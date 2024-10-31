@@ -112,26 +112,26 @@
 |   登录名   |          呼号          |  频率   |                                    职责范围                                     |
 | :--------: | :--------------------: | :-----: | :-----------------------------------------------------------------------------: |
 |  ZBAA_TWR  | 北京塔台/Beijing Tower | 118.500 | 所有跑道及联络道、C 滑行道、D9 滑行道、F 滑行道 M7 以南部分及 W7 与 S4 之间部分 |
-| ZBAA_1_TWR | 北京塔台/Beijing Tower | 124.300 |                       36L/18R 跑道及对应联络道、C 滑行道                        |
-| ZBAA_2_TWR | 北京塔台/Beijing Tower | 118.500 |  36R/18L 跑道及对应联络道、D9 滑行道、F 滑行道 M7 以南部分及 W7 与 S4 之间部分  |
-| ZBAA_3_TWR | 北京塔台/Beijing Tower | 118.600 |                             01/19 跑道及对应联络道                              |
+| ZBAA_W_TWR | 北京塔台/Beijing Tower | 124.300 |                       36L/18R 跑道及对应联络道、C 滑行道                        |
+| ZBAA_E_TWR | 北京塔台/Beijing Tower | 118.600 |                             01/19 跑道及对应联络道                              |
 
 塔台管制空域：以机场基准点为中心，半径 15km 的圆，高度 600m(MSL)以下
 
 席位开设规则：
 
-1. 北向运行时，F 滑行道 W7 与 S4 之间部分由 ZBAA_A3_GND 代管
-2. ZBAA_TWR 为主扇，经主扇同意后开设分扇 ZBAA_3_TWR，分扇开设后 ZBAA_TWR 管辖范围为 36R/18L 跑道及对应联络道，ZBAA_3_TWR 管辖范围为 01/19 跑道和 36L/18R 跑道及配套联络道
-3. ZBAA_TWR（或 ZBAA_2_TWR）及 ZBAA_3_TWR 均在线时，经 ZBAA_TWR（或 ZBAA_2_TWR）及 ZBAA_3_TWR 同意后方可开设 ZBAA_1_TWR 各塔台管制范围如下：
+1. 北向运行时，F 滑行道 W7 与 S4 之间部分由 ZBAA_W_RMP 代管
+2. ZBAA_TWR 为主扇，经主扇同意后开设分扇 ZBAA_E_TWR，分扇开设后 ZBAA_TWR 管辖范围为 36R/18L 跑道及对应联络道，ZBAA_E_TWR 管辖范围为 01/19 跑道和 36L/18R 跑道及配套联络道
+3. ZBAA_TWR及 ZBAA_E_TWR 均在线时，经 ZBAA_TWR及 ZBAA_E_TWR 同意后方可开设 ZBAA_W_TWR
+   各塔台管制范围如下：
 
 - ZBAA_TWR（合扇）：所有跑道及联络道、C 滑行道、D9 滑行道、F 滑行道 M7 以南部分及 W7 与 S4 之间部分
-- ZBAA_1_TWR：36L/18R 跑道及对应联络道、C 滑行道（粉色）
-- ZBAA_2_TWR：36R/18L 跑道及对应联络道、D9 滑行道、F 滑行道 M7 以南部分及 W7 与 S4 之间部分（蓝色）
-- ZBAA_3_TWR：01/19 跑道及对应联络道（绿色）
+- ZBAA_W_TWR：36L/18R 跑道及对应联络道、C 滑行道（粉色）
+- ZBAA_TWR（分扇）：36R/18L 跑道及对应联络道、D9 滑行道、F 滑行道 M7 以南部分及 W7 与 S4 之间部分（蓝色）
+- ZBAA_E_TWR：01/19 跑道及对应联络道（绿色）
 
-注意事项：橙色代管区域在北向运行时由 ZBAA_A3_GND 提供管制服务，南向运行时由 ZBAA_2_TWR 提供管制服务
+注意事项：橙色代管区域在北向运行时由 ZBAA_W_RMP 提供管制服务，南向运行时由 ZBAA_TWR 提供管制服务
 
-> 需要!!!!图 3.1 塔台管制范围划分图（橙色部分为 ZBAA_A3_GND 代管区域）!!!!
+> 需要!!!!图 3.1 塔台管制范围划分图（橙色部分为 ZBAA_W_RMP 代管区域）!!!!
 
 ### 3.2 地面
 
@@ -149,37 +149,32 @@
 |   登录名   |           呼号            |  频率   |          职责范围          |
 | :--------: | :-----------------------: | :-----: | :------------------------: |
 |  ZBAA_DEL  | 北京放行/Beijing Delivery | 121.600 |           全机场           |
-| ZBAA_W_DEL | 北京放行/Beijing Delivery | 121.600 | 36R/18L 跑道中线延长线以西 |
 | ZBAA_E_DEL | 北京放行/Beijing Delivery | 121.650 | 36R/18L 跑道中线延长线以东 |
 
 席位开设规则：
 
-1. ZBAA_DEL 为放行主席位，经主频率同意后可开设 ZBAA_E_DEL，开设后 ZBAA_DEL 管制范围为 36R/18L 跑道中线延长线以西
+1. ZBAA_DEL 为放行主席位，经ZBAA_DEL同意后可开设 ZBAA_E_DEL，开设后 ZBAA_DEL 管制范围为 36R/18L 跑道中线延长线以西
 
 ### 3.4 机坪
 
 |   登录名    |          呼号          |  频率   |              职责范围               |
 | :---------: | :--------------------: | :-----: | :---------------------------------: |
-| ZBAA_A_GND  | 北京机坪/Beijing Apron | 122.225 | 全机场机坪管制区域（不含 9 号机坪） |
-| ZBAA_A1_GND | 北京机坪/Beijing Apron | 122.225 |           APN01 管制区域            |
-| ZBAA_A2_GND | 北京机坪/Beijing Apron | 122.625 |  APN02 管制区域 （不含 9 号机坪）   |
-| ZBAA_A3_GND | 北京机坪/Beijing Apron | 122.675 |          APN03+04 管制区域          |
+| ZBAA_RMP  | 北京机坪/Beijing Apron | 122.225 | 全机场机坪管制区域（不含 9 号机坪） |
+| ZBAA_W_RMP | 北京机坪/Beijing Apron | 122.675 |          APN03+04 管制区域          |
 
 席位开设规则：
 
-1. ZBAA_GND 在线且航空器数量足够时，可开设 ZBAA_A1_GND、ZBAA_A3_GND。如选择开设 ZBAA_A1_GND，则其管制范围为 APN01+02 管制区。也可选择开设 ZBAA_A_GND
-2. ZBAA_A_GND 在线时，如出现机坪分扇上线，则 ZBAA_A_GND 需在商议好管制范围后将登录名更换为对应分扇的登录名
-3. ZBAA_A1_GND 在线时，经 ZBAA_A1_GND 同意，可开设 ZBAA_A2_GND。ZBAA_A1_GND 在线是 ZBAA_A2_GND 开设的必要条件
+1. 北京首都机场有塔台或地面席位在线时，可开设 ZBAA_RMP
+2. ZBAA_RMP 在线时，经 ZBAA_RMP 同意，可开设 ZBAA_W_RMP
 
 各机坪管制范围如下：
 
-- ZBAA_A_GND（合扇）：全机场机坪管制区域
-- ZBAA_A1_GND：APN01 管制区域（蓝色）
-- ZBAA_A2_GND：APN02 管制区域（不含 9 号机坪）（青绿色）
-- ZBAA_A3_GND：APN03+04 管制区域（红色）
-  注意事项：橙色代管区域在北向运行时由 ZBAA_A3_GND 提供管制服务，南向运行时由 ZBAA_2_TWR 提供管制服务
+- ZBAA_RMP（合扇）：全机场机坪管制区域
+- ZBAA_RMP（分扇）：APN01+02 管制区域（蓝色）
+- ZBAA_W_RMP：APN03+04 管制区域（红色）
+  注意事项：橙色代管区域在北向运行时由 ZBAA_W_RMP 提供管制服务，南向运行时由 ZBAA_TWR 提供管制服务
 
-> 需要!!!!图 3.2 机坪划分图（橙色部分为 ZBAA_A3_GND 代管区域）!!!!
+> 需要!!!!图 3.2 机坪划分图（橙色部分为 ZBAA_W_RMP 代管区域）!!!!
 
 ## 4. 席位职责
 
@@ -237,21 +232,21 @@
 
 由跑道 36R 向东脱离或沿 A9 跑道 36R 穿越的航空器，脱离后立即移交 ZBAA_GND
 
-由跑道 36R 向西脱离或沿 A8 穿越跑道 36R 的航空器，脱离后立即移交 ZBAA_A3_GND
+由跑道 36R 向西脱离或沿 A8 穿越跑道 36R 的航空器，脱离后立即移交 ZBAA_W_RMP
 
-由跑道 18L 向西脱离或沿 A1 穿越跑道 18L 的航空器，在 Z3/M7 前移交 ZBAA_A3_GND
+由跑道 18L 向西脱离或沿 A1 穿越跑道 18L 的航空器，在 Z3/M7 前移交 ZBAA_W_RMP
 
-由跑道 18L 向东脱离的航空器，如沿 E0/E1/E2 脱离后立即移交 ZBAA_A1_GND，其他位置联系 ZBAA_GND
+由跑道 18L 向东脱离的航空器，如沿 E0/E1/E2 脱离后立即移交 ZBAA_RMP，其他位置联系 ZBAA_GND
 
-沿 A0 向东穿越跑道 18L 的，沿 T1 在 H 前等，根据其目的地方向联系 ZBAA_GND 或 ZBAA_A1_GND（如无明确方向，默认联系 ZBAA_GND），或右转沿 G 在 E2 前等，联系 ZBAA_A1_GND
+沿 A0 向东穿越跑道 18L 的，沿 T1 在 H 前等，根据其目的地方向联系 ZBAA_GND 或 ZBAA_RMP（如无明确方向，默认联系 ZBAA_GND），或右转沿 G 在 E2 前等，联系 ZBAA_RMP
 
 由跑道 01/19 脱离的航空器，在给出滑行方向后移交 ZBAA_GND（南向运行时沿 Q3 脱离后如需左转上 K 向南滑行，则在 K 前直接移交 ZBAA_GND）
 
-进入 W5 机坪的航空器，在 Z20 前移交 ZBAA_A3_GND
+进入 W5 机坪的航空器，在 Z20 前移交 ZBAA_W_RMP
 
-进入 W6 机坪的航空器，在 Z24 前移交 ZBAA_A3_GND
+进入 W6 机坪的航空器，在 Z24 前移交 ZBAA_W_RMP
 
-在 HP21、HP7 或 C1/C2/M 前移交 ZBAA_A3_GND
+在 HP21、HP7 或 C1/C2/M 前移交 ZBAA_W_RMP
 
 ### 4.2 地面和机坪
 
@@ -430,19 +425,15 @@ B. 进场滑行路线
 
 **(3) 与机坪的移交**
 
-1. G H1 前移交 ZBAA_A3_GND
+1. G H1 前移交 ZBAA_W_RMP
 
 2. 北向时：
 
-在 T1 Y2 前、T2 Y5 前移交 ZBAA_A1_GND
-
-在 T3/G4/G5 Y1 前、T4/K4/K5 Y4 前、J2 Y3 前、J3 Y6 前、H/H7 Y8 前、J Y9/U2 前移交 ZBAA_A2_GND
+在 T1 Y2 前、T2 Y5 、T3/G4/G5 Y1 前、T4/K4/K5 Y4 前、J2 Y3 前、J3 Y6 前、H/H7 Y8 前、J Y9/U2 前移交 ZBAA_RMP
 
 3. 南向时：
 
-在 T1 Y2 前、T2 Y5 前、G G2 前、K K2 前移交 ZBAA_A1_GND
-
-在 T3/G4/G5 Y1 前、T4/K4/K5 Y4 前、J2 Y3 前、J3 Y6 前、H/H7 Y8 前、J Y9/U2 前移交 ZBAA_A2_GND
+在 T1 Y2 前、T2 Y5 前、G G2 前、K K2 前、 T3/G4/G5 Y1 前、T4/K4/K5 Y4 前、J2 Y3 前、J3 Y6 前、H/H7 Y8 前、J Y9/U2 前移交 ZBAA_RMP
 
 #### 4.2.2 机坪席位
 
@@ -471,49 +462,51 @@ B. 进场滑行路线
 |        Nr.818.819        |    M    |   Z6    |
 
 **(2) 与其它场面席位的移交**
-ZBAA_A1_GND：
+ZBAA_RMP：
 
 北向时：
 
-沿 G0、G1、G2 滑出的 G 前移交 ZBAA_2_TWR 沿 K1、K2 滑出的 K 前的移交 ZBAA_3_TWR
+沿 G0、G1、G2 滑出的 G 前移交 ZBAA_TWR 
+
+沿 K1、K2 滑出的 K 前的移交 ZBAA_E_TWR
 
 在 T1 J 前、T2 H 前移交 ZBAA_GND
 
 南向时：
 
-沿 T2 A1 穿越跑道的在 H 前移交 ZBAA_2_TWR
+沿 T2 A1 穿越跑道的在 H 前移交 ZBAA_TWR
 
 在 T1 J 前、T2 H 前移交 ZBAA_GND
-
-沿 T2 进入 4 号机坪的，T2 Y1 前移交 ZBAA_A2_GND
-
-沿 T1 进入 4 号机坪的，T4 T2 前移交 ZBAA_A2_GND ZBAA_A2_GND：
 
 在 T4/Y1/Y8 H 前、T3/Y4/Y8 J 前、Y3 J1 前、Y6 J4 前、J U2 前移交 ZBAA_GND
 
-北向时 4 号机坪沿 Y1/Y4 滑出的 T2 前移交 ZBAA_A1_GND ZBAA_A3_GND：
+ZBAA_W_RMP：
 
 北向时：
 
-M7 到 F0 之间在 F 前移交 ZBAA_2_TWR。航空器在 Z3 上滑行，预计转向上 F 的，在航空器到达预计转向的道口前移交 ZBAA_2_TWR；不在 Z3 上滑行的，在 F 前移交 ZBAA_2_TWR F 向南在 M7 前移交 ZBAA_2_TWR
+M7 到 F0 之间在 F 前移交 ZBAA_TWR。航空器在 Z3 上滑行，预计转向上 F 的，在航空器到达预计转向的道口前移交 ZBAA_TWR；不在 Z3 上滑行的，在 F 前移交 ZBAA_TWR
 
-A9 移交 ZBAA_2_TWR
+F 向南在 M7 前移交 ZBAA_TWR
 
-C 前移交 ZBAA_1_TWR
+A9 移交 ZBAA_TWR
 
-Z2 HP7 移交 ZBAA_1_TWR
+C 前移交 ZBAA_W_TWR
 
-W211-W213 机位的航空器准备好滑行后原地移交 ZBAA_1_TWR Route2（Y7）H2 前移交 ZBAA_GND
+Z2 HP7 移交 ZBAA_W_TWR
+
+W211-W213 机位的航空器准备好滑行后原地移交 ZBAA_W_TWR 
+
+Route2（Y7）H2 前移交 ZBAA_GND
 
 南向时：
 
-在 F W7 前移交 ZBAA_2_TWR
+在 F W7 前移交 ZBAA_TWR
 
-沿 Z3 F2 A0 穿越跑道的在 F2 前移交 ZBAA_2_TWR
+沿 Z3 F2 A0 穿越跑道的在 F2 前移交 ZBAA_TWR
 
-沿 Route3、Route1 去往 18L 跑道离场的，在 HP4（S4 前）移交 ZBAA_2_TWR 需要使用 D9 的航空器在 M1 前移交 ZBAA_2_TWR
+沿 Route3、Route1 去往 18L 跑道离场的，在 HP4（S4 前）移交 ZBAA_TWR
 
-在 C 前移交 ZBAA_1_TWR Route2（Y7）H2 前移交 ZBAA_GND
+在 C 前移交 ZBAA_W_TWR Route2（Y7）H2 前移交 ZBAA_GND
 
 ### 4.3 放行
 
@@ -537,7 +530,6 @@ W211-W213 机位的航空器准备好滑行后原地移交 ZBAA_1_TWR Route2（Y
 | IDKEX  |   ZBMZ、ZBLA、ZLDH、蒙古、欧洲、新疆   |     米制双数      |                              主用离场点                               |
 | BOTPU  |                  ZBHH                  |     6000/6600     |                              主用离场点                               |
 | BOTPU  | 西南、西北、南亚、内蒙古、东南亚、欧洲 |     米制双数      |                              主用离场点                               |
-| RUSDO  |                  ZBSJ                  |     4800/5400     |                              主用离场点                               |
 | RUSDO  |                  ZBYN                  |  6600/7200/7800   |                              主用离场点                               |
 | RUSDO  |     华南、中原、西南、东南亚、ZSCN     |     米制双数      |                              主用离场点                               |
 
@@ -578,7 +570,6 @@ W211-W213 机位的航空器准备好滑行后原地移交 ZBAA_1_TWR Route2（Y
 | RUSDO  | 36L  |  RUSDO-9ZD   |
 | RUSDO  | 36R  |  RUSDO-9YD   |
 
-有管制席位对北京终端区提供管制服务时，使用跑道 36R 离场的航空器离地后需保持跑道航迹(maintain runway track)，与相关管制员协调时相关管制员明确表示不需要的除外，并注意英文表达(使用 Extend runway centerline 容易造成歧义)
 
 南向
 
@@ -620,7 +611,7 @@ F 类航空器不可使用 18R/36L 跑道，运行跑道为 18L/36R 跑道、01/
 机位：
 
 A388：
-21211、22112、403、413、507-509、701、702、931、932、938、939、951、955、M01、M02
+212、221、403、413、507-509、701、702、931、932、938、939、951、955、M01、M02
 
 AN124：
 212、221、403、413、507-509、701、702、931、932、938、939、951、955、 M01、M02、N205、N206
