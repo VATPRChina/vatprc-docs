@@ -80,8 +80,10 @@
 #### 2.3.1 日常情况运行
 
 - 单跑道运行：36R/18L 跑道单跑道运行（一般为夜间低流量情况下采用）
-- 北向运行：36L、36R、01 用于起飞；36L、36R1、01 用于降落
-- 南向运行：18R、18L、19 用于起飞；18R、18L2、19 用于降落
+- 北向运行：36L、36R、01 用于起飞；36L、36R、01 用于降落
+- 南向运行：18R、18L、19 用于起飞；18R、18L、19 用于降落
+
+>考虑到离场流量分布，不建议使用36R/18L跑道落地，请注意在协调中明确是否接受36R跑道落地
 
 北向运行时，任意两条平行跑道可以实施相关平行仪表进近，跑道 36L、01 可以实施独立平行仪表进近
 
@@ -141,8 +143,7 @@
 
 席位开设规则：
 
-1. 各机坪管制席位不在线时，ZBAA_GND 需代管其对应的管制范围
-2. ZBAA_GND 在线时如有机坪管制席位上线，ZBAA_GND 需将对应管制范围移交给相应的机坪管制席位
+1. 机坪管制席位不在线时，ZBAA_GND 需代管其对应的管制范围
 
 ### 3.3 放行
 
@@ -247,6 +248,16 @@
 进入 W6 机坪的航空器，在 Z24 前移交 ZBAA_W_RMP
 
 在 HP21、HP7 或 C1/C2/M 前移交 ZBAA_W_RMP
+
+**(7)	与对终端区提供雷达管制服务的席位的移交优先级**
+
+| 优先级 |    席位    |   频率   |
+| :---: | :--------: | :-----: |
+|   1   | ZBAA_F_APP | 126.100 |
+|   2   | ZBAA_APP | 120.600 |
+|   3   | ZBAA_C_CTR | 126.950 |
+|   4   | ZBAA_CTR | 126.700 |
+|   5   | ZBPE_CTR | 125.900 |
 
 ### 4.2 地面和机坪
 
@@ -452,7 +463,8 @@ B. 进场滑行路线
 |        Nr.220.221        |   Z3    | Z18->M5 |
 |        Nr.261-264        |   Z16   |   Z1    |
 |        Nr.251-254        |   Z2    |   Z15   |
-|    Nr.701-704.706-714    |   Z3    |   Z9    |
+|    Nr.701-705.711-714    |   Z3    |   Z3    |
+|        Nr.706-710        |   Z3    |   Z9    |
 |    Nr.501-514.560-565    |  K4/K5  |   Y4    |
 |    Nr.525-536.551-556    |  G3/G4  |   Y1    |
 |        Nr.515-519        |   J3    |  Y6/J4  |
@@ -523,7 +535,7 @@ Route2（Y7）H2 前移交 ZBAA_GND
 | MUGLO  |                  ZYTL                  |     6900/6300     |                              主用离场点                               |
 | MUGLO  |               RKSI、RKSS               |  7500/8100/8900   |                              主用离场点                               |
 | MUGLO  |              日朝韩、北美              | 8900 以上米制单数 |                              主用离场点                               |
-| LULTA  |                                        |                   | 原则上不使用 必须由区域管制席位提出使用，进近管制席位同意后才可以使用 |
+| LULTA  |                                         |                   | 原则上不使用 必须由区域管制席位提出使用，进近管制席位同意后才可以使用 |
 | DOTRA  |                  ZYTX                  |     8100/8900     |                              主用离场点                               |
 | DOTRA  |                  ZYCC                  |     9500/8900     |                              主用离场点                               |
 | DOTRA  |         东北、东西伯利亚、北美         |     米制单数      |                              主用离场点                               |
@@ -532,6 +544,8 @@ Route2（Y7）H2 前移交 ZBAA_GND
 | BOTPU  | 西南、西北、南亚、内蒙古、东南亚、欧洲 |     米制双数      |                              主用离场点                               |
 | RUSDO  |                  ZBYN                  |  6600/7200/7800   |                              主用离场点                               |
 | RUSDO  |     华南、中原、西南、东南亚、ZSCN     |     米制双数      |                              主用离场点                               |
+| OMDEK  |                  ZBSJ                  |       4500      |                               非主用离场点                              |
+| PEGSO  |                                        |                 |                               非主用离场点                              |
 
 由北京首都机场出发沿京广大通道南下的航空器，不得由 ELKUR 方向离场后沿 W40 航路南下后沿 W562/W4 航路向西加入 W37/A461 航路，应由 RUSDO 方向离场
 
@@ -554,41 +568,66 @@ Route2（Y7）H2 前移交 ZBAA_GND
 
 | 离场点 | 跑道 | 主用离场程序 |
 | :----: | :--: | :----------: |
-| ELKUR  | 36L  |  ELKUR-9YD   |
-| ELKUR  | 36R  |  ELKUR-9ZD   |
-| IGMOR  | 36L  |  IGMOR-9XD   |
-| IGMOR  | 36R  |  IGMOR-9WD   |
-| IGMOR  |  01  |  IGMOR-9YD   |
-| MUGLO  | 36L  |  MUGLO-9XD   |
-| MUGLO  | 36R  |  MUGLO-9WD   |
-| MUGLO  |  01  |  MUGLO-9YD   |
-| DOTRA  | 36R  |  DOTRA-9YD   |
-| DOTRA  |  01  |  DOTRA-9ZD   |
-| IDKEX  | 36R  |  IDKEX-9YD   |
-| IDKEX  |  01  |  IDKEX-9ZD   |
-| BOTPU  | 36R  |  BOTPU-9ZD   |
-| RUSDO  | 36L  |  RUSDO-9ZD   |
-| RUSDO  | 36R  |  RUSDO-9YD   |
+| ELKUR  | 36L  |  ELKUR-9Z   |
+| ELKUR  | 36R  |  ELKUR-7X   |
+| ELKUR  |  01  |  ELKUR-7X   |
+| IGMOR  | 36L  |  IGMOR-9Z   |
+| IGMOR  | 36R  |  IGMOR-7X   |
+| IGMOR  |  01  |  IGMOR-7X   |
+| MUGLO  | 36L  |  MUGLO-9Z   |
+| MUGLO  | 36R  |  MUGLO-7X   |
+| MUGLO  |  01  |  MUGLO-7X   |
+| DOTRA  | 36L  |  DOTRA-5Y   |
+| DOTRA  | 36R  |  DOTRA-5Y   |
+| DOTRA  |  01  |  DOTRA-7X   |
+| IDKEX  | 36L  |  IDKEX-5Y   |
+| IDKEX  | 36R  |  IDKEX-5Y   |
+| IDKEX  |  01  |  IDKEX-7X   |
+| BOTPU  | 36L  |  BOTPU-9Z   |
+| BOTPU  | 36R  |  BOTPU-7X   |
+| BOTPU  |  01  |  BOTPU-7X   |
+| RUSDO  | 36L  |  RUSDO-9Z   |
+| RUSDO  | 36R  |  RUSDO-9Z   |
+| RUSDO  |  01  |  RUSDO-9Z   |
+| PEGSO  | 36L  |  PEGSO-9Z   |
+| PEGSO  | 36R  |  PEGSO-9Z   |
+| PEGSO  |  01  |  PEGSO-9Z   |
+| OMDEK  | 36L  |  OMDEK-9Z   |
+| OMDEK  | 36R  |  OMDEK-9Z   |
+| OMDEK  |  01  |  OMDEK-9Z   |
 
 
 南向
 
 | 离场点 | 跑道 | 主用离场程序 |
 | :----: | :--: | :----------: |
-| ELKUR  | 18L  |  ELKUR-8ZD   |
-| IGMOR  | 18L  |  IGMOR-8ZD   |
-| IGMOR  |  19  |  IGMOR-8YD   |
-| MUGLO  | 18L  |  MUGLO-8ZD   |
-| MUGLO  |  19  |  MUGLO-8YD   |
-| DOTRA  | 18L  |  DOTRA-8YD   |
-| DOTRA  |  19  |  DOTRA-8ZD   |
-| IDKEX  | 18L  |  IDKEX-8YD   |
-| IDKEX  |  19  |  IDKEX-8ZD   |
-| BOTPU  | 18R  |  BOTPU-8ZD   |
-| BOTPU  | 18L  |  BOTPU-8XD   |
-| BOTPU  |  19  |  BOTPU-8YD   |
-| RUSDO  | 18R  |  RUSDO-8ZD   |
-| RUSDO  | 18L  |  RUSDO-8YD   |
+| ELKUR  | 18L  |  ELKUR-2G   |
+| ELKUR  | 18R  |  ELKUR-2G   |
+| ELKUR  |  19  |  ELKUR-6J   |
+| IGMOR  | 18L  |  IGMOR-2G   |
+| IGMOR  | 18R  |  IGMOR-2G   |
+| IGMOR  |  19  |  IGMOR-6J   |
+| MUGLO  | 18L  |  MUGLO-2G   |
+| MUGLO  | 18R  |  MUGLO-2G   |
+| MUGLO  |  19  |  MUGLO-6J   |
+| DOTRA  | 18L  |  DOTRA-2G   |
+| DOTRA  | 18R  |  DOTRA-2G   |
+| DOTRA  |  19  |  DOTRA-2G   |
+| IDKEX  | 18L  |  IDKEX-2G   |
+| IDKEX  | 18R  |  IDKEX-2G   |
+| IDKEX  |  19  |  IDKEX-2G   |
+| BOTPU  | 18R  |  BOTPU-2G   |
+| BOTPU  | 18L  |  BOTPU-6J   |
+| BOTPU  |  19  |  BOTPU-4E   |
+| RUSDO  | 18R  |  RUSDO-2G   |
+| RUSDO  | 18L  |  RUSDO-6J   |
+| RUSDO  |  19  |  RUSDO-4E   |
+| PEGSO  | 18L  |  PEGSO-2G   |
+| PEGSO  | 18R  |  PEGSO-2G   |
+| PEGSO  |  19  |  PEGSO-2G   |
+| OMDEK  | 18L  |  OMDEK-2G   |
+| OMDEK  | 18R  |  OMDEK-2G   |
+| OMDEK  |  19  |  OMDEK-2G   |
 
 **(3) 起始高度**
 
@@ -666,7 +705,7 @@ A0、A1 联络道关闭，不得使用
 
 航空器向东脱离 36R 跑道或沿 A9 穿越 36R 跑道后，在 G 前移交 ZBAA_GND
 
-航空器向西脱离 36R 跑道或沿 A8 穿越 36R 跑道后，在 F/D9 前移交 ZBAA_A3_GND
+航空器向西脱离 36R 跑道或沿 A8 穿越 36R 跑道后，在 F/D9 前移交 ZBAA_W_RMP
 
 跑道 01
 
@@ -674,7 +713,9 @@ A0、A1 联络道关闭，不得使用
 
 **(6) 地面席位与其他场面席位的移交**
 
-ZBAA_GND 在 G E7 前、H（北绕滑向南） H4 前、K Q8 前、J（M 维修坪向南） H2 前移交塔台。对于被批准使用 A8 联络道穿越 36R 跑道的航空器，指挥其在 A8 外等，联系 ZBAA_2_TWR。航空器未联系塔台，不得进入联络道，不得跨越 CATⅡ/Ⅲ 等待点
+ZBAA_GND 在 G E7 前、H（北绕滑向南） H4 前、K Q8 前、J（M 维修坪向南） H2 前移交塔台。对于被批准使用 A8 联络道穿越 36R 跑道的航空器，指挥其在 A8 外等，联系 ZBAA_TWR。
+
+**航空器未联系塔台，不得进入联络道，不得跨越 CATⅡ/Ⅲ 等待点**
 
 与机坪席位的移交与 4.2.1 要求相同
 
@@ -686,11 +727,13 @@ ZBAA_GND 在 G E7 前、H（北绕滑向南） H4 前、K Q8 前、J（M 维修�
 
 此条内容仅为参考，不作为强制要求
 
-远机位均为国内、国际港澳台航班混合停放二号航站楼
+远机位均为国内、国际港澳台航班混合停放
+
+二号航站楼
 
 |             类型             |  机位   |
 | :--------------------------: | :-----: |
-|       仅供国内航班停放       | 220-240 |
+|       仅供国内航班停放       | 220.221.226-240 |
 |    仅供国际港澳台航班停放    | 205-218 |
 | 国内、国际港澳台航班混合停放 |   219   |
 
@@ -733,3 +776,13 @@ ZBAA_GND 在 G E7 前、H（北绕滑向南） H4 前、K Q8 前、J（M 维修�
 |   澳门航空（AMU）   |   中华航空（CAL）   |  阿提哈德航空（ETD）  |
 |   深圳航空（CSZ）   |   蒙古航空（MGL）   | 埃塞俄比亚航空（ETH） |
 |  菲律宾航空（PAL）  |                     |                       |
+
+其他航空器
+
+|  航空器类型  | 机位 |
+| :---------: | :---: |
+| 公务机 | W5、W6机坪所有机位，251-254. 261-264. 267. 268. 602. 603. 608-612. 622-640 |
+| 货运航空器 | W1、W3、N2、8号机坪所有机位 |
+| 维修航空器 | M维修机坪、7号机坪所有机位 |
+| 除冰航空器 | 36L：W211-W213 36R：706-710. 371-373，G0、G1、G2滑行道 01：381. 382，K1、K2滑行道 18R：W103-W107 18L：W103-W107. 951-954 19：955-958 |
+
