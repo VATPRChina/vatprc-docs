@@ -1,0 +1,49 @@
+import remarkGfm from "remark-gfm";
+
+/**
+ * @import type { GatsbyConfig } from "gatsby"
+ * @type GatsbyConfig
+ */
+const config = {
+  siteMetadata: {
+    title: `VATPRC Docs`,
+    siteUrl: `https://www.yourdomain.tld`,
+  },
+  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
+  // If you use VSCode you can also use the GraphQL plugin
+  // Learn more at: https://gatsby.dev/graphql-typegen
+  graphqlTypegen: true,
+  plugins: [
+    "gatsby-plugin-postcss",
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        mdxOptions: {
+          remarkPlugins: [
+            // Add GitHub Flavored Markdown (GFM) support
+            remarkGfm,
+          ],
+        },
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "pages",
+        path: "./src/pages/",
+      },
+      __key: "pages",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "docs",
+        path: "./docs",
+      },
+      __key: "docs",
+    },
+  ],
+};
+
+export default config;
