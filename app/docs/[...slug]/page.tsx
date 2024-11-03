@@ -110,7 +110,7 @@ const PostPage = async (props: any) => {
         </div>
       </div>
       <div className="bg-white px-4 max-w-full md:px-12 pt-4 mx-auto shadow rounded">
-        <article className="prose dark:prose-invert prose-p:my-2">
+        <article className="prose prose-p:my-2">
           <MDXContent />
         </article>
       </div>
