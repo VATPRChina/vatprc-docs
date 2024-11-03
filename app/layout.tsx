@@ -17,6 +17,7 @@ export default function RootLayout({
         <Link href="/docs">
           <span className="font-bold">Docs</span>
         </Link>
+        <span>仅供模拟飞行使用，严禁用于真实运行。</span>
       </div>
     </header>
   );

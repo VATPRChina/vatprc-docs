@@ -9,6 +9,7 @@ import rehypeSlug from "rehype-slug";
 import Slugger from "github-slugger";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
 import React from "react";
+import remarkBreaks from "remark-breaks";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
@@ -86,7 +87,7 @@ const PostPage = async (props: any) => {
   const code = String(
     await compile(source, {
       outputFormat: "function-body",
-      remarkPlugins: [gfm, withToc, withTocExport],
+      remarkPlugins: [gfm, withToc, withTocExport, remarkBreaks],
       rehypePlugins: [rehypeSlug, rehypeGithubAlerts],
     })
   );
