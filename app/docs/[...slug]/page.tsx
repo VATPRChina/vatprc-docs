@@ -7,6 +7,10 @@ import * as runtime from "react/jsx-runtime";
 import { glob } from "glob";
 import rehypeSlug from "rehype-slug";
 import Slugger from "github-slugger";
+import { remarkAlert } from "remark-github-blockquote-alert";
+import React from "react";
+
+import "remark-github-blockquote-alert/alert.css";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
@@ -32,7 +36,7 @@ const TableOfContents = ({
     return (
       <>
         {tableOfContents.map((toc: any) => (
-          <>
+          <React.Fragment key={toc.value}>
             <a
               href={"#" + slugger.slug(toc.value)}
               className="font-normal no-underline"
@@ -47,7 +51,7 @@ const TableOfContents = ({
                 slugger={slugger}
               />
             )}
-          </>
+          </React.Fragment>
         ))}
       </>
     );
@@ -56,7 +60,7 @@ const TableOfContents = ({
   return (
     <ul>
       {tableOfContents.map((toc: any) => (
-        <li>
+        <li key={toc.value}>
           <a
             href={"#" + slugger.slug(toc.value)}
             className="font-normal no-underline"
@@ -84,7 +88,7 @@ const PostPage = async (props: any) => {
   const code = String(
     await compile(source, {
       outputFormat: "function-body",
-      remarkPlugins: [gfm, withToc, withTocExport],
+      remarkPlugins: [gfm, withToc, withTocExport, remarkAlert],
       rehypePlugins: [rehypeSlug],
     })
   );
