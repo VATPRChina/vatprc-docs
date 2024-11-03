@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "../styles/globals.css";
+import logo from "../assets/logo_standard.svg";
 
 export default function RootLayout({
   children,
@@ -8,40 +9,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const header = (
-    <header>
-      <div className="text-center bg-slate-800 p-8 my-6 rounded-md">
-        <Image
-          src="/logo.png"
-          width={40}
-          height={40}
-          className="mx-auto"
-          alt={"logo"}
-        />
+    <header className="py-2 px-8 border-b-2 border-slate-300 sticky top-0 bg-white rounded-full h-16 flex items-center">
+      <div className="flex items-center gap-8">
         <Link href="/">
-          <h1 className="text-2xl text-white font-bold mt-4">Jack's Blog</h1>
+          <Image src={logo} alt="VATPRC logo" height={32} className="-mt-2" />
         </Link>
-        <p className="text-slate-300">🤟 Welcome to my tech blog. 💻</p>
+        <Link href="/docs">
+          <span className="font-bold">Docs</span>
+        </Link>
       </div>
     </header>
   );
 
   const footer = (
-    <footer>
-      <div className="border-t border-slate-400 mt-12 py-6 text-center text-slate-400">
-        <h3>Designed by Pixegami</h3>
-      </div>
+    <footer className="mt-8">
+      <p className="text-slate-500">
+        &copy; 2010 - 2024, VATSIM P.R. China Division. All rights reserved.
+        Powered by Next.js.
+      </p>
     </footer>
   );
 
   return (
-    <html>
-      <head />
-      <body>
-        <div className="mx-auto  max-w-2xl px-6">
-          {header}
-          {children}
-          {footer}
-        </div>
+    <html className="scroll-pt-16">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className="bg-slate-50 container mx-auto">
+        {header}
+        <div className="pt-4">{children}</div>
+        {footer}
       </body>
     </html>
   );

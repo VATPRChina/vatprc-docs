@@ -4,6 +4,7 @@ const nextConfig = {
   output: "export",
   distDir: "dist",
   images: { unoptimized: true },
+  transpilePackages: ["next-mdx-remote"],
 };
 
 module.exports = nextConfig;
