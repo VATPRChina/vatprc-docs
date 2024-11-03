@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "../styles/globals.css";
 import logo from "../assets/logo_standard.svg";
-
+import "../styles/rehype-github-callouts.css";
 export default function RootLayout({
   children,
 }: {

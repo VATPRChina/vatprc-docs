@@ -7,10 +7,8 @@ import * as runtime from "react/jsx-runtime";
 import { glob } from "glob";
 import rehypeSlug from "rehype-slug";
 import Slugger from "github-slugger";
-import { remarkAlert } from "remark-github-blockquote-alert";
+import { rehypeGithubAlerts } from "rehype-github-alerts";
 import React from "react";
-
-import "remark-github-blockquote-alert/alert.css";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
@@ -88,8 +86,8 @@ const PostPage = async (props: any) => {
   const code = String(
     await compile(source, {
       outputFormat: "function-body",
-      remarkPlugins: [gfm, withToc, withTocExport, remarkAlert],
-      rehypePlugins: [rehypeSlug],
+      remarkPlugins: [gfm, withToc, withTocExport],
+      rehypePlugins: [rehypeSlug, rehypeGithubAlerts],
     })
   );
 
