@@ -245,7 +245,7 @@
 | ZBAA_W_RMP | 进入W6机坪（西六号坪）         | Z24前移交            |             |
 | ZBAA_W_RMP | 进入S5、Z2、M、W2机坪（西二机坪） | HP21、HP7、C1、C2、M前 |             |
 
-> [NOTE]
+> [!NOTE]
 > 1. 根据其目的地方向联系 ZBAA_GND 或 ZBAA_RMP（如无明确方向，默认联系 ZBAA_GND），或右转沿 G 在 E2 前等，联系 ZBAA_RMP
 
 **(7)	与对终端区提供雷达管制服务的席位的移交优先级**
