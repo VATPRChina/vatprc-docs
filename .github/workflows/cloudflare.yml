@@ -14,22 +14,19 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      - uses: actions/cache@v4
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-      - run: pip install mkdocs-material
-      - run: mkdocs build
+      - uses: actions/setup-node@v4
+        with: { node-version: "lts/*" }
+      - uses: pnpm/action-setup@v4
+      - name: Install dependencies
+        run: |
+          pnpm install
+      - name: Build
+        run: |
+          pnpm run build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 21001a1efbe4155f55f64e486e2cfe2a
           projectName: vatprc-docs
-          directory: site
+          directory: dist
