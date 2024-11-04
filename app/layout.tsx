@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const header = (
-    <header className="py-2 px-8 border-b-2 border-slate-300 sticky top-0 bg-white rounded-full h-16 flex items-center">
+    <header className="bg-slate-50 py-2 px-8 border-b-2 border-slate-300 sticky top-0 h-16 flex items-center z-50 w-full">
       <div className="flex items-center gap-8">
         <Link href="/">
           <Image src={logo} alt="VATPRC logo" height={32} className="-mt-2" />
@@ -17,7 +17,6 @@ export default function RootLayout({
         <Link href="/docs">
           <span className="font-bold">Docs</span>
         </Link>
-        <span>仅供模拟飞行使用，严禁用于真实运行。</span>
       </div>
     </header>
   );
@@ -26,7 +25,15 @@ export default function RootLayout({
     <footer className="mt-8">
       <p className="text-slate-500">
         &copy; 2010 - 2024, VATSIM P.R. China Division. All rights reserved.
-        Powered by Next.js.
+        Powered by{" "}
+        <a href="https://nextjs.org" className="underline">
+          Next.js
+        </a>{" "}
+        and{" "}
+        <a href="https://tailwindcss.com" className="underline">
+          Tailwind
+        </a>
+        .
       </p>
     </footer>
   );

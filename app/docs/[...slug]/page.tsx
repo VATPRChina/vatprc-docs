@@ -99,16 +99,20 @@ const PostPage = async (props: any) => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div>
-        <div className="prose sticky top-16 pt-4">
-          <TableOfContents
-            tableOfContents={tableOfContents}
-            maxDepth={3}
-            slugger={new Slugger()}
-          />
-        </div>
+      <div className="prose md:sticky md:top-16 pt-4 md:overflow-y-scroll md:max-h-dvh z-10">
+        <TableOfContents
+          tableOfContents={tableOfContents}
+          maxDepth={3}
+          slugger={new Slugger()}
+        />
       </div>
-      <div className="bg-white px-4 max-w-full md:px-12 pt-4 mx-auto shadow rounded">
+      <div className="bg-white px-4 md:px-12 py-6 mx-auto shadow rounded">
+        <div className="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15">
+          <p>仅供模拟飞行使用，严禁用于真实运行。</p>
+          <p className="text-sm">
+            &copy; 2010 - 2024, VATSIM P.R. China Division.
+          </p>
+        </div>
         <article className="prose prose-p:my-2">
           <MDXContent />
         </article>
