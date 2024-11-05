@@ -22,7 +22,7 @@ export default function RootLayout({
   );
 
   const footer = (
-    <footer className="mt-8">
+    <footer className="mt-8 mb-4">
       <p className="text-slate-500">
         &copy; 2010 - 2024, VATSIM P.R. China Division. All rights reserved.
         Powered by{" "}
@@ -33,7 +33,7 @@ export default function RootLayout({
         <a href="https://tailwindcss.com" className="underline">
           Tailwind
         </a>
-        .
+        . For simulation use only.
       </p>
     </footer>
   );

@@ -7,6 +7,8 @@ import withToc from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
 import * as runtime from "react/jsx-runtime";
 import path from "path";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 const HomePage = async () => {
   const files = await glob("docs/**/*.md");
@@ -14,20 +16,27 @@ const HomePage = async () => {
     <div className="flex flex-row gap-8 flex-wrap">
       {files.sort().map(async (file) => {
         const source = await fs.readFile(file, { encoding: "utf8" });
-        const code = String(
-          await compile(source, {
-            outputFormat: "function-body",
-            remarkPlugins: [gfm, withToc, withTocExport],
-          })
-        );
+        const compiled = await compile(source, {
+          outputFormat: "function-body",
+          remarkPlugins: [
+            gfm,
+            withToc,
+            withTocExport,
+            remarkFrontmatter,
+            remarkMdxFrontmatter,
+          ],
+        });
+        const code = String(compiled);
 
-        const { default: MDXContent, tableOfContents } = await run(code, {
+        const { tableOfContents, frontmatter } = await run(code, {
           ...runtime,
           baseUrl: import.meta.url,
         });
 
         const title =
-          (tableOfContents as any)?.[0]?.value ?? path.basename(file, ".md");
+          (frontmatter as any)?.title ??
+          (tableOfContents as any)?.[0]?.value ??
+          path.basename(file, ".md");
         return (
           <Link href={file.replace(".md", "")} key={file}>
             <div className="flex flex-col gap-2 w-96 p-2 bg-white shadow-md rounded-md">

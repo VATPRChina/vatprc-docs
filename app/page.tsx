@@ -1,13 +1,13 @@
+import DocList from "./docs/page";
+
 const HomePage = async () => {
   return (
-    <>
-      <p>Aerodromes</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-      <p>Enroute</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-      <p>Terminal</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-    </>
+    <div className="flex flex-col gap-y-4">
+      <h1 className="text-3xl font-bold">Documents</h1>
+      <div>
+        <DocList />
+      </div>
+    </div>
   );
 };
 

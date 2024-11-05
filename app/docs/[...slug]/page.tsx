@@ -10,6 +10,7 @@ import Slugger from "github-slugger";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
 import React from "react";
 import remarkBreaks from "remark-breaks";
+import remarkFrontmatter from "remark-frontmatter";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
@@ -87,7 +88,13 @@ const PostPage = async (props: any) => {
   const code = String(
     await compile(source, {
       outputFormat: "function-body",
-      remarkPlugins: [gfm, withToc, withTocExport, remarkBreaks],
+      remarkPlugins: [
+        gfm,
+        withToc,
+        withTocExport,
+        remarkBreaks,
+        remarkFrontmatter,
+      ],
       rehypePlugins: [rehypeSlug, rehypeGithubAlerts],
     })
   );
@@ -99,7 +106,7 @@ const PostPage = async (props: any) => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="prose md:sticky md:top-16 pt-4 md:overflow-y-scroll md:max-h-dvh z-10">
+      <div className="prose md:sticky md:top-24 md:overflow-y-scroll md:max-h-dvh z-10 prose-ul:my-0 prose-li:my-0">
         <TableOfContents
           tableOfContents={tableOfContents}
           maxDepth={3}
@@ -107,7 +114,7 @@ const PostPage = async (props: any) => {
         />
       </div>
       <div className="bg-white px-4 md:px-12 py-6 mx-auto shadow rounded">
-        <div className="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15">
+        <div className="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15 -rotate-45">
           <p>仅供模拟飞行使用，严禁用于真实运行。</p>
           <p className="text-sm">
             &copy; 2010 - 2024, VATSIM P.R. China Division.
