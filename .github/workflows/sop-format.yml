@@ -1,15 +1,17 @@
 name: "Auto Format SOP"
 on:
-  pull_request:
-    types: [opened, synchronize]
-    paths:
-      - "docs/**"
+  push: { paths: ["docs/**"] }
+  pull_request_target: { paths: ["docs/**"] }
 
 jobs:
   format-code:
     runs-on: ubuntu-latest
+    permissions: { contents: write }
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.head_ref }}
       - run: npm install -g prettier
       - run: prettier --write 'docs/**/*.md'
       - uses: stefanzweifel/git-auto-commit-action@v5
