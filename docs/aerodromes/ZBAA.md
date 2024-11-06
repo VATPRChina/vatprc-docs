@@ -10,6 +10,11 @@
 
 管制员上线时需遵守 VATSIM Code of Conduct (COC) ，并积极与上下级管制员协调以达成一致认知。
 
+Lorem ipsum
+* dolor
+* sit
+* amet
+
 ### 1.3 适用范围
 
 本文件的使用范围是 VATPRC 管辖内北京首都机场的塔台、地面、放行、机坪席位。 **本文件严禁用于真实运行。**
