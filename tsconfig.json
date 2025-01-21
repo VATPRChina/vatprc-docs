@@ -22,7 +22,18 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/assets/*": [
+        "./assets/*"
+      ],
+      "@/styles/*": [
+        "./styles/*"
+      ],
+    },
   },
   "include": [
     "**/*.ts",

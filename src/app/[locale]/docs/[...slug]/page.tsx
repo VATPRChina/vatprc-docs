@@ -11,6 +11,8 @@ import { rehypeGithubAlerts } from "rehype-github-alerts";
 import React from "react";
 import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageProps } from "@/utils";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
@@ -80,8 +82,11 @@ const TableOfContents = ({
   );
 };
 
-const PostPage = async (props: any) => {
-  const { slug } = await props.params;
+const PostPage = async (props: PageProps<"locale" | "...slug">) => {
+  const { slug, locale } = await props.params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Docs.Single");
+
   const file = `docs/${slug.join("/")}.md`;
 
   const source = await fs.readFile(file, { encoding: "utf8" });
@@ -115,10 +120,8 @@ const PostPage = async (props: any) => {
       </div>
       <div className="bg-white px-4 md:px-12 py-6 mx-auto shadow rounded">
         <div className="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15 -rotate-45">
-          <p>仅供模拟飞行使用，严禁用于真实运行。</p>
-          <p className="text-sm">
-            &copy; 2010 - 2024, VATSIM P.R. China Division.
-          </p>
+          <p>{t("warning")}</p>
+          <p className="text-sm">&copy; {t("copyright")}</p>
         </div>
         <article className="prose prose-p:my-2">
           <MDXContent />

@@ -11,7 +11,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 const HomePage = async () => {
-  const files = await glob("docs/**/*.md");
+  const files = await glob("../../../docs/**/*.md");
   return (
     <div className="flex flex-row gap-8 flex-wrap">
       {files.sort().map(async (file) => {
