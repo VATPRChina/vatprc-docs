@@ -25,6 +25,7 @@
     "@types/react-dom": "^19.0.3",
     "astro": "^5.1.8",
     "github-slugger": "^2.0.0",
+    "glob": "^11.0.1",
     "i18next": "^24.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -10,16 +10,5 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/assets/*": [
-        "./assets/*"
-      ],
-      "@/styles/*": [
-        "./styles/*"
-      ],
-    },
   }
 }

@@ -14,15 +14,12 @@ import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
 import path from "node:path";
 import { TableOfContents } from "../../../components/TableOfContents";
+import { glob } from "glob";
 
 export const getStaticPaths = getLocalePaths(async () => {
-  const pages = Object.keys(
-    import.meta.glob("../../../../docs/**/*.md", { eager: true })
-  )
-    .map((file) => path.relative("../../../../docs", file))
-    // remove the file extension
+  const pages = (await glob("docs/**/*.md"))
+    .map((file) => path.relative("docs", file))
     .map((file) => file.replace(path.extname(file), ""));
-  console.log(pages);
   return pages.map((slug) => ({ params: { path: slug } }));
 });
 

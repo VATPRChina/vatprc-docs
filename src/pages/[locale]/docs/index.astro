@@ -10,25 +10,19 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { glob } from "glob";
 
 export const getStaticPaths = getLocalePaths();
 
 const t = await useTranslation(Astro.currentLocale);
-const files = Object.keys(
-  import.meta.glob("../../../../docs/**/*.md", { eager: true })
-);
+const files = await glob("docs/**/*.md");
 ---
 
 <Layout>
   <div class="flex flex-row gap-8 flex-wrap">
     {
       files.sort().map(async (file) => {
-        const source = await fs.readFile(
-          path.resolve(import.meta.dirname, file),
-          {
-            encoding: "utf8",
-          }
-        );
+        const source = await fs.readFile(file, { encoding: "utf8" });
         const compiled = await compile(source, {
           outputFormat: "function-body",
           remarkPlugins: [
@@ -54,7 +48,7 @@ const files = Object.keys(
         return (
           <a
             href={makePath(
-              path.relative("../../../../", file.replace(".md", "")),
+              file.replace(path.extname(file), ""),
               Astro.currentLocale
             )}
           >
