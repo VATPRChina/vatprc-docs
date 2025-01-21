@@ -1,0 +1,79 @@
+---
+import { getLocalePaths, useTranslation } from "../../../i18n";
+import Layout from "../../../layouts/Layout.astro";
+import fs from "node:fs/promises";
+import gfm from "remark-gfm";
+import withToc from "@stefanprobst/remark-extract-toc";
+import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
+import { compile, run } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime";
+import rehypeSlug from "rehype-slug";
+import Slugger from "github-slugger";
+import { rehypeGithubAlerts } from "rehype-github-alerts";
+import remarkBreaks from "remark-breaks";
+import remarkFrontmatter from "remark-frontmatter";
+import path from "node:path";
+import { TableOfContents } from "../../../components/TableOfContents";
+
+export const getStaticPaths = getLocalePaths(async () => {
+  const pages = Object.keys(
+    import.meta.glob("../../../../docs/**/*.md", { eager: true })
+  )
+    .map((file) => path.relative("../../../../docs", file))
+    // remove the file extension
+    .map((file) => file.replace(path.extname(file), ""));
+  console.log(pages);
+  return pages.map((slug) => ({ params: { path: slug } }));
+});
+
+const t = await useTranslation(Astro.currentLocale);
+
+const file = `../../../../docs/${Astro.params.path}.md`;
+
+const source = await fs.readFile(path.resolve(import.meta.dirname, file), {
+  encoding: "utf8",
+});
+const code = String(
+  await compile(source, {
+    outputFormat: "function-body",
+    remarkPlugins: [
+      gfm,
+      withToc,
+      withTocExport,
+      remarkBreaks,
+      remarkFrontmatter,
+    ],
+    rehypePlugins: [rehypeSlug, rehypeGithubAlerts],
+  })
+);
+
+const { default: MDXContent, tableOfContents } = await run(code, {
+  ...runtime,
+  baseUrl: import.meta.url,
+});
+---
+
+<Layout>
+  <div class="flex flex-col md:flex-row">
+    <div
+      class="prose md:sticky md:top-24 md:overflow-y-scroll md:max-h-dvh z-10 prose-ul:my-0 prose-li:my-0"
+    >
+      <TableOfContents
+        tableOfContents={tableOfContents}
+        maxDepth={3}
+        slugger={new Slugger()}
+      />
+    </div>
+    <div class="bg-white px-4 md:px-12 py-6 mx-auto shadow rounded">
+      <div
+        class="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15 -rotate-45"
+      >
+        <p>{t("Docs.Single.warning")}</p>
+        <p class="text-sm">&copy; {t("Docs.Single.copyright")}</p>
+      </div>
+      <article class="prose prose-p:my-2 max-w-screen-lg">
+        <MDXContent />
+      </article>
+    </div>
+  </div>
+</Layout>

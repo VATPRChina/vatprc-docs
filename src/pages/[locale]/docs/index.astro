@@ -1,0 +1,70 @@
+---
+import { useTranslation, getLocalePaths, makePath } from "../../../i18n";
+import Layout from "../../../layouts/Layout.astro";
+import { compile, run } from "@mdx-js/mdx";
+import gfm from "remark-gfm";
+import withToc from "@stefanprobst/remark-extract-toc";
+import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
+import * as runtime from "react/jsx-runtime";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+export const getStaticPaths = getLocalePaths();
+
+const t = await useTranslation(Astro.currentLocale);
+const files = Object.keys(
+  import.meta.glob("../../../../docs/**/*.md", { eager: true })
+);
+---
+
+<Layout>
+  <div class="flex flex-row gap-8 flex-wrap">
+    {
+      files.sort().map(async (file) => {
+        const source = await fs.readFile(
+          path.resolve(import.meta.dirname, file),
+          {
+            encoding: "utf8",
+          }
+        );
+        const compiled = await compile(source, {
+          outputFormat: "function-body",
+          remarkPlugins: [
+            gfm,
+            withToc,
+            withTocExport,
+            remarkFrontmatter,
+            remarkMdxFrontmatter,
+          ],
+        });
+        const code = String(compiled);
+
+        const { tableOfContents, frontmatter } = await run(code, {
+          ...runtime,
+          baseUrl: import.meta.url,
+        });
+
+        const title =
+          (frontmatter as any)?.title ??
+          (tableOfContents as any)?.[0]?.value ??
+          path.basename(file, ".md");
+
+        return (
+          <a
+            href={makePath(
+              path.relative("../../../../", file.replace(".md", "")),
+              Astro.currentLocale
+            )}
+          >
+            <div class="flex flex-col gap-2 w-96 p-2 bg-white shadow-md rounded-md">
+              <span>{title}</span>
+              <span class="text-slate-500">{path.basename(file, ".md")}</span>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</Layout>
