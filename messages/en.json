@@ -1,0 +1,15 @@
+{
+  "Layout": {
+    "copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
+    "menu": {
+      "docs": "Docs",
+      "lang": "简体中文"
+    }
+  },
+  "Docs": {
+    "Single": {
+      "warning": "For simulation use only. Real world usage strictly prohibited.",
+      "copyright": "2010 - 2024, VATSIM P.R. China Division."
+    }
+  }
+}

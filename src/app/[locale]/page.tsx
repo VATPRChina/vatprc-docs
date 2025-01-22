@@ -1,27 +1,20 @@
----
-import { useTranslation, getLocalePaths, makePath } from "../../../i18n";
-import Layout from "../../../layouts/Layout.astro";
+import { glob } from "glob";
+import Link from "next/link";
+import fs from "fs/promises";
 import { compile, run } from "@mdx-js/mdx";
 import gfm from "remark-gfm";
 import withToc from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
 import * as runtime from "react/jsx-runtime";
+import path from "path";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import fs from "node:fs/promises";
-import path from "node:path";
-import { glob } from "glob";
 
-export const getStaticPaths = getLocalePaths();
-
-const t = await useTranslation(Astro.currentLocale);
-const files = await glob("docs/**/*.md");
----
-
-<Layout>
-  <div class="flex flex-row gap-8 flex-wrap">
-    {
-      files.sort().map(async (file) => {
+const HomePage = async () => {
+  const files = await glob("../../../docs/**/*.md");
+  return (
+    <div className="flex flex-row gap-8 flex-wrap">
+      {files.sort().map(async (file) => {
         const source = await fs.readFile(file, { encoding: "utf8" });
         const compiled = await compile(source, {
           outputFormat: "function-body",
@@ -44,21 +37,19 @@ const files = await glob("docs/**/*.md");
           (frontmatter as any)?.title ??
           (tableOfContents as any)?.[0]?.value ??
           path.basename(file, ".md");
-
         return (
-          <a
-            href={makePath(
-              file.replace(path.extname(file), ""),
-              Astro.currentLocale
-            )}
-          >
-            <div class="flex flex-col gap-2 w-96 p-2 bg-white shadow-md rounded-md">
+          <Link href={file.replace(".md", "")} key={file}>
+            <div className="flex flex-col gap-2 w-96 p-2 bg-white shadow-md rounded-md">
               <span>{title}</span>
-              <span class="text-slate-500">{path.basename(file, ".md")}</span>
+              <span className="text-slate-500">
+                {path.basename(file, ".md")}
+              </span>
             </div>
-          </a>
+          </Link>
         );
-      })
-    }
-  </div>
-</Layout>
+      })}
+    </div>
+  );
+};
+
+export default HomePage;
