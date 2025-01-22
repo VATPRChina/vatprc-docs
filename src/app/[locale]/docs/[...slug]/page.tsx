@@ -1,22 +1,22 @@
-import fs from "fs/promises";
-import gfm from "remark-gfm";
-import withToc from "@stefanprobst/remark-extract-toc";
-import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
+import { PageProps } from "@/utils";
 import { compile, run } from "@mdx-js/mdx";
-import * as runtime from "react/jsx-runtime";
-import { glob } from "glob";
-import rehypeSlug from "rehype-slug";
+import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
+import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
+import fs from "fs/promises";
 import Slugger from "github-slugger";
-import { rehypeGithubAlerts } from "rehype-github-alerts";
+import { glob } from "glob";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import React from "react";
+import * as runtime from "react/jsx-runtime";
+import { rehypeGithubAlerts } from "rehype-github-alerts";
+import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PageProps } from "@/utils";
+import gfm from "remark-gfm";
 
 export const generateStaticParams = async () => {
   const pages = (await glob("docs/**/*.md")).map((file) =>
-    file.replace(".md", "").split("/").slice(1)
+    file.replace(".md", "").split("/").slice(1),
   );
   return pages.map((slug) => ({ slug }));
 };
@@ -26,7 +26,7 @@ const TableOfContents = ({
   maxDepth,
   slugger,
 }: {
-  tableOfContents: any;
+  tableOfContents: Toc;
   maxDepth?: number;
   slugger: Slugger;
 }) => {
@@ -37,7 +37,7 @@ const TableOfContents = ({
   if (tableOfContents?.[0].depth === 1) {
     return (
       <>
-        {tableOfContents.map((toc: any) => (
+        {tableOfContents.map((toc: TocEntry) => (
           <React.Fragment key={toc.value}>
             <a
               href={"#" + slugger.slug(toc.value)}
@@ -61,7 +61,7 @@ const TableOfContents = ({
 
   return (
     <ul>
-      {tableOfContents.map((toc: any) => (
+      {tableOfContents.map((toc: TocEntry) => (
         <li key={toc.value}>
           <a
             href={"#" + slugger.slug(toc.value)}
@@ -101,7 +101,7 @@ const PostPage = async (props: PageProps<"locale" | "...slug">) => {
         remarkFrontmatter,
       ],
       rehypePlugins: [rehypeSlug, rehypeGithubAlerts],
-    })
+    }),
   );
 
   const { default: MDXContent, tableOfContents } = await run(code, {
@@ -111,19 +111,19 @@ const PostPage = async (props: PageProps<"locale" | "...slug">) => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="prose md:sticky md:top-24 md:overflow-y-scroll md:max-h-dvh z-10 prose-ul:my-0 prose-li:my-0">
+      <div className="prose z-10 prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
         <TableOfContents
-          tableOfContents={tableOfContents}
+          tableOfContents={tableOfContents as Toc}
           maxDepth={3}
           slugger={new Slugger()}
         />
       </div>
-      <div className="bg-white px-4 md:px-12 py-6 mx-auto shadow rounded">
-        <div className="fixed top-1/2 left-0 right-0 font-light text-center text-2xl text-red-900 opacity-15 -rotate-45">
+      <div className="mx-auto rounded bg-white px-4 py-6 shadow md:px-12">
+        <div className="fixed left-0 right-0 top-1/2 -rotate-45 text-center text-2xl font-light text-red-900 opacity-15">
           <p>{t("warning")}</p>
           <p className="text-sm">&copy; {t("copyright")}</p>
         </div>
-        <article className="prose prose-p:my-2 max-w-screen-lg">
+        <article className="prose max-w-screen-lg prose-p:my-2">
           <MDXContent />
         </article>
       </div>

@@ -3,15 +3,13 @@ type Prettify<T> = {
 } & {};
 
 type UnionToIntersection<T> = Prettify<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (T extends any ? (x: T) => any : never) extends (x: infer R) => any
     ? R
     : never
 >;
 
-export interface PageProps<
-  TParams extends string = never,
-  TSearchParams extends string = never
-> {
+export interface PageProps<TParams extends string = never> {
   params: Promise<
     UnionToIntersection<
       {
@@ -23,5 +21,4 @@ export interface PageProps<
       }[TParams]
     >
   >;
-  // searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

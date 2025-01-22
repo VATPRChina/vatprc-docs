@@ -12,8 +12,6 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import Image from "next/image";
-import { useParams, usePathname } from "next/navigation";
-import { LanguageServiceMode } from "typescript";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -29,7 +27,7 @@ const RootLayout = async ({
   const t = await getTranslations({ locale, namespace: "Layout" });
 
   const header = (
-    <header className="bg-slate-50 py-2 px-8 border-b-2 border-slate-300 sticky top-0 h-16 flex items-center z-50 w-full">
+    <header className="sticky top-0 z-50 flex h-16 w-full items-center border-b-2 border-slate-300 bg-slate-50 px-8 py-2">
       <div className="flex items-center gap-8">
         <Link href="/">
           <Image src={logo} alt="VATPRC logo" height={32} className="-mt-2" />
@@ -43,7 +41,7 @@ const RootLayout = async ({
   );
 
   const footer = (
-    <footer className="mt-8 mb-4">
+    <footer className="mb-4 mt-8">
       <p className="text-slate-500">
         &copy;{" "}
         {t.rich("copyright", {
@@ -68,7 +66,7 @@ const RootLayout = async ({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="bg-slate-50 container mx-auto">
+      <body className="container mx-auto bg-slate-50">
         <NextIntlClientProvider messages={messages} locale={locale}>
           {header}
           <div className="pt-4">{children}</div>

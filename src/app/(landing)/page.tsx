@@ -1,9 +1,9 @@
 "use client";
 
-import languageDetector from "next-language-detector";
 import { routing } from "@/i18n/routing";
-import { useEffect } from "react";
+import languageDetector from "next-language-detector";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const lngDetector = languageDetector({
   supportedLngs: [...routing.locales],
