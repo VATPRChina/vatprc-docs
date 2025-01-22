@@ -1,0 +1,15 @@
+{
+  "Layout": {
+    "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
+    "menu": {
+      "docs": "文档",
+      "lang": "English"
+    }
+  },
+  "Docs": {
+    "Single": {
+      "warning": "仅供模拟飞行使用，严禁用于真实运行。",
+      "copyright": "2010 - 2024, VATSIM P.R. China Division."
+    }
+  }
+}
