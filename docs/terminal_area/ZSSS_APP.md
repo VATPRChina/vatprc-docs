@@ -369,14 +369,8 @@
 
 ### 附录A. 扇区分扇示意图
 
-![](https://github.com/user-attachments/assets/3e3226ab-a4e5-473e-b3be-497feaac73c2)
+WIP
 
 ### 附录B. 扇区移交示意图
 
-![](https://github.com/user-attachments/assets/60002a67-4b37-4296-981b-3bdcb2967ce6)
-
-![](https://github.com/user-attachments/assets/c950168d-15e4-4313-8ba3-31d0b7be6dac)
-
-![](https://github.com/user-attachments/assets/529690fa-301a-49fb-8ee1-d02d2806fcda)
-
-![](https://github.com/user-attachments/assets/7acdd288-fef8-4996-b750-63f71fd2c5ae)
+WIP
