@@ -118,12 +118,12 @@ const PostPage = async (props: PageProps<"locale" | "...slug">) => {
           slugger={new Slugger()}
         />
       </div>
-      <div className="mx-auto rounded bg-white px-4 py-6 shadow md:px-12">
+      <div className="mx-auto w-full max-w-screen-lg rounded bg-white px-4 py-6 shadow md:px-12">
         <div className="fixed left-0 right-0 top-1/2 -rotate-45 text-center text-2xl font-light text-red-900 opacity-15">
           <p>{t("warning")}</p>
           <p className="text-sm">&copy; {t("copyright")}</p>
         </div>
-        <article className="prose max-w-screen-lg prose-p:my-2">
+        <article className="prose prose-p:my-2">
           <MDXContent />
         </article>
       </div>
