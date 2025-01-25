@@ -1,19 +1,24 @@
 "use client";
 
 import { Link, usePathname } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export const LanguageSwitch: React.FunctionComponent<{
-  locale: string;
-}> = ({ locale }) => {
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ children, className }) => {
+  const locale = useLocale();
   const path = usePathname();
   const t = useTranslations("Layout");
+
   return (
     <Link
       href={path.replace(`/${locale}`, "")}
       locale={locale === "en" ? "zh-cn" : "en"}
+      title={t("menu.lang")}
+      className={className}
     >
-      <span>{t("menu.lang")}</span>
+      {children ?? <span>{t("menu.lang")}</span>}
     </Link>
   );
 };

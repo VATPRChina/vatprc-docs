@@ -111,19 +111,19 @@ const PostPage = async (props: PageProps<"locale" | "...slug">) => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="prose z-10 prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
+      <div className="prose z-10 dark:prose-invert prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
         <TableOfContents
           tableOfContents={tableOfContents as Toc}
           maxDepth={3}
           slugger={new Slugger()}
         />
       </div>
-      <div className="mx-auto w-full max-w-screen-lg rounded bg-white px-4 py-6 shadow md:px-12">
-        <div className="fixed left-0 right-0 top-1/2 -rotate-45 text-center text-2xl font-light text-red-900 opacity-15">
+      <div className="mx-auto w-full max-w-screen-lg rounded bg-white px-4 py-6 shadow dark:bg-black dark:shadow-none md:px-12">
+        <div className="fixed left-0 right-0 top-1/2 -rotate-45 text-center text-2xl font-light text-red-900 opacity-15 dark:text-red-50 dark:opacity-20">
           <p>{t("warning")}</p>
           <p className="text-sm">&copy; {t("copyright")}</p>
         </div>
-        <article className="prose prose-p:my-2">
+        <article className="prose dark:prose-invert prose-p:my-2">
           <MDXContent />
         </article>
       </div>
