@@ -84,7 +84,9 @@
       "Error": "未知错误：{message}",
       "EmptyContentError": "内容为空",
       "NoTranslationError": "尚未完成翻译"
-    }
+    },
+    "pilots-all": "显示所有机组",
+    "pilots-less": "显示部分机组"
   },
   "Layout": {
     "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
@@ -97,6 +99,17 @@
     "Single": {
       "warning": "仅供模拟飞行使用，严禁用于真实运行。",
       "copyright": "2010 - 2024, VATSIM P.R. China Division."
+    }
+  },
+  "Components": {
+    "RecentEvents": {
+      "no_event": "近期没有活动。"
+    },
+    "OnlineController": {
+      "no_controller": "没有管制员在线。"
+    },
+    "OnlinePilots": {
+      "no_pilot": "没有在线机组。"
     }
   }
 }

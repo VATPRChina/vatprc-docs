@@ -84,7 +84,9 @@
       "Error": "Unknown Error: {message}",
       "EmptyContentError": "Empty content",
       "NoTranslationError": "There is unfortunately no corresponding translation in your selected language."
-    }
+    },
+    "pilots-less": "Show less pilots",
+    "pilots-all": "Show all pilots"
   },
   "Layout": {
     "copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
@@ -97,6 +99,17 @@
     "Single": {
       "warning": "For simulation use only. Real world usage strictly prohibited.",
       "copyright": "2010 - 2024, VATSIM P.R. China Division."
+    }
+  },
+  "Components": {
+    "RecentEvents": {
+      "no_event": "No event is scheduled recently."
+    },
+    "OnlineController": {
+      "no_controller": "No controller is online now."
+    },
+    "OnlinePilots": {
+      "no_pilot": "No online pilot."
     }
   }
 }
