@@ -2,7 +2,7 @@ import { LanguageSwitch } from "./LanguageSwitch";
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { Link } from "@/i18n/routing";
-import { LanguageIcon } from "@heroicons/react/24/outline";
+import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-[1px] border-slate-300 bg-white px-8 py-2 dark:border-slate-700 dark:bg-black">
-      <div className="items-top flex gap-4">
+      <div className="flex items-center gap-4">
         <Link href="/">
           <Image
             src={logo}
@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
           <span className="text-bold">{t("Legacy.nav-menu.logo-pack")}</span>
         </div> */}
         <LanguageSwitch className="hover:text-vatprc dark:text-white">
-          <LanguageIcon height={16} />
+          <Languages size={18} />
         </LanguageSwitch>
       </div>
       {/* <div className="grid w-full auto-cols-min grid-flow-col auto-rows-min items-center justify-start justify-items-center gap-2">

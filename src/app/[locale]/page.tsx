@@ -7,8 +7,7 @@ import { OnlineControllers } from "@/components/OnlineControllers";
 import { OnlinePilots } from "@/components/OnlinePilots";
 import { RecentEvents } from "@/components/RecentEvents";
 import { PageProps } from "@/utils";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import ArrowRightIcon from "@heroicons/react/24/outline/ArrowRightIcon";
+import { ArrowRight, Mail } from "lucide-react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
@@ -53,7 +52,7 @@ const HomePage = async ({ params }: PageProps<"locale">) => {
                 className="vatprc-big-btn-reverse mt-6"
               >
                 {t("nav-menu.atc-center")}
-                <ArrowRightIcon className="-mt-0.5 ml-2" height={24} />
+                <ArrowRight className="-mt-0.5 ml-2" size={24} />
               </a>
             </div>
             <div className="flex flex-col items-center justify-center sm:hidden">
@@ -85,7 +84,7 @@ const HomePage = async ({ params }: PageProps<"locale">) => {
                 target="_blank"
                 className="vatprc-big-btn-reverse mt-6"
               >
-                <EnvelopeIcon className="mr-2" height={24} />
+                <Mail className="mr-2" height={24} />
                 feedback@vatprc.net
               </a>
               <a
@@ -94,7 +93,7 @@ const HomePage = async ({ params }: PageProps<"locale">) => {
                 className="vatprc-big-btn-reverse mt-6"
               >
                 {t("nav-menu.forum")}
-                <ArrowRightIcon className="-mt-0.5 ml-2" height={24} />
+                <ArrowRight className="-mt-0.5 ml-2" height={24} />
               </a>
             </div>
             <div className="flex flex-col items-center justify-center sm:hidden">
