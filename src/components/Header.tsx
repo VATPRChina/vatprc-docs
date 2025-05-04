@@ -1,5 +1,5 @@
+import "./Header.css";
 import { LanguageSwitch } from "./LanguageSwitch";
-import "./header.css";
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import {
