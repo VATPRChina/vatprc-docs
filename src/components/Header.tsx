@@ -8,31 +8,12 @@ import {
   NavigationMenuItem,
   NavigationMenuTrigger,
   NavigationMenuContent,
-  NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Link } from "@/i18n/routing";
-import { cn } from "@/lib/utils";
 import { Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a ref={ref} className={cn("nav-list-item", className)} {...props}>
-          <div className="title">{title}</div>
-          <p className="description">{children}</p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
 
 export const Header: React.FC = () => {
   const t = useTranslations();
@@ -62,66 +43,54 @@ export const Header: React.FC = () => {
                 {t("Legacy.nav-menu.about")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-4">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="https://community.vatprc.net/c/69-category/12-category/12"
-                        target="_blank"
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          {t("Legacy.nav-menu.announcement")}
-                        </div>
-                        {/* <p className="text-sm leading-tight text-muted-foreground">
-                          Beautifully designed components that you can copy and
-                          paste into your apps. Accessible. Customizable. Open
-                          Source.
-                        </p> */}
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <ListItem
-                    title={t("Legacy.nav-menu.introduction")}
-                  ></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.staff")}></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.privacy")}></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.logo-pack")}
+                <div className="nav-list-grid">
+                  <Link
+                    className="large-item row-span-4 flex items-end"
+                    href="https://community.vatprc.net/c/69-category/12-category/12"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.announcement")}
+                  </Link>
+                  <Link className="item" href="/division/introduction">
+                    <h3>{t("Legacy.nav-menu.introduction")}</h3>
+                  </Link>
+                  <Link className="item" href="/division/staff">
+                    <h3>{t("Legacy.nav-menu.staff")}</h3>
+                  </Link>
+                  <Link className="item" href="/division/privacy">
+                    <h3>{t("Legacy.nav-menu.privacy")}</h3>
+                  </Link>
+                  <Link
+                    className="item"
                     href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip"
                     target="_blank"
-                  ></ListItem>
-                  <li className="row-span-4">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href="https://community.vatprc.net"
-                        target="_blank"
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          {t("Legacy.nav-menu.forum")}
-                        </div>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                  <li className="row-span-4">
-                    <NavigationMenuLink asChild>
-                      <a
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        href={
-                          locale === "zh-cn"
-                            ? "https://community.vatprc.net/c/events/66-category/66"
-                            : "https://vatsim.net/events/"
-                        }
-                        target="_blank"
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          {t("Legacy.nav-menu.event")}
-                        </div>
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
+                    rel="noopener noreferrer"
+                  >
+                    <h3>{t("Legacy.nav-menu.logo-pack")}</h3>
+                  </Link>
+                  <hr className="col-span-full" />
+                  <Link
+                    className="large-item"
+                    href="https://community.vatprc.net"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>{t("Legacy.nav-menu.forum")}</h3>
+                  </Link>
+                  <Link
+                    className="large-item"
+                    href={
+                      locale === "zh-cn"
+                        ? "https://community.vatprc.net/c/events/66-category/66"
+                        : "https://vatsim.net/events/"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>{t("Legacy.nav-menu.event")}</h3>
+                  </Link>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -129,25 +98,26 @@ export const Header: React.FC = () => {
                 {t("Legacy.nav-menu.operation")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="nav-list-grid">
-                  <ListItem title={t("Legacy.nav-menu.fir")}></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.rvsm")}></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.atc-positions-frequencies")}
-                  ></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.sop")}></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.vfr")}></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.charts")}
-                    href="https://chartfox.org/"
-                    target="_blank"
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.vacdm")}
-                    href="https://vacdm.vatprc.net/"
-                    target="_blank"
-                  ></ListItem>
-                </ul>
+                <div className="nav-list-grid">
+                  <Link
+                    className="large-item row-span-4 flex items-end"
+                    href="/airspace/fir"
+                  >
+                    {t("Legacy.nav-menu.fir")}
+                  </Link>
+                  <Link className="item" href="/airspace/rvsm">
+                    {t("Legacy.nav-menu.rvsm")}
+                  </Link>
+                  <Link className="item" href="/airspace/station">
+                    {t("Legacy.nav-menu.atc-positions-frequencies")}
+                  </Link>
+                  <Link className="item" href="/airspace/sop">
+                    {t("Legacy.nav-menu.sop")}
+                  </Link>
+                  <Link className="item" href="/airspace/vfr">
+                    {t("Legacy.nav-menu.vfr")}
+                  </Link>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -155,23 +125,51 @@ export const Header: React.FC = () => {
                 {t("Legacy.nav-menu.pilot")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="nav-list-grid">
-                  <ListItem
-                    title={t("Legacy.nav-menu.start-to-fly")}
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.introduction-to-fly")}
-                  ></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.ts3")}></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.pilot-softwares")}
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.weather")}
+                <div className="nav-list-grid">
+                  <Link
+                    className="large-item row-span-2 flex items-end"
+                    href="/pilot/start-to-fly"
+                  >
+                    {t("Legacy.nav-menu.start-to-fly")}
+                  </Link>
+                  <Link className="item" href="/pilot/introduction-to-fly">
+                    {t("Legacy.nav-menu.introduction-to-fly")}
+                  </Link>
+                  <Link className="item" href="/pilot/ts3">
+                    {t("Legacy.nav-menu.ts3")}
+                  </Link>
+                  <hr className="col-span-full" />
+                  <Link
+                    className="large-item row-span-3 flex items-end"
+                    href="/pilot/pilot-softwares"
+                  >
+                    {t("Legacy.nav-menu.pilot-softwares")}
+                  </Link>
+                  <Link
+                    className="item"
+                    href="https://chartfox.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.charts")}
+                  </Link>
+                  <Link
+                    className="item"
+                    href="https://vacdm.vatprc.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.vacdm")}
+                  </Link>
+                  <Link
+                    className="item"
                     href="https://metar-taf.com/"
                     target="_blank"
-                  ></ListItem>
-                </ul>
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.weather")}
+                  </Link>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -180,30 +178,46 @@ export const Header: React.FC = () => {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="nav-list-grid">
-                  <ListItem
-                    title={t("Legacy.nav-menu.controller-regulations")}
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.become-a-controller")}
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.controller-list")}
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.atc-center")}
+                  <Link
+                    className="large-item row-span-3"
+                    href="/controller/controller-regulations"
+                  >
+                    {t("Legacy.nav-menu.controller-regulations")}
+                  </Link>
+                  <Link className="item" href="/controller/become-a-controller">
+                    {t("Legacy.nav-menu.become-a-controller")}
+                  </Link>
+                  <Link className="item" href="/controller/controller-list">
+                    {t("Legacy.nav-menu.controller-list")}
+                  </Link>
+                  <Link
+                    className="item"
+                    href="/controller/visiting-and-transferring"
+                  >
+                    {t("Legacy.nav-menu.visiting-and-transferring")}
+                  </Link>
+                  <Link
+                    className="large-item row-span-3"
                     href="https://atc.vatprc.net"
                     target="_blank"
-                  ></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.moodle")}
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.atc-center")}
+                  </Link>
+                  <Link
+                    className="item"
                     href="https://moodle.vatprc.net"
                     target="_blank"
-                  ></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.sector")}></ListItem>
-                  <ListItem title={t("Legacy.nav-menu.loa")}></ListItem>
-                  <ListItem
-                    title={t("Legacy.nav-menu.visiting-and-transferring")}
-                  ></ListItem>
+                    rel="noopener noreferrer"
+                  >
+                    {t("Legacy.nav-menu.moodle")}
+                  </Link>
+                  <Link className="item" href="/controller/sector">
+                    {t("Legacy.nav-menu.sector")}
+                  </Link>
+                  <Link className="item" href="/controller/loa">
+                    {t("Legacy.nav-menu.loa")}
+                  </Link>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>

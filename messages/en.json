@@ -44,7 +44,8 @@
       "charts": "Charts",
       "visiting-and-transferring": "Visiting & Transfer",
       "atc-positions-frequencies": "ATC Positions & Frequencies",
-      "vacdm": "vACDM"
+      "vacdm": "vACDM",
+      "tools": "Tools"
     },
     "recent-events": "Recent Events",
     "online-controllers": "Online Controllers",
@@ -114,6 +115,13 @@
     "DiscourseDocument": {
       "Error": "Error",
       "loading": "Loading"
+    }
+  },
+  "pages": {
+    "airspace": {
+      "sop": {
+        "no-english": "This page is not available in English."
+      }
     }
   }
 }

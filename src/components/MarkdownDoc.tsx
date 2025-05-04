@@ -36,7 +36,7 @@ export const TableOfContents = ({
     return null;
   }
 
-  if (tableOfContents?.[0].depth === 1) {
+  if (tableOfContents?.[0]?.depth === 1) {
     return (
       <>
         {tableOfContents.map((toc: TocEntry) => (

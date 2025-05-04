@@ -44,7 +44,8 @@
       "charts": "航图",
       "visiting-and-transferring": "客座和转移",
       "atc-positions-frequencies": "管制席位及频率",
-      "vacdm": "vACDM"
+      "vacdm": "vACDM",
+      "tools": "工具"
     },
     "recent-events": "近期活动",
     "online-controllers": "在线管制员",
@@ -114,6 +115,13 @@
     "DiscourseDocument": {
       "Error": "错误",
       "loading": "正在加载"
+    }
+  },
+  "pages": {
+    "airspace": {
+      "sop": {
+        "no-english": "本页面暂不提供英文版本。"
+      }
     }
   }
 }

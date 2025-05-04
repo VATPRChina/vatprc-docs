@@ -33,7 +33,7 @@ const fetcher = async ([, postId]: [string, string]) => {
     },
   );
 
-  let contentRes = raw;
+  let contentRes = raw.replaceAll("<->", "\\<->");
   let i = 0;
   contentRes = contentRes.replaceAll(/upload:\/\/([\w.-]+)/g, () => {
     const thumbnailUrl = meta.thumbnails?.[i]?.url ?? "";
