@@ -1,16 +1,52 @@
 import { LanguageSwitch } from "./LanguageSwitch";
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu";
 import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 import { Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import React from "react";
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className,
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 export const Header: React.FC = () => {
   const t = useTranslations();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-[1px] border-slate-300 bg-white px-8 py-2 dark:border-slate-700 dark:bg-black">
+    <header className="sticky top-0 z-50 w-full border-b-[1px] bg-white px-8 py-2 dark:border-slate-700 dark:bg-black">
       <div className="flex items-center gap-4">
         <Link href="/">
           <Image
@@ -26,39 +62,63 @@ export const Header: React.FC = () => {
             className="hidden dark:block"
           />
         </Link>
-        {/* <div className="flex flex-col gap-2">
-          <span className="text-bold">{t("Legacy.nav-menu.announcement")}</span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <span className="text-bold">{t("Legacy.nav-menu.about")}</span>
-          <span className="text-bold">{t("Legacy.nav-menu.introduction")}</span>
-          <span className="text-bold">{t("Legacy.nav-menu.staff")}</span>
-          <span className="text-bold">{t("Legacy.nav-menu.privacy")}</span>
-          <span className="text-bold">{t("Legacy.nav-menu.logo-pack")}</span>
-        </div> */}
-        <LanguageSwitch className="hover:text-vatprc dark:text-white">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                {t("Legacy.nav-menu.about")}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <li className="row-span-4">
+                    <NavigationMenuLink asChild>
+                      <a
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href="https://community.vatprc.net/c/69-category/12-category/12"
+                      >
+                        <div className="mb-2 mt-4 text-lg font-medium">
+                          {t("Legacy.nav-menu.announcement")}
+                        </div>
+                        {/* <p className="text-sm leading-tight text-muted-foreground">
+                          Beautifully designed components that you can copy and
+                          paste into your apps. Accessible. Customizable. Open
+                          Source.
+                        </p> */}
+                      </a>
+                    </NavigationMenuLink>
+                  </li>
+                  <ListItem
+                    title={t("Legacy.nav-menu.introduction")}
+                  ></ListItem>
+                  <ListItem title={t("Legacy.nav-menu.staff")}></ListItem>
+                  <ListItem title={t("Legacy.nav-menu.privacy")}></ListItem>
+                  <ListItem
+                    title={t("Legacy.nav-menu.logo-pack")}
+                    href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip"
+                  ></ListItem>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            {/* <NavigationMenuItem>
+              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ListItem
+                    key={component.title}
+                    title={component.title}
+                    href={component.href}
+                  >
+                    {component.description}
+                  </ListItem>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem> */}
+          </NavigationMenuList>
+        </NavigationMenu>
+        <LanguageSwitch className="ml-auto hover:text-vatprc dark:text-white">
           <Languages size={18} />
         </LanguageSwitch>
       </div>
-      {/* <div className="grid w-full auto-cols-min grid-flow-col auto-rows-min items-center justify-start justify-items-center gap-2">
-        <div className="contents">
-          <div className="col-[1] row-[1] h-16 w-24 bg-red-300"></div>
-        </div>
-        <div className="contents">
-          <div className="col-[2] row-[1] h-4 w-8 bg-orange-300"></div>
-          <div className="col-[2] h-4 w-16 bg-yellow-300"></div>
-          <div className="col-[2] h-4 w-12 bg-green-300"></div>
-        </div>
-        <div className="contents">
-          <div className="col-[3] row-[1] h-4 w-16 bg-cyan-300"></div>
-          <div className="w-18 col-[3] h-4 bg-blue-300"></div>
-        </div>
-        <div className="contents">
-          <div className="col-[4] row-[1] h-4 w-12 bg-purple-300"></div>
-          <div className="col-[4] h-4 w-16 bg-red-300"></div>
-          <div className="col-[4] h-4 w-8 bg-orange-300"></div>
-        </div>
-      </div> */}
     </header>
   );
 };

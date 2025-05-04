@@ -89,7 +89,7 @@
     "pilots-all": "Show all pilots"
   },
   "Layout": {
-    "copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
+    "copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
     "menu": {
       "docs": "Docs",
       "lang": "简体中文"

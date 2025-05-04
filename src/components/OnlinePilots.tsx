@@ -93,16 +93,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({
       >
         {pilots?.slice(0, 8)}
       </div>
-      <div className="flex items-center justify-center space-x-4 px-4">
-        {open ? t("pilots-less") : t("pilots-all")}
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm">
-            <ChevronsUpDown className="h-4 w-4" />
-          </Button>
-        </CollapsibleTrigger>
-      </div>
       <CollapsibleContent>
-        {" "}
         <div
           className={cn(
             className,
@@ -112,6 +103,14 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({
           {pilots?.slice(8)}
         </div>
       </CollapsibleContent>
+      <div className="flex items-center justify-center space-x-4 px-4">
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm">
+            {open ? t("pilots-less") : t("pilots-all")}
+            <ChevronsUpDown className="h-4 w-4" />
+          </Button>
+        </CollapsibleTrigger>
+      </div>
     </Collapsible>
   );
 };

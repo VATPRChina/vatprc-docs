@@ -8,8 +8,21 @@ import { OnlinePilots } from "@/components/OnlinePilots";
 import { RecentEvents } from "@/components/RecentEvents";
 import { PageProps } from "@/utils";
 import { ArrowRight, Mail } from "lucide-react";
+import { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
+
+export async function generateMetadata({
+  params,
+}: PageProps<"locale">): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Legacy");
+
+  return {
+    title: t("title"),
+  };
+}
 
 const HomePage = async ({ params }: PageProps<"locale">) => {
   const { locale } = await params;

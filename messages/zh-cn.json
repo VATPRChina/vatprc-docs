@@ -89,7 +89,7 @@
     "pilots-less": "显示部分机组"
   },
   "Layout": {
-    "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
+    "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 Microsoft Azure, .NET, <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
     "menu": {
       "docs": "文档",
       "lang": "English"
