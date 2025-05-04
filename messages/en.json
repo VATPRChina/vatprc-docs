@@ -75,7 +75,8 @@
       "show-absence": "Show Absence Controllers",
       "until": "until",
       "tmu-controllers": "Controllers with Traffic Management Center Permission",
-      "no-tmu": "No controllers with Traffic Management Center Permission currently"
+      "no-tmu": "No controllers with Traffic Management Center Permission currently",
+      "absent": "Absent"
     },
     "cookie": {
       "text": "By continuing to use this website, you consent to the use of cookies in accordance with our Cookie Policy.",

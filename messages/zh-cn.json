@@ -75,7 +75,8 @@
       "show-absence": "显示 Absence 管制员",
       "until": "直到",
       "tmu-controllers": "流量控制席位权限管制员列表",
-      "no-tmu": "暂无具备流量控制席位权限的管制员"
+      "no-tmu": "暂无具备流量控制席位权限的管制员",
+      "absent": "非活跃"
     },
     "cookie": {
       "text": "继续使用本网站即表示您同意我们根据我们的 Cookie 政策使用 Cookie 来记录您的某些信息。",

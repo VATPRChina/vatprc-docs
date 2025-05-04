@@ -10,7 +10,7 @@ import {
   NavigationMenuContent,
 } from "@/components/ui/navigation-menu";
 import { Link } from "@/i18n/routing";
-import { Languages } from "lucide-react";
+import { ExternalLink, Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
@@ -50,7 +50,10 @@ export const Header: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {t("Legacy.nav-menu.announcement")}
+                    <div className="flex items-center gap-2">
+                      {t("Legacy.nav-menu.announcement")}
+                      <ExternalLink size={12} />
+                    </div>
                   </Link>
                   <Link className="item" href="/division/introduction">
                     <h3>{t("Legacy.nav-menu.introduction")}</h3>
@@ -67,7 +70,10 @@ export const Header: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <h3>{t("Legacy.nav-menu.logo-pack")}</h3>
+                    <div className="flex items-center gap-2">
+                      {t("Legacy.nav-menu.logo-pack")}
+                      <ExternalLink size={12} />
+                    </div>
                   </Link>
                   <hr className="col-span-full" />
                   <Link
@@ -76,7 +82,10 @@ export const Header: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <h3>{t("Legacy.nav-menu.forum")}</h3>
+                    <div className="flex items-center gap-2">
+                      {t("Legacy.nav-menu.forum")}
+                      <ExternalLink size={12} />
+                    </div>
                   </Link>
                   <Link
                     className="large-item"
@@ -88,7 +97,10 @@ export const Header: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <h3>{t("Legacy.nav-menu.event")}</h3>
+                    <div className="flex items-center gap-2">
+                      {t("Legacy.nav-menu.event")}
+                      <ExternalLink size={12} />
+                    </div>
                   </Link>
                 </div>
               </NavigationMenuContent>
@@ -146,28 +158,31 @@ export const Header: React.FC = () => {
                     {t("Legacy.nav-menu.pilot-softwares")}
                   </Link>
                   <Link
-                    className="item"
+                    className="item flex items-center gap-2"
                     href="https://chartfox.org/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {t("Legacy.nav-menu.charts")}
+                    <ExternalLink size={12} />
                   </Link>
                   <Link
-                    className="item"
+                    className="item flex items-center gap-2"
                     href="https://vacdm.vatprc.net/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {t("Legacy.nav-menu.vacdm")}
+                    <ExternalLink size={12} />
                   </Link>
                   <Link
-                    className="item"
+                    className="item flex items-center gap-2"
                     href="https://metar-taf.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {t("Legacy.nav-menu.weather")}
+                    <ExternalLink size={12} />
                   </Link>
                 </div>
               </NavigationMenuContent>
@@ -179,7 +194,13 @@ export const Header: React.FC = () => {
               <NavigationMenuContent>
                 <ul className="nav-list-grid">
                   <Link
-                    className="large-item row-span-3"
+                    className="large-item row-span-3 flex items-end"
+                    href="/controller/controller-list"
+                  >
+                    {t("Legacy.nav-menu.controller-list")}
+                  </Link>
+                  <Link
+                    className="item"
                     href="/controller/controller-regulations"
                   >
                     {t("Legacy.nav-menu.controller-regulations")}
@@ -187,30 +208,32 @@ export const Header: React.FC = () => {
                   <Link className="item" href="/controller/become-a-controller">
                     {t("Legacy.nav-menu.become-a-controller")}
                   </Link>
-                  <Link className="item" href="/controller/controller-list">
-                    {t("Legacy.nav-menu.controller-list")}
-                  </Link>
                   <Link
                     className="item"
                     href="/controller/visiting-and-transferring"
                   >
                     {t("Legacy.nav-menu.visiting-and-transferring")}
                   </Link>
+                  <hr className="col-span-full" />
                   <Link
-                    className="large-item row-span-3"
+                    className="large-item row-span-3 flex items-end"
                     href="https://atc.vatprc.net"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {t("Legacy.nav-menu.atc-center")}
+                    <div className="flex items-center gap-2">
+                      {t("Legacy.nav-menu.atc-center")}
+                      <ExternalLink size={12} />
+                    </div>
                   </Link>
                   <Link
-                    className="item"
+                    className="item flex items-center gap-2"
                     href="https://moodle.vatprc.net"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {t("Legacy.nav-menu.moodle")}
+                    <ExternalLink size={12} />
                   </Link>
                   <Link className="item" href="/controller/sector">
                     {t("Legacy.nav-menu.sector")}
