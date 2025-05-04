@@ -20,7 +20,7 @@ const DocumentCard = ({
   }
   return (
     <Link href={webPath}>
-      <div className="flex w-96 flex-col gap-2 rounded-md bg-white p-2 shadow-md">
+      <div className="flex w-96 flex-col gap-2 rounded-md border bg-white p-2 hover:bg-gray-50">
         <span>{title}</span>
         <span className="text-slate-500">{fileName}</span>
       </div>

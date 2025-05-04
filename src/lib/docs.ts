@@ -120,7 +120,7 @@ export const getAllDocuments = async (
         (b.order ?? Number.MAX_SAFE_INTEGER)
       );
     }
-    return a.title.localeCompare(b.title);
+    return b.title.localeCompare(a.title);
   });
   return documents;
 };

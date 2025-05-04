@@ -114,7 +114,7 @@ export const MarkdownDoc: React.FC<{
       <div className="prose z-10 dark:prose-invert prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
         <TableOfContents tableOfContents={toc} maxDepth={3} />
       </div>
-      <div className="mx-auto w-full max-w-screen-lg rounded bg-white px-4 py-6 shadow dark:bg-black dark:shadow-none md:px-12">
+      <div className="mx-auto w-full max-w-screen-lg rounded border-l bg-white px-4 py-6 dark:bg-black md:px-12">
         <article className="prose mx-auto dark:prose-invert prose-p:my-2">
           {children}
         </article>

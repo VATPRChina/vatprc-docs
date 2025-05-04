@@ -29,12 +29,32 @@ const RootLayout = async ({
         &copy;{" "}
         {t.rich("Layout.copyright", {
           next: (chunks) => (
-            <a href="https://nextjs.org" className="underline">
+            <a
+              href="https://nextjs.org"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {chunks}
             </a>
           ),
           tw: (chunks) => (
-            <a href="https://tailwindcss.com" className="underline">
+            <a
+              href="https://tailwindcss.com"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {chunks}
+            </a>
+          ),
+          azure: (chunks) => (
+            <a
+              href="https://azure.microsoft.com"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {chunks}
             </a>
           ),

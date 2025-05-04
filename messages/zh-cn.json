@@ -91,7 +91,7 @@
     "pilots-less": "显示部分机组"
   },
   "Layout": {
-    "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 Microsoft Azure, .NET, <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
+    "copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 <azure>Microsoft Azure</azure>, .NET, <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
     "menu": {
       "docs": "文档",
       "lang": "English"
@@ -121,7 +121,9 @@
   "pages": {
     "airspace": {
       "sop": {
-        "no-english": "本页面暂不提供英文版本。"
+        "no-english": "本页面暂不提供英文版本。",
+        "legacy": "其他标准运行程序",
+        "new": "标准运行程序列表"
       }
     }
   }
