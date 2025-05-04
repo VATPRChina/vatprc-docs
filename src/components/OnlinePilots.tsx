@@ -54,7 +54,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({
   const [open, setOpen] = useState(false);
 
   if (isLoading) {
-    return <Loader className="h-24" size={48} />;
+    return <Loader className="m-auto h-24 animate-spin" size={48} />;
   }
 
   const pilots =

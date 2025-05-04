@@ -62,7 +62,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({
   );
 
   if (isLoading) {
-    return <Loader className="h-24" size={48} />;
+    return <Loader className="m-auto h-24 animate-spin" size={48} />;
   }
 
   return (

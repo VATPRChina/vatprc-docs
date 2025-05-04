@@ -110,6 +110,10 @@
     },
     "OnlinePilots": {
       "no_pilot": "没有在线机组。"
+    },
+    "DiscourseDocument": {
+      "Error": "错误",
+      "loading": "正在加载"
     }
   }
 }

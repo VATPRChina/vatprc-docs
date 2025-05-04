@@ -110,6 +110,10 @@
     },
     "OnlinePilots": {
       "no_pilot": "No online pilot."
+    },
+    "DiscourseDocument": {
+      "Error": "Error",
+      "loading": "Loading"
     }
   }
 }

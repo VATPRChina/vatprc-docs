@@ -107,7 +107,7 @@ export const RecentEvents: React.FC<{ className: string }> = ({
   );
 
   if (isCnLoading || isEnLoading) {
-    return <Loader className="h-24" size={48} />;
+    return <Loader className="h-24 animate-spin" size={48} />;
   }
 
   const events = [
