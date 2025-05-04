@@ -1,0 +1,17 @@
+.nav-list-item {
+  @apply block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors;
+  @apply hover:bg-accent hover:text-accent-foreground;
+  @apply focus:bg-accent focus:text-accent-foreground;
+
+  .title {
+    @apply text-sm font-medium leading-none;
+  }
+
+  .description {
+    @apply line-clamp-2 text-sm leading-snug text-muted-foreground;
+  }
+}
+
+.nav-list-grid {
+  @apply grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px];
+}
