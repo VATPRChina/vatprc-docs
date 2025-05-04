@@ -3,6 +3,7 @@
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
+import { utc } from "@date-fns/utc";
 import {
   addDays,
   format,
@@ -10,7 +11,6 @@ import {
   isAfter,
   isBefore,
 } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
 import { Loader } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import React from "react";
@@ -64,14 +64,14 @@ const Event: React.FC<{
       </span>
       <span>{intlFormatDistance(start, Date.now(), { locale })}</span>
       <div className="flex gap-1">
-        <span>{formatInTimeZone(start, "UTC", "MM-dd")}</span>
+        <span>{format(start, "MM-dd", { in: utc })}</span>
         <span>
-          {formatInTimeZone(start, "UTC", "HHmm")}
+          {format(start, "HHmm", { in: utc })}
           <span className="text-sm font-light">Z</span>
         </span>
         <span>-</span>
         <span>
-          {formatInTimeZone(end, "UTC", "HHmm")}
+          {format(end, "HHmm", { in: utc })}
           <span className="text-sm font-light">Z</span>
         </span>
       </div>
