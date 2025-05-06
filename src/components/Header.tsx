@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-[1px] bg-white px-8 py-2 dark:border-slate-700 dark:bg-black">
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-4 md:flex-row">
         <Link href="/">
           <Image
             src={logo}
@@ -246,7 +246,7 @@ export const Header: React.FC = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <LanguageSwitch className="ml-auto hover:text-vatprc dark:text-white">
+        <LanguageSwitch className="absolute right-8 top-4 ml-auto hover:text-vatprc dark:text-white md:static md:right-auto md:top-auto">
           <Languages size={18} />
         </LanguageSwitch>
       </div>

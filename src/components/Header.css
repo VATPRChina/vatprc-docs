@@ -1,5 +1,5 @@
 .nav-list-grid {
-  @apply grid w-[400px] gap-3 border p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px];
+  @apply grid w-[400px] max-w-[90vw] gap-3 border p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px];
 }
 
 .nav-list-grid .large-item {
