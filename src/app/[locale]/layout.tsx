@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { RemoveServiceWorker } from "@/components/RemoveServiceWorker";
 import { routing } from "@/i18n/routing";
 import "@/styles/globals.css";
 import "@/styles/rehype-github-callouts.css";
@@ -76,6 +77,7 @@ const RootLayout = async ({
           <div className="pt-4">{children}</div>
           {footer}
         </NextIntlClientProvider>
+        <RemoveServiceWorker />
       </body>
     </html>
   );
