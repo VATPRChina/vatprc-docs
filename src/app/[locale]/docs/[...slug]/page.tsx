@@ -2,6 +2,7 @@ import { buildMarkdownDoc, MarkdownDoc } from "@/components/MarkdownDoc";
 import { PageProps } from "@/utils";
 import fs from "fs/promises";
 import { glob } from "glob";
+import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import React from "react";
 
@@ -10,6 +11,19 @@ export const generateStaticParams = async () => {
     file.replace(".md", "").split("/").slice(1),
   );
   return pages.map((slug) => ({ slug }));
+};
+
+export const generateMetadata = async ({
+  params,
+}: PageProps<"locale" | "...slug">): Promise<Metadata> => {
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations();
+
+  const file = `docs/${slug.join("/")}.md`;
+  const source = await fs.readFile(file, { encoding: "utf8" });
+  const meta = await buildMarkdownDoc(source);
+  return { title: `${meta.title} - ${t("Legacy.title")}` };
 };
 
 const PostPage = async (props: PageProps<"locale" | "...slug">) => {

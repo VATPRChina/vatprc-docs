@@ -10,6 +10,7 @@ import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
 import gfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 const addIdToTocEntry = (toc: TocEntry, slugger: Slugger) => {
   toc.id = slugger.slug(toc.value);
@@ -86,6 +87,7 @@ export const buildMarkdownDoc = async (source: string) => {
         withTocExport,
         remarkBreaks,
         remarkFrontmatter,
+        remarkMdxFrontmatter,
       ],
       rehypePlugins: [
         rehypeSlug,
@@ -95,14 +97,24 @@ export const buildMarkdownDoc = async (source: string) => {
     }),
   );
 
-  const { default: MDXContent, tableOfContents } = await run(code, {
-    ...runtime,
-    baseUrl: import.meta.url,
-  });
+  const {
+    default: MDXContent,
+    tableOfContents,
+    frontmatter,
+  } = (await run(code, { ...runtime, baseUrl: import.meta.url })) as Awaited<
+    ReturnType<typeof run>
+  > & {
+    tableOfContents: Toc;
+    frontmatter: Record<string, unknown>;
+  };
+
+  const frontmatterTitle =
+    typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
+  const title = frontmatterTitle ?? tableOfContents?.[0]?.value;
 
   addIdToToc(tableOfContents as Toc);
 
-  return { MDXContent, tableOfContents: tableOfContents as Toc };
+  return { MDXContent, tableOfContents: tableOfContents as Toc, title };
 };
 
 export const MarkdownDoc: React.FC<{

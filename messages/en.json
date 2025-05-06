@@ -123,7 +123,8 @@
       "sop": {
         "no-english": "This page is not available in English.",
         "legacy": "Other SOPs",
-        "new": "List of SOPs"
+        "new": "List of SOPs",
+        "title": "Standard operation procedures"
       }
     }
   }

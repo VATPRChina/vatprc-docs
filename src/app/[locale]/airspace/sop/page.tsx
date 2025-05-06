@@ -5,6 +5,16 @@ import { getAllDocuments } from "@/lib/docs";
 import { PageProps } from "@/utils";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+export const generateMetadata = async ({ params }: PageProps<"locale">) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations();
+
+  return {
+    title: `${t("pages.airspace.sop.title")} - ${t("Legacy.title")}`,
+  };
+};
+
 const Page = async ({ params }: PageProps<"locale">) => {
   const { locale } = await params;
   setRequestLocale(locale);

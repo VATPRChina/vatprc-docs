@@ -68,6 +68,7 @@ const RootLayout = async ({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{t("Legacy.title")}</title>
       </head>
       <body className="container mx-auto dark:bg-black">
         <NextIntlClientProvider messages={messages} locale={locale}>

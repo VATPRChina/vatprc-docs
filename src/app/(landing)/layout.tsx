@@ -16,6 +16,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         <meta httpEquiv="refresh" content="2;url=/zh-cn/" />
         <meta name="robots" content="noindex" />
         <link rel="canonical" href="/zh-cn/" />
+        <title>VATSIM P.R. China Division</title>
       </head>
       <body className="container mx-auto bg-slate-50">
         <div className="grid h-screen place-items-center">

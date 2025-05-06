@@ -1,48 +1,12 @@
 "use client";
 
-import { buildMarkdownDoc, MarkdownDoc } from "./MarkdownDoc";
+import { fetcher } from "./DiscourseDocument.server";
+import { MarkdownDoc } from "./MarkdownDoc";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { AlertCircle, Loader } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import useSWR from "swr";
-
-interface PostMeta {
-  title: string;
-  thumbnails?: {
-    url?: string;
-  }[];
-}
-
-const fetcher = async ([, postId]: [string, string]) => {
-  const postPath = `${postId}/1`;
-  const meta: PostMeta = await fetch(
-    `https://community.vatprc.net/t/topic/${postPath}.json`,
-  ).then((res) => {
-    if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status}`);
-    }
-    return res.json();
-  });
-  const raw = await fetch(`https://community.vatprc.net/raw/${postPath}`).then(
-    (res) => {
-      if (!res.ok) {
-        throw new Error(`Failed to fetch: ${res.status}`);
-      }
-      return res.text();
-    },
-  );
-
-  let contentRes = raw.replaceAll("<->", "\\<->");
-  let i = 0;
-  contentRes = contentRes.replaceAll(/upload:\/\/([\w.-]+)/g, () => {
-    const thumbnailUrl = meta.thumbnails?.[i]?.url ?? "";
-    i++;
-    return thumbnailUrl;
-  });
-
-  return { title: meta.title, ...(await buildMarkdownDoc(contentRes)) };
-};
 
 export const DiscourseDocument: React.FC<{
   cn?: string;
