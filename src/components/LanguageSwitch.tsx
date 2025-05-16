@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/lib/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 
 export const LanguageSwitch: React.FunctionComponent<{

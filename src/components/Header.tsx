@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
 } from "@/components/ui/navigation-menu";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/lib/i18n/routing";
 import { ExternalLink, Languages } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";

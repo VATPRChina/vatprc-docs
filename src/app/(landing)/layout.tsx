@@ -1,4 +1,4 @@
-import { routing } from "@/i18n/routing";
+import { routing } from "@/lib/i18n/routing";
 import "@/styles/globals.css";
 import "@/styles/rehype-github-callouts.css";
 import Link from "next/link";

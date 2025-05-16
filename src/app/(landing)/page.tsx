@@ -1,6 +1,6 @@
 "use client";
 
-import { routing } from "@/i18n/routing";
+import { routing } from "@/lib/i18n/routing";
 import languageDetector from "next-language-detector";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";

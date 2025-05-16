@@ -1,5 +1,5 @@
-import { Link } from "@/i18n/routing";
 import { DocumentEntry } from "@/lib/docs";
+import { Link } from "@/lib/i18n/routing";
 import React from "react";
 
 const DocumentCard = ({
