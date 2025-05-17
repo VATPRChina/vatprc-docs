@@ -4,6 +4,8 @@ import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import FullCalendar from "@fullcalendar/react";
 import {
   addDays,
   format,
@@ -136,17 +138,35 @@ export const RecentEvents: React.FC<{ className: string }> = ({
     .filter((e) => isBefore(e.start, addDays(Date.now(), 30)));
 
   return (
-    <div className={cn(className, "flex flex-wrap justify-center gap-4")}>
-      {events.map((e) => (
-        <Event
-          key={e.id}
-          title={e.title}
-          url={e.url}
-          start={e.start}
-          end={e.end}
-          isExam={e.isExam}
+    <div className={cn(className, "grid grid-cols-2 gap-4 md:grid-cols-3")}>
+      <div className="col-span-2">
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          events={events.map((e) => ({
+            id: e.id.toString(),
+            title: e.title,
+            url: e.url,
+            start: e.start,
+            end: e.end,
+            display: "list-item",
+          }))}
+          expandRows
+          locale={locale}
         />
-      ))}
+      </div>
+      <div className="flex flex-row flex-wrap items-start gap-2">
+        {events.map((e) => (
+          <Event
+            key={e.id}
+            title={e.title}
+            url={e.url}
+            start={e.start}
+            end={e.end}
+            isExam={e.isExam}
+          />
+        ))}
+      </div>
       {events.length === 0 && <span>{t("no_event")}</span>}
     </div>
   );
