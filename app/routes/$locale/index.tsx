@@ -1,3 +1,5 @@
+// import { ThemeToggle } from "@/components/ThemeToggle";
+import * as m from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$locale/")({
@@ -5,5 +7,5 @@ export const Route = createFileRoute("/$locale/")({
 });
 
 function RouteComponent() {
-  return <div>Hello &quot;/$locale/&quot;!</div>;
+  return <div>{m.Legacy_button_about()}</div>;
 }

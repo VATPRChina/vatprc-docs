@@ -1,4 +1,4 @@
-import { createRouter } from "./router";
+import { createRouter } from "@/router";
 import { getRouterManifest } from "@tanstack/react-start/router-manifest";
 import {
   createStartHandler,
@@ -8,4 +8,4 @@ import {
 export default createStartHandler({
   createRouter,
   getRouterManifest,
-})(defaultStreamHandler);
+})(defaultStreamHandler); // eslint-disable-line @typescript-eslint/no-unsafe-argument

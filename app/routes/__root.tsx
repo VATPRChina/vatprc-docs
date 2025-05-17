@@ -1,26 +1,35 @@
-import "@/styles/globals.css";
 import "@/styles/rehype-github-callouts.css";
+import {
+  ColorSchemeScript,
+  mantineHtmlProps,
+  MantineProvider,
+} from "@mantine/core";
+import "@mantine/core/styles.css";
 import {
   createRootRoute,
   HeadContent,
   Outlet,
   Scripts,
+  useParams,
 } from "@tanstack/react-router";
 
 const RootLayout: React.FC = () => {
+  const params = useParams({ strict: false });
+
   return (
-    <html className="scroll-pt-16">
+    <html
+      className="scroll-pt-16"
+      lang={params.locale ?? "en"}
+      {...mantineHtmlProps}
+    >
       <head>
-        {/* <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta httpEquiv="refresh" content="2;url=/zh-cn/" />
-        <meta name="robots" content="noindex" />
-        <link rel="canonical" href="/zh-cn/" />
-        <title>VATSIM P.R. China Division</title> */}
         <HeadContent />
+        <ColorSchemeScript />
       </head>
       <body className="container mx-auto bg-slate-50">
-        <Outlet />
+        <MantineProvider>
+          <Outlet />
+        </MantineProvider>
         <Scripts />
       </body>
     </html>
@@ -30,24 +39,9 @@ const RootLayout: React.FC = () => {
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: "utf-8",
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1.0",
-      },
-      {
-        name: "robots",
-        content: "noindex",
-      },
-      {
-        httpEquiv: "refresh",
-        content: "2;url=/zh-cn/",
-      },
-      {
-        title: "VATSIM P.R. China Division",
-      },
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+      { title: "VATSIM P.R. China Division" },
     ],
   }),
   component: RootLayout,

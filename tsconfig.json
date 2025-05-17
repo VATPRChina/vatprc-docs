@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,7 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "preserve",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -20,7 +20,7 @@
     "incremental": true,
     "paths": {
       "@/*": [
-        "./src/*"
+        "./app/*"
       ],
       "@/assets/*": [
         "./assets/*"
@@ -33,6 +33,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.mjs",
   ],
   "exclude": [
     "node_modules"

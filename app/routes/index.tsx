@@ -1,10 +1,38 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      { name: "robots", content: "noindex" },
+      { httpEquiv: "refresh", content: "2;url=/zh-cn/" },
+    ],
+  }),
 });
 
 function RouteComponent() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    let useChinese = false;
+    if (navigator.language.toLowerCase().startsWith("zh")) {
+      useChinese = true;
+    }
+    for (const language of navigator.languages) {
+      if (language.toLowerCase().startsWith("en")) {
+        break;
+      } else if (language.toLowerCase().startsWith("zh")) {
+        useChinese = true;
+        break;
+      }
+    }
+    if (useChinese) {
+      void navigate({ to: "/$locale", params: { locale: "zh-cn" } });
+    } else {
+      void navigate({ to: "/$locale", params: { locale: "en" } });
+    }
+  });
+
   return (
     <div className="grid h-screen place-items-center">
       <div className="flex flex-col items-center gap-4">

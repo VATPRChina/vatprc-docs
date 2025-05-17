@@ -1,0 +1,160 @@
+const data = {
+  $schema: "https://inlang.com/schema/inlang-message-format",
+  Legacy: {
+    title: "VATSIM P.R.China Division",
+    subtitle: "VATPRC",
+    button: {
+      about: "About",
+      back: "Back",
+      go: "GO",
+      home: "Home",
+      toggle_dark: "Toggle dark mode",
+      toggle_langs: "中文版",
+    },
+    "nav-menu": {
+      home: "Home",
+      announcement: "Announcement",
+      about: "About Us",
+      introduction: "Introduction",
+      staff: "Staff",
+      privacy: "Privacy Policy",
+      "logo-pack": "Logo Pack",
+      forum: "Forum",
+      event: "Event",
+      operation: "Operation",
+      fir: "Airspace",
+      rvsm: "China RVSM",
+      sop: "Standard Operation Procedures",
+      "non-radar-airports": "Tier 2 Airports",
+      vfr: "VFR Policy",
+      pilot: "Pilots",
+      "start-to-fly": "Start to Fly",
+      "introduction-to-fly": "Pilot Guidelines",
+      ts3: "Community & Teamspeak 3",
+      "pilot-softwares": "Pilot Softwares",
+      weather: "Weather",
+      "pilot-center": "Pilot Center",
+      atc: "Controllers",
+      "controller-regulations": "Progression Guide",
+      "become-a-controller": "Become a Controller",
+      "controller-list": "Controller List",
+      "atc-center": "ATC Center",
+      moodle: "Moodle",
+      sector: "Sector Files",
+      loa: "Letter of Agreement",
+      charts: "Charts",
+      "visiting-and-transferring": "Visiting & Transfer",
+      "atc-positions-frequencies": "ATC Positions & Frequencies",
+      vacdm: "vACDM",
+      tools: "Tools",
+    },
+    "recent-events": "Recent Events",
+    "online-controllers": "Online Controllers",
+    feedback: "Feedback",
+    "feedback-description":
+      "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!",
+    "future-controllers": "ATC Schedule",
+    "online-pilots": "Online Pilots",
+    "load-more": "Load More",
+    "no-atc-online": "There is currently no online ATC.",
+    "no-pilot-online": "There is currently no online pilot.",
+    "no-future-atc": "There is currently no ATC schedule.",
+    copyright: "VATSIM P.R.China Division",
+    "not-found": "Not found",
+    "maintenance-title": "Maintenance",
+    maintenance: "This page is currently under maintenance :(",
+    "load-failed": "Failed",
+    "controller-list": {
+      description:
+        "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)",
+      "status-active":
+        "Active: This controller is active, and be able to provide service.",
+      "status-absence":
+        "Inactive: This controller is inactive, need to be re-certified before providing service.",
+      "marker-visiting": "Visiting: This controller is a visiting controller.",
+      "permission-restricted":
+        "Restricted: This controller is not eligible to provide service to this position.",
+      "permission-training":
+        "In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor",
+      "permission-solo":
+        "Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training.",
+      "permission-full":
+        "Certified: The controller is fully eligible to provide solo service to this position.",
+      "ptwr-description":
+        "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page.",
+      "show-absence": "Show Absence Controllers",
+      until: "until",
+      "tmu-controllers":
+        "Controllers with Traffic Management Center Permission",
+      "no-tmu":
+        "No controllers with Traffic Management Center Permission currently",
+      absent: "Absent",
+    },
+    cookie: {
+      text: "By continuing to use this website, you consent to the use of cookies in accordance with our Cookie Policy.",
+      accept: "ACCEPT",
+    },
+    errors: {
+      Error: "Unknown Error: {message}",
+      EmptyContentError: "Empty content",
+      NoTranslationError:
+        "There is unfortunately no corresponding translation in your selected language.",
+    },
+    "pilots-less": "Show less pilots",
+    "pilots-all": "Show all pilots",
+  },
+  Layout: {
+    copyright:
+      "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by <azure>Microsoft Azure</azure>, .NET, <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
+    menu: {
+      docs: "Docs",
+      lang: "简体中文",
+    },
+  },
+  Docs: {
+    Single: {
+      warning: "For simulation use only. Real world usage strictly prohibited.",
+      copyright: "2010 - 2024, VATSIM P.R. China Division.",
+    },
+  },
+  Components: {
+    RecentEvents: {
+      no_event: "No event is scheduled recently.",
+    },
+    OnlineController: {
+      no_controller: "No controller is online now.",
+    },
+    OnlinePilots: {
+      no_pilot: "No online pilot.",
+    },
+    DiscourseDocument: {
+      Error: "Error",
+      loading: "Loading",
+    },
+  },
+  pages: {
+    airspace: {
+      sop: {
+        "no-english": "This page is not available in English.",
+        legacy: "Other SOPs",
+        new: "List of SOPs",
+        title: "Standard operation procedures",
+      },
+    },
+  },
+};
+
+// flatten the object
+const flattenObject = (obj, parentKey = "", result = {}) => {
+  for (let key in obj) {
+    const newKey = parentKey ? `${parentKey}_${key}` : key;
+    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+      flattenObject(obj[key], newKey, result);
+    } else {
+      result[newKey] = obj[key];
+    }
+  }
+  return result;
+};
+
+console.log(JSON.stringify(flattenObject(data)));
