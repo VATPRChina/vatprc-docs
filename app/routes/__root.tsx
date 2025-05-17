@@ -1,10 +1,10 @@
-import "@/styles/rehype-github-callouts.css";
+import stylesheetUrl from "./__root.css?url";
+import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import {
   ColorSchemeScript,
   mantineHtmlProps,
   MantineProvider,
 } from "@mantine/core";
-import "@mantine/core/styles.css";
 import {
   createRootRoute,
   HeadContent,
@@ -17,22 +17,22 @@ const RootLayout: React.FC = () => {
   const params = useParams({ strict: false });
 
   return (
-    <html
-      className="scroll-pt-16"
-      lang={params.locale ?? "en"}
-      {...mantineHtmlProps}
-    >
-      <head>
-        <HeadContent />
-        <ColorSchemeScript />
-      </head>
-      <body className="container mx-auto bg-slate-50">
-        <MantineProvider>
+    <MantineProvider defaultColorScheme="auto">
+      <html
+        className="scroll-pt-16"
+        lang={params.locale ?? "en"}
+        {...mantineHtmlProps}
+      >
+        <head>
+          <HeadContent />
+          <ColorSchemeScript />
+        </head>
+        <body className="container mx-auto bg-slate-50">
           <Outlet />
-        </MantineProvider>
-        <Scripts />
-      </body>
-    </html>
+          <Scripts />
+        </body>
+      </html>
+    </MantineProvider>
   );
 };
 
@@ -42,6 +42,10 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
       { title: "VATSIM P.R. China Division" },
+    ],
+    links: [
+      { rel: "stylesheet", href: stylesheetUrl },
+      { rel: "stylesheet", href: rehypeCssUrl },
     ],
   }),
   component: RootLayout,
