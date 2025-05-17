@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { name: "robots", content: "noindex" },
-      { httpEquiv: "refresh", content: "2;url=/zh-cn/" },
+      // { httpEquiv: "refresh", content: "2;url=/zh-cn/" },
     ],
   }),
 });
