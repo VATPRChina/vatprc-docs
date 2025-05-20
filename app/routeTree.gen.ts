@@ -11,17 +11,27 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LocaleImport } from './routes/$locale'
 import { Route as IndexImport } from './routes/index'
-import { Route as LocaleIndexImport } from './routes/$locale/index'
+import { Route as PilotTs3IndexImport } from './routes/pilot/ts3/index'
+import { Route as PilotStartToFlyIndexImport } from './routes/pilot/start-to-fly/index'
+import { Route as PilotPilotSoftwaresIndexImport } from './routes/pilot/pilot-softwares/index'
+import { Route as PilotIntroductionToFlyIndexImport } from './routes/pilot/introduction-to-fly/index'
+import { Route as DivisionStaffIndexImport } from './routes/division/staff/index'
+import { Route as DivisionPrivacyIndexImport } from './routes/division/privacy/index'
+import { Route as DivisionIntroductionIndexImport } from './routes/division/introduction/index'
+import { Route as ControllerVisitingAndTransferringIndexImport } from './routes/controller/visiting-and-transferring/index'
+import { Route as ControllerSectorIndexImport } from './routes/controller/sector/index'
+import { Route as ControllerLoaIndexImport } from './routes/controller/loa/index'
+import { Route as ControllerControllerRegulationsIndexImport } from './routes/controller/controller-regulations/index'
+import { Route as ControllerControllerListIndexImport } from './routes/controller/controller-list/index'
+import { Route as ControllerBecomeAControllerIndexImport } from './routes/controller/become-a-controller/index'
+import { Route as AirspaceVfrIndexImport } from './routes/airspace/vfr/index'
+import { Route as AirspaceStationIndexImport } from './routes/airspace/station/index'
+import { Route as AirspaceSopIndexImport } from './routes/airspace/sop/index'
+import { Route as AirspaceRvsmIndexImport } from './routes/airspace/rvsm/index'
+import { Route as AirspaceFirIndexImport } from './routes/airspace/fir/index'
 
 // Create/Update Routes
-
-const LocaleRoute = LocaleImport.update({
-  id: '/$locale',
-  path: '/$locale',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -29,10 +39,117 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LocaleIndexRoute = LocaleIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => LocaleRoute,
+const PilotTs3IndexRoute = PilotTs3IndexImport.update({
+  id: '/pilot/ts3/',
+  path: '/pilot/ts3/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PilotStartToFlyIndexRoute = PilotStartToFlyIndexImport.update({
+  id: '/pilot/start-to-fly/',
+  path: '/pilot/start-to-fly/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PilotPilotSoftwaresIndexRoute = PilotPilotSoftwaresIndexImport.update({
+  id: '/pilot/pilot-softwares/',
+  path: '/pilot/pilot-softwares/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PilotIntroductionToFlyIndexRoute =
+  PilotIntroductionToFlyIndexImport.update({
+    id: '/pilot/introduction-to-fly/',
+    path: '/pilot/introduction-to-fly/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const DivisionStaffIndexRoute = DivisionStaffIndexImport.update({
+  id: '/division/staff/',
+  path: '/division/staff/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DivisionPrivacyIndexRoute = DivisionPrivacyIndexImport.update({
+  id: '/division/privacy/',
+  path: '/division/privacy/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DivisionIntroductionIndexRoute = DivisionIntroductionIndexImport.update({
+  id: '/division/introduction/',
+  path: '/division/introduction/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ControllerVisitingAndTransferringIndexRoute =
+  ControllerVisitingAndTransferringIndexImport.update({
+    id: '/controller/visiting-and-transferring/',
+    path: '/controller/visiting-and-transferring/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const ControllerSectorIndexRoute = ControllerSectorIndexImport.update({
+  id: '/controller/sector/',
+  path: '/controller/sector/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ControllerLoaIndexRoute = ControllerLoaIndexImport.update({
+  id: '/controller/loa/',
+  path: '/controller/loa/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ControllerControllerRegulationsIndexRoute =
+  ControllerControllerRegulationsIndexImport.update({
+    id: '/controller/controller-regulations/',
+    path: '/controller/controller-regulations/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const ControllerControllerListIndexRoute =
+  ControllerControllerListIndexImport.update({
+    id: '/controller/controller-list/',
+    path: '/controller/controller-list/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const ControllerBecomeAControllerIndexRoute =
+  ControllerBecomeAControllerIndexImport.update({
+    id: '/controller/become-a-controller/',
+    path: '/controller/become-a-controller/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const AirspaceVfrIndexRoute = AirspaceVfrIndexImport.update({
+  id: '/airspace/vfr/',
+  path: '/airspace/vfr/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AirspaceStationIndexRoute = AirspaceStationIndexImport.update({
+  id: '/airspace/station/',
+  path: '/airspace/station/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AirspaceSopIndexRoute = AirspaceSopIndexImport.update({
+  id: '/airspace/sop/',
+  path: '/airspace/sop/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AirspaceRvsmIndexRoute = AirspaceRvsmIndexImport.update({
+  id: '/airspace/rvsm/',
+  path: '/airspace/rvsm/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AirspaceFirIndexRoute = AirspaceFirIndexImport.update({
+  id: '/airspace/fir/',
+  path: '/airspace/fir/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -46,71 +163,315 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/$locale': {
-      id: '/$locale'
-      path: '/$locale'
-      fullPath: '/$locale'
-      preLoaderRoute: typeof LocaleImport
+    '/airspace/fir/': {
+      id: '/airspace/fir/'
+      path: '/airspace/fir'
+      fullPath: '/airspace/fir'
+      preLoaderRoute: typeof AirspaceFirIndexImport
       parentRoute: typeof rootRoute
     }
-    '/$locale/': {
-      id: '/$locale/'
-      path: '/'
-      fullPath: '/$locale/'
-      preLoaderRoute: typeof LocaleIndexImport
-      parentRoute: typeof LocaleImport
+    '/airspace/rvsm/': {
+      id: '/airspace/rvsm/'
+      path: '/airspace/rvsm'
+      fullPath: '/airspace/rvsm'
+      preLoaderRoute: typeof AirspaceRvsmIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/airspace/sop/': {
+      id: '/airspace/sop/'
+      path: '/airspace/sop'
+      fullPath: '/airspace/sop'
+      preLoaderRoute: typeof AirspaceSopIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/airspace/station/': {
+      id: '/airspace/station/'
+      path: '/airspace/station'
+      fullPath: '/airspace/station'
+      preLoaderRoute: typeof AirspaceStationIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/airspace/vfr/': {
+      id: '/airspace/vfr/'
+      path: '/airspace/vfr'
+      fullPath: '/airspace/vfr'
+      preLoaderRoute: typeof AirspaceVfrIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/become-a-controller/': {
+      id: '/controller/become-a-controller/'
+      path: '/controller/become-a-controller'
+      fullPath: '/controller/become-a-controller'
+      preLoaderRoute: typeof ControllerBecomeAControllerIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/controller-list/': {
+      id: '/controller/controller-list/'
+      path: '/controller/controller-list'
+      fullPath: '/controller/controller-list'
+      preLoaderRoute: typeof ControllerControllerListIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/controller-regulations/': {
+      id: '/controller/controller-regulations/'
+      path: '/controller/controller-regulations'
+      fullPath: '/controller/controller-regulations'
+      preLoaderRoute: typeof ControllerControllerRegulationsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/loa/': {
+      id: '/controller/loa/'
+      path: '/controller/loa'
+      fullPath: '/controller/loa'
+      preLoaderRoute: typeof ControllerLoaIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/sector/': {
+      id: '/controller/sector/'
+      path: '/controller/sector'
+      fullPath: '/controller/sector'
+      preLoaderRoute: typeof ControllerSectorIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/controller/visiting-and-transferring/': {
+      id: '/controller/visiting-and-transferring/'
+      path: '/controller/visiting-and-transferring'
+      fullPath: '/controller/visiting-and-transferring'
+      preLoaderRoute: typeof ControllerVisitingAndTransferringIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/division/introduction/': {
+      id: '/division/introduction/'
+      path: '/division/introduction'
+      fullPath: '/division/introduction'
+      preLoaderRoute: typeof DivisionIntroductionIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/division/privacy/': {
+      id: '/division/privacy/'
+      path: '/division/privacy'
+      fullPath: '/division/privacy'
+      preLoaderRoute: typeof DivisionPrivacyIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/division/staff/': {
+      id: '/division/staff/'
+      path: '/division/staff'
+      fullPath: '/division/staff'
+      preLoaderRoute: typeof DivisionStaffIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/pilot/introduction-to-fly/': {
+      id: '/pilot/introduction-to-fly/'
+      path: '/pilot/introduction-to-fly'
+      fullPath: '/pilot/introduction-to-fly'
+      preLoaderRoute: typeof PilotIntroductionToFlyIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/pilot/pilot-softwares/': {
+      id: '/pilot/pilot-softwares/'
+      path: '/pilot/pilot-softwares'
+      fullPath: '/pilot/pilot-softwares'
+      preLoaderRoute: typeof PilotPilotSoftwaresIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/pilot/start-to-fly/': {
+      id: '/pilot/start-to-fly/'
+      path: '/pilot/start-to-fly'
+      fullPath: '/pilot/start-to-fly'
+      preLoaderRoute: typeof PilotStartToFlyIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/pilot/ts3/': {
+      id: '/pilot/ts3/'
+      path: '/pilot/ts3'
+      fullPath: '/pilot/ts3'
+      preLoaderRoute: typeof PilotTs3IndexImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface LocaleRouteChildren {
-  LocaleIndexRoute: typeof LocaleIndexRoute
-}
-
-const LocaleRouteChildren: LocaleRouteChildren = {
-  LocaleIndexRoute: LocaleIndexRoute,
-}
-
-const LocaleRouteWithChildren =
-  LocaleRoute._addFileChildren(LocaleRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRouteWithChildren
-  '/$locale/': typeof LocaleIndexRoute
+  '/airspace/fir': typeof AirspaceFirIndexRoute
+  '/airspace/rvsm': typeof AirspaceRvsmIndexRoute
+  '/airspace/sop': typeof AirspaceSopIndexRoute
+  '/airspace/station': typeof AirspaceStationIndexRoute
+  '/airspace/vfr': typeof AirspaceVfrIndexRoute
+  '/controller/become-a-controller': typeof ControllerBecomeAControllerIndexRoute
+  '/controller/controller-list': typeof ControllerControllerListIndexRoute
+  '/controller/controller-regulations': typeof ControllerControllerRegulationsIndexRoute
+  '/controller/loa': typeof ControllerLoaIndexRoute
+  '/controller/sector': typeof ControllerSectorIndexRoute
+  '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringIndexRoute
+  '/division/introduction': typeof DivisionIntroductionIndexRoute
+  '/division/privacy': typeof DivisionPrivacyIndexRoute
+  '/division/staff': typeof DivisionStaffIndexRoute
+  '/pilot/introduction-to-fly': typeof PilotIntroductionToFlyIndexRoute
+  '/pilot/pilot-softwares': typeof PilotPilotSoftwaresIndexRoute
+  '/pilot/start-to-fly': typeof PilotStartToFlyIndexRoute
+  '/pilot/ts3': typeof PilotTs3IndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleIndexRoute
+  '/airspace/fir': typeof AirspaceFirIndexRoute
+  '/airspace/rvsm': typeof AirspaceRvsmIndexRoute
+  '/airspace/sop': typeof AirspaceSopIndexRoute
+  '/airspace/station': typeof AirspaceStationIndexRoute
+  '/airspace/vfr': typeof AirspaceVfrIndexRoute
+  '/controller/become-a-controller': typeof ControllerBecomeAControllerIndexRoute
+  '/controller/controller-list': typeof ControllerControllerListIndexRoute
+  '/controller/controller-regulations': typeof ControllerControllerRegulationsIndexRoute
+  '/controller/loa': typeof ControllerLoaIndexRoute
+  '/controller/sector': typeof ControllerSectorIndexRoute
+  '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringIndexRoute
+  '/division/introduction': typeof DivisionIntroductionIndexRoute
+  '/division/privacy': typeof DivisionPrivacyIndexRoute
+  '/division/staff': typeof DivisionStaffIndexRoute
+  '/pilot/introduction-to-fly': typeof PilotIntroductionToFlyIndexRoute
+  '/pilot/pilot-softwares': typeof PilotPilotSoftwaresIndexRoute
+  '/pilot/start-to-fly': typeof PilotStartToFlyIndexRoute
+  '/pilot/ts3': typeof PilotTs3IndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleRouteWithChildren
-  '/$locale/': typeof LocaleIndexRoute
+  '/airspace/fir/': typeof AirspaceFirIndexRoute
+  '/airspace/rvsm/': typeof AirspaceRvsmIndexRoute
+  '/airspace/sop/': typeof AirspaceSopIndexRoute
+  '/airspace/station/': typeof AirspaceStationIndexRoute
+  '/airspace/vfr/': typeof AirspaceVfrIndexRoute
+  '/controller/become-a-controller/': typeof ControllerBecomeAControllerIndexRoute
+  '/controller/controller-list/': typeof ControllerControllerListIndexRoute
+  '/controller/controller-regulations/': typeof ControllerControllerRegulationsIndexRoute
+  '/controller/loa/': typeof ControllerLoaIndexRoute
+  '/controller/sector/': typeof ControllerSectorIndexRoute
+  '/controller/visiting-and-transferring/': typeof ControllerVisitingAndTransferringIndexRoute
+  '/division/introduction/': typeof DivisionIntroductionIndexRoute
+  '/division/privacy/': typeof DivisionPrivacyIndexRoute
+  '/division/staff/': typeof DivisionStaffIndexRoute
+  '/pilot/introduction-to-fly/': typeof PilotIntroductionToFlyIndexRoute
+  '/pilot/pilot-softwares/': typeof PilotPilotSoftwaresIndexRoute
+  '/pilot/start-to-fly/': typeof PilotStartToFlyIndexRoute
+  '/pilot/ts3/': typeof PilotTs3IndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$locale' | '/$locale/'
+  fullPaths:
+    | '/'
+    | '/airspace/fir'
+    | '/airspace/rvsm'
+    | '/airspace/sop'
+    | '/airspace/station'
+    | '/airspace/vfr'
+    | '/controller/become-a-controller'
+    | '/controller/controller-list'
+    | '/controller/controller-regulations'
+    | '/controller/loa'
+    | '/controller/sector'
+    | '/controller/visiting-and-transferring'
+    | '/division/introduction'
+    | '/division/privacy'
+    | '/division/staff'
+    | '/pilot/introduction-to-fly'
+    | '/pilot/pilot-softwares'
+    | '/pilot/start-to-fly'
+    | '/pilot/ts3'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$locale'
-  id: '__root__' | '/' | '/$locale' | '/$locale/'
+  to:
+    | '/'
+    | '/airspace/fir'
+    | '/airspace/rvsm'
+    | '/airspace/sop'
+    | '/airspace/station'
+    | '/airspace/vfr'
+    | '/controller/become-a-controller'
+    | '/controller/controller-list'
+    | '/controller/controller-regulations'
+    | '/controller/loa'
+    | '/controller/sector'
+    | '/controller/visiting-and-transferring'
+    | '/division/introduction'
+    | '/division/privacy'
+    | '/division/staff'
+    | '/pilot/introduction-to-fly'
+    | '/pilot/pilot-softwares'
+    | '/pilot/start-to-fly'
+    | '/pilot/ts3'
+  id:
+    | '__root__'
+    | '/'
+    | '/airspace/fir/'
+    | '/airspace/rvsm/'
+    | '/airspace/sop/'
+    | '/airspace/station/'
+    | '/airspace/vfr/'
+    | '/controller/become-a-controller/'
+    | '/controller/controller-list/'
+    | '/controller/controller-regulations/'
+    | '/controller/loa/'
+    | '/controller/sector/'
+    | '/controller/visiting-and-transferring/'
+    | '/division/introduction/'
+    | '/division/privacy/'
+    | '/division/staff/'
+    | '/pilot/introduction-to-fly/'
+    | '/pilot/pilot-softwares/'
+    | '/pilot/start-to-fly/'
+    | '/pilot/ts3/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LocaleRoute: typeof LocaleRouteWithChildren
+  AirspaceFirIndexRoute: typeof AirspaceFirIndexRoute
+  AirspaceRvsmIndexRoute: typeof AirspaceRvsmIndexRoute
+  AirspaceSopIndexRoute: typeof AirspaceSopIndexRoute
+  AirspaceStationIndexRoute: typeof AirspaceStationIndexRoute
+  AirspaceVfrIndexRoute: typeof AirspaceVfrIndexRoute
+  ControllerBecomeAControllerIndexRoute: typeof ControllerBecomeAControllerIndexRoute
+  ControllerControllerListIndexRoute: typeof ControllerControllerListIndexRoute
+  ControllerControllerRegulationsIndexRoute: typeof ControllerControllerRegulationsIndexRoute
+  ControllerLoaIndexRoute: typeof ControllerLoaIndexRoute
+  ControllerSectorIndexRoute: typeof ControllerSectorIndexRoute
+  ControllerVisitingAndTransferringIndexRoute: typeof ControllerVisitingAndTransferringIndexRoute
+  DivisionIntroductionIndexRoute: typeof DivisionIntroductionIndexRoute
+  DivisionPrivacyIndexRoute: typeof DivisionPrivacyIndexRoute
+  DivisionStaffIndexRoute: typeof DivisionStaffIndexRoute
+  PilotIntroductionToFlyIndexRoute: typeof PilotIntroductionToFlyIndexRoute
+  PilotPilotSoftwaresIndexRoute: typeof PilotPilotSoftwaresIndexRoute
+  PilotStartToFlyIndexRoute: typeof PilotStartToFlyIndexRoute
+  PilotTs3IndexRoute: typeof PilotTs3IndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LocaleRoute: LocaleRouteWithChildren,
+  AirspaceFirIndexRoute: AirspaceFirIndexRoute,
+  AirspaceRvsmIndexRoute: AirspaceRvsmIndexRoute,
+  AirspaceSopIndexRoute: AirspaceSopIndexRoute,
+  AirspaceStationIndexRoute: AirspaceStationIndexRoute,
+  AirspaceVfrIndexRoute: AirspaceVfrIndexRoute,
+  ControllerBecomeAControllerIndexRoute: ControllerBecomeAControllerIndexRoute,
+  ControllerControllerListIndexRoute: ControllerControllerListIndexRoute,
+  ControllerControllerRegulationsIndexRoute:
+    ControllerControllerRegulationsIndexRoute,
+  ControllerLoaIndexRoute: ControllerLoaIndexRoute,
+  ControllerSectorIndexRoute: ControllerSectorIndexRoute,
+  ControllerVisitingAndTransferringIndexRoute:
+    ControllerVisitingAndTransferringIndexRoute,
+  DivisionIntroductionIndexRoute: DivisionIntroductionIndexRoute,
+  DivisionPrivacyIndexRoute: DivisionPrivacyIndexRoute,
+  DivisionStaffIndexRoute: DivisionStaffIndexRoute,
+  PilotIntroductionToFlyIndexRoute: PilotIntroductionToFlyIndexRoute,
+  PilotPilotSoftwaresIndexRoute: PilotPilotSoftwaresIndexRoute,
+  PilotStartToFlyIndexRoute: PilotStartToFlyIndexRoute,
+  PilotTs3IndexRoute: PilotTs3IndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -124,21 +485,82 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$locale"
+        "/airspace/fir/",
+        "/airspace/rvsm/",
+        "/airspace/sop/",
+        "/airspace/station/",
+        "/airspace/vfr/",
+        "/controller/become-a-controller/",
+        "/controller/controller-list/",
+        "/controller/controller-regulations/",
+        "/controller/loa/",
+        "/controller/sector/",
+        "/controller/visiting-and-transferring/",
+        "/division/introduction/",
+        "/division/privacy/",
+        "/division/staff/",
+        "/pilot/introduction-to-fly/",
+        "/pilot/pilot-softwares/",
+        "/pilot/start-to-fly/",
+        "/pilot/ts3/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/$locale": {
-      "filePath": "$locale.tsx",
-      "children": [
-        "/$locale/"
-      ]
+    "/airspace/fir/": {
+      "filePath": "airspace/fir/index.tsx"
     },
-    "/$locale/": {
-      "filePath": "$locale/index.tsx",
-      "parent": "/$locale"
+    "/airspace/rvsm/": {
+      "filePath": "airspace/rvsm/index.tsx"
+    },
+    "/airspace/sop/": {
+      "filePath": "airspace/sop/index.tsx"
+    },
+    "/airspace/station/": {
+      "filePath": "airspace/station/index.tsx"
+    },
+    "/airspace/vfr/": {
+      "filePath": "airspace/vfr/index.tsx"
+    },
+    "/controller/become-a-controller/": {
+      "filePath": "controller/become-a-controller/index.tsx"
+    },
+    "/controller/controller-list/": {
+      "filePath": "controller/controller-list/index.tsx"
+    },
+    "/controller/controller-regulations/": {
+      "filePath": "controller/controller-regulations/index.tsx"
+    },
+    "/controller/loa/": {
+      "filePath": "controller/loa/index.tsx"
+    },
+    "/controller/sector/": {
+      "filePath": "controller/sector/index.tsx"
+    },
+    "/controller/visiting-and-transferring/": {
+      "filePath": "controller/visiting-and-transferring/index.tsx"
+    },
+    "/division/introduction/": {
+      "filePath": "division/introduction/index.tsx"
+    },
+    "/division/privacy/": {
+      "filePath": "division/privacy/index.tsx"
+    },
+    "/division/staff/": {
+      "filePath": "division/staff/index.tsx"
+    },
+    "/pilot/introduction-to-fly/": {
+      "filePath": "pilot/introduction-to-fly/index.tsx"
+    },
+    "/pilot/pilot-softwares/": {
+      "filePath": "pilot/pilot-softwares/index.tsx"
+    },
+    "/pilot/start-to-fly/": {
+      "filePath": "pilot/start-to-fly/index.tsx"
+    },
+    "/pilot/ts3/": {
+      "filePath": "pilot/ts3/index.tsx"
     }
   }
 }

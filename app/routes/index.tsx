@@ -1,18 +1,21 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { m } from "@/lib/i18n/messages";
+import { getPathname } from "@/lib/util";
+import { Anchor, Group } from "@mantine/core";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
   head: () => ({
-    meta: [
-      { name: "robots", content: "noindex" },
-      // { httpEquiv: "refresh", content: "2;url=/zh-cn/" },
-    ],
+    meta: [{ name: "robots", content: "noindex" }],
   }),
 });
 
-function RouteComponent() {
-  const navigate = useNavigate();
+const IndexWithLocale: React.FC = () => {
+  return <div>{m.Legacy_button_about()}</div>;
+};
+
+const Index: React.FC = () => {
   useEffect(() => {
     let useChinese = false;
     if (navigator.language.toLowerCase().startsWith("zh")) {
@@ -27,26 +30,29 @@ function RouteComponent() {
       }
     }
     if (useChinese) {
-      void navigate({ to: "/$locale", params: { locale: "zh-cn" } });
+      window.location.replace("/zh-cn");
     } else {
-      void navigate({ to: "/$locale", params: { locale: "en" } });
+      window.location.replace("/en");
     }
   });
 
   return (
-    <div className="grid h-screen place-items-center">
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-3xl">Redirecting to landing page.</p>
-        <p className="text-3xl">正在重定向到首页。</p>
-        <p className="flex flex-row gap-8 text-xl text-slate-700 underline">
-          <Link to="/$locale" params={{ locale: "zh-cn" }}>
-            简体中文
-          </Link>
-          <Link to="/$locale" params={{ locale: "en" }}>
-            English
-          </Link>
-        </p>
+    <div>
+      <div>
+        <p>Redirecting to landing page.</p>
+        <p>正在重定向到首页。</p>
+        <Group>
+          <Anchor href="/zh-cn">简体中文</Anchor>
+          <Anchor href="/en">English</Anchor>
+        </Group>
       </div>
     </div>
   );
+};
+
+function RouteComponent() {
+  if (getPathname().startsWith("/en") || getPathname().startsWith("/zh-cn")) {
+    return <IndexWithLocale />;
+  }
+  return <Index />;
 }
