@@ -196,7 +196,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
               </RouteButton>
             </Stack>
           </SimpleGrid>
-          <hr className="col-span-full" />
+          <Divider my="sm" />
           <SimpleGrid cols={2}>
             <Button href="https://atc.vatprc.net" {...extProps} {...lgProps}>
               {m["Legacy_nav-menu_atc-center"]()}

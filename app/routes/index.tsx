@@ -1,6 +1,20 @@
+import drone from "@/assets/legacy/drone.png";
+import feedback from "@/assets/legacy/feedback.png";
+import laptop from "@/assets/legacy/lap_top.png";
+import pilot from "@/assets/legacy/pilot.png";
 import { m } from "@/lib/i18n/messages";
 import { getPathname } from "@/lib/util";
-import { Anchor, Group } from "@mantine/core";
+import {
+  Anchor,
+  Text,
+  Group,
+  Image,
+  SimpleGrid,
+  Stack,
+  Title,
+  Button,
+} from "@mantine/core";
+import { IconMail } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
@@ -12,10 +26,87 @@ export const Route = createFileRoute("/")({
 });
 
 const IndexWithLocale: React.FC = () => {
-  return <div>{m.Legacy_button_about()}</div>;
+  // @ts-expect-error Allow any
+  // eslint-disable-next-line
+  const t = (s: string) => m["Legacy_" + s.replaceAll(".", "_")]();
+
+  return (
+    <Stack gap="xl">
+      <SimpleGrid cols={{ base: 1, md: 2 }}>
+        <Stack justify="center">
+          <Title order={1} style={{ textAlign: "center" }}>
+            {m["Legacy_title"]()}
+          </Title>
+          <Title order={2} style={{ textAlign: "center" }}>
+            {m["Legacy_subtitle"]()}
+          </Title>
+        </Stack>
+        <Image src={pilot} alt="Pilot" width="100%" height="100%" />
+      </SimpleGrid>
+      <section className="py-18 px flex w-full flex-col items-center justify-center">
+        <h3 className="text-4xl">{t("recent-events")}</h3>
+        {/* <RecentEvents className="my-8 w-full" /> */}
+      </section>
+      <SimpleGrid
+        cols={{ base: 1, md: 2 }}
+        style={{ justifyItems: "center", alignItems: "center" }}
+      >
+        <Image src={laptop} alt="laptop" w={512} />
+        <Stack>
+          <Title order={2}>{m["Legacy_online-controllers"]()}</Title>
+          {/* <OnlineControllers /> */}
+        </Stack>
+      </SimpleGrid>
+      <SimpleGrid
+        cols={{ base: 1, md: 2 }}
+        style={{ justifyItems: "center", alignItems: "center" }}
+      >
+        <Stack>
+          <Title order={2}>{m["Legacy_online-pilots"]()}</Title>
+          {/* <OnlinePilots className="my-auto" /> */}
+        </Stack>
+        <Image src={drone} alt="drone" w={512} />
+      </SimpleGrid>
+      <SimpleGrid
+        cols={{ base: 1, md: 2 }}
+        style={{ justifyItems: "center", alignItems: "center" }}
+      >
+        <Image src={feedback} alt="feedback" w={512} />
+        <Stack>
+          <Title order={2}>{m["Legacy_feedback"]()}</Title>
+          <Text>{m["Legacy_feedback-description"]()}</Text>
+          <Button
+            variant="subtle"
+            color="red"
+            component="a"
+            href="mailto:feedback@vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconMail />
+            feedback@vatprc.net
+          </Button>
+          <Button
+            variant="subtle"
+            color="red"
+            component="a"
+            href="https://community.vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_forum"]()}
+          </Button>
+        </Stack>
+      </SimpleGrid>
+      <Stack style={{ textAlign: "center", fontStyle: "italic" }} c="red.9">
+        <Title order={2}>VATPRC 有你更精彩</Title>
+        <Title order={2}>You make the difference!</Title>
+      </Stack>
+    </Stack>
+  );
 };
 
-const Index: React.FC = () => {
+const IndexWithoutLocale: React.FC = () => {
   useEffect(() => {
     let useChinese = false;
     if (navigator.language.toLowerCase().startsWith("zh")) {
@@ -54,5 +145,5 @@ function RouteComponent() {
   if (getPathname().startsWith("/en") || getPathname().startsWith("/zh-cn")) {
     return <IndexWithLocale />;
   }
-  return <Index />;
+  return <IndexWithoutLocale />;
 }
