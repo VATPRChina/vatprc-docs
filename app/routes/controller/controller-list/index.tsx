@@ -1,4 +1,5 @@
-import { DiscourseDocument } from "@/components/DiscourseDocument";
+import { ControllerList } from "@/components/ControllerList";
+import { m } from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/controller-list/")({
@@ -6,35 +7,31 @@ export const Route = createFileRoute("/controller/controller-list/")({
 });
 
 function Page() {
-  // const { locale } = await params;
-  // setRequestLocale(locale);
-  // const t = await getTranslations("Legacy");
-
   return (
     <div>
-      {/* <div className="prose min-w-full dark:prose-invert">
-        <h2>{t("nav-menu.controller-list")}</h2>
-        <p>{t("controller-list.description")}</p>
+      <div className="prose min-w-full dark:prose-invert">
+        <h2>{m["Legacy_nav-menu_controller-list"]()}</h2>
+        <p>{m["Legacy_controller-list_description"]()}</p>
         <ul>
           <li>
-            <b>✘</b> {t("controller-list.permission-restricted")}
+            <b>✘</b> {m["Legacy_controller-list_permission-restricted"]()}
           </li>
           <li>
-            <b>T</b> {t("controller-list.permission-training")}
+            <b>T</b> {m["Legacy_controller-list_permission-training"]()}
           </li>
           <li>
-            <b>S</b> {t("controller-list.permission-solo")}
+            <b>S</b> {m["Legacy_controller-list_permission-solo"]()}
           </li>
           <li>
-            <b>✓</b> {t("controller-list.permission-full")}
+            <b>✓</b> {m["Legacy_controller-list_permission-full"]()}
           </li>
           <li>
-            <b>V</b> {t("controller-list.marker-visiting")}
+            <b>V</b> {m["Legacy_controller-list_marker-visiting"]()}
           </li>
         </ul>
-        <p>{t("controller-list.ptwr-description")}</p>
+        <p>{m["Legacy_controller-list_ptwr-description"]()}</p>
       </div>
-      <ControllerList /> */}
+      <ControllerList />
     </div>
   );
 }

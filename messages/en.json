@@ -92,5 +92,6 @@
   "pages_airspace_sop_no-english": "This page is not available in English.",
   "pages_airspace_sop_legacy": "Other SOPs",
   "pages_airspace_sop_new": "List of SOPs",
-  "pages_airspace_sop_title": "Standard operation procedures"
+  "pages_airspace_sop_title": "Standard operation procedures",
+  "controller_list_visiting": "Visiting"
 }
