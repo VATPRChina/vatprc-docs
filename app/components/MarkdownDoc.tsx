@@ -1,4 +1,10 @@
-import { Box, Grid, TypographyStylesProvider } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Grid,
+  Stack,
+  TypographyStylesProvider,
+} from "@mantine/core";
 import { compile, run } from "@mdx-js/mdx";
 import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
@@ -38,42 +44,37 @@ export const TableOfContents = ({
     return null;
   }
 
-  if (tableOfContents?.[0]?.depth === 1) {
-    return (
-      <>
-        {tableOfContents.map((toc: TocEntry) => (
-          <React.Fragment key={toc.value}>
-            <a href={`#${toc.id}`}>{toc.value}</a>
-            <br />
-            {toc.children && (
-              <TableOfContents
-                tableOfContents={toc.children}
-                maxDepth={maxDepth - 1}
-              />
-            )}
-          </React.Fragment>
-        ))}
-      </>
-    );
-  }
+  return tableOfContents.map((toc) => (
+    <Box key={toc.value} role="listitem">
+      <Button
+        variant="transparent"
+        color="dark"
+        component="a"
+        href={`#${toc.id}`}
+      >
+        {toc.value}
+      </Button>
 
-  return (
-    <ul>
-      {tableOfContents.map((toc: TocEntry) => (
-        <li key={toc.value}>
-          <a href={`#${toc.id}`} className="font-normal no-underline">
-            {toc.value}
-          </a>
-          {toc.children && (
+      {toc.children && (
+        <Stack
+          gap="xs"
+          ml={16}
+          style={{
+            borderLeft: "1px solid var(--mantine-color-gray-3)",
+          }}
+          role="list"
+        >
+          {toc.children.map((child) => (
             <TableOfContents
-              tableOfContents={toc.children}
+              key={child.value}
+              tableOfContents={[child]}
               maxDepth={maxDepth - 1}
             />
-          )}
-        </li>
-      ))}
-    </ul>
-  );
+          ))}
+        </Stack>
+      )}
+    </Box>
+  ));
 };
 
 export const buildMarkdownDoc = async (source: string) => {

@@ -41,7 +41,7 @@ export const fetcher = async ([, postId]: [string, string]) => {
   });
 
   const doc = await buildMarkdownDoc(contentRes);
-  doc.title ??= meta.title;
+  doc.title = meta.title ?? doc.title;
   return doc;
 };
 
