@@ -4,18 +4,13 @@ import * as React from "react";
 
 type MantineButtonProps = Omit<ButtonProps, "href">;
 
-const MantineLinkComponent = React.forwardRef<
-  HTMLAnchorElement,
-  MantineButtonProps
->((props, ref) => {
+const MantineLinkComponent = React.forwardRef<HTMLAnchorElement, MantineButtonProps>((props, ref) => {
   return <Button component="a" ref={ref} {...props} />;
 });
 MantineLinkComponent.displayName = "MantineLinkComponent";
 
 const CreatedButtonComponent = createLink(MantineLinkComponent);
 
-export const RouteButton: LinkComponent<typeof MantineLinkComponent> = (
-  props,
-) => {
+export const RouteButton: LinkComponent<typeof MantineLinkComponent> = (props) => {
   return <CreatedButtonComponent preload="intent" {...props} />;
 };

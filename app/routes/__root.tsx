@@ -27,12 +27,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconExternalLink, IconLanguage } from "@tabler/icons-react";
-import {
-  createRootRoute,
-  HeadContent,
-  Outlet,
-  Scripts,
-} from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { Fragment } from "react";
 
 interface NavMenuProps {
@@ -76,11 +71,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
           </SimpleGrid>
           <Divider my="sm" />
           <SimpleGrid cols={2}>
-            <Button
-              href="https://community.vatprc.net"
-              {...extProps}
-              {...smProps}
-            >
+            <Button href="https://community.vatprc.net" {...extProps} {...smProps}>
               {m["Legacy_nav-menu_forum"]()}
               <IconExternalLink size={12} />
             </Button>
@@ -156,11 +147,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
                 {m["Legacy_nav-menu_charts"]()}
                 <IconExternalLink size={12} />
               </Button>
-              <Button
-                href="https://vacdm.vatprc.net/"
-                {...extProps}
-                {...smProps}
-              >
+              <Button href="https://vacdm.vatprc.net/" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_vacdm"]()}
                 <IconExternalLink size={12} />
               </Button>
@@ -188,10 +175,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
               <RouteButton to="/controller/become-a-controller" {...smProps}>
                 {m["Legacy_nav-menu_become-a-controller"]()}
               </RouteButton>
-              <RouteButton
-                to="/controller/visiting-and-transferring"
-                {...smProps}
-              >
+              <RouteButton to="/controller/visiting-and-transferring" {...smProps}>
                 {m["Legacy_nav-menu_visiting-and-transferring"]()}
               </RouteButton>
             </Stack>
@@ -203,11 +187,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
               <IconExternalLink size={12} />
             </Button>
             <Stack gap="xs">
-              <Button
-                href="https://moodle.vatprc.net"
-                {...extProps}
-                {...smProps}
-              >
+              <Button href="https://moodle.vatprc.net" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_moodle"]()}
                 <IconExternalLink size={12} />
               </Button>
@@ -254,9 +234,7 @@ interface ApplicationProps {
   children?: React.ReactNode;
 }
 
-const Application: React.FC<ApplicationProps> = ({
-  children,
-}: ApplicationProps) => {
+const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
@@ -281,12 +259,7 @@ const Application: React.FC<ApplicationProps> = ({
           }}
         >
           <Group h="100%" px="md">
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <Group justify="space-between" style={{ flex: 1 }}>
               <Group>
                 <RouteButton to="/" variant="transparent">
@@ -303,12 +276,7 @@ const Application: React.FC<ApplicationProps> = ({
               </Group>
               <Group>
                 <ColorSchemeToggle />
-                <ActionIcon
-                  variant="subtle"
-                  c="gray"
-                  component="a"
-                  href={getLocale() === "zh-cn" ? "/en" : "/zh-cn"}
-                >
+                <ActionIcon variant="subtle" c="gray" component="a" href={getLocale() === "zh-cn" ? "/en" : "/zh-cn"}>
                   <IconLanguage width="70%" height="70%" />
                 </ActionIcon>
               </Group>

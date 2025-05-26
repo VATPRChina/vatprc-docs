@@ -8,8 +8,7 @@ const ONLINE_STATUS_ENDPOINT =
   process.env.NODE_ENV === "development"
     ? "/api/cors/online-status"
     : "https://uniapi.vatprc.net/api/compat/online-status";
-const fetcher = (...args: Parameters<typeof fetch>) =>
-  fetch(...args).then((res) => res.json());
+const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
 
 const Controller: React.FC<{
   callsign: string;
@@ -19,14 +18,7 @@ const Controller: React.FC<{
 }> = ({ callsign, name, frequency, schedule }) => {
   return (
     <Card>
-      <span
-        className={[
-          "text-xl font-bold",
-          schedule ? "text-blue-900" : "text-red-900",
-        ]}
-      >
-        {callsign}
-      </span>
+      <span className={["text-xl font-bold", schedule ? "text-blue-900" : "text-red-900"]}>{callsign}</span>
       <span>{name}</span>
       {frequency && <span>{frequency}</span>}
       {schedule && (
@@ -47,13 +39,8 @@ const Controller: React.FC<{
   );
 };
 
-export const OnlineControllers: React.FC<{ className?: string }> = ({
-  className,
-}) => {
-  const { data, isLoading } = useSWR<OnlineData>(
-    ONLINE_STATUS_ENDPOINT,
-    fetcher,
-  );
+export const OnlineControllers: React.FC<{ className?: string }> = ({ className }) => {
+  const { data, isLoading } = useSWR<OnlineData>(ONLINE_STATUS_ENDPOINT, fetcher);
 
   // if (isLoading) {
   return <Loader />;

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,23 +15,11 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./app/*"
-      ],
-      "@/assets/*": [
-        "./assets/*"
-      ],
-      "@/styles/*": [
-        "./styles/*"
-      ]
+      "@/*": ["./app/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/styles/*": ["./styles/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.mjs",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mjs"],
+  "exclude": ["node_modules"]
 }

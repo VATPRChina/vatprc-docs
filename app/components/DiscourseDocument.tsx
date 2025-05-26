@@ -15,22 +15,18 @@ export interface PostMeta {
 
 export const fetcher = async ([, postId]: [string, string]) => {
   const postPath = `${postId}/1`;
-  const meta = await fetch(
-    `https://community.vatprc.net/t/topic/${postPath}.json`,
-  ).then((res) => {
+  const meta = await fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
     if (!res.ok) {
       throw new Error(`Failed to fetch: ${res.status}`);
     }
     return res.json() as Promise<PostMeta>;
   });
-  const raw = await fetch(`https://community.vatprc.net/raw/${postPath}`).then(
-    (res) => {
-      if (!res.ok) {
-        throw new Error(`Failed to fetch: ${res.status}`);
-      }
-      return res.text();
-    },
-  );
+  const raw = await fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+    return res.text();
+  });
 
   let contentRes = raw.replaceAll("<->", "\\<->");
   let i = 0;
@@ -52,23 +48,17 @@ export const DiscourseDocument: React.FC<{
   const locale = getLocale();
 
   const postId = locale === "zh-cn" ? (cn ?? en) : en;
-  const { data, isLoading, error } = useSWR<
-    Awaited<ReturnType<typeof fetcher>>,
-    Error
-  >([`https://community.vatprc.net/t/topic/${postId}.json`, postId], fetcher);
+  const { data, isLoading, error } = useSWR<Awaited<ReturnType<typeof fetcher>>, Error>(
+    [`https://community.vatprc.net/t/topic/${postId}.json`, postId],
+    fetcher,
+  );
   if (isLoading) {
     return <Loader />;
   }
   if (error || !data) {
     return (
-      <Alert
-        variant="light"
-        color="red"
-        title={m.Components_DiscourseDocument_Error()}
-      >
-        {error instanceof Error
-          ? error.message
-          : m.Components_DiscourseDocument_Error()}
+      <Alert variant="light" color="red" title={m.Components_DiscourseDocument_Error()}>
+        {error instanceof Error ? error.message : m.Components_DiscourseDocument_Error()}
       </Alert>
     );
   }

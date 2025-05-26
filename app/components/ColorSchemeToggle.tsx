@@ -1,8 +1,4 @@
-import {
-  useMantineColorScheme,
-  ActionIcon,
-  useComputedColorScheme,
-} from "@mantine/core";
+import { useMantineColorScheme, ActionIcon, useComputedColorScheme } from "@mantine/core";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 
 export const ColorSchemeToggle = () => {
@@ -18,11 +14,7 @@ export const ColorSchemeToggle = () => {
         toggleColorScheme();
       }}
     >
-      {computedColorScheme === "light" ? (
-        <IconSun width="70%" height="70%" />
-      ) : (
-        <IconMoon width="70%" height="70%" />
-      )}
+      {computedColorScheme === "light" ? <IconSun width="70%" height="70%" /> : <IconMoon width="70%" height="70%" />}
     </ActionIcon>
   );
 };

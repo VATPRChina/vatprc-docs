@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  TypographyStylesProvider,
-} from "@mantine/core";
+import { Anchor, Box, Grid, Stack, TypographyStylesProvider } from "@mantine/core";
 import { compile, run } from "@mdx-js/mdx";
 import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
@@ -33,43 +27,29 @@ export const addIdToToc = (tableOfContents: Toc) => {
   }
 };
 
-export const TableOfContents = ({
-  tableOfContents,
-  maxDepth,
-}: {
-  tableOfContents: Toc;
-  maxDepth?: number;
-}) => {
+export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents: Toc; maxDepth?: number }) => {
   if (!maxDepth || maxDepth <= 0) {
     return null;
   }
 
   return tableOfContents.map((toc) => (
-    <Box key={toc.value} role="listitem">
-      <Button
-        variant="transparent"
-        color="dark"
-        component="a"
-        href={`#${toc.id}`}
-      >
+    <Box key={toc.value} role="listitem" pl={8}>
+      <Anchor c="dark" underline="hover" href={`#${toc.id}`}>
         {toc.value}
-      </Button>
+      </Anchor>
 
       {toc.children && (
         <Stack
           gap="xs"
           ml={16}
+          my={8}
           style={{
             borderLeft: "1px solid var(--mantine-color-gray-3)",
           }}
           role="list"
         >
           {toc.children.map((child) => (
-            <TableOfContents
-              key={child.value}
-              tableOfContents={[child]}
-              maxDepth={maxDepth - 1}
-            />
+            <TableOfContents key={child.value} tableOfContents={[child]} maxDepth={maxDepth - 1} />
           ))}
         </Stack>
       )}
@@ -81,14 +61,7 @@ export const buildMarkdownDoc = async (source: string) => {
   const code = String(
     await compile(source, {
       outputFormat: "function-body",
-      remarkPlugins: [
-        gfm,
-        withToc,
-        withTocExport,
-        remarkBreaks,
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-      ],
+      remarkPlugins: [gfm, withToc, withTocExport, remarkBreaks, remarkFrontmatter, remarkMdxFrontmatter],
       rehypePlugins: [
         rehypeSlug,
         rehypeGithubAlerts,
@@ -101,15 +74,12 @@ export const buildMarkdownDoc = async (source: string) => {
     default: MDXContent,
     tableOfContents,
     frontmatter,
-  } = (await run(code, { ...runtime, baseUrl: import.meta.url })) as Awaited<
-    ReturnType<typeof run>
-  > & {
+  } = (await run(code, { ...runtime, baseUrl: import.meta.url })) as Awaited<ReturnType<typeof run>> & {
     tableOfContents: Toc;
     frontmatter: Record<string, unknown>;
   };
 
-  const frontmatterTitle =
-    typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
+  const frontmatterTitle = typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
   const title = frontmatterTitle ?? tableOfContents?.[0]?.value;
 
   addIdToToc(tableOfContents);

@@ -63,6 +63,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "prettier": {
+    "printWidth": 120,
     "plugins": [
       "@trivago/prettier-plugin-sort-imports"
     ]

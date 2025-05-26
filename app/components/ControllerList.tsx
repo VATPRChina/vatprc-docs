@@ -1,14 +1,5 @@
 import { m } from "@/lib/i18n/messages";
-import {
-  Badge,
-  Card,
-  Checkbox,
-  Group,
-  Loader,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Badge, Card, Checkbox, Group, Loader, SimpleGrid, Stack, Text } from "@mantine/core";
 import { format } from "date-fns";
 import { useState } from "react";
 import useSWR from "swr";
@@ -83,11 +74,7 @@ interface PositionRoleItem {
 interface MarkerItem {
   type: RoleType.Marker;
 }
-export type RoleItem =
-  | RatingRoleItem
-  | StatusRoleItem
-  | PositionRoleItem
-  | MarkerItem;
+export type RoleItem = RatingRoleItem | StatusRoleItem | PositionRoleItem | MarkerItem;
 
 export const VISITING_CONTROLLER_ID = 298;
 
@@ -319,11 +306,7 @@ interface PermissionTagProps {
   positionName: string;
   expiration?: Date | null;
 }
-const PermissionTag = ({
-  permission,
-  positionName,
-  expiration,
-}: PermissionTagProps) => {
+const PermissionTag = ({ permission, positionName, expiration }: PermissionTagProps) => {
   return (
     permission !== ControllerPositionPermission.Restricted && (
       <Badge
@@ -340,16 +323,11 @@ const PermissionTag = ({
       >
         <Group gap={2}>
           {positionName}
-          {permission === ControllerPositionPermission.Training && (
-            <span className="text-xs">(T)</span>
-          )}
-          {permission === ControllerPositionPermission.Solo && (
-            <span className="text-xs">(S)</span>
-          )}
+          {permission === ControllerPositionPermission.Training && <span className="text-xs">(T)</span>}
+          {permission === ControllerPositionPermission.Solo && <span className="text-xs">(S)</span>}
           {expiration && (
             <span className="text-xs">
-              {m["Legacy_controller-list_until"]()}{" "}
-              {format(expiration, "yyyy-MM-dd")}
+              {m["Legacy_controller-list_until"]()} {format(expiration, "yyyy-MM-dd")}
             </span>
           )}
         </Group>
@@ -358,8 +336,7 @@ const PermissionTag = ({
   );
 };
 
-const fetcher = (...args: Parameters<typeof fetch>) =>
-  fetch(...args).then((res) => res.json());
+const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
 
 export const ControllerList: React.FC = () => {
   const [showAbsent, setShowAbsent] = useState(false);
@@ -374,10 +351,7 @@ export const ControllerList: React.FC = () => {
     let ratingType: ControllerRatingType = ControllerRatingType.Unknown;
     let status: ControllerStatus = ControllerStatus.Active;
     let visiting = false;
-    const permissions: Record<
-      ControllerPosition,
-      ControllerPositionPermission
-    > = {
+    const permissions: Record<ControllerPosition, ControllerPositionPermission> = {
       [ControllerPosition.DEL]: ControllerPositionPermission.Restricted,
       [ControllerPosition.GND]: ControllerPositionPermission.Restricted,
       [ControllerPosition.TWR]: ControllerPositionPermission.Restricted,
@@ -404,10 +378,7 @@ export const ControllerList: React.FC = () => {
         console.warn("Invalid role", roleItem);
         continue;
       }
-      if (
-        roleDetail.type === RoleType.Rating &&
-        roleDetail.extraValue !== ControllerRatingType.Student
-      ) {
+      if (roleDetail.type === RoleType.Rating && roleDetail.extraValue !== ControllerRatingType.Student) {
         rating = roleDetail.value;
         ratingType = roleDetail.extraValue;
       } else if (roleDetail.type === RoleType.Position) {
@@ -416,9 +387,7 @@ export const ControllerList: React.FC = () => {
         const curVal = permissions[pos];
         if (newVal > curVal) {
           permissions[pos] = newVal;
-          expirations[pos] = roleItem.expires
-            ? new Date(roleItem.expires)
-            : null;
+          expirations[pos] = roleItem.expires ? new Date(roleItem.expires) : null;
         }
       } else if (roleDetail.type === RoleType.Status) {
         status = roleDetail.value;
@@ -447,10 +416,7 @@ export const ControllerList: React.FC = () => {
 
   return (
     <Stack>
-      <Checkbox
-        onChange={onShowAbsentChange}
-        label={m["Legacy_controller-list_show-absence"]()}
-      />
+      <Checkbox onChange={onShowAbsentChange} label={m["Legacy_controller-list_show-absence"]()} />
       <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }} spacing="md">
         {controllers
           ?.sort((ca, cb) => {
@@ -471,9 +437,7 @@ export const ControllerList: React.FC = () => {
             }
             return ca.id - cb.id;
           })
-          ?.filter(
-            (ctr) => showAbsent || ctr.status !== ControllerStatus.Absence,
-          )
+          ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
           ?.map((ctr) => (
             <Card key={ctr.id} withBorder>
               <Group gap={8}>
@@ -484,15 +448,9 @@ export const ControllerList: React.FC = () => {
                   {ctr.id}
                 </Text>
                 <Text fw="bold">{ControllerRating[ctr.rating]}</Text>
-                {ctr.visiting && (
-                  <Badge color="yellow">
-                    {m["controller_list_visiting"]()}
-                  </Badge>
-                )}
+                {ctr.visiting && <Badge color="yellow">{m["controller_list_visiting"]()}</Badge>}
                 {ctr.status === ControllerStatus.Absence && (
-                  <Badge color="red">
-                    {m["Legacy_controller-list_absent"]()}
-                  </Badge>
+                  <Badge color="red">{m["Legacy_controller-list_absent"]()}</Badge>
                 )}
               </Group>
               <div className="flex flex-wrap gap-2 font-mono text-sm">
@@ -531,10 +489,7 @@ export const ControllerList: React.FC = () => {
                   expiration={ctr.expirations[ControllerPosition.FSS]}
                   positionName="FSS"
                 />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.TMU]}
-                  positionName="TMU"
-                />
+                <PermissionTag permission={ctr.permissions[ControllerPosition.TMU]} positionName="TMU" />
               </div>
             </Card>
           ))}

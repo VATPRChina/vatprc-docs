@@ -4,16 +4,7 @@ import laptop from "@/assets/legacy/lap_top.png";
 import pilot from "@/assets/legacy/pilot.png";
 import { m } from "@/lib/i18n/messages";
 import { getPathname } from "@/lib/util";
-import {
-  Anchor,
-  Text,
-  Group,
-  Image,
-  SimpleGrid,
-  Stack,
-  Title,
-  Button,
-} from "@mantine/core";
+import { Anchor, Text, Group, Image, SimpleGrid, Stack, Title, Button } from "@mantine/core";
 import { IconMail } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -47,32 +38,23 @@ const IndexWithLocale: React.FC = () => {
         <h3 className="text-4xl">{t("recent-events")}</h3>
         {/* <RecentEvents className="my-8 w-full" /> */}
       </section>
-      <SimpleGrid
-        cols={{ base: 1, md: 2 }}
-        style={{ justifyItems: "center", alignItems: "center" }}
-      >
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
         <Image src={laptop} alt="laptop" w={512} />
         <Stack>
           <Title order={2}>{m["Legacy_online-controllers"]()}</Title>
           {/* <OnlineControllers /> */}
         </Stack>
       </SimpleGrid>
-      <SimpleGrid
-        cols={{ base: 1, md: 2 }}
-        style={{ justifyItems: "center", alignItems: "center" }}
-      >
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
         <Stack>
           <Title order={2}>{m["Legacy_online-pilots"]()}</Title>
           {/* <OnlinePilots className="my-auto" /> */}
         </Stack>
         <Image src={drone} alt="drone" w={512} />
       </SimpleGrid>
-      <SimpleGrid
-        cols={{ base: 1, md: 2 }}
-        style={{ justifyItems: "center", alignItems: "center" }}
-      >
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
         <Image src={feedback} alt="feedback" w={512} />
-        <Stack>
+        <Stack align="center">
           <Title order={2}>{m["Legacy_feedback"]()}</Title>
           <Text>{m["Legacy_feedback-description"]()}</Text>
           <Button
@@ -82,8 +64,8 @@ const IndexWithLocale: React.FC = () => {
             href="mailto:feedback@vatprc.net"
             target="_blank"
             rel="noopener noreferrer"
+            leftSection={<IconMail />}
           >
-            <IconMail />
             feedback@vatprc.net
           </Button>
           <Button
