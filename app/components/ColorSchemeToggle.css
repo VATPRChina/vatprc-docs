@@ -1,0 +1,10 @@
+.button-theme-toggle {
+  @apply p-2.5 w-10 h-10;
+  @apply rounded-lg;
+  @apply text-gray-500 hover:bg-gray-100;
+  @apply dark:text-gray-400 dark:hover:bg-gray-700;
+}
+
+.button-theme-toggle svg {
+  @apply w-full h-full;
+}

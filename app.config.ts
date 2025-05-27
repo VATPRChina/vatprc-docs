@@ -1,4 +1,5 @@
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "@tanstack/react-start/config";
 import tsConfigPaths from "vite-tsconfig-paths";
 
@@ -22,9 +23,8 @@ export default defineConfig({
           },
         ],
       }),
+      // @ts-expect-error Tailwind type definition is not compatible
+      tailwindcss(),
     ],
-    ssr: {
-      noExternal: ["@mantine/*"],
-    },
   },
 });

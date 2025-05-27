@@ -1,4 +1,3 @@
-import { Anchor, Box, Grid, Stack, TypographyStylesProvider } from "@mantine/core";
 import { compile, run } from "@mdx-js/mdx";
 import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
@@ -32,29 +31,34 @@ export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents
     return null;
   }
 
-  return tableOfContents.map((toc) => (
-    <Box key={toc.value} role="listitem" pl={8}>
-      <Anchor c="dark" underline="hover" href={`#${toc.id}`}>
-        {toc.value}
-      </Anchor>
+  if (tableOfContents?.[0]?.depth === 1) {
+    return (
+      <>
+        {tableOfContents.map((toc: TocEntry) => (
+          <React.Fragment key={toc.value}>
+            <a href={`#${toc.id}`} className="font-normal no-underline">
+              {toc.value}
+            </a>
+            <br />
+            {toc.children && <TableOfContents tableOfContents={toc.children} maxDepth={maxDepth - 1} />}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  }
 
-      {toc.children && (
-        <Stack
-          gap="xs"
-          ml={16}
-          my={8}
-          style={{
-            borderLeft: "1px solid var(--mantine-color-gray-3)",
-          }}
-          role="list"
-        >
-          {toc.children.map((child) => (
-            <TableOfContents key={child.value} tableOfContents={[child]} maxDepth={maxDepth - 1} />
-          ))}
-        </Stack>
-      )}
-    </Box>
-  ));
+  return (
+    <ul>
+      {tableOfContents.map((toc: TocEntry) => (
+        <li key={toc.value}>
+          <a href={`#${toc.id}`} className="font-normal no-underline">
+            {toc.value}
+          </a>
+          {toc.children && <TableOfContents tableOfContents={toc.children} maxDepth={maxDepth - 1} />}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 export const buildMarkdownDoc = async (source: string) => {
@@ -92,20 +96,13 @@ export const MarkdownDoc: React.FC<{
   toc: Toc;
 }> = ({ children, toc }) => {
   return (
-    <Grid>
-      <Grid.Col span={8}>
-        <TypographyStylesProvider>{children}</TypographyStylesProvider>
-      </Grid.Col>
-      <Grid.Col span={4}>
-        <Box
-          style={{
-            position: "sticky",
-            top: "calc(var(--app-shell-header-offset, 0rem) + var(--app-shell-padding) + var(--grid-col-padding) + 1em)",
-          }}
-        >
-          <TableOfContents tableOfContents={toc} maxDepth={3} />
-        </Box>
-      </Grid.Col>
-    </Grid>
+    <div className="flex flex-col md:flex-row">
+      <div className="mx-auto w-full max-w-screen-lg rounded px-4 py-6 md:px-12 flex-2/3">
+        <article className="prose mx-auto dark:prose-invert prose-p:my-2">{children}</article>
+      </div>
+      <div className="prose z-1 dark:prose-invert prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:h-full md:overflow-y-scroll flex-1/3">
+        <TableOfContents tableOfContents={toc} maxDepth={3} />
+      </div>
+    </div>
   );
 };

@@ -1,5 +1,26 @@
-@import "@mantine/core/styles.css";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-html {
-  scroll-padding-top: var(--app-shell-header-height);
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.nav-list-grid {
+  @apply grid w-[400px] max-w-[90vw] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px];
 }
+
+.nav-list-grid .large-item {
+  @apply rounded-md bg-gray-100 px-6 py-4 font-bold;
+}
+
+.nav-list-grid a.large-item:hover {
+  @apply bg-gray-200;
+}
+
+.nav-list-grid .item {
+  @apply rounded-sm px-3 py-2 text-sm hover:bg-gray-100;
+}
+
+@import "../components/ColorSchemeToggle.css";
