@@ -2,6 +2,7 @@ import { MarkdownDoc } from "./MarkdownDoc";
 import { buildMarkdownDoc } from "./MarkdownDoc";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
+import { Alert, Loader } from "@mantine/core";
 import React from "react";
 import useSWR from "swr";
 
@@ -52,13 +53,13 @@ export const DiscourseDocument: React.FC<{
     fetcher,
   );
   if (isLoading) {
-    return "Loading";
+    return <Loader />;
   }
   if (error || !data) {
     return (
-      <div data-title={m.Components_DiscourseDocument_Error()}>
+      <Alert variant="light" color="red" title={m.Components_DiscourseDocument_Error()}>
         {error instanceof Error ? error.message : m.Components_DiscourseDocument_Error()}
-      </div>
+      </Alert>
     );
   }
   return (

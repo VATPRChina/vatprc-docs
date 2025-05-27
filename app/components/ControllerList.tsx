@@ -1,0 +1,499 @@
+import { m } from "@/lib/i18n/messages";
+import { Badge, Card, Checkbox, Group, Loader, SimpleGrid, Stack, Text } from "@mantine/core";
+import { format } from "date-fns";
+import { useState } from "react";
+import useSWR from "swr";
+
+export enum ControllerRating {
+  Unknown = 0,
+  S1 = 1,
+  S2 = 3,
+  S3 = 4,
+  C1 = 5,
+  C3 = 6,
+  I1 = 7,
+  I3 = 8,
+}
+export enum ControllerRatingType {
+  Unknown = 0,
+  Student = 1,
+  Controller = 2,
+}
+
+export enum ControllerPosition {
+  DEL = 0,
+  GND = 1,
+  TWR = 2,
+  PTWR = 3, // Procedural TWR
+  APP = 4,
+  CTR = 5,
+  FSS = 6,
+  TMU = 7,
+}
+
+export enum ControllerPositionPermission {
+  Restricted = 0,
+  Training = 1,
+  Solo = 2,
+  Full = 3,
+}
+
+export const CONTROLLER_POSITION_PERMISSION_FLAG_MAP = {
+  [ControllerPositionPermission.Restricted]: "✘",
+  [ControllerPositionPermission.Training]: "T",
+  [ControllerPositionPermission.Solo]: "S",
+  [ControllerPositionPermission.Full]: "✓",
+};
+
+export enum ControllerStatus {
+  Active = 0,
+  Absence = 1,
+}
+
+export enum RoleType {
+  Rating,
+  Position,
+  Status,
+  Marker,
+}
+
+interface RatingRoleItem {
+  type: RoleType.Rating;
+  value: ControllerRating;
+  extraValue: ControllerRatingType;
+}
+interface StatusRoleItem {
+  type: RoleType.Status;
+  value: ControllerStatus;
+}
+interface PositionRoleItem {
+  type: RoleType.Position;
+  value: ControllerPosition;
+  extraValue: ControllerPositionPermission;
+}
+interface MarkerItem {
+  type: RoleType.Marker;
+}
+export type RoleItem = RatingRoleItem | StatusRoleItem | PositionRoleItem | MarkerItem;
+
+export const VISITING_CONTROLLER_ID = 298;
+
+export const ROLE_MAP: Record<string, RoleItem> = {
+  // S1 Student
+  201: {
+    type: RoleType.Rating,
+    value: ControllerRating.S1,
+    extraValue: ControllerRatingType.Student,
+  },
+  // S1 Controller
+  202: {
+    type: RoleType.Rating,
+    value: ControllerRating.S1,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // S2 Student
+  203: {
+    type: RoleType.Rating,
+    value: ControllerRating.S2,
+    extraValue: ControllerRatingType.Student,
+  },
+  // S2 Controller
+  204: {
+    type: RoleType.Rating,
+    value: ControllerRating.S2,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // S3 Student
+  205: {
+    type: RoleType.Rating,
+    value: ControllerRating.S3,
+    extraValue: ControllerRatingType.Student,
+  },
+  // S3 Controller
+  206: {
+    type: RoleType.Rating,
+    value: ControllerRating.S3,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // C1 Student
+  207: {
+    type: RoleType.Rating,
+    value: ControllerRating.C1,
+    extraValue: ControllerRatingType.Student,
+  },
+  // C1 Controller
+  208: {
+    type: RoleType.Rating,
+    value: ControllerRating.C1,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // C3 Student
+  211: {
+    type: RoleType.Rating,
+    value: ControllerRating.C3,
+    extraValue: ControllerRatingType.Student,
+  },
+  // C3 Controller
+  212: {
+    type: RoleType.Rating,
+    value: ControllerRating.C3,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // I1 Instructor
+  213: {
+    type: RoleType.Rating,
+    value: ControllerRating.I1,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // I3 Instructor
+  215: {
+    type: RoleType.Rating,
+    value: ControllerRating.I3,
+    extraValue: ControllerRatingType.Controller,
+  },
+  // Absence
+  297: {
+    type: RoleType.Status,
+    value: ControllerStatus.Absence,
+  },
+  // Visiting Controller
+  298: {
+    type: RoleType.Marker,
+  },
+  // ATC Student
+  299: {
+    type: RoleType.Marker,
+  },
+  // DEL Full Permission
+  300: {
+    type: RoleType.Position,
+    value: ControllerPosition.DEL,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // DEL Solo Permission
+  301: {
+    type: RoleType.Position,
+    value: ControllerPosition.DEL,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // DEL Under Mentoring Permission
+  302: {
+    type: RoleType.Position,
+    value: ControllerPosition.DEL,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // GND Full Permission
+  310: {
+    type: RoleType.Position,
+    value: ControllerPosition.GND,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // GND Solo Permission
+  311: {
+    type: RoleType.Position,
+    value: ControllerPosition.GND,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // GND Under Mentoring Permission
+  312: {
+    type: RoleType.Position,
+    value: ControllerPosition.GND,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // TWR Full Permission
+  320: {
+    type: RoleType.Position,
+    value: ControllerPosition.TWR,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // TWR Solo Permission
+  321: {
+    type: RoleType.Position,
+    value: ControllerPosition.TWR,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // TWR Under Mentoring Permission
+  322: {
+    type: RoleType.Position,
+    value: ControllerPosition.TWR,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // APP Full Permission
+  330: {
+    type: RoleType.Position,
+    value: ControllerPosition.APP,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // APP Solo Permission
+  331: {
+    type: RoleType.Position,
+    value: ControllerPosition.APP,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // APP Under Mentoring Permission
+  332: {
+    type: RoleType.Position,
+    value: ControllerPosition.APP,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // Procedural TWR Permission
+  333: {
+    type: RoleType.Position,
+    value: ControllerPosition.PTWR,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // CTR Full Permission
+  340: {
+    type: RoleType.Position,
+    value: ControllerPosition.CTR,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // CTR Solo Permission
+  341: {
+    type: RoleType.Position,
+    value: ControllerPosition.CTR,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // CTR Under Mentoring Permission
+  342: {
+    type: RoleType.Position,
+    value: ControllerPosition.CTR,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // FSS Full Permission
+  350: {
+    type: RoleType.Position,
+    value: ControllerPosition.FSS,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // FSS Solo Permission
+  351: {
+    type: RoleType.Position,
+    value: ControllerPosition.FSS,
+    extraValue: ControllerPositionPermission.Solo,
+  },
+  // FSS Under Mentoring Permission
+  352: {
+    type: RoleType.Position,
+    value: ControllerPosition.FSS,
+    extraValue: ControllerPositionPermission.Training,
+  },
+  // Traffic Management Center Permission
+  360: {
+    type: RoleType.Position,
+    value: ControllerPosition.TMU,
+    extraValue: ControllerPositionPermission.Full,
+  },
+  // Online Permission
+  399: {
+    type: RoleType.Marker,
+  },
+};
+
+interface ControllerListResponseItem {
+  id: number;
+  first_name: string;
+  last_name: string;
+  roles: {
+    id: number;
+    name: string;
+    expires: string | null;
+  }[];
+}
+
+interface PermissionTagProps {
+  permission: ControllerPositionPermission;
+  positionName: string;
+  expiration?: Date | null;
+}
+const PermissionTag = ({ permission, positionName, expiration }: PermissionTagProps) => {
+  return (
+    permission !== ControllerPositionPermission.Restricted && (
+      <Badge
+        variant="light"
+        color={
+          permission === ControllerPositionPermission.Full
+            ? "green"
+            : permission === ControllerPositionPermission.Training
+              ? "red"
+              : permission === ControllerPositionPermission.Solo
+                ? "yellow"
+                : undefined
+        }
+      >
+        <Group gap={2}>
+          {positionName}
+          {permission === ControllerPositionPermission.Training && <span className="text-xs">(T)</span>}
+          {permission === ControllerPositionPermission.Solo && <span className="text-xs">(S)</span>}
+          {expiration && (
+            <span className="text-xs">
+              {m["Legacy_controller-list_until"]()} {format(expiration, "yyyy-MM-dd")}
+            </span>
+          )}
+        </Group>
+      </Badge>
+    )
+  );
+};
+
+const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
+
+export const ControllerList: React.FC = () => {
+  const [showAbsent, setShowAbsent] = useState(false);
+
+  const { data, isLoading } = useSWR<ControllerListResponseItem[]>(
+    "https://atcapi.vatprc.net/v1/public/controllers",
+    fetcher,
+  );
+
+  const controllers = data?.map((item) => {
+    let rating: ControllerRating = ControllerRating.Unknown;
+    let ratingType: ControllerRatingType = ControllerRatingType.Unknown;
+    let status: ControllerStatus = ControllerStatus.Active;
+    let visiting = false;
+    const permissions: Record<ControllerPosition, ControllerPositionPermission> = {
+      [ControllerPosition.DEL]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.GND]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.TWR]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.PTWR]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.APP]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.CTR]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.FSS]: ControllerPositionPermission.Restricted,
+      [ControllerPosition.TMU]: ControllerPositionPermission.Restricted,
+    };
+    const expirations: Record<ControllerPosition, Date | null> = {
+      [ControllerPosition.DEL]: null,
+      [ControllerPosition.GND]: null,
+      [ControllerPosition.TWR]: null,
+      [ControllerPosition.PTWR]: null,
+      [ControllerPosition.APP]: null,
+      [ControllerPosition.CTR]: null,
+      [ControllerPosition.FSS]: null,
+      [ControllerPosition.TMU]: null,
+    };
+
+    for (const roleItem of item.roles) {
+      const roleDetail = ROLE_MAP[roleItem.id];
+      if (!roleDetail) {
+        console.warn("Invalid role", roleItem);
+        continue;
+      }
+      if (roleDetail.type === RoleType.Rating && roleDetail.extraValue !== ControllerRatingType.Student) {
+        rating = roleDetail.value;
+        ratingType = roleDetail.extraValue;
+      } else if (roleDetail.type === RoleType.Position) {
+        const pos = roleDetail.value;
+        const newVal = roleDetail.extraValue;
+        const curVal = permissions[pos];
+        if (newVal > curVal) {
+          permissions[pos] = newVal;
+          expirations[pos] = roleItem.expires ? new Date(roleItem.expires) : null;
+        }
+      } else if (roleDetail.type === RoleType.Status) {
+        status = roleDetail.value;
+      } else if (roleItem.id === VISITING_CONTROLLER_ID) {
+        visiting = true;
+      }
+    }
+
+    return {
+      ...item,
+      rating,
+      ratingType,
+      status,
+      visiting,
+      permissions,
+      expirations,
+    };
+  });
+
+  const onShowAbsentChange: React.ChangeEventHandler<HTMLInputElement> = (e) =>
+    setShowAbsent(e.target.checked === true);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
+    <Stack>
+      <Checkbox onChange={onShowAbsentChange} label={m["Legacy_controller-list_show-absence"]()} />
+      <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }} spacing="md">
+        {controllers
+          ?.sort((ca, cb) => {
+            if (ca.rating !== cb.rating) {
+              return cb.rating - ca.rating;
+            }
+            if (ca.visiting && !cb.visiting) {
+              return 1;
+            }
+            if (!ca.visiting && cb.visiting) {
+              return -1;
+            }
+            if (ca.status === ControllerStatus.Absence) {
+              return 1;
+            }
+            if (cb.status === ControllerStatus.Absence) {
+              return -1;
+            }
+            return ca.id - cb.id;
+          })
+          ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
+          ?.map((ctr) => (
+            <Card key={ctr.id} withBorder>
+              <Group gap={8}>
+                <Text fw="bold">
+                  {ctr.first_name} {ctr.last_name}
+                </Text>
+                <Text size="sm" fw="lighter">
+                  {ctr.id}
+                </Text>
+                <Text fw="bold">{ControllerRating[ctr.rating]}</Text>
+                {ctr.visiting && <Badge color="yellow">{m["controller_list_visiting"]()}</Badge>}
+                {ctr.status === ControllerStatus.Absence && (
+                  <Badge color="red">{m["Legacy_controller-list_absent"]()}</Badge>
+                )}
+              </Group>
+              <div className="flex flex-wrap gap-2 font-mono text-sm">
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.DEL]}
+                  expiration={ctr.expirations[ControllerPosition.DEL]}
+                  positionName="DEL"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.GND]}
+                  expiration={ctr.expirations[ControllerPosition.GND]}
+                  positionName="GND"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.TWR]}
+                  expiration={ctr.expirations[ControllerPosition.TWR]}
+                  positionName="TWR"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.PTWR]}
+                  expiration={ctr.expirations[ControllerPosition.PTWR]}
+                  positionName="Tier 2"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.APP]}
+                  expiration={ctr.expirations[ControllerPosition.APP]}
+                  positionName="APP"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.CTR]}
+                  expiration={ctr.expirations[ControllerPosition.CTR]}
+                  positionName="CTR"
+                />
+                <PermissionTag
+                  permission={ctr.permissions[ControllerPosition.FSS]}
+                  expiration={ctr.expirations[ControllerPosition.FSS]}
+                  positionName="FSS"
+                />
+                <PermissionTag permission={ctr.permissions[ControllerPosition.TMU]} positionName="TMU" />
+              </div>
+            </Card>
+          ))}
+      </SimpleGrid>
+    </Stack>
+  );
+};

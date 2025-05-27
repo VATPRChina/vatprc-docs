@@ -1,4 +1,4 @@
-// import { ControllerList } from "@/components/ControllerList";
+import { ControllerList } from "@/components/ControllerList";
 import { m } from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -31,7 +31,7 @@ function Page() {
         </ul>
         <p>{m["Legacy_controller-list_ptwr-description"]()}</p>
       </div>
-      {/* <ControllerList /> */}
+      <ControllerList />
     </div>
   );
 }

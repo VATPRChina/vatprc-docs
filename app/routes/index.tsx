@@ -4,9 +4,10 @@ import laptop from "@/assets/legacy/lap_top.png";
 import pilot from "@/assets/legacy/pilot.png";
 import { m } from "@/lib/i18n/messages";
 import { getPathname } from "@/lib/util";
+import { Anchor, Text, Group, Image, SimpleGrid, Stack, Title, Button } from "@mantine/core";
+import { IconMail } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { TbArrowRight, TbMail } from "react-icons/tb";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -21,98 +22,69 @@ const IndexWithLocale: React.FC = () => {
   const t = (s: string) => m["Legacy_" + s.replaceAll(".", "_")]();
 
   return (
-    <div className="flex flex-col items-center dark:text-white">
-      <div className="xl:max-w-80vw 2xl:max-w-65vw 3xl:max-w-45vw w-full">
-        <section className="px flex w-full flex-row items-center justify-center py-12 text-center">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="pxy flex flex-col items-center justify-center">
-              <h1 className="home-font m-2 text-4xl font-medium">{t("title")}</h1>
-              <h2 className="home-font m-2 text-3xl font-medium">{t("subtitle")}</h2>
-            </div>
-            <div className="pxy flex flex-col items-center justify-center">
-              <img src={pilot} alt="Pilot" />
-            </div>
-          </div>
-        </section>
-        <section className="py-18 px flex w-full flex-col items-center justify-center">
-          <h3 className="text-4xl">{t("recent-events")}</h3>
-          {/* <RecentEvents className="my-8 w-full" /> */}
-        </section>
-        <section className="px flex w-full flex-row items-center justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-col items-center justify-center">
-              <img className="flex w-1/2" src={laptop} alt="laptop" />
-            </div>
-            <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{t("online-controllers")}</h3>
-              {/* <OnlineControllers /> */}
-              <a
-                href="https://atc.vatprc.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="vatprc-big-btn-reverse mt-6"
-              >
-                {t("nav-menu.atc-center")}
-                <TbArrowRight className="-mt-0.5 ml-2" size={24} />
-              </a>
-            </div>
-            <div className="flex flex-col items-center justify-center sm:hidden">
-              <img className="flex w-1/2" src={laptop} alt="laptop" />
-            </div>
-          </div>
-        </section>
-        <section className="px pt-18 flex w-full flex-row items-center justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{t("online-pilots")}</h3>
-              {/* <OnlinePilots className="my-auto" /> */}
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <img className="flex w-1/2" src={drone} alt="Drone" />
-            </div>
-          </div>
-        </section>
-        <section className="px pt-18 flex w-full flex-row items-center justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="hidden flex-col items-center justify-center md:flex">
-              <img className="flex w-1/2" src={feedback} alt="Feedback" />
-            </div>
-            <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{t("feedback")}</h3>
-              <p className="text-center">{t("feedback-description")}</p>
-              <a
-                href="mailto:feedback@vatprc.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="vatprc-big-btn-reverse mt-6"
-              >
-                <TbMail className="mr-2" height={24} />
-                feedback@vatprc.net
-              </a>
-              <a
-                href="https://community.vatprc.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="vatprc-big-btn-reverse mt-6"
-              >
-                {t("nav-menu.forum")}
-                <TbArrowRight className="-mt-0.5 ml-2" height={24} />
-              </a>
-            </div>
-            <div className="flex flex-col items-center justify-center sm:hidden">
-              <img className="flex w-1/2" src={feedback} alt="Feedback" />
-            </div>
-          </div>
-        </section>
-        <section className="flex w-full flex-row items-center justify-center text-center">
-          <div className="color-vatprc-red home-font py-16 text-2xl font-medium italic">
-            <b>VATPRC 有你更精彩</b>
-            <br />
-            You make the difference!
-          </div>
-        </section>
-      </div>
-    </div>
+    <Stack gap="xl">
+      <SimpleGrid cols={{ base: 1, md: 2 }}>
+        <Stack justify="center">
+          <Title order={1} style={{ textAlign: "center" }}>
+            {m["Legacy_title"]()}
+          </Title>
+          <Title order={2} style={{ textAlign: "center" }}>
+            {m["Legacy_subtitle"]()}
+          </Title>
+        </Stack>
+        <Image src={pilot} alt="Pilot" width="100%" height="100%" />
+      </SimpleGrid>
+      <section className="py-18 px flex w-full flex-col items-center justify-center">
+        <h3 className="text-4xl">{t("recent-events")}</h3>
+        {/* <RecentEvents className="my-8 w-full" /> */}
+      </section>
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
+        <Image src={laptop} alt="laptop" w={512} />
+        <Stack>
+          <Title order={2}>{m["Legacy_online-controllers"]()}</Title>
+          {/* <OnlineControllers /> */}
+        </Stack>
+      </SimpleGrid>
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
+        <Stack>
+          <Title order={2}>{m["Legacy_online-pilots"]()}</Title>
+          {/* <OnlinePilots className="my-auto" /> */}
+        </Stack>
+        <Image src={drone} alt="drone" w={512} />
+      </SimpleGrid>
+      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
+        <Image src={feedback} alt="feedback" w={512} />
+        <Stack align="center">
+          <Title order={2}>{m["Legacy_feedback"]()}</Title>
+          <Text>{m["Legacy_feedback-description"]()}</Text>
+          <Button
+            variant="subtle"
+            color="red"
+            component="a"
+            href="mailto:feedback@vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            leftSection={<IconMail />}
+          >
+            feedback@vatprc.net
+          </Button>
+          <Button
+            variant="subtle"
+            color="red"
+            component="a"
+            href="https://community.vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_forum"]()}
+          </Button>
+        </Stack>
+      </SimpleGrid>
+      <Stack style={{ textAlign: "center", fontStyle: "italic" }} c="red.9">
+        <Title order={2}>VATPRC 有你更精彩</Title>
+        <Title order={2}>You make the difference!</Title>
+      </Stack>
+    </Stack>
   );
 };
 
@@ -138,14 +110,14 @@ const IndexWithoutLocale: React.FC = () => {
   });
 
   return (
-    <div className="grid h-screen place-items-center">
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-3xl">Redirecting to landing page.</p>
-        <p className="text-3xl">正在重定向到首页。</p>
-        <p className="flex flex-row gap-8 text-xl text-slate-700 underline">
-          <a href="/zh-cn">简体中文</a>
-          <a href="/en">English</a>
-        </p>
+    <div>
+      <div>
+        <p>Redirecting to landing page.</p>
+        <p>正在重定向到首页。</p>
+        <Group>
+          <Anchor href="/zh-cn">简体中文</Anchor>
+          <Anchor href="/en">English</Anchor>
+        </Group>
       </div>
     </div>
   );

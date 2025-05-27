@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "inlang.vs-code-extension",
-    "bradlc.vscode-tailwindcss"
-  ]
+  "recommendations": ["inlang.vs-code-extension"]
 }
