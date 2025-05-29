@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as DocsSplatImport } from './routes/docs/$'
 import { Route as PilotTs3IndexImport } from './routes/pilot/ts3/index'
 import { Route as PilotStartToFlyIndexImport } from './routes/pilot/start-to-fly/index'
 import { Route as PilotPilotSoftwaresIndexImport } from './routes/pilot/pilot-softwares/index'
@@ -36,6 +37,12 @@ import { Route as AirspaceFirIndexImport } from './routes/airspace/fir/index'
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocsSplatRoute = DocsSplatImport.update({
+  id: '/docs/$',
+  path: '/docs/$',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -161,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/docs/$': {
+      id: '/docs/$'
+      path: '/docs/$'
+      fullPath: '/docs/$'
+      preLoaderRoute: typeof DocsSplatImport
       parentRoute: typeof rootRoute
     }
     '/airspace/fir/': {
@@ -296,6 +310,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs/$': typeof DocsSplatRoute
   '/airspace/fir': typeof AirspaceFirIndexRoute
   '/airspace/rvsm': typeof AirspaceRvsmIndexRoute
   '/airspace/sop': typeof AirspaceSopIndexRoute
@@ -318,6 +333,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs/$': typeof DocsSplatRoute
   '/airspace/fir': typeof AirspaceFirIndexRoute
   '/airspace/rvsm': typeof AirspaceRvsmIndexRoute
   '/airspace/sop': typeof AirspaceSopIndexRoute
@@ -341,6 +357,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/docs/$': typeof DocsSplatRoute
   '/airspace/fir/': typeof AirspaceFirIndexRoute
   '/airspace/rvsm/': typeof AirspaceRvsmIndexRoute
   '/airspace/sop/': typeof AirspaceSopIndexRoute
@@ -365,6 +382,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/docs/$'
     | '/airspace/fir'
     | '/airspace/rvsm'
     | '/airspace/sop'
@@ -386,6 +404,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/docs/$'
     | '/airspace/fir'
     | '/airspace/rvsm'
     | '/airspace/sop'
@@ -407,6 +426,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/docs/$'
     | '/airspace/fir/'
     | '/airspace/rvsm/'
     | '/airspace/sop/'
@@ -430,6 +450,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsSplatRoute: typeof DocsSplatRoute
   AirspaceFirIndexRoute: typeof AirspaceFirIndexRoute
   AirspaceRvsmIndexRoute: typeof AirspaceRvsmIndexRoute
   AirspaceSopIndexRoute: typeof AirspaceSopIndexRoute
@@ -452,6 +473,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsSplatRoute: DocsSplatRoute,
   AirspaceFirIndexRoute: AirspaceFirIndexRoute,
   AirspaceRvsmIndexRoute: AirspaceRvsmIndexRoute,
   AirspaceSopIndexRoute: AirspaceSopIndexRoute,
@@ -485,6 +507,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/docs/$",
         "/airspace/fir/",
         "/airspace/rvsm/",
         "/airspace/sop/",
@@ -507,6 +530,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/docs/$": {
+      "filePath": "docs/$.tsx"
     },
     "/airspace/fir/": {
       "filePath": "airspace/fir/index.tsx"

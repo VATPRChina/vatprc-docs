@@ -42,12 +42,19 @@ const Event: React.FC<{
 
   return (
     <a
-      className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-gray-50"
+      className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-secondary"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span className={cn("text-xl font-bold", isExam ? "text-blue-900" : "text-red-900")}>{title}</span>
+      <span
+        className={cn(
+          "text-xl font-bold",
+          isExam ? "text-blue-900 dark:text-blue-100" : "text-red-900 dark:text-red-100",
+        )}
+      >
+        {title}
+      </span>
       <span>{intlFormatDistance(start, Date.now(), { locale })}</span>
       <div className="flex gap-1">
         <span>{format(start, "MM-dd", { in: utc })}</span>

@@ -20,7 +20,7 @@ const Pilot: React.FC<{
   arrival: string;
 }> = ({ callsign, aircraft, departure, arrival }) => {
   return (
-    <div className="flex flex-col rounded-md border px-6 py-4 hover:bg-gray-50">
+    <div className="flex flex-col rounded-md border px-6 py-4 hover:bg-secondary">
       <div className="flex gap-2">
         <span className="font-bold">{callsign}</span>
         <span className="font-light text-gray-500">{aircraft}</span>

@@ -129,13 +129,13 @@ html {
 }
 
 .nav-list-grid .large-item {
-  @apply rounded-md bg-gray-100 px-6 py-4 font-bold;
+  @apply rounded-md bg-secondary px-6 py-4 font-bold;
 }
 
 .nav-list-grid a.large-item:hover {
-  @apply bg-gray-200;
+  @apply bg-secondary/80;
 }
 
 .nav-list-grid .item {
-  @apply rounded-sm px-3 py-2 text-sm hover:bg-gray-100;
+  @apply rounded-sm px-3 py-2 text-sm hover:bg-secondary;
 }

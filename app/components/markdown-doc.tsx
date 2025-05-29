@@ -88,7 +88,7 @@ export const buildMarkdownDoc = async (source: string) => {
 
   addIdToToc(tableOfContents);
 
-  return { MDXContent, tableOfContents: tableOfContents, title };
+  return { MDXContent, tableOfContents: tableOfContents, title, frontmatter };
 };
 
 export const MarkdownDoc: React.FC<{

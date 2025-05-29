@@ -19,7 +19,7 @@ const Controller: React.FC<{
   frequency?: string;
 }> = ({ callsign, name, frequency, schedule }) => {
   return (
-    <div className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-gray-50">
+    <div className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-secondary">
       <span className={cn("text-xl font-bold", schedule ? "text-blue-900" : "text-red-900")}>{callsign}</span>
       <span>{name}</span>
       {frequency && <span>{frequency}</span>}

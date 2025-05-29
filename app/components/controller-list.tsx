@@ -315,9 +315,12 @@ const PermissionTag = ({ permission, positionName, expiration }: PermissionTagPr
       <span
         className={cn(
           "flex items-end gap-1 rounded-sm px-2 py-1",
-          permission === ControllerPositionPermission.Full && "bg-green-50 text-green-700",
-          permission === ControllerPositionPermission.Training && "bg-red-50 text-red-700",
-          permission === ControllerPositionPermission.Solo && "bg-yellow-50 text-yellow-700",
+          permission === ControllerPositionPermission.Full &&
+            "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-100",
+          permission === ControllerPositionPermission.Training &&
+            "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-100",
+          permission === ControllerPositionPermission.Solo &&
+            "bg-yellow-50 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-100",
         )}
       >
         {positionName}
@@ -436,7 +439,7 @@ export const ControllerList: React.FC = () => {
           })
           ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
           ?.map((ctr) => (
-            <div key={ctr.id} className="flex flex-col gap-4 rounded-md border px-6 py-4 hover:bg-gray-50">
+            <div key={ctr.id} className="flex flex-col gap-4 rounded-md border px-6 py-4 hover:bg-secondary">
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold">
                   {ctr.first_name} {ctr.last_name}
