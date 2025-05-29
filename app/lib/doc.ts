@@ -73,8 +73,7 @@ export const getAllDocuments = createServerFn().handler(async () => findAllDocum
 export const getDocument = createServerFn()
   .validator((data: string) => data)
   .handler(async (ctx) => {
-    let filePath = ctx.data;
-    filePath = path.resolve(import.meta.dirname, "../../", "docs", filePath);
+    const filePath = `docs/${ctx.data}`;
     const content = await fs.readFile(filePath, "utf-8");
     return content;
   });
