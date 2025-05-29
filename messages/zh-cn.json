@@ -79,7 +79,7 @@
   "Legacy_errors_NoTranslationError": "尚未完成翻译",
   "Legacy_pilots-all": "显示所有机组",
   "Legacy_pilots-less": "显示部分机组",
-  "Layout_copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 <azure>Microsoft Azure</azure>, .NET, <next>Next.js</next> 和 <tw>Tailwind</tw> 驱动。仅供模拟飞行用途。",
+  "Layout_copyright": "2010 - 2025，VATSIM 中华人民共和国分部。保留所有权利。由 Microsoft Azure, .NET, TanStack 和 shadcn/ui 驱动。仅供模拟飞行用途。",
   "Layout_menu_docs": "文档",
   "Layout_menu_lang": "English",
   "Docs_Single_warning": "仅供模拟飞行使用，严禁用于真实运行。",

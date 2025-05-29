@@ -23,9 +23,6 @@ export default defineConfig({
         ],
       }),
     ],
-    ssr: {
-      noExternal: ["@mantine/*"],
-    },
   },
   server: {
     routeRules: {

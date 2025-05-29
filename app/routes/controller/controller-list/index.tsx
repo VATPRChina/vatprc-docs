@@ -1,4 +1,4 @@
-import { ControllerList } from "@/components/ControllerList";
+import { ControllerList } from "@/components/controller-list";
 import { m } from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 

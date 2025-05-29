@@ -1,10 +1,12 @@
-import { MarkdownDoc } from "./MarkdownDoc";
-import { buildMarkdownDoc } from "./MarkdownDoc";
+import { MarkdownDoc } from "./markdown-doc";
+import { buildMarkdownDoc } from "./markdown-doc";
+import { Skeleton } from "./ui/skeleton";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
-import { Alert, Loader } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { TbAlertCircle } from "react-icons/tb";
 
 export interface PostMeta {
   title: string;
@@ -54,12 +56,14 @@ export const DiscourseDocument: React.FC<{
   });
 
   if (isLoading) {
-    return <Loader />;
+    return <Skeleton className="h-svh w-full" />;
   }
   if (error || !data) {
     return (
-      <Alert variant="light" color="red" title={m.Components_DiscourseDocument_Error()}>
-        {error instanceof Error ? error.message : m.Components_DiscourseDocument_Error()}
+      <Alert variant="destructive">
+        <TbAlertCircle className="h-4 w-4" />
+        <AlertTitle>{m["Components_DiscourseDocument_Error"]()}</AlertTitle>
+        <AlertDescription>{error?.message}</AlertDescription>
       </Alert>
     );
   }

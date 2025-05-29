@@ -2,13 +2,14 @@ import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
+import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
-import { Card, Grid, Group, Loader, Stack, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { addDays, format, intlFormatDistance, isAfter, isBefore, subDays } from "date-fns";
+import { addDays, format, intlFormatDistance, isAfter, isBefore } from "date-fns";
 import React from "react";
+import { TbLoader } from "react-icons/tb";
 
 const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
@@ -36,52 +37,47 @@ const Event: React.FC<{
   end: Date;
   url: string;
   isExam: boolean;
-}> = ({ title, start, end, url }) => {
+}> = ({ title, start, end, url, isExam }) => {
   const locale = getLocale();
 
   return (
-    <Card component="a" href={url} target="_blank" rel="noopener noreferrer" withBorder>
-      <Text fw="bold" size="xl">
-        {title}
-      </Text>
-      <Text>{intlFormatDistance(start, Date.now(), { locale })}</Text>
-      <Group gap={8}>
-        <Text span>{format(start, "MM-dd", { in: utc })}</Text>
-        <Text span>
+    <a
+      className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-gray-50"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className={cn("text-xl font-bold", isExam ? "text-blue-900" : "text-red-900")}>{title}</span>
+      <span>{intlFormatDistance(start, Date.now(), { locale })}</span>
+      <div className="flex gap-1">
+        <span>{format(start, "MM-dd", { in: utc })}</span>
+        <span>
           {format(start, "HHmm", { in: utc })}
-          <Text span size="sm" fw="light">
-            Z
-          </Text>
-        </Text>
-        <Text span>-</Text>
-        <Text span>
+          <span className="text-sm font-light">Z</span>
+        </span>
+        <span>-</span>
+        <span>
           {format(end, "HHmm", { in: utc })}
-          <Text span size="sm" fw="light">
-            Z
-          </Text>
-        </Text>
-      </Group>
-      <Group gap={8}>
-        <Text>{format(start, "MM-dd")}</Text>
-        <Text>
+          <span className="text-sm font-light">Z</span>
+        </span>
+      </div>
+      <div className="flex gap-1">
+        <span>{format(start, "MM-dd")}</span>
+        <span>
           {format(start, "HHmm")}
-          <Text span size="sm" fw="light">
-            L
-          </Text>
-        </Text>
-        <Text>-</Text>
-        <Text>
+          <span className="text-sm font-light">L</span>
+        </span>
+        <span>-</span>
+        <span>
           {format(end, "HHmm")}
-          <Text span size="sm" fw="light">
-            L
-          </Text>
-        </Text>
-      </Group>
-    </Card>
+          <span className="text-sm font-light">L</span>
+        </span>
+      </div>
+    </a>
   );
 };
 
-export const RecentEvents: React.FC = () => {
+export const RecentEvents: React.FC<{ className?: string }> = ({ className }) => {
   const { data: cnData, isLoading: isCnLoading } = useQuery({
     queryKey: [COMMUNITY_EVENT_ENDPOINT],
     queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<CommunityEventData>),
@@ -94,7 +90,7 @@ export const RecentEvents: React.FC = () => {
   });
 
   if (isCnLoading || isEnLoading) {
-    return <Loader />;
+    return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
   }
 
   const events = [
@@ -120,11 +116,11 @@ export const RecentEvents: React.FC = () => {
       })) ?? []),
   ].filter((e) => isBefore(e.start, addDays(Date.now(), 30)));
 
-  const scheduledEvents = events.filter((e) => isAfter(e.start, subDays(Date.now(), 14)));
+  const scheduledEvents = events.filter((e) => isAfter(e.start, Date.now()));
 
   return (
-    <Grid style={{ justifyItems: "center", alignItems: "center" }} w="100%">
-      <Grid.Col span={{ base: 12, md: 8 }}>
+    <div className={cn(className, "grid grid-cols-2 gap-4 md:grid-cols-3")}>
+      <div className="col-span-2">
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
@@ -138,19 +134,14 @@ export const RecentEvents: React.FC = () => {
           }))}
           expandRows
           locale={getLocale()}
-          height="auto"
-          displayEventTime={false}
-          eventTextColor="black"
         />
-      </Grid.Col>
-      <Grid.Col span={{ base: 12, md: 4 }}>
-        <Stack>
-          {scheduledEvents.map((e) => (
-            <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
-          ))}
-          {scheduledEvents.length === 0 && <Text>{m["Components_RecentEvents_no_event"]()}</Text>}
-        </Stack>
-      </Grid.Col>
-    </Grid>
+      </div>
+      <div className="flex flex-col flex-wrap items-stretch gap-2">
+        {scheduledEvents.map((e) => (
+          <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
+        ))}
+        {scheduledEvents.length === 0 && <span>{m["Components_RecentEvents_no_event"]()}</span>}
+      </div>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { getPathname } from "./lib/util";
+import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";
 import "@/lib/i18n";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";

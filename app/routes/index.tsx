@@ -2,15 +2,15 @@ import drone from "@/assets/legacy/drone.png";
 import feedback from "@/assets/legacy/feedback.png";
 import laptop from "@/assets/legacy/lap_top.png";
 import pilot from "@/assets/legacy/pilot.png";
-import { OnlineControllers } from "@/components/OnlineControllers";
-import { OnlinePilots } from "@/components/OnlinePilots";
-import { RecentEvents } from "@/components/RecentEvents";
+import { OnlineControllers } from "@/components/online-controllers";
+import { OnlinePilots } from "@/components/online-pilots";
+import { RecentEvents } from "@/components/recent-events";
+import { Button } from "@/components/ui/button";
 import { m } from "@/lib/i18n/messages";
-import { getPathname } from "@/lib/util";
-import { Anchor, Text, Group, Image, SimpleGrid, Stack, Title, Button } from "@mantine/core";
+import { getPathname } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { TbMail } from "react-icons/tb";
+import { TbArrowRight, TbMail } from "react-icons/tb";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -20,74 +20,105 @@ export const Route = createFileRoute("/")({
 });
 
 const IndexWithLocale: React.FC = () => {
-  // @ts-expect-error Allow any
-  // eslint-disable-next-line
-  const t = (s: string) => m["Legacy_" + s.replaceAll(".", "_")]();
-
   return (
-    <Stack gap="xl">
-      <SimpleGrid cols={{ base: 1, md: 2 }}>
-        <Stack justify="center">
-          <Title order={1} style={{ textAlign: "center" }}>
-            {m["Legacy_title"]()}
-          </Title>
-          <Title order={2} style={{ textAlign: "center" }}>
-            {m["Legacy_subtitle"]()}
-          </Title>
-        </Stack>
-        <Image src={pilot} alt="Pilot" width="100%" height="100%" />
-      </SimpleGrid>
-      <Stack align="center">
-        <Title order={2}>{t("recent-events")}</Title>
-        <RecentEvents />
-      </Stack>
-      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Image src={laptop} alt="laptop" w={512} maw="50%" />
-        <Stack align="center">
-          <Title order={2}>{m["Legacy_online-controllers"]()}</Title>
-          <OnlineControllers />
-        </Stack>
-      </SimpleGrid>
-      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Stack align="center">
-          <Title order={2}>{m["Legacy_online-pilots"]()}</Title>
-          <OnlinePilots />
-        </Stack>
-        <Image src={drone} alt="drone" w={512} maw="50%" />
-      </SimpleGrid>
-      <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Image src={feedback} alt="feedback" w={512} maw="50%" />
-        <Stack align="center">
-          <Title order={2}>{m["Legacy_feedback"]()}</Title>
-          <Text>{m["Legacy_feedback-description"]()}</Text>
-          <Button
-            variant="subtle"
-            color="red"
-            component="a"
-            href="mailto:feedback@vatprc.net"
-            target="_blank"
-            rel="noopener noreferrer"
-            leftSection={<TbMail />}
-          >
-            feedback@vatprc.net
-          </Button>
-          <Button
-            variant="subtle"
-            color="red"
-            component="a"
-            href="https://community.vatprc.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {m["Legacy_nav-menu_forum"]()}
-          </Button>
-        </Stack>
-      </SimpleGrid>
-      <Stack style={{ textAlign: "center", fontStyle: "italic" }} c="red.9">
-        <Title order={2}>VATPRC 有你更精彩</Title>
-        <Title order={2}>You make the difference!</Title>
-      </Stack>
-    </Stack>
+    <div className="flex flex-col items-center">
+      <div className="xl:max-w-80vw 2xl:max-w-65vw 3xl:max-w-45vw w-full">
+        <section className="px flex w-full flex-row items-center justify-center py-12 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="pxy flex flex-col items-center justify-center">
+              <h1 className="home-font m-2 text-4xl font-medium">{m["Legacy_title"]()}</h1>
+              <h2 className="home-font m-2 text-3xl font-medium">{m["Legacy_subtitle"]()}</h2>
+            </div>
+            <div className="pxy flex flex-col items-center justify-center">
+              <img src={pilot} alt="Pilot" />
+            </div>
+          </div>
+        </section>
+        <section className="py-18 px flex w-full flex-col items-center justify-center">
+          <h3 className="text-4xl mb-8">{m["Legacy_recent-events"]()}</h3>
+          <RecentEvents className="w-full" />
+        </section>
+        <section className="px flex w-full flex-row items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="flex flex-col items-center justify-center">
+              <img className="flex w-1/2" src={laptop} alt="laptop" />
+            </div>
+            <div className="flex flex-col items-center justify-center py-9">
+              <h3 className="mb-8 text-4xl">{m["Legacy_online-controllers"]()}</h3>
+              <OnlineControllers />
+              <Button asChild variant="ghost">
+                <a
+                  href="https://atc.vatprc.net"
+                  target="_blank"
+                  className="vatprc-big-btn-reverse mt-6"
+                  rel="noreferrer"
+                >
+                  {m["Legacy_nav-menu_atc-center"]()}
+                  <TbArrowRight className="-mt-0.5 ml-2" size={24} />
+                </a>
+              </Button>
+            </div>
+            <div className="flex flex-col items-center justify-center sm:hidden">
+              <img className="flex w-1/2" src={laptop} alt="laptop" />
+            </div>
+          </div>
+        </section>
+        <section className="px pt-18 flex w-full flex-row items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="flex flex-col items-center justify-center py-9">
+              <h3 className="mb-8 text-4xl">{m["Legacy_online-pilots"]()}</h3>
+              <OnlinePilots className="my-auto" />
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <img className="flex w-1/2" src={drone} alt="Drone" />
+            </div>
+          </div>
+        </section>
+        <section className="px pt-18 flex w-full flex-row items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="hidden flex-col items-center justify-center md:flex">
+              <img className="flex w-1/2" src={feedback} alt="Feedback" />
+            </div>
+            <div className="flex flex-col items-center justify-center py-9">
+              <h3 className="mb-8 text-4xl">{m["Legacy_feedback"]()}</h3>
+              <p className="text-center">{m["Legacy_feedback-description"]()}</p>
+              <Button asChild variant="ghost">
+                <a
+                  href="mailto:feedback@vatprc.net"
+                  target="_blank"
+                  className="vatprc-big-btn-reverse mt-6"
+                  rel="noreferrer"
+                >
+                  <TbMail className="mr-2" height={24} />
+                  feedback@vatprc.net
+                </a>
+              </Button>
+              <Button asChild variant="ghost">
+                <a
+                  href="https://community.vatprc.net"
+                  target="_blank"
+                  className="vatprc-big-btn-reverse mt-6"
+                  rel="noreferrer"
+                >
+                  {m["Legacy_nav-menu_forum"]()}
+                  <TbArrowRight className="-mt-0.5 ml-2" height={24} />
+                </a>
+              </Button>
+            </div>
+            <div className="flex flex-col items-center justify-center sm:hidden">
+              <img className="flex w-1/2" src={feedback} alt="Feedback" />
+            </div>
+          </div>
+        </section>
+        <section className="flex w-full flex-row items-center justify-center text-center">
+          <div className="color-vatprc-red home-font py-16 text-2xl font-medium italic">
+            <b>VATPRC 有你更精彩</b>
+            <br />
+            You make the difference!
+          </div>
+        </section>
+      </div>
+    </div>
   );
 };
 
@@ -113,14 +144,14 @@ const IndexWithoutLocale: React.FC = () => {
   });
 
   return (
-    <div>
-      <div>
-        <p>Redirecting to landing page.</p>
-        <p>正在重定向到首页。</p>
-        <Group>
-          <Anchor href="/zh-cn">简体中文</Anchor>
-          <Anchor href="/en">English</Anchor>
-        </Group>
+    <div className="grid h-screen place-items-center">
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-3xl">Redirecting to landing page.</p>
+        <p className="text-3xl">正在重定向到首页。</p>
+        <p className="flex flex-row gap-8 text-xl text-slate-700 underline">
+          <a href="/zh-cn">简体中文</a>
+          <a href="/en">English</a>
+        </p>
       </div>
     </div>
   );

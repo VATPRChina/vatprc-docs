@@ -79,7 +79,7 @@
   "Legacy_errors_NoTranslationError": "There is unfortunately no corresponding translation in your selected language.",
   "Legacy_pilots-less": "Show less pilots",
   "Legacy_pilots-all": "Show all pilots",
-  "Layout_copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by <azure>Microsoft Azure</azure>, .NET, <next>Next.js</next> and <tw>Tailwind</tw>. For simulation use only.",
+  "Layout_copyright": "2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only.",
   "Layout_menu_docs": "Docs",
   "Layout_menu_lang": "简体中文",
   "Docs_Single_warning": "For simulation use only. Real world usage strictly prohibited.",

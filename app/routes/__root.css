@@ -1,5 +1,0 @@
-@import "@mantine/core/styles.css";
-
-html {
-  scroll-padding-top: var(--app-shell-header-height);
-}

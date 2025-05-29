@@ -1,234 +1,216 @@
-import stylesheetUrl from "./__root.css?url";
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
-import { ColorSchemeToggle } from "@/components/ColorSchemeToggle";
-import { RouteButton } from "@/components/route/Button";
+import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
-import { getPathname } from "@/lib/util";
+import { getPathname } from "@/lib/utils";
+import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import {
-  ActionIcon,
-  AppShell,
-  Burger,
-  ColorSchemeScript,
-  Container,
-  Group,
-  Text,
-  Image,
-  mantineHtmlProps,
-  MantineProvider,
-  useComputedColorScheme,
-  Button,
-  HoverCard,
-  Stack,
-  SimpleGrid,
-  Divider,
-  Box,
-  ButtonProps,
-  Accordion,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
 import { useState } from "react";
 import { TbExternalLink, TbLanguage } from "react-icons/tb";
 
-interface NavMenuProps {
-  isMobile?: boolean;
-}
-const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
-  const lgProps = {
-    variant: "default",
-    h: "100%",
-    justify: "left",
-  } as const satisfies ButtonProps;
-  const smProps = {
-    variant: "default",
-    justify: "left",
-    bd: "none",
-  } as const satisfies ButtonProps;
-  const extProps = {
-    component: "a",
-    target: "_blank",
-    rel: "noopener noreferrer",
-  } as const;
+const NavMenu: React.FC = () => {
   const contents = [
     {
       title: m["Legacy_nav-menu_about"](),
       content: (
-        <>
-          <SimpleGrid cols={2}>
-            <RouteButton to="/division/introduction" {...lgProps}>
+        <div className="nav-list-grid">
+          <a
+            className="large-item row-span-4 flex items-end"
+            href="https://community.vatprc.net/c/69-category/12-category/12"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center gap-2">
               {m["Legacy_nav-menu_announcement"]()}
               <TbExternalLink size={12} />
-            </RouteButton>
-            <Stack gap="xs">
-              <RouteButton to="/division/staff" {...smProps}>
-                {m["Legacy_nav-menu_staff"]()}
-              </RouteButton>
-              <RouteButton to="/division/privacy" {...smProps}>
-                {m["Legacy_nav-menu_privacy"]()}
-              </RouteButton>
-            </Stack>
-          </SimpleGrid>
-          <Divider my="sm" />
-          <SimpleGrid cols={2}>
-            <Button href="https://community.vatprc.net" {...extProps} {...smProps}>
+            </div>
+          </a>
+          <Link className="item" to="/division/introduction">
+            <h3>{m["Legacy_nav-menu_introduction"]()}</h3>
+          </Link>
+          <Link className="item" to="/division/staff">
+            <h3>{m["Legacy_nav-menu_staff"]()}</h3>
+          </Link>
+          <Link className="item" to="/division/privacy">
+            <h3>{m["Legacy_nav-menu_privacy"]()}</h3>
+          </Link>
+          <a
+            className="item"
+            href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center gap-2">
+              {m["Legacy_nav-menu_logo-pack"]()}
+              <TbExternalLink size={12} />
+            </div>
+          </a>
+          <hr className="col-span-full" />
+          <a className="large-item" href="https://community.vatprc.net" target="_blank" rel="noopener noreferrer">
+            <div className="flex items-center gap-2">
               {m["Legacy_nav-menu_forum"]()}
               <TbExternalLink size={12} />
-            </Button>
-            <Button
-              href={
-                getLocale() === "zh-cn"
-                  ? "https://community.vatprc.net/c/events/66-category/66"
-                  : "https://vatsim.net/events/"
-              }
-              {...smProps}
-              {...extProps}
-            >
+            </div>
+          </a>
+          <a
+            className="large-item"
+            href={
+              getLocale() === "zh-cn"
+                ? "https://community.vatprc.net/c/events/66-category/66"
+                : "https://vatsim.net/events/"
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center gap-2">
               {m["Legacy_nav-menu_event"]()}
               <TbExternalLink size={12} />
-            </Button>
-          </SimpleGrid>
-        </>
+            </div>
+          </a>
+        </div>
       ),
     },
     {
       title: m["Legacy_nav-menu_operation"](),
       content: (
-        <>
-          <SimpleGrid cols={2}>
-            <RouteButton to="/airspace/fir" {...lgProps}>
-              {m["Legacy_nav-menu_fir"]()}
-            </RouteButton>
-            <Stack gap="xs">
-              <RouteButton to="/division/introduction" {...smProps}>
-                {m["Legacy_nav-menu_introduction"]()}
-              </RouteButton>
-              <RouteButton to="/airspace/rvsm" {...smProps}>
-                {m["Legacy_nav-menu_rvsm"]()}
-              </RouteButton>
-              <RouteButton to="/airspace/station" {...smProps}>
-                {m["Legacy_nav-menu_atc-positions-frequencies"]()}
-              </RouteButton>
-              <RouteButton to="/airspace/sop" {...smProps}>
-                {m["Legacy_nav-menu_sop"]()}
-              </RouteButton>
-              <RouteButton to="/airspace/vfr" {...smProps}>
-                {m["Legacy_nav-menu_vfr"]()}
-              </RouteButton>
-            </Stack>
-          </SimpleGrid>
-        </>
+        <div className="nav-list-grid">
+          <Link className="large-item row-span-4 flex items-end" to="/airspace/fir">
+            {m["Legacy_nav-menu_fir"]()}
+          </Link>
+          <Link className="item" to="/airspace/rvsm">
+            {m["Legacy_nav-menu_rvsm"]()}
+          </Link>
+          <Link className="item" to="/airspace/station">
+            {m["Legacy_nav-menu_atc-positions-frequencies"]()}
+          </Link>
+          <Link className="item" to="/airspace/sop">
+            {m["Legacy_nav-menu_sop"]()}
+          </Link>
+          <Link className="item" to="/airspace/vfr">
+            {m["Legacy_nav-menu_vfr"]()}
+          </Link>
+        </div>
       ),
     },
     {
       title: m["Legacy_nav-menu_pilot"](),
       content: (
-        <>
-          <SimpleGrid cols={2}>
-            <RouteButton to="/pilot/start-to-fly" {...lgProps}>
-              {m["Legacy_nav-menu_start-to-fly"]()}
-            </RouteButton>
-            <Stack gap="xs">
-              <RouteButton to="/pilot/introduction-to-fly" {...smProps}>
-                {m["Legacy_nav-menu_introduction-to-fly"]()}
-              </RouteButton>
-              <RouteButton to="/pilot/ts3" {...smProps}>
-                {m["Legacy_nav-menu_ts3"]()}
-              </RouteButton>
-            </Stack>
-          </SimpleGrid>
-          <Divider my="sm" />
-          <SimpleGrid cols={2}>
-            <RouteButton to="/pilot/pilot-softwares" {...lgProps}>
-              {m["Legacy_nav-menu_pilot-softwares"]()}
-            </RouteButton>
-            <Stack gap="xs">
-              <Button href="https://chartfox.org/" {...extProps} {...smProps}>
-                {m["Legacy_nav-menu_charts"]()}
-                <TbExternalLink size={12} />
-              </Button>
-              <Button href="https://vacdm.vatprc.net/" {...extProps} {...smProps}>
-                {m["Legacy_nav-menu_vacdm"]()}
-                <TbExternalLink size={12} />
-              </Button>
-              <Button href="https://metar-taf.com/" {...extProps} {...smProps}>
-                {m["Legacy_nav-menu_weather"]()}
-                <TbExternalLink size={12} />
-              </Button>
-            </Stack>
-          </SimpleGrid>
-        </>
+        <div className="nav-list-grid">
+          <Link className="large-item row-span-2 flex items-end" to="/pilot/start-to-fly">
+            {m["Legacy_nav-menu_start-to-fly"]()}
+          </Link>
+          <Link className="item" to="/pilot/introduction-to-fly">
+            {m["Legacy_nav-menu_introduction-to-fly"]()}
+          </Link>
+          <Link className="item" to="/pilot/ts3">
+            {m["Legacy_nav-menu_ts3"]()}
+          </Link>
+          <hr className="col-span-full" />
+          <Link className="large-item row-span-3 flex items-end" to="/pilot/pilot-softwares">
+            {m["Legacy_nav-menu_pilot-softwares"]()}
+          </Link>
+          <a
+            className="item flex items-center gap-2"
+            href="https://chartfox.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_charts"]()}
+            <TbExternalLink size={12} />
+          </a>
+          <a
+            className="item flex items-center gap-2"
+            href="https://vacdm.vatprc.net/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_vacdm"]()}
+            <TbExternalLink size={12} />
+          </a>
+          <a
+            className="item flex items-center gap-2"
+            href="https://metar-taf.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_weather"]()}
+            <TbExternalLink size={12} />
+          </a>
+        </div>
       ),
     },
     {
       title: m["Legacy_nav-menu_atc"](),
       content: (
-        <>
-          <SimpleGrid cols={2}>
-            <RouteButton to="/controller/controller-list" {...lgProps}>
-              {m["Legacy_nav-menu_controller-list"]()}
-            </RouteButton>
-            <Stack gap="xs">
-              <RouteButton to="/controller/controller-regulations" {...smProps}>
-                {m["Legacy_nav-menu_controller-regulations"]()}
-              </RouteButton>
-              <RouteButton to="/controller/become-a-controller" {...smProps}>
-                {m["Legacy_nav-menu_become-a-controller"]()}
-              </RouteButton>
-              <RouteButton to="/controller/visiting-and-transferring" {...smProps}>
-                {m["Legacy_nav-menu_visiting-and-transferring"]()}
-              </RouteButton>
-            </Stack>
-          </SimpleGrid>
-          <Divider my="sm" />
-          <SimpleGrid cols={2}>
-            <Button href="https://atc.vatprc.net" {...extProps} {...lgProps}>
+        <ul className="nav-list-grid">
+          <Link className="large-item row-span-3 flex items-end" to="/controller/controller-list">
+            {m["Legacy_nav-menu_controller-list"]()}
+          </Link>
+          <Link className="item" to="/controller/controller-regulations">
+            {m["Legacy_nav-menu_controller-regulations"]()}
+          </Link>
+          <Link className="item" to="/controller/become-a-controller">
+            {m["Legacy_nav-menu_become-a-controller"]()}
+          </Link>
+          <Link className="item" to="/controller/visiting-and-transferring">
+            {m["Legacy_nav-menu_visiting-and-transferring"]()}
+          </Link>
+          <hr className="col-span-full" />
+          <a
+            className="large-item row-span-3 flex items-end"
+            href="https://atc.vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex items-center gap-2">
               {m["Legacy_nav-menu_atc-center"]()}
               <TbExternalLink size={12} />
-            </Button>
-            <Stack gap="xs">
-              <Button href="https://moodle.vatprc.net" {...extProps} {...smProps}>
-                {m["Legacy_nav-menu_moodle"]()}
-                <TbExternalLink size={12} />
-              </Button>
-              <RouteButton to="/controller/sector" {...smProps}>
-                {m["Legacy_nav-menu_sector"]()}
-              </RouteButton>
-              <RouteButton to="/controller/loa" {...smProps}>
-                {m["Legacy_nav-menu_loa"]()}
-              </RouteButton>
-            </Stack>
-          </SimpleGrid>
-        </>
+            </div>
+          </a>
+          <a
+            className="item flex items-center gap-2"
+            href="https://moodle.vatprc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m["Legacy_nav-menu_moodle"]()}
+            <TbExternalLink size={12} />
+          </a>
+          <Link className="item" to="/controller/sector">
+            {m["Legacy_nav-menu_sector"]()}
+          </Link>
+          <Link className="item" to="/controller/loa">
+            {m["Legacy_nav-menu_loa"]()}
+          </Link>
+        </ul>
       ),
     },
   ];
 
-  if (isMobile) {
-    return (
-      <Accordion defaultValue={contents[0].title}>
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
         {contents.map((content) => (
-          <Accordion.Item key={content.title} value={content.title}>
-            <Accordion.Control>{content.title}</Accordion.Control>
-            <Accordion.Panel>{content.content}</Accordion.Panel>
-          </Accordion.Item>
+          <NavigationMenuItem key={content.title}>
+            <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
+            <NavigationMenuContent asChild>{content.content}</NavigationMenuContent>
+          </NavigationMenuItem>
         ))}
-      </Accordion>
-    );
-  }
-  return contents.map((content) => (
-    <HoverCard key={content.title} width="max-content" shadow="md">
-      <HoverCard.Target>
-        <Button variant="default" bd="none">
-          {content.title}
-        </Button>
-      </HoverCard.Target>
-      <HoverCard.Dropdown w={500}>{content.content}</HoverCard.Dropdown>
-    </HoverCard>
-  ));
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
 };
 
 interface ApplicationProps {
@@ -236,72 +218,34 @@ interface ApplicationProps {
 }
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
-  const computedColorScheme = useComputedColorScheme("light", {
-    getInitialValueInEffect: true,
-  });
-  const [opened, { toggle }] = useDisclosure();
+  const theme = useThemeValue();
+
+  const pathnameAnotherLang =
+    getLocale() === "zh-cn" ? getPathname().replace("/zh-cn", "/en") : getPathname().replace("/en", "/zh-cn");
 
   return (
-    <Container size={1440}>
-      <AppShell
-        header={{ height: 60 }}
-        navbar={{
-          width: 300,
-          breakpoint: "sm",
-          collapsed: { desktop: true, mobile: !opened },
-        }}
-        padding="md"
-      >
-        <AppShell.Header
-          style={{
-            maxWidth: "calc(90rem * var(--mantine-scale))",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Group h="100%" px="md">
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-            <Group justify="space-between" style={{ flex: 1 }}>
-              <Group>
-                <RouteButton to="/" variant="transparent">
-                  <Image
-                    src={computedColorScheme === "light" ? logo : logoWhite}
-                    alt={m.Legacy_title()}
-                    h={24}
-                    w="auto"
-                  />
-                </RouteButton>
-                <Group gap={0} visibleFrom="sm">
-                  <NavMenu />
-                </Group>
-              </Group>
-              <Group>
-                <ColorSchemeToggle />
-                <ActionIcon
-                  variant="subtle"
-                  c="gray"
-                  component="a"
-                  href={getPathname().replace(getLocale(), getLocale() === "zh-cn" ? "en" : "zh-cn")}
-                >
-                  <TbLanguage width="70%" height="70%" />
-                </ActionIcon>
-              </Group>
-            </Group>
-          </Group>
-        </AppShell.Header>
-
-        <AppShell.Navbar py="md" px={4} hiddenFrom="sm" h="100%">
-          <NavMenu isMobile />
-        </AppShell.Navbar>
-
-        <AppShell.Main>
-          {children}
-          <Box component="footer" mt="md">
-            <Text c="gray.5">&copy; {m.Layout_copyright()}</Text>
-          </Box>
-        </AppShell.Main>
-      </AppShell>
-    </Container>
+    <div className="container mx-auto">
+      <header className="sticky top-0 z-50 w-full border-b-[1px] px-8 py-2 dark:border-slate-700 bg-background">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <Link to="/">
+            <img src={theme === "light" ? logo : logoWhite} alt={m["Legacy_title"]()} className="h-6" />
+          </Link>
+          <NavMenu />
+          <div className="flex flex-row items-center gap-4 absolute right-8 top-2 ml-auto md:static md:right-auto md:top-auto">
+            <ModeToggle />
+            <Button variant="ghost" size="icon" asChild>
+              <a href={pathnameAnotherLang} className="cursor-default">
+                <TbLanguage size={18} />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </header>
+      <div className="pt-4">{children}</div>
+      <footer className="mb-4 mt-8">
+        <p className="text-slate-500 dark:text-slate-300">&copy; {m["Layout_copyright"]()}</p>
+      </footer>
+    </div>
   );
 };
 
@@ -320,19 +264,18 @@ const RootLayout: React.FC = () => {
   );
 
   return (
-    <html lang={getLocale() ?? "en"} {...mantineHtmlProps}>
+    <html lang={getLocale() ?? "en"}>
       <head>
         <HeadContent />
-        <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="auto">
+        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
           <QueryClientProvider client={queryClient}>
             <Application>
               <Outlet />
             </Application>
           </QueryClientProvider>
-        </MantineProvider>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
@@ -347,7 +290,7 @@ export const Route = createRootRoute({
       { title: "VATSIM P.R. China Division" },
     ],
     links: [
-      { rel: "stylesheet", href: stylesheetUrl },
+      { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: rehypeCssUrl },
     ],
   }),
