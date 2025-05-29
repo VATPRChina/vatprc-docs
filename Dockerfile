@@ -1,6 +1,6 @@
-FROM node:lts-slim as base
+FROM --platform=$BUILDPLATFORM node:lts-slim as base
 
-FROM --platform=$BUILDPLATFORM node:lts-slim as deps
+FROM --platform=$BUILDPLATFORM base AS deps
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml* ./
