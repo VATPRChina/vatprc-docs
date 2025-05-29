@@ -97,10 +97,10 @@ export const MarkdownDoc: React.FC<{
 }> = ({ children, toc }) => {
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="mx-auto w-full max-w-screen-lg rounded border-r px-4 py-6 md:px-12">
+      <div className="md:flex-2/3 px-4 py-6 md:px-12">
         <article className="prose mx-auto dark:prose-invert prose-p:my-2">{children}</article>
       </div>
-      <div className="prose z-10 dark:prose-invert prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
+      <div className="md:flex-1/3 prose z-10 dark:prose-invert prose-ul:my-0 prose-li:my-0 md:sticky md:top-24 md:max-h-dvh md:overflow-y-scroll">
         <TableOfContents tableOfContents={toc} maxDepth={3} />
       </div>
     </div>
