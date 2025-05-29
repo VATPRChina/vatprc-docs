@@ -3,8 +3,8 @@ import { buildMarkdownDoc } from "./MarkdownDoc";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { Alert, Loader } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import useSWR from "swr";
 
 export interface PostMeta {
   title: string;
@@ -48,10 +48,11 @@ export const DiscourseDocument: React.FC<{
   const locale = getLocale();
 
   const postId = locale === "zh-cn" ? (cn ?? en) : en;
-  const { data, isLoading, error } = useSWR<Awaited<ReturnType<typeof fetcher>>, Error>(
-    [`https://community.vatprc.net/t/topic/${postId}.json`, postId],
-    fetcher,
-  );
+  const { data, isLoading, error } = useQuery({
+    queryKey: [`https://community.vatprc.net/t/topic/*.json`, postId],
+    queryFn: ({ queryKey }) => fetcher([`https://community.vatprc.net/t/topic/${queryKey[1]}.json`, queryKey[1]]),
+  });
+
   if (isLoading) {
     return <Loader />;
   }

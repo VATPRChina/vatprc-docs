@@ -33,7 +33,7 @@ export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents
   }
 
   return tableOfContents.map((toc) => (
-    <Box key={toc.value} role="listitem" pl={8}>
+    <Box key={toc.value} role="listitem" pl="2ch">
       <Anchor c="dark" underline="hover" href={`#${toc.id}`}>
         {toc.value}
       </Anchor>

@@ -5,6 +5,7 @@ import { ColorSchemeToggle } from "@/components/ColorSchemeToggle";
 import { RouteButton } from "@/components/route/Button";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
+import { getPathname } from "@/lib/util";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import {
   ActionIcon,
@@ -24,27 +25,29 @@ import {
   SimpleGrid,
   Divider,
   Box,
+  ButtonProps,
+  Accordion,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconExternalLink, IconLanguage } from "@tabler/icons-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
-import { Fragment } from "react";
+import { useState } from "react";
+import { TbExternalLink, TbLanguage } from "react-icons/tb";
 
 interface NavMenuProps {
   isMobile?: boolean;
 }
 const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
   const lgProps = {
-    color: "dark",
-    variant: "light",
+    variant: "default",
     h: "100%",
-    styles: { inner: { justifyContent: "left" } },
-  } as const;
+    justify: "left",
+  } as const satisfies ButtonProps;
   const smProps = {
-    color: "dark",
-    variant: "subtle",
-    styles: { inner: { justifyContent: "left" } },
-  } as const;
+    variant: "default",
+    justify: "left",
+    bd: "none",
+  } as const satisfies ButtonProps;
   const extProps = {
     component: "a",
     target: "_blank",
@@ -58,7 +61,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
           <SimpleGrid cols={2}>
             <RouteButton to="/division/introduction" {...lgProps}>
               {m["Legacy_nav-menu_announcement"]()}
-              <IconExternalLink size={12} />
+              <TbExternalLink size={12} />
             </RouteButton>
             <Stack gap="xs">
               <RouteButton to="/division/staff" {...smProps}>
@@ -73,7 +76,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
           <SimpleGrid cols={2}>
             <Button href="https://community.vatprc.net" {...extProps} {...smProps}>
               {m["Legacy_nav-menu_forum"]()}
-              <IconExternalLink size={12} />
+              <TbExternalLink size={12} />
             </Button>
             <Button
               href={
@@ -85,7 +88,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
               {...extProps}
             >
               {m["Legacy_nav-menu_event"]()}
-              <IconExternalLink size={12} />
+              <TbExternalLink size={12} />
             </Button>
           </SimpleGrid>
         </>
@@ -145,15 +148,15 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
             <Stack gap="xs">
               <Button href="https://chartfox.org/" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_charts"]()}
-                <IconExternalLink size={12} />
+                <TbExternalLink size={12} />
               </Button>
               <Button href="https://vacdm.vatprc.net/" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_vacdm"]()}
-                <IconExternalLink size={12} />
+                <TbExternalLink size={12} />
               </Button>
               <Button href="https://metar-taf.com/" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_weather"]()}
-                <IconExternalLink size={12} />
+                <TbExternalLink size={12} />
               </Button>
             </Stack>
           </SimpleGrid>
@@ -184,12 +187,12 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
           <SimpleGrid cols={2}>
             <Button href="https://atc.vatprc.net" {...extProps} {...lgProps}>
               {m["Legacy_nav-menu_atc-center"]()}
-              <IconExternalLink size={12} />
+              <TbExternalLink size={12} />
             </Button>
             <Stack gap="xs">
               <Button href="https://moodle.vatprc.net" {...extProps} {...smProps}>
                 {m["Legacy_nav-menu_moodle"]()}
-                <IconExternalLink size={12} />
+                <TbExternalLink size={12} />
               </Button>
               <RouteButton to="/controller/sector" {...smProps}>
                 {m["Legacy_nav-menu_sector"]()}
@@ -206,22 +209,20 @@ const NavMenu: React.FC<NavMenuProps> = ({ isMobile }: NavMenuProps) => {
 
   if (isMobile) {
     return (
-      <Stack>
+      <Accordion defaultValue={contents[0].title}>
         {contents.map((content) => (
-          <Fragment key={content.title}>
-            <Button variant="outline" color="dark">
-              {content.title}
-            </Button>
-            {content.content}
-          </Fragment>
+          <Accordion.Item key={content.title} value={content.title}>
+            <Accordion.Control>{content.title}</Accordion.Control>
+            <Accordion.Panel>{content.content}</Accordion.Panel>
+          </Accordion.Item>
         ))}
-      </Stack>
+      </Accordion>
     );
   }
   return contents.map((content) => (
     <HoverCard key={content.title} width="max-content" shadow="md">
       <HoverCard.Target>
-        <Button variant="subtle" color="dark">
+        <Button variant="default" bd="none">
           {content.title}
         </Button>
       </HoverCard.Target>
@@ -276,15 +277,20 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
               </Group>
               <Group>
                 <ColorSchemeToggle />
-                <ActionIcon variant="subtle" c="gray" component="a" href={getLocale() === "zh-cn" ? "/en" : "/zh-cn"}>
-                  <IconLanguage width="70%" height="70%" />
+                <ActionIcon
+                  variant="subtle"
+                  c="gray"
+                  component="a"
+                  href={getPathname().replace(getLocale(), getLocale() === "zh-cn" ? "en" : "zh-cn")}
+                >
+                  <TbLanguage width="70%" height="70%" />
                 </ActionIcon>
               </Group>
             </Group>
           </Group>
         </AppShell.Header>
 
-        <AppShell.Navbar py="md" px={4} hiddenFrom="sm">
+        <AppShell.Navbar py="md" px={4} hiddenFrom="sm" h="100%">
           <NavMenu isMobile />
         </AppShell.Navbar>
 
@@ -300,6 +306,19 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 };
 
 const RootLayout: React.FC = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            // With SSR, we usually want to set some default staleTime
+            // above 0 to avoid refetching immediately on the client
+            staleTime: 60 * 1000,
+          },
+        },
+      }),
+  );
+
   return (
     <html lang={getLocale() ?? "en"} {...mantineHtmlProps}>
       <head>
@@ -308,9 +327,11 @@ const RootLayout: React.FC = () => {
       </head>
       <body>
         <MantineProvider defaultColorScheme="auto">
-          <Application>
-            <Outlet />
-          </Application>
+          <QueryClientProvider client={queryClient}>
+            <Application>
+              <Outlet />
+            </Application>
+          </QueryClientProvider>
         </MantineProvider>
         <Scripts />
       </body>

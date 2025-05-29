@@ -27,4 +27,10 @@ export default defineConfig({
       noExternal: ["@mantine/*"],
     },
   },
+  server: {
+    routeRules: {
+      "/api/cors/online-status": { proxy: { to: "https://uniapi.vatprc.net/api/compat/online-status" } },
+      "/api/cors/vatsim-events-prc": { proxy: { to: "https://my.vatsim.net/api/v2/events/latest" } },
+    },
+  },
 });

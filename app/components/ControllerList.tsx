@@ -1,8 +1,8 @@
 import { m } from "@/lib/i18n/messages";
 import { Badge, Card, Checkbox, Group, Loader, SimpleGrid, Stack, Text } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useState } from "react";
-import useSWR from "swr";
 
 export enum ControllerRating {
   Unknown = 0,
@@ -336,15 +336,13 @@ const PermissionTag = ({ permission, positionName, expiration }: PermissionTagPr
   );
 };
 
-const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
-
 export const ControllerList: React.FC = () => {
   const [showAbsent, setShowAbsent] = useState(false);
 
-  const { data, isLoading } = useSWR<ControllerListResponseItem[]>(
-    "https://atcapi.vatprc.net/v1/public/controllers",
-    fetcher,
-  );
+  const { data, isLoading } = useQuery<ControllerListResponseItem[]>({
+    queryKey: ["https://atcapi.vatprc.net/v1/public/controllers"],
+    queryFn: () => fetch("https://atcapi.vatprc.net/v1/public/controllers").then((res) => res.json()),
+  });
 
   const controllers = data?.map((item) => {
     let rating: ControllerRating = ControllerRating.Unknown;
@@ -440,57 +438,59 @@ export const ControllerList: React.FC = () => {
           ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
           ?.map((ctr) => (
             <Card key={ctr.id} withBorder>
-              <Group gap={8}>
-                <Text fw="bold">
-                  {ctr.first_name} {ctr.last_name}
-                </Text>
-                <Text size="sm" fw="lighter">
-                  {ctr.id}
-                </Text>
-                <Text fw="bold">{ControllerRating[ctr.rating]}</Text>
-                {ctr.visiting && <Badge color="yellow">{m["controller_list_visiting"]()}</Badge>}
-                {ctr.status === ControllerStatus.Absence && (
-                  <Badge color="red">{m["Legacy_controller-list_absent"]()}</Badge>
-                )}
-              </Group>
-              <div className="flex flex-wrap gap-2 font-mono text-sm">
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.DEL]}
-                  expiration={ctr.expirations[ControllerPosition.DEL]}
-                  positionName="DEL"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.GND]}
-                  expiration={ctr.expirations[ControllerPosition.GND]}
-                  positionName="GND"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.TWR]}
-                  expiration={ctr.expirations[ControllerPosition.TWR]}
-                  positionName="TWR"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.PTWR]}
-                  expiration={ctr.expirations[ControllerPosition.PTWR]}
-                  positionName="Tier 2"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.APP]}
-                  expiration={ctr.expirations[ControllerPosition.APP]}
-                  positionName="APP"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.CTR]}
-                  expiration={ctr.expirations[ControllerPosition.CTR]}
-                  positionName="CTR"
-                />
-                <PermissionTag
-                  permission={ctr.permissions[ControllerPosition.FSS]}
-                  expiration={ctr.expirations[ControllerPosition.FSS]}
-                  positionName="FSS"
-                />
-                <PermissionTag permission={ctr.permissions[ControllerPosition.TMU]} positionName="TMU" />
-              </div>
+              <Stack>
+                <Group gap={8}>
+                  <Text fw="bold">
+                    {ctr.first_name} {ctr.last_name}
+                  </Text>
+                  <Text size="sm" fw="lighter">
+                    {ctr.id}
+                  </Text>
+                  <Text fw="bold">{ControllerRating[ctr.rating]}</Text>
+                  {ctr.visiting && <Badge color="yellow">{m["controller_list_visiting"]()}</Badge>}
+                  {ctr.status === ControllerStatus.Absence && (
+                    <Badge color="red">{m["Legacy_controller-list_absent"]()}</Badge>
+                  )}
+                </Group>
+                <Group gap="xs">
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.DEL]}
+                    expiration={ctr.expirations[ControllerPosition.DEL]}
+                    positionName="DEL"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.GND]}
+                    expiration={ctr.expirations[ControllerPosition.GND]}
+                    positionName="GND"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.TWR]}
+                    expiration={ctr.expirations[ControllerPosition.TWR]}
+                    positionName="TWR"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.PTWR]}
+                    expiration={ctr.expirations[ControllerPosition.PTWR]}
+                    positionName="Tier 2"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.APP]}
+                    expiration={ctr.expirations[ControllerPosition.APP]}
+                    positionName="APP"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.CTR]}
+                    expiration={ctr.expirations[ControllerPosition.CTR]}
+                    positionName="CTR"
+                  />
+                  <PermissionTag
+                    permission={ctr.permissions[ControllerPosition.FSS]}
+                    expiration={ctr.expirations[ControllerPosition.FSS]}
+                    positionName="FSS"
+                  />
+                  <PermissionTag permission={ctr.permissions[ControllerPosition.TMU]} positionName="TMU" />
+                </Group>
+              </Stack>
             </Card>
           ))}
       </SimpleGrid>

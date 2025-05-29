@@ -2,12 +2,15 @@ import drone from "@/assets/legacy/drone.png";
 import feedback from "@/assets/legacy/feedback.png";
 import laptop from "@/assets/legacy/lap_top.png";
 import pilot from "@/assets/legacy/pilot.png";
+import { OnlineControllers } from "@/components/OnlineControllers";
+import { OnlinePilots } from "@/components/OnlinePilots";
+import { RecentEvents } from "@/components/RecentEvents";
 import { m } from "@/lib/i18n/messages";
 import { getPathname } from "@/lib/util";
 import { Anchor, Text, Group, Image, SimpleGrid, Stack, Title, Button } from "@mantine/core";
-import { IconMail } from "@tabler/icons-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { TbMail } from "react-icons/tb";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -34,26 +37,26 @@ const IndexWithLocale: React.FC = () => {
         </Stack>
         <Image src={pilot} alt="Pilot" width="100%" height="100%" />
       </SimpleGrid>
-      <section className="py-18 px flex w-full flex-col items-center justify-center">
-        <h3 className="text-4xl">{t("recent-events")}</h3>
-        {/* <RecentEvents className="my-8 w-full" /> */}
-      </section>
+      <Stack align="center">
+        <Title order={2}>{t("recent-events")}</Title>
+        <RecentEvents />
+      </Stack>
       <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Image src={laptop} alt="laptop" w={512} />
-        <Stack>
+        <Image src={laptop} alt="laptop" w={512} maw="50%" />
+        <Stack align="center">
           <Title order={2}>{m["Legacy_online-controllers"]()}</Title>
-          {/* <OnlineControllers /> */}
+          <OnlineControllers />
         </Stack>
       </SimpleGrid>
       <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Stack>
+        <Stack align="center">
           <Title order={2}>{m["Legacy_online-pilots"]()}</Title>
-          {/* <OnlinePilots className="my-auto" /> */}
+          <OnlinePilots />
         </Stack>
-        <Image src={drone} alt="drone" w={512} />
+        <Image src={drone} alt="drone" w={512} maw="50%" />
       </SimpleGrid>
       <SimpleGrid cols={{ base: 1, md: 2 }} style={{ justifyItems: "center", alignItems: "center" }}>
-        <Image src={feedback} alt="feedback" w={512} />
+        <Image src={feedback} alt="feedback" w={512} maw="50%" />
         <Stack align="center">
           <Title order={2}>{m["Legacy_feedback"]()}</Title>
           <Text>{m["Legacy_feedback-description"]()}</Text>
@@ -64,7 +67,7 @@ const IndexWithLocale: React.FC = () => {
             href="mailto:feedback@vatprc.net"
             target="_blank"
             rel="noopener noreferrer"
-            leftSection={<IconMail />}
+            leftSection={<TbMail />}
           >
             feedback@vatprc.net
           </Button>
