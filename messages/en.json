@@ -93,5 +93,8 @@
   "pages_airspace_sop_legacy": "Other SOPs",
   "pages_airspace_sop_new": "List of SOPs",
   "pages_airspace_sop_title": "Standard operation procedures",
-  "controller_list_visiting": "Visiting"
+  "controller_list_visiting": "Visiting",
+  "theme_toggle_dark": "Dark",
+  "theme_toggle_light": "Light",
+  "theme_toggle_system": "System"
 }

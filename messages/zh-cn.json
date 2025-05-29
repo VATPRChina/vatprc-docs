@@ -93,5 +93,8 @@
   "pages_airspace_sop_legacy": "其他标准运行程序",
   "pages_airspace_sop_new": "标准运行程序列表",
   "pages_airspace_sop_title": "标准运行程序",
-  "controller_list_visiting": " 客座管制员"
+  "controller_list_visiting": " 客座管制员",
+  "theme_toggle_dark": "深色",
+  "theme_toggle_light": "浅色",
+  "theme_toggle_system": "系统"
 }
