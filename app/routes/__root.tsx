@@ -15,6 +15,7 @@ import { getLocale } from "@/lib/i18n/runtime";
 import { getPathname } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
+import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
 import { useState } from "react";
@@ -26,59 +27,73 @@ const NavMenu: React.FC = () => {
       title: m["Legacy_nav-menu_about"](),
       content: (
         <div className="nav-list-grid">
-          <a
-            className="large-item row-span-4 flex items-end"
-            href="https://community.vatprc.net/c/69-category/12-category/12"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="flex items-center gap-2">
-              {m["Legacy_nav-menu_announcement"]()}
-              <TbExternalLink size={12} />
-            </div>
-          </a>
-          <Link className="item" to="/division/introduction">
-            <h3>{m["Legacy_nav-menu_introduction"]()}</h3>
-          </Link>
-          <Link className="item" to="/division/staff">
-            <h3>{m["Legacy_nav-menu_staff"]()}</h3>
-          </Link>
-          <Link className="item" to="/division/privacy">
-            <h3>{m["Legacy_nav-menu_privacy"]()}</h3>
-          </Link>
-          <a
-            className="item"
-            href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="flex items-center gap-2">
-              {m["Legacy_nav-menu_logo-pack"]()}
-              <TbExternalLink size={12} />
-            </div>
-          </a>
+          <NavigationMenuLink asChild>
+            <a
+              className="large-item row-span-4 flex items-end"
+              href="https://community.vatprc.net/c/69-category/12-category/12"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex items-center gap-2">
+                {m["Legacy_nav-menu_announcement"]()}
+                <TbExternalLink size={12} />
+              </div>
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/division/introduction">
+              <h3>{m["Legacy_nav-menu_introduction"]()}</h3>
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/division/staff">
+              <h3>{m["Legacy_nav-menu_staff"]()}</h3>
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/division/privacy">
+              <h3>{m["Legacy_nav-menu_privacy"]()}</h3>
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="item"
+              href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex items-center gap-2">
+                {m["Legacy_nav-menu_logo-pack"]()}
+                <TbExternalLink size={12} />
+              </div>
+            </a>
+          </NavigationMenuLink>
           <hr className="col-span-full" />
-          <a className="large-item" href="https://community.vatprc.net" target="_blank" rel="noopener noreferrer">
-            <div className="flex items-center gap-2">
-              {m["Legacy_nav-menu_forum"]()}
-              <TbExternalLink size={12} />
-            </div>
-          </a>
-          <a
-            className="large-item"
-            href={
-              getLocale() === "zh-cn"
-                ? "https://community.vatprc.net/c/events/66-category/66"
-                : "https://vatsim.net/events/"
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="flex items-center gap-2">
-              {m["Legacy_nav-menu_event"]()}
-              <TbExternalLink size={12} />
-            </div>
-          </a>
+          <NavigationMenuLink asChild>
+            <a className="large-item" href="https://community.vatprc.net" target="_blank" rel="noopener noreferrer">
+              <div className="flex items-center gap-2">
+                {m["Legacy_nav-menu_forum"]()}
+                <TbExternalLink size={12} />
+              </div>
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="large-item"
+              href={
+                getLocale() === "zh-cn"
+                  ? "https://community.vatprc.net/c/events/66-category/66"
+                  : "https://vatsim.net/events/"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex items-center gap-2">
+                {m["Legacy_nav-menu_event"]()}
+                <TbExternalLink size={12} />
+              </div>
+            </a>
+          </NavigationMenuLink>
         </div>
       ),
     },
@@ -86,21 +101,31 @@ const NavMenu: React.FC = () => {
       title: m["Legacy_nav-menu_operation"](),
       content: (
         <div className="nav-list-grid">
-          <Link className="large-item row-span-4 flex items-end" to="/airspace/fir">
-            {m["Legacy_nav-menu_fir"]()}
-          </Link>
-          <Link className="item" to="/airspace/rvsm">
-            {m["Legacy_nav-menu_rvsm"]()}
-          </Link>
-          <Link className="item" to="/airspace/station">
-            {m["Legacy_nav-menu_atc-positions-frequencies"]()}
-          </Link>
-          <Link className="item" to="/airspace/sop">
-            {m["Legacy_nav-menu_sop"]()}
-          </Link>
-          <Link className="item" to="/airspace/vfr">
-            {m["Legacy_nav-menu_vfr"]()}
-          </Link>
+          <NavigationMenuLink asChild>
+            <Link className="large-item row-span-4 flex items-end" to="/airspace/fir">
+              {m["Legacy_nav-menu_fir"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/airspace/rvsm">
+              {m["Legacy_nav-menu_rvsm"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/airspace/station">
+              {m["Legacy_nav-menu_atc-positions-frequencies"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/airspace/sop">
+              {m["Legacy_nav-menu_sop"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/airspace/vfr">
+              {m["Legacy_nav-menu_vfr"]()}
+            </Link>
+          </NavigationMenuLink>
         </div>
       ),
     },
@@ -108,46 +133,60 @@ const NavMenu: React.FC = () => {
       title: m["Legacy_nav-menu_pilot"](),
       content: (
         <div className="nav-list-grid">
-          <Link className="large-item row-span-2 flex items-end" to="/pilot/start-to-fly">
-            {m["Legacy_nav-menu_start-to-fly"]()}
-          </Link>
-          <Link className="item" to="/pilot/introduction-to-fly">
-            {m["Legacy_nav-menu_introduction-to-fly"]()}
-          </Link>
-          <Link className="item" to="/pilot/ts3">
-            {m["Legacy_nav-menu_ts3"]()}
-          </Link>
+          <NavigationMenuLink asChild>
+            <Link className="large-item row-span-2 flex items-end" to="/pilot/start-to-fly">
+              {m["Legacy_nav-menu_start-to-fly"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/pilot/introduction-to-fly">
+              {m["Legacy_nav-menu_introduction-to-fly"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/pilot/ts3">
+              {m["Legacy_nav-menu_ts3"]()}
+            </Link>
+          </NavigationMenuLink>
           <hr className="col-span-full" />
-          <Link className="large-item row-span-3 flex items-end" to="/pilot/pilot-softwares">
-            {m["Legacy_nav-menu_pilot-softwares"]()}
-          </Link>
-          <a
-            className="item flex items-center gap-2"
-            href="https://chartfox.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {m["Legacy_nav-menu_charts"]()}
-            <TbExternalLink size={12} />
-          </a>
-          <a
-            className="item flex items-center gap-2"
-            href="https://vacdm.vatprc.net/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {m["Legacy_nav-menu_vacdm"]()}
-            <TbExternalLink size={12} />
-          </a>
-          <a
-            className="item flex items-center gap-2"
-            href="https://metar-taf.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {m["Legacy_nav-menu_weather"]()}
-            <TbExternalLink size={12} />
-          </a>
+          <NavigationMenuLink asChild>
+            <Link className="large-item row-span-3 flex items-end" to="/pilot/pilot-softwares">
+              {m["Legacy_nav-menu_pilot-softwares"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="item flex items-center gap-2"
+              href="https://chartfox.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {m["Legacy_nav-menu_charts"]()}
+              <TbExternalLink size={12} />
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="item flex items-center gap-2"
+              href="https://vacdm.vatprc.net/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {m["Legacy_nav-menu_vacdm"]()}
+              <TbExternalLink size={12} />
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="item flex items-center gap-2"
+              href="https://metar-taf.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {m["Legacy_nav-menu_weather"]()}
+              <TbExternalLink size={12} />
+            </a>
+          </NavigationMenuLink>
         </div>
       ),
     },
@@ -155,45 +194,61 @@ const NavMenu: React.FC = () => {
       title: m["Legacy_nav-menu_atc"](),
       content: (
         <ul className="nav-list-grid">
-          <Link className="large-item row-span-3 flex items-end" to="/controller/controller-list">
-            {m["Legacy_nav-menu_controller-list"]()}
-          </Link>
-          <Link className="item" to="/controller/controller-regulations">
-            {m["Legacy_nav-menu_controller-regulations"]()}
-          </Link>
-          <Link className="item" to="/controller/become-a-controller">
-            {m["Legacy_nav-menu_become-a-controller"]()}
-          </Link>
-          <Link className="item" to="/controller/visiting-and-transferring">
-            {m["Legacy_nav-menu_visiting-and-transferring"]()}
-          </Link>
+          <NavigationMenuLink asChild>
+            <Link className="large-item row-span-3 flex items-end" to="/controller/controller-list">
+              {m["Legacy_nav-menu_controller-list"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/controller/controller-regulations">
+              {m["Legacy_nav-menu_controller-regulations"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/controller/become-a-controller">
+              {m["Legacy_nav-menu_become-a-controller"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/controller/visiting-and-transferring">
+              {m["Legacy_nav-menu_visiting-and-transferring"]()}
+            </Link>
+          </NavigationMenuLink>
           <hr className="col-span-full" />
-          <a
-            className="large-item row-span-3 flex items-end"
-            href="https://atc.vatprc.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="flex items-center gap-2">
-              {m["Legacy_nav-menu_atc-center"]()}
+          <NavigationMenuLink asChild>
+            <a
+              className="large-item row-span-3 flex items-end"
+              href="https://atc.vatprc.net"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex items-center gap-2">
+                {m["Legacy_nav-menu_atc-center"]()}
+                <TbExternalLink size={12} />
+              </div>
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <a
+              className="item flex items-center gap-2"
+              href="https://moodle.vatprc.net"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {m["Legacy_nav-menu_moodle"]()}
               <TbExternalLink size={12} />
-            </div>
-          </a>
-          <a
-            className="item flex items-center gap-2"
-            href="https://moodle.vatprc.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {m["Legacy_nav-menu_moodle"]()}
-            <TbExternalLink size={12} />
-          </a>
-          <Link className="item" to="/controller/sector">
-            {m["Legacy_nav-menu_sector"]()}
-          </Link>
-          <Link className="item" to="/controller/loa">
-            {m["Legacy_nav-menu_loa"]()}
-          </Link>
+            </a>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/controller/sector">
+              {m["Legacy_nav-menu_sector"]()}
+            </Link>
+          </NavigationMenuLink>
+          <NavigationMenuLink asChild>
+            <Link className="item" to="/controller/loa">
+              {m["Legacy_nav-menu_loa"]()}
+            </Link>
+          </NavigationMenuLink>
         </ul>
       ),
     },
