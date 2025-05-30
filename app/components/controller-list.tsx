@@ -439,7 +439,7 @@ export const ControllerList: React.FC = () => {
           })
           ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
           ?.map((ctr) => (
-            <div key={ctr.id} className="flex flex-col gap-4 rounded-md border px-6 py-4 hover:bg-secondary">
+            <div key={ctr.id} className="hover:bg-secondary flex flex-col gap-4 rounded-md border px-6 py-4">
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold">
                   {ctr.first_name} {ctr.last_name}

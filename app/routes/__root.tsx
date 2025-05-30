@@ -173,20 +173,20 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 
   return (
     <div className="container mx-auto">
-      <header className="sticky top-0 z-50 w-full border-b-[1px] px-8 py-2 dark:border-slate-700 bg-background">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+      <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
+        <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
             <img src={theme === "light" ? logo : logoWhite} alt={m["Legacy_title"]()} className="h-6" />
           </Link>
           <NavMenu />
-          <div className="flex flex-row items-center gap-4 absolute right-8 top-2 ml-auto md:static md:right-auto md:top-auto">
+          <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
             <ModeToggle />
             <LanguageToggle />
           </div>
         </div>
       </header>
       <div className="pt-4">{children}</div>
-      <footer className="mb-4 mt-8">
+      <footer className="mt-8 mb-4">
         <p className="text-slate-500 dark:text-slate-300">&copy; {m["Layout_copyright"]()}</p>
       </footer>
     </div>

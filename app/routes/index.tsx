@@ -34,8 +34,8 @@ const IndexWithLocale: React.FC = () => {
             </div>
           </div>
         </section>
-        <section className="py-18 px flex w-full flex-col items-center justify-center">
-          <h3 className="text-4xl mb-8">{m["Legacy_recent-events"]()}</h3>
+        <section className="px flex w-full flex-col items-center justify-center py-18">
+          <h3 className="mb-8 text-4xl">{m["Legacy_recent-events"]()}</h3>
           <RecentEvents className="w-full" />
         </section>
         <section className="px flex w-full flex-row items-center justify-center">
@@ -63,7 +63,7 @@ const IndexWithLocale: React.FC = () => {
             </div>
           </div>
         </section>
-        <section className="px pt-18 flex w-full flex-row items-center justify-center">
+        <section className="px flex w-full flex-row items-center justify-center pt-18">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center justify-center py-9">
               <h3 className="mb-8 text-4xl">{m["Legacy_online-pilots"]()}</h3>
@@ -74,7 +74,7 @@ const IndexWithLocale: React.FC = () => {
             </div>
           </div>
         </section>
-        <section className="px pt-18 flex w-full flex-row items-center justify-center">
+        <section className="px flex w-full flex-row items-center justify-center pt-18">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="hidden flex-col items-center justify-center md:flex">
               <img className="flex w-1/2" src={feedback} alt="Feedback" />

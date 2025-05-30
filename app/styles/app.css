@@ -111,10 +111,6 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
-html {
-  @apply scroll-pt-16;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -129,7 +125,7 @@ html {
 }
 
 .nav-list-grid .large-item {
-  @apply rounded-md bg-secondary px-6 py-4 font-bold;
+  @apply bg-secondary rounded-md px-6 py-4 font-bold;
 }
 
 .nav-list-grid a.large-item:hover {
@@ -137,5 +133,5 @@ html {
 }
 
 .nav-list-grid .item {
-  @apply rounded-sm px-3 py-2 text-sm hover:bg-secondary;
+  @apply hover:bg-secondary rounded-sm px-3 py-2 text-sm;
 }

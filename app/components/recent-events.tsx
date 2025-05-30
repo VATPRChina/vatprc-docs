@@ -42,7 +42,7 @@ const Event: React.FC<{
 
   return (
     <a
-      className="flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md hover:bg-secondary"
+      className="hover:bg-secondary flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
@@ -143,7 +143,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
           locale={getLocale()}
         />
       </div>
-      <div className="flex flex-col flex-wrap items-stretch gap-2">
+      <div className="col-span-2 flex flex-col items-stretch gap-2 md:col-span-1">
         {scheduledEvents.map((e) => (
           <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
         ))}

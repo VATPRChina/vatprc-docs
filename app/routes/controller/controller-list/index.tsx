@@ -9,7 +9,7 @@ export const Route = createFileRoute("/controller/controller-list/")({
 function Page() {
   return (
     <div>
-      <div className="prose min-w-full dark:prose-invert">
+      <div className="prose dark:prose-invert min-w-full">
         <h2>{m["Legacy_nav-menu_controller-list"]()}</h2>
         <p>{m["Legacy_controller-list_description"]()}</p>
         <ul>

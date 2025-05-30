@@ -19,7 +19,7 @@
       "@/assets/*": ["./assets/*"],
       "@/styles/*": ["./styles/*"]
     },
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": false
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.mjs"],
   "exclude": ["node_modules"]
