@@ -133,7 +133,7 @@ html {
 }
 
 .nav-list-grid a.large-item:hover {
-  @apply bg-secondary/80;
+  @apply bg-secondary/50;
 }
 
 .nav-list-grid .item {
