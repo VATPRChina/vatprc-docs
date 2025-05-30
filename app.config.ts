@@ -25,9 +25,10 @@ export default defineConfig({
     ],
   },
   server: {
-    routeRules: {
-      "/api/cors/online-status": { proxy: { to: "https://uniapi.vatprc.net/api/compat/online-status" } },
-      "/api/cors/vatsim-events-prc": { proxy: { to: "https://my.vatsim.net/api/v2/events/latest" } },
+    devProxy: {
+      // "/api/cors/online-status": { target: "https://uniapi.vatprc.net/api/compat/online-status" },
+      // "/api/cors/vatsim-events-prc": { target: "https://my.vatsim.net/api/v2/events/latest" },
+      "/uniapi": { target: "https://uniapi.vatprc.net", changeOrigin: true },
     },
   },
 });

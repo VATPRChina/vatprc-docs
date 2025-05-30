@@ -3,6 +3,7 @@ import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,6 +11,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { Toaster } from "@/components/ui/sonner";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { cn } from "@/lib/utils";
@@ -119,6 +121,12 @@ const NavMenu: React.FC = () => {
           <NavMenuLink href="https://chartfox.org/">{m["Legacy_nav-menu_charts"]()}</NavMenuLink>
           <NavMenuLink href="https://vacdm.vatprc.net/">{m["Legacy_nav-menu_vacdm"]()}</NavMenuLink>
           <NavMenuLink href="https://metar-taf.com/">{m["Legacy_nav-menu_weather"]()}</NavMenuLink>
+          <NavMenuLink href="/flights">
+            {m["layout_navmenu_fpl_checker"]()}
+            <Badge className="ml-2 rounded-full" variant="destructive">
+              New
+            </Badge>
+          </NavMenuLink>
         </ul>
       ),
     },
@@ -208,11 +216,11 @@ const RootLayout: React.FC = () => {
   );
 
   return (
-    <html lang={getLocale() ?? "en"}>
+    <html lang={getLocale() ?? "en"} className="scroll-pt-16">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="px-1 md:px-0">
         <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
           <QueryClientProvider client={queryClient}>
             <Application>
@@ -220,6 +228,7 @@ const RootLayout: React.FC = () => {
             </Application>
           </QueryClientProvider>
         </ThemeProvider>
+        <Toaster position="top-center" />
         <Scripts />
       </body>
     </html>

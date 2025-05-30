@@ -18,4 +18,5 @@ export default tseslint.config(
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
   router.configs["flat/recommended"],
+  { ignores: ["app/lib/api.d.ts"] },
 );

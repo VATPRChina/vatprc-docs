@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { TbLoader } from "react-icons/tb";
 
-export enum ControllerRating {
+enum ControllerRating {
   Unknown = 0,
   S1 = 1,
   S2 = 3,
@@ -17,13 +17,13 @@ export enum ControllerRating {
   I1 = 7,
   I3 = 8,
 }
-export enum ControllerRatingType {
+enum ControllerRatingType {
   Unknown = 0,
   Student = 1,
   Controller = 2,
 }
 
-export enum ControllerPosition {
+enum ControllerPosition {
   DEL = 0,
   GND = 1,
   TWR = 2,
@@ -34,26 +34,19 @@ export enum ControllerPosition {
   TMU = 7,
 }
 
-export enum ControllerPositionPermission {
+enum ControllerPositionPermission {
   Restricted = 0,
   Training = 1,
   Solo = 2,
   Full = 3,
 }
 
-export const CONTROLLER_POSITION_PERMISSION_FLAG_MAP = {
-  [ControllerPositionPermission.Restricted]: "✘",
-  [ControllerPositionPermission.Training]: "T",
-  [ControllerPositionPermission.Solo]: "S",
-  [ControllerPositionPermission.Full]: "✓",
-};
-
-export enum ControllerStatus {
+enum ControllerStatus {
   Active = 0,
   Absence = 1,
 }
 
-export enum RoleType {
+enum RoleType {
   Rating,
   Position,
   Status,
@@ -77,11 +70,11 @@ interface PositionRoleItem {
 interface MarkerItem {
   type: RoleType.Marker;
 }
-export type RoleItem = RatingRoleItem | StatusRoleItem | PositionRoleItem | MarkerItem;
+type RoleItem = RatingRoleItem | StatusRoleItem | PositionRoleItem | MarkerItem;
 
-export const VISITING_CONTROLLER_ID = 298;
+const VISITING_CONTROLLER_ID = 298;
 
-export const ROLE_MAP: Record<string, RoleItem> = {
+const ROLE_MAP: Record<string, RoleItem> = {
   // S1 Student
   201: {
     type: RoleType.Rating,

@@ -15,7 +15,7 @@ export interface PostMeta {
   }[];
 }
 
-export const fetcher = async ([, postId]: [string, string]) => {
+const fetcher = async ([, postId]: [string, string]) => {
   const postPath = `${postId}/1`;
   const meta = await fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
     if (!res.ok) {

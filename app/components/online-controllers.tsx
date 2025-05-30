@@ -64,7 +64,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
           schedule={[new Date(c.start), new Date(c.end)]}
         />
       ))}{" "}
-      {(!data || data?.controllers.length === 0) && <span>{m["Legacy_no-atc-online"]()}</span>}
+      {(!data || data?.controllers?.length === 0) && <span>{m["Legacy_no-atc-online"]()}</span>}
     </div>
   );
 };

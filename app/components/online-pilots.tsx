@@ -50,9 +50,9 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
 
   if (pilots.length <= 0) {
     return (
-      (!data || data?.pilots.length === 0) && (
+      (!data || data?.pilots?.length === 0) && (
         <div className={cn("flex flex-wrap justify-center gap-x-2 gap-y-4")}>
-          {(!data || data?.pilots.length === 0) && <span>{m["Components_OnlinePilots_no_pilot"]()}</span>}
+          {(!data || data?.pilots?.length === 0) && <span>{m["Components_OnlinePilots_no_pilot"]()}</span>}
         </div>
       )
     );
