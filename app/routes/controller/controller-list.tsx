@@ -2,7 +2,7 @@ import { ControllerList } from "@/components/controller-list";
 import { m } from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/controller/controller-list/")({
+export const Route = createFileRoute("/controller/controller-list")({
   component: Page,
 });
 

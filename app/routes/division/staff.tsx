@@ -1,7 +1,7 @@
 import { DiscourseDocument } from "@/components/discourse-doc";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/division/staff/")({
+export const Route = createFileRoute("/division/staff")({
   component: Page,
 });
 

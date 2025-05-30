@@ -6,7 +6,7 @@ import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/airspace/sop/")({
+export const Route = createFileRoute("/airspace/sop")({
   component: Page,
   loader() {
     return getAllDocuments();
