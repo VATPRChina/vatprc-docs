@@ -1,23 +1,16 @@
 import { Button } from "./ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
-import { OnlineData } from "@/lib/types/online";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { TbCaretUpDown, TbLoader } from "react-icons/tb";
 
-const ONLINE_STATUS_ENDPOINT =
-  process.env.NODE_ENV === "development"
-    ? "/api/cors/online-status"
-    : "https://uniapi.vatprc.net/api/compat/online-status";
-const fetcher = () => fetch(ONLINE_STATUS_ENDPOINT).then((res) => res.json());
-
 const Pilot: React.FC<{
   callsign: string;
-  aircraft: string;
-  departure: string;
-  arrival: string;
+  aircraft: string | null | undefined;
+  departure: string | null | undefined;
+  arrival: string | null | undefined;
 }> = ({ callsign, aircraft, departure, arrival }) => {
   return (
     <div className="hover:bg-secondary flex flex-col rounded-md border px-6 py-4">
@@ -35,7 +28,7 @@ const Pilot: React.FC<{
 };
 
 export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) => {
-  const { data, isLoading } = useQuery<OnlineData>({ queryKey: [ONLINE_STATUS_ENDPOINT], queryFn: fetcher });
+  const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
   const [open, setOpen] = useState(false);
 

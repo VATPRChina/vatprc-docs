@@ -1,16 +1,9 @@
+import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
-import { OnlineData } from "@/lib/types/online";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
-
-const ONLINE_STATUS_ENDPOINT =
-  process.env.NODE_ENV === "development"
-    ? "/api/cors/online-status"
-    : "https://uniapi.vatprc.net/api/compat/online-status";
-const fetcher = () => fetch(ONLINE_STATUS_ENDPOINT).then((res) => res.json());
 
 const Controller: React.FC<{
   callsign: string;
@@ -42,10 +35,7 @@ const Controller: React.FC<{
 };
 
 export const OnlineControllers: React.FC<{ className?: string }> = ({ className }) => {
-  const { data, isLoading } = useQuery<OnlineData>({
-    queryKey: ["https://uniapi.vatprc.net/api/compat/online-status"],
-    queryFn: fetcher,
-  });
+  const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
   if (isLoading) {
     return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
@@ -56,7 +46,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
       {data?.controllers?.map((c) => (
         <Controller key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
       ))}
-      {data?.futureControllers?.map((c) => (
+      {data?.future_controllers?.map((c) => (
         <Controller
           key={c.callsign}
           callsign={c.callsign}
