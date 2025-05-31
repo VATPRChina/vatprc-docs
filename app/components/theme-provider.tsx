@@ -1,3 +1,4 @@
+import { localStorage } from "@/lib/utils";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light" | "system";
@@ -16,11 +17,6 @@ type ThemeProviderState = {
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
-};
-
-const localStorage = (typeof window !== "undefined" ? window.localStorage : null) ?? {
-  getItem: () => null,
-  setItem: () => null,
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);

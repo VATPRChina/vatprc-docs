@@ -124,6 +124,10 @@ const IndexWithLocale: React.FC = () => {
 
 const IndexWithoutLocale: React.FC = () => {
   useEffect(() => {
+    if (localStorage.getItem("vatprc-homepage-locale")) {
+      window.location.replace(`/${localStorage.getItem("vatprc-homepage-locale")}`);
+      return;
+    }
     let useChinese = false;
     if (navigator.language.toLowerCase().startsWith("zh")) {
       useChinese = true;

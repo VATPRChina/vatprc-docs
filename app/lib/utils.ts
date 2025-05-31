@@ -17,3 +17,8 @@ export const getPathname = () => {
   }
   return getPathnameServer();
 };
+
+export const localStorage = (typeof window !== "undefined" ? window.localStorage : null) ?? {
+  getItem: () => null,
+  setItem: () => null,
+};
