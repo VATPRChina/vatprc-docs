@@ -22,6 +22,7 @@ import { Route as DocsSplatImport } from './routes/docs/$'
 import { Route as DivisionStaffImport } from './routes/division/staff'
 import { Route as DivisionPrivacyImport } from './routes/division/privacy'
 import { Route as DivisionIntroductionImport } from './routes/division/introduction'
+import { Route as DivisionApiImport } from './routes/division/api'
 import { Route as ControllerVisitingAndTransferringImport } from './routes/controller/visiting-and-transferring'
 import { Route as ControllerSectorImport } from './routes/controller/sector'
 import { Route as ControllerLoaImport } from './routes/controller/loa'
@@ -99,6 +100,12 @@ const DivisionPrivacyRoute = DivisionPrivacyImport.update({
 const DivisionIntroductionRoute = DivisionIntroductionImport.update({
   id: '/division/introduction',
   path: '/division/introduction',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DivisionApiRoute = DivisionApiImport.update({
+  id: '/division/api',
+  path: '/division/api',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -259,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControllerVisitingAndTransferringImport
       parentRoute: typeof rootRoute
     }
+    '/division/api': {
+      id: '/division/api'
+      path: '/division/api'
+      fullPath: '/division/api'
+      preLoaderRoute: typeof DivisionApiImport
+      parentRoute: typeof rootRoute
+    }
     '/division/introduction': {
       id: '/division/introduction'
       path: '/division/introduction'
@@ -347,6 +361,7 @@ export interface FileRoutesByFullPath {
   '/controller/loa': typeof ControllerLoaRoute
   '/controller/sector': typeof ControllerSectorRoute
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
+  '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
@@ -372,6 +387,7 @@ export interface FileRoutesByTo {
   '/controller/loa': typeof ControllerLoaRoute
   '/controller/sector': typeof ControllerSectorRoute
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
+  '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
@@ -398,6 +414,7 @@ export interface FileRoutesById {
   '/controller/loa': typeof ControllerLoaRoute
   '/controller/sector': typeof ControllerSectorRoute
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
+  '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
@@ -425,6 +442,7 @@ export interface FileRouteTypes {
     | '/controller/loa'
     | '/controller/sector'
     | '/controller/visiting-and-transferring'
+    | '/division/api'
     | '/division/introduction'
     | '/division/privacy'
     | '/division/staff'
@@ -449,6 +467,7 @@ export interface FileRouteTypes {
     | '/controller/loa'
     | '/controller/sector'
     | '/controller/visiting-and-transferring'
+    | '/division/api'
     | '/division/introduction'
     | '/division/privacy'
     | '/division/staff'
@@ -473,6 +492,7 @@ export interface FileRouteTypes {
     | '/controller/loa'
     | '/controller/sector'
     | '/controller/visiting-and-transferring'
+    | '/division/api'
     | '/division/introduction'
     | '/division/privacy'
     | '/division/staff'
@@ -499,6 +519,7 @@ export interface RootRouteChildren {
   ControllerLoaRoute: typeof ControllerLoaRoute
   ControllerSectorRoute: typeof ControllerSectorRoute
   ControllerVisitingAndTransferringRoute: typeof ControllerVisitingAndTransferringRoute
+  DivisionApiRoute: typeof DivisionApiRoute
   DivisionIntroductionRoute: typeof DivisionIntroductionRoute
   DivisionPrivacyRoute: typeof DivisionPrivacyRoute
   DivisionStaffRoute: typeof DivisionStaffRoute
@@ -525,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   ControllerSectorRoute: ControllerSectorRoute,
   ControllerVisitingAndTransferringRoute:
     ControllerVisitingAndTransferringRoute,
+  DivisionApiRoute: DivisionApiRoute,
   DivisionIntroductionRoute: DivisionIntroductionRoute,
   DivisionPrivacyRoute: DivisionPrivacyRoute,
   DivisionStaffRoute: DivisionStaffRoute,
@@ -559,6 +581,7 @@ export const routeTree = rootRoute
         "/controller/loa",
         "/controller/sector",
         "/controller/visiting-and-transferring",
+        "/division/api",
         "/division/introduction",
         "/division/privacy",
         "/division/staff",
@@ -606,6 +629,9 @@ export const routeTree = rootRoute
     },
     "/controller/visiting-and-transferring": {
       "filePath": "controller/visiting-and-transferring.tsx"
+    },
+    "/division/api": {
+      "filePath": "division/api.tsx"
     },
     "/division/introduction": {
       "filePath": "division/introduction.tsx"

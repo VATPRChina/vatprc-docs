@@ -19,7 +19,7 @@ import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { TbExternalLink } from "react-icons/tb";
 
@@ -87,6 +87,9 @@ const NavMenu: React.FC = () => {
             external
           >
             {m["Legacy_nav-menu_event"]()}
+          </NavMenuLink>
+          <NavMenuLink href="/division/api" external>
+            {m["nav_menu_division_api"]()}
           </NavMenuLink>
         </ul>
       ),
@@ -178,6 +181,10 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const theme = useThemeValue();
+  const route = useRouterState();
+  if (route.location.pathname === "/division/api") {
+    return children;
+  }
 
   return (
     <div className="container mx-auto">
@@ -215,8 +222,10 @@ const RootLayout: React.FC = () => {
       }),
   );
 
+  const route = useRouterState();
+
   return (
-    <html lang={getLocale() ?? "en"} className="scroll-pt-16">
+    <html lang={getLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
       <head>
         <HeadContent />
       </head>

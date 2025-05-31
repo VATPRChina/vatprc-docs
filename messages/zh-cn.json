@@ -110,5 +110,6 @@
   "flight": {
     "no_active_flght": "没有在线航班",
     "type_callsign": "呼号"
-  }
+  },
+  "nav_menu_division_api": "API 文档"
 }
