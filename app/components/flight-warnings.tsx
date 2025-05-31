@@ -2,7 +2,7 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { TbExclamationCircle } from "react-icons/tb";
+import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
 const messages: Record<string, string> = {
   no_rvsm: "The aircraft does not specify RVSM capability.",
@@ -47,29 +47,32 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
 
   if (isLoading) return <Skeleton className="h-16 w-full" />;
   return (
-    <>
+    <div className="flex w-full flex-col items-stretch gap-2">
       {error?.message && (
         <Alert color="red">
           <AlertTitle>{error?.message}</AlertTitle>
         </Alert>
       )}
-      <div className="flex flex-col gap-2">
-        {(warnings?.length ?? 0) === 0 && <Alert title={"Flight looks good."} color="green"></Alert>}
-        {warnings?.map((warning) => (
-          <Alert
-            key={warning.message_code}
-            color={
-              ["no_preferred_route", "parse_route_failed", "rnp_ar", "rnp_ar_without_rf"].includes(warning.message_code)
-                ? "blue"
-                : "yellow"
-            }
-          >
-            <TbExclamationCircle />
-            <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
-            <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
-          </Alert>
-        ))}
-      </div>
-    </>
+      {(warnings?.length ?? 0) === 0 && (
+        <Alert>
+          <TbCheck />
+          <AlertTitle>Flight looks good.</AlertTitle>
+        </Alert>
+      )}
+      {warnings?.map((warning) => (
+        <Alert
+          key={warning.message_code}
+          color={
+            ["no_preferred_route", "parse_route_failed", "rnp_ar", "rnp_ar_without_rf"].includes(warning.message_code)
+              ? "blue"
+              : "yellow"
+          }
+        >
+          <TbExclamationCircle />
+          <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
+          <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
+        </Alert>
+      ))}
+    </div>
   );
 };

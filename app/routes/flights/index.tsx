@@ -21,10 +21,10 @@ function RouteComponent() {
     <div className="flex flex-col items-start gap-8">
       <h1 className="text-3xl">{m.flight_plan_checker()}</h1>
       <div className="flex flex-row gap-4">
-        <Command className="w-72 rounded-lg border shadow-md" onChange={onChange}>
-          <CommandInput placeholder="Type a callsign or search..." value={callsign} onFocus={() => setHidden(false)} />
+        <Command className="w-72 rounded-lg border" onChange={onChange}>
+          <CommandInput placeholder={m["flight.type_callsign"]()} value={callsign} onFocus={() => setHidden(false)} />
           <CommandList hidden={hidden}>
-            <CommandEmpty>No flight found.</CommandEmpty>
+            <CommandEmpty>{m["flight.no_active_flght"]()}</CommandEmpty>
             <CommandGroup>
               {flights?.map((flight) => (
                 <CommandItem key={flight.callsign} onSelect={() => setCallsign(flight.callsign)}>

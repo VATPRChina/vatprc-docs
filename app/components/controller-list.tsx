@@ -1,3 +1,4 @@
+import { Label } from "./ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
@@ -406,9 +407,9 @@ export const ControllerList: React.FC = () => {
 
   return (
     <div className="mt-4 flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Checkbox onCheckedChange={onShowAbsentChange} />
-        <label>{m["Legacy_controller-list_show-absence"]()}</label>
+      <div className="flex items-center gap-x-2">
+        <Checkbox onCheckedChange={onShowAbsentChange} id="show-absent" />
+        <Label htmlFor="show-absent">{m["Legacy_controller-list_show-absence"]()}</Label>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {controllers

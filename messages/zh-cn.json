@@ -106,5 +106,9 @@
   "route_flights_callsign_equipment": "设备代码",
   "navigation_performance": "导航性能代码",
   "route_flights_callsign_transponder": "应答机代码",
-  "route_flights_callsign_route": "航路"
+  "route_flights_callsign_route": "航路",
+  "flight": {
+    "no_active_flght": "没有在线航班",
+    "type_callsign": "呼号"
+  }
 }

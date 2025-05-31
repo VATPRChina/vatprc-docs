@@ -105,5 +105,9 @@
   "route_flights_callsign_equipment": "Equipment",
   "navigation_performance": "Navigation Performance",
   "route_flights_callsign_transponder": "Transponder",
-  "route_flights_callsign_route": "Route"
+  "route_flights_callsign_route": "Route",
+  "flight": {
+    "no_active_flght": "No active flight",
+    "type_callsign": "Callsign"
+  }
 }

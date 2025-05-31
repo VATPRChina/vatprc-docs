@@ -9,5 +9,5 @@
     "messages"
   ],
   "i18n-ally.sourceLanguage": "zh-cn",
-  "i18n-ally.keystyle": "flat"
+  "i18n-ally.keystyle": "nested"
 }

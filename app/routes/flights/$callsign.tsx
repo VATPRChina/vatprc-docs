@@ -1,15 +1,63 @@
-import { FlightWarnings } from "@/components/flight-warnings";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button-link";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
+import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
-import { TbArrowLeft } from "react-icons/tb";
+import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
 });
+
+interface FplFieldProps {
+  label: string;
+  value?: string;
+  tooltip?: string;
+}
+const FplField = ({
+  label,
+  value,
+  tooltip,
+  children,
+  className,
+  ...props
+}: FplFieldProps & React.ComponentProps<"div">) => {
+  const labelC = tooltip ? (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="text-muted-foreground">{label}</span>
+      </TooltipTrigger>
+      <TooltipContent side="right">
+        <p>{tooltip}</p>
+      </TooltipContent>
+    </Tooltip>
+  ) : (
+    <span className="text-muted-foreground">{label}</span>
+  );
+
+  return (
+    <div className={cn("flex flex-col items-start gap-2", className)} {...props}>
+      {labelC}
+      {value && value !== "-" && <span className="font-mono">{value}</span>}
+      {value === "-" && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="text-muted-foreground min-w-8">{value}</span>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            <p>Check at VATSIM</p>
+          </TooltipContent>
+        </Tooltip>
+      )}
+      {children}
+    </div>
+  );
+};
 
 function RouteComponent() {
   const { callsign } = Route.useParams();
@@ -19,6 +67,14 @@ function RouteComponent() {
     data: flight,
     isLoading,
   } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", { params: { path: { callsign } } });
+  const { data: warnings } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/warnings", {
+    params: { path: { callsign } },
+  });
+
+  const noRvsmWarning = warnings?.find((w) => w.message_code === "no_rvsm");
+  const noRnav1Equip = warnings?.find((w) => w.message_code === "no_rnav1_equipment");
+  const noRnav1Pbn = warnings?.find((w) => w.message_code === "no_rnav1_pbn");
+  const noTransponder = warnings?.find((w) => w.message_code === "no_transponder");
 
   return (
     <div className="flex flex-col items-start gap-4">
@@ -33,25 +89,128 @@ function RouteComponent() {
       )}
       {isLoading && <Skeleton className="h-48 w-full" />}
       {!error && flight && (
-        <div className="flex flex-col gap-4">
-          <h2 className="text-3xl">{callsign}</h2>
-          <h3 className="text-2xl">
-            {flight?.departure} - {flight?.arrival}
-          </h3>
-          <div className="flex flex-row gap-2">
-            <span className="font-mono">{flight?.aircraft}</span>
-            <span className="font-light">{m["route_flights_callsign_equipment"]()}</span>
-            <span className="font-mono">{flight?.equipment}</span>
-            <span className="font-light">{m["navigation_performance"]()}</span>
-            <span className="font-mono">{flight?.navigation_performance}</span>
-            <span className="font-light">{m["route_flights_callsign_transponder"]()}</span>
-            <span className="font-mono">{flight?.transponder}</span>
+        <div className="flex w-full flex-col gap-4">
+          <h1 className="flex items-baseline">
+            <span className="text-3xl">{callsign}</span>
+            <span className="text-muted-foreground ml-2 flex gap-1 text-2xl">
+              <span>{flight.departure}</span>
+              <TbPlaneInflight />
+              <span>{flight.arrival}</span>
+            </span>
+          </h1>
+          <h2 className="text-2xl">Flight Plan</h2>
+          <div className="grid grid-cols-4 gap-4">
+            <FplField label="Callsign" value={flight.callsign} />
+            {/* <FplField label="Flight Rules" value="-" /> */}
+            {/* <FplField label="Date of Flight" value="-" /> */}
+            {/* <FplField label="Voice Rules" value="-" /> */}
+            {/* <FplField label="Aircraft Type" value="-" /> */}
+            {/* <FplField label="Wake Category" value="-" /> */}
+            <FplField label="Equipment">
+              <div className="flex items-center gap-2">
+                <span className="text-mono">{flight.equipment}</span>
+                {noRvsmWarning && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                        <TbInfoCircleFilled />
+                        RVSM
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                      <p>The aircraft does not specify RVSM capability.</p>
+                      <p>
+                        Edit your flight plan on VATSIM: Add <span className="text-mono">W</span> to Equipment Code.
+                      </p>
+                    </PopoverContent>
+                  </Popover>
+                )}
+                {noRnav1Equip && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                        <TbInfoCircleFilled />
+                        RNAV1
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                      <p>The aircraft does not specify RNAV1 capability.</p>
+                      <p>
+                        Edit your flight plan on VATSIM: Add <span className="text-mono">R</span> to Equipment Code.
+                      </p>
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </div>
+            </FplField>
+            <FplField label="Transponder">
+              <div className="flex items-center gap-2">
+                <span className="text-mono">{flight.transponder}</span>
+                {noTransponder && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                        <TbInfoCircleFilled />
+                        Transponder
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                      <p>Transponder field is empty.</p>
+                      <p>Edit your flight plan on VATSIM: Write your transponder code.</p>
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </div>
+            </FplField>
+            <FplField label="Departure" value={flight.departure} className="col-start-1" />
+            {/* <FplField label="Off Block" value="-" /> */}
+            {/* <FplField label="Airspeed" value="-" /> */}
+            {/* <FplField label="Altitude" value="-" /> */}
+            <FplField label="Route" value={flight.raw_route} className="col-span-4" />
+            <FplField label="Arrival" value={flight.arrival} />
+            {/* <FplField label="Enroute Time" value="-" /> */}
+            {/* <FplField label="Alternate" value="-" /> */}
+            {/* <FplField label="Endurance" value="-" /> */}
+            <FplField label="PBN" tooltip="Performance Based Navigation">
+              <div className="flex items-center gap-2">
+                <span className="text-mono">{flight.navigation_performance}</span>
+                {noRnav1Pbn && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                        <TbInfoCircleFilled />
+                        RNAV1
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                      <p>The aircraft does not specify RNAV1 capability.</p>
+                      <p>
+                        Edit your flight plan on VATSIM: Add <span className="text-mono">D1</span> or{" "}
+                        <span className="text-mono">D2</span> to PBN.
+                      </p>
+                    </PopoverContent>
+                  </Popover>
+                )}
+              </div>
+            </FplField>
+            {/* <FplField label="CODE" value="-" tooltip="ADSB Hex Code" /> */}
+            {/* <FplField label="RVR" value="-" tooltip="Runway Visual Range Limit" /> */}
+            {/* <FplField label="PER" value="-" tooltip="Performance Code" /> */}
+            {/* <FplField label="SEL" value="-" tooltip="SELCAL Code" /> */}
+            {/* <FplField label="NAV" value="-" tooltip="NAV Equipment" /> */}
+            {/* <FplField label="DAT" value="-" tooltip="Additional Data" /> */}
+            {/* <FplField label="REG" value="-" tooltip="Aircraft Registration" /> */}
+            {/* <FplField label="COM" value="-" tooltip="Communication Codes" /> */}
+            {/* <FplField label="OPR" value="-" tooltip="Operator" /> */}
+            {/* <FplField label="SUR" value="-" tooltip="Surveillance Equipment" /> */}
+            {/* <FplField label="ORGN" value="-" tooltip="Origin of Flightplan" /> */}
+            {/* <FplField label="RALT" value="-" tooltip="Enroute Alternates" /> */}
+            {/* <FplField label="TALT" value="-" tooltip="Takeoff Alternate" /> */}
+            {/* <FplField label="EET" value="-" tooltip="Estimated Elapsed Times" /> */}
+            {/* <FplField label="RMK" value="-" tooltip="Additional Remarks" className="col-span-4" /> */}
           </div>
-          <div className="text-secondary-foreground flex flex-row gap-2">
-            <span className="font-light">{m["route_flights_callsign_route"]()}</span>
-            <span className="font-mono">{flight?.__simplified_route}</span>
-          </div>
-          <FlightWarnings callsign={callsign} />
+          <h2 className="text-2xl">Validation Result</h2>
+          {/* <FlightWarnings callsign={callsign} /> */}
         </div>
       )}
     </div>
