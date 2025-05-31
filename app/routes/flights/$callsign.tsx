@@ -40,15 +40,15 @@ function RouteComponent() {
           </h3>
           <div className="flex flex-row gap-2">
             <span className="font-mono">{flight?.aircraft}</span>
-            <span className="font-light">Equipment</span>
+            <span className="font-light">{m["route_flights_callsign_equipment"]()}</span>
             <span className="font-mono">{flight?.equipment}</span>
-            <span className="font-light">Navigation Performance</span>
+            <span className="font-light">{m["navigation_performance"]()}</span>
             <span className="font-mono">{flight?.navigation_performance}</span>
-            <span className="font-light">Transpoder</span>
+            <span className="font-light">{m["route_flights_callsign_transponder"]()}</span>
             <span className="font-mono">{flight?.transponder}</span>
           </div>
           <div className="text-secondary-foreground flex flex-row gap-2">
-            <span className="font-light">Route</span>
+            <span className="font-light">{m["route_flights_callsign_route"]()}</span>
             <span className="font-mono">{flight?.__simplified_route}</span>
           </div>
           <FlightWarnings callsign={callsign} />

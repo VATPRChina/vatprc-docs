@@ -3,5 +3,11 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "i18n-ally.extract.keygenStyle": "PascalCase",
+  "i18n-ally.localesPaths": [
+    "messages"
+  ],
+  "i18n-ally.sourceLanguage": "zh-cn",
+  "i18n-ally.keystyle": "flat"
 }
