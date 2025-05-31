@@ -15,6 +15,17 @@ export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
 });
 
+const EditFpl = () => (
+  <a
+    href="https://my.vatsim.net/pilots/flightplan/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-primary/80 underline"
+  >
+    VATSIM
+  </a>
+);
+
 interface FplFieldProps {
   label: string;
   value?: string;
@@ -141,13 +152,13 @@ function RouteComponent() {
                 <WarningTip enabled={!!noRvsmWarning} text="RVSM">
                   <p>The aircraft does not specify RVSM capability.</p>
                   <p>
-                    Edit your flight plan on VATSIM: Add <span className="text-mono">W</span> to Equipment Code.
+                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">W</span> to Equipment Code.
                   </p>
                 </WarningTip>
                 <WarningTip enabled={!!noRnav1Equip} text="RNAV1">
                   <p>The aircraft does not specify RNAV1 capability.</p>
                   <p>
-                    Edit your flight plan on VATSIM: Add <span className="text-mono">R</span> to Equipment Code.
+                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">R</span> to Equipment Code.
                   </p>
                 </WarningTip>
               </div>
@@ -157,7 +168,9 @@ function RouteComponent() {
                 {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
                 <WarningTip enabled={!!noTransponder} text="Transponder">
                   <p>Transponder field is empty.</p>
-                  <p>Edit your flight plan on VATSIM: Write your transponder capability.</p>
+                  <p>
+                    Edit your flight plan on <EditFpl />: Write your transponder capability.
+                  </p>
                 </WarningTip>
               </div>
             </FplField>
@@ -176,7 +189,7 @@ function RouteComponent() {
                 <WarningTip enabled={!!noRnav1Pbn} text="RNAV1">
                   <p>The aircraft does not specify RNAV1 capability.</p>
                   <p>
-                    Edit your flight plan on VATSIM: Add <span className="text-mono">D1</span> or{" "}
+                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">D1</span> or{" "}
                     <span className="text-mono">D2</span> to PBN.
                   </p>
                 </WarningTip>
