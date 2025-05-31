@@ -9,7 +9,7 @@ export const LanguageToggle = () => {
   const state = useRouterState();
   const pathname = state.location.pathname ?? getPathname();
   const pathnameAnotherLang =
-    getLocale() === "zh-cn" ? pathname.replace("/zh-cn", "/en") : pathname.replace("/en", "/zh-cn");
+    (getLocale() === "zh-cn" ? "/en" : "/zh-cn") + pathname.replace("/zh-cn", "/").replace("/en", "/");
 
   const onClick = () => {
     localStorage.setItem("vatprc-homepage-locale", getLocale() === "zh-cn" ? "en" : "zh-cn");
