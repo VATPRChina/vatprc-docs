@@ -19,9 +19,31 @@ const descriptions: Record<
   string,
   (flight: components["schemas"]["FlightDto"], warning: components["schemas"]["WarningMessage"]) => React.ReactNode
 > = {
-  no_rvsm: (flight) => `Equipment code "${flight.equipment}" does not contain "W" for RVSM.`,
-  no_rnav1: (flight) =>
-    `Equipment code "${flight.equipment}" does not contain "R" for RNAV1, or navigation performance code "${flight.navigation_performance}" does not contain "D1" or "D2" for RNAV1.`,
+  no_rvsm: () => (
+    <>
+      <p>Aircraft without RVSM capability will not be allowed to enter RVSM airspace.</p>
+      <p>
+        RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between
+        8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300
+        meters. To enter this airspace, your flight plan must include W in the Equipment field.
+      </p>
+    </>
+  ),
+  no_rnav1: () => (
+    <>
+      <p>
+        Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar
+        vectored. Conventional procedures may only be used with ATC approval.
+      </p>
+      <p>
+        RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the
+        flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation
+        routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival. Navigation
+        standards for en route phases are not checked at this time. For RNAV1, your flight plan must include P in the
+        Equipment field and D1 or D2 in the PBN/ field.
+      </p>
+    </>
+  ),
   rnp_ar: () => "",
   rnp_ar_without_rf: () => "",
   no_transponder: () => "Transponder field is empty.",
@@ -59,20 +81,16 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
           <AlertTitle>Flight looks good.</AlertTitle>
         </Alert>
       )}
-      {warnings?.map((warning) => (
-        <Alert
-          key={warning.message_code}
-          color={
-            ["no_preferred_route", "parse_route_failed", "rnp_ar", "rnp_ar_without_rf"].includes(warning.message_code)
-              ? "blue"
-              : "yellow"
-          }
-        >
-          <TbExclamationCircle />
-          <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
-          <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
-        </Alert>
-      ))}
+      {warnings?.map(
+        (warning) =>
+          messages[warning.message_code] && (
+            <Alert key={warning.message_code}>
+              <TbExclamationCircle />
+              <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
+              <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
+            </Alert>
+          ),
+      )}
     </div>
   );
 };

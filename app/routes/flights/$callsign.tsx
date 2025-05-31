@@ -1,3 +1,4 @@
+import { FlightWarnings } from "@/components/flight-warnings";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button-link";
@@ -59,6 +60,34 @@ const FplField = ({
   );
 };
 
+interface WarningTipProps {
+  enabled?: boolean;
+  text: string;
+  children?: React.ReactNode;
+}
+const WarningTip = ({ enabled, text, children, ...props }: WarningTipProps & React.ComponentProps<typeof Popover>) => {
+  if (!enabled) return null;
+
+  return (
+    <Popover {...props}>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+          <TbInfoCircleFilled />
+          {text}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-max">
+        {children}
+        <p className="hover:text-primary/80 underline">
+          <a href="https://community.vatprc.net/t/topic/9700" target="_blank" rel="noopener noreferrer">
+            Learn more
+          </a>
+        </p>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
 function RouteComponent() {
   const { callsign } = Route.useParams();
 
@@ -108,58 +137,28 @@ function RouteComponent() {
             {/* <FplField label="Wake Category" value="-" /> */}
             <FplField label="Equipment">
               <div className="flex items-center gap-2">
-                <span className="text-mono">{flight.equipment}</span>
-                {noRvsmWarning && (
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                        <TbInfoCircleFilled />
-                        RVSM
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-80">
-                      <p>The aircraft does not specify RVSM capability.</p>
-                      <p>
-                        Edit your flight plan on VATSIM: Add <span className="text-mono">W</span> to Equipment Code.
-                      </p>
-                    </PopoverContent>
-                  </Popover>
-                )}
-                {noRnav1Equip && (
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                        <TbInfoCircleFilled />
-                        RNAV1
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-80">
-                      <p>The aircraft does not specify RNAV1 capability.</p>
-                      <p>
-                        Edit your flight plan on VATSIM: Add <span className="text-mono">R</span> to Equipment Code.
-                      </p>
-                    </PopoverContent>
-                  </Popover>
-                )}
+                {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
+                <WarningTip enabled={!!noRvsmWarning} text="RVSM">
+                  <p>The aircraft does not specify RVSM capability.</p>
+                  <p>
+                    Edit your flight plan on VATSIM: Add <span className="text-mono">W</span> to Equipment Code.
+                  </p>
+                </WarningTip>
+                <WarningTip enabled={!!noRnav1Equip} text="RNAV1">
+                  <p>The aircraft does not specify RNAV1 capability.</p>
+                  <p>
+                    Edit your flight plan on VATSIM: Add <span className="text-mono">R</span> to Equipment Code.
+                  </p>
+                </WarningTip>
               </div>
             </FplField>
             <FplField label="Transponder">
               <div className="flex items-center gap-2">
-                <span className="text-mono">{flight.transponder}</span>
-                {noTransponder && (
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                        <TbInfoCircleFilled />
-                        Transponder
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-80">
-                      <p>Transponder field is empty.</p>
-                      <p>Edit your flight plan on VATSIM: Write your transponder code.</p>
-                    </PopoverContent>
-                  </Popover>
-                )}
+                {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
+                <WarningTip enabled={!!noTransponder} text="Transponder">
+                  <p>Transponder field is empty.</p>
+                  <p>Edit your flight plan on VATSIM: Write your transponder capability.</p>
+                </WarningTip>
               </div>
             </FplField>
             <FplField label="Departure" value={flight.departure} className="col-start-1" />
@@ -173,24 +172,14 @@ function RouteComponent() {
             {/* <FplField label="Endurance" value="-" /> */}
             <FplField label="PBN" tooltip="Performance Based Navigation">
               <div className="flex items-center gap-2">
-                <span className="text-mono">{flight.navigation_performance}</span>
-                {noRnav1Pbn && (
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                        <TbInfoCircleFilled />
-                        RNAV1
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-80">
-                      <p>The aircraft does not specify RNAV1 capability.</p>
-                      <p>
-                        Edit your flight plan on VATSIM: Add <span className="text-mono">D1</span> or{" "}
-                        <span className="text-mono">D2</span> to PBN.
-                      </p>
-                    </PopoverContent>
-                  </Popover>
-                )}
+                {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
+                <WarningTip enabled={!!noRnav1Pbn} text="RNAV1">
+                  <p>The aircraft does not specify RNAV1 capability.</p>
+                  <p>
+                    Edit your flight plan on VATSIM: Add <span className="text-mono">D1</span> or{" "}
+                    <span className="text-mono">D2</span> to PBN.
+                  </p>
+                </WarningTip>
               </div>
             </FplField>
             {/* <FplField label="CODE" value="-" tooltip="ADSB Hex Code" /> */}
@@ -210,7 +199,7 @@ function RouteComponent() {
             {/* <FplField label="RMK" value="-" tooltip="Additional Remarks" className="col-span-4" /> */}
           </div>
           <h2 className="text-2xl">Validation Result</h2>
-          {/* <FlightWarnings callsign={callsign} /> */}
+          <FlightWarnings callsign={callsign} />
         </div>
       )}
     </div>
