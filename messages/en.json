@@ -110,5 +110,7 @@
     "no_active_flght": "No active flight",
     "type_callsign": "Callsign"
   },
-  "nav_menu_division_api": "API Document"
+  "nav_menu_division_api": "API Document",
+  "layout_switch_chinese": "Switch to Chinese",
+  "layout_switch_english": "Switch to English"
 }

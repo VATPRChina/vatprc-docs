@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
+import { getLocalPathname } from "@/lib/i18n";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { cn } from "@/lib/utils";
@@ -245,7 +246,7 @@ const RootLayout: React.FC = () => {
 };
 
 export const Route = createRootRoute({
-  head: () => ({
+  head: (ctx) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
@@ -254,6 +255,8 @@ export const Route = createRootRoute({
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: rehypeCssUrl },
+      { rel: "alternate", hreflang: "en", href: getLocalPathname(ctx.match.pathname, "en") },
+      { rel: "alternate", hreflang: "zh-cn", href: getLocalPathname(ctx.match.pathname, "zh-cn") },
     ],
   }),
   component: RootLayout,

@@ -111,5 +111,7 @@
     "no_active_flght": "没有在线航班",
     "type_callsign": "呼号"
   },
-  "nav_menu_division_api": "API 文档"
+  "nav_menu_division_api": "API 文档",
+  "layout_switch_chinese": "切换到中文",
+  "layout_switch_english": "切换到英文"
 }

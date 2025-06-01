@@ -20,3 +20,13 @@ overwriteGetLocale(() => {
   const url = getURLServer();
   return url;
 });
+
+export const getLocalPathname = (pathname: string, locale: "en" | "zh-cn") => {
+  let normalized = pathname;
+  if (pathname.startsWith("/en")) {
+    normalized = pathname.slice("/en".length);
+  } else if (pathname.startsWith("/zh-cn")) {
+    normalized = pathname.slice("/zh-cn".length);
+  }
+  return `/${locale}${normalized}`;
+};
