@@ -246,7 +246,7 @@ const RootLayout: React.FC = () => {
 };
 
 export const Route = createRootRoute({
-  head: (ctx) => ({
+  head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
@@ -255,8 +255,8 @@ export const Route = createRootRoute({
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: rehypeCssUrl },
-      { rel: "alternate", hreflang: "en", href: getLocalPathname(ctx.match.pathname, "en") },
-      { rel: "alternate", hreflang: "zh-cn", href: getLocalPathname(ctx.match.pathname, "zh-cn") },
+      // { rel: "alternate", hreflang: "en", href: getLocalPathname(ctx.match.pathname, "en") },
+      // { rel: "alternate", hreflang: "zh-cn", href: getLocalPathname(ctx.match.pathname, "zh-cn") },
     ],
   }),
   component: RootLayout,
