@@ -121,7 +121,8 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         title: event.name,
         isExam: event.type !== "Event",
       })) ?? []),
-  ].filter((e) => isBefore(e.start, addDays(Date.now(), 30)));
+  ];
+  // .filter((e) => isBefore(e.start, addDays(Date.now(), 30)));
 
   const scheduledEvents = events.filter((e) => isAfter(e.start, Date.now()));
 
