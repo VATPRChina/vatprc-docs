@@ -57,7 +57,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
             parse(c.end, "dd HH:mm", Date.now(), { in: utc }),
           ]}
         />
-      ))}{" "}
+      ))}
       {(!data || data?.controllers?.length === 0) && <span>{m["Legacy_no-atc-online"]()}</span>}
     </div>
   );

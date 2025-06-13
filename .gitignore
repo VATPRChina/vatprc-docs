@@ -177,3 +177,6 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node,nextjs
+
+# Sentry Config File
+.env.sentry-build-plugin

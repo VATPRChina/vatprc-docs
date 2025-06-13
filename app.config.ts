@@ -1,4 +1,5 @@
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig } from "@tanstack/react-start/config";
 import tsConfigPaths from "vite-tsconfig-paths";
 
@@ -22,7 +23,12 @@ export default defineConfig({
           },
         ],
       }),
+      sentryVitePlugin({
+        org: "xfoxfu",
+        project: "vatprc-homepage",
+      }),
     ],
+    build: { sourcemap: true },
   },
   server: {
     devProxy: {
