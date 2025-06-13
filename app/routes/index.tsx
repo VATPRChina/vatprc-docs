@@ -7,8 +7,7 @@ import { OnlinePilots } from "@/components/online-pilots";
 import { RecentEvents } from "@/components/recent-events";
 import { Button } from "@/components/ui/button";
 import { m } from "@/lib/i18n/messages";
-import { getPathname } from "@/lib/utils";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
@@ -162,7 +161,11 @@ const IndexWithoutLocale: React.FC = () => {
 };
 
 function RouteComponent() {
-  if (getPathname().startsWith("/en") || getPathname().startsWith("/zh-cn")) {
+  const {
+    location: { pathname },
+  } = useRouterState();
+
+  if (pathname.startsWith("/en") || pathname.startsWith("/zh-cn")) {
     return <IndexWithLocale />;
   }
   return <IndexWithoutLocale />;
