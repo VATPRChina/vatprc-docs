@@ -1,7 +1,8 @@
 import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { utc } from "@date-fns/utc";
+import { format, parse } from "date-fns";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
 
@@ -51,7 +52,10 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
           key={c.callsign}
           callsign={c.callsign}
           name={c.name}
-          schedule={[new Date(c.start), new Date(c.end)]}
+          schedule={[
+            parse(c.start, "dd HH:mm", Date.now(), { in: utc }),
+            parse(c.end, "dd HH:mm", Date.now(), { in: utc }),
+          ]}
         />
       ))}{" "}
       {(!data || data?.controllers?.length === 0) && <span>{m["Legacy_no-atc-online"]()}</span>}
