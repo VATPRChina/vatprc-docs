@@ -1,5 +1,5 @@
 import { buildMarkdownDoc } from "@/components/markdown-doc";
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, serverOnly } from "@tanstack/react-start";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -12,7 +12,7 @@ export interface DocumentEntry {
   order?: number;
 }
 
-const findAllDocuments = async (prefix = "docs"): Promise<DocumentEntry[]> => {
+const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
   for await (const entry of dirEntries) {
@@ -66,7 +66,7 @@ const findAllDocuments = async (prefix = "docs"): Promise<DocumentEntry[]> => {
     return b.title.localeCompare(a.title);
   });
   return documents;
-};
+});
 
 export const getAllDocuments = createServerFn().handler(async () => findAllDocuments());
 
