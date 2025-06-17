@@ -12,7 +12,6 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
-import { getLocalPathname } from "@/lib/i18n";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { cn } from "@/lib/utils";
@@ -168,7 +167,7 @@ const NavMenu: React.FC = () => {
         {contents.map((content) => (
           <NavigationMenuItem key={content.title}>
             <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-            <NavigationMenuContent asChild>{content.content}</NavigationMenuContent>
+            <NavigationMenuContent>{content.content}</NavigationMenuContent>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
