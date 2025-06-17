@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "build": "paraglide-js compile --project ./project.inlang --outdir ./app/lib/i18n && vite build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/i18n && vite build",
     "start": "vite start",
     "lint": "eslint 'app/**/*.{ts,tsx}'",
     "format": "prettier --write .",
