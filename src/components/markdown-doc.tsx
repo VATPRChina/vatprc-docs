@@ -62,7 +62,7 @@ export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents
 };
 
 export const buildMarkdownDoc = async (source: string) => {
-  source = source.replaceAll("<-", "\\<-");
+  source = source.replaceAll("<-", "{'<-'}");
 
   const code = String(
     await compile(source, {

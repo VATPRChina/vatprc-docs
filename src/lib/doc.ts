@@ -23,16 +23,28 @@ const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<Doc
     ) {
       const filePath = path.resolve(entry.parentPath, entry.name);
       const fileContent = await fs.readFile(filePath, "utf-8");
-      const file = await buildMarkdownDoc(fileContent);
+      try {
+        const file = await buildMarkdownDoc(fileContent);
 
-      documents.push({
-        title: file.title,
-        path: filePath,
-        children: [],
-        webPath: "/docs/" + path.relative("docs", filePath).replace(/\.mdx?$/, ""),
-        fileName: path.basename(filePath, path.extname(filePath)),
-        order: typeof file.frontmatter?.order === "number" ? file.frontmatter?.order : undefined,
-      });
+        documents.push({
+          title: file.title,
+          path: filePath,
+          children: [],
+          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.mdx?$/, ""),
+          fileName: path.basename(filePath, path.extname(filePath)),
+          order: typeof file.frontmatter?.order === "number" ? file.frontmatter?.order : undefined,
+        });
+      } catch (error) {
+        console.error(`Error processing file ${entry.name}:`, error);
+        documents.push({
+          title: entry.name,
+          path: filePath,
+          children: [],
+          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.mdx?$/, ""),
+          fileName: path.basename(filePath, path.extname(filePath)),
+          order: undefined,
+        });
+      }
     } else if (entry.isDirectory()) {
       const indexFilePath = path.resolve(entry.parentPath, entry.name, "index.md");
       const indexExists = await fs
