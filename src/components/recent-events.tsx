@@ -7,7 +7,7 @@ import { utc } from "@date-fns/utc";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import { useQuery } from "@tanstack/react-query";
-import { addDays, format, intlFormatDistance, isAfter, isBefore } from "date-fns";
+import { format, intlFormatDistance, isAfter } from "date-fns";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
 

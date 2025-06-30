@@ -4,41 +4,6 @@
  */
 
 export interface paths {
-  "/debug/routes": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description OK */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "text/plain": string;
-          };
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/auth/authorize": {
     parameters: {
       query?: never;
@@ -1087,6 +1052,142 @@ export interface paths {
         query?: {
           id?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example INTERNAL_SERVER_ERROR
+               */
+              error_code: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example urn:vatprc-uniapi-error:internal-server-error
+               */
+              type: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/homepage/events/vatsim": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example INTERNAL_SERVER_ERROR
+               */
+              error_code: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example urn:vatprc-uniapi-error:internal-server-error
+               */
+              type: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/trackaudio/mandatory_version": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
         header?: never;
         path?: never;
         cookie?: never;
@@ -3138,16 +3239,6 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** @description List of warnings:
-     *
-     *     - `no_rvsm`: The aircraft does not support RVSM.
-     *     - `no_rnav1`: The aircraft does not support RNAV1.
-     *     - `rnp_ar`: The aircraft supports RNP AR with RF.
-     *     - `rnp_ar_without_rf`: The aircraft supports RNP AR without RF.
-     *     - `no_transponder`: The aircraft does not have a transponder.
-     *     - `no_preferred_route`: There is no preferred route designated by CAAC.
-     *     - `not_preferred_route`: The flight does not follow the preferred route designated by CAAC.
-     *        The parameter is the preferred route. */
     get: {
       parameters: {
         query?: never;
@@ -3166,6 +3257,78 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["WarningMessage"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example INTERNAL_SERVER_ERROR
+               */
+              error_code: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @example urn:vatprc-uniapi-error:internal-server-error
+               */
+              type: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/by-callsign/{callsign}/__route": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          callsign: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["RouteToken"][];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3512,12 +3675,17 @@ export interface components {
       raw_route: string;
       __simplified_route: string;
       aircraft: string;
+      __normalized_route?: string | null;
     };
     FutureControllerDto: {
       callsign: string;
       name: string;
       start: string;
+      /** Format: date-time */
+      start_utc: string;
       end: string;
+      /** Format: date-time */
+      end_utc: string;
     };
     LoginResDto: {
       access_token: string;
@@ -3544,8 +3712,16 @@ export interface components {
       arrival: string | null;
       aircraft: string | null;
     };
+    RouteToken: {
+      kind: components["schemas"]["RouteTokenKind"];
+      value: string;
+      id: components["schemas"]["Ulid"];
+    };
+    /** @enum {unknown} */
+    RouteTokenKind: "SID" | "STAR" | "AIRWAY" | "AIRPORT" | "VHF" | "NDB" | "WAYPOINT" | "GEO_COORD" | "UNKNOWN";
     SectorPermissionResponse: {
       has_permission: boolean;
+      sector_type: string;
     };
     TokenDto: {
       user: components["schemas"]["UserDto"];
@@ -3614,9 +3790,21 @@ export interface components {
       future_controllers: components["schemas"]["FutureControllerDto"][];
     };
     WarningMessage: {
-      message_code: string;
+      message_code: components["schemas"]["WarningMessageCode"];
       parameter?: string | null;
     };
+    /** @enum {unknown} */
+    WarningMessageCode:
+      | "no_rvsm"
+      | "no_rnav1"
+      | "no_rnav1_equipment"
+      | "no_rnav1_pbn"
+      | "rnp_ar"
+      | "rnp_ar_without_rf"
+      | "no_transponder"
+      | "no_preferred_route"
+      | "not_preferred_route"
+      | "parse_route_failed";
   };
   responses: never;
   parameters: never;

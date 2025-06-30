@@ -2,7 +2,7 @@ import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
-import { format, parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
 
@@ -13,7 +13,7 @@ const Controller: React.FC<{
   frequency?: string;
 }> = ({ callsign, name, frequency, schedule }) => {
   return (
-    <div className="hover:bg-secondary flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md">
+    <div className="hover:bg-secondary flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4">
       <span className={cn("text-xl font-bold", schedule ? "text-blue-900" : "text-red-900")}>{callsign}</span>
       <span>{name}</span>
       {frequency && <span>{frequency}</span>}
@@ -21,13 +21,13 @@ const Controller: React.FC<{
         <div className="flex gap-1">
           <span>{format(schedule[0], "MM-dd")}</span>
           <span>
-            {format(schedule[0], "HHmm")}
-            <span className="text-sm font-light">L</span>
+            {format(schedule[0], "HHmm", { in: utc })}
+            <span className="text-sm font-light">Z</span>
           </span>
           <span>-</span>
           <span>
-            {format(schedule[1], "HHmm")}
-            <span className="text-sm font-light">L</span>
+            {format(schedule[1], "HHmm", { in: utc })}
+            <span className="text-sm font-light">Z</span>
           </span>
         </div>
       )}
@@ -44,6 +44,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
 
   return (
     <div className={cn(className, "flex flex-wrap gap-4")}>
+      {(!data || data?.controllers?.length === 0) && <span className="basis-full">{m["Legacy_no-atc-online"]()}</span>}
       {data?.controllers?.map((c) => (
         <Controller key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
       ))}
@@ -52,13 +53,9 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
           key={c.callsign}
           callsign={c.callsign}
           name={c.name}
-          schedule={[
-            parse(c.start, "dd HH:mm", Date.now(), { in: utc }),
-            parse(c.end, "dd HH:mm", Date.now(), { in: utc }),
-          ]}
+          schedule={[parseISO(c.start_utc), parseISO(c.end_utc)]}
         />
       ))}
-      {(!data || data?.controllers?.length === 0) && <span>{m["Legacy_no-atc-online"]()}</span>}
     </div>
   );
 };
