@@ -13,9 +13,6 @@ import { TbArrowRight, TbMail } from "react-icons/tb";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
-  head: () => ({
-    meta: [{ name: "robots", content: "noindex" }],
-  }),
 });
 
 const IndexWithLocale: React.FC = () => {

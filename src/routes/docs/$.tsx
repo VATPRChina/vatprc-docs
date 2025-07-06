@@ -17,6 +17,9 @@ export const Route = createFileRoute("/docs/$")({
       }
     }
   },
+  head: () => ({
+    meta: [{ name: "robots", content: "noindex" }],
+  }),
 });
 
 function RouteComponent() {
