@@ -4,19 +4,21 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
-const messages: Record<string, string> = {
+const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
   no_rvsm: "The aircraft does not specify RVSM capability.",
   no_rnav1: "The aircraft does not specify RNAV1 capability.",
   rnp_ar: "The aircraft specifies RNP AR capability with RF.",
   rnp_ar_without_rf: "The aircraft specifies RNP AR capability without RF.",
   no_transponder: "The aircraft does not specify transponder capability.",
-  no_preferred_route: "There is no CAAC preferred route for the aircraft.",
-  not_preferred_route: "The aircraft does not follow the CAAC preferred route.",
-  parse_route_failed: "The server failed to parse planned route.",
+  no_rnav1_equipment: "The aircraft does not specify RNAV1 capability.",
+  no_rnav1_pbn: "The aircraft does not specify RNAV1 capability.",
+  route_direct_segment: "The route contains a direct leg. Please ensure that the direct segment is valid.",
+  route_leg_direction: "The route contains a leg with an invalid direction.",
+  airway_require_approval: "The route contains an airway that requires controller approval.",
 };
 
 const descriptions: Record<
-  string,
+  components["schemas"]["WarningMessageCode"],
   (flight: components["schemas"]["FlightDto"], warning: components["schemas"]["WarningMessage"]) => React.ReactNode
 > = {
   no_rvsm: () => (
@@ -47,15 +49,24 @@ const descriptions: Record<
   rnp_ar: () => "",
   rnp_ar_without_rf: () => "",
   no_transponder: () => "Transponder field is empty.",
-  no_preferred_route: (flight) =>
-    `Our database does not contain a preferred route for the flight ${flight.departure}-${flight.arrival}. Please follow controller instructions.`,
-  not_preferred_route: (flight, message) =>
-    `The route in flight plan "${flight.__simplified_route}" does not match the preferred route "${(
-      message.parameter?.split(";") ?? []
-    ).join('" or "')}".`,
-  parse_route_failed: (flight, message) =>
-    `Failed to parse the flight route "${flight.raw_route}" due to: ${message.parameter}`,
+  no_rnav1_equipment: function (): React.ReactNode {
+    return null;
+  },
+  no_rnav1_pbn: function (): React.ReactNode {
+    return null;
+  },
+  route_direct_segment: function (): React.ReactNode {
+    return null;
+  },
+  route_leg_direction: function (): React.ReactNode {
+    return null;
+  },
+  airway_require_approval: function (): React.ReactNode {
+    return null;
+  },
 };
+
+const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = ["rnp_ar", "rnp_ar_without_rf"];
 
 export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   const { data: flight } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
@@ -75,7 +86,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
           <AlertTitle>{error?.message}</AlertTitle>
         </Alert>
       )}
-      {(warnings?.length ?? 0) === 0 && (
+      {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert>
           <TbCheck />
           <AlertTitle>Flight looks good.</AlertTitle>

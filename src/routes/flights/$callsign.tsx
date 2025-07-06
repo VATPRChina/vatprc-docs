@@ -221,18 +221,27 @@ function RouteComponent() {
           <h2 className="text-2xl">Validation Result</h2>
           <FlightWarnings callsign={callsign} />
           <h2 className="text-2xl">Flight Route</h2>
-          <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1">
+          <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-1">
             <div className="contents">
               <span className="text-muted-foreground col-1 text-right font-light">From</span>
               <span className="text-muted-foreground col-2 text-center font-light">Via</span>
               <span className="text-muted-foreground col-3 text-left font-light">To</span>
             </div>
             {route &&
-              route.map((r) => (
-                <div key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`} className="contents font-mono">
-                  <span className="col-1 text-right">{r.from.identifier}</span>
-                  <span className="col-2 text-center">{r.leg_identifier}</span>
-                  <span className="col-3 text-left">{r.to.identifier}</span>
+              route.map((r, i) => (
+                <div key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`} className="contents">
+                  <span className="col-1 text-right font-mono">{r.from.identifier}</span>
+                  <span className="col-2 text-center font-mono">{r.leg_identifier}</span>
+                  <span className="col-3 text-left font-mono">{r.to.identifier}</span>
+                  <div className="text-destructive self-baseline text-sm">
+                    {warnings?.find(
+                      (w) => w.message_code === "airway_require_approval" && w.parameter === i.toString(),
+                    ) && "Airway requires controller approval."}
+                    {warnings?.find((w) => w.message_code === "route_direct_segment" && w.parameter === i.toString()) &&
+                      "Direct segment needs caution."}
+                    {warnings?.find((w) => w.message_code === "route_leg_direction" && w.parameter === i.toString()) &&
+                      "Direction violates airway restriction."}
+                  </div>
                 </div>
               ))}
           </div>
