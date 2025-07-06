@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
+import { getLocale } from "@/lib/i18n/runtime";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -79,6 +80,9 @@ interface WarningTipProps {
 const WarningTip = ({ enabled, text, children, ...props }: WarningTipProps & React.ComponentProps<typeof Popover>) => {
   if (!enabled) return null;
 
+  const helpLink =
+    getLocale() == "en" ? "https://community.vatprc.net/t/topic/9700" : "https://community.vatprc.net/t/topic/9695";
+
   return (
     <Popover {...props}>
       <PopoverTrigger asChild>
@@ -90,7 +94,7 @@ const WarningTip = ({ enabled, text, children, ...props }: WarningTipProps & Rea
       <PopoverContent className="w-max">
         {children}
         <p className="hover:text-primary/80 underline">
-          <a href="https://community.vatprc.net/t/topic/9700" target="_blank" rel="noopener noreferrer">
+          <a href={helpLink} target="_blank" rel="noopener noreferrer">
             Learn more
           </a>
         </p>
