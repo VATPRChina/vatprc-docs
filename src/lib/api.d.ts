@@ -3304,7 +3304,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/api/flights/by-callsign/{callsign}/__route": {
+  "/api/flights/by-callsign/{callsign}/route": {
     parameters: {
       query?: never;
       header?: never;
@@ -3328,7 +3328,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["RouteToken"][];
+            "application/json": components["schemas"]["FlightLeg"][];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3673,9 +3673,15 @@ export interface components {
       navigation_performance: string;
       transponder: string;
       raw_route: string;
-      __simplified_route: string;
       aircraft: string;
-      __normalized_route?: string | null;
+    };
+    FlightFix: {
+      identifier: string;
+    };
+    FlightLeg: {
+      from: components["schemas"]["FlightFix"];
+      to: components["schemas"]["FlightFix"];
+      leg_identifier: string;
     };
     FutureControllerDto: {
       callsign: string;
@@ -3712,13 +3718,6 @@ export interface components {
       arrival: string | null;
       aircraft: string | null;
     };
-    RouteToken: {
-      kind: components["schemas"]["RouteTokenKind"];
-      value: string;
-      id: components["schemas"]["Ulid"];
-    };
-    /** @enum {unknown} */
-    RouteTokenKind: "SID" | "STAR" | "AIRWAY" | "AIRPORT" | "VHF" | "NDB" | "WAYPOINT" | "GEO_COORD" | "UNKNOWN";
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;

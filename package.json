@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/i18n && vite build",
+    "build:api": "openapi-typescript https://uniapi.vatprc.net/openapi/v1.json -o src/lib/api.d.ts",
     "start": "vite start",
     "lint": "eslint 'app/**/*.{ts,tsx}'",
     "format": "prettier --write .",

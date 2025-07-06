@@ -114,6 +114,9 @@ function RouteComponent() {
   const { data: warnings } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/warnings", {
     params: { path: { callsign } },
   });
+  const { data: route } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/route", {
+    params: { path: { callsign } },
+  });
 
   const noRvsmWarning = warnings?.find((w) => w.message_code === "no_rvsm");
   const noRnav1Equip = warnings?.find((w) => w.message_code === "no_rnav1_equipment");
@@ -217,6 +220,22 @@ function RouteComponent() {
           </div>
           <h2 className="text-2xl">Validation Result</h2>
           <FlightWarnings callsign={callsign} />
+          <h2 className="text-2xl">Flight Route</h2>
+          <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1">
+            <div className="contents">
+              <span className="text-muted-foreground col-1 text-right font-light">From</span>
+              <span className="text-muted-foreground col-2 text-center font-light">Via</span>
+              <span className="text-muted-foreground col-3 text-left font-light">To</span>
+            </div>
+            {route &&
+              route.map((r) => (
+                <div key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`} className="contents font-mono">
+                  <span className="col-1 text-right">{r.from.identifier}</span>
+                  <span className="col-2 text-center">{r.leg_identifier}</span>
+                  <span className="col-3 text-left">{r.to.identifier}</span>
+                </div>
+              ))}
+          </div>
         </div>
       )}
     </div>
