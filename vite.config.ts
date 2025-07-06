@@ -12,7 +12,7 @@ export default defineConfig({
     tanstackStart(),
     paraglideVitePlugin({
       project: "./project.inlang",
-      outdir: "./app/lib/i18n",
+      outdir: "./src/lib/i18n",
       strategy: ["url", "baseLocale"],
       urlPatterns: [
         {
