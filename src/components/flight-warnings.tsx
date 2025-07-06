@@ -67,6 +67,8 @@ const descriptions: Record<
 };
 
 const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = ["rnp_ar", "rnp_ar_without_rf"];
+const uniqWith = <T,>(arr: T[], fn: (a: T, b: T) => boolean) =>
+  arr.filter((element, index) => arr.findIndex((step) => fn(element, step)) === index);
 
 export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   const { data: flight } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
@@ -92,16 +94,17 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
           <AlertTitle>Flight looks good.</AlertTitle>
         </Alert>
       )}
-      {warnings?.map(
-        (warning) =>
-          messages[warning.message_code] && (
-            <Alert key={warning.message_code}>
-              <TbExclamationCircle />
-              <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
-              <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
-            </Alert>
-          ),
-      )}
+      {warnings &&
+        uniqWith(warnings, (w1, w2) => w1.message_code === w2.message_code).map(
+          (warning) =>
+            messages[warning.message_code] && (
+              <Alert key={warning.message_code}>
+                <TbExclamationCircle />
+                <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
+                <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
+              </Alert>
+            ),
+        )}
     </div>
   );
 };
