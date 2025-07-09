@@ -113,5 +113,6 @@
   },
   "nav_menu_division_api": "API 文档",
   "layout_switch_chinese": "切换到中文",
-  "layout_switch_english": "切换到英文"
+  "layout_switch_english": "切换到英文",
+  "nav_menu_meeting_notes": "会议记录"
 }

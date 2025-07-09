@@ -75,6 +75,9 @@ const NavMenu: React.FC = () => {
           <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
             {m["Legacy_nav-menu_logo-pack"]()}
           </NavMenuLink>
+          <NavMenuLink href="https://community.vatprc.net/t/topic/10542" external>
+            {m["nav_menu_meeting_notes"]()}
+          </NavMenuLink>
           <hr className="col-span-full" />
           <NavMenuLink href="https://community.vatprc.net" external>
             {m["Legacy_nav-menu_forum"]()}
