@@ -7,6 +7,9 @@ import { ChangeEventHandler, useState } from "react";
 
 export const Route = createFileRoute("/flights/")({
   component: RouteComponent,
+  head: () => ({
+    meta: [{ title: `${m.flight_plan_checker()} - VATPRC` }],
+  }),
 });
 
 function RouteComponent() {

@@ -11,6 +11,7 @@ export const Route = createFileRoute("/airspace/sop")({
   loader() {
     return getAllDocuments();
   },
+  head: () => ({ meta: [{ title: m["pages_airspace_sop_title"]() }] }),
 });
 
 function Page() {

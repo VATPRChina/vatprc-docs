@@ -114,5 +114,6 @@
   "layout_switch_chinese": "Switch to Chinese",
   "layout_switch_english": "Switch to English",
   "nav_menu_meeting_notes": "Meeting Notes",
-  "doc_fail_to_load": "Failed to load document"
+  "doc_fail_to_load": "Failed to load document",
+  "route_flights_callsign_title": "Flight Plan"
 }

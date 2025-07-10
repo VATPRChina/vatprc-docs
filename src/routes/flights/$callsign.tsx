@@ -14,6 +14,12 @@ import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
+  head: (ctx) => ({
+    meta: [
+      { name: "robots", content: "noindex" },
+      { title: `${ctx.params.callsign} - ${m.route_flights_callsign_title()}` },
+    ],
+  }),
 });
 
 const EditFpl = () => (

@@ -4,6 +4,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/controller-list")({
   component: Page,
+  head: () => ({
+    meta: [{ title: m["Legacy_nav-menu_controller-list"]() }],
+  }),
 });
 
 function Page() {

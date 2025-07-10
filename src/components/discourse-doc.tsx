@@ -5,6 +5,7 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { useQuery } from "@tanstack/react-query";
+import { AnyRouteMatch } from "@tanstack/react-router";
 import React from "react";
 import { TbAlertCircle } from "react-icons/tb";
 
@@ -17,18 +18,20 @@ export interface PostMeta {
 
 const fetcher = async ([, postId]: [string, string]) => {
   const postPath = `${postId}/1`;
-  const meta = await fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
-    if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status}`);
-    }
-    return res.json() as Promise<PostMeta>;
-  });
-  const raw = await fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
-    if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status}`);
-    }
-    return res.text();
-  });
+  const [meta, raw] = await Promise.all([
+    fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
+      if (!res.ok) {
+        throw new Error(`Failed to fetch: ${res.status}`);
+      }
+      return res.json() as Promise<PostMeta>;
+    }),
+    await fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
+      if (!res.ok) {
+        throw new Error(`Failed to fetch: ${res.status}`);
+      }
+      return res.text();
+    }),
+  ]);
 
   let contentRes = raw;
   let i = 0;
@@ -74,3 +77,20 @@ export const DiscourseDocument: React.FC<{
     </MarkdownDoc>
   );
 };
+
+export const getDiscourseDocumentMeta =
+  (cn: string, en: string): (() => Promise<{ meta?: AnyRouteMatch["meta"] }>) =>
+  async () => {
+    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+    try {
+      const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch: ${res.status}`);
+        }
+        return res.json() as Promise<PostMeta>;
+      });
+      return { meta: [{ title: `${meta.title} - VATPRC` }] };
+    } catch {
+      return {};
+    }
+  };
