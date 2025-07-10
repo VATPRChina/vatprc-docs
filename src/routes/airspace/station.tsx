@@ -2,11 +2,5 @@ import { DiscourseDocument } from "@/components/discourse-doc";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/airspace/station")({
-  component: Page,
+  component: () => <DiscourseDocument cn="8884" en="8884" />,
 });
-
-function Page() {
-  return <DiscourseDocument cn="8884" en="8884" />;
-}
-
-export default Page;
