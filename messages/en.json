@@ -113,5 +113,6 @@
   "nav_menu_division_api": "API Document",
   "layout_switch_chinese": "Switch to Chinese",
   "layout_switch_english": "Switch to English",
-  "nav_menu_meeting_notes": "Meeting Notes"
+  "nav_menu_meeting_notes": "Meeting Notes",
+  "doc_fail_to_load": "Failed to load document"
 }
