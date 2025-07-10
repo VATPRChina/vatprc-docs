@@ -19,6 +19,7 @@ import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as DivisionStaffRouteImport } from './routes/division/staff'
 import { Route as DivisionPrivacyRouteImport } from './routes/division/privacy'
+import { Route as DivisionMeetingRouteImport } from './routes/division/meeting'
 import { Route as DivisionIntroductionRouteImport } from './routes/division/introduction'
 import { Route as DivisionApiRouteImport } from './routes/division/api'
 import { Route as ControllerVisitingAndTransferringRouteImport } from './routes/controller/visiting-and-transferring'
@@ -81,6 +82,11 @@ const DivisionStaffRoute = DivisionStaffRouteImport.update({
 const DivisionPrivacyRoute = DivisionPrivacyRouteImport.update({
   id: '/division/privacy',
   path: '/division/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DivisionMeetingRoute = DivisionMeetingRouteImport.update({
+  id: '/division/meeting',
+  path: '/division/meeting',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DivisionIntroductionRoute = DivisionIntroductionRouteImport.update({
@@ -168,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
   '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
+  '/division/meeting': typeof DivisionMeetingRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
   '/docs/$': typeof DocsSplatRoute
@@ -193,6 +200,7 @@ export interface FileRoutesByTo {
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
   '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
+  '/division/meeting': typeof DivisionMeetingRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
   '/docs/$': typeof DocsSplatRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   '/controller/visiting-and-transferring': typeof ControllerVisitingAndTransferringRoute
   '/division/api': typeof DivisionApiRoute
   '/division/introduction': typeof DivisionIntroductionRoute
+  '/division/meeting': typeof DivisionMeetingRoute
   '/division/privacy': typeof DivisionPrivacyRoute
   '/division/staff': typeof DivisionStaffRoute
   '/docs/$': typeof DocsSplatRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/controller/visiting-and-transferring'
     | '/division/api'
     | '/division/introduction'
+    | '/division/meeting'
     | '/division/privacy'
     | '/division/staff'
     | '/docs/$'
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/controller/visiting-and-transferring'
     | '/division/api'
     | '/division/introduction'
+    | '/division/meeting'
     | '/division/privacy'
     | '/division/staff'
     | '/docs/$'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/controller/visiting-and-transferring'
     | '/division/api'
     | '/division/introduction'
+    | '/division/meeting'
     | '/division/privacy'
     | '/division/staff'
     | '/docs/$'
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   ControllerVisitingAndTransferringRoute: typeof ControllerVisitingAndTransferringRoute
   DivisionApiRoute: typeof DivisionApiRoute
   DivisionIntroductionRoute: typeof DivisionIntroductionRoute
+  DivisionMeetingRoute: typeof DivisionMeetingRoute
   DivisionPrivacyRoute: typeof DivisionPrivacyRoute
   DivisionStaffRoute: typeof DivisionStaffRoute
   DocsSplatRoute: typeof DocsSplatRoute
@@ -403,6 +416,13 @@ declare module '@tanstack/react-router' {
       path: '/division/privacy'
       fullPath: '/division/privacy'
       preLoaderRoute: typeof DivisionPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/division/meeting': {
+      id: '/division/meeting'
+      path: '/division/meeting'
+      fullPath: '/division/meeting'
+      preLoaderRoute: typeof DivisionMeetingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/division/introduction': {
@@ -515,6 +535,7 @@ const rootRouteChildren: RootRouteChildren = {
     ControllerVisitingAndTransferringRoute,
   DivisionApiRoute: DivisionApiRoute,
   DivisionIntroductionRoute: DivisionIntroductionRoute,
+  DivisionMeetingRoute: DivisionMeetingRoute,
   DivisionPrivacyRoute: DivisionPrivacyRoute,
   DivisionStaffRoute: DivisionStaffRoute,
   DocsSplatRoute: DocsSplatRoute,
