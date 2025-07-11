@@ -2,6 +2,7 @@ import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";
 import "@/lib/i18n";
 import * as Sentry from "@sentry/react";
+import { wrapCreateRootRouteWithSentry } from "@sentry/tanstackstart-react";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 
 Sentry.init({
@@ -20,12 +21,14 @@ const getRouterBasepath = (pathname: string) => {
 };
 
 export function createRouter() {
-  const router = createTanStackRouter({
-    routeTree,
-    scrollRestoration: true,
-    defaultNotFoundComponent: () => <div>Not Found</div>,
-    basepath: getRouterBasepath(getPathname()),
-  });
+  const router = wrapCreateRootRouteWithSentry(
+    createTanStackRouter({
+      routeTree,
+      scrollRestoration: true,
+      defaultNotFoundComponent: () => <div>Not Found</div>,
+      basepath: getRouterBasepath(getPathname()),
+    }),
+  );
 
   return router;
 }
