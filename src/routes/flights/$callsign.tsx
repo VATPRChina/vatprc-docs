@@ -30,7 +30,7 @@ const EditFpl = () => (
     rel="noopener noreferrer"
     className="hover:text-primary/80 underline"
   >
-    VATSIM
+    {m.flight_edit_flight_plan()}
   </a>
 );
 
@@ -70,7 +70,7 @@ const FplField = ({
             <span className="text-muted-foreground min-w-8">{value}</span>
           </TooltipTrigger>
           <TooltipContent side="right">
-            <p>Check at VATSIM</p>
+            <p>{m["flight_check_at_vatsim"]()}</p>
           </TooltipContent>
         </Tooltip>
       )}
@@ -90,7 +90,7 @@ const AircraftCodeCommonHelp = () => (
     </p>
     <p className="hover:text-primary/80 underline">
       <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
-        Learn more
+        {m["flight_learn_more"]()}
       </a>
     </p>
   </>
@@ -99,7 +99,7 @@ const AircraftCodeCommonHelp = () => (
 const ChinaRvsmHelp = () => (
   <>
     <p className="hover:text-primary/80 underline">
-      <Link to="/airspace/rvsm">Learn more about China RVSM</Link>
+      <Link to="/airspace/rvsm">{m["flight_learn_rvsm"]()}</Link>
     </p>
   </>
 );
@@ -133,18 +133,24 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
 > = {
   no_rvsm: () => (
     <>
-      <p>The aircraft does not specify RVSM capability.</p>
+      <p>{m["warning_title_no_rvsm"]()}</p>
       <p>
-        Edit your flight plan on <EditFpl />: Add <span className="text-mono">W</span> to Equipment Code.
+        <EditFpl />
+        {m["warning_popover_action_add"]()}
+        <span className="text-mono">W</span>
+        {m["warning_popover_action_add_to_equip"]()}
       </p>
       <AircraftCodeCommonHelp />
     </>
   ),
   no_rnav1: () => (
     <>
-      <p>The aircraft does not specify RNAV1 capability.</p>
+      <p>{m.warning_title_no_rnav1()}</p>
       <p>
-        Edit your flight plan on <EditFpl />: Add <span className="text-mono">R</span> to Equipment Code.
+        <EditFpl />
+        {m["warning_popover_action_add"]()}
+        <span className="text-mono">R</span>
+        {m["warning_popover_action_add_to_equip"]()}
       </p>
       <AircraftCodeCommonHelp />
     </>
@@ -153,9 +159,10 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   rnp_ar_without_rf: () => null,
   no_transponder: () => (
     <>
-      <p>Transponder field is empty.</p>
+      <p>{m["warning_description_transponder"]()}</p>
       <p>
-        Edit your flight plan on <EditFpl />: Write your transponder capability.
+        <EditFpl />
+        {m["warning_popover_no_transponder_action"]()}
       </p>
       <AircraftCodeCommonHelp />
     </>
@@ -167,29 +174,40 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   cruising_level_mismatch: ({ warning }) => (
     <>
       <p>
-        The cruising level type does not meet the requirement of the route. Cruising level should be{" "}
+        {m["warning_popover_cruising_level_mismatch"]()}
         {CRUISING_LEVEL_TEXT[warning.parameter ?? "Contact ATC"]}.
       </p>
       <p>
-        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+        <EditFpl />
+        {m["warning_popover_action_cruising_level"]()}
       </p>
       <ChinaRvsmHelp />
     </>
   ),
   cruising_level_too_low: ({ warning }) => (
     <>
-      <p>The cruising level is too low for route. The minimum is {warning.parameter} feet.</p>
       <p>
-        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+        {m["warning_popover_cruising_level_too_low_1"]()}
+        {warning.parameter}
+        {m["warning_popover_cruising_level_too_low_2"]()}
+      </p>
+      <p>
+        <EditFpl />
+        {m["warning_popover_action_cruising_level"]()}
       </p>
     </>
   ),
   cruising_level_not_allowed: ({ warning }) => (
     <>
-      <p>The cruising level is not permitted for the route.</p>
-      <p>Allowed levels are {warning.parameter} (in feet).</p>
+      <p>{m["warning_popover_cruising_level_not_allowed_1"]()}</p>
       <p>
-        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+        {m["warning_popover_cruising_level_not_allowed_2"]()}
+        {warning.parameter}
+        {m["warning_popover_cruising_level_not_allowed_3"]()}
+      </p>
+      <p>
+        <EditFpl />
+        {m["warning_popover_action_cruising_level"]()}
       </p>
       <ChinaRvsmHelp />
     </>
@@ -280,7 +298,7 @@ function RouteComponent() {
               <span>{flight.arrival}</span>
             </span>
           </h1>
-          <h2 className="text-2xl">Flight Plan</h2>
+          <h2 className="text-2xl">{m["flight_plan"]()}</h2>
           <div className="grid grid-cols-4 gap-4">
             <FplField label="Callsign" value={flight.callsign} />
             {/* <FplField label="Flight Rules" value="-" /> */}
