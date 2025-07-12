@@ -124,5 +124,14 @@
   "warning_short_route_direct_segment": "Direct leg",
   "warning_short_route_leg_direction": "Leg direction violation",
   "warning_short_airway_require_approval": "Restricted airway",
-  "warning_short_not_preferred_route": "Not preferred route"
+  "warning_short_not_preferred_route": "Not preferred route",
+  "warning_short_cruising_level": "Cruising Level",
+  "cruising_level_standard_even": "China RVSM even flight level",
+  "cruising_level_standard_odd": "China RVSM odd flight level",
+  "cruising_level_standard": "China RVSM flight level",
+  "cruising_level_flight_level_even": "even flight level",
+  "cruising_level_flight_level_odd": "odd flight level",
+  "cruising_level_flight_level": "flight level",
+  "warning_short_cruising_level_too_low": "Too Low",
+  "warning_short_cruising_level_type": "Flight Level Type"
 }

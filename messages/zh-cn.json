@@ -125,5 +125,14 @@
   "warning_short_route_direct_segment": "直飞段",
   "warning_short_route_leg_direction": "违反航路方向",
   "warning_short_airway_require_approval": "受限航路",
-  "warning_short_not_preferred_route": "与推荐航路不一致"
+  "warning_short_not_preferred_route": "与推荐航路不一致",
+  "warning_short_cruising_level": "巡航高度",
+  "cruising_level_standard_even": "偶数公制高度层",
+  "cruising_level_standard_odd": "奇数公制高度层",
+  "cruising_level_standard": "公制高度层",
+  "cruising_level_flight_level_even": "偶数英制高度层",
+  "cruising_level_flight_level_odd": "奇数英制高度层",
+  "cruising_level_flight_level": "英制高度层",
+  "warning_short_cruising_level_too_low": "巡航高度过低",
+  "warning_short_cruising_level_type": "高度层类型"
 }

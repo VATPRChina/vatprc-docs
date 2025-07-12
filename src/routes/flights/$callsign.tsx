@@ -10,7 +10,7 @@ import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
 import { cn } from "@/lib/utils";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
@@ -96,6 +96,23 @@ const AircraftCodeCommonHelp = () => (
   </>
 );
 
+const ChinaRvsmHelp = () => (
+  <>
+    <p className="hover:text-primary/80 underline">
+      <Link to="/airspace/rvsm">Learn more about China RVSM</Link>
+    </p>
+  </>
+);
+
+const CRUISING_LEVEL_TEXT: Record<string, string> = {
+  standard_even: m.cruising_level_standard_even(),
+  standard_odd: m.cruising_level_standard_odd(),
+  standard: m.cruising_level_standard(),
+  flight_level_even: m.cruising_level_flight_level_even(),
+  flight_level_odd: m.cruising_level_flight_level_odd(),
+  flight_level: m.cruising_level_flight_level(),
+};
+
 const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], string> = {
   no_rvsm: m.warning_short_no_rvsm(),
   no_rnav1: m.warning_short_no_rnav1(),
@@ -106,6 +123,9 @@ const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"
   route_leg_direction: m.warning_short_route_leg_direction(),
   airway_require_approval: m.warning_short_airway_require_approval(),
   not_preferred_route: m.warning_short_not_preferred_route(),
+  cruising_level_mismatch: m.warning_short_cruising_level_type(),
+  cruising_level_too_low: m.warning_short_cruising_level_too_low(),
+  cruising_level_not_allowed: m.warning_short_cruising_level(),
 };
 const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],
@@ -144,6 +164,36 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   route_leg_direction: () => null,
   airway_require_approval: () => null,
   not_preferred_route: () => null,
+  cruising_level_mismatch: ({ warning }) => (
+    <>
+      <p>
+        The cruising level type does not meet the requirement of the route. Cruising level should be{" "}
+        {CRUISING_LEVEL_TEXT[warning.parameter ?? "Contact ATC"]}.
+      </p>
+      <p>
+        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+      </p>
+      <ChinaRvsmHelp />
+    </>
+  ),
+  cruising_level_too_low: ({ warning }) => (
+    <>
+      <p>The cruising level is too low for route. The minimum is {warning.parameter} feet.</p>
+      <p>
+        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+      </p>
+    </>
+  ),
+  cruising_level_not_allowed: ({ warning }) => (
+    <>
+      <p>The cruising level is not permitted for the route.</p>
+      <p>Allowed levels are {warning.parameter} (in feet).</p>
+      <p>
+        Edit your flight plan on <EditFpl />: Pick a suitable cruising level.
+      </p>
+      <ChinaRvsmHelp />
+    </>
+  ),
 };
 
 interface WarningProps {
@@ -163,25 +213,34 @@ const Warning = ({
 
   const localWarnings = warnings.filter((w) => w.field === field && w.field_index === (field_index ?? null));
 
-  return localWarnings.map((warning) => {
-    const button = (
-      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" key={warning.message_code}>
-        <TbInfoCircleFilled />
-        {WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code}
-      </Button>
-    );
+  return (
+    <div className="flex items-center gap-2">
+      {localWarnings.map((warning) => {
+        const button = (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-destructive hover:text-destructive"
+            key={warning.message_code}
+          >
+            <TbInfoCircleFilled />
+            {WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code}
+          </Button>
+        );
 
-    const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]({ warning, flight }) as React.ReactNode;
+        const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
 
-    if (!content) return button;
+        if (!content) return button;
 
-    return (
-      <Popover {...props} key={warning.message_code}>
-        <PopoverTrigger asChild>{button}</PopoverTrigger>
-        <PopoverContent className="w-max">{content}</PopoverContent>
-      </Popover>
-    );
-  });
+        return (
+          <Popover {...props} key={warning.message_code}>
+            <PopoverTrigger asChild>{button}</PopoverTrigger>
+            <PopoverContent className="w-max">{content}</PopoverContent>
+          </Popover>
+        );
+      })}
+    </div>
+  );
 };
 
 function RouteComponent() {
@@ -244,7 +303,10 @@ function RouteComponent() {
             <FplField label="Departure" value={flight.departure} className="col-start-1" />
             {/* <FplField label="Off Block" value="-" /> */}
             {/* <FplField label="Airspeed" value="-" /> */}
-            {/* <FplField label="Altitude" value="-" /> */}
+            <FplField label="Altitude (Feet)">
+              {flight.altitude && <span className="text-mono">{flight.altitude}</span>}
+              <Warning flight={flight} warnings={warnings} field="cruising_altitude" />
+            </FplField>
             <FplField label="Route" className="col-span-4">
               {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
               <Warning flight={flight} warnings={warnings} field="route" />

@@ -3672,6 +3672,8 @@ export interface components {
             transponder: string;
             raw_route: string;
             aircraft: string;
+            /** Format: int32 */
+            altitude: number;
         };
         FlightFix: {
             identifier: string;
@@ -3794,9 +3796,9 @@ export interface components {
             field_index?: number | null;
         };
         /** @enum {unknown} */
-        WarningMessageCode: "no_rvsm" | "no_rnav1" | "rnp_ar" | "rnp_ar_without_rf" | "no_transponder" | "route_direct_segment" | "route_leg_direction" | "airway_require_approval" | "not_preferred_route";
+        WarningMessageCode: "no_rvsm" | "no_rnav1" | "rnp_ar" | "rnp_ar_without_rf" | "no_transponder" | "route_direct_segment" | "route_leg_direction" | "airway_require_approval" | "not_preferred_route" | "cruising_level_mismatch" | "cruising_level_too_low" | "cruising_level_not_allowed";
         /** @enum {unknown} */
-        WarningMessageField: "equipment" | "transponder" | "navigation_performance" | "route";
+        WarningMessageField: "equipment" | "transponder" | "navigation_performance" | "route" | "cruising_altitude";
     };
     responses: never;
     parameters: never;

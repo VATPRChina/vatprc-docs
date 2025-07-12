@@ -14,6 +14,9 @@ const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
   route_leg_direction: "The route contains a leg with an invalid direction.",
   airway_require_approval: "The route contains an airway that requires controller approval.",
   not_preferred_route: "The flight plan does not match the preferred route for this flight.",
+  cruising_level_mismatch: "The cruising level type does not meet the requirement of the route.",
+  cruising_level_too_low: "The cruising level is too low for the route.",
+  cruising_level_not_allowed: "The cruising level is not allowed for the route.",
 };
 
 const descriptions: Record<
@@ -64,6 +67,9 @@ const descriptions: Record<
       </p>
     </>
   ),
+  cruising_level_mismatch: () => null,
+  cruising_level_too_low: () => null,
+  cruising_level_not_allowed: () => null,
 };
 
 const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = ["rnp_ar", "rnp_ar_without_rf"];
