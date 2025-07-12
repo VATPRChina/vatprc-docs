@@ -321,9 +321,9 @@ function RouteComponent() {
             <FplField label="Departure" value={flight.departure} className="col-start-1" />
             {/* <FplField label="Off Block" value="-" /> */}
             {/* <FplField label="Airspeed" value="-" /> */}
-            <FplField label="Altitude (Feet)">
-              {flight.altitude && <span className="text-mono">{flight.altitude}</span>}
-              <Warning flight={flight} warnings={warnings} field="cruising_altitude" />
+            <FplField label="Cruising Level (Feet)">
+              {flight.cruising_level && <span className="text-mono">{flight.cruising_level}</span>}
+              <Warning flight={flight} warnings={warnings} field="cruising_level" />
             </FplField>
             <FplField label="Route" className="col-span-4">
               {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
