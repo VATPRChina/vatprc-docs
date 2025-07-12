@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/ui/button-link";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
 import { getLocale } from "@/lib/i18n/runtime";
@@ -78,35 +79,109 @@ const FplField = ({
   );
 };
 
-interface WarningTipProps {
-  enabled?: boolean;
-  text: string;
-  children?: React.ReactNode;
+const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${getLocale() == "en" ? 9700 : 9695}`;
+const AircraftCodeCommonHelp = () => (
+  <>
+    <p>
+      <img
+        src="https://community.vatprc.net/uploads/default/original/2X/b/b12a2cf2739a9c80f9d75e5670287fef7b8f3876.png"
+        className="w-[960px] max-w-screen"
+      />
+    </p>
+    <p className="hover:text-primary/80 underline">
+      <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
+        Learn more
+      </a>
+    </p>
+  </>
+);
+
+const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], string> = {
+  no_rvsm: m.warning_short_no_rvsm(),
+  no_rnav1: m.warning_short_no_rnav1(),
+  rnp_ar: m.warning_short_rnp_ar(),
+  rnp_ar_without_rf: m.warning_short_rnp_ar_without_rf(),
+  no_transponder: m.warning_short_no_transponder(),
+  route_direct_segment: m.warning_short_route_direct_segment(),
+  route_leg_direction: m.warning_short_route_leg_direction(),
+  airway_require_approval: m.warning_short_airway_require_approval(),
+  not_preferred_route: m.warning_short_not_preferred_route(),
+};
+const WARNING_MESSAGE_TO_POPOVER: Record<
+  components["schemas"]["WarningMessageCode"],
+  React.FC<{ warning: components["schemas"]["WarningMessage"]; flight: components["schemas"]["FlightDto"] }>
+> = {
+  no_rvsm: () => (
+    <>
+      <p>The aircraft does not specify RVSM capability.</p>
+      <p>
+        Edit your flight plan on <EditFpl />: Add <span className="text-mono">W</span> to Equipment Code.
+      </p>
+      <AircraftCodeCommonHelp />
+    </>
+  ),
+  no_rnav1: () => (
+    <>
+      <p>The aircraft does not specify RNAV1 capability.</p>
+      <p>
+        Edit your flight plan on <EditFpl />: Add <span className="text-mono">R</span> to Equipment Code.
+      </p>
+      <AircraftCodeCommonHelp />
+    </>
+  ),
+  rnp_ar: () => null,
+  rnp_ar_without_rf: () => null,
+  no_transponder: () => (
+    <>
+      <p>Transponder field is empty.</p>
+      <p>
+        Edit your flight plan on <EditFpl />: Write your transponder capability.
+      </p>
+      <AircraftCodeCommonHelp />
+    </>
+  ),
+  route_direct_segment: () => null,
+  route_leg_direction: () => null,
+  airway_require_approval: () => null,
+  not_preferred_route: () => null,
+};
+
+interface WarningProps {
+  field: components["schemas"]["WarningMessageField"];
+  field_index?: number;
+  warnings?: components["schemas"]["WarningMessage"][];
+  flight: components["schemas"]["FlightDto"];
 }
-const WarningTip = ({ enabled, text, children, ...props }: WarningTipProps & React.ComponentProps<typeof Popover>) => {
-  if (!enabled) return null;
+const Warning = ({
+  field,
+  field_index,
+  warnings,
+  flight,
+  ...props
+}: WarningProps & React.ComponentProps<typeof Popover>) => {
+  if (!warnings) return null;
 
-  const helpLink =
-    getLocale() == "en" ? "https://community.vatprc.net/t/topic/9700" : "https://community.vatprc.net/t/topic/9695";
+  const localWarnings = warnings.filter((w) => w.field === field && w.field_index === (field_index ?? null));
 
-  return (
-    <Popover {...props}>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-          <TbInfoCircleFilled />
-          {text}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-max">
-        {children}
-        <p className="hover:text-primary/80 underline">
-          <a href={helpLink} target="_blank" rel="noopener noreferrer">
-            Learn more
-          </a>
-        </p>
-      </PopoverContent>
-    </Popover>
-  );
+  return localWarnings.map((warning) => {
+    const button = (
+      <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive" key={warning.message_code}>
+        <TbInfoCircleFilled />
+        {WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code}
+      </Button>
+    );
+
+    const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]({ warning, flight }) as React.ReactNode;
+
+    if (!content) return button;
+
+    return (
+      <Popover {...props} key={warning.message_code}>
+        <PopoverTrigger asChild>{button}</PopoverTrigger>
+        <PopoverContent className="w-max">{content}</PopoverContent>
+      </Popover>
+    );
+  });
 };
 
 function RouteComponent() {
@@ -123,11 +198,6 @@ function RouteComponent() {
   const { data: route } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/route", {
     params: { path: { callsign } },
   });
-
-  const noRvsmWarning = warnings?.find((w) => w.message_code === "no_rvsm");
-  const noRnav1Equip = warnings?.find((w) => w.message_code === "no_rnav1_equipment");
-  const noRnav1Pbn = warnings?.find((w) => w.message_code === "no_rnav1_pbn");
-  const noTransponder = warnings?.find((w) => w.message_code === "no_transponder");
 
   return (
     <div className="flex flex-col items-start gap-4">
@@ -162,36 +232,23 @@ function RouteComponent() {
             <FplField label="Equipment">
               <div className="flex items-center gap-2">
                 {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
-                <WarningTip enabled={!!noRvsmWarning} text="RVSM">
-                  <p>The aircraft does not specify RVSM capability.</p>
-                  <p>
-                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">W</span> to Equipment Code.
-                  </p>
-                </WarningTip>
-                <WarningTip enabled={!!noRnav1Equip} text="RNAV1">
-                  <p>The aircraft does not specify RNAV1 capability.</p>
-                  <p>
-                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">R</span> to Equipment Code.
-                  </p>
-                </WarningTip>
+                <Warning flight={flight} warnings={warnings} field="equipment" />
               </div>
             </FplField>
             <FplField label="Transponder">
               <div className="flex items-center gap-2">
                 {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
-                <WarningTip enabled={!!noTransponder} text="Transponder">
-                  <p>Transponder field is empty.</p>
-                  <p>
-                    Edit your flight plan on <EditFpl />: Write your transponder capability.
-                  </p>
-                </WarningTip>
+                <Warning flight={flight} warnings={warnings} field="transponder" />
               </div>
             </FplField>
             <FplField label="Departure" value={flight.departure} className="col-start-1" />
             {/* <FplField label="Off Block" value="-" /> */}
             {/* <FplField label="Airspeed" value="-" /> */}
             {/* <FplField label="Altitude" value="-" /> */}
-            <FplField label="Route" value={flight.raw_route} className="col-span-4" />
+            <FplField label="Route" className="col-span-4">
+              {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
+              <Warning flight={flight} warnings={warnings} field="route" />
+            </FplField>
             <FplField label="Arrival" value={flight.arrival} />
             {/* <FplField label="Enroute Time" value="-" /> */}
             {/* <FplField label="Alternate" value="-" /> */}
@@ -199,13 +256,7 @@ function RouteComponent() {
             <FplField label="PBN" tooltip="Performance Based Navigation">
               <div className="flex items-center gap-2">
                 {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
-                <WarningTip enabled={!!noRnav1Pbn} text="RNAV1">
-                  <p>The aircraft does not specify RNAV1 capability.</p>
-                  <p>
-                    Edit your flight plan on <EditFpl />: Add <span className="text-mono">D1</span> or{" "}
-                    <span className="text-mono">D2</span> to PBN.
-                  </p>
-                </WarningTip>
+                <Warning flight={flight} warnings={warnings} field="navigation_performance" />
               </div>
             </FplField>
             {/* <FplField label="CODE" value="-" tooltip="ADSB Hex Code" /> */}
@@ -239,14 +290,8 @@ function RouteComponent() {
                   <span className="col-1 text-right font-mono">{r.from.identifier}</span>
                   <span className="col-2 text-center font-mono">{r.leg_identifier}</span>
                   <span className="col-3 text-left font-mono">{r.to.identifier}</span>
-                  <div className="text-destructive self-baseline text-sm">
-                    {warnings?.find(
-                      (w) => w.message_code === "airway_require_approval" && w.parameter === i.toString(),
-                    ) && "Airway requires controller approval."}
-                    {warnings?.find((w) => w.message_code === "route_direct_segment" && w.parameter === i.toString()) &&
-                      "Direct segment needs caution."}
-                    {warnings?.find((w) => w.message_code === "route_leg_direction" && w.parameter === i.toString()) &&
-                      "Direction violates airway restriction."}
+                  <div className="text-destructive min-h-8 self-baseline text-sm">
+                    <Warning flight={flight} warnings={warnings} field="route" field_index={i} />
                   </div>
                 </div>
               ))}

@@ -23,7 +23,7 @@ const throwMiddleware: Middleware = {
     }
   },
   onError(err) {
-    if (err.error instanceof Error) toast(err.error.name, { description: err.error.message });
+    if (err.error instanceof ApiError) toast(err.error.name, { description: err.error.message });
   },
 };
 

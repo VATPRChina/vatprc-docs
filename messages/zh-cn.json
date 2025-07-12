@@ -116,5 +116,14 @@
   "layout_switch_english": "切换到英文",
   "nav_menu_meeting_notes": "会议记录",
   "doc_fail_to_load": "无法加载文档",
-  "route_flights_callsign_title": "飞行计划"
+  "route_flights_callsign_title": "飞行计划",
+  "warning_short_no_rvsm": "无RVSM",
+  "warning_short_no_rnav1": "无RNAV1",
+  "warning_short_rnp_ar": "RNP AR",
+  "warning_short_rnp_ar_without_rf": "RNP AR",
+  "warning_short_no_transponder": "无应答机",
+  "warning_short_route_direct_segment": "直飞段",
+  "warning_short_route_leg_direction": "违反航路方向",
+  "warning_short_airway_require_approval": "受限航路",
+  "warning_short_not_preferred_route": "与推荐航路不一致"
 }

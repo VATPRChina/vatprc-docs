@@ -10,11 +10,10 @@ const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
   rnp_ar: "The aircraft specifies RNP AR capability with RF.",
   rnp_ar_without_rf: "The aircraft specifies RNP AR capability without RF.",
   no_transponder: "The aircraft does not specify transponder capability.",
-  no_rnav1_equipment: "The aircraft does not specify RNAV1 capability.",
-  no_rnav1_pbn: "The aircraft does not specify RNAV1 capability.",
   route_direct_segment: "The route contains a direct leg. Please ensure that the direct segment is valid.",
   route_leg_direction: "The route contains a leg with an invalid direction.",
   airway_require_approval: "The route contains an airway that requires controller approval.",
+  not_preferred_route: "The flight plan does not match the preferred route for this flight.",
 };
 
 const descriptions: Record<
@@ -46,24 +45,25 @@ const descriptions: Record<
       </p>
     </>
   ),
-  rnp_ar: () => "",
-  rnp_ar_without_rf: () => "",
+  rnp_ar: () => null,
+  rnp_ar_without_rf: () => null,
   no_transponder: () => "Transponder field is empty.",
-  no_rnav1_equipment: function (): React.ReactNode {
-    return null;
-  },
-  no_rnav1_pbn: function (): React.ReactNode {
-    return null;
-  },
-  route_direct_segment: function (): React.ReactNode {
-    return null;
-  },
-  route_leg_direction: function (): React.ReactNode {
-    return null;
-  },
-  airway_require_approval: function (): React.ReactNode {
-    return null;
-  },
+  route_direct_segment: () => null,
+  route_leg_direction: () => null,
+  airway_require_approval: () => null,
+  not_preferred_route: (flight, warning) => (
+    <>
+      <p>
+        The submitted route is: <span className="font-mono">{flight.raw_route}</span>
+      </p>
+      <p>
+        Please choose a preferred route from the following list, or contact ATC for assistance:
+        <ol className="list-decimal font-mono">
+          {warning.parameter?.split(",").map((route, index) => <li key={index}>{route}</li>)}
+        </ol>
+      </p>
+    </>
+  ),
 };
 
 const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = ["rnp_ar", "rnp_ar_without_rf"];

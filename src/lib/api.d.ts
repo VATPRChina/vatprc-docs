@@ -3789,9 +3789,14 @@ export interface components {
         WarningMessage: {
             message_code: components["schemas"]["WarningMessageCode"];
             parameter?: string | null;
+            field: components["schemas"]["WarningMessageField"];
+            /** Format: int32 */
+            field_index?: number | null;
         };
         /** @enum {unknown} */
-        WarningMessageCode: "no_rvsm" | "no_rnav1" | "no_rnav1_equipment" | "no_rnav1_pbn" | "rnp_ar" | "rnp_ar_without_rf" | "no_transponder" | "route_direct_segment" | "route_leg_direction" | "airway_require_approval";
+        WarningMessageCode: "no_rvsm" | "no_rnav1" | "rnp_ar" | "rnp_ar_without_rf" | "no_transponder" | "route_direct_segment" | "route_leg_direction" | "airway_require_approval" | "not_preferred_route";
+        /** @enum {unknown} */
+        WarningMessageField: "equipment" | "transponder" | "navigation_performance" | "route";
     };
     responses: never;
     parameters: never;

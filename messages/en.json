@@ -115,5 +115,14 @@
   "layout_switch_english": "Switch to English",
   "nav_menu_meeting_notes": "Meeting Notes",
   "doc_fail_to_load": "Failed to load document",
-  "route_flights_callsign_title": "Flight Plan"
+  "route_flights_callsign_title": "Flight Plan",
+  "warning_short_no_rvsm": "No RVSM",
+  "warning_short_no_rnav1": "No RNAV1",
+  "warning_short_rnp_ar": "RNP AR",
+  "warning_short_rnp_ar_without_rf": "RNP AR",
+  "warning_short_no_transponder": "No transponder",
+  "warning_short_route_direct_segment": "Direct leg",
+  "warning_short_route_leg_direction": "Leg direction violation",
+  "warning_short_airway_require_approval": "Restricted airway",
+  "warning_short_not_preferred_route": "Not preferred route"
 }
