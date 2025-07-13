@@ -161,7 +161,7 @@
   "flight_edit_flight_plan": "去 VATSIM 编辑飞行计划。",
   "warning_popover_no_transponder_action": "：给出应答机设备代码。",
   "warning_popover_action_add": "添加",
-  "warning_popover_action_add_to_equip": "到设备代码",
+  "warning_popover_action_add_to_equip": "到设备代码。",
   "warning_popover_action_lead_colon": "：",
   "warning_popover_action_cruising_level": "选择合适的巡航高度层。",
   "flight_plan": "飞行计划",
@@ -171,5 +171,7 @@
   "warning_popover_cruising_level_not_allowed_1": "巡航高度未获航路许可。",
   "warning_popover_cruising_level_not_allowed_2": "可用高度为",
   "warning_popover_cruising_level_not_allowed_3": "（英尺）。",
-  "warning_description_not_preferred_route_atc": "请与 ATC 联系获得帮助调整航路。"
+  "warning_description_not_preferred_route_atc": "请与 ATC 联系获得帮助调整航路。",
+  "warning_popover_action_add_to_pbn": "到 PBN。",
+  "warning_popover_action_or": "或"
 }

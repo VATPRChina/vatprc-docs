@@ -170,5 +170,7 @@
   "warning_popover_cruising_level_not_allowed_1": "The cruising level is not allowed for the route.",
   "warning_popover_cruising_level_not_allowed_2": "Allowed levels are",
   "warning_popover_cruising_level_not_allowed_3": "(in feet).",
-  "warning_description_not_preferred_route_atc": "Please contact ATC for help adjusting the route."
+  "warning_description_not_preferred_route_atc": "Please contact ATC for help adjusting the route.",
+  "warning_popover_action_add_to_pbn": "to PBN.",
+  "warning_popover_action_or": "or"
 }

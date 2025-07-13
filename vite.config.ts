@@ -30,7 +30,7 @@ export default defineConfig({
       sourcemaps: { filesToDeleteAfterUpload: ["**/*.js.map"] },
     }),
   ],
-  build: { sourcemap: true },
+  build: { sourcemap: "hidden" },
   server: {
     proxy: {
       "/api/cors/vatsim-events-prc": { target: "https://my.vatsim.net/api/v2/events/latest", changeOrigin: true },

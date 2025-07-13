@@ -143,14 +143,27 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
       <AircraftCodeCommonHelp />
     </>
   ),
-  no_rnav1: () => (
+  no_rnav1: ({ warning }) => (
     <>
       <p>{m.warning_title_no_rnav1()}</p>
       <p>
         <EditFpl />
-        {m["warning_popover_action_add"]()}
-        <span className="text-mono">R</span>
-        {m["warning_popover_action_add_to_equip"]()}
+        {warning.field === "equipment" && (
+          <>
+            {m["warning_popover_action_add"]()}
+            <span className="text-mono">R</span>
+            {m["warning_popover_action_add_to_equip"]()}
+          </>
+        )}
+        {warning.field === "navigation_performance" && (
+          <>
+            {m["warning_popover_action_add"]()}
+            <span className="text-mono">D1</span>
+            {m["warning_popover_action_or"]()}
+            <span className="text-mono">D2</span>
+            {m["warning_popover_action_add_to_pbn"]()}
+          </>
+        )}
       </p>
       <AircraftCodeCommonHelp />
     </>
