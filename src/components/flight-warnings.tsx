@@ -42,20 +42,23 @@ const descriptions: Record<
   route_direct_segment: () => null,
   route_leg_direction: () => null,
   airway_require_approval: () => null,
-  not_preferred_route: (flight, warning) => (
-    <>
-      <p>
-        {m["warning_description_not_preferred_route_route_is"]()}
-        <span className="font-mono">{flight.raw_route}</span>
-      </p>
-      <p>
-        {m["warning_description_not_preferred_route_choose"]()}
-        <ol className="list-decimal font-mono">
-          {warning.parameter?.split(",").map((route, index) => <li key={index}>{route}</li>)}
-        </ol>
-      </p>
-    </>
-  ),
+  not_preferred_route: (flight, warning) => {
+    const routes = warning.parameter?.split(",").filter((r) => !!r.trim());
+    return (
+      <>
+        <p>
+          {m["warning_description_not_preferred_route_route_is"]()}
+          <span className="font-mono">{flight.raw_route}</span>
+        </p>
+        <p>
+          {(routes?.length ?? 0) > 0
+            ? m["warning_description_not_preferred_route_choose"]()
+            : m["warning_description_not_preferred_route_atc"]()}
+          <ol className="list-decimal font-mono">{routes?.map((route, index) => <li key={index}>{route}</li>)}</ol>
+        </p>
+      </>
+    );
+  },
   cruising_level_mismatch: () => null,
   cruising_level_too_low: () => null,
   cruising_level_not_allowed: () => null,

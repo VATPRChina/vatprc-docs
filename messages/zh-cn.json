@@ -170,5 +170,6 @@
   "warning_popover_cruising_level_too_low_2": "英尺。",
   "warning_popover_cruising_level_not_allowed_1": "巡航高度未获航路许可。",
   "warning_popover_cruising_level_not_allowed_2": "可用高度为",
-  "warning_popover_cruising_level_not_allowed_3": "（英尺）。"
+  "warning_popover_cruising_level_not_allowed_3": "（英尺）。",
+  "warning_description_not_preferred_route_atc": "请与 ATC 联系获得帮助调整航路。"
 }
