@@ -27,6 +27,7 @@ export default defineConfig({
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",
+      sourcemaps: { filesToDeleteAfterUpload: ["**/*.js.map"] },
     }),
   ],
   build: { sourcemap: true },

@@ -7,13 +7,18 @@ COPY package.json pnpm-lock.yaml* ./
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 FROM --platform=$BUILDPLATFORM base AS builder
+
+ARG VERSION=0.0.1
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN npm install -g pnpm
 
-RUN pnpm build
+ENV SENTRY_RELEASE=${VERSION}
+RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN \
+  pnpm build
 
 FROM node:lts-slim AS runner
 WORKDIR /app
