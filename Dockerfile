@@ -22,7 +22,7 @@ RUN npm install -g pnpm
 ENV SENTRY_RELEASE=${VERSION}
 RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN \
   pnpm build
-RUN rm -rf /app/.output/**/*.map
+RUN find /app/.output/public/assets -type f -name '*.map' -exec rm -vf {} +
 
 FROM node:lts-slim AS runner
 WORKDIR /app
