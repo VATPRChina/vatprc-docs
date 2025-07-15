@@ -6,7 +6,7 @@ import { OnlineControllers } from "@/components/online-controllers";
 import { OnlinePilots } from "@/components/online-pilots";
 import { RecentEvents } from "@/components/recent-events";
 import { Button } from "@/components/ui/button";
-import { m } from "@/lib/i18n/messages";
+import { Trans } from "@lingui/react/macro";
 import { createFileRoute, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { TbArrowRight, TbMail } from "react-icons/tb";
@@ -22,8 +22,8 @@ const IndexWithLocale: React.FC = () => {
         <section className="px flex w-full flex-row items-center justify-center py-12 text-center">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="pxy flex flex-col items-center justify-center">
-              <h1 className="home-font m-2 text-4xl font-medium">{m["Legacy_title"]()}</h1>
-              <h2 className="home-font m-2 text-3xl font-medium">{m["Legacy_subtitle"]()}</h2>
+              <h1 className="home-font m-2 text-4xl font-medium">VATSIM P.R.China Division</h1>
+              <h2 className="home-font m-2 text-3xl font-medium">VATPRC</h2>
             </div>
             <div className="pxy flex flex-col items-center justify-center">
               <img src={pilot} alt="Pilot" />
@@ -31,7 +31,7 @@ const IndexWithLocale: React.FC = () => {
           </div>
         </section>
         <section className="px flex w-full flex-col items-center justify-center py-18">
-          <h3 className="mb-8 text-4xl">{m["Legacy_recent-events"]()}</h3>
+          <h3 className="mb-8 text-4xl">Recent Events</h3>
           <RecentEvents className="w-full" />
         </section>
         <section className="px flex w-full flex-row items-center justify-center">
@@ -40,7 +40,7 @@ const IndexWithLocale: React.FC = () => {
               <img className="flex w-1/2" src={laptop} alt="laptop" />
             </div>
             <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{m["Legacy_online-controllers"]()}</h3>
+              <h3 className="mb-8 text-4xl">Online Controllers</h3>
               <OnlineControllers />
               <Button asChild variant="ghost">
                 <a
@@ -49,7 +49,7 @@ const IndexWithLocale: React.FC = () => {
                   className="vatprc-big-btn-reverse mt-6"
                   rel="noreferrer"
                 >
-                  {m["Legacy_nav-menu_atc-center"]()}
+                  Controllers-center
                   <TbArrowRight className="-mt-0.5 ml-2" size={24} />
                 </a>
               </Button>
@@ -62,7 +62,7 @@ const IndexWithLocale: React.FC = () => {
         <section className="px flex w-full flex-row items-center justify-center pt-18">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{m["Legacy_online-pilots"]()}</h3>
+              <h3 className="mb-8 text-4xl">Online Pilots</h3>
               <OnlinePilots className="my-auto" />
             </div>
             <div className="flex flex-col items-center justify-center">
@@ -76,8 +76,8 @@ const IndexWithLocale: React.FC = () => {
               <img className="flex w-1/2" src={feedback} alt="Feedback" />
             </div>
             <div className="flex flex-col items-center justify-center py-9">
-              <h3 className="mb-8 text-4xl">{m["Legacy_feedback"]()}</h3>
-              <p className="text-center">{m["Legacy_feedback-description"]()}</p>
+              <h3 className="mb-8 text-4xl">Feedback</h3>
+              <p className="text-center">Feedback-description</p>
               <Button asChild variant="ghost">
                 <a
                   href="mailto:feedback@vatprc.net"
@@ -96,7 +96,7 @@ const IndexWithLocale: React.FC = () => {
                   className="vatprc-big-btn-reverse mt-6"
                   rel="noreferrer"
                 >
-                  {m["Legacy_nav-menu_forum"]()}
+                  <Trans>论坛</Trans>
                   <TbArrowRight className="-mt-0.5 ml-2" height={24} />
                 </a>
               </Button>
@@ -108,9 +108,11 @@ const IndexWithLocale: React.FC = () => {
         </section>
         <section className="flex w-full flex-row items-center justify-center text-center">
           <div className="color-vatprc-red home-font py-16 text-2xl font-medium italic">
-            <b>VATPRC 有你更精彩</b>
-            <br />
-            You make the difference!
+            <Trans>
+              <b>VATPRC 有你更精彩</b>
+              <br />
+              You make the difference!
+            </Trans>
           </div>
         </section>
       </div>

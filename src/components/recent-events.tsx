@@ -1,5 +1,4 @@
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
@@ -148,7 +147,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         {scheduledEvents.map((e) => (
           <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
         ))}
-        {scheduledEvents.length === 0 && <span>{m["Components_RecentEvents_no_event"]()}</span>}
+        {scheduledEvents.length === 0 && <span>No event is scheduled recently.</span>}
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";
-import "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
+import { messages as en } from "@/locales/en.po";
+import { messages as zh } from "@/locales/zh-cn.po";
+import { i18n } from "@lingui/core";
 import * as Sentry from "@sentry/react";
 import { wrapCreateRootRouteWithSentry } from "@sentry/tanstackstart-react";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
@@ -21,6 +24,11 @@ const getRouterBasepath = (pathname: string) => {
 };
 
 export function createRouter() {
+  const locale = getLocale();
+  i18n.load("en", en);
+  i18n.load("zh-cn", zh);
+  i18n.activate(locale);
+
   const router = wrapCreateRootRouteWithSentry(
     createTanStackRouter({
       routeTree,

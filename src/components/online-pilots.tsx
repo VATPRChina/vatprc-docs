@@ -1,7 +1,6 @@
 import { Button } from "./ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
-import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { TbCaretUpDown, TbLoader } from "react-icons/tb";
@@ -45,7 +44,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
     return (
       (!data || data?.pilots?.length === 0) && (
         <div className={cn("flex flex-wrap justify-center gap-x-2 gap-y-4")}>
-          {(!data || data?.pilots?.length === 0) && <span>{m["Components_OnlinePilots_no_pilot"]()}</span>}
+          {(!data || data?.pilots?.length === 0) && <span>No online pilot.</span>}
         </div>
       )
     );
@@ -60,7 +59,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
       <div className="mt-2 flex items-center justify-center space-x-4 px-4">
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="sm">
-            {open ? m["Legacy_pilots-less"]() : m["Legacy_pilots-all"]()}
+            {open ? "Show less pilots" : "Show all pilots"}
             <TbCaretUpDown className="h-4 w-4" />
           </Button>
         </CollapsibleTrigger>

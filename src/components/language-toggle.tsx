@@ -1,7 +1,5 @@
 import { Button } from "./ui/button";
-import { getLocalPathname } from "@/lib/i18n";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { getLocale, getLocalPathname } from "@/lib/i18n";
 import { localStorage } from "@/lib/utils";
 import { useRouterState } from "@tanstack/react-router";
 import { TbLanguage } from "react-icons/tb";
@@ -16,7 +14,7 @@ export const LanguageToggle = () => {
     window.location.assign(getLocalPathname(pathname, nextLang));
   };
 
-  const ariaLabel = nextLang === "en" ? m["layout_switch_english"]() : m["layout_switch_chinese"]();
+  const ariaLabel = nextLang === "en" ? "Switch to English" : "Switch to Chinese";
 
   return (
     <Button variant="ghost" size="icon" onClick={onClick} aria-label={ariaLabel}>

@@ -1,7 +1,6 @@
 import { useTheme, useThemeValue } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { m } from "@/lib/i18n/messages";
 import { Moon, Sun } from "lucide-react";
 
 export function ModeToggle() {
@@ -20,13 +19,13 @@ export function ModeToggle() {
       <HoverCardContent align="end" className="w-auto px-0 py-1" asChild>
         <ul className="flex cursor-default flex-col">
           <Button asChild variant="ghost" size="sm" className="rounded-none px-4">
-            <li onClick={() => setTheme("light")}>{m["theme_toggle_light"]()}</li>
+            <li onClick={() => setTheme("light")}>Light</li>
           </Button>
           <Button asChild variant="ghost" size="sm" className="rounded-none px-4">
-            <li onClick={() => setTheme("dark")}>{m["theme_toggle_dark"]()}</li>
+            <li onClick={() => setTheme("dark")}>Dark</li>
           </Button>
           <Button asChild variant="ghost" size="sm" className="rounded-none px-4">
-            <li onClick={() => setTheme("system")}>{m["theme_toggle_system"]()}</li>
+            <li onClick={() => setTheme("system")}>System</li>
           </Button>
         </ul>
       </HoverCardContent>

@@ -1,5 +1,4 @@
 import { $api } from "@/lib/client";
-import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { format, parseISO } from "date-fns";
@@ -44,7 +43,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
 
   return (
     <div className={cn(className, "flex flex-wrap gap-4")}>
-      {(!data || data?.controllers?.length === 0) && <span className="basis-full">{m["Legacy_no-atc-online"]()}</span>}
+      {(!data || data?.controllers?.length === 0) && <span className="basis-full">There is currently no online ATC.</span>}
       {data?.controllers?.map((c) => (
         <Controller key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
       ))}

@@ -1,14 +1,13 @@
 import { LinkButton } from "@/components/ui/button-link";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { $api } from "@/lib/client";
-import { m } from "@/lib/i18n/messages";
 import { createFileRoute } from "@tanstack/react-router";
 import { ChangeEventHandler, useState } from "react";
 
 export const Route = createFileRoute("/flights/")({
   component: RouteComponent,
   head: () => ({
-    meta: [{ title: `${m.flight_plan_checker()} - VATPRC` }],
+    meta: [{ title: `Flight Plan Checker` }],
   }),
 });
 
@@ -22,12 +21,12 @@ function RouteComponent() {
   };
   return (
     <div className="flex flex-col items-start gap-8">
-      <h1 className="text-3xl">{m.flight_plan_checker()}</h1>
+      <h1 className="text-3xl">Flight Plan Checker</h1>
       <div className="flex flex-row gap-4">
         <Command className="w-72 rounded-lg border" onChange={onChange}>
-          <CommandInput placeholder={m["flight.type_callsign"]()} value={callsign} onFocus={() => setHidden(false)} />
+          <CommandInput placeholder="Callsign" value={callsign} onFocus={() => setHidden(false)} />
           <CommandList hidden={hidden}>
-            <CommandEmpty>{m["flight.no_active_flght"]()}</CommandEmpty>
+            <CommandEmpty>No active flight</CommandEmpty>
             <CommandGroup>
               {flights?.map((flight) => (
                 <CommandItem key={flight.callsign} onSelect={() => setCallsign(flight.callsign)}>
@@ -38,7 +37,7 @@ function RouteComponent() {
           </CommandList>
         </Command>
         <LinkButton to="/flights/$callsign" params={{ callsign }}>
-          {m.flight_plan_checker_check()}
+          Check
         </LinkButton>
       </div>
     </div>

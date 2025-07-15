@@ -1,7 +1,6 @@
 import { buildMarkdownDoc, MarkdownDoc } from "@/components/markdown-doc";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getDocument } from "@/lib/doc";
-import { m } from "@/lib/i18n/messages";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 
@@ -36,7 +35,7 @@ function RouteComponent() {
   if (error) {
     return (
       <Alert variant="destructive">
-        <AlertTitle>{m["doc_fail_to_load"]()}</AlertTitle>
+        <AlertTitle>Failed to load document</AlertTitle>
         <AlertDescription>{error.message}</AlertDescription>
       </Alert>
     );

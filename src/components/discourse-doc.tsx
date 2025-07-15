@@ -2,8 +2,7 @@ import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDoc } from "./markdown-doc";
 import { Skeleton } from "./ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { getLocale } from "@/lib/i18n";
 import { useQuery } from "@tanstack/react-query";
 import { AnyRouteMatch } from "@tanstack/react-router";
 import React from "react";
@@ -65,7 +64,7 @@ export const DiscourseDocument: React.FC<{
     return (
       <Alert variant="destructive">
         <TbAlertCircle className="h-4 w-4" />
-        <AlertTitle>{m["Components_DiscourseDocument_Error"]()}</AlertTitle>
+        <AlertTitle>Error</AlertTitle>
         <AlertDescription>{error?.message}</AlertDescription>
       </Alert>
     );

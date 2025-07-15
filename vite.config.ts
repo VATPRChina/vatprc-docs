@@ -1,4 +1,4 @@
-import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import { lingui } from "@lingui/vite-plugin";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { defineConfig } from "vite";
@@ -9,21 +9,14 @@ export default defineConfig({
     tsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
-    tanstackStart(),
-    paraglideVitePlugin({
-      project: "./project.inlang",
-      outdir: "./src/lib/i18n",
-      strategy: ["url", "baseLocale"],
-      urlPatterns: [
-        {
-          pattern: "/:path(.*)?",
-          localized: [
-            ["zh-cn", "/zh-cn/:path(.*)?"],
-            ["en", "/en/:path(.*)?"],
-          ],
+    tanstackStart({
+      react: {
+        babel: {
+          plugins: ["@lingui/babel-plugin-lingui-macro"],
         },
-      ],
+      },
     }),
+    lingui(),
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",

@@ -2,8 +2,7 @@ import { DiscourseDocument } from "@/components/discourse-doc";
 import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { getLocale } from "@/lib/i18n";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/airspace/sop")({
@@ -11,7 +10,7 @@ export const Route = createFileRoute("/airspace/sop")({
   loader() {
     return getAllDocuments();
   },
-  head: () => ({ meta: [{ title: m["pages_airspace_sop_title"]() }] }),
+  head: () => ({ meta: [{ title: "Standard operation procedures" }] }),
 });
 
 function Page() {
@@ -22,10 +21,10 @@ function Page() {
     <>
       {locale === "en" && (
         <Alert variant="destructive">
-          <AlertTitle>{m["pages_airspace_sop_no-english"]()}</AlertTitle>
+          <AlertTitle>This page is not available in English.</AlertTitle>
         </Alert>
       )}
-      <h1 className="my-4 text-center text-3xl font-bold">{m["pages_airspace_sop_new"]()}</h1>
+      <h1 className="my-4 text-center text-3xl font-bold">List of SOPs</h1>
       <DocList
         documents={documents.filter(
           (doc) =>
@@ -35,7 +34,7 @@ function Page() {
         )}
       />
       <hr />
-      <h1 className="my-4 text-center text-3xl font-bold">{m["pages_airspace_sop_legacy"]()}</h1>
+      <h1 className="my-4 text-center text-3xl font-bold">Other SOPs</h1>
       <DiscourseDocument en="7532" />
     </>
   );

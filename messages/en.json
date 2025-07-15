@@ -106,10 +106,8 @@
   "navigation_performance": "Navigation Performance",
   "route_flights_callsign_transponder": "Transponder",
   "route_flights_callsign_route": "Route",
-  "flight": {
-    "no_active_flght": "No active flight",
-    "type_callsign": "Callsign"
-  },
+  "flight.no_active_flght": "No active flight",
+  "flight.type_callsign": "Callsign",
   "nav_menu_division_api": "API Document",
   "layout_switch_chinese": "Switch to Chinese",
   "layout_switch_english": "Switch to English",

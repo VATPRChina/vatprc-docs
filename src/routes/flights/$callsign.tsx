@@ -7,8 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -16,10 +15,7 @@ import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
   head: (ctx) => ({
-    meta: [
-      { name: "robots", content: "noindex" },
-      { title: `${ctx.params.callsign} - ${m.route_flights_callsign_title()}` },
-    ],
+    meta: [{ name: "robots", content: "noindex" }, { title: `${ctx.params.callsign} - Flight Plan` }],
   }),
 });
 
@@ -30,7 +26,7 @@ const EditFpl = () => (
     rel="noopener noreferrer"
     className="hover:text-primary/80 underline"
   >
-    {m.flight_edit_flight_plan()}
+    Edit your flight plan on VATSIM.
   </a>
 );
 
@@ -70,7 +66,7 @@ const FplField = ({
             <span className="text-muted-foreground min-w-8">{value}</span>
           </TooltipTrigger>
           <TooltipContent side="right">
-            <p>{m["flight_check_at_vatsim"]()}</p>
+            <p>Check at VATSIM</p>
           </TooltipContent>
         </Tooltip>
       )}
@@ -94,7 +90,7 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
     </p>
     <p className="hover:text-primary/80 underline">
       <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
-        {m["flight_learn_more"]()}
+        Learn more
       </a>
     </p>
   </>
@@ -103,18 +99,18 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
 const ChinaRvsmHelp = () => (
   <>
     <p className="hover:text-primary/80 underline">
-      <Link to="/airspace/rvsm">{m["flight_learn_rvsm"]()}</Link>
+      <Link to="/airspace/rvsm">Learn more about China RVSM</Link>
     </p>
   </>
 );
 
 const CRUISING_LEVEL_TEXT: Record<string, string> = {
-  standard_even: m.cruising_level_standard_even(),
-  standard_odd: m.cruising_level_standard_odd(),
-  standard: m.cruising_level_standard(),
-  flight_level_even: m.cruising_level_flight_level_even(),
-  flight_level_odd: m.cruising_level_flight_level_odd(),
-  flight_level: m.cruising_level_flight_level(),
+  standard_even: "China RVSM even flight level",
+  standard_odd: "China RVSM odd flight level",
+  standard: "China RVSM flight level",
+  flight_level_even: "even flight level",
+  flight_level_odd: "odd flight level",
+  flight_level: "flight level",
 };
 
 const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageCode"], "error" | "warning"> = {
@@ -134,19 +130,19 @@ const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageC
 };
 
 const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], string> = {
-  no_rvsm: m.warning_short_no_rvsm(),
-  no_rnav1: m.warning_short_no_rnav1(),
-  rnp_ar: m.warning_short_rnp_ar(),
-  rnp_ar_without_rf: m.warning_short_rnp_ar_without_rf(),
-  no_transponder: m.warning_short_no_transponder(),
-  route_direct_segment: m.warning_short_route_direct_segment(),
-  route_leg_direction: m.warning_short_route_leg_direction(),
-  airway_require_approval: m.warning_short_airway_require_approval(),
-  not_preferred_route: m.warning_short_not_preferred_route(),
-  cruising_level_mismatch: m.warning_short_cruising_level_type(),
-  cruising_level_too_low: m.warning_short_cruising_level_too_low(),
-  cruising_level_not_allowed: m.warning_short_cruising_level(),
-  route_match_preferred: m.warning_short_preferred_route(),
+  no_rvsm: "No RVSM",
+  no_rnav1: "No RNAV1",
+  rnp_ar: "RNP AR",
+  rnp_ar_without_rf: "RNP AR without RF",
+  no_transponder: "No transponder",
+  route_direct_segment: "Direct leg",
+  route_leg_direction: "Leg direction violation",
+  airway_require_approval: "Restricted airway",
+  not_preferred_route: "Not preferred route",
+  cruising_level_mismatch: "Cruising Level Type Mismatch",
+  cruising_level_too_low: "Cruising Level Too Low",
+  cruising_level_not_allowed: "Cruising Level Not Allowed",
+  route_match_preferred: "Match preferred route",
 };
 const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],
@@ -154,35 +150,35 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
 > = {
   no_rvsm: () => (
     <>
-      <p>{m["warning_title_no_rvsm"]()}</p>
+      <p>The aircraft does not specify RVSM capability.</p>
       <p>
         <EditFpl />
-        {m["warning_popover_action_add"]()}
+        Add
         <span className="text-mono">W</span>
-        {m["warning_popover_action_add_to_equip"]()}
+        to equipment code.
       </p>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
   no_rnav1: ({ warning }) => (
     <>
-      <p>{m.warning_title_no_rnav1()}</p>
+      <p>The aircraft does not specify RNAV1 capability.</p>
       <p>
         <EditFpl />
         {warning.field === "equipment" && (
           <>
-            {m["warning_popover_action_add"]()}
+            Add
             <span className="text-mono">R</span>
-            {m["warning_popover_action_add_to_equip"]()}
+            to equipment code.
           </>
         )}
         {warning.field === "navigation_performance" && (
           <>
-            {m["warning_popover_action_add"]()}
+            Add
             <span className="text-mono">D1</span>
-            {m["warning_popover_action_or"]()}
+            or
             <span className="text-mono">D2</span>
-            {m["warning_popover_action_add_to_pbn"]()}
+            to PBN.
           </>
         )}
       </p>
@@ -193,10 +189,10 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   rnp_ar_without_rf: () => null,
   no_transponder: () => (
     <>
-      <p>{m["warning_description_transponder"]()}</p>
+      <p>Transponder field is empty.</p>
       <p>
         <EditFpl />
-        {m["warning_popover_no_transponder_action"]()}
+        Write your transponder equipment code.
       </p>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
@@ -208,12 +204,12 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   cruising_level_mismatch: ({ warning }) => (
     <>
       <p>
-        {m["warning_popover_cruising_level_mismatch"]()}
+        The cruising level type does not meet the requirement of the route. Cruising level should be
         {CRUISING_LEVEL_TEXT[warning.parameter ?? "Contact ATC"]}.
       </p>
       <p>
         <EditFpl />
-        {m["warning_popover_action_cruising_level"]()}
+        Pick a suitable cruising level.
       </p>
       <ChinaRvsmHelp />
     </>
@@ -221,27 +217,27 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   cruising_level_too_low: ({ warning }) => (
     <>
       <p>
-        {m["warning_popover_cruising_level_too_low_1"]()}
+        The cruising level is too low for route. The minimum is
         {warning.parameter}
-        {m["warning_popover_cruising_level_too_low_2"]()}
+        feet.
       </p>
       <p>
         <EditFpl />
-        {m["warning_popover_action_cruising_level"]()}
+        Pick a suitable cruising level.
       </p>
     </>
   ),
   cruising_level_not_allowed: ({ warning }) => (
     <>
-      <p>{m["warning_popover_cruising_level_not_allowed_1"]()}</p>
+      <p>The cruising level is not allowed for the route.</p>
       <p>
-        {m["warning_popover_cruising_level_not_allowed_2"]()}
+        Allowed levels are
         {warning.parameter}
-        {m["warning_popover_cruising_level_not_allowed_3"]()}
+        (in feet).
       </p>
       <p>
         <EditFpl />
-        {m["warning_popover_action_cruising_level"]()}
+        Pick a suitable cruising level.
       </p>
       <ChinaRvsmHelp />
     </>
@@ -318,7 +314,7 @@ function RouteComponent() {
     <div className="flex flex-col items-start gap-4">
       <LinkButton variant="ghost" to="..">
         <TbArrowLeft />
-        {m.route_flights_callsign_back()}
+        Back
       </LinkButton>
       {error?.message && (
         <Alert color="red">
@@ -336,7 +332,7 @@ function RouteComponent() {
               <span>{flight.arrival}</span>
             </span>
           </h1>
-          <h2 className="text-2xl">{m["flight_plan"]()}</h2>
+          <h2 className="text-2xl">Flight Plan</h2>
           <div className="grid grid-cols-4 gap-4">
             <FplField label="Callsign" value={flight.callsign} />
             {/* <FplField label="Flight Rules" value="-" /> */}

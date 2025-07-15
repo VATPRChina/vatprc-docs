@@ -1,8 +1,3 @@
-import logo from "@/assets/logo_standard.svg";
-import logoWhite from "@/assets/logo_standard_white.svg";
-import { LanguageToggle } from "@/components/language-toggle";
-import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import {
   NavigationMenu,
@@ -11,17 +6,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Toaster } from "@/components/ui/sonner";
-import { getLocale, getLocalPathname } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import appCss from "@/styles/app.css?url";
-import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { i18n } from "@lingui/core";
-import { I18nProvider } from "@lingui/react";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRootRoute, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
 
 interface NavigationMenuLinkProps {
@@ -104,7 +92,7 @@ export const NavMenu: React.FC = () => {
             Airspace
           </NavMenuLink>
           <NavMenuLink href="/airspace/rvsm">China RVSM</NavMenuLink>
-          <NavMenuLink href="/airspace/station">ATC Positions & Frequencies</NavMenuLink>
+          <NavMenuLink href="/airspace/station">Controllers-positions-frequencies</NavMenuLink>
           <NavMenuLink href="/airspace/sop">Standard Operation Procedures</NavMenuLink>
           <NavMenuLink href="/airspace/vfr">VFR Policy</NavMenuLink>
         </ul>
@@ -117,11 +105,11 @@ export const NavMenu: React.FC = () => {
           <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
             Start to Fly
           </NavMenuLink>
-          <NavMenuLink href="/pilot/introduction-to-fly">Introduction to Fly</NavMenuLink>
-          <NavMenuLink href="/pilot/ts3">Community & Teamspeak 3</NavMenuLink>
+          <NavMenuLink href="/pilot/introduction-to-fly">Introduction-to-fly</NavMenuLink>
+          <NavMenuLink href="/pilot/ts3">Community Legacy_nav-menu_ts3 Teamspeak 3</NavMenuLink>
           <hr className="col-span-full" />
           <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
-            Pilot Softwares
+            Pilots-softwares
           </NavMenuLink>
           <NavMenuLink href="https://chartfox.org/">Charts</NavMenuLink>
           <NavMenuLink href="https://vacdm.vatprc.net/">vACDM</NavMenuLink>
@@ -144,10 +132,12 @@ export const NavMenu: React.FC = () => {
           </NavMenuLink>
           <NavMenuLink href="/controller/controller-regulations">Progression Guide</NavMenuLink>
           <NavMenuLink href="/controller/become-a-controller">Become a Controller</NavMenuLink>
-          <NavMenuLink href="/controller/visiting-and-transferring">Visiting & Transfer</NavMenuLink>
+          <NavMenuLink href="/controller/visiting-and-transferring">
+            Visiting Legacy_nav-menu_visiting-and-transferring Transfer
+          </NavMenuLink>
           <hr className="col-span-full" />
           <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
-            ATC Center
+            Controllers-center
           </NavMenuLink>
           <NavMenuLink href="https://moodle.vatprc.net" external>
             Moodle
@@ -172,97 +162,3 @@ export const NavMenu: React.FC = () => {
     </NavigationMenu>
   );
 };
-
-interface ApplicationProps {
-  children?: React.ReactNode;
-}
-
-const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
-  const theme = useThemeValue();
-  const route = useRouterState();
-  if (route.location.pathname === "/division/api") {
-    return children;
-  }
-
-  return (
-    <div className="container mx-auto">
-      <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
-        <div className="flex flex-col items-center gap-4 md:flex-row">
-          <Link to="/">
-            <img src={theme === "light" ? logo : logoWhite} alt="VATSIM P.R.China Division" className="h-6" />
-          </Link>
-          <NavMenu />
-          <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
-            <ModeToggle />
-            <LanguageToggle />
-          </div>
-        </div>
-      </header>
-      <div className="pt-4">{children}</div>
-      <footer className="mt-8 mb-4">
-        <p className="text-slate-500 dark:text-slate-300">
-          &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
-          TanStack and shadcn/ui. For simulation use only.
-        </p>
-      </footer>
-    </div>
-  );
-};
-
-const RootLayout: React.FC = () => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            // With SSR, we usually want to set some default staleTime
-            // above 0 to avoid refetching immediately on the client
-            staleTime: 60 * 1000,
-          },
-        },
-      }),
-  );
-
-  const route = useRouterState();
-
-  return (
-    <html lang={getLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
-      <head>
-        <HeadContent />
-      </head>
-      <body className="px-1 md:px-0">
-        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
-          <QueryClientProvider client={queryClient}>
-            <I18nProvider i18n={i18n}>
-              <Application>
-                <Outlet />
-              </Application>
-            </I18nProvider>
-          </QueryClientProvider>
-        </ThemeProvider>
-        <Toaster position="top-center" />
-        <Scripts />
-      </body>
-    </html>
-  );
-};
-
-export const Route = createRootRoute({
-  head: (ctx) => {
-    const pathname = ctx.matches[ctx.matches.length - 1].pathname;
-    return {
-      meta: [
-        { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-        { title: "VATSIM P.R. China Division" },
-      ],
-      links: [
-        { rel: "stylesheet", href: appCss },
-        { rel: "stylesheet", href: rehypeCssUrl },
-        { rel: "alternate", hrefLang: "en", href: getLocalPathname(pathname, "en") },
-        { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname(pathname, "zh-cn") },
-      ],
-    };
-  },
-  component: RootLayout,
-});
