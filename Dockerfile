@@ -1,4 +1,7 @@
-FROM --platform=$BUILDPLATFORM node:lts-slim as base
+FROM --platform=$BUILDPLATFORM node:lts-slim AS base
+
+RUN RUN apt update && \
+  apt install -y ca-certificates
 
 FROM --platform=$BUILDPLATFORM base AS deps
 WORKDIR /app
