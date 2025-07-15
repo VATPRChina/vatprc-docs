@@ -2,11 +2,14 @@ import { serverOnly } from "@tanstack/react-start";
 import { getRequestURL } from "@tanstack/react-start/server";
 
 const getURLServer = serverOnly(() => {
-  if (getRequestURL().pathname.startsWith("/en")) {
-    return "en";
-  } else {
-    return "zh-cn";
+  try {
+    if (getRequestURL().pathname.startsWith("/en")) {
+      return "en";
+    }
+  } catch {
+    // ignore
   }
+  return "zh-cn";
 });
 
 export const getLocale = () => {

@@ -9,6 +9,7 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { Trans } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
@@ -26,7 +27,7 @@ const EditFpl = () => (
     rel="noopener noreferrer"
     className="hover:text-primary/80 underline"
   >
-    Edit your flight plan on VATSIM.
+    <Trans>Edit your flight plan on VATSIM.</Trans>
   </a>
 );
 

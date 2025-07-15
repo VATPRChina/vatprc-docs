@@ -85,6 +85,7 @@
     "@vitejs/plugin-react": "^4.5.2",
     "@vitest/browser": "^3.2.3",
     "eslint": "^9.29.0",
+    "eslint-plugin-lingui": "^0.10.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "openapi-typescript": "^7.8.0",

@@ -17,6 +17,22 @@ msgstr ""
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
+#: src/components/controller-list.tsx:450
+msgid "Absent"
+msgstr "Absent"
+
+#: src/routes/flights/$callsign.tsx:30
+msgid "Edit your flight plan on VATSIM."
+msgstr "Edit your flight plan on VATSIM."
+
+#: src/components/controller-list.tsx:413
+msgid "Show Absence Controllers"
+msgstr "Show Absence Controllers"
+
+#: src/components/controller-list.tsx:325
+msgid "until"
+msgstr "until"
+
 #: src/routes/index.tsx:99
 msgid "论坛"
 msgstr "论坛"
