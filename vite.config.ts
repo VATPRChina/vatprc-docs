@@ -27,10 +27,9 @@ export default defineConfig({
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",
-      sourcemaps: { filesToDeleteAfterUpload: ["**/*.js.map"] },
     }),
   ],
-  build: { sourcemap: "hidden" },
+  build: { sourcemap: true },
   server: {
     proxy: {
       "/api/cors/vatsim-events-prc": { target: "https://my.vatsim.net/api/v2/events/latest", changeOrigin: true },
