@@ -80,11 +80,15 @@ const FplField = ({
 };
 
 const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${getLocale() == "en" ? 9700 : 9695}`;
-const AircraftCodeCommonHelp = () => (
+const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
   <>
     <p>
       <img
-        src="https://community.vatprc.net/uploads/default/original/2X/b/b12a2cf2739a9c80f9d75e5670287fef7b8f3876.png"
+        src={
+          type === "PBN"
+            ? "https://cdn.sa.net/2025/07/19/icdkAQVeoNrablP.png"
+            : "https://cdn.sa.net/2025/07/19/JnkshOqN6fr4BzW.png"
+        }
         className="w-[960px] max-w-screen"
       />
     </p>
@@ -140,7 +144,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
         <span className="text-mono">W</span>
         {m["warning_popover_action_add_to_equip"]()}
       </p>
-      <AircraftCodeCommonHelp />
+      <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
   no_rnav1: ({ warning }) => (
@@ -165,7 +169,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
           </>
         )}
       </p>
-      <AircraftCodeCommonHelp />
+      <AircraftCodeCommonHelp type="PBN" />
     </>
   ),
   rnp_ar: () => null,
@@ -177,7 +181,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
         <EditFpl />
         {m["warning_popover_no_transponder_action"]()}
       </p>
-      <AircraftCodeCommonHelp />
+      <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
   route_direct_segment: () => null,
