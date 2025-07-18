@@ -3,6 +3,7 @@ import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { m } from "@/lib/i18n/messages";
+import { cn } from "@/lib/utils";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
 const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
@@ -18,6 +19,7 @@ const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
   cruising_level_mismatch: m.warning_title_cruising_level_mismatch(),
   cruising_level_too_low: m.warning_title_cruising_level_too_low(),
   cruising_level_not_allowed: m.warning_title_cruising_level_not_allowed(),
+  route_match_preferred: m.warning_short_preferred_route(),
 };
 
 const descriptions: Record<
@@ -62,9 +64,19 @@ const descriptions: Record<
   cruising_level_mismatch: () => null,
   cruising_level_too_low: () => null,
   cruising_level_not_allowed: () => null,
+  route_match_preferred: (_, warning) => (
+    <p>
+      {m.match_preferred_route()}
+      <span className="font-mono">{warning.parameter}</span>
+    </p>
+  ),
 };
 
-const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = ["rnp_ar", "rnp_ar_without_rf"];
+const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = [
+  "rnp_ar",
+  "rnp_ar_without_rf",
+  "route_match_preferred",
+];
 const uniqWith = <T,>(arr: T[], fn: (a: T, b: T) => boolean) =>
   arr.filter((element, index) => arr.findIndex((step) => fn(element, step)) === index);
 
@@ -89,7 +101,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert>
           <TbCheck />
-          <AlertTitle>{m["warning_short_ok"]()}</AlertTitle>
+          <AlertTitle className="text-green-700 dark:text-green-500">{m["warning_short_ok"]()}</AlertTitle>
         </Alert>
       )}
       {warnings &&
@@ -97,8 +109,14 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
           (warning) =>
             messages[warning.message_code] && (
               <Alert key={warning.message_code}>
-                <TbExclamationCircle />
-                <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
+                {ALLOWED_MESSAGE_CODES.includes(warning.message_code) ? <TbCheck /> : <TbExclamationCircle />}
+                <AlertTitle
+                  className={cn(
+                    ALLOWED_MESSAGE_CODES.includes(warning.message_code) && "text-green-700 dark:text-green-500",
+                  )}
+                >
+                  {messages[warning.message_code] ?? warning.message_code}
+                </AlertTitle>
                 <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
               </Alert>
             ),

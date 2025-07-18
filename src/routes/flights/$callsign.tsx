@@ -117,6 +117,22 @@ const CRUISING_LEVEL_TEXT: Record<string, string> = {
   flight_level: m.cruising_level_flight_level(),
 };
 
+const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageCode"], "error" | "warning"> = {
+  no_rvsm: "error",
+  no_rnav1: "error",
+  rnp_ar: "warning",
+  rnp_ar_without_rf: "warning",
+  no_transponder: "error",
+  route_direct_segment: "error",
+  route_leg_direction: "error",
+  airway_require_approval: "error",
+  not_preferred_route: "error",
+  cruising_level_mismatch: "error",
+  cruising_level_too_low: "error",
+  cruising_level_not_allowed: "error",
+  route_match_preferred: "warning",
+};
+
 const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], string> = {
   no_rvsm: m.warning_short_no_rvsm(),
   no_rnav1: m.warning_short_no_rnav1(),
@@ -130,6 +146,7 @@ const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"
   cruising_level_mismatch: m.warning_short_cruising_level_type(),
   cruising_level_too_low: m.warning_short_cruising_level_too_low(),
   cruising_level_not_allowed: m.warning_short_cruising_level(),
+  route_match_preferred: m.warning_short_preferred_route(),
 };
 const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],
@@ -229,6 +246,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
       <ChinaRvsmHelp />
     </>
   ),
+  route_match_preferred: () => null,
 };
 
 interface WarningProps {
@@ -255,7 +273,10 @@ const Warning = ({
           <Button
             variant="ghost"
             size="sm"
-            className="text-destructive hover:text-destructive"
+            className={cn(
+              (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
+                "text-destructive hover:text-destructive",
+            )}
             key={warning.message_code}
           >
             <TbInfoCircleFilled />

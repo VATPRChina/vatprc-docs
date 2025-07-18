@@ -173,5 +173,7 @@
   "warning_popover_cruising_level_not_allowed_3": "（英尺）。",
   "warning_description_not_preferred_route_atc": "请与 ATC 联系获得帮助调整航路。",
   "warning_popover_action_add_to_pbn": "到 PBN。",
-  "warning_popover_action_or": "或"
+  "warning_popover_action_or": "或",
+  "warning_short_preferred_route": "符合推荐航路",
+  "match_preferred_route": "计划航路与推荐航路一致："
 }

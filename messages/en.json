@@ -172,5 +172,7 @@
   "warning_popover_cruising_level_not_allowed_3": "(in feet).",
   "warning_description_not_preferred_route_atc": "Please contact ATC for help adjusting the route.",
   "warning_popover_action_add_to_pbn": "to PBN.",
-  "warning_popover_action_or": "or"
+  "warning_popover_action_or": "or",
+  "warning_short_preferred_route": "Match preferred route",
+  "match_preferred_route": "Planned route matches a preferred route: "
 }
