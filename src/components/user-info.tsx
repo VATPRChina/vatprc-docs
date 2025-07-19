@@ -45,11 +45,14 @@ export const UserInfo = () => {
   url.searchParams.set("redirect_uri", import.meta.env.VITE_API_REDIRECT_URI);
   url.searchParams.set("response_type", "code");
 
+  const onLogin = () => {
+    localStorage.setItem("pre_oauth_path", window.location.pathname);
+    location.assign(url.toString());
+  };
+
   return (
-    <Button asChild variant="ghost">
-      <a href={url.toString()}>
-        <Trans>Login</Trans>
-      </a>
+    <Button variant="ghost" onClick={onLogin}>
+      <Trans>Login</Trans>
     </Button>
   );
 };

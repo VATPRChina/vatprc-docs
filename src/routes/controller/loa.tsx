@@ -1,7 +1,18 @@
-import { DiscourseDocument, getDiscourseDocumentMeta } from "@/components/discourse-doc";
+import { DiscourseDocument } from "@/components/discourse-doc";
+import { msg } from "@lingui/core/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/loa")({
-  component: () => <DiscourseDocument cn="7217" en="7217" />,
-  head: getDiscourseDocumentMeta("7217", "7217"),
+  component: () => Page,
+  head: () => ({
+    meta: [{ title: msg`Letter of Agreement`.message }],
+  }),
 });
+
+function Page() {
+  return (
+    <>
+      <DiscourseDocument cn="7217" en="7217" />
+    </>
+  );
+}

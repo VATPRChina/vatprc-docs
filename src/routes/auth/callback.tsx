@@ -19,14 +19,19 @@ export const Route = createFileRoute("/auth/callback")({
 
 function Component() {
   const match = Route.useMatch();
-  const navigate = Route.useNavigate();
   const client = useQueryClient();
 
   useEffect(() => {
     (async () => {
       await login(match.search.code);
       await client.resetQueries();
-      await navigate({ to: "/" });
+      const prev = localStorage.getItem("pre_oauth_path");
+      if (prev) {
+        localStorage.removeItem("pre_oauth_path");
+        location.replace(prev);
+      } else {
+        location.replace("/");
+      }
     })().catch(console.error);
   });
 
