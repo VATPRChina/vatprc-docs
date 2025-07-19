@@ -13,9 +13,33 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/routes/controller/controller-list.tsx:57
+msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
+msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
+
 #: src/routes/__root.tsx:243
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+
+#: src/routes/controller/controller-list.tsx:46
+msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
+msgstr "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
+
+#: src/routes/controller/controller-list.tsx:29
+msgid "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
+msgstr "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
+
+#: src/routes/controller/controller-list.tsx:40
+msgid "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
+msgstr "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
+
+#: src/routes/controller/controller-list.tsx:34
+msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
+msgstr "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
+
+#: src/routes/controller/controller-list.tsx:51
+msgid "<0>V</0> Visiting: This controller is a visiting controller."
+msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
 #: src/routes/index.tsx:130
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
@@ -120,6 +144,7 @@ msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
 #: src/routes/__root.tsx:170
+#: src/routes/controller/controller-list.tsx:17
 msgid "Controller List"
 msgstr "Controller List"
 
@@ -233,6 +258,10 @@ msgstr "Leg direction violation"
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
 
+#: src/routes/airspace/sop.tsx:32
+msgid "List of SOPs"
+msgstr "List of SOPs"
+
 #: src/routes/__root.tsx:83
 msgid "Logo Pack"
 msgstr "Logo Pack"
@@ -290,6 +319,10 @@ msgstr "Online Pilots"
 #: src/routes/__root.tsx:109
 msgid "Operation"
 msgstr "Operation"
+
+#: src/routes/airspace/sop.tsx:44
+msgid "Other SOPs"
+msgstr "Other SOPs"
 
 #: src/routes/flights/$callsign.tsx:399
 msgid "PBN"
@@ -357,6 +390,10 @@ msgstr "Show Absence Controllers"
 msgid "Staff"
 msgstr "Staff"
 
+#: src/routes/airspace/sop.tsx:15
+msgid "Standard operation procedures"
+msgstr "Standard operation procedures"
+
 #: src/routes/__root.tsx:122
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
@@ -388,6 +425,14 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 #: src/routes/flights/$callsign.tsx:231
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
+
+#: src/routes/controller/controller-list.tsx:20
+msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
+msgstr "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
+
+#: src/routes/airspace/sop.tsx:27
+msgid "This page is not available in English."
+msgstr "This page is not available in English."
 
 #: src/routes/flights/$callsign.tsx:437
 msgid "To"

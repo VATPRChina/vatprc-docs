@@ -13,9 +13,33 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/routes/controller/controller-list.tsx:57
+msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
+msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
+
 #: src/routes/__root.tsx:243
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
+
+#: src/routes/controller/controller-list.tsx:46
+msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
+msgstr "<0>✓</0> 已认证：此管制员可以在此席位提供全方面的管制和雷达服务。(Certified)"
+
+#: src/routes/controller/controller-list.tsx:29
+msgid "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
+msgstr "<0>✘</0> 限制的：管制员没有权利在此席位提供任何的服务。(Restricted)"
+
+#: src/routes/controller/controller-list.tsx:40
+msgid "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
+msgstr "<0>S</0> 训练中：此管制员为了训练原因，可以在本席位提供独立的管制服务。(Solo)"
+
+#: src/routes/controller/controller-list.tsx:34
+msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
+msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员的监督下开扇。(Under Supervision)"
+
+#: src/routes/controller/controller-list.tsx:51
+msgid "<0>V</0> Visiting: This controller is a visiting controller."
+msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
 #: src/routes/index.tsx:130
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
@@ -120,6 +144,7 @@ msgid "Community & Teamspeak 3"
 msgstr "社群"
 
 #: src/routes/__root.tsx:170
+#: src/routes/controller/controller-list.tsx:17
 msgid "Controller List"
 msgstr "管制员列表"
 
@@ -233,6 +258,10 @@ msgstr "航段方向不允许"
 msgid "Letter of Agreement"
 msgstr "移交协议书"
 
+#: src/routes/airspace/sop.tsx:32
+msgid "List of SOPs"
+msgstr "标准运行程序列表"
+
 #: src/routes/__root.tsx:83
 msgid "Logo Pack"
 msgstr "视觉标识包"
@@ -290,6 +319,10 @@ msgstr "在线飞行员"
 #: src/routes/__root.tsx:109
 msgid "Operation"
 msgstr "运行"
+
+#: src/routes/airspace/sop.tsx:44
+msgid "Other SOPs"
+msgstr "其他标准运行程序"
 
 #: src/routes/flights/$callsign.tsx:399
 msgid "PBN"
@@ -357,6 +390,10 @@ msgstr "显示缺席管制员"
 msgid "Staff"
 msgstr "职员"
 
+#: src/routes/airspace/sop.tsx:15
+msgid "Standard operation procedures"
+msgstr "标准运行程序"
+
 #: src/routes/__root.tsx:122
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
@@ -388,6 +425,14 @@ msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}�
 #: src/routes/flights/$callsign.tsx:231
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
+
+#: src/routes/controller/controller-list.tsx:20
+msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
+msgstr "下方表格的内容基于管制员中心数据自动生成，正常情况下最多存在24小时延迟。表中数据仅包含至少含有一类席位管制权限的管制员（含客座管制员），即不包含在下表中的管制员不再拥有管制权限。"
+
+#: src/routes/airspace/sop.tsx:27
+msgid "This page is not available in English."
+msgstr "本页面仅支持简体中文。"
 
 #: src/routes/flights/$callsign.tsx:437
 msgid "To"

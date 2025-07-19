@@ -3,6 +3,8 @@ import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
 import { getLocale } from "@/lib/i18n";
+import { msg } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/airspace/sop")({
@@ -10,7 +12,7 @@ export const Route = createFileRoute("/airspace/sop")({
   loader() {
     return getAllDocuments();
   },
-  head: () => ({ meta: [{ title: "Standard operation procedures" }] }),
+  head: () => ({ meta: [{ title: msg`Standard operation procedures`.message }] }),
 });
 
 function Page() {
@@ -21,10 +23,14 @@ function Page() {
     <>
       {locale === "en" && (
         <Alert variant="destructive">
-          <AlertTitle>This page is not available in English.</AlertTitle>
+          <AlertTitle>
+            <Trans>This page is not available in English.</Trans>
+          </AlertTitle>
         </Alert>
       )}
-      <h1 className="my-4 text-center text-3xl font-bold">List of SOPs</h1>
+      <h1 className="my-4 text-center text-3xl font-bold">
+        <Trans>List of SOPs</Trans>
+      </h1>
       <DocList
         documents={documents.filter(
           (doc) =>
@@ -34,7 +40,9 @@ function Page() {
         )}
       />
       <hr />
-      <h1 className="my-4 text-center text-3xl font-bold">Other SOPs</h1>
+      <h1 className="my-4 text-center text-3xl font-bold">
+        <Trans>Other SOPs</Trans>
+      </h1>
       <DiscourseDocument en="7532" />
     </>
   );
