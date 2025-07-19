@@ -1,11 +1,12 @@
 import { ControllerList } from "@/components/controller-list";
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/controller-list")({
   component: Page,
-  head: () => ({
-    meta: [{ title: "Controller List" }],
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],
   }),
 });
 

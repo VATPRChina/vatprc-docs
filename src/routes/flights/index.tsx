@@ -8,8 +8,8 @@ import { ChangeEventHandler, useState } from "react";
 
 export const Route = createFileRoute("/flights/")({
   component: RouteComponent,
-  head: () => ({
-    meta: [{ title: msg`Flight Plan Checker`.message }],
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Flight Plan Checker`) }],
   }),
 });
 

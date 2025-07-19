@@ -4,8 +4,8 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/loa")({
   component: () => Page,
-  head: () => ({
-    meta: [{ title: msg`Letter of Agreement`.message }],
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Letter of Agreement`) }],
   }),
 });
 

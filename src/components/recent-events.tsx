@@ -1,4 +1,4 @@
-import { getLocale } from "@/lib/i18n";
+import { useLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
@@ -38,7 +38,7 @@ const Event: React.FC<{
   url: string;
   isExam: boolean;
 }> = ({ title, start, end, url, isExam }) => {
-  const locale = getLocale();
+  const locale = useLocale();
 
   return (
     <a
@@ -85,15 +85,16 @@ const Event: React.FC<{
 };
 
 export const RecentEvents: React.FC<{ className?: string }> = ({ className }) => {
+  const locale = useLocale();
   const { data: cnData, isLoading: isCnLoading } = useQuery({
     queryKey: [COMMUNITY_EVENT_ENDPOINT],
     queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<CommunityEventData>),
-    enabled: getLocale() === "zh-cn",
+    enabled: locale === "zh-cn",
   });
   const { data: enData, isLoading: isEnLoading } = useQuery({
     queryKey: [VATSIM_EVENT_ENDPOINT],
     queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<VatsimEventData>),
-    enabled: getLocale() === "en",
+    enabled: locale === "en",
   });
 
   if (isCnLoading || isEnLoading) {
@@ -141,7 +142,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
             display: "list-item",
           }))}
           expandRows
-          locale={getLocale()}
+          locale={locale}
         />
       </div>
       <div className="col-span-2 flex flex-col items-stretch gap-2 md:col-span-1">

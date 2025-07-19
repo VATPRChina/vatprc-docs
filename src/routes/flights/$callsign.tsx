@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -78,26 +78,29 @@ const FplField = ({
   );
 };
 
-const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${getLocale() == "en" ? 9700 : 9695}`;
-const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
-  <>
-    <p>
-      <img
-        src={
-          type === "PBN"
-            ? "https://cdn.sa.net/2025/07/19/icdkAQVeoNrablP.png"
-            : "https://cdn.sa.net/2025/07/19/JnkshOqN6fr4BzW.png"
-        }
-        className="w-[960px] max-w-screen"
-      />
-    </p>
-    <p className="hover:text-primary/80 underline">
-      <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
-        <Trans>Learn more</Trans>
-      </a>
-    </p>
-  </>
-);
+const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
+  const locale = useLocale();
+  const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${locale == "en" ? 9700 : 9695}`;
+  return (
+    <>
+      <p>
+        <img
+          src={
+            type === "PBN"
+              ? "https://cdn.sa.net/2025/07/19/icdkAQVeoNrablP.png"
+              : "https://cdn.sa.net/2025/07/19/JnkshOqN6fr4BzW.png"
+          }
+          className="w-[960px] max-w-screen"
+        />
+      </p>
+      <p className="hover:text-primary/80 underline">
+        <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
+          <Trans>Learn more</Trans>
+        </a>
+      </p>
+    </>
+  );
+};
 
 const ChinaRvsmHelp = () => (
   <>

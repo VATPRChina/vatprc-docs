@@ -4,10 +4,10 @@ import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { usePermission } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
+import { getLocale, useLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { AnyRouteMatch } from "@tanstack/react-router";
+import { RouteOptions } from "@tanstack/react-router";
 import React from "react";
 import { TbAlertCircle } from "react-icons/tb";
 
@@ -52,7 +52,7 @@ export const DiscourseDocument: React.FC<{
   cn?: string;
   en: string;
 }> = ({ cn, en }) => {
-  const locale = getLocale();
+  const locale = useLocale();
 
   const postId = locale === "zh-cn" ? (cn ?? en) : en;
   const { data, isLoading, error } = useQuery({
@@ -103,9 +103,9 @@ export const DiscourseDocument: React.FC<{
 };
 
 export const getDiscourseDocumentMeta =
-  (cn: string, en: string): (() => Promise<{ meta?: AnyRouteMatch["meta"] }>) =>
-  async () => {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  (cn: string, en: string): RouteOptions["head"] =>
+  async (ctx) => {
+    const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
         if (!res.ok) {

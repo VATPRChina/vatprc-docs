@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { getLocale, getLocalPathname } from "@/lib/i18n";
+import { useLocale, getLocalPathname } from "@/lib/i18n";
 import { localStorage } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
 import { useRouterState } from "@tanstack/react-router";
@@ -8,7 +8,7 @@ import { TbLanguage } from "react-icons/tb";
 export const LanguageToggle = () => {
   const state = useRouterState();
   const pathname = state.location.pathname;
-  const nextLang = getLocale() === "zh-cn" ? "en" : "zh-cn";
+  const nextLang = useLocale() === "zh-cn" ? "en" : "zh-cn";
 
   const { t } = useLingui();
 

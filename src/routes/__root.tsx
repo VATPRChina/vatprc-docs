@@ -13,18 +13,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
 import { UserInfo } from "@/components/user-info";
-import { getLocale, getLocalPathname } from "@/lib/i18n";
+import { useLocale, getLocalPathname } from "@/lib/i18n";
+import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { i18n } from "@lingui/core";
-import { msg } from "@lingui/core/macro";
-import { I18nProvider } from "@lingui/react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRootRoute, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
 
 interface NavigationMenuLinkProps {
@@ -61,7 +57,7 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
 const contents = [
   {
     title: <Trans>About Us</Trans>,
-    content: (
+    content: ({ locale }: { locale: "en" | "zh-cn" }) => (
       <ul className="nav-list-grid">
         <NavMenuLink
           href="https://community.vatprc.net/c/69-category/12-category/12"
@@ -92,9 +88,7 @@ const contents = [
         </NavMenuLink>
         <NavMenuLink
           href={
-            getLocale() === "zh-cn"
-              ? "https://community.vatprc.net/c/events/66-category/66"
-              : "https://vatsim.net/events/"
+            locale === "zh-cn" ? "https://community.vatprc.net/c/events/66-category/66" : "https://vatsim.net/events/"
           }
           external
         >
@@ -108,7 +102,7 @@ const contents = [
   },
   {
     title: <Trans>Operation</Trans>,
-    content: (
+    content: () => (
       <ul className="nav-list-grid">
         <NavMenuLink href="/airspace/fir" large className="row-span-4">
           <Trans>Airspace</Trans>
@@ -130,7 +124,7 @@ const contents = [
   },
   {
     title: <Trans>Pilots</Trans>,
-    content: (
+    content: () => (
       <ul className="nav-list-grid">
         <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
           <Trans>Start to Fly</Trans>
@@ -165,7 +159,7 @@ const contents = [
   },
   {
     title: <Trans>Controllers</Trans>,
-    content: (
+    content: () => (
       <ul className="nav-list-grid">
         <NavMenuLink href="/controller/controller-list" large className="row-span-3">
           <Trans>Controller List</Trans>
@@ -198,13 +192,17 @@ const contents = [
 ];
 
 export const NavMenu: React.FC = () => {
+  const locale = useLocale();
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
         {contents.map((content, i) => (
           <NavigationMenuItem key={i}>
             <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-            <NavigationMenuContent>{content.content}</NavigationMenuContent>
+            <NavigationMenuContent>
+              <content.content locale={locale} />
+            </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
@@ -252,52 +250,15 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
   );
 };
 
-const RootLayout: React.FC = () => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            // With SSR, we usually want to set some default staleTime
-            // above 0 to avoid refetching immediately on the client
-            staleTime: 60 * 1000,
-          },
-        },
-      }),
-  );
-
-  const route = useRouterState();
-
-  return (
-    <html lang={getLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
-      <head>
-        <HeadContent />
-      </head>
-      <body className="px-1 md:px-0">
-        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
-          <QueryClientProvider client={queryClient}>
-            <I18nProvider i18n={i18n}>
-              <Application>
-                <Outlet />
-              </Application>
-            </I18nProvider>
-          </QueryClientProvider>
-        </ThemeProvider>
-        <Toaster position="top-center" />
-        <Scripts />
-      </body>
-    </html>
-  );
-};
-
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  component: RootLayout,
   head: (ctx) => {
     const pathname = ctx.matches[ctx.matches.length - 1].pathname;
     return {
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-        { title: msg`VATSIM P.R. China Division`.message },
+        { title: ctx.match.context.i18n._("VATSIM P.R. China Division") },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
@@ -307,5 +268,25 @@ export const Route = createRootRoute({
       ],
     };
   },
-  component: RootLayout,
 });
+
+function RootLayout() {
+  const route = useRouterState();
+
+  return (
+    <html lang={useLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
+      <head>
+        <HeadContent />
+      </head>
+      <body className="px-1 md:px-0">
+        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
+          <Application>
+            <Outlet />
+          </Application>
+        </ThemeProvider>
+        <Toaster position="top-center" />
+        <Scripts />
+      </body>
+    </html>
+  );
+}

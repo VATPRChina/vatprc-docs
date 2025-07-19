@@ -1,26 +1,18 @@
-import { serverOnly } from "@tanstack/react-start";
-import { getRequestURL } from "@tanstack/react-start/server";
+import { useRouterState } from "@tanstack/react-router";
 
-const getURLServer = serverOnly(() => {
-  try {
-    if (getRequestURL().pathname.startsWith("/en")) {
-      return "en";
-    }
-  } catch {
-    // ignore
+export const getLocale = (pathname: string): "en" | "zh-cn" => {
+  if (pathname.startsWith("/en")) {
+    return "en";
   }
-  return "zh-cn";
-});
-
-export const getLocale = () => {
-  if (typeof window !== "undefined") {
-    if (window.location.pathname.startsWith("/en")) {
-      return "en";
-    }
+  if (pathname.startsWith("/zh-cn")) {
     return "zh-cn";
   }
-  const url = getURLServer();
-  return url;
+  return "zh-cn";
+};
+
+export const useLocale = (): "en" | "zh-cn" => {
+  const path = useRouterState().location.pathname;
+  return getLocale(path);
 };
 
 export const getLocalPathname = (pathname: string, locale: "en" | "zh-cn") => {

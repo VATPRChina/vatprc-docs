@@ -2,7 +2,7 @@ import { DiscourseDocument } from "@/components/discourse-doc";
 import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
-import { getLocale } from "@/lib/i18n";
+import { useLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -12,11 +12,11 @@ export const Route = createFileRoute("/airspace/sop")({
   loader() {
     return getAllDocuments();
   },
-  head: () => ({ meta: [{ title: msg`Standard operation procedures`.message }] }),
+  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Standard Operation Procedures`) }] }),
 });
 
 function Page() {
-  const locale = getLocale();
+  const locale = useLocale();
   const documents = Route.useLoaderData();
 
   return (
