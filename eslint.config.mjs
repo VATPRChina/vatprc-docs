@@ -21,18 +21,4 @@ export default tseslint.config(
   router.configs["flat/recommended"],
   { ignores: ["app/lib/api.d.ts"] },
   pluginLingui.configs["flat/recommended"],
-  {
-    rules: {
-      "lingui/no-unlocalized-strings": [
-        "warn",
-        {
-          ignore: ["https:", "^app/", "^@/"],
-          ignoreFunctions: ["console.log", "console.warn", "console.error"],
-          ignoreNames: ["className", "role", "href", "variant"],
-          ignoreMethodsOnTypes: ["ThemeProvider"],
-          useTsTypes: true,
-        },
-      ],
-    },
-  },
 );
