@@ -9,14 +9,14 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
   head: (ctx) => ({
-    meta: [{ name: "robots", content: "noindex" }, { title: `${ctx.params.callsign} - Flight Plan` }],
+    meta: [{ name: "robots", content: "noindex" }, { title: ctx.params.callsign }],
   }),
 });
 
@@ -67,7 +67,9 @@ const FplField = ({
             <span className="text-muted-foreground min-w-8">{value}</span>
           </TooltipTrigger>
           <TooltipContent side="right">
-            <p>Check at VATSIM</p>
+            <p>
+              <Trans>Check at VATSIM</Trans>
+            </p>
           </TooltipContent>
         </Tooltip>
       )}
@@ -91,7 +93,7 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
     </p>
     <p className="hover:text-primary/80 underline">
       <a href={AIRCRAFT_CODES_HELP_LINK} target="_blank" rel="noopener noreferrer">
-        Learn more
+        <Trans>Learn more</Trans>
       </a>
     </p>
   </>
@@ -100,18 +102,20 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => (
 const ChinaRvsmHelp = () => (
   <>
     <p className="hover:text-primary/80 underline">
-      <Link to="/airspace/rvsm">Learn more about China RVSM</Link>
+      <Link to="/airspace/rvsm">
+        <Trans>Learn more about China RVSM</Trans>
+      </Link>
     </p>
   </>
 );
 
-const CRUISING_LEVEL_TEXT: Record<string, string> = {
-  standard_even: "China RVSM even flight level",
-  standard_odd: "China RVSM odd flight level",
-  standard: "China RVSM flight level",
-  flight_level_even: "even flight level",
-  flight_level_odd: "odd flight level",
-  flight_level: "flight level",
+const CRUISING_LEVEL_TEXT: Record<string, React.ReactNode> = {
+  standard_even: <Trans>China RVSM even flight level</Trans>,
+  standard_odd: <Trans>China RVSM odd flight level</Trans>,
+  standard: <Trans>China RVSM flight level</Trans>,
+  flight_level_even: <Trans context="feet">even flight level</Trans>,
+  flight_level_odd: <Trans context="feet">odd flight level</Trans>,
+  flight_level: <Trans context="feet">flight level</Trans>,
 };
 
 const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageCode"], "error" | "warning"> = {
@@ -130,20 +134,20 @@ const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageC
   route_match_preferred: "warning",
 };
 
-const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], string> = {
-  no_rvsm: "No RVSM",
-  no_rnav1: "No RNAV1",
-  rnp_ar: "RNP AR",
-  rnp_ar_without_rf: "RNP AR without RF",
-  no_transponder: "No transponder",
-  route_direct_segment: "Direct leg",
-  route_leg_direction: "Leg direction violation",
-  airway_require_approval: "Restricted airway",
-  not_preferred_route: "Not preferred route",
-  cruising_level_mismatch: "Cruising Level Type Mismatch",
-  cruising_level_too_low: "Cruising Level Too Low",
-  cruising_level_not_allowed: "Cruising Level Not Allowed",
-  route_match_preferred: "Match preferred route",
+const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  no_rvsm: <Trans>No RVSM</Trans>,
+  no_rnav1: <Trans>No RNAV1</Trans>,
+  rnp_ar: <Trans>RNP AR</Trans>,
+  rnp_ar_without_rf: <Trans>RNP AR without RF</Trans>,
+  no_transponder: <Trans>No transponder</Trans>,
+  route_direct_segment: <Trans>Direct leg</Trans>,
+  route_leg_direction: <Trans>Leg direction violation</Trans>,
+  airway_require_approval: <Trans>Restricted airway</Trans>,
+  not_preferred_route: <Trans>Not preferred route</Trans>,
+  cruising_level_mismatch: <Trans>Cruising Level Type Mismatch</Trans>,
+  cruising_level_too_low: <Trans>Cruising Level Too Low</Trans>,
+  cruising_level_not_allowed: <Trans>Cruising Level Not Allowed</Trans>,
+  route_match_preferred: <Trans>Match preferred route</Trans>,
 };
 const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],
@@ -151,35 +155,45 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
 > = {
   no_rvsm: () => (
     <>
-      <p>The aircraft does not specify RVSM capability.</p>
+      <p>
+        <Trans>The aircraft does not specify RVSM capability.</Trans>
+      </p>
       <p>
         <EditFpl />
-        Add
-        <span className="text-mono">W</span>
-        to equipment code.
+        <Trans>
+          Add
+          <span className="text-mono">W</span>
+          to equipment code.
+        </Trans>
       </p>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
   no_rnav1: ({ warning }) => (
     <>
-      <p>The aircraft does not specify RNAV1 capability.</p>
+      <p>
+        <Trans>The aircraft does not specify RNAV1 capability.</Trans>
+      </p>
       <p>
         <EditFpl />
         {warning.field === "equipment" && (
           <>
-            Add
-            <span className="text-mono">R</span>
-            to equipment code.
+            <Trans>
+              Add
+              <span className="text-mono">R</span>
+              to equipment code.
+            </Trans>
           </>
         )}
         {warning.field === "navigation_performance" && (
           <>
-            Add
-            <span className="text-mono">D1</span>
-            or
-            <span className="text-mono">D2</span>
-            to PBN.
+            <Trans>
+              Add
+              <span className="text-mono">D1</span>
+              or
+              <span className="text-mono">D2</span>
+              to PBN.
+            </Trans>
           </>
         )}
       </p>
@@ -190,10 +204,12 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   rnp_ar_without_rf: () => null,
   no_transponder: () => (
     <>
-      <p>Transponder field is empty.</p>
+      <p>
+        <Trans>Transponder field is empty.</Trans>
+      </p>
       <p>
         <EditFpl />
-        Write your transponder equipment code.
+        <Trans>Write your transponder equipment code.</Trans>
       </p>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
@@ -202,43 +218,51 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
   route_leg_direction: () => null,
   airway_require_approval: () => null,
   not_preferred_route: () => null,
-  cruising_level_mismatch: ({ warning }) => (
+  cruising_level_mismatch: ({ warning }) => {
+    const level = warning.parameter && CRUISING_LEVEL_TEXT[warning.parameter];
+    return (
+      <>
+        <p>
+          {level ? (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Cruising level should be {level}.
+            </Trans>
+          ) : (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Please contact ATC for help.
+            </Trans>
+          )}
+        </p>
+        <p>
+          <EditFpl />
+          <Trans>Pick a suitable cruising level.</Trans>
+        </p>
+        <ChinaRvsmHelp />
+      </>
+    );
+  },
+  cruising_level_too_low: ({ warning: { parameter: level } }) => (
     <>
       <p>
-        The cruising level type does not meet the requirement of the route. Cruising level should be
-        {CRUISING_LEVEL_TEXT[warning.parameter ?? "Contact ATC"]}.
+        <Trans>The cruising level is too low for route. The minimum is {level} feet.</Trans>
       </p>
       <p>
         <EditFpl />
-        Pick a suitable cruising level.
+        <Trans>Pick a suitable cruising level.</Trans>
       </p>
-      <ChinaRvsmHelp />
     </>
   ),
-  cruising_level_too_low: ({ warning }) => (
+  cruising_level_not_allowed: ({ warning: { parameter: level } }) => (
     <>
       <p>
-        The cruising level is too low for route. The minimum is
-        {warning.parameter}
-        feet.
+        <Trans>The cruising level is not allowed for the route.</Trans>
+      </p>
+      <p>
+        <Trans>Allowed levels are {level} (in feet).</Trans>
       </p>
       <p>
         <EditFpl />
-        Pick a suitable cruising level.
-      </p>
-    </>
-  ),
-  cruising_level_not_allowed: ({ warning }) => (
-    <>
-      <p>The cruising level is not allowed for the route.</p>
-      <p>
-        Allowed levels are
-        {warning.parameter}
-        (in feet).
-      </p>
-      <p>
-        <EditFpl />
-        Pick a suitable cruising level.
+        <Trans>Pick a suitable cruising level.</Trans>
       </p>
       <ChinaRvsmHelp />
     </>
@@ -299,6 +323,8 @@ const Warning = ({
 function RouteComponent() {
   const { callsign } = Route.useParams();
 
+  const { t } = useLingui();
+
   const {
     error,
     data: flight,
@@ -315,7 +341,7 @@ function RouteComponent() {
     <div className="flex flex-col items-start gap-4">
       <LinkButton variant="ghost" to="..">
         <TbArrowLeft />
-        Back
+        <Trans>Back</Trans>
       </LinkButton>
       {error?.message && (
         <Alert color="red">
@@ -333,42 +359,44 @@ function RouteComponent() {
               <span>{flight.arrival}</span>
             </span>
           </h1>
-          <h2 className="text-2xl">Flight Plan</h2>
+          <h2 className="text-2xl">
+            <Trans>Flight Plan</Trans>
+          </h2>
           <div className="grid grid-cols-4 gap-4">
-            <FplField label="Callsign" value={flight.callsign} />
+            <FplField label={t`Callsign`} value={flight.callsign} />
             {/* <FplField label="Flight Rules" value="-" /> */}
             {/* <FplField label="Date of Flight" value="-" /> */}
             {/* <FplField label="Voice Rules" value="-" /> */}
             {/* <FplField label="Aircraft Type" value="-" /> */}
             {/* <FplField label="Wake Category" value="-" /> */}
-            <FplField label="Equipment">
+            <FplField label={t`Equipment`}>
               <div className="flex items-center gap-2">
                 {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
                 <Warning flight={flight} warnings={warnings} field="equipment" />
               </div>
             </FplField>
-            <FplField label="Transponder">
+            <FplField label={t`Transponder`}>
               <div className="flex items-center gap-2">
                 {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
                 <Warning flight={flight} warnings={warnings} field="transponder" />
               </div>
             </FplField>
-            <FplField label="Departure" value={flight.departure} className="col-start-1" />
+            <FplField label={t`Departure`} value={flight.departure} className="col-start-1" />
             {/* <FplField label="Off Block" value="-" /> */}
             {/* <FplField label="Airspeed" value="-" /> */}
-            <FplField label="Cruising Level (Feet)">
+            <FplField label={t`Cruising Level (Feet)`}>
               {flight.cruising_level && <span className="text-mono">{flight.cruising_level}</span>}
               <Warning flight={flight} warnings={warnings} field="cruising_level" />
             </FplField>
-            <FplField label="Route" className="col-span-4">
+            <FplField label={t`Route`} className="col-span-4">
               {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
               <Warning flight={flight} warnings={warnings} field="route" />
             </FplField>
-            <FplField label="Arrival" value={flight.arrival} />
+            <FplField label={t`Arrival`} value={flight.arrival} />
             {/* <FplField label="Enroute Time" value="-" /> */}
             {/* <FplField label="Alternate" value="-" /> */}
             {/* <FplField label="Endurance" value="-" /> */}
-            <FplField label="PBN" tooltip="Performance Based Navigation">
+            <FplField label={t`PBN`} tooltip={t`Performance Based Navigation`}>
               <div className="flex items-center gap-2">
                 {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
                 <Warning flight={flight} warnings={warnings} field="navigation_performance" />
@@ -390,14 +418,24 @@ function RouteComponent() {
             {/* <FplField label="EET" value="-" tooltip="Estimated Elapsed Times" /> */}
             {/* <FplField label="RMK" value="-" tooltip="Additional Remarks" className="col-span-4" /> */}
           </div>
-          <h2 className="text-2xl">Validation Result</h2>
+          <h2 className="text-2xl">
+            <Trans>Validation Result</Trans>
+          </h2>
           <FlightWarnings callsign={callsign} />
-          <h2 className="text-2xl">Flight Route</h2>
+          <h2 className="text-2xl">
+            <Trans>Flight Route</Trans>
+          </h2>
           <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-1">
             <div className="contents">
-              <span className="text-muted-foreground col-1 text-right font-light">From</span>
-              <span className="text-muted-foreground col-2 text-center font-light">Via</span>
-              <span className="text-muted-foreground col-3 text-left font-light">To</span>
+              <span className="text-muted-foreground col-1 text-right font-light">
+                <Trans>From</Trans>
+              </span>
+              <span className="text-muted-foreground col-2 text-center font-light">
+                <Trans>Via</Trans>
+              </span>
+              <span className="text-muted-foreground col-3 text-left font-light">
+                <Trans>To</Trans>
+              </span>
             </div>
             {route &&
               route.map((r, i) => (

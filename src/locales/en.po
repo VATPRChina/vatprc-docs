@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/routes/__root.tsx:245
+#: src/routes/__root.tsx:243
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
@@ -21,7 +21,7 @@ msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/routes/__root.tsx:65
+#: src/routes/__root.tsx:62
 msgid "About Us"
 msgstr "About Us"
 
@@ -29,15 +29,31 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/routes/__root.tsx:116
+#: src/routes/flights/$callsign.tsx:190
+msgid "Add<0>D1</0>or<1>D2</1>to PBN."
+msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
+
+#: src/routes/flights/$callsign.tsx:181
+msgid "Add<0>R</0>to equipment code."
+msgstr "Add <0>R</0> to equipment code."
+
+#: src/routes/flights/$callsign.tsx:163
+msgid "Add<0>W</0>to equipment code."
+msgstr "Add <0>W</0> to equipment code."
+
+#: src/routes/__root.tsx:113
 msgid "Airspace"
 msgstr "Airspace"
 
-#: src/routes/__root.tsx:74
+#: src/routes/flights/$callsign.tsx:261
+msgid "Allowed levels are {level} (in feet)."
+msgstr "Allowed levels are {level} (in feet)."
+
+#: src/routes/__root.tsx:71
 msgid "Announcement"
 msgstr "Announcement"
 
-#: src/routes/__root.tsx:106
+#: src/routes/__root.tsx:103
 msgid "API Document"
 msgstr "API Document"
 
@@ -45,50 +61,116 @@ msgstr "API Document"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
+#: src/routes/flights/$callsign.tsx:395
+msgid "Arrival"
+msgstr "Arrival"
+
 #: src/routes/index.tsx:62
-#: src/routes/__root.tsx:186
+#: src/routes/__root.tsx:183
 msgid "ATC Center"
 msgstr "ATC Center"
 
-#: src/routes/__root.tsx:122
+#: src/routes/__root.tsx:119
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/routes/__root.tsx:179
+#: src/routes/flights/$callsign.tsx:344
+msgid "Back"
+msgstr "Back"
+
+#: src/routes/__root.tsx:176
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
-#: src/routes/__root.tsx:151
+#: src/routes/flights/index.tsx:33
+#: src/routes/flights/$callsign.tsx:366
+msgid "Callsign"
+msgstr "Callsign"
+
+#: src/routes/__root.tsx:148
 msgid "Charts"
 msgstr "Charts"
 
-#: src/routes/__root.tsx:119
+#: src/routes/flights/index.tsx:48
+msgid "Check"
+msgstr "Check"
+
+#: src/routes/flights/$callsign.tsx:71
+msgid "Check at VATSIM"
+msgstr "Check at VATSIM"
+
+#: src/routes/__root.tsx:116
 msgid "China RVSM"
 msgstr "China RVSM"
 
-#: src/routes/__root.tsx:144
+#: src/routes/flights/$callsign.tsx:113
+msgid "China RVSM even flight level"
+msgstr "China RVSM even flight level"
+
+#: src/routes/flights/$callsign.tsx:115
+msgid "China RVSM flight level"
+msgstr "China RVSM flight level"
+
+#: src/routes/flights/$callsign.tsx:114
+msgid "China RVSM odd flight level"
+msgstr "China RVSM odd flight level"
+
+#: src/routes/__root.tsx:141
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/__root.tsx:173
+#: src/routes/__root.tsx:170
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/__root.tsx:169
+#: src/routes/__root.tsx:166
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/routes/index.tsx:62
-msgid "Controllers-center"
-msgstr "Controllers-center"
+#: src/routes/flights/$callsign.tsx:387
+msgid "Cruising Level (Feet)"
+msgstr "Cruising Level (Feet)"
+
+#: src/routes/flights/$callsign.tsx:149
+msgid "Cruising Level Not Allowed"
+msgstr "Cruising Level Not Allowed"
+
+#: src/routes/flights/$callsign.tsx:148
+msgid "Cruising Level Too Low"
+msgstr "Cruising Level Too Low"
+
+#: src/routes/flights/$callsign.tsx:147
+msgid "Cruising Level Type Mismatch"
+msgstr "Cruising Level Type Mismatch"
+
+#: src/routes/flights/$callsign.tsx:384
+msgid "Departure"
+msgstr "Departure"
+
+#: src/routes/flights/$callsign.tsx:143
+msgid "Direct leg"
+msgstr "Direct leg"
 
 #: src/routes/flights/$callsign.tsx:30
 msgid "Edit your flight plan on VATSIM."
 msgstr "Edit your flight plan on VATSIM."
 
-#: src/routes/__root.tsx:103
+#: src/routes/flights/$callsign.tsx:372
+msgid "Equipment"
+msgstr "Equipment"
+
+#: src/routes/flights/$callsign.tsx:116
+msgctxt "feet"
+msgid "even flight level"
+msgstr "even flight level"
+
+#: src/routes/__root.tsx:100
 msgid "Event"
 msgstr "Event"
+
+#: src/routes/docs/$.tsx:40
+msgid "Failed to load document."
+msgstr "Failed to load document."
 
 #: src/routes/index.tsx:88
 #: src/routes/index.tsx:92
@@ -96,43 +178,106 @@ msgstr "Event"
 msgid "Feedback"
 msgstr "Feedback"
 
-#: src/routes/__root.tsx:160
+#: src/routes/flights/$callsign.tsx:118
+msgctxt "feet"
+msgid "flight level"
+msgstr "flight level"
+
+#: src/routes/flights/$callsign.tsx:363
+msgid "Flight Plan"
+msgstr "Flight Plan"
+
+#: src/routes/__root.tsx:157
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
+#: src/routes/flights/index.tsx:12
+#: src/routes/flights/index.tsx:29
+msgid "Flight Plan Checker"
+msgstr "Flight Plan Checker"
+
+#: src/routes/flights/$callsign.tsx:426
+msgid "Flight Route"
+msgstr "Flight Route"
+
 #: src/routes/index.tsx:118
-#: src/routes/__root.tsx:93
+#: src/routes/__root.tsx:90
 msgid "Forum"
 msgstr "Forum"
 
-#: src/routes/__root.tsx:77
+#: src/routes/flights/$callsign.tsx:431
+msgid "From"
+msgstr "From"
+
+#: src/routes/__root.tsx:74
 msgid "Introduction"
 msgstr "Introduction"
 
-#: src/routes/__root.tsx:141
+#: src/routes/__root.tsx:138
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
-#: src/routes/__root.tsx:195
+#: src/routes/flights/$callsign.tsx:96
+msgid "Learn more"
+msgstr "Learn more"
+
+#: src/routes/flights/$callsign.tsx:106
+msgid "Learn more about China RVSM"
+msgstr "Learn more about China RVSM"
+
+#: src/routes/flights/$callsign.tsx:144
+msgid "Leg direction violation"
+msgstr "Leg direction violation"
+
+#: src/routes/__root.tsx:192
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
 
-#: src/routes/__root.tsx:86
+#: src/routes/__root.tsx:83
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
-#: src/routes/__root.tsx:89
+#: src/routes/flights/$callsign.tsx:150
+msgid "Match preferred route"
+msgstr "Match preferred route"
+
+#: src/routes/__root.tsx:86
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/routes/__root.tsx:189
+#: src/routes/__root.tsx:186
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/__root.tsx:162
+#: src/routes/__root.tsx:159
 msgctxt "new feature"
 msgid "New"
 msgstr "New"
+
+#: src/routes/flights/index.tsx:36
+msgid "No active flight"
+msgstr "No active flight"
+
+#: src/routes/flights/$callsign.tsx:139
+msgid "No RNAV1"
+msgstr "No RNAV1"
+
+#: src/routes/flights/$callsign.tsx:138
+msgid "No RVSM"
+msgstr "No RVSM"
+
+#: src/routes/flights/$callsign.tsx:142
+msgid "No transponder"
+msgstr "No transponder"
+
+#: src/routes/flights/$callsign.tsx:146
+msgid "Not preferred route"
+msgstr "Not preferred route"
+
+#: src/routes/flights/$callsign.tsx:117
+msgctxt "feet"
+msgid "odd flight level"
+msgstr "odd flight level"
 
 #: src/routes/index.tsx:52
 msgid "Online Controllers"
@@ -142,27 +287,41 @@ msgstr "Online Controllers"
 msgid "Online Pilots"
 msgstr "Online Pilots"
 
-#: src/routes/__root.tsx:112
+#: src/routes/__root.tsx:109
 msgid "Operation"
 msgstr "Operation"
+
+#: src/routes/flights/$callsign.tsx:399
+msgid "PBN"
+msgstr "PBN"
+
+#: src/routes/flights/$callsign.tsx:399
+msgid "Performance Based Navigation"
+msgstr "Performance Based Navigation"
+
+#: src/routes/flights/$callsign.tsx:238
+#: src/routes/flights/$callsign.tsx:251
+#: src/routes/flights/$callsign.tsx:265
+msgid "Pick a suitable cruising level."
+msgstr "Pick a suitable cruising level."
 
 #: src/routes/index.tsx:35
 msgid "Pilot"
 msgstr "Pilot"
 
-#: src/routes/__root.tsx:148
+#: src/routes/__root.tsx:145
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
-#: src/routes/__root.tsx:134
+#: src/routes/__root.tsx:131
 msgid "Pilots"
 msgstr "Pilots"
 
-#: src/routes/__root.tsx:83
+#: src/routes/__root.tsx:80
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/routes/__root.tsx:176
+#: src/routes/__root.tsx:173
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
@@ -170,7 +329,23 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/routes/__root.tsx:192
+#: src/routes/flights/$callsign.tsx:145
+msgid "Restricted airway"
+msgstr "Restricted airway"
+
+#: src/routes/flights/$callsign.tsx:140
+msgid "RNP AR"
+msgstr "RNP AR"
+
+#: src/routes/flights/$callsign.tsx:141
+msgid "RNP AR without RF"
+msgstr "RNP AR without RF"
+
+#: src/routes/flights/$callsign.tsx:391
+msgid "Route"
+msgstr "Route"
+
+#: src/routes/__root.tsx:189
 msgid "Sector Files"
 msgstr "Sector Files"
 
@@ -178,51 +353,95 @@ msgstr "Sector Files"
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
 
-#: src/routes/__root.tsx:80
+#: src/routes/__root.tsx:77
 msgid "Staff"
 msgstr "Staff"
 
-#: src/routes/__root.tsx:125
+#: src/routes/__root.tsx:122
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
-#: src/routes/__root.tsx:138
+#: src/routes/__root.tsx:135
 msgid "Start to Fly"
 msgstr "Start to Fly"
+
+#: src/routes/flights/$callsign.tsx:175
+msgid "The aircraft does not specify RNAV1 capability."
+msgstr "The aircraft does not specify RNAV1 capability."
+
+#: src/routes/flights/$callsign.tsx:159
+msgid "The aircraft does not specify RVSM capability."
+msgstr "The aircraft does not specify RVSM capability."
+
+#: src/routes/flights/$callsign.tsx:258
+msgid "The cruising level is not allowed for the route."
+msgstr "The cruising level is not allowed for the route."
+
+#: src/routes/flights/$callsign.tsx:247
+msgid "The cruising level is too low for route. The minimum is {level} feet."
+msgstr "The cruising level is too low for route. The minimum is {level} feet."
+
+#: src/routes/flights/$callsign.tsx:227
+msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
+msgstr "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
+
+#: src/routes/flights/$callsign.tsx:231
+msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
+msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
+
+#: src/routes/flights/$callsign.tsx:437
+msgid "To"
+msgstr "To"
+
+#: src/routes/flights/$callsign.tsx:378
+msgid "Transponder"
+msgstr "Transponder"
+
+#: src/routes/flights/$callsign.tsx:208
+msgid "Transponder field is empty."
+msgstr "Transponder field is empty."
 
 #: src/components/controller-list.tsx:325
 msgid "until"
 msgstr "until"
 
-#: src/routes/__root.tsx:154
+#: src/routes/__root.tsx:151
 msgid "vACDM"
 msgstr "vACDM"
+
+#: src/routes/flights/$callsign.tsx:422
+msgid "Validation Result"
+msgstr "Validation Result"
 
 #: src/routes/index.tsx:31
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/routes/__root.tsx:300
+#: src/routes/__root.tsx:298
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
 #: src/routes/index.tsx:28
-#: src/routes/__root.tsx:233
+#: src/routes/__root.tsx:231
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM P.R.China Division"
 
-#: src/routes/__root.tsx:128
+#: src/routes/__root.tsx:125
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/routes/__root.tsx:182
+#: src/routes/flights/$callsign.tsx:434
+msgid "Via"
+msgstr "Via"
+
+#: src/routes/__root.tsx:179
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/__root.tsx:157
+#: src/routes/__root.tsx:154
 msgid "Weather"
 msgstr "Weather"
 
-#: src/routes/index.tsx:99
-msgid "论坛"
-msgstr "论坛"
+#: src/routes/flights/$callsign.tsx:212
+msgid "Write your transponder equipment code."
+msgstr "Write your transponder equipment code."
