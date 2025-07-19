@@ -17,7 +17,7 @@ msgstr ""
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
-#: src/routes/index.tsx:111
+#: src/routes/index.tsx:130
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -41,6 +41,11 @@ msgstr "Announcement"
 msgid "API Document"
 msgstr "API Document"
 
+#: src/routes/index.tsx:95
+msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
+msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
+
+#: src/routes/index.tsx:62
 #: src/routes/__root.tsx:186
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -73,6 +78,10 @@ msgstr "Controller List"
 msgid "Controllers"
 msgstr "Controllers"
 
+#: src/routes/index.tsx:62
+msgid "Controllers-center"
+msgstr "Controllers-center"
+
 #: src/routes/flights/$callsign.tsx:30
 msgid "Edit your flight plan on VATSIM."
 msgstr "Edit your flight plan on VATSIM."
@@ -81,10 +90,17 @@ msgstr "Edit your flight plan on VATSIM."
 msgid "Event"
 msgstr "Event"
 
+#: src/routes/index.tsx:88
+#: src/routes/index.tsx:92
+#: src/routes/index.tsx:124
+msgid "Feedback"
+msgstr "Feedback"
+
 #: src/routes/__root.tsx:160
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
+#: src/routes/index.tsx:118
 #: src/routes/__root.tsx:93
 msgid "Forum"
 msgstr "Forum"
@@ -118,9 +134,21 @@ msgctxt "new feature"
 msgid "New"
 msgstr "New"
 
+#: src/routes/index.tsx:52
+msgid "Online Controllers"
+msgstr "Online Controllers"
+
+#: src/routes/index.tsx:76
+msgid "Online Pilots"
+msgstr "Online Pilots"
+
 #: src/routes/__root.tsx:112
 msgid "Operation"
 msgstr "Operation"
+
+#: src/routes/index.tsx:35
+msgid "Pilot"
+msgstr "Pilot"
 
 #: src/routes/__root.tsx:148
 msgid "Pilot Softwares"
@@ -137,6 +165,10 @@ msgstr "Privacy Policy"
 #: src/routes/__root.tsx:176
 msgid "Progression Guide"
 msgstr "Progression Guide"
+
+#: src/routes/index.tsx:41
+msgid "Recent Events"
+msgstr "Recent Events"
 
 #: src/routes/__root.tsx:192
 msgid "Sector Files"
@@ -166,10 +198,15 @@ msgstr "until"
 msgid "vACDM"
 msgstr "vACDM"
 
+#: src/routes/index.tsx:31
+msgid "VATPRC"
+msgstr "VATPRC"
+
 #: src/routes/__root.tsx:300
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
+#: src/routes/index.tsx:28
 #: src/routes/__root.tsx:233
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM P.R.China Division"

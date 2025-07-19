@@ -17,7 +17,7 @@ msgstr ""
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
 
-#: src/routes/index.tsx:111
+#: src/routes/index.tsx:130
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -41,6 +41,11 @@ msgstr "公告"
 msgid "API Document"
 msgstr "API 文档"
 
+#: src/routes/index.tsx:95
+msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
+msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
+
+#: src/routes/index.tsx:62
 #: src/routes/__root.tsx:186
 msgid "ATC Center"
 msgstr "ATC 中心"
@@ -81,10 +86,17 @@ msgstr "在 VATSIM 上修改你的飞行计划。"
 msgid "Event"
 msgstr "活动"
 
+#: src/routes/index.tsx:88
+#: src/routes/index.tsx:92
+#: src/routes/index.tsx:124
+msgid "Feedback"
+msgstr "反馈"
+
 #: src/routes/__root.tsx:160
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
+#: src/routes/index.tsx:118
 #: src/routes/__root.tsx:93
 msgid "Forum"
 msgstr "论坛"
@@ -118,9 +130,21 @@ msgctxt "new feature"
 msgid "New"
 msgstr "新"
 
+#: src/routes/index.tsx:52
+msgid "Online Controllers"
+msgstr "在线管制员"
+
+#: src/routes/index.tsx:76
+msgid "Online Pilots"
+msgstr "在线飞行员"
+
 #: src/routes/__root.tsx:112
 msgid "Operation"
 msgstr "运行"
+
+#: src/routes/index.tsx:35
+msgid "Pilot"
+msgstr "飞行员"
 
 #: src/routes/__root.tsx:148
 msgid "Pilot Softwares"
@@ -137,6 +161,10 @@ msgstr "隐私政策"
 #: src/routes/__root.tsx:176
 msgid "Progression Guide"
 msgstr "晋升指引"
+
+#: src/routes/index.tsx:41
+msgid "Recent Events"
+msgstr "近期活动"
 
 #: src/routes/__root.tsx:192
 msgid "Sector Files"
@@ -166,10 +194,15 @@ msgstr "直到"
 msgid "vACDM"
 msgstr "模拟 A-CDM"
 
+#: src/routes/index.tsx:31
+msgid "VATPRC"
+msgstr "VATPRC"
+
 #: src/routes/__root.tsx:300
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
+#: src/routes/index.tsx:28
 #: src/routes/__root.tsx:233
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM 中国分部"
