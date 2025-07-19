@@ -8,6 +8,9 @@ interface ViteTypeOptions {
 
 interface ImportMetaEnv {
   readonly VITE_API_ENDPOINT: string;
+  readonly VITE_API_AUTH_ENDPOINT: string;
+  readonly VITE_API_REDIRECT_URI: string;
+  readonly VITE_API_CLIENT_ID: string;
   // more env variables...
 }
 

@@ -28,6 +28,7 @@ import { Route as ControllerLoaRouteImport } from './routes/controller/loa'
 import { Route as ControllerControllerRegulationsRouteImport } from './routes/controller/controller-regulations'
 import { Route as ControllerControllerListRouteImport } from './routes/controller/controller-list'
 import { Route as ControllerBecomeAControllerRouteImport } from './routes/controller/become-a-controller'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as AirspaceVfrRouteImport } from './routes/airspace/vfr'
 import { Route as AirspaceStationRouteImport } from './routes/airspace/station'
 import { Route as AirspaceSopRouteImport } from './routes/airspace/sop'
@@ -133,6 +134,11 @@ const ControllerBecomeAControllerRoute =
     path: '/controller/become-a-controller',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AirspaceVfrRoute = AirspaceVfrRouteImport.update({
   id: '/airspace/vfr',
   path: '/airspace/vfr',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/airspace/sop': typeof AirspaceSopRoute
   '/airspace/station': typeof AirspaceStationRoute
   '/airspace/vfr': typeof AirspaceVfrRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/controller/become-a-controller': typeof ControllerBecomeAControllerRoute
   '/controller/controller-list': typeof ControllerControllerListRoute
   '/controller/controller-regulations': typeof ControllerControllerRegulationsRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/airspace/sop': typeof AirspaceSopRoute
   '/airspace/station': typeof AirspaceStationRoute
   '/airspace/vfr': typeof AirspaceVfrRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/controller/become-a-controller': typeof ControllerBecomeAControllerRoute
   '/controller/controller-list': typeof ControllerControllerListRoute
   '/controller/controller-regulations': typeof ControllerControllerRegulationsRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   '/airspace/sop': typeof AirspaceSopRoute
   '/airspace/station': typeof AirspaceStationRoute
   '/airspace/vfr': typeof AirspaceVfrRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/controller/become-a-controller': typeof ControllerBecomeAControllerRoute
   '/controller/controller-list': typeof ControllerControllerListRoute
   '/controller/controller-regulations': typeof ControllerControllerRegulationsRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/airspace/sop'
     | '/airspace/station'
     | '/airspace/vfr'
+    | '/auth/callback'
     | '/controller/become-a-controller'
     | '/controller/controller-list'
     | '/controller/controller-regulations'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/airspace/sop'
     | '/airspace/station'
     | '/airspace/vfr'
+    | '/auth/callback'
     | '/controller/become-a-controller'
     | '/controller/controller-list'
     | '/controller/controller-regulations'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/airspace/sop'
     | '/airspace/station'
     | '/airspace/vfr'
+    | '/auth/callback'
     | '/controller/become-a-controller'
     | '/controller/controller-list'
     | '/controller/controller-regulations'
@@ -326,6 +338,7 @@ export interface RootRouteChildren {
   AirspaceSopRoute: typeof AirspaceSopRoute
   AirspaceStationRoute: typeof AirspaceStationRoute
   AirspaceVfrRoute: typeof AirspaceVfrRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   ControllerBecomeAControllerRoute: typeof ControllerBecomeAControllerRoute
   ControllerControllerListRoute: typeof ControllerControllerListRoute
   ControllerControllerRegulationsRoute: typeof ControllerControllerRegulationsRoute
@@ -481,6 +494,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControllerBecomeAControllerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/airspace/vfr': {
       id: '/airspace/vfr'
       path: '/airspace/vfr'
@@ -526,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   AirspaceSopRoute: AirspaceSopRoute,
   AirspaceStationRoute: AirspaceStationRoute,
   AirspaceVfrRoute: AirspaceVfrRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   ControllerBecomeAControllerRoute: ControllerBecomeAControllerRoute,
   ControllerControllerListRoute: ControllerControllerListRoute,
   ControllerControllerRegulationsRoute: ControllerControllerRegulationsRoute,

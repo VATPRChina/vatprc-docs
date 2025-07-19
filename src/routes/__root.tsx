@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
+import { UserInfo } from "@/components/user-info";
 import { getLocale, getLocalPathname } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
@@ -234,6 +235,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
             <ModeToggle />
             <LanguageToggle />
+            <UserInfo />
           </div>
         </div>
       </header>

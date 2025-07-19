@@ -33,4 +33,27 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    projects: [
+      {
+        test: {
+          include: ["**/*.unit.{test,spec}.ts"],
+          name: "unit",
+          environment: "node",
+        },
+      },
+      {
+        test: {
+          include: ["**/*.browser.{test,spec}.{ts,tsx}"],
+          name: "browser",
+          browser: {
+            provider: "playwright",
+            enabled: true,
+            headless: true,
+            instances: [{ browser: "chromium" }],
+          },
+        },
+      },
+    ],
+  },
 });
