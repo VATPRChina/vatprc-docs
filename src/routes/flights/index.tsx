@@ -53,9 +53,11 @@ function RouteComponent() {
       <div className="flex flex-row gap-4">
         <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
       </div>
-      <div className="grid w-full grid-cols-[repeat(auto-fit,_minmax(calc(var(--spacing)*64),_1fr))] gap-x-6 gap-y-4">
+      <div className="grid w-full grid-cols-[repeat(auto-fill,_minmax(calc(var(--spacing)*64),_1fr))] gap-x-6 gap-y-4">
         {mine && <Flight flight={mine} />}
-        {flights?.map((flight) => <Flight flight={flight} key={flight.callsign} />)}
+        {flights
+          ?.filter((f) => f.callsign.includes(filter) || f.cid.includes(filter))
+          ?.map((flight) => <Flight flight={flight} key={flight.callsign} />)}
       </div>
     </div>
   );
