@@ -1,10 +1,11 @@
-import { LinkButton } from "@/components/ui/button-link";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
+import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChangeEventHandler, useState } from "react";
+import * as React from "react";
 
 export const Route = createFileRoute("/flights/")({
   component: RouteComponent,
@@ -13,15 +14,36 @@ export const Route = createFileRoute("/flights/")({
   }),
 });
 
+const Flight: React.FC<{
+  flight: components["schemas"]["FlightDto"];
+}> = ({ flight: { callsign, cid, departure, arrival, aircraft } }) => (
+  <Link
+    to="/flights/$callsign"
+    params={{ callsign }}
+    key={callsign}
+    className="flex flex-col gap-1 rounded-md border px-3 py-2"
+  >
+    <span className="text-lg font-bold">
+      {callsign}
+      <span className="ml-1 text-sm font-light">{cid}</span>
+    </span>
+    <div className="flex items-center gap-x-1">
+      <span>{departure}</span>
+      <span className="mx-2 font-mono text-xs font-light text-gray-400">{aircraft}</span>
+      <span>{arrival}</span>
+    </div>
+  </Link>
+);
+
 function RouteComponent() {
   const { t } = useLingui();
 
   const { data: flights } = $api.useQuery("get", "/api/flights/active");
+  const { data: mine } = $api.useQuery("get", "/api/flights/mine");
 
-  const [hidden, setHidden] = useState(true);
-  const [callsign, setCallsign] = useState("");
+  const [filter, setFilter] = useState("");
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setCallsign(e.target.value);
+    setFilter(e.target.value);
   };
   return (
     <div className="flex flex-col items-start gap-8">
@@ -29,24 +51,11 @@ function RouteComponent() {
         <Trans>Flight Plan Checker</Trans>
       </h1>
       <div className="flex flex-row gap-4">
-        <Command className="w-72 rounded-lg border" onChange={onChange}>
-          <CommandInput placeholder={t`Callsign`} value={callsign} onFocus={() => setHidden(false)} />
-          <CommandList hidden={hidden}>
-            <CommandEmpty>
-              <Trans>No active flight</Trans>
-            </CommandEmpty>
-            <CommandGroup>
-              {flights?.map((flight) => (
-                <CommandItem key={flight.callsign} onSelect={() => setCallsign(flight.callsign)}>
-                  {flight.callsign}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-        <LinkButton to="/flights/$callsign" params={{ callsign }}>
-          <Trans>Check</Trans>
-        </LinkButton>
+        <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
+      </div>
+      <div className="grid w-full grid-cols-[repeat(auto-fit,_minmax(calc(var(--spacing)*64),_1fr))] gap-x-6 gap-y-4">
+        {mine && <Flight flight={mine} />}
+        {flights?.map((flight) => <Flight flight={flight} key={flight.callsign} />)}
       </div>
     </div>
   );
