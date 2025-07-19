@@ -1,7 +1,9 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDoc } from "./markdown-doc";
+import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
@@ -58,6 +60,22 @@ export const DiscourseDocument: React.FC<{
     queryFn: ({ queryKey }) => fetcher([`https://community.vatprc.net/t/topic/${queryKey[1]}.json`, queryKey[1]]),
   });
 
+  const editPermission = usePermission("admin");
+  const editButtons = editPermission && (
+    <div className="flex gap-2">
+      <Button asChild variant="outline">
+        <a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer">
+          <Trans>Edit English</Trans>
+        </a>
+      </Button>
+      <Button asChild variant="outline">
+        <a href={`https://community.vatprc.net/t/topic/${cn}`} target="_blank" rel="noopener noreferrer">
+          <Trans>Edit Chinese</Trans>
+        </a>
+      </Button>
+    </div>
+  );
+
   if (isLoading) {
     return <Skeleton className="h-svh w-full" />;
   }
@@ -68,7 +86,10 @@ export const DiscourseDocument: React.FC<{
         <AlertTitle>
           <Trans>Error</Trans>
         </AlertTitle>
-        <AlertDescription>{error?.message}</AlertDescription>
+        <AlertDescription>
+          {error?.message}
+          {editButtons}
+        </AlertDescription>
       </Alert>
     );
   }
@@ -76,6 +97,7 @@ export const DiscourseDocument: React.FC<{
     <MarkdownDoc toc={data.tableOfContents}>
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
+      {editButtons}
     </MarkdownDoc>
   );
 };
