@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { format, intlFormatDistance, isAfter } from "date-fns";
 import React from "react";
@@ -147,7 +148,11 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         {scheduledEvents.map((e) => (
           <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
         ))}
-        {scheduledEvents.length === 0 && <span>No event is scheduled recently.</span>}
+        {scheduledEvents.length === 0 && (
+          <span>
+            <Trans>No event is scheduled recently.</Trans>
+          </span>
+        )}
       </div>
     </div>
   );

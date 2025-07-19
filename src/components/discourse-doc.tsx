@@ -3,6 +3,7 @@ import { buildMarkdownDoc } from "./markdown-doc";
 import { Skeleton } from "./ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { getLocale } from "@/lib/i18n";
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { AnyRouteMatch } from "@tanstack/react-router";
 import React from "react";
@@ -64,7 +65,9 @@ export const DiscourseDocument: React.FC<{
     return (
       <Alert variant="destructive">
         <TbAlertCircle className="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
+        <AlertTitle>
+          <Trans>Error</Trans>
+        </AlertTitle>
         <AlertDescription>{error?.message}</AlertDescription>
       </Alert>
     );
@@ -88,7 +91,7 @@ export const getDiscourseDocumentMeta =
         }
         return res.json() as Promise<PostMeta>;
       });
-      return { meta: [{ title: `${meta.title} - VATPRC` }] };
+      return { meta: [{ title: meta.title }] };
     } catch {
       return {};
     }

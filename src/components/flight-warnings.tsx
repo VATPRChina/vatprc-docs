@@ -3,22 +3,33 @@ import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
+import { Trans } from "@lingui/react/macro";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
-const messages: Record<components["schemas"]["WarningMessageCode"], string> = {
-  no_rvsm: "The aircraft does not specify RVSM capability.",
-  no_rnav1: "The aircraft does not specify RNAV1 capability.",
-  rnp_ar: "The aircraft specifies RNP AR capability with RF.",
-  rnp_ar_without_rf: "The aircraft specifies RNP AR capability with RF._without_rf",
-  no_transponder: "The aircraft does not specify transponder capability.",
-  route_direct_segment: "The route contains a direct leg. Please ensure that the direct segment is valid.",
-  route_leg_direction: "The route contains a leg with an invalid direction.",
-  airway_require_approval: "The route contains an airway that requires controller approval.",
-  not_preferred_route: "The flight plan does not match the preferred route for this flight.",
-  cruising_level_mismatch: "The cruising level type does not meet the requirement of the route.",
-  cruising_level_too_low: "The cruising level is too low for the route.",
-  cruising_level_not_allowed: "The cruising level is not allowed for the route.",
-  route_match_preferred: "The planned route matches preferred route.",
+const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  no_rvsm: <Trans>The aircraft does not specify RVSM capability.</Trans>,
+  no_rnav1: <Trans>The aircraft does not specify RNAV1 capability.</Trans>,
+  rnp_ar: (
+    <Trans>
+      The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when
+      possible.
+    </Trans>
+  ),
+  rnp_ar_without_rf: (
+    <Trans>
+      The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures
+      without RF when possible.
+    </Trans>
+  ),
+  no_transponder: <Trans>The aircraft does not specify transponder capability.</Trans>,
+  route_direct_segment: <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>,
+  route_leg_direction: <Trans>The route contains a leg with an invalid direction.</Trans>,
+  airway_require_approval: <Trans>The route contains an airway that requires controller approval.</Trans>,
+  not_preferred_route: <Trans>The flight plan does not match the preferred route for this flight.</Trans>,
+  cruising_level_mismatch: <Trans>The cruising level type does not meet the requirement of the route.</Trans>,
+  cruising_level_too_low: <Trans>The cruising level is too low for the route.</Trans>,
+  cruising_level_not_allowed: <Trans>The cruising level is not allowed for the route.</Trans>,
+  route_match_preferred: <Trans>The planned route matches preferred route.</Trans>,
 };
 
 const descriptions: Record<
@@ -27,47 +38,59 @@ const descriptions: Record<
 > = {
   no_rvsm: () => (
     <>
-      <p>Aircraft without RVSM capability will not be allowed to enter RVSM airspace.</p>
       <p>
-        RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between
-        8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300
-        meters. To enter this airspace, your flight plan must include W in the Equipment field.
+        <Trans>Aircraft without RVSM capability will not be allowed to enter RVSM airspace.</Trans>
+      </p>
+      <p>
+        <Trans>
+          RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between
+          8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300
+          meters. To enter this airspace, your flight plan must include W in the Equipment field.
+        </Trans>
       </p>
     </>
   ),
   no_rnav1: () => (
     <>
       <p>
-        Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar
-        vectored. Conventional procedures may only be used with ATC approval.
+        <Trans>
+          Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar
+          vectored. Conventional procedures may only be used with ATC approval.
+        </Trans>
       </p>
       <p>
-        RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the
-        flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation
-        routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival. Navigation
-        standards for en route phases are not checked at this time. For RNAV1, your flight plan must include P in the
-        Equipment field and D1 or D2 in the PBN/ field.
+        <Trans>
+          RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the
+          flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation
+          routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival.
+          Navigation standards for en route phases are not checked at this time. For RNAV1, your flight plan must
+          include P in the Equipment field and D1 or D2 in the PBN/ field.
+        </Trans>
       </p>
     </>
   ),
   rnp_ar: () => null,
   rnp_ar_without_rf: () => null,
-  no_transponder: () => "Transponder field is empty.",
+  no_transponder: () => <Trans>Transponder field is empty.</Trans>,
   route_direct_segment: () => null,
   route_leg_direction: () => null,
   airway_require_approval: () => null,
-  not_preferred_route: (flight, warning) => {
+  not_preferred_route: ({ raw_route: route }, warning) => {
     const routes = warning.parameter?.split(",").filter((r) => !!r.trim());
     return (
       <>
         <p>
-          The submitted route is:
-          <span className="font-mono">{flight.raw_route}</span>
+          <Trans>
+            The submitted route is:
+            <span className="font-mono">{route}</span>
+          </Trans>
         </p>
         <p>
-          {(routes?.length ?? 0) > 0
-            ? "Please choose a preferred route from the following list, or contact ATC for assistance:"
-            : "Please contact ATC for help adjusting the route."}
+          {(routes?.length ?? 0) > 0 ? (
+            <Trans>Please choose a preferred route from the following list, or contact ATC for assistance:</Trans>
+          ) : (
+            <Trans>Please contact ATC for help adjusting the route.</Trans>
+          )}
           <ol className="list-decimal font-mono">{routes?.map((route, index) => <li key={index}>{route}</li>)}</ol>
         </p>
       </>
@@ -76,10 +99,12 @@ const descriptions: Record<
   cruising_level_mismatch: () => null,
   cruising_level_too_low: () => null,
   cruising_level_not_allowed: () => null,
-  route_match_preferred: (_, warning) => (
+  route_match_preferred: (_, { parameter: route }) => (
     <p>
-      Planned route matches a preferred route:
-      <span className="font-mono">{warning.parameter}</span>
+      <Trans>
+        Planned route matches a preferred route:
+        <span className="font-mono">{route}</span>
+      </Trans>
     </p>
   ),
 };
@@ -114,7 +139,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
         <Alert>
           <TbCheck />
           <AlertTitle className="text-green-700 dark:text-green-500">
-            Flight looks good. Please confirm with the clearance delivery controller.
+            <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>
           </AlertTitle>
         </Alert>
       )}

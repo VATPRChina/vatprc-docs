@@ -1,6 +1,7 @@
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
+import { Trans } from "@lingui/react/macro";
 import { format, parseISO } from "date-fns";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
@@ -43,7 +44,11 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
 
   return (
     <div className={cn(className, "flex flex-wrap gap-4")}>
-      {(!data || data?.controllers?.length === 0) && <span className="basis-full">There is currently no online ATC.</span>}
+      {(!data || data?.controllers?.length === 0) && (
+        <span className="basis-full">
+          <Trans>There is currently no online ATC.</Trans>
+        </span>
+      )}
       {data?.controllers?.map((c) => (
         <Controller key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
       ))}
