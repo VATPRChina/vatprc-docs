@@ -13,25 +13,178 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/routes/__root.tsx:245
+msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+
 #: src/routes/index.tsx:111
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
+
+#: src/routes/__root.tsx:65
+msgid "About Us"
+msgstr "About Us"
 
 #: src/components/controller-list.tsx:450
 msgid "Absent"
 msgstr "Absent"
 
+#: src/routes/__root.tsx:116
+msgid "Airspace"
+msgstr "Airspace"
+
+#: src/routes/__root.tsx:74
+msgid "Announcement"
+msgstr "Announcement"
+
+#: src/routes/__root.tsx:106
+msgid "API Document"
+msgstr "API Document"
+
+#: src/routes/__root.tsx:186
+msgid "ATC Center"
+msgstr "ATC Center"
+
+#: src/routes/__root.tsx:122
+msgid "ATC Positions & Frequencies"
+msgstr "ATC Positions & Frequencies"
+
+#: src/routes/__root.tsx:179
+msgid "Become a Controller"
+msgstr "Become a Controller"
+
+#: src/routes/__root.tsx:151
+msgid "Charts"
+msgstr "Charts"
+
+#: src/routes/__root.tsx:119
+msgid "China RVSM"
+msgstr "China RVSM"
+
+#: src/routes/__root.tsx:144
+msgid "Community & Teamspeak 3"
+msgstr "Community & Teamspeak 3"
+
+#: src/routes/__root.tsx:173
+msgid "Controller List"
+msgstr "Controller List"
+
+#: src/routes/__root.tsx:169
+msgid "Controllers"
+msgstr "Controllers"
+
 #: src/routes/flights/$callsign.tsx:30
 msgid "Edit your flight plan on VATSIM."
 msgstr "Edit your flight plan on VATSIM."
+
+#: src/routes/__root.tsx:103
+msgid "Event"
+msgstr "Event"
+
+#: src/routes/__root.tsx:160
+msgid "Flight plan checker"
+msgstr "Flight plan checker"
+
+#: src/routes/__root.tsx:93
+msgid "Forum"
+msgstr "Forum"
+
+#: src/routes/__root.tsx:77
+msgid "Introduction"
+msgstr "Introduction"
+
+#: src/routes/__root.tsx:141
+msgid "Introduction to Fly"
+msgstr "Introduction to Fly"
+
+#: src/routes/__root.tsx:195
+msgid "Letter of Agreement"
+msgstr "Letter of Agreement"
+
+#: src/routes/__root.tsx:86
+msgid "Logo Pack"
+msgstr "Logo Pack"
+
+#: src/routes/__root.tsx:89
+msgid "Meeting Notes"
+msgstr "Meeting Notes"
+
+#: src/routes/__root.tsx:189
+msgid "Moodle"
+msgstr "Moodle"
+
+#: src/routes/__root.tsx:162
+msgctxt "new feature"
+msgid "New"
+msgstr "New"
+
+#: src/routes/__root.tsx:112
+msgid "Operation"
+msgstr "Operation"
+
+#: src/routes/__root.tsx:148
+msgid "Pilot Softwares"
+msgstr "Pilot Softwares"
+
+#: src/routes/__root.tsx:134
+msgid "Pilots"
+msgstr "Pilots"
+
+#: src/routes/__root.tsx:83
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+#: src/routes/__root.tsx:176
+msgid "Progression Guide"
+msgstr "Progression Guide"
+
+#: src/routes/__root.tsx:192
+msgid "Sector Files"
+msgstr "Sector Files"
 
 #: src/components/controller-list.tsx:413
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
 
+#: src/routes/__root.tsx:80
+msgid "Staff"
+msgstr "Staff"
+
+#: src/routes/__root.tsx:125
+msgid "Standard Operation Procedures"
+msgstr "Standard Operation Procedures"
+
+#: src/routes/__root.tsx:138
+msgid "Start to Fly"
+msgstr "Start to Fly"
+
 #: src/components/controller-list.tsx:325
 msgid "until"
 msgstr "until"
+
+#: src/routes/__root.tsx:154
+msgid "vACDM"
+msgstr "vACDM"
+
+#: src/routes/__root.tsx:300
+msgid "VATSIM P.R. China Division"
+msgstr "VATSIM P.R. China Division"
+
+#: src/routes/__root.tsx:233
+msgid "VATSIM P.R.China Division"
+msgstr "VATSIM P.R.China Division"
+
+#: src/routes/__root.tsx:128
+msgid "VFR Policy"
+msgstr "VFR Policy"
+
+#: src/routes/__root.tsx:182
+msgid "Visiting & Transfer"
+msgstr "Visiting & Transfer"
+
+#: src/routes/__root.tsx:157
+msgid "Weather"
+msgstr "Weather"
 
 #: src/routes/index.tsx:99
 msgid "论坛"

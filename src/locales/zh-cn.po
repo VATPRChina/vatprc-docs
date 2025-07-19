@@ -13,25 +13,178 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/routes/__root.tsx:245
+msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
+
 #: src/routes/index.tsx:111
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
+
+#: src/routes/__root.tsx:65
+msgid "About Us"
+msgstr "关于我们"
 
 #: src/components/controller-list.tsx:450
 msgid "Absent"
 msgstr "缺席"
 
+#: src/routes/__root.tsx:116
+msgid "Airspace"
+msgstr "空域"
+
+#: src/routes/__root.tsx:74
+msgid "Announcement"
+msgstr "公告"
+
+#: src/routes/__root.tsx:106
+msgid "API Document"
+msgstr "API 文档"
+
+#: src/routes/__root.tsx:186
+msgid "ATC Center"
+msgstr "ATC 中心"
+
+#: src/routes/__root.tsx:122
+msgid "ATC Positions & Frequencies"
+msgstr "管制席位及频率"
+
+#: src/routes/__root.tsx:179
+msgid "Become a Controller"
+msgstr "成为管制员"
+
+#: src/routes/__root.tsx:151
+msgid "Charts"
+msgstr "航图"
+
+#: src/routes/__root.tsx:119
+msgid "China RVSM"
+msgstr "中国 RVSM"
+
+#: src/routes/__root.tsx:144
+msgid "Community & Teamspeak 3"
+msgstr "社群"
+
+#: src/routes/__root.tsx:173
+msgid "Controller List"
+msgstr "管制员列表"
+
+#: src/routes/__root.tsx:169
+msgid "Controllers"
+msgstr "管制员"
+
 #: src/routes/flights/$callsign.tsx:30
 msgid "Edit your flight plan on VATSIM."
 msgstr "在 VATSIM 上修改你的飞行计划。"
+
+#: src/routes/__root.tsx:103
+msgid "Event"
+msgstr "活动"
+
+#: src/routes/__root.tsx:160
+msgid "Flight plan checker"
+msgstr "飞行计划检查器"
+
+#: src/routes/__root.tsx:93
+msgid "Forum"
+msgstr "论坛"
+
+#: src/routes/__root.tsx:77
+msgid "Introduction"
+msgstr "介绍"
+
+#: src/routes/__root.tsx:141
+msgid "Introduction to Fly"
+msgstr "飞行简介"
+
+#: src/routes/__root.tsx:195
+msgid "Letter of Agreement"
+msgstr "移交协议书"
+
+#: src/routes/__root.tsx:86
+msgid "Logo Pack"
+msgstr "视觉标识包"
+
+#: src/routes/__root.tsx:89
+msgid "Meeting Notes"
+msgstr "会议记录"
+
+#: src/routes/__root.tsx:189
+msgid "Moodle"
+msgstr "Moodle"
+
+#: src/routes/__root.tsx:162
+msgctxt "new feature"
+msgid "New"
+msgstr "新"
+
+#: src/routes/__root.tsx:112
+msgid "Operation"
+msgstr "运行"
+
+#: src/routes/__root.tsx:148
+msgid "Pilot Softwares"
+msgstr "飞行员软件"
+
+#: src/routes/__root.tsx:134
+msgid "Pilots"
+msgstr "飞行员"
+
+#: src/routes/__root.tsx:83
+msgid "Privacy Policy"
+msgstr "隐私政策"
+
+#: src/routes/__root.tsx:176
+msgid "Progression Guide"
+msgstr "晋升指引"
+
+#: src/routes/__root.tsx:192
+msgid "Sector Files"
+msgstr "扇区文件"
 
 #: src/components/controller-list.tsx:413
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
 
+#: src/routes/__root.tsx:80
+msgid "Staff"
+msgstr "职员"
+
+#: src/routes/__root.tsx:125
+msgid "Standard Operation Procedures"
+msgstr "标准运行程序"
+
+#: src/routes/__root.tsx:138
+msgid "Start to Fly"
+msgstr "开始飞行"
+
 #: src/components/controller-list.tsx:325
 msgid "until"
 msgstr "直到"
+
+#: src/routes/__root.tsx:154
+msgid "vACDM"
+msgstr "模拟 A-CDM"
+
+#: src/routes/__root.tsx:300
+msgid "VATSIM P.R. China Division"
+msgstr "VATSIM 中国分部"
+
+#: src/routes/__root.tsx:233
+msgid "VATSIM P.R.China Division"
+msgstr "VATSIM 中国分部"
+
+#: src/routes/__root.tsx:128
+msgid "VFR Policy"
+msgstr "目视飞行规则"
+
+#: src/routes/__root.tsx:182
+msgid "Visiting & Transfer"
+msgstr "访问和转移"
+
+#: src/routes/__root.tsx:157
+msgid "Weather"
+msgstr "天气"
 
 #: src/routes/index.tsx:99
 msgid "论坛"

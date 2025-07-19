@@ -28,6 +28,8 @@ export default tseslint.config(
         {
           ignore: ["https:", "^app/", "^@/"],
           ignoreFunctions: ["console.log", "console.warn", "console.error"],
+          ignoreNames: ["className", "role", "href", "variant"],
+          ignoreMethodsOnTypes: ["ThemeProvider"],
           useTsTypes: true,
         },
       ],

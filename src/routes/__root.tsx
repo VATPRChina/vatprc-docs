@@ -19,6 +19,7 @@ import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { I18nProvider } from "@lingui/react";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRootRoute, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
@@ -56,110 +57,148 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
   return <NavigationMenuLink asChild>{link}</NavigationMenuLink>;
 };
 
-const contents = [
-  {
-    title: msg`About Us`.message,
-    content: (
-      <ul className="nav-list-grid">
-        <NavMenuLink
-          href="https://community.vatprc.net/c/69-category/12-category/12"
-          large
-          external
-          className="row-span-4"
-        >
-          Announcement
-        </NavMenuLink>
-        <NavMenuLink href="/division/introduction">Introduction</NavMenuLink>
-        <NavMenuLink href="/division/staff">Staff</NavMenuLink>
-        <NavMenuLink href="/division/privacy">Privacy Policy</NavMenuLink>
-        <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
-          Logo Pack
-        </NavMenuLink>
-        <NavMenuLink href="/division/meeting">Meeting Notes</NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="https://community.vatprc.net" external>
-          Forum
-        </NavMenuLink>
-        <NavMenuLink
-          href={
-            getLocale() === "zh-cn"
-              ? "https://community.vatprc.net/c/events/66-category/66"
-              : "https://vatsim.net/events/"
-          }
-          external
-        >
-          Event
-        </NavMenuLink>
-        <NavMenuLink href="/division/api" external>
-          API Document
-        </NavMenuLink>
-      </ul>
-    ),
-  },
-  {
-    title: "Operation",
-    content: (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/airspace/fir" large className="row-span-4">
-          Airspace
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/rvsm">China RVSM</NavMenuLink>
-        <NavMenuLink href="/airspace/station">ATC Positions & Frequencies</NavMenuLink>
-        <NavMenuLink href="/airspace/sop">Standard Operation Procedures</NavMenuLink>
-        <NavMenuLink href="/airspace/vfr">VFR Policy</NavMenuLink>
-      </ul>
-    ),
-  },
-  {
-    title: "Pilots",
-    content: (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
-          Start to Fly
-        </NavMenuLink>
-        <NavMenuLink href="/pilot/introduction-to-fly">Introduction to Fly</NavMenuLink>
-        <NavMenuLink href="/pilot/ts3">Community & Teamspeak 3</NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
-          Pilot Softwares
-        </NavMenuLink>
-        <NavMenuLink href="https://chartfox.org/">Charts</NavMenuLink>
-        <NavMenuLink href="https://vacdm.vatprc.net/">vACDM</NavMenuLink>
-        <NavMenuLink href="https://metar-taf.com/">Weather</NavMenuLink>
-        <NavMenuLink href="/flights">
-          Flight plan checker
-          <Badge className="ml-2 rounded-full" variant="destructive">
-            New
-          </Badge>
-        </NavMenuLink>
-      </ul>
-    ),
-  },
-  {
-    title: "Controllers",
-    content: (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/controller/controller-list" large className="row-span-3">
-          Controller List
-        </NavMenuLink>
-        <NavMenuLink href="/controller/controller-regulations">Progression Guide</NavMenuLink>
-        <NavMenuLink href="/controller/become-a-controller">Become a Controller</NavMenuLink>
-        <NavMenuLink href="/controller/visiting-and-transferring">Visiting & Transfer</NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
-          ATC Center
-        </NavMenuLink>
-        <NavMenuLink href="https://moodle.vatprc.net" external>
-          Moodle
-        </NavMenuLink>
-        <NavMenuLink href="/controller/sector">Sector Files</NavMenuLink>
-        <NavMenuLink href="/controller/loa">Letter of Agreement</NavMenuLink>
-      </ul>
-    ),
-  },
-];
-
 export const NavMenu: React.FC = () => {
+  const { t } = useLingui();
+
+  const contents = [
+    {
+      title: t`About Us`,
+      content: (
+        <ul className="nav-list-grid">
+          <NavMenuLink
+            href="https://community.vatprc.net/c/69-category/12-category/12"
+            large
+            external
+            className="row-span-4"
+          >
+            <Trans>Announcement</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/division/introduction">
+            <Trans>Introduction</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/division/staff">
+            <Trans>Staff</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/division/privacy">
+            <Trans>Privacy Policy</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
+            <Trans>Logo Pack</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/division/meeting">
+            <Trans>Meeting Notes</Trans>
+          </NavMenuLink>
+          <hr className="col-span-full" />
+          <NavMenuLink href="https://community.vatprc.net" external>
+            <Trans>Forum</Trans>
+          </NavMenuLink>
+          <NavMenuLink
+            href={
+              getLocale() === "zh-cn"
+                ? "https://community.vatprc.net/c/events/66-category/66"
+                : "https://vatsim.net/events/"
+            }
+            external
+          >
+            <Trans>Event</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/division/api" external>
+            <Trans>API Document</Trans>
+          </NavMenuLink>
+        </ul>
+      ),
+    },
+    {
+      title: t`Operation`,
+      content: (
+        <ul className="nav-list-grid">
+          <NavMenuLink href="/airspace/fir" large className="row-span-4">
+            <Trans>Airspace</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/airspace/rvsm">
+            <Trans>China RVSM</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/airspace/station">
+            <Trans>ATC Positions & Frequencies</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/airspace/sop">
+            <Trans>Standard Operation Procedures</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/airspace/vfr">
+            <Trans>VFR Policy</Trans>
+          </NavMenuLink>
+        </ul>
+      ),
+    },
+    {
+      title: t`Pilots`,
+      content: (
+        <ul className="nav-list-grid">
+          <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
+            <Trans>Start to Fly</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/pilot/introduction-to-fly">
+            <Trans>Introduction to Fly</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/pilot/ts3">
+            <Trans>Community & Teamspeak 3</Trans>
+          </NavMenuLink>
+          <hr className="col-span-full" />
+          <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
+            <Trans>Pilot Softwares</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="https://chartfox.org/">
+            <Trans>Charts</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="https://vacdm.vatprc.net/">
+            <Trans>vACDM</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="https://metar-taf.com/">
+            <Trans>Weather</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/flights">
+            <Trans>Flight plan checker</Trans>
+            <Badge className="ml-2 rounded-full" variant="destructive">
+              <Trans context="new feature">New</Trans>
+            </Badge>
+          </NavMenuLink>
+        </ul>
+      ),
+    },
+    {
+      title: t`Controllers`,
+      content: (
+        <ul className="nav-list-grid">
+          <NavMenuLink href="/controller/controller-list" large className="row-span-3">
+            <Trans>Controller List</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/controller/controller-regulations">
+            <Trans>Progression Guide</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/controller/become-a-controller">
+            <Trans>Become a Controller</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/controller/visiting-and-transferring">
+            <Trans>Visiting & Transfer</Trans>
+          </NavMenuLink>
+          <hr className="col-span-full" />
+          <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
+            <Trans>ATC Center</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="https://moodle.vatprc.net" external>
+            <Trans>Moodle</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/controller/sector">
+            <Trans>Sector Files</Trans>
+          </NavMenuLink>
+          <NavMenuLink href="/controller/loa">
+            <Trans>Letter of Agreement</Trans>
+          </NavMenuLink>
+        </ul>
+      ),
+    },
+  ];
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -179,6 +218,7 @@ interface ApplicationProps {
 }
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
+  const { t } = useLingui();
   const theme = useThemeValue();
   const route = useRouterState();
   if (route.location.pathname === "/division/api") {
@@ -190,7 +230,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
       <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
-            <img src={theme === "light" ? logo : logoWhite} alt="VATSIM P.R.China Division" className="h-6" />
+            <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
           </Link>
           <NavMenu />
           <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
@@ -202,8 +242,10 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
       <div className="pt-4">{children}</div>
       <footer className="mt-8 mb-4">
         <p className="text-slate-500 dark:text-slate-300">
-          &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
-          TanStack and shadcn/ui. For simulation use only.
+          <Trans>
+            &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
+            TanStack and shadcn/ui. For simulation use only.
+          </Trans>
         </p>
       </footer>
     </div>
@@ -255,7 +297,7 @@ export const Route = createRootRoute({
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-        { title: "VATSIM P.R. China Division" },
+        { title: msg`VATSIM P.R. China Division`.message },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
