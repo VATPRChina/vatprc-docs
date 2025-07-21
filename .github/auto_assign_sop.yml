@@ -5,7 +5,7 @@ addAssignees: true
 
 # reviewers should be VATPRC3, VATPRC5 and corresponding assistants
 reviewers:
-  - paul891014
+  - ZBAA-LucasF
 
 numberOfReviewers: 0
 numberOfAssignees: 0

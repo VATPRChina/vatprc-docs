@@ -1,0 +1,644 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-07-15 22:12+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh-cn\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. js-lingui-explicit-id
+#: src/routes/__root.tsx:261
+msgid "VATSIM P.R. China Division"
+msgstr "VATSIM 中国分部"
+
+#: src/routes/controller/controller-list.tsx:58
+msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
+msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
+
+#: src/routes/__root.tsx:243
+msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
+
+#: src/routes/controller/controller-list.tsx:47
+msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
+msgstr "<0>✓</0> 已认证：此管制员可以在此席位提供全方面的管制和雷达服务。(Certified)"
+
+#: src/routes/controller/controller-list.tsx:30
+msgid "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
+msgstr "<0>✘</0> 限制的：管制员没有权利在此席位提供任何的服务。(Restricted)"
+
+#: src/routes/controller/controller-list.tsx:41
+msgid "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
+msgstr "<0>S</0> 训练中：此管制员为了训练原因，可以在本席位提供独立的管制服务。(Solo)"
+
+#: src/routes/controller/controller-list.tsx:35
+msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
+msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员的监督下开扇。(Under Supervision)"
+
+#: src/routes/controller/controller-list.tsx:52
+msgid "<0>V</0> Visiting: This controller is a visiting controller."
+msgstr "<0>V</0> 客座：此管制员为客座管制员。"
+
+#: src/routes/index.tsx:130
+msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
+msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
+
+#: src/routes/__root.tsx:59
+msgid "About Us"
+msgstr "关于我们"
+
+#: src/components/controller-list.tsx:450
+msgid "Absent"
+msgstr "缺席"
+
+#: src/routes/flights/$callsign.tsx:193
+msgid "Add<0>D1</0>or<1>D2</1>to PBN."
+msgstr "将 <0>D1</0> 或 <1>D2</1> 添加到 PBN。"
+
+#: src/routes/flights/$callsign.tsx:184
+msgid "Add<0>R</0>to equipment code."
+msgstr "将 <0>R</0> 添加到设备代码。"
+
+#: src/routes/flights/$callsign.tsx:166
+msgid "Add<0>W</0>to equipment code."
+msgstr "将 <0>W</0> 添加到设备代码。"
+
+#: src/components/flight-warnings.tsx:56
+msgid "Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar vectored. Conventional procedures may only be used with ATC approval."
+msgstr "不具备RNAV1能力的航空器将不会给出进离场程序，默认使用雷达引导。传统程序仅在ATC许可下使用。"
+
+#: src/components/flight-warnings.tsx:42
+msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
+msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
+
+#: src/routes/__root.tsx:108
+msgid "Airspace"
+msgstr "空域"
+
+#: src/routes/flights/$callsign.tsx:264
+msgid "Allowed levels are {level} (in feet)."
+msgstr "允许的巡航高度是 {level} （英尺）。"
+
+#: src/routes/__root.tsx:68
+msgid "Announcement"
+msgstr "公告"
+
+#: src/routes/__root.tsx:98
+msgid "API Document"
+msgstr "API 文档"
+
+#: src/routes/index.tsx:95
+msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
+msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
+
+#: src/routes/flights/$callsign.tsx:398
+msgid "Arrival"
+msgstr "目的机场"
+
+#: src/routes/index.tsx:62
+#: src/routes/__root.tsx:178
+msgid "ATC Center"
+msgstr "ATC 中心"
+
+#: src/routes/__root.tsx:114
+msgid "ATC Positions & Frequencies"
+msgstr "管制席位及频率"
+
+#: src/routes/flights/$callsign.tsx:347
+msgid "Back"
+msgstr "返回"
+
+#: src/routes/__root.tsx:171
+msgid "Become a Controller"
+msgstr "成为管制员"
+
+#: src/routes/flights/index.tsx:33
+#: src/routes/flights/$callsign.tsx:369
+msgid "Callsign"
+msgstr "呼号"
+
+#: src/routes/__root.tsx:143
+msgid "Charts"
+msgstr "航图"
+
+#: src/routes/flights/index.tsx:48
+msgid "Check"
+msgstr "检查"
+
+#: src/routes/flights/$callsign.tsx:71
+msgid "Check at VATSIM"
+msgstr "去 VATSIM 确认"
+
+#: src/routes/__root.tsx:111
+msgid "China RVSM"
+msgstr "中国 RVSM"
+
+#: src/routes/flights/$callsign.tsx:116
+msgid "China RVSM even flight level"
+msgstr "中国 RVSM 双数高度层"
+
+#: src/routes/flights/$callsign.tsx:118
+msgid "China RVSM flight level"
+msgstr "中国 RVSM 高度层"
+
+#: src/routes/flights/$callsign.tsx:117
+msgid "China RVSM odd flight level"
+msgstr "中国 RVSM 单数高度层"
+
+#: src/routes/__root.tsx:136
+msgid "Community & Teamspeak 3"
+msgstr "社群"
+
+#: src/routes/__root.tsx:165
+#: src/routes/controller/controller-list.tsx:9
+#: src/routes/controller/controller-list.tsx:18
+msgid "Controller List"
+msgstr "管制员列表"
+
+#: src/routes/__root.tsx:161
+msgid "Controllers"
+msgstr "管制员"
+
+#: src/routes/flights/$callsign.tsx:390
+msgid "Cruising Level (Feet)"
+msgstr "巡航高度（英尺）"
+
+#: src/routes/flights/$callsign.tsx:152
+msgid "Cruising Level Not Allowed"
+msgstr "巡航高度不允许"
+
+#: src/routes/flights/$callsign.tsx:151
+msgid "Cruising Level Too Low"
+msgstr "巡航高度过低"
+
+#: src/routes/flights/$callsign.tsx:150
+msgid "Cruising Level Type Mismatch"
+msgstr "巡航高度类型不允许"
+
+#: src/components/theme-toggle.tsx:31
+msgid "Dark"
+msgstr "暗色"
+
+#: src/routes/flights/$callsign.tsx:387
+msgid "Departure"
+msgstr "出发机场"
+
+#: src/routes/flights/$callsign.tsx:146
+msgid "Direct leg"
+msgstr "直飞段"
+
+#: src/components/discourse-doc.tsx:73
+msgid "Edit Chinese"
+msgstr "编辑中文"
+
+#: src/components/discourse-doc.tsx:68
+msgid "Edit English"
+msgstr "编辑英文"
+
+#: src/routes/flights/$callsign.tsx:30
+msgid "Edit your flight plan on VATSIM."
+msgstr "在 VATSIM 上修改你的飞行计划。"
+
+#: src/routes/flights/$callsign.tsx:375
+msgid "Equipment"
+msgstr "设备代码"
+
+#: src/components/discourse-doc.tsx:87
+msgid "Error"
+msgstr "错误"
+
+#: src/routes/flights/$callsign.tsx:119
+msgctxt "feet"
+msgid "even flight level"
+msgstr "英制双数飞行高度层"
+
+#: src/routes/__root.tsx:95
+msgid "Event"
+msgstr "活动"
+
+#: src/routes/docs/$.tsx:40
+msgid "Failed to load document."
+msgstr "加载文档失败。"
+
+#: src/routes/index.tsx:88
+#: src/routes/index.tsx:92
+#: src/routes/index.tsx:124
+msgid "Feedback"
+msgstr "反馈"
+
+#: src/routes/flights/$callsign.tsx:121
+msgctxt "feet"
+msgid "flight level"
+msgstr "英制高度层"
+
+#: src/components/flight-warnings.tsx:142
+msgid "Flight looks good. Please confirm with the clearance delivery controller."
+msgstr "未发现飞行计划问题，但请以放行管制员为准。"
+
+#: src/routes/flights/$callsign.tsx:366
+msgid "Flight Plan"
+msgstr "飞行计划"
+
+#: src/routes/__root.tsx:152
+msgid "Flight plan checker"
+msgstr "飞行计划检查器"
+
+#: src/routes/flights/index.tsx:12
+#: src/routes/flights/index.tsx:29
+msgid "Flight Plan Checker"
+msgstr "飞行计划检查器"
+
+#: src/routes/flights/$callsign.tsx:429
+msgid "Flight Route"
+msgstr "航路"
+
+#: src/routes/index.tsx:118
+#: src/routes/__root.tsx:87
+msgid "Forum"
+msgstr "论坛"
+
+#: src/routes/flights/$callsign.tsx:434
+msgid "From"
+msgstr "从"
+
+#: src/routes/__root.tsx:71
+msgid "Introduction"
+msgstr "介绍"
+
+#: src/routes/__root.tsx:133
+msgid "Introduction to Fly"
+msgstr "飞行简介"
+
+#: src/routes/flights/$callsign.tsx:98
+msgid "Learn more"
+msgstr "了解详情"
+
+#: src/routes/flights/$callsign.tsx:109
+msgid "Learn more about China RVSM"
+msgstr "了解中国 RVSM"
+
+#: src/routes/flights/$callsign.tsx:147
+msgid "Leg direction violation"
+msgstr "航段方向不允许"
+
+#: src/routes/__root.tsx:187
+#: src/routes/controller/loa.tsx:8
+msgid "Letter of Agreement"
+msgstr "移交协议书"
+
+#: src/components/theme-toggle.tsx:26
+msgid "Light"
+msgstr "浅色"
+
+#: src/routes/airspace/sop.tsx:32
+msgid "List of SOPs"
+msgstr "标准运行程序列表"
+
+#: src/components/user-info.tsx:39
+msgid "Loading"
+msgstr "正在加载"
+
+#: src/components/user-info.tsx:55
+msgid "Login"
+msgstr "登入"
+
+#: src/routes/__root.tsx:80
+msgid "Logo Pack"
+msgstr "视觉标识包"
+
+#: src/components/user-info.tsx:28
+msgid "Logout"
+msgstr "登出"
+
+#: src/routes/flights/$callsign.tsx:153
+msgid "Match preferred route"
+msgstr "符合推荐航路"
+
+#: src/routes/__root.tsx:83
+msgid "Meeting Notes"
+msgstr "会议记录"
+
+#: src/routes/__root.tsx:181
+msgid "Moodle"
+msgstr "Moodle"
+
+#: src/routes/__root.tsx:154
+msgctxt "new feature"
+msgid "New"
+msgstr "新"
+
+#: src/routes/flights/index.tsx:36
+msgid "No active flight"
+msgstr "没有在线航班"
+
+#: src/components/recent-events.tsx:154
+msgid "No event is scheduled recently."
+msgstr "近期无活动计划。"
+
+#: src/components/online-pilots.tsx:52
+msgid "No online pilot."
+msgstr "当前无在线管制员。"
+
+#: src/routes/flights/$callsign.tsx:142
+msgid "No RNAV1"
+msgstr "无 RNAV1"
+
+#: src/routes/flights/$callsign.tsx:141
+msgid "No RVSM"
+msgstr "无 RVSM"
+
+#: src/routes/flights/$callsign.tsx:145
+msgid "No transponder"
+msgstr "无应答机"
+
+#: src/routes/flights/$callsign.tsx:149
+msgid "Not preferred route"
+msgstr "不符合推荐航路"
+
+#: src/routes/flights/$callsign.tsx:120
+msgctxt "feet"
+msgid "odd flight level"
+msgstr "英制单数飞行高度层"
+
+#: src/routes/index.tsx:52
+msgid "Online Controllers"
+msgstr "在线管制员"
+
+#: src/routes/index.tsx:76
+msgid "Online Pilots"
+msgstr "在线飞行员"
+
+#: src/routes/__root.tsx:104
+msgid "Operation"
+msgstr "运行"
+
+#: src/routes/airspace/sop.tsx:44
+msgid "Other SOPs"
+msgstr "其他标准运行程序"
+
+#: src/routes/flights/$callsign.tsx:402
+msgid "PBN"
+msgstr "PBM"
+
+#: src/routes/flights/$callsign.tsx:402
+msgid "Performance Based Navigation"
+msgstr "所需导航性能能力"
+
+#: src/routes/flights/$callsign.tsx:241
+#: src/routes/flights/$callsign.tsx:254
+#: src/routes/flights/$callsign.tsx:268
+msgid "Pick a suitable cruising level."
+msgstr "选择合适的巡航高度。"
+
+#: src/routes/index.tsx:35
+msgid "Pilot"
+msgstr "飞行员"
+
+#: src/routes/__root.tsx:140
+msgid "Pilot Softwares"
+msgstr "飞行员软件"
+
+#: src/routes/__root.tsx:126
+msgid "Pilots"
+msgstr "飞行员"
+
+#: src/components/flight-warnings.tsx:104
+msgid "Planned route matches a preferred route:<0>{route}</0>"
+msgstr "计划航路与推荐航路 <0>{route}</0> 匹配。"
+
+#: src/components/flight-warnings.tsx:90
+msgid "Please choose a preferred route from the following list, or contact ATC for assistance:"
+msgstr "请从下列航路中选择一条作为计划航路，或与管制员联系。"
+
+#: src/components/flight-warnings.tsx:92
+msgid "Please contact ATC for help adjusting the route."
+msgstr "请与管制员联系调整航路。"
+
+#: src/routes/auth/callback.tsx:40
+msgid "Please wait while being logged in."
+msgstr "正在登入，请稍等片刻。"
+
+#: src/routes/__root.tsx:77
+msgid "Privacy Policy"
+msgstr "隐私政策"
+
+#: src/routes/__root.tsx:168
+msgid "Progression Guide"
+msgstr "晋升指引"
+
+#: src/routes/index.tsx:41
+msgid "Recent Events"
+msgstr "近期活动"
+
+#: src/routes/flights/$callsign.tsx:148
+msgid "Restricted airway"
+msgstr "受限航路"
+
+#: src/components/flight-warnings.tsx:62
+msgid "RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival. Navigation standards for en route phases are not checked at this time. For RNAV1, your flight plan must include P in the Equipment field and D1 or D2 in the PBN/ field."
+msgstr "RNAV 全称 Area Navigation，中文“区域导航”。而 RNAV1 代表在95％的飞行时间内，总系统误差不超过 1NM。RNAV1 既可应用于进离场程序，也可以应用于区域导航航路。现阶段下，VATPRC 的管制员仅会针对进离场程序检查 RNAV1 的能力。对于航路的导航规范暂不检查。使用 RNAV1，在飞行计划中的 Equipment 项中，必须包含 R，且 PBN 项中必须包含 D1 或 D2。否则管制员将会在仅用 RNAV 程序的机场拒绝你的离港/进港飞行计划。"
+
+#: src/routes/flights/$callsign.tsx:143
+msgid "RNP AR"
+msgstr "RNP AR"
+
+#: src/routes/flights/$callsign.tsx:144
+msgid "RNP AR without RF"
+msgstr "RNP AR（无 RF 航段）"
+
+#: src/routes/flights/$callsign.tsx:394
+msgid "Route"
+msgstr "航路"
+
+#: src/components/flight-warnings.tsx:45
+msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
+msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
+
+#: src/routes/__root.tsx:184
+msgid "Sector Files"
+msgstr "扇区文件"
+
+#: src/components/controller-list.tsx:413
+msgid "Show Absence Controllers"
+msgstr "显示缺席管制员"
+
+#: src/components/online-pilots.tsx:69
+msgid "Show all pilots"
+msgstr "显示全部"
+
+#: src/components/online-pilots.tsx:69
+msgid "Show less pilots"
+msgstr "显示部分"
+
+#: src/routes/__root.tsx:74
+msgid "Staff"
+msgstr "职员"
+
+#: src/routes/__root.tsx:117
+#: src/routes/airspace/sop.tsx:15
+msgid "Standard Operation Procedures"
+msgstr "标准运行程序"
+
+#: src/routes/__root.tsx:130
+msgid "Start to Fly"
+msgstr "开始飞行"
+
+#: src/components/language-toggle.tsx:20
+msgid "Switch to Chinese"
+msgstr "切换到中文"
+
+#: src/components/language-toggle.tsx:20
+msgid "Switch to English"
+msgstr "切换到英文"
+
+#: src/components/theme-toggle.tsx:36
+msgid "System"
+msgstr "跟随系统"
+
+#: src/routes/flights/$callsign.tsx:178
+#: src/components/flight-warnings.tsx:11
+msgid "The aircraft does not specify RNAV1 capability."
+msgstr "设备代码未表明具备 RNAV1 能力。"
+
+#: src/routes/flights/$callsign.tsx:162
+#: src/components/flight-warnings.tsx:10
+msgid "The aircraft does not specify RVSM capability."
+msgstr "设备代码未表明具备 RVSM 能力。"
+
+#: src/components/flight-warnings.tsx:24
+msgid "The aircraft does not specify transponder capability."
+msgstr "设备代码未填写应答机能力。"
+
+#: src/components/flight-warnings.tsx:13
+msgid "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
+msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP AR（带 RF 航段）程序。"
+
+#: src/components/flight-warnings.tsx:19
+msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
+msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 RNP AR（不带 RF 航段）程序。"
+
+#: src/routes/flights/$callsign.tsx:261
+#: src/components/flight-warnings.tsx:31
+msgid "The cruising level is not allowed for the route."
+msgstr "巡航高度违反航路限制。"
+
+#: src/routes/flights/$callsign.tsx:250
+msgid "The cruising level is too low for route. The minimum is {level} feet."
+msgstr "巡航高度过低，不满足航路要求。至少应当为 {level} 英尺。"
+
+#: src/components/flight-warnings.tsx:30
+msgid "The cruising level is too low for the route."
+msgstr "巡航高度过低，不满足航路要求。"
+
+#: src/components/flight-warnings.tsx:29
+msgid "The cruising level type does not meet the requirement of the route."
+msgstr "巡航高度类型不符合航路要求。"
+
+#: src/routes/flights/$callsign.tsx:230
+msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
+msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}。"
+
+#: src/routes/flights/$callsign.tsx:234
+msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
+msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
+
+#: src/components/flight-warnings.tsx:28
+msgid "The flight plan does not match the preferred route for this flight."
+msgstr "计划航路与推荐航路不一致。"
+
+#: src/routes/controller/controller-list.tsx:21
+msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
+msgstr "下方表格的内容基于管制员中心数据自动生成，正常情况下最多存在24小时延迟。表中数据仅包含至少含有一类席位管制权限的管制员（含客座管制员），即不包含在下表中的管制员不再拥有管制权限。"
+
+#: src/components/flight-warnings.tsx:32
+msgid "The planned route matches preferred route."
+msgstr "计划航路符合推荐航路。"
+
+#: src/components/flight-warnings.tsx:25
+msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
+msgstr "计划航路包含直飞段。请确认直飞段是否符合实际飞行要求。"
+
+#: src/components/flight-warnings.tsx:26
+msgid "The route contains a leg with an invalid direction."
+msgstr "计划航路包含与航路方向不一致的航段。"
+
+#: src/components/flight-warnings.tsx:27
+msgid "The route contains an airway that requires controller approval."
+msgstr "计划航路包括需要管制员许可的航路。"
+
+#: src/components/flight-warnings.tsx:83
+msgid "The submitted route is:<0>{route}</0>"
+msgstr "提交的航路是 <0>{route}</0>。"
+
+#: src/components/online-controllers.tsx:49
+msgid "There is currently no online ATC."
+msgstr "当前无在线管制员。"
+
+#: src/routes/airspace/sop.tsx:27
+msgid "This page is not available in English."
+msgstr "本页面仅支持简体中文。"
+
+#: src/routes/flights/$callsign.tsx:440
+msgid "To"
+msgstr "到"
+
+#: src/components/theme-toggle.tsx:18
+msgid "Toggle theme"
+msgstr "切换主题"
+
+#: src/routes/flights/$callsign.tsx:381
+msgid "Transponder"
+msgstr "应答机"
+
+#: src/routes/flights/$callsign.tsx:211
+#: src/components/flight-warnings.tsx:74
+msgid "Transponder field is empty."
+msgstr "应答机设备代码为空。"
+
+#: src/components/controller-list.tsx:325
+msgid "until"
+msgstr "直到"
+
+#: src/routes/__root.tsx:146
+msgid "vACDM"
+msgstr "模拟 A-CDM"
+
+#: src/routes/flights/$callsign.tsx:425
+msgid "Validation Result"
+msgstr "检查结果"
+
+#: src/routes/index.tsx:31
+msgid "VATPRC"
+msgstr "VATPRC"
+
+#: src/routes/index.tsx:28
+#: src/routes/__root.tsx:230
+msgid "VATSIM P.R.China Division"
+msgstr "VATSIM 中国分部"
+
+#: src/routes/__root.tsx:120
+msgid "VFR Policy"
+msgstr "目视飞行规则"
+
+#: src/routes/flights/$callsign.tsx:437
+msgid "Via"
+msgstr "经由"
+
+#: src/routes/__root.tsx:174
+msgid "Visiting & Transfer"
+msgstr "访问和转移"
+
+#: src/routes/__root.tsx:149
+msgid "Weather"
+msgstr "天气"
+
+#: src/routes/flights/$callsign.tsx:215
+msgid "Write your transponder equipment code."
+msgstr "给出你的应答机设备代码。"

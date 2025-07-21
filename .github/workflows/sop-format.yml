@@ -13,7 +13,7 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.head_ref }}
       - run: npm install -g prettier @trivago/prettier-plugin-sort-imports prettier-plugin-tailwindcss
-      - run: prettier --write 'docs/**/*.md'
+      - run: prettier --write 'docs/**/*.md' --no-config --print-width 120
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto format SOP"
