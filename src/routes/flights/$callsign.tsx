@@ -293,6 +293,8 @@ const Warning = ({
   return (
     <div className="flex items-center gap-2">
       {localWarnings.map((warning) => {
+        const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
+
         const button = (
           <Button
             variant="ghost"
@@ -300,6 +302,7 @@ const Warning = ({
             className={cn(
               (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
                 "text-destructive hover:text-destructive",
+              content && "underline",
             )}
             key={warning.message_code}
           >
@@ -307,8 +310,6 @@ const Warning = ({
             {WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code}
           </Button>
         );
-
-        const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
 
         if (!content) return button;
 
