@@ -385,7 +385,7 @@ msgstr "其他标准运行程序"
 
 #: src/routes/flights/$callsign.tsx:402
 msgid "PBN"
-msgstr "PBM"
+msgstr "PBN"
 
 #: src/routes/flights/$callsign.tsx:402
 msgid "Performance Based Navigation"
