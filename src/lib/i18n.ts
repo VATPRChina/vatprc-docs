@@ -1,25 +1,19 @@
-import { overwriteGetLocale } from "./i18n/runtime";
-import { serverOnly } from "@tanstack/react-start";
-import { getRequestURL } from "@tanstack/react-start/server";
+import { useRouterState } from "@tanstack/react-router";
 
-const getURLServer = serverOnly(() => {
-  if (getRequestURL().pathname.startsWith("/en")) {
+export const getLocale = (pathname: string): "en" | "zh-cn" => {
+  if (pathname.startsWith("/en")) {
     return "en";
-  } else {
+  }
+  if (pathname.startsWith("/zh-cn")) {
     return "zh-cn";
   }
-});
+  return "zh-cn";
+};
 
-overwriteGetLocale(() => {
-  if (typeof window !== "undefined") {
-    if (window.location.pathname.startsWith("/en")) {
-      return "en";
-    }
-    return "zh-cn";
-  }
-  const url = getURLServer();
-  return url;
-});
+export const useLocale = (): "en" | "zh-cn" => {
+  const path = useRouterState().location.pathname;
+  return getLocale(path);
+};
 
 export const getLocalPathname = (pathname: string, locale: "en" | "zh-cn") => {
   let normalized = pathname;

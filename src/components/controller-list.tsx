@@ -1,7 +1,7 @@
 import { Label } from "./ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { m } from "@/lib/i18n/messages";
 import { cn } from "@/lib/utils";
+import { Trans } from "@lingui/react/macro";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -322,7 +322,7 @@ const PermissionTag = ({ permission, positionName, expiration }: PermissionTagPr
         {permission === ControllerPositionPermission.Solo && <span className="text-xs">(S)</span>}
         {expiration && (
           <span className="text-xs">
-            {m["Legacy_controller-list_until"]()} {format(expiration, "yyyy-MM-dd")}
+            <Trans>until</Trans> {format(expiration, "yyyy-MM-dd")}
           </span>
         )}
       </span>
@@ -409,7 +409,9 @@ export const ControllerList: React.FC = () => {
     <div className="mt-4 flex flex-col gap-4">
       <div className="flex items-center gap-x-2">
         <Checkbox onCheckedChange={onShowAbsentChange} id="show-absent" />
-        <Label htmlFor="show-absent">{m["Legacy_controller-list_show-absence"]()}</Label>
+        <Label htmlFor="show-absent">
+          <Trans>Show Absence Controllers</Trans>
+        </Label>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {controllers
@@ -444,7 +446,9 @@ export const ControllerList: React.FC = () => {
                   {ctr.visiting && <span className="font-light">(V)</span>}
                 </span>
                 {ctr.status === ControllerStatus.Absence && (
-                  <span className="font-bold text-red-700">{m["Legacy_controller-list_absent"]()}</span>
+                  <span className="font-bold text-red-700">
+                    <Trans>Absent</Trans>
+                  </span>
                 )}
               </div>
               <div className="flex flex-wrap gap-2 font-mono text-sm">

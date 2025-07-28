@@ -12,16 +12,15 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
-import { getLocalPathname } from "@/lib/i18n";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { UserInfo } from "@/components/user-info";
+import { useLocale, getLocalPathname } from "@/lib/i18n";
+import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRootRoute, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
 
 interface NavigationMenuLinkProps {
@@ -55,121 +54,155 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
   return <NavigationMenuLink asChild>{link}</NavigationMenuLink>;
 };
 
-const NavMenu: React.FC = () => {
-  const contents = [
-    {
-      title: m["Legacy_nav-menu_about"](),
-      content: (
-        <ul className="nav-list-grid">
-          <NavMenuLink
-            href="https://community.vatprc.net/c/69-category/12-category/12"
-            large
-            external
-            className="row-span-4"
-          >
-            {m["Legacy_nav-menu_announcement"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/division/introduction">{m["Legacy_nav-menu_introduction"]()}</NavMenuLink>
-          <NavMenuLink href="/division/staff">{m["Legacy_nav-menu_staff"]()}</NavMenuLink>
-          <NavMenuLink href="/division/privacy">{m["Legacy_nav-menu_privacy"]()}</NavMenuLink>
-          <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
-            {m["Legacy_nav-menu_logo-pack"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/division/meeting">{m["nav_menu_meeting_notes"]()}</NavMenuLink>
-          <hr className="col-span-full" />
-          <NavMenuLink href="https://community.vatprc.net" external>
-            {m["Legacy_nav-menu_forum"]()}
-          </NavMenuLink>
-          <NavMenuLink
-            href={
-              getLocale() === "zh-cn"
-                ? "https://community.vatprc.net/c/events/66-category/66"
-                : "https://vatsim.net/events/"
-            }
-            external
-          >
-            {m["Legacy_nav-menu_event"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/division/api" external>
-            {m["nav_menu_division_api"]()}
-          </NavMenuLink>
-        </ul>
-      ),
-    },
-    {
-      title: m["Legacy_nav-menu_operation"](),
-      content: (
-        <ul className="nav-list-grid">
-          <NavMenuLink href="/airspace/fir" large className="row-span-4">
-            {m["Legacy_nav-menu_fir"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/airspace/rvsm">{m["Legacy_nav-menu_rvsm"]()}</NavMenuLink>
-          <NavMenuLink href="/airspace/station">{m["Legacy_nav-menu_atc-positions-frequencies"]()}</NavMenuLink>
-          <NavMenuLink href="/airspace/sop">{m["Legacy_nav-menu_sop"]()}</NavMenuLink>
-          <NavMenuLink href="/airspace/vfr">{m["Legacy_nav-menu_vfr"]()}</NavMenuLink>
-        </ul>
-      ),
-    },
-    {
-      title: m["Legacy_nav-menu_pilot"](),
-      content: (
-        <ul className="nav-list-grid">
-          <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
-            {m["Legacy_nav-menu_start-to-fly"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/pilot/introduction-to-fly">{m["Legacy_nav-menu_introduction-to-fly"]()}</NavMenuLink>
-          <NavMenuLink href="/pilot/ts3">{m["Legacy_nav-menu_ts3"]()}</NavMenuLink>
-          <hr className="col-span-full" />
-          <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
-            {m["Legacy_nav-menu_pilot-softwares"]()}
-          </NavMenuLink>
-          <NavMenuLink href="https://chartfox.org/">{m["Legacy_nav-menu_charts"]()}</NavMenuLink>
-          <NavMenuLink href="https://vacdm.vatprc.net/">{m["Legacy_nav-menu_vacdm"]()}</NavMenuLink>
-          <NavMenuLink href="https://metar-taf.com/">{m["Legacy_nav-menu_weather"]()}</NavMenuLink>
-          <NavMenuLink href="/flights">
-            {m["layout_navmenu_fpl_checker"]()}
-            <Badge className="ml-2 rounded-full" variant="destructive">
-              New
-            </Badge>
-          </NavMenuLink>
-        </ul>
-      ),
-    },
-    {
-      title: m["Legacy_nav-menu_atc"](),
-      content: (
-        <ul className="nav-list-grid">
-          <NavMenuLink href="/controller/controller-list" large className="row-span-3">
-            {m["Legacy_nav-menu_controller-list"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/controller/controller-regulations">
-            {m["Legacy_nav-menu_controller-regulations"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/controller/become-a-controller">{m["Legacy_nav-menu_become-a-controller"]()}</NavMenuLink>
-          <NavMenuLink href="/controller/visiting-and-transferring">
-            {m["Legacy_nav-menu_visiting-and-transferring"]()}
-          </NavMenuLink>
-          <hr className="col-span-full" />
-          <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
-            {m["Legacy_nav-menu_atc-center"]()}
-          </NavMenuLink>
-          <NavMenuLink href="https://moodle.vatprc.net" external>
-            {m["Legacy_nav-menu_moodle"]()}
-          </NavMenuLink>
-          <NavMenuLink href="/controller/sector">{m["Legacy_nav-menu_sector"]()}</NavMenuLink>
-          <NavMenuLink href="/controller/loa">{m["Legacy_nav-menu_loa"]()}</NavMenuLink>
-        </ul>
-      ),
-    },
-  ];
+const contents = [
+  {
+    title: <Trans>About Us</Trans>,
+    content: ({ locale }: { locale: "en" | "zh-cn" }) => (
+      <ul className="nav-list-grid">
+        <NavMenuLink
+          href="https://community.vatprc.net/c/69-category/12-category/12"
+          large
+          external
+          className="row-span-4"
+        >
+          <Trans>Announcement</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/division/introduction">
+          <Trans>Introduction</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/division/staff">
+          <Trans>Staff</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/division/privacy">
+          <Trans>Privacy Policy</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
+          <Trans>Logo Pack</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/division/meeting">
+          <Trans>Meeting Notes</Trans>
+        </NavMenuLink>
+        <hr className="col-span-full" />
+        <NavMenuLink href="https://community.vatprc.net" external>
+          <Trans>Forum</Trans>
+        </NavMenuLink>
+        <NavMenuLink
+          href={
+            locale === "zh-cn" ? "https://community.vatprc.net/c/events/66-category/66" : "https://vatsim.net/events/"
+          }
+          external
+        >
+          <Trans>Event</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/division/api" external>
+          <Trans>API Document</Trans>
+        </NavMenuLink>
+      </ul>
+    ),
+  },
+  {
+    title: <Trans>Operation</Trans>,
+    content: () => (
+      <ul className="nav-list-grid">
+        <NavMenuLink href="/airspace/fir" large className="row-span-4">
+          <Trans>Airspace</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/airspace/rvsm">
+          <Trans>China RVSM</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/airspace/station">
+          <Trans>ATC Positions & Frequencies</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/airspace/sop">
+          <Trans>Standard Operation Procedures</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/airspace/vfr">
+          <Trans>VFR Policy</Trans>
+        </NavMenuLink>
+      </ul>
+    ),
+  },
+  {
+    title: <Trans>Pilots</Trans>,
+    content: () => (
+      <ul className="nav-list-grid">
+        <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
+          <Trans>Start to Fly</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/pilot/introduction-to-fly">
+          <Trans>Introduction to Fly</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/pilot/ts3">
+          <Trans>Community & Teamspeak 3</Trans>
+        </NavMenuLink>
+        <hr className="col-span-full" />
+        <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
+          <Trans>Pilot Softwares</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="https://chartfox.org/">
+          <Trans>Charts</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="https://vacdm.vatprc.net/">
+          <Trans>vACDM</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="https://metar-taf.com/">
+          <Trans>Weather</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/flights">
+          <Trans>Flight plan checker</Trans>
+          <Badge className="ml-2 rounded-full" variant="destructive">
+            <Trans context="new feature">New</Trans>
+          </Badge>
+        </NavMenuLink>
+      </ul>
+    ),
+  },
+  {
+    title: <Trans>Controllers</Trans>,
+    content: () => (
+      <ul className="nav-list-grid">
+        <NavMenuLink href="/controller/controller-list" large className="row-span-3">
+          <Trans>Controller List</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/controller/controller-regulations">
+          <Trans>Progression Guide</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/controller/become-a-controller">
+          <Trans>Become a Controller</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/controller/visiting-and-transferring">
+          <Trans>Visiting & Transfer</Trans>
+        </NavMenuLink>
+        <hr className="col-span-full" />
+        <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
+          <Trans>ATC Center</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="https://moodle.vatprc.net" external>
+          <Trans>Moodle</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/controller/sector">
+          <Trans>Sector Files</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/controller/loa">
+          <Trans>Letter of Agreement</Trans>
+        </NavMenuLink>
+      </ul>
+    ),
+  },
+];
+
+export const NavMenu: React.FC = () => {
+  const locale = useLocale();
 
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {contents.map((content) => (
-          <NavigationMenuItem key={content.title}>
+        {contents.map((content, i) => (
+          <NavigationMenuItem key={i}>
             <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-            <NavigationMenuContent>{content.content}</NavigationMenuContent>
+            <NavigationMenuContent>
+              <content.content locale={locale} />
+            </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
@@ -182,6 +215,7 @@ interface ApplicationProps {
 }
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
+  const { t } = useLingui();
   const theme = useThemeValue();
   const route = useRouterState();
   if (route.location.pathname === "/division/api") {
@@ -193,67 +227,38 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
       <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
-            <img src={theme === "light" ? logo : logoWhite} alt={m["Legacy_title"]()} className="h-6" />
+            <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
           </Link>
           <NavMenu />
           <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
             <ModeToggle />
             <LanguageToggle />
+            <UserInfo />
           </div>
         </div>
       </header>
       <div className="pt-4">{children}</div>
       <footer className="mt-8 mb-4">
-        <p className="text-slate-500 dark:text-slate-300">&copy; {m["Layout_copyright"]()}</p>
+        <p className="text-slate-500 dark:text-slate-300">
+          <Trans>
+            &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
+            TanStack and shadcn/ui. For simulation use only.
+          </Trans>
+        </p>
       </footer>
     </div>
   );
 };
 
-const RootLayout: React.FC = () => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            // With SSR, we usually want to set some default staleTime
-            // above 0 to avoid refetching immediately on the client
-            staleTime: 60 * 1000,
-          },
-        },
-      }),
-  );
-
-  const route = useRouterState();
-
-  return (
-    <html lang={getLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
-      <head>
-        <HeadContent />
-      </head>
-      <body className="px-1 md:px-0">
-        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
-          <QueryClientProvider client={queryClient}>
-            <Application>
-              <Outlet />
-            </Application>
-          </QueryClientProvider>
-        </ThemeProvider>
-        <Toaster position="top-center" />
-        <Scripts />
-      </body>
-    </html>
-  );
-};
-
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  component: RootLayout,
   head: (ctx) => {
     const pathname = ctx.matches[ctx.matches.length - 1].pathname;
     return {
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-        { title: "VATSIM P.R. China Division" },
+        { title: ctx.match.context.i18n._("VATSIM P.R. China Division") },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
@@ -263,5 +268,25 @@ export const Route = createRootRoute({
       ],
     };
   },
-  component: RootLayout,
 });
+
+function RootLayout() {
+  const route = useRouterState();
+
+  return (
+    <html lang={useLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
+      <head>
+        <HeadContent />
+      </head>
+      <body className="px-1 md:px-0">
+        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
+          <Application>
+            <Outlet />
+          </Application>
+        </ThemeProvider>
+        <Toaster position="top-center" />
+        <Scripts />
+      </body>
+    </html>
+  );
+}

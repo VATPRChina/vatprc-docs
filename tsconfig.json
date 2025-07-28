@@ -21,6 +21,6 @@
     },
     "verbatimModuleSyntax": false
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.mjs"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mjs", "**/*.config.js"],
   "exclude": ["node_modules"]
 }

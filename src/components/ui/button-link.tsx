@@ -12,5 +12,5 @@ LinkButtonComponent.displayName = "LinkButtonComponent";
 const CreatedLinkComponent = createLink(LinkButtonComponent);
 
 export const LinkButton: LinkComponent<typeof LinkButtonComponent> = (props) => {
-  return <CreatedLinkComponent preload={"intent"} {...props} />;
+  return <CreatedLinkComponent preload="intent" {...props} />;
 };

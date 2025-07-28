@@ -1,11 +1,13 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDoc } from "./markdown-doc";
+import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { m } from "@/lib/i18n/messages";
-import { getLocale } from "@/lib/i18n/runtime";
+import { usePermission } from "@/lib/client";
+import { getLocale, useLocale } from "@/lib/i18n";
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { AnyRouteMatch } from "@tanstack/react-router";
+import { RouteOptions } from "@tanstack/react-router";
 import React from "react";
 import { TbAlertCircle } from "react-icons/tb";
 
@@ -50,13 +52,29 @@ export const DiscourseDocument: React.FC<{
   cn?: string;
   en: string;
 }> = ({ cn, en }) => {
-  const locale = getLocale();
+  const locale = useLocale();
 
   const postId = locale === "zh-cn" ? (cn ?? en) : en;
   const { data, isLoading, error } = useQuery({
     queryKey: [`https://community.vatprc.net/t/topic/*.json`, postId],
     queryFn: ({ queryKey }) => fetcher([`https://community.vatprc.net/t/topic/${queryKey[1]}.json`, queryKey[1]]),
   });
+
+  const editPermission = usePermission("admin");
+  const editButtons = editPermission && (
+    <div className="flex gap-2">
+      <Button asChild variant="outline">
+        <a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer">
+          <Trans>Edit English</Trans>
+        </a>
+      </Button>
+      <Button asChild variant="outline">
+        <a href={`https://community.vatprc.net/t/topic/${cn}`} target="_blank" rel="noopener noreferrer">
+          <Trans>Edit Chinese</Trans>
+        </a>
+      </Button>
+    </div>
+  );
 
   if (isLoading) {
     return <Skeleton className="h-svh w-full" />;
@@ -65,8 +83,13 @@ export const DiscourseDocument: React.FC<{
     return (
       <Alert variant="destructive">
         <TbAlertCircle className="h-4 w-4" />
-        <AlertTitle>{m["Components_DiscourseDocument_Error"]()}</AlertTitle>
-        <AlertDescription>{error?.message}</AlertDescription>
+        <AlertTitle>
+          <Trans>Error</Trans>
+        </AlertTitle>
+        <AlertDescription>
+          {error?.message}
+          {editButtons}
+        </AlertDescription>
       </Alert>
     );
   }
@@ -74,14 +97,15 @@ export const DiscourseDocument: React.FC<{
     <MarkdownDoc toc={data.tableOfContents}>
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
+      {editButtons}
     </MarkdownDoc>
   );
 };
 
 export const getDiscourseDocumentMeta =
-  (cn: string, en: string): (() => Promise<{ meta?: AnyRouteMatch["meta"] }>) =>
-  async () => {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  (cn: string, en: string): RouteOptions["head"] =>
+  async (ctx) => {
+    const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
         if (!res.ok) {
@@ -89,7 +113,7 @@ export const getDiscourseDocumentMeta =
         }
         return res.json() as Promise<PostMeta>;
       });
-      return { meta: [{ title: `${meta.title} - VATPRC` }] };
+      return { meta: [{ title: meta.title }] };
     } catch {
       return {};
     }

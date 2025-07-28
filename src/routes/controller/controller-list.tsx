@@ -1,11 +1,12 @@
 import { ControllerList } from "@/components/controller-list";
-import { m } from "@/lib/i18n/messages";
+import { msg } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/controller-list")({
   component: Page,
-  head: () => ({
-    meta: [{ title: m["Legacy_nav-menu_controller-list"]() }],
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],
   }),
 });
 
@@ -13,26 +14,49 @@ function Page() {
   return (
     <div>
       <div className="prose dark:prose-invert min-w-full">
-        <h2>{m["Legacy_nav-menu_controller-list"]()}</h2>
-        <p>{m["Legacy_controller-list_description"]()}</p>
+        <h2>
+          <Trans>Controller List</Trans>
+        </h2>
+        <p>
+          <Trans>
+            The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have
+            at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on
+            at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling
+            permission.)
+          </Trans>
+        </p>
         <ul>
           <li>
-            <b>✘</b> {m["Legacy_controller-list_permission-restricted"]()}
+            <Trans>
+              <b>✘</b> Restricted: This controller is not eligible to provide service to this position.
+            </Trans>
           </li>
           <li>
-            <b>T</b> {m["Legacy_controller-list_permission-training"]()}
+            <Trans>
+              <b>T</b> In Training: This controller is eligible to provide service to this position ONLY under
+              supervision from a mentor
+            </Trans>
           </li>
           <li>
-            <b>S</b> {m["Legacy_controller-list_permission-solo"]()}
+            <Trans>
+              <b>S</b> Solo Training: This controller is eligible to provide solo service to this position for the
+              purpose of position familiarization and fluency training.
+            </Trans>
           </li>
           <li>
-            <b>✓</b> {m["Legacy_controller-list_permission-full"]()}
+            <Trans>
+              <b>✓</b> Certified: The controller is fully eligible to provide solo service to this position.
+            </Trans>
           </li>
           <li>
-            <b>V</b> {m["Legacy_controller-list_marker-visiting"]()}
+            <Trans>
+              <b>V</b> Visiting: This controller is a visiting controller.
+            </Trans>
           </li>
         </ul>
-        <p>{m["Legacy_controller-list_ptwr-description"]()}</p>
+        <p>
+          <Trans>*T2: Tier 2 Permission. Training status for this permission is not displayed on this page.</Trans>
+        </p>
       </div>
       <ControllerList />
     </div>

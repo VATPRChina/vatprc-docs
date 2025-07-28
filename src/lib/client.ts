@@ -1,33 +1,10 @@
-import { paths } from "./api";
-import createClient, { Middleware } from "openapi-fetch";
-import createQueryClient from "openapi-react-query";
-import { toast } from "sonner";
+import { $api } from "./client/client";
 
-export class ApiError extends Error {
-  constructor(
-    message: string,
-    public readonly status?: number,
-    public readonly errorCode?: string,
-  ) {
-    super(message);
-    this.name = "ApiError";
-  }
-}
+export { $api } from "./client/client";
+export { login, logout } from "./client/auth";
 
-const throwMiddleware: Middleware = {
-  async onResponse({ response }) {
-    if (!response.ok) {
-      const body = (await response.clone().json()) as { message: string; error_code: string };
-      const err = new ApiError(body.message, response.status, body.error_code);
-      if (err.errorCode !== "INVALID_TOKEN") throw err;
-    }
-  },
-  onError(err) {
-    if (err.error instanceof ApiError) toast(err.error.name, { description: err.error.message });
-  },
+export const usePermission = (role: string) => {
+  const { data } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  if (!data?.user) return false;
+  return data.user.roles.includes(role) ?? false;
 };
-
-export const client = createClient<paths>({ baseUrl: import.meta.env.VITE_API_ENDPOINT });
-client.use(throwMiddleware);
-
-export const $api = createQueryClient(client);
