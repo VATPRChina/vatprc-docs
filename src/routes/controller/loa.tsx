@@ -3,7 +3,7 @@ import { msg } from "@lingui/core/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controller/loa")({
-  component: () => Page,
+  component: Page,
   head: (ctx) => ({
     meta: [{ title: ctx.match.context.i18n._(msg`Letter of Agreement`) }],
   }),
