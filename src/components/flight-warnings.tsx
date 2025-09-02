@@ -25,11 +25,11 @@ const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactN
   route_direct_segment: <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>,
   route_leg_direction: <Trans>The route contains a leg with an invalid direction.</Trans>,
   airway_require_approval: <Trans>The route contains an airway that requires controller approval.</Trans>,
-  not_preferred_route: <Trans>The flight plan does not match the preferred route for this flight.</Trans>,
+  not_preferred_route: <Trans>The flight plan does not match the designated route for this flight.</Trans>,
   cruising_level_mismatch: <Trans>The cruising level type does not meet the requirement of the route.</Trans>,
   cruising_level_too_low: <Trans>The cruising level is too low for the route.</Trans>,
   cruising_level_not_allowed: <Trans>The cruising level is not allowed for the route.</Trans>,
-  route_match_preferred: <Trans>The planned route matches preferred route.</Trans>,
+  route_match_preferred: <Trans>The planned route matches designated route.</Trans>,
 };
 
 const descriptions: Record<
@@ -54,17 +54,8 @@ const descriptions: Record<
     <>
       <p>
         <Trans>
-          Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar
-          vectored. Conventional procedures may only be used with ATC approval.
-        </Trans>
-      </p>
-      <p>
-        <Trans>
-          RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the
-          flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation
-          routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival.
-          Navigation standards for en route phases are not checked at this time. For RNAV1, your flight plan must
-          include P in the Equipment field and D1 or D2 in the PBN/ field.
+          RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard
+          departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance.
         </Trans>
       </p>
     </>
@@ -87,7 +78,7 @@ const descriptions: Record<
         </p>
         <p>
           {(routes?.length ?? 0) > 0 ? (
-            <Trans>Please choose a preferred route from the following list, or contact ATC for assistance:</Trans>
+            <Trans>Please choose a designated route from the following list, or contact ATC for assistance:</Trans>
           ) : (
             <Trans>Please contact ATC for help adjusting the route.</Trans>
           )}
@@ -102,7 +93,7 @@ const descriptions: Record<
   route_match_preferred: (_, { parameter: route }) => (
     <p>
       <Trans>
-        Planned route matches a preferred route:
+        Planned route matches a designated route:
         <span className="font-mono">{route}</span>
       </Trans>
     </p>

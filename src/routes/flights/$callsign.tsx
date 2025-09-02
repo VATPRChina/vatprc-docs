@@ -146,11 +146,11 @@ const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"
   route_direct_segment: <Trans>Direct leg</Trans>,
   route_leg_direction: <Trans>Leg direction violation</Trans>,
   airway_require_approval: <Trans>Restricted airway</Trans>,
-  not_preferred_route: <Trans>Not preferred route</Trans>,
+  not_preferred_route: <Trans>Not designated route</Trans>,
   cruising_level_mismatch: <Trans>Cruising Level Type Mismatch</Trans>,
   cruising_level_too_low: <Trans>Cruising Level Too Low</Trans>,
   cruising_level_not_allowed: <Trans>Cruising Level Not Allowed</Trans>,
-  route_match_preferred: <Trans>Match preferred route</Trans>,
+  route_match_preferred: <Trans>Match designated route</Trans>,
 };
 const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],

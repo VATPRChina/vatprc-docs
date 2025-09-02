@@ -70,10 +70,6 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/components/flight-warnings.tsx:56
-msgid "Aircraft without RNAV1 capability will not be assigned RNAV departure or arrival procedures and will be radar vectored. Conventional procedures may only be used with ATC approval."
-msgstr "不具备RNAV1能力的航空器将不会给出进离场程序，默认使用雷达引导。传统程序仅在ATC许可下使用。"
-
 #: src/components/flight-warnings.tsx:42
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
@@ -98,7 +94,7 @@ msgstr "API 文档"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
-#: src/routes/flights/$callsign.tsx:398
+#: src/routes/flights/$callsign.tsx:399
 msgid "Arrival"
 msgstr "目的机场"
 
@@ -111,7 +107,7 @@ msgstr "ATC 中心"
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/routes/flights/$callsign.tsx:347
+#: src/routes/flights/$callsign.tsx:348
 msgid "Back"
 msgstr "返回"
 
@@ -119,18 +115,14 @@ msgstr "返回"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/routes/flights/index.tsx:33
-#: src/routes/flights/$callsign.tsx:369
+#: src/routes/flights/index.tsx:54
+#: src/routes/flights/$callsign.tsx:370
 msgid "Callsign"
 msgstr "呼号"
 
 #: src/routes/__root.tsx:143
 msgid "Charts"
 msgstr "航图"
-
-#: src/routes/flights/index.tsx:48
-msgid "Check"
-msgstr "检查"
 
 #: src/routes/flights/$callsign.tsx:71
 msgid "Check at VATSIM"
@@ -166,7 +158,7 @@ msgstr "管制员列表"
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/routes/flights/$callsign.tsx:390
+#: src/routes/flights/$callsign.tsx:391
 msgid "Cruising Level (Feet)"
 msgstr "巡航高度（英尺）"
 
@@ -186,7 +178,7 @@ msgstr "巡航高度类型不允许"
 msgid "Dark"
 msgstr "暗色"
 
-#: src/routes/flights/$callsign.tsx:387
+#: src/routes/flights/$callsign.tsx:388
 msgid "Departure"
 msgstr "出发机场"
 
@@ -206,7 +198,7 @@ msgstr "编辑英文"
 msgid "Edit your flight plan on VATSIM."
 msgstr "在 VATSIM 上修改你的飞行计划。"
 
-#: src/routes/flights/$callsign.tsx:375
+#: src/routes/flights/$callsign.tsx:376
 msgid "Equipment"
 msgstr "设备代码"
 
@@ -238,11 +230,11 @@ msgctxt "feet"
 msgid "flight level"
 msgstr "英制高度层"
 
-#: src/components/flight-warnings.tsx:142
+#: src/components/flight-warnings.tsx:133
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 
-#: src/routes/flights/$callsign.tsx:366
+#: src/routes/flights/$callsign.tsx:367
 msgid "Flight Plan"
 msgstr "飞行计划"
 
@@ -250,12 +242,12 @@ msgstr "飞行计划"
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
-#: src/routes/flights/index.tsx:12
-#: src/routes/flights/index.tsx:29
+#: src/routes/flights/index.tsx:13
+#: src/routes/flights/index.tsx:51
 msgid "Flight Plan Checker"
 msgstr "飞行计划检查器"
 
-#: src/routes/flights/$callsign.tsx:429
+#: src/routes/flights/$callsign.tsx:430
 msgid "Flight Route"
 msgstr "航路"
 
@@ -264,7 +256,7 @@ msgstr "航路"
 msgid "Forum"
 msgstr "论坛"
 
-#: src/routes/flights/$callsign.tsx:434
+#: src/routes/flights/$callsign.tsx:435
 msgid "From"
 msgstr "从"
 
@@ -318,8 +310,8 @@ msgid "Logout"
 msgstr "登出"
 
 #: src/routes/flights/$callsign.tsx:153
-msgid "Match preferred route"
-msgstr "符合推荐航路"
+msgid "Match designated route"
+msgstr "符合指定航路"
 
 #: src/routes/__root.tsx:83
 msgid "Meeting Notes"
@@ -333,10 +325,6 @@ msgstr "Moodle"
 msgctxt "new feature"
 msgid "New"
 msgstr "新"
-
-#: src/routes/flights/index.tsx:36
-msgid "No active flight"
-msgstr "没有在线航班"
 
 #: src/components/recent-events.tsx:154
 msgid "No event is scheduled recently."
@@ -359,8 +347,8 @@ msgid "No transponder"
 msgstr "无应答机"
 
 #: src/routes/flights/$callsign.tsx:149
-msgid "Not preferred route"
-msgstr "不符合推荐航路"
+msgid "Not designated route"
+msgstr "不符合指定航路"
 
 #: src/routes/flights/$callsign.tsx:120
 msgctxt "feet"
@@ -383,11 +371,11 @@ msgstr "运行"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/routes/flights/$callsign.tsx:402
+#: src/routes/flights/$callsign.tsx:403
 msgid "PBN"
 msgstr "PBN"
 
-#: src/routes/flights/$callsign.tsx:402
+#: src/routes/flights/$callsign.tsx:403
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
@@ -409,15 +397,15 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/flight-warnings.tsx:104
-msgid "Planned route matches a preferred route:<0>{route}</0>"
-msgstr "计划航路与推荐航路 <0>{route}</0> 匹配。"
+#: src/components/flight-warnings.tsx:95
+msgid "Planned route matches a designated route:<0>{route}</0>"
+msgstr "计划航路与指定航路 <0>{route}</0> 匹配。"
 
-#: src/components/flight-warnings.tsx:90
-msgid "Please choose a preferred route from the following list, or contact ATC for assistance:"
-msgstr "请从下列航路中选择一条作为计划航路，或与管制员联系。"
+#: src/components/flight-warnings.tsx:81
+msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
+msgstr "请从下列指定航路中选择一条作为计划航路，或与管制员联系。"
 
-#: src/components/flight-warnings.tsx:92
+#: src/components/flight-warnings.tsx:83
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
@@ -441,9 +429,9 @@ msgstr "近期活动"
 msgid "Restricted airway"
 msgstr "受限航路"
 
-#: src/components/flight-warnings.tsx:62
-msgid "RNAV stands for Area Navigation. RNAV1 means that the total system error does not exceed 1 NM for 95% of the flight time. RNAV1 is used for RNAV departure and arrival procedures and may also be used for area navigation routes. However, VATPRC controllers currently only check RNAV1 capability for departure and arrival. Navigation standards for en route phases are not checked at this time. For RNAV1, your flight plan must include P in the Equipment field and D1 or D2 in the PBN/ field."
-msgstr "RNAV 全称 Area Navigation，中文“区域导航”。而 RNAV1 代表在95％的飞行时间内，总系统误差不超过 1NM。RNAV1 既可应用于进离场程序，也可以应用于区域导航航路。现阶段下，VATPRC 的管制员仅会针对进离场程序检查 RNAV1 的能力。对于航路的导航规范暂不检查。使用 RNAV1，在飞行计划中的 Equipment 项中，必须包含 R，且 PBN 项中必须包含 D1 或 D2。否则管制员将会在仅用 RNAV 程序的机场拒绝你的离港/进港飞行计划。"
+#: src/components/flight-warnings.tsx:56
+msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
+msgstr "VATPRC 全空域实施 RNAV1 运行，不具备 RNAV1 能力的航空器将无法执行航路及标准进离场。不具备 RNAV1 能力的航空器，需要联系 ATC 申请特别航路许可。"
 
 #: src/routes/flights/$callsign.tsx:143
 msgid "RNP AR"
@@ -453,7 +441,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/flights/$callsign.tsx:394
+#: src/routes/flights/$callsign.tsx:395
 msgid "Route"
 msgstr "航路"
 
@@ -550,16 +538,16 @@ msgid "The cruising level type does not meet the requirement of the route. Pleas
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
 
 #: src/components/flight-warnings.tsx:28
-msgid "The flight plan does not match the preferred route for this flight."
-msgstr "计划航路与推荐航路不一致。"
+msgid "The flight plan does not match the designated route for this flight."
+msgstr "计划航路与指定航路不一致。"
 
 #: src/routes/controller/controller-list.tsx:21
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "下方表格的内容基于管制员中心数据自动生成，正常情况下最多存在24小时延迟。表中数据仅包含至少含有一类席位管制权限的管制员（含客座管制员），即不包含在下表中的管制员不再拥有管制权限。"
 
 #: src/components/flight-warnings.tsx:32
-msgid "The planned route matches preferred route."
-msgstr "计划航路符合推荐航路。"
+msgid "The planned route matches designated route."
+msgstr "计划航路符合指定航路。"
 
 #: src/components/flight-warnings.tsx:25
 msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
@@ -573,7 +561,7 @@ msgstr "计划航路包含与航路方向不一致的航段。"
 msgid "The route contains an airway that requires controller approval."
 msgstr "计划航路包括需要管制员许可的航路。"
 
-#: src/components/flight-warnings.tsx:83
+#: src/components/flight-warnings.tsx:74
 msgid "The submitted route is:<0>{route}</0>"
 msgstr "提交的航路是 <0>{route}</0>。"
 
@@ -585,7 +573,7 @@ msgstr "当前无在线管制员。"
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
-#: src/routes/flights/$callsign.tsx:440
+#: src/routes/flights/$callsign.tsx:441
 msgid "To"
 msgstr "到"
 
@@ -593,12 +581,12 @@ msgstr "到"
 msgid "Toggle theme"
 msgstr "切换主题"
 
-#: src/routes/flights/$callsign.tsx:381
+#: src/routes/flights/$callsign.tsx:382
 msgid "Transponder"
 msgstr "应答机"
 
 #: src/routes/flights/$callsign.tsx:211
-#: src/components/flight-warnings.tsx:74
+#: src/components/flight-warnings.tsx:65
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
 
@@ -610,7 +598,7 @@ msgstr "直到"
 msgid "vACDM"
 msgstr "模拟 A-CDM"
 
-#: src/routes/flights/$callsign.tsx:425
+#: src/routes/flights/$callsign.tsx:426
 msgid "Validation Result"
 msgstr "检查结果"
 
@@ -627,7 +615,7 @@ msgstr "VATSIM 中国分部"
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
-#: src/routes/flights/$callsign.tsx:437
+#: src/routes/flights/$callsign.tsx:438
 msgid "Via"
 msgstr "经由"
 
