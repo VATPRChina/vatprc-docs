@@ -16,6 +16,7 @@ import {
   isAfter,
   isMonday,
   isSameDay,
+  isSameWeek,
   nextMonday,
   previousMonday,
   startOfMonth,
@@ -69,7 +70,12 @@ const Event: React.FC<{
       >
         {title}
       </span>
-      <span>{intlFormatDistance(start, Date.now(), { locale })}</span>
+      <span>
+        {intlFormatDistance(start, Date.now(), { locale })}
+        {isSameWeek(start, Date.now(), { weekStartsOn: 1 }) && (
+          <span className="ml-2 rounded-md bg-red-200 px-1 py-0.5 dark:bg-red-800">In This Week</span>
+        )}
+      </span>
       <div className="flex gap-1">
         <span>{format(start, "MM-dd", { in: utc })}</span>
         <span>
@@ -186,7 +192,11 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
                       key={e.id}
                       className={cn(
                         "rounded px-1 text-sm",
-                        e.isExam ? "bg-blue-200 text-blue-800" : "bg-red-200 text-red-800",
+                        e.isExam
+                          ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200"
+                          : "bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200",
+                        isSameWeek(e.start, Date.now(), { weekStartsOn: 1 }) &&
+                          "border border-red-700 font-bold dark:border-red-300",
                       )}
                       href={e.url}
                       target="_blank"
