@@ -1,13 +1,27 @@
+import { Button } from "./ui/button";
 import { useLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import FullCalendar from "@fullcalendar/react";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { format, intlFormatDistance, isAfter } from "date-fns";
+import {
+  add,
+  differenceInCalendarDays,
+  endOfMonth,
+  format,
+  intlFormat,
+  intlFormatDistance,
+  isAfter,
+  isMonday,
+  isSameDay,
+  nextMonday,
+  previousMonday,
+  startOfMonth,
+  sub,
+} from "date-fns";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
 
@@ -15,7 +29,7 @@ const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
 const VATSIM_EVENT_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "/api/cors/vatsim-events-prc"
+    ? "/uniapi/api/compat/homepage/events/vatsim"
     : "https://cors-proxy.vatprc.net/?target=" + encodeURIComponent("https://my.vatsim.net/api/v2/events/latest");
 
 const isChinaAirport = (ident: string) =>
@@ -97,6 +111,8 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
     enabled: locale === "en",
   });
 
+  const [refDate, setRefDate] = React.useState(new Date());
+
   if (isCnLoading || isEnLoading) {
     return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
   }
@@ -130,20 +146,60 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
   return (
     <div className={cn(className, "grid grid-cols-2 gap-4 md:grid-cols-3")}>
       <div className="col-span-2">
-        <FullCalendar
-          plugins={[dayGridPlugin]}
-          initialView="dayGridMonth"
-          events={events.map((e) => ({
-            id: e.id.toString(),
-            title: e.title,
-            url: e.url,
-            start: e.start,
-            end: e.end,
-            display: "list-item",
-          }))}
-          expandRows
-          locale={locale}
-        />
+        <div className="my-6 flex items-center justify-between">
+          <h4 className="text-3xl">{intlFormat(refDate, { year: "numeric", month: "long" }, { locale })}</h4>
+          <div>
+            <Button variant="ghost" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
+              <ChevronLeftIcon />
+            </Button>
+            <Button variant="ghost" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
+              <ChevronRightIcon />
+            </Button>
+          </div>
+        </div>
+        <div className="grid grid-cols-7 items-center justify-items-center gap-4">
+          <div className="contents font-bold">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+          </div>
+          {(() => {
+            const monthStart = startOfMonth(refDate);
+            const start = isMonday(monthStart) ? monthStart : previousMonday(monthStart);
+            const monthEnd = endOfMonth(refDate);
+            const end = isMonday(monthEnd) ? monthEnd : nextMonday(monthEnd);
+            const days = differenceInCalendarDays(end, start);
+            return Array.from({ length: days }, (_, i) => {
+              const d = add(start, { days: i });
+              const eventsOnDay = events.filter((e) => isSameDay(e.start, d));
+              return (
+                <div key={d.toISOString()} className="flex min-h-24 w-full flex-col gap-1 self-end">
+                  <span className={cn("text-right", eventsOnDay.length === 0 && "text-muted-foreground")}>
+                    {format(d, "dd")}
+                  </span>
+                  {eventsOnDay.map((e) => (
+                    <a
+                      key={e.id}
+                      className={cn(
+                        "rounded px-1 text-sm",
+                        e.isExam ? "bg-blue-200 text-blue-800" : "bg-red-200 text-red-800",
+                      )}
+                      href={e.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {e.title}
+                    </a>
+                  ))}
+                </div>
+              );
+            });
+          })()}
+        </div>
       </div>
       <div className="col-span-2 flex flex-col items-stretch gap-2 md:col-span-1">
         {scheduledEvents.map((e) => (
