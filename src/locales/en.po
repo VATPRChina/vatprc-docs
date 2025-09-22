@@ -115,6 +115,10 @@ msgstr "Back"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
+#: src/components/event/event-detail.tsx:21
+msgid "Booking:"
+msgstr "Booking:"
+
 #: src/routes/flights/index.tsx:54
 #: src/routes/flights/$callsign.tsx:370
 msgid "Callsign"
@@ -326,7 +330,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "New"
 
-#: src/components/recent-events.tsx:154
+#: src/components/recent-events.tsx:210
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
@@ -572,6 +576,10 @@ msgstr "There is currently no online ATC."
 #: src/routes/airspace/sop.tsx:27
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
+
+#: src/components/event/event-detail.tsx:13
+msgid "Time:"
+msgstr "Time:"
 
 #: src/routes/flights/$callsign.tsx:441
 msgid "To"
