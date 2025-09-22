@@ -21,20 +21,20 @@ function RouteComponent() {
     <div key={slot.id} role="row" className="contents">
       <div role="cell">{slot.airspace.name}</div>
       <div role="cell">
-        <div className="flex gap-1">
-          <div className="flex">
-            <span className="mr-1">CTOT/</span>
+        <div className="flex gap-4">
+          <span>
+            <span className="text-muted-foreground">CTOT/</span>
             <DateTime noDistance noDate>
               {slot.enter_at}
             </DateTime>
-          </div>
+          </span>
           {slot.leave_at && (
-            <div className="flex">
-              <span className="mr-1">ELDT/</span>
+            <span>
+              <span className="text-muted-foreground">ELDT/</span>
               <DateTime noDistance noDate>
                 {slot.leave_at}
               </DateTime>
-            </div>
+            </span>
           )}
         </div>
       </div>
@@ -66,12 +66,10 @@ function RouteComponent() {
   return (
     event && (
       <div key={event.id} className="flex flex-col gap-4">
-        <div>
-          <LinkButton variant="ghost" to="..">
-            <TbArrowLeft />
-            <Trans>Back</Trans>
-          </LinkButton>
-        </div>
+        <LinkButton variant="ghost" to=".." className="self-start">
+          <TbArrowLeft />
+          <Trans>Back</Trans>
+        </LinkButton>
         <div className="grid grid-cols-2 items-center gap-8">
           <img src={event.image_url ?? NoEventImage} className="rounded-2xl" />
           <div className="flex flex-col gap-4">
