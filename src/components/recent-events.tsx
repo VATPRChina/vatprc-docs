@@ -16,6 +16,7 @@ import {
   isAfter,
   isMonday,
   isSameDay,
+  isSameMonth,
   isSameWeek,
   nextMonday,
   previousMonday,
@@ -184,6 +185,9 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
             return Array.from({ length: days }, (_, i) => {
               const d = add(start, { days: i });
               const eventsOnDay = events.filter((e) => isSameDay(e.start, d));
+              if (!isSameMonth(d, refDate)) {
+                return <div key={d.toISOString()}></div>;
+              }
               return (
                 <div key={d.toISOString()} className="flex min-h-24 w-full flex-col gap-1 self-end">
                   <span className={cn("text-right", eventsOnDay.length === 0 && "text-muted-foreground")}>
