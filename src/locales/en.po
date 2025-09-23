@@ -94,6 +94,10 @@ msgstr "API Document"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
+#: src/routes/events/$id.tsx:148
+msgid "Area"
+msgstr "Area"
+
 #: src/routes/flights/$callsign.tsx:399
 msgid "Arrival"
 msgstr "Arrival"
@@ -108,12 +112,17 @@ msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
 #: src/routes/flights/$callsign.tsx:348
+#: src/routes/events/$id.tsx:108
 msgid "Back"
 msgstr "Back"
 
 #: src/routes/__root.tsx:171
 msgid "Become a Controller"
 msgstr "Become a Controller"
+
+#: src/routes/events/$id.tsx:80
+msgid "Book"
+msgstr "Book"
 
 #: src/components/event/event-detail.tsx:21
 msgid "Booking:"
@@ -123,6 +132,10 @@ msgstr "Booking:"
 #: src/routes/flights/$callsign.tsx:370
 msgid "Callsign"
 msgstr "Callsign"
+
+#: src/routes/events/$id.tsx:154
+msgid "Callsign & Aircraft"
+msgstr "Callsign & Aircraft"
 
 #: src/routes/__root.tsx:143
 msgid "Charts"
@@ -264,6 +277,10 @@ msgstr "Forum"
 msgid "From"
 msgstr "From"
 
+#: src/components/recent-events.tsx:77
+msgid "In This Week"
+msgstr "In This Week"
+
 #: src/routes/__root.tsx:71
 msgid "Introduction"
 msgstr "Introduction"
@@ -330,7 +347,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "New"
 
-#: src/components/recent-events.tsx:210
+#: src/components/recent-events.tsx:222
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
@@ -349,6 +366,10 @@ msgstr "No RVSM"
 #: src/routes/flights/$callsign.tsx:145
 msgid "No transponder"
 msgstr "No transponder"
+
+#: src/routes/events/$id.tsx:69
+msgid "Not designated"
+msgstr "Not designated"
 
 #: src/routes/flights/$callsign.tsx:149
 msgid "Not designated route"
@@ -413,6 +434,10 @@ msgstr "Please choose a designated route from the following list, or contact ATC
 msgid "Please contact ATC for help adjusting the route."
 msgstr "Please contact ATC for help adjusting the route."
 
+#: src/routes/events/$id.tsx:132
+msgid "Please login to book a slot."
+msgstr "Please login to book a slot."
+
 #: src/routes/auth/callback.tsx:40
 msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
@@ -428,6 +453,10 @@ msgstr "Progression Guide"
 #: src/routes/index.tsx:41
 msgid "Recent Events"
 msgstr "Recent Events"
+
+#: src/routes/events/$id.tsx:86
+msgid "Release"
+msgstr "Release"
 
 #: src/routes/flights/$callsign.tsx:148
 msgid "Restricted airway"
@@ -468,6 +497,10 @@ msgstr "Show all pilots"
 #: src/components/online-pilots.tsx:69
 msgid "Show less pilots"
 msgstr "Show less pilots"
+
+#: src/routes/events/$id.tsx:126
+msgid "Slots"
+msgstr "Slots"
 
 #: src/routes/__root.tsx:74
 msgid "Staff"
@@ -515,6 +548,10 @@ msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to b
 #: src/components/flight-warnings.tsx:19
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
+
+#: src/routes/events/$id.tsx:140
+msgid "The booking has not started yet or has ended."
+msgstr "The booking has not started yet or has ended."
 
 #: src/routes/flights/$callsign.tsx:261
 #: src/components/flight-warnings.tsx:31
@@ -576,6 +613,10 @@ msgstr "There is currently no online ATC."
 #: src/routes/airspace/sop.tsx:27
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
+
+#: src/routes/events/$id.tsx:151
+msgid "Time"
+msgstr "Time"
 
 #: src/components/event/event-detail.tsx:13
 msgid "Time:"

@@ -8,7 +8,7 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
 
   return (
     <div>
-      <div className="flex flex-row items-baseline gap-2">
+      <div className="flex flex-row flex-wrap items-baseline gap-2">
         <span>
           <Trans>Time:</Trans>
         </span>
@@ -16,7 +16,7 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
         <ArrowRight size={12} />
         <DateTime>{event?.end_at}</DateTime>
       </div>
-      <div className="flex flex-row items-baseline gap-2">
+      <div className="flex flex-row flex-wrap items-baseline gap-2">
         <span>
           <Trans>Booking:</Trans>
         </span>

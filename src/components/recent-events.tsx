@@ -73,7 +73,9 @@ const Event: React.FC<{
       <span>
         {intlFormatDistance(start, Date.now(), { locale })}
         {isSameWeek(start, Date.now(), { weekStartsOn: 1 }) && (
-          <span className="ml-2 rounded-md bg-red-200 px-1 py-0.5 dark:bg-red-800">In This Week</span>
+          <span className="ml-2 rounded-md bg-red-200 px-1 py-0.5 dark:bg-red-800">
+            <Trans>In This Week</Trans>
+          </span>
         )}
       </span>
       <div className="flex gap-1">
