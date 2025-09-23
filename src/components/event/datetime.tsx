@@ -1,6 +1,7 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { useLocale } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
-import { format, formatDistanceToNow, isFuture, isPast } from "date-fns";
+import { format, intlFormatDistance } from "date-fns";
 
 export const DateTime = ({
   children,
@@ -11,6 +12,7 @@ export const DateTime = ({
   noDistance?: boolean;
   noDate?: boolean;
 }) => {
+  const locale = useLocale();
   if (!children) return null;
 
   const time = typeof children === "string" ? new Date(children) : children;
@@ -22,11 +24,7 @@ export const DateTime = ({
           {format(time, noDate ? "HHmm" : "yyyy-MM-dd HH:mm", { in: utc })}
           <span className="text-muted-foreground text-sm">Z</span>
           {!noDistance && (
-            <span className="ml-0.5">
-              ({isFuture(time) && "in "}
-              {formatDistanceToNow(time)}
-              {isPast(time) && " ago"})
-            </span>
+            <span className="ml-0.5">({intlFormatDistance(time, Date.now(), { locale, numeric: "always" })})</span>
           )}
         </span>
       </TooltipTrigger>
