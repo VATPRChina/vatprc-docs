@@ -20,10 +20,19 @@ export const Route = createFileRoute("/events/$id")({
 const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) => {
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
-  const { mutate: book, isPending: isBookPending } = $api.useMutation("put", "/api/events/{eid}/slots/{sid}/booking");
+
+  const { refetch } = $api.useQuery("get", "/api/events/{eid}/slots", { params: { path: { eid: slot.event_id } } });
+  const onMutateSuccess = () => {
+    refetch().catch(console.error);
+  };
+
+  const { mutate: book, isPending: isBookPending } = $api.useMutation("put", "/api/events/{eid}/slots/{sid}/booking", {
+    onSuccess: onMutateSuccess,
+  });
   const { mutate: release, isPending: isReleasePending } = $api.useMutation(
     "delete",
     "/api/events/{eid}/slots/{sid}/booking",
+    { onSuccess: onMutateSuccess },
   );
 
   const isLoggedIn = !!session?.user.id;
