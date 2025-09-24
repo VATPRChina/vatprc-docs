@@ -17,11 +17,15 @@ export const Route = createFileRoute("/events/$id")({
   component: RouteComponent,
 });
 
+const EVENT_BOOKING_LIMIT = 1;
+
 const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) => {
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
 
-  const { refetch } = $api.useQuery("get", "/api/events/{eid}/slots", { params: { path: { eid: slot.event_id } } });
+  const { data: slots, refetch } = $api.useQuery("get", "/api/events/{eid}/slots", {
+    params: { path: { eid: slot.event_id } },
+  });
   const onMutateSuccess = () => {
     refetch().catch(console.error);
   };
@@ -39,6 +43,8 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
   const isBookedByCurrentUser = isLoggedIn && slot.booking?.user_id === session.user.id;
   const isBookedByOtherUser = slot.booking && slot.booking.user_id !== session?.user.id;
   const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
+  const isOverBookingLimit =
+    (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
 
   const onBook = () => {
     book({ params: { path: { eid: slot.event_id, sid: slot.id } } });
@@ -80,7 +86,11 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
       )}
       <div role="cell" className="flex gap-1">
         {!isBookedByCurrentUser && !isBookedByOtherUser && (
-          <Button variant="outline" disabled={!isLoggedIn || !isInBookingPeriod || isBookPending} onClick={onBook}>
+          <Button
+            variant="outline"
+            disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
+            onClick={onBook}
+          >
             {isBookPending && <Loader2Icon className="animate-spin" />}
             <Trans>Book</Trans>
           </Button>
