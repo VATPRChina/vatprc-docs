@@ -79,14 +79,15 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
         </div>
       )}
       <div role="cell" className="flex gap-1">
-        {!isBookedByCurrentUser && (
-          <Button
-            variant="outline"
-            disabled={!isLoggedIn || !isInBookingPeriod || isBookedByOtherUser || isBookPending}
-            onClick={onBook}
-          >
-            {isReleasePending && <Loader2Icon className="animate-spin" />}
+        {!isBookedByCurrentUser && !isBookedByOtherUser && (
+          <Button variant="outline" disabled={!isLoggedIn || !isInBookingPeriod || isBookPending} onClick={onBook}>
+            {isBookPending && <Loader2Icon className="animate-spin" />}
             <Trans>Book</Trans>
+          </Button>
+        )}
+        {isBookedByOtherUser && (
+          <Button variant="outline" disabled>
+            <Trans>Already Booked</Trans>
           </Button>
         )}
         {isBookedByCurrentUser && (

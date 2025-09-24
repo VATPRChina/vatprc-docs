@@ -82,6 +82,10 @@ msgstr "空域"
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
 
+#: src/routes/events/$id.tsx:90
+msgid "Already Booked"
+msgstr "已被预订"
+
 #: src/routes/__root.tsx:68
 msgid "Announcement"
 msgstr "公告"
@@ -94,7 +98,7 @@ msgstr "API 文档"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
-#: src/routes/events/$id.tsx:148
+#: src/routes/events/$id.tsx:158
 msgid "Area"
 msgstr "区域"
 
@@ -112,7 +116,7 @@ msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
 #: src/routes/flights/$callsign.tsx:348
-#: src/routes/events/$id.tsx:108
+#: src/routes/events/$id.tsx:118
 msgid "Back"
 msgstr "返回"
 
@@ -120,7 +124,7 @@ msgstr "返回"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/routes/events/$id.tsx:80
+#: src/routes/events/$id.tsx:85
 msgid "Book"
 msgstr "预订"
 
@@ -133,7 +137,7 @@ msgstr "预订时间："
 msgid "Callsign"
 msgstr "呼号"
 
-#: src/routes/events/$id.tsx:154
+#: src/routes/events/$id.tsx:164
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
@@ -277,7 +281,7 @@ msgstr "论坛"
 msgid "From"
 msgstr "从"
 
-#: src/components/recent-events.tsx:77
+#: src/components/recent-events.tsx:78
 msgid "In This Week"
 msgstr "本周"
 
@@ -347,7 +351,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "新"
 
-#: src/components/recent-events.tsx:222
+#: src/components/recent-events.tsx:226
 msgid "No event is scheduled recently."
 msgstr "近期无活动计划。"
 
@@ -367,7 +371,7 @@ msgstr "无 RVSM"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/routes/events/$id.tsx:69
+#: src/routes/events/$id.tsx:78
 msgid "Not designated"
 msgstr "任意"
 
@@ -434,7 +438,7 @@ msgstr "请从下列指定航路中选择一条作为计划航路，或与管制
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
-#: src/routes/events/$id.tsx:132
+#: src/routes/events/$id.tsx:142
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
@@ -454,7 +458,7 @@ msgstr "晋升指引"
 msgid "Recent Events"
 msgstr "近期活动"
 
-#: src/routes/events/$id.tsx:86
+#: src/routes/events/$id.tsx:96
 msgid "Release"
 msgstr "取消预订"
 
@@ -498,7 +502,7 @@ msgstr "显示全部"
 msgid "Show less pilots"
 msgstr "显示部分"
 
-#: src/routes/events/$id.tsx:126
+#: src/routes/events/$id.tsx:136
 msgid "Slots"
 msgstr "时刻"
 
@@ -549,7 +553,7 @@ msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 RNP AR（不带 RF 航段）程序。"
 
-#: src/routes/events/$id.tsx:140
+#: src/routes/events/$id.tsx:150
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
 
@@ -614,7 +618,7 @@ msgstr "当前无在线管制员。"
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
-#: src/routes/events/$id.tsx:151
+#: src/routes/events/$id.tsx:161
 msgid "Time"
 msgstr "时间"
 
