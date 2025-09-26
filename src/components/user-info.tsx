@@ -1,7 +1,6 @@
-import { Button } from "./ui/button";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { $api, logout } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Button, HoverCard } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const UserInfo = () => {
@@ -18,24 +17,20 @@ export const UserInfo = () => {
   if (data?.user) {
     return (
       <HoverCard>
-        <HoverCardTrigger asChild>
-          <Button variant="ghost">{data.user.full_name}</Button>
-        </HoverCardTrigger>
-        <HoverCardContent align="end" className="w-auto px-0 py-1" asChild>
-          <ul className="flex cursor-default flex-col">
-            <Button asChild variant="ghost" size="sm" className="rounded-none px-4">
-              <li onClick={onLogout}>
-                <Trans>Logout</Trans>
-              </li>
-            </Button>
-          </ul>
-        </HoverCardContent>
+        <HoverCard.Target>
+          <Button variant="subtle">{data.user.full_name}</Button>
+        </HoverCard.Target>
+        <HoverCard.Dropdown className="w-auto px-0 py-1">
+          <Button variant="subtle" onClick={onLogout}>
+            <Trans>Logout</Trans>
+          </Button>
+        </HoverCard.Dropdown>
       </HoverCard>
     );
   }
 
   if (!error) {
-    <Button asChild variant="ghost">
+    <Button variant="subtle">
       <Trans>Loading</Trans>
     </Button>;
   }
@@ -51,7 +46,7 @@ export const UserInfo = () => {
   };
 
   return (
-    <Button variant="ghost" onClick={onLogin}>
+    <Button variant="subtle" onClick={onLogin}>
       <Trans>Login</Trans>
     </Button>
   );

@@ -1,10 +1,10 @@
-import { Button } from "./ui/button";
 import { useLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
+import { ActionIcon } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   add,
@@ -23,9 +23,8 @@ import {
   startOfMonth,
   sub,
 } from "date-fns";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import React from "react";
-import { TbLoader } from "react-icons/tb";
+import { TbChevronLeft, TbChevronRight, TbLoader } from "react-icons/tb";
 
 const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
@@ -158,12 +157,12 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         <div className="my-6 flex items-center justify-between">
           <h4 className="text-3xl">{intlFormat(refDate, { year: "numeric", month: "long" }, { locale })}</h4>
           <div>
-            <Button variant="ghost" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
-              <ChevronLeftIcon />
-            </Button>
-            <Button variant="ghost" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
-              <ChevronRightIcon />
-            </Button>
+            <ActionIcon variant="subtle" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
+              <TbChevronLeft />
+            </ActionIcon>
+            <ActionIcon variant="subtle" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
+              <TbChevronRight />
+            </ActionIcon>
           </div>
         </div>
         <div className="grid grid-cols-7 items-center justify-items-center gap-4">

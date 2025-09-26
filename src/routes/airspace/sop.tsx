@@ -1,10 +1,10 @@
 import { DiscourseDocument } from "@/components/discourse-doc";
 import { DocList } from "@/components/doc-list";
-import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
 import { useLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/airspace/sop")({
@@ -22,10 +22,8 @@ function Page() {
   return (
     <>
       {locale === "en" && (
-        <Alert variant="destructive">
-          <AlertTitle>
-            <Trans>This page is not available in English.</Trans>
-          </AlertTitle>
+        <Alert color="red">
+          <Trans>This page is not available in English.</Trans>
         </Alert>
       )}
       <h1 className="my-4 text-center text-3xl font-bold">

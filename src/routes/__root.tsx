@@ -2,15 +2,6 @@ import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ModeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Toaster } from "@/components/ui/sonner";
 import { UserInfo } from "@/components/user-info";
 import { useLocale, getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
@@ -18,14 +9,25 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import {
+  Badge,
+  ColorSchemeScript,
+  createTheme,
+  Group,
+  HoverCard,
+  mantineHtmlProps,
+  MantineProvider,
+  Paper,
+  Text,
+} from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import { useColorScheme } from "@mantine/hooks";
-import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
 
 const theme = createTheme({
+  primaryColor: "vatprc",
+  primaryShade: { light: 8, dark: 2 },
   colors: {
     vatprc: [
       "#ffebeb",
@@ -70,7 +72,7 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
     </Link>
   );
 
-  return <NavigationMenuLink asChild>{link}</NavigationMenuLink>;
+  return link;
 };
 
 const contents = [
@@ -214,18 +216,16 @@ export const NavMenu: React.FC = () => {
   const locale = useLocale();
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        {contents.map((content, i) => (
-          <NavigationMenuItem key={i}>
-            <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <content.content locale={locale} />
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        ))}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <Group>
+      {contents.map((content, i) => (
+        <HoverCard key={i}>
+          <HoverCard.Target>{content.title}</HoverCard.Target>
+          <HoverCard.Dropdown>
+            <content.content locale={locale} />
+          </HoverCard.Dropdown>
+        </HoverCard>
+      ))}
+    </Group>
   );
 };
 
@@ -242,8 +242,8 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
   const theme = useColorScheme();
 
   return (
-    <div className="container mx-auto">
-      <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
+    <>
+      <Paper className="sticky top-0 z-50" px="md" py="sm" withBorder w="100%">
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
             <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
@@ -255,17 +255,17 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
             <UserInfo />
           </div>
         </div>
-      </header>
+      </Paper>
       <div className="pt-4">{children}</div>
-      <footer className="mt-8 mb-4">
-        <p className="text-slate-500 dark:text-slate-300">
+      <Paper component="footer" pt="lg" pb="sm" px="sm" className="bg-body text-blue">
+        <Text>
           <Trans>
             &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
             TanStack and shadcn/ui. For simulation use only.
           </Trans>
-        </p>
-      </footer>
-    </div>
+        </Text>
+      </Paper>
+    </>
   );
 };
 
@@ -309,7 +309,6 @@ function RootLayout() {
             <Outlet />
           </Application>
         </MantineProvider>
-        <Toaster position="top-center" />
         <Scripts />
       </body>
     </html>

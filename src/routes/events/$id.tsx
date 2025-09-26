@@ -127,7 +127,7 @@ function RouteComponent() {
   return (
     event && (
       <div key={event.id} className="flex flex-col gap-4">
-        <LinkButton variant="ghost" to=".." className="self-start">
+        <LinkButton variant="subtle" to=".." className="self-start">
           <TbArrowLeft />
           <Trans>Back</Trans>
         </LinkButton>

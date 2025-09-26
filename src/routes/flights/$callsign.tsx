@@ -297,7 +297,7 @@ const Warning = ({
 
         const button = (
           <Button
-            variant="ghost"
+            variant="subtle"
             size="sm"
             className={cn(
               (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
@@ -343,7 +343,7 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col items-start gap-4">
-      <LinkButton variant="ghost" to="..">
+      <LinkButton variant="subtle" to="..">
         <TbArrowLeft />
         <Trans>Back</Trans>
       </LinkButton>

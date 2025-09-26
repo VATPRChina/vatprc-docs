@@ -1,11 +1,9 @@
-import { Label } from "./ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { CheckedState } from "@radix-ui/react-checkbox";
+import { Checkbox } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { TbLoader } from "react-icons/tb";
 
 enum ControllerRating {
@@ -399,7 +397,7 @@ export const ControllerList: React.FC = () => {
     };
   });
 
-  const onShowAbsentChange = (e: CheckedState) => setShowAbsent(e === true);
+  const onShowAbsentChange: ChangeEventHandler<HTMLInputElement> = (e) => setShowAbsent(e.target.checked);
 
   if (isLoading) {
     return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
@@ -408,10 +406,7 @@ export const ControllerList: React.FC = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       <div className="flex items-center gap-x-2">
-        <Checkbox onCheckedChange={onShowAbsentChange} id="show-absent" />
-        <Label htmlFor="show-absent">
-          <Trans>Show Absence Controllers</Trans>
-        </Label>
+        <Checkbox onChange={onShowAbsentChange} label={<Trans>Show Absence Controllers</Trans>} />
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {controllers
