@@ -310,11 +310,11 @@ const PermissionTag = ({ permission, positionName, expiration }: PermissionTagPr
         className={cn(
           "flex items-end gap-1 rounded-sm px-2 py-1",
           permission === ControllerPositionPermission.Full &&
-            "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-100",
+            "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
           permission === ControllerPositionPermission.Training &&
-            "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-100",
+            "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
           permission === ControllerPositionPermission.Solo &&
-            "bg-yellow-50 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-100",
+            "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
         )}
       >
         {positionName}

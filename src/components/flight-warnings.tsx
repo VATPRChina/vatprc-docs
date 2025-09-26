@@ -2,7 +2,6 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
@@ -122,14 +121,14 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   return (
     <div className="flex w-full flex-col items-stretch gap-2">
       {error?.message && (
-        <Alert color="red">
+        <Alert>
           <AlertTitle>{error?.message}</AlertTitle>
         </Alert>
       )}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
-        <Alert>
+        <Alert variant="success">
           <TbCheck />
-          <AlertTitle className="text-green-700 dark:text-green-500">
+          <AlertTitle>
             <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>
           </AlertTitle>
         </Alert>
@@ -138,15 +137,12 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
         uniqWith(warnings, (w1, w2) => w1.message_code === w2.message_code).map(
           (warning) =>
             messages[warning.message_code] && (
-              <Alert key={warning.message_code}>
+              <Alert
+                key={warning.message_code}
+                variant={(ALLOWED_MESSAGE_CODES.includes(warning.message_code) && "success") || undefined}
+              >
                 {ALLOWED_MESSAGE_CODES.includes(warning.message_code) ? <TbCheck /> : <TbExclamationCircle />}
-                <AlertTitle
-                  className={cn(
-                    ALLOWED_MESSAGE_CODES.includes(warning.message_code) && "text-green-700 dark:text-green-500",
-                  )}
-                >
-                  {messages[warning.message_code] ?? warning.message_code}
-                </AlertTitle>
+                <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
                 <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
               </Alert>
             ),
