@@ -1,7 +1,6 @@
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
-import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -19,9 +18,29 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import mantineCoreStyle from "@mantine/core/styles.css?url";
+import { useColorScheme } from "@mantine/hooks";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
+
+const theme = createTheme({
+  colors: {
+    vatprc: [
+      "#ffebeb",
+      "#fad5d5",
+      "#f2a8a7",
+      "#eb7877",
+      "#e6504e",
+      "#e33834",
+      "#e22b26",
+      "#c91e1a",
+      "#ab1615",
+      "#9d0b10",
+    ],
+  },
+});
 
 interface NavigationMenuLinkProps {
   large?: boolean;
@@ -216,11 +235,11 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const { t } = useLingui();
-  const theme = useThemeValue();
   const route = useRouterState();
   if (route.location.pathname === "/division/api") {
     return children;
   }
+  const theme = useColorScheme();
 
   return (
     <div className="container mx-auto">
@@ -263,6 +282,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
+        { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "alternate", hrefLang: "en", href: getLocalPathname(pathname, "en") },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname(pathname, "zh-cn") },
       ],
@@ -274,16 +294,21 @@ function RootLayout() {
   const route = useRouterState();
 
   return (
-    <html lang={useLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
+    <html
+      lang={useLocale() ?? "en"}
+      className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}
+      {...mantineHtmlProps}
+    >
       <head>
         <HeadContent />
+        <ColorSchemeScript />
       </head>
       <body className="px-1 md:px-0">
-        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
+        <MantineProvider theme={theme}>
           <Application>
             <Outlet />
           </Application>
-        </ThemeProvider>
+        </MantineProvider>
         <Toaster position="top-center" />
         <Scripts />
       </body>

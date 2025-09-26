@@ -23,7 +23,11 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
 
-  const { data: slots, refetch } = $api.useQuery("get", "/api/events/{eid}/slots", {
+  const {
+    data: slots,
+    refetch,
+    isFetching,
+  } = $api.useQuery("get", "/api/events/{eid}/slots", {
     params: { path: { eid: slot.event_id } },
   });
   const onMutateSuccess = () => {
@@ -88,7 +92,7 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
         {!isBookedByCurrentUser && !isBookedByOtherUser && (
           <Button
             variant="outline"
-            disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
+            disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit || isFetching}
             onClick={onBook}
           >
             {isBookPending && <Loader2Icon className="animate-spin" />}
@@ -101,7 +105,7 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
           </Button>
         )}
         {isBookedByCurrentUser && (
-          <Button variant="outline" onClick={onRelease} disabled={isReleasePending}>
+          <Button variant="outline" onClick={onRelease} disabled={isReleasePending || isFetching}>
             {isReleasePending && <Loader2Icon className="animate-spin" />}
             <Trans>Release</Trans>
           </Button>
