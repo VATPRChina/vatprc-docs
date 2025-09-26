@@ -1,9 +1,9 @@
+import { Button } from "./ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Box, Button, Collapse } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import React from "react";
+import React, { useState } from "react";
 import { TbCaretUpDown, TbLoader } from "react-icons/tb";
 
 const Pilot: React.FC<{
@@ -32,7 +32,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
 
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
-  const [opened, { toggle }] = useDisclosure(false);
+  const [open, setOpen] = useState(false);
 
   if (isLoading) {
     return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
@@ -58,17 +58,19 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
   }
 
   return (
-    <Box className="space-y-2">
+    <Collapsible open={open} onOpenChange={setOpen} className="space-y-2">
       <div className={cn(className, "flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(0, 8)}</div>
-      <Collapse in={opened}>
+      <CollapsibleContent asChild>
         <div className={cn(className, "mt-2 flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(8)}</div>
-      </Collapse>
+      </CollapsibleContent>
       <div className="mt-2 flex items-center justify-center space-x-4 px-4">
-        <Button variant="subtle" size="sm" onClick={toggle}>
-          {opened ? t`Show less pilots` : t`Show all pilots`}
-          <TbCaretUpDown />
-        </Button>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm">
+            {open ? t`Show less pilots` : t`Show all pilots`}
+            <TbCaretUpDown className="h-4 w-4" />
+          </Button>
+        </CollapsibleTrigger>
       </div>
-    </Box>
+    </Collapsible>
   );
 };

@@ -1,7 +1,17 @@
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
+import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { Toaster } from "@/components/ui/sonner";
 import { UserInfo } from "@/components/user-info";
 import { useLocale, getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
@@ -9,40 +19,9 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import {
-  Badge,
-  ColorSchemeScript,
-  createTheme,
-  Group,
-  HoverCard,
-  mantineHtmlProps,
-  MantineProvider,
-  Paper,
-  Text,
-} from "@mantine/core";
-import mantineCoreStyle from "@mantine/core/styles.css?url";
-import { useColorScheme } from "@mantine/hooks";
+import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { TbExternalLink } from "react-icons/tb";
-
-const theme = createTheme({
-  primaryColor: "vatprc",
-  primaryShade: { light: 8, dark: 2 },
-  colors: {
-    vatprc: [
-      "#ffebeb",
-      "#fad5d5",
-      "#f2a8a7",
-      "#eb7877",
-      "#e6504e",
-      "#e33834",
-      "#e22b26",
-      "#c91e1a",
-      "#ab1615",
-      "#9d0b10",
-    ],
-  },
-});
 
 interface NavigationMenuLinkProps {
   large?: boolean;
@@ -72,7 +51,7 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
     </Link>
   );
 
-  return link;
+  return <NavigationMenuLink asChild>{link}</NavigationMenuLink>;
 };
 
 const contents = [
@@ -216,16 +195,18 @@ export const NavMenu: React.FC = () => {
   const locale = useLocale();
 
   return (
-    <Group>
-      {contents.map((content, i) => (
-        <HoverCard key={i}>
-          <HoverCard.Target>{content.title}</HoverCard.Target>
-          <HoverCard.Dropdown>
-            <content.content locale={locale} />
-          </HoverCard.Dropdown>
-        </HoverCard>
-      ))}
-    </Group>
+    <NavigationMenu>
+      <NavigationMenuList>
+        {contents.map((content, i) => (
+          <NavigationMenuItem key={i}>
+            <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <content.content locale={locale} />
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
 
@@ -235,15 +216,15 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const { t } = useLingui();
+  const theme = useThemeValue();
   const route = useRouterState();
   if (route.location.pathname === "/division/api") {
     return children;
   }
-  const theme = useColorScheme();
 
   return (
-    <>
-      <Paper className="sticky top-0 z-50" px="md" py="sm" withBorder w="100%">
+    <div className="container mx-auto">
+      <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
             <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
@@ -255,17 +236,17 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
             <UserInfo />
           </div>
         </div>
-      </Paper>
+      </header>
       <div className="pt-4">{children}</div>
-      <Paper component="footer" pt="lg" pb="sm" px="sm" className="bg-body text-blue">
-        <Text>
+      <footer className="mt-8 mb-4">
+        <p className="text-slate-500 dark:text-slate-300">
           <Trans>
             &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
             TanStack and shadcn/ui. For simulation use only.
           </Trans>
-        </Text>
-      </Paper>
-    </>
+        </p>
+      </footer>
+    </div>
   );
 };
 
@@ -282,7 +263,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
-        { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "alternate", hrefLang: "en", href: getLocalPathname(pathname, "en") },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname(pathname, "zh-cn") },
       ],
@@ -294,21 +274,17 @@ function RootLayout() {
   const route = useRouterState();
 
   return (
-    <html
-      lang={useLocale() ?? "en"}
-      className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}
-      {...mantineHtmlProps}
-    >
+    <html lang={useLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
       <head>
         <HeadContent />
-        <ColorSchemeScript />
       </head>
       <body className="px-1 md:px-0">
-        <MantineProvider theme={theme}>
+        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
           <Application>
             <Outlet />
           </Application>
-        </MantineProvider>
+        </ThemeProvider>
+        <Toaster position="top-center" />
         <Scripts />
       </body>
     </html>

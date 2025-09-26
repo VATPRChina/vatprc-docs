@@ -1,9 +1,11 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDoc } from "./markdown-doc";
+import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { usePermission } from "@/lib/client";
 import { getLocale, useLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
-import { Button, Skeleton, Alert } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { RouteOptions } from "@tanstack/react-router";
 import React from "react";
@@ -61,12 +63,12 @@ export const DiscourseDocument: React.FC<{
   const editPermission = usePermission("admin");
   const editButtons = editPermission && (
     <div className="flex gap-2">
-      <Button variant="outline">
+      <Button asChild variant="outline">
         <a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer">
           <Trans>Edit English</Trans>
         </a>
       </Button>
-      <Button variant="outline">
+      <Button asChild variant="outline">
         <a href={`https://community.vatprc.net/t/topic/${cn}`} target="_blank" rel="noopener noreferrer">
           <Trans>Edit Chinese</Trans>
         </a>
@@ -79,9 +81,15 @@ export const DiscourseDocument: React.FC<{
   }
   if (error || !data) {
     return (
-      <Alert c="red" title={<Trans>Error</Trans>} icon={<TbAlertCircle />}>
-        {error?.message}
-        {editButtons}
+      <Alert variant="destructive">
+        <TbAlertCircle className="h-4 w-4" />
+        <AlertTitle>
+          <Trans>Error</Trans>
+        </AlertTitle>
+        <AlertDescription>
+          {error?.message}
+          {editButtons}
+        </AlertDescription>
       </Alert>
     );
   }
