@@ -84,7 +84,7 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
   component: () => {
     const code: string = useLoaderData({ strict: false });
-    <DiscourseDocument code={code} en={en} cn={cn} />;
+    return <DiscourseDocument code={code} en={en} cn={cn} />;
   },
   async head(ctx) {
     const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
