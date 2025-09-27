@@ -80,7 +80,7 @@ const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<Doc
   return documents;
 });
 
-export const getAllDocuments = createServerFn({ type: "static" }).handler(async () => findAllDocuments());
+export const getAllDocuments = createServerFn().handler(async () => findAllDocuments());
 
 export const getDocument = createServerFn()
   .validator((data: string) => data)
