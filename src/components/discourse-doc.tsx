@@ -1,4 +1,5 @@
-import { buildMarkdownDocSync, compileMarkdownDoc, MarkdownDoc } from "./markdown-doc";
+import { MarkdownDoc } from "./markdown-doc";
+import { buildMarkdownDocSync } from "./markdown-doc-lib";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -41,6 +42,7 @@ export const getDiscourseDocumentCode = async (postId: string) => {
     return thumbnailUrl;
   });
 
+  const { compileMarkdownDoc } = await import("./markdown-doc-build");
   const doc = await compileMarkdownDoc(contentRes);
   return doc;
 };

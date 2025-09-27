@@ -1,4 +1,4 @@
-import { buildMarkdownDoc, MarkdownDoc } from "@/components/markdown-doc";
+import { MarkdownDoc } from "@/components/markdown-doc";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
@@ -30,7 +30,8 @@ function RouteComponent() {
 
   const { data, error } = useQuery({
     queryKey: ["://app/lib/doc.ts/getDocument", path],
-    queryFn: () => buildMarkdownDoc(source ?? ""),
+    queryFn: () =>
+      import("@/components/markdown-doc-build").then(({ buildMarkdownDoc }) => buildMarkdownDoc(source ?? "")),
   });
 
   if (error) {

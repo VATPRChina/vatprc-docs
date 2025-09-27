@@ -1,4 +1,3 @@
-import { buildMarkdownDoc } from "@/components/markdown-doc";
 import { createServerFn, serverOnly } from "@tanstack/react-start";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -13,6 +12,7 @@ export interface DocumentEntry {
 }
 
 const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
+  const { buildMarkdownDoc } = await import("@/components/markdown-doc-build");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
   for await (const entry of dirEntries) {

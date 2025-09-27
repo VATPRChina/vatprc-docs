@@ -1,30 +1,6 @@
-import { compile, run, runSync } from "@mdx-js/mdx";
-import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
-import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
-import Slugger from "github-slugger";
-import React from "react";
-import * as runtime from "react/jsx-runtime";
-import rehypeExternalLinks from "rehype-external-links";
-import { rehypeGithubAlerts } from "rehype-github-alerts";
-import rehypeSlug from "rehype-slug";
-import remarkBreaks from "remark-breaks";
-import remarkFrontmatter from "remark-frontmatter";
-import gfm from "remark-gfm";
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-
-const addIdToTocEntry = (toc: TocEntry, slugger: Slugger) => {
-  toc.id = slugger.slug(toc.value);
-  for (const entry of toc.children ?? []) {
-    addIdToTocEntry(entry, slugger);
-  }
-};
-
-export const addIdToToc = (tableOfContents: Toc) => {
-  const slugger = new Slugger();
-  for (const toc of tableOfContents) {
-    addIdToTocEntry(toc, slugger);
-  }
-};
+import type { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
+import type React from "react";
+import { Fragment } from "react";
 
 export const TableOfContents: React.FC<{ tableOfContents: Toc; maxDepth?: number }> = ({
   tableOfContents,
@@ -38,13 +14,13 @@ export const TableOfContents: React.FC<{ tableOfContents: Toc; maxDepth?: number
     return (
       <>
         {tableOfContents.map((toc: TocEntry) => (
-          <React.Fragment key={toc.value}>
+          <Fragment key={toc.value}>
             <a href={`#${toc.id}`} className="font-normal no-underline">
               {toc.value}
             </a>
             <br />
             {toc.children && <TableOfContents tableOfContents={toc.children} maxDepth={maxDepth - 1} />}
-          </React.Fragment>
+          </Fragment>
         ))}
       </>
     );
@@ -62,62 +38,6 @@ export const TableOfContents: React.FC<{ tableOfContents: Toc; maxDepth?: number
       ))}
     </ul>
   );
-};
-
-export const compileMarkdownDoc = async (source: string) => {
-  source = source.replaceAll("<-", "{'<-'}");
-
-  const code = String(
-    await compile(source, {
-      outputFormat: "function-body",
-      remarkPlugins: [gfm, withToc, withTocExport, remarkBreaks, remarkFrontmatter, remarkMdxFrontmatter],
-      rehypePlugins: [
-        rehypeSlug,
-        rehypeGithubAlerts,
-        [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
-      ],
-    }),
-  );
-
-  return code;
-};
-
-export const buildMarkdownDoc = async (source: string) => {
-  const code = await compileMarkdownDoc(source);
-
-  const {
-    default: MDXContent,
-    tableOfContents,
-    frontmatter,
-  } = (await run(code, { ...runtime, baseUrl: import.meta.url })) as Awaited<ReturnType<typeof run>> & {
-    tableOfContents: Toc;
-    frontmatter: Record<string, unknown>;
-  };
-
-  const frontmatterTitle = typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
-  const title = frontmatterTitle ?? tableOfContents?.[0]?.value;
-
-  addIdToToc(tableOfContents);
-
-  return { MDXContent, tableOfContents: tableOfContents, title, frontmatter };
-};
-
-export const buildMarkdownDocSync = (code: string) => {
-  const {
-    default: MDXContent,
-    tableOfContents,
-    frontmatter,
-  } = runSync(code, { ...runtime, baseUrl: import.meta.url }) as Awaited<ReturnType<typeof run>> & {
-    tableOfContents: Toc;
-    frontmatter: Record<string, unknown>;
-  };
-
-  const frontmatterTitle = typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
-  const title = frontmatterTitle ?? tableOfContents?.[0]?.value;
-
-  addIdToToc(tableOfContents);
-
-  return { MDXContent, tableOfContents: tableOfContents, title, frontmatter };
 };
 
 export const MarkdownDoc: React.FC<{
