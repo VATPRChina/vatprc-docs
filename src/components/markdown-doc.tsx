@@ -1,4 +1,4 @@
-import { compile, run } from "@mdx-js/mdx";
+import { compile, run, runSync } from "@mdx-js/mdx";
 import withToc, { Toc, TocEntry } from "@stefanprobst/remark-extract-toc";
 import withTocExport from "@stefanprobst/remark-extract-toc/mdx";
 import Slugger from "github-slugger";
@@ -26,7 +26,10 @@ export const addIdToToc = (tableOfContents: Toc) => {
   }
 };
 
-export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents: Toc; maxDepth?: number }) => {
+export const TableOfContents: React.FC<{ tableOfContents: Toc; maxDepth?: number }> = ({
+  tableOfContents,
+  maxDepth,
+}) => {
   if (!maxDepth || maxDepth <= 0) {
     return null;
   }
@@ -61,7 +64,7 @@ export const TableOfContents = ({ tableOfContents, maxDepth }: { tableOfContents
   );
 };
 
-export const buildMarkdownDoc = async (source: string) => {
+export const compileMarkdownDoc = async (source: string) => {
   source = source.replaceAll("<-", "{'<-'}");
 
   const code = String(
@@ -76,11 +79,35 @@ export const buildMarkdownDoc = async (source: string) => {
     }),
   );
 
+  return code;
+};
+
+export const buildMarkdownDoc = async (source: string) => {
+  const code = await compileMarkdownDoc(source);
+
   const {
     default: MDXContent,
     tableOfContents,
     frontmatter,
   } = (await run(code, { ...runtime, baseUrl: import.meta.url })) as Awaited<ReturnType<typeof run>> & {
+    tableOfContents: Toc;
+    frontmatter: Record<string, unknown>;
+  };
+
+  const frontmatterTitle = typeof frontmatter?.title === "string" ? frontmatter?.title : undefined;
+  const title = frontmatterTitle ?? tableOfContents?.[0]?.value;
+
+  addIdToToc(tableOfContents);
+
+  return { MDXContent, tableOfContents: tableOfContents, title, frontmatter };
+};
+
+export const buildMarkdownDocSync = (code: string) => {
+  const {
+    default: MDXContent,
+    tableOfContents,
+    frontmatter,
+  } = runSync(code, { ...runtime, baseUrl: import.meta.url }) as Awaited<ReturnType<typeof run>> & {
     tableOfContents: Toc;
     frontmatter: Record<string, unknown>;
   };

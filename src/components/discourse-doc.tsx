@@ -1,15 +1,13 @@
-import { MarkdownDoc } from "./markdown-doc";
-import { buildMarkdownDoc } from "./markdown-doc";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { buildMarkdownDocSync, compileMarkdownDoc, MarkdownDoc } from "./markdown-doc";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { usePermission } from "@/lib/client";
-import { getLocale, useLocale } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, FileRoutesByPath } from "@tanstack/react-router";
-import React from "react";
-import { TbAlertCircle } from "react-icons/tb";
+import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
+import React, { useMemo } from "react";
+import { TbCloudX } from "react-icons/tb";
 
 export interface PostMeta {
   title: string;
@@ -18,7 +16,7 @@ export interface PostMeta {
   }[];
 }
 
-const fetcher = async ([, postId]: [string, string]) => {
+export const getDiscourseDocumentCode = async (postId: string) => {
   const postPath = `${postId}/1`;
   const [meta, raw] = await Promise.all([
     fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
@@ -43,22 +41,16 @@ const fetcher = async ([, postId]: [string, string]) => {
     return thumbnailUrl;
   });
 
-  const doc = await buildMarkdownDoc(contentRes);
-  doc.title = meta.title ?? doc.title;
+  const doc = await compileMarkdownDoc(contentRes);
   return doc;
 };
 
 export const DiscourseDocument: React.FC<{
-  cn?: string;
+  code: string;
   en: string;
-}> = ({ cn, en }) => {
-  const locale = useLocale();
-
-  const postId = locale === "zh-cn" ? (cn ?? en) : en;
-  const { data, isLoading, error } = useQuery({
-    queryKey: [`https://community.vatprc.net/t/topic/*.json`, postId],
-    queryFn: ({ queryKey }) => fetcher([`https://community.vatprc.net/t/topic/${queryKey[1]}.json`, queryKey[1]]),
-  });
+  cn: string;
+}> = ({ code, en, cn }) => {
+  const data = useMemo(() => buildMarkdownDocSync(code), [code]);
 
   const editPermission = usePermission("admin");
   const editButtons = editPermission && (
@@ -76,23 +68,6 @@ export const DiscourseDocument: React.FC<{
     </div>
   );
 
-  if (isLoading) {
-    return <Skeleton className="h-svh w-full" />;
-  }
-  if (error || !data) {
-    return (
-      <Alert variant="destructive">
-        <TbAlertCircle className="h-4 w-4" />
-        <AlertTitle>
-          <Trans>Error</Trans>
-        </AlertTitle>
-        <AlertDescription>
-          {error?.message}
-          {editButtons}
-        </AlertDescription>
-      </Alert>
-    );
-  }
   return (
     <MarkdownDoc toc={data.tableOfContents}>
       <h1 className="text-2xl">{data.title}</h1>
@@ -107,8 +82,11 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   cn: string,
   en: string,
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
-  component: () => <DiscourseDocument cn={cn} en={en} />,
-  head: async (ctx) => {
+  component: () => {
+    const code: string = useLoaderData({ strict: false });
+    <DiscourseDocument code={code} en={en} cn={cn} />;
+  },
+  async head(ctx) {
     const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
@@ -121,5 +99,26 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
     } catch {
       return {};
     }
+  },
+  async loader(ctx) {
+    const postId = getLocale(ctx.location.pathname) === "zh-cn" ? (cn ?? en) : en;
+    return await getDiscourseDocumentCode(postId);
+  },
+  pendingMs: 100,
+  pendingComponent: () => (
+    <div className="h-svh w-full p-16">
+      <Skeleton className="h-full w-full" />
+    </div>
+  ),
+  errorComponent: (props) => {
+    return (
+      <Alert className="mx-auto max-w-lg" variant="destructive">
+        <TbCloudX />
+        <AlertTitle>
+          <Trans>Failed to load document</Trans>
+        </AlertTitle>
+        <AlertDescription>{props.error.message}</AlertDescription>
+      </Alert>
+    );
   },
 });

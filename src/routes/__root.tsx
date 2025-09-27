@@ -139,13 +139,13 @@ const contents = [
         <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
           <Trans>Pilot Softwares</Trans>
         </NavMenuLink>
-        <NavMenuLink href="https://chartfox.org/">
+        <NavMenuLink href="https://chartfox.org/" external>
           <Trans>Charts</Trans>
         </NavMenuLink>
-        <NavMenuLink href="https://vacdm.vatprc.net/">
+        <NavMenuLink href="https://vacdm.vatprc.net/" external>
           <Trans>vACDM</Trans>
         </NavMenuLink>
-        <NavMenuLink href="https://metar-taf.com/">
+        <NavMenuLink href="https://metar-taf.com/" external>
           <Trans>Weather</Trans>
         </NavMenuLink>
         <NavMenuLink href="/flights">

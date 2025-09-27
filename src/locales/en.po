@@ -58,19 +58,19 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/routes/flights/$callsign.tsx:193
+#: src/routes/flights/$callsign.tsx:194
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
 
-#: src/routes/flights/$callsign.tsx:184
+#: src/routes/flights/$callsign.tsx:185
 msgid "Add<0>R</0>to equipment code."
 msgstr "Add <0>R</0> to equipment code."
 
-#: src/routes/flights/$callsign.tsx:166
+#: src/routes/flights/$callsign.tsx:167
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/flight-warnings.tsx:42
+#: src/components/flight-warnings.tsx:41
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
@@ -78,11 +78,11 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
-#: src/routes/flights/$callsign.tsx:264
+#: src/routes/flights/$callsign.tsx:265
 msgid "Allowed levels are {level} (in feet)."
 msgstr "Allowed levels are {level} (in feet)."
 
-#: src/routes/events/$id.tsx:90
+#: src/routes/events/$id.tsx:99
 msgid "Already Booked"
 msgstr "Already Booked"
 
@@ -98,11 +98,11 @@ msgstr "API Document"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
-#: src/routes/events/$id.tsx:158
+#: src/routes/events/$id.tsx:167
 msgid "Area"
 msgstr "Area"
 
-#: src/routes/flights/$callsign.tsx:399
+#: src/routes/flights/$callsign.tsx:410
 msgid "Arrival"
 msgstr "Arrival"
 
@@ -115,8 +115,8 @@ msgstr "ATC Center"
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/routes/flights/$callsign.tsx:348
-#: src/routes/events/$id.tsx:118
+#: src/routes/flights/$callsign.tsx:359
+#: src/routes/events/$id.tsx:127
 msgid "Back"
 msgstr "Back"
 
@@ -124,7 +124,7 @@ msgstr "Back"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
-#: src/routes/events/$id.tsx:85
+#: src/routes/events/$id.tsx:94
 msgid "Book"
 msgstr "Book"
 
@@ -133,11 +133,11 @@ msgid "Booking:"
 msgstr "Booking:"
 
 #: src/routes/flights/index.tsx:54
-#: src/routes/flights/$callsign.tsx:370
+#: src/routes/flights/$callsign.tsx:381
 msgid "Callsign"
 msgstr "Callsign"
 
-#: src/routes/events/$id.tsx:164
+#: src/routes/events/$id.tsx:173
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
@@ -145,7 +145,7 @@ msgstr "Callsign & Aircraft"
 msgid "Charts"
 msgstr "Charts"
 
-#: src/routes/flights/$callsign.tsx:71
+#: src/routes/flights/$callsign.tsx:72
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
@@ -153,15 +153,15 @@ msgstr "Check at VATSIM"
 msgid "China RVSM"
 msgstr "China RVSM"
 
-#: src/routes/flights/$callsign.tsx:116
+#: src/routes/flights/$callsign.tsx:117
 msgid "China RVSM even flight level"
 msgstr "China RVSM even flight level"
 
-#: src/routes/flights/$callsign.tsx:118
+#: src/routes/flights/$callsign.tsx:119
 msgid "China RVSM flight level"
 msgstr "China RVSM flight level"
 
-#: src/routes/flights/$callsign.tsx:117
+#: src/routes/flights/$callsign.tsx:118
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
@@ -179,19 +179,19 @@ msgstr "Controller List"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/routes/flights/$callsign.tsx:391
+#: src/routes/flights/$callsign.tsx:402
 msgid "Cruising Level (Feet)"
 msgstr "Cruising Level (Feet)"
 
-#: src/routes/flights/$callsign.tsx:152
+#: src/routes/flights/$callsign.tsx:153
 msgid "Cruising Level Not Allowed"
 msgstr "Cruising Level Not Allowed"
 
-#: src/routes/flights/$callsign.tsx:151
+#: src/routes/flights/$callsign.tsx:152
 msgid "Cruising Level Too Low"
 msgstr "Cruising Level Too Low"
 
-#: src/routes/flights/$callsign.tsx:150
+#: src/routes/flights/$callsign.tsx:151
 msgid "Cruising Level Type Mismatch"
 msgstr "Cruising Level Type Mismatch"
 
@@ -199,35 +199,31 @@ msgstr "Cruising Level Type Mismatch"
 msgid "Dark"
 msgstr "Dark"
 
-#: src/routes/flights/$callsign.tsx:388
+#: src/routes/flights/$callsign.tsx:399
 msgid "Departure"
 msgstr "Departure"
 
-#: src/routes/flights/$callsign.tsx:146
+#: src/routes/flights/$callsign.tsx:147
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/components/discourse-doc.tsx:73
+#: src/components/discourse-doc.tsx:65
 msgid "Edit Chinese"
 msgstr "Edit Chinese"
 
-#: src/components/discourse-doc.tsx:68
+#: src/components/discourse-doc.tsx:60
 msgid "Edit English"
 msgstr "Edit English"
 
-#: src/routes/flights/$callsign.tsx:30
+#: src/routes/flights/$callsign.tsx:31
 msgid "Edit your flight plan on VATSIM."
 msgstr "Edit your flight plan on VATSIM."
 
-#: src/routes/flights/$callsign.tsx:376
+#: src/routes/flights/$callsign.tsx:387
 msgid "Equipment"
 msgstr "Equipment"
 
-#: src/components/discourse-doc.tsx:87
-msgid "Error"
-msgstr "Error"
-
-#: src/routes/flights/$callsign.tsx:119
+#: src/routes/flights/$callsign.tsx:120
 msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
@@ -235,6 +231,10 @@ msgstr "even flight level"
 #: src/routes/__root.tsx:95
 msgid "Event"
 msgstr "Event"
+
+#: src/components/discourse-doc.tsx:115
+msgid "Failed to load document"
+msgstr "Failed to load document"
 
 #: src/routes/docs/$.tsx:40
 msgid "Failed to load document."
@@ -246,16 +246,16 @@ msgstr "Failed to load document."
 msgid "Feedback"
 msgstr "Feedback"
 
-#: src/routes/flights/$callsign.tsx:121
+#: src/routes/flights/$callsign.tsx:122
 msgctxt "feet"
 msgid "flight level"
 msgstr "flight level"
 
-#: src/components/flight-warnings.tsx:133
+#: src/components/flight-warnings.tsx:132
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "Flight looks good. Please confirm with the clearance delivery controller."
 
-#: src/routes/flights/$callsign.tsx:367
+#: src/routes/flights/$callsign.tsx:378
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
@@ -268,7 +268,7 @@ msgstr "Flight plan checker"
 msgid "Flight Plan Checker"
 msgstr "Flight Plan Checker"
 
-#: src/routes/flights/$callsign.tsx:430
+#: src/routes/flights/$callsign.tsx:441
 msgid "Flight Route"
 msgstr "Flight Route"
 
@@ -277,11 +277,7 @@ msgstr "Flight Route"
 msgid "Forum"
 msgstr "Forum"
 
-#: src/routes/flights/$callsign.tsx:435
-msgid "From"
-msgstr "From"
-
-#: src/components/recent-events.tsx:78
+#: src/components/recent-events.tsx:77
 msgid "In This Week"
 msgstr "In This Week"
 
@@ -293,15 +289,15 @@ msgstr "Introduction"
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
-#: src/routes/flights/$callsign.tsx:98
+#: src/routes/flights/$callsign.tsx:99
 msgid "Learn more"
 msgstr "Learn more"
 
-#: src/routes/flights/$callsign.tsx:109
+#: src/routes/flights/$callsign.tsx:110
 msgid "Learn more about China RVSM"
 msgstr "Learn more about China RVSM"
 
-#: src/routes/flights/$callsign.tsx:147
+#: src/routes/flights/$callsign.tsx:148
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
 
@@ -334,7 +330,7 @@ msgstr "Logo Pack"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/routes/flights/$callsign.tsx:153
+#: src/routes/flights/$callsign.tsx:154
 msgid "Match designated route"
 msgstr "Match designated route"
 
@@ -351,7 +347,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "New"
 
-#: src/components/recent-events.tsx:226
+#: src/components/recent-events.tsx:225
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
@@ -359,27 +355,27 @@ msgstr "No event is scheduled recently."
 msgid "No online pilot."
 msgstr "No online pilot."
 
-#: src/routes/flights/$callsign.tsx:142
+#: src/routes/flights/$callsign.tsx:143
 msgid "No RNAV1"
 msgstr "No RNAV1"
 
-#: src/routes/flights/$callsign.tsx:141
+#: src/routes/flights/$callsign.tsx:142
 msgid "No RVSM"
 msgstr "No RVSM"
 
-#: src/routes/flights/$callsign.tsx:145
+#: src/routes/flights/$callsign.tsx:146
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/routes/events/$id.tsx:78
+#: src/routes/events/$id.tsx:83
 msgid "Not designated"
 msgstr "Not designated"
 
-#: src/routes/flights/$callsign.tsx:149
+#: src/routes/flights/$callsign.tsx:150
 msgid "Not designated route"
 msgstr "Not designated route"
 
-#: src/routes/flights/$callsign.tsx:120
+#: src/routes/flights/$callsign.tsx:121
 msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
@@ -400,17 +396,17 @@ msgstr "Operation"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/routes/flights/$callsign.tsx:403
+#: src/routes/flights/$callsign.tsx:414
 msgid "PBN"
 msgstr "PBN"
 
-#: src/routes/flights/$callsign.tsx:403
+#: src/routes/flights/$callsign.tsx:414
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
 
-#: src/routes/flights/$callsign.tsx:241
-#: src/routes/flights/$callsign.tsx:254
-#: src/routes/flights/$callsign.tsx:268
+#: src/routes/flights/$callsign.tsx:242
+#: src/routes/flights/$callsign.tsx:255
+#: src/routes/flights/$callsign.tsx:269
 msgid "Pick a suitable cruising level."
 msgstr "Pick a suitable cruising level."
 
@@ -426,19 +422,19 @@ msgstr "Pilot Softwares"
 msgid "Pilots"
 msgstr "Pilots"
 
-#: src/components/flight-warnings.tsx:95
+#: src/components/flight-warnings.tsx:94
 msgid "Planned route matches a designated route:<0>{route}</0>"
 msgstr "Planned route matches a designated route:<0>{route}</0>"
 
-#: src/components/flight-warnings.tsx:81
+#: src/components/flight-warnings.tsx:80
 msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
 msgstr "Please choose a designated route from the following list, or contact ATC for assistance:"
 
-#: src/components/flight-warnings.tsx:83
+#: src/components/flight-warnings.tsx:82
 msgid "Please contact ATC for help adjusting the route."
 msgstr "Please contact ATC for help adjusting the route."
 
-#: src/routes/events/$id.tsx:142
+#: src/routes/events/$id.tsx:151
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
@@ -458,31 +454,31 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/routes/events/$id.tsx:96
+#: src/routes/events/$id.tsx:105
 msgid "Release"
 msgstr "Release"
 
-#: src/routes/flights/$callsign.tsx:148
+#: src/routes/flights/$callsign.tsx:149
 msgid "Restricted airway"
 msgstr "Restricted airway"
 
-#: src/components/flight-warnings.tsx:56
+#: src/components/flight-warnings.tsx:55
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 msgstr "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 
-#: src/routes/flights/$callsign.tsx:143
+#: src/routes/flights/$callsign.tsx:144
 msgid "RNP AR"
 msgstr "RNP AR"
 
-#: src/routes/flights/$callsign.tsx:144
+#: src/routes/flights/$callsign.tsx:145
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/flights/$callsign.tsx:395
+#: src/routes/flights/$callsign.tsx:406
 msgid "Route"
 msgstr "Route"
 
-#: src/components/flight-warnings.tsx:45
+#: src/components/flight-warnings.tsx:44
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 
@@ -502,7 +498,7 @@ msgstr "Show all pilots"
 msgid "Show less pilots"
 msgstr "Show less pilots"
 
-#: src/routes/events/$id.tsx:136
+#: src/routes/events/$id.tsx:145
 msgid "Slots"
 msgstr "Slots"
 
@@ -531,58 +527,58 @@ msgstr "Switch to English"
 msgid "System"
 msgstr "System"
 
-#: src/routes/flights/$callsign.tsx:178
-#: src/components/flight-warnings.tsx:11
+#: src/routes/flights/$callsign.tsx:179
+#: src/components/flight-warnings.tsx:10
 msgid "The aircraft does not specify RNAV1 capability."
 msgstr "The aircraft does not specify RNAV1 capability."
 
-#: src/routes/flights/$callsign.tsx:162
-#: src/components/flight-warnings.tsx:10
+#: src/routes/flights/$callsign.tsx:163
+#: src/components/flight-warnings.tsx:9
 msgid "The aircraft does not specify RVSM capability."
 msgstr "The aircraft does not specify RVSM capability."
 
-#: src/components/flight-warnings.tsx:24
+#: src/components/flight-warnings.tsx:23
 msgid "The aircraft does not specify transponder capability."
 msgstr "The aircraft does not specify transponder capability."
 
-#: src/components/flight-warnings.tsx:13
+#: src/components/flight-warnings.tsx:12
 msgid "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 
-#: src/components/flight-warnings.tsx:19
+#: src/components/flight-warnings.tsx:18
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 
-#: src/routes/events/$id.tsx:150
+#: src/routes/events/$id.tsx:159
 msgid "The booking has not started yet or has ended."
 msgstr "The booking has not started yet or has ended."
 
-#: src/routes/flights/$callsign.tsx:261
-#: src/components/flight-warnings.tsx:31
+#: src/routes/flights/$callsign.tsx:262
+#: src/components/flight-warnings.tsx:30
 msgid "The cruising level is not allowed for the route."
 msgstr "The cruising level is not allowed for the route."
 
-#: src/routes/flights/$callsign.tsx:250
+#: src/routes/flights/$callsign.tsx:251
 msgid "The cruising level is too low for route. The minimum is {level} feet."
 msgstr "The cruising level is too low for route. The minimum is {level} feet."
 
-#: src/components/flight-warnings.tsx:30
+#: src/components/flight-warnings.tsx:29
 msgid "The cruising level is too low for the route."
 msgstr "The cruising level is too low for the route."
 
-#: src/components/flight-warnings.tsx:29
+#: src/components/flight-warnings.tsx:28
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "The cruising level type does not meet the requirement of the route."
 
-#: src/routes/flights/$callsign.tsx:230
+#: src/routes/flights/$callsign.tsx:231
 msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 msgstr "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 
-#: src/routes/flights/$callsign.tsx:234
+#: src/routes/flights/$callsign.tsx:235
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/flight-warnings.tsx:28
+#: src/components/flight-warnings.tsx:27
 msgid "The flight plan does not match the designated route for this flight."
 msgstr "The flight plan does not match the designated route for this flight."
 
@@ -590,23 +586,23 @@ msgstr "The flight plan does not match the designated route for this flight."
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 
-#: src/components/flight-warnings.tsx:32
+#: src/components/flight-warnings.tsx:31
 msgid "The planned route matches designated route."
 msgstr "The planned route matches designated route."
 
-#: src/components/flight-warnings.tsx:25
+#: src/components/flight-warnings.tsx:24
 msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
 msgstr "The route contains a direct leg. Please ensure that the direct segment is valid."
 
-#: src/components/flight-warnings.tsx:26
+#: src/components/flight-warnings.tsx:25
 msgid "The route contains a leg with an invalid direction."
 msgstr "The route contains a leg with an invalid direction."
 
-#: src/components/flight-warnings.tsx:27
+#: src/components/flight-warnings.tsx:26
 msgid "The route contains an airway that requires controller approval."
 msgstr "The route contains an airway that requires controller approval."
 
-#: src/components/flight-warnings.tsx:74
+#: src/components/flight-warnings.tsx:73
 msgid "The submitted route is:<0>{route}</0>"
 msgstr "The submitted route is: <0>{route}</0>"
 
@@ -618,7 +614,7 @@ msgstr "There is currently no online ATC."
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
 
-#: src/routes/events/$id.tsx:161
+#: src/routes/events/$id.tsx:170
 msgid "Time"
 msgstr "Time"
 
@@ -626,20 +622,16 @@ msgstr "Time"
 msgid "Time:"
 msgstr "Time:"
 
-#: src/routes/flights/$callsign.tsx:441
-msgid "To"
-msgstr "To"
-
 #: src/components/theme-toggle.tsx:18
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
-#: src/routes/flights/$callsign.tsx:382
+#: src/routes/flights/$callsign.tsx:393
 msgid "Transponder"
 msgstr "Transponder"
 
-#: src/routes/flights/$callsign.tsx:211
-#: src/components/flight-warnings.tsx:65
+#: src/routes/flights/$callsign.tsx:212
+#: src/components/flight-warnings.tsx:64
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
 
@@ -651,7 +643,7 @@ msgstr "until"
 msgid "vACDM"
 msgstr "vACDM"
 
-#: src/routes/flights/$callsign.tsx:426
+#: src/routes/flights/$callsign.tsx:437
 msgid "Validation Result"
 msgstr "Validation Result"
 
@@ -668,10 +660,6 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/routes/flights/$callsign.tsx:438
-msgid "Via"
-msgstr "Via"
-
 #: src/routes/__root.tsx:174
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
@@ -680,6 +668,6 @@ msgstr "Visiting & Transfer"
 msgid "Weather"
 msgstr "Weather"
 
-#: src/routes/flights/$callsign.tsx:215
+#: src/routes/flights/$callsign.tsx:216
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."

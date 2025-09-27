@@ -1,4 +1,4 @@
-import { DiscourseDocument } from "@/components/discourse-doc";
+import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/discourse-doc";
 import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
@@ -9,18 +9,18 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/airspace/sop")({
   component: Page,
-  loader() {
-    return getAllDocuments();
+  async loader() {
+    return [await getAllDocuments(), await getDiscourseDocumentCode("7532")] as const;
   },
   head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Standard Operation Procedures`) }] }),
 });
 
 function Page() {
   const locale = useLocale();
-  const documents = Route.useLoaderData();
+  const [documents, docCode] = Route.useLoaderData();
 
   return (
-    <>
+    <div className="container mx-auto">
       {locale === "en" && (
         <Alert variant="destructive">
           <AlertTitle>
@@ -43,7 +43,7 @@ function Page() {
       <h1 className="my-4 text-center text-3xl font-bold">
         <Trans>Other SOPs</Trans>
       </h1>
-      <DiscourseDocument en="7532" />
-    </>
+      <DiscourseDocument code={docCode} cn="7532" en="7532" />
+    </div>
   );
 }
