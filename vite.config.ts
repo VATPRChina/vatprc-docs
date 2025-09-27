@@ -1,7 +1,6 @@
 import { lingui } from "@lingui/vite-plugin";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
@@ -10,14 +9,14 @@ export default defineConfig({
     tsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
-    tanstackStart(),
-    viteReact({
-      babel: {
-        plugins: ["@lingui/babel-plugin-lingui-macro"],
+    tanstackStart({
+      react: {
+        babel: {
+          plugins: ["@lingui/babel-plugin-lingui-macro"],
+        },
       },
     }),
     lingui(),
-    // @ts-expect-error Sentry is not upgraded to Vite 7
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",
