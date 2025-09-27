@@ -7,7 +7,7 @@ import { usePermission } from "@/lib/client";
 import { getLocale, useLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { RouteOptions } from "@tanstack/react-router";
+import { createFileRoute, FileRoutesByPath } from "@tanstack/react-router";
 import React from "react";
 import { TbAlertCircle } from "react-icons/tb";
 
@@ -102,9 +102,13 @@ export const DiscourseDocument: React.FC<{
   );
 };
 
-export const getDiscourseDocumentMeta =
-  (cn: string, en: string): RouteOptions["head"] =>
-  async (ctx) => {
+export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPath>(
+  path: TFilePath,
+  cn: string,
+  en: string,
+): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
+  component: () => <DiscourseDocument cn={cn} en={en} />,
+  head: async (ctx) => {
     const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
@@ -117,4 +121,5 @@ export const getDiscourseDocumentMeta =
     } catch {
       return {};
     }
-  };
+  },
+});

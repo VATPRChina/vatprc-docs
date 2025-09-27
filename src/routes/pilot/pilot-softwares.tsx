@@ -1,7 +1,6 @@
-import { DiscourseDocument, getDiscourseDocumentMeta } from "@/components/discourse-doc";
+import { createDiscourseFileRoute } from "@/components/discourse-doc";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/pilot/pilot-softwares")({
-  component: () => <DiscourseDocument cn="9143" en="9143" />,
-  head: getDiscourseDocumentMeta("9143", "9143"),
-});
+export const Route = createFileRoute("/pilot/pilot-softwares")(
+  createDiscourseFileRoute("/pilot/pilot-softwares", "9143", "9143"),
+);
