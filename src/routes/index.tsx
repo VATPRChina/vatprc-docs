@@ -7,8 +7,7 @@ import { OnlinePilots } from "@/components/online-pilots";
 import { RecentEvents } from "@/components/recent-events";
 import { Button } from "@/components/ui/button";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { createFileRoute, useRouterState } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
 export const Route = createFileRoute("/")({
@@ -19,7 +18,7 @@ const IndexWithLocale: React.FC = () => {
   const { t } = useLingui();
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="container mx-auto flex flex-col items-center">
       <div className="xl:max-w-80vw 2xl:max-w-65vw 3xl:max-w-45vw w-full">
         <section className="px flex w-full flex-row items-center justify-center py-12 text-center">
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -139,52 +138,6 @@ const IndexWithLocale: React.FC = () => {
   );
 };
 
-const IndexWithoutLocale: React.FC = () => {
-  useEffect(() => {
-    if (localStorage.getItem("vatprc-homepage-locale")) {
-      window.location.replace(`/${localStorage.getItem("vatprc-homepage-locale")}`);
-      return;
-    }
-    let useChinese = false;
-    if (navigator.language.toLowerCase().startsWith("zh")) {
-      useChinese = true;
-    }
-    for (const language of navigator.languages) {
-      if (language.toLowerCase().startsWith("en")) {
-        break;
-      } else if (language.toLowerCase().startsWith("zh")) {
-        useChinese = true;
-        break;
-      }
-    }
-    if (useChinese) {
-      window.location.replace("/zh-cn");
-    } else {
-      window.location.replace("/en");
-    }
-  });
-
-  return (
-    <div className="grid h-screen place-items-center">
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-3xl">Redirecting to landing page.</p>
-        <p className="text-3xl">正在重定向到首页。</p>
-        <p className="flex flex-row gap-8 text-xl text-slate-700 underline">
-          <a href="/zh-cn">简体中文</a>
-          <a href="/en">English</a>
-        </p>
-      </div>
-    </div>
-  );
-};
-
 function RouteComponent() {
-  const {
-    location: { pathname },
-  } = useRouterState();
-
-  if (pathname.startsWith("/en") || pathname.startsWith("/zh-cn")) {
-    return <IndexWithLocale />;
-  }
-  return <IndexWithoutLocale />;
+  return <IndexWithLocale />;
 }

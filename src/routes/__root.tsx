@@ -21,6 +21,7 @@ import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import { createRootRouteWithContext, HeadContent, Link, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { TbExternalLink } from "react-icons/tb";
 
 interface NavigationMenuLinkProps {
@@ -265,6 +266,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "alternate", hrefLang: "en", href: getLocalPathname(pathname, "en") },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname(pathname, "zh-cn") },
+        { rel: "alternate", hrefLang: "x-default", href: getLocalPathname(pathname, "") },
       ],
     };
   },
@@ -272,6 +274,17 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootLayout() {
   const route = useRouterState();
+
+  useEffect(() => {
+    if (route.location.pathname.startsWith("/en") || route.location.pathname.startsWith("/zh-cn")) {
+      return;
+    }
+
+    const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
+    if (locale) {
+      setTimeout(() => window.location.replace(getLocalPathname(route.location.pathname, locale)));
+    }
+  });
 
   return (
     <html lang={useLocale() ?? "en"} className={cn(route.location.pathname !== "/division/api" && "scroll-pt-16")}>
