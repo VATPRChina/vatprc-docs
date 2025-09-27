@@ -11,7 +11,8 @@ import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { TbArrowLeft, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
+import { FC, Fragment } from "react";
+import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
@@ -278,45 +279,54 @@ interface WarningProps {
   field_index?: number;
   warnings?: components["schemas"]["WarningMessage"][];
   flight: components["schemas"]["FlightDto"];
+  popoverText?: boolean;
 }
-const Warning = ({
+const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
   field,
   field_index,
   warnings,
   flight,
+  popoverText,
   ...props
-}: WarningProps & React.ComponentProps<typeof Popover>) => {
+}) => {
   if (!warnings) return null;
 
   const localWarnings = warnings.filter((w) => w.field === field && w.field_index === (field_index ?? null));
 
+  if (localWarnings.length === 0) return null;
+
   return (
     <div className="flex items-center gap-2">
       {localWarnings.map((warning) => {
+        const message = WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code;
         const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
 
         const button = (
           <Button
             variant="ghost"
-            size="sm"
+            size={popoverText ? "mini" : "sm"}
             className={cn(
               (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
                 "text-destructive hover:text-destructive",
               content && "underline",
+              popoverText && "-ml-2",
             )}
             key={warning.message_code}
           >
             <TbInfoCircleFilled />
-            {WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code}
+            {!popoverText && message}
           </Button>
         );
 
-        if (!content) return button;
+        if (!content && !popoverText) return button;
 
         return (
           <Popover {...props} key={warning.message_code}>
             <PopoverTrigger asChild>{button}</PopoverTrigger>
-            <PopoverContent className="w-max">{content}</PopoverContent>
+            <PopoverContent className="w-max">
+              {popoverText && message}
+              {content}
+            </PopoverContent>
           </Popover>
         );
       })}
@@ -324,6 +334,7 @@ const Warning = ({
   );
 };
 
+const LEG_IDENTIFIER_DIRECT = "DCT";
 function RouteComponent() {
   const { callsign } = Route.useParams();
 
@@ -429,28 +440,22 @@ function RouteComponent() {
           <h2 className="text-2xl">
             <Trans>Flight Route</Trans>
           </h2>
-          <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-1">
-            <div className="contents">
-              <span className="text-muted-foreground col-1 text-right font-light">
-                <Trans>From</Trans>
-              </span>
-              <span className="text-muted-foreground col-2 text-center font-light">
-                <Trans>Via</Trans>
-              </span>
-              <span className="text-muted-foreground col-3 text-left font-light">
-                <Trans>To</Trans>
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-lg">{route?.[0].from.identifier}</span>
             {route &&
               route.map((r, i) => (
-                <div key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`} className="contents">
-                  <span className="col-1 text-right font-mono">{r.from.identifier}</span>
-                  <span className="col-2 text-center font-mono">{r.leg_identifier}</span>
-                  <span className="col-3 text-left font-mono">{r.to.identifier}</span>
-                  <div className="text-destructive min-h-8 self-baseline text-sm">
-                    <Warning flight={flight} warnings={warnings} field="route" field_index={i} />
-                  </div>
-                </div>
+                <Fragment key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`}>
+                  {r.leg_identifier !== LEG_IDENTIFIER_DIRECT && (
+                    <span className="font-light text-slate-700 dark:text-slate-300">{r.leg_identifier}</span>
+                  )}
+                  {r.leg_identifier === LEG_IDENTIFIER_DIRECT && (
+                    <span className="font-light text-slate-700 dark:text-slate-300">
+                      <TbArrowRight />
+                    </span>
+                  )}
+                  <Warning flight={flight} warnings={warnings} field="route" field_index={i} popoverText />
+                  <span className="text-lg">{r.to.identifier}</span>
+                </Fragment>
               ))}
           </div>
         </div>

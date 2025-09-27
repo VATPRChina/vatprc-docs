@@ -150,7 +150,7 @@ const contents = [
         </NavMenuLink>
         <NavMenuLink href="/flights">
           <Trans>Flight plan checker</Trans>
-          <Badge className="ml-2 rounded-full" variant="destructive">
+          <Badge className="ml-2 rounded-full bg-red-100 dark:bg-red-900" variant="secondary">
             <Trans context="new feature">New</Trans>
           </Badge>
         </NavMenuLink>

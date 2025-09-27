@@ -81,8 +81,8 @@ const descriptions: Record<
           ) : (
             <Trans>Please contact ATC for help adjusting the route.</Trans>
           )}
-          <ol className="list-decimal font-mono">{routes?.map((route, index) => <li key={index}>{route}</li>)}</ol>
         </p>
+        <ol className="list-decimal font-mono">{routes?.map((route, index) => <li key={index}>{route}</li>)}</ol>
       </>
     );
   },
