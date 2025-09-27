@@ -23,9 +23,8 @@ import {
   startOfMonth,
   sub,
 } from "date-fns";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import React from "react";
-import { TbLoader } from "react-icons/tb";
+import { TbChevronLeft, TbChevronRight, TbLoader } from "react-icons/tb";
 
 const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
@@ -159,10 +158,10 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
           <h4 className="text-3xl">{intlFormat(refDate, { year: "numeric", month: "long" }, { locale })}</h4>
           <div>
             <Button variant="ghost" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
-              <ChevronLeftIcon />
+              <TbChevronLeft />
             </Button>
             <Button variant="ghost" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
-              <ChevronRightIcon />
+              <TbChevronRight />
             </Button>
           </div>
         </div>

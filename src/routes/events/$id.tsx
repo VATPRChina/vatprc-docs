@@ -9,9 +9,8 @@ import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { isFuture, isPast } from "date-fns";
-import { Loader2Icon, UserLock } from "lucide-react";
 import type { FC } from "react";
-import { TbArrowLeft } from "react-icons/tb";
+import { TbArrowLeft, TbLoader2, TbLockAccess } from "react-icons/tb";
 
 export const Route = createFileRoute("/events/$id")({
   component: RouteComponent,
@@ -91,7 +90,7 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
             disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
             onClick={onBook}
           >
-            {isBookPending && <Loader2Icon className="animate-spin" />}
+            {isBookPending && <TbLoader2 className="animate-spin" />}
             <Trans>Book</Trans>
           </Button>
         )}
@@ -102,7 +101,7 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
         )}
         {isBookedByCurrentUser && (
           <Button variant="outline" onClick={onRelease} disabled={isReleasePending}>
-            {isReleasePending && <Loader2Icon className="animate-spin" />}
+            {isReleasePending && <TbLoader2 className="animate-spin" />}
             <Trans>Release</Trans>
           </Button>
         )}
@@ -147,7 +146,7 @@ function RouteComponent() {
         </h2>
         {!session && (
           <Alert>
-            <UserLock />
+            <TbLockAccess />
             <AlertTitle>
               <Trans>Please login to book a slot.</Trans>
             </AlertTitle>
@@ -155,7 +154,7 @@ function RouteComponent() {
         )}
         {!isInBookingPeriod && (
           <Alert>
-            <UserLock />
+            <TbLockAccess />
             <AlertTitle>
               <Trans>The booking has not started yet or has ended.</Trans>
             </AlertTitle>
