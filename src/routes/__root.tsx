@@ -223,9 +223,9 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
   }
 
   return (
-    <div className="container mx-auto">
+    <>
       <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
-        <div className="flex flex-col items-center gap-4 md:flex-row">
+        <div className="container mx-auto flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
             <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
           </Link>
@@ -238,7 +238,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
         </div>
       </header>
       <div className="pt-4">{children}</div>
-      <footer className="mt-8 mb-4">
+      <footer className="container mx-auto mt-8 mb-4">
         <p className="text-slate-500 dark:text-slate-300">
           <Trans>
             &copy; 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
@@ -246,7 +246,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           </Trans>
         </p>
       </footer>
-    </div>
+    </>
   );
 };
 

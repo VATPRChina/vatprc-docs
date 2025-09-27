@@ -3,7 +3,7 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ChangeEventHandler, useState } from "react";
 import * as React from "react";
 
@@ -58,6 +58,7 @@ function RouteComponent() {
         {flights
           ?.filter((f) => f.callsign.includes(filter) || f.cid.includes(filter))
           ?.map((flight) => <Flight flight={flight} key={flight.callsign} />)}
+        <Outlet />
       </div>
     </div>
   );
