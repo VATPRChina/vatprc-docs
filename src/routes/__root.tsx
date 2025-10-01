@@ -280,6 +280,10 @@ function RootLayout() {
       return;
     }
 
+    if (route.location.pathname.includes("/auth/callback")) {
+      return;
+    }
+
     const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
     if (locale) {
       setTimeout(() => window.location.replace(getLocalPathname(route.location.pathname, locale)));
