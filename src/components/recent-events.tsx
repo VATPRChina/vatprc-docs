@@ -28,10 +28,7 @@ import { TbChevronLeft, TbChevronRight, TbLoader } from "react-icons/tb";
 
 const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
-const VATSIM_EVENT_ENDPOINT =
-  process.env.NODE_ENV === "development"
-    ? "/uniapi/api/compat/homepage/events/vatsim"
-    : "https://cors-proxy.vatprc.net/?target=" + encodeURIComponent("https://my.vatsim.net/api/v2/events/latest");
+const VATSIM_EVENT_ENDPOINT = "/uniapi/api/compat/homepage/events/vatsim";
 
 const isChinaAirport = (ident: string) =>
   ident[0] == "Z" &&
