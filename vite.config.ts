@@ -1,6 +1,8 @@
 import { lingui } from "@lingui/vite-plugin";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
@@ -9,11 +11,11 @@ export default defineConfig({
     tsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
-    tanstackStart({
-      react: {
-        babel: {
-          plugins: ["@lingui/babel-plugin-lingui-macro"],
-        },
+    tanstackStart(),
+    !process.env.VITEST && nitroV2Plugin({ preset: "node-server" }),
+    viteReact({
+      babel: {
+        plugins: ["@lingui/babel-plugin-lingui-macro"],
       },
     }),
     lingui(),

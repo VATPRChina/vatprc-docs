@@ -1,4 +1,4 @@
-import { createServerFn, serverOnly } from "@tanstack/react-start";
+import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -11,7 +11,7 @@ export interface DocumentEntry {
   order?: number;
 }
 
-const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
+const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
   const { buildMarkdownDoc } = await import("@/components/markdown-doc-build");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
@@ -83,7 +83,7 @@ const findAllDocuments = serverOnly(async (prefix: string = "docs"): Promise<Doc
 export const getAllDocuments = createServerFn().handler(async () => findAllDocuments());
 
 export const getDocument = createServerFn()
-  .validator((data: string) => data)
+  .inputValidator((data: string) => data)
   .handler(async (ctx) => {
     const filePath = `docs/${ctx.data}`;
     const content = await fs.readFile(filePath, "utf-8");

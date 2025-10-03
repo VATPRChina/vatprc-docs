@@ -1,6 +1,7 @@
-import { useRouterState } from "@tanstack/react-router";
+import { getPathname } from "./utils";
 
-export const getLocale = (pathname: string): "en" | "zh-cn" => {
+export const getLocale = (): "en" | "zh-cn" => {
+  const pathname = getPathname();
   if (pathname.startsWith("/en")) {
     return "en";
   }
@@ -16,20 +17,16 @@ export const getLocale = (pathname: string): "en" | "zh-cn" => {
   return "zh-cn";
 };
 
-export const useLocale = (): "en" | "zh-cn" => {
-  const path = useRouterState().location.pathname;
-  return getLocale(path);
-};
-
-export const getLocalPathname = (pathname: string, locale: "en" | "zh-cn" | "") => {
+export const getLocalPathname = (locale: "en" | "zh-cn" | "", path?: string) => {
+  const pathname = path ?? getPathname();
   let normalized = pathname;
   if (pathname.startsWith("/en")) {
     normalized = pathname.slice("/en".length);
   } else if (pathname.startsWith("/zh-cn")) {
     normalized = pathname.slice("/zh-cn".length);
   }
-  if (normalized === "/" && locale === "") {
-    return "/";
+  if (locale === "") {
+    return normalized;
   }
   return `/${locale}${normalized}`;
 };

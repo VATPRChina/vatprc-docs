@@ -8,9 +8,7 @@ import { I18nProvider } from "@lingui/react";
 import * as Sentry from "@sentry/react";
 import { wrapCreateRootRouteWithSentry } from "@sentry/tanstackstart-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import { serverOnly } from "@tanstack/react-start";
-import { getRequestURL } from "@tanstack/react-start/server";
+import { createRouter } from "@tanstack/react-router";
 
 Sentry.init({
   dsn: "https://70174050ab722ce431b6906686263907@o131360.ingest.us.sentry.io/4509490348294144",
@@ -19,23 +17,20 @@ Sentry.init({
 
 const getRouterBasepath = (pathname: string) => {
   if (pathname.startsWith("/en")) {
-    return "/en";
+    return "/en/";
   }
   if (pathname.startsWith("/zh-cn")) {
-    return "/zh-cn";
+    return "/zh-cn/";
   }
   return "/";
 };
 
-const getServerPathname = serverOnly(() => getRequestURL().pathname);
-
-export function createRouter() {
+export function getRouter() {
   const i18n = setupI18n();
   i18n.load("en", en);
   i18n.load("zh-cn", zh);
 
-  const pathname = typeof window !== "undefined" ? window.location.pathname : getServerPathname();
-  i18n.activate(getLocale(pathname));
+  i18n.activate(getLocale());
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -48,11 +43,20 @@ export function createRouter() {
   });
 
   const router = wrapCreateRootRouteWithSentry(
-    createTanStackRouter({
+    createRouter({
       routeTree,
       scrollRestoration: true,
       defaultNotFoundComponent: () => <div>Not Found</div>,
-      basepath: getRouterBasepath(getPathname()),
+      rewrite: {
+        input: ({ url }) => {
+          url.pathname = url.pathname.replace(getRouterBasepath(url.pathname), "/");
+          return url;
+        },
+        output: ({ url }) => {
+          url.pathname = url.pathname.replace("/", getRouterBasepath(getPathname()));
+          return url;
+        },
+      },
       context: {
         i18n,
         queryClient,
@@ -68,10 +72,4 @@ export function createRouter() {
   );
 
   return router;
-}
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: ReturnType<typeof createRouter>;
-  }
 }

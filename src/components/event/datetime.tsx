@@ -1,5 +1,5 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useLocale } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { format, intlFormatDistance } from "date-fns";
 
@@ -12,7 +12,7 @@ export const DateTime = ({
   noDistance?: boolean;
   noDate?: boolean;
 }) => {
-  const locale = useLocale();
+  const locale = getLocale();
   if (!children) return null;
 
   const time = typeof children === "string" ? new Date(children) : children;
