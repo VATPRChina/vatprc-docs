@@ -2,7 +2,7 @@ import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/discou
 import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
-import { useLocale } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/controller/loa")({
 });
 
 function Page() {
-  const locale = useLocale();
+  const locale = getLocale();
   const [documents, docCode] = Route.useLoaderData();
 
   return (

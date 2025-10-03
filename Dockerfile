@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:lts-slim AS base
+FROM --platform=$BUILDPLATFORM node:slim AS base
 
 RUN apt update && \
   apt install -y ca-certificates
@@ -22,9 +22,9 @@ RUN npm install -g pnpm
 ENV SENTRY_RELEASE=${VERSION}
 RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN \
   pnpm build
-RUN find /app/.output/public/assets -type f -name '*.map' -exec rm -vf {} +
+RUN find /app/dist/client/assets -type f -name '*.map' -exec rm -vf {} +
 
-FROM node:lts-slim AS runner
+FROM node:slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

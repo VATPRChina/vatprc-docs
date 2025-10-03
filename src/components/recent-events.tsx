@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { useLocale } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
@@ -53,7 +53,7 @@ const Event: React.FC<{
   url: string;
   isExam: boolean;
 }> = ({ title, start, end, url, isExam }) => {
-  const locale = useLocale();
+  const locale = getLocale();
 
   return (
     <a
@@ -107,7 +107,7 @@ const Event: React.FC<{
 };
 
 export const RecentEvents: React.FC<{ className?: string }> = ({ className }) => {
-  const locale = useLocale();
+  const locale = getLocale();
   const { data: cnData, isLoading: isCnLoading } = useQuery({
     queryKey: [COMMUNITY_EVENT_ENDPOINT],
     queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<CommunityEventData>),

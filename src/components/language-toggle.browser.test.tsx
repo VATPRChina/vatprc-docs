@@ -1,5 +1,5 @@
+import { getLocale } from "../lib/i18n";
 import { LanguageToggle } from "./language-toggle";
-import { useLocale } from "@/lib/i18n";
 import { useRouterState } from "@tanstack/react-router";
 import { page } from "@vitest/browser/context";
 import { describe, expect, it, vi, Mock } from "vitest";
@@ -18,21 +18,21 @@ vi.mock("@/lib/i18n/runtime", async () => {
 describe("LanguageToggle", () => {
   it("renders the button in English", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
-    (useLocale as Mock).mockReturnValue("en");
+    (getLocale as Mock).mockReturnValue("en");
     render(<LanguageToggle />);
     await expect.element(page.getByLabelText("Switch to Chinese")).toBeInTheDocument();
   });
 
   it("renders the button in Chinese", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
-    (useLocale as Mock).mockReturnValue("zh-cn");
+    (getLocale as Mock).mockReturnValue("zh-cn");
     render(<LanguageToggle />);
     await expect.element(page.getByLabelText("Switch to English")).toBeInTheDocument();
   });
 
   it.todo("redirect to Chinese in English", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
-    (useLocale as Mock).mockReturnValue("en");
+    (getLocale as Mock).mockReturnValue("en");
     render(<LanguageToggle />);
     await page.getByLabelText("Switch to Chinese").click();
     // TODO: find a way to mock window.location.assign
@@ -41,7 +41,7 @@ describe("LanguageToggle", () => {
 
   it.todo("redirect to English in Chinese", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
-    (useLocale as Mock).mockReturnValue("zh-cn");
+    (getLocale as Mock).mockReturnValue("zh-cn");
     render(<LanguageToggle />);
     await page.getByLabelText("Switch to English").click();
     expect(window.localStorage.getItem("vatprc-homepage-locale")).toBe("en");
