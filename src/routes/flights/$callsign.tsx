@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
+import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -80,7 +80,7 @@ const FplField = ({
 };
 
 const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
-  const locale = getLocale();
+  const locale = useLocale();
   const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${locale == "en" ? 9700 : 9695}`;
   return (
     <>

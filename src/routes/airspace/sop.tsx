@@ -2,7 +2,7 @@ import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/discou
 import { DocList } from "@/components/doc-list";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
-import { getLocale } from "@/lib/i18n";
+import { useLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/airspace/sop")({
 });
 
 function Page() {
-  const locale = getLocale();
+  const locale = useLocale();
   const [documents, docCode] = Route.useLoaderData();
 
   return (

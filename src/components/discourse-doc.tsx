@@ -88,8 +88,8 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
     const code: string = useLoaderData({ strict: false });
     return <DiscourseDocument code={code} en={en} cn={cn} />;
   },
-  async head() {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  async head(ctx) {
+    const postId = getLocale(ctx.match.pathname) === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
         if (!res.ok) {
@@ -102,8 +102,8 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
       return {};
     }
   },
-  async loader() {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  async loader(ctx) {
+    const postId = getLocale(ctx.location.pathname) === "zh-cn" ? (cn ?? en) : en;
     return await getDiscourseDocumentCode(postId);
   },
   pendingMs: 100,
