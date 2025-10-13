@@ -47,7 +47,7 @@ export const MarkdownDoc: React.FC<{
   return (
     <div className="flex flex-col md:flex-row">
       <div className="px-4 py-6 md:flex-2/3 md:px-12">
-        <article className="prose dark:prose-invert prose-p:my-2 mx-auto">{children}</article>
+        <article className="prose dark:prose-invert vatprc-prose mx-auto">{children}</article>
       </div>
       <div className="prose dark:prose-invert prose-ul:my-0 prose-li:my-0 z-10 md:sticky md:top-24 md:max-h-dvh md:flex-1/3 md:overflow-y-scroll">
         <TableOfContents tableOfContents={toc} maxDepth={3} />

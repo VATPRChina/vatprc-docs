@@ -135,3 +135,11 @@
 .nav-list-grid .item {
   @apply hover:bg-secondary rounded-sm px-3 py-2 text-sm;
 }
+
+.vatprc-prose {
+  @apply prose-p:my-2;
+  @apply prose-code:bg-gray-200 dark:prose-code:bg-gray-800;
+  @apply prose-code:font-normal;
+  @apply prose-code:p-0.5;
+  @apply prose-code:before:content-none prose-code:after:content-none;
+}
