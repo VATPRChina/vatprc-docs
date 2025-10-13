@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# vatprc-docs
 
-## Getting Started
+This is the code for VATPRC's Homepage.
 
-First, run the development server:
+## Contributing
 
-```bash
-npm run dev
-# or
-yarn dev
+### Docs / SOP
+
+The docs are placed under `docs/`. All markdown documents there are immediately
+available on our website under <https://www.vatprc.net/docs>, despite there is no
+listing for all docs.
+
+For SOP docs, it requires review first by VATPRC3, and after VATPRC3 approves, it
+requires assigning to VATPRC5 for approval. If both approved, the merge request
+can be merged at discretion.
+
+#### Image
+
+This repository recommends against placing static assets inside the repository.
+Please use an online image service, and include the absolute link to it.
+
+- For VATPRC staff with s3 access, you may use our `files.vatprc.net` s3 bucket.
+- For others, please create a draft in our [forum](https://community.vatprc.net)
+  and upload images there. The draft is not required to be published and may be
+  discarded after uploading the image.
+- It is also totally fine to use another online image CDN service.
+
+### Code
+
+For coding-related contributions, please reach out to VATPRC8 as there is no clear
+document currently.
+
+To run the server locally,
+
+```console
+pnpm install
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+&copy; 2010 - 2025, [VATSIM P.R. China Division](https://www.vatprc.net), All rights reserved.
