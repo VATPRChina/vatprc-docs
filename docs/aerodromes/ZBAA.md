@@ -150,7 +150,7 @@
 > [!IMPORTANT]
 > 橙色代管区域在北向运行时由 ZBAA_W_RMP 提供管制服务，南向运行时由 ZBAA_TWR 提供管制服务
 
-![alt text](【250906】塔台管制范围.png)
+![【250906】塔台管制范围](https://community.vatprc.net/uploads/default/original/2X/6/6e9b84a859fdd87b3984f25c82fec9e0a578fe9e.png)
 图 3.1.1塔台管制范围划分图（橙色部分为 ZBAA_W_RMP 代管区域）
 
 ### 3.2 地面
@@ -201,7 +201,7 @@
 > [!IMPORTANT]
 > 橙色代管区域在北向运行时由 ZBAA_W_RMP 提供管制服务，南向运行时由 ZBAA_TWR 提供管制服务
 
-![alt text](【250911】机坪管制范围.png)
+![【250911】机坪管制范围.png](https://community.vatprc.net/uploads/default/original/2X/0/035def8442757e0e1427fa6d6ef25f84f721002e.png)
 图 3.2 机坪划分图（橙色部分为 ZBAA_W_RMP 代管区域）
 
 ## 4. 席位职责
@@ -292,12 +292,12 @@
 
 ##### 北向运行
 
-![alt text](【250911】北向滑行路线.png)
+![【250911】北向滑行路线.png](https://community.vatprc.net/uploads/default/original/2X/6/67f7300aafc81928539af0abb4bfaa287b142b06.png)
 图 4.1 北向滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
 ##### 南向运行
 
-![alt text](【250911】南向滑行路线.png)
+![【250911】南向滑行路线.png](https://community.vatprc.net/uploads/default/original/2X/0/0c4239b7a724d9ba989d0f82a58ad8fb16996fd3.png)
 图 4.2 南向滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
 #### 与其他场面席位的移交
@@ -580,7 +580,7 @@
    - 出现航空器误入跑道联络道时，应立刻停止对应跑道的一切起落活动，立即清空跑道并指挥误入航空器离开联络道，然后重新恢复正常低能见度运行
 
 4. 低能见度滑行路线（仅北向）：
-   ![alt text](【250911】低能见运行.png)
+   ![【250911】低能见运行.png](https://community.vatprc.net/uploads/default/original/2X/6/6fdd3d2c77f9f47a347a9c2e0ca6bd1c498be41f.png)
    图 5.2 北向低能见度滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
 5. 塔台席位与其他场面席位的移交
