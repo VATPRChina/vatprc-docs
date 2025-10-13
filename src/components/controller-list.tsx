@@ -308,7 +308,7 @@ const PermissionTag = ({ permission, positionName, expiration }: PermissionTagPr
     permission !== ControllerPositionPermission.Restricted && (
       <span
         className={cn(
-          "flex items-end gap-1 rounded-sm px-2 py-1",
+          "flex items-end gap-1 px-2 py-1",
           permission === ControllerPositionPermission.Full &&
             "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
           permission === ControllerPositionPermission.Training &&
@@ -435,7 +435,7 @@ export const ControllerList: React.FC = () => {
           })
           ?.filter((ctr) => showAbsent || ctr.status !== ControllerStatus.Absence)
           ?.map((ctr) => (
-            <div key={ctr.id} className="hover:bg-secondary flex flex-col gap-4 rounded-md border px-6 py-4">
+            <div key={ctr.id} className="hover:bg-secondary flex flex-col gap-4 border px-6 py-4">
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold">
                   {ctr.first_name} {ctr.last_name}

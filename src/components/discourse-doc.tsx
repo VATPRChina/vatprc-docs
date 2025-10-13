@@ -26,7 +26,7 @@ export const getDiscourseDocumentCode = async (postId: string) => {
       }
       return res.json() as Promise<PostMeta>;
     }),
-    await fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
+    fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
       if (!res.ok) {
         throw new Error(`Failed to fetch: ${res.status}`);
       }

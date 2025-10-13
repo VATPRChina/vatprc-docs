@@ -13,8 +13,8 @@ function RouteComponent() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {events?.map((event) => (
-        <div key={event.id} className="flex flex-col gap-2 rounded-2xl border p-4">
-          <img src={event.image_url ?? NoEventImage} className="rounded-lg" />
+        <div key={event.id} className="flex flex-col gap-2 border p-4">
+          <img src={event.image_url ?? NoEventImage} className="" />
           <Link to="/events/$id" params={{ id: event.id }} role="heading" aria-level={2} className="text-2xl font-bold">
             {event.title}
           </Link>

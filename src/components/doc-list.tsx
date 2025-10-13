@@ -15,7 +15,7 @@ const DocCard = ({ title, fileName, webPath, children }: DocumentEntry) => {
   }
   return (
     <Link to={webPath}>
-      <div className="hover:bg-secondary flex w-96 flex-col gap-2 rounded-md border p-2">
+      <div className="hover:bg-secondary flex w-96 flex-col gap-2 border p-2">
         <span>{title}</span>
         <span className="text-slate-500">{fileName}</span>
       </div>

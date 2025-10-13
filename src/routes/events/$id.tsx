@@ -127,7 +127,7 @@ function RouteComponent() {
           <Trans>Back</Trans>
         </LinkButton>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <img src={event.image_url ?? NoEventImage} className="rounded-2xl" />
+          <img src={event.image_url ?? NoEventImage} className="" />
           <div className="flex flex-col gap-4">
             <Link
               to="/events/$id"

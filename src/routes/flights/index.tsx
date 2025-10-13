@@ -17,12 +17,7 @@ export const Route = createFileRoute("/flights/")({
 const Flight: React.FC<{
   flight: components["schemas"]["FlightDto"];
 }> = ({ flight: { callsign, cid, departure, arrival, aircraft } }) => (
-  <Link
-    to="/flights/$callsign"
-    params={{ callsign }}
-    key={callsign}
-    className="flex flex-col gap-1 rounded-md border px-3 py-2"
-  >
+  <Link to="/flights/$callsign" params={{ callsign }} key={callsign} className="flex flex-col gap-1 border px-3 py-2">
     <span className="text-lg font-bold">
       {callsign}
       <span className="ml-1 text-sm font-light">{cid}</span>
@@ -57,7 +52,9 @@ function RouteComponent() {
         {mine && <Flight flight={mine} />}
         {flights
           ?.filter((f) => f.callsign.includes(filter) || f.cid.includes(filter))
-          ?.map((flight) => <Flight flight={flight} key={flight.callsign} />)}
+          ?.map((flight) => (
+            <Flight flight={flight} key={flight.callsign} />
+          ))}
         <Outlet />
       </div>
     </div>

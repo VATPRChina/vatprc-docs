@@ -54,7 +54,7 @@ const Event: React.FC<{
 
   return (
     <a
-      className="hover:bg-secondary flex min-w-48 flex-col gap-2 rounded-md border px-6 py-4 shadow-md"
+      className="hover:bg-secondary flex min-w-48 flex-col gap-2 border px-6 py-4"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
@@ -70,7 +70,7 @@ const Event: React.FC<{
       <span>
         {intlFormatDistance(start, Date.now(), { locale })}
         {isSameWeek(start, Date.now(), { weekStartsOn: 1 }) && (
-          <span className="ml-2 rounded-md bg-red-200 px-1 py-0.5 dark:bg-red-800">
+          <span className="ml-2 bg-red-200 px-1 py-0.5 dark:bg-red-800">
             <Trans>In This Week</Trans>
           </span>
         )}
@@ -193,12 +193,13 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
                     <a
                       key={e.id}
                       className={cn(
-                        "rounded px-1 text-sm",
+                        "px-1 text-sm",
                         e.isExam
                           ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200"
                           : "bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200",
-                        isSameWeek(e.start, Date.now(), { weekStartsOn: 1 }) &&
-                          "border border-red-700 font-bold dark:border-red-300",
+                        isSameWeek(e.start, Date.now(), { weekStartsOn: 1 }) && e.isExam
+                          ? "border border-blue-300 font-bold dark:border-blue-700"
+                          : "border border-red-300 font-bold dark:border-red-700",
                       )}
                       href={e.url}
                       target="_blank"
