@@ -197,9 +197,10 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
                         e.isExam
                           ? "bg-blue-200 text-blue-800 dark:bg-blue-800 dark:text-blue-200"
                           : "bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200",
-                        isSameWeek(e.start, Date.now(), { weekStartsOn: 1 }) && e.isExam
-                          ? "border border-blue-300 font-bold dark:border-blue-700"
-                          : "border border-red-300 font-bold dark:border-red-700",
+                        isSameWeek(e.start, Date.now(), { weekStartsOn: 1 }) &&
+                          (e.isExam
+                            ? "border border-blue-300 font-bold dark:border-blue-700"
+                            : "border border-red-300 font-bold dark:border-red-700"),
                       )}
                       href={e.url}
                       target="_blank"
