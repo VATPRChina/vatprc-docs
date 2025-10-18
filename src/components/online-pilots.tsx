@@ -1,10 +1,11 @@
 import { Button } from "./ui/button";
+import { Spinner } from "./ui/spinner";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import React, { useState } from "react";
-import { TbCaretUpDown, TbLoader } from "react-icons/tb";
+import { TbCaretUpDown } from "react-icons/tb";
 
 const Pilot: React.FC<{
   callsign: string;
@@ -35,7 +36,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
   const [open, setOpen] = useState(false);
 
   if (isLoading) {
-    return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
+    return <Spinner />;
   }
 
   const pilots =

@@ -1,10 +1,10 @@
+import { Spinner } from "./ui/spinner";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
 import { format, parseISO } from "date-fns";
 import React from "react";
-import { TbLoader } from "react-icons/tb";
 
 const Controller: React.FC<{
   callsign: string;
@@ -39,7 +39,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
   if (isLoading) {
-    return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
+    return <Spinner />;
   }
 
   return (

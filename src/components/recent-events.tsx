@@ -1,4 +1,5 @@
 import { Button } from "./ui/button";
+import { Spinner } from "./ui/spinner";
 import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
@@ -24,7 +25,7 @@ import {
   sub,
 } from "date-fns";
 import React from "react";
-import { TbChevronLeft, TbChevronRight, TbLoader } from "react-icons/tb";
+import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 
 const COMMUNITY_EVENT_ENDPOINT =
   "https://community.vatprc.net/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true";
@@ -119,7 +120,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
   const [refDate, setRefDate] = React.useState(new Date());
 
   if (isCnLoading || isEnLoading) {
-    return <TbLoader className="m-auto h-24 animate-spin" size={48} />;
+    return <Spinner />;
   }
 
   const events = [
