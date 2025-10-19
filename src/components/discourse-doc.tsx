@@ -20,13 +20,17 @@ export interface PostMeta {
 export const getDiscourseDocumentCode = async (postId: string) => {
   const postPath = `${postId}/1`;
   const [meta, raw] = await Promise.all([
-    fetch(`https://community.vatprc.net/t/topic/${postPath}.json`).then((res) => {
+    fetch(
+      `${process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"}/t/topic/${postPath}.json`,
+    ).then((res) => {
       if (!res.ok) {
         throw new Error(`Failed to fetch: ${res.status}`);
       }
       return res.json() as Promise<PostMeta>;
     }),
-    fetch(`https://community.vatprc.net/raw/${postPath}`).then((res) => {
+    fetch(
+      `${process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"}/raw/${postPath}`,
+    ).then((res) => {
       if (!res.ok) {
         throw new Error(`Failed to fetch: ${res.status}`);
       }
@@ -91,7 +95,9 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   async head() {
     const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
     try {
-      const meta = await fetch(`https://community.vatprc.net/t/topic/${postId}.json`).then((res) => {
+      const meta = await fetch(
+        `${process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"}/t/topic/${postId}.json`,
+      ).then((res) => {
         if (!res.ok) {
           throw new Error(`Failed to fetch: ${res.status}`);
         }

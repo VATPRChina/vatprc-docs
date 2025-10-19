@@ -27,11 +27,15 @@ export default defineConfig({
   build: { sourcemap: true },
   server: {
     proxy: {
-      "/api/cors/vatsim-events-prc": { target: "https://my.vatsim.net/api/v2/events/latest", changeOrigin: true },
       "/uniapi": {
         target: "https://uniapi.vatprc.net",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/uniapi/, ""),
+      },
+      "/community": {
+        target: "https://community.vatprc.net",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/community/, ""),
       },
     },
   },
