@@ -38,6 +38,7 @@ import { Route as AirspaceStationRouteImport } from './routes/airspace/station'
 import { Route as AirspaceSopRouteImport } from './routes/airspace/sop'
 import { Route as AirspaceRvsmRouteImport } from './routes/airspace/rvsm'
 import { Route as AirspaceFirRouteImport } from './routes/airspace/fir'
+import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 
 const FlightsRoute = FlightsRouteImport.update({
   id: '/flights',
@@ -188,6 +189,11 @@ const AirspaceFirRoute = AirspaceFirRouteImport.update({
   path: '/airspace/fir',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
+  id: '/docs/utils/image',
+  path: '/docs/utils/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/pilot/ts3': typeof PilotTs3Route
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
+  '/docs/utils/image': typeof DocsUtilsImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/pilot/ts3': typeof PilotTs3Route
   '/events': typeof EventsIndexRoute
   '/flights': typeof FlightsIndexRoute
+  '/docs/utils/image': typeof DocsUtilsImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -280,6 +288,7 @@ export interface FileRoutesById {
   '/pilot/ts3': typeof PilotTs3Route
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
+  '/docs/utils/image': typeof DocsUtilsImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -313,6 +322,7 @@ export interface FileRouteTypes {
     | '/pilot/ts3'
     | '/events/'
     | '/flights/'
+    | '/docs/utils/image'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -342,6 +352,7 @@ export interface FileRouteTypes {
     | '/pilot/ts3'
     | '/events'
     | '/flights'
+    | '/docs/utils/image'
   id:
     | '__root__'
     | '/'
@@ -373,6 +384,7 @@ export interface FileRouteTypes {
     | '/pilot/ts3'
     | '/events/'
     | '/flights/'
+    | '/docs/utils/image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -401,6 +413,7 @@ export interface RootRouteChildren {
   PilotPilotSoftwaresRoute: typeof PilotPilotSoftwaresRoute
   PilotStartToFlyRoute: typeof PilotStartToFlyRoute
   PilotTs3Route: typeof PilotTs3Route
+  DocsUtilsImageRoute: typeof DocsUtilsImageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -608,6 +621,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AirspaceFirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/utils/image': {
+      id: '/docs/utils/image'
+      path: '/docs/utils/image'
+      fullPath: '/docs/utils/image'
+      preLoaderRoute: typeof DocsUtilsImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -664,6 +684,7 @@ const rootRouteChildren: RootRouteChildren = {
   PilotPilotSoftwaresRoute: PilotPilotSoftwaresRoute,
   PilotStartToFlyRoute: PilotStartToFlyRoute,
   PilotTs3Route: PilotTs3Route,
+  DocsUtilsImageRoute: DocsUtilsImageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
