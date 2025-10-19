@@ -19,8 +19,9 @@ function RouteComponent() {
     setFile(e.target.files?.item(0) ?? null);
   };
   const onUpload = () => {
+    if (!file) return;
     const form = new FormData();
-    form.append("image", file!);
+    form.append("image", file, file?.name ?? "untitled");
     mutate({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
       body: form as any,

@@ -19,11 +19,8 @@ can be merged at discretion.
 This repository recommends against placing static assets inside the repository.
 Please use an online image service, and include the absolute link to it.
 
-- For VATPRC staff with s3 access, you may use our `files.vatprc.net` s3 bucket.
-- For others, please create a draft in our [forum](https://community.vatprc.net)
-  and upload images there. The draft is not required to be published and may be
-  discarded after uploading the image.
-- It is also totally fine to use another online image CDN service.
+- For VATPRC staff, you may use <https://www.vatprc.net/docs/utils/image>.
+- For others, please use an online image CDN service.
 
 ### Code
 
