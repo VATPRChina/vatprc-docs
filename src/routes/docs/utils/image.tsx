@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/docs/utils/image")({
 });
 
 function RouteComponent() {
-  const { mutate, data, error } = $api.useMutation("post", "/api/storage/images");
+  const { mutate, data, error, isPending } = $api.useMutation("post", "/api/storage/images");
 
   const [file, setFile] = useState<File | null>(null);
   const onSelectFile: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -34,6 +35,7 @@ function RouteComponent() {
       <Label htmlFor="picture">Picture</Label>
       <Input id="picture" type="file" onChange={onSelectFile} />
       <Button onClick={onUpload}>
+        {isPending && <Spinner />}
         <Trans>Upload</Trans>
       </Button>
       <p>URL: {data?.url}</p>
