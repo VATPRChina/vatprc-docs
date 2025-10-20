@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:270
+#: src/routes/__root.tsx:280
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
@@ -22,7 +22,7 @@ msgstr "VATSIM 中国分部"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
-#: src/routes/__root.tsx:252
+#: src/routes/__root.tsx:262
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
 
@@ -207,11 +207,11 @@ msgstr "出发机场"
 msgid "Direct leg"
 msgstr "直飞段"
 
-#: src/components/discourse-doc.tsx:67
+#: src/components/discourse-doc.tsx:71
 msgid "Edit Chinese"
 msgstr "编辑中文"
 
-#: src/components/discourse-doc.tsx:62
+#: src/components/discourse-doc.tsx:66
 msgid "Edit English"
 msgstr "编辑英文"
 
@@ -232,7 +232,7 @@ msgstr "英制双数飞行高度层"
 msgid "Event"
 msgstr "活动"
 
-#: src/components/discourse-doc.tsx:120
+#: src/components/discourse-doc.tsx:126
 msgid "Failed to load document"
 msgstr "加载文档失败"
 
@@ -277,7 +277,7 @@ msgstr "航路"
 msgid "Forum"
 msgstr "论坛"
 
-#: src/components/recent-events.tsx:75
+#: src/components/recent-events.tsx:74
 msgid "In This Week"
 msgstr "本周"
 
@@ -351,7 +351,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "新"
 
-#: src/components/recent-events.tsx:225
+#: src/components/recent-events.tsx:224
 msgid "No event is scheduled recently."
 msgstr "近期无活动计划。"
 
@@ -648,11 +648,11 @@ msgstr "应答机设备代码为空。"
 msgid "until"
 msgstr "直到"
 
-#: src/routes/docs/utils/image.tsx:20
+#: src/routes/docs/utils/image.tsx:40
 msgid "Upload"
 msgstr "上传"
 
-#: src/routes/docs/utils/image.tsx:15
+#: src/routes/docs/utils/image.tsx:34
 msgid "Upload image"
 msgstr "上传图片"
 
@@ -680,6 +680,10 @@ msgstr "目视飞行规则"
 #: src/routes/__root.tsx:183
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
+
+#: src/routes/__root.tsx:256
+msgid "We need your help! Donate to VATPRC to help us to improve!"
+msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 
 #: src/routes/__root.tsx:158
 msgid "Weather"

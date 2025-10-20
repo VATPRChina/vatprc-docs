@@ -246,6 +246,16 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           </div>
         </div>
       </header>
+      {getLocale() === "zh-cn" && (
+        <a
+          className="block w-full bg-gray-100 py-4 text-center hover:bg-gray-50 dark:bg-gray-900 hover:dark:bg-gray-950"
+          href="https://community.vatprc.net/t/topic/10193"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
+        </a>
+      )}
       <div className="pt-4">{children}</div>
       <footer className="container mx-auto mt-8 mb-4">
         <p className="text-slate-500 dark:text-slate-300">

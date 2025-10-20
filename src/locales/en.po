@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:270
+#: src/routes/__root.tsx:280
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
@@ -22,7 +22,7 @@ msgstr "VATSIM P.R. China Division"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
-#: src/routes/__root.tsx:252
+#: src/routes/__root.tsx:262
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
@@ -207,11 +207,11 @@ msgstr "Departure"
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/components/discourse-doc.tsx:67
+#: src/components/discourse-doc.tsx:71
 msgid "Edit Chinese"
 msgstr "Edit Chinese"
 
-#: src/components/discourse-doc.tsx:62
+#: src/components/discourse-doc.tsx:66
 msgid "Edit English"
 msgstr "Edit English"
 
@@ -232,7 +232,7 @@ msgstr "even flight level"
 msgid "Event"
 msgstr "Event"
 
-#: src/components/discourse-doc.tsx:120
+#: src/components/discourse-doc.tsx:126
 msgid "Failed to load document"
 msgstr "Failed to load document"
 
@@ -277,7 +277,7 @@ msgstr "Flight Route"
 msgid "Forum"
 msgstr "Forum"
 
-#: src/components/recent-events.tsx:75
+#: src/components/recent-events.tsx:74
 msgid "In This Week"
 msgstr "In This Week"
 
@@ -351,7 +351,7 @@ msgctxt "new feature"
 msgid "New"
 msgstr "New"
 
-#: src/components/recent-events.tsx:225
+#: src/components/recent-events.tsx:224
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
@@ -648,11 +648,11 @@ msgstr "Transponder field is empty."
 msgid "until"
 msgstr "until"
 
-#: src/routes/docs/utils/image.tsx:20
+#: src/routes/docs/utils/image.tsx:40
 msgid "Upload"
 msgstr "Upload"
 
-#: src/routes/docs/utils/image.tsx:15
+#: src/routes/docs/utils/image.tsx:34
 msgid "Upload image"
 msgstr "Upload image"
 
@@ -680,6 +680,10 @@ msgstr "VFR Policy"
 #: src/routes/__root.tsx:183
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
+
+#: src/routes/__root.tsx:256
+msgid "We need your help! Donate to VATPRC to help us to improve!"
+msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
 #: src/routes/__root.tsx:158
 msgid "Weather"

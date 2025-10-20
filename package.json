@@ -16,7 +16,8 @@
     "format": "prettier --write .",
     "test": "vitest",
     "ui:add": "shadcn add",
-    "test:browser": "vitest --workspace=vitest.workspace.ts"
+    "test:browser": "vitest --workspace=vitest.workspace.ts",
+    "i18n:extract": "lingui extract --clean"
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.1",
