@@ -634,14 +634,14 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 >
 > ② This TCP is for Helicopter or General Aviation aircraft ONLY.
 
-|  TCP  |             Direction              |            Altitudes (FLAS)            |
-| :---: | :--------------------------------: | :------------------------------------: |
-| BEKOL | Departing VHHH/VHHX Landing ZGSZ ① |                 S0180                  |
-| BEKOL |  Departing VHHH/VHHX Landing ZGGG  |     S0420 \*S0450 on coordination      |
-| TAMOT |            Landing ZGGG            |     S0450 \*S0420 on coordination      |
+|  TCP  |             Direction              |                 Altitudes (FLAS)                  |
+| :---: | :--------------------------------: | :-----------------------------------------------: |
+| BEKOL | Departing VHHH/VHHX Landing ZGSZ ① |                       S0180                       |
+| BEKOL |  Departing VHHH/VHHX Landing ZGGG  |           S0420 \*S0450 on coordination           |
+| TAMOT |            Landing ZGGG            |           S0450 \*S0420 on coordination           |
 | LUKBU |       Departing VMMC, ZGSZ ②       | 9000ft \*Aircraft are released for climb to FL120 |
-| LANDA |            Landing ZGSZ            |        F110 \*9000ft alternate         |
-| SIERA |           Departing ZGSZ           |                  F120                  |
+| LANDA |            Landing ZGSZ            |              F110 \*9000ft alternate              |
+| SIERA |           Departing ZGSZ           |                       F120                        |
 
 > **Remarks:**
 >
@@ -673,14 +673,14 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 
 ### 9.4 Guangzhou ACC – Hong Kong ACC (W/U)/TMC\*
 
-|   TCP   |       Direction       |       Altitudes (FLAS)       |
-| :-----: | :-------------------: | :--------------------------: |
-| BEKOL ① |  Departing VHHH/VHHX  |           S0690 ②            |
-|  BEKOL  | To Guangzhou ACC Only |  S0890 - S1190 \*Metric Odd  |
-|  SIERA  |     Landing VHHH      |       F190\*/F210/F230       |
-|  SIERA  |    Departing ZGGG     |          F230/F250           |
-|  TAMOT  |     Landing VHHX      |            F280 ③            |
-|  TAMOT  | To Hong Kong ACC Only |  S0840 - S1220 \*Metric Even |
+|   TCP   |       Direction       |      Altitudes (FLAS)       |
+| :-----: | :-------------------: | :-------------------------: |
+| BEKOL ① |  Departing VHHH/VHHX  |           S0690 ②           |
+|  BEKOL  | To Guangzhou ACC Only | S0890 - S1190 \*Metric Odd  |
+|  SIERA  |     Landing VHHH      |      F190\*/F210/F230       |
+|  SIERA  |    Departing ZGGG     |          F230/F250          |
+|  TAMOT  |     Landing VHHX      |           F280 ③            |
+|  TAMOT  | To Hong Kong ACC Only | S0840 - S1220 \*Metric Even |
 
 > **Remarks:**
 >
@@ -692,17 +692,17 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 
 ### 9.5 Sanya ACC – Hong Kong ACC (W/V/D/U)
 
-|  TCP  |          Direction          |              Altitudes (FLAS)               |
-| :---: | :-------------------------: | :-----------------------------------------: |
-| SIKOU |       Departing ZJSY        |                 S0810/S0890                 |
-| SIKOU |        Landing ZJSY         |                    S0840                    |
-| SIKOU |  To Sanya ACC beyond ASSAD  |             S1040, S1160, S1220             |
-| SIKOU | To Hong Kong ACC from beyond ASSAD |     S1010 - S1250 \*Metric Odd       |
-| SIKOU |   To Sanya ACC beyond WUY   |         S0980 - S1220 \*Metric Even         |
-| IKELA |        To Sanya ACC         |    F280, F300, F340, F380, F400 and F430    |
-| IKELA |      To Hong Kong ACC       | F270, F290, F330, F370, F390, F410 and F450 |
-| EPKAL |      To Sanya ACC Only      | F280, F310, F320, F350, F360, F390 and F400 |
-| DOSUT |    To Hong Kong ACC Only    | F270, F310, F320, F350, F360, F390 and F400 |
+|  TCP  |             Direction              |              Altitudes (FLAS)               |
+| :---: | :--------------------------------: | :-----------------------------------------: |
+| SIKOU |           Departing ZJSY           |                 S0810/S0890                 |
+| SIKOU |            Landing ZJSY            |                    S0840                    |
+| SIKOU |     To Sanya ACC beyond ASSAD      |             S1040, S1160, S1220             |
+| SIKOU | To Hong Kong ACC from beyond ASSAD |         S1010 - S1250 \*Metric Odd          |
+| SIKOU |      To Sanya ACC beyond WUY       |         S0980 - S1220 \*Metric Even         |
+| IKELA |            To Sanya ACC            |    F280, F300, F340, F380, F400 and F430    |
+| IKELA |          To Hong Kong ACC          | F270, F290, F330, F370, F390, F410 and F450 |
+| EPKAL |         To Sanya ACC Only          | F280, F310, F320, F350, F360, F390 and F400 |
+| DOSUT |       To Hong Kong ACC Only        | F270, F310, F320, F350, F360, F390 and F400 |
 
 ### 9.6 Nanning ACC ① – Hong Kong ACC (W)
 
@@ -1018,4 +1018,3 @@ ICAO Doc 4444
 <img width="968" height="1400" alt="QQ_1761453880476" src="https://github.com/user-attachments/assets/598c481d-a3a9-40ee-9c11-fd68b5a6a86b" />
 
 <img width="948" height="720" alt="QQ_1761453907425" src="https://github.com/user-attachments/assets/fb965daf-92ac-4963-9b61-a5522b7434d7" />
-
