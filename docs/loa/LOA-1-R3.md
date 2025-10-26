@@ -1,12 +1,12 @@
 # Letter of Agreement (LOA) Between People's Republic of China Division (VATPRC) and Hong Kong vACC, Southeast Asia Division (VATSEA)
 
-**Revision 3**
+**Revision 4**
 
-**Date Issued:** Jul 28, 2025
+**Date Issued:** Oct 20, 2025
 
-**VATPRC Document Number:** VATPRC-LOA-1-R3-EN
+**VATPRC Document Number:** VATPRC-LOA-1-R4-EN
 
-**vACC Hong Kong Document Number:** HKVACC-LOA-VATPRC-R3
+**vACC Hong Kong Document Number:** HKVACC-LOA-VATPRC-R4
 
 ## 1. Purpose
 
@@ -321,8 +321,8 @@ Figure 7.16: Hong Kong Approach Sector when runway 25s are in use
 #### 7.2.5 Hong Kong Terminal Radar West
 
 - Position: VHHH_W_APP; Callsign: Hong Kong Radar
-- This sector covers ZGSZ/ZGGG departures and VHHH arrivals via SIERA.
-- Hong Kong Terminal Radar West covers the airspace around SIERA between FL120 - FL250.
+- This sector covers ZGSZ/ZGGG departures and VHHH arrivals via SIERA, as well as Hong Kong Terminal Radar Low and Macau Approach Radar sector in their absence.
+- Hong Kong Terminal Radar West covers the airspace around SIERA between FL190 - FL250.
 - Handoffs to Hong Kong Terminal Radar West shall be made in the following order:
   VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
 
@@ -330,19 +330,25 @@ Figure 7.16: Hong Kong Approach Sector when runway 25s are in use
 
 Figure 7.17: Hong Kong Terminal Radar West Sector
 
-#### 7.2.6 Macau Approach Radar
+#### 7.2.6 Hong Kong Terminal Radar Low
+
+- Position: VHHH_L_APP; Callsign: Hong Kong Radar
+- This sector is responsible for SIERA arrivals that have been handed off from Hong Kong Terminal Radar West and Macau Approach Radar sector in its absence. When this sector is open, FL190 is not available at SIERA.
+- Hong Kong Terminal Radar Low covers the airspace around SIERA between FL120 and FL190.
+- Handoffs to Hong Kong Terminal Radar Low shall be made in the following order: VHHH_L_APP -> VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
+
+#### 7.2.7 Macau Approach Radar
 
 - Position: VMMC_APP; Callsign: Hong Kong Radar
-- This sector covers ZGSZ arrivals via LANDA and ZGSZ departures via SIERA. When Runway 16 is in use, this sector also covers VMMC arrivals entering Zhuhai airspace via INDUS as well as VMMC arrivals via UJ and MCU.
+- This sector covers ZGSZ arrivals via LANDA and ZGSZ departures via SIERA. When Runway 16 is in use, this sector also covers VMMC arrivals entering Zhuhai airspace via INDUS as well as VMMC arrivals via UJ and MCU and oil rig support helicopters via Track D.
 - Macau Approach Radar covers the airspace around LANDA and SIERA between SFC - FL120.
-- Handoffs to Macau Approach Radar shall be made in the following order:
-  VMMC_APP -> VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
+- Handoffs to Macau Approach Radar shall be made in the following order: VMMC_APP -> VHHH_L_APP -> VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
 
 <img width="1090" height="948" alt="QQ_1754223392461" src="https://github.com/user-attachments/assets/9fbeafa4-b3df-4032-bbdc-1957aa4cd945" />
 
 Figure 7.18: Macau Approach Radar Sector
 
-#### 7.2.7 Hong Kong Area Radar East Arrivals
+#### 7.2.8 Hong Kong Area Radar East Arrivals
 
 - Position: HKG_K_CTR; Callsign: Hong Kong Radar
 - This sector covers traffic via DOTMI and LELIM.
@@ -354,7 +360,7 @@ Figure 7.18: Macau Approach Radar Sector
 
 Figure 7.19: Hong Kong Area Radar East Arrivals Sector
 
-#### 7.2.8 Hong Kong Area Radar West (TRD)
+#### 7.2.9 Hong Kong Area Radar West (TRD)
 
 - Position: HKG_D_CTR; Callsign: Hong Kong Radar
 - This sector covers traffic via EPKAL and DOSUT.
@@ -366,7 +372,7 @@ Figure 7.19: Hong Kong Area Radar East Arrivals Sector
 
 Figure 7.20: Hong Kong Area Radar West (TRD) Sector
 
-#### 7.2.9 Hong Kong Area Radar West (TRV)
+#### 7.2.10 Hong Kong Area Radar West (TRV)
 
 - Position: HKG_V_CTR; Callsign: Hong Kong Radar
 - This sector covers traffic via IKELA.
@@ -378,7 +384,7 @@ Figure 7.20: Hong Kong Area Radar West (TRD) Sector
 
 Figure 7.21: Hong Kong Area Radar West (TRV) Sector
 
-#### 7.2.10 Hong Kong Area Radar West
+#### 7.2.11 Hong Kong Area Radar West
 
 - Position: HKG_W_CTR; Callsign: Hong Kong Radar
 - This is the primary Area Radar sector. When fully split, this sector covers traffic via SIKOU, high-level overflights and VHHX arrivals via TAMOT.
@@ -388,7 +394,7 @@ Figure 7.21: Hong Kong Area Radar West (TRV) Sector
 
 Figure 7.22: Hong Kong Area Radar West Sector
 
-#### 7.2.11 Hong Kong Area Radar Upper
+#### 7.2.12 Hong Kong Area Radar Upper
 
 - Position: HKG_U_CTR; Callsign: Hong Kong Radar
 - This sector covers high-level traffic within Hong Kong FIR.
@@ -399,39 +405,57 @@ Figure 7.22: Hong Kong Area Radar West Sector
 
 Figure 7.23: Hong Kong Area Radar Upper Sector
 
-#### 7.2.12 Hong Kong Air Movements Control (North)
+#### 7.2.13 Hong Kong Air Movements Control (North)
 
 - Position: VHHH_N_TWR; Callsign: Hong Kong Tower
-- This sector covers the northern half of the Hong Kong ATZ.
+- This sector covers the northern half of the Hong Kong ATZ. In the absence of VHHH_S_TWR and VHHH_C_TWR, it shall cover the entire Hong Kong ATZ.
 - Hong Kong Air Movements Control (North) covers SFC - 2000ft AAL.
 - Handoffs to Hong Kong Air Movements Control (North) shall be made in the following order:
-  VHHH_N_TWR -> VHHH_S_TWR -> VHHH_APP -> HKG_W_CTR
+  VHHH_N_TWR -> VHHH_C_TWR -> VHHH_S_TWR -> VHHH_APP -> HKG_W_CTR
 
-#### 7.2.13 Hong Kong Air Movements Control (South)
+#### 7.2.14 Hong Kong Air Movements Control (South)
 
 - Position: VHHH_S_TWR; Callsign: Hong Kong Tower
-- This sector covers the southern half of the Hong Kong ATZ. In the absence of VHHH_N_TWR, it shall cover the entire Hong Kong ATZ.
+- This sector covers the southern half of the Hong Kong ATZ. In the absence of VHHH_N_TWR and VHHH_C_TWR, it shall cover the entire Hong Kong ATZ.
 - Hong Kong Air Movements Control (South) covers SFC - 2000ft AAL.
 - Handoffs to Hong Kong Air Movements Control (South) shall be made in the following order:
-  VHHH_S_TWR -> VHHH_APP -> HKG_W_CTR
+  VHHH_S_TWR -> VHHH_C_TWR -> VHHH_N_TWR -> VHHH_APP -> HKG_W_CTR
+
+#### 7.2.15 Hong Kong Air Movements Control (Midfield)
+
+- Position: VHHH_C_TWR; Callsign: Hong Kong Tower
+- This sector covers the centre runway at VHHH. In the absence of VHHH_N_TWR and VHHH_S_TWR, it shall cover the entire Hong Kong ATZ.
+- Handoffs to Hong Kong Air Movements Control (Midfield) shall be made in the following order: VHHH_C_TWR -> VHHH_S/N_TWR (depending on RWY in use) -> VHHH_APP -> HKG_W_CTR
 
 <img width="1176" height="950" alt="QQ_1754223755670" src="https://github.com/user-attachments/assets/dfe7088a-d958-48f6-920e-f4d7bcccbf5d" />
 
 Figure 7.24: Hong Kong Air Movements Control Sector
 
-#### 7.2.14 Macau Tower
+#### 7.2.16 Macau Tower
 
 - Position: VMMC_TWR; Callsign: Macau Tower
 - This sector covers the Macau ATZ.
 - Macau Tower covers SFC - 3000ft AAL.
 - Handoffs to Macau Tower shall be made in the following order:
-  VMMC_TWR -> VMMC_APP -> VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
+  VMMC_TWR -> VMMC_APP -> VHHH_L_APP -> VHHH_W_APP -> HKG_W_CTR -> VHHH_APP
 
 <img width="1178" height="1402" alt="QQ_1754223807230" src="https://github.com/user-attachments/assets/cedc52f8-79c6-451d-8ba4-62370f9966f8" />
 
 Figure 7.25: Control airspace of Macau Tower
 
-#### 7.2.15 Southeast Asia Control
+#### 7.2.17 Hong Kong Flight Information Service
+
+- Position: VHHH_F_TWR; Callsign: Hong Kong Information
+- This sector is responsible for providing Flight Information Service within Class G airspace in Hong Kong FIR.
+- Handoffs to Hong Kong Flight Information Service shall be made in the following order: VHHH_F_TWR -> VHHH_Z_TWR -> VHHH_S/C/N_TWR (by coordination) -> VHHH_APP -> HKG_W_CTR
+
+#### 7.2.18 Hong Kong Zone Control
+
+- Position: VHHH_Z_TWR; Callsign: Hong Kong Zone
+- This sector is responsible for VFR traffic operating within the Hong Kong CTR at or below 2000ft. While this sector will not normally accept handoffs from Mainland China ATC positions, it is responsible for covering Hong Kong Flight Information Service in its absence, hence it has been included in this document.
+- Handoffs to Hong Kong Zone Control shall be made in the following order: VHHH_Z_TWR -> VHHH_S/C/N_TWR (by coordination) -> VHHH_APP -> HKG_W_CTR
+
+#### 7.2.19 Southeast Asia Control
 
 - Position: ASEA_FSS; Callsign: Southeast Asia Control
 - This sector covers all CTR sectors within each VATSEA vACC in the absence of local ATC.
@@ -577,7 +601,7 @@ Handoff from/to Hong Kong Zone (VHHH_Z_TWR) or any online controllers who are re
 
 #### 8.4.8
 
-For VFR route Shenzhen ⟷ VHHH, to avoid unnecessary change of frequencies, handoff from/to Hong Kong Air Movements Control North (VHHH_N_TWR) if online or Hong Kong Air Movements Control South (VHHH_S_TWR) if offline may be established.
+For VFR route Shenzhen ⟷ VHHH, to avoid unnecessary change of frequencies, handoff from/to Hong Kong Air Movements Control North (VHHH_N_TWR) if online or Hong Kong Air Movements Control Midfield (VHHH_C_TWR) / Hong Kong Air Movements Control South (VHHH_S_TWR) if offline may be established.
 
 <img width="1200" height="1228" alt="QQ_1754226736995" src="https://github.com/user-attachments/assets/a005681e-52fd-43e6-902f-ae3d7988575d" />
 
@@ -615,7 +639,7 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 | BEKOL | Departing VHHH/VHHX Landing ZGSZ ① |                 S0180                  |
 | BEKOL |  Departing VHHH/VHHX Landing ZGGG  |     S0420 \*S0450 on coordination      |
 | TAMOT |            Landing ZGGG            |     S0450 \*S0420 on coordination      |
-| LUKBU |          Departing ZGSZ ②          | 6000ft-FL120 \*Except transition layer |
+| LUKBU |       Departing VMMC, ZGSZ ②       | 9000ft \*Aircraft are released for climb to FL120 |
 | LANDA |            Landing ZGSZ            |        F110 \*9000ft alternate         |
 | SIERA |           Departing ZGSZ           |                  F120                  |
 
@@ -652,11 +676,11 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 |   TCP   |       Direction       |       Altitudes (FLAS)       |
 | :-----: | :-------------------: | :--------------------------: |
 | BEKOL ① |  Departing VHHH/VHHX  |           S0690 ②            |
-|  BEKOL  | To Guangzhou ACC Only |        S0890 or above        |
+|  BEKOL  | To Guangzhou ACC Only |  S0890 - S1190 \*Metric Odd  |
 |  SIERA  |     Landing VHHH      |       F190\*/F210/F230       |
 |  SIERA  |    Departing ZGGG     |          F230/F250           |
 |  TAMOT  |     Landing VHHX      |            F280 ③            |
-|  TAMOT  | To Hong Kong ACC Only | S0840 or above \*Metric Even |
+|  TAMOT  | To Hong Kong ACC Only |  S0840 - S1220 \*Metric Even |
 
 > **Remarks:**
 >
@@ -672,10 +696,11 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 | :---: | :-------------------------: | :-----------------------------------------: |
 | SIKOU |       Departing ZJSY        |                 S0810/S0890                 |
 | SIKOU |        Landing ZJSY         |                    S0840                    |
-| SIKOU |   All others to Sanya ACC   |        S0980 or above \*Metric Even         |
-| SIKOU | All others to Hong Kong ACC |         S1010 or above \*Metric Odd         |
-| IKELA |        To Sanya ACC         |            Imperial Even Levels             |
-| IKELA |      To Hong Kong ACC       |             Imperial Odd Levels             |
+| SIKOU |  To Sanya ACC beyond ASSAD  |             S1040, S1160, S1220             |
+| SIKOU | To Hong Kong ACC from beyond ASSAD |     S1010 - S1250 \*Metric Odd       |
+| SIKOU |   To Sanya ACC beyond WUY   |         S0980 - S1220 \*Metric Even         |
+| IKELA |        To Sanya ACC         |    F280, F300, F340, F380, F400 and F430    |
+| IKELA |      To Hong Kong ACC       | F270, F290, F330, F370, F390, F410 and F450 |
 | EPKAL |      To Sanya ACC Only      | F280, F310, F320, F350, F360, F390 and F400 |
 | DOSUT |    To Hong Kong ACC Only    | F270, F310, F320, F350, F360, F390 and F400 |
 
@@ -843,14 +868,12 @@ When runway 34 is in use at Macau International Airport (VMMC), Macau Tower shal
 
 #### 11.4.1 Runway 34 departure
 
-- To LUKBU – 6000ft
-- To other Guangzhou directions – S0120
+- All directions – S0120
 
 #### 11.4.2 Runway 16 departure
 
-- To BIGRO – S0150
-- To other Guangzhou directions – S0180
 - To Hong Kong direction – 4000ft
+- To other Guangzhou directions - S0120
 
 ### 11.5 Procedure in the Absence of Mainland China ATC
 
@@ -959,11 +982,11 @@ A content review of this LOA shall take at most six (6) months after this LOA ta
 
 Any parties wishing to amend this LOA (by adding, omitting or changing any clauses) shall contact the other party to call for an immediate review of the LOA. Both parties must reach a consensus on any amendments before they take effect. Subsequent content review shall take place at most every six (6) months henceforth.
 
-### This Letter of Agreement is approved on 28 Jul, year 2025:
+### This Letter of Agreement is approved on 20 Oct, year 2025:
 
 VATPRC Division Director - Hongye Rudi Zhang
 
-VATSEA Division Director - Eugene Lee
+VATSEA Acting Division Director - Hoo Jiong Sheng
 
 Hong Kong vACC Director - Mark Hui
 
@@ -982,12 +1005,17 @@ ICAO Doc 4444
 > [!Note]
 > Positions on the below take over positions on the above if they are offline.
 
-<img width="1120" height="1406" alt="QQ_1754325627020" src="https://github.com/user-attachments/assets/3b5ade76-438f-4ea5-a52e-ae7ea07eeacd" />
+<img width="970" height="1218" alt="QQ_1761453683043" src="https://github.com/user-attachments/assets/1b87a7fc-6f19-4fef-808e-ecde1124c56c" />
 
-<img width="944" height="1376" alt="QQ_1754325673449" src="https://github.com/user-attachments/assets/7687cc9e-f222-4687-816c-0897aabc927e" />
+<img width="962" height="1400" alt="QQ_1761453741851" src="https://github.com/user-attachments/assets/cf51ddc5-2840-4bf3-a6c7-207652738bd2" />
 
-<img width="944" height="1316" alt="QQ_1754325699158" src="https://github.com/user-attachments/assets/02b943f3-a5cc-4a0d-afad-b424d512053d" />
+<img width="960" height="1340" alt="QQ_1761453775241" src="https://github.com/user-attachments/assets/2185d525-2b6f-4219-b4fb-af0f20519278" />
 
-<img width="942" height="1332" alt="QQ_1754325728744" src="https://github.com/user-attachments/assets/d015ae7e-b9a5-4444-9331-007599015cf0" />
+<img width="962" height="1396" alt="QQ_1761453804907" src="https://github.com/user-attachments/assets/6ae8df32-69a0-47af-9c7c-62eeaaf529bd" />
 
-<img width="944" height="1204" alt="QQ_1754325750276" src="https://github.com/user-attachments/assets/7c13b92e-62d7-41c4-8fa3-e6b463adf6d2" />
+<img width="958" height="1402" alt="QQ_1761453832541" src="https://github.com/user-attachments/assets/697620f5-b76a-4cca-8c1a-fd92f3e83a8d" />
+
+<img width="968" height="1400" alt="QQ_1761453880476" src="https://github.com/user-attachments/assets/598c481d-a3a9-40ee-9c11-fd68b5a6a86b" />
+
+<img width="948" height="720" alt="QQ_1761453907425" src="https://github.com/user-attachments/assets/fb965daf-92ac-4963-9b61-a5522b7434d7" />
+
