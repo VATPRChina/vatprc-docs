@@ -29,16 +29,20 @@ function RouteComponent() {
   };
 
   return (
-    <div className="mx-auto flex max-w-2xl flex-col gap-4">
+    <div className="container mx-auto flex flex-col items-start gap-4">
       <h1 className="text-3xl">
         <Trans>Upload image</Trans>
       </h1>
-      <Label htmlFor="picture">Picture</Label>
-      <Input id="picture" type="file" onChange={onSelectFile} />
-      <Button onClick={onUpload}>
-        {isPending && <Spinner />}
-        <Trans>Upload</Trans>
-      </Button>
+      <div className="flex w-full max-w-3xl flex-row items-end gap-4">
+        <div className="flex flex-grow flex-col gap-2">
+          <Label htmlFor="picture">Picture</Label>
+          <Input id="picture" type="file" onChange={onSelectFile} />
+        </div>
+        <Button onClick={onUpload} variant="secondary">
+          {isPending && <Spinner />}
+          <Trans>Upload</Trans>
+        </Button>
+      </div>
       <p>URL: {data?.url}</p>
       <p>Error: {error?.message}</p>
     </div>
