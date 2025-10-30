@@ -37,11 +37,13 @@ export const hasAuthenticatedAtom = atom(
 export const getAccessToken = () => sessionStore.get(accessTokenAtom)?.access_token;
 
 const handleSessionLoginResponse = (
-  result: Pick<components["schemas"]["LoginResDto"], "access_token" | "expires_in" | "refresh_token">,
+  result: Pick<components["schemas"]["TokenResponse"], "access_token" | "expires_in" | "refresh_token">,
 ) => {
   const expires_at = new Date(Date.now() + result.expires_in * 1000).toJSON();
   sessionStore.set(accessTokenAtom, { access_token: result.access_token, expires_at });
-  sessionStore.set(refreshTokenAtom, result.refresh_token);
+  if (result.refresh_token) {
+    sessionStore.set(refreshTokenAtom, result.refresh_token);
+  }
 };
 
 export const login = async (code: string) => {

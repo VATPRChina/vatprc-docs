@@ -3,8 +3,9 @@ import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { playwright } from "@vitest/browser-playwright";
 import tsConfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [
@@ -53,7 +54,7 @@ export default defineConfig({
           include: ["**/*.browser.{test,spec}.{ts,tsx}"],
           name: "browser",
           browser: {
-            provider: "playwright",
+            provider: playwright(),
             enabled: true,
             headless: true,
             instances: [{ browser: "chromium" }],
