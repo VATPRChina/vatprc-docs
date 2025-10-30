@@ -4,4181 +4,4196 @@
  */
 
 export interface paths {
-    "/auth/authorize": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Authorization request */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Value MUST be set to "code". */
-                    response_type?: string;
-                    client_id?: string;
-                    redirect_uri?: string;
-                    state?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Temporary Redirect */
-                307: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/auth/authorize": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/auth/device_authorization": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    /** Authorization request */
+    get: {
+      parameters: {
+        query?: {
+          /** @description Value MUST be set to "code". */
+          response_type?: string;
+          client_id?: string;
+          redirect_uri?: string;
+          state?: string;
         };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/x-www-form-urlencoded": {
-                        client_id?: string;
-                        scope?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["DeviceAuthorizationResponse"];
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenErrorDto"];
-                    };
-                };
-            };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Temporary Redirect */
+        307: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/auth/token": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/x-www-form-urlencoded": {
-                        grant_type?: string;
-                        client_id?: string;
-                        device_code?: string;
-                        refresh_token?: string;
-                        code?: string;
-                        code_verifier?: string;
-                        client_secret?: string;
-                    };
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenResponse"];
-                    };
-                };
-                /** @description Bad Request */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenErrorDto"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/auth/device_authorization": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/session": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get?: never;
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/x-www-form-urlencoded": {
+            client_id?: string;
+            scope?: string;
+          };
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["DeviceAuthorizationResponse"];
+          };
         };
-        put?: never;
-        post?: never;
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description No Content */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["TokenErrorDto"];
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/users": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UserDto"][];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/auth/token": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/users/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get?: never;
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/x-www-form-urlencoded": {
+            grant_type?: string;
+            client_id?: string;
+            device_code?: string;
+            refresh_token?: string;
+            code?: string;
+            code_verifier?: string;
+            client_secret?: string;
+          };
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UserDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description USER_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description USER_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "USER_NOT_FOUND";
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description USER_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:user-not-found";
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["TokenResponse"];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["TokenErrorDto"];
+          };
+        };
+      };
     };
-    "/api/users/{id}/roles": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": string[];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UserDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description USER_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description USER_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "USER_NOT_FOUND";
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description USER_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:user-not-found";
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description User {user_id} not found.
-                             * @example User {user_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/session": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/users/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["TokenDto"];
+          };
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UserDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/compat/online-status": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    put?: never;
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description No Content */
+        204: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["VatprcStatusDto"];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/compat/euroscope/metar/{icao}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    icao: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/users": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/compat/euroscope/metar/metar.php": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["UserDto"][];
+          };
         };
-        get: {
-            parameters: {
-                query?: {
-                    id?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/compat/homepage/events/vatsim": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/users/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/compat/trackaudio/mandatory_version": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["UserDto"];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description USER_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description USER_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "USER_NOT_FOUND";
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              message: string;
+              /**
+               * @description USER_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:user-not-found";
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              title: string;
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/events/{eid}/airspaces": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventAirspaceDto"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["CreateEventAirspaceDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventAirspaceDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/users/{id}/roles": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/events/{eid}/airspaces/{aid}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get?: never;
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    aid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventAirspaceDto"];
-                    };
-                };
-                /** @description EVENT_NOT_FOUND, EVENT_AIRSPACE_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_NOT_FOUND";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-not-found";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            detail: string;
-                        } | {
-                            /**
-                             * @description EVENT_AIRSPACE_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_AIRSPACE_NOT_FOUND";
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_AIRSPACE_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-airspace-not-found";
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": string[];
         };
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    aid: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["UpdateEventAirspaceDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventAirspaceDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["UserDto"];
+          };
         };
-        post?: never;
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    aid: string;
-                };
-                cookie?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventAirspaceDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description USER_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description USER_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "USER_NOT_FOUND";
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              message: string;
+              /**
+               * @description USER_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:user-not-found";
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              title: string;
+              /**
+               * @description User {user_id} not found.
+               * @example User {user_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/events": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventDto"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["CreateEventDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/users/me": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/events/{eid}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["UserDto"];
+          };
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventDto"];
-                    };
-                };
-                /** @description EVENT_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_NOT_FOUND";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-not-found";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
             };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["UpdateEventDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/events/{eid}/slots/{sid}/booking": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventBookingDto"];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventBookingDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description EVENT_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_NOT_FOUND";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-not-found";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventBookingDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/online-status": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/events/{eid}/slots": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["VatprcStatusDto"];
+          };
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["CreateEventSlotDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description EVENT_AIRSPACE_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_AIRSPACE_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_AIRSPACE_NOT_FOUND";
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_AIRSPACE_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-airspace-not-found";
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id}'s airspace {airspace_id} not found.
-                             * @example Event {event_id}'s airspace {airspace_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/events/{eid}/slots/bookings.csv": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/csv": unknown;
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/euroscope/metar/{icao}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/events/{eid}/slots/{sid}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          icao: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"];
-                    };
-                };
-                /** @description EVENT_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_NOT_FOUND";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-not-found";
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id} not found.
-                             * @example Event {event_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
             };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["UpdateEventSlotDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        post?: never;
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                    sid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/events/{eid}/slots/mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    eid: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EventSlotDto"];
-                    };
-                };
-                /** @description EVENT_SLOT_NOT_FOUND */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description EVENT_SLOT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            error_code: "EVENT_SLOT_NOT_FOUND";
-                            /**
-                             * @description Event {event_id}'s slot {slot_id} not found.
-                             * @example Event {event_id}'s slot {slot_id} not found.
-                             */
-                            message: string;
-                            /**
-                             * @description EVENT_SLOT_NOT_FOUND
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:event-slot-not-found";
-                            /**
-                             * @description Event {event_id}'s slot {slot_id} not found.
-                             * @example Event {event_id}'s slot {slot_id} not found.
-                             */
-                            title: string;
-                            /**
-                             * @description Event {event_id}'s slot {slot_id} not found.
-                             * @example Event {event_id}'s slot {slot_id} not found.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/euroscope/metar/metar.php": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/flights/active": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: {
+          id?: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["FlightDto"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/flights/by-callsign/{callsign}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    callsign: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["FlightDto"];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/homepage/events/vatsim": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/flights/by-callsign/{callsign}/warnings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    callsign: string;
-                };
-                cookie?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["WarningMessage"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/flights/by-callsign/{callsign}/route": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    callsign: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["FlightLeg"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/compat/trackaudio/mandatory_version": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/flights/temporary/by-plan/warnings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
         };
-        get: {
-            parameters: {
-                query?: {
-                    departure?: string;
-                    arrival?: string;
-                    aircraft?: string;
-                    equipment?: string;
-                    navigation_performance?: string;
-                    transponder?: string;
-                    raw_route?: string;
-                    cruising_level?: number;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
             };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["WarningMessage"][];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
     };
-    "/api/flights/mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["FlightDto"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/airspaces": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/notams": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Notam"][];
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventAirspaceDto"][];
+          };
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/sectors/current/permission": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["SectorPermissionResponse"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["CreateEventAirspaceDto"];
         };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventAirspaceDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
     };
-    "/api/storage/images": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "multipart/form-data": {
-                        image?: components["schemas"]["IFormFile"];
-                    };
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["UploadImageResponse"];
-                    };
-                };
-                /** @description INVALID_TOKEN */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            error_code: "INVALID_TOKEN";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            message: string;
-                            /**
-                             * @description INVALID_TOKEN
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:invalid-token";
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            title: string;
-                            /**
-                             * @description Invalid token {oauth_code}: {oauth_desc}.
-                             * @example Invalid token {oauth_code}: {oauth_desc}.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-                /** @description INTERNAL_SERVER_ERROR */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            error_code: "INTERNAL_SERVER_ERROR";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            message: string;
-                            /**
-                             * @description INTERNAL_SERVER_ERROR
-                             * @enum {string}
-                             */
-                            type: "urn:vatprc-uniapi-error:internal-server-error";
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            title: string;
-                            /**
-                             * @description An internal server error occurred.
-                             * @example An internal server error occurred.
-                             */
-                            detail: string;
-                        };
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/airspaces/{aid}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          aid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventAirspaceDto"];
+          };
+        };
+        /** @description EVENT_NOT_FOUND, EVENT_AIRSPACE_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json":
+              | {
+                  /**
+                   * @description EVENT_NOT_FOUND
+                   * @enum {string}
+                   */
+                  error_code: "EVENT_NOT_FOUND";
+                  /**
+                   * @description Event {event_id} not found.
+                   * @example Event {event_id} not found.
+                   */
+                  message: string;
+                  /**
+                   * @description EVENT_NOT_FOUND
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:event-not-found";
+                  /**
+                   * @description Event {event_id} not found.
+                   * @example Event {event_id} not found.
+                   */
+                  title: string;
+                  /**
+                   * @description Event {event_id} not found.
+                   * @example Event {event_id} not found.
+                   */
+                  detail: string;
+                }
+              | {
+                  /**
+                   * @description EVENT_AIRSPACE_NOT_FOUND
+                   * @enum {string}
+                   */
+                  error_code: "EVENT_AIRSPACE_NOT_FOUND";
+                  /**
+                   * @description Event {event_id}'s airspace {airspace_id} not found.
+                   * @example Event {event_id}'s airspace {airspace_id} not found.
+                   */
+                  message: string;
+                  /**
+                   * @description EVENT_AIRSPACE_NOT_FOUND
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:event-airspace-not-found";
+                  /**
+                   * @description Event {event_id}'s airspace {airspace_id} not found.
+                   * @example Event {event_id}'s airspace {airspace_id} not found.
+                   */
+                  title: string;
+                  /**
+                   * @description Event {event_id}'s airspace {airspace_id} not found.
+                   * @example Event {event_id}'s airspace {airspace_id} not found.
+                   */
+                  detail: string;
+                };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          aid: string;
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["UpdateEventAirspaceDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventAirspaceDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          aid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventAirspaceDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventDto"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["CreateEventDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventDto"];
+          };
+        };
+        /** @description EVENT_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "EVENT_NOT_FOUND";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              message: string;
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:event-not-found";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              title: string;
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["UpdateEventDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/slots/{sid}/booking": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventBookingDto"];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventBookingDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description EVENT_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "EVENT_NOT_FOUND";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              message: string;
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:event-not-found";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              title: string;
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventBookingDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/slots": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["CreateEventSlotDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description EVENT_AIRSPACE_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description EVENT_AIRSPACE_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "EVENT_AIRSPACE_NOT_FOUND";
+              /**
+               * @description Event {event_id}'s airspace {airspace_id} not found.
+               * @example Event {event_id}'s airspace {airspace_id} not found.
+               */
+              message: string;
+              /**
+               * @description EVENT_AIRSPACE_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:event-airspace-not-found";
+              /**
+               * @description Event {event_id}'s airspace {airspace_id} not found.
+               * @example Event {event_id}'s airspace {airspace_id} not found.
+               */
+              title: string;
+              /**
+               * @description Event {event_id}'s airspace {airspace_id} not found.
+               * @example Event {event_id}'s airspace {airspace_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/slots/bookings.csv": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "text/csv": unknown;
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/slots/{sid}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"];
+          };
+        };
+        /** @description EVENT_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "EVENT_NOT_FOUND";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              message: string;
+              /**
+               * @description EVENT_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:event-not-found";
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              title: string;
+              /**
+               * @description Event {event_id} not found.
+               * @example Event {event_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["UpdateEventSlotDto"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+          sid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/events/{eid}/slots/mine": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          eid: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["EventSlotDto"];
+          };
+        };
+        /** @description EVENT_SLOT_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description EVENT_SLOT_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "EVENT_SLOT_NOT_FOUND";
+              /**
+               * @description Event {event_id}'s slot {slot_id} not found.
+               * @example Event {event_id}'s slot {slot_id} not found.
+               */
+              message: string;
+              /**
+               * @description EVENT_SLOT_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:event-slot-not-found";
+              /**
+               * @description Event {event_id}'s slot {slot_id} not found.
+               * @example Event {event_id}'s slot {slot_id} not found.
+               */
+              title: string;
+              /**
+               * @description Event {event_id}'s slot {slot_id} not found.
+               * @example Event {event_id}'s slot {slot_id} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/active": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["FlightDto"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/by-callsign/{callsign}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          callsign: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["FlightDto"];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/by-callsign/{callsign}/warnings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          callsign: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["WarningMessage"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/by-callsign/{callsign}/route": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          callsign: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["FlightLeg"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/temporary/by-plan/warnings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: {
+          departure?: string;
+          arrival?: string;
+          aircraft?: string;
+          equipment?: string;
+          navigation_performance?: string;
+          transponder?: string;
+          raw_route?: string;
+          cruising_level?: number;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["WarningMessage"][];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/mine": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["FlightDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/notams": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["Notam"][];
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/sectors/current/permission": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["SectorPermissionResponse"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/storage/images": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            /** Format: binary */
+            image?: string;
+          };
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["UploadImageResponse"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        ControllerDto: {
-            /** Format: int32 */
-            cid: number;
-            name: string;
-            callsign: string;
-            frequency: string;
-        };
-        CreateEventAirspaceDto: {
-            name: string;
-            icao_codes: string[];
-            description: string;
-        };
-        CreateEventDto: {
-            title: string;
-            /** Format: date-time */
-            start_at: string;
-            /** Format: date-time */
-            end_at: string;
-            /** Format: date-time */
-            start_booking_at: string;
-            /** Format: date-time */
-            end_booking_at: string;
-            image_url?: string | null;
-            description: string;
-        };
-        CreateEventSlotDto: {
-            airspace_id: components["schemas"]["Ulid"];
-            /** Format: date-time */
-            enter_at: string;
-            /** Format: date-time */
-            leave_at?: string | null;
-            callsign?: string | null;
-            aircraft_type_icao?: string | null;
-        };
-        DeviceAuthorizationResponse: {
-            device_code: string;
-            user_code: string;
-            verification_uri: string;
-            verification_uri_complete?: string | null;
-            /** Format: uint32 */
-            expires_in: number;
-            /** Format: uint32 */
-            interval?: number | null;
-        };
-        EventAirspaceDto: {
-            id: components["schemas"]["Ulid"];
-            event_id: components["schemas"]["Ulid"];
-            name: string;
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-            icao_codes: string[];
-            description: string;
-        };
-        EventBookingDto: {
-            id: components["schemas"]["Ulid"];
-            user_id: components["schemas"]["Ulid"];
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-        };
-        EventBookingDto2: {
-            id: components["schemas"]["Ulid"];
-            user_id: components["schemas"]["Ulid"];
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-        } | null;
-        EventDto: {
-            id: components["schemas"]["Ulid"];
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-            title: string;
-            /** Format: date-time */
-            start_at: string;
-            /** Format: date-time */
-            end_at: string;
-            /** Format: date-time */
-            start_booking_at: string;
-            /** Format: date-time */
-            end_booking_at: string;
-            image_url?: string | null;
-            description: string;
-        };
-        EventSlotDto: {
-            id: components["schemas"]["Ulid"];
-            event_id: components["schemas"]["Ulid"];
-            airspace_id: components["schemas"]["Ulid"];
-            airspace: components["schemas"]["EventAirspaceDto"];
-            /** Format: date-time */
-            enter_at: string;
-            /** Format: date-time */
-            leave_at?: string | null;
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-            booking?: components["schemas"]["EventBookingDto2"];
-            callsign?: string | null;
-            aircraft_type_icao?: string | null;
-        };
-        FlightDto: {
-            id: components["schemas"]["Ulid"];
-            cid: string;
-            callsign: string;
-            /** Format: date-time */
-            last_observed_at: string;
-            departure: string;
-            arrival: string;
-            equipment: string;
-            navigation_performance: string;
-            transponder: string;
-            raw_route: string;
-            aircraft: string;
-            /** Format: int64 */
-            altitude: number;
-            /** Format: int64 */
-            cruising_level: number;
-        };
-        FlightFix: {
-            identifier: string;
-        };
-        FlightLeg: {
-            from: components["schemas"]["FlightFix"];
-            to: components["schemas"]["FlightFix"];
-            leg_identifier: string;
-        };
-        FutureControllerDto: {
-            callsign: string;
-            name: string;
-            start: string;
-            /** Format: date-time */
-            start_utc: string;
-            end: string;
-            /** Format: date-time */
-            end_utc: string;
-        };
-        /** Format: binary */
-        IFormFile: string;
-        Notam: {
-            title: string;
-            language_code: string;
-            link: string;
-        };
-        PilotDto: {
-            /** Format: int32 */
-            cid: number;
-            name: string;
-            callsign: string;
-            departure: string | null;
-            arrival: string | null;
-            aircraft: string | null;
-        };
-        SectorPermissionResponse: {
-            has_permission: boolean;
-            sector_type: string;
-        };
-        TokenDto: {
-            user: components["schemas"]["UserDto"];
-            /** Format: date-time */
-            issued_at: string;
-            /** Format: date-time */
-            expires_at: string;
-        };
-        TokenErrorDto: {
-            error: string;
-            error_description?: string | null;
-            error_uri?: string | null;
-            state?: string | null;
-        };
-        TokenResponse: {
-            access_token: string;
-            token_type: string;
-            /** Format: uint32 */
-            expires_in: number;
-            refresh_token?: string | null;
-            scope: string;
-        };
-        /** @description ULID */
-        Ulid: string;
-        UpdateEventAirspaceDto: {
-            name: string;
-            icao_codes: string[];
-            description: string;
-        };
-        UpdateEventDto: {
-            title: string;
-            /** Format: date-time */
-            start_at: string;
-            /** Format: date-time */
-            end_at: string;
-            /** Format: date-time */
-            start_booking_at: string;
-            /** Format: date-time */
-            end_booking_at: string;
-            image_url?: string | null;
-            description: string;
-        };
-        UpdateEventSlotDto: {
-            /** Format: date-time */
-            enter_at: string;
-            /** Format: date-time */
-            leave_at?: string | null;
-            callsign?: string | null;
-            aircraft_type_icao?: string | null;
-        };
-        UploadImageResponse: {
-            url: string;
-        };
-        UserDto: {
-            id: components["schemas"]["Ulid"];
-            cid: string;
-            full_name: string;
-            /** Format: date-time */
-            created_at: string;
-            /** Format: date-time */
-            updated_at: string;
-            roles: string[];
-        };
-        VatprcStatusDto: {
-            /** Format: date-time */
-            last_updated: string;
-            pilots: components["schemas"]["PilotDto"][];
-            controllers: components["schemas"]["ControllerDto"][];
-            future_controllers: components["schemas"]["FutureControllerDto"][];
-        };
-        WarningMessage: {
-            message_code: components["schemas"]["WarningMessageCode"];
-            parameter?: string | null;
-            field: components["schemas"]["WarningMessageField"];
-            /** Format: int32 */
-            field_index?: number | null;
-        };
-        /** @enum {unknown} */
-        WarningMessageCode: "no_rvsm" | "no_rnav1" | "rnp_ar" | "rnp_ar_without_rf" | "no_transponder" | "route_direct_segment" | "route_leg_direction" | "airway_require_approval" | "not_preferred_route" | "cruising_level_mismatch" | "cruising_level_too_low" | "cruising_level_not_allowed" | "route_match_preferred";
-        /** @enum {unknown} */
-        WarningMessageField: "equipment" | "transponder" | "navigation_performance" | "route" | "cruising_level";
+  schemas: {
+    ControllerDto: {
+      /** Format: int32 */
+      cid: number;
+      name: string;
+      callsign: string;
+      frequency: string;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    CreateEventAirspaceDto: {
+      name: string;
+      icao_codes: string[];
+      description: string;
+    };
+    CreateEventDto: {
+      title: string;
+      /** Format: date-time */
+      start_at: string;
+      /** Format: date-time */
+      end_at: string;
+      /** Format: date-time */
+      start_booking_at: string;
+      /** Format: date-time */
+      end_booking_at: string;
+      image_url?: string | null;
+      description: string;
+    };
+    CreateEventSlotDto: {
+      airspace_id: components["schemas"]["Ulid"];
+      /** Format: date-time */
+      enter_at: string;
+      /** Format: date-time */
+      leave_at?: string | null;
+      callsign?: string | null;
+      aircraft_type_icao?: string | null;
+    };
+    DeviceAuthorizationResponse: {
+      device_code: string;
+      user_code: string;
+      verification_uri: string;
+      verification_uri_complete?: string | null;
+      /** Format: uint32 */
+      expires_in: number;
+      /** Format: uint32 */
+      interval?: number | null;
+    };
+    EventAirspaceDto: {
+      id: components["schemas"]["Ulid"];
+      event_id: components["schemas"]["Ulid"];
+      name: string;
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+      icao_codes: string[];
+      description: string;
+    };
+    EventBookingDto: {
+      id: components["schemas"]["Ulid"];
+      user_id: components["schemas"]["Ulid"];
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+    };
+    EventBookingDto2: {
+      id: components["schemas"]["Ulid"];
+      user_id: components["schemas"]["Ulid"];
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+    } | null;
+    EventDto: {
+      id: components["schemas"]["Ulid"];
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+      title: string;
+      /** Format: date-time */
+      start_at: string;
+      /** Format: date-time */
+      end_at: string;
+      /** Format: date-time */
+      start_booking_at: string;
+      /** Format: date-time */
+      end_booking_at: string;
+      image_url?: string | null;
+      description: string;
+    };
+    EventSlotDto: {
+      id: components["schemas"]["Ulid"];
+      event_id: components["schemas"]["Ulid"];
+      airspace_id: components["schemas"]["Ulid"];
+      airspace: components["schemas"]["EventAirspaceDto"];
+      /** Format: date-time */
+      enter_at: string;
+      /** Format: date-time */
+      leave_at?: string | null;
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+      booking?: components["schemas"]["EventBookingDto2"];
+      callsign?: string | null;
+      aircraft_type_icao?: string | null;
+    };
+    FlightDto: {
+      id: components["schemas"]["Ulid"];
+      cid: string;
+      callsign: string;
+      /** Format: date-time */
+      last_observed_at: string;
+      departure: string;
+      arrival: string;
+      equipment: string;
+      navigation_performance: string;
+      transponder: string;
+      raw_route: string;
+      aircraft: string;
+      /** Format: int64 */
+      altitude: number;
+      /** Format: int64 */
+      cruising_level: number;
+    };
+    FlightFix: {
+      identifier: string;
+    };
+    FlightLeg: {
+      from: components["schemas"]["FlightFix"];
+      to: components["schemas"]["FlightFix"];
+      leg_identifier: string;
+    };
+    FutureControllerDto: {
+      callsign: string;
+      name: string;
+      start: string;
+      /** Format: date-time */
+      start_utc: string;
+      end: string;
+      /** Format: date-time */
+      end_utc: string;
+    };
+    Notam: {
+      title: string;
+      language_code: string;
+      link: string;
+    };
+    PilotDto: {
+      /** Format: int32 */
+      cid: number;
+      name: string;
+      callsign: string;
+      departure: string | null;
+      arrival: string | null;
+      aircraft: string | null;
+    };
+    SectorPermissionResponse: {
+      has_permission: boolean;
+      sector_type: string;
+    };
+    TokenDto: {
+      user: components["schemas"]["UserDto"];
+      /** Format: date-time */
+      issued_at: string;
+      /** Format: date-time */
+      expires_at: string;
+    };
+    TokenErrorDto: {
+      error: string;
+      error_description?: string | null;
+      error_uri?: string | null;
+      state?: string | null;
+    };
+    TokenResponse: {
+      access_token: string;
+      token_type: string;
+      /** Format: uint32 */
+      expires_in: number;
+      refresh_token?: string | null;
+      scope: string;
+    };
+    /** @description ULID */
+    Ulid: string;
+    UpdateEventAirspaceDto: {
+      name: string;
+      icao_codes: string[];
+      description: string;
+    };
+    UpdateEventDto: {
+      title: string;
+      /** Format: date-time */
+      start_at: string;
+      /** Format: date-time */
+      end_at: string;
+      /** Format: date-time */
+      start_booking_at: string;
+      /** Format: date-time */
+      end_booking_at: string;
+      image_url?: string | null;
+      description: string;
+    };
+    UpdateEventSlotDto: {
+      /** Format: date-time */
+      enter_at: string;
+      /** Format: date-time */
+      leave_at?: string | null;
+      callsign?: string | null;
+      aircraft_type_icao?: string | null;
+    };
+    UploadImageResponse: {
+      url: string;
+    };
+    UserDto: {
+      id: components["schemas"]["Ulid"];
+      cid: string;
+      full_name: string;
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      updated_at: string;
+      roles: string[];
+      direct_roles: string[];
+    };
+    VatprcStatusDto: {
+      /** Format: date-time */
+      last_updated: string;
+      pilots: components["schemas"]["PilotDto"][];
+      controllers: components["schemas"]["ControllerDto"][];
+      future_controllers: components["schemas"]["FutureControllerDto"][];
+    };
+    WarningMessage: {
+      message_code: components["schemas"]["WarningMessageCode"];
+      parameter?: string | null;
+      field: components["schemas"]["WarningMessageField"];
+      /** Format: int32 */
+      field_index?: number | null;
+    };
+    /** @enum {unknown} */
+    WarningMessageCode:
+      | "no_rvsm"
+      | "no_rnav1"
+      | "rnp_ar"
+      | "rnp_ar_without_rf"
+      | "no_transponder"
+      | "route_direct_segment"
+      | "route_leg_direction"
+      | "airway_require_approval"
+      | "not_preferred_route"
+      | "cruising_level_mismatch"
+      | "cruising_level_too_low"
+      | "cruising_level_not_allowed"
+      | "route_match_preferred";
+    /** @enum {unknown} */
+    WarningMessageField: "equipment" | "transponder" | "navigation_performance" | "route" | "cruising_level";
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;

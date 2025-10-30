@@ -58,6 +58,10 @@ msgstr "关于我们"
 msgid "Absent"
 msgstr "缺席"
 
+#: src/routes/users/index.tsx:164
+msgid "Actions"
+msgstr "操作"
+
 #: src/routes/flights/$callsign.tsx:194
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "将 <0>D1</0> 或 <1>D2</1> 添加到 PBN。"
@@ -141,6 +145,10 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
+#: src/routes/users/index.tsx:148
+msgid "Cancel"
+msgstr "取消"
+
 #: src/routes/__root.tsx:152
 msgid "Charts"
 msgstr "航图"
@@ -164,6 +172,10 @@ msgstr "中国 RVSM 高度层"
 #: src/routes/flights/$callsign.tsx:118
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
+
+#: src/routes/users/index.tsx:71
+msgid "CID"
+msgstr "CID"
 
 #: src/routes/__root.tsx:145
 msgid "Community & Teamspeak 3"
@@ -214,6 +226,10 @@ msgstr "编辑中文"
 #: src/components/discourse-doc.tsx:66
 msgid "Edit English"
 msgstr "编辑英文"
+
+#: src/routes/users/index.tsx:118
+msgid "Edit roles"
+msgstr "编辑权限"
 
 #: src/routes/flights/$callsign.tsx:31
 msgid "Edit your flight plan on VATSIM."
@@ -276,6 +292,22 @@ msgstr "航路"
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "论坛"
+
+#: src/routes/users/index.tsx:287
+msgid "Go to first page"
+msgstr "前往第一页"
+
+#: src/routes/users/index.tsx:323
+msgid "Go to last page"
+msgstr "前往最后页"
+
+#: src/routes/users/index.tsx:311
+msgid "Go to next page"
+msgstr "前往下一页"
+
+#: src/routes/users/index.tsx:299
+msgid "Go to previous page"
+msgstr "前往上一页"
 
 #: src/components/recent-events.tsx:74
 msgid "In This Week"
@@ -346,6 +378,10 @@ msgstr "会议记录"
 msgid "Moodle"
 msgstr "Moodle"
 
+#: src/routes/users/index.tsx:79
+msgid "Name"
+msgstr "姓名"
+
 #: src/routes/__root.tsx:163
 msgctxt "new feature"
 msgid "New"
@@ -358,6 +394,10 @@ msgstr "近期无活动计划。"
 #: src/components/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
+
+#: src/routes/users/index.tsx:243
+msgid "No results."
+msgstr "没有数据"
 
 #: src/routes/flights/$callsign.tsx:143
 msgid "No RNAV1"
@@ -403,6 +443,10 @@ msgstr "其他移交协议书"
 #: src/routes/airspace/sop.tsx:44
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
+
+#: src/routes/users/index.tsx:274
+msgid "Page {currentPage} of {totalPages}"
+msgstr "第 {currentPage} 页，共 {totalPages} 页"
 
 #: src/routes/flights/$callsign.tsx:414
 msgid "PBN"
@@ -482,13 +526,33 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
+#: src/routes/users/index.tsx:83
+msgid "Roles"
+msgstr "权限"
+
 #: src/routes/flights/$callsign.tsx:406
 msgid "Route"
 msgstr "航路"
 
+#: src/routes/users/index.tsx:253
+msgid "Rows per page"
+msgstr "每页行数"
+
 #: src/components/flight-warnings.tsx:44
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
+
+#: src/routes/users/index.tsx:154
+msgid "Save changes"
+msgstr "保存变更"
+
+#: src/routes/users/index.tsx:199
+msgid "Search CID"
+msgstr "按 CID 搜索"
+
+#: src/routes/users/index.tsx:208
+msgid "Search Name"
+msgstr "按姓名搜索"
 
 #: src/routes/__root.tsx:193
 msgid "Sector Files"
@@ -648,7 +712,7 @@ msgstr "应答机设备代码为空。"
 msgid "until"
 msgstr "直到"
 
-#: src/routes/docs/utils/image.tsx:40
+#: src/routes/docs/utils/image.tsx:43
 msgid "Upload"
 msgstr "上传"
 

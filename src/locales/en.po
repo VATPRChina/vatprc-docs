@@ -58,6 +58,10 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
+#: src/routes/users/index.tsx:164
+msgid "Actions"
+msgstr "Actions"
+
 #: src/routes/flights/$callsign.tsx:194
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
@@ -141,6 +145,10 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
+#: src/routes/users/index.tsx:148
+msgid "Cancel"
+msgstr "Cancel"
+
 #: src/routes/__root.tsx:152
 msgid "Charts"
 msgstr "Charts"
@@ -164,6 +172,10 @@ msgstr "China RVSM flight level"
 #: src/routes/flights/$callsign.tsx:118
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
+
+#: src/routes/users/index.tsx:71
+msgid "CID"
+msgstr "CID"
 
 #: src/routes/__root.tsx:145
 msgid "Community & Teamspeak 3"
@@ -214,6 +226,10 @@ msgstr "Edit Chinese"
 #: src/components/discourse-doc.tsx:66
 msgid "Edit English"
 msgstr "Edit English"
+
+#: src/routes/users/index.tsx:118
+msgid "Edit roles"
+msgstr "Edit roles"
 
 #: src/routes/flights/$callsign.tsx:31
 msgid "Edit your flight plan on VATSIM."
@@ -276,6 +292,22 @@ msgstr "Flight Route"
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "Forum"
+
+#: src/routes/users/index.tsx:287
+msgid "Go to first page"
+msgstr "Go to first page"
+
+#: src/routes/users/index.tsx:323
+msgid "Go to last page"
+msgstr "Go to last page"
+
+#: src/routes/users/index.tsx:311
+msgid "Go to next page"
+msgstr "Go to next page"
+
+#: src/routes/users/index.tsx:299
+msgid "Go to previous page"
+msgstr "Go to previous page"
 
 #: src/components/recent-events.tsx:74
 msgid "In This Week"
@@ -346,6 +378,10 @@ msgstr "Meeting Notes"
 msgid "Moodle"
 msgstr "Moodle"
 
+#: src/routes/users/index.tsx:79
+msgid "Name"
+msgstr "Name"
+
 #: src/routes/__root.tsx:163
 msgctxt "new feature"
 msgid "New"
@@ -358,6 +394,10 @@ msgstr "No event is scheduled recently."
 #: src/components/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "No online pilot."
+
+#: src/routes/users/index.tsx:243
+msgid "No results."
+msgstr "No results."
 
 #: src/routes/flights/$callsign.tsx:143
 msgid "No RNAV1"
@@ -403,6 +443,10 @@ msgstr "Other LOAs"
 #: src/routes/airspace/sop.tsx:44
 msgid "Other SOPs"
 msgstr "Other SOPs"
+
+#: src/routes/users/index.tsx:274
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Page {currentPage} of {totalPages}"
 
 #: src/routes/flights/$callsign.tsx:414
 msgid "PBN"
@@ -482,13 +526,33 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
+#: src/routes/users/index.tsx:83
+msgid "Roles"
+msgstr "Roles"
+
 #: src/routes/flights/$callsign.tsx:406
 msgid "Route"
 msgstr "Route"
 
+#: src/routes/users/index.tsx:253
+msgid "Rows per page"
+msgstr "Rows per page"
+
 #: src/components/flight-warnings.tsx:44
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
+
+#: src/routes/users/index.tsx:154
+msgid "Save changes"
+msgstr "Save changes"
+
+#: src/routes/users/index.tsx:199
+msgid "Search CID"
+msgstr "Search CID"
+
+#: src/routes/users/index.tsx:208
+msgid "Search Name"
+msgstr "Search Name"
 
 #: src/routes/__root.tsx:193
 msgid "Sector Files"
@@ -648,7 +712,7 @@ msgstr "Transponder field is empty."
 msgid "until"
 msgstr "until"
 
-#: src/routes/docs/utils/image.tsx:40
+#: src/routes/docs/utils/image.tsx:43
 msgid "Upload"
 msgstr "Upload"
 
