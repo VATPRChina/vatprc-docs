@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Toaster } from "@/components/ui/sonner";
 import { UserInfo } from "@/components/user-info";
+import { usePermissions } from "@/lib/client";
 import { getLocale, getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";
@@ -198,22 +199,42 @@ const contents = [
       </ul>
     ),
   },
+  {
+    title: <Trans>Admin</Trans>,
+    requiresRole: "volunteer",
+    content: () => (
+      <ul className="nav-list-grid">
+        <NavMenuLink href="/users">
+          <Trans>User List</Trans>
+        </NavMenuLink>
+        <NavMenuLink href="/docs/utils/image">
+          <Trans>Image Upload Tool</Trans>
+        </NavMenuLink>
+      </ul>
+    ),
+  },
 ];
 
 export const NavMenu: React.FC = () => {
   const locale = getLocale();
+  const roles = usePermissions();
 
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {contents.map((content, i) => (
-          <NavigationMenuItem key={i}>
-            <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <content.content locale={locale} />
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        ))}
+        {contents.map((content, i) => {
+          if (content.requiresRole && !roles.includes(content.requiresRole)) {
+            return null;
+          }
+          return (
+            <NavigationMenuItem key={i}>
+              <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <content.content locale={locale} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          );
+        })}
       </NavigationMenuList>
     </NavigationMenu>
   );

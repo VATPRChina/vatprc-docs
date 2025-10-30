@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:280
+#: src/routes/__root.tsx:301
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
@@ -22,7 +22,7 @@ msgstr "VATSIM P.R. China Division"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
-#: src/routes/__root.tsx:262
+#: src/routes/__root.tsx:283
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
@@ -50,7 +50,7 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/routes/__root.tsx:68
+#: src/routes/__root.tsx:69
 msgid "About Us"
 msgstr "About Us"
 
@@ -74,11 +74,15 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
+#: src/routes/__root.tsx:203
+msgid "Admin"
+msgstr "Admin"
+
 #: src/components/flight-warnings.tsx:41
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
-#: src/routes/__root.tsx:117
+#: src/routes/__root.tsx:118
 msgid "Airspace"
 msgstr "Airspace"
 
@@ -90,11 +94,11 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/routes/__root.tsx:77
+#: src/routes/__root.tsx:78
 msgid "Announcement"
 msgstr "Announcement"
 
-#: src/routes/__root.tsx:107
+#: src/routes/__root.tsx:108
 msgid "API Document"
 msgstr "API Document"
 
@@ -110,12 +114,12 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
-#: src/routes/__root.tsx:187
+#: src/routes/__root.tsx:188
 #: src/routes/index.tsx:61
 msgid "ATC Center"
 msgstr "ATC Center"
 
-#: src/routes/__root.tsx:123
+#: src/routes/__root.tsx:124
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
@@ -124,7 +128,7 @@ msgstr "ATC Positions & Frequencies"
 msgid "Back"
 msgstr "Back"
 
-#: src/routes/__root.tsx:180
+#: src/routes/__root.tsx:181
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
@@ -149,7 +153,7 @@ msgstr "Callsign & Aircraft"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/routes/__root.tsx:152
+#: src/routes/__root.tsx:153
 msgid "Charts"
 msgstr "Charts"
 
@@ -157,7 +161,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/routes/__root.tsx:120
+#: src/routes/__root.tsx:121
 msgid "China RVSM"
 msgstr "China RVSM"
 
@@ -177,17 +181,17 @@ msgstr "China RVSM odd flight level"
 msgid "CID"
 msgstr "CID"
 
-#: src/routes/__root.tsx:145
+#: src/routes/__root.tsx:146
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/__root.tsx:174
+#: src/routes/__root.tsx:175
 #: src/routes/controller/controller-list.tsx:9
 #: src/routes/controller/controller-list.tsx:18
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/__root.tsx:170
+#: src/routes/__root.tsx:171
 msgid "Controllers"
 msgstr "Controllers"
 
@@ -244,7 +248,7 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/routes/__root.tsx:104
+#: src/routes/__root.tsx:105
 msgid "Event"
 msgstr "Event"
 
@@ -275,7 +279,7 @@ msgstr "Flight looks good. Please confirm with the clearance delivery controller
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
-#: src/routes/__root.tsx:161
+#: src/routes/__root.tsx:162
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -288,36 +292,40 @@ msgstr "Flight Plan Checker"
 msgid "Flight Route"
 msgstr "Flight Route"
 
-#: src/routes/__root.tsx:96
+#: src/routes/__root.tsx:97
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "Forum"
 
-#: src/routes/users/index.tsx:287
+#: src/routes/users/index.tsx:288
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/routes/users/index.tsx:323
+#: src/routes/users/index.tsx:324
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/routes/users/index.tsx:311
+#: src/routes/users/index.tsx:312
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/routes/users/index.tsx:299
+#: src/routes/users/index.tsx:300
 msgid "Go to previous page"
 msgstr "Go to previous page"
+
+#: src/routes/__root.tsx:211
+msgid "Image Upload Tool"
+msgstr "Image Upload Tool"
 
 #: src/components/recent-events.tsx:74
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/routes/__root.tsx:80
+#: src/routes/__root.tsx:81
 msgid "Introduction"
 msgstr "Introduction"
 
-#: src/routes/__root.tsx:142
+#: src/routes/__root.tsx:143
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
@@ -333,7 +341,7 @@ msgstr "Learn more about China RVSM"
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
 
-#: src/routes/__root.tsx:196
+#: src/routes/__root.tsx:197
 #: src/routes/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
@@ -358,7 +366,7 @@ msgstr "Loading"
 msgid "Login"
 msgstr "Login"
 
-#: src/routes/__root.tsx:89
+#: src/routes/__root.tsx:90
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
@@ -370,11 +378,11 @@ msgstr "Logout"
 msgid "Match designated route"
 msgstr "Match designated route"
 
-#: src/routes/__root.tsx:92
+#: src/routes/__root.tsx:93
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/routes/__root.tsx:190
+#: src/routes/__root.tsx:191
 msgid "Moodle"
 msgstr "Moodle"
 
@@ -382,7 +390,7 @@ msgstr "Moodle"
 msgid "Name"
 msgstr "Name"
 
-#: src/routes/__root.tsx:163
+#: src/routes/__root.tsx:164
 msgctxt "new feature"
 msgid "New"
 msgstr "New"
@@ -395,7 +403,7 @@ msgstr "No event is scheduled recently."
 msgid "No online pilot."
 msgstr "No online pilot."
 
-#: src/routes/users/index.tsx:243
+#: src/routes/users/index.tsx:245
 msgid "No results."
 msgstr "No results."
 
@@ -432,7 +440,7 @@ msgstr "Online Controllers"
 msgid "Online Pilots"
 msgstr "Online Pilots"
 
-#: src/routes/__root.tsx:113
+#: src/routes/__root.tsx:114
 msgid "Operation"
 msgstr "Operation"
 
@@ -444,7 +452,7 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/routes/users/index.tsx:274
+#: src/routes/users/index.tsx:275
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
 
@@ -466,11 +474,11 @@ msgstr "Pick a suitable cruising level."
 msgid "Pilot"
 msgstr "Pilot"
 
-#: src/routes/__root.tsx:149
+#: src/routes/__root.tsx:150
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
-#: src/routes/__root.tsx:135
+#: src/routes/__root.tsx:136
 msgid "Pilots"
 msgstr "Pilots"
 
@@ -494,11 +502,11 @@ msgstr "Please login to book a slot."
 msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
-#: src/routes/__root.tsx:86
+#: src/routes/__root.tsx:87
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/routes/__root.tsx:177
+#: src/routes/__root.tsx:178
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
@@ -534,7 +542,7 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
-#: src/routes/users/index.tsx:253
+#: src/routes/users/index.tsx:254
 msgid "Rows per page"
 msgstr "Rows per page"
 
@@ -546,15 +554,15 @@ msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspa
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/routes/users/index.tsx:199
+#: src/routes/users/index.tsx:200
 msgid "Search CID"
 msgstr "Search CID"
 
-#: src/routes/users/index.tsx:208
+#: src/routes/users/index.tsx:210
 msgid "Search Name"
 msgstr "Search Name"
 
-#: src/routes/__root.tsx:193
+#: src/routes/__root.tsx:194
 msgid "Sector Files"
 msgstr "Sector Files"
 
@@ -574,16 +582,16 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/routes/__root.tsx:83
+#: src/routes/__root.tsx:84
 msgid "Staff"
 msgstr "Staff"
 
-#: src/routes/__root.tsx:126
+#: src/routes/__root.tsx:127
 #: src/routes/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
-#: src/routes/__root.tsx:139
+#: src/routes/__root.tsx:140
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
@@ -720,7 +728,11 @@ msgstr "Upload"
 msgid "Upload image"
 msgstr "Upload image"
 
-#: src/routes/__root.tsx:155
+#: src/routes/__root.tsx:208
+msgid "User List"
+msgstr "User List"
+
+#: src/routes/__root.tsx:156
 msgid "vACDM"
 msgstr "vACDM"
 
@@ -732,24 +744,24 @@ msgstr "Validation Result"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/routes/__root.tsx:239
+#: src/routes/__root.tsx:260
 #: src/routes/index.tsx:27
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM P.R.China Division"
 
-#: src/routes/__root.tsx:129
+#: src/routes/__root.tsx:130
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/routes/__root.tsx:183
+#: src/routes/__root.tsx:184
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/__root.tsx:256
+#: src/routes/__root.tsx:277
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
-#: src/routes/__root.tsx:158
+#: src/routes/__root.tsx:159
 msgid "Weather"
 msgstr "Weather"
 

@@ -8,3 +8,9 @@ export const usePermission = (role: string) => {
   if (!data?.user) return false;
   return data.user.roles.includes(role) ?? false;
 };
+
+export const usePermissions = () => {
+  const { data } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  if (!data?.user) return [];
+  return data.user.roles ?? [];
+};

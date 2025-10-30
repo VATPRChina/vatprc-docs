@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:280
+#: src/routes/__root.tsx:301
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
@@ -22,7 +22,7 @@ msgstr "VATSIM 中国分部"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
-#: src/routes/__root.tsx:262
+#: src/routes/__root.tsx:283
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
 
@@ -50,7 +50,7 @@ msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/routes/__root.tsx:68
+#: src/routes/__root.tsx:69
 msgid "About Us"
 msgstr "关于我们"
 
@@ -74,11 +74,15 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
+#: src/routes/__root.tsx:203
+msgid "Admin"
+msgstr "管理"
+
 #: src/components/flight-warnings.tsx:41
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 
-#: src/routes/__root.tsx:117
+#: src/routes/__root.tsx:118
 msgid "Airspace"
 msgstr "空域"
 
@@ -90,11 +94,11 @@ msgstr "允许的巡航高度是 {level} （英尺）。"
 msgid "Already Booked"
 msgstr "已被预订"
 
-#: src/routes/__root.tsx:77
+#: src/routes/__root.tsx:78
 msgid "Announcement"
 msgstr "公告"
 
-#: src/routes/__root.tsx:107
+#: src/routes/__root.tsx:108
 msgid "API Document"
 msgstr "API 文档"
 
@@ -110,12 +114,12 @@ msgstr "区域"
 msgid "Arrival"
 msgstr "目的机场"
 
-#: src/routes/__root.tsx:187
+#: src/routes/__root.tsx:188
 #: src/routes/index.tsx:61
 msgid "ATC Center"
 msgstr "ATC 中心"
 
-#: src/routes/__root.tsx:123
+#: src/routes/__root.tsx:124
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
@@ -124,7 +128,7 @@ msgstr "管制席位及频率"
 msgid "Back"
 msgstr "返回"
 
-#: src/routes/__root.tsx:180
+#: src/routes/__root.tsx:181
 msgid "Become a Controller"
 msgstr "成为管制员"
 
@@ -149,7 +153,7 @@ msgstr "呼号和机型"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/routes/__root.tsx:152
+#: src/routes/__root.tsx:153
 msgid "Charts"
 msgstr "航图"
 
@@ -157,7 +161,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/routes/__root.tsx:120
+#: src/routes/__root.tsx:121
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
@@ -177,17 +181,17 @@ msgstr "中国 RVSM 单数高度层"
 msgid "CID"
 msgstr "CID"
 
-#: src/routes/__root.tsx:145
+#: src/routes/__root.tsx:146
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/__root.tsx:174
+#: src/routes/__root.tsx:175
 #: src/routes/controller/controller-list.tsx:9
 #: src/routes/controller/controller-list.tsx:18
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/__root.tsx:170
+#: src/routes/__root.tsx:171
 msgid "Controllers"
 msgstr "管制员"
 
@@ -244,7 +248,7 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
-#: src/routes/__root.tsx:104
+#: src/routes/__root.tsx:105
 msgid "Event"
 msgstr "活动"
 
@@ -275,7 +279,7 @@ msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 msgid "Flight Plan"
 msgstr "飞行计划"
 
-#: src/routes/__root.tsx:161
+#: src/routes/__root.tsx:162
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -288,36 +292,40 @@ msgstr "飞行计划检查器"
 msgid "Flight Route"
 msgstr "航路"
 
-#: src/routes/__root.tsx:96
+#: src/routes/__root.tsx:97
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "论坛"
 
-#: src/routes/users/index.tsx:287
+#: src/routes/users/index.tsx:288
 msgid "Go to first page"
 msgstr "前往第一页"
 
-#: src/routes/users/index.tsx:323
+#: src/routes/users/index.tsx:324
 msgid "Go to last page"
 msgstr "前往最后页"
 
-#: src/routes/users/index.tsx:311
+#: src/routes/users/index.tsx:312
 msgid "Go to next page"
 msgstr "前往下一页"
 
-#: src/routes/users/index.tsx:299
+#: src/routes/users/index.tsx:300
 msgid "Go to previous page"
 msgstr "前往上一页"
+
+#: src/routes/__root.tsx:211
+msgid "Image Upload Tool"
+msgstr "图床"
 
 #: src/components/recent-events.tsx:74
 msgid "In This Week"
 msgstr "本周"
 
-#: src/routes/__root.tsx:80
+#: src/routes/__root.tsx:81
 msgid "Introduction"
 msgstr "介绍"
 
-#: src/routes/__root.tsx:142
+#: src/routes/__root.tsx:143
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
@@ -333,7 +341,7 @@ msgstr "了解中国 RVSM"
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
 
-#: src/routes/__root.tsx:196
+#: src/routes/__root.tsx:197
 #: src/routes/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "移交协议书"
@@ -358,7 +366,7 @@ msgstr "正在加载"
 msgid "Login"
 msgstr "登入"
 
-#: src/routes/__root.tsx:89
+#: src/routes/__root.tsx:90
 msgid "Logo Pack"
 msgstr "视觉标识包"
 
@@ -370,11 +378,11 @@ msgstr "登出"
 msgid "Match designated route"
 msgstr "符合指定航路"
 
-#: src/routes/__root.tsx:92
+#: src/routes/__root.tsx:93
 msgid "Meeting Notes"
 msgstr "会议记录"
 
-#: src/routes/__root.tsx:190
+#: src/routes/__root.tsx:191
 msgid "Moodle"
 msgstr "Moodle"
 
@@ -382,7 +390,7 @@ msgstr "Moodle"
 msgid "Name"
 msgstr "姓名"
 
-#: src/routes/__root.tsx:163
+#: src/routes/__root.tsx:164
 msgctxt "new feature"
 msgid "New"
 msgstr "新"
@@ -395,7 +403,7 @@ msgstr "近期无活动计划。"
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
 
-#: src/routes/users/index.tsx:243
+#: src/routes/users/index.tsx:245
 msgid "No results."
 msgstr "没有数据"
 
@@ -432,7 +440,7 @@ msgstr "在线管制员"
 msgid "Online Pilots"
 msgstr "在线飞行员"
 
-#: src/routes/__root.tsx:113
+#: src/routes/__root.tsx:114
 msgid "Operation"
 msgstr "运行"
 
@@ -444,7 +452,7 @@ msgstr "其他移交协议书"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/routes/users/index.tsx:274
+#: src/routes/users/index.tsx:275
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
 
@@ -466,11 +474,11 @@ msgstr "选择合适的巡航高度。"
 msgid "Pilot"
 msgstr "飞行员"
 
-#: src/routes/__root.tsx:149
+#: src/routes/__root.tsx:150
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
 
-#: src/routes/__root.tsx:135
+#: src/routes/__root.tsx:136
 msgid "Pilots"
 msgstr "飞行员"
 
@@ -494,11 +502,11 @@ msgstr "预订时刻前请先登入。"
 msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
-#: src/routes/__root.tsx:86
+#: src/routes/__root.tsx:87
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/routes/__root.tsx:177
+#: src/routes/__root.tsx:178
 msgid "Progression Guide"
 msgstr "晋升指引"
 
@@ -534,7 +542,7 @@ msgstr "权限"
 msgid "Route"
 msgstr "航路"
 
-#: src/routes/users/index.tsx:253
+#: src/routes/users/index.tsx:254
 msgid "Rows per page"
 msgstr "每页行数"
 
@@ -546,15 +554,15 @@ msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间�
 msgid "Save changes"
 msgstr "保存变更"
 
-#: src/routes/users/index.tsx:199
+#: src/routes/users/index.tsx:200
 msgid "Search CID"
 msgstr "按 CID 搜索"
 
-#: src/routes/users/index.tsx:208
+#: src/routes/users/index.tsx:210
 msgid "Search Name"
 msgstr "按姓名搜索"
 
-#: src/routes/__root.tsx:193
+#: src/routes/__root.tsx:194
 msgid "Sector Files"
 msgstr "扇区文件"
 
@@ -574,16 +582,16 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/routes/__root.tsx:83
+#: src/routes/__root.tsx:84
 msgid "Staff"
 msgstr "职员"
 
-#: src/routes/__root.tsx:126
+#: src/routes/__root.tsx:127
 #: src/routes/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
 
-#: src/routes/__root.tsx:139
+#: src/routes/__root.tsx:140
 msgid "Start to Fly"
 msgstr "开始飞行"
 
@@ -720,7 +728,11 @@ msgstr "上传"
 msgid "Upload image"
 msgstr "上传图片"
 
-#: src/routes/__root.tsx:155
+#: src/routes/__root.tsx:208
+msgid "User List"
+msgstr "用户列表"
+
+#: src/routes/__root.tsx:156
 msgid "vACDM"
 msgstr "模拟 A-CDM"
 
@@ -732,24 +744,24 @@ msgstr "检查结果"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/routes/__root.tsx:239
+#: src/routes/__root.tsx:260
 #: src/routes/index.tsx:27
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/routes/__root.tsx:129
+#: src/routes/__root.tsx:130
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
-#: src/routes/__root.tsx:183
+#: src/routes/__root.tsx:184
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/__root.tsx:256
+#: src/routes/__root.tsx:277
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 
-#: src/routes/__root.tsx:158
+#: src/routes/__root.tsx:159
 msgid "Weather"
 msgstr "天气"
 
