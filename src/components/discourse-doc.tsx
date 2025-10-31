@@ -58,7 +58,7 @@ export const DiscourseDocument: React.FC<{
 }> = ({ code, en, cn }) => {
   const data = useMemo(() => buildMarkdownDocSync(code), [code]);
 
-  const editPermission = usePermission("admin");
+  const editPermission = usePermission("staff");
   const editButtons = editPermission && (
     <div className="flex gap-2">
       <Button asChild variant="outline">

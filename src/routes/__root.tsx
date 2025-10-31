@@ -201,7 +201,7 @@ const contents = [
   },
   {
     title: <Trans>Admin</Trans>,
-    requiresRole: "volunteer",
+    requiresRole: "volunteer" as const,
     content: () => (
       <ul className="nav-list-grid">
         <NavMenuLink href="/users">
