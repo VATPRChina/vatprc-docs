@@ -34,6 +34,47 @@ pnpm install
 pnpm dev
 ```
 
+#### API
+
+The backend API is well-defined with OpenAPI. Please run the following command
+to grab the latest API definition.
+
+```
+pnpm build:api
+```
+
+And when using the API, import `$api` and make calls, which is a typesafe wrapper
+over [TanStack Query](https://tanstack.com/query/latest).
+
+```
+import { $api } from "@/lib/client";
+const { data: warnings } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/warnings", {
+  params: { path: { callsign } },
+});
+```
+
+#### Pages
+
+This project is based on [TanStack Router](https://tanstack.com/router/latest)'s
+file-based routing. Create new page by creating relevant file in `src/routes`, and
+`pnpm dev` will automatically update the routing on the fly.
+
+#### Localization
+
+Please write English version of UI strings in the codebase, and wrap them with
+[Lingui](https://lingui.dev/)'s [`Trans`](https://lingui.dev/ref/react#trans)
+component.
+
+After finishing the code, please run the following command to build localization
+files:
+
+```
+pnpm i18n:extract
+```
+
+And update `src/locales/zh-cn.po` to provide Chinese localization for the new
+strings.
+
 ## License
 
 &copy; 2010 - 2025, [VATSIM P.R. China Division](https://www.vatprc.net), All rights reserved.
