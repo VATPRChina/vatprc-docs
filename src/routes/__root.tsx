@@ -277,7 +277,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
         </a>
       )}
-      <div className="pt-4">{children}</div>
+      <div>{children}</div>
       <footer className="container mx-auto mt-8 mb-4">
         <p className="text-slate-500 dark:text-slate-300">
           <Trans>
