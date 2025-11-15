@@ -2,7 +2,7 @@ name: Container
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main]
 jobs:
   container:
     runs-on: ubuntu-latest
