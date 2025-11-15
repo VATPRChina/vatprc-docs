@@ -14,7 +14,7 @@ title: "技术贡献规范"
 
 本文所述 VATSIM 会员、VATPRC 会员、VATPRC 职员等概念，适用《VATSIM Code of Conduct》《VATSIM Code of Regulations》及 VATPRC 相关规范文件中的定义。
 
-本文件自 ARINC Cycle 2512 起施行。
+本文件自 AIRAC Cycle 2512 起施行。
 
 ## 项目计划
 
