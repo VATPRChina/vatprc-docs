@@ -1,7 +1,6 @@
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
-import { ThemeProvider, useThemeValue } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -20,6 +19,8 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import mantineCoreStyle from "@mantine/core/styles.css?url";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import {
   createRootRouteWithContext,
@@ -32,6 +33,25 @@ import {
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { TbExternalLink } from "react-icons/tb";
+
+const theme = createTheme({
+  primaryColor: "vatprc",
+  primaryShade: { light: 8, dark: 2 },
+  colors: {
+    vatprc: [
+      "#ffebeb",
+      "#fad5d5",
+      "#f2a8a7",
+      "#eb7877",
+      "#e6504e",
+      "#e33834",
+      "#e22b26",
+      "#c91e1a",
+      "#ab1615",
+      "#9d0b10",
+    ],
+  },
+});
 
 interface NavigationMenuLinkProps {
   large?: boolean;
@@ -246,7 +266,6 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const { t } = useLingui();
-  const theme = useThemeValue();
   const route = useRouterState();
   if (route.location.pathname === "/division/api") {
     return children;
@@ -257,7 +276,8 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
       <header className="bg-background sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
         <div className="container mx-auto flex flex-col items-center gap-4 md:flex-row">
           <Link to="/">
-            <img src={theme === "light" ? logo : logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6" />
+            <img src={logo} alt={t`VATSIM P.R.China Division`} className="h-6 not-dark:block dark:hidden" />
+            <img src={logoWhite} alt={t`VATSIM P.R.China Division`} className="h-6 not-dark:hidden dark:block" />
           </Link>
           <NavMenu />
           <div className="absolute top-2 right-8 ml-auto flex flex-row items-center gap-4 md:static md:top-auto md:right-auto">
@@ -303,6 +323,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
+        { rel: "stylesheet", href: mantineCoreStyle },
+
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },
         { rel: "alternate", hrefLang: "x-default", href: getLocalPathname("", pathname) },
@@ -330,16 +352,21 @@ function RootLayout() {
   });
 
   return (
-    <html lang={getLocale() ?? "en"} className={cn(publicHref !== "/division/api" && "scroll-pt-16")}>
+    <html
+      lang={getLocale() ?? "en"}
+      className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
+      {...mantineHtmlProps}
+    >
       <head>
         <HeadContent />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body className="px-1 md:px-0">
-        <ThemeProvider defaultTheme="light" storageKey="vatprc-ui-theme">
+        <MantineProvider theme={theme} defaultColorScheme="auto">
           <Application>
             <Outlet />
           </Application>
-        </ThemeProvider>
+        </MantineProvider>
         <Toaster position="top-center" />
         <Scripts />
       </body>
