@@ -51,6 +51,8 @@ const theme = createTheme({
       "#9d0b10",
     ],
   },
+  fontFamily:
+    '"Outfit", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
 });
 
 interface NavigationMenuLinkProps {
@@ -328,6 +330,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },
         { rel: "alternate", hrefLang: "x-default", href: getLocalPathname("", pathname) },
+
+        { rel: "preconnect", href: "https://fonts.loli.net" },
+        { rel: "preconnect", href: "https://gstatic.loli.net", crossOrigin: "anonymous" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.loli.net/css2?family=Outfit:wght@100..900&display=swap",
+        },
       ],
     };
   },
