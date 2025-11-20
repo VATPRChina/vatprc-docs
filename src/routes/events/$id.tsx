@@ -2,6 +2,7 @@ import NoEventImage from "@/assets/no-event-image.svg";
 import { DateTime } from "@/components/event/datetime";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
+import { ImportSlot } from "@/components/event/slot-import";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/ui/button-link";
@@ -145,6 +146,7 @@ function RouteComponent() {
         </div>
         <h2 className="text-2xl">
           <Trans>Slots</Trans>
+          <ImportSlot eventId={event.id} />
         </h2>
         {!session && (
           <Alert>

@@ -171,7 +171,7 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
-  const { data } = $api.useQuery("get", "/api/users");
+  const { data, isLoading } = $api.useQuery("get", "/api/users");
   const [sorting, setSorting] = React.useState<SortingState>([{ id: "cid", desc: false }]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -203,7 +203,7 @@ function RouteComponent() {
             id="filter-cid"
             value={(table.getColumn("cid")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("cid")?.setFilterValue(event.target.value)}
-            disabled={table.getRowCount() === 0}
+            disabled={isLoading}
           />
         </div>
         <div className="flex flex-1 flex-col gap-2">
@@ -214,7 +214,7 @@ function RouteComponent() {
             id="filter-name"
             value={(table.getColumn("full_name")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("full_name")?.setFilterValue(event.target.value)}
-            disabled={table.getRowCount() === 0}
+            disabled={isLoading}
           />
         </div>
       </div>

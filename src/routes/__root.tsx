@@ -22,6 +22,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
+import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import {
   createRootRouteWithContext,
@@ -331,6 +332,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "stylesheet", href: mantineDateStyle },
+        { rel: "stylesheet", href: mantineDropzoneStyle },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },

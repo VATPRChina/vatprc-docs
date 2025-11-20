@@ -1,13 +1,14 @@
 import { DateTime } from "./datetime";
 import NoEventImage from "@/assets/no-event-image.svg";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithToast } from "@/lib/utils";
+import { promiseWithLog, promiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Group, Image, Modal, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { formatISO, setMinutes, setSeconds } from "date-fns";
 import { TbEdit } from "react-icons/tb";
 
@@ -17,6 +18,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const user = useUser();
+  const queryClient = useQueryClient();
   const { data: event, isLoading } = $api.useQuery(
     "get",
     "/api/events/{eid}",
@@ -25,7 +27,10 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   );
   const title = event?.title;
   const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events", {
-    onSuccess: () => close(),
+    onSuccess: () => {
+      close();
+      promiseWithLog(queryClient.invalidateQueries({ queryKey: $api.queryOptions("get", "/api/events").queryKey }));
+    },
   });
   const { mutate: update, isPending: isUpdatePending } = $api.useMutation("post", "/api/events/{eid}", {
     onSuccess: () => close(),
