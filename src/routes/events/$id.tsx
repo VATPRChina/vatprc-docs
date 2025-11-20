@@ -1,5 +1,6 @@
 import NoEventImage from "@/assets/no-event-image.svg";
 import { DateTime } from "@/components/event/datetime";
+import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -137,6 +138,7 @@ function RouteComponent() {
               className="text-4xl font-bold"
             >
               {event.title}
+              <CreateEvent eventId={event?.id} />
             </Link>
             <EventDetail eventId={event.id} />
           </div>

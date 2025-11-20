@@ -21,6 +21,7 @@ import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
+import mantineDateStyle from "@mantine/dates/styles.css?url";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import {
   createRootRouteWithContext,
@@ -52,7 +53,7 @@ const theme = createTheme({
     ],
   },
   fontFamily:
-    '"Outfit", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
+    '"Outfit", ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
 });
 
 interface NavigationMenuLinkProps {
@@ -226,6 +227,9 @@ const contents = [
     requiresRole: "volunteer" as const,
     content: () => (
       <ul className="nav-list-grid">
+        <NavMenuLink href="/events">
+          <Trans>Event</Trans>
+        </NavMenuLink>
         <NavMenuLink href="/users">
           <Trans>User List</Trans>
         </NavMenuLink>
@@ -289,7 +293,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           </div>
         </div>
       </header>
-      {getLocale() === "zh-cn" && (
+      {getLocale() === "zh-cn" && route.location.pathname === "/" && (
         <a
           className="block w-full bg-gray-100 py-4 text-center hover:bg-gray-50 dark:bg-gray-900 hover:dark:bg-gray-950"
           href="https://community.vatprc.net/t/topic/10193"
@@ -326,6 +330,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "stylesheet", href: mantineCoreStyle },
+        { rel: "stylesheet", href: mantineDateStyle },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },

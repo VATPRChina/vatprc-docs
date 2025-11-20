@@ -17,3 +17,8 @@ export const usePermissions = (): UserRole[] => {
   if (!data?.user) return [];
   return data.user.roles ?? [];
 };
+
+export const useUser = () => {
+  const { data } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  return data?.user;
+};
