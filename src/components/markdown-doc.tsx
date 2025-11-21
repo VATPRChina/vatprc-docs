@@ -43,13 +43,15 @@ export const TableOfContents: React.FC<{ tableOfContents: Toc; maxDepth?: number
 export const MarkdownDoc: React.FC<{
   children: React.ReactNode;
   toc: Toc;
-}> = ({ children, toc }) => {
+  tocHeader?: React.ReactNode;
+}> = ({ children, toc, tocHeader }) => {
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="container mx-auto flex flex-col md:flex-row">
       <div className="px-4 py-6 md:flex-2/3 md:px-12">
         <article className="prose dark:prose-invert vatprc-prose mx-auto">{children}</article>
       </div>
       <div className="prose dark:prose-invert prose-ul:my-0 prose-li:my-0 z-10 md:sticky md:top-24 md:max-h-dvh md:flex-1/3 md:overflow-y-scroll">
+        {tocHeader}
         <TableOfContents tableOfContents={toc} maxDepth={3} />
       </div>
     </div>

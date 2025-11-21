@@ -4,15 +4,14 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { ImportSlot } from "@/components/event/slot-import";
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/ui/button-link";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { isFuture, isPast } from "date-fns";
 import type { FC } from "react";
-import { TbArrowLeft, TbLoader2, TbLockAccess } from "react-icons/tb";
+import { TbArrowLeft, TbLockAccess } from "react-icons/tb";
 
 export const Route = createFileRoute("/events/$id")({
   component: RouteComponent,
@@ -91,8 +90,8 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
             variant="outline"
             disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
             onClick={onBook}
+            loading={isBookPending}
           >
-            {isBookPending && <TbLoader2 className="animate-spin" />}
             <Trans>Book</Trans>
           </Button>
         )}
@@ -102,8 +101,7 @@ const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) 
           </Button>
         )}
         {isBookedByCurrentUser && (
-          <Button variant="outline" onClick={onRelease} disabled={isReleasePending}>
-            {isReleasePending && <TbLoader2 className="animate-spin" />}
+          <Button variant="outline" onClick={onRelease} loading={isReleasePending}>
             <Trans>Release</Trans>
           </Button>
         )}
@@ -124,10 +122,14 @@ function RouteComponent() {
   return (
     event && (
       <div key={event.id} className="flex flex-col gap-4">
-        <LinkButton variant="ghost" to=".." className="self-start">
-          <TbArrowLeft />
+        <Button
+          renderRoot={(props) => <Link to=".." {...props} />}
+          variant="subtle"
+          className="self-start"
+          leftSection={<TbArrowLeft />}
+        >
           <Trans>Back</Trans>
-        </LinkButton>
+        </Button>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <img src={event.image_url ?? NoEventImage} className="" />
           <div className="flex flex-col gap-4">

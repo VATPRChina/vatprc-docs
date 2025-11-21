@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { DialogHeader, DialogFooter } from "@/components/ui/dialog";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import {
@@ -10,11 +9,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Spinner } from "@/components/ui/spinner";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { ActionIcon, Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ColumnDef,
@@ -67,10 +66,17 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
     accessorKey: "cid",
     header: ({ column }) => {
       return (
-        <Button variant="ghost" size="sm" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <>
           <Trans>CID</Trans>
-          <TbArrowsUpDown className="ml-2 h-4 w-4" />
-        </Button>
+          <ActionIcon
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            variant="transparent"
+            size="xs"
+            c="gray"
+          >
+            <TbArrowsUpDown />
+          </ActionIcon>
+        </>
       );
     },
   },
@@ -108,9 +114,9 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="icon" variant="ghost">
+              <ActionIcon variant="subtle">
                 <TbUserBolt />
-              </Button>
+              </ActionIcon>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
@@ -122,16 +128,16 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
                 {roles.map((role) => (
                   <div key={role} className="flex w-full items-center gap-2">
                     <span className="flex-grow">{role}</span>
-                    <Button size="icon" variant="outline" onClick={onRemoveRole(role)}>
+                    <ActionIcon onClick={onRemoveRole(role)}>
                       <TbMinus />
-                    </Button>
+                    </ActionIcon>
                   </div>
                 ))}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="icon" variant="outline">
+                    <ActionIcon>
                       <TbPlus />
-                    </Button>
+                    </ActionIcon>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     {ALL_ROLES.map((role) => (
@@ -148,9 +154,8 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
                     <Trans>Cancel</Trans>
                   </Button>
                 </DialogClose>
-                <Button size="sm" type="submit" onClick={onSave}>
-                  {isSuccess && <TbCheck className="mr-2" />}
-                  {isPending && <Spinner />}
+                <Button size="sm" type="submit" onClick={onSave} loading={isPending}>
+                  {isSuccess && <TbCheck />}
                   <Trans>Save changes</Trans>
                 </Button>
               </DialogFooter>

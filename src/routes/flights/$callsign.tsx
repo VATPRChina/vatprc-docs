@@ -1,7 +1,5 @@
 import { FlightWarnings } from "@/components/flight-warnings";
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/ui/button-link";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -10,6 +8,7 @@ import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
 import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -303,7 +302,7 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
 
         const button = (
           <Button
-            variant="ghost"
+            variant="subtle"
             size={popoverText ? "mini" : "sm"}
             className={cn(
               (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
@@ -312,8 +311,8 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
               popoverText && "-ml-2",
             )}
             key={warning.message_code}
+            leftSection={<TbInfoCircleFilled />}
           >
-            <TbInfoCircleFilled />
             {!popoverText && message}
           </Button>
         );
@@ -354,10 +353,14 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col items-start gap-4">
-      <LinkButton variant="ghost" to="..">
-        <TbArrowLeft />
+      <Button
+        renderRoot={(props) => <Link to=".." {...props} />}
+        variant="subtle"
+        className="self-start"
+        leftSection={<TbArrowLeft />}
+      >
         <Trans>Back</Trans>
-      </LinkButton>
+      </Button>
       {error?.message && (
         <Alert color="red">
           <AlertTitle>{error?.message}</AlertTitle>

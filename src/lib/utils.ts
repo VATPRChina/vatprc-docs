@@ -28,14 +28,12 @@ export const errorToast = (err: Error) => {
 type PromiseOrFunction = Promise<unknown> | (() => Promise<unknown>);
 
 export const promiseWithLog = (promise: PromiseOrFunction, final?: () => unknown) => {
-  // eslint-disable-next-line no-console
   (typeof promise === "function" ? promise() : promise).catch((err) => console.error(err)).finally(final);
 };
 
 export const promiseWithToast = (promise: PromiseOrFunction, final?: () => unknown) => {
   (typeof promise === "function" ? promise() : promise)
     .catch((err) => {
-      // eslint-disable-next-line no-console
       console.error(err);
       notifications.show({
         title: "An error occurred.",

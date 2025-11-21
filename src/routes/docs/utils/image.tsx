@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Spinner } from "@/components/ui/spinner";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ChangeEventHandler, useState } from "react";
 
@@ -38,8 +37,7 @@ function RouteComponent() {
           <Label htmlFor="picture">Picture</Label>
           <Input id="picture" type="file" onChange={onSelectFile} />
         </div>
-        <Button onClick={onUpload} variant="secondary">
-          {isPending && <Spinner />}
+        <Button onClick={onUpload} variant="secondary" loading={isPending}>
           <Trans>Upload</Trans>
         </Button>
       </div>

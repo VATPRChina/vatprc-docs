@@ -19,21 +19,21 @@ describe("LanguageToggle", () => {
   it("renders the button in English", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
     (getLocale as Mock).mockReturnValue("en");
-    render(<LanguageToggle />);
+    await render(<LanguageToggle />);
     await expect.element(page.getByLabelText("Switch to Chinese")).toBeInTheDocument();
   });
 
   it("renders the button in Chinese", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
     (getLocale as Mock).mockReturnValue("zh-cn");
-    render(<LanguageToggle />);
+    await render(<LanguageToggle />);
     await expect.element(page.getByLabelText("Switch to English")).toBeInTheDocument();
   });
 
   it.todo("redirect to Chinese in English", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
     (getLocale as Mock).mockReturnValue("en");
-    render(<LanguageToggle />);
+    await render(<LanguageToggle />);
     await page.getByLabelText("Switch to Chinese").click();
     // TODO: find a way to mock window.location.assign
     expect(window.localStorage.getItem("vatprc-homepage-locale")).toBe("zh-cn");
@@ -42,7 +42,7 @@ describe("LanguageToggle", () => {
   it.todo("redirect to English in Chinese", async () => {
     (useRouterState as Mock).mockReturnValue({ location: { pathname: "/" } });
     (getLocale as Mock).mockReturnValue("zh-cn");
-    render(<LanguageToggle />);
+    await render(<LanguageToggle />);
     await page.getByLabelText("Switch to English").click();
     expect(window.localStorage.getItem("vatprc-homepage-locale")).toBe("en");
   });

@@ -1,11 +1,11 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDocSync } from "./markdown-doc-lib";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
+import { Button, ButtonGroup } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import React, { useMemo } from "react";
 import { TbCloudX } from "react-icons/tb";
@@ -60,25 +60,32 @@ export const DiscourseDocument: React.FC<{
 
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
-    <div className="flex gap-2">
-      <Button asChild variant="outline">
-        <a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer">
-          <Trans>Edit English</Trans>
-        </a>
+    <ButtonGroup mb="md">
+      <Button
+        component="a"
+        variant="subtle"
+        href={`https://community.vatprc.net/t/topic/${en}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Trans>Edit English</Trans>
       </Button>
-      <Button asChild variant="outline">
-        <a href={`https://community.vatprc.net/t/topic/${cn}`} target="_blank" rel="noopener noreferrer">
-          <Trans>Edit Chinese</Trans>
-        </a>
+      <Button
+        component="a"
+        variant="subtle"
+        href={`https://community.vatprc.net/t/topic/${cn}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Trans>Edit Chinese</Trans>
       </Button>
-    </div>
+    </ButtonGroup>
   );
 
   return (
-    <MarkdownDoc toc={data.tableOfContents}>
+    <MarkdownDoc toc={data.tableOfContents} tocHeader={editButtons}>
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
-      {editButtons}
     </MarkdownDoc>
   );
 };

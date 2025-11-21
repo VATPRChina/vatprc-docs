@@ -1,4 +1,3 @@
-import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
 import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
@@ -6,6 +5,7 @@ import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
+import { ActionIcon, ActionIconGroup } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   add,
@@ -154,12 +154,14 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         <div className="my-6 flex items-center justify-between">
           <h4 className="text-3xl">{intlFormat(refDate, { year: "numeric", month: "long" }, { locale })}</h4>
           <div>
-            <Button variant="ghost" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
-              <TbChevronLeft />
-            </Button>
-            <Button variant="ghost" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
-              <TbChevronRight />
-            </Button>
+            <ActionIconGroup>
+              <ActionIcon variant="subtle" onClick={() => setRefDate(sub(refDate, { months: 1 }))}>
+                <TbChevronLeft />
+              </ActionIcon>
+              <ActionIcon variant="subtle" onClick={() => setRefDate(add(refDate, { months: 1 }))}>
+                <TbChevronRight />
+              </ActionIcon>
+            </ActionIconGroup>
           </div>
         </div>
         <div className="grid grid-cols-7 items-center justify-items-center gap-4">

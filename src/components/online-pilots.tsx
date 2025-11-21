@@ -1,9 +1,9 @@
-import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Button } from "@mantine/core";
 import React, { useState } from "react";
 import { TbCaretUpDown } from "react-icons/tb";
 
@@ -66,9 +66,8 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
       </CollapsibleContent>
       <div className="mt-2 flex items-center justify-center space-x-4 px-4">
         <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm">
+          <Button variant="subtle" size="sm" rightSection={<TbCaretUpDown />}>
             {open ? t`Show less pilots` : t`Show all pilots`}
-            <TbCaretUpDown className="h-4 w-4" />
           </Button>
         </CollapsibleTrigger>
       </div>

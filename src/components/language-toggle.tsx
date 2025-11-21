@@ -1,7 +1,7 @@
-import { Button } from "./ui/button";
 import { getLocale, getLocalPathname } from "@/lib/i18n";
 import { localStorage } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
+import { ActionIcon } from "@mantine/core";
 import { TbLanguage } from "react-icons/tb";
 
 export const LanguageToggle = () => {
@@ -17,8 +17,8 @@ export const LanguageToggle = () => {
   const ariaLabel = nextLang === "en" ? t`Switch to English` : t`Switch to Chinese`;
 
   return (
-    <Button variant="ghost" size="icon" onClick={onClick} aria-label={ariaLabel}>
-      <TbLanguage size={18} />
-    </Button>
+    <ActionIcon variant="subtle" color="gray" onClick={onClick} aria-label={ariaLabel}>
+      <TbLanguage />
+    </ActionIcon>
   );
 };

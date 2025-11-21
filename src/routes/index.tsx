@@ -5,8 +5,8 @@ import pilot from "@/assets/legacy/pilot.png";
 import { OnlineControllers } from "@/components/online-controllers";
 import { OnlinePilots } from "@/components/online-pilots";
 import { RecentEvents } from "@/components/recent-events";
-import { Button } from "@/components/ui/button";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
@@ -51,16 +51,16 @@ const IndexWithLocale: React.FC = () => {
                 <Trans>Online Controllers</Trans>
               </h3>
               <OnlineControllers />
-              <Button asChild variant="ghost">
-                <a
-                  href="https://atc.vatprc.net"
-                  target="_blank"
-                  className="vatprc-big-btn-reverse mt-6"
-                  rel="noreferrer"
-                >
-                  <Trans>ATC Center</Trans>
-                  <TbArrowRight className="-mt-0.5 ml-2" size={24} />
-                </a>
+              <Button
+                variant="subtle"
+                component="a"
+                href="https://atc.vatprc.net"
+                target="_blank"
+                className="vatprc-big-btn-reverse mt-6"
+                rel="noreferrer"
+                rightSection={<TbArrowRight />}
+              >
+                <Trans>ATC Center</Trans>
               </Button>
             </div>
             <div className="flex flex-col items-center justify-center sm:hidden">
@@ -96,27 +96,27 @@ const IndexWithLocale: React.FC = () => {
                   or join the discussion on our forum!
                 </Trans>
               </p>
-              <Button asChild variant="ghost">
-                <a
-                  href="mailto:feedback@vatprc.net"
-                  target="_blank"
-                  className="vatprc-big-btn-reverse mt-6"
-                  rel="noreferrer"
-                >
-                  <TbMail className="mr-2" height={24} />
-                  feedback@vatprc.net
-                </a>
+              <Button
+                variant="subtle"
+                component="a"
+                href="mailto:feedback@vatprc.net"
+                target="_blank"
+                className="vatprc-big-btn-reverse mt-6"
+                rel="noreferrer"
+                leftSection={<TbMail />}
+              >
+                feedback@vatprc.net
               </Button>
-              <Button asChild variant="ghost">
-                <a
-                  href="https://community.vatprc.net"
-                  target="_blank"
-                  className="vatprc-big-btn-reverse mt-6"
-                  rel="noreferrer"
-                >
-                  <Trans>Forum</Trans>
-                  <TbArrowRight className="-mt-0.5 ml-2" height={24} />
-                </a>
+              <Button
+                variant="subtle"
+                component="a"
+                href="https://community.vatprc.net"
+                target="_blank"
+                className="vatprc-big-btn-reverse mt-6"
+                rel="noreferrer"
+                rightSection={<TbArrowRight />}
+              >
+                <Trans>Forum</Trans>
               </Button>
             </div>
             <div className="flex flex-col items-center justify-center sm:hidden">
