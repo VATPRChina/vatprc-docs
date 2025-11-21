@@ -7,7 +7,7 @@ import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button } from "@mantine/core";
+import { ActionIcon, Alert, Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
 import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -299,18 +299,28 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
         const message = WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code;
         const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
 
-        const button = (
-          <Button
-            variant="subtle"
-            size={popoverText ? "mini" : "sm"}
-            className={cn(content && "underline", popoverText && "-ml-2")}
-            key={warning.message_code}
-            leftSection={<TbInfoCircleFilled />}
-            color={((WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" && "red") || "gray"}
-          >
-            {!popoverText && message}
-          </Button>
-        );
+        const button =
+          !popoverText && message ? (
+            <Button
+              variant="outline"
+              size="xs"
+              className={cn(content && "underline", popoverText && "-ml-2")}
+              key={warning.message_code}
+              leftSection={<TbInfoCircleFilled />}
+              color={((WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" && "red") || "gray"}
+            >
+              {!popoverText && message}
+            </Button>
+          ) : (
+            <ActionIcon
+              variant="outline"
+              size="sm"
+              key={warning.message_code}
+              color={((WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" && "red") || "gray"}
+            >
+              <TbInfoCircleFilled />
+            </ActionIcon>
+          );
 
         if (!content && !popoverText) return button;
 
