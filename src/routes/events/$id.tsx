@@ -3,11 +3,10 @@ import { DateTime } from "@/components/event/datetime";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { ImportSlot } from "@/components/event/slot-import";
-import { Alert, AlertTitle } from "@/components/ui/alert";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
+import { Alert, Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { isFuture, isPast } from "date-fns";
 import type { FC } from "react";
@@ -150,21 +149,13 @@ function RouteComponent() {
           <Trans>Slots</Trans>
           <ImportSlot eventId={event.id} />
         </h2>
-        {!session && (
-          <Alert>
-            <TbLockAccess />
-            <AlertTitle>
-              <Trans>Please login to book a slot.</Trans>
-            </AlertTitle>
-          </Alert>
-        )}
+        {!session && <Alert icon={<TbLockAccess />} color="blue" title={<Trans>Please login to book a slot.</Trans>} />}
         {!isInBookingPeriod && (
-          <Alert>
-            <TbLockAccess />
-            <AlertTitle>
-              <Trans>The booking has not started yet or has ended.</Trans>
-            </AlertTitle>
-          </Alert>
+          <Alert
+            icon={<TbLockAccess />}
+            color="blue"
+            title={<Trans>The booking has not started yet or has ended.</Trans>}
+          />
         )}
         {(slots?.length ?? 0) > 0 && (
           <div className="grid grid-cols-[auto_auto_auto_1fr] items-center gap-x-8 gap-y-1" role="table">

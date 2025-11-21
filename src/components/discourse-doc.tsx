@@ -1,11 +1,10 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDocSync } from "./markdown-doc-lib";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
-import { Button, ButtonGroup } from "@mantine/core";
+import { Alert, Button, ButtonGroup } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 import React, { useMemo } from "react";
@@ -120,12 +119,13 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   ),
   errorComponent: (props) => {
     return (
-      <Alert className="mx-auto max-w-lg" variant="destructive">
-        <TbCloudX />
-        <AlertTitle>
-          <Trans>Failed to load document</Trans>
-        </AlertTitle>
-        <AlertDescription>{props.error.message}</AlertDescription>
+      <Alert
+        icon={<TbCloudX />}
+        title={<Trans>Failed to load document</Trans>}
+        color="red"
+        className="container mx-auto"
+      >
+        {props.error.message}
       </Alert>
     );
   },

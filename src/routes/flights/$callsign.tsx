@@ -1,5 +1,4 @@
 import { FlightWarnings } from "@/components/flight-warnings";
-import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -8,7 +7,7 @@ import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
+import { Alert, Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
 import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -304,14 +303,10 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
           <Button
             variant="subtle"
             size={popoverText ? "mini" : "sm"}
-            className={cn(
-              (WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" &&
-                "text-destructive hover:text-destructive",
-              content && "underline",
-              popoverText && "-ml-2",
-            )}
+            className={cn(content && "underline", popoverText && "-ml-2")}
             key={warning.message_code}
             leftSection={<TbInfoCircleFilled />}
+            color={((WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" && "red") || "gray"}
           >
             {!popoverText && message}
           </Button>
@@ -361,11 +356,7 @@ function RouteComponent() {
       >
         <Trans>Back</Trans>
       </Button>
-      {error?.message && (
-        <Alert color="red">
-          <AlertTitle>{error?.message}</AlertTitle>
-        </Alert>
-      )}
+      {error?.message && <Alert color="red">{error?.message}</Alert>}
       {isLoading && <Skeleton className="h-48 w-full" />}
       {!error && flight && (
         <div className="flex w-full flex-col gap-4">

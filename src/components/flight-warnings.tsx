@@ -1,8 +1,8 @@
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
 const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
@@ -124,17 +124,10 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   if (isLoading) return <Skeleton className="h-16 w-full" />;
   return (
     <div className="flex w-full flex-col items-stretch gap-2">
-      {error?.message && (
-        <Alert>
-          <AlertTitle>{error?.message}</AlertTitle>
-        </Alert>
-      )}
+      {error?.message && <Alert color="red">{error?.message}</Alert>}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
-        <Alert variant="success">
-          <TbCheck />
-          <AlertTitle>
-            <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>
-          </AlertTitle>
+        <Alert color="green" icon={<TbCheck />}>
+          <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>
         </Alert>
       )}
       {warnings &&
@@ -142,12 +135,12 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
           (warning) =>
             messages[warning.message_code] && (
               <Alert
+                icon={ALLOWED_MESSAGE_CODES.includes(warning.message_code) ? <TbCheck /> : <TbExclamationCircle />}
                 key={warning.message_code}
-                variant={(ALLOWED_MESSAGE_CODES.includes(warning.message_code) && "success") || undefined}
+                color={(ALLOWED_MESSAGE_CODES.includes(warning.message_code) && "green") || undefined}
+                title={messages[warning.message_code] ?? warning.message_code}
               >
-                {ALLOWED_MESSAGE_CODES.includes(warning.message_code) ? <TbCheck /> : <TbExclamationCircle />}
-                <AlertTitle>{messages[warning.message_code] ?? warning.message_code}</AlertTitle>
-                <AlertDescription>{flight && descriptions[warning.message_code]?.(flight, warning)}</AlertDescription>
+                {flight && descriptions[warning.message_code]?.(flight, warning)}
               </Alert>
             ),
         )}
