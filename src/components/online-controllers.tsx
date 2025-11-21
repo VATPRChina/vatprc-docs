@@ -1,8 +1,8 @@
-import { Spinner } from "./ui/spinner";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
+import { Loader } from "@mantine/core";
 import { format, parseISO } from "date-fns";
 import React from "react";
 
@@ -39,7 +39,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   return (

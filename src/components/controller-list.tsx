@@ -1,8 +1,8 @@
 import { Label } from "./ui/label";
-import { Spinner } from "./ui/spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
+import { Loader } from "@mantine/core";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -402,7 +402,7 @@ export const ControllerList: React.FC = () => {
   const onShowAbsentChange = (e: CheckedState) => setShowAbsent(e === true);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   return (

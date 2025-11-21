@@ -1,8 +1,8 @@
-import { Spinner } from "./ui/spinner";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Loader } from "@mantine/core";
 import { Button } from "@mantine/core";
 import React, { useState } from "react";
 import { TbCaretUpDown } from "react-icons/tb";
@@ -36,7 +36,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
   const [open, setOpen] = useState(false);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   const pilots =

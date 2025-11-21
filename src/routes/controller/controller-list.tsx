@@ -12,7 +12,7 @@ export const Route = createFileRoute("/controller/controller-list")({
 
 function Page() {
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="prose dark:prose-invert min-w-full">
         <h2>
           <Trans>Controller List</Trans>

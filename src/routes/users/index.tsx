@@ -9,11 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { ActionIcon, Button } from "@mantine/core";
+import { ActionIcon, Button, Table } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ColumnDef,
@@ -224,36 +223,28 @@ function RouteComponent() {
         </div>
       </div>
       <Table>
-        <TableHeader>
+        <Table.Thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <Table.Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className={header.id === "actions" ? "w-full" : "w-fit"}>
+                  <Table.Th key={header.id} className={header.id === "actions" ? "w-full" : "w-max"}>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
+                  </Table.Th>
                 );
               })}
-            </TableRow>
+            </Table.Tr>
           ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                <Trans>No results.</Trans>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
+        </Table.Thead>
+        <Table.Tbody>
+          {table.getRowModel().rows.map((row) => (
+            <Table.Tr key={row.id} data-state={row.getIsSelected() && "selected"}>
+              {row.getVisibleCells().map((cell) => (
+                <Table.Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Table.Td>
+              ))}
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
       </Table>
       <div className="flex items-center justify-between space-x-6 px-2 lg:space-x-8">
         <div className="flex items-center space-x-2">

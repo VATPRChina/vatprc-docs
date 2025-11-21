@@ -1,10 +1,10 @@
-import { Spinner } from "./ui/spinner";
 import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
+import { Loader } from "@mantine/core";
 import { ActionIcon, ActionIconGroup } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -119,7 +119,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
   const [refDate, setRefDate] = React.useState(new Date());
 
   if (isCnLoading || isEnLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   const events = [
