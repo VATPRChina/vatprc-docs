@@ -8,7 +8,7 @@ export function ModeToggle() {
   return (
     <Menu trigger="hover">
       <Menu.Target>
-        <ActionIcon variant="subtle" onClick={() => toggleColorScheme()} c="gray">
+        <ActionIcon variant="subtle" onClick={() => toggleColorScheme()} color="gray">
           <TbSun className="not-dark:block dark:hidden" />
           <TbMoon className="not-dark:hidden dark:block" />
           <span className="sr-only">
