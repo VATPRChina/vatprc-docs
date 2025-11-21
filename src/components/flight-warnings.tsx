@@ -1,8 +1,7 @@
-import { Skeleton } from "./ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
+import { Alert, Skeleton } from "@mantine/core";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
 const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
@@ -121,7 +120,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
     data: warnings,
   } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/warnings", { params: { path: { callsign } } });
 
-  if (isLoading) return <Skeleton className="h-16 w-full" />;
+  if (isLoading) return <Skeleton h={16} />;
   return (
     <div className="flex w-full flex-col items-stretch gap-2">
       {error?.message && <Alert color="red">{error?.message}</Alert>}

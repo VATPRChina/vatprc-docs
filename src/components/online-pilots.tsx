@@ -1,10 +1,10 @@
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Loader } from "@mantine/core";
+import { Collapse, Loader } from "@mantine/core";
 import { Button } from "@mantine/core";
-import React, { useState } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import React from "react";
 import { TbCaretUpDown } from "react-icons/tb";
 
 const Pilot: React.FC<{
@@ -33,7 +33,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
 
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
 
-  const [open, setOpen] = useState(false);
+  const [opened, { toggle }] = useDisclosure(false);
 
   if (isLoading) {
     return <Loader />;
@@ -59,18 +59,16 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
   }
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen} className="space-y-2">
+    <div className="space-y-2">
       <div className={cn(className, "flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(0, 8)}</div>
-      <CollapsibleContent asChild>
+      <Collapse in={opened}>
         <div className={cn(className, "mt-2 flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(8)}</div>
-      </CollapsibleContent>
+      </Collapse>
       <div className="mt-2 flex items-center justify-center space-x-4 px-4">
-        <CollapsibleTrigger asChild>
-          <Button variant="subtle" size="sm" rightSection={<TbCaretUpDown />}>
-            {open ? t`Show less pilots` : t`Show all pilots`}
-          </Button>
-        </CollapsibleTrigger>
+        <Button variant="subtle" size="sm" rightSection={<TbCaretUpDown />} onClick={toggle}>
+          {opened ? t`Show less pilots` : t`Show all pilots`}
+        </Button>
       </div>
-    </Collapsible>
+    </div>
   );
 };

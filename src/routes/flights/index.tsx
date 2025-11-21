@@ -1,8 +1,8 @@
-import { Input } from "@/components/ui/input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Input } from "@mantine/core";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ChangeEventHandler, useState } from "react";
 import * as React from "react";

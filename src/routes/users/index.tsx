@@ -6,13 +6,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { Trans } from "@lingui/react/macro";
-import { ActionIcon, Button, Table } from "@mantine/core";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { ActionIcon, ActionIconGroup, Button, Select, Table, TextInput } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ColumnDef,
@@ -175,6 +172,8 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
+  const { t } = useLingui();
+
   const { data, isLoading } = $api.useQuery("get", "/api/users");
   const [sorting, setSorting] = React.useState<SortingState>([{ id: "cid", desc: false }]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -200,25 +199,21 @@ function RouteComponent() {
     <div className="container mx-auto">
       <div className="flex flex-row gap-4">
         <div className="flex flex-1 flex-col gap-2">
-          <Label htmlFor="filter-cid">
-            <Trans>Search CID</Trans>
-          </Label>
-          <Input
+          <TextInput
             id="filter-cid"
             value={(table.getColumn("cid")?.getFilterValue() as string) ?? ""}
-            onChange={(event) => table.getColumn("cid")?.setFilterValue(event.target.value)}
+            onChange={(e) => table.getColumn("cid")?.setFilterValue(e.target.value)}
             disabled={isLoading}
+            label={<Trans>Search CID</Trans>}
           />
         </div>
         <div className="flex flex-1 flex-col gap-2">
-          <Label htmlFor="filter-name">
-            <Trans>Search Name</Trans>
-          </Label>
-          <Input
+          <TextInput
             id="filter-name"
             value={(table.getColumn("full_name")?.getFilterValue() as string) ?? ""}
-            onChange={(event) => table.getColumn("full_name")?.setFilterValue(event.target.value)}
+            onChange={(e) => table.getColumn("full_name")?.setFilterValue(e.target.value)}
             disabled={isLoading}
+            label={<Trans>Search Name</Trans>}
           />
         </div>
       </div>
@@ -228,7 +223,7 @@ function RouteComponent() {
             <Table.Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <Table.Th key={header.id} className={header.id === "actions" ? "w-full" : "w-max"}>
+                  <Table.Th key={header.id}>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </Table.Th>
                 );
@@ -247,83 +242,53 @@ function RouteComponent() {
         </Table.Tbody>
       </Table>
       <div className="flex items-center justify-between space-x-6 px-2 lg:space-x-8">
-        <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">
-            <Trans>Rows per page</Trans>
-          </p>
-          <Select
-            value={`${table.getState().pagination.pageSize}`}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value));
-            }}
-          >
-            <SelectTrigger className="h-8">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 25, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select
+          value={`${table.getState().pagination.pageSize}`}
+          onChange={(value) => {
+            table.setPageSize(Number(value));
+          }}
+          label={<Trans>Rows per page</Trans>}
+          data={["10", "20", "25", "30", "40", "50"]}
+        />
         <div className="flex items-center justify-center text-sm font-medium">
           <Trans>
             Page {currentPage} of {totalPages}
           </Trans>
         </div>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="icon"
-            className="hidden size-8 lg:flex"
+        <ActionIconGroup>
+          <ActionIcon
+            variant="subtle"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
+            title={t`Go to first page`}
           >
-            <span className="sr-only">
-              <Trans>Go to first page</Trans>
-            </span>
             <TbChevronsLeft />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8"
+          </ActionIcon>
+          <ActionIcon
+            variant="subtle"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            title={t`Go to previous page`}
           >
-            <span className="sr-only">
-              <Trans>Go to previous page</Trans>
-            </span>
             <TbChevronLeft />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8"
+          </ActionIcon>
+          <ActionIcon
+            variant="subtle"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            title={t`Go to next page`}
           >
-            <span className="sr-only">
-              <Trans>Go to next page</Trans>
-            </span>
             <TbChevronRight />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="hidden size-8 lg:flex"
+          </ActionIcon>
+          <ActionIcon
+            variant="subtle"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
+            title={t`Go to last page`}
           >
-            <span className="sr-only">
-              <Trans>Go to last page</Trans>
-            </span>
             <TbChevronsRight />
-          </Button>
-        </div>
+          </ActionIcon>
+        </ActionIconGroup>
       </div>
     </div>
   );

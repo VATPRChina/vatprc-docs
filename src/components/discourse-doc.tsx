@@ -1,10 +1,9 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDocSync } from "./markdown-doc-lib";
-import { Skeleton } from "@/components/ui/skeleton";
 import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button, ButtonGroup } from "@mantine/core";
+import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 import React, { useMemo } from "react";
@@ -114,7 +113,7 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   pendingMs: 100,
   pendingComponent: () => (
     <div className="h-svh w-full p-16">
-      <Skeleton className="h-full w-full" />
+      <Skeleton h="100svh" />
     </div>
   ),
   errorComponent: (props) => {

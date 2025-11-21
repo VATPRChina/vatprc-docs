@@ -1,12 +1,9 @@
-import { Label } from "./ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Loader } from "@mantine/core";
-import { CheckedState } from "@radix-ui/react-checkbox";
+import { Checkbox, Loader } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 enum ControllerRating {
   Unknown = 0,
@@ -399,7 +396,7 @@ export const ControllerList: React.FC = () => {
     };
   });
 
-  const onShowAbsentChange = (e: CheckedState) => setShowAbsent(e === true);
+  const onShowAbsentChange = (e: ChangeEvent<HTMLInputElement>) => setShowAbsent(e.target.checked === true);
 
   if (isLoading) {
     return <Loader />;
@@ -408,10 +405,7 @@ export const ControllerList: React.FC = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       <div className="flex items-center gap-x-2">
-        <Checkbox onCheckedChange={onShowAbsentChange} id="show-absent" />
-        <Label htmlFor="show-absent">
-          <Trans>Show Absence Controllers</Trans>
-        </Label>
+        <Checkbox onChange={onShowAbsentChange} id="show-absent" label={<Trans>Show Absence Controllers</Trans>} />
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {controllers

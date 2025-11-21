@@ -1,13 +1,11 @@
 import { FlightWarnings } from "@/components/flight-warnings";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button } from "@mantine/core";
+import { ActionIcon, Alert, Button, Skeleton, Tooltip } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
 import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -44,13 +42,8 @@ const FplField = ({
   ...props
 }: FplFieldProps & React.ComponentProps<"div">) => {
   const labelC = tooltip ? (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <span className="text-muted-foreground">{label}</span>
-      </TooltipTrigger>
-      <TooltipContent side="right">
-        <p>{tooltip}</p>
-      </TooltipContent>
+    <Tooltip label={tooltip}>
+      <span className="text-muted-foreground">{label}</span>
     </Tooltip>
   ) : (
     <span className="text-muted-foreground">{label}</span>
@@ -61,15 +54,8 @@ const FplField = ({
       {labelC}
       {value && value !== "-" && <span className="font-mono">{value}</span>}
       {value === "-" && (
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span className="text-muted-foreground min-w-8">{value}</span>
-          </TooltipTrigger>
-          <TooltipContent side="right">
-            <p>
-              <Trans>Check at VATSIM</Trans>
-            </p>
-          </TooltipContent>
+        <Tooltip label={<Trans>Check at VATSIM</Trans>}>
+          <span className="text-muted-foreground min-w-8">{value}</span>
         </Tooltip>
       )}
       {children}
@@ -367,7 +353,7 @@ function RouteComponent() {
         <Trans>Back</Trans>
       </Button>
       {error?.message && <Alert color="red">{error?.message}</Alert>}
-      {isLoading && <Skeleton className="h-48 w-full" />}
+      {isLoading && <Skeleton h={48} />}
       {!error && flight && (
         <div className="flex w-full flex-col gap-4">
           <h1 className="flex items-baseline">
