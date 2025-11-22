@@ -58,7 +58,7 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/routes/users/index.tsx:152
+#: src/routes/users/index.tsx:145
 msgid "Actions"
 msgstr "Actions"
 
@@ -78,7 +78,7 @@ msgstr "Add <0>W</0> to equipment code."
 msgid "Admin"
 msgstr "Admin"
 
-#: src/routes/users/index.tsx:49
+#: src/routes/users/index.tsx:57
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
 
@@ -159,7 +159,7 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/routes/users/index.tsx:139
+#: src/routes/users/index.tsx:131
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -187,7 +187,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/users/index.tsx:60
+#: src/routes/users/index.tsx:69
 msgid "CID"
 msgstr "CID"
 
@@ -195,7 +195,7 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:58
 msgid "Controller"
 msgstr "Controller"
 
@@ -205,11 +205,11 @@ msgstr "Controller"
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:43
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:44
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
@@ -262,7 +262,7 @@ msgstr "Description"
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/routes/users/index.tsx:51
+#: src/routes/users/index.tsx:42
 msgid "Division Director"
 msgstr "Division Director"
 
@@ -283,7 +283,7 @@ msgstr "Edit English"
 msgid "Edit Event {title}"
 msgstr "Edit Event {title}"
 
-#: src/routes/users/index.tsx:112
+#: src/routes/users/index.tsx:124
 msgid "Edit roles"
 msgstr "Edit roles"
 
@@ -321,11 +321,11 @@ msgstr "even flight level"
 msgid "Event"
 msgstr "Event"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:53
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:52
 msgid "Event Director"
 msgstr "Event Director"
 
@@ -382,23 +382,23 @@ msgstr "Forum"
 msgid "Fri"
 msgstr "Fri"
 
-#: src/routes/users/index.tsx:250
+#: src/routes/users/index.tsx:243
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/routes/users/index.tsx:274
+#: src/routes/users/index.tsx:267
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/routes/users/index.tsx:266
+#: src/routes/users/index.tsx:259
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/routes/users/index.tsx:258
+#: src/routes/users/index.tsx:251
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:54
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
@@ -422,7 +422,7 @@ msgstr "Import Slots"
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:45
 msgid "Instructor"
 msgstr "Instructor"
 
@@ -463,7 +463,7 @@ msgstr "List of LOAs"
 msgid "List of SOPs"
 msgstr "List of SOPs"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:51
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
@@ -491,7 +491,7 @@ msgstr "Match designated route"
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:46
 msgid "Mentor"
 msgstr "Mentor"
 
@@ -503,7 +503,7 @@ msgstr "Mon"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:75
+#: src/routes/users/index.tsx:84
 msgid "Name"
 msgstr "Name"
 
@@ -540,6 +540,10 @@ msgstr "Not designated"
 msgid "Not designated route"
 msgstr "Not designated route"
 
+#: src/components/app-not-found.tsx:12
+msgid "Nothing to see here"
+msgstr "Nothing to see here"
+
 #: src/routes/flights/$callsign.tsx:104
 msgctxt "feet"
 msgid "odd flight level"
@@ -557,11 +561,11 @@ msgstr "Online Pilots"
 msgid "Operation"
 msgstr "Operation"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:48
 msgid "Operation Director"
 msgstr "Operation Director"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:49
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
 
@@ -573,9 +577,13 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/routes/users/index.tsx:241
+#: src/routes/users/index.tsx:234
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
+
+#: src/components/app-not-found.tsx:15
+msgid "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
+msgstr "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 
 #: src/routes/flights/$callsign.tsx:403
 msgid "PBN"
@@ -655,7 +663,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/users/index.tsx:79
+#: src/routes/users/index.tsx:88
 msgid "Roles"
 msgstr "Roles"
 
@@ -663,7 +671,7 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
-#: src/routes/users/index.tsx:237
+#: src/routes/users/index.tsx:230
 msgid "Rows per page"
 msgstr "Rows per page"
 
@@ -679,19 +687,19 @@ msgstr "Sat"
 msgid "Save"
 msgstr "Save"
 
-#: src/routes/users/index.tsx:143
+#: src/routes/users/index.tsx:135
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/routes/users/index.tsx:194
+#: src/routes/users/index.tsx:187
 msgid "Search CID"
 msgstr "Search CID"
 
-#: src/routes/users/index.tsx:203
+#: src/routes/users/index.tsx:196
 msgid "Search Name"
 msgstr "Search Name"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:50
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
@@ -715,12 +723,12 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:47
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
 #: src/components/app-nav-menu.tsx:61
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:59
 msgid "Staff"
 msgstr "Staff"
 
@@ -757,11 +765,15 @@ msgstr "Switch to English"
 msgid "System"
 msgstr "System"
 
-#: src/routes/users/index.tsx:47
+#: src/components/app-not-found.tsx:21
+msgid "Take me back to home page"
+msgstr "Take me back to home page"
+
+#: src/routes/users/index.tsx:55
 msgid "Tech Director"
 msgstr "Tech Director"
 
-#: src/routes/users/index.tsx:48
+#: src/routes/users/index.tsx:56
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
 
@@ -928,7 +940,7 @@ msgstr "VFR Policy"
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:60
 msgid "Volunteer"
 msgstr "Volunteer"
 

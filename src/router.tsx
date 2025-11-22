@@ -1,3 +1,4 @@
+import { NotFound } from "./components/app-not-found";
 import { getLocale } from "./lib/i18n";
 import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";
@@ -49,7 +50,7 @@ export function getRouter() {
     createRouter({
       routeTree,
       scrollRestoration: true,
-      defaultNotFoundComponent: () => <div>Not Found</div>,
+      defaultNotFoundComponent: () => <NotFound />,
       rewrite: {
         input: ({ url }) => {
           url.pathname = url.pathname.replace(getRouterBasepath(url.pathname), "/");

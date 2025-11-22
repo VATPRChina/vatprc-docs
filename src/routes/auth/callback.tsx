@@ -1,5 +1,6 @@
 import { login } from "@/lib/client/auth";
 import { Trans } from "@lingui/react/macro";
+import { Container, Stack, Title } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -36,8 +37,15 @@ function Component() {
   });
 
   return (
-    <div>
-      <Trans>Please wait while being logged in.</Trans>
-    </div>
+    <Container>
+      <Stack gap="xl" align="start">
+        <Title order={1} size={192} c="dimmed">
+          307
+        </Title>
+        <Title order={2}>
+          <Trans>Please wait while being logged in.</Trans>
+        </Title>
+      </Stack>
+    </Container>
   );
 }

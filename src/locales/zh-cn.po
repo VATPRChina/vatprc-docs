@@ -58,7 +58,7 @@ msgstr "关于我们"
 msgid "Absent"
 msgstr "缺席"
 
-#: src/routes/users/index.tsx:152
+#: src/routes/users/index.tsx:145
 msgid "Actions"
 msgstr "操作"
 
@@ -78,7 +78,7 @@ msgstr "将 <0>W</0> 添加到设备代码。"
 msgid "Admin"
 msgstr "管理"
 
-#: src/routes/users/index.tsx:49
+#: src/routes/users/index.tsx:57
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
 
@@ -159,7 +159,7 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:139
+#: src/routes/users/index.tsx:131
 msgid "Cancel"
 msgstr "取消"
 
@@ -187,7 +187,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/users/index.tsx:60
+#: src/routes/users/index.tsx:69
 msgid "CID"
 msgstr "CID"
 
@@ -195,7 +195,7 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:58
 msgid "Controller"
 msgstr "管制员"
 
@@ -205,11 +205,11 @@ msgstr "管制员"
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:43
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:44
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
@@ -262,7 +262,7 @@ msgstr "描述"
 msgid "Direct leg"
 msgstr "直飞段"
 
-#: src/routes/users/index.tsx:51
+#: src/routes/users/index.tsx:42
 msgid "Division Director"
 msgstr "分部主席"
 
@@ -283,7 +283,7 @@ msgstr "编辑英文"
 msgid "Edit Event {title}"
 msgstr "编辑活动 {title}"
 
-#: src/routes/users/index.tsx:112
+#: src/routes/users/index.tsx:124
 msgid "Edit roles"
 msgstr "编辑权限"
 
@@ -321,11 +321,11 @@ msgstr "英制双数飞行高度层"
 msgid "Event"
 msgstr "活动"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:53
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:52
 msgid "Event Director"
 msgstr "组织部主管"
 
@@ -382,23 +382,23 @@ msgstr "论坛"
 msgid "Fri"
 msgstr "星期五"
 
-#: src/routes/users/index.tsx:250
+#: src/routes/users/index.tsx:243
 msgid "Go to first page"
 msgstr "前往第一页"
 
-#: src/routes/users/index.tsx:274
+#: src/routes/users/index.tsx:267
 msgid "Go to last page"
 msgstr "前往最后页"
 
-#: src/routes/users/index.tsx:266
+#: src/routes/users/index.tsx:259
 msgid "Go to next page"
 msgstr "前往下一页"
 
-#: src/routes/users/index.tsx:258
+#: src/routes/users/index.tsx:251
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:54
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
@@ -422,7 +422,7 @@ msgstr "导入时刻表"
 msgid "In This Week"
 msgstr "本周"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:45
 msgid "Instructor"
 msgstr "教员"
 
@@ -463,7 +463,7 @@ msgstr "移交协议书列表"
 msgid "List of SOPs"
 msgstr "标准运行程序列表"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:51
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
@@ -491,7 +491,7 @@ msgstr "符合指定航路"
 msgid "Meeting Notes"
 msgstr "会议记录"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:46
 msgid "Mentor"
 msgstr "教师"
 
@@ -503,7 +503,7 @@ msgstr "星期一"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:75
+#: src/routes/users/index.tsx:84
 msgid "Name"
 msgstr "姓名"
 
@@ -540,6 +540,10 @@ msgstr "任意"
 msgid "Not designated route"
 msgstr "不符合指定航路"
 
+#: src/components/app-not-found.tsx:12
+msgid "Nothing to see here"
+msgstr "这里空无一物"
+
 #: src/routes/flights/$callsign.tsx:104
 msgctxt "feet"
 msgid "odd flight level"
@@ -557,11 +561,11 @@ msgstr "在线飞行员"
 msgid "Operation"
 msgstr "运行"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:48
 msgid "Operation Director"
 msgstr "运行部主管"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:49
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
@@ -573,9 +577,13 @@ msgstr "其他移交协议书"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/routes/users/index.tsx:241
+#: src/routes/users/index.tsx:234
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
+
+#: src/components/app-not-found.tsx:15
+msgid "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
+msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者该页面的地址有所变化。"
 
 #: src/routes/flights/$callsign.tsx:403
 msgid "PBN"
@@ -655,7 +663,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:79
+#: src/routes/users/index.tsx:88
 msgid "Roles"
 msgstr "权限"
 
@@ -663,7 +671,7 @@ msgstr "权限"
 msgid "Route"
 msgstr "航路"
 
-#: src/routes/users/index.tsx:237
+#: src/routes/users/index.tsx:230
 msgid "Rows per page"
 msgstr "每页行数"
 
@@ -679,19 +687,19 @@ msgstr "星期六"
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:143
+#: src/routes/users/index.tsx:135
 msgid "Save changes"
 msgstr "保存变更"
 
-#: src/routes/users/index.tsx:194
+#: src/routes/users/index.tsx:187
 msgid "Search CID"
 msgstr "按 CID 搜索"
 
-#: src/routes/users/index.tsx:203
+#: src/routes/users/index.tsx:196
 msgid "Search Name"
 msgstr "按姓名搜索"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:50
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
@@ -715,12 +723,12 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:47
 msgid "SOP Editor"
 msgstr "SOP 组组员"
 
 #: src/components/app-nav-menu.tsx:61
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:59
 msgid "Staff"
 msgstr "职员"
 
@@ -757,11 +765,15 @@ msgstr "切换到英文"
 msgid "System"
 msgstr "跟随系统"
 
-#: src/routes/users/index.tsx:47
+#: src/components/app-not-found.tsx:21
+msgid "Take me back to home page"
+msgstr "返回首页"
+
+#: src/routes/users/index.tsx:55
 msgid "Tech Director"
 msgstr "技术部主管"
 
-#: src/routes/users/index.tsx:48
+#: src/routes/users/index.tsx:56
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
 
@@ -928,7 +940,7 @@ msgstr "目视飞行规则"
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:60
 msgid "Volunteer"
 msgstr "志愿者"
 
