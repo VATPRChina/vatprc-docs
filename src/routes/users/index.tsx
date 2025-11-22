@@ -2,7 +2,18 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, ActionIconGroup, Button, Group, Menu, Modal, Select, Table, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  ActionIconGroup,
+  Button,
+  Checkbox,
+  Group,
+  Modal,
+  Select,
+  Stack,
+  Table,
+  TextInput,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
 import {
@@ -16,7 +27,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { ReactNode, useState } from "react";
+import React, { MouseEvent, ReactNode, useState } from "react";
 import {
   TbChevronsLeft,
   TbChevronLeft,
@@ -24,14 +35,11 @@ import {
   TbChevronsRight,
   TbArrowsUpDown,
   TbUserBolt,
-  TbPlus,
-  TbMinus,
   TbCheck,
 } from "react-icons/tb";
 
 const ROLES = {
-  staff: <Trans>Staff</Trans>,
-  volunteer: <Trans>Volunteer</Trans>,
+  "division-director": <Trans>Division Director</Trans>,
   "controller-training-director": <Trans>Controller Training Director</Trans>,
   "controller-training-director-assistant": <Trans>Controller Training Director Assistant</Trans>,
   "controller-training-instructor": <Trans>Instructor</Trans>,
@@ -48,7 +56,8 @@ const ROLES = {
   "tech-director-assistant": <Trans>Tech Director Assistant</Trans>,
   "tech-afv-facility-engineer": <Trans>AFV Facility Engineer</Trans>,
   controller: <Trans>Controller</Trans>,
-  "division-director": <Trans>Division Director</Trans>,
+  staff: <Trans>Staff</Trans>,
+  volunteer: <Trans>Volunteer</Trans>,
 } satisfies Record<Exclude<components["schemas"]["UserRoleDto"], "api-client" | "user">, ReactNode>;
 
 export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
@@ -94,8 +103,11 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
             }),
           },
         );
-      const onAddRole = (role: string) => () => setRoles((pv) => [...pv.filter((r) => r !== role), role]);
-      const onRemoveRole = (role: string) => () => setRoles((pv) => pv.filter((r) => r !== role));
+
+      const onToggleRole = (role: string) => (e: MouseEvent<HTMLInputElement>) =>
+        e.currentTarget.checked
+          ? setRoles((pv) => [...pv.filter((r) => r !== role), role])
+          : setRoles((pv) => pv.filter((r) => r !== role));
 
       return (
         <div className="flex flex-row items-center gap-2">
@@ -110,39 +122,20 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
             <TbUserBolt />
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
-            <div className="mb-2 flex flex-col items-start gap-2">
-              {roles.map((role) => (
-                <div key={role} className="flex w-full items-center">
-                  <span className="flex-grow">{role}</span>
-                  <ActionIcon onClick={onRemoveRole(role)}>
-                    <TbMinus />
-                  </ActionIcon>
-                </div>
+            <Stack>
+              {Object.entries(ROLES).map(([role, name]) => (
+                <Checkbox key={role} onClick={onToggleRole(role)} label={name} checked={roles.includes(role)} />
               ))}
-            </div>
-            <Group gap="sm">
-              <Menu>
-                <Menu.Target>
-                  <ActionIcon>
-                    <TbPlus />
-                  </ActionIcon>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  {Object.entries(ROLES).map(([role, name]) => (
-                    <Menu.Item key={role} onClick={onAddRole(role)}>
-                      {name}
-                    </Menu.Item>
-                  ))}
-                </Menu.Dropdown>
-              </Menu>
-              <Button variant="outline" size="xs" onClick={close}>
-                <Trans>Cancel</Trans>
-              </Button>
-              <Button size="xs" type="submit" onClick={onSave} loading={isPending}>
-                {isSuccess && <TbCheck />}
-                <Trans>Save changes</Trans>
-              </Button>
-            </Group>
+              <Group>
+                <Button variant="outline" size="xs" onClick={close}>
+                  <Trans>Cancel</Trans>
+                </Button>
+                <Button size="xs" type="submit" onClick={onSave} loading={isPending}>
+                  {isSuccess && <TbCheck />}
+                  <Trans>Save changes</Trans>
+                </Button>
+              </Group>
+            </Stack>
           </Modal>
         </div>
       );
