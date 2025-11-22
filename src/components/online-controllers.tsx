@@ -14,7 +14,7 @@ const Controller: React.FC<{
 }> = ({ callsign, name, frequency, schedule }) => {
   return (
     <div className="hover:bg-secondary flex min-w-48 flex-col gap-2 border px-6 py-4">
-      <span className={cn("text-xl font-bold", schedule ? "text-blue-900" : "text-red-900")}>{callsign}</span>
+      <span className={cn("text-lg font-bold", schedule ? "text-blue-900" : "text-red-900")}>{callsign}</span>
       <span>{name}</span>
       {frequency && <span>{frequency}</span>}
       {schedule && (
@@ -43,7 +43,7 @@ export const OnlineControllers: React.FC<{ className?: string }> = ({ className 
   }
 
   return (
-    <div className={cn(className, "flex flex-wrap gap-4")}>
+    <div className={cn(className, "grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3")}>
       {(!data || data?.controllers?.length === 0) && (
         <span className="basis-full">
           <Trans>There is currently no online ATC.</Trans>

@@ -54,14 +54,14 @@ const Event: React.FC<{
 
   return (
     <a
-      className="hover:bg-secondary flex min-w-48 flex-col gap-2 border px-6 py-4"
+      className="hover:bg-secondary flex min-w-48 flex-col gap-2 border px-1.5 py-1"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
     >
       <span
         className={cn(
-          "text-xl font-bold",
+          "text-lg font-bold",
           isExam ? "text-blue-900 dark:text-blue-100" : "text-red-900 dark:text-red-100",
         )}
       >
@@ -75,28 +75,28 @@ const Event: React.FC<{
           </span>
         )}
       </span>
-      <div className="flex gap-1">
+      <div className="flex gap-1 text-sm">
         <span>{format(start, "MM-dd", { in: utc })}</span>
         <span>
           {format(start, "HHmm", { in: utc })}
-          <span className="text-sm font-light">Z</span>
+          <span className="text-xs font-light">Z</span>
         </span>
         <span>-</span>
         <span>
           {format(end, "HHmm", { in: utc })}
-          <span className="text-sm font-light">Z</span>
+          <span className="text-xs font-light">Z</span>
         </span>
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 text-sm">
         <span>{format(start, "MM-dd")}</span>
         <span>
           {format(start, "HHmm")}
-          <span className="text-sm font-light">L</span>
+          <span className="text-xs font-light">L</span>
         </span>
         <span>-</span>
         <span>
           {format(end, "HHmm")}
-          <span className="text-sm font-light">L</span>
+          <span className="text-xs font-light">L</span>
         </span>
       </div>
     </a>
@@ -149,8 +149,8 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
   const scheduledEvents = events.filter((e) => isAfter(e.start, Date.now()));
 
   return (
-    <div className={cn(className, "grid grid-cols-2 gap-4 md:grid-cols-3")}>
-      <div className="col-span-2">
+    <div className={cn(className, "grid grid-cols-2 items-start gap-4 md:grid-cols-3")}>
+      <div className="col-span-2 hidden md:block">
         <div className="my-6 flex items-center justify-between">
           <h4 className="text-3xl">{intlFormat(refDate, { year: "numeric", month: "long" }, { locale })}</h4>
           <div>
@@ -166,13 +166,27 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
         </div>
         <div className="grid grid-cols-7 items-center justify-items-center gap-4">
           <div className="contents font-bold">
-            <span>Mon</span>
-            <span>Tue</span>
-            <span>Wed</span>
-            <span>Thu</span>
-            <span>Fri</span>
-            <span>Sat</span>
-            <span>Sun</span>
+            <span>
+              <Trans>Mon</Trans>
+            </span>
+            <span>
+              <Trans>Tue</Trans>
+            </span>
+            <span>
+              <Trans>Wed</Trans>
+            </span>
+            <span>
+              <Trans>Thu</Trans>
+            </span>
+            <span>
+              <Trans>Fri</Trans>
+            </span>
+            <span>
+              <Trans>Sat</Trans>
+            </span>
+            <span>
+              <Trans>Sun</Trans>
+            </span>
           </div>
           {(() => {
             const monthStart = startOfMonth(refDate);
@@ -187,7 +201,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
                 return <div key={d.toISOString()}></div>;
               }
               return (
-                <div key={d.toISOString()} className="flex min-h-24 w-full flex-col gap-1 self-end">
+                <div key={d.toISOString()} className="flex min-h-24 w-full flex-col gap-1 self-start">
                   <span className={cn("text-right", eventsOnDay.length === 0 && "text-muted-foreground")}>
                     {format(d, "dd")}
                   </span>
