@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:328
+#: src/routes/__root.tsx:84
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
@@ -22,7 +22,7 @@ msgstr "VATSIM 中国分部"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
-#: src/routes/__root.tsx:310
+#: src/components/app-footer.tsx:7
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
 
@@ -50,59 +50,63 @@ msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/routes/__root.tsx:93
+#: src/components/app-nav-menu.tsx:46
 msgid "About Us"
 msgstr "关于我们"
 
-#: src/components/controller-list.tsx:450
+#: src/components/controller-list.tsx:444
 msgid "Absent"
 msgstr "缺席"
 
-#: src/routes/users/index.tsx:164
+#: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "操作"
 
-#: src/routes/flights/$callsign.tsx:194
+#: src/routes/flights/$callsign.tsx:177
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "将 <0>D1</0> 或 <1>D2</1> 添加到 PBN。"
 
-#: src/routes/flights/$callsign.tsx:185
+#: src/routes/flights/$callsign.tsx:168
 msgid "Add<0>R</0>to equipment code."
 msgstr "将 <0>R</0> 添加到设备代码。"
 
-#: src/routes/flights/$callsign.tsx:167
+#: src/routes/flights/$callsign.tsx:150
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/routes/__root.tsx:227
+#: src/components/app-nav-menu.tsx:180
 msgid "Admin"
 msgstr "管理"
+
+#: src/routes/users/index.tsx:49
+msgid "AFV Facility Engineer"
+msgstr "AFV 设备工程师"
 
 #: src/components/event/slot-import.tsx:140
 msgid "Aircraft Type"
 msgstr "机型"
 
-#: src/components/flight-warnings.tsx:41
+#: src/components/flight-warnings.tsx:40
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 
-#: src/routes/__root.tsx:142
+#: src/components/app-nav-menu.tsx:95
 msgid "Airspace"
 msgstr "空域"
 
-#: src/routes/flights/$callsign.tsx:265
+#: src/routes/flights/$callsign.tsx:248
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
 
-#: src/routes/events/$id.tsx:101
+#: src/routes/events/$id.tsx:99
 msgid "Already Booked"
 msgstr "已被预订"
 
-#: src/routes/__root.tsx:102
+#: src/components/app-nav-menu.tsx:55
 msgid "Announcement"
 msgstr "公告"
 
-#: src/routes/__root.tsx:132
+#: src/components/app-nav-menu.tsx:85
 msgid "API Document"
 msgstr "API 文档"
 
@@ -111,33 +115,33 @@ msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback 
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
 #: src/components/event/slot-import.tsx:131
-#: src/routes/events/$id.tsx:171
+#: src/routes/events/$id.tsx:164
 msgid "Area"
 msgstr "区域"
 
-#: src/routes/flights/$callsign.tsx:410
+#: src/routes/flights/$callsign.tsx:399
 msgid "Arrival"
 msgstr "目的机场"
 
-#: src/routes/__root.tsx:212
-#: src/routes/index.tsx:61
+#: src/components/app-nav-menu.tsx:165
+#: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC 中心"
 
-#: src/routes/__root.tsx:148
+#: src/components/app-nav-menu.tsx:101
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/routes/events/$id.tsx:129
-#: src/routes/flights/$callsign.tsx:359
+#: src/routes/events/$id.tsx:130
+#: src/routes/flights/$callsign.tsx:352
 msgid "Back"
 msgstr "返回"
 
-#: src/routes/__root.tsx:205
+#: src/components/app-nav-menu.tsx:158
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/routes/events/$id.tsx:96
+#: src/routes/events/$id.tsx:94
 msgid "Book"
 msgstr "预订"
 
@@ -146,58 +150,70 @@ msgid "Booking:"
 msgstr "预订时间："
 
 #: src/components/event/slot-import.tsx:137
-#: src/routes/flights/$callsign.tsx:381
+#: src/routes/flights/$callsign.tsx:370
 #: src/routes/flights/index.tsx:49
 msgid "Callsign"
 msgstr "呼号"
 
-#: src/routes/events/$id.tsx:177
+#: src/routes/events/$id.tsx:170
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:148
+#: src/routes/users/index.tsx:139
 msgid "Cancel"
 msgstr "取消"
 
-#: src/routes/__root.tsx:177
+#: src/components/app-nav-menu.tsx:130
 msgid "Charts"
 msgstr "航图"
 
-#: src/routes/flights/$callsign.tsx:72
+#: src/routes/flights/$callsign.tsx:56
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/routes/__root.tsx:145
+#: src/components/app-nav-menu.tsx:98
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
-#: src/routes/flights/$callsign.tsx:117
+#: src/routes/flights/$callsign.tsx:100
 msgid "China RVSM even flight level"
 msgstr "中国 RVSM 双数高度层"
 
-#: src/routes/flights/$callsign.tsx:119
+#: src/routes/flights/$callsign.tsx:102
 msgid "China RVSM flight level"
 msgstr "中国 RVSM 高度层"
 
-#: src/routes/flights/$callsign.tsx:118
+#: src/routes/flights/$callsign.tsx:101
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/users/index.tsx:71
+#: src/routes/users/index.tsx:60
 msgid "CID"
 msgstr "CID"
 
-#: src/routes/__root.tsx:170
+#: src/components/app-nav-menu.tsx:123
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/__root.tsx:199
+#: src/routes/users/index.tsx:50
+msgid "Controller"
+msgstr "管制员"
+
+#: src/components/app-nav-menu.tsx:152
 #: src/routes/controller/controller-list.tsx:9
 #: src/routes/controller/controller-list.tsx:18
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/__root.tsx:195
+#: src/routes/users/index.tsx:35
+msgid "Controller Training Director"
+msgstr "管制员训练部主管"
+
+#: src/routes/users/index.tsx:36
+msgid "Controller Training Director Assistant"
+msgstr "管制员训练部行政事务助理"
+
+#: src/components/app-nav-menu.tsx:148
 msgid "Controllers"
 msgstr "管制员"
 
@@ -210,19 +226,19 @@ msgstr "创建"
 msgid "Create Event"
 msgstr "创建活动"
 
-#: src/routes/flights/$callsign.tsx:402
+#: src/routes/flights/$callsign.tsx:391
 msgid "Cruising Level (Feet)"
 msgstr "巡航高度（英尺）"
 
-#: src/routes/flights/$callsign.tsx:153
+#: src/routes/flights/$callsign.tsx:136
 msgid "Cruising Level Not Allowed"
 msgstr "巡航高度不允许"
 
-#: src/routes/flights/$callsign.tsx:152
+#: src/routes/flights/$callsign.tsx:135
 msgid "Cruising Level Too Low"
 msgstr "巡航高度过低"
 
-#: src/routes/flights/$callsign.tsx:151
+#: src/routes/flights/$callsign.tsx:134
 msgid "Cruising Level Type Mismatch"
 msgstr "巡航高度类型不允许"
 
@@ -234,7 +250,7 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "暗色"
 
-#: src/routes/flights/$callsign.tsx:399
+#: src/routes/flights/$callsign.tsx:388
 msgid "Departure"
 msgstr "出发机场"
 
@@ -242,19 +258,23 @@ msgstr "出发机场"
 msgid "Description"
 msgstr "描述"
 
-#: src/routes/flights/$callsign.tsx:147
+#: src/routes/flights/$callsign.tsx:130
 msgid "Direct leg"
 msgstr "直飞段"
+
+#: src/routes/users/index.tsx:51
+msgid "Division Director"
+msgstr "分部主席"
 
 #: src/components/event/slot-import.tsx:120
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/discourse-doc.tsx:71
+#: src/components/discourse-doc.tsx:73
 msgid "Edit Chinese"
 msgstr "编辑中文"
 
-#: src/components/discourse-doc.tsx:66
+#: src/components/discourse-doc.tsx:64
 msgid "Edit English"
 msgstr "编辑英文"
 
@@ -263,11 +283,11 @@ msgstr "编辑英文"
 msgid "Edit Event {title}"
 msgstr "编辑活动 {title}"
 
-#: src/routes/users/index.tsx:118
+#: src/routes/users/index.tsx:112
 msgid "Edit roles"
 msgstr "编辑权限"
 
-#: src/routes/flights/$callsign.tsx:31
+#: src/routes/flights/$callsign.tsx:26
 msgid "Edit your flight plan on VATSIM."
 msgstr "在 VATSIM 上修改你的飞行计划。"
 
@@ -287,25 +307,33 @@ msgstr "预订结束时间"
 msgid "Enter at"
 msgstr "进入空域时间"
 
-#: src/routes/flights/$callsign.tsx:387
+#: src/routes/flights/$callsign.tsx:376
 msgid "Equipment"
 msgstr "设备代码"
 
-#: src/routes/flights/$callsign.tsx:120
+#: src/routes/flights/$callsign.tsx:103
 msgctxt "feet"
 msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
-#: src/routes/__root.tsx:129
-#: src/routes/__root.tsx:232
+#: src/components/app-nav-menu.tsx:82
+#: src/components/app-nav-menu.tsx:185
 msgid "Event"
 msgstr "活动"
 
-#: src/components/discourse-doc.tsx:126
+#: src/routes/users/index.tsx:45
+msgid "Event Coordinator"
+msgstr "活动协调员"
+
+#: src/routes/users/index.tsx:44
+msgid "Event Director"
+msgstr "组织部主管"
+
+#: src/components/discourse-doc.tsx:123
 msgid "Failed to load document"
 msgstr "加载文档失败"
 
-#: src/routes/docs/$.tsx:41
+#: src/routes/docs/$.tsx:39
 msgid "Failed to load document."
 msgstr "加载文档失败。"
 
@@ -319,20 +347,20 @@ msgstr "反馈"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH:mm), 到达机场, 到达时间 (yyyy-MM-dd HH:mm), 呼号, 机型"
 
-#: src/routes/flights/$callsign.tsx:122
+#: src/routes/flights/$callsign.tsx:105
 msgctxt "feet"
 msgid "flight level"
 msgstr "英制高度层"
 
-#: src/components/flight-warnings.tsx:136
+#: src/components/flight-warnings.tsx:129
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 
-#: src/routes/flights/$callsign.tsx:378
+#: src/routes/flights/$callsign.tsx:367
 msgid "Flight Plan"
 msgstr "飞行计划"
 
-#: src/routes/__root.tsx:186
+#: src/components/app-nav-menu.tsx:139
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -341,32 +369,40 @@ msgstr "飞行计划检查器"
 msgid "Flight Plan Checker"
 msgstr "飞行计划检查器"
 
-#: src/routes/flights/$callsign.tsx:441
+#: src/routes/flights/$callsign.tsx:430
 msgid "Flight Route"
 msgstr "航路"
 
-#: src/routes/__root.tsx:121
-#: src/routes/index.tsx:117
+#: src/components/app-nav-menu.tsx:74
+#: src/routes/index.tsx:119
 msgid "Forum"
 msgstr "论坛"
 
-#: src/routes/users/index.tsx:290
+#: src/components/recent-events.tsx:182
+msgid "Fri"
+msgstr "星期五"
+
+#: src/routes/users/index.tsx:250
 msgid "Go to first page"
 msgstr "前往第一页"
 
-#: src/routes/users/index.tsx:326
+#: src/routes/users/index.tsx:274
 msgid "Go to last page"
 msgstr "前往最后页"
 
-#: src/routes/users/index.tsx:314
+#: src/routes/users/index.tsx:266
 msgid "Go to next page"
 msgstr "前往下一页"
 
-#: src/routes/users/index.tsx:302
+#: src/routes/users/index.tsx:258
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/__root.tsx:238
+#: src/routes/users/index.tsx:46
+msgid "Graphics Designer"
+msgstr "图形设计师"
+
+#: src/components/app-nav-menu.tsx:191
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -386,27 +422,31 @@ msgstr "导入时刻表"
 msgid "In This Week"
 msgstr "本周"
 
-#: src/routes/__root.tsx:105
+#: src/routes/users/index.tsx:37
+msgid "Instructor"
+msgstr "教员"
+
+#: src/components/app-nav-menu.tsx:58
 msgid "Introduction"
 msgstr "介绍"
 
-#: src/routes/__root.tsx:167
+#: src/components/app-nav-menu.tsx:120
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/routes/flights/$callsign.tsx:99
+#: src/routes/flights/$callsign.tsx:82
 msgid "Learn more"
 msgstr "了解详情"
 
-#: src/routes/flights/$callsign.tsx:110
+#: src/routes/flights/$callsign.tsx:93
 msgid "Learn more about China RVSM"
 msgstr "了解中国 RVSM"
 
-#: src/routes/flights/$callsign.tsx:148
+#: src/routes/flights/$callsign.tsx:131
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
 
-#: src/routes/__root.tsx:221
+#: src/components/app-nav-menu.tsx:174
 #: src/routes/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "移交协议书"
@@ -415,23 +455,27 @@ msgstr "移交协议书"
 msgid "Light"
 msgstr "浅色"
 
-#: src/routes/controller/loa.tsx:32
+#: src/routes/controller/loa.tsx:30
 msgid "List of LOAs"
 msgstr "移交协议书列表"
 
-#: src/routes/airspace/sop.tsx:32
+#: src/routes/airspace/sop.tsx:30
 msgid "List of SOPs"
 msgstr "标准运行程序列表"
 
-#: src/components/user-info.tsx:39
+#: src/routes/users/index.tsx:43
+msgid "LOA Editor"
+msgstr "移交协议书编辑"
+
+#: src/components/user-info.tsx:37
 msgid "Loading"
 msgstr "正在加载"
 
-#: src/components/user-info.tsx:55
+#: src/components/user-info.tsx:53
 msgid "Login"
 msgstr "登入"
 
-#: src/routes/__root.tsx:114
+#: src/components/app-nav-menu.tsx:67
 msgid "Logo Pack"
 msgstr "视觉标识包"
 
@@ -439,28 +483,36 @@ msgstr "视觉标识包"
 msgid "Logout"
 msgstr "登出"
 
-#: src/routes/flights/$callsign.tsx:154
+#: src/routes/flights/$callsign.tsx:137
 msgid "Match designated route"
 msgstr "符合指定航路"
 
-#: src/routes/__root.tsx:117
+#: src/components/app-nav-menu.tsx:70
 msgid "Meeting Notes"
 msgstr "会议记录"
 
-#: src/routes/__root.tsx:215
+#: src/routes/users/index.tsx:38
+msgid "Mentor"
+msgstr "教师"
+
+#: src/components/recent-events.tsx:170
+msgid "Mon"
+msgstr "星期一"
+
+#: src/components/app-nav-menu.tsx:168
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:79
+#: src/routes/users/index.tsx:75
 msgid "Name"
 msgstr "姓名"
 
-#: src/routes/__root.tsx:188
+#: src/components/app-nav-menu.tsx:141
 msgctxt "new feature"
 msgid "New"
 msgstr "新"
 
-#: src/components/recent-events.tsx:224
+#: src/components/recent-events.tsx:240
 msgid "No event is scheduled recently."
 msgstr "近期无活动计划。"
 
@@ -468,31 +520,27 @@ msgstr "近期无活动计划。"
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
 
-#: src/routes/users/index.tsx:247
-msgid "No results."
-msgstr "没有数据"
-
-#: src/routes/flights/$callsign.tsx:143
+#: src/routes/flights/$callsign.tsx:126
 msgid "No RNAV1"
 msgstr "无 RNAV1"
 
-#: src/routes/flights/$callsign.tsx:142
+#: src/routes/flights/$callsign.tsx:125
 msgid "No RVSM"
 msgstr "无 RVSM"
 
-#: src/routes/flights/$callsign.tsx:146
+#: src/routes/flights/$callsign.tsx:129
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/routes/events/$id.tsx:85
+#: src/routes/events/$id.tsx:83
 msgid "Not designated"
 msgstr "任意"
 
-#: src/routes/flights/$callsign.tsx:150
+#: src/routes/flights/$callsign.tsx:133
 msgid "Not designated route"
 msgstr "不符合指定航路"
 
-#: src/routes/flights/$callsign.tsx:121
+#: src/routes/flights/$callsign.tsx:104
 msgctxt "feet"
 msgid "odd flight level"
 msgstr "英制单数飞行高度层"
@@ -505,33 +553,41 @@ msgstr "在线管制员"
 msgid "Online Pilots"
 msgstr "在线飞行员"
 
-#: src/routes/__root.tsx:138
+#: src/components/app-nav-menu.tsx:91
 msgid "Operation"
 msgstr "运行"
 
-#: src/routes/controller/loa.tsx:37
+#: src/routes/users/index.tsx:40
+msgid "Operation Director"
+msgstr "运行部主管"
+
+#: src/routes/users/index.tsx:41
+msgid "Operation Director Assistant"
+msgstr "运行部主管助理"
+
+#: src/routes/controller/loa.tsx:35
 msgid "Other LOAs"
 msgstr "其他移交协议书"
 
-#: src/routes/airspace/sop.tsx:44
+#: src/routes/airspace/sop.tsx:42
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/routes/users/index.tsx:277
+#: src/routes/users/index.tsx:241
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
 
-#: src/routes/flights/$callsign.tsx:414
+#: src/routes/flights/$callsign.tsx:403
 msgid "PBN"
 msgstr "PBN"
 
-#: src/routes/flights/$callsign.tsx:414
+#: src/routes/flights/$callsign.tsx:403
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
-#: src/routes/flights/$callsign.tsx:242
-#: src/routes/flights/$callsign.tsx:255
-#: src/routes/flights/$callsign.tsx:269
+#: src/routes/flights/$callsign.tsx:225
+#: src/routes/flights/$callsign.tsx:238
+#: src/routes/flights/$callsign.tsx:252
 msgid "Pick a suitable cruising level."
 msgstr "选择合适的巡航高度。"
 
@@ -539,27 +595,27 @@ msgstr "选择合适的巡航高度。"
 msgid "Pilot"
 msgstr "飞行员"
 
-#: src/routes/__root.tsx:174
+#: src/components/app-nav-menu.tsx:127
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
 
-#: src/routes/__root.tsx:160
+#: src/components/app-nav-menu.tsx:113
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/flight-warnings.tsx:98
+#: src/components/flight-warnings.tsx:97
 msgid "Planned route matches a designated route:<0>{route}</0>"
 msgstr "计划航路与指定航路 <0>{route}</0> 匹配。"
 
-#: src/components/flight-warnings.tsx:80
+#: src/components/flight-warnings.tsx:79
 msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
 msgstr "请从下列指定航路中选择一条作为计划航路，或与管制员联系。"
 
-#: src/components/flight-warnings.tsx:82
+#: src/components/flight-warnings.tsx:81
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
-#: src/routes/events/$id.tsx:155
+#: src/routes/events/$id.tsx:152
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
@@ -567,11 +623,11 @@ msgstr "预订时刻前请先登入。"
 msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
-#: src/routes/__root.tsx:111
+#: src/components/app-nav-menu.tsx:64
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/routes/__root.tsx:202
+#: src/components/app-nav-menu.tsx:155
 msgid "Progression Guide"
 msgstr "晋升指引"
 
@@ -579,83 +635,96 @@ msgstr "晋升指引"
 msgid "Recent Events"
 msgstr "近期活动"
 
-#: src/routes/events/$id.tsx:107
+#: src/routes/events/$id.tsx:104
 msgid "Release"
 msgstr "取消预订"
 
-#: src/routes/flights/$callsign.tsx:149
+#: src/routes/flights/$callsign.tsx:132
 msgid "Restricted airway"
 msgstr "受限航路"
 
-#: src/components/flight-warnings.tsx:55
+#: src/components/flight-warnings.tsx:54
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 msgstr "VATPRC 全空域实施 RNAV1 运行，不具备 RNAV1 能力的航空器将无法执行航路及标准进离场。不具备 RNAV1 能力的航空器，需要联系 ATC 申请特别航路许可。"
 
-#: src/routes/flights/$callsign.tsx:144
+#: src/routes/flights/$callsign.tsx:127
 msgid "RNP AR"
 msgstr "RNP AR"
 
-#: src/routes/flights/$callsign.tsx:145
+#: src/routes/flights/$callsign.tsx:128
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:83
+#: src/routes/users/index.tsx:79
 msgid "Roles"
 msgstr "权限"
 
-#: src/routes/flights/$callsign.tsx:406
+#: src/routes/flights/$callsign.tsx:395
 msgid "Route"
 msgstr "航路"
 
-#: src/routes/users/index.tsx:256
+#: src/routes/users/index.tsx:237
 msgid "Rows per page"
 msgstr "每页行数"
 
-#: src/components/flight-warnings.tsx:44
+#: src/components/flight-warnings.tsx:43
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
+
+#: src/components/recent-events.tsx:185
+msgid "Sat"
+msgstr "星期六"
 
 #: src/components/event/event-create.tsx:191
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:154
+#: src/routes/users/index.tsx:143
 msgid "Save changes"
 msgstr "保存变更"
 
-#: src/routes/users/index.tsx:200
+#: src/routes/users/index.tsx:194
 msgid "Search CID"
 msgstr "按 CID 搜索"
 
-#: src/routes/users/index.tsx:211
+#: src/routes/users/index.tsx:203
 msgid "Search Name"
 msgstr "按姓名搜索"
 
-#: src/routes/__root.tsx:218
+#: src/routes/users/index.tsx:42
+msgid "Sector Editor"
+msgstr "扇区组组员"
+
+#: src/components/app-nav-menu.tsx:171
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/controller-list.tsx:413
+#: src/components/controller-list.tsx:408
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
 
-#: src/components/online-pilots.tsx:70
+#: src/components/online-pilots.tsx:69
 msgid "Show all pilots"
 msgstr "显示全部"
 
-#: src/components/online-pilots.tsx:70
+#: src/components/online-pilots.tsx:69
 msgid "Show less pilots"
 msgstr "显示部分"
 
-#: src/routes/events/$id.tsx:148
+#: src/routes/events/$id.tsx:149
 msgid "Slots"
 msgstr "时刻"
 
-#: src/routes/__root.tsx:108
+#: src/routes/users/index.tsx:39
+msgid "SOP Editor"
+msgstr "SOP 组组员"
+
+#: src/components/app-nav-menu.tsx:61
+#: src/routes/users/index.tsx:33
 msgid "Staff"
 msgstr "职员"
 
-#: src/routes/__root.tsx:151
+#: src/components/app-nav-menu.tsx:104
 #: src/routes/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
@@ -668,9 +737,13 @@ msgstr "开始时间"
 msgid "Start booking at"
 msgstr "开始预订时间"
 
-#: src/routes/__root.tsx:164
+#: src/components/app-nav-menu.tsx:117
 msgid "Start to Fly"
 msgstr "开始飞行"
+
+#: src/components/recent-events.tsx:188
+msgid "Sun"
+msgstr "星期日"
 
 #: src/components/language-toggle.tsx:17
 msgid "Switch to Chinese"
@@ -684,58 +757,66 @@ msgstr "切换到英文"
 msgid "System"
 msgstr "跟随系统"
 
-#: src/components/flight-warnings.tsx:10
-#: src/routes/flights/$callsign.tsx:179
+#: src/routes/users/index.tsx:47
+msgid "Tech Director"
+msgstr "技术部主管"
+
+#: src/routes/users/index.tsx:48
+msgid "Tech Director Assistant"
+msgstr "技术部主管助理"
+
+#: src/components/flight-warnings.tsx:9
+#: src/routes/flights/$callsign.tsx:162
 msgid "The aircraft does not specify RNAV1 capability."
 msgstr "设备代码未表明具备 RNAV1 能力。"
 
-#: src/components/flight-warnings.tsx:9
-#: src/routes/flights/$callsign.tsx:163
+#: src/components/flight-warnings.tsx:8
+#: src/routes/flights/$callsign.tsx:146
 msgid "The aircraft does not specify RVSM capability."
 msgstr "设备代码未表明具备 RVSM 能力。"
 
-#: src/components/flight-warnings.tsx:23
+#: src/components/flight-warnings.tsx:22
 msgid "The aircraft does not specify transponder capability."
 msgstr "设备代码未填写应答机能力。"
 
-#: src/components/flight-warnings.tsx:12
+#: src/components/flight-warnings.tsx:11
 msgid "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP AR（带 RF 航段）程序。"
 
-#: src/components/flight-warnings.tsx:18
+#: src/components/flight-warnings.tsx:17
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 RNP AR（不带 RF 航段）程序。"
 
-#: src/routes/events/$id.tsx:163
+#: src/routes/events/$id.tsx:157
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
 
-#: src/components/flight-warnings.tsx:30
-#: src/routes/flights/$callsign.tsx:262
+#: src/components/flight-warnings.tsx:29
+#: src/routes/flights/$callsign.tsx:245
 msgid "The cruising level is not allowed for the route."
 msgstr "巡航高度违反航路限制。"
 
-#: src/routes/flights/$callsign.tsx:251
+#: src/routes/flights/$callsign.tsx:234
 msgid "The cruising level is too low for route. The minimum is {level} feet."
 msgstr "巡航高度过低，不满足航路要求。至少应当为 {level} 英尺。"
 
-#: src/components/flight-warnings.tsx:29
+#: src/components/flight-warnings.tsx:28
 msgid "The cruising level is too low for the route."
 msgstr "巡航高度过低，不满足航路要求。"
 
-#: src/components/flight-warnings.tsx:28
+#: src/components/flight-warnings.tsx:27
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "巡航高度类型不符合航路要求。"
 
-#: src/routes/flights/$callsign.tsx:231
+#: src/routes/flights/$callsign.tsx:214
 msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}。"
 
-#: src/routes/flights/$callsign.tsx:235
+#: src/routes/flights/$callsign.tsx:218
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
 
-#: src/components/flight-warnings.tsx:27
+#: src/components/flight-warnings.tsx:26
 msgid "The flight plan does not match the designated route for this flight."
 msgstr "计划航路与指定航路不一致。"
 
@@ -743,23 +824,23 @@ msgstr "计划航路与指定航路不一致。"
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "下方表格的内容基于管制员中心数据自动生成，正常情况下最多存在24小时延迟。表中数据仅包含至少含有一类席位管制权限的管制员（含客座管制员），即不包含在下表中的管制员不再拥有管制权限。"
 
-#: src/components/flight-warnings.tsx:31
+#: src/components/flight-warnings.tsx:30
 msgid "The planned route matches designated route."
 msgstr "计划航路符合指定航路。"
 
-#: src/components/flight-warnings.tsx:24
+#: src/components/flight-warnings.tsx:23
 msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
 msgstr "计划航路包含直飞段。请确认直飞段是否符合实际飞行要求。"
 
-#: src/components/flight-warnings.tsx:25
+#: src/components/flight-warnings.tsx:24
 msgid "The route contains a leg with an invalid direction."
 msgstr "计划航路包含与航路方向不一致的航段。"
 
-#: src/components/flight-warnings.tsx:26
+#: src/components/flight-warnings.tsx:25
 msgid "The route contains an airway that requires controller approval."
 msgstr "计划航路包括需要管制员许可的航路。"
 
-#: src/components/flight-warnings.tsx:73
+#: src/components/flight-warnings.tsx:72
 msgid "The submitted route is:<0>{route}</0>"
 msgstr "提交的航路是 <0>{route}</0>。"
 
@@ -767,12 +848,16 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
-#: src/routes/airspace/sop.tsx:27
-#: src/routes/controller/loa.tsx:27
+#: src/routes/airspace/sop.tsx:26
+#: src/routes/controller/loa.tsx:26
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
-#: src/routes/events/$id.tsx:174
+#: src/components/recent-events.tsx:179
+msgid "Thu"
+msgstr "星期四"
+
+#: src/routes/events/$id.tsx:167
 msgid "Time"
 msgstr "时间"
 
@@ -788,36 +873,40 @@ msgstr "标题"
 msgid "Toggle theme"
 msgstr "切换主题"
 
-#: src/routes/flights/$callsign.tsx:393
+#: src/routes/flights/$callsign.tsx:382
 msgid "Transponder"
 msgstr "应答机"
 
-#: src/components/flight-warnings.tsx:64
-#: src/routes/flights/$callsign.tsx:212
+#: src/components/flight-warnings.tsx:63
+#: src/routes/flights/$callsign.tsx:195
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
 
-#: src/components/controller-list.tsx:325
+#: src/components/recent-events.tsx:173
+msgid "Tue"
+msgstr "星期二"
+
+#: src/components/controller-list.tsx:322
 msgid "until"
 msgstr "直到"
 
-#: src/routes/docs/utils/image.tsx:43
+#: src/routes/docs/utils/image.tsx:36
 msgid "Upload"
 msgstr "上传"
 
-#: src/routes/docs/utils/image.tsx:34
+#: src/routes/docs/utils/image.tsx:31
 msgid "Upload image"
 msgstr "上传图片"
 
-#: src/routes/__root.tsx:235
+#: src/components/app-nav-menu.tsx:188
 msgid "User List"
 msgstr "用户列表"
 
-#: src/routes/__root.tsx:180
+#: src/components/app-nav-menu.tsx:133
 msgid "vACDM"
 msgstr "模拟 A-CDM"
 
-#: src/routes/flights/$callsign.tsx:437
+#: src/routes/flights/$callsign.tsx:426
 msgid "Validation Result"
 msgstr "检查结果"
 
@@ -825,28 +914,36 @@ msgstr "检查结果"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/routes/__root.tsx:286
-#: src/routes/__root.tsx:287
+#: src/components/app-header.tsx:21
+#: src/components/app-header.tsx:22
 #: src/routes/index.tsx:27
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/routes/__root.tsx:154
+#: src/components/app-nav-menu.tsx:107
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
-#: src/routes/__root.tsx:208
+#: src/components/app-nav-menu.tsx:161
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/__root.tsx:304
+#: src/routes/users/index.tsx:34
+msgid "Volunteer"
+msgstr "志愿者"
+
+#: src/routes/__root.tsx:67
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 
-#: src/routes/__root.tsx:183
+#: src/components/app-nav-menu.tsx:136
 msgid "Weather"
 msgstr "天气"
 
-#: src/routes/flights/$callsign.tsx:216
+#: src/components/recent-events.tsx:176
+msgid "Wed"
+msgstr "星期三"
+
+#: src/routes/flights/$callsign.tsx:199
 msgid "Write your transponder equipment code."
 msgstr "给出你的应答机设备代码。"

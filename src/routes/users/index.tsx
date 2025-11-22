@@ -16,7 +16,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   TbChevronsLeft,
   TbChevronLeft,
@@ -29,27 +29,27 @@ import {
   TbCheck,
 } from "react-icons/tb";
 
-const ALL_ROLES = [
-  "staff",
-  "volunteer",
-  "director",
-  "controller-training-director",
-  "controller-training-director-assistant",
-  "controller-training-instructor",
-  "controller-training-mentor",
-  "controller-training-sop-editor",
-  "operation-director",
-  "operation-director-assistant",
-  "operation-sector-editor",
-  "operation-loa-editor",
-  "event-director",
-  "event-coordinator",
-  "event-graphics-designer",
-  "tech-director",
-  "tech-director-assistant",
-  "tech-afv-facility-engineer",
-  "controller",
-];
+const ROLES = {
+  staff: <Trans>Staff</Trans>,
+  volunteer: <Trans>Volunteer</Trans>,
+  "controller-training-director": <Trans>Controller Training Director</Trans>,
+  "controller-training-director-assistant": <Trans>Controller Training Director Assistant</Trans>,
+  "controller-training-instructor": <Trans>Instructor</Trans>,
+  "controller-training-mentor": <Trans>Mentor</Trans>,
+  "controller-training-sop-editor": <Trans>SOP Editor</Trans>,
+  "operation-director": <Trans>Operation Director</Trans>,
+  "operation-director-assistant": <Trans>Operation Director Assistant</Trans>,
+  "operation-sector-editor": <Trans>Sector Editor</Trans>,
+  "operation-loa-editor": <Trans>LOA Editor</Trans>,
+  "event-director": <Trans>Event Director</Trans>,
+  "event-coordinator": <Trans>Event Coordinator</Trans>,
+  "event-graphics-designer": <Trans>Graphics Designer</Trans>,
+  "tech-director": <Trans>Tech Director</Trans>,
+  "tech-director-assistant": <Trans>Tech Director Assistant</Trans>,
+  "tech-afv-facility-engineer": <Trans>AFV Facility Engineer</Trans>,
+  controller: <Trans>Controller</Trans>,
+  "division-director": <Trans>Division Director</Trans>,
+} satisfies Record<Exclude<components["schemas"]["UserRoleDto"], "api-client" | "user">, ReactNode>;
 
 export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
   {
@@ -99,18 +99,20 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
 
       return (
         <div className="flex flex-row items-center gap-2">
-          <div className="flex flex-col flex-wrap gap-x-1">
-            {savedRoles.map((role) => (
-              <span key={role}>{role}</span>
-            ))}
-          </div>
+          {savedRoles.length > 0 && (
+            <div className="flex flex-col flex-wrap gap-x-1">
+              {savedRoles.map((role) => (
+                <span key={role}>{role}</span>
+              ))}
+            </div>
+          )}
           <ActionIcon variant="subtle" onClick={open}>
             <TbUserBolt />
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
-            <div className="flex flex-col items-start gap-4">
+            <div className="mb-2 flex flex-col items-start gap-2">
               {roles.map((role) => (
-                <div key={role} className="flex w-full items-center gap-2">
+                <div key={role} className="flex w-full items-center">
                   <span className="flex-grow">{role}</span>
                   <ActionIcon onClick={onRemoveRole(role)}>
                     <TbMinus />
@@ -126,9 +128,9 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
                   </ActionIcon>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  {ALL_ROLES.map((role) => (
+                  {Object.entries(ROLES).map(([role, name]) => (
                     <Menu.Item key={role} onClick={onAddRole(role)}>
-                      {role}
+                      {name}
                     </Menu.Item>
                   ))}
                 </Menu.Dropdown>
