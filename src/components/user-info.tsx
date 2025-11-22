@@ -18,7 +18,9 @@ export const UserInfo = () => {
     return (
       <Menu shadow="md" width={200}>
         <Menu.Target>
-          <Button variant="subtle">{data.user.full_name}</Button>
+          <Button variant="subtle" color="gray">
+            {data.user.full_name}
+          </Button>
         </Menu.Target>
 
         <Menu.Dropdown>

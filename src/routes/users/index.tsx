@@ -1,15 +1,9 @@
-import { DialogHeader, DialogFooter } from "@/components/ui/dialog";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, ActionIconGroup, Button, Select, Table, TextInput } from "@mantine/core";
+import { ActionIcon, ActionIconGroup, Button, Group, Menu, Modal, Select, Table, TextInput } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ColumnDef,
@@ -88,14 +82,16 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
       const [roles, setRoles] = useState(getValue<string[]>());
       const { mutate, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/roles");
       const { refetch } = $api.useQuery("get", "/api/users");
+      const [opened, { open, close }] = useDisclosure(false);
 
       const onSave = () =>
         mutate(
           { params: { path: { id: row.original.id } }, body: [...roles] },
           {
-            onSuccess: () => {
-              refetch().catch(console.error);
-            },
+            onSuccess: wrapPromiseWithLog(async () => {
+              await refetch();
+              close();
+            }),
           },
         );
       const onAddRole = (role: string) => () => setRoles((pv) => [...pv.filter((r) => r !== role), role]);
@@ -108,55 +104,44 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
               <span key={role}>{role}</span>
             ))}
           </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <ActionIcon variant="subtle">
-                <TbUserBolt />
-              </ActionIcon>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>
-                  <Trans>Edit roles</Trans>
-                </DialogTitle>
-              </DialogHeader>
-              <div className="flex flex-col items-start gap-4">
-                {roles.map((role) => (
-                  <div key={role} className="flex w-full items-center gap-2">
-                    <span className="flex-grow">{role}</span>
-                    <ActionIcon onClick={onRemoveRole(role)}>
-                      <TbMinus />
-                    </ActionIcon>
-                  </div>
-                ))}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <ActionIcon>
-                      <TbPlus />
-                    </ActionIcon>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    {ALL_ROLES.map((role) => (
-                      <DropdownMenuItem key={role} onSelect={onAddRole(role)}>
-                        {role}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline" size="sm">
-                    <Trans>Cancel</Trans>
-                  </Button>
-                </DialogClose>
-                <Button size="sm" type="submit" onClick={onSave} loading={isPending}>
-                  {isSuccess && <TbCheck />}
-                  <Trans>Save changes</Trans>
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <ActionIcon variant="subtle" onClick={open}>
+            <TbUserBolt />
+          </ActionIcon>
+          <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
+            <div className="flex flex-col items-start gap-4">
+              {roles.map((role) => (
+                <div key={role} className="flex w-full items-center gap-2">
+                  <span className="flex-grow">{role}</span>
+                  <ActionIcon onClick={onRemoveRole(role)}>
+                    <TbMinus />
+                  </ActionIcon>
+                </div>
+              ))}
+            </div>
+            <Group gap="sm">
+              <Menu>
+                <Menu.Target>
+                  <ActionIcon>
+                    <TbPlus />
+                  </ActionIcon>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {ALL_ROLES.map((role) => (
+                    <Menu.Item key={role} onClick={onAddRole(role)}>
+                      {role}
+                    </Menu.Item>
+                  ))}
+                </Menu.Dropdown>
+              </Menu>
+              <Button variant="outline" size="xs" onClick={close}>
+                <Trans>Cancel</Trans>
+              </Button>
+              <Button size="xs" type="submit" onClick={onSave} loading={isPending}>
+                {isSuccess && <TbCheck />}
+                <Trans>Save changes</Trans>
+              </Button>
+            </Group>
+          </Modal>
         </div>
       );
     },

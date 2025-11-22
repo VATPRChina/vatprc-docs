@@ -1,11 +1,10 @@
 import { FlightWarnings } from "@/components/flight-warnings";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Skeleton, Tooltip } from "@mantine/core";
+import { ActionIcon, Alert, Button, Popover, Skeleton, Tooltip } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
 import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
@@ -312,11 +311,11 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
 
         return (
           <Popover {...props} key={warning.message_code}>
-            <PopoverTrigger asChild>{button}</PopoverTrigger>
-            <PopoverContent className="w-max">
+            <Popover.Target>{button}</Popover.Target>
+            <Popover.Dropdown className="w-max">
               {popoverText && message}
               {content}
-            </PopoverContent>
+            </Popover.Dropdown>
           </Popover>
         );
       })}

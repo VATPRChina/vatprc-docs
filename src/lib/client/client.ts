@@ -1,9 +1,9 @@
 import { paths } from "../api";
 import { ApiError } from "./ApiError";
 import { authMiddleware } from "./auth";
+import { notifications } from "@mantine/notifications";
 import createClient, { Middleware } from "openapi-fetch";
 import createQueryClient from "openapi-react-query";
-import { toast } from "sonner";
 
 const throwMiddleware: Middleware = {
   async onResponse({ response }) {
@@ -14,7 +14,13 @@ const throwMiddleware: Middleware = {
     }
   },
   onError(err) {
-    if (err.error instanceof ApiError) toast(err.error.name, { description: err.error.message });
+    if (err.error instanceof ApiError) {
+      notifications.show({
+        title: err.error.name,
+        message: err.error.message,
+        color: "red",
+      });
+    }
   },
 };
 

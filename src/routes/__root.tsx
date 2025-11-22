@@ -2,14 +2,6 @@ import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ModeToggle } from "@/components/theme-toggle";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Toaster } from "@/components/ui/sonner";
 import { UserInfo } from "@/components/user-info";
 import { usePermissions } from "@/lib/client";
 import { getLocale, getLocalPathname } from "@/lib/i18n";
@@ -18,11 +10,21 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge, ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  ColorSchemeScript,
+  createTheme,
+  Group,
+  HoverCard,
+  mantineHtmlProps,
+  MantineProvider,
+} from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
-import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
+import { Notifications } from "@mantine/notifications";
+import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -85,7 +87,7 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
     </Link>
   );
 
-  return <NavigationMenuLink asChild>{link}</NavigationMenuLink>;
+  return link;
 };
 
 const contents = [
@@ -247,23 +249,25 @@ export const NavMenu: React.FC = () => {
   const roles = usePermissions();
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        {contents.map((content, i) => {
-          if (content.requiresRole && !roles.includes(content.requiresRole)) {
-            return null;
-          }
-          return (
-            <NavigationMenuItem key={i}>
-              <NavigationMenuTrigger>{content.title}</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <content.content locale={locale} />
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          );
-        })}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <Group gap="md">
+      {contents.map((content, i) => {
+        if (content.requiresRole && !roles.includes(content.requiresRole)) {
+          return null;
+        }
+        return (
+          <HoverCard key={i}>
+            <HoverCard.Target>
+              <Button variant="subtle" color="gray">
+                {content.title}
+              </Button>
+            </HoverCard.Target>
+            <HoverCard.Dropdown>
+              <content.content locale={locale} />
+            </HoverCard.Dropdown>
+          </HoverCard>
+        );
+      })}
+    </Group>
   );
 };
 
@@ -333,6 +337,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "stylesheet", href: mantineDateStyle },
         { rel: "stylesheet", href: mantineDropzoneStyle },
+        { rel: "stylesheet", href: mantineNotificationStyle },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },
@@ -382,8 +387,8 @@ function RootLayout() {
           <Application>
             <Outlet />
           </Application>
+          <Notifications position="top-center" />
         </MantineProvider>
-        <Toaster position="top-center" />
         <Scripts />
       </body>
     </html>

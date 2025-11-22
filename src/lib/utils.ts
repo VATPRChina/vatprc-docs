@@ -45,4 +45,5 @@ export const promiseWithToast = (promise: PromiseOrFunction, final?: () => unkno
     .finally(final);
 };
 
+export const wrapPromiseWithLog = (promise: PromiseOrFunction) => () => promiseWithLog(promise);
 export const wrapPromiseWithToast = (promise: PromiseOrFunction) => () => promiseWithToast(promise);
