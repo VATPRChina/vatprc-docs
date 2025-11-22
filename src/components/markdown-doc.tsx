@@ -18,6 +18,7 @@ export const MarkdownDoc: React.FC<{
           variant="light"
           scrollSpyOptions={{
             selector: "#markdown-doc :is(h1, h2, h3, h4, h5, h6)",
+            offset: 54,
           }}
           getControlProps={({ data }) => ({
             component: "a",
