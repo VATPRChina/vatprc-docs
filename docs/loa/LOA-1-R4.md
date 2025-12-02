@@ -2,7 +2,7 @@
 
 **Revision 4**
 
-**Date Issued:** Oct 20, 2025
+**Date Issued:** Nov 27, 2025
 
 **VATPRC Document Number:** VATPRC-LOA-1-R4-EN
 
@@ -636,7 +636,7 @@ Figure 8.3: Area chart-Guangzhou and Zhuhai (Source: China AIP ENR2.2.2.4)
 
 |  TCP  |             Direction              |                 Altitudes (FLAS)                  |
 | :---: | :--------------------------------: | :-----------------------------------------------: |
-| BEKOL | Departing VHHH/VHHX Landing ZGSZ ① |                       S0180                       |
+| BEKOL | Departing VHHH/VHHX Landing ZGSZ ① |           S0240 \*S0210 on coordination           |
 | BEKOL |  Departing VHHH/VHHX Landing ZGGG  |           S0420 \*S0450 on coordination           |
 | TAMOT |            Landing ZGGG            |           S0450 \*S0420 on coordination           |
 | LUKBU |       Departing VMMC, ZGSZ ②       | 9000ft \*Aircraft are released for climb to FL120 |
@@ -1003,18 +1003,69 @@ ICAO Doc 4444
 ## Appendix B: Quick Reference Table
 
 > [!Note]
-> Positions on the below take over positions on the above if they are offline.
+> Latter positions take over previous ones if they are offline.
 
-<img width="970" height="1218" alt="QQ_1761453683043" src="https://github.com/user-attachments/assets/1b87a7fc-6f19-4fef-808e-ecde1124c56c" />
+|  TCP  |               Altitude               |          Transfer to          |        Remark        |
+| :---: | :----------------------------------: | :---------------------------: | :------------------: |
+| BEKOL |     S0240 \*S0210 on coordination    |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | Only for VHHH/VHHX->ZGSZ |
+| BEKOL |     S0420 \*S0450 on coordination    |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | Only for VHHH/VHHX->ZGGG |
+| BEKOL |    S0690 \*Above S0480 when handoff  |       ZGGG_CTR ZGZU_CTR       | Departing VHHH/VHHX  |
+| BEKOL |       S0890 - S1190 \*Metric Odd     |    ZGGG_CTR ZGZU_CTR PRC_FSS  | To Guangzhou ACC \*For En-Route |
+| DAPENG（大鹏） |      600m/2000ft or below     |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | To Guangzhou ACC \*VFR Route Only for General Aviation |
+| DAPENG（大鹏） |      600m/2000ft or below     | VHHH_F_TWR VHHH_Z_TWR VHHH_S/C/N_TWR\* VHHH_APP\* HKG_W_CTR \*Specific sector by coordination | To Hong Kong ACC \*VFR Route Only for General Aviation |
+| DOSUT |  F270/F310/F320/F350/F360/F390/F400  | HKG_U_CTR (if F365+) HKG_D_CTR HKG_V_CTR HKG_W_CTR | To Hong Kong ACC \*For En-Route |
+| DOTMI |            S0420          |  HKG_K_CTR HKG_E_CTR HKG_S_CTR HKG_W_CTR |    Departing ZGOW    |
+| DOTMI |            S0450              | ZGOW_APP ZGGG_CTR ZGZU_CTR ZSAM_CTR ZSHA_CTR | Landing ZGOW |
+| DOTMI |     S0660 S0720 S0780      | HKG_K_CTR HKG_E_CTR HKG_S_CTR HKG_W_CTR | Departing Xiamen ACC |
+| DOTMI |            S0630 S0750               |       ZSAM_CTR ZSHA_CTR       | Landing ZSAM/ZSQZ/ ZSFZ/ZSWY/ZSWZ |
+| DOTMI |             F280 F300      | HKG_K_CTR HKG_E_CTR HKG_S_CTR HKG_W_CTR |  Landing VHHH/VMMC   |
+| DOTMI |          F280 F300 F360 F380         | HKG_U_CTR (if F365+) HKG_K_CTR HKG_E_CTR HKG_S_CTR HKG_W_CTR | To Hong Kong ACC \*For En-Route |
+| DOTMI |     S0810 F330 F350 F390    |  ZSSS_S_CTR ZSSS_CTR ZSHA_CTR PRC_FSS  | To Shanghai ACC \*For En-Route |
+| EPKAL |  F280/F310/F320/F350/F360/F390/F400  |  ZJSY_O_CTR ZJSA_CTR PRC_FSS  | To Sanya ACC \*For En-Route |
+| QZ（青州） |     600m/2000ft or below      |  VHHH_F_TWR VHHH_Z_TWR VHHH_S/C/N_TWR\* VHHH_APP HKG_W_CTR \*Specific sector by coordination  | To Hong Kong ACC \*VFR Route Only for General Aviation |
+| QZ（青州） |     600m/2000ft or below          |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | To Guangzhou ACC \*VFR Route Only for General Aviation |
+| IKELA |    F280/F300/F340/F380/F400/F430     | ZJSY_O_CTR (if F140+) ZJSA_CTR (if F140+) PRC_FSS (if F256+) | To Sanya ACC \*For En-Route |
+| IKELA |  F270/F290/F330/F370/F390/F410/F450  | HKG_U_CTR (if F365+) HKG_V_CTR HKG_W_CTR | To Hong Kong ACC \*For En-Route |
+| INDUS |              S0270                   |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | Landing VMMC\* \*For runway 16 |
+| LANDA |        F110 \*9000ft alternate       |  ZGJD_APP ZGGG_CTR ZGZU_CTR   |      Landing ZGSZ       |
+| LELIM |              F300         |  HKG_K_CTR HKG_E_CTR HKG_S_CTR HKG_W_CTR | Only for ZSPD/ZSQD/ZSYT/ZYTL -> VHHH |
+| LELIM |           F330 F350        |  ZSSS_S_CTR ZSSS_CTR ZSHA_CTR PRC_FSS   | Only for VHHH/VMMC -> ZSPD/ZSQD/ZSYT/ZYTL |
+| LUKBU | 9000ft\* \*Aircraft are released for climb to FL120 | VHHH_S_DEP VHHH_N_DEP VHHH_APP HKG_W_CTR | Departing ZGSZ\*/VMMC \*By coordination only Primary use SIERA |
+| LUKBU |      300m/1000ft     | VHHH_N_TWR VHHH_C_TWR VHHH_S_TWR VHHH_APP HKG_W_CTR | ZGSZ->VHHH \*VFR Route Only for General Aviation |
+| LUKBU |           300m/1000ft                |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | VHHH->ZGSZ \*VFR Route Only for General Aviation |
+|  MCU  |        7000ft      | VMMC_APP VHHH_L_APP VHHH_W_APP HKG_W_CTR VHHH_APP |    Landing VMMC    |
+| ROMEO |        6000ft      | VMMC_APP VHHH_L_APP VHHH_W_APP HKG_W_CTR VHHH_APP |   Landing VMMC     |
+| ROMEO | S0120/4000ft \*S0180/6000ft on coordination | VMMC_APP VHHH_L_APP VHHH_W_APP HKG_W_CTR VHHH_APP | To Hong Kong ACC \*IFR Route Only for General Aviation |
+| ROMEO |            S0150/5000ft              |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | To Guangzhou ACC \*IFR Route Only for General Aviation |
+| SESAN（星山） |     600m/2000ft or below       | VHHH_F_TWR VHHH_Z_TWR VHHH_S/C/N_TWR\* VHHH_APP HKG_W_CTR \*Specific sector by coordination | To Hong Kong ACC \*VFR Route Only for General Aviation |
+| SESAN（星山） |     600m/2000ft or below       |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | To Guangzhou ACC \*VFR Route Only for General Aviation |
+| SESAN（星山） |       S0120/4000ft             |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | To Guangzhou ACC \*IFR Route Only for General Aviation |
+| SESAN（星山） |  S0150/5000ft  | VHHH_F_TWR VHHH_Z_TWR VHHH_S/C/N_TWR\* VHHH_APP HKG_W_CTR \*Specific sector by coordination | To Hong Kong ACC \*IFR Route Only for General Aviation |
+| SIERA |          F120       | VMMC_APP VHHH_L_APP VHHH_W_APP HKG_W_CTR VHHH_APP |  Departing ZGSZ   |
+| SIERA |           F190 F210 F230             | VHHH_W_APP HKG_W_CTR VHHH_APP |     Landing VHHH    |
+| SIERA |              F230 F250               | VHHH_W_APP HKG_W_CTR VHHH_APP |   Departing ZGGG    |
+| SIKOU |                S0630                 |            HKG_W_CTR          |  Departing ZJHK/ZJQH |
+| SIKOU |                S0570                 |            HKG_W_CTR          | Departing ZGZJ/ZGBH |
+| SIKOU |                S0600                 |   ZGZJ_APP ZGNN_CTR ZGZU_CTR  |     Landing ZGZJ    |
+| SIKOU |             S0810 S0890              |            HKG_W_CTR          |     Departing ZJSY   |
+| SIKOU |                S0840                 |  ZJSY_L_CTR ZJSA_CTR PRC_FSS  |     Landing ZJSY    |
+| SIKOU |             S0660 S0720              |       ZGNN_CTR ZGZU_CTR       |   Landing ZJHK/ZJQH  |
+| SIKOU |             S0720 S0780              |       ZGNN_CTR ZGZU_CTR       |  Landing ZGNN/ZGBH  |
+| SIKOU |           S1040/S1160/S1220          |  ZJSY_L_CTR ZJSA_CTR PRC_FSS  | To Sanya ACC (beyond ASSAD) \*For En-Route |
+| SIKOU |      S0980 - S1220 \*Metric Even     |  ZJSY_L_CTR ZJSA_CTR PRC_FSS  | To Sanya ACC (beyond WUY) \*For En-Route |
+| SIKOU |      S1010 - S1250 \*Metric Odd     | HKG_U_CTR (if F365+) HKG_W_CT  | To Hong Kong ACC \*For En-Route |
+| TAMOT |    S0450 \*S0420 on coordination    |   ZGJD_APP ZGGG_CTR ZGZU_CTR   |     Landing ZGGG     |
+| TAMOT | F280 \*Lower altitudes on coordination |         HKG_W_CTR           |      Landing VHHX    |
+| TAMOT |      S0840 - S1220  \*Metric Even  |  HKG_U_CTR (if F365+) HKG_W_CTR | To Hong Kong ACC \*For En-Route |
+| ZAO（九洲） |   300m/1000ft or below   | VMMC_TWR VMMC_APP VHHH_L_APP VHHH_W_APP VHHH_APP HKG_W_CTR | ZGSZ->VMMC \*VFR Route Only for General Aviation |
+| ZAO（九洲） |       300m/1000ft or below       |   ZGJD_APP ZGGG_CTR ZGZU_CTR  | VMMC->ZGSZ \*VFR Route Only for General Aviation |
+| ZAO（九洲） | 150/500ft or below **\*when VHHH RWY 07s in use* 250m/800ft or below **\*when VHHH RWY 25s in use* | VMMC_TWR VMMC_APP VHHH_L_APP VHHH_W_APP VHHH_APP HKG_W_CTR | To Hong Kong ACC \*VFR Route Only for General Aviation |
+| ZAO（九洲） |       300m/1000ft or below       |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | To Guangzhou ACC \*VFR Route Only for General Aviation |
+| FIR Border |          S0180 or below         |  ZGJD_APP ZGGG_CTR ZGZU_CTR   | Departing VMMC\* \*For runway 16 |
 
-<img width="962" height="1400" alt="QQ_1761453741851" src="https://github.com/user-attachments/assets/cf51ddc5-2840-4bf3-a6c7-207652738bd2" />
 
-<img width="960" height="1340" alt="QQ_1761453775241" src="https://github.com/user-attachments/assets/2185d525-2b6f-4219-b4fb-af0f20519278" />
 
-<img width="962" height="1396" alt="QQ_1761453804907" src="https://github.com/user-attachments/assets/6ae8df32-69a0-47af-9c7c-62eeaaf529bd" />
 
-<img width="958" height="1402" alt="QQ_1761453832541" src="https://github.com/user-attachments/assets/697620f5-b76a-4cca-8c1a-fd92f3e83a8d" />
 
-<img width="968" height="1400" alt="QQ_1761453880476" src="https://github.com/user-attachments/assets/598c481d-a3a9-40ee-9c11-fd68b5a6a86b" />
 
-<img width="948" height="720" alt="QQ_1761453907425" src="https://github.com/user-attachments/assets/fb965daf-92ac-4963-9b61-a5522b7434d7" />
+
