@@ -982,7 +982,7 @@ A content review of this LOA shall take at most six (6) months after this LOA ta
 
 Any parties wishing to amend this LOA (by adding, omitting or changing any clauses) shall contact the other party to call for an immediate review of the LOA. Both parties must reach a consensus on any amendments before they take effect. Subsequent content review shall take place at most every six (6) months henceforth.
 
-### This Letter of Agreement is approved on 20 Oct, year 2025:
+### This Letter of Agreement is approved on 27 Nov, year 2025:
 
 VATPRC Division Director - Hongye Rudi Zhang
 
