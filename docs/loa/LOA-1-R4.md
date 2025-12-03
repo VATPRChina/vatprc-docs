@@ -156,7 +156,7 @@ Controllers should refer to the Sector Ownership Priority table in Appendix B to
 - The vertical boundary of Zhuhai TMA is GND-S0450 (F148)
 - Handoffs to Zhuhai TMA shall be made in the following order: ZGJD_APP -> ZGGG_CTR -> ZGZU_CTR
 
-<img width="1544" height="1128" alt="QQ_1754221661470" src="https://github.com/user-attachments/assets/f2a64b93-d82e-47aa-84b5-60f7ca35c0dd" />
+<img width="6159" height="4500" alt="hkboundary_画板 1-09" src="https://github.com/user-attachments/assets/69a50a6c-1073-411b-8e88-259b6cc6dfb4" />
 
 Figure 7.1: Zhuhai TMA Sector
 
@@ -169,7 +169,7 @@ Figure 7.1: Zhuhai TMA Sector
 - The vertical boundary of Shantou TMA is GND-S0450 (F148)
 - Handoffs to Shantou TMA shall be made in the following order: ZGOW_APP -> ZGGG_CTR -> ZGZU_CTR -> ZSAM_CTR -> ZSHA_CTR
 
-<img width="1262" height="1094" alt="QQ_1754221744744" src="https://github.com/user-attachments/assets/4d41a030-e643-4218-b8ff-1fe469fb585d" />
+<img width="5207" height="4500" alt="hkboundary_画板 1-10" src="https://github.com/user-attachments/assets/e228872b-d955-4508-8fe9-dcf2e275a8d7" />
 
 Figure 7.2: Shantou TMA Sector
 
@@ -181,7 +181,7 @@ Figure 7.2: Shantou TMA Sector
 - The vertical boundary of Zhanjiang TMA is GND-S0600 (F197)
 - Handoffs to Zhanjiang TMA shall be made in the following order: ZGZJ_APP -> ZGNN_CTR -> ZGZU_CTR
 
-<img width="1566" height="1124" alt="QQ_1754221820563" src="https://github.com/user-attachments/assets/db98bd9c-c4d3-45d2-a7ca-9d7fd139f382" />
+<img width="6284" height="4500" alt="hkboundary_画板 1-11" src="https://github.com/user-attachments/assets/56f097a6-4a43-475a-8954-1e99197261d2" />
 
 Figure 7.3: Zhanjiang TMA Sector
 
@@ -194,7 +194,7 @@ Figure 7.3: Zhanjiang TMA Sector
 - The horizontal boundary of Guangzhou ACC is shown in Figure 7.4
 - Handoffs to Guangzhou ACC shall be made in the following order: ZGGG_CTR -> ZGZU_CTR -> PRC_FSS (Above S0780/F256)
 
-<img width="1654" height="1112" alt="QQ_1754221897577" src="https://github.com/user-attachments/assets/434206d5-899b-4be8-9778-8575a17c7da9" />
+<img width="6696" height="4500" alt="hkboundary_画板 1-12" src="https://github.com/user-attachments/assets/8f0373cc-89b6-4683-8d4f-710d6a0cae5e" />
 
 Figure 7.4: Guangzhou ACC Sector
 
@@ -209,7 +209,7 @@ Figure 7.4: Guangzhou ACC Sector
 - The horizontal boundary of Sanya ACC is shown in Figure 7.5
 - Handoffs to Sanya ACC shall be made in the following order: ZJSY_L_CTR/ZJSY_O_CTR -> ZJSA_CTR -> PRC_FSS (Above S0780/F256)
 
-<img width="1402" height="1096" alt="QQ_1754222011087" src="https://github.com/user-attachments/assets/739336f7-f2c0-4154-8335-a1ff1b98962d" />
+<img width="5759" height="4500" alt="hkboundary_画板 1-13" src="https://github.com/user-attachments/assets/31eddf7e-b61a-4f17-ba73-d576f47f438a" />
 
 Figure 7.5: Sanya ACC Sector
 
@@ -223,7 +223,7 @@ Figure 7.5: Sanya ACC Sector
 - The horizontal boundary of Nanning ACC is shown in Figure 7.6
 - Handoffs to Nanning ACC shall be made in the following order: ZGNN_CTR -> ZGZU_CTR
 
-<img width="1374" height="1102" alt="QQ_1754222082723" src="https://github.com/user-attachments/assets/0b814835-d25f-47e7-bf5f-4a77262e77a4" />
+<img width="5655" height="4500" alt="hkboundary_画板 1-14" src="https://github.com/user-attachments/assets/751588b4-603d-4a5f-a39a-8c223833f1d4" />
 
 Figure 7.6: Nanning ACC Sector
 
@@ -237,7 +237,7 @@ Figure 7.6: Nanning ACC Sector
 - The horizontal boundary of Xiamen ACC is shown in Figure 7.7
 - Handoffs to Xiamen ACC shall be made in the following order: ZSAM_CTR -> ZSHA_CTR
 
-<img width="1294" height="1112" alt="QQ_1754222146061" src="https://github.com/user-attachments/assets/2d955096-a68e-42e0-a5f9-01c34f9f4f30" />
+<img width="5255" height="4500" alt="hkboundary_画板 1-15" src="https://github.com/user-attachments/assets/ce8a10cd-c73d-4993-851d-741555bff14e" />
 
 Figure 7.7: Xiamen ACC Sector
 
@@ -251,7 +251,7 @@ Figure 7.7: Xiamen ACC Sector
 - The horizontal boundary of Shanghai ACC is shown in Figure 7.8
 - Handoffs to Shanghai ACC shall be made in the following order: ZSSS_S_CTR -> ZSSS_CTR -> ZSHA_CTR -> PRC_FSS (Above S0780/F256)
 
-<img width="1304" height="1072" alt="QQ_1754222225919" src="https://github.com/user-attachments/assets/be00c5e1-72d1-4b0c-933a-eed5291e1ebe" />
+<img width="5480" height="4500" alt="hkboundary_画板 1-16" src="https://github.com/user-attachments/assets/6d78746f-ac78-4302-85c1-0a16dcca6405" />
 
 Figure 7.8: Shanghai ACC Sector
 
