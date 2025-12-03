@@ -883,11 +883,11 @@ This section defines the procedures when all Mainland China ATC are offline. Thi
 
 #### 11.5.2
 
-**RWY 34 Departure towards LUKBU and missed approach towards MC411** – After takeoff/missed approach, Macau Tower shall instruct aircraft with the following phraseology: “<callsign>, leaving controlled airspace, monitor Advisory Frequency 122.8, report passing LUKBU/MC411 on <next controller frequency>.”
+**RWY 34 Departure towards LUKBU and missed approach towards MC411** – After takeoff/missed approach, Macau Tower shall instruct aircraft with the following phraseology: “\<callsign\>, leaving controlled airspace, monitor Advisory Frequency 122.8, report passing LUKBU/MC411 on \<next controller frequency\>.”
 
 #### 11.5.3
 
-**RWY 16 arrival via INDUS** – Upon reaching INDUS, Hong Kong ATC shall instruct aircraft with the following phraseology: “<callsign>, leaving controlled airspace, monitor Advisory Frequency 122.8, report established on the localiser runway 16 on <next controller frequency>.”
+**RWY 16 arrival via INDUS** – Upon reaching INDUS, Hong Kong ATC shall instruct aircraft with the following phraseology: “\<callsign\>, leaving controlled airspace, monitor Advisory Frequency 122.8, report established on the localiser runway 16 on \<next controller frequency\>.”
 
 #### 11.5.4
 
