@@ -1,6 +1,5 @@
 name: "Auto Format SOP"
 on:
-  push: { paths: ["docs/**"] }
   pull_request_target: { paths: ["docs/**"] }
 
 jobs:
