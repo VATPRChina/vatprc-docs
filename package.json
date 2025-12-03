@@ -1,18 +1,21 @@
 {
-  "name": "nextjs-blog",
+  "name": "vatprc-docs",
   "type": "module",
   "version": "0.1.0",
   "engines": {
     "node": ">=v22.11.0"
   },
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.24.0",
   "private": true,
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
     "build:api": "openapi-typescript https://uniapi.vatprc.net/openapi/v1.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
     "start": "vite start",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint": "concurrently --raw 'pnpm:lint:*'",
+    "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:tsc": "tsc --noEmit",
+    "lint:prettier": "prettier --check .",
     "format": "prettier --write .",
     "test": "vitest",
     "ui:add": "shadcn add",
@@ -76,6 +79,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/browser": "^4.0.5",
     "@vitest/browser-playwright": "^4.0.5",
+    "concurrently": "^9.2.1",
     "eslint": "^9.36.0",
     "eslint-plugin-lingui": "^0.11.0",
     "eslint-plugin-react": "^7.37.5",

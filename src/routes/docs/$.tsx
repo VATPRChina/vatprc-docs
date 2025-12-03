@@ -43,7 +43,7 @@ function RouteComponent() {
   }
   if (!data) return null;
   return (
-    <MarkdownDoc toc={data.tableOfContents}>
+    <MarkdownDoc>
       <data.MDXContent />
     </MarkdownDoc>
   );

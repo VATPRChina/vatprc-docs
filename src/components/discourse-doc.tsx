@@ -76,7 +76,7 @@ export const DiscourseDocument: React.FC<{
   );
 
   return (
-    <MarkdownDoc toc={data.tableOfContents} tocHeader={editButtons}>
+    <MarkdownDoc tocHeader={editButtons}>
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
     </MarkdownDoc>
