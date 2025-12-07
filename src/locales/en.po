@@ -220,7 +220,7 @@ msgid "Controllers"
 msgstr "Controllers"
 
 #: src/components/event/event-create.tsx:191
-#: src/components/preferred-route-create.tsx:200
+#: src/components/preferred-route-create.tsx:202
 msgid "Create"
 msgstr "Create"
 
@@ -246,7 +246,7 @@ msgstr "Cruising Level Not Allowed"
 msgid "Cruising Level Too Low"
 msgstr "Cruising Level Too Low"
 
-#: src/components/preferred-route-create.tsx:173
+#: src/components/preferred-route-create.tsx:175
 msgid "Cruising Level Type"
 msgstr "Cruising Level Type"
 
@@ -269,7 +269,7 @@ msgid "Departure"
 msgstr "Departure"
 
 #: src/components/event/event-create.tsx:179
-#: src/components/preferred-route-create.tsx:188
+#: src/components/preferred-route-create.tsx:190
 msgid "Description"
 msgstr "Description"
 
@@ -430,7 +430,7 @@ msgstr "Image Upload Tool"
 msgid "Image URL"
 msgstr "Image URL"
 
-#: src/components/preferred-route-create.tsx:22
+#: src/components/preferred-route-create.tsx:23
 msgid "imperial even flight level (feet)"
 msgstr "imperial even flight level (feet)"
 
@@ -438,7 +438,7 @@ msgstr "imperial even flight level (feet)"
 msgid "imperial flight level (feet)"
 msgstr "imperial flight level (feet)"
 
-#: src/components/preferred-route-create.tsx:23
+#: src/components/preferred-route-create.tsx:22
 msgid "imperial odd flight level (feet)"
 msgstr "imperial odd flight level (feet)"
 
@@ -527,7 +527,7 @@ msgstr "Meeting Notes"
 msgid "Mentor"
 msgstr "Mentor"
 
-#: src/components/preferred-route-create.tsx:19
+#: src/components/preferred-route-create.tsx:20
 msgid "metric even flight level (meters)"
 msgstr "metric even flight level (meters)"
 
@@ -535,7 +535,7 @@ msgstr "metric even flight level (meters)"
 msgid "metric flight level (meters)"
 msgstr "metric flight level (meters)"
 
-#: src/components/preferred-route-create.tsx:20
+#: src/components/preferred-route-create.tsx:19
 msgid "metric odd flight level (meters)"
 msgstr "metric odd flight level (meters)"
 
@@ -719,7 +719,7 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
-#: src/components/preferred-route-create.tsx:160
+#: src/components/preferred-route-create.tsx:162
 #: src/routes/flights/$callsign.tsx:395
 #: src/routes/navdata/preferred-routes.tsx:30
 msgid "Route"
@@ -738,7 +738,7 @@ msgid "Sat"
 msgstr "Sat"
 
 #: src/components/event/event-create.tsx:191
-#: src/components/preferred-route-create.tsx:200
+#: src/components/preferred-route-create.tsx:202
 msgid "Save"
 msgstr "Save"
 
@@ -985,7 +985,7 @@ msgstr "vACDM"
 msgid "Valid From"
 msgstr "Valid From"
 
-#: src/components/preferred-route-create.tsx:143
+#: src/components/preferred-route-create.tsx:144
 msgid "Valid Until"
 msgstr "Valid Until"
 

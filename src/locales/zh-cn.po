@@ -220,7 +220,7 @@ msgid "Controllers"
 msgstr "管制员"
 
 #: src/components/event/event-create.tsx:191
-#: src/components/preferred-route-create.tsx:200
+#: src/components/preferred-route-create.tsx:202
 msgid "Create"
 msgstr "创建"
 
@@ -246,7 +246,7 @@ msgstr "巡航高度不允许"
 msgid "Cruising Level Too Low"
 msgstr "巡航高度过低"
 
-#: src/components/preferred-route-create.tsx:173
+#: src/components/preferred-route-create.tsx:175
 msgid "Cruising Level Type"
 msgstr "巡航高度类型"
 
@@ -269,7 +269,7 @@ msgid "Departure"
 msgstr "出发机场"
 
 #: src/components/event/event-create.tsx:179
-#: src/components/preferred-route-create.tsx:188
+#: src/components/preferred-route-create.tsx:190
 msgid "Description"
 msgstr "描述"
 
@@ -430,7 +430,7 @@ msgstr "图床"
 msgid "Image URL"
 msgstr "图片 URL"
 
-#: src/components/preferred-route-create.tsx:22
+#: src/components/preferred-route-create.tsx:23
 msgid "imperial even flight level (feet)"
 msgstr "英制双数飞行高度层（英尺）"
 
@@ -438,7 +438,7 @@ msgstr "英制双数飞行高度层（英尺）"
 msgid "imperial flight level (feet)"
 msgstr "英制飞行高度层（英尺）"
 
-#: src/components/preferred-route-create.tsx:23
+#: src/components/preferred-route-create.tsx:22
 msgid "imperial odd flight level (feet)"
 msgstr "英制单数飞行高度层（英尺）"
 
@@ -527,7 +527,7 @@ msgstr "会议记录"
 msgid "Mentor"
 msgstr "教师"
 
-#: src/components/preferred-route-create.tsx:19
+#: src/components/preferred-route-create.tsx:20
 msgid "metric even flight level (meters)"
 msgstr "公制双数飞行高度层（米）"
 
@@ -535,7 +535,7 @@ msgstr "公制双数飞行高度层（米）"
 msgid "metric flight level (meters)"
 msgstr "公制飞行高度层"
 
-#: src/components/preferred-route-create.tsx:20
+#: src/components/preferred-route-create.tsx:19
 msgid "metric odd flight level (meters)"
 msgstr "公制单数飞行高度层（米）"
 
@@ -719,7 +719,7 @@ msgstr "RNP AR（无 RF 航段）"
 msgid "Roles"
 msgstr "权限"
 
-#: src/components/preferred-route-create.tsx:160
+#: src/components/preferred-route-create.tsx:162
 #: src/routes/flights/$callsign.tsx:395
 #: src/routes/navdata/preferred-routes.tsx:30
 msgid "Route"
@@ -738,7 +738,7 @@ msgid "Sat"
 msgstr "星期六"
 
 #: src/components/event/event-create.tsx:191
-#: src/components/preferred-route-create.tsx:200
+#: src/components/preferred-route-create.tsx:202
 msgid "Save"
 msgstr "保存"
 
@@ -985,7 +985,7 @@ msgstr "模拟 A-CDM"
 msgid "Valid From"
 msgstr "生效自"
 
-#: src/components/preferred-route-create.tsx:143
+#: src/components/preferred-route-create.tsx:144
 msgid "Valid Until"
 msgstr "生效至"
 
