@@ -19,6 +19,7 @@ import { Route as PilotTs3RouteImport } from './routes/pilot/ts3'
 import { Route as PilotStartToFlyRouteImport } from './routes/pilot/start-to-fly'
 import { Route as PilotPilotSoftwaresRouteImport } from './routes/pilot/pilot-softwares'
 import { Route as PilotIntroductionToFlyRouteImport } from './routes/pilot/introduction-to-fly'
+import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
@@ -89,6 +90,11 @@ const PilotPilotSoftwaresRoute = PilotPilotSoftwaresRouteImport.update({
 const PilotIntroductionToFlyRoute = PilotIntroductionToFlyRouteImport.update({
   id: '/pilot/introduction-to-fly',
   path: '/pilot/introduction-to-fly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
+  id: '/navdata/preferred-routes',
+  path: '/navdata/preferred-routes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
@@ -225,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/pilot/introduction-to-fly': typeof PilotIntroductionToFlyRoute
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
@@ -256,6 +263,7 @@ export interface FileRoutesByTo {
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/pilot/introduction-to-fly': typeof PilotIntroductionToFlyRoute
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
@@ -290,6 +298,7 @@ export interface FileRoutesById {
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/pilot/introduction-to-fly': typeof PilotIntroductionToFlyRoute
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/docs/$'
     | '/events/$id'
     | '/flights/$callsign'
+    | '/navdata/preferred-routes'
     | '/pilot/introduction-to-fly'
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
@@ -356,6 +366,7 @@ export interface FileRouteTypes {
     | '/docs/$'
     | '/events/$id'
     | '/flights/$callsign'
+    | '/navdata/preferred-routes'
     | '/pilot/introduction-to-fly'
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/docs/$'
     | '/events/$id'
     | '/flights/$callsign'
+    | '/navdata/preferred-routes'
     | '/pilot/introduction-to-fly'
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
@@ -421,6 +433,7 @@ export interface RootRouteChildren {
   DivisionPrivacyRoute: typeof DivisionPrivacyRoute
   DivisionStaffRoute: typeof DivisionStaffRoute
   DocsSplatRoute: typeof DocsSplatRoute
+  NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
   PilotIntroductionToFlyRoute: typeof PilotIntroductionToFlyRoute
   PilotPilotSoftwaresRoute: typeof PilotPilotSoftwaresRoute
   PilotStartToFlyRoute: typeof PilotStartToFlyRoute
@@ -499,6 +512,13 @@ declare module '@tanstack/react-router' {
       path: '/pilot/introduction-to-fly'
       fullPath: '/pilot/introduction-to-fly'
       preLoaderRoute: typeof PilotIntroductionToFlyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/navdata/preferred-routes': {
+      id: '/navdata/preferred-routes'
+      path: '/navdata/preferred-routes'
+      fullPath: '/navdata/preferred-routes'
+      preLoaderRoute: typeof NavdataPreferredRoutesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flights/$callsign': {
@@ -700,6 +720,7 @@ const rootRouteChildren: RootRouteChildren = {
   DivisionPrivacyRoute: DivisionPrivacyRoute,
   DivisionStaffRoute: DivisionStaffRoute,
   DocsSplatRoute: DocsSplatRoute,
+  NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,
   PilotIntroductionToFlyRoute: PilotIntroductionToFlyRoute,
   PilotPilotSoftwaresRoute: PilotPilotSoftwaresRoute,
   PilotStartToFlyRoute: PilotStartToFlyRoute,

@@ -1,25 +1,14 @@
+import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
-import { Trans, useLingui } from "@lingui/react/macro";
-import {
-  ActionIcon,
-  ActionIconGroup,
-  Button,
-  Checkbox,
-  Group,
-  Modal,
-  Select,
-  Stack,
-  Table,
-  TextInput,
-} from "@mantine/core";
+import { Trans } from "@lingui/react/macro";
+import { ActionIcon, Button, Checkbox, Group, Modal, Stack, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ColumnDef,
   ColumnFiltersState,
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -28,15 +17,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { MouseEvent, ReactNode, useState } from "react";
-import {
-  TbChevronsLeft,
-  TbChevronLeft,
-  TbChevronRight,
-  TbChevronsRight,
-  TbArrowsUpDown,
-  TbUserBolt,
-  TbCheck,
-} from "react-icons/tb";
+import { TbArrowsUpDown, TbUserBolt, TbCheck } from "react-icons/tb";
 
 const ROLES = {
   "division-director": <Trans>Division Director</Trans>,
@@ -152,8 +133,6 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
-  const { t } = useLingui();
-
   const { data, isLoading } = $api.useQuery("get", "/api/users");
   const [sorting, setSorting] = React.useState<SortingState>([{ id: "cid", desc: false }]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -171,9 +150,6 @@ function RouteComponent() {
       columnFilters,
     },
   });
-
-  const currentPage = table.getState().pagination.pageIndex + 1;
-  const totalPages = table.getPageCount();
 
   return (
     <div className="container mx-auto">
@@ -197,79 +173,7 @@ function RouteComponent() {
           />
         </div>
       </div>
-      <Table>
-        <Table.Thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <Table.Th key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </Table.Th>
-                );
-              })}
-            </Table.Tr>
-          ))}
-        </Table.Thead>
-        <Table.Tbody>
-          {table.getRowModel().rows.map((row) => (
-            <Table.Tr key={row.id} data-state={row.getIsSelected() && "selected"}>
-              {row.getVisibleCells().map((cell) => (
-                <Table.Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Table.Td>
-              ))}
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
-      <div className="flex items-center justify-between space-x-6 px-2 lg:space-x-8">
-        <Select
-          value={`${table.getState().pagination.pageSize}`}
-          onChange={(value) => {
-            table.setPageSize(Number(value));
-          }}
-          label={<Trans>Rows per page</Trans>}
-          data={["10", "20", "25", "30", "40", "50"]}
-        />
-        <div className="flex items-center justify-center text-sm font-medium">
-          <Trans>
-            Page {currentPage} of {totalPages}
-          </Trans>
-        </div>
-        <ActionIconGroup>
-          <ActionIcon
-            variant="subtle"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-            title={t`Go to first page`}
-          >
-            <TbChevronsLeft />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            title={t`Go to previous page`}
-          >
-            <TbChevronLeft />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            title={t`Go to next page`}
-          >
-            <TbChevronRight />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-            title={t`Go to last page`}
-          >
-            <TbChevronsRight />
-          </ActionIcon>
-        </ActionIconGroup>
-      </div>
+      <RichTable table={table} />
     </div>
   );
 }

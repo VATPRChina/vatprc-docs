@@ -1,6 +1,7 @@
 import { LanguageToggle } from "./language-toggle";
 import { ModeToggle } from "./theme-toggle";
 import { UserInfo } from "./user-info";
+import { components } from "@/lib/api";
 import { usePermissions } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -16,7 +17,9 @@ interface NavigationMenuLinkProps {
   external?: boolean;
   children: React.ReactNode;
   className?: string;
+  requireRole?: components["schemas"]["UserRoleDto"];
 }
+
 const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLinkProps) => {
   const { large, href, external, children, className } = props;
 
@@ -190,6 +193,9 @@ const contents = [
         <NavMenuLink href="/docs/utils/image">
           <Trans>Image Upload Tool</Trans>
         </NavMenuLink>
+        <NavMenuLink href="/navdata/preferred-routes" requireRole="volunteer">
+          <Trans>Preferred Routes</Trans>
+        </NavMenuLink>
       </ul>
     ),
   },
@@ -223,6 +229,8 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
 };
 
 export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) => {
+  const roles = usePermissions();
+
   return (
     <Drawer {...props}>
       <Stack>
@@ -231,12 +239,17 @@ export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) =>
           <LanguageToggle />
           <UserInfo />
         </Group>
-        {contents.map((content, i) => (
-          <div key={i}>
-            <h3 className="mb-2 font-semibold">{content.title}</h3>
-            <content.content locale={getLocale()} />
-          </div>
-        ))}
+        {contents.map((content, i) => {
+          if (content.requiresRole && !roles.includes(content.requiresRole)) {
+            return null;
+          }
+          return (
+            <div key={i}>
+              <h3 className="mb-2 font-semibold">{content.title}</h3>
+              <content.content locale={getLocale()} />
+            </div>
+          );
+        })}
       </Stack>
     </Drawer>
   );
