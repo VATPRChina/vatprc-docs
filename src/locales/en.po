@@ -119,8 +119,9 @@ msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback
 msgid "Area"
 msgstr "Area"
 
+#: src/components/preferred-route-create.tsx:112
 #: src/routes/flights/$callsign.tsx:399
-#: src/routes/navdata/preferred-routes.tsx:25
+#: src/routes/navdata/preferred-routes.tsx:26
 msgid "Arrival"
 msgstr "Arrival"
 
@@ -219,6 +220,7 @@ msgid "Controllers"
 msgstr "Controllers"
 
 #: src/components/event/event-create.tsx:191
+#: src/components/preferred-route-create.tsx:200
 msgid "Create"
 msgstr "Create"
 
@@ -226,6 +228,11 @@ msgstr "Create"
 #: src/components/event/event-create.tsx:70
 msgid "Create Event"
 msgstr "Create Event"
+
+#: src/components/preferred-route-create.tsx:80
+#: src/components/preferred-route-create.tsx:87
+msgid "Create Preferred Route"
+msgstr "Create Preferred Route"
 
 #: src/routes/flights/$callsign.tsx:391
 msgid "Cruising Level (Feet)"
@@ -239,6 +246,10 @@ msgstr "Cruising Level Not Allowed"
 msgid "Cruising Level Too Low"
 msgstr "Cruising Level Too Low"
 
+#: src/components/preferred-route-create.tsx:173
+msgid "Cruising Level Type"
+msgstr "Cruising Level Type"
+
 #: src/routes/flights/$callsign.tsx:134
 msgid "Cruising Level Type Mismatch"
 msgstr "Cruising Level Type Mismatch"
@@ -251,12 +262,14 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "Dark"
 
+#: src/components/preferred-route-create.tsx:101
 #: src/routes/flights/$callsign.tsx:388
-#: src/routes/navdata/preferred-routes.tsx:21
+#: src/routes/navdata/preferred-routes.tsx:22
 msgid "Departure"
 msgstr "Departure"
 
 #: src/components/event/event-create.tsx:179
+#: src/components/preferred-route-create.tsx:188
 msgid "Description"
 msgstr "Description"
 
@@ -284,6 +297,11 @@ msgstr "Edit English"
 #: src/components/event/event-create.tsx:70
 msgid "Edit Event {title}"
 msgstr "Edit Event {title}"
+
+#: src/components/preferred-route-create.tsx:75
+#: src/components/preferred-route-create.tsx:87
+msgid "Edit Preferred Route {title}"
+msgstr "Edit Preferred Route {title}"
 
 #: src/routes/users/index.tsx:105
 msgid "Edit roles"
@@ -412,6 +430,18 @@ msgstr "Image Upload Tool"
 msgid "Image URL"
 msgstr "Image URL"
 
+#: src/components/preferred-route-create.tsx:22
+msgid "imperial even flight level (feet)"
+msgstr "imperial even flight level (feet)"
+
+#: src/components/preferred-route-create.tsx:21
+msgid "imperial flight level (feet)"
+msgstr "imperial flight level (feet)"
+
+#: src/components/preferred-route-create.tsx:23
+msgid "imperial odd flight level (feet)"
+msgstr "imperial odd flight level (feet)"
+
 #: src/components/event/slot-import.tsx:99
 msgid "Import slots"
 msgstr "Import slots"
@@ -496,6 +526,18 @@ msgstr "Meeting Notes"
 #: src/routes/users/index.tsx:27
 msgid "Mentor"
 msgstr "Mentor"
+
+#: src/components/preferred-route-create.tsx:19
+msgid "metric even flight level (meters)"
+msgstr "metric even flight level (meters)"
+
+#: src/components/preferred-route-create.tsx:18
+msgid "metric flight level (meters)"
+msgstr "metric flight level (meters)"
+
+#: src/components/preferred-route-create.tsx:20
+msgid "metric odd flight level (meters)"
+msgstr "metric odd flight level (meters)"
 
 #: src/components/recent-events.tsx:170
 msgid "Mon"
@@ -653,7 +695,7 @@ msgstr "Recent Events"
 msgid "Release"
 msgstr "Release"
 
-#: src/routes/navdata/preferred-routes.tsx:33
+#: src/routes/navdata/preferred-routes.tsx:34
 msgid "Remark"
 msgstr "Remark"
 
@@ -677,8 +719,9 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
+#: src/components/preferred-route-create.tsx:160
 #: src/routes/flights/$callsign.tsx:395
-#: src/routes/navdata/preferred-routes.tsx:29
+#: src/routes/navdata/preferred-routes.tsx:30
 msgid "Route"
 msgstr "Route"
 
@@ -695,6 +738,7 @@ msgid "Sat"
 msgstr "Sat"
 
 #: src/components/event/event-create.tsx:191
+#: src/components/preferred-route-create.tsx:200
 msgid "Save"
 msgstr "Save"
 
@@ -702,7 +746,7 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/routes/navdata/preferred-routes.tsx:73
+#: src/routes/navdata/preferred-routes.tsx:83
 msgid "Search Arrival"
 msgstr "Search Arrival"
 
@@ -710,7 +754,7 @@ msgstr "Search Arrival"
 msgid "Search CID"
 msgstr "Search CID"
 
-#: src/routes/navdata/preferred-routes.tsx:64
+#: src/routes/navdata/preferred-routes.tsx:74
 msgid "Search Departure"
 msgstr "Search Departure"
 
@@ -936,6 +980,14 @@ msgstr "User List"
 #: src/components/app-nav-menu.tsx:136
 msgid "vACDM"
 msgstr "vACDM"
+
+#: src/components/preferred-route-create.tsx:126
+msgid "Valid From"
+msgstr "Valid From"
+
+#: src/components/preferred-route-create.tsx:143
+msgid "Valid Until"
+msgstr "Valid Until"
 
 #: src/routes/flights/$callsign.tsx:426
 msgid "Validation Result"

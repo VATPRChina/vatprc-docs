@@ -8,7 +8,7 @@ export const DateTime = ({
   noDistance,
   noDate,
 }: {
-  children?: string | Date;
+  children?: string | Date | null;
   noDistance?: boolean;
   noDate?: boolean;
 }) => {

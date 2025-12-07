@@ -1,3 +1,4 @@
+import { CreatePreferredRoute } from "@/components/preferred-route-create";
 import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -31,6 +32,14 @@ const columns: ColumnDef<components["schemas"]["PreferredRouteDto"]>[] = [
   {
     accessorKey: "remarks",
     header: () => <Trans>Remark</Trans>,
+    cell: ({ row, getValue }) => {
+      return (
+        <div className="flex flex-row items-center gap-2">
+          <span>{getValue<string>()}</span>
+          <CreatePreferredRoute id={row.original.id} />
+        </div>
+      );
+    },
   },
 ];
 
@@ -53,8 +62,9 @@ function RouteComponent() {
   });
 
   return (
-    <div className="container mx-auto">
-      <div className="flex flex-row gap-4">
+    <div className="container mx-auto flex flex-col items-start gap-4">
+      <CreatePreferredRoute />
+      <div className="flex flex-row gap-4 self-stretch">
         <div className="flex flex-1 flex-col gap-2">
           <TextInput
             id="filter-departure"

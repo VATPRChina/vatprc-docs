@@ -39,7 +39,7 @@ export const RichTable = <TData,>({ table }: RichTableProps<TData>) => {
           ))}
         </Table.Tbody>
       </Table>
-      <div className="flex items-center justify-between space-x-6 px-2 lg:space-x-8">
+      <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
         <Select
           value={`${table.getState().pagination.pageSize}`}
           onChange={(value) => {

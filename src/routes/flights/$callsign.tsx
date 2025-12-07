@@ -96,7 +96,7 @@ const ChinaRvsmHelp = () => (
   </>
 );
 
-const CRUISING_LEVEL_TEXT: Record<string, React.ReactNode> = {
+export const CRUISING_LEVEL_TEXT: Record<string, React.ReactElement> = {
   standard_even: <Trans>China RVSM even flight level</Trans>,
   standard_odd: <Trans>China RVSM odd flight level</Trans>,
   standard: <Trans>China RVSM flight level</Trans>,
