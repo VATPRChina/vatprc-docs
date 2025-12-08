@@ -5,7 +5,7 @@ import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { Trans, useLingui } from "@lingui/react/macro";
+import { Trans } from "@lingui/react/macro";
 import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
@@ -108,7 +108,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootLayout() {
   const { publicHref } = useLocation();
-  const { i18n } = useLingui();
 
   useEffect(() => {
     if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
@@ -121,7 +120,7 @@ function RootLayout() {
 
     const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
     if (locale) {
-      i18n.activate(locale);
+      setTimeout(() => window.location.replace(getLocalPathname(locale)));
     }
   });
 
