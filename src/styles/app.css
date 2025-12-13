@@ -32,10 +32,3 @@
   @apply prose-code:p-0.5;
   @apply prose-code:before:content-none prose-code:after:content-none;
 }
-
-html {
-  -moz-filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-  filter: gray; /* IE6-9 */
-  filter: grayscale(100%);
-}
