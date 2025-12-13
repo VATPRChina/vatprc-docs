@@ -6,18 +6,8 @@ import { messages as en } from "@/locales/en.po";
 import { messages as zh } from "@/locales/zh-cn.po";
 import { setupI18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { wrapCreateRootRouteWithSentry } from "@sentry/tanstackstart-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
-
-import("@sentry/react")
-  .then((Sentry) => {
-    Sentry.init({
-      dsn: "https://70174050ab722ce431b6906686263907@o131360.ingest.us.sentry.io/4509490348294144",
-      sendDefaultPii: true,
-    });
-  })
-  .catch((err) => console.error("Failed to initialize sentry", err));
 
 const getRouterBasepath = (pathname: string) => {
   if (pathname.startsWith("/en")) {
@@ -46,34 +36,43 @@ export function getRouter() {
     },
   });
 
-  const router = wrapCreateRootRouteWithSentry(
-    createRouter({
-      routeTree,
-      scrollRestoration: true,
-      defaultNotFoundComponent: () => <NotFound />,
-      rewrite: {
-        input: ({ url }) => {
-          url.pathname = url.pathname.replace(getRouterBasepath(url.pathname), "/");
-          return url;
-        },
-        output: ({ url }) => {
-          url.pathname = url.pathname.replace("/", getRouterBasepath(getPathname()));
-          return url;
-        },
+  const router = createRouter({
+    routeTree,
+    scrollRestoration: true,
+    defaultNotFoundComponent: () => <NotFound />,
+    rewrite: {
+      input: ({ url }) => {
+        url.pathname = url.pathname.replace(getRouterBasepath(url.pathname), "/");
+        return url;
       },
-      context: {
-        i18n,
-        queryClient,
+      output: ({ url }) => {
+        url.pathname = url.pathname.replace("/", getRouterBasepath(getPathname()));
+        return url;
       },
-      Wrap: ({ children }: { children: React.ReactNode }) => {
-        return (
-          <QueryClientProvider client={queryClient}>
-            <I18nProvider i18n={i18n}>{children}</I18nProvider>
-          </QueryClientProvider>
-        );
-      },
-    }),
-  );
+    },
+    context: {
+      i18n,
+      queryClient,
+    },
+    Wrap: ({ children }: { children: React.ReactNode }) => {
+      return (
+        <QueryClientProvider client={queryClient}>
+          <I18nProvider i18n={i18n}>{children}</I18nProvider>
+        </QueryClientProvider>
+      );
+    },
+  });
+
+  if (!router.isServer) {
+    import("@sentry/tanstackstart-react")
+      .then((Sentry) => {
+        Sentry.init({
+          dsn: "https://70174050ab722ce431b6906686263907@o131360.ingest.us.sentry.io/4509490348294144",
+          sendDefaultPii: true,
+        });
+      })
+      .catch((err) => console.error("Failed to initialize sentry", err));
+  }
 
   return router;
 }
