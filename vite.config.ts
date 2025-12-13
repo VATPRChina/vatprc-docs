@@ -7,12 +7,14 @@ import { playwright } from "@vitest/browser-playwright";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
+/// <reference types="vitest/config" />
+
 export default defineConfig({
   plugins: [
     tsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
-    tanstackStart(),
+    !process.env.VITEST && tanstackStart(),
     !process.env.VITEST && nitroV2Plugin({ preset: "node-server" }),
     viteReact({
       babel: {
@@ -43,6 +45,7 @@ export default defineConfig({
   test: {
     projects: [
       {
+        extends: true,
         test: {
           include: ["**/*.unit.{test,spec}.ts"],
           name: "unit",
@@ -50,6 +53,7 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           include: ["**/*.browser.{test,spec}.{ts,tsx}"],
           name: "browser",

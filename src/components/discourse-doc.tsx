@@ -1,5 +1,5 @@
 import { MarkdownDoc } from "./markdown-doc";
-import { buildMarkdownDocSync } from "./markdown-doc-lib";
+import { buildMarkdownDocSync } from "./markdown-doc-build";
 import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";

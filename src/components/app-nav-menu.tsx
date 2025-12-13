@@ -6,7 +6,7 @@ import { usePermissions } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Badge, Button, Drawer, Group, HoverCard, Stack } from "@mantine/core";
+import { Button, Drawer, Group, HoverCard, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { ComponentProps } from "react";
 import { TbExternalLink } from "react-icons/tb";
@@ -140,9 +140,6 @@ const contents = [
         </NavMenuLink>
         <NavMenuLink href="/flights">
           <Trans>Flight plan checker</Trans>
-          <Badge className="ml-2 bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-100" variant="secondary">
-            <Trans context="new feature">New</Trans>
-          </Badge>
         </NavMenuLink>
       </ul>
     ),
