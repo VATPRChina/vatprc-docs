@@ -1,5 +1,5 @@
 import { MarkdownDoc } from "./markdown-doc";
-import { buildMarkdownDocSync } from "./markdown-doc-build";
+import { buildMarkdownDocSync } from "./markdown-doc-run";
 import { usePermission } from "@/lib/client";
 import { getLocale } from "@/lib/i18n";
 import { Trans } from "@lingui/react/macro";
@@ -39,7 +39,7 @@ export const getDiscourseDocumentCode = async (postId: string) => {
     return thumbnailUrl;
   });
 
-  const { compileMarkdownDoc } = await import("./markdown-doc-build");
+  const { compileMarkdownDoc } = await import("./markdown-doc-compile");
   const doc = await compileMarkdownDoc(contentRes);
   return doc;
 };

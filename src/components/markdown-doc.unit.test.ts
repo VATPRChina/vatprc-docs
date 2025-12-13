@@ -1,4 +1,5 @@
-import { buildMarkdownDoc, buildMarkdownDocSync, compileMarkdownDoc } from "./markdown-doc-build";
+import { compileMarkdownDoc } from "./markdown-doc-compile";
+import { buildMarkdownDoc, buildMarkdownDocSync } from "./markdown-doc-run";
 import { getAllDocuments, getDocument } from "@/lib/doc";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import path from "node:path";
@@ -55,7 +56,8 @@ describe.concurrent("compileMarkdownDoc", async () => {
 describe.concurrent("buildMarkdownDoc", async () => {
   test.concurrent.each(await getAllDocumentPaths())('can build doc at "%s"', async (docPath) => {
     const document = await getDocument({ data: docPath });
-    const built = await buildMarkdownDoc(document);
+    const markdown = await compileMarkdownDoc(document);
+    const built = await buildMarkdownDoc(markdown);
 
     expect(built).toBeDefined();
     expect(built.MDXContent).toBeDefined();

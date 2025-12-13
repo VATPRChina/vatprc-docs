@@ -12,7 +12,8 @@ export interface DocumentEntry {
 }
 
 const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
-  const { buildMarkdownDoc } = await import("@/components/markdown-doc-build");
+  const { compileMarkdownDoc } = await import("@/components/markdown-doc-compile");
+  const { buildMarkdownDoc } = await import("@/components/markdown-doc-run");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
   for await (const entry of dirEntries) {
@@ -24,7 +25,8 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
       const filePath = path.resolve(entry.parentPath, entry.name);
       const fileContent = await fs.readFile(filePath, "utf-8");
       try {
-        const file = await buildMarkdownDoc(fileContent);
+        const compiled = await compileMarkdownDoc(fileContent);
+        const file = await buildMarkdownDoc(compiled);
 
         documents.push({
           title: file.title,
@@ -55,7 +57,8 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
       let order = undefined;
       if (indexExists) {
         const fileContent = await fs.readFile(indexFilePath, "utf-8");
-        const file = await buildMarkdownDoc(fileContent);
+        const compiled = await compileMarkdownDoc(fileContent);
+        const file = await buildMarkdownDoc(compiled);
         title = file.title;
         if (typeof file.frontmatter?.order === "number") {
           order = file.frontmatter?.order;

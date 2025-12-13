@@ -25,6 +25,7 @@ export default defineConfig({
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",
+      telemetry: false,
     }),
   ],
   build: { sourcemap: true },

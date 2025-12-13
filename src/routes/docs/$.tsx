@@ -1,16 +1,19 @@
 import { MarkdownDoc } from "@/components/markdown-doc";
+import { buildMarkdownDocSync } from "@/components/markdown-doc-run";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
+import { Skeleton, Alert } from "@mantine/core";
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import { TbCloudX } from "react-icons/tb";
 
 export const Route = createFileRoute("/docs/$")({
   component: RouteComponent,
   async loader(ctx) {
     try {
       const source = await getDocument({ data: `${ctx.params._splat}.md` });
-      return source;
+      const { compileMarkdownDoc } = await import("@/components/markdown-doc-compile");
+      const doc = await compileMarkdownDoc(source);
+      return doc;
     } catch (exception) {
       if (exception instanceof Error && exception.message.startsWith("ENOENT")) {
         notFound({ throw: true });
@@ -22,29 +25,33 @@ export const Route = createFileRoute("/docs/$")({
   head: () => ({
     meta: [{ name: "robots", content: "noindex" }],
   }),
+  pendingMs: 100,
+  pendingComponent: () => (
+    <div className="h-svh w-full p-16">
+      <Skeleton h="100svh" />
+    </div>
+  ),
+  errorComponent: (props) => {
+    return (
+      <Alert
+        icon={<TbCloudX />}
+        title={<Trans>Failed to load document</Trans>}
+        color="red"
+        className="container mx-auto"
+      >
+        {props.error.message}
+      </Alert>
+    );
+  },
 });
 
 function RouteComponent() {
-  const { _splat: path } = Route.useParams();
-  const source = Route.useLoaderData();
+  const compiled: string = Route.useLoaderData();
+  const doc = buildMarkdownDocSync(compiled);
 
-  const { data, error } = useQuery({
-    queryKey: ["://app/lib/doc.ts/getDocument", path],
-    queryFn: () =>
-      import("@/components/markdown-doc-build").then(({ buildMarkdownDoc }) => buildMarkdownDoc(source ?? "")),
-  });
-
-  if (error) {
-    return (
-      <Alert color="red" title={<Trans>Failed to load document.</Trans>}>
-        {error.message}
-      </Alert>
-    );
-  }
-  if (!data) return null;
   return (
     <MarkdownDoc>
-      <data.MDXContent />
+      <doc.MDXContent />
     </MarkdownDoc>
   );
 }
