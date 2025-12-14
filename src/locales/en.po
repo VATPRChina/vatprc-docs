@@ -58,7 +58,7 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/routes/users/index.tsx:126
+#: src/routes/users/index.tsx:147
 msgid "Actions"
 msgstr "Actions"
 
@@ -74,11 +74,11 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app-nav-menu.tsx:183
+#: src/components/app-nav-menu.tsx:180
 msgid "Admin"
 msgstr "Admin"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:48
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
 
@@ -106,6 +106,10 @@ msgstr "Already Booked"
 msgid "Announcement"
 msgstr "Announcement"
 
+#: src/routes/users/index.tsx:52
+msgid "API Client"
+msgstr "API Client"
+
 #: src/components/app-nav-menu.tsx:88
 msgid "API Document"
 msgstr "API Document"
@@ -125,7 +129,7 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
-#: src/components/app-nav-menu.tsx:168
+#: src/components/app-nav-menu.tsx:165
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -139,7 +143,7 @@ msgstr "ATC Positions & Frequencies"
 msgid "Back"
 msgstr "Back"
 
-#: src/components/app-nav-menu.tsx:161
+#: src/components/app-nav-menu.tsx:158
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
@@ -161,7 +165,7 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/routes/users/index.tsx:112
+#: src/routes/users/index.tsx:133
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -189,7 +193,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:63
 msgid "CID"
 msgstr "CID"
 
@@ -197,25 +201,25 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:49
 msgid "Controller"
 msgstr "Controller"
 
-#: src/components/app-nav-menu.tsx:155
+#: src/components/app-nav-menu.tsx:152
 #: src/routes/controller/controller-list.tsx:9
 #: src/routes/controller/controller-list.tsx:18
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/users/index.tsx:24
+#: src/routes/users/index.tsx:34
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
 
-#: src/routes/users/index.tsx:25
+#: src/routes/users/index.tsx:35
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
-#: src/components/app-nav-menu.tsx:151
+#: src/components/app-nav-menu.tsx:148
 msgid "Controllers"
 msgstr "Controllers"
 
@@ -277,7 +281,7 @@ msgstr "Description"
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/routes/users/index.tsx:23
+#: src/routes/users/index.tsx:33
 msgid "Division Director"
 msgstr "Division Director"
 
@@ -303,7 +307,7 @@ msgstr "Edit Event {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "Edit Preferred Route {title}"
 
-#: src/routes/users/index.tsx:105
+#: src/routes/users/index.tsx:120
 msgid "Edit roles"
 msgstr "Edit roles"
 
@@ -337,25 +341,22 @@ msgid "even flight level"
 msgstr "even flight level"
 
 #: src/components/app-nav-menu.tsx:85
-#: src/components/app-nav-menu.tsx:188
+#: src/components/app-nav-menu.tsx:185
 msgid "Event"
 msgstr "Event"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:44
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:43
 msgid "Event Director"
 msgstr "Event Director"
 
 #: src/components/discourse-doc.tsx:123
+#: src/routes/docs/$.tsx:38
 msgid "Failed to load document"
 msgstr "Failed to load document"
-
-#: src/routes/docs/$.tsx:39
-msgid "Failed to load document."
-msgstr "Failed to load document."
 
 #: src/routes/index.tsx:87
 #: src/routes/index.tsx:91
@@ -418,11 +419,11 @@ msgstr "Go to next page"
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:45
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
-#: src/components/app-nav-menu.tsx:194
+#: src/components/app-nav-menu.tsx:191
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -454,7 +455,7 @@ msgstr "Import Slots"
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/routes/users/index.tsx:26
+#: src/routes/users/index.tsx:36
 msgid "Instructor"
 msgstr "Instructor"
 
@@ -478,7 +479,7 @@ msgstr "Learn more about China RVSM"
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
 
-#: src/components/app-nav-menu.tsx:177
+#: src/components/app-nav-menu.tsx:174
 #: src/routes/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
@@ -495,7 +496,7 @@ msgstr "List of LOAs"
 msgid "List of SOPs"
 msgstr "List of SOPs"
 
-#: src/routes/users/index.tsx:32
+#: src/routes/users/index.tsx:42
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
@@ -523,7 +524,7 @@ msgstr "Match designated route"
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/routes/users/index.tsx:27
+#: src/routes/users/index.tsx:37
 msgid "Mentor"
 msgstr "Mentor"
 
@@ -543,18 +544,13 @@ msgstr "metric odd flight level (meters)"
 msgid "Mon"
 msgstr "Mon"
 
-#: src/components/app-nav-menu.tsx:171
+#: src/components/app-nav-menu.tsx:168
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:65
+#: src/routes/users/index.tsx:77
 msgid "Name"
 msgstr "Name"
-
-#: src/components/app-nav-menu.tsx:144
-msgctxt "new feature"
-msgid "New"
-msgstr "New"
 
 #: src/components/recent-events.tsx:240
 msgid "No event is scheduled recently."
@@ -605,11 +601,11 @@ msgstr "Online Pilots"
 msgid "Operation"
 msgstr "Operation"
 
-#: src/routes/users/index.tsx:29
+#: src/routes/users/index.tsx:39
 msgid "Operation Director"
 msgstr "Operation Director"
 
-#: src/routes/users/index.tsx:30
+#: src/routes/users/index.tsx:40
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
 
@@ -675,7 +671,7 @@ msgstr "Please login to book a slot."
 msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
-#: src/components/app-nav-menu.tsx:197
+#: src/components/app-nav-menu.tsx:194
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
@@ -683,7 +679,7 @@ msgstr "Preferred Routes"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/app-nav-menu.tsx:158
+#: src/components/app-nav-menu.tsx:155
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
@@ -715,7 +711,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/users/index.tsx:69
+#: src/routes/users/index.tsx:80
 msgid "Roles"
 msgstr "Roles"
 
@@ -742,7 +738,7 @@ msgstr "Sat"
 msgid "Save"
 msgstr "Save"
 
-#: src/routes/users/index.tsx:116
+#: src/routes/users/index.tsx:137
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -750,7 +746,7 @@ msgstr "Save changes"
 msgid "Search Arrival"
 msgstr "Search Arrival"
 
-#: src/routes/users/index.tsx:163
+#: src/routes/users/index.tsx:184
 msgid "Search CID"
 msgstr "Search CID"
 
@@ -758,15 +754,15 @@ msgstr "Search CID"
 msgid "Search Departure"
 msgstr "Search Departure"
 
-#: src/routes/users/index.tsx:172
+#: src/routes/users/index.tsx:193
 msgid "Search Name"
 msgstr "Search Name"
 
-#: src/routes/users/index.tsx:31
+#: src/routes/users/index.tsx:41
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
-#: src/components/app-nav-menu.tsx:174
+#: src/components/app-nav-menu.tsx:171
 msgid "Sector Files"
 msgstr "Sector Files"
 
@@ -786,12 +782,12 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/routes/users/index.tsx:28
+#: src/routes/users/index.tsx:38
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
 #: src/components/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:50
 msgid "Staff"
 msgstr "Staff"
 
@@ -832,11 +828,11 @@ msgstr "System"
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:46
 msgid "Tech Director"
 msgstr "Tech Director"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:47
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
 
@@ -973,7 +969,11 @@ msgstr "Upload"
 msgid "Upload image"
 msgstr "Upload image"
 
-#: src/components/app-nav-menu.tsx:191
+#: src/routes/users/index.tsx:53
+msgid "User"
+msgstr "User"
+
+#: src/components/app-nav-menu.tsx:188
 msgid "User List"
 msgstr "User List"
 
@@ -1007,11 +1007,11 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/components/app-nav-menu.tsx:164
+#: src/components/app-nav-menu.tsx:161
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:51
 msgid "Volunteer"
 msgstr "Volunteer"
 

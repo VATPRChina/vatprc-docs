@@ -2,13 +2,15 @@ import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
-import { Trans } from "@lingui/react/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Checkbox, Group, Modal, Stack, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ColumnDef,
   ColumnFiltersState,
+  createColumnHelper,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -16,34 +18,45 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { MouseEvent, ReactNode, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import { TbArrowsUpDown, TbUserBolt, TbCheck } from "react-icons/tb";
 
-const ROLES = {
-  "division-director": <Trans>Division Director</Trans>,
-  "controller-training-director": <Trans>Controller Training Director</Trans>,
-  "controller-training-director-assistant": <Trans>Controller Training Director Assistant</Trans>,
-  "controller-training-instructor": <Trans>Instructor</Trans>,
-  "controller-training-mentor": <Trans>Mentor</Trans>,
-  "controller-training-sop-editor": <Trans>SOP Editor</Trans>,
-  "operation-director": <Trans>Operation Director</Trans>,
-  "operation-director-assistant": <Trans>Operation Director Assistant</Trans>,
-  "operation-sector-editor": <Trans>Sector Editor</Trans>,
-  "operation-loa-editor": <Trans>LOA Editor</Trans>,
-  "event-director": <Trans>Event Director</Trans>,
-  "event-coordinator": <Trans>Event Coordinator</Trans>,
-  "event-graphics-designer": <Trans>Graphics Designer</Trans>,
-  "tech-director": <Trans>Tech Director</Trans>,
-  "tech-director-assistant": <Trans>Tech Director Assistant</Trans>,
-  "tech-afv-facility-engineer": <Trans>AFV Facility Engineer</Trans>,
-  controller: <Trans>Controller</Trans>,
-  staff: <Trans>Staff</Trans>,
-  volunteer: <Trans>Volunteer</Trans>,
-} satisfies Record<Exclude<components["schemas"]["UserRoleDto"], "api-client" | "user">, ReactNode>;
+const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
+  "controller",
+  "staff",
+  "volunteer",
+  "api-client",
+  "user",
+];
 
-export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
-  {
-    accessorKey: "cid",
+const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
+  ["division-director", msg`Division Director`],
+  ["controller-training-director", msg`Controller Training Director`],
+  ["controller-training-director-assistant", msg`Controller Training Director Assistant`],
+  ["controller-training-instructor", msg`Instructor`],
+  ["controller-training-mentor", msg`Mentor`],
+  ["controller-training-sop-editor", msg`SOP Editor`],
+  ["operation-director", msg`Operation Director`],
+  ["operation-director-assistant", msg`Operation Director Assistant`],
+  ["operation-sector-editor", msg`Sector Editor`],
+  ["operation-loa-editor", msg`LOA Editor`],
+  ["event-director", msg`Event Director`],
+  ["event-coordinator", msg`Event Coordinator`],
+  ["event-graphics-designer", msg`Graphics Designer`],
+  ["tech-director", msg`Tech Director`],
+  ["tech-director-assistant", msg`Tech Director Assistant`],
+  ["tech-afv-facility-engineer", msg`AFV Facility Engineer`],
+  ["controller", msg`Controller`],
+  ["staff", msg`Staff`],
+  ["volunteer", msg`Volunteer`],
+  ["api-client", msg`API Client`],
+  ["user", msg`User`],
+]);
+
+const columnHelper = createColumnHelper<components["schemas"]["UserDto"]>();
+
+export const columns = [
+  columnHelper.accessor("cid", {
     header: ({ column }) => {
       return (
         <>
@@ -59,17 +72,17 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
         </>
       );
     },
-  },
-  {
-    accessorKey: "full_name",
+  }),
+  columnHelper.accessor("full_name", {
     header: () => <Trans>Name</Trans>,
-  },
-  {
-    accessorKey: "direct_roles",
+  }),
+  columnHelper.accessor("direct_roles", {
     header: () => <Trans>Roles</Trans>,
     cell: ({ row, getValue }) => {
-      const savedRoles = getValue<string[]>();
-      const [roles, setRoles] = useState(getValue<string[]>());
+      const { i18n } = useLingui();
+
+      const savedRoles = getValue();
+      const [roles, setRoles] = useState(getValue());
       const { mutate, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/roles");
       const { refetch } = $api.useQuery("get", "/api/users");
       const [opened, { open, close }] = useDisclosure(false);
@@ -87,16 +100,20 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
 
       const onToggleRole = (role: string) => (e: MouseEvent<HTMLInputElement>) =>
         e.currentTarget.checked
-          ? setRoles((pv) => [...pv.filter((r) => r !== role), role])
+          ? setRoles((pv) => [...pv.filter((r) => r !== role), role as components["schemas"]["UserRoleDto"]])
           : setRoles((pv) => pv.filter((r) => r !== role));
+
+      const computedRoles = row.original.roles;
 
       return (
         <div className="flex flex-row items-center gap-2">
           {savedRoles.length > 0 && (
             <div className="flex flex-col flex-wrap gap-x-1">
-              {savedRoles.map((role) => (
-                <span key={role}>{role}</span>
-              ))}
+              {savedRoles.map((role) => {
+                const roleName = ROLES.get(role);
+                if (!roleName) return null;
+                return <span key={role}>{i18n._(roleName)}</span>;
+              })}
             </div>
           )}
           <ActionIcon variant="subtle" onClick={open}>
@@ -104,8 +121,14 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
             <Stack>
-              {Object.entries(ROLES).map(([role, name]) => (
-                <Checkbox key={role} onClick={onToggleRole(role)} label={name} checked={roles.includes(role)} />
+              {ROLES.entries().map(([role, name]) => (
+                <Checkbox
+                  key={role}
+                  onClick={onToggleRole(role)}
+                  label={i18n._(name)}
+                  checked={roles.includes(role) || (computedRoles.includes(role) && AUTOMATIC_ROLES.includes(role))}
+                  disabled={AUTOMATIC_ROLES.includes(role)}
+                />
               ))}
               <Group>
                 <Button variant="outline" size="xs" onClick={close}>
@@ -121,7 +144,7 @@ export const columns: ColumnDef<components["schemas"]["UserDto"]>[] = [
         </div>
       );
     },
-  },
+  }),
   {
     header: () => <Trans>Actions</Trans>,
     id: "actions",

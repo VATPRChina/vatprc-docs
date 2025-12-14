@@ -58,7 +58,7 @@ msgstr "关于我们"
 msgid "Absent"
 msgstr "缺席"
 
-#: src/routes/users/index.tsx:126
+#: src/routes/users/index.tsx:147
 msgid "Actions"
 msgstr "操作"
 
@@ -74,11 +74,11 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/components/app-nav-menu.tsx:183
+#: src/components/app-nav-menu.tsx:180
 msgid "Admin"
 msgstr "管理"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:48
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
 
@@ -106,6 +106,10 @@ msgstr "已被预订"
 msgid "Announcement"
 msgstr "公告"
 
+#: src/routes/users/index.tsx:52
+msgid "API Client"
+msgstr "接口客户端"
+
 #: src/components/app-nav-menu.tsx:88
 msgid "API Document"
 msgstr "API 文档"
@@ -125,7 +129,7 @@ msgstr "区域"
 msgid "Arrival"
 msgstr "到达机场"
 
-#: src/components/app-nav-menu.tsx:168
+#: src/components/app-nav-menu.tsx:165
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC 中心"
@@ -139,7 +143,7 @@ msgstr "管制席位及频率"
 msgid "Back"
 msgstr "返回"
 
-#: src/components/app-nav-menu.tsx:161
+#: src/components/app-nav-menu.tsx:158
 msgid "Become a Controller"
 msgstr "成为管制员"
 
@@ -161,7 +165,7 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:112
+#: src/routes/users/index.tsx:133
 msgid "Cancel"
 msgstr "取消"
 
@@ -189,7 +193,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:63
 msgid "CID"
 msgstr "CID"
 
@@ -197,25 +201,25 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:49
 msgid "Controller"
 msgstr "管制员"
 
-#: src/components/app-nav-menu.tsx:155
+#: src/components/app-nav-menu.tsx:152
 #: src/routes/controller/controller-list.tsx:9
 #: src/routes/controller/controller-list.tsx:18
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/users/index.tsx:24
+#: src/routes/users/index.tsx:34
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
 
-#: src/routes/users/index.tsx:25
+#: src/routes/users/index.tsx:35
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
-#: src/components/app-nav-menu.tsx:151
+#: src/components/app-nav-menu.tsx:148
 msgid "Controllers"
 msgstr "管制员"
 
@@ -277,7 +281,7 @@ msgstr "描述"
 msgid "Direct leg"
 msgstr "直飞段"
 
-#: src/routes/users/index.tsx:23
+#: src/routes/users/index.tsx:33
 msgid "Division Director"
 msgstr "分部主席"
 
@@ -303,7 +307,7 @@ msgstr "编辑活动 {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "修改推荐航路 {title}"
 
-#: src/routes/users/index.tsx:105
+#: src/routes/users/index.tsx:120
 msgid "Edit roles"
 msgstr "编辑权限"
 
@@ -337,25 +341,22 @@ msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
 #: src/components/app-nav-menu.tsx:85
-#: src/components/app-nav-menu.tsx:188
+#: src/components/app-nav-menu.tsx:185
 msgid "Event"
 msgstr "活动"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:44
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:43
 msgid "Event Director"
 msgstr "组织部主管"
 
 #: src/components/discourse-doc.tsx:123
+#: src/routes/docs/$.tsx:38
 msgid "Failed to load document"
 msgstr "加载文档失败"
-
-#: src/routes/docs/$.tsx:39
-msgid "Failed to load document."
-msgstr "加载文档失败。"
 
 #: src/routes/index.tsx:87
 #: src/routes/index.tsx:91
@@ -418,11 +419,11 @@ msgstr "前往下一页"
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:45
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
-#: src/components/app-nav-menu.tsx:194
+#: src/components/app-nav-menu.tsx:191
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -454,7 +455,7 @@ msgstr "导入时刻表"
 msgid "In This Week"
 msgstr "本周"
 
-#: src/routes/users/index.tsx:26
+#: src/routes/users/index.tsx:36
 msgid "Instructor"
 msgstr "教员"
 
@@ -478,7 +479,7 @@ msgstr "了解中国 RVSM"
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
 
-#: src/components/app-nav-menu.tsx:177
+#: src/components/app-nav-menu.tsx:174
 #: src/routes/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "移交协议书"
@@ -495,7 +496,7 @@ msgstr "移交协议书列表"
 msgid "List of SOPs"
 msgstr "标准运行程序列表"
 
-#: src/routes/users/index.tsx:32
+#: src/routes/users/index.tsx:42
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
@@ -523,7 +524,7 @@ msgstr "符合指定航路"
 msgid "Meeting Notes"
 msgstr "会议记录"
 
-#: src/routes/users/index.tsx:27
+#: src/routes/users/index.tsx:37
 msgid "Mentor"
 msgstr "教师"
 
@@ -543,18 +544,13 @@ msgstr "公制单数飞行高度层（米）"
 msgid "Mon"
 msgstr "星期一"
 
-#: src/components/app-nav-menu.tsx:171
+#: src/components/app-nav-menu.tsx:168
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:65
+#: src/routes/users/index.tsx:77
 msgid "Name"
 msgstr "姓名"
-
-#: src/components/app-nav-menu.tsx:144
-msgctxt "new feature"
-msgid "New"
-msgstr "新"
 
 #: src/components/recent-events.tsx:240
 msgid "No event is scheduled recently."
@@ -605,11 +601,11 @@ msgstr "在线飞行员"
 msgid "Operation"
 msgstr "运行"
 
-#: src/routes/users/index.tsx:29
+#: src/routes/users/index.tsx:39
 msgid "Operation Director"
 msgstr "运行部主管"
 
-#: src/routes/users/index.tsx:30
+#: src/routes/users/index.tsx:40
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
@@ -675,7 +671,7 @@ msgstr "预订时刻前请先登入。"
 msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
-#: src/components/app-nav-menu.tsx:197
+#: src/components/app-nav-menu.tsx:194
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
@@ -683,7 +679,7 @@ msgstr "推荐航路"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/components/app-nav-menu.tsx:158
+#: src/components/app-nav-menu.tsx:155
 msgid "Progression Guide"
 msgstr "晋升指引"
 
@@ -715,7 +711,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:69
+#: src/routes/users/index.tsx:80
 msgid "Roles"
 msgstr "权限"
 
@@ -742,7 +738,7 @@ msgstr "星期六"
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:116
+#: src/routes/users/index.tsx:137
 msgid "Save changes"
 msgstr "保存变更"
 
@@ -750,7 +746,7 @@ msgstr "保存变更"
 msgid "Search Arrival"
 msgstr "搜索到达机场"
 
-#: src/routes/users/index.tsx:163
+#: src/routes/users/index.tsx:184
 msgid "Search CID"
 msgstr "按 CID 搜索"
 
@@ -758,15 +754,15 @@ msgstr "按 CID 搜索"
 msgid "Search Departure"
 msgstr "搜索出发机场"
 
-#: src/routes/users/index.tsx:172
+#: src/routes/users/index.tsx:193
 msgid "Search Name"
 msgstr "按姓名搜索"
 
-#: src/routes/users/index.tsx:31
+#: src/routes/users/index.tsx:41
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
-#: src/components/app-nav-menu.tsx:174
+#: src/components/app-nav-menu.tsx:171
 msgid "Sector Files"
 msgstr "扇区文件"
 
@@ -786,12 +782,12 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/routes/users/index.tsx:28
+#: src/routes/users/index.tsx:38
 msgid "SOP Editor"
 msgstr "SOP 组组员"
 
 #: src/components/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:50
 msgid "Staff"
 msgstr "职员"
 
@@ -832,11 +828,11 @@ msgstr "跟随系统"
 msgid "Take me back to home page"
 msgstr "返回首页"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:46
 msgid "Tech Director"
 msgstr "技术部主管"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:47
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
 
@@ -973,7 +969,11 @@ msgstr "上传"
 msgid "Upload image"
 msgstr "上传图片"
 
-#: src/components/app-nav-menu.tsx:191
+#: src/routes/users/index.tsx:53
+msgid "User"
+msgstr "用户"
+
+#: src/components/app-nav-menu.tsx:188
 msgid "User List"
 msgstr "用户列表"
 
@@ -1007,11 +1007,11 @@ msgstr "VATSIM 中国分部"
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
-#: src/components/app-nav-menu.tsx:164
+#: src/components/app-nav-menu.tsx:161
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:51
 msgid "Volunteer"
 msgstr "志愿者"
 
