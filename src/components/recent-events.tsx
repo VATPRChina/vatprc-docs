@@ -146,7 +146,7 @@ export const RecentEvents: React.FC<{ className?: string }> = ({ className }) =>
   ];
   // .filter((e) => isBefore(e.start, addDays(Date.now(), 30)));
 
-  const scheduledEvents = events.filter((e) => isAfter(e.start, Date.now()));
+  const scheduledEvents = events.filter((e) => isAfter(e.end, Date.now()));
 
   return (
     <div className={cn(className, "grid grid-cols-2 items-start gap-4 md:grid-cols-3")}>
