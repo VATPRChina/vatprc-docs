@@ -118,7 +118,7 @@ msgstr "API 文档"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
-#: src/components/atc-permission-modal.tsx:22
+#: src/components/atc-permission-modal.tsx:24
 msgid "Approach"
 msgstr "进近"
 
@@ -177,11 +177,11 @@ msgstr "呼号和机型"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/components/atc-permission-modal.tsx:23
+#: src/components/atc-permission-modal.tsx:25
 msgid "Center"
 msgstr "区域"
 
-#: src/components/atc-permission-modal.tsx:32
+#: src/components/atc-permission-modal.tsx:34
 msgid "Certified"
 msgstr "完整权限"
 
@@ -278,11 +278,16 @@ msgstr "巡航高度类型不允许"
 msgid "CTOT"
 msgstr "CTOT"
 
+#: src/components/atc-permission-modal.tsx:102
+#: src/components/atc-permission-modal.tsx:116
+msgid "Current Value: "
+msgstr "当前值："
+
 #: src/components/theme-toggle.tsx:25
 msgid "Dark"
 msgstr "暗色"
 
-#: src/components/atc-permission-modal.tsx:18
+#: src/components/atc-permission-modal.tsx:20
 msgid "Delivery"
 msgstr "放行"
 
@@ -309,7 +314,7 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-permission-modal.tsx:123
+#: src/components/atc-permission-modal.tsx:135
 msgid "Edit ATC permissions"
 msgstr "编辑管制员权限"
 
@@ -418,11 +423,11 @@ msgstr "飞行计划检查器"
 msgid "Flight Route"
 msgstr "航路"
 
-#: src/components/atc-permission-modal.tsx:24
+#: src/components/atc-permission-modal.tsx:26
 msgid "Flight Service Station"
 msgstr "飞服"
 
-#: src/components/atc-permission-modal.tsx:25
+#: src/components/atc-permission-modal.tsx:27
 msgid "Flow Management Position"
 msgstr "流量控制"
 
@@ -455,7 +460,7 @@ msgstr "前往上一页"
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
-#: src/components/atc-permission-modal.tsx:19
+#: src/components/atc-permission-modal.tsx:21
 msgid "Ground"
 msgstr "地面"
 
@@ -536,11 +541,11 @@ msgstr "标准运行程序列表"
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
-#: src/components/user-info.tsx:37
+#: src/components/user-info.tsx:40
 msgid "Loading"
 msgstr "正在加载"
 
-#: src/components/user-info.tsx:53
+#: src/components/user-info.tsx:56
 msgid "Login"
 msgstr "登入"
 
@@ -549,6 +554,7 @@ msgid "Logo Pack"
 msgstr "视觉标识包"
 
 #: src/components/user-info.tsx:28
+#: src/components/user-info.tsx:31
 msgid "Logout"
 msgstr "登出"
 
@@ -596,7 +602,8 @@ msgstr "近期无活动计划。"
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
 
-#: src/components/atc-permission-modal.tsx:89
+#: src/components/atc-permission-modal.tsx:96
+#: src/components/atc-permission-modal.tsx:103
 msgid "No permission"
 msgstr "没有权限"
 
@@ -822,11 +829,11 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/components/atc-permission-modal.tsx:31
+#: src/components/atc-permission-modal.tsx:33
 msgid "Solo"
 msgstr "独立训练"
 
-#: src/components/atc-permission-modal.tsx:97
+#: src/components/atc-permission-modal.tsx:108
 msgid "Solo Expiration Date"
 msgstr "独立训练到期日"
 
@@ -856,7 +863,7 @@ msgstr "开始预订时间"
 msgid "Start to Fly"
 msgstr "开始飞行"
 
-#: src/components/atc-permission-modal.tsx:29
+#: src/components/atc-permission-modal.tsx:31
 msgid "Student"
 msgstr "理论学习"
 
@@ -980,7 +987,7 @@ msgstr "本页面仅支持简体中文。"
 msgid "Thu"
 msgstr "星期四"
 
-#: src/components/atc-permission-modal.tsx:21
+#: src/components/atc-permission-modal.tsx:23
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -1000,7 +1007,7 @@ msgstr "标题"
 msgid "Toggle theme"
 msgstr "切换主题"
 
-#: src/components/atc-permission-modal.tsx:20
+#: src/components/atc-permission-modal.tsx:22
 msgid "Tower"
 msgstr "塔台"
 
@@ -1017,7 +1024,7 @@ msgstr "应答机设备代码为空。"
 msgid "Tue"
 msgstr "星期二"
 
-#: src/components/atc-permission-modal.tsx:30
+#: src/components/atc-permission-modal.tsx:32
 msgid "Under Mentor"
 msgstr "教员监督"
 

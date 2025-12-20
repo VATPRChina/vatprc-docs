@@ -118,7 +118,7 @@ msgstr "API Document"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
-#: src/components/atc-permission-modal.tsx:22
+#: src/components/atc-permission-modal.tsx:24
 msgid "Approach"
 msgstr "Approach"
 
@@ -177,11 +177,11 @@ msgstr "Callsign & Aircraft"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/atc-permission-modal.tsx:23
+#: src/components/atc-permission-modal.tsx:25
 msgid "Center"
 msgstr "Center"
 
-#: src/components/atc-permission-modal.tsx:32
+#: src/components/atc-permission-modal.tsx:34
 msgid "Certified"
 msgstr "Certified"
 
@@ -278,11 +278,16 @@ msgstr "Cruising Level Type Mismatch"
 msgid "CTOT"
 msgstr "CTOT"
 
+#: src/components/atc-permission-modal.tsx:102
+#: src/components/atc-permission-modal.tsx:116
+msgid "Current Value: "
+msgstr "Current Value: "
+
 #: src/components/theme-toggle.tsx:25
 msgid "Dark"
 msgstr "Dark"
 
-#: src/components/atc-permission-modal.tsx:18
+#: src/components/atc-permission-modal.tsx:20
 msgid "Delivery"
 msgstr "Delivery"
 
@@ -309,7 +314,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-permission-modal.tsx:123
+#: src/components/atc-permission-modal.tsx:135
 msgid "Edit ATC permissions"
 msgstr "Edit ATC permissions"
 
@@ -418,11 +423,11 @@ msgstr "Flight Plan Checker"
 msgid "Flight Route"
 msgstr "Flight Route"
 
-#: src/components/atc-permission-modal.tsx:24
+#: src/components/atc-permission-modal.tsx:26
 msgid "Flight Service Station"
 msgstr "Flight Service Station"
 
-#: src/components/atc-permission-modal.tsx:25
+#: src/components/atc-permission-modal.tsx:27
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
@@ -455,7 +460,7 @@ msgstr "Go to previous page"
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
-#: src/components/atc-permission-modal.tsx:19
+#: src/components/atc-permission-modal.tsx:21
 msgid "Ground"
 msgstr "Ground"
 
@@ -536,11 +541,11 @@ msgstr "List of SOPs"
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
-#: src/components/user-info.tsx:37
+#: src/components/user-info.tsx:40
 msgid "Loading"
 msgstr "Loading"
 
-#: src/components/user-info.tsx:53
+#: src/components/user-info.tsx:56
 msgid "Login"
 msgstr "Login"
 
@@ -549,6 +554,7 @@ msgid "Logo Pack"
 msgstr "Logo Pack"
 
 #: src/components/user-info.tsx:28
+#: src/components/user-info.tsx:31
 msgid "Logout"
 msgstr "Logout"
 
@@ -596,7 +602,8 @@ msgstr "No event is scheduled recently."
 msgid "No online pilot."
 msgstr "No online pilot."
 
-#: src/components/atc-permission-modal.tsx:89
+#: src/components/atc-permission-modal.tsx:96
+#: src/components/atc-permission-modal.tsx:103
 msgid "No permission"
 msgstr "No permission"
 
@@ -822,11 +829,11 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/components/atc-permission-modal.tsx:31
+#: src/components/atc-permission-modal.tsx:33
 msgid "Solo"
 msgstr "Solo"
 
-#: src/components/atc-permission-modal.tsx:97
+#: src/components/atc-permission-modal.tsx:108
 msgid "Solo Expiration Date"
 msgstr "Solo Expiration Date"
 
@@ -856,7 +863,7 @@ msgstr "Start booking at"
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
-#: src/components/atc-permission-modal.tsx:29
+#: src/components/atc-permission-modal.tsx:31
 msgid "Student"
 msgstr "Student"
 
@@ -980,7 +987,7 @@ msgstr "This page is not available in English."
 msgid "Thu"
 msgstr "Thu"
 
-#: src/components/atc-permission-modal.tsx:21
+#: src/components/atc-permission-modal.tsx:23
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -1000,7 +1007,7 @@ msgstr "Title"
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
-#: src/components/atc-permission-modal.tsx:20
+#: src/components/atc-permission-modal.tsx:22
 msgid "Tower"
 msgstr "Tower"
 
@@ -1017,7 +1024,7 @@ msgstr "Transponder field is empty."
 msgid "Tue"
 msgstr "Tue"
 
-#: src/components/atc-permission-modal.tsx:30
+#: src/components/atc-permission-modal.tsx:32
 msgid "Under Mentor"
 msgstr "Under Mentor"
 

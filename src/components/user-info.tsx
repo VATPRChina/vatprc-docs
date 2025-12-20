@@ -27,6 +27,9 @@ export const UserInfo = () => {
           <Menu.Item onClick={onLogout}>
             <Trans>Logout</Trans>
           </Menu.Item>
+          <Menu.Item onClick={onLogout}>
+            <Trans>Logout</Trans>
+          </Menu.Item>
         </Menu.Dropdown>
       </Menu>
     );

@@ -7,7 +7,6 @@ import createQueryClient from "openapi-react-query";
 
 const throwMiddleware: Middleware = {
   async onResponse({ response }) {
-    console.log(response.ok, await response.clone().json());
     if (response.ok) return;
 
     const body = (await response.clone().json()) as { message: string; error_code: string };

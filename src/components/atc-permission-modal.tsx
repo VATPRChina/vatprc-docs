@@ -1,12 +1,14 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Group, Modal, Select, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import { endOfDay, parse, parseISO } from "date-fns";
+import { useQueryClient } from "@tanstack/react-query";
+import { endOfDay, format, parse, parseISO } from "date-fns";
 import { ComponentProps, FC, MouseEventHandler, useEffect, useState } from "react";
 import { TbDeviceFloppy } from "react-icons/tb";
 
@@ -39,19 +41,24 @@ const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDe
 }) => {
   const { i18n, t } = useLingui();
 
-  const { data, refetch, isPending } = $api.useQuery("get", "/api/users/{id}/atc/permissions", {
+  const queryClient = useQueryClient();
+  const { data, isPending } = $api.useQuery("get", "/api/users/{id}/atc/permissions", {
     params: { path: { id: userId } },
   });
+  const invalidateQueries = () =>
+    promiseWithLog(
+      queryClient.invalidateQueries(
+        $api.queryOptions("get", "/api/users/{id}/atc/permissions", { params: { path: { id: userId } } }),
+      ),
+    );
   const permission = data?.find((p) => p.position_kind_id === kindId);
   const { mutate: put, isPending: isPutPending } = $api.useMutation("put", "/api/users/{id}/atc/permissions/{kind}", {
-    onSuccess: () => refetch(),
+    onSuccess: invalidateQueries,
   });
   const { mutate: del, isPending: isDelPending } = $api.useMutation(
     "delete",
     "/api/users/{id}/atc/permissions/{kind}",
-    {
-      onSuccess: () => refetch(),
-    },
+    { onSuccess: invalidateQueries },
   );
 
   const [state, setState] = useState<components["schemas"]["UserControllerState"] | null>(permission?.state ?? null);
@@ -91,18 +98,23 @@ const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDe
         className="flex-1"
         onChange={(v) => setState(v as components["schemas"]["UserControllerState"] | null)}
         disabled={isPending || isPutPending || isDelPending}
+        description={
+          t`Current Value: ` +
+          i18n._((permission?.state && POSITION_STATE_MAP.get(permission?.state)) ?? msg`No permission`)
+        }
       />
       {state === "solo" && (
         <DateInput
           label={t`Solo Expiration Date`}
-          value={soloExpiresAt}
-          onChange={(e) => (
-            console.log(e),
+          value={soloExpiresAt && format(soloExpiresAt, "yyyy-MM-dd", { in: utc })}
+          onChange={(e) =>
             setSoloExpiresAt(e !== null ? endOfDay(parse(e, "yyyy-MM-dd", Date.now(), { in: utc }), { in: utc }) : null)
-          )}
+          }
           valueFormat="YYYY-MM-DD"
           clearable
           className="flex-1"
+          description={t`Current Value: ` + permission?.solo_expires_at}
+          disabled={isPending || isPutPending || isDelPending}
         />
       )}
       <ActionIcon

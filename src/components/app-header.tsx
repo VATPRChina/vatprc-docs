@@ -15,7 +15,7 @@ export const AppHeader: React.FC = () => {
   const [opened, { open, close }] = useDisclosure();
 
   return (
-    <Paper className="sticky top-0 z-50 w-full border-b-[1px] px-8 py-2">
+    <Paper className="sticky top-0 z-50 w-full border-b px-8 py-2">
       <div className="container mx-auto flex flex-row items-center gap-4">
         <Link to="/">
           <img src={logo} alt={t`VATSIM P.R.China Division`} className="h-6 not-dark:block dark:hidden" />
