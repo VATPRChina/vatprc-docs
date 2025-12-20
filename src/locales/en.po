@@ -58,7 +58,7 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/routes/users/index.tsx:147
+#: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "Actions"
 
@@ -78,7 +78,7 @@ msgstr "Add <0>W</0> to equipment code."
 msgid "Admin"
 msgstr "Admin"
 
-#: src/routes/users/index.tsx:48
+#: src/routes/users/index.tsx:50
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
 
@@ -106,7 +106,7 @@ msgstr "Already Booked"
 msgid "Announcement"
 msgstr "Announcement"
 
-#: src/routes/users/index.tsx:52
+#: src/routes/users/index.tsx:54
 msgid "API Client"
 msgstr "API Client"
 
@@ -117,6 +117,10 @@ msgstr "API Document"
 #: src/routes/index.tsx:94
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
+
+#: src/components/atc-permission-modal.tsx:22
+msgid "Approach"
+msgstr "Approach"
 
 #: src/components/event/slot-import.tsx:131
 #: src/routes/events/$id.tsx:164
@@ -133,6 +137,10 @@ msgstr "Arrival"
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC Center"
+
+#: src/routes/users/index.tsx:161
+msgid "ATC Permission"
+msgstr "ATC Permission"
 
 #: src/components/app-nav-menu.tsx:104
 msgid "ATC Positions & Frequencies"
@@ -165,9 +173,17 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/routes/users/index.tsx:133
+#: src/routes/users/index.tsx:137
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/components/atc-permission-modal.tsx:23
+msgid "Center"
+msgstr "Center"
+
+#: src/components/atc-permission-modal.tsx:32
+msgid "Certified"
+msgstr "Certified"
 
 #: src/components/app-nav-menu.tsx:133
 msgid "Charts"
@@ -193,7 +209,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/users/index.tsx:63
+#: src/routes/users/index.tsx:65
 msgid "CID"
 msgstr "CID"
 
@@ -201,7 +217,7 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/users/index.tsx:49
+#: src/routes/users/index.tsx:51
 msgid "Controller"
 msgstr "Controller"
 
@@ -211,11 +227,11 @@ msgstr "Controller"
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:36
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:37
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
@@ -266,6 +282,10 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "Dark"
 
+#: src/components/atc-permission-modal.tsx:18
+msgid "Delivery"
+msgstr "Delivery"
+
 #: src/components/preferred-route-create.tsx:101
 #: src/routes/flights/$callsign.tsx:388
 #: src/routes/navdata/preferred-routes.tsx:22
@@ -281,13 +301,17 @@ msgstr "Description"
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:35
 msgid "Division Director"
 msgstr "Division Director"
 
 #: src/components/event/slot-import.tsx:120
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
+
+#: src/components/atc-permission-modal.tsx:123
+msgid "Edit ATC permissions"
+msgstr "Edit ATC permissions"
 
 #: src/components/discourse-doc.tsx:73
 msgid "Edit Chinese"
@@ -307,7 +331,7 @@ msgstr "Edit Event {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "Edit Preferred Route {title}"
 
-#: src/routes/users/index.tsx:120
+#: src/routes/users/index.tsx:124
 msgid "Edit roles"
 msgstr "Edit roles"
 
@@ -345,11 +369,11 @@ msgstr "even flight level"
 msgid "Event"
 msgstr "Event"
 
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:46
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:45
 msgid "Event Director"
 msgstr "Event Director"
 
@@ -394,6 +418,14 @@ msgstr "Flight Plan Checker"
 msgid "Flight Route"
 msgstr "Flight Route"
 
+#: src/components/atc-permission-modal.tsx:24
+msgid "Flight Service Station"
+msgstr "Flight Service Station"
+
+#: src/components/atc-permission-modal.tsx:25
+msgid "Flow Management Position"
+msgstr "Flow Management Position"
+
 #: src/components/app-nav-menu.tsx:77
 #: src/routes/index.tsx:119
 msgid "Forum"
@@ -419,9 +451,13 @@ msgstr "Go to next page"
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:47
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
+
+#: src/components/atc-permission-modal.tsx:19
+msgid "Ground"
+msgstr "Ground"
 
 #: src/components/app-nav-menu.tsx:191
 msgid "Image Upload Tool"
@@ -455,7 +491,7 @@ msgstr "Import Slots"
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:38
 msgid "Instructor"
 msgstr "Instructor"
 
@@ -496,7 +532,7 @@ msgstr "List of LOAs"
 msgid "List of SOPs"
 msgstr "List of SOPs"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:44
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
@@ -524,7 +560,7 @@ msgstr "Match designated route"
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:39
 msgid "Mentor"
 msgstr "Mentor"
 
@@ -548,7 +584,7 @@ msgstr "Mon"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:77
+#: src/routes/users/index.tsx:79
 msgid "Name"
 msgstr "Name"
 
@@ -559,6 +595,10 @@ msgstr "No event is scheduled recently."
 #: src/components/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "No online pilot."
+
+#: src/components/atc-permission-modal.tsx:89
+msgid "No permission"
+msgstr "No permission"
 
 #: src/routes/flights/$callsign.tsx:126
 msgid "No RNAV1"
@@ -601,11 +641,11 @@ msgstr "Online Pilots"
 msgid "Operation"
 msgstr "Operation"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:41
 msgid "Operation Director"
 msgstr "Operation Director"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:42
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
 
@@ -711,7 +751,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/users/index.tsx:80
+#: src/routes/users/index.tsx:82
 msgid "Roles"
 msgstr "Roles"
 
@@ -738,7 +778,7 @@ msgstr "Sat"
 msgid "Save"
 msgstr "Save"
 
-#: src/routes/users/index.tsx:137
+#: src/routes/users/index.tsx:141
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -746,7 +786,7 @@ msgstr "Save changes"
 msgid "Search Arrival"
 msgstr "Search Arrival"
 
-#: src/routes/users/index.tsx:184
+#: src/routes/users/index.tsx:203
 msgid "Search CID"
 msgstr "Search CID"
 
@@ -754,11 +794,11 @@ msgstr "Search CID"
 msgid "Search Departure"
 msgstr "Search Departure"
 
-#: src/routes/users/index.tsx:193
+#: src/routes/users/index.tsx:212
 msgid "Search Name"
 msgstr "Search Name"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:43
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
@@ -782,12 +822,20 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/routes/users/index.tsx:38
+#: src/components/atc-permission-modal.tsx:31
+msgid "Solo"
+msgstr "Solo"
+
+#: src/components/atc-permission-modal.tsx:97
+msgid "Solo Expiration Date"
+msgstr "Solo Expiration Date"
+
+#: src/routes/users/index.tsx:40
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
 #: src/components/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:52
 msgid "Staff"
 msgstr "Staff"
 
@@ -807,6 +855,10 @@ msgstr "Start booking at"
 #: src/components/app-nav-menu.tsx:120
 msgid "Start to Fly"
 msgstr "Start to Fly"
+
+#: src/components/atc-permission-modal.tsx:29
+msgid "Student"
+msgstr "Student"
 
 #: src/components/recent-events.tsx:188
 msgid "Sun"
@@ -828,11 +880,11 @@ msgstr "System"
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:48
 msgid "Tech Director"
 msgstr "Tech Director"
 
-#: src/routes/users/index.tsx:47
+#: src/routes/users/index.tsx:49
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
 
@@ -928,6 +980,10 @@ msgstr "This page is not available in English."
 msgid "Thu"
 msgstr "Thu"
 
+#: src/components/atc-permission-modal.tsx:21
+msgid "Tier 2"
+msgstr "Tier 2"
+
 #: src/routes/events/$id.tsx:167
 msgid "Time"
 msgstr "Time"
@@ -944,6 +1000,10 @@ msgstr "Title"
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
+#: src/components/atc-permission-modal.tsx:20
+msgid "Tower"
+msgstr "Tower"
+
 #: src/routes/flights/$callsign.tsx:382
 msgid "Transponder"
 msgstr "Transponder"
@@ -957,6 +1017,10 @@ msgstr "Transponder field is empty."
 msgid "Tue"
 msgstr "Tue"
 
+#: src/components/atc-permission-modal.tsx:30
+msgid "Under Mentor"
+msgstr "Under Mentor"
+
 #: src/components/controller-list.tsx:322
 msgid "until"
 msgstr "until"
@@ -969,7 +1033,7 @@ msgstr "Upload"
 msgid "Upload image"
 msgstr "Upload image"
 
-#: src/routes/users/index.tsx:53
+#: src/routes/users/index.tsx:55
 msgid "User"
 msgstr "User"
 
@@ -1011,7 +1075,7 @@ msgstr "VFR Policy"
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/users/index.tsx:51
+#: src/routes/users/index.tsx:53
 msgid "Volunteer"
 msgstr "Volunteer"
 

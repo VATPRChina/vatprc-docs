@@ -58,7 +58,7 @@ msgstr "关于我们"
 msgid "Absent"
 msgstr "缺席"
 
-#: src/routes/users/index.tsx:147
+#: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "操作"
 
@@ -78,7 +78,7 @@ msgstr "将 <0>W</0> 添加到设备代码。"
 msgid "Admin"
 msgstr "管理"
 
-#: src/routes/users/index.tsx:48
+#: src/routes/users/index.tsx:50
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
 
@@ -106,7 +106,7 @@ msgstr "已被预订"
 msgid "Announcement"
 msgstr "公告"
 
-#: src/routes/users/index.tsx:52
+#: src/routes/users/index.tsx:54
 msgid "API Client"
 msgstr "接口客户端"
 
@@ -117,6 +117,10 @@ msgstr "API 文档"
 #: src/routes/index.tsx:94
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
+
+#: src/components/atc-permission-modal.tsx:22
+msgid "Approach"
+msgstr "进近"
 
 #: src/components/event/slot-import.tsx:131
 #: src/routes/events/$id.tsx:164
@@ -133,6 +137,10 @@ msgstr "到达机场"
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC 中心"
+
+#: src/routes/users/index.tsx:161
+msgid "ATC Permission"
+msgstr "管制员权限"
 
 #: src/components/app-nav-menu.tsx:104
 msgid "ATC Positions & Frequencies"
@@ -165,9 +173,17 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:133
+#: src/routes/users/index.tsx:137
 msgid "Cancel"
 msgstr "取消"
+
+#: src/components/atc-permission-modal.tsx:23
+msgid "Center"
+msgstr "区域"
+
+#: src/components/atc-permission-modal.tsx:32
+msgid "Certified"
+msgstr "完整权限"
 
 #: src/components/app-nav-menu.tsx:133
 msgid "Charts"
@@ -193,7 +209,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/users/index.tsx:63
+#: src/routes/users/index.tsx:65
 msgid "CID"
 msgstr "CID"
 
@@ -201,7 +217,7 @@ msgstr "CID"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/users/index.tsx:49
+#: src/routes/users/index.tsx:51
 msgid "Controller"
 msgstr "管制员"
 
@@ -211,11 +227,11 @@ msgstr "管制员"
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/users/index.tsx:34
+#: src/routes/users/index.tsx:36
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
 
-#: src/routes/users/index.tsx:35
+#: src/routes/users/index.tsx:37
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
@@ -266,6 +282,10 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "暗色"
 
+#: src/components/atc-permission-modal.tsx:18
+msgid "Delivery"
+msgstr "放行"
+
 #: src/components/preferred-route-create.tsx:101
 #: src/routes/flights/$callsign.tsx:388
 #: src/routes/navdata/preferred-routes.tsx:22
@@ -281,13 +301,17 @@ msgstr "描述"
 msgid "Direct leg"
 msgstr "直飞段"
 
-#: src/routes/users/index.tsx:33
+#: src/routes/users/index.tsx:35
 msgid "Division Director"
 msgstr "分部主席"
 
 #: src/components/event/slot-import.tsx:120
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
+
+#: src/components/atc-permission-modal.tsx:123
+msgid "Edit ATC permissions"
+msgstr "编辑管制员权限"
 
 #: src/components/discourse-doc.tsx:73
 msgid "Edit Chinese"
@@ -307,7 +331,7 @@ msgstr "编辑活动 {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "修改推荐航路 {title}"
 
-#: src/routes/users/index.tsx:120
+#: src/routes/users/index.tsx:124
 msgid "Edit roles"
 msgstr "编辑权限"
 
@@ -345,11 +369,11 @@ msgstr "英制双数飞行高度层"
 msgid "Event"
 msgstr "活动"
 
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:46
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:45
 msgid "Event Director"
 msgstr "组织部主管"
 
@@ -394,6 +418,14 @@ msgstr "飞行计划检查器"
 msgid "Flight Route"
 msgstr "航路"
 
+#: src/components/atc-permission-modal.tsx:24
+msgid "Flight Service Station"
+msgstr "飞服"
+
+#: src/components/atc-permission-modal.tsx:25
+msgid "Flow Management Position"
+msgstr "流量控制"
+
 #: src/components/app-nav-menu.tsx:77
 #: src/routes/index.tsx:119
 msgid "Forum"
@@ -419,9 +451,13 @@ msgstr "前往下一页"
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:47
 msgid "Graphics Designer"
 msgstr "图形设计师"
+
+#: src/components/atc-permission-modal.tsx:19
+msgid "Ground"
+msgstr "地面"
 
 #: src/components/app-nav-menu.tsx:191
 msgid "Image Upload Tool"
@@ -455,7 +491,7 @@ msgstr "导入时刻表"
 msgid "In This Week"
 msgstr "本周"
 
-#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:38
 msgid "Instructor"
 msgstr "教员"
 
@@ -496,7 +532,7 @@ msgstr "移交协议书列表"
 msgid "List of SOPs"
 msgstr "标准运行程序列表"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:44
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
@@ -524,7 +560,7 @@ msgstr "符合指定航路"
 msgid "Meeting Notes"
 msgstr "会议记录"
 
-#: src/routes/users/index.tsx:37
+#: src/routes/users/index.tsx:39
 msgid "Mentor"
 msgstr "教师"
 
@@ -548,7 +584,7 @@ msgstr "星期一"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/users/index.tsx:77
+#: src/routes/users/index.tsx:79
 msgid "Name"
 msgstr "姓名"
 
@@ -559,6 +595,10 @@ msgstr "近期无活动计划。"
 #: src/components/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
+
+#: src/components/atc-permission-modal.tsx:89
+msgid "No permission"
+msgstr "没有权限"
 
 #: src/routes/flights/$callsign.tsx:126
 msgid "No RNAV1"
@@ -601,11 +641,11 @@ msgstr "在线飞行员"
 msgid "Operation"
 msgstr "运行"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:41
 msgid "Operation Director"
 msgstr "运行部主管"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:42
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
@@ -711,7 +751,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:80
+#: src/routes/users/index.tsx:82
 msgid "Roles"
 msgstr "权限"
 
@@ -738,7 +778,7 @@ msgstr "星期六"
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:137
+#: src/routes/users/index.tsx:141
 msgid "Save changes"
 msgstr "保存变更"
 
@@ -746,7 +786,7 @@ msgstr "保存变更"
 msgid "Search Arrival"
 msgstr "搜索到达机场"
 
-#: src/routes/users/index.tsx:184
+#: src/routes/users/index.tsx:203
 msgid "Search CID"
 msgstr "按 CID 搜索"
 
@@ -754,11 +794,11 @@ msgstr "按 CID 搜索"
 msgid "Search Departure"
 msgstr "搜索出发机场"
 
-#: src/routes/users/index.tsx:193
+#: src/routes/users/index.tsx:212
 msgid "Search Name"
 msgstr "按姓名搜索"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:43
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
@@ -782,12 +822,20 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/routes/users/index.tsx:38
+#: src/components/atc-permission-modal.tsx:31
+msgid "Solo"
+msgstr "独立训练"
+
+#: src/components/atc-permission-modal.tsx:97
+msgid "Solo Expiration Date"
+msgstr "独立训练到期日"
+
+#: src/routes/users/index.tsx:40
 msgid "SOP Editor"
 msgstr "SOP 组组员"
 
 #: src/components/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:50
+#: src/routes/users/index.tsx:52
 msgid "Staff"
 msgstr "职员"
 
@@ -807,6 +855,10 @@ msgstr "开始预订时间"
 #: src/components/app-nav-menu.tsx:120
 msgid "Start to Fly"
 msgstr "开始飞行"
+
+#: src/components/atc-permission-modal.tsx:29
+msgid "Student"
+msgstr "理论学习"
 
 #: src/components/recent-events.tsx:188
 msgid "Sun"
@@ -828,11 +880,11 @@ msgstr "跟随系统"
 msgid "Take me back to home page"
 msgstr "返回首页"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:48
 msgid "Tech Director"
 msgstr "技术部主管"
 
-#: src/routes/users/index.tsx:47
+#: src/routes/users/index.tsx:49
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
 
@@ -928,6 +980,10 @@ msgstr "本页面仅支持简体中文。"
 msgid "Thu"
 msgstr "星期四"
 
+#: src/components/atc-permission-modal.tsx:21
+msgid "Tier 2"
+msgstr "Tier 2"
+
 #: src/routes/events/$id.tsx:167
 msgid "Time"
 msgstr "时间"
@@ -944,6 +1000,10 @@ msgstr "标题"
 msgid "Toggle theme"
 msgstr "切换主题"
 
+#: src/components/atc-permission-modal.tsx:20
+msgid "Tower"
+msgstr "塔台"
+
 #: src/routes/flights/$callsign.tsx:382
 msgid "Transponder"
 msgstr "应答机"
@@ -957,6 +1017,10 @@ msgstr "应答机设备代码为空。"
 msgid "Tue"
 msgstr "星期二"
 
+#: src/components/atc-permission-modal.tsx:30
+msgid "Under Mentor"
+msgstr "教员监督"
+
 #: src/components/controller-list.tsx:322
 msgid "until"
 msgstr "直到"
@@ -969,7 +1033,7 @@ msgstr "上传"
 msgid "Upload image"
 msgstr "上传图片"
 
-#: src/routes/users/index.tsx:53
+#: src/routes/users/index.tsx:55
 msgid "User"
 msgstr "用户"
 
@@ -1011,7 +1075,7 @@ msgstr "目视飞行规则"
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/users/index.tsx:51
+#: src/routes/users/index.tsx:53
 msgid "Volunteer"
 msgstr "志愿者"
 

@@ -1,3 +1,5 @@
+import { AtcPermissionModal } from "@/components/atc-permission-modal";
+import { RequireRole } from "@/components/require-role";
 import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -19,7 +21,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { MouseEvent, useState } from "react";
-import { TbArrowsUpDown, TbUserBolt, TbCheck } from "react-icons/tb";
+import { TbArrowsUpDown, TbUserBolt, TbCheck, TbAirTrafficControl } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "controller",
@@ -145,10 +147,25 @@ export const columns = [
       );
     },
   }),
-  {
-    header: () => <Trans>Actions</Trans>,
+  columnHelper.display({
     id: "actions",
-  },
+    header: () => <Trans>Actions</Trans>,
+    cell: ({ row }) => {
+      const userId = row.original.id;
+      const [opened, { open, close }] = useDisclosure(false);
+
+      return (
+        <Group>
+          <RequireRole role="controller-training-director-assistant">
+            <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
+              <Trans>ATC Permission</Trans>
+            </Button>
+            <AtcPermissionModal userId={userId} opened={opened} onClose={close} />
+          </RequireRole>
+        </Group>
+      );
+    },
+  }),
 ];
 
 export const Route = createFileRoute("/users/")({

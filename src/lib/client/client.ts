@@ -7,19 +7,18 @@ import createQueryClient from "openapi-react-query";
 
 const throwMiddleware: Middleware = {
   async onResponse({ response }) {
-    if (!response.ok) {
-      const body = (await response.clone().json()) as { message: string; error_code: string };
-      const err = new ApiError(body.message, response.status, body.error_code);
-      if (err.errorCode !== "INVALID_TOKEN") throw err;
-    }
-  },
-  onError(err) {
-    if (err.error instanceof ApiError) {
+    console.log(response.ok, await response.clone().json());
+    if (response.ok) return;
+
+    const body = (await response.clone().json()) as { message: string; error_code: string };
+    const err = new ApiError(body.message, response.status, body.error_code);
+    if (err.errorCode !== "INVALID_TOKEN") {
       notifications.show({
-        title: err.error.name,
-        message: err.error.message,
+        title: err.name,
+        message: err.message,
         color: "red",
       });
+      throw err;
     }
   },
 };
