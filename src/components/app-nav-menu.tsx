@@ -1,4 +1,5 @@
 import { LanguageToggle } from "./language-toggle";
+import { RequireRole } from "./require-role";
 import { ModeToggle } from "./theme-toggle";
 import { UserInfo } from "./user-info";
 import { components } from "@/lib/api";
@@ -193,6 +194,11 @@ const contents = [
         <NavMenuLink href="/navdata/preferred-routes" requireRole="volunteer">
           <Trans>Preferred Routes</Trans>
         </NavMenuLink>
+        <RequireRole role="controller-training-director-assistant">
+          <NavMenuLink href="/controllers/applications">
+            <Trans>ATC Applications</Trans>
+          </NavMenuLink>
+        </RequireRole>
       </ul>
     ),
   },

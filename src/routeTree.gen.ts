@@ -40,7 +40,9 @@ import { Route as AirspaceStationRouteImport } from './routes/airspace/station'
 import { Route as AirspaceSopRouteImport } from './routes/airspace/sop'
 import { Route as AirspaceRvsmRouteImport } from './routes/airspace/rvsm'
 import { Route as AirspaceFirRouteImport } from './routes/airspace/fir'
+import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
+import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
 
 const FlightsRoute = FlightsRouteImport.update({
   id: '/flights',
@@ -201,11 +203,23 @@ const AirspaceFirRoute = AirspaceFirRouteImport.update({
   path: '/airspace/fir',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ControllersApplicationsIndexRoute =
+  ControllersApplicationsIndexRouteImport.update({
+    id: '/controllers/applications/',
+    path: '/controllers/applications/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
   id: '/docs/utils/image',
   path: '/docs/utils/image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ControllersApplicationsNewRoute =
+  ControllersApplicationsNewRouteImport.update({
+    id: '/controllers/applications/new',
+    path: '/controllers/applications/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -239,7 +253,9 @@ export interface FileRoutesByFullPath {
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
+  '/controllers/applications': typeof ControllersApplicationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -271,7 +287,9 @@ export interface FileRoutesByTo {
   '/events': typeof EventsIndexRoute
   '/flights': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
+  '/controllers/applications': typeof ControllersApplicationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -306,7 +324,9 @@ export interface FileRoutesById {
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
+  '/controllers/applications/': typeof ControllersApplicationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -342,7 +362,9 @@ export interface FileRouteTypes {
     | '/events/'
     | '/flights/'
     | '/users'
+    | '/controllers/applications/new'
     | '/docs/utils/image'
+    | '/controllers/applications'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -374,7 +396,9 @@ export interface FileRouteTypes {
     | '/events'
     | '/flights'
     | '/users'
+    | '/controllers/applications/new'
     | '/docs/utils/image'
+    | '/controllers/applications'
   id:
     | '__root__'
     | '/'
@@ -408,7 +432,9 @@ export interface FileRouteTypes {
     | '/events/'
     | '/flights/'
     | '/users/'
+    | '/controllers/applications/new'
     | '/docs/utils/image'
+    | '/controllers/applications/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -439,7 +465,9 @@ export interface RootRouteChildren {
   PilotStartToFlyRoute: typeof PilotStartToFlyRoute
   PilotTs3Route: typeof PilotTs3Route
   UsersIndexRoute: typeof UsersIndexRoute
+  ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
+  ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -661,11 +689,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AirspaceFirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/controllers/applications/': {
+      id: '/controllers/applications/'
+      path: '/controllers/applications'
+      fullPath: '/controllers/applications'
+      preLoaderRoute: typeof ControllersApplicationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/utils/image': {
       id: '/docs/utils/image'
       path: '/docs/utils/image'
       fullPath: '/docs/utils/image'
       preLoaderRoute: typeof DocsUtilsImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/applications/new': {
+      id: '/controllers/applications/new'
+      path: '/controllers/applications/new'
+      fullPath: '/controllers/applications/new'
+      preLoaderRoute: typeof ControllersApplicationsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -726,7 +768,9 @@ const rootRouteChildren: RootRouteChildren = {
   PilotStartToFlyRoute: PilotStartToFlyRoute,
   PilotTs3Route: PilotTs3Route,
   UsersIndexRoute: UsersIndexRoute,
+  ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,
+  ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
