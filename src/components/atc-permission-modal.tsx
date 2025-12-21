@@ -1,5 +1,6 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { localizeWithMap } from "@/lib/i18n";
 import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
@@ -98,10 +99,7 @@ const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDe
         className="flex-1"
         onChange={(v) => setState(v as components["schemas"]["UserControllerState"] | null)}
         disabled={isPending || isPutPending || isDelPending}
-        description={
-          t`Current Value: ` +
-          i18n._((permission?.state && POSITION_STATE_MAP.get(permission?.state)) ?? msg`No permission`)
-        }
+        description={t`Current Value: ` + localizeWithMap(POSITION_STATE_MAP, permission?.state ?? "", i18n)}
       />
       {state === "solo" && (
         <DateInput

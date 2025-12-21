@@ -58,6 +58,10 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
+#: src/components/atc-application-list.tsx:23
+msgid "Accepted"
+msgstr "Accepted"
+
 #: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "Actions"
@@ -114,19 +118,19 @@ msgstr "API Client"
 msgid "API Document"
 msgstr "API Document"
 
-#: src/routes/controllers/applications/new.tsx:63
+#: src/routes/controllers/applications/new.tsx:65
 msgid "Application Information"
 msgstr "Application Information"
 
-#: src/routes/controllers/applications/new.tsx:41
+#: src/routes/controllers/applications/new.tsx:44
 msgid "Application submitted"
 msgstr "Application submitted"
 
-#: src/routes/controllers/applications/index.tsx:29
+#: src/components/atc-application-list.tsx:39
 msgid "Applied At"
 msgstr "Applied At"
 
-#: src/routes/controllers/applications/index.tsx:52
+#: src/routes/controllers/applications/index.tsx:17
 msgid "Apply"
 msgstr "Apply"
 
@@ -134,7 +138,7 @@ msgstr "Apply"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
-#: src/components/atc-permission-modal.tsx:24
+#: src/components/atc-permission-modal.tsx:25
 msgid "Approach"
 msgstr "Approach"
 
@@ -150,7 +154,7 @@ msgid "Arrival"
 msgstr "Arrival"
 
 #: src/components/app-nav-menu.tsx:199
-#: src/routes/controllers/applications/index.tsx:49
+#: src/routes/controllers/applications/index.tsx:14
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
@@ -172,7 +176,7 @@ msgstr "ATC Positions & Frequencies"
 msgid "Back"
 msgstr "Back"
 
-#: src/routes/controllers/applications/new.tsx:58
+#: src/routes/controllers/applications/new.tsx:60
 msgid "Basic Information"
 msgstr "Basic Information"
 
@@ -202,11 +206,11 @@ msgstr "Callsign & Aircraft"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/atc-permission-modal.tsx:25
+#: src/components/atc-permission-modal.tsx:26
 msgid "Center"
 msgstr "Center"
 
-#: src/components/atc-permission-modal.tsx:34
+#: src/components/atc-permission-modal.tsx:35
 msgid "Certified"
 msgstr "Certified"
 
@@ -234,8 +238,8 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/controllers/applications/index.tsx:26
-#: src/routes/controllers/applications/new.tsx:60
+#: src/components/atc-application-list.tsx:30
+#: src/routes/controllers/applications/new.tsx:62
 #: src/routes/users/index.tsx:65
 msgid "CID"
 msgstr "CID"
@@ -306,7 +310,7 @@ msgid "CTOT"
 msgstr "CTOT"
 
 #: src/components/atc-permission-modal.tsx:102
-#: src/components/atc-permission-modal.tsx:116
+#: src/components/atc-permission-modal.tsx:114
 msgid "Current Value: "
 msgstr "Current Value: "
 
@@ -314,7 +318,7 @@ msgstr "Current Value: "
 msgid "Dark"
 msgstr "Dark"
 
-#: src/components/atc-permission-modal.tsx:20
+#: src/components/atc-permission-modal.tsx:21
 msgid "Delivery"
 msgstr "Delivery"
 
@@ -341,7 +345,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-permission-modal.tsx:135
+#: src/components/atc-permission-modal.tsx:133
 msgid "Edit ATC permissions"
 msgstr "Edit ATC permissions"
 
@@ -450,11 +454,11 @@ msgstr "Flight Plan Checker"
 msgid "Flight Route"
 msgstr "Flight Route"
 
-#: src/components/atc-permission-modal.tsx:26
+#: src/components/atc-permission-modal.tsx:27
 msgid "Flight Service Station"
 msgstr "Flight Service Station"
 
-#: src/components/atc-permission-modal.tsx:27
+#: src/components/atc-permission-modal.tsx:28
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
@@ -467,7 +471,7 @@ msgstr "Forum"
 msgid "Fri"
 msgstr "Fri"
 
-#: src/routes/controllers/applications/new.tsx:61
+#: src/routes/controllers/applications/new.tsx:63
 msgid "Full Name"
 msgstr "Full Name"
 
@@ -491,13 +495,9 @@ msgstr "Go to previous page"
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
-#: src/components/atc-permission-modal.tsx:21
+#: src/components/atc-permission-modal.tsx:22
 msgid "Ground"
 msgstr "Ground"
-
-#: src/routes/controllers/applications/index.tsx:25
-msgid "ID"
-msgstr "ID"
 
 #: src/components/app-nav-menu.tsx:192
 msgid "Image Upload Tool"
@@ -530,6 +530,10 @@ msgstr "Import Slots"
 #: src/components/recent-events.tsx:74
 msgid "In This Week"
 msgstr "In This Week"
+
+#: src/components/atc-application-list.tsx:22
+msgid "In Waitlist"
+msgstr "In Waitlist"
 
 #: src/routes/users/index.tsx:38
 msgid "Instructor"
@@ -625,12 +629,12 @@ msgstr "Mon"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/routes/controllers/applications/index.tsx:27
+#: src/components/atc-application-list.tsx:31
 #: src/routes/users/index.tsx:79
 msgid "Name"
 msgstr "Name"
 
-#: src/routes/controllers/applications/new.tsx:55
+#: src/routes/controllers/applications/new.tsx:57
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
@@ -642,8 +646,7 @@ msgstr "No event is scheduled recently."
 msgid "No online pilot."
 msgstr "No online pilot."
 
-#: src/components/atc-permission-modal.tsx:96
-#: src/components/atc-permission-modal.tsx:103
+#: src/components/atc-permission-modal.tsx:97
 msgid "No permission"
 msgstr "No permission"
 
@@ -774,6 +777,10 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
+#: src/components/atc-application-list.tsx:24
+msgid "Rejected"
+msgstr "Rejected"
+
 #: src/routes/events/$id.tsx:104
 msgid "Release"
 msgstr "Release"
@@ -869,11 +876,11 @@ msgstr "Show less pilots"
 msgid "Slots"
 msgstr "Slots"
 
-#: src/components/atc-permission-modal.tsx:33
+#: src/components/atc-permission-modal.tsx:34
 msgid "Solo"
 msgstr "Solo"
 
-#: src/components/atc-permission-modal.tsx:108
+#: src/components/atc-permission-modal.tsx:106
 msgid "Solo Expiration Date"
 msgstr "Solo Expiration Date"
 
@@ -903,17 +910,21 @@ msgstr "Start booking at"
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
-#: src/routes/controllers/applications/index.tsx:28
+#: src/components/atc-application-list.tsx:33
 msgid "Status"
 msgstr "Status"
 
-#: src/components/atc-permission-modal.tsx:31
+#: src/components/atc-permission-modal.tsx:32
 msgid "Student"
 msgstr "Student"
 
-#: src/routes/controllers/applications/new.tsx:123
+#: src/routes/controllers/applications/new.tsx:125
 msgid "Submit"
 msgstr "Submit"
+
+#: src/components/atc-application-list.tsx:21
+msgid "Submitted"
+msgstr "Submitted"
 
 #: src/components/recent-events.tsx:188
 msgid "Sun"
@@ -994,7 +1005,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/routes/controllers/applications/new.tsx:79
+#: src/routes/controllers/applications/new.tsx:81
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
@@ -1039,7 +1050,7 @@ msgstr "This page is not available in English."
 msgid "Thu"
 msgstr "Thu"
 
-#: src/components/atc-permission-modal.tsx:23
+#: src/components/atc-permission-modal.tsx:24
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -1059,7 +1070,7 @@ msgstr "Title"
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
-#: src/components/atc-permission-modal.tsx:22
+#: src/components/atc-permission-modal.tsx:23
 msgid "Tower"
 msgstr "Tower"
 
@@ -1076,9 +1087,13 @@ msgstr "Transponder field is empty."
 msgid "Tue"
 msgstr "Tue"
 
-#: src/components/atc-permission-modal.tsx:32
+#: src/components/atc-permission-modal.tsx:33
 msgid "Under Mentor"
 msgstr "Under Mentor"
+
+#: src/lib/i18n.ts:39
+msgid "Unknown: {value}"
+msgstr "Unknown: {value}"
 
 #: src/components/controller-list.tsx:322
 msgid "until"
@@ -1154,6 +1169,6 @@ msgstr "Wed"
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
 
-#: src/routes/controllers/applications/new.tsx:42
+#: src/routes/controllers/applications/new.tsx:45
 msgid "Your ATC application has been submitted successfully."
 msgstr "Your ATC application has been submitted successfully."
