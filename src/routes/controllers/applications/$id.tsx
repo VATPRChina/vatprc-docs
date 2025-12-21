@@ -1,5 +1,5 @@
 import { AtcApplicationForm } from "@/components/atc-application-form";
-import { AtcApplicationStatusAlert } from "@/components/atc-application-status";
+import { AtcApplicationStatusAlert, AtcApplicationStatusEdit } from "@/components/atc-application-status";
 import { BackButton } from "@/components/back-button";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -19,6 +19,10 @@ function RouteComponent() {
       </h1>
       <AtcApplicationStatusAlert applicationId={params.id} />
       <AtcApplicationForm applicationId={params.id} />
+      <h1 className="text-lg">
+        <Trans>Review</Trans>
+      </h1>
+      <AtcApplicationStatusEdit applicationId={params.id} />
     </div>
   );
 }

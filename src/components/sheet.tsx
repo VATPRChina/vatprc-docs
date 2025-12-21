@@ -1,7 +1,7 @@
 import { components } from "@/lib/api";
 import { promiseWithLog } from "@/lib/utils";
-import { i18n } from "@lingui/core";
 import { t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react/macro";
 import { Skeleton, TextInput, Textarea, Select, Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { ComponentProps, FC } from "react";
@@ -13,6 +13,7 @@ interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   isFieldValuesLoading?: boolean;
   isSubmitDisabled?: boolean;
   submitButtonContent?: React.ReactNode;
+  doNotRequirePristine?: boolean;
 }
 
 export const Sheet: FC<SheetProps> = ({
@@ -22,8 +23,10 @@ export const Sheet: FC<SheetProps> = ({
   isFieldValuesLoading,
   isSubmitDisabled,
   submitButtonContent,
+  doNotRequirePristine,
   ...props
 }) => {
+  const { i18n } = useLingui();
   const form = useForm({
     defaultValues: Object.fromEntries(
       sheet?.fields
@@ -73,13 +76,13 @@ export const Sheet: FC<SheetProps> = ({
             };
             if (sheetField.kind === "short-text") {
               return (
-                <Skeleton visible={isFieldValuesLoading}>
+                <Skeleton visible={isFieldValuesLoading ?? false}>
                   <TextInput {...commonProps} onChange={(e) => field.handleChange(e.target.value)} />
                 </Skeleton>
               );
             } else if (sheetField.kind === "long-text") {
               return (
-                <Skeleton visible={isFieldValuesLoading}>
+                <Skeleton visible={isFieldValuesLoading ?? false}>
                   <Textarea
                     {...commonProps}
                     onChange={(e) => field.handleChange(e.target.value)}
@@ -91,7 +94,7 @@ export const Sheet: FC<SheetProps> = ({
               );
             } else if (sheetField.kind === "single-choice") {
               return (
-                <Skeleton visible={isFieldValuesLoading}>
+                <Skeleton visible={isFieldValuesLoading ?? false}>
                   <Select
                     {...commonProps}
                     data={sheetField.single_choice_options}
@@ -107,7 +110,7 @@ export const Sheet: FC<SheetProps> = ({
       <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}>
         {([canSubmit, isSubmitting, isPristine]) => (
           <Button
-            disabled={!canSubmit || isPristine || isSubmitDisabled}
+            disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
             loading={isSubmitting}
             type="submit"
             className="self-start"

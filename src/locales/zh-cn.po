@@ -58,12 +58,12 @@ msgstr "关于我们"
 msgid "Absent"
 msgstr "缺席"
 
-#: src/components/atc-application-list.tsx:27
-#: src/components/atc-application-status.tsx:30
+#: src/components/atc-application-status.tsx:16
+#: src/components/atc-application-status.tsx:42
 msgid "Accepted"
 msgstr "已通过"
 
-#: src/components/atc-application-list.tsx:49
+#: src/components/atc-application-list.tsx:41
 #: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "操作"
@@ -120,19 +120,23 @@ msgstr "接口客户端"
 msgid "API Document"
 msgstr "API 文档"
 
-#: src/components/atc-application-form.tsx:87
+#: src/components/atc-application-form.tsx:76
 msgid "Application Information"
 msgstr "申请信息"
 
-#: src/components/atc-application-form.tsx:34
+#: src/components/atc-application-status.tsx:102
+msgid "Application review updated"
+msgstr "申请审核已更新"
+
+#: src/components/atc-application-form.tsx:37
 msgid "Application submitted"
 msgstr "申请已提交"
 
-#: src/components/atc-application-form.tsx:45
+#: src/components/atc-application-form.tsx:48
 msgid "Application updated"
 msgstr "申请已更新"
 
-#: src/components/atc-application-list.tsx:44
+#: src/components/atc-application-list.tsx:36
 msgid "Applied At"
 msgstr "申请时间"
 
@@ -185,7 +189,7 @@ msgstr "管制席位及频率"
 msgid "Back"
 msgstr "返回"
 
-#: src/components/atc-application-form.tsx:82
+#: src/components/atc-application-form.tsx:67
 msgid "Basic Information"
 msgstr "基本信息"
 
@@ -247,8 +251,8 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/atc-application-form.tsx:84
-#: src/components/atc-application-list.tsx:34
+#: src/components/atc-application-form.tsx:70
+#: src/components/atc-application-list.tsx:26
 #: src/routes/users/index.tsx:65
 msgid "CID"
 msgstr "CID"
@@ -354,7 +358,7 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-application-form.tsx:153
+#: src/components/atc-application-form.tsx:87
 msgid "Edit"
 msgstr "编辑"
 
@@ -484,7 +488,7 @@ msgstr "论坛"
 msgid "Fri"
 msgstr "星期五"
 
-#: src/components/atc-application-form.tsx:85
+#: src/components/atc-application-form.tsx:73
 msgid "Full Name"
 msgstr "姓名"
 
@@ -544,8 +548,8 @@ msgstr "导入时刻表"
 msgid "In This Week"
 msgstr "本周"
 
-#: src/components/atc-application-list.tsx:26
-#: src/components/atc-application-status.tsx:20
+#: src/components/atc-application-status.tsx:15
+#: src/components/atc-application-status.tsx:32
 msgid "In Waitlist"
 msgstr "等待中"
 
@@ -643,7 +647,7 @@ msgstr "星期一"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/components/atc-application-list.tsx:35
+#: src/components/atc-application-list.tsx:27
 #: src/routes/users/index.tsx:79
 msgid "Name"
 msgstr "姓名"
@@ -791,8 +795,8 @@ msgstr "晋升指引"
 msgid "Recent Events"
 msgstr "近期活动"
 
-#: src/components/atc-application-list.tsx:28
-#: src/components/atc-application-status.tsx:38
+#: src/components/atc-application-status.tsx:17
+#: src/components/atc-application-status.tsx:50
 msgid "Rejected"
 msgstr "已拒绝"
 
@@ -807,6 +811,10 @@ msgstr "备注"
 #: src/routes/flights/$callsign.tsx:133
 msgid "Restricted airway"
 msgstr "受限航路"
+
+#: src/routes/controllers/applications/$id.tsx:23
+msgid "Review"
+msgstr "审核"
 
 #: src/components/flight-warnings.tsx:54
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
@@ -925,7 +933,8 @@ msgstr "开始预订时间"
 msgid "Start to Fly"
 msgstr "开始飞行"
 
-#: src/components/atc-application-list.tsx:37
+#: src/components/atc-application-list.tsx:29
+#: src/components/atc-application-status.tsx:123
 msgid "Status"
 msgstr "状态"
 
@@ -933,12 +942,13 @@ msgstr "状态"
 msgid "Student"
 msgstr "理论学习"
 
-#: src/components/atc-application-form.tsx:152
+#: src/components/atc-application-form.tsx:87
+#: src/components/atc-application-status.tsx:137
 msgid "Submit"
 msgstr "提交"
 
-#: src/components/atc-application-list.tsx:25
-#: src/components/atc-application-status.tsx:12
+#: src/components/atc-application-status.tsx:14
+#: src/components/atc-application-status.tsx:24
 msgid "Submitted"
 msgstr "已提交"
 
@@ -992,6 +1002,10 @@ msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 RNP AR（不带 RF 航段）程序。"
 
+#: src/components/atc-application-status.tsx:103
+msgid "The ATC application review has been updated successfully."
+msgstr "管制员申请审核已成功更新。"
+
 #: src/routes/events/$id.tsx:151
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
@@ -1021,7 +1035,7 @@ msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}�
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
 
-#: src/components/atc-application-form.tsx:103
+#: src/components/sheet.tsx:61
 msgid "The field must not be empty."
 msgstr "该项不能为空。"
 
@@ -1162,7 +1176,7 @@ msgstr "VATSIM 中国分部"
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
-#: src/components/atc-application-list.tsx:56
+#: src/components/atc-application-list.tsx:48
 msgid "View"
 msgstr "查看"
 
@@ -1178,7 +1192,7 @@ msgstr "志愿者"
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 
-#: src/components/atc-application-status.tsx:39
+#: src/components/atc-application-status.tsx:51
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
@@ -1194,22 +1208,22 @@ msgstr "星期三"
 msgid "Write your transponder equipment code."
 msgstr "给出你的应答机设备代码。"
 
-#: src/components/atc-application-status.tsx:31
+#: src/components/atc-application-status.tsx:43
 msgid "Your application has been approved. Welcome to start growing to be a controller!"
 msgstr "您的申请已通过。欢迎开始学习成为管制员！"
 
-#: src/components/atc-application-status.tsx:21
+#: src/components/atc-application-status.tsx:33
 msgid "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 msgstr "您的申请已被列入候补名单。如有空位将通知您。"
 
-#: src/components/atc-application-status.tsx:13
+#: src/components/atc-application-status.tsx:25
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "您的申请已提交，正在等待职员审核。"
 
-#: src/components/atc-application-form.tsx:35
+#: src/components/atc-application-form.tsx:38
 msgid "Your ATC application has been submitted successfully."
 msgstr "已经成功提交管制员申请。"
 
-#: src/components/atc-application-form.tsx:46
+#: src/components/atc-application-form.tsx:49
 msgid "Your ATC application has been updated successfully."
 msgstr "已经成功修改管制员申请。"

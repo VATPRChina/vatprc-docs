@@ -1,10 +1,9 @@
+import { APPLICATION_STATUS } from "./atc-application-status";
 import { RichTable } from "./table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
-import { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
@@ -20,13 +19,6 @@ import {
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbFileDescription } from "react-icons/tb";
-
-const APPLICATION_STATUS: Map<components["schemas"]["AtcApplicationStatus"], MessageDescriptor> = new Map([
-  ["submitted", msg`Submitted`],
-  ["in-waitlist", msg`In Waitlist`],
-  ["approved", msg`Accepted`],
-  ["rejected", msg`Rejected`],
-]);
 
 const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSummaryDto"]>();
 

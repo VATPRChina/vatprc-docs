@@ -58,12 +58,12 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/components/atc-application-list.tsx:27
-#: src/components/atc-application-status.tsx:30
+#: src/components/atc-application-status.tsx:16
+#: src/components/atc-application-status.tsx:42
 msgid "Accepted"
 msgstr "Accepted"
 
-#: src/components/atc-application-list.tsx:49
+#: src/components/atc-application-list.tsx:41
 #: src/routes/users/index.tsx:152
 msgid "Actions"
 msgstr "Actions"
@@ -120,19 +120,23 @@ msgstr "API Client"
 msgid "API Document"
 msgstr "API Document"
 
-#: src/components/atc-application-form.tsx:87
+#: src/components/atc-application-form.tsx:76
 msgid "Application Information"
 msgstr "Application Information"
 
-#: src/components/atc-application-form.tsx:34
+#: src/components/atc-application-status.tsx:102
+msgid "Application review updated"
+msgstr "Application review updated"
+
+#: src/components/atc-application-form.tsx:37
 msgid "Application submitted"
 msgstr "Application submitted"
 
-#: src/components/atc-application-form.tsx:45
+#: src/components/atc-application-form.tsx:48
 msgid "Application updated"
 msgstr "Application updated"
 
-#: src/components/atc-application-list.tsx:44
+#: src/components/atc-application-list.tsx:36
 msgid "Applied At"
 msgstr "Applied At"
 
@@ -185,7 +189,7 @@ msgstr "ATC Positions & Frequencies"
 msgid "Back"
 msgstr "Back"
 
-#: src/components/atc-application-form.tsx:82
+#: src/components/atc-application-form.tsx:67
 msgid "Basic Information"
 msgstr "Basic Information"
 
@@ -247,8 +251,8 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/atc-application-form.tsx:84
-#: src/components/atc-application-list.tsx:34
+#: src/components/atc-application-form.tsx:70
+#: src/components/atc-application-list.tsx:26
 #: src/routes/users/index.tsx:65
 msgid "CID"
 msgstr "CID"
@@ -354,7 +358,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-application-form.tsx:153
+#: src/components/atc-application-form.tsx:87
 msgid "Edit"
 msgstr "Edit"
 
@@ -484,7 +488,7 @@ msgstr "Forum"
 msgid "Fri"
 msgstr "Fri"
 
-#: src/components/atc-application-form.tsx:85
+#: src/components/atc-application-form.tsx:73
 msgid "Full Name"
 msgstr "Full Name"
 
@@ -544,8 +548,8 @@ msgstr "Import Slots"
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/components/atc-application-list.tsx:26
-#: src/components/atc-application-status.tsx:20
+#: src/components/atc-application-status.tsx:15
+#: src/components/atc-application-status.tsx:32
 msgid "In Waitlist"
 msgstr "In Waitlist"
 
@@ -643,7 +647,7 @@ msgstr "Mon"
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/components/atc-application-list.tsx:35
+#: src/components/atc-application-list.tsx:27
 #: src/routes/users/index.tsx:79
 msgid "Name"
 msgstr "Name"
@@ -791,8 +795,8 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/components/atc-application-list.tsx:28
-#: src/components/atc-application-status.tsx:38
+#: src/components/atc-application-status.tsx:17
+#: src/components/atc-application-status.tsx:50
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -807,6 +811,10 @@ msgstr "Remark"
 #: src/routes/flights/$callsign.tsx:133
 msgid "Restricted airway"
 msgstr "Restricted airway"
+
+#: src/routes/controllers/applications/$id.tsx:23
+msgid "Review"
+msgstr "Review"
 
 #: src/components/flight-warnings.tsx:54
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
@@ -925,7 +933,8 @@ msgstr "Start booking at"
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
-#: src/components/atc-application-list.tsx:37
+#: src/components/atc-application-list.tsx:29
+#: src/components/atc-application-status.tsx:123
 msgid "Status"
 msgstr "Status"
 
@@ -933,12 +942,13 @@ msgstr "Status"
 msgid "Student"
 msgstr "Student"
 
-#: src/components/atc-application-form.tsx:152
+#: src/components/atc-application-form.tsx:87
+#: src/components/atc-application-status.tsx:137
 msgid "Submit"
 msgstr "Submit"
 
-#: src/components/atc-application-list.tsx:25
-#: src/components/atc-application-status.tsx:12
+#: src/components/atc-application-status.tsx:14
+#: src/components/atc-application-status.tsx:24
 msgid "Submitted"
 msgstr "Submitted"
 
@@ -992,6 +1002,10 @@ msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to b
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 
+#: src/components/atc-application-status.tsx:103
+msgid "The ATC application review has been updated successfully."
+msgstr "The ATC application review has been updated successfully."
+
 #: src/routes/events/$id.tsx:151
 msgid "The booking has not started yet or has ended."
 msgstr "The booking has not started yet or has ended."
@@ -1021,7 +1035,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/atc-application-form.tsx:103
+#: src/components/sheet.tsx:61
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
@@ -1162,7 +1176,7 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/components/atc-application-list.tsx:56
+#: src/components/atc-application-list.tsx:48
 msgid "View"
 msgstr "View"
 
@@ -1178,7 +1192,7 @@ msgstr "Volunteer"
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
-#: src/components/atc-application-status.tsx:39
+#: src/components/atc-application-status.tsx:51
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
@@ -1194,22 +1208,22 @@ msgstr "Wed"
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
 
-#: src/components/atc-application-status.tsx:31
+#: src/components/atc-application-status.tsx:43
 msgid "Your application has been approved. Welcome to start growing to be a controller!"
 msgstr "Your application has been approved. Welcome to start growing to be a controller!"
 
-#: src/components/atc-application-status.tsx:21
+#: src/components/atc-application-status.tsx:33
 msgid "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 msgstr "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 
-#: src/components/atc-application-status.tsx:13
+#: src/components/atc-application-status.tsx:25
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "Your application has been submitted and is pending review by the staff."
 
-#: src/components/atc-application-form.tsx:35
+#: src/components/atc-application-form.tsx:38
 msgid "Your ATC application has been submitted successfully."
 msgstr "Your ATC application has been submitted successfully."
 
-#: src/components/atc-application-form.tsx:46
+#: src/components/atc-application-form.tsx:49
 msgid "Your ATC application has been updated successfully."
 msgstr "Your ATC application has been updated successfully."

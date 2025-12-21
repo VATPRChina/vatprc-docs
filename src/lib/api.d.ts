@@ -29,41 +29,6 @@ export interface paths {
             "application/json": components["schemas"]["SheetDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -140,41 +105,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcApplicationSummaryDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -248,41 +178,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcApplicationDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description ATC_APPLICATION_CANNOT_UPDATE */
@@ -834,41 +729,6 @@ export interface paths {
             "application/json": components["schemas"]["EventAirspaceDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -1065,41 +925,6 @@ export interface paths {
             "application/json": components["schemas"]["EventAirspaceDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -1157,41 +982,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventAirspaceDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -1263,41 +1053,6 @@ export interface paths {
             "application/json": components["schemas"]["EventAtcPositionDto"][];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -1358,41 +1113,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventAtcPositionDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -1471,41 +1191,6 @@ export interface paths {
             "application/json": components["schemas"]["EventAtcPositionDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -1562,41 +1247,6 @@ export interface paths {
             [name: string]: unknown;
           };
           content?: never;
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
         };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
@@ -1666,42 +1316,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["EventAtcPositionBookingDto2"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["EventAtcPositionBookingDto"];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -1760,42 +1375,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["EventAtcPositionBookingDto2"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["EventAtcPositionBookingDto"];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -1923,41 +1503,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -2199,41 +1744,6 @@ export interface paths {
             "application/json": components["schemas"]["EventDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -2289,41 +1799,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -2454,41 +1929,6 @@ export interface paths {
             "application/json": components["schemas"]["EventBookingDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description EVENT_NOT_FOUND */
         404: {
           headers: {
@@ -2581,41 +2021,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventBookingDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -2749,41 +2154,6 @@ export interface paths {
             "application/json": components["schemas"]["EventSlotDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description EVENT_AIRSPACE_NOT_FOUND */
         404: {
           headers: {
@@ -2887,41 +2257,6 @@ export interface paths {
           };
           content: {
             "text/csv": unknown;
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3094,41 +2429,6 @@ export interface paths {
             "application/json": components["schemas"]["EventSlotDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -3186,41 +2486,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventSlotDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3675,7 +2940,7 @@ export interface paths {
           navigation_performance?: string;
           transponder?: string;
           raw_route?: string;
-          cruising_level?: number;
+          cruising_level?: number | string;
         };
         header?: never;
         path?: never;
@@ -3690,41 +2955,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["WarningMessage"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3795,41 +3025,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["FlightDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -3972,41 +3167,6 @@ export interface paths {
             "application/json": components["schemas"]["SectorPermissionResponse"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -4071,8 +3231,7 @@ export interface paths {
       requestBody: {
         content: {
           "multipart/form-data": {
-            /** Format: binary */
-            image?: string;
+            image?: components["schemas"]["IFormFile"];
           };
         };
       };
@@ -4084,41 +3243,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["UploadImageResponse"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -4189,41 +3313,6 @@ export interface paths {
             "application/json": components["schemas"]["PreferredRouteDto"][];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -4282,41 +3371,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["PreferredRouteDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -4389,41 +3443,6 @@ export interface paths {
             "application/json": components["schemas"]["PreferredRouteDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -4485,41 +3504,6 @@ export interface paths {
             "application/json": components["schemas"]["PreferredRouteDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -4578,41 +3562,6 @@ export interface paths {
             "application/json": components["schemas"]["PreferredRouteDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -4666,10 +3615,13 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          /** @description Value MUST be set to "code". */
+          /** @description REQUIRED.  Value MUST be set to "code". */
           response_type?: string;
+          /** @description REQUIRED.  The client identifier as described in Section 2.2. */
           client_id?: string;
+          /** @description OPTIONAL.  As described in Section 3.1.2. */
           redirect_uri?: string;
+          /** @description RECOMMENDED.  An opaque value used by the client to maintain state between the request and callback. */
           state?: string;
         };
         header?: never;
@@ -4678,7 +3630,6 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Temporary Redirect */
         307: {
           headers: {
             [name: string]: unknown;
@@ -4704,6 +3655,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
+    /** Device authorization */
     post: {
       parameters: {
         query?: never;
@@ -4711,6 +3663,10 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
+      /**
+       * @description OPTIONAL.  The scope of the access request as defined by
+       *     Section 3.3 of [RFC6749].
+       */
       requestBody: {
         content: {
           "application/x-www-form-urlencoded": {
@@ -4755,6 +3711,12 @@ export interface paths {
     };
     get?: never;
     put?: never;
+    /**
+     * Get token
+     * @description Obtain an access token by exchanging an authorization code, a refresh
+     *     token, or a device code. Please be aware that this endpoint only accepts
+     *     `application/x-www-form-urlencoded` content type.
+     */
     post: {
       parameters: {
         query?: never;
@@ -4762,6 +3724,7 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
+      /** @description REQUIRED for client credentials grant. */
       requestBody: {
         content: {
           "application/x-www-form-urlencoded": {
@@ -4809,6 +3772,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** Get Current */
     get: {
       parameters: {
         query?: never;
@@ -4818,48 +3782,12 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description OK */
         200: {
           headers: {
             [name: string]: unknown;
           };
           content: {
             "application/json": components["schemas"]["TokenDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -4901,6 +3829,7 @@ export interface paths {
     };
     put?: never;
     post?: never;
+    /** Logout */
     delete: {
       parameters: {
         query?: never;
@@ -4910,47 +3839,11 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description No Content */
         204: {
           headers: {
             [name: string]: unknown;
           };
           content?: never;
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
         };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
@@ -5017,41 +3910,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["UserDto"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -5124,41 +3982,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["UserDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description USER_NOT_FOUND */
@@ -5270,41 +4093,6 @@ export interface paths {
             "application/json": components["schemas"]["UserDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -5378,41 +4166,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["UserDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description USER_NOT_FOUND */
@@ -5519,41 +4272,6 @@ export interface paths {
             "application/json": components["schemas"]["UserDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -5622,41 +4340,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcApplicationSummaryDto"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -5729,41 +4412,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcApplicationDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description ATC_APPLICATION_NOT_FOUND */
@@ -5862,41 +4510,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcApplicationDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -5964,41 +4577,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["SheetDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -6078,41 +4656,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcApplicationDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -6180,41 +4723,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcBookingDto"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -6312,41 +4820,6 @@ export interface paths {
             };
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -6413,41 +4886,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcBookingDto"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -6520,41 +4958,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcBookingDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description ATC_BOOKING_NOT_FOUND */
@@ -6683,41 +5086,6 @@ export interface paths {
               /**
                * @description Start date field {start} must be before end date field {end}.
                * @example Start date field {start} must be before end date field {end}.
-               */
-              detail: string;
-            };
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
                */
               detail: string;
             };
@@ -6849,41 +5217,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcBookingDto"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description ATC_BOOKING_FORBIDDEN */
@@ -7023,41 +5356,6 @@ export interface paths {
             "application/json": components["schemas"]["TrainingApplicationDto"][];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -7115,42 +5413,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["TrainingApplicationDto2"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["TrainingApplicationDto"];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -7228,41 +5491,6 @@ export interface paths {
             "application/json": components["schemas"]["TrainingApplicationResponseDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -7329,42 +5557,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["TrainingDto4"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["TrainingDto"][];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -7436,42 +5629,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["TrainingDto4"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["TrainingDto"][];
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -7543,42 +5701,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["TrainingDto5"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["TrainingDto"];
           };
         };
         /** @description NOT_FOUND */
@@ -7686,41 +5809,6 @@ export interface paths {
             "application/json": components["schemas"]["SheetDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -7795,42 +5883,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            "application/json": components["schemas"]["TrainingDto5"];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
+            "application/json": components["schemas"]["TrainingDto"];
           };
         };
         /** @description NOT_FOUND */
@@ -7937,41 +5990,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcPermissionDto"][];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -8042,41 +6060,6 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["AtcPermissionDto"][];
-          };
-        };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */
@@ -8152,41 +6135,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcPermissionDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -8249,41 +6197,6 @@ export interface paths {
             "application/json": components["schemas"]["AtcPermissionDto"];
           };
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -8341,41 +6254,6 @@ export interface paths {
           };
           content?: never;
         };
-        /** @description INVALID_TOKEN */
-        401: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            "application/json": {
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              error_code: "INVALID_TOKEN";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              message: string;
-              /**
-               * @description INVALID_TOKEN
-               * @enum {string}
-               */
-              type: "urn:vatprc-uniapi-error:invalid-token";
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              title: string;
-              /**
-               * @description Invalid token {oauth_code}: {oauth_desc}.
-               * @example Invalid token {oauth_code}: {oauth_desc}.
-               */
-              detail: string;
-            };
-          };
-        };
         /** @description INTERNAL_SERVER_ERROR */
         500: {
           headers: {
@@ -8430,7 +6308,7 @@ export interface components {
       applied_at: string;
       status: components["schemas"]["AtcApplicationStatus"];
       application_filing_answers: components["schemas"]["AtcApplicationFieldAnswerDto"][];
-      review_filing_answers?: components["schemas"][] | null;
+      review_filing_answers: null | components["schemas"]["AtcApplicationFieldAnswerDto"][];
     };
     AtcApplicationFieldAnswerDto: {
       field: components["schemas"]["SheetFieldDto"];
@@ -8485,16 +6363,16 @@ export interface components {
       position_kind_id: string;
       state: components["schemas"]["UserControllerState"];
       /** Format: date-time */
-      solo_expires_at?: string | null;
+      solo_expires_at: null | string;
     };
     AtcPermissionSetRequest: {
       state: components["schemas"]["UserControllerState"];
       /** Format: date-time */
-      solo_expires_at?: string | null;
+      solo_expires_at: null | string;
     };
     CompatControllerDto: {
       /** Format: int32 */
-      cid: number;
+      cid: number | string;
       name: string;
       callsign: string;
       frequency: string;
@@ -8511,12 +6389,12 @@ export interface components {
     };
     CompatPilotDto: {
       /** Format: int32 */
-      cid: number;
+      cid: number | string;
       name: string;
       callsign: string;
-      departure: string | null;
-      arrival: string | null;
-      aircraft: string | null;
+      departure: null | string;
+      arrival: null | string;
+      aircraft: null | string;
     };
     CompatVatprcStatusDto: {
       /** Format: date-time */
@@ -8525,15 +6403,37 @@ export interface components {
       controllers: components["schemas"]["CompatControllerDto"][];
       future_controllers: components["schemas"]["CompatFutureControllerDto"][];
     };
+    /** @description Device Authorization Response */
     DeviceAuthorizationResponse: {
+      /** @description REQUIRED.  The device verification code. */
       device_code: string;
+      /** @description REQUIRED.  The end-user verification code. */
       user_code: string;
+      /**
+       * @description REQUIRED.  The end-user verification URI on the authorization
+       *     server.  The URI should be short and easy to remember as end users
+       *     will be asked to manually type it into their user agent.
+       */
       verification_uri: string;
-      verification_uri_complete?: string | null;
-      /** Format: uint32 */
-      expires_in: number;
-      /** Format: uint32 */
-      interval?: number | null;
+      /**
+       * @description OPTIONAL.  A verification URI that includes the "user_code" (or
+       *     other information with the same function as the "user_code"),
+       *     which is designed for non-textual transmission.
+       */
+      verification_uri_complete: null | string;
+      /**
+       * Format: uint32
+       * @description REQUIRED.  The lifetime in seconds of the "device_code" and
+       *     "user_code".
+       */
+      expires_in: number | string;
+      /**
+       * Format: uint32
+       * @description OPTIONAL.  The minimum amount of time in seconds that the client
+       *     SHOULD wait between polling requests to the token endpoint.  If no
+       *     value is provided, clients MUST use 5 as the default.
+       */
+      interval: null | number | string;
     };
     EventAirspaceDto: {
       id: components["schemas"]["Ulid"];
@@ -8555,11 +6455,6 @@ export interface components {
       user_id: components["schemas"]["Ulid"];
       /** Format: date-time */
       booked_at: string;
-    } | null;
-    EventAtcPositionBookingDto2: {
-      user_id: components["schemas"]["Ulid"];
-      /** Format: date-time */
-      booked_at: string;
     };
     EventAtcPositionDto: {
       callsign: string;
@@ -8567,10 +6462,10 @@ export interface components {
       start_at: string;
       /** Format: date-time */
       end_at: string;
-      remarks?: string | null;
+      remarks: null | string;
       position_kind_id: string;
       minimum_controller_state: components["schemas"]["UserControllerState"];
-      booking?: components["schemas"]["EventAtcPositionBookingDto"];
+      booking: null | components["schemas"]["EventAtcPositionBookingDto"];
     };
     EventAtcPositionSaveRequest: {
       callsign: string;
@@ -8578,7 +6473,7 @@ export interface components {
       start_at: string;
       /** Format: date-time */
       end_at: string;
-      remarks?: string | null;
+      remarks: null | string;
       position_kind_id: string;
       minimum_controller_state: components["schemas"]["UserControllerState"];
     };
@@ -8590,14 +6485,6 @@ export interface components {
       /** Format: date-time */
       updated_at: string;
     };
-    EventBookingDto2: {
-      id: components["schemas"]["Ulid"];
-      user_id: components["schemas"]["Ulid"];
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-    } | null;
     EventDto: {
       id: components["schemas"]["Ulid"];
       /** Format: date-time */
@@ -8613,7 +6500,7 @@ export interface components {
       start_booking_at: string;
       /** Format: date-time */
       end_booking_at: string;
-      image_url?: string | null;
+      image_url: null | string;
       description: string;
     };
     EventSaveRequest: {
@@ -8626,7 +6513,7 @@ export interface components {
       start_booking_at: string;
       /** Format: date-time */
       end_booking_at: string;
-      image_url?: string | null;
+      image_url: null | string;
       description: string;
     };
     EventSlotDto: {
@@ -8637,23 +6524,24 @@ export interface components {
       /** Format: date-time */
       enter_at: string;
       /** Format: date-time */
-      leave_at?: string | null;
+      leave_at: null | string;
       /** Format: date-time */
       created_at: string;
       /** Format: date-time */
       updated_at: string;
-      booking?: components["schemas"]["EventBookingDto2"];
-      callsign?: string | null;
-      aircraft_type_icao?: string | null;
+      booking: null | components["schemas"]["EventBookingDto"];
+      callsign: null | string;
+      aircraft_type_icao: null | string;
     };
     EventSlotSaveRequest: {
+      /** @description Only applies to create. Ignored on update. */
       airspace_id: components["schemas"]["Ulid"];
       /** Format: date-time */
       enter_at: string;
       /** Format: date-time */
-      leave_at?: string | null;
-      callsign?: string | null;
-      aircraft_type_icao?: string | null;
+      leave_at: null | string;
+      callsign: null | string;
+      aircraft_type_icao: null | string;
     };
     FlightDto: {
       id: components["schemas"]["Ulid"];
@@ -8669,9 +6557,9 @@ export interface components {
       raw_route: string;
       aircraft: string;
       /** Format: int64 */
-      altitude: number;
+      altitude: number | string;
       /** Format: int64 */
-      cruising_level: number;
+      cruising_level: number | string;
     };
     FlightFix: {
       identifier: string;
@@ -8681,6 +6569,8 @@ export interface components {
       to: components["schemas"]["FlightFix"];
       leg_identifier: string;
     };
+    /** Format: binary */
+    IFormFile: string;
     /** @enum {unknown} */
     LevelRestrictionType:
       | "standard-even"
@@ -8694,35 +6584,34 @@ export interface components {
       language_code: string;
       link: string;
     };
-    NullableOfUlid: unknown;
     PreferredRouteDto: {
       id: components["schemas"]["Ulid"];
       departure: string;
       arrival: string;
       raw_route: string;
       cruising_level_restriction: components["schemas"]["LevelRestrictionType"];
-      allowed_altitudes: number[];
+      allowed_altitudes: (number | string)[];
       /** Format: int32 */
-      minimal_altitude: number;
+      minimal_altitude: number | string;
       remarks: string;
       /** Format: date-time */
-      valid_from: string | null;
+      valid_from: null | string;
       /** Format: date-time */
-      valid_until: string | null;
+      valid_until: null | string;
     };
     PreferredRouteSaveRequest: {
       departure: string;
       arrival: string;
       raw_route: string;
       cruising_level_restriction: components["schemas"]["LevelRestrictionType"];
-      allowed_altitudes: number[];
+      allowed_altitudes: (number | string)[];
       /** Format: int32 */
-      minimal_altitude: number;
+      minimal_altitude: number | string;
       remarks: string;
       /** Format: date-time */
-      valid_from?: string | null;
+      valid_from: null | string;
       /** Format: date-time */
-      valid_until?: string | null;
+      valid_until: null | string;
     };
     SectorPermissionResponse: {
       has_permission: boolean;
@@ -8737,13 +6626,13 @@ export interface components {
       sheet_id: string;
       id: string;
       /** Format: uint32 */
-      sequence: number;
+      sequence: number | string;
       name_zh: string;
-      name_en?: string | null;
+      name_en: null | string;
       kind: components["schemas"]["SheetFieldKind"];
       single_choice_options: string[];
-      description_zh?: string | null;
-      description_en?: string | null;
+      description_zh: null | string;
+      description_en: null | string;
       is_deleted: boolean;
     };
     /** @enum {unknown} */
@@ -8757,16 +6646,40 @@ export interface components {
     };
     TokenErrorDto: {
       error: string;
-      error_description?: string | null;
-      error_uri?: string | null;
-      state?: string | null;
+      error_description: null | string;
+      error_uri: null | string;
+      state: null | string;
     };
+    /** @description Token response, compliant with RFC 8693 */
     TokenResponse: {
+      /** @description REQUIRED.  The access token issued by the authorization server. */
       access_token: string;
+      /**
+       * @description REQUIRED.  The type of the token issued as described in
+       *     Section 7.1.  Value is case insensitive.
+       * @example Bearer
+       */
       token_type: string;
-      /** Format: uint32 */
-      expires_in: number;
-      refresh_token?: string | null;
+      /**
+       * Format: uint32
+       * @description RECOMMENDED.  The lifetime in seconds of the access token.  For
+       *     example, the value "3600" denotes that the access token will
+       *     expire in one hour from the time the response was generated.
+       *     If omitted, the authorization server SHOULD provide the
+       *     expiration time via other means or document the default value.
+       */
+      expires_in: number | string;
+      /**
+       * @description OPTIONAL.  The refresh token, which can be used to obtain new
+       *     access tokens using the same authorization grant as described
+       *     in Section 6.
+       */
+      refresh_token: null | string;
+      /**
+       * @description OPTIONAL, if identical to the scope requested by the client;
+       *     otherwise, REQUIRED.  The scope of the access token as
+       *     described by Section 3.3.
+       */
       scope: string;
     };
     TrainingApplicationCreateRequest: {
@@ -8782,42 +6695,8 @@ export interface components {
       trainee: components["schemas"]["UserDto"];
       status: components["schemas"]["TrainingApplicationStatus"];
       name: string;
-      train_id?: components["schemas"]["NullableOfUlid"];
-      train?: components["schemas"]["TrainingDto"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-    };
-    TrainingApplicationDto2: {
-      id: components["schemas"]["Ulid"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto"];
-      status: components["schemas"]["TrainingApplicationStatus"];
-      name: string;
-      train_id?: components["schemas"]["NullableOfUlid"];
-      train?: components["schemas"]["TrainingDto2"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-    };
-    TrainingApplicationDto3: {
-      id: components["schemas"]["Ulid"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto"];
-      status: components["schemas"]["TrainingApplicationStatus"];
-      name: string;
-      train_id?: components["schemas"]["NullableOfUlid"];
-      train?: components["schemas"]["TrainingDto3"];
+      train_id: null | components["schemas"]["Ulid"];
+      train: null | components["schemas"]["TrainingDto"];
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -8830,9 +6709,9 @@ export interface components {
     TrainingApplicationResponseDto: {
       id: components["schemas"]["Ulid"];
       application_id: components["schemas"]["Ulid"];
-      application: components["schemas"]["TrainingApplicationDto3"];
+      application: components["schemas"]["TrainingApplicationDto"];
       trainer_id: components["schemas"]["Ulid"];
-      trainer: components["schemas"]["UserDto4"];
+      trainer: components["schemas"]["UserDto"];
       is_accepted: boolean;
       comment: string;
       /** Format: date-time */
@@ -8850,63 +6729,9 @@ export interface components {
       id: components["schemas"]["Ulid"];
       name: string;
       trainer_id: components["schemas"]["Ulid"];
-      trainer: components["schemas"]["UserDto2"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto2"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      record_sheet_filing_id: components["schemas"]["NullableOfUlid"];
-      record_sheet_filing: components["schemas"]["TrainingRecordFieldAnswerDto"][] | null;
-    } | null;
-    TrainingDto2: {
-      id: components["schemas"]["Ulid"];
-      name: string;
-      trainer_id: components["schemas"]["Ulid"];
-      trainer: components["schemas"]["UserDto3"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto3"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      record_sheet_filing_id: components["schemas"]["NullableOfUlid"];
-      record_sheet_filing: components["schemas"]["TrainingRecordFieldAnswerDto"][] | null;
-    } | null;
-    TrainingDto3: {
-      id: components["schemas"]["Ulid"];
-      name: string;
-      trainer_id: components["schemas"]["Ulid"];
-      trainer: components["schemas"]["UserDto4"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto4"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      record_sheet_filing_id: components["schemas"]["NullableOfUlid"];
-      record_sheet_filing: components["schemas"]["TrainingRecordFieldAnswerDto"][] | null;
-    } | null;
-    TrainingDto4: {
-      id: components["schemas"]["Ulid"];
-      name: string;
-      trainer_id: components["schemas"]["Ulid"];
       trainer: components["schemas"]["UserDto"];
       trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto5"];
+      trainee: components["schemas"]["UserDto"];
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -8915,26 +6740,8 @@ export interface components {
       created_at: string;
       /** Format: date-time */
       updated_at: string;
-      record_sheet_filing_id: components["schemas"]["NullableOfUlid"];
-      record_sheet_filing: components["schemas"]["TrainingRecordFieldAnswerDto"][] | null;
-    };
-    TrainingDto5: {
-      id: components["schemas"]["Ulid"];
-      name: string;
-      trainer_id: components["schemas"]["Ulid"];
-      trainer: components["schemas"]["UserDto"];
-      trainee_id: components["schemas"]["Ulid"];
-      trainee: components["schemas"]["UserDto6"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      record_sheet_filing_id: components["schemas"]["NullableOfUlid"];
-      record_sheet_filing: components["schemas"]["TrainingRecordFieldAnswerDto"][] | null;
+      record_sheet_filing_id: null | components["schemas"]["Ulid"];
+      record_sheet_filing: null | components["schemas"]["TrainingRecordFieldAnswerDto"][];
     };
     TrainingRecordFieldAnswerDto: {
       field: components["schemas"]["SheetFieldDto"];
@@ -8947,8 +6754,7 @@ export interface components {
       id: string;
       answer: string;
     };
-    /** @description ULID */
-    Ulid: string;
+    Ulid: unknown;
     UploadImageResponse: {
       url: string;
     };
@@ -8964,61 +6770,6 @@ export interface components {
       updated_at: string;
       roles: components["schemas"]["UserRoleDto"][];
       direct_roles: components["schemas"]["UserRoleDto"][];
-    };
-    UserDto2: {
-      id: components["schemas"]["Ulid"];
-      cid: string;
-      full_name: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      roles: components["schemas"];
-      direct_roles: components["schemas"];
-    };
-    UserDto3: {
-      id: components["schemas"]["Ulid"];
-      cid: string;
-      full_name: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      roles: components["schemas"];
-      direct_roles: components["schemas"];
-    };
-    UserDto4: {
-      id: components["schemas"]["Ulid"];
-      cid: string;
-      full_name: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      roles: components["schemas"];
-      direct_roles: components["schemas"];
-    };
-    UserDto5: {
-      id: components["schemas"]["Ulid"];
-      cid: string;
-      full_name: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      roles: components["schemas"];
-      direct_roles: components["schemas"];
-    };
-    UserDto6: {
-      id: components["schemas"]["Ulid"];
-      cid: string;
-      full_name: string;
-      /** Format: date-time */
-      created_at: string;
-      /** Format: date-time */
-      updated_at: string;
-      roles: components["schemas"];
-      direct_roles: components["schemas"];
     };
     /** @enum {unknown} */
     UserRoleDto:
@@ -9045,10 +6796,10 @@ export interface components {
       | "user";
     WarningMessage: {
       message_code: components["schemas"]["WarningMessageCode"];
-      parameter?: string | null;
+      parameter: null | string;
       field: components["schemas"]["WarningMessageField"];
       /** Format: int32 */
-      field_index?: number | null;
+      field_index: null | number | string;
     };
     /** @enum {unknown} */
     WarningMessageCode:
