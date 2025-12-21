@@ -7,6 +7,7 @@ import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Button, Skeleton } from "@mantine/core";
+import { Link } from "@tanstack/react-router";
 import {
   ColumnFiltersState,
   useReactTable,
@@ -46,8 +47,12 @@ export const columns = [
   columnHelper.display({
     id: "actions",
     header: () => <Trans>Actions</Trans>,
-    cell: () => (
-      <Button variant="subtle" leftSection={<TbFileDescription />}>
+    cell: ({ row }) => (
+      <Button
+        variant="subtle"
+        leftSection={<TbFileDescription />}
+        renderRoot={(props) => <Link to="/controllers/applications/$id/" params={{ id: row.original.id }} {...props} />}
+      >
         <Trans>View</Trans>
       </Button>
     ),
@@ -68,10 +73,9 @@ export const AtcApplicationList: FC = () => {
     state: { columnFilters },
   });
 
-  return (
-    <>
-      {isLoading && <Skeleton />}
-      <RichTable table={table} />
-    </>
-  );
+  if (isLoading) {
+    return <Skeleton h={256} />;
+  }
+
+  return <RichTable table={table} />;
 };

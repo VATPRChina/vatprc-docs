@@ -43,6 +43,7 @@ import { Route as AirspaceFirRouteImport } from './routes/airspace/fir'
 import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
+import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
 
 const FlightsRoute = FlightsRouteImport.update({
   id: '/flights',
@@ -220,6 +221,12 @@ const ControllersApplicationsNewRoute =
     path: '/controllers/applications/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ControllersApplicationsIdRoute =
+  ControllersApplicationsIdRouteImport.update({
+    id: '/controllers/applications/$id',
+    path: '/controllers/applications/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -253,6 +260,7 @@ export interface FileRoutesByFullPath {
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
@@ -287,6 +295,7 @@ export interface FileRoutesByTo {
   '/events': typeof EventsIndexRoute
   '/flights': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
@@ -324,6 +333,7 @@ export interface FileRoutesById {
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications/': typeof ControllersApplicationsIndexRoute
@@ -362,6 +372,7 @@ export interface FileRouteTypes {
     | '/events/'
     | '/flights/'
     | '/users'
+    | '/controllers/applications/$id'
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications'
@@ -396,6 +407,7 @@ export interface FileRouteTypes {
     | '/events'
     | '/flights'
     | '/users'
+    | '/controllers/applications/$id'
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications'
@@ -432,6 +444,7 @@ export interface FileRouteTypes {
     | '/events/'
     | '/flights/'
     | '/users/'
+    | '/controllers/applications/$id'
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications/'
@@ -465,6 +478,7 @@ export interface RootRouteChildren {
   PilotStartToFlyRoute: typeof PilotStartToFlyRoute
   PilotTs3Route: typeof PilotTs3Route
   UsersIndexRoute: typeof UsersIndexRoute
+  ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
   ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
   ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
@@ -710,6 +724,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControllersApplicationsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/controllers/applications/$id': {
+      id: '/controllers/applications/$id'
+      path: '/controllers/applications/$id'
+      fullPath: '/controllers/applications/$id'
+      preLoaderRoute: typeof ControllersApplicationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -768,6 +789,7 @@ const rootRouteChildren: RootRouteChildren = {
   PilotStartToFlyRoute: PilotStartToFlyRoute,
   PilotTs3Route: PilotTs3Route,
   UsersIndexRoute: UsersIndexRoute,
+  ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
   ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,
   ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,

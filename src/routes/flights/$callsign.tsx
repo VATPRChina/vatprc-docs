@@ -1,3 +1,4 @@
+import { BackButton } from "@/components/back-button";
 import { FlightWarnings } from "@/components/flight-warnings";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -7,7 +8,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Alert, Button, Popover, Skeleton, Tooltip } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FC, Fragment } from "react";
-import { TbArrowLeft, TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
+import { TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
@@ -343,16 +344,9 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col items-start gap-4">
-      <Button
-        renderRoot={(props) => <Link to=".." {...props} />}
-        variant="subtle"
-        className="self-start"
-        leftSection={<TbArrowLeft />}
-      >
-        <Trans>Back</Trans>
-      </Button>
+      <BackButton />
       {error?.message && <Alert color="red">{error?.message}</Alert>}
-      {isLoading && <Skeleton h={48} />}
+      {isLoading && <Skeleton h={64} />}
       {!error && flight && (
         <div className="flex w-full flex-col gap-4">
           <h1 className="flex items-baseline">

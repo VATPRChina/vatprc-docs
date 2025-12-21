@@ -1,4 +1,5 @@
 import NoEventImage from "@/assets/no-event-image.svg";
+import { BackButton } from "@/components/back-button";
 import { DateTime } from "@/components/event/datetime";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
@@ -10,7 +11,7 @@ import { Alert, Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { isFuture, isPast } from "date-fns";
 import type { FC } from "react";
-import { TbArrowLeft, TbLockAccess } from "react-icons/tb";
+import { TbLockAccess } from "react-icons/tb";
 
 export const Route = createFileRoute("/events/$id")({
   component: RouteComponent,
@@ -121,14 +122,7 @@ function RouteComponent() {
   return (
     event && (
       <div key={event.id} className="flex flex-col gap-4">
-        <Button
-          renderRoot={(props) => <Link to=".." {...props} />}
-          variant="subtle"
-          className="self-start"
-          leftSection={<TbArrowLeft />}
-        >
-          <Trans>Back</Trans>
-        </Button>
+        <BackButton />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <img src={event.image_url ?? NoEventImage} className="" />
           <div className="flex flex-col gap-4">
