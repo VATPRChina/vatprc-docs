@@ -12,6 +12,7 @@ interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   onSubmit?: (answers: { id: string; answer: string }[]) => Promise<unknown>;
   isFieldValuesLoading?: boolean;
   isSubmitDisabled?: boolean;
+  isSubmitHidden?: boolean;
   submitButtonContent?: React.ReactNode;
   doNotRequirePristine?: boolean;
 }
@@ -22,6 +23,7 @@ export const Sheet: FC<SheetProps> = ({
   onSubmit,
   isFieldValuesLoading,
   isSubmitDisabled,
+  isSubmitHidden,
   submitButtonContent,
   doNotRequirePristine,
   ...props
@@ -73,6 +75,7 @@ export const Sheet: FC<SheetProps> = ({
                   ? sheetField.description_zh
                   : sheetField.description_en,
               error: field.state.meta.errors.join(""),
+              disabled: isSubmitHidden,
             };
             if (sheetField.kind === "short-text") {
               return (
@@ -107,18 +110,20 @@ export const Sheet: FC<SheetProps> = ({
           }}
         </form.Field>
       ))}
-      <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}>
-        {([canSubmit, isSubmitting, isPristine]) => (
-          <Button
-            disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
-            loading={isSubmitting}
-            type="submit"
-            className="self-start"
-          >
-            {submitButtonContent}
-          </Button>
-        )}
-      </form.Subscribe>
+      {!isSubmitHidden && (
+        <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}>
+          {([canSubmit, isSubmitting, isPristine]) => (
+            <Button
+              disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
+              loading={isSubmitting}
+              type="submit"
+              className="self-start"
+            >
+              {submitButtonContent}
+            </Button>
+          )}
+        </form.Subscribe>
+      )}
     </form>
   );
 };

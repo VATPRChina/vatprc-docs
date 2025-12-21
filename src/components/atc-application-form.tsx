@@ -83,7 +83,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
         existingFillingAnswers={existingApplication?.application_filing_answers}
         onSubmit={onSubmit}
         isFieldValuesLoading={isValuesLoading}
-        isSubmitDisabled={isEditDisabled}
+        isSubmitHidden={isEditDisabled}
         submitButtonContent={applicationId ? <Trans>Edit</Trans> : <Trans>Submit</Trans>}
       />
     </div>

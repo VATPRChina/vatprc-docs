@@ -108,10 +108,6 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
     );
   };
 
-  if (!hasPermission) {
-    return null;
-  }
-
   if (!application) {
     return <Skeleton height={64} />;
   }
@@ -126,6 +122,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
             .toArray()}
           value={status ?? application.status}
           onChange={(value) => setStatus(value as components["schemas"]["AtcApplicationStatus"] | null)}
+          disabled={!hasPermission}
         />
       </Skeleton>
       <Sheet
@@ -135,6 +132,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
         onSubmit={onSubmit}
         isFieldValuesLoading={isApplicationLoading}
         isSubmitDisabled={!status || status === application.status}
+        isSubmitHidden={!hasPermission}
         submitButtonContent={<Trans>Submit</Trans>}
         doNotRequirePristine
       />
