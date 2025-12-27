@@ -1,12 +1,15 @@
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal";
 import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
+import { ConfirmButton } from "../ui/confirm-button";
 import { CreateAtcSlot } from "./atc-slot-create";
 import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
-import { $api } from "@/lib/client";
-import { renderLocalizedWithMap } from "@/lib/utils";
+import { $api, useControllerPermission, useUser } from "@/lib/client";
+import { renderLocalizedWithMap, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
+import { Badge } from "@mantine/core";
+import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isSameMinute } from "date-fns";
 import { FC } from "react";
@@ -39,26 +42,98 @@ const columns = [
         </DateTime>
       ),
   }),
-  columnHelper.accessor("position_kind_id", {
+  columnHelper.accessor((row) => [row.position_kind_id, row.minimum_controller_state, row.remarks] as const, {
+    id: "position",
     header: () => <Trans>Position</Trans>,
-    cell: ({ getValue }) => renderLocalizedWithMap(POSITION_KINDS_MAP, getValue()),
-  }),
-  columnHelper.accessor("minimum_controller_state", {
-    header: () => <Trans>Minimum State</Trans>,
-    cell: ({ getValue }) => renderLocalizedWithMap(POSITION_STATE_MAP, getValue()),
-  }),
-  columnHelper.accessor("remarks", {
-    header: () => <Trans>Remark</Trans>,
+    cell: ({ getValue }) => {
+      const [position, state, remarks] = getValue();
+      const hasPositionPermission = useControllerPermission(position, "student");
+      const hasPermission = useControllerPermission(position, state);
+
+      return (
+        <div className="flex gap-2">
+          <Badge color={hasPositionPermission ? "green" : "red"} variant="dot" size="lg">
+            {renderLocalizedWithMap(POSITION_KINDS_MAP, position)}
+          </Badge>
+          <Badge color={hasPermission ? "green" : "red"} variant="dot" size="lg">
+            {renderLocalizedWithMap(POSITION_STATE_MAP, state)}
+          </Badge>
+          <span>{remarks}</span>
+        </div>
+      );
+    },
   }),
   columnHelper.display({
     id: "actions",
     header: () => null,
     enableSorting: false,
     cell: ({ row }) => {
+      const queryClient = useQueryClient();
+
+      const user = useUser();
+
+      const { data } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
+        params: { path: { eventId: row.original.event.id } },
+      });
+      const slot = data?.find((s) => s.id === row.original.id);
+      const onMutateSuccess = wrapPromiseWithLog(() =>
+        queryClient.invalidateQueries(
+          $api.queryOptions("get", "/api/events/{eventId}/controllers", {
+            params: { path: { eventId: row.original.event.id } },
+          }),
+        ),
+      );
+      const { mutate: book, isPending: isBookPending } = $api.useMutation(
+        "put",
+        "/api/events/{eventId}/controllers/{positionId}/booking",
+        {
+          onSuccess: onMutateSuccess,
+        },
+      );
+      const { mutate: release, isPending: isReleasePending } = $api.useMutation(
+        "delete",
+        "/api/events/{eventId}/controllers/{positionId}/booking",
+        { onSuccess: onMutateSuccess },
+      );
+
+      const hasPermission = useControllerPermission(
+        row.original.position_kind_id,
+        row.original.minimum_controller_state,
+      );
+
+      const onBook = () => {
+        book({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
+      };
+      const onRelease = () => {
+        release({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
+      };
+
       return (
-        <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
-          <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
-        </RequireRole>
+        <div className="flex flex-row gap-2">
+          <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
+            <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
+          </RequireRole>
+          <RequireRole role="controller">
+            <ConfirmButton
+              actionDescription={<Trans>Are you sure to book this ATC position?</Trans>}
+              variant="subtle"
+              onClick={onBook}
+              loading={isBookPending}
+              disabled={!!slot?.booking || !hasPermission}
+            >
+              <Trans>Book</Trans>
+            </ConfirmButton>
+            <ConfirmButton
+              actionDescription={<Trans>Are you sure to release this ATC position?</Trans>}
+              variant="subtle"
+              onClick={onRelease}
+              loading={isReleasePending}
+              disabled={!slot?.booking || !hasPermission || slot.booking.user_id !== user?.id}
+            >
+              <Trans>Release</Trans>
+            </ConfirmButton>
+          </RequireRole>
+        </div>
       );
     },
   }),

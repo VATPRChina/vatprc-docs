@@ -61,10 +61,10 @@ export const renderWithMap = <T extends string>(map: Map<T, React.FC>, value: T)
   );
 };
 
-export const renderLocalizedWithMap = <T extends string>(map: Map<T, MessageDescriptor>, value: T): ReactNode => {
-  const { i18n } = useLingui();
+export const renderLocalizedWithMap = <T extends string>(map: Map<T, MessageDescriptor>, value: T): string => {
+  const { i18n, t } = useLingui();
 
   const descriptor = map.get(value);
-  if (descriptor) return <>{i18n._(descriptor)}</>;
-  return <Trans>Unknown: {value}</Trans>;
+  if (descriptor) return i18n._(descriptor);
+  return t`Unknown: {value}`;
 };
