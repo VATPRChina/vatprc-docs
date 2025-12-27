@@ -108,7 +108,7 @@ msgstr "空域"
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
 
-#: src/routes/events/$id.tsx:129
+#: src/routes/events/$id.tsx:131
 msgid "Already Booked"
 msgstr "已被预订"
 
@@ -156,6 +156,14 @@ msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，
 msgid "Approach"
 msgstr "进近"
 
+#: src/routes/events/$id.tsx:124
+msgid "Are you sure to book the slot?"
+msgstr "确定要预订该时段吗？"
+
+#: src/routes/events/$id.tsx:140
+msgid "Are you sure to release the slot?"
+msgstr "确定要取消该预订吗？"
+
 #: src/components/event/slot-import.tsx:131
 msgid "Area"
 msgstr "区域"
@@ -200,7 +208,7 @@ msgstr "基本信息"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/routes/events/$id.tsx:124
+#: src/routes/events/$id.tsx:126
 msgid "Book"
 msgstr "预订"
 
@@ -214,10 +222,11 @@ msgstr "预订时间："
 msgid "Callsign"
 msgstr "呼号"
 
-#: src/routes/events/$id.tsx:56
+#: src/routes/events/$id.tsx:57
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
+#: src/components/ui/confirm-button.tsx:25
 #: src/routes/users/index.tsx:114
 msgid "Cancel"
 msgstr "取消"
@@ -683,7 +692,7 @@ msgstr "无 RVSM"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/routes/events/$id.tsx:60
+#: src/routes/events/$id.tsx:61
 msgid "Not designated"
 msgstr "任意"
 
@@ -774,7 +783,7 @@ msgstr "请从下列指定航路中选择一条作为计划航路，或与管制
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
-#: src/routes/events/$id.tsx:177
+#: src/routes/events/$id.tsx:183
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
@@ -803,7 +812,7 @@ msgstr "近期活动"
 msgid "Rejected"
 msgstr "已拒绝"
 
-#: src/routes/events/$id.tsx:134
+#: src/routes/events/$id.tsx:142
 msgid "Release"
 msgstr "取消预订"
 
@@ -836,7 +845,7 @@ msgid "Roles"
 msgstr "权限"
 
 #: src/components/preferred-route-create.tsx:162
-#: src/routes/events/$id.tsx:27
+#: src/routes/events/$id.tsx:28
 #: src/routes/flights/$callsign.tsx:389
 #: src/routes/navdata/preferred-routes.tsx:20
 msgid "Route"
@@ -883,7 +892,7 @@ msgstr "显示全部"
 msgid "Show less pilots"
 msgstr "显示部分"
 
-#: src/routes/events/$id.tsx:174
+#: src/routes/events/$id.tsx:180
 msgid "Slots"
 msgstr "时刻"
 
@@ -994,7 +1003,7 @@ msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 
 msgid "The ATC application review has been updated successfully."
 msgstr "管制员申请审核已成功更新。"
 
-#: src/routes/events/$id.tsx:182
+#: src/routes/events/$id.tsx:188
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
 
@@ -1072,7 +1081,7 @@ msgstr "星期四"
 msgid "Tier 2"
 msgstr "Tier 2"
 
-#: src/routes/events/$id.tsx:31
+#: src/routes/events/$id.tsx:32
 msgid "Time"
 msgstr "时间"
 

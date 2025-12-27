@@ -5,6 +5,7 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { ImportSlot } from "@/components/event/slot-import";
 import { RichTable } from "@/components/table";
+import { ConfirmButton } from "@/components/ui/confirm-button";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -114,15 +115,16 @@ const columns = [
       return (
         <div role="cell" className="flex gap-2">
           {!isBookedByCurrentUser && !isBookedByOtherUser && (
-            <Button
+            <ConfirmButton
               variant="subtle"
               size="compact-sm"
               disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
               onClick={onBook}
               loading={isBookPending}
+              actionDescription={<Trans>Are you sure to book the slot?</Trans>}
             >
               <Trans>Book</Trans>
-            </Button>
+            </ConfirmButton>
           )}
           {isBookedByOtherUser && (
             <Button variant="subtle" size="compact-sm" disabled>
@@ -130,9 +132,15 @@ const columns = [
             </Button>
           )}
           {isBookedByCurrentUser && (
-            <Button variant="subtle" size="compact-sm" onClick={onRelease} loading={isReleasePending}>
+            <ConfirmButton
+              variant="subtle"
+              size="compact-sm"
+              onClick={onRelease}
+              loading={isReleasePending}
+              actionDescription={<Trans>Are you sure to release the slot?</Trans>}
+            >
               <Trans>Release</Trans>
-            </Button>
+            </ConfirmButton>
           )}
         </div>
       );
@@ -147,8 +155,6 @@ function RouteComponent() {
   const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eid}/slots", { params: { path: { eid: id } } });
 
   const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
-
-  console.log("inside", columns);
 
   return (
     event && (
