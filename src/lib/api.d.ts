@@ -8600,7 +8600,7 @@ export interface components {
       remarks?: null | string;
       position_kind_id: string;
       minimum_controller_state: components["schemas"]["UserControllerState"];
-      booking: null | components["schemas"]["EventAtcPositionBookingDto"];
+      booking?: null | components["schemas"]["EventAtcPositionBookingDto"];
     };
     EventAtcPositionSaveRequest: {
       callsign: string;
@@ -8635,7 +8635,7 @@ export interface components {
       start_booking_at: string;
       /** Format: date-time */
       end_booking_at: string;
-      image_url?: null | string;
+      image_url: null | string;
       description: string;
     };
     EventSaveRequest: {
@@ -8659,14 +8659,14 @@ export interface components {
       /** Format: date-time */
       enter_at: string;
       /** Format: date-time */
-      leave_at?: null | string;
+      leave_at: null | string;
       /** Format: date-time */
       created_at: string;
       /** Format: date-time */
       updated_at: string;
       booking: null | components["schemas"]["EventBookingDto"];
-      callsign?: null | string;
-      aircraft_type_icao?: null | string;
+      callsign: null | string;
+      aircraft_type_icao: null | string;
     };
     EventSlotSaveRequest: {
       /** @description Only applies to create. Ignored on update. */
@@ -8739,7 +8739,7 @@ export interface components {
       arrival: string;
       raw_route: string;
       cruising_level_restriction: components["schemas"]["LevelRestrictionType"];
-      allowed_altitudes: number[];
+      allowed_altitudes?: number[];
       /** Format: int32 */
       minimal_altitude: number;
       remarks: string;
@@ -8794,7 +8794,7 @@ export interface components {
        *     Section 7.1.  Value is case insensitive.
        * @example Bearer
        */
-      token_type: string;
+      token_type?: string;
       /**
        * Format: uint32
        * @description RECOMMENDED.  The lifetime in seconds of the access token.  For
@@ -8831,7 +8831,7 @@ export interface components {
       status: components["schemas"]["TrainingApplicationStatus"];
       name: string;
       train_id?: null | components["schemas"]["Ulid"];
-      train: null | components["schemas"]["TrainingDto"];
+      train?: null | components["schemas"]["TrainingDto"];
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -8935,10 +8935,10 @@ export interface components {
       | "user";
     WarningMessage: {
       message_code: components["schemas"]["WarningMessageCode"];
-      parameter?: null | string;
+      parameter: null | string;
       field: components["schemas"]["WarningMessageField"];
       /** Format: int32 */
-      field_index?: null | number;
+      field_index: null | number;
     };
     /** @enum {unknown} */
     WarningMessageCode:

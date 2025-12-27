@@ -7,21 +7,12 @@ import { wrapPromiseWithLog } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Group, Modal, Stack, TextInput } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Group, Modal, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ColumnFiltersState,
-  createColumnHelper,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from "@tanstack/react-table";
-import React, { MouseEvent, useState } from "react";
-import { TbArrowsUpDown, TbUserBolt, TbCheck, TbAirTrafficControl } from "react-icons/tb";
+import { createColumnHelper } from "@tanstack/react-table";
+import { MouseEvent, useState } from "react";
+import { TbUserBolt, TbCheck, TbAirTrafficControl } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "controller",
@@ -57,23 +48,9 @@ const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
 
 const columnHelper = createColumnHelper<components["schemas"]["UserDto"]>();
 
-export const columns = [
+const columns = [
   columnHelper.accessor("cid", {
-    header: ({ column }) => {
-      return (
-        <>
-          <Trans>CID</Trans>
-          <ActionIcon
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            variant="transparent"
-            size="xs"
-            c="gray"
-          >
-            <TbArrowsUpDown />
-          </ActionIcon>
-        </>
-      );
-    },
+    header: () => <Trans>CID</Trans>,
   }),
   columnHelper.accessor("full_name", {
     header: () => <Trans>Name</Trans>,
@@ -174,46 +151,10 @@ export const Route = createFileRoute("/users/")({
 
 function RouteComponent() {
   const { data, isLoading } = $api.useQuery("get", "/api/users");
-  const [sorting, setSorting] = React.useState<SortingState>([{ id: "cid", desc: false }]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-  const table = useReactTable({
-    data: data ?? [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      sorting,
-      columnFilters,
-    },
-  });
 
   return (
     <div className="container mx-auto">
-      <div className="flex flex-row gap-4">
-        <div className="flex flex-1 flex-col gap-2">
-          <TextInput
-            id="filter-cid"
-            value={(table.getColumn("cid")?.getFilterValue() as string) ?? ""}
-            onChange={(e) => table.getColumn("cid")?.setFilterValue(e.target.value)}
-            disabled={isLoading}
-            label={<Trans>Search CID</Trans>}
-          />
-        </div>
-        <div className="flex flex-1 flex-col gap-2">
-          <TextInput
-            id="filter-name"
-            value={(table.getColumn("full_name")?.getFilterValue() as string) ?? ""}
-            onChange={(e) => table.getColumn("full_name")?.setFilterValue(e.target.value)}
-            disabled={isLoading}
-            label={<Trans>Search Name</Trans>}
-          />
-        </div>
-      </div>
-      <RichTable table={table} />
+      <RichTable data={data} columns={columns} isLoading={isLoading} />
     </div>
   );
 }

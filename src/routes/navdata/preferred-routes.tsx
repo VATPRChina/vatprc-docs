@@ -3,18 +3,8 @@ import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { TextInput } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { useState } from "react";
+import { ColumnDef } from "@tanstack/react-table";
 
 const columns: ColumnDef<components["schemas"]["PreferredRouteDto"]>[] = [
   {
@@ -49,42 +39,11 @@ export const Route = createFileRoute("/navdata/preferred-routes")({
 
 function RouteComponent() {
   const { data, isLoading } = $api.useQuery("get", "/api/navdata/preferred-routes");
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const table = useReactTable({
-    data: data ?? [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: { columnFilters },
-  });
 
   return (
-    <div className="container mx-auto flex flex-col items-start gap-4">
+    <div className="container mx-auto flex flex-col gap-4">
       <CreatePreferredRoute />
-      <div className="flex flex-row gap-4 self-stretch">
-        <div className="flex flex-1 flex-col gap-2">
-          <TextInput
-            id="filter-departure"
-            value={(table.getColumn("departure")?.getFilterValue() as string) ?? ""}
-            onChange={(e) => table.getColumn("departure")?.setFilterValue(e.target.value)}
-            disabled={isLoading}
-            label={<Trans>Search Departure</Trans>}
-          />
-        </div>
-        <div className="flex flex-1 flex-col gap-2">
-          <TextInput
-            id="filter-arrival"
-            value={(table.getColumn("arrival")?.getFilterValue() as string) ?? ""}
-            onChange={(e) => table.getColumn("arrival")?.setFilterValue(e.target.value)}
-            disabled={isLoading}
-            label={<Trans>Search Arrival</Trans>}
-          />
-        </div>
-      </div>
-      <RichTable table={table} />
+      <RichTable data={data} columns={columns} isLoading={isLoading} />
     </div>
   );
 }

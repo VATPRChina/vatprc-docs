@@ -5,19 +5,11 @@ import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Skeleton } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import {
-  ColumnFiltersState,
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  getFilteredRowModel,
-  createColumnHelper,
-} from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TbFileDescription } from "react-icons/tb";
 
 const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSummaryDto"]>();
@@ -53,21 +45,6 @@ export const columns = [
 
 export const AtcApplicationList: FC = () => {
   const { data, isLoading } = $api.useQuery("get", "/api/atc/applications");
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const table = useReactTable({
-    data: data ?? [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: { columnFilters },
-  });
 
-  if (isLoading) {
-    return <Skeleton h={256} />;
-  }
-
-  return <RichTable table={table} />;
+  return <RichTable data={data} columns={columns} isLoading={isLoading} />;
 };

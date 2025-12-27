@@ -4,13 +4,14 @@ import { DateTime } from "@/components/event/datetime";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { ImportSlot } from "@/components/event/slot-import";
+import { RichTable } from "@/components/table";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Button } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { createColumnHelper } from "@tanstack/react-table";
 import { isFuture, isPast } from "date-fns";
-import type { FC } from "react";
 import { TbLockAccess } from "react-icons/tb";
 
 export const Route = createFileRoute("/events/$id")({
@@ -19,105 +20,135 @@ export const Route = createFileRoute("/events/$id")({
 
 const EVENT_BOOKING_LIMIT = 1;
 
-const SlotRow: FC<{ slot: components["schemas"]["EventSlotDto"] }> = ({ slot }) => {
-  const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
-  const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
+const columnHelper = createColumnHelper<components["schemas"]["EventSlotDto"]>();
 
-  const { data: slots, refetch } = $api.useQuery("get", "/api/events/{eid}/slots", {
-    params: { path: { eid: slot.event_id } },
-  });
-  const onMutateSuccess = () => {
-    refetch().catch(console.error);
-  };
-
-  const { mutate: book, isPending: isBookPending } = $api.useMutation("put", "/api/events/{eid}/slots/{sid}/booking", {
-    onSuccess: onMutateSuccess,
-  });
-  const { mutate: release, isPending: isReleasePending } = $api.useMutation(
-    "delete",
-    "/api/events/{eid}/slots/{sid}/booking",
-    { onSuccess: onMutateSuccess },
-  );
-
-  const isLoggedIn = !!session?.user.id;
-  const isBookedByCurrentUser = isLoggedIn && slot.booking?.user_id === session.user.id;
-  const isBookedByOtherUser = slot.booking && slot.booking.user_id !== session?.user.id;
-  const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
-  const isOverBookingLimit =
-    (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
-
-  const onBook = () => {
-    book({ params: { path: { eid: slot.event_id, sid: slot.id } } });
-  };
-  const onRelease = () => {
-    release({ params: { path: { eid: slot.event_id, sid: slot.id } } });
-  };
-
-  return (
-    <div role="row" className="contents">
-      <div role="cell">{slot.airspace.name}</div>
-      <div role="cell">
+const columns = [
+  columnHelper.accessor("airspace.name", {
+    header: () => <Trans>Route</Trans>,
+  }),
+  columnHelper.accessor((row) => [row.enter_at, row.leave_at] as const, {
+    id: "time",
+    header: () => <Trans>Time</Trans>,
+    cell: ({ getValue }) => {
+      const [enterAt, leaveAt] = getValue();
+      return (
         <div className="flex gap-4">
           <span>
             <span className="text-muted-foreground">CTOT/</span>
             <DateTime noDistance noDate>
-              {slot.enter_at}
+              {enterAt}
             </DateTime>
           </span>
-          {slot.leave_at && (
+          {leaveAt && (
             <span>
               <span className="text-muted-foreground">ELDT/</span>
               <DateTime noDistance noDate>
-                {slot.leave_at}
+                {leaveAt}
               </DateTime>
             </span>
           )}
         </div>
-      </div>
-      {!!slot.callsign || !!slot.aircraft_type_icao ? (
-        <div role="cell">
-          {slot.callsign}
-          {slot.aircraft_type_icao && <span className="text-muted-foreground">({slot.aircraft_type_icao})</span>}
+      );
+    },
+  }),
+  columnHelper.accessor((row) => [row.callsign, row.aircraft_type_icao] as const, {
+    id: "callsign_aircraft",
+    header: () => <Trans>Callsign & Aircraft</Trans>,
+    cell: ({ getValue }) => {
+      const [callsign, aircraft] = getValue();
+      if (!callsign && !aircraft) {
+        return <Trans>Not designated</Trans>;
+      }
+      return (
+        <>
+          {callsign}
+          {aircraft && <span className="text-muted-foreground">({aircraft})</span>}
+        </>
+      );
+    },
+  }),
+  columnHelper.display({
+    id: "actions",
+    header: () => null,
+    enableSorting: false,
+    cell: ({ row }) => {
+      const slot = row.original;
+
+      const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
+      const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
+
+      const { data: slots, refetch } = $api.useQuery("get", "/api/events/{eid}/slots", {
+        params: { path: { eid: slot.event_id } },
+      });
+      const onMutateSuccess = () => {
+        refetch().catch(console.error);
+      };
+
+      const { mutate: book, isPending: isBookPending } = $api.useMutation(
+        "put",
+        "/api/events/{eid}/slots/{sid}/booking",
+        {
+          onSuccess: onMutateSuccess,
+        },
+      );
+      const { mutate: release, isPending: isReleasePending } = $api.useMutation(
+        "delete",
+        "/api/events/{eid}/slots/{sid}/booking",
+        { onSuccess: onMutateSuccess },
+      );
+
+      const isLoggedIn = !!session?.user.id;
+      const isBookedByCurrentUser = isLoggedIn && slot.booking?.user_id === session.user.id;
+      const isBookedByOtherUser = slot.booking && slot.booking.user_id !== session?.user.id;
+      const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
+      const isOverBookingLimit =
+        (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
+
+      const onBook = () => {
+        book({ params: { path: { eid: slot.event_id, sid: slot.id } } });
+      };
+      const onRelease = () => {
+        release({ params: { path: { eid: slot.event_id, sid: slot.id } } });
+      };
+
+      return (
+        <div role="cell" className="flex gap-2">
+          {!isBookedByCurrentUser && !isBookedByOtherUser && (
+            <Button
+              variant="subtle"
+              size="compact-sm"
+              disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
+              onClick={onBook}
+              loading={isBookPending}
+            >
+              <Trans>Book</Trans>
+            </Button>
+          )}
+          {isBookedByOtherUser && (
+            <Button variant="subtle" size="compact-sm" disabled>
+              <Trans>Already Booked</Trans>
+            </Button>
+          )}
+          {isBookedByCurrentUser && (
+            <Button variant="subtle" size="compact-sm" onClick={onRelease} loading={isReleasePending}>
+              <Trans>Release</Trans>
+            </Button>
+          )}
         </div>
-      ) : (
-        <div role="cell">
-          <Trans>Not designated</Trans>
-        </div>
-      )}
-      <div role="cell" className="flex gap-1">
-        {!isBookedByCurrentUser && !isBookedByOtherUser && (
-          <Button
-            variant="outline"
-            disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
-            onClick={onBook}
-            loading={isBookPending}
-          >
-            <Trans>Book</Trans>
-          </Button>
-        )}
-        {isBookedByOtherUser && (
-          <Button variant="outline" disabled>
-            <Trans>Already Booked</Trans>
-          </Button>
-        )}
-        {isBookedByCurrentUser && (
-          <Button variant="outline" onClick={onRelease} loading={isReleasePending}>
-            <Trans>Release</Trans>
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-};
+      );
+    },
+  }),
+];
 
 function RouteComponent() {
   const { id } = Route.useParams();
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: id } } });
-  const { data: slots } = $api.useQuery("get", "/api/events/{eid}/slots", { params: { path: { eid: id } } });
+  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eid}/slots", { params: { path: { eid: id } } });
 
-  const rows = slots?.map((slot) => <SlotRow key={slot.id} slot={slot} />);
   const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
+
+  console.log("inside", columns);
 
   return (
     event && (
@@ -151,25 +182,7 @@ function RouteComponent() {
             title={<Trans>The booking has not started yet or has ended.</Trans>}
           />
         )}
-        {(slots?.length ?? 0) > 0 && (
-          <div className="grid grid-cols-[auto_auto_auto_1fr] items-center gap-x-8 gap-y-1" role="table">
-            <div className="contents font-bold" role="row">
-              <div role="columnheader">
-                <Trans>Area</Trans>
-              </div>
-              <div role="columnheader">
-                <Trans>Time</Trans>
-              </div>
-              <div role="columnheader">
-                <Trans>Callsign & Aircraft</Trans>
-              </div>
-              <div role="columnheader"></div>
-            </div>
-            <div className="contents" role="rowgroup">
-              {rows}
-            </div>
-          </div>
-        )}
+        <RichTable data={slots} columns={columns} isLoading={isLoading} />
       </div>
     )
   );

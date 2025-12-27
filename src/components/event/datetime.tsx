@@ -17,7 +17,7 @@ export const DateTime = ({
 
   const time = typeof children === "string" ? new Date(children) : children;
   return (
-    <Tooltip label={format(time, "yyyy-MM-dd HH:mm zzzz", { in: utc })}>
+    <Tooltip label={format(time, "yyyy-MM-dd HH:mm zzzz")}>
       <span>
         {format(time, noDate ? "HHmm" : "yyyy-MM-dd HH:mm", { in: utc })}
         <span className="text-muted-foreground text-sm">Z</span>
