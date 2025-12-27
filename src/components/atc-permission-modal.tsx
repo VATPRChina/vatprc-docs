@@ -17,7 +17,7 @@ interface AtcPermissionModalProps extends ComponentProps<typeof Modal> {
   userId: string;
 }
 
-const POSITION_KINDS_MAP: Map<string, MessageDescriptor> = new Map([
+export const POSITION_KINDS_MAP: Map<string, MessageDescriptor> = new Map([
   ["DEL", msg`Delivery`],
   ["GND", msg`Ground`],
   ["TWR", msg`Tower`],
@@ -28,7 +28,7 @@ const POSITION_KINDS_MAP: Map<string, MessageDescriptor> = new Map([
   ["FMP", msg`Flow Management Position`],
 ]);
 
-const POSITION_STATE_MAP: Map<components["schemas"]["UserControllerState"], MessageDescriptor> = new Map([
+export const POSITION_STATE_MAP: Map<components["schemas"]["UserControllerState"], MessageDescriptor> = new Map([
   ["student", msg`Student`],
   ["under-mentor", msg`Under Mentor`],
   ["solo", msg`Solo`],

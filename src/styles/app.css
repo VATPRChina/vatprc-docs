@@ -9,6 +9,10 @@
   }
 }
 
+@theme {
+  --color-dimmed: var(--mantine-color-dimmed);
+}
+
 .nav-list-grid {
   @apply grid w-100 max-w-[90vw] gap-3 p-2 md:w-125 md:grid-cols-2 lg:w-150;
 }

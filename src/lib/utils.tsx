@@ -1,4 +1,5 @@
-import { Trans } from "@lingui/react/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { createIsomorphicFn } from "@tanstack/react-start";
@@ -58,4 +59,12 @@ export const renderWithMap = <T extends string>(map: Map<T, React.FC>, value: T)
       <Trans>Unknown: {value}</Trans>
     </Alert>
   );
+};
+
+export const renderLocalizedWithMap = <T extends string>(map: Map<T, MessageDescriptor>, value: T): ReactNode => {
+  const { i18n } = useLingui();
+
+  const descriptor = map.get(value);
+  if (descriptor) return <>{i18n._(descriptor)}</>;
+  return <Trans>Unknown: {value}</Trans>;
 };

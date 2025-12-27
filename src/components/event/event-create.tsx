@@ -35,13 +35,14 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const { mutate: update, isPending: isUpdatePending } = $api.useMutation("post", "/api/events/{eid}", {
     onSuccess: () => close(),
   });
+  const now = formatISO(setMinutes(setSeconds(Date.now(), 0), 0));
   const form = useForm({
     defaultValues: {
       title: event?.title ?? "",
-      start_at: event?.start_at ?? formatISO(setMinutes(setSeconds(Date.now(), 0), 0)),
-      end_at: event?.end_at ?? formatISO(setMinutes(setSeconds(Date.now(), 0), 0)),
-      start_booking_at: event?.start_booking_at ?? formatISO(setMinutes(setSeconds(Date.now(), 0), 0)),
-      end_booking_at: event?.end_booking_at ?? formatISO(setMinutes(setSeconds(Date.now(), 0), 0)),
+      start_at: event?.start_at ?? now,
+      end_at: event?.end_at ?? now,
+      start_booking_at: event?.start_booking_at ?? now,
+      end_booking_at: event?.end_booking_at ?? now,
       image_url: event?.image_url ?? null,
       description: event?.description ?? "",
     },

@@ -20,7 +20,7 @@ export const DateTime = ({
     <Tooltip label={format(time, "yyyy-MM-dd HH:mm zzzz")}>
       <span>
         {format(time, noDate ? "HHmm" : "yyyy-MM-dd HH:mm", { in: utc })}
-        <span className="text-muted-foreground text-sm">Z</span>
+        <span className="text-dimmed text-sm">Z</span>
         {!noDistance && (
           <span className="ml-0.5">({intlFormatDistance(time, Date.now(), { locale, numeric: "always" })})</span>
         )}

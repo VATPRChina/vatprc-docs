@@ -1347,7 +1347,7 @@ export interface paths {
       };
       requestBody: {
         content: {
-          "application/json": components["schemas"]["EventAtcPositionDto"];
+          "application/json": components["schemas"]["EventAtcPositionSaveRequest"];
         };
       };
       responses: {
@@ -8592,6 +8592,8 @@ export interface components {
       booked_at: string;
     };
     EventAtcPositionDto: {
+      id: components["schemas"]["Ulid"];
+      event: components["schemas"]["EventDto"];
       callsign: string;
       /** Format: date-time */
       start_at: string;
