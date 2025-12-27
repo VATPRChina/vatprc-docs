@@ -208,6 +208,10 @@ msgstr "ATC Positions & Frequencies"
 msgid "Back"
 msgstr "Back"
 
+#: src/routes/users/me.tsx:46
+msgid "Basic Info"
+msgstr "Basic Info"
+
 #: src/components/atc-application-form.tsx:67
 msgid "Basic Information"
 msgstr "Basic Information"
@@ -277,6 +281,7 @@ msgstr "China RVSM odd flight level"
 #: src/components/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:67
 #: src/routes/users/index.tsx:53
+#: src/routes/users/me.tsx:49
 msgid "CID"
 msgstr "CID"
 
@@ -287,6 +292,10 @@ msgstr "Community & Teamspeak 3"
 #: src/routes/users/index.tsx:42
 msgid "Controller"
 msgstr "Controller"
+
+#: src/routes/users/me.tsx:65
+msgid "Controller Info"
+msgstr "Controller Info"
 
 #: src/components/app-nav-menu.tsx:153
 #: src/routes/controller/controller-list.tsx:9
@@ -328,6 +337,10 @@ msgstr "Create Event"
 #: src/components/preferred-route-create.tsx:87
 msgid "Create Preferred Route"
 msgstr "Create Preferred Route"
+
+#: src/routes/users/me.tsx:51
+msgid "Created at"
+msgstr "Created at"
 
 #: src/routes/flights/$callsign.tsx:385
 msgid "Cruising Level (Feet)"
@@ -534,6 +547,10 @@ msgstr "Forum"
 msgid "Fri"
 msgstr "Fri"
 
+#: src/routes/users/me.tsx:50
+msgid "Full name"
+msgstr "Full name"
+
 #: src/components/atc-application-form.tsx:73
 msgid "Full Name"
 msgstr "Full Name"
@@ -644,11 +661,11 @@ msgstr "List of SOPs"
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
-#: src/components/user-info.tsx:40
+#: src/components/user-info.tsx:41
 msgid "Loading"
 msgstr "Loading"
 
-#: src/components/user-info.tsx:56
+#: src/components/user-info.tsx:57
 msgid "Login"
 msgstr "Login"
 
@@ -656,8 +673,7 @@ msgstr "Login"
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
-#: src/components/user-info.tsx:28
-#: src/components/user-info.tsx:31
+#: src/components/user-info.tsx:32
 msgid "Logout"
 msgstr "Logout"
 
@@ -890,6 +906,7 @@ msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
 #: src/routes/users/index.tsx:59
+#: src/routes/users/me.tsx:54
 msgid "Roles"
 msgstr "Roles"
 
@@ -1186,6 +1203,10 @@ msgstr "Unknown: {value}"
 msgid "until"
 msgstr "until"
 
+#: src/routes/users/me.tsx:52
+msgid "Updated at"
+msgstr "Updated at"
+
 #: src/routes/docs/utils/image.tsx:36
 msgid "Upload"
 msgstr "Upload"
@@ -1197,6 +1218,11 @@ msgstr "Upload image"
 #: src/routes/users/index.tsx:46
 msgid "User"
 msgstr "User"
+
+#: src/components/user-info.tsx:29
+#: src/routes/users/me.tsx:42
+msgid "User Info"
+msgstr "User Info"
 
 #: src/components/app-nav-menu.tsx:189
 msgid "User List"

@@ -33,7 +33,13 @@ export const getLocalPathname = (locale: "en" | "zh-cn" | "", path?: string) => 
   return `/${locale}${normalized}`;
 };
 
-export const localizeWithMap = <T extends string>(map: Map<T, MessageDescriptor>, value: T, i18n: I18n): string => {
+export const localizeWithMap = <T extends string>(
+  map: Map<T, MessageDescriptor>,
+  value: T | undefined,
+  i18n: I18n,
+): string => {
+  if (!value) return "-";
+
   const message = map.get(value);
   if (message) return i18n._(message);
   return i18n._(msg`Unknown: ${value}`);

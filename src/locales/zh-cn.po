@@ -208,6 +208,10 @@ msgstr "管制席位及频率"
 msgid "Back"
 msgstr "返回"
 
+#: src/routes/users/me.tsx:46
+msgid "Basic Info"
+msgstr "基本信息"
+
 #: src/components/atc-application-form.tsx:67
 msgid "Basic Information"
 msgstr "基本信息"
@@ -277,6 +281,7 @@ msgstr "中国 RVSM 单数高度层"
 #: src/components/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:67
 #: src/routes/users/index.tsx:53
+#: src/routes/users/me.tsx:49
 msgid "CID"
 msgstr "CID"
 
@@ -287,6 +292,10 @@ msgstr "社群"
 #: src/routes/users/index.tsx:42
 msgid "Controller"
 msgstr "管制员"
+
+#: src/routes/users/me.tsx:65
+msgid "Controller Info"
+msgstr "管制员信息"
 
 #: src/components/app-nav-menu.tsx:153
 #: src/routes/controller/controller-list.tsx:9
@@ -328,6 +337,10 @@ msgstr "创建活动"
 #: src/components/preferred-route-create.tsx:87
 msgid "Create Preferred Route"
 msgstr "创建推荐航路"
+
+#: src/routes/users/me.tsx:51
+msgid "Created at"
+msgstr "创建时间"
 
 #: src/routes/flights/$callsign.tsx:385
 msgid "Cruising Level (Feet)"
@@ -534,6 +547,10 @@ msgstr "论坛"
 msgid "Fri"
 msgstr "星期五"
 
+#: src/routes/users/me.tsx:50
+msgid "Full name"
+msgstr "姓名"
+
 #: src/components/atc-application-form.tsx:73
 msgid "Full Name"
 msgstr "姓名"
@@ -644,11 +661,11 @@ msgstr "标准运行程序列表"
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
-#: src/components/user-info.tsx:40
+#: src/components/user-info.tsx:41
 msgid "Loading"
 msgstr "正在加载"
 
-#: src/components/user-info.tsx:56
+#: src/components/user-info.tsx:57
 msgid "Login"
 msgstr "登入"
 
@@ -656,8 +673,7 @@ msgstr "登入"
 msgid "Logo Pack"
 msgstr "视觉标识包"
 
-#: src/components/user-info.tsx:28
-#: src/components/user-info.tsx:31
+#: src/components/user-info.tsx:32
 msgid "Logout"
 msgstr "登出"
 
@@ -890,6 +906,7 @@ msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
 #: src/routes/users/index.tsx:59
+#: src/routes/users/me.tsx:54
 msgid "Roles"
 msgstr "权限"
 
@@ -1186,6 +1203,10 @@ msgstr "未知：{value}"
 msgid "until"
 msgstr "直到"
 
+#: src/routes/users/me.tsx:52
+msgid "Updated at"
+msgstr "修改时间"
+
 #: src/routes/docs/utils/image.tsx:36
 msgid "Upload"
 msgstr "上传"
@@ -1197,6 +1218,11 @@ msgstr "上传图片"
 #: src/routes/users/index.tsx:46
 msgid "User"
 msgstr "用户"
+
+#: src/components/user-info.tsx:29
+#: src/routes/users/me.tsx:42
+msgid "User Info"
+msgstr "用户信息"
 
 #: src/components/app-nav-menu.tsx:189
 msgid "User List"

@@ -22,7 +22,7 @@ const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "user",
 ];
 
-const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
+export const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
   ["division-director", msg`Division Director`],
   ["controller-training-director", msg`Controller Training Director`],
   ["controller-training-director-assistant", msg`Controller Training Director Assistant`],

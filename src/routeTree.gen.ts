@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as UsersMeRouteImport } from './routes/users/me'
 import { Route as PilotTs3RouteImport } from './routes/pilot/ts3'
 import { Route as PilotStartToFlyRouteImport } from './routes/pilot/start-to-fly'
 import { Route as PilotPilotSoftwaresRouteImport } from './routes/pilot/pilot-softwares'
@@ -74,6 +75,11 @@ const EventsIndexRoute = EventsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => EventsRoute,
+} as any)
+const UsersMeRoute = UsersMeRouteImport.update({
+  id: '/users/me',
+  path: '/users/me',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PilotTs3Route = PilotTs3RouteImport.update({
   id: '/pilot/ts3',
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
   '/pilot/ts3': typeof PilotTs3Route
+  '/users/me': typeof UsersMeRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
@@ -292,6 +299,7 @@ export interface FileRoutesByTo {
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
   '/pilot/ts3': typeof PilotTs3Route
+  '/users/me': typeof UsersMeRoute
   '/events': typeof EventsIndexRoute
   '/flights': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
@@ -330,6 +338,7 @@ export interface FileRoutesById {
   '/pilot/pilot-softwares': typeof PilotPilotSoftwaresRoute
   '/pilot/start-to-fly': typeof PilotStartToFlyRoute
   '/pilot/ts3': typeof PilotTs3Route
+  '/users/me': typeof UsersMeRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users/': typeof UsersIndexRoute
@@ -369,6 +378,7 @@ export interface FileRouteTypes {
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
+    | '/users/me'
     | '/events/'
     | '/flights/'
     | '/users'
@@ -404,6 +414,7 @@ export interface FileRouteTypes {
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
+    | '/users/me'
     | '/events'
     | '/flights'
     | '/users'
@@ -441,6 +452,7 @@ export interface FileRouteTypes {
     | '/pilot/pilot-softwares'
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
+    | '/users/me'
     | '/events/'
     | '/flights/'
     | '/users/'
@@ -477,6 +489,7 @@ export interface RootRouteChildren {
   PilotPilotSoftwaresRoute: typeof PilotPilotSoftwaresRoute
   PilotStartToFlyRoute: typeof PilotStartToFlyRoute
   PilotTs3Route: typeof PilotTs3Route
+  UsersMeRoute: typeof UsersMeRoute
   UsersIndexRoute: typeof UsersIndexRoute
   ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
   ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
@@ -527,6 +540,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/events/'
       preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof EventsRoute
+    }
+    '/users/me': {
+      id: '/users/me'
+      path: '/users/me'
+      fullPath: '/users/me'
+      preLoaderRoute: typeof UsersMeRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/pilot/ts3': {
       id: '/pilot/ts3'
@@ -788,6 +808,7 @@ const rootRouteChildren: RootRouteChildren = {
   PilotPilotSoftwaresRoute: PilotPilotSoftwaresRoute,
   PilotStartToFlyRoute: PilotStartToFlyRoute,
   PilotTs3Route: PilotTs3Route,
+  UsersMeRoute: UsersMeRoute,
   UsersIndexRoute: UsersIndexRoute,
   ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
   ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,

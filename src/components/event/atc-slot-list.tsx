@@ -6,8 +6,9 @@ import { CreateAtcSlot } from "./atc-slot-create";
 import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
 import { $api, useControllerPermission, useUser } from "@/lib/client";
-import { renderLocalizedWithMap, wrapPromiseWithLog } from "@/lib/utils";
-import { Trans } from "@lingui/react/macro";
+import { localizeWithMap } from "@/lib/i18n";
+import { wrapPromiseWithLog } from "@/lib/utils";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -46,6 +47,7 @@ const columns = [
     id: "position",
     header: () => <Trans>Position</Trans>,
     cell: ({ getValue }) => {
+      const { i18n } = useLingui();
       const [position, state, remarks] = getValue();
       const hasPositionPermission = useControllerPermission(position, "student");
       const hasPermission = useControllerPermission(position, state);
@@ -53,10 +55,10 @@ const columns = [
       return (
         <div className="flex gap-2">
           <Badge color={hasPositionPermission ? "green" : "red"} variant="dot" size="lg">
-            {renderLocalizedWithMap(POSITION_KINDS_MAP, position)}
+            {localizeWithMap(POSITION_KINDS_MAP, position, i18n)}
           </Badge>
           <Badge color={hasPermission ? "green" : "red"} variant="dot" size="lg">
-            {renderLocalizedWithMap(POSITION_STATE_MAP, state)}
+            {localizeWithMap(POSITION_STATE_MAP, state, i18n)}
           </Badge>
           <span>{remarks}</span>
         </div>
