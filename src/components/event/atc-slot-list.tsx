@@ -8,7 +8,7 @@ import { components } from "@/lib/api";
 import { $api, useControllerPermission, useUser } from "@/lib/client";
 import { renderLocalizedWithMap, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
+import { Alert, Badge } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isSameMinute } from "date-fns";
@@ -153,6 +153,9 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
       <h2 className="text-2xl">
         <Trans>Controllers</Trans>
       </h2>
+      <Alert color="blue">
+        <Trans>This feature is under construction and is not available to use.</Trans>
+      </Alert>
       <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
         <div className="flex flex-row gap-2">
           <CreateAtcSlot eventId={eventId} />

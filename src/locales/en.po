@@ -1122,6 +1122,10 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
+#: src/components/event/atc-slot-list.tsx:157
+msgid "This feature is under construction and is not available to use."
+msgstr "This feature is under construction and is not available to use."
+
 #: src/routes/airspace/sop.tsx:26
 #: src/routes/controller/loa.tsx:26
 msgid "This page is not available in English."
