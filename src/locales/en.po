@@ -144,7 +144,7 @@ msgstr "Application updated"
 msgid "Applied At"
 msgstr "Applied At"
 
-#: src/routes/controllers/applications/index.tsx:17
+#: src/routes/controllers/applications/index.tsx:28
 msgid "Apply"
 msgstr "Apply"
 
@@ -187,7 +187,7 @@ msgid "ATC Application"
 msgstr "ATC Application"
 
 #: src/components/app-nav-menu.tsx:201
-#: src/routes/controllers/applications/index.tsx:14
+#: src/routes/controllers/applications/index.tsx:18
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
@@ -1086,7 +1086,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/sheet.tsx:63
+#: src/components/sheet.tsx:62
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 

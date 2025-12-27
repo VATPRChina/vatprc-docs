@@ -144,7 +144,7 @@ msgstr "申请已更新"
 msgid "Applied At"
 msgstr "申请时间"
 
-#: src/routes/controllers/applications/index.tsx:17
+#: src/routes/controllers/applications/index.tsx:28
 msgid "Apply"
 msgstr "申请"
 
@@ -187,7 +187,7 @@ msgid "ATC Application"
 msgstr "管制员申请"
 
 #: src/components/app-nav-menu.tsx:201
-#: src/routes/controllers/applications/index.tsx:14
+#: src/routes/controllers/applications/index.tsx:18
 msgid "ATC Applications"
 msgstr "管制员申请"
 
@@ -1086,7 +1086,7 @@ msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}�
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
 
-#: src/components/sheet.tsx:63
+#: src/components/sheet.tsx:62
 msgid "The field must not be empty."
 msgstr "该项不能为空。"
 

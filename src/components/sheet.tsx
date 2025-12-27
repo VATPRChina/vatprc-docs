@@ -1,6 +1,5 @@
 import { components } from "@/lib/api";
 import { promiseWithLog } from "@/lib/utils";
-import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react/macro";
 import { Skeleton, TextInput, Textarea, Select, Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
@@ -28,7 +27,7 @@ export const Sheet: FC<SheetProps> = ({
   doNotRequirePristine,
   ...props
 }) => {
-  const { i18n } = useLingui();
+  const { i18n, t } = useLingui();
   const form = useForm({
     defaultValues: Object.fromEntries(
       sheet?.fields
