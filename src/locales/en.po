@@ -160,13 +160,17 @@ msgstr "Approach"
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 
-#: src/components/event/atc-slot-list.tsx:65
+#: src/components/event/atc-slot-list.tsx:122
 msgid "Are you sure to book this ATC position?"
 msgstr "Are you sure to book this ATC position?"
 
 #: src/components/event/slot-list.tsx:132
 msgid "Are you sure to release the slot?"
 msgstr "Are you sure to release the slot?"
+
+#: src/components/event/atc-slot-list.tsx:131
+msgid "Are you sure to release this ATC position?"
+msgstr "Are you sure to release this ATC position?"
 
 #: src/components/event/slot-import.tsx:131
 msgid "Area"
@@ -212,6 +216,7 @@ msgstr "Basic Information"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
+#: src/components/event/atc-slot-list.tsx:128
 #: src/components/event/slot-list.tsx:118
 msgid "Book"
 msgstr "Book"
@@ -231,7 +236,7 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/components/ui/confirm-button.tsx:25
+#: src/components/ui/confirm-button.tsx:28
 #: src/routes/users/index.tsx:114
 msgid "Cancel"
 msgstr "Cancel"
@@ -270,6 +275,7 @@ msgstr "China RVSM odd flight level"
 
 #: src/components/atc-application-form.tsx:70
 #: src/components/atc-application-list.tsx:18
+#: src/components/event/atc-slot-list.tsx:67
 #: src/routes/users/index.tsx:53
 msgid "CID"
 msgstr "CID"
@@ -297,7 +303,7 @@ msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
 #: src/components/app-nav-menu.tsx:149
-#: src/components/event/atc-slot-list.tsx:81
+#: src/components/event/atc-slot-list.tsx:154
 #: src/routes/events/$id.tsx:47
 msgid "Controllers"
 msgstr "Controllers"
@@ -427,7 +433,7 @@ msgid "ELDT"
 msgstr "ELDT"
 
 #: src/components/event/atc-slot-create.tsx:127
-#: src/components/event/atc-slot-list.tsx:33
+#: src/components/event/atc-slot-list.tsx:35
 #: src/components/event/event-create.tsx:113
 msgid "End at"
 msgstr "End at"
@@ -462,11 +468,11 @@ msgstr "Event Coordinator"
 msgid "Event Director"
 msgstr "Event Director"
 
-#: src/components/event/atc-slot-list.tsx:36
+#: src/components/event/atc-slot-list.tsx:38
 msgid "Event end"
 msgstr "Event end"
 
-#: src/components/event/atc-slot-list.tsx:25
+#: src/components/event/atc-slot-list.tsx:27
 msgid "Event start"
 msgstr "Event start"
 
@@ -680,7 +686,6 @@ msgid "metric odd flight level (meters)"
 msgstr "metric odd flight level (meters)"
 
 #: src/components/event/atc-slot-create.tsx:158
-#: src/components/event/atc-slot-list.tsx:48
 msgid "Minimum State"
 msgstr "Minimum State"
 
@@ -724,6 +729,10 @@ msgstr "No RVSM"
 #: src/routes/flights/$callsign.tsx:130
 msgid "No transponder"
 msgstr "No transponder"
+
+#: src/components/event/atc-slot-list.tsx:68
+msgid "Not booked"
+msgstr "Not booked"
 
 #: src/components/event/slot-list.tsx:53
 msgid "Not designated"
@@ -825,7 +834,7 @@ msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
 #: src/components/event/atc-slot-create.tsx:144
-#: src/components/event/atc-slot-list.tsx:44
+#: src/components/event/atc-slot-list.tsx:47
 msgid "Position"
 msgstr "Position"
 
@@ -850,12 +859,12 @@ msgstr "Recent Events"
 msgid "Rejected"
 msgstr "Rejected"
 
+#: src/components/event/atc-slot-list.tsx:137
 #: src/components/event/slot-list.tsx:134
 msgid "Release"
 msgstr "Release"
 
 #: src/components/event/atc-slot-create.tsx:172
-#: src/components/event/atc-slot-list.tsx:52
 #: src/routes/navdata/preferred-routes.tsx:24
 msgid "Remark"
 msgstr "Remark"
@@ -884,7 +893,7 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
-#: src/components/event/atc-slot-list.tsx:19
+#: src/components/event/atc-slot-list.tsx:21
 #: src/components/event/slot-list.tsx:20
 #: src/components/preferred-route-create.tsx:162
 #: src/routes/flights/$callsign.tsx:389
@@ -962,7 +971,7 @@ msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
 #: src/components/event/atc-slot-create.tsx:110
-#: src/components/event/atc-slot-list.tsx:22
+#: src/components/event/atc-slot-list.tsx:24
 #: src/components/event/event-create.tsx:96
 msgid "Start at"
 msgstr "Start at"

@@ -8588,6 +8588,7 @@ export interface components {
     };
     EventAtcPositionBookingDto: {
       user_id: components["schemas"]["Ulid"];
+      user: null | components["schemas"]["UserDto"];
       /** Format: date-time */
       booked_at: string;
     };

@@ -63,6 +63,10 @@ const columns = [
       );
     },
   }),
+  columnHelper.accessor("booking.user.cid", {
+    header: () => <Trans>CID</Trans>,
+    cell: ({ getValue }) => getValue() ?? <Trans>Not booked</Trans>,
+  }),
   columnHelper.display({
     id: "actions",
     header: () => null,
