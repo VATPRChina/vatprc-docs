@@ -70,7 +70,7 @@ const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDe
   useEffect(() => {
     if (!state) setState(permission?.state ?? null);
     if (!soloExpiresAt) setSoloExpiresAt(permission?.solo_expires_at ? parseISO(permission.solo_expires_at) : null);
-  }, [permission]);
+  }, [permission, soloExpiresAt, state]);
 
   const onSave: MouseEventHandler = () => {
     if (state !== null) {

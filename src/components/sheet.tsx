@@ -7,7 +7,10 @@ import { ComponentProps, FC } from "react";
 
 interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   sheet?: components["schemas"]["SheetDto"];
-  existingFillingAnswers?: components["schemas"]["AtcApplicationFieldAnswerDto"][];
+  existingFillingAnswers?: (
+    | components["schemas"]["AtcApplicationFieldAnswerDto"]
+    | components["schemas"]["TrainingRecordFieldAnswerDto"]
+  )[];
   onSubmit?: (answers: { id: string; answer: string }[]) => Promise<unknown>;
   isFieldValuesLoading?: boolean;
   isSubmitDisabled?: boolean;

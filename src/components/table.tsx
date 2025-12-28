@@ -52,11 +52,13 @@ export interface RichTableProps<TData> {
   isLoading?: boolean;
 }
 
+const EMPTY_TABLE = [] as never[];
+
 export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<TData>) => {
   const { t } = useLingui();
 
   const table = useReactTable({
-    data: data ?? [],
+    data: data ?? EMPTY_TABLE,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -68,7 +70,7 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
   const [debouncedGlobalFiler] = useDebouncedValue(globalFiler, 200);
   useEffect(() => {
     table.setGlobalFilter(debouncedGlobalFiler);
-  }, [debouncedGlobalFiler, table]);
+  }, [debouncedGlobalFiler]);
 
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
