@@ -3,7 +3,7 @@ import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/controller/controller-list")({
+export const Route = createFileRoute("/_doc/controller/controller-list")({
   component: Page,
   head: (ctx) => ({
     meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],

@@ -1,4 +1,6 @@
 import { createDiscourseFileRoute } from "@/components/discourse-doc";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/airspace/vfr")(createDiscourseFileRoute("/airspace/vfr", "7183", "7209"));
+export const Route = createFileRoute("/_doc/airspace/fir")(
+  createDiscourseFileRoute("/_doc/airspace/fir", "7170", "7207"),
+);

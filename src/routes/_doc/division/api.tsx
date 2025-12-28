@@ -2,7 +2,7 @@ import { ApiReferenceReact } from "@scalar/api-reference-react";
 import scalaCss from "@scalar/api-reference-react/style.css?url";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/division/api")({
+export const Route = createFileRoute("/_doc/division/api")({
   component: RouteComponent,
   head() {
     return { links: [{ rel: "stylesheet", href: scalaCss }] };

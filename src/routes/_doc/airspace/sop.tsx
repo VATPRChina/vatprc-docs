@@ -7,12 +7,12 @@ import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/controller/loa")({
+export const Route = createFileRoute("/_doc/airspace/sop")({
   component: Page,
   async loader() {
-    return [await getAllDocuments(), await getDiscourseDocumentCode("7217")] as const;
+    return [await getAllDocuments(), await getDiscourseDocumentCode("7532")] as const;
   },
-  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Letter of Agreement`) }] }),
+  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Standard Operation Procedures`) }] }),
 });
 
 function Page() {
@@ -27,14 +27,21 @@ function Page() {
         </Alert>
       )}
       <h1 className="my-4 text-center text-3xl font-bold">
-        <Trans>List of LOAs</Trans>
+        <Trans>List of SOPs</Trans>
       </h1>
-      <DocList documents={documents.filter((doc) => doc.webPath.startsWith("/docs/loa"))} />
+      <DocList
+        documents={documents.filter(
+          (doc) =>
+            doc.webPath.startsWith("/docs/aerodromes") ||
+            doc.webPath.startsWith("/docs/enroute") ||
+            doc.webPath.startsWith("/docs/terminal_area"),
+        )}
+      />
       <hr />
       <h1 className="my-4 text-center text-3xl font-bold">
-        <Trans>Other LOAs</Trans>
+        <Trans>Other SOPs</Trans>
       </h1>
-      <DiscourseDocument code={docCode} cn="7217" en="7217" />
+      <DiscourseDocument code={docCode} cn="7532" en="7532" />
     </div>
   );
 }
