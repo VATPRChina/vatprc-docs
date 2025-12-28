@@ -21,6 +21,7 @@ import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as ControllersTrainingsIndexRouteImport } from './routes/controllers/trainings/index'
 import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
@@ -106,6 +107,12 @@ const AuthCallbackRoute = AuthCallbackRouteImport.update({
   path: '/auth/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ControllersTrainingsIndexRoute =
+  ControllersTrainingsIndexRouteImport.update({
+    id: '/controllers/trainings/',
+    path: '/controllers/trainings/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ControllersApplicationsIndexRoute =
   ControllersApplicationsIndexRouteImport.update({
     id: '/controllers/applications/',
@@ -272,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
+  '/controllers/trainings': typeof ControllersTrainingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -308,6 +316,7 @@ export interface FileRoutesByTo {
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
+  '/controllers/trainings': typeof ControllersTrainingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -347,6 +356,7 @@ export interface FileRoutesById {
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications/': typeof ControllersApplicationsIndexRoute
+  '/controllers/trainings/': typeof ControllersTrainingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -387,6 +397,7 @@ export interface FileRouteTypes {
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications'
+    | '/controllers/trainings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -423,6 +434,7 @@ export interface FileRouteTypes {
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications'
+    | '/controllers/trainings'
   id:
     | '__root__'
     | '/'
@@ -461,6 +473,7 @@ export interface FileRouteTypes {
     | '/controllers/applications/new'
     | '/docs/utils/image'
     | '/controllers/applications/'
+    | '/controllers/trainings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -496,6 +509,7 @@ export interface RootRouteChildren {
   ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
   ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
+  ControllersTrainingsIndexRoute: typeof ControllersTrainingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -582,6 +596,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/callback'
       fullPath: '/auth/callback'
       preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/trainings/': {
+      id: '/controllers/trainings/'
+      path: '/controllers/trainings'
+      fullPath: '/controllers/trainings'
+      preLoaderRoute: typeof ControllersTrainingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers/applications/': {
@@ -816,6 +837,7 @@ const rootRouteChildren: RootRouteChildren = {
   ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,
   ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,
+  ControllersTrainingsIndexRoute: ControllersTrainingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

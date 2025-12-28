@@ -201,6 +201,11 @@ const contents = [
             <Trans>ATC Applications</Trans>
           </NavMenuLink>
         </RequireRole>
+        <RequireRole role={["controller", "controller-training-mentor"]}>
+          <NavMenuLink href="/controllers/trainings">
+            <Trans>ATC Trainings</Trans>
+          </NavMenuLink>
+        </RequireRole>
       </ul>
     ),
   },

@@ -24,6 +24,13 @@ export const useUser = () => {
   return data?.user;
 };
 
+export const useControllerPermissions = () => {
+  const { data } = $api.useQuery("get", "/api/users/me/atc/permissions", {}, { retry: false });
+  return (
+    data?.filter((p) => !(p.state === "solo" && p.solo_expires_at && isBefore(Date.now(), p.solo_expires_at))) ?? []
+  );
+};
+
 const POSITION_STATE_PRIORITY: Record<components["schemas"]["UserControllerState"], number> = {
   student: 0,
   "under-mentor": 1,
