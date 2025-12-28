@@ -4,7 +4,7 @@ import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Anchor, Button, Card, Loader } from "@mantine/core";
+import { Anchor, Card, Loader } from "@mantine/core";
 import { ActionIcon, ActionIconGroup } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
