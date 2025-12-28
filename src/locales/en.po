@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/table.tsx:129
+#: src/components/table.tsx:136
 msgid "{size} items/page"
 msgstr "{size} items/page"
 
@@ -26,7 +26,7 @@ msgstr "{size} items/page"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
-#: src/components/app-footer.tsx:7
+#: src/components/app/app-footer.tsx:7
 msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
@@ -54,24 +54,34 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/app-nav-menu.tsx:50
+#: src/components/app/app-nav-menu.tsx:50
 msgid "About Us"
 msgstr "About Us"
 
-#: src/components/controller-list.tsx:444
+#: src/components/homepage/controller-list.tsx:444
 msgid "Absent"
 msgstr "Absent"
 
-#: src/components/atc-application-status.tsx:16
-#: src/components/atc-application-status.tsx:42
-#: src/components/atc-training/training-application-list.tsx:24
+#: src/components/atc-training/training-application-responses.tsx:53
+msgid "Accept"
+msgstr "Accept"
+
+#: src/components/atc-application/atc-application-status.tsx:16
+#: src/components/atc-application/atc-application-status.tsx:42
+#: src/components/atc-training/training-application-list.tsx:25
+#: src/components/atc-training/training-application-responses.tsx:76
 msgid "Accepted"
 msgstr "Accepted"
 
-#: src/components/atc-application-list.tsx:33
+#: src/components/atc-application/atc-application-list.tsx:33
+#: src/components/atc-training/training-list.tsx:27
 #: src/routes/users/index.tsx:129
 msgid "Actions"
 msgstr "Actions"
+
+#: src/routes/controllers/trainings/index.tsx:24
+msgid "Active Trainings"
+msgstr "Active Trainings"
 
 #: src/routes/flights/$callsign.tsx:178
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
@@ -85,7 +95,7 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app-nav-menu.tsx:181
+#: src/components/app/app-nav-menu.tsx:181
 msgid "Admin"
 msgstr "Admin"
 
@@ -101,7 +111,7 @@ msgstr "Aircraft Type"
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
-#: src/components/app-nav-menu.tsx:99
+#: src/components/app/app-nav-menu.tsx:99
 msgid "Airspace"
 msgstr "Airspace"
 
@@ -113,7 +123,7 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/components/app-nav-menu.tsx:59
+#: src/components/app/app-nav-menu.tsx:59
 msgid "Announcement"
 msgstr "Announcement"
 
@@ -121,31 +131,31 @@ msgstr "Announcement"
 msgid "API Client"
 msgstr "API Client"
 
-#: src/components/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:89
 msgid "API Document"
 msgstr "API Document"
 
-#: src/components/atc-application-form.tsx:76
+#: src/components/atc-application/atc-application-form.tsx:76
 msgid "Application Information"
 msgstr "Application Information"
 
-#: src/components/atc-application-status.tsx:102
+#: src/components/atc-application/atc-application-status.tsx:102
 msgid "Application review updated"
 msgstr "Application review updated"
 
-#: src/components/atc-application-form.tsx:37
+#: src/components/atc-application/atc-application-form.tsx:37
 msgid "Application submitted"
 msgstr "Application submitted"
 
-#: src/components/atc-application-form.tsx:48
+#: src/components/atc-application/atc-application-form.tsx:48
 msgid "Application updated"
 msgstr "Application updated"
 
-#: src/routes/controllers/trainings/index.tsx:17
+#: src/routes/controllers/trainings/index.tsx:39
 msgid "Applications"
 msgstr "Applications"
 
-#: src/components/atc-application-list.tsx:28
+#: src/components/atc-application/atc-application-list.tsx:28
 msgid "Applied At"
 msgstr "Applied At"
 
@@ -187,16 +197,16 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
-#: src/routes/controllers/applications/$id.tsx:18
+#: src/routes/controllers/applications/$id.tsx:21
 msgid "ATC Application"
 msgstr "ATC Application"
 
-#: src/components/app-nav-menu.tsx:201
+#: src/components/app/app-nav-menu.tsx:201
 #: src/routes/controllers/applications/index.tsx:18
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/app-nav-menu.tsx:166
+#: src/components/app/app-nav-menu.tsx:166
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -205,12 +215,12 @@ msgstr "ATC Center"
 msgid "ATC Permission"
 msgstr "ATC Permission"
 
-#: src/components/app-nav-menu.tsx:105
+#: src/components/app/app-nav-menu.tsx:105
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/components/app-nav-menu.tsx:206
-#: src/routes/controllers/trainings/index.tsx:14
+#: src/components/app/app-nav-menu.tsx:206
+#: src/routes/controllers/trainings/index.tsx:16
 msgid "ATC Trainings"
 msgstr "ATC Trainings"
 
@@ -222,11 +232,11 @@ msgstr "Back"
 msgid "Basic Info"
 msgstr "Basic Info"
 
-#: src/components/atc-application-form.tsx:67
+#: src/components/atc-application/atc-application-form.tsx:67
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/app-nav-menu.tsx:159
+#: src/components/app/app-nav-menu.tsx:159
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
@@ -263,7 +273,7 @@ msgstr "Center"
 msgid "Certified"
 msgstr "Certified"
 
-#: src/components/app-nav-menu.tsx:134
+#: src/components/app/app-nav-menu.tsx:134
 msgid "Charts"
 msgstr "Charts"
 
@@ -271,7 +281,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/components/app-nav-menu.tsx:102
+#: src/components/app/app-nav-menu.tsx:102
 msgid "China RVSM"
 msgstr "China RVSM"
 
@@ -287,15 +297,20 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/atc-application-form.tsx:70
-#: src/components/atc-application-list.tsx:18
+#: src/components/atc-application/atc-application-form.tsx:70
+#: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:69
 #: src/routes/users/index.tsx:53
 #: src/routes/users/me.tsx:50
 msgid "CID"
 msgstr "CID"
 
-#: src/components/app-nav-menu.tsx:127
+#: src/components/atc-training/training-application-responses.tsx:44
+#: src/components/atc-training/training-application-responses.tsx:87
+msgid "Comment"
+msgstr "Comment"
+
+#: src/components/app/app-nav-menu.tsx:127
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
@@ -307,7 +322,7 @@ msgstr "Controller"
 msgid "Controller Info"
 msgstr "Controller Info"
 
-#: src/components/app-nav-menu.tsx:153
+#: src/components/app/app-nav-menu.tsx:153
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:18
 msgid "Controller List"
@@ -321,7 +336,7 @@ msgstr "Controller Training Director"
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
-#: src/components/app-nav-menu.tsx:149
+#: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:156
 #: src/routes/events/$id.tsx:47
 msgid "Controllers"
@@ -387,7 +402,7 @@ msgstr "CTOT"
 msgid "Current Value: "
 msgstr "Current Value: "
 
-#: src/components/theme-toggle.tsx:25
+#: src/components/app/theme-toggle.tsx:25
 msgid "Dark"
 msgstr "Dark"
 
@@ -418,7 +433,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-application-form.tsx:87
+#: src/components/atc-application/atc-application-form.tsx:87
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "Edit"
@@ -431,11 +446,11 @@ msgstr "Edit ATC permissions"
 msgid "Edit ATC Position {callsign}"
 msgstr "Edit ATC Position {callsign}"
 
-#: src/components/discourse-doc.tsx:73
+#: src/components/doc/discourse-doc.tsx:73
 msgid "Edit Chinese"
 msgstr "Edit Chinese"
 
-#: src/components/discourse-doc.tsx:64
+#: src/components/doc/discourse-doc.tsx:64
 msgid "Edit English"
 msgstr "Edit English"
 
@@ -462,7 +477,8 @@ msgid "ELDT"
 msgstr "ELDT"
 
 #: src/components/atc-training/training-application-create.tsx:87
-#: src/components/atc-training/training-application-list.tsx:52
+#: src/components/atc-training/training-application-list.tsx:53
+#: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/event-create.tsx:113
@@ -486,8 +502,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/components/app-nav-menu.tsx:86
-#: src/components/app-nav-menu.tsx:186
+#: src/components/app/app-nav-menu.tsx:86
+#: src/components/app/app-nav-menu.tsx:186
 msgid "Event"
 msgstr "Event"
 
@@ -507,7 +523,7 @@ msgstr "Event end"
 msgid "Event start"
 msgstr "Event start"
 
-#: src/components/discourse-doc.tsx:123
+#: src/components/doc/discourse-doc.tsx:123
 #: src/routes/docs/$.tsx:38
 msgid "Failed to load document"
 msgstr "Failed to load document"
@@ -522,6 +538,10 @@ msgstr "Feedback"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 
+#: src/routes/controllers/trainings/index.tsx:27
+msgid "Finished Trainings"
+msgstr "Finished Trainings"
+
 #: src/routes/flights/$callsign.tsx:106
 msgctxt "feet"
 msgid "flight level"
@@ -535,7 +555,7 @@ msgstr "Flight looks good. Please confirm with the clearance delivery controller
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
-#: src/components/app-nav-menu.tsx:143
+#: src/components/app/app-nav-menu.tsx:143
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -556,12 +576,12 @@ msgstr "Flight Service Station"
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
-#: src/components/app-nav-menu.tsx:78
+#: src/components/app/app-nav-menu.tsx:78
 #: src/routes/index.tsx:119
 msgid "Forum"
 msgstr "Forum"
 
-#: src/components/recent-events.tsx:182
+#: src/components/homepage/recent-events.tsx:182
 msgid "Fri"
 msgstr "Fri"
 
@@ -569,23 +589,23 @@ msgstr "Fri"
 msgid "Full name"
 msgstr "Full name"
 
-#: src/components/atc-application-form.tsx:73
+#: src/components/atc-application/atc-application-form.tsx:73
 msgid "Full Name"
 msgstr "Full Name"
 
-#: src/components/table.tsx:141
+#: src/components/table.tsx:148
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/components/table.tsx:165
+#: src/components/table.tsx:172
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/components/table.tsx:157
+#: src/components/table.tsx:164
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/components/table.tsx:149
+#: src/components/table.tsx:156
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
@@ -597,7 +617,7 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/app-nav-menu.tsx:192
+#: src/components/app/app-nav-menu.tsx:192
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -625,12 +645,12 @@ msgstr "Import slots"
 msgid "Import Slots"
 msgstr "Import Slots"
 
-#: src/components/recent-events.tsx:74
+#: src/components/homepage/recent-events.tsx:74
 msgid "In This Week"
 msgstr "In This Week"
 
-#: src/components/atc-application-status.tsx:15
-#: src/components/atc-application-status.tsx:32
+#: src/components/atc-application/atc-application-status.tsx:15
+#: src/components/atc-application/atc-application-status.tsx:32
 msgid "In Waitlist"
 msgstr "In Waitlist"
 
@@ -638,11 +658,11 @@ msgstr "In Waitlist"
 msgid "Instructor"
 msgstr "Instructor"
 
-#: src/components/app-nav-menu.tsx:62
+#: src/components/app/app-nav-menu.tsx:62
 msgid "Introduction"
 msgstr "Introduction"
 
-#: src/components/app-nav-menu.tsx:124
+#: src/components/app/app-nav-menu.tsx:124
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
@@ -658,12 +678,12 @@ msgstr "Learn more about China RVSM"
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
 
-#: src/components/app-nav-menu.tsx:175
+#: src/components/app/app-nav-menu.tsx:175
 #: src/routes/_doc/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
 
-#: src/components/theme-toggle.tsx:22
+#: src/components/app/theme-toggle.tsx:22
 msgid "Light"
 msgstr "Light"
 
@@ -679,19 +699,19 @@ msgstr "List of SOPs"
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
-#: src/components/user-info.tsx:41
+#: src/components/app/user-info.tsx:41
 msgid "Loading"
 msgstr "Loading"
 
-#: src/components/user-info.tsx:57
+#: src/components/app/user-info.tsx:57
 msgid "Login"
 msgstr "Login"
 
-#: src/components/app-nav-menu.tsx:71
+#: src/components/app/app-nav-menu.tsx:71
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
-#: src/components/user-info.tsx:32
+#: src/components/app/user-info.tsx:32
 msgid "Logout"
 msgstr "Logout"
 
@@ -699,7 +719,7 @@ msgstr "Logout"
 msgid "Match designated route"
 msgstr "Match designated route"
 
-#: src/components/app-nav-menu.tsx:74
+#: src/components/app/app-nav-menu.tsx:74
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
@@ -723,15 +743,15 @@ msgstr "metric odd flight level (meters)"
 msgid "Minimum State"
 msgstr "Minimum State"
 
-#: src/components/recent-events.tsx:170
+#: src/components/homepage/recent-events.tsx:170
 msgid "Mon"
 msgstr "Mon"
 
-#: src/components/app-nav-menu.tsx:169
+#: src/components/app/app-nav-menu.tsx:169
 msgid "Moodle"
 msgstr "Moodle"
 
-#: src/components/atc-application-list.tsx:19
+#: src/components/atc-application/atc-application-list.tsx:19
 #: src/routes/users/index.tsx:56
 msgid "Name"
 msgstr "Name"
@@ -740,11 +760,19 @@ msgstr "Name"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
-#: src/components/recent-events.tsx:240
+#: src/components/atc-training/training-application-responses.tsx:89
+msgid "No comments"
+msgstr "No comments"
+
+#: src/components/table.tsx:129
+msgid "No data"
+msgstr "No data"
+
+#: src/components/homepage/recent-events.tsx:240
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
-#: src/components/online-pilots.tsx:53
+#: src/components/homepage/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "No online pilot."
 
@@ -776,7 +804,7 @@ msgstr "Not designated"
 msgid "Not designated route"
 msgstr "Not designated route"
 
-#: src/components/app-not-found.tsx:12
+#: src/components/app/app-not-found.tsx:12
 msgid "Nothing to see here"
 msgstr "Nothing to see here"
 
@@ -793,7 +821,7 @@ msgstr "Online Controllers"
 msgid "Online Pilots"
 msgstr "Online Pilots"
 
-#: src/components/app-nav-menu.tsx:95
+#: src/components/app/app-nav-menu.tsx:95
 msgid "Operation"
 msgstr "Operation"
 
@@ -813,11 +841,11 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/components/table.tsx:132
+#: src/components/table.tsx:139
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
 
-#: src/components/app-not-found.tsx:15
+#: src/components/app/app-not-found.tsx:15
 msgid "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 msgstr "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 
@@ -825,7 +853,7 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "PBN"
 msgstr "PBN"
 
-#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:17
 msgid "Pending"
 msgstr "Pending"
 
@@ -843,11 +871,11 @@ msgstr "Pick a suitable cruising level."
 msgid "Pilot"
 msgstr "Pilot"
 
-#: src/components/app-nav-menu.tsx:131
+#: src/components/app/app-nav-menu.tsx:131
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
-#: src/components/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:117
 msgid "Pilots"
 msgstr "Pilots"
 
@@ -876,15 +904,15 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app-nav-menu.tsx:196
+#: src/components/app/app-nav-menu.tsx:196
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
-#: src/components/app-nav-menu.tsx:68
+#: src/components/app/app-nav-menu.tsx:68
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/app-nav-menu.tsx:156
+#: src/components/app/app-nav-menu.tsx:156
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
@@ -892,9 +920,14 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/components/atc-application-status.tsx:17
-#: src/components/atc-application-status.tsx:50
-#: src/components/atc-training/training-application-list.tsx:32
+#: src/components/atc-training/training-application-responses.tsx:61
+msgid "Reject"
+msgstr "Reject"
+
+#: src/components/atc-application/atc-application-status.tsx:17
+#: src/components/atc-application/atc-application-status.tsx:50
+#: src/components/atc-training/training-application-list.tsx:33
+#: src/components/atc-training/training-application-responses.tsx:80
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -912,7 +945,7 @@ msgstr "Remark"
 msgid "Restricted airway"
 msgstr "Restricted airway"
 
-#: src/routes/controllers/applications/$id.tsx:23
+#: src/routes/controllers/applications/$id.tsx:26
 msgid "Review"
 msgstr "Review"
 
@@ -945,10 +978,11 @@ msgstr "Route"
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 
-#: src/components/recent-events.tsx:185
+#: src/components/homepage/recent-events.tsx:185
 msgid "Sat"
 msgstr "Sat"
 
+#: src/components/atc-training/training-response.tsx:59
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:192
 #: src/components/preferred-route-create.tsx:202
@@ -959,7 +993,7 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/components/table.tsx:79
+#: src/components/table.tsx:81
 msgid "Search..."
 msgstr "Search..."
 
@@ -967,19 +1001,19 @@ msgstr "Search..."
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
-#: src/components/app-nav-menu.tsx:172
+#: src/components/app/app-nav-menu.tsx:172
 msgid "Sector Files"
 msgstr "Sector Files"
 
-#: src/components/controller-list.tsx:408
+#: src/components/homepage/controller-list.tsx:408
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
 
-#: src/components/online-pilots.tsx:69
+#: src/components/homepage/online-pilots.tsx:69
 msgid "Show all pilots"
 msgstr "Show all pilots"
 
-#: src/components/online-pilots.tsx:69
+#: src/components/homepage/online-pilots.tsx:69
 msgid "Show less pilots"
 msgstr "Show less pilots"
 
@@ -1000,18 +1034,19 @@ msgstr "Solo Expiration Date"
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
-#: src/components/app-nav-menu.tsx:65
+#: src/components/app/app-nav-menu.tsx:65
 #: src/routes/users/index.tsx:43
 msgid "Staff"
 msgstr "Staff"
 
-#: src/components/app-nav-menu.tsx:108
+#: src/components/app/app-nav-menu.tsx:108
 #: src/routes/_doc/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
 #: src/components/atc-training/training-application-create.tsx:70
-#: src/components/atc-training/training-application-list.tsx:48
+#: src/components/atc-training/training-application-list.tsx:49
+#: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:110
 #: src/components/event/atc-slot-list.tsx:25
 #: src/components/event/event-create.tsx:96
@@ -1022,13 +1057,13 @@ msgstr "Start at"
 msgid "Start booking at"
 msgstr "Start booking at"
 
-#: src/components/app-nav-menu.tsx:121
+#: src/components/app/app-nav-menu.tsx:121
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
-#: src/components/atc-application-list.tsx:21
-#: src/components/atc-application-status.tsx:119
-#: src/components/atc-training/training-application-list.tsx:42
+#: src/components/atc-application/atc-application-list.tsx:21
+#: src/components/atc-application/atc-application-status.tsx:119
+#: src/components/atc-training/training-application-list.tsx:43
 msgid "Status"
 msgstr "Status"
 
@@ -1036,33 +1071,33 @@ msgstr "Status"
 msgid "Student"
 msgstr "Student"
 
-#: src/components/atc-application-form.tsx:87
-#: src/components/atc-application-status.tsx:136
+#: src/components/atc-application/atc-application-form.tsx:87
+#: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "Submit"
 
-#: src/components/atc-application-status.tsx:14
-#: src/components/atc-application-status.tsx:24
+#: src/components/atc-application/atc-application-status.tsx:14
+#: src/components/atc-application/atc-application-status.tsx:24
 msgid "Submitted"
 msgstr "Submitted"
 
-#: src/components/recent-events.tsx:188
+#: src/components/homepage/recent-events.tsx:188
 msgid "Sun"
 msgstr "Sun"
 
-#: src/components/language-toggle.tsx:17
+#: src/components/app/language-toggle.tsx:17
 msgid "Switch to Chinese"
 msgstr "Switch to Chinese"
 
-#: src/components/language-toggle.tsx:17
+#: src/components/app/language-toggle.tsx:17
 msgid "Switch to English"
 msgstr "Switch to English"
 
-#: src/components/theme-toggle.tsx:28
+#: src/components/app/theme-toggle.tsx:28
 msgid "System"
 msgstr "System"
 
-#: src/components/app-not-found.tsx:21
+#: src/components/app/app-not-found.tsx:21
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
 
@@ -1096,7 +1131,7 @@ msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to b
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 
-#: src/components/atc-application-status.tsx:103
+#: src/components/atc-application/atc-application-status.tsx:103
 msgid "The ATC application review has been updated successfully."
 msgstr "The ATC application review has been updated successfully."
 
@@ -1129,7 +1164,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/sheet.tsx:62
+#: src/components/sheet.tsx:65
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
@@ -1161,7 +1196,7 @@ msgstr "The route contains an airway that requires controller approval."
 msgid "The submitted route is:<0>{route}</0>"
 msgstr "The submitted route is: <0>{route}</0>"
 
-#: src/components/online-controllers.tsx:49
+#: src/components/homepage/online-controllers.tsx:49
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
@@ -1174,7 +1209,7 @@ msgstr "This feature is under construction and is not available to use."
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
 
-#: src/components/recent-events.tsx:179
+#: src/components/homepage/recent-events.tsx:179
 msgid "Thu"
 msgstr "Thu"
 
@@ -1191,12 +1226,13 @@ msgid "Time:"
 msgstr "Time:"
 
 #: src/components/atc-training/training-application-create.tsx:58
-#: src/components/atc-training/training-application-list.tsx:40
+#: src/components/atc-training/training-application-list.tsx:41
+#: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:83
 msgid "Title"
 msgstr "Title"
 
-#: src/components/theme-toggle.tsx:15
+#: src/components/app/theme-toggle.tsx:15
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
@@ -1204,13 +1240,40 @@ msgstr "Toggle theme"
 msgid "Tower"
 msgstr "Tower"
 
-#: src/components/atc-training/training-application-list.tsx:45
+#: src/components/atc-training/training-application-list.tsx:46
+#: src/components/atc-training/training-list.tsx:13
 msgid "Trainee CID"
 msgstr "Trainee CID"
 
-#: src/components/atc-training/training-application-list.tsx:46
+#: src/components/atc-training/training-application-list.tsx:47
+#: src/components/atc-training/training-list.tsx:14
 msgid "Trainee Name"
 msgstr "Trainee Name"
+
+#: src/components/atc-training/training-application-responses.tsx:70
+msgid "Trainer"
+msgstr "Trainer"
+
+#: src/components/atc-training/training-list.tsx:15
+msgid "Trainer CID"
+msgstr "Trainer CID"
+
+#: src/components/atc-training/training-list.tsx:16
+msgid "Trainer Name"
+msgstr "Trainer Name"
+
+#: src/components/atc-training/training-application-responses.tsx:42
+#: src/components/atc-training/training-response.tsx:50
+msgid "Training Application Responses"
+msgstr "Training Application Responses"
+
+#: src/components/atc-training/training-response.tsx:48
+msgid "Training Record"
+msgstr "Training Record"
+
+#: src/routes/controllers/trainings/index.tsx:19
+msgid "Trainings"
+msgstr "Trainings"
 
 #: src/routes/flights/$callsign.tsx:376
 msgid "Transponder"
@@ -1221,7 +1284,7 @@ msgstr "Transponder"
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
 
-#: src/components/recent-events.tsx:173
+#: src/components/homepage/recent-events.tsx:173
 msgid "Tue"
 msgstr "Tue"
 
@@ -1234,7 +1297,7 @@ msgstr "Under Mentor"
 msgid "Unknown: {value}"
 msgstr "Unknown: {value}"
 
-#: src/components/controller-list.tsx:322
+#: src/components/homepage/controller-list.tsx:322
 msgid "until"
 msgstr "until"
 
@@ -1254,16 +1317,16 @@ msgstr "Upload image"
 msgid "User"
 msgstr "User"
 
-#: src/components/user-info.tsx:29
+#: src/components/app/user-info.tsx:29
 #: src/routes/users/me.tsx:43
 msgid "User Info"
 msgstr "User Info"
 
-#: src/components/app-nav-menu.tsx:189
+#: src/components/app/app-nav-menu.tsx:189
 msgid "User List"
 msgstr "User List"
 
-#: src/components/app-nav-menu.tsx:137
+#: src/components/app/app-nav-menu.tsx:137
 msgid "vACDM"
 msgstr "vACDM"
 
@@ -1283,21 +1346,25 @@ msgstr "Validation Result"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/components/app-header.tsx:21
-#: src/components/app-header.tsx:22
+#: src/components/app/app-header.tsx:21
+#: src/components/app/app-header.tsx:22
 #: src/routes/index.tsx:27
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM P.R.China Division"
 
-#: src/components/app-nav-menu.tsx:111
+#: src/components/app/app-nav-menu.tsx:111
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/components/atc-application-list.tsx:40
+#: src/components/atc-application/atc-application-list.tsx:40
 msgid "View"
 msgstr "View"
 
-#: src/components/app-nav-menu.tsx:162
+#: src/components/atc-training/training-application-responses.tsx:40
+msgid "View Responses"
+msgstr "View Responses"
+
+#: src/components/app/app-nav-menu.tsx:162
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
@@ -1309,15 +1376,15 @@ msgstr "Volunteer"
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
-#: src/components/atc-application-status.tsx:51
+#: src/components/atc-application/atc-application-status.tsx:51
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
-#: src/components/app-nav-menu.tsx:140
+#: src/components/app/app-nav-menu.tsx:140
 msgid "Weather"
 msgstr "Weather"
 
-#: src/components/recent-events.tsx:176
+#: src/components/homepage/recent-events.tsx:176
 msgid "Wed"
 msgstr "Wed"
 
@@ -1325,22 +1392,22 @@ msgstr "Wed"
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
 
-#: src/components/atc-application-status.tsx:43
+#: src/components/atc-application/atc-application-status.tsx:43
 msgid "Your application has been approved. Welcome to start growing to be a controller!"
 msgstr "Your application has been approved. Welcome to start growing to be a controller!"
 
-#: src/components/atc-application-status.tsx:33
+#: src/components/atc-application/atc-application-status.tsx:33
 msgid "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 msgstr "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 
-#: src/components/atc-application-status.tsx:25
+#: src/components/atc-application/atc-application-status.tsx:25
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "Your application has been submitted and is pending review by the staff."
 
-#: src/components/atc-application-form.tsx:38
+#: src/components/atc-application/atc-application-form.tsx:38
 msgid "Your ATC application has been submitted successfully."
 msgstr "Your ATC application has been submitted successfully."
 
-#: src/components/atc-application-form.tsx:49
+#: src/components/atc-application/atc-application-form.tsx:49
 msgid "Your ATC application has been updated successfully."
 msgstr "Your ATC application has been updated successfully."

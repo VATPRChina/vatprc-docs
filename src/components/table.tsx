@@ -124,6 +124,11 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
               ))}
         </Table.Tbody>
       </Table>
+      {table.getRowCount() === 0 && !isLoading && (
+        <div className="text-dimmed flex items-center justify-center p-6">
+          <Trans>No data</Trans>
+        </div>
+      )}
       <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
         <Select
           value={`${table.getState().pagination.pageSize}`}
