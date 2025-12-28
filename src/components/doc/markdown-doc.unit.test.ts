@@ -40,7 +40,7 @@ const getAllDocumentPaths = async () => {
   const docPaths = documents
     .flatMap((doc) => doc.children)
     .filter((doc) => doc.children.length === 0)
-    .map((doc) => path.relative(path.resolve(import.meta.filename, "../../../docs"), doc.path));
+    .map((doc) => path.relative(path.resolve(import.meta.filename, "../../../../docs"), doc.path));
   return docPaths;
 };
 
