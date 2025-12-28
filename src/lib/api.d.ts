@@ -9137,6 +9137,7 @@ export interface components {
       | "controller-training-instructor"
       | "controller-training-mentor"
       | "controller-training-sop-editor"
+      | "community-director"
       | "operation-director"
       | "operation-director-assistant"
       | "operation-sector-editor"
