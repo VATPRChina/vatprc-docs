@@ -1,5 +1,6 @@
 import { DateTime } from "../event/datetime";
 import { RichTable } from "../table";
+import { TrainingApplicationResponsesModal } from "./training-application-responses";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { renderWithMap } from "@/lib/utils";
@@ -54,6 +55,7 @@ const columns = [
   }),
   col.display({
     id: "actions",
+    cell: ({ row }) => <TrainingApplicationResponsesModal id={row.original.id} />,
   }),
 ];
 
