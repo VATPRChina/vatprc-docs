@@ -1,5 +1,5 @@
-import { MarkdownDoc } from "@/components/markdown-doc";
-import { buildMarkdownDocSync } from "@/components/markdown-doc-run";
+import { MarkdownDoc } from "@/components/doc/markdown-doc";
+import { buildMarkdownDocSync } from "@/components/doc/markdown-doc-run";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton, Alert } from "@mantine/core";
@@ -11,7 +11,7 @@ export const Route = createFileRoute("/docs/$")({
   async loader(ctx) {
     try {
       const source = await getDocument({ data: `${ctx.params._splat}.md` });
-      const { compileMarkdownDoc } = await import("@/components/markdown-doc-compile");
+      const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
       const doc = await compileMarkdownDoc(source);
       return doc;
     } catch (exception) {

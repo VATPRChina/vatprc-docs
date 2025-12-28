@@ -1,5 +1,5 @@
-import { AppFooter } from "@/components/app-footer";
-import { AppHeader } from "@/components/app-header";
+import { AppFooter } from "@/components/app/app-footer";
+import { AppHeader } from "@/components/app/app-header";
 import { getLocale, getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";

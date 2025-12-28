@@ -12,8 +12,8 @@ export interface DocumentEntry {
 }
 
 const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
-  const { compileMarkdownDoc } = await import("@/components/markdown-doc-compile");
-  const { buildMarkdownDoc } = await import("@/components/markdown-doc-run");
+  const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
+  const { buildMarkdownDoc } = await import("@/components/doc/markdown-doc-run");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
   for await (const entry of dirEntries) {

@@ -1,5 +1,5 @@
+import { RichTable } from "../table";
 import { APPLICATION_STATUS } from "./atc-application-status";
-import { RichTable } from "./table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";

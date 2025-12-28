@@ -1,4 +1,4 @@
-import { NotFound } from "./components/app-not-found";
+import { NotFound } from "./components/app/app-not-found";
 import { getLocale } from "./lib/i18n";
 import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";

@@ -1,4 +1,4 @@
-import { Sheet } from "./sheet";
+import { Sheet } from "../sheet";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { useLingui, Trans } from "@lingui/react/macro";

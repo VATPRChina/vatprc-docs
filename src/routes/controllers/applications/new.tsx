@@ -1,4 +1,4 @@
-import { AtcApplicationForm } from "@/components/atc-application-form";
+import { AtcApplicationForm } from "@/components/atc-application/atc-application-form";
 import { BackButton } from "@/components/back-button";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";

@@ -1,4 +1,4 @@
-import { ControllerList } from "@/components/controller-list";
+import { ControllerList } from "@/components/homepage/controller-list";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";

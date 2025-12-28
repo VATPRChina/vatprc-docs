@@ -1,5 +1,5 @@
-import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/discourse-doc";
-import { DocList } from "@/components/doc-list";
+import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/doc/discourse-doc";
+import { DocList } from "@/components/doc/doc-list";
 import { getAllDocuments } from "@/lib/doc";
 import { getLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";

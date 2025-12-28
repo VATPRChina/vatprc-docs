@@ -1,4 +1,4 @@
-import { createDiscourseFileRoute } from "@/components/discourse-doc";
+import { createDiscourseFileRoute } from "@/components/doc/discourse-doc";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_doc/controller/visiting-and-transferring")(

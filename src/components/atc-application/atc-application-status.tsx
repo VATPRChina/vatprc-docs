@@ -1,4 +1,4 @@
-import { Sheet } from "./sheet";
+import { Sheet } from "../sheet";
 import { components } from "@/lib/api";
 import { $api, usePermission } from "@/lib/client";
 import { renderWithMap } from "@/lib/utils";

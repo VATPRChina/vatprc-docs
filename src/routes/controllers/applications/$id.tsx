@@ -1,5 +1,8 @@
-import { AtcApplicationForm } from "@/components/atc-application-form";
-import { AtcApplicationStatusAlert, AtcApplicationStatusEdit } from "@/components/atc-application-status";
+import { AtcApplicationForm } from "@/components/atc-application/atc-application-form";
+import {
+  AtcApplicationStatusAlert,
+  AtcApplicationStatusEdit,
+} from "@/components/atc-application/atc-application-status";
 import { BackButton } from "@/components/back-button";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";

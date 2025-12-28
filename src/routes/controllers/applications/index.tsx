@@ -1,4 +1,4 @@
-import { AtcApplicationList } from "@/components/atc-application-list";
+import { AtcApplicationList } from "@/components/atc-application/atc-application-list";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";

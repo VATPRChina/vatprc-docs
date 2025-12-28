@@ -1,5 +1,5 @@
+import { RequireRole } from "../require-role";
 import { LanguageToggle } from "./language-toggle";
-import { RequireRole } from "./require-role";
 import { ModeToggle } from "./theme-toggle";
 import { UserInfo } from "./user-info";
 import { components } from "@/lib/api";
