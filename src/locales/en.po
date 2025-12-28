@@ -54,7 +54,7 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/app/app-nav-menu.tsx:50
+#: src/components/app/app-nav-menu.tsx:49
 msgid "About Us"
 msgstr "About Us"
 
@@ -95,7 +95,7 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app/app-nav-menu.tsx:181
+#: src/components/app/app-nav-menu.tsx:175
 msgid "Admin"
 msgstr "Admin"
 
@@ -111,7 +111,7 @@ msgstr "Aircraft Type"
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
-#: src/components/app/app-nav-menu.tsx:99
+#: src/components/app/app-nav-menu.tsx:93
 msgid "Airspace"
 msgstr "Airspace"
 
@@ -123,7 +123,7 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/components/app/app-nav-menu.tsx:59
+#: src/components/app/app-nav-menu.tsx:58
 msgid "Announcement"
 msgstr "Announcement"
 
@@ -131,7 +131,7 @@ msgstr "Announcement"
 msgid "API Client"
 msgstr "API Client"
 
-#: src/components/app/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:83
 msgid "API Document"
 msgstr "API Document"
 
@@ -201,12 +201,12 @@ msgstr "Arrival"
 msgid "ATC Application"
 msgstr "ATC Application"
 
-#: src/components/app/app-nav-menu.tsx:201
+#: src/components/app/app-nav-menu.tsx:195
 #: src/routes/controllers/applications/index.tsx:18
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/app/app-nav-menu.tsx:166
+#: src/components/app/app-nav-menu.tsx:160
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -215,11 +215,11 @@ msgstr "ATC Center"
 msgid "ATC Permission"
 msgstr "ATC Permission"
 
-#: src/components/app/app-nav-menu.tsx:105
+#: src/components/app/app-nav-menu.tsx:99
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/components/app/app-nav-menu.tsx:206
+#: src/components/app/app-nav-menu.tsx:200
 #: src/routes/controllers/trainings/index.tsx:16
 msgid "ATC Trainings"
 msgstr "ATC Trainings"
@@ -236,7 +236,7 @@ msgstr "Basic Info"
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/app/app-nav-menu.tsx:159
+#: src/components/app/app-nav-menu.tsx:153
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
@@ -273,7 +273,7 @@ msgstr "Center"
 msgid "Certified"
 msgstr "Certified"
 
-#: src/components/app/app-nav-menu.tsx:134
+#: src/components/app/app-nav-menu.tsx:128
 msgid "Charts"
 msgstr "Charts"
 
@@ -281,7 +281,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/components/app/app-nav-menu.tsx:102
+#: src/components/app/app-nav-menu.tsx:96
 msgid "China RVSM"
 msgstr "China RVSM"
 
@@ -314,7 +314,7 @@ msgstr "Comment"
 msgid "Community & Membership Director"
 msgstr "Community & Membership Director"
 
-#: src/components/app/app-nav-menu.tsx:127
+#: src/components/app/app-nav-menu.tsx:121
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
@@ -326,7 +326,7 @@ msgstr "Controller"
 msgid "Controller Info"
 msgstr "Controller Info"
 
-#: src/components/app/app-nav-menu.tsx:153
+#: src/components/app/app-nav-menu.tsx:147
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:18
 msgid "Controller List"
@@ -340,7 +340,7 @@ msgstr "Controller Training Director"
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
-#: src/components/app/app-nav-menu.tsx:149
+#: src/components/app/app-nav-menu.tsx:143
 #: src/components/event/atc-slot-list.tsx:156
 #: src/routes/events/$id.tsx:47
 msgid "Controllers"
@@ -506,8 +506,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/components/app/app-nav-menu.tsx:86
-#: src/components/app/app-nav-menu.tsx:186
+#: src/components/app/app-nav-menu.tsx:80
+#: src/components/app/app-nav-menu.tsx:180
 msgid "Event"
 msgstr "Event"
 
@@ -526,6 +526,10 @@ msgstr "Event end"
 #: src/components/event/atc-slot-list.tsx:28
 msgid "Event start"
 msgstr "Event start"
+
+#: src/routes/events/index.tsx:21
+msgid "Events"
+msgstr "Events"
 
 #: src/components/doc/discourse-doc.tsx:123
 #: src/routes/docs/$.tsx:38
@@ -559,7 +563,7 @@ msgstr "Flight looks good. Please confirm with the clearance delivery controller
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
-#: src/components/app/app-nav-menu.tsx:143
+#: src/components/app/app-nav-menu.tsx:137
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -580,12 +584,12 @@ msgstr "Flight Service Station"
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
-#: src/components/app/app-nav-menu.tsx:78
+#: src/components/app/app-nav-menu.tsx:77
 #: src/routes/index.tsx:119
 msgid "Forum"
 msgstr "Forum"
 
-#: src/components/homepage/recent-events.tsx:182
+#: src/components/homepage/recent-events.tsx:173
 msgid "Fri"
 msgstr "Fri"
 
@@ -621,7 +625,7 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/app/app-nav-menu.tsx:192
+#: src/components/app/app-nav-menu.tsx:186
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -649,7 +653,7 @@ msgstr "Import slots"
 msgid "Import Slots"
 msgstr "Import Slots"
 
-#: src/components/homepage/recent-events.tsx:74
+#: src/components/homepage/recent-events.tsx:77
 msgid "In This Week"
 msgstr "In This Week"
 
@@ -662,11 +666,11 @@ msgstr "In Waitlist"
 msgid "Instructor"
 msgstr "Instructor"
 
-#: src/components/app/app-nav-menu.tsx:62
+#: src/components/app/app-nav-menu.tsx:61
 msgid "Introduction"
 msgstr "Introduction"
 
-#: src/components/app/app-nav-menu.tsx:124
+#: src/components/app/app-nav-menu.tsx:118
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
@@ -682,7 +686,7 @@ msgstr "Learn more about China RVSM"
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
 
-#: src/components/app/app-nav-menu.tsx:175
+#: src/components/app/app-nav-menu.tsx:169
 #: src/routes/_doc/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
@@ -711,7 +715,7 @@ msgstr "Loading"
 msgid "Login"
 msgstr "Login"
 
-#: src/components/app/app-nav-menu.tsx:71
+#: src/components/app/app-nav-menu.tsx:70
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
@@ -723,7 +727,7 @@ msgstr "Logout"
 msgid "Match designated route"
 msgstr "Match designated route"
 
-#: src/components/app/app-nav-menu.tsx:74
+#: src/components/app/app-nav-menu.tsx:73
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
@@ -747,11 +751,11 @@ msgstr "metric odd flight level (meters)"
 msgid "Minimum State"
 msgstr "Minimum State"
 
-#: src/components/homepage/recent-events.tsx:170
+#: src/components/homepage/recent-events.tsx:161
 msgid "Mon"
 msgstr "Mon"
 
-#: src/components/app/app-nav-menu.tsx:169
+#: src/components/app/app-nav-menu.tsx:163
 msgid "Moodle"
 msgstr "Moodle"
 
@@ -772,7 +776,7 @@ msgstr "No comments"
 msgid "No data"
 msgstr "No data"
 
-#: src/components/homepage/recent-events.tsx:240
+#: src/components/homepage/recent-events.tsx:132
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
@@ -825,7 +829,7 @@ msgstr "Online Controllers"
 msgid "Online Pilots"
 msgstr "Online Pilots"
 
-#: src/components/app/app-nav-menu.tsx:95
+#: src/components/app/app-nav-menu.tsx:89
 msgid "Operation"
 msgstr "Operation"
 
@@ -836,6 +840,10 @@ msgstr "Operation Director"
 #: src/routes/users/index.tsx:34
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
+
+#: src/routes/events/index.tsx:36
+msgid "Other Events"
+msgstr "Other Events"
 
 #: src/routes/_doc/controller/loa.tsx:35
 msgid "Other LOAs"
@@ -875,11 +883,11 @@ msgstr "Pick a suitable cruising level."
 msgid "Pilot"
 msgstr "Pilot"
 
-#: src/components/app/app-nav-menu.tsx:131
+#: src/components/app/app-nav-menu.tsx:125
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:111
 msgid "Pilots"
 msgstr "Pilots"
 
@@ -908,15 +916,15 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app/app-nav-menu.tsx:196
+#: src/components/app/app-nav-menu.tsx:190
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
-#: src/components/app/app-nav-menu.tsx:68
+#: src/components/app/app-nav-menu.tsx:67
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/app/app-nav-menu.tsx:156
+#: src/components/app/app-nav-menu.tsx:150
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
@@ -982,7 +990,7 @@ msgstr "Route"
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 
-#: src/components/homepage/recent-events.tsx:185
+#: src/components/homepage/recent-events.tsx:176
 msgid "Sat"
 msgstr "Sat"
 
@@ -1005,9 +1013,13 @@ msgstr "Search..."
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
-#: src/components/app/app-nav-menu.tsx:172
+#: src/components/app/app-nav-menu.tsx:166
 msgid "Sector Files"
 msgstr "Sector Files"
+
+#: src/components/homepage/recent-events.tsx:286
+msgid "See All Events"
+msgstr "See All Events"
 
 #: src/components/homepage/controller-list.tsx:408
 msgid "Show Absence Controllers"
@@ -1038,12 +1050,12 @@ msgstr "Solo Expiration Date"
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
-#: src/components/app/app-nav-menu.tsx:65
+#: src/components/app/app-nav-menu.tsx:64
 #: src/routes/users/index.tsx:44
 msgid "Staff"
 msgstr "Staff"
 
-#: src/components/app/app-nav-menu.tsx:108
+#: src/components/app/app-nav-menu.tsx:102
 #: src/routes/_doc/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
@@ -1061,7 +1073,7 @@ msgstr "Start at"
 msgid "Start booking at"
 msgstr "Start booking at"
 
-#: src/components/app/app-nav-menu.tsx:121
+#: src/components/app/app-nav-menu.tsx:115
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
@@ -1085,7 +1097,7 @@ msgstr "Submit"
 msgid "Submitted"
 msgstr "Submitted"
 
-#: src/components/homepage/recent-events.tsx:188
+#: src/components/homepage/recent-events.tsx:179
 msgid "Sun"
 msgstr "Sun"
 
@@ -1213,7 +1225,7 @@ msgstr "This feature is under construction and is not available to use."
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
 
-#: src/components/homepage/recent-events.tsx:179
+#: src/components/homepage/recent-events.tsx:170
 msgid "Thu"
 msgstr "Thu"
 
@@ -1288,7 +1300,7 @@ msgstr "Transponder"
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
 
-#: src/components/homepage/recent-events.tsx:173
+#: src/components/homepage/recent-events.tsx:164
 msgid "Tue"
 msgstr "Tue"
 
@@ -1326,11 +1338,11 @@ msgstr "User"
 msgid "User Info"
 msgstr "User Info"
 
-#: src/components/app/app-nav-menu.tsx:189
+#: src/components/app/app-nav-menu.tsx:183
 msgid "User List"
 msgstr "User List"
 
-#: src/components/app/app-nav-menu.tsx:137
+#: src/components/app/app-nav-menu.tsx:131
 msgid "vACDM"
 msgstr "vACDM"
 
@@ -1356,7 +1368,7 @@ msgstr "VATPRC"
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM P.R.China Division"
 
-#: src/components/app/app-nav-menu.tsx:111
+#: src/components/app/app-nav-menu.tsx:105
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
@@ -1368,7 +1380,7 @@ msgstr "View"
 msgid "View Responses"
 msgstr "View Responses"
 
-#: src/components/app/app-nav-menu.tsx:162
+#: src/components/app/app-nav-menu.tsx:156
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
@@ -1384,11 +1396,11 @@ msgstr "We need your help! Donate to VATPRC to help us to improve!"
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
-#: src/components/app/app-nav-menu.tsx:140
+#: src/components/app/app-nav-menu.tsx:134
 msgid "Weather"
 msgstr "Weather"
 
-#: src/components/homepage/recent-events.tsx:176
+#: src/components/homepage/recent-events.tsx:167
 msgid "Wed"
 msgstr "Wed"
 

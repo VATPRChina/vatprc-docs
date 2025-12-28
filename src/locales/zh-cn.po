@@ -54,7 +54,7 @@ msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/app/app-nav-menu.tsx:50
+#: src/components/app/app-nav-menu.tsx:49
 msgid "About Us"
 msgstr "关于我们"
 
@@ -95,7 +95,7 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/components/app/app-nav-menu.tsx:181
+#: src/components/app/app-nav-menu.tsx:175
 msgid "Admin"
 msgstr "管理"
 
@@ -111,7 +111,7 @@ msgstr "机型"
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 
-#: src/components/app/app-nav-menu.tsx:99
+#: src/components/app/app-nav-menu.tsx:93
 msgid "Airspace"
 msgstr "空域"
 
@@ -123,7 +123,7 @@ msgstr "允许的巡航高度是 {level} （英尺）。"
 msgid "Already Booked"
 msgstr "已被预订"
 
-#: src/components/app/app-nav-menu.tsx:59
+#: src/components/app/app-nav-menu.tsx:58
 msgid "Announcement"
 msgstr "公告"
 
@@ -131,7 +131,7 @@ msgstr "公告"
 msgid "API Client"
 msgstr "接口客户端"
 
-#: src/components/app/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:83
 msgid "API Document"
 msgstr "API 文档"
 
@@ -201,12 +201,12 @@ msgstr "到达机场"
 msgid "ATC Application"
 msgstr "管制员申请"
 
-#: src/components/app/app-nav-menu.tsx:201
+#: src/components/app/app-nav-menu.tsx:195
 #: src/routes/controllers/applications/index.tsx:18
 msgid "ATC Applications"
 msgstr "管制员申请"
 
-#: src/components/app/app-nav-menu.tsx:166
+#: src/components/app/app-nav-menu.tsx:160
 #: src/routes/index.tsx:63
 msgid "ATC Center"
 msgstr "ATC 中心"
@@ -215,11 +215,11 @@ msgstr "ATC 中心"
 msgid "ATC Permission"
 msgstr "管制员权限"
 
-#: src/components/app/app-nav-menu.tsx:105
+#: src/components/app/app-nav-menu.tsx:99
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/components/app/app-nav-menu.tsx:206
+#: src/components/app/app-nav-menu.tsx:200
 #: src/routes/controllers/trainings/index.tsx:16
 msgid "ATC Trainings"
 msgstr "管制员培训"
@@ -236,7 +236,7 @@ msgstr "基本信息"
 msgid "Basic Information"
 msgstr "基本信息"
 
-#: src/components/app/app-nav-menu.tsx:159
+#: src/components/app/app-nav-menu.tsx:153
 msgid "Become a Controller"
 msgstr "成为管制员"
 
@@ -273,7 +273,7 @@ msgstr "区域"
 msgid "Certified"
 msgstr "完整权限"
 
-#: src/components/app/app-nav-menu.tsx:134
+#: src/components/app/app-nav-menu.tsx:128
 msgid "Charts"
 msgstr "航图"
 
@@ -281,7 +281,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/components/app/app-nav-menu.tsx:102
+#: src/components/app/app-nav-menu.tsx:96
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
@@ -314,7 +314,7 @@ msgstr "评论"
 msgid "Community & Membership Director"
 msgstr "社区会员部主管"
 
-#: src/components/app/app-nav-menu.tsx:127
+#: src/components/app/app-nav-menu.tsx:121
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
@@ -326,7 +326,7 @@ msgstr "管制员"
 msgid "Controller Info"
 msgstr "管制员信息"
 
-#: src/components/app/app-nav-menu.tsx:153
+#: src/components/app/app-nav-menu.tsx:147
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:18
 msgid "Controller List"
@@ -340,7 +340,7 @@ msgstr "管制员训练部主管"
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
-#: src/components/app/app-nav-menu.tsx:149
+#: src/components/app/app-nav-menu.tsx:143
 #: src/components/event/atc-slot-list.tsx:156
 #: src/routes/events/$id.tsx:47
 msgid "Controllers"
@@ -506,8 +506,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
-#: src/components/app/app-nav-menu.tsx:86
-#: src/components/app/app-nav-menu.tsx:186
+#: src/components/app/app-nav-menu.tsx:80
+#: src/components/app/app-nav-menu.tsx:180
 msgid "Event"
 msgstr "活动"
 
@@ -526,6 +526,10 @@ msgstr "活动结束"
 #: src/components/event/atc-slot-list.tsx:28
 msgid "Event start"
 msgstr "活动开始"
+
+#: src/routes/events/index.tsx:21
+msgid "Events"
+msgstr "活动"
 
 #: src/components/doc/discourse-doc.tsx:123
 #: src/routes/docs/$.tsx:38
@@ -559,7 +563,7 @@ msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 msgid "Flight Plan"
 msgstr "飞行计划"
 
-#: src/components/app/app-nav-menu.tsx:143
+#: src/components/app/app-nav-menu.tsx:137
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -580,12 +584,12 @@ msgstr "飞服"
 msgid "Flow Management Position"
 msgstr "流量控制"
 
-#: src/components/app/app-nav-menu.tsx:78
+#: src/components/app/app-nav-menu.tsx:77
 #: src/routes/index.tsx:119
 msgid "Forum"
 msgstr "论坛"
 
-#: src/components/homepage/recent-events.tsx:182
+#: src/components/homepage/recent-events.tsx:173
 msgid "Fri"
 msgstr "星期五"
 
@@ -621,7 +625,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/app/app-nav-menu.tsx:192
+#: src/components/app/app-nav-menu.tsx:186
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -649,7 +653,7 @@ msgstr "导入时刻表"
 msgid "Import Slots"
 msgstr "导入时刻表"
 
-#: src/components/homepage/recent-events.tsx:74
+#: src/components/homepage/recent-events.tsx:77
 msgid "In This Week"
 msgstr "本周"
 
@@ -662,11 +666,11 @@ msgstr "等待中"
 msgid "Instructor"
 msgstr "教员"
 
-#: src/components/app/app-nav-menu.tsx:62
+#: src/components/app/app-nav-menu.tsx:61
 msgid "Introduction"
 msgstr "介绍"
 
-#: src/components/app/app-nav-menu.tsx:124
+#: src/components/app/app-nav-menu.tsx:118
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
@@ -682,7 +686,7 @@ msgstr "了解中国 RVSM"
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
 
-#: src/components/app/app-nav-menu.tsx:175
+#: src/components/app/app-nav-menu.tsx:169
 #: src/routes/_doc/controller/loa.tsx:15
 msgid "Letter of Agreement"
 msgstr "移交协议书"
@@ -711,7 +715,7 @@ msgstr "正在加载"
 msgid "Login"
 msgstr "登入"
 
-#: src/components/app/app-nav-menu.tsx:71
+#: src/components/app/app-nav-menu.tsx:70
 msgid "Logo Pack"
 msgstr "视觉标识包"
 
@@ -723,7 +727,7 @@ msgstr "登出"
 msgid "Match designated route"
 msgstr "符合指定航路"
 
-#: src/components/app/app-nav-menu.tsx:74
+#: src/components/app/app-nav-menu.tsx:73
 msgid "Meeting Notes"
 msgstr "会议记录"
 
@@ -747,11 +751,11 @@ msgstr "公制单数飞行高度层（米）"
 msgid "Minimum State"
 msgstr "最低权限"
 
-#: src/components/homepage/recent-events.tsx:170
+#: src/components/homepage/recent-events.tsx:161
 msgid "Mon"
 msgstr "星期一"
 
-#: src/components/app/app-nav-menu.tsx:169
+#: src/components/app/app-nav-menu.tsx:163
 msgid "Moodle"
 msgstr "Moodle"
 
@@ -772,7 +776,7 @@ msgstr "暂无评论"
 msgid "No data"
 msgstr "无数据"
 
-#: src/components/homepage/recent-events.tsx:240
+#: src/components/homepage/recent-events.tsx:132
 msgid "No event is scheduled recently."
 msgstr "近期无活动计划。"
 
@@ -825,7 +829,7 @@ msgstr "在线管制员"
 msgid "Online Pilots"
 msgstr "在线飞行员"
 
-#: src/components/app/app-nav-menu.tsx:95
+#: src/components/app/app-nav-menu.tsx:89
 msgid "Operation"
 msgstr "运行"
 
@@ -836,6 +840,10 @@ msgstr "运行部主管"
 #: src/routes/users/index.tsx:34
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
+
+#: src/routes/events/index.tsx:36
+msgid "Other Events"
+msgstr "其它活动"
 
 #: src/routes/_doc/controller/loa.tsx:35
 msgid "Other LOAs"
@@ -875,11 +883,11 @@ msgstr "选择合适的巡航高度。"
 msgid "Pilot"
 msgstr "飞行员"
 
-#: src/components/app/app-nav-menu.tsx:131
+#: src/components/app/app-nav-menu.tsx:125
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
 
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:111
 msgid "Pilots"
 msgstr "飞行员"
 
@@ -908,15 +916,15 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
-#: src/components/app/app-nav-menu.tsx:196
+#: src/components/app/app-nav-menu.tsx:190
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
-#: src/components/app/app-nav-menu.tsx:68
+#: src/components/app/app-nav-menu.tsx:67
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/components/app/app-nav-menu.tsx:156
+#: src/components/app/app-nav-menu.tsx:150
 msgid "Progression Guide"
 msgstr "晋升指引"
 
@@ -982,7 +990,7 @@ msgstr "航路"
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
 
-#: src/components/homepage/recent-events.tsx:185
+#: src/components/homepage/recent-events.tsx:176
 msgid "Sat"
 msgstr "星期六"
 
@@ -1005,9 +1013,13 @@ msgstr "搜索..."
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
-#: src/components/app/app-nav-menu.tsx:172
+#: src/components/app/app-nav-menu.tsx:166
 msgid "Sector Files"
 msgstr "扇区文件"
+
+#: src/components/homepage/recent-events.tsx:286
+msgid "See All Events"
+msgstr "查看所有活动"
 
 #: src/components/homepage/controller-list.tsx:408
 msgid "Show Absence Controllers"
@@ -1038,12 +1050,12 @@ msgstr "独立训练到期日"
 msgid "SOP Editor"
 msgstr "SOP 组组员"
 
-#: src/components/app/app-nav-menu.tsx:65
+#: src/components/app/app-nav-menu.tsx:64
 #: src/routes/users/index.tsx:44
 msgid "Staff"
 msgstr "职员"
 
-#: src/components/app/app-nav-menu.tsx:108
+#: src/components/app/app-nav-menu.tsx:102
 #: src/routes/_doc/airspace/sop.tsx:15
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
@@ -1061,7 +1073,7 @@ msgstr "开始时间"
 msgid "Start booking at"
 msgstr "开始预订时间"
 
-#: src/components/app/app-nav-menu.tsx:121
+#: src/components/app/app-nav-menu.tsx:115
 msgid "Start to Fly"
 msgstr "开始飞行"
 
@@ -1085,7 +1097,7 @@ msgstr "提交"
 msgid "Submitted"
 msgstr "已提交"
 
-#: src/components/homepage/recent-events.tsx:188
+#: src/components/homepage/recent-events.tsx:179
 msgid "Sun"
 msgstr "星期日"
 
@@ -1213,7 +1225,7 @@ msgstr "本功能正在开发，暂未开放使用。"
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
-#: src/components/homepage/recent-events.tsx:179
+#: src/components/homepage/recent-events.tsx:170
 msgid "Thu"
 msgstr "星期四"
 
@@ -1288,7 +1300,7 @@ msgstr "应答机"
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
 
-#: src/components/homepage/recent-events.tsx:173
+#: src/components/homepage/recent-events.tsx:164
 msgid "Tue"
 msgstr "星期二"
 
@@ -1326,11 +1338,11 @@ msgstr "用户"
 msgid "User Info"
 msgstr "用户信息"
 
-#: src/components/app/app-nav-menu.tsx:189
+#: src/components/app/app-nav-menu.tsx:183
 msgid "User List"
 msgstr "用户列表"
 
-#: src/components/app/app-nav-menu.tsx:137
+#: src/components/app/app-nav-menu.tsx:131
 msgid "vACDM"
 msgstr "模拟 A-CDM"
 
@@ -1356,7 +1368,7 @@ msgstr "VATPRC"
 msgid "VATSIM P.R.China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/components/app/app-nav-menu.tsx:111
+#: src/components/app/app-nav-menu.tsx:105
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
@@ -1368,7 +1380,7 @@ msgstr "查看"
 msgid "View Responses"
 msgstr "查看回复"
 
-#: src/components/app/app-nav-menu.tsx:162
+#: src/components/app/app-nav-menu.tsx:156
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
@@ -1384,11 +1396,11 @@ msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧�
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
-#: src/components/app/app-nav-menu.tsx:140
+#: src/components/app/app-nav-menu.tsx:134
 msgid "Weather"
 msgstr "天气"
 
-#: src/components/homepage/recent-events.tsx:176
+#: src/components/homepage/recent-events.tsx:167
 msgid "Wed"
 msgstr "星期三"
 

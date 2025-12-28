@@ -4,7 +4,6 @@ import { ModeToggle } from "./theme-toggle";
 import { UserInfo } from "./user-info";
 import { components } from "@/lib/api";
 import { usePermissions } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
 import { Button, Drawer, Group, HoverCard, Stack } from "@mantine/core";
@@ -48,7 +47,7 @@ const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLin
 const contents = [
   {
     title: <Trans>About Us</Trans>,
-    content: ({ locale }: { locale: "en" | "zh-cn" }) => (
+    content: () => (
       <ul className="nav-list-grid">
         <NavMenuLink
           href="https://community.vatprc.net/c/69-category/12-category/12"
@@ -77,12 +76,7 @@ const contents = [
         <NavMenuLink href="https://community.vatprc.net" external>
           <Trans>Forum</Trans>
         </NavMenuLink>
-        <NavMenuLink
-          href={
-            locale === "zh-cn" ? "https://community.vatprc.net/c/events/66-category/66" : "https://vatsim.net/events/"
-          }
-          external
-        >
+        <NavMenuLink href="/events">
           <Trans>Event</Trans>
         </NavMenuLink>
         <NavMenuLink href="/division/api" external>
@@ -212,7 +206,6 @@ const contents = [
 ];
 
 export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
-  const locale = getLocale();
   const roles = usePermissions();
 
   return (
@@ -229,7 +222,7 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
               </Button>
             </HoverCard.Target>
             <HoverCard.Dropdown>
-              <content.content locale={locale} />
+              <content.content />
             </HoverCard.Dropdown>
           </HoverCard>
         );
@@ -256,7 +249,7 @@ export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) =>
           return (
             <div key={i}>
               <h3 className="mb-2 font-semibold">{content.title}</h3>
-              <content.content locale={getLocale()} />
+              <content.content />
             </div>
           );
         })}
