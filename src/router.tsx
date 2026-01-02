@@ -6,6 +6,7 @@ import { messages as en } from "@/locales/en.po";
 import { messages as zh } from "@/locales/zh-cn.po";
 import { setupI18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import { Skeleton } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
 
@@ -40,6 +41,12 @@ export function getRouter() {
     routeTree,
     scrollRestoration: true,
     defaultNotFoundComponent: () => <NotFound />,
+    defaultPendingComponent: () => (
+      <div className="h-svh w-full p-16">
+        <Skeleton h="100svh" />
+      </div>
+    ),
+    defaultPendingMs: 100,
     rewrite: {
       input: ({ url }) => {
         url.pathname = url.pathname.replace(getRouterBasepath(url.pathname), "/");
