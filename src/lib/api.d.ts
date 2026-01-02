@@ -8656,26 +8656,14 @@ export interface components {
       /** Format: date-time */
       applied_at: string;
       status: components["schemas"]["AtcApplicationStatus"];
-      application_filing_answers: components["schemas"]["AtcApplicationFieldAnswerDto"][];
-      review_filing_answers?: null | components["schemas"]["AtcApplicationFieldAnswerDto"][];
-    };
-    AtcApplicationFieldAnswerDto: {
-      field: components["schemas"]["SheetFieldDto"];
-      answer: string;
+      application_filing_answers: components["schemas"]["SheetFieldAnswerDto"][];
+      review_filing_answers?: null | components["schemas"]["SheetFieldAnswerDto"][];
     };
     AtcApplicationRequest: {
-      request_answers: components["schemas"]["AtcApplicationRequestField"][];
-    };
-    AtcApplicationRequestField: {
-      id: string;
-      answer: string;
+      request_answers: components["schemas"]["SheetRequestField"][];
     };
     AtcApplicationReviewRequest: {
-      review_answers: components["schemas"]["AtcApplicationReviewRequestAnswer"][];
-    };
-    AtcApplicationReviewRequestAnswer: {
-      id: string;
-      answer: string;
+      review_answers: components["schemas"]["SheetRequestField"][];
     };
     /** @enum {unknown} */
     AtcApplicationStatus: "submitted" | "in-waitlist" | "approved" | "rejected";
@@ -8974,6 +8962,10 @@ export interface components {
       name: string;
       fields: components["schemas"]["SheetFieldDto"][];
     };
+    SheetFieldAnswerDto: {
+      field: components["schemas"]["SheetFieldDto"];
+      answer: string;
+    };
     SheetFieldDto: {
       sheet_id: string;
       id: string;
@@ -8989,6 +8981,10 @@ export interface components {
     };
     /** @enum {unknown} */
     SheetFieldKind: "short-text" | "long-text" | "single-choice";
+    SheetRequestField: {
+      id: string;
+      answer: string;
+    };
     TokenDto: {
       user: components["schemas"]["UserDto"];
       /** Format: date-time */
@@ -9048,7 +9044,6 @@ export interface components {
       status: components["schemas"]["TrainingApplicationStatus"];
       name: string;
       train_id?: null | components["schemas"]["Ulid"];
-      train?: null | components["schemas"]["TrainingDto"];
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -9093,18 +9088,10 @@ export interface components {
       /** Format: date-time */
       updated_at: string;
       record_sheet_filing_id: null | components["schemas"]["Ulid"];
-      record_sheet_filing: null | components["schemas"]["TrainingRecordFieldAnswerDto"][];
-    };
-    TrainingRecordFieldAnswerDto: {
-      field: components["schemas"]["SheetFieldDto"];
-      answer: string;
+      record_sheet_filing: null | components["schemas"]["SheetFieldAnswerDto"][];
     };
     TrainingRecordRequest: {
-      request_answers: components["schemas"]["TrainingRecordRequestField"][];
-    };
-    TrainingRecordRequestField: {
-      id: string;
-      answer: string;
+      request_answers: components["schemas"]["SheetRequestField"][];
     };
     /**
      * Format: ulid

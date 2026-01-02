@@ -1,7 +1,7 @@
 import { RequireRole } from "../require-role";
-import { $api } from "@/lib/client";
+import { $api, useUser } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge, Button, Divider, Modal, Textarea } from "@mantine/core";
+import { Alert, Badge, Button, Divider, Modal, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -15,6 +15,7 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
   const { t } = useLingui();
   const queryClient = useQueryClient();
 
+  const user = useUser();
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const { data } = $api.useQuery(
@@ -41,6 +42,9 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Training Application Responses`}>
         <div className="flex flex-col gap-2">
+          {user?.id && data?.some((response) => response.trainer_id === user?.id) && (
+            <Alert color="green" title={<Trans>You have responded to this training request.</Trans>} />
+          )}
           <Textarea label={t`Comment`} onChange={(e) => setComment(e.target.value)} autosize minRows={2} />
           <div className="flex flex-row gap-2">
             <RequireRole role="controller-training-mentor">

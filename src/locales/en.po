@@ -62,14 +62,14 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/components/atc-training/training-application-responses.tsx:53
+#: src/components/atc-training/training-application-responses.tsx:57
 msgid "Accept"
 msgstr "Accept"
 
 #: src/components/atc-application/atc-application-status.tsx:16
 #: src/components/atc-application/atc-application-status.tsx:42
 #: src/components/atc-training/training-application-list.tsx:25
-#: src/components/atc-training/training-application-responses.tsx:76
+#: src/components/atc-training/training-application-responses.tsx:80
 msgid "Accepted"
 msgstr "Accepted"
 
@@ -313,8 +313,8 @@ msgstr "China RVSM odd flight level"
 msgid "CID"
 msgstr "CID"
 
-#: src/components/atc-training/training-application-responses.tsx:44
-#: src/components/atc-training/training-application-responses.tsx:87
+#: src/components/atc-training/training-application-responses.tsx:48
+#: src/components/atc-training/training-application-responses.tsx:91
 msgid "Comment"
 msgstr "Comment"
 
@@ -788,7 +788,7 @@ msgstr "Name"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
-#: src/components/atc-training/training-application-responses.tsx:89
+#: src/components/atc-training/training-application-responses.tsx:93
 msgid "No comments"
 msgstr "No comments"
 
@@ -956,14 +956,14 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/components/atc-training/training-application-responses.tsx:61
+#: src/components/atc-training/training-application-responses.tsx:65
 msgid "Reject"
 msgstr "Reject"
 
 #: src/components/atc-application/atc-application-status.tsx:17
 #: src/components/atc-application/atc-application-status.tsx:50
 #: src/components/atc-training/training-application-list.tsx:33
-#: src/components/atc-training/training-application-responses.tsx:80
+#: src/components/atc-training/training-application-responses.tsx:84
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -1212,7 +1212,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/sheet.tsx:65
+#: src/components/sheet.tsx:62
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
@@ -1298,7 +1298,7 @@ msgstr "Trainee CID"
 msgid "Trainee Name"
 msgstr "Trainee Name"
 
-#: src/components/atc-training/training-application-responses.tsx:70
+#: src/components/atc-training/training-application-responses.tsx:74
 msgid "Trainer"
 msgstr "Trainer"
 
@@ -1310,7 +1310,7 @@ msgstr "Trainer CID"
 msgid "Trainer Name"
 msgstr "Trainer Name"
 
-#: src/components/atc-training/training-application-responses.tsx:42
+#: src/components/atc-training/training-application-responses.tsx:43
 #: src/components/atc-training/training-response.tsx:50
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
@@ -1408,7 +1408,7 @@ msgstr "VFR Policy"
 msgid "View"
 msgstr "View"
 
-#: src/components/atc-training/training-application-responses.tsx:40
+#: src/components/atc-training/training-application-responses.tsx:41
 msgid "View Responses"
 msgstr "View Responses"
 
@@ -1439,6 +1439,10 @@ msgstr "Wed"
 #: src/routes/flights/$callsign.tsx:200
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
+
+#: src/components/atc-training/training-application-responses.tsx:46
+msgid "You have responded to this training request."
+msgstr "You have responded to this training request."
 
 #: src/components/atc-application/atc-application-status.tsx:43
 msgid "Your application has been approved. Welcome to start growing to be a controller!"
