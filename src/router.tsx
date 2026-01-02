@@ -33,6 +33,20 @@ export function getRouter() {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
         staleTime: 60 * 1000,
+        retry(failureCount, error) {
+          // Don't retry 4xx errors
+          console.log(Object.getPrototypeOf(error));
+          if (
+            "status" in error &&
+            error.status &&
+            typeof error.status === "number" &&
+            error.status >= 400 &&
+            error.status < 500
+          ) {
+            return false;
+          }
+          return failureCount < 3;
+        },
       },
     },
   });

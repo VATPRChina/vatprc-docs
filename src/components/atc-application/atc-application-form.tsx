@@ -7,6 +7,7 @@ import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { ComponentProps, FC, useState } from "react";
+import { TbUser } from "react-icons/tb";
 
 interface AtcApplicationFormProps {
   applicationId?: string;
@@ -61,6 +62,10 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
 
   const [value, setValue] = useState<string[]>([]);
   const isEditDisabled = !!applicationId && existingApplication?.status !== "submitted";
+
+  if (!user && !isUserLoading) {
+    return <Alert icon={<TbUser />} title={<Trans>Please login to file an application.</Trans>}></Alert>;
+  }
 
   return (
     <div className="flex flex-col gap-2">
