@@ -6,7 +6,7 @@ import { Trans } from "@lingui/react/macro";
 import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
-import React, { ReactNode, useMemo } from "react";
+import React, { useMemo } from "react";
 import { TbCloudX } from "react-icons/tb";
 
 export interface PostMeta {
@@ -49,8 +49,7 @@ export const DiscourseDocument: React.FC<{
   en: string;
   cn: string;
   inline?: boolean;
-  extraHeader?: ReactNode;
-}> = ({ code, en, cn, inline, extraHeader }) => {
+}> = ({ code, en, cn, inline }) => {
   const data = useMemo(() => buildMarkdownDocSync(code), [code]);
 
   const editPermission = usePermission("staff");
@@ -79,7 +78,6 @@ export const DiscourseDocument: React.FC<{
 
   return (
     <MarkdownDoc tocHeader={editButtons} inline={inline}>
-      {extraHeader}
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
     </MarkdownDoc>
@@ -87,14 +85,13 @@ export const DiscourseDocument: React.FC<{
 };
 
 export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPath>(
-  _path: TFilePath,
+  path: TFilePath,
   cn: string,
   en: string,
-  extraHeader?: ReactNode,
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
   component: () => {
     const code: string = useLoaderData({ strict: false });
-    return <DiscourseDocument code={code} en={en} cn={cn} extraHeader={extraHeader} />;
+    return <DiscourseDocument code={code} en={en} cn={cn} />;
   },
   async head() {
     const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;

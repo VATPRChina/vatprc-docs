@@ -73,7 +73,7 @@ msgstr "接受"
 msgid "Accepted"
 msgstr "已通过"
 
-#: src/components/atc-application/atc-application-form.tsx:77
+#: src/components/atc-application/atc-application-form.tsx:72
 msgid "Account belongs to VATPRC division"
 msgstr "账号归属为 VATPRC 分部"
 
@@ -139,7 +139,7 @@ msgstr "接口客户端"
 msgid "API Document"
 msgstr "API 文档"
 
-#: src/components/atc-application/atc-application-form.tsx:94
+#: src/components/atc-application/atc-application-form.tsx:89
 msgid "Application Information"
 msgstr "申请信息"
 
@@ -147,11 +147,11 @@ msgstr "申请信息"
 msgid "Application review updated"
 msgstr "申请审核已更新"
 
-#: src/components/atc-application/atc-application-form.tsx:38
+#: src/components/atc-application/atc-application-form.tsx:37
 msgid "Application submitted"
 msgstr "申请已提交"
 
-#: src/components/atc-application/atc-application-form.tsx:49
+#: src/components/atc-application/atc-application-form.tsx:48
 msgid "Application updated"
 msgstr "申请已更新"
 
@@ -163,7 +163,6 @@ msgstr "申请"
 msgid "Applied At"
 msgstr "申请时间"
 
-#: src/routes/_doc/controller/become-a-controller.tsx:12
 #: src/routes/controllers/applications/index.tsx:28
 msgid "Apply"
 msgstr "申请"
@@ -237,7 +236,7 @@ msgstr "返回"
 msgid "Basic Info"
 msgstr "基本信息"
 
-#: src/components/atc-application/atc-application-form.tsx:85
+#: src/components/atc-application/atc-application-form.tsx:80
 msgid "Basic Information"
 msgstr "基本信息"
 
@@ -286,7 +285,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/components/atc-application/atc-application-form.tsx:73
+#: src/components/atc-application/atc-application-form.tsx:68
 msgid "Checklist"
 msgstr "检查单"
 
@@ -306,7 +305,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/atc-application/atc-application-form.tsx:88
+#: src/components/atc-application/atc-application-form.tsx:83
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:69
 #: src/routes/users/index.tsx:54
@@ -450,7 +449,7 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-application/atc-application-form.tsx:106
+#: src/components/atc-application/atc-application-form.tsx:101
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "编辑"
@@ -463,11 +462,11 @@ msgstr "编辑管制员权限"
 msgid "Edit ATC Position {callsign}"
 msgstr "编辑管制席位 {callsign}"
 
-#: src/components/doc/discourse-doc.tsx:75
+#: src/components/doc/discourse-doc.tsx:74
 msgid "Edit Chinese"
 msgstr "编辑中文"
 
-#: src/components/doc/discourse-doc.tsx:66
+#: src/components/doc/discourse-doc.tsx:65
 msgid "Edit English"
 msgstr "编辑英文"
 
@@ -544,12 +543,12 @@ msgstr "活动开始"
 msgid "Events"
 msgstr "活动"
 
-#: src/components/doc/discourse-doc.tsx:127
+#: src/components/doc/discourse-doc.tsx:124
 #: src/routes/docs/$.tsx:38
 msgid "Failed to load document"
 msgstr "加载文档失败"
 
-#: src/components/atc-application/atc-application-form.tsx:79
+#: src/components/atc-application/atc-application-form.tsx:74
 msgid "Familiar with VATSIM regulations"
 msgstr "熟悉 VATSIM 的连线规定"
 
@@ -614,7 +613,7 @@ msgstr "星期五"
 msgid "Full name"
 msgstr "姓名"
 
-#: src/components/atc-application/atc-application-form.tsx:91
+#: src/components/atc-application/atc-application-form.tsx:86
 msgid "Full Name"
 msgstr "姓名"
 
@@ -642,7 +641,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/atc-application/atc-application-form.tsx:78
+#: src/components/atc-application/atc-application-form.tsx:73
 msgid "Have sufficient experience on VATSIM"
 msgstr "有足够的在 VATSIM 的连线经验"
 
@@ -928,10 +927,6 @@ msgstr "请与管制员联系调整航路。"
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
-#: src/components/atc-application/atc-application-form.tsx:67
-msgid "Please login to file an application."
-msgstr "递交申请前请先登入。"
-
 #: src/routes/controllers/applications/new.tsx:25
 msgid "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
 msgstr "请仔细阅读下列说明，并确保已完全满足所列条件。如先前的申请被拒绝，该情况将在后续申请中予以考量。目前所有申请管制员职位者均须具备中文水平。"
@@ -1116,7 +1111,7 @@ msgstr "状态"
 msgid "Student"
 msgstr "理论学习"
 
-#: src/components/atc-application/atc-application-form.tsx:106
+#: src/components/atc-application/atc-application-form.tsx:101
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "提交"
@@ -1126,11 +1121,11 @@ msgstr "提交"
 msgid "Submitted"
 msgstr "已提交"
 
-#: src/components/atc-application/atc-application-form.tsx:80
+#: src/components/atc-application/atc-application-form.tsx:75
 msgid "Sufficient English proficiency"
 msgstr "足够的英语水平"
 
-#: src/components/atc-application/atc-application-form.tsx:81
+#: src/components/atc-application/atc-application-form.tsx:76
 msgid "Sufficient online availability"
 msgstr "足够的上线时间保证"
 
@@ -1457,10 +1452,10 @@ msgstr "您的申请已被列入候补名单。如有空位将通知您。"
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "您的申请已提交，正在等待职员审核。"
 
-#: src/components/atc-application/atc-application-form.tsx:39
+#: src/components/atc-application/atc-application-form.tsx:38
 msgid "Your ATC application has been submitted successfully."
 msgstr "已经成功提交管制员申请。"
 
-#: src/components/atc-application/atc-application-form.tsx:50
+#: src/components/atc-application/atc-application-form.tsx:49
 msgid "Your ATC application has been updated successfully."
 msgstr "已经成功修改管制员申请。"

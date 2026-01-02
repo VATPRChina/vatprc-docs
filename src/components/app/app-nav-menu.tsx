@@ -149,7 +149,7 @@ const contents = [
         <NavMenuLink href="/controller/controller-regulations">
           <Trans>Progression Guide</Trans>
         </NavMenuLink>
-        <NavMenuLink href="/controllers/applications/new">
+        <NavMenuLink href="/controller/become-a-controller">
           <Trans>Become a Controller</Trans>
         </NavMenuLink>
         <NavMenuLink href="/controller/visiting-and-transferring">
