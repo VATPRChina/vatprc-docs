@@ -4,7 +4,12 @@ import type React from "react";
 export const MarkdownDoc: React.FC<{
   children: React.ReactNode;
   tocHeader?: React.ReactNode;
-}> = ({ children, tocHeader }) => {
+  inline?: boolean;
+}> = ({ children, tocHeader, inline }) => {
+  if (inline) {
+    return <article className="prose dark:prose-invert vatprc-prose">{children}</article>;
+  }
+
   return (
     <div className="container mx-auto flex flex-col md:flex-row">
       <div className="px-4 py-6 md:flex-2/3 md:px-12">

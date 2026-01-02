@@ -48,7 +48,8 @@ export const DiscourseDocument: React.FC<{
   code: string;
   en: string;
   cn: string;
-}> = ({ code, en, cn }) => {
+  inline?: boolean;
+}> = ({ code, en, cn, inline }) => {
   const data = useMemo(() => buildMarkdownDocSync(code), [code]);
 
   const editPermission = usePermission("staff");
@@ -76,7 +77,7 @@ export const DiscourseDocument: React.FC<{
   );
 
   return (
-    <MarkdownDoc tocHeader={editButtons}>
+    <MarkdownDoc tocHeader={editButtons} inline={inline}>
       <h1 className="text-2xl">{data.title}</h1>
       {<data.MDXContent />}
     </MarkdownDoc>

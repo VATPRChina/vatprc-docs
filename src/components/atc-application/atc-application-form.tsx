@@ -2,11 +2,11 @@ import { Sheet } from "../sheet";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { useLingui, Trans } from "@lingui/react/macro";
-import { TextInput, Alert, Skeleton } from "@mantine/core";
+import { TextInput, Alert, Skeleton, Checkbox } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState } from "react";
 
 interface AtcApplicationFormProps {
   applicationId?: string;
@@ -59,10 +59,23 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
     return createAsync({ body }, { onSuccess: onCreateSuccess });
   };
 
+  const [value, setValue] = useState<string[]>([]);
   const isEditDisabled = !!applicationId && existingApplication?.status !== "submitted";
 
   return (
     <div className="flex flex-col gap-2">
+      <h2 className="text-lg">
+        <Trans>Checklist</Trans>
+      </h2>
+      <Checkbox.Group value={value} onChange={setValue}>
+        <div className="flex flex-col gap-2">
+          <Checkbox value="division" label={<Trans>Account belongs to VATPRC division</Trans>} />
+          <Checkbox value="experience" label={<Trans>Have sufficient experience on VATSIM</Trans>} />
+          <Checkbox value="coc" label={<Trans>Familiar with VATSIM regulations</Trans>} />
+          <Checkbox value="english" label={<Trans>Sufficient English proficiency</Trans>} />
+          <Checkbox value="time" label={<Trans>Sufficient online availability</Trans>} />
+        </div>
+      </Checkbox.Group>
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
@@ -83,6 +96,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
         existingFillingAnswers={existingApplication?.application_filing_answers}
         onSubmit={onSubmit}
         isFieldValuesLoading={isValuesLoading}
+        isSubmitDisabled={value.length < 5}
         isSubmitHidden={isEditDisabled}
         submitButtonContent={applicationId ? <Trans>Edit</Trans> : <Trans>Submit</Trans>}
       />
