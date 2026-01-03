@@ -14,6 +14,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter, isSameMinute } from "date-fns";
 import { FC } from "react";
+import { TbExclamationCircle } from "react-icons/tb";
 
 export const POSITION_KINDS_PRIORITY: string[] = ["DEL", "GND", "TWR", "T2", "APP", "CTR", "FSS", "FMP"];
 
@@ -168,7 +169,13 @@ const columns = [
 ];
 
 export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
+  const { t } = useLingui();
+
+  const {
+    data: slots,
+    isLoading,
+    error,
+  } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
     params: { path: { eventId } },
   });
 
@@ -177,9 +184,11 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
       <h2 className="text-2xl">
         <Trans>Controllers</Trans>
       </h2>
-      <Alert color="blue">
-        <Trans>This feature is under construction and is not available to use.</Trans>
-      </Alert>
+      {error && (
+        <Alert color="red" icon={<TbExclamationCircle />} title={t`Error`}>
+          {error.message}
+        </Alert>
+      )}
       <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
         <div className="flex flex-row gap-2">
           <CreateAtcSlot eventId={eventId} />
