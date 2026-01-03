@@ -23,6 +23,11 @@ export const columns = [
       const { i18n } = useLingui();
       return localizeWithMap(APPLICATION_STATUS, getValue(), i18n);
     },
+    meta: {
+      filterValues: APPLICATION_STATUS.entries()
+        .map(([value, label]) => ({ value, label }))
+        .toArray(),
+    },
   }),
   columnHelper.accessor("applied_at", {
     header: () => <Trans>Applied At</Trans>,
