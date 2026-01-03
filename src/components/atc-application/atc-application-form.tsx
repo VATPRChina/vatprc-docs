@@ -64,18 +64,22 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
 
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-lg">
-        <Trans>Checklist</Trans>
-      </h2>
-      <Checkbox.Group value={value} onChange={setValue}>
-        <div className="flex flex-col gap-2">
-          <Checkbox value="division" label={<Trans>Account belongs to VATPRC division</Trans>} />
-          <Checkbox value="experience" label={<Trans>Have sufficient experience on VATSIM</Trans>} />
-          <Checkbox value="coc" label={<Trans>Familiar with VATSIM regulations</Trans>} />
-          <Checkbox value="english" label={<Trans>Sufficient English proficiency</Trans>} />
-          <Checkbox value="time" label={<Trans>Sufficient online availability</Trans>} />
-        </div>
-      </Checkbox.Group>
+      {!applicationId && (
+        <>
+          <h2 className="text-lg">
+            <Trans>Checklist</Trans>
+          </h2>
+          <Checkbox.Group value={value} onChange={setValue}>
+            <div className="flex flex-col gap-2">
+              <Checkbox value="division" label={<Trans>Account belongs to VATPRC division</Trans>} />
+              <Checkbox value="experience" label={<Trans>Have sufficient experience on VATSIM</Trans>} />
+              <Checkbox value="coc" label={<Trans>Familiar with VATSIM regulations</Trans>} />
+              <Checkbox value="english" label={<Trans>Sufficient English proficiency</Trans>} />
+              <Checkbox value="time" label={<Trans>Sufficient online availability</Trans>} />
+            </div>
+          </Checkbox.Group>
+        </>
+      )}
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
