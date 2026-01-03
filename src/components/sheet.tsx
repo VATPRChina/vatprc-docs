@@ -1,3 +1,4 @@
+import { ConfirmButton } from "./ui/confirm-button";
 import { components } from "@/lib/api";
 import { promiseWithLog } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
@@ -14,6 +15,7 @@ interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   isSubmitHidden?: boolean;
   submitButtonContent?: React.ReactNode;
   doNotRequirePristine?: boolean;
+  confirm?: string;
 }
 
 export const Sheet: FC<SheetProps> = ({
@@ -25,6 +27,7 @@ export const Sheet: FC<SheetProps> = ({
   isSubmitHidden,
   submitButtonContent,
   doNotRequirePristine,
+  confirm,
   ...props
 }) => {
   const { i18n, t } = useLingui();
@@ -111,16 +114,28 @@ export const Sheet: FC<SheetProps> = ({
       ))}
       {!isSubmitHidden && (
         <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}>
-          {([canSubmit, isSubmitting, isPristine]) => (
-            <Button
-              disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
-              loading={isSubmitting}
-              type="submit"
-              className="self-start"
-            >
-              {submitButtonContent}
-            </Button>
-          )}
+          {([canSubmit, isSubmitting, isPristine]) =>
+            confirm ? (
+              <ConfirmButton
+                actionDescription={confirm}
+                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
+                loading={isSubmitting}
+                type="submit"
+                className="self-start"
+              >
+                {submitButtonContent}
+              </ConfirmButton>
+            ) : (
+              <Button
+                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
+                loading={isSubmitting}
+                type="submit"
+                className="self-start"
+              >
+                {submitButtonContent}
+              </Button>
+            )
+          }
         </form.Subscribe>
       )}
     </form>

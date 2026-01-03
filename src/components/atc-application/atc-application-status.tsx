@@ -135,6 +135,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
         isSubmitHidden={!hasPermission}
         submitButtonContent={<Trans>Submit</Trans>}
         doNotRequirePristine
+        confirm={t`Are you sure you want to submit the application review?`}
       />
     </div>
   );
