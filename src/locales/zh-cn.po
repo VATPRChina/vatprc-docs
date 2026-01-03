@@ -73,7 +73,7 @@ msgstr "缺席"
 msgid "Accepted"
 msgstr "已通过"
 
-#: src/components/atc-application/atc-application-form.tsx:77
+#: src/components/atc-application/atc-application-form.tsx:79
 msgid "Account belongs to VATPRC division"
 msgstr "账号归属为 VATPRC 分部"
 
@@ -139,7 +139,7 @@ msgstr "接口客户端"
 msgid "API Document"
 msgstr "API 文档"
 
-#: src/components/atc-application/atc-application-form.tsx:94
+#: src/components/atc-application/atc-application-form.tsx:102
 msgid "Application Information"
 msgstr "申请信息"
 
@@ -180,7 +180,7 @@ msgstr "进近"
 msgid "Are you sure to book the slot?"
 msgstr "确定要预订该时段吗？"
 
-#: src/components/event/atc-slot-list.tsx:126
+#: src/components/event/atc-slot-list.tsx:147
 msgid "Are you sure to book this ATC position?"
 msgstr "确定要预订该管制席位吗？"
 
@@ -188,9 +188,13 @@ msgstr "确定要预订该管制席位吗？"
 msgid "Are you sure to release the slot?"
 msgstr "确定要取消该预订吗？"
 
-#: src/components/event/atc-slot-list.tsx:135
+#: src/components/event/atc-slot-list.tsx:156
 msgid "Are you sure to release this ATC position?"
 msgstr "确定要取消该管制席位预订吗？"
+
+#: src/components/atc-application/atc-application-status.tsx:138
+msgid "Are you sure you want to submit the application review?"
+msgstr "确定要提交申请审核结果吗？"
 
 #: src/components/event/slot-import.tsx:131
 msgid "Area"
@@ -245,7 +249,7 @@ msgstr "返回"
 msgid "Basic Info"
 msgstr "基本信息"
 
-#: src/components/atc-application/atc-application-form.tsx:85
+#: src/components/atc-application/atc-application-form.tsx:89
 msgid "Basic Information"
 msgstr "基本信息"
 
@@ -253,7 +257,7 @@ msgstr "基本信息"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/components/event/atc-slot-list.tsx:132
+#: src/components/event/atc-slot-list.tsx:153
 #: src/components/event/slot-list.tsx:118
 msgid "Book"
 msgstr "预订"
@@ -298,7 +302,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/components/atc-application/atc-application-form.tsx:73
+#: src/components/atc-application/atc-application-form.tsx:75
 msgid "Checklist"
 msgstr "检查单"
 
@@ -318,9 +322,9 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/atc-application/atc-application-form.tsx:88
+#: src/components/atc-application/atc-application-form.tsx:92
 #: src/components/atc-application/atc-application-list.tsx:18
-#: src/components/event/atc-slot-list.tsx:69
+#: src/components/event/atc-slot-list.tsx:90
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -366,14 +370,14 @@ msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/event/atc-slot-list.tsx:158
+#: src/components/event/atc-slot-list.tsx:185
 #: src/routes/events/$id.tsx:47
 msgid "Controllers"
 msgstr "管制员"
 
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/event/atc-slot-create.tsx:182
-#: src/components/event/event-create.tsx:212
+#: src/components/event/event-create.tsx:246
 #: src/components/preferred-route-create.tsx:202
 msgid "Create"
 msgstr "创建"
@@ -383,8 +387,8 @@ msgstr "创建"
 msgid "Create ATC Position"
 msgstr "创建管制席位"
 
-#: src/components/event/event-create.tsx:70
-#: src/components/event/event-create.tsx:73
+#: src/components/event/event-create.tsx:101
+#: src/components/event/event-create.tsx:104
 msgid "Create Event"
 msgstr "创建活动"
 
@@ -445,7 +449,7 @@ msgstr "放行"
 msgid "Departure"
 msgstr "出发机场"
 
-#: src/components/event/event-create.tsx:200
+#: src/components/event/event-create.tsx:231
 #: src/components/preferred-route-create.tsx:190
 msgid "Description"
 msgstr "描述"
@@ -462,7 +466,7 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-application/atc-application-form.tsx:106
+#: src/components/atc-application/atc-application-form.tsx:114
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "编辑"
@@ -483,8 +487,8 @@ msgstr "编辑中文"
 msgid "Edit English"
 msgstr "编辑英文"
 
-#: src/components/event/event-create.tsx:65
-#: src/components/event/event-create.tsx:73
+#: src/components/event/event-create.tsx:96
+#: src/components/event/event-create.tsx:104
 msgid "Edit Event {title}"
 msgstr "编辑活动 {title}"
 
@@ -508,20 +512,25 @@ msgstr "ELDT"
 #: src/components/atc-training/training-application-create.tsx:149
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:127
-#: src/components/event/atc-slot-list.tsx:36
-#: src/components/event/event-create.tsx:115
+#: src/components/event/atc-slot-list.tsx:46
+#: src/components/event/event-create.tsx:148
 msgid "End at"
 msgstr "结束时间"
 
-#: src/components/event/event-create.tsx:151
+#: src/components/event/event-create.tsx:186
 msgid "End booking at"
 msgstr "预订结束时间"
+
+#: src/components/event/event-create.tsx:84
+msgid "End booking time must be after start booking time"
+msgstr "预订结束时间必须晚于开始预订时间"
 
 #: src/components/atc-training/training-application-create.tsx:50
 msgid "End time is required"
 msgstr "结束时间为必填项"
 
 #: src/components/atc-training/training-application-create.tsx:53
+#: src/components/event/event-create.tsx:81
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
@@ -534,6 +543,7 @@ msgid "Equipment"
 msgstr "设备代码"
 
 #: src/components/atc-training/training-application-create.tsx:118
+#: src/components/event/atc-slot-list.tsx:188
 msgid "Error"
 msgstr "错误"
 
@@ -555,11 +565,11 @@ msgstr "组织部主管"
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
-#: src/components/event/atc-slot-list.tsx:39
+#: src/components/event/atc-slot-list.tsx:49
 msgid "Event end"
 msgstr "活动结束"
 
-#: src/components/event/atc-slot-list.tsx:28
+#: src/components/event/atc-slot-list.tsx:38
 msgid "Event start"
 msgstr "活动开始"
 
@@ -572,7 +582,7 @@ msgstr "活动"
 msgid "Failed to load document"
 msgstr "加载文档失败"
 
-#: src/components/atc-application/atc-application-form.tsx:79
+#: src/components/atc-application/atc-application-form.tsx:81
 msgid "Familiar with VATSIM regulations"
 msgstr "熟悉 VATSIM 的连线规定"
 
@@ -637,7 +647,7 @@ msgstr "星期五"
 msgid "Full name"
 msgstr "姓名"
 
-#: src/components/atc-application/atc-application-form.tsx:91
+#: src/components/atc-application/atc-application-form.tsx:96
 msgid "Full Name"
 msgstr "姓名"
 
@@ -665,7 +675,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/atc-application/atc-application-form.tsx:78
+#: src/components/atc-application/atc-application-form.tsx:80
 msgid "Have sufficient experience on VATSIM"
 msgstr "有足够的在 VATSIM 的连线经验"
 
@@ -673,7 +683,7 @@ msgstr "有足够的在 VATSIM 的连线经验"
 msgid "Image Upload Tool"
 msgstr "图床"
 
-#: src/components/event/event-create.tsx:186
+#: src/components/event/event-create.tsx:226
 msgid "Image URL"
 msgstr "图片 URL"
 
@@ -844,7 +854,7 @@ msgstr "无 RVSM"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/event/atc-slot-list.tsx:70
+#: src/components/event/atc-slot-list.tsx:91
 msgid "Not booked"
 msgstr "未预订"
 
@@ -964,7 +974,7 @@ msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
 #: src/components/event/atc-slot-create.tsx:144
-#: src/components/event/atc-slot-list.tsx:48
+#: src/components/event/atc-slot-list.tsx:58
 msgid "Position"
 msgstr "席位"
 
@@ -995,7 +1005,7 @@ msgstr "拒绝"
 msgid "Rejected"
 msgstr "已拒绝"
 
-#: src/components/event/atc-slot-list.tsx:141
+#: src/components/event/atc-slot-list.tsx:162
 #: src/components/event/slot-list.tsx:134
 msgid "Release"
 msgstr "取消预订"
@@ -1034,7 +1044,7 @@ msgstr "RNP AR（无 RF 航段）"
 msgid "Roles"
 msgstr "权限"
 
-#: src/components/event/atc-slot-list.tsx:22
+#: src/components/event/atc-slot-list.tsx:32
 #: src/components/event/slot-list.tsx:20
 #: src/components/preferred-route-create.tsx:162
 #: src/routes/flights/$callsign.tsx:389
@@ -1052,7 +1062,7 @@ msgstr "星期六"
 
 #: src/components/atc-training/training-response.tsx:59
 #: src/components/event/atc-slot-create.tsx:182
-#: src/components/event/event-create.tsx:212
+#: src/components/event/event-create.tsx:246
 #: src/components/preferred-route-create.tsx:202
 msgid "Save"
 msgstr "保存"
@@ -1120,16 +1130,16 @@ msgstr "标准运行程序"
 #: src/components/atc-training/training-application-create.tsx:132
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:110
-#: src/components/event/atc-slot-list.tsx:25
-#: src/components/event/event-create.tsx:98
+#: src/components/event/atc-slot-list.tsx:35
+#: src/components/event/event-create.tsx:130
 msgid "Start at"
 msgstr "开始时间"
 
-#: src/components/event/event-create.tsx:169
+#: src/components/event/event-create.tsx:205
 msgid "Start ATC booking at"
 msgstr "管制员预订开始时间"
 
-#: src/components/event/event-create.tsx:134
+#: src/components/event/event-create.tsx:168
 msgid "Start booking at"
 msgstr "开始预订时间"
 
@@ -1151,7 +1161,7 @@ msgstr "状态"
 msgid "Student"
 msgstr "理论学习"
 
-#: src/components/atc-application/atc-application-form.tsx:106
+#: src/components/atc-application/atc-application-form.tsx:114
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "提交"
@@ -1161,11 +1171,11 @@ msgstr "提交"
 msgid "Submitted"
 msgstr "已提交"
 
-#: src/components/atc-application/atc-application-form.tsx:80
+#: src/components/atc-application/atc-application-form.tsx:82
 msgid "Sufficient English proficiency"
 msgstr "足够的英语水平"
 
-#: src/components/atc-application/atc-application-form.tsx:81
+#: src/components/atc-application/atc-application-form.tsx:83
 msgid "Sufficient online availability"
 msgstr "足够的上线时间保证"
 
@@ -1252,7 +1262,7 @@ msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}�
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
 
-#: src/components/sheet.tsx:62
+#: src/components/sheet.tsx:65
 msgid "The field must not be empty."
 msgstr "该项不能为空。"
 
@@ -1288,10 +1298,6 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
-#: src/components/event/atc-slot-list.tsx:161
-msgid "This feature is under construction and is not available to use."
-msgstr "本功能正在开发，暂未开放使用。"
-
 #: src/routes/_doc/airspace/sop.tsx:26
 #: src/routes/_doc/controller/loa.tsx:26
 msgid "This page is not available in English."
@@ -1317,11 +1323,12 @@ msgstr "活动时间："
 #: src/components/atc-training/training-application-create.tsx:84
 #: src/components/atc-training/training-application-list.tsx:40
 #: src/components/atc-training/training-list.tsx:12
-#: src/components/event/event-create.tsx:85
+#: src/components/event/event-create.tsx:116
 msgid "Title"
 msgstr "标题"
 
 #: src/components/atc-training/training-application-create.tsx:40
+#: src/components/event/event-create.tsx:78
 msgid "Title is required"
 msgstr "标题为必填项"
 
