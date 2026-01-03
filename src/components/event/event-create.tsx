@@ -7,6 +7,7 @@ import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Group, Image, Modal, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -27,13 +28,28 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     { enabled: !!eventId && opened },
   );
   const title = event?.title;
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events", {
+
+  const { mutate: uploadImage, isPending: isImageUploading } = $api.useMutation("post", "/api/storage/images", {
+    onSuccess: (data) => form.setFieldValue("image_url", data.url),
+  });
+  const onUpload = (files: File[]) => {
+    if (!files || files.length !== 1) return;
+    const file = files[0];
+    const form = new FormData();
+    form.append("image", file, file?.name ?? "untitled");
+    uploadImage({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+      body: form as any,
+    });
+  };
+
+  const { mutateAsync: create } = $api.useMutation("post", "/api/events", {
     onSuccess: () => {
       close();
       promiseWithLog(queryClient.invalidateQueries({ queryKey: $api.queryOptions("get", "/api/events").queryKey }));
     },
   });
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation("post", "/api/events/{eid}", {
+  const { mutateAsync: update } = $api.useMutation("post", "/api/events/{eid}", {
     onSuccess: () => close(),
   });
   const now = formatISO(setMinutes(setSeconds(addHours(Date.now(), 1), 0), 0));
@@ -50,10 +66,25 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     } satisfies components["schemas"]["EventSaveRequest"],
     onSubmit: ({ value }) => {
       if (eventId) {
-        update({ params: { path: { eid: eventId ?? NULL_ULID } }, body: value });
+        return update({ params: { path: { eid: eventId ?? NULL_ULID } }, body: value });
       } else {
-        create({ body: value });
+        return create({ body: value });
       }
+    },
+    validators: {
+      onSubmit: ({ value }) => {
+        const fields: Record<string, string> = {};
+        if (!value.title) {
+          fields["title"] = t`Title is required`;
+        }
+        if (new Date(value.start_at) >= new Date(value.end_at)) {
+          fields["end_at"] = t`End time must be after start time`;
+        }
+        if (new Date(value.start_booking_at) >= new Date(value.end_booking_at)) {
+          fields["end_booking_at"] = t`End booking time must be after start booking time`;
+        }
+        return { fields };
+      },
     },
   });
 
@@ -87,6 +118,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   disabled={isLoading}
+                  error={field.state.meta.errors.join("")}
                 ></TextInput>
               )}
             </form.Field>
@@ -101,6 +133,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                       value={new Date(field.state.value)}
                       onBlur={field.handleBlur}
                       disabled={isLoading}
+                      error={field.state.meta.errors.join("")}
                     />
                     <Text size="xs">
                       <DateTime>{field.state.value}</DateTime>
@@ -118,6 +151,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                       value={new Date(field.state.value)}
                       onBlur={field.handleBlur}
                       disabled={isLoading}
+                      error={field.state.meta.errors.join("")}
                     />
                     <Text size="xs">
                       <DateTime>{field.state.value}</DateTime>
@@ -137,6 +171,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                       value={new Date(field.state.value)}
                       onBlur={field.handleBlur}
                       disabled={isLoading}
+                      error={field.state.meta.errors.join("")}
                     />
                     <Text size="xs">
                       <DateTime>{field.state.value}</DateTime>
@@ -154,6 +189,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                       value={new Date(field.state.value)}
                       onBlur={field.handleBlur}
                       disabled={isLoading}
+                      error={field.state.meta.errors.join("")}
                     />
                     <Text size="xs">
                       <DateTime>{field.state.value}</DateTime>
@@ -173,6 +209,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                     onBlur={field.handleBlur}
                     disabled={isLoading}
                     clearable
+                    error={field.state.meta.errors.join("")}
                   />
                   <Text size="xs">
                     <DateTime>{field.state.value}</DateTime>
@@ -180,20 +217,14 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 </Stack>
               )}
             </form.Field>
+            <Dropzone onDrop={onUpload} accept={IMAGE_MIME_TYPE} loading={isImageUploading}>
+              <form.Subscribe selector={(state) => state.values.image_url}>
+                {(image_url) => <Image src={image_url ?? NoEventImage} />}
+              </form.Subscribe>
+            </Dropzone>
             <form.Field name="image_url">
-              {(field) => (
-                <TextInput
-                  label={t`Image URL`}
-                  onChange={(e) => field.handleChange(e.target.value || null)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                />
-              )}
+              {(field) => <TextInput label={t`Image URL`} value={field.state.value ?? ""} disabled />}
             </form.Field>
-            <form.Subscribe selector={(state) => state.values.image_url}>
-              {(image_url) => <Image src={image_url ?? NoEventImage} />}
-            </form.Subscribe>
             <form.Field name="description">
               {(field) => (
                 <Textarea
@@ -204,14 +235,19 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   disabled={isLoading}
                   autosize
                   minRows={5}
+                  error={field.state.meta.errors.join("")}
                 />
               )}
             </form.Field>
-            <Group>
-              <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
-                {eventId ? t`Save` : t`Create`}
-              </Button>
-            </Group>
+            <div>
+              <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+                {([canSubmit, isSubmitting]) => (
+                  <Button variant="subtle" type="submit" loading={isSubmitting} disabled={!canSubmit}>
+                    {eventId ? t`Save` : t`Create`}
+                  </Button>
+                )}
+              </form.Subscribe>
+            </div>
           </Stack>
         </form>
       </Modal>
