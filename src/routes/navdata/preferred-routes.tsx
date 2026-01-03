@@ -42,7 +42,9 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <CreatePreferredRoute />
+      <div>
+        <CreatePreferredRoute />
+      </div>
       <RichTable data={data} columns={columns} isLoading={isLoading} />
     </div>
   );

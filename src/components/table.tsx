@@ -1,6 +1,6 @@
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
-import { useDebouncedValue } from "@mantine/hooks";
+import { useDebouncedCallback, useDebouncedValue } from "@mantine/hooks";
 import {
   ColumnDef,
   flexRender,
@@ -11,7 +11,7 @@ import {
   SortDirection,
   useReactTable,
 } from "@tanstack/react-table";
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
   TbChevronsLeft,
   TbChevronLeft,
@@ -75,6 +75,11 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
   const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
+  const onColumnFilterChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const id = e.target.getAttribute("data-field") ?? "";
+    table.setColumnFilters((f) => [...f.filter((f) => f.id !== id), { id, value: e.target.value }]);
+  }, 200);
+
   return (
     <div className="flex flex-col gap-4">
       <TextInput
@@ -97,6 +102,12 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
                   >
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </SortableHeader>
+                  <TextInput
+                    className="font-normal"
+                    size="xs"
+                    data-field={header.column.id}
+                    onChange={onColumnFilterChange}
+                  />
                 </Table.Th>
               )),
             )}
