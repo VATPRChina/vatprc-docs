@@ -1,7 +1,7 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDocSync } from "./markdown-doc-run";
 import { usePermission } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
+import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
@@ -85,7 +85,7 @@ export const DiscourseDocument: React.FC<{
 };
 
 export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPath>(
-  path: TFilePath,
+  _path: TFilePath,
   cn: string,
   en: string,
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
@@ -93,8 +93,8 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
     const code: string = useLoaderData({ strict: false });
     return <DiscourseDocument code={code} en={en} cn={cn} />;
   },
-  async head() {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  async head(ctx) {
+    const postId = (ctx.match.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
     try {
       const meta = await fetch(`${COMMUNITY_ENDPOINT}/t/topic/${postId}.json`).then((res) => {
         if (!res.ok) {
@@ -107,8 +107,8 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
       return {};
     }
   },
-  async loader() {
-    const postId = getLocale() === "zh-cn" ? (cn ?? en) : en;
+  async loader(ctx) {
+    const postId = (ctx.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
     return await getDiscourseDocumentCode(postId);
   },
   pendingMs: 100,

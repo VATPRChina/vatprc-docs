@@ -1,5 +1,5 @@
 import { NotFound } from "./components/app/app-not-found";
-import { getLocale } from "./lib/i18n";
+import { inferLocale } from "./lib/i18n";
 import { getPathname } from "./lib/utils";
 import { routeTree } from "./routeTree.gen";
 import { messages as en } from "@/locales/en.po";
@@ -25,7 +25,7 @@ export function getRouter() {
   i18n.load("en", en);
   i18n.load("zh-cn", zh);
 
-  i18n.activate(getLocale());
+  i18n.activate(inferLocale());
 
   const queryClient = new QueryClient({
     defaultOptions: {

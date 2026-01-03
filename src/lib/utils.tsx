@@ -14,11 +14,6 @@ export const getPathname = createIsomorphicFn()
   .server(() => getRequestUrl().pathname)
   .client(() => window.location.pathname);
 
-export const localStorage = (typeof window !== "undefined" ? window.localStorage : null) ?? {
-  getItem: () => null,
-  setItem: () => null,
-};
-
 export const errorToast = (err: Error) => {
   notifications.show({
     title: "An error occurred.",

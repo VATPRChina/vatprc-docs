@@ -1,9 +1,8 @@
-import { getLocale } from "@/lib/i18n";
 import { CommunityEventData } from "@/lib/types/community";
 import { VatsimEventData } from "@/lib/types/vatsim";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Anchor, Card, Loader } from "@mantine/core";
 import { ActionIcon, ActionIconGroup } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
@@ -51,7 +50,8 @@ const Event: React.FC<{
   url: string;
   isExam: boolean;
 }> = ({ title, start, end, url, isExam }) => {
-  const locale = getLocale();
+  const { i18n } = useLingui();
+  const locale = i18n.locale;
 
   return (
     <Card
@@ -137,7 +137,8 @@ export const EventList: FC<{ events: Event[]; direction: "col" | "row" }> = ({ e
 };
 
 export const EventCalendar: FC<{ events: Event[] }> = ({ events }) => {
-  const locale = getLocale();
+  const { i18n } = useLingui();
+  const locale = i18n.locale;
   const [refDate, setRefDate] = React.useState<Date>(new Date());
 
   return (
@@ -226,7 +227,8 @@ export const EventCalendar: FC<{ events: Event[] }> = ({ events }) => {
 };
 
 export const useScheduledEvents = () => {
-  const locale = getLocale();
+  const { i18n } = useLingui();
+  const locale = i18n.locale;
   const { data: cnData, isLoading: isCnLoading } = useQuery({
     queryKey: [COMMUNITY_EVENT_ENDPOINT],
     queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<CommunityEventData>),

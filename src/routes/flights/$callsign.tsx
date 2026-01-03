@@ -2,7 +2,6 @@ import { BackButton } from "@/components/back-button";
 import { FlightWarnings } from "@/components/flight-warnings";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { getLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Alert, Button, Popover, Skeleton, Tooltip } from "@mantine/core";
@@ -64,7 +63,8 @@ const FplField = ({
 };
 
 const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
-  const locale = getLocale();
+  const { i18n } = useLingui();
+  const locale = i18n.locale;
   const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${locale == "en" ? 9700 : 9695}`;
   return (
     <>
@@ -75,7 +75,7 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
               ? "https://cdn.sa.net/2025/07/19/icdkAQVeoNrablP.png"
               : "https://cdn.sa.net/2025/07/19/JnkshOqN6fr4BzW.png"
           }
-          className="w-[960px] max-w-screen"
+          className="w-240 max-w-screen"
         />
       </p>
       <p className="hover:text-primary/80 underline">

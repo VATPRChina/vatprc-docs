@@ -1,11 +1,11 @@
 import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
-import { getLocale, getLocalPathname } from "@/lib/i18n";
+import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
@@ -50,6 +50,8 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const route = useRouterState();
+  const { i18n } = useLingui();
+
   if (route.location.pathname === "/division/api") {
     return children;
   }
@@ -57,7 +59,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
   return (
     <>
       <AppHeader />
-      {getLocale() === "zh-cn" && route.location.pathname === "/" && (
+      {i18n.locale === "zh-cn" && route.location.pathname === "/" && (
         <a
           className="block w-full bg-gray-100 py-4 text-center hover:bg-gray-50 dark:bg-gray-900 hover:dark:bg-gray-950"
           href="https://community.vatprc.net/t/topic/10193"
@@ -108,6 +110,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootLayout() {
   const { publicHref } = useLocation();
+  const { i18n } = useLingui();
 
   useEffect(() => {
     if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
@@ -125,11 +128,7 @@ function RootLayout() {
   });
 
   return (
-    <html
-      lang={getLocale() ?? "en"}
-      className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
-      {...mantineHtmlProps}
-    >
+    <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
       <head>
         <HeadContent />
         <ColorSchemeScript defaultColorScheme="auto" />

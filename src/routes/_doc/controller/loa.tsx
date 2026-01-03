@@ -1,9 +1,8 @@
 import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/doc/discourse-doc";
 import { DocList } from "@/components/doc/doc-list";
 import { getAllDocuments } from "@/lib/doc";
-import { getLocale } from "@/lib/i18n";
 import { msg } from "@lingui/core/macro";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -16,7 +15,8 @@ export const Route = createFileRoute("/_doc/controller/loa")({
 });
 
 function Page() {
-  const locale = getLocale();
+  const { i18n } = useLingui();
+  const locale = i18n.locale;
   const [documents, docCode] = Route.useLoaderData();
 
   return (

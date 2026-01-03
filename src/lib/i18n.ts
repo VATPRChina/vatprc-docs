@@ -2,7 +2,7 @@ import { getPathname } from "./utils";
 import { I18n, MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 
-export const getLocale = (): "en" | "zh-cn" => {
+export const inferLocale = (): "en" | "zh-cn" => {
   const pathname = getPathname();
   if (pathname.startsWith("/en")) {
     return "en";
