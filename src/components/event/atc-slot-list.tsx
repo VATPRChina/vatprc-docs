@@ -15,6 +15,15 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter, isSameMinute } from "date-fns";
 import { FC } from "react";
 
+export const POSITION_KINDS_PRIORITY: string[] = ["DEL", "GND", "TWR", "T2", "APP", "CTR", "FSS", "FMP"];
+
+export const POSITION_STATE_PRIORITY: components["schemas"]["UserControllerState"][] = [
+  "student",
+  "under-mentor",
+  "solo",
+  "certified",
+];
+
 const columnHelper = createColumnHelper<components["schemas"]["EventAtcPositionDto"]>();
 
 const columns = [
@@ -63,6 +72,17 @@ const columns = [
           <span>{remarks}</span>
         </div>
       );
+    },
+    sortingFn: (a, b) => {
+      const kindA = POSITION_KINDS_PRIORITY.indexOf(a.original.position_kind_id);
+      const kindB = POSITION_KINDS_PRIORITY.indexOf(b.original.position_kind_id);
+      if (kindA !== kindB) {
+        return kindA - kindB;
+      }
+
+      const stateA = POSITION_STATE_PRIORITY.indexOf(a.original.minimum_controller_state);
+      const stateB = POSITION_STATE_PRIORITY.indexOf(b.original.minimum_controller_state);
+      return stateA - stateB;
     },
   }),
   columnHelper.accessor("booking.user.cid", {
