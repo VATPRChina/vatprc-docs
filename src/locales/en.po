@@ -253,10 +253,6 @@ msgstr "Basic Info"
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/app/app-nav-menu.tsx:153
-msgid "Become a Controller"
-msgstr "Become a Controller"
-
 #: src/components/event/atc-slot-list.tsx:153
 #: src/components/event/slot-list.tsx:118
 msgid "Book"
@@ -346,6 +342,10 @@ msgstr "Community & Teamspeak 3"
 #: src/routes/users/index.tsx:43
 msgid "Controller"
 msgstr "Controller"
+
+#: src/components/app/app-nav-menu.tsx:153
+msgid "Controller Application"
+msgstr "Controller Application"
 
 #: src/routes/controllers/applications/new.tsx:24
 msgid "Controller Application Guideline"

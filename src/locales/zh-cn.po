@@ -253,10 +253,6 @@ msgstr "基本信息"
 msgid "Basic Information"
 msgstr "基本信息"
 
-#: src/components/app/app-nav-menu.tsx:153
-msgid "Become a Controller"
-msgstr "成为管制员"
-
 #: src/components/event/atc-slot-list.tsx:153
 #: src/components/event/slot-list.tsx:118
 msgid "Book"
@@ -346,6 +342,10 @@ msgstr "社群"
 #: src/routes/users/index.tsx:43
 msgid "Controller"
 msgstr "管制员"
+
+#: src/components/app/app-nav-menu.tsx:153
+msgid "Controller Application"
+msgstr "管制员申请"
 
 #: src/routes/controllers/applications/new.tsx:24
 msgid "Controller Application Guideline"
