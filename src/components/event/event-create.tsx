@@ -1,5 +1,6 @@
 import { DateTime } from "./datetime";
 import NoEventImage from "@/assets/no-event-image.svg";
+import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { promiseWithLog, promiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
@@ -9,7 +10,7 @@ import { DateTimePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { formatISO, setMinutes, setSeconds } from "date-fns";
+import { addHours, formatISO, setMinutes, setSeconds } from "date-fns";
 import { TbEdit } from "react-icons/tb";
 
 const NULL_ULID = "01J2N4V2BNSP3E5Q9MBA3AE8E3";
@@ -35,7 +36,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const { mutate: update, isPending: isUpdatePending } = $api.useMutation("post", "/api/events/{eid}", {
     onSuccess: () => close(),
   });
-  const now = formatISO(setMinutes(setSeconds(Date.now(), 0), 0));
+  const now = formatISO(setMinutes(setSeconds(addHours(Date.now(), 1), 0), 0));
   const form = useForm({
     defaultValues: {
       title: event?.title ?? "",
@@ -43,9 +44,10 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
       end_at: event?.end_at ?? now,
       start_booking_at: event?.start_booking_at ?? now,
       end_booking_at: event?.end_booking_at ?? now,
+      start_atc_booking_at: (event?.start_atc_booking_at ?? now) as string | null,
       image_url: event?.image_url ?? null,
       description: event?.description ?? "",
-    },
+    } satisfies components["schemas"]["EventSaveRequest"],
     onSubmit: ({ value }) => {
       if (eventId) {
         update({ params: { path: { eid: eventId ?? NULL_ULID } }, body: value });
@@ -160,6 +162,24 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 )}
               </form.Field>
             </Group>
+            <form.Field name="start_atc_booking_at">
+              {(field) => (
+                <Stack gap="xs">
+                  <DateTimePicker
+                    label={t`Start ATC booking at`}
+                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
+                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                    value={field.state.value && new Date(field.state.value)}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                    clearable
+                  />
+                  <Text size="xs">
+                    <DateTime>{field.state.value}</DateTime>
+                  </Text>
+                </Stack>
+              )}
+            </form.Field>
             <form.Field name="image_url">
               {(field) => (
                 <TextInput

@@ -12,7 +12,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
-import { isSameMinute } from "date-fns";
+import { isAfter, isSameMinute } from "date-fns";
 import { FC } from "react";
 
 const columnHelper = createColumnHelper<components["schemas"]["EventAtcPositionDto"]>();
@@ -82,6 +82,8 @@ const columns = [
         params: { path: { eventId: row.original.event.id } },
       });
       const slot = data?.find((s) => s.id === row.original.id);
+      const isNotInBookingPeriod =
+        !!slot?.event.start_atc_booking_at && !isAfter(Date.now(), slot.event.start_atc_booking_at);
       const onMutateSuccess = wrapPromiseWithLog(() =>
         queryClient.invalidateQueries(
           $api.queryOptions("get", "/api/events/{eventId}/controllers", {
@@ -125,7 +127,7 @@ const columns = [
               variant="subtle"
               onClick={onBook}
               loading={isBookPending}
-              disabled={!!slot?.booking || !hasPermission}
+              disabled={!!slot?.booking || !hasPermission || isNotInBookingPeriod}
             >
               <Trans>Book</Trans>
             </ConfirmButton>
@@ -134,7 +136,7 @@ const columns = [
               variant="subtle"
               onClick={onRelease}
               loading={isReleasePending}
-              disabled={!slot?.booking || !hasPermission || slot.booking.user_id !== user?.id}
+              disabled={!slot?.booking || !hasPermission || slot.booking.user_id !== user?.id || isNotInBookingPeriod}
             >
               <Trans>Release</Trans>
             </ConfirmButton>
