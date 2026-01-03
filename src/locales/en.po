@@ -73,7 +73,7 @@ msgstr "Absent"
 msgid "Accepted"
 msgstr "Accepted"
 
-#: src/components/atc-application/atc-application-form.tsx:72
+#: src/components/atc-application/atc-application-form.tsx:77
 msgid "Account belongs to VATPRC division"
 msgstr "Account belongs to VATPRC division"
 
@@ -139,7 +139,7 @@ msgstr "API Client"
 msgid "API Document"
 msgstr "API Document"
 
-#: src/components/atc-application/atc-application-form.tsx:89
+#: src/components/atc-application/atc-application-form.tsx:94
 msgid "Application Information"
 msgstr "Application Information"
 
@@ -147,11 +147,11 @@ msgstr "Application Information"
 msgid "Application review updated"
 msgstr "Application review updated"
 
-#: src/components/atc-application/atc-application-form.tsx:37
+#: src/components/atc-application/atc-application-form.tsx:38
 msgid "Application submitted"
 msgstr "Application submitted"
 
-#: src/components/atc-application/atc-application-form.tsx:48
+#: src/components/atc-application/atc-application-form.tsx:49
 msgid "Application updated"
 msgstr "Application updated"
 
@@ -163,6 +163,7 @@ msgstr "Applications"
 msgid "Applied At"
 msgstr "Applied At"
 
+#: src/routes/_doc/controller/become-a-controller.tsx:12
 #: src/routes/controllers/applications/index.tsx:28
 msgid "Apply"
 msgstr "Apply"
@@ -244,7 +245,7 @@ msgstr "Back"
 msgid "Basic Info"
 msgstr "Basic Info"
 
-#: src/components/atc-application/atc-application-form.tsx:80
+#: src/components/atc-application/atc-application-form.tsx:85
 msgid "Basic Information"
 msgstr "Basic Information"
 
@@ -297,7 +298,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/components/atc-application/atc-application-form.tsx:68
+#: src/components/atc-application/atc-application-form.tsx:73
 msgid "Checklist"
 msgstr "Checklist"
 
@@ -317,7 +318,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/atc-application/atc-application-form.tsx:83
+#: src/components/atc-application/atc-application-form.tsx:88
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:69
 #: src/routes/users/index.tsx:54
@@ -461,7 +462,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-application/atc-application-form.tsx:101
+#: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "Edit"
@@ -474,11 +475,11 @@ msgstr "Edit ATC permissions"
 msgid "Edit ATC Position {callsign}"
 msgstr "Edit ATC Position {callsign}"
 
-#: src/components/doc/discourse-doc.tsx:74
+#: src/components/doc/discourse-doc.tsx:75
 msgid "Edit Chinese"
 msgstr "Edit Chinese"
 
-#: src/components/doc/discourse-doc.tsx:65
+#: src/components/doc/discourse-doc.tsx:66
 msgid "Edit English"
 msgstr "Edit English"
 
@@ -566,12 +567,12 @@ msgstr "Event start"
 msgid "Events"
 msgstr "Events"
 
-#: src/components/doc/discourse-doc.tsx:124
+#: src/components/doc/discourse-doc.tsx:127
 #: src/routes/docs/$.tsx:38
 msgid "Failed to load document"
 msgstr "Failed to load document"
 
-#: src/components/atc-application/atc-application-form.tsx:74
+#: src/components/atc-application/atc-application-form.tsx:79
 msgid "Familiar with VATSIM regulations"
 msgstr "Familiar with VATSIM regulations"
 
@@ -636,7 +637,7 @@ msgstr "Fri"
 msgid "Full name"
 msgstr "Full name"
 
-#: src/components/atc-application/atc-application-form.tsx:86
+#: src/components/atc-application/atc-application-form.tsx:91
 msgid "Full Name"
 msgstr "Full Name"
 
@@ -664,7 +665,7 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/atc-application/atc-application-form.tsx:73
+#: src/components/atc-application/atc-application-form.tsx:78
 msgid "Have sufficient experience on VATSIM"
 msgstr "Have sufficient experience on VATSIM"
 
@@ -950,6 +951,10 @@ msgstr "Please contact ATC for help adjusting the route."
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
+#: src/components/atc-application/atc-application-form.tsx:67
+msgid "Please login to file an application."
+msgstr "Please login to file an application."
+
 #: src/routes/controllers/applications/new.tsx:25
 msgid "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
 msgstr "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
@@ -1146,7 +1151,7 @@ msgstr "Status"
 msgid "Student"
 msgstr "Student"
 
-#: src/components/atc-application/atc-application-form.tsx:101
+#: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "Submit"
@@ -1156,11 +1161,11 @@ msgstr "Submit"
 msgid "Submitted"
 msgstr "Submitted"
 
-#: src/components/atc-application/atc-application-form.tsx:75
+#: src/components/atc-application/atc-application-form.tsx:80
 msgid "Sufficient English proficiency"
 msgstr "Sufficient English proficiency"
 
-#: src/components/atc-application/atc-application-form.tsx:76
+#: src/components/atc-application/atc-application-form.tsx:81
 msgid "Sufficient online availability"
 msgstr "Sufficient online availability"
 
@@ -1496,10 +1501,10 @@ msgstr "Your application has been placed in the waitlist. You will be notified i
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "Your application has been submitted and is pending review by the staff."
 
-#: src/components/atc-application/atc-application-form.tsx:38
+#: src/components/atc-application/atc-application-form.tsx:39
 msgid "Your ATC application has been submitted successfully."
 msgstr "Your ATC application has been submitted successfully."
 
-#: src/components/atc-application/atc-application-form.tsx:49
+#: src/components/atc-application/atc-application-form.tsx:50
 msgid "Your ATC application has been updated successfully."
 msgstr "Your ATC application has been updated successfully."
