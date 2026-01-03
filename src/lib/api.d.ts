@@ -8790,7 +8790,7 @@ export interface components {
     };
     EventAtcPositionBookingDto: {
       user_id: components["schemas"]["Ulid"];
-      user: null | components["schemas"]["UserDto"];
+      user: components["schemas"]["UserDto"];
       /** Format: date-time */
       booked_at: string;
     };
@@ -9036,6 +9036,9 @@ export interface components {
     };
     TrainingApplicationCreateRequest: {
       name: string;
+      slots: components["schemas"]["TrainingApplicationCreateRequestSlot"][];
+    };
+    TrainingApplicationCreateRequestSlot: {
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -9048,10 +9051,7 @@ export interface components {
       status: components["schemas"]["TrainingApplicationStatus"];
       name: string;
       train_id?: null | components["schemas"]["Ulid"];
-      /** Format: date-time */
-      start_at: string;
-      /** Format: date-time */
-      end_at: string;
+      slots?: null | components["schemas"]["TrainingApplicationSlotDto"][];
       /** Format: date-time */
       created_at: string;
       /** Format: date-time */
@@ -9060,7 +9060,6 @@ export interface components {
     TrainingApplicationResponseDto: {
       id: components["schemas"]["Ulid"];
       application_id: components["schemas"]["Ulid"];
-      application: components["schemas"]["TrainingApplicationDto"];
       trainer_id: components["schemas"]["Ulid"];
       trainer: components["schemas"]["UserDto"];
       is_accepted: boolean;
@@ -9071,8 +9070,16 @@ export interface components {
       updated_at: string;
     };
     TrainingApplicationResponseRequest: {
-      is_accepted: boolean;
+      slot_id?: null | components["schemas"]["Ulid"];
       comment: string;
+    };
+    TrainingApplicationSlotDto: {
+      id: components["schemas"]["Ulid"];
+      application_id: components["schemas"]["Ulid"];
+      /** Format: date-time */
+      start_at: string;
+      /** Format: date-time */
+      end_at: string;
     };
     /** @enum {unknown} */
     TrainingApplicationStatus: "pending" | "accepted" | "rejected";

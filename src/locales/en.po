@@ -54,6 +54,10 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
+#: src/components/atc-training/training-application-create.tsx:111
+msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
+msgstr "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
+
 #: src/components/app/app-nav-menu.tsx:49
 msgid "About Us"
 msgstr "About Us"
@@ -62,14 +66,10 @@ msgstr "About Us"
 msgid "Absent"
 msgstr "Absent"
 
-#: src/components/atc-training/training-application-responses.tsx:57
-msgid "Accept"
-msgstr "Accept"
-
 #: src/components/atc-application/atc-application-status.tsx:16
 #: src/components/atc-application/atc-application-status.tsx:42
-#: src/components/atc-training/training-application-list.tsx:25
-#: src/components/atc-training/training-application-responses.tsx:80
+#: src/components/atc-training/training-application-list.tsx:24
+#: src/components/atc-training/training-application-responses.tsx:89
 msgid "Accepted"
 msgstr "Accepted"
 
@@ -201,6 +201,10 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
+#: src/components/atc-training/training-application-create.tsx:43
+msgid "At least one slot is required"
+msgstr "At least one slot is required"
+
 #: src/routes/controllers/applications/$id.tsx:21
 msgid "ATC Application"
 msgstr "ATC Application"
@@ -256,6 +260,10 @@ msgstr "Book"
 #: src/components/event/event-detail.tsx:21
 msgid "Booking:"
 msgstr "Booking:"
+
+#: src/components/atc-training/training-application-create.tsx:89
+msgid "Briefly describe the target of the training, such as position and lesson content."
+msgstr "Briefly describe the target of the training, such as position and lesson content."
 
 #: src/components/event/atc-slot-create.tsx:97
 #: src/components/event/slot-import.tsx:137
@@ -317,8 +325,8 @@ msgstr "China RVSM odd flight level"
 msgid "CID"
 msgstr "CID"
 
-#: src/components/atc-training/training-application-responses.tsx:48
-#: src/components/atc-training/training-application-responses.tsx:91
+#: src/components/atc-training/training-application-responses.tsx:66
+#: src/components/atc-training/training-application-responses.tsx:100
 msgid "Comment"
 msgstr "Comment"
 
@@ -362,7 +370,7 @@ msgstr "Controller Training Director Assistant"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/atc-training/training-application-create.tsx:103
+#: src/components/atc-training/training-application-create.tsx:172
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:212
 #: src/components/preferred-route-create.tsx:202
@@ -384,8 +392,8 @@ msgstr "Create Event"
 msgid "Create Preferred Route"
 msgstr "Create Preferred Route"
 
-#: src/components/atc-training/training-application-create.tsx:43
-#: src/components/atc-training/training-application-create.tsx:46
+#: src/components/atc-training/training-application-create.tsx:69
+#: src/components/atc-training/training-application-create.tsx:72
 msgid "Create Training Request"
 msgstr "Create Training Request"
 
@@ -496,8 +504,7 @@ msgstr "Edit your flight plan on VATSIM."
 msgid "ELDT"
 msgstr "ELDT"
 
-#: src/components/atc-training/training-application-create.tsx:87
-#: src/components/atc-training/training-application-list.tsx:53
+#: src/components/atc-training/training-application-create.tsx:149
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:36
@@ -509,6 +516,14 @@ msgstr "End at"
 msgid "End booking at"
 msgstr "End booking at"
 
+#: src/components/atc-training/training-application-create.tsx:50
+msgid "End time is required"
+msgstr "End time is required"
+
+#: src/components/atc-training/training-application-create.tsx:53
+msgid "End time must be after start time"
+msgstr "End time must be after start time"
+
 #: src/components/event/slot-import.tsx:134
 msgid "Enter at"
 msgstr "Enter at"
@@ -516,6 +531,10 @@ msgstr "Enter at"
 #: src/routes/flights/$callsign.tsx:370
 msgid "Equipment"
 msgstr "Equipment"
+
+#: src/components/atc-training/training-application-create.tsx:118
+msgid "Error"
+msgstr "Error"
 
 #: src/routes/flights/$callsign.tsx:104
 msgctxt "feet"
@@ -792,7 +811,7 @@ msgstr "Name"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
-#: src/components/atc-training/training-application-responses.tsx:93
+#: src/components/atc-training/training-application-responses.tsx:102
 msgid "No comments"
 msgstr "No comments"
 
@@ -889,7 +908,7 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "PBN"
 msgstr "PBN"
 
-#: src/components/atc-training/training-application-list.tsx:17
+#: src/components/atc-training/training-application-list.tsx:16
 msgid "Pending"
 msgstr "Pending"
 
@@ -960,14 +979,14 @@ msgstr "Progression Guide"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/components/atc-training/training-application-responses.tsx:65
+#: src/components/atc-training/training-application-responses.tsx:40
 msgid "Reject"
 msgstr "Reject"
 
 #: src/components/atc-application/atc-application-status.tsx:17
 #: src/components/atc-application/atc-application-status.tsx:50
-#: src/components/atc-training/training-application-list.tsx:33
-#: src/components/atc-training/training-application-responses.tsx:84
+#: src/components/atc-training/training-application-list.tsx:32
+#: src/components/atc-training/training-application-responses.tsx:93
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -980,6 +999,10 @@ msgstr "Release"
 #: src/routes/navdata/preferred-routes.tsx:24
 msgid "Remark"
 msgstr "Remark"
+
+#: src/components/atc-training/training-application-responses.tsx:74
+msgid "Respond"
+msgstr "Respond"
 
 #: src/routes/flights/$callsign.tsx:133
 msgid "Restricted airway"
@@ -1061,6 +1084,7 @@ msgstr "Show all pilots"
 msgid "Show less pilots"
 msgstr "Show less pilots"
 
+#: src/components/atc-training/training-application-create.tsx:98
 #: src/components/event/slot-list.tsx:154
 #: src/routes/events/$id.tsx:44
 msgid "Slots"
@@ -1088,8 +1112,7 @@ msgstr "Staff"
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
-#: src/components/atc-training/training-application-create.tsx:70
-#: src/components/atc-training/training-application-list.tsx:49
+#: src/components/atc-training/training-application-create.tsx:132
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:110
 #: src/components/event/atc-slot-list.tsx:25
@@ -1105,13 +1128,17 @@ msgstr "Start ATC booking at"
 msgid "Start booking at"
 msgstr "Start booking at"
 
+#: src/components/atc-training/training-application-create.tsx:47
+msgid "Start time is required"
+msgstr "Start time is required"
+
 #: src/components/app/app-nav-menu.tsx:115
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
 #: src/components/atc-application/atc-application-list.tsx:21
 #: src/components/atc-application/atc-application-status.tsx:119
-#: src/components/atc-training/training-application-list.tsx:43
+#: src/components/atc-training/training-application-list.tsx:42
 msgid "Status"
 msgstr "Status"
 
@@ -1141,11 +1168,11 @@ msgstr "Sufficient online availability"
 msgid "Sun"
 msgstr "Sun"
 
-#: src/components/app/language-toggle.tsx:18
+#: src/components/app/language-toggle.tsx:17
 msgid "Switch to Chinese"
 msgstr "Switch to Chinese"
 
-#: src/components/app/language-toggle.tsx:18
+#: src/components/app/language-toggle.tsx:17
 msgid "Switch to English"
 msgstr "Switch to English"
 
@@ -1273,6 +1300,7 @@ msgstr "Thu"
 msgid "Tier 2"
 msgstr "Tier 2"
 
+#: src/components/atc-training/training-application-responses.tsx:65
 #: src/components/event/slot-list.tsx:24
 msgid "Time"
 msgstr "Time"
@@ -1281,12 +1309,16 @@ msgstr "Time"
 msgid "Time:"
 msgstr "Time:"
 
-#: src/components/atc-training/training-application-create.tsx:58
-#: src/components/atc-training/training-application-list.tsx:41
+#: src/components/atc-training/training-application-create.tsx:84
+#: src/components/atc-training/training-application-list.tsx:40
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:85
 msgid "Title"
 msgstr "Title"
+
+#: src/components/atc-training/training-application-create.tsx:40
+msgid "Title is required"
+msgstr "Title is required"
 
 #: src/components/app/theme-toggle.tsx:15
 msgid "Toggle theme"
@@ -1296,17 +1328,17 @@ msgstr "Toggle theme"
 msgid "Tower"
 msgstr "Tower"
 
-#: src/components/atc-training/training-application-list.tsx:46
+#: src/components/atc-training/training-application-list.tsx:45
 #: src/components/atc-training/training-list.tsx:13
 msgid "Trainee CID"
 msgstr "Trainee CID"
 
-#: src/components/atc-training/training-application-list.tsx:47
+#: src/components/atc-training/training-application-list.tsx:46
 #: src/components/atc-training/training-list.tsx:14
 msgid "Trainee Name"
 msgstr "Trainee Name"
 
-#: src/components/atc-training/training-application-responses.tsx:74
+#: src/components/atc-training/training-application-responses.tsx:83
 msgid "Trainer"
 msgstr "Trainer"
 
@@ -1318,7 +1350,7 @@ msgstr "Trainer CID"
 msgid "Trainer Name"
 msgstr "Trainer Name"
 
-#: src/components/atc-training/training-application-responses.tsx:43
+#: src/components/atc-training/training-application-responses.tsx:59
 #: src/components/atc-training/training-response.tsx:50
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
@@ -1416,7 +1448,7 @@ msgstr "VFR Policy"
 msgid "View"
 msgstr "View"
 
-#: src/components/atc-training/training-application-responses.tsx:41
+#: src/components/atc-training/training-application-responses.tsx:57
 msgid "View Responses"
 msgstr "View Responses"
 
@@ -1448,7 +1480,7 @@ msgstr "Wed"
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
 
-#: src/components/atc-training/training-application-responses.tsx:46
+#: src/components/atc-training/training-application-responses.tsx:63
 msgid "You have responded to this training request."
 msgstr "You have responded to this training request."
 

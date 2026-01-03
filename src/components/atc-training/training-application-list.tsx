@@ -1,4 +1,3 @@
-import { DateTime } from "../event/datetime";
 import { RichTable } from "../table";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
 import { components } from "@/lib/api";
@@ -45,14 +44,6 @@ const columns = [
   }),
   col.accessor("trainee.cid", { header: () => <Trans>Trainee CID</Trans> }),
   col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
-  col.accessor("start_at", {
-    header: () => <Trans>Start at</Trans>,
-    cell: ({ getValue }) => <DateTime>{getValue()}</DateTime>,
-  }),
-  col.accessor("end_at", {
-    header: () => <Trans>End at</Trans>,
-    cell: ({ getValue }) => <DateTime>{getValue()}</DateTime>,
-  }),
   col.display({
     id: "actions",
     cell: ({ row }) => <TrainingApplicationResponsesModal id={row.original.id} />,
