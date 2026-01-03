@@ -89,10 +89,14 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
         <Trans>Basic Information</Trans>
       </h2>
       <Skeleton visible={isUserLoading}>
-        <TextInput label={t`CID`} value={user?.cid ?? ""} disabled />
+        <TextInput label={t`CID`} value={existingApplication?.user?.cid ?? user?.cid ?? ""} disabled />
       </Skeleton>
       <Skeleton visible={isUserLoading}>
-        <TextInput label={t`Full Name`} value={user?.full_name ?? ""} disabled />
+        <TextInput
+          label={t`Full Name`}
+          value={existingApplication?.user?.full_name ?? user?.full_name ?? ""}
+          disabled
+        />
       </Skeleton>
       <h2 className="text-lg">
         <Trans>Application Information</Trans>
