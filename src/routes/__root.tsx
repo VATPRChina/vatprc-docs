@@ -6,12 +6,13 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { Alert, ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
 import { Notifications } from "@mantine/notifications";
 import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
+import * as Sentry from "@sentry/tanstackstart-react";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -20,7 +21,7 @@ import {
   useLocation,
   useRouterState,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { FC, PropsWithChildren, useEffect } from "react";
 
 const theme = createTheme({
   primaryColor: "vatprc",
@@ -75,8 +76,62 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
   );
 };
 
+const AppHtml: FC<PropsWithChildren> = ({ children }) => {
+  const { publicHref } = useLocation();
+  const { i18n } = useLingui();
+
+  useEffect(() => {
+    if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
+      return;
+    }
+
+    if (publicHref.includes("/auth/callback")) {
+      return;
+    }
+
+    const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
+    if (locale) {
+      setTimeout(() => window.location.replace(getLocalPathname(locale)));
+    }
+  });
+
+  return (
+    <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
+      <head>
+        <HeadContent />
+        <ColorSchemeScript defaultColorScheme="auto" />
+      </head>
+      <body className="px-1 md:px-0">
+        <MantineProvider theme={theme} defaultColorScheme="auto">
+          <Application>{children}</Application>
+          <Notifications position="top-center" />
+        </MantineProvider>
+        <Scripts />
+      </body>
+    </html>
+  );
+};
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootLayout,
+  errorComponent: ({ error }) => {
+    useEffect(() => {
+      Sentry.captureException(error);
+    }, [error]);
+
+    return (
+      <AppHtml>
+        <div className="mx-auto max-w-prose">
+          <Alert color="red" title={<Trans>Error</Trans>}>
+            <p className="font-medium">{error.message}</p>
+            <p className="text-wrap">
+              <pre>{error.stack}</pre>
+            </p>
+          </Alert>
+        </div>
+      </AppHtml>
+    );
+  },
   head: (ctx) => {
     const pathname = ctx.matches[ctx.matches.length - 1].pathname;
     return {
@@ -109,39 +164,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootLayout() {
-  const { publicHref } = useLocation();
-  const { i18n } = useLingui();
-
-  useEffect(() => {
-    if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
-      return;
-    }
-
-    if (publicHref.includes("/auth/callback")) {
-      return;
-    }
-
-    const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
-    if (locale) {
-      setTimeout(() => window.location.replace(getLocalPathname(locale)));
-    }
-  });
-
   return (
-    <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
-      <head>
-        <HeadContent />
-        <ColorSchemeScript defaultColorScheme="auto" />
-      </head>
-      <body className="px-1 md:px-0">
-        <MantineProvider theme={theme} defaultColorScheme="auto">
-          <Application>
-            <Outlet />
-          </Application>
-          <Notifications position="top-center" />
-        </MantineProvider>
-        <Scripts />
-      </body>
-    </html>
+    <AppHtml>
+      <Outlet />
+    </AppHtml>
   );
 }

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:86
+#: src/routes/__root.tsx:141
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
@@ -68,7 +68,8 @@ msgstr "缺席"
 
 #: src/components/atc-application/atc-application-status.tsx:16
 #: src/components/atc-application/atc-application-status.tsx:42
-#: src/components/atc-training/training-application-list.tsx:24
+#: src/components/atc-training/training-application-list.tsx:15
+#: src/components/atc-training/training-application-list.tsx:32
 #: src/components/atc-training/training-application-responses.tsx:89
 msgid "Accepted"
 msgstr "已通过"
@@ -135,7 +136,7 @@ msgstr "接口客户端"
 msgid "API Document"
 msgstr "API 文档"
 
-#: src/components/atc-application/atc-application-form.tsx:118
+#: src/components/atc-application/atc-application-form.tsx:127
 msgid "Application Information"
 msgstr "申请信息"
 
@@ -247,7 +248,7 @@ msgstr "返回"
 msgid "Basic Info"
 msgstr "基本信息"
 
-#: src/components/atc-application/atc-application-form.tsx:105
+#: src/components/atc-application/atc-application-form.tsx:106
 msgid "Basic Information"
 msgstr "基本信息"
 
@@ -297,7 +298,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/components/atc-application/atc-application-form.tsx:136
+#: src/components/atc-application/atc-application-form.tsx:145
 msgid "Checklist"
 msgstr "检查单"
 
@@ -317,7 +318,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/atc-application/atc-application-form.tsx:108
+#: src/components/atc-application/atc-application-form.tsx:110
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:90
 #: src/routes/users/index.tsx:54
@@ -473,7 +474,7 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-application/atc-application-form.tsx:130
+#: src/components/atc-application/atc-application-form.tsx:139
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "编辑"
@@ -551,6 +552,7 @@ msgstr "设备代码"
 
 #: src/components/atc-training/training-application-create.tsx:118
 #: src/components/event/atc-slot-list.tsx:188
+#: src/routes/__root.tsx:125
 msgid "Error"
 msgstr "错误"
 
@@ -650,7 +652,7 @@ msgstr "星期五"
 msgid "Full name"
 msgstr "姓名"
 
-#: src/components/atc-application/atc-application-form.tsx:112
+#: src/components/atc-application/atc-application-form.tsx:118
 msgid "Full Name"
 msgstr "姓名"
 
@@ -946,7 +948,8 @@ msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者
 msgid "PBN"
 msgstr "PBN"
 
-#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:14
+#: src/components/atc-training/training-application-list.tsx:24
 msgid "Pending"
 msgstr "待处理"
 
@@ -988,7 +991,7 @@ msgstr "请与管制员联系调整航路。"
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
-#: src/components/atc-application/atc-application-form.tsx:99
+#: src/components/atc-application/atc-application-form.tsx:100
 msgid "Please login to file an application."
 msgstr "递交申请前请先登入。"
 
@@ -1027,7 +1030,8 @@ msgstr "拒绝"
 
 #: src/components/atc-application/atc-application-status.tsx:17
 #: src/components/atc-application/atc-application-status.tsx:50
-#: src/components/atc-training/training-application-list.tsx:32
+#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:40
 #: src/components/atc-training/training-application-responses.tsx:93
 msgid "Rejected"
 msgstr "已拒绝"
@@ -1179,7 +1183,7 @@ msgstr "开始飞行"
 
 #: src/components/atc-application/atc-application-list.tsx:21
 #: src/components/atc-application/atc-application-status.tsx:119
-#: src/components/atc-training/training-application-list.tsx:42
+#: src/components/atc-training/training-application-list.tsx:50
 msgid "Status"
 msgstr "状态"
 
@@ -1187,7 +1191,7 @@ msgstr "状态"
 msgid "Student"
 msgstr "理论学习"
 
-#: src/components/atc-application/atc-application-form.tsx:130
+#: src/components/atc-application/atc-application-form.tsx:139
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "提交"
@@ -1339,7 +1343,7 @@ msgid "Time:"
 msgstr "活动时间："
 
 #: src/components/atc-training/training-application-create.tsx:84
-#: src/components/atc-training/training-application-list.tsx:40
+#: src/components/atc-training/training-application-list.tsx:48
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:116
 msgid "Title"
@@ -1358,12 +1362,12 @@ msgstr "切换主题"
 msgid "Tower"
 msgstr "塔台"
 
-#: src/components/atc-training/training-application-list.tsx:45
+#: src/components/atc-training/training-application-list.tsx:58
 #: src/components/atc-training/training-list.tsx:13
 msgid "Trainee CID"
 msgstr "学员 CID"
 
-#: src/components/atc-training/training-application-list.tsx:46
+#: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:14
 msgid "Trainee Name"
 msgstr "学员姓名"
@@ -1487,7 +1491,7 @@ msgstr "访问和转移"
 msgid "Volunteer"
 msgstr "志愿者"
 
-#: src/routes/__root.tsx:69
+#: src/routes/__root.tsx:70
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 

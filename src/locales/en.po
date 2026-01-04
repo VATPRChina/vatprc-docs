@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:86
+#: src/routes/__root.tsx:141
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
@@ -68,7 +68,8 @@ msgstr "Absent"
 
 #: src/components/atc-application/atc-application-status.tsx:16
 #: src/components/atc-application/atc-application-status.tsx:42
-#: src/components/atc-training/training-application-list.tsx:24
+#: src/components/atc-training/training-application-list.tsx:15
+#: src/components/atc-training/training-application-list.tsx:32
 #: src/components/atc-training/training-application-responses.tsx:89
 msgid "Accepted"
 msgstr "Accepted"
@@ -135,7 +136,7 @@ msgstr "API Client"
 msgid "API Document"
 msgstr "API Document"
 
-#: src/components/atc-application/atc-application-form.tsx:118
+#: src/components/atc-application/atc-application-form.tsx:127
 msgid "Application Information"
 msgstr "Application Information"
 
@@ -247,7 +248,7 @@ msgstr "Back"
 msgid "Basic Info"
 msgstr "Basic Info"
 
-#: src/components/atc-application/atc-application-form.tsx:105
+#: src/components/atc-application/atc-application-form.tsx:106
 msgid "Basic Information"
 msgstr "Basic Information"
 
@@ -297,7 +298,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/components/atc-application/atc-application-form.tsx:136
+#: src/components/atc-application/atc-application-form.tsx:145
 msgid "Checklist"
 msgstr "Checklist"
 
@@ -317,7 +318,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/atc-application/atc-application-form.tsx:108
+#: src/components/atc-application/atc-application-form.tsx:110
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:90
 #: src/routes/users/index.tsx:54
@@ -473,7 +474,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-application/atc-application-form.tsx:130
+#: src/components/atc-application/atc-application-form.tsx:139
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "Edit"
@@ -551,6 +552,7 @@ msgstr "Equipment"
 
 #: src/components/atc-training/training-application-create.tsx:118
 #: src/components/event/atc-slot-list.tsx:188
+#: src/routes/__root.tsx:125
 msgid "Error"
 msgstr "Error"
 
@@ -650,7 +652,7 @@ msgstr "Fri"
 msgid "Full name"
 msgstr "Full name"
 
-#: src/components/atc-application/atc-application-form.tsx:112
+#: src/components/atc-application/atc-application-form.tsx:118
 msgid "Full Name"
 msgstr "Full Name"
 
@@ -946,7 +948,8 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "PBN"
 msgstr "PBN"
 
-#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:14
+#: src/components/atc-training/training-application-list.tsx:24
 msgid "Pending"
 msgstr "Pending"
 
@@ -988,7 +991,7 @@ msgstr "Please contact ATC for help adjusting the route."
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
-#: src/components/atc-application/atc-application-form.tsx:99
+#: src/components/atc-application/atc-application-form.tsx:100
 msgid "Please login to file an application."
 msgstr "Please login to file an application."
 
@@ -1027,7 +1030,8 @@ msgstr "Reject"
 
 #: src/components/atc-application/atc-application-status.tsx:17
 #: src/components/atc-application/atc-application-status.tsx:50
-#: src/components/atc-training/training-application-list.tsx:32
+#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:40
 #: src/components/atc-training/training-application-responses.tsx:93
 msgid "Rejected"
 msgstr "Rejected"
@@ -1179,7 +1183,7 @@ msgstr "Start to Fly"
 
 #: src/components/atc-application/atc-application-list.tsx:21
 #: src/components/atc-application/atc-application-status.tsx:119
-#: src/components/atc-training/training-application-list.tsx:42
+#: src/components/atc-training/training-application-list.tsx:50
 msgid "Status"
 msgstr "Status"
 
@@ -1187,7 +1191,7 @@ msgstr "Status"
 msgid "Student"
 msgstr "Student"
 
-#: src/components/atc-application/atc-application-form.tsx:130
+#: src/components/atc-application/atc-application-form.tsx:139
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "Submit"
@@ -1339,7 +1343,7 @@ msgid "Time:"
 msgstr "Time:"
 
 #: src/components/atc-training/training-application-create.tsx:84
-#: src/components/atc-training/training-application-list.tsx:40
+#: src/components/atc-training/training-application-list.tsx:48
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:116
 msgid "Title"
@@ -1358,12 +1362,12 @@ msgstr "Toggle theme"
 msgid "Tower"
 msgstr "Tower"
 
-#: src/components/atc-training/training-application-list.tsx:45
+#: src/components/atc-training/training-application-list.tsx:58
 #: src/components/atc-training/training-list.tsx:13
 msgid "Trainee CID"
 msgstr "Trainee CID"
 
-#: src/components/atc-training/training-application-list.tsx:46
+#: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:14
 msgid "Trainee Name"
 msgstr "Trainee Name"
@@ -1487,7 +1491,7 @@ msgstr "Visiting & Transfer"
 msgid "Volunteer"
 msgstr "Volunteer"
 
-#: src/routes/__root.tsx:69
+#: src/routes/__root.tsx:70
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
