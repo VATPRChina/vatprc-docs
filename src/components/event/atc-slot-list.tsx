@@ -29,7 +29,7 @@ const columnHelper = createColumnHelper<components["schemas"]["EventAtcPositionD
 
 const columns = [
   columnHelper.accessor("callsign", {
-    header: () => <Trans>Route</Trans>,
+    header: () => <Trans>Callsign</Trans>,
   }),
   columnHelper.accessor("start_at", {
     header: () => <Trans>Start at</Trans>,

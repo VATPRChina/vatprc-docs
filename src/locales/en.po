@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/table.tsx:136
+#: src/components/table.tsx:162
 msgid "{size} items/page"
 msgstr "{size} items/page"
 
@@ -73,11 +73,7 @@ msgstr "Absent"
 msgid "Accepted"
 msgstr "Accepted"
 
-#: src/components/atc-application/atc-application-form.tsx:79
-msgid "Account belongs to VATPRC division"
-msgstr "Account belongs to VATPRC division"
-
-#: src/components/atc-application/atc-application-list.tsx:33
+#: src/components/atc-application/atc-application-list.tsx:38
 #: src/components/atc-training/training-list.tsx:27
 #: src/routes/users/index.tsx:130
 msgid "Actions"
@@ -139,7 +135,7 @@ msgstr "API Client"
 msgid "API Document"
 msgstr "API Document"
 
-#: src/components/atc-application/atc-application-form.tsx:102
+#: src/components/atc-application/atc-application-form.tsx:118
 msgid "Application Information"
 msgstr "Application Information"
 
@@ -147,11 +143,11 @@ msgstr "Application Information"
 msgid "Application review updated"
 msgstr "Application review updated"
 
-#: src/components/atc-application/atc-application-form.tsx:38
+#: src/components/atc-application/atc-application-form.tsx:70
 msgid "Application submitted"
 msgstr "Application submitted"
 
-#: src/components/atc-application/atc-application-form.tsx:49
+#: src/components/atc-application/atc-application-form.tsx:81
 msgid "Application updated"
 msgstr "Application updated"
 
@@ -159,7 +155,7 @@ msgstr "Application updated"
 msgid "Applications"
 msgstr "Applications"
 
-#: src/components/atc-application/atc-application-list.tsx:28
+#: src/components/atc-application/atc-application-list.tsx:33
 msgid "Applied At"
 msgstr "Applied At"
 
@@ -249,7 +245,7 @@ msgstr "Back"
 msgid "Basic Info"
 msgstr "Basic Info"
 
-#: src/components/atc-application/atc-application-form.tsx:89
+#: src/components/atc-application/atc-application-form.tsx:105
 msgid "Basic Information"
 msgstr "Basic Information"
 
@@ -267,6 +263,7 @@ msgid "Briefly describe the target of the training, such as position and lesson 
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
 #: src/components/event/atc-slot-create.tsx:97
+#: src/components/event/atc-slot-list.tsx:32
 #: src/components/event/slot-import.tsx:137
 #: src/routes/flights/$callsign.tsx:364
 #: src/routes/flights/index.tsx:49
@@ -298,7 +295,7 @@ msgstr "Charts"
 msgid "Check at VATSIM"
 msgstr "Check at VATSIM"
 
-#: src/components/atc-application/atc-application-form.tsx:75
+#: src/components/atc-application/atc-application-form.tsx:136
 msgid "Checklist"
 msgstr "Checklist"
 
@@ -318,7 +315,7 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/atc-application/atc-application-form.tsx:92
+#: src/components/atc-application/atc-application-form.tsx:108
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:90
 #: src/routes/users/index.tsx:54
@@ -466,7 +463,7 @@ msgstr "Division Director"
 msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
-#: src/components/atc-application/atc-application-form.tsx:114
+#: src/components/atc-application/atc-application-form.tsx:130
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "Edit"
@@ -582,10 +579,6 @@ msgstr "Events"
 msgid "Failed to load document"
 msgstr "Failed to load document"
 
-#: src/components/atc-application/atc-application-form.tsx:81
-msgid "Familiar with VATSIM regulations"
-msgstr "Familiar with VATSIM regulations"
-
 #: src/routes/index.tsx:87
 #: src/routes/index.tsx:91
 #: src/routes/index.tsx:123
@@ -647,23 +640,23 @@ msgstr "Fri"
 msgid "Full name"
 msgstr "Full name"
 
-#: src/components/atc-application/atc-application-form.tsx:96
+#: src/components/atc-application/atc-application-form.tsx:112
 msgid "Full Name"
 msgstr "Full Name"
 
-#: src/components/table.tsx:148
+#: src/components/table.tsx:174
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/components/table.tsx:172
+#: src/components/table.tsx:198
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/components/table.tsx:164
+#: src/components/table.tsx:190
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/components/table.tsx:156
+#: src/components/table.tsx:182
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
@@ -675,9 +668,29 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/atc-application/atc-application-form.tsx:80
-msgid "Have sufficient experience on VATSIM"
-msgstr "Have sufficient experience on VATSIM"
+#: src/components/atc-application/atc-application-form.tsx:36
+msgid "I agree to the Privacy Policy of VATSIM and VATPRC, and I consent to my full name, CID, and controller rating being publicized in VATSIM."
+msgstr "I agree to the Privacy Policy of VATSIM and VATPRC, and I consent to my full name, CID, and controller rating being publicized in VATSIM."
+
+#: src/components/atc-application/atc-application-form.tsx:26
+msgid "I am familiar with VATSIM regulations, and do not have violation record recently."
+msgstr "I am familiar with VATSIM regulations, and do not have violation record recently."
+
+#: src/components/atc-application/atc-application-form.tsx:13
+msgid "I am over 16 years old."
+msgstr "I am over 16 years old."
+
+#: src/components/atc-application/atc-application-form.tsx:30
+msgid "I have sufficient English proficiency to provide ATC service in both Chinese and English."
+msgstr "I have sufficient English proficiency to provide ATC service in both Chinese and English."
+
+#: src/components/atc-application/atc-application-form.tsx:18
+msgid "I have sufficient experience on VATSIM. I have connected as a pilot for more than 150 hours and have participated in more than 10 official events of VATPRC."
+msgstr "I have sufficient experience on VATSIM. I have connected as a pilot for more than 150 hours and have participated in more than 10 official events of VATPRC."
+
+#: src/components/atc-application/atc-application-form.tsx:32
+msgid "I will ensure to have sufficient ATC online time."
+msgstr "I will ensure to have sufficient ATC online time."
 
 #: src/components/app/app-nav-menu.tsx:186
 msgid "Image Upload Tool"
@@ -813,6 +826,10 @@ msgstr "Mon"
 msgid "Moodle"
 msgstr "Moodle"
 
+#: src/components/atc-application/atc-application-form.tsx:14
+msgid "My account belongs to VATPRC division."
+msgstr "My account belongs to VATPRC division."
+
 #: src/components/atc-application/atc-application-list.tsx:19
 #: src/routes/users/index.tsx:57
 msgid "Name"
@@ -826,7 +843,7 @@ msgstr "New ATC Application"
 msgid "No comments"
 msgstr "No comments"
 
-#: src/components/table.tsx:129
+#: src/components/table.tsx:155
 msgid "No data"
 msgstr "No data"
 
@@ -907,7 +924,7 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/components/table.tsx:139
+#: src/components/table.tsx:165
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
 
@@ -961,7 +978,7 @@ msgstr "Please contact ATC for help adjusting the route."
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
-#: src/components/atc-application/atc-application-form.tsx:67
+#: src/components/atc-application/atc-application-form.tsx:99
 msgid "Please login to file an application."
 msgstr "Please login to file an application."
 
@@ -1044,7 +1061,6 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
-#: src/components/event/atc-slot-list.tsx:32
 #: src/components/event/slot-list.tsx:20
 #: src/components/preferred-route-create.tsx:162
 #: src/routes/flights/$callsign.tsx:389
@@ -1071,7 +1087,7 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/components/table.tsx:81
+#: src/components/table.tsx:88
 msgid "Search..."
 msgstr "Search..."
 
@@ -1161,7 +1177,7 @@ msgstr "Status"
 msgid "Student"
 msgstr "Student"
 
-#: src/components/atc-application/atc-application-form.tsx:114
+#: src/components/atc-application/atc-application-form.tsx:130
 #: src/components/atc-application/atc-application-status.tsx:136
 msgid "Submit"
 msgstr "Submit"
@@ -1170,14 +1186,6 @@ msgstr "Submit"
 #: src/components/atc-application/atc-application-status.tsx:24
 msgid "Submitted"
 msgstr "Submitted"
-
-#: src/components/atc-application/atc-application-form.tsx:82
-msgid "Sufficient English proficiency"
-msgstr "Sufficient English proficiency"
-
-#: src/components/atc-application/atc-application-form.tsx:83
-msgid "Sufficient online availability"
-msgstr "Sufficient online availability"
 
 #: src/components/homepage/recent-events.tsx:180
 msgid "Sun"
@@ -1262,7 +1270,7 @@ msgstr "The cruising level type does not meet the requirement of the route. Crui
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 
-#: src/components/sheet.tsx:65
+#: src/components/sheet.tsx:67
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
@@ -1456,7 +1464,7 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/components/atc-application/atc-application-list.tsx:40
+#: src/components/atc-application/atc-application-list.tsx:45
 msgid "View"
 msgstr "View"
 
@@ -1508,10 +1516,10 @@ msgstr "Your application has been placed in the waitlist. You will be notified i
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "Your application has been submitted and is pending review by the staff."
 
-#: src/components/atc-application/atc-application-form.tsx:39
+#: src/components/atc-application/atc-application-form.tsx:71
 msgid "Your ATC application has been submitted successfully."
 msgstr "Your ATC application has been submitted successfully."
 
-#: src/components/atc-application/atc-application-form.tsx:50
+#: src/components/atc-application/atc-application-form.tsx:82
 msgid "Your ATC application has been updated successfully."
 msgstr "Your ATC application has been updated successfully."

@@ -9,6 +9,38 @@ import { useRouter } from "@tanstack/react-router";
 import { ComponentProps, FC, useState } from "react";
 import { TbUser } from "react-icons/tb";
 
+const CHECKLIST = [
+  { value: "age", label: <Trans>I am over 16 years old.</Trans> },
+  { value: "division", label: <Trans>My account belongs to VATPRC division.</Trans> },
+  {
+    value: "experience",
+    label: (
+      <Trans>
+        I have sufficient experience on VATSIM. I have connected as a pilot for more than 150 hours and have
+        participated in more than 10 official events of VATPRC.
+      </Trans>
+    ),
+  },
+  {
+    value: "coc",
+    label: <Trans>I am familiar with VATSIM regulations, and do not have violation record recently.</Trans>,
+  },
+  {
+    value: "english",
+    label: <Trans>I have sufficient English proficiency to provide ATC service in both Chinese and English.</Trans>,
+  },
+  { value: "time", label: <Trans>I will ensure to have sufficient ATC online time.</Trans> },
+  {
+    value: "privacy",
+    label: (
+      <Trans>
+        I agree to the Privacy Policy of VATSIM and VATPRC, and I consent to my full name, CID, and controller rating
+        being publicized in VATSIM.
+      </Trans>
+    ),
+  },
+];
+
 interface AtcApplicationFormProps {
   applicationId?: string;
 }
@@ -69,22 +101,6 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
 
   return (
     <div className="flex flex-col gap-2">
-      {!applicationId && (
-        <>
-          <h2 className="text-lg">
-            <Trans>Checklist</Trans>
-          </h2>
-          <Checkbox.Group value={value} onChange={setValue}>
-            <div className="flex flex-col gap-2">
-              <Checkbox value="division" label={<Trans>Account belongs to VATPRC division</Trans>} />
-              <Checkbox value="experience" label={<Trans>Have sufficient experience on VATSIM</Trans>} />
-              <Checkbox value="coc" label={<Trans>Familiar with VATSIM regulations</Trans>} />
-              <Checkbox value="english" label={<Trans>Sufficient English proficiency</Trans>} />
-              <Checkbox value="time" label={<Trans>Sufficient online availability</Trans>} />
-            </div>
-          </Checkbox.Group>
-        </>
-      )}
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
@@ -109,9 +125,27 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
         existingFillingAnswers={existingApplication?.application_filing_answers}
         onSubmit={onSubmit}
         isFieldValuesLoading={isValuesLoading}
-        isSubmitDisabled={value.length < 5}
+        isSubmitDisabled={value.length < CHECKLIST.length}
         isSubmitHidden={isEditDisabled}
         submitButtonContent={applicationId ? <Trans>Edit</Trans> : <Trans>Submit</Trans>}
+        footer={
+          <>
+            {!applicationId && (
+              <>
+                <h2 className="text-lg">
+                  <Trans>Checklist</Trans>
+                </h2>
+                <Checkbox.Group value={value} onChange={setValue}>
+                  <div className="flex flex-col gap-2">
+                    {CHECKLIST.map((item) => (
+                      <Checkbox key={item.value} value={item.value} label={item.label} />
+                    ))}
+                  </div>
+                </Checkbox.Group>
+              </>
+            )}
+          </>
+        }
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { promiseWithLog } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
 import { Skeleton, TextInput, Textarea, Select, Button } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, ReactNode } from "react";
 
 interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   sheet?: components["schemas"]["SheetDto"];
@@ -15,7 +15,8 @@ interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   isSubmitHidden?: boolean;
   submitButtonContent?: React.ReactNode;
   doNotRequirePristine?: boolean;
-  confirm?: string;
+  confirm?: ReactNode;
+  footer?: ReactNode;
 }
 
 export const Sheet: FC<SheetProps> = ({
@@ -28,6 +29,7 @@ export const Sheet: FC<SheetProps> = ({
   submitButtonContent,
   doNotRequirePristine,
   confirm,
+  footer,
   ...props
 }) => {
   const { i18n, t } = useLingui();
@@ -112,6 +114,7 @@ export const Sheet: FC<SheetProps> = ({
           }}
         </form.Field>
       ))}
+      {footer}
       {!isSubmitHidden && (
         <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}>
           {([canSubmit, isSubmitting, isPristine]) =>
