@@ -87,7 +87,7 @@ export const Sheet: FC<SheetProps> = ({
                 <Skeleton visible={isFieldValuesLoading ?? false}>
                   <p className="text-sm font-bold">{commonProps.label}</p>
                   <Card withBorder className="mt-1 text-sm" padding="xs">
-                    <pre className="font-sans">{commonProps.value}</pre>
+                    <pre className="font-sans text-wrap">{commonProps.value}</pre>
                   </Card>
                 </Skeleton>
               );
