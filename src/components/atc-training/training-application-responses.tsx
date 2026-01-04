@@ -54,7 +54,7 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
   return (
     <>
       <Button onClick={toggle} variant="subtle" size="compact-sm">
-        <Trans>View Responses</Trans>
+        <Trans>View</Trans>
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Training Application Responses`}>
         <div className="flex flex-col gap-2">
@@ -62,7 +62,7 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
             {user?.id && data?.some((response) => response.trainer_id === user?.id) && (
               <Alert color="green" title={<Trans>You have responded to this training request.</Trans>} />
             )}
-            <Select label={t`Time`} data={slots} value={slotId} onChange={(value) => value && setSlotId(value)} />
+            <Select label={t`Time`} data={slots} value={slotId} onChange={(value) => setSlotId(value ?? "")} />
             <Textarea label={t`Comment`} onChange={(e) => setComment(e.target.value)} autosize minRows={2} />
             <div className="flex flex-row gap-2">
               <Button
