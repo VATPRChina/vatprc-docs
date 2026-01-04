@@ -1658,7 +1658,11 @@ export interface paths {
         };
         cookie?: never;
       };
-      requestBody?: never;
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["EventAtcPositionBookRequest"];
+        };
+      };
       responses: {
         /** @description OK */
         200: {
@@ -7648,9 +7652,7 @@ export interface paths {
     };
     get: {
       parameters: {
-        query?: {
-          until?: string;
-        };
+        query?: never;
         header?: never;
         path?: never;
         cookie?: never;
@@ -8793,6 +8795,9 @@ export interface components {
       user: components["schemas"]["UserDto"];
       /** Format: date-time */
       booked_at: string;
+    };
+    EventAtcPositionBookRequest: {
+      user_id?: null | components["schemas"]["Ulid"];
     };
     EventAtcPositionDto: {
       id: components["schemas"]["Ulid"];

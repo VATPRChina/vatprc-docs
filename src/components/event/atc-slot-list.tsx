@@ -131,7 +131,7 @@ const columns = [
       );
 
       const onBook = () => {
-        book({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
+        book({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } }, body: {} });
       };
       const onRelease = () => {
         release({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
