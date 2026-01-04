@@ -2,7 +2,7 @@ import { ConfirmButton } from "./ui/confirm-button";
 import { components } from "@/lib/api";
 import { promiseWithLog } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
-import { Skeleton, TextInput, Textarea, Select, Button } from "@mantine/core";
+import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { ComponentProps, FC, ReactNode } from "react";
 
@@ -81,6 +81,18 @@ export const Sheet: FC<SheetProps> = ({
               error: field.state.meta.errors.join(""),
               disabled: isSubmitHidden,
             };
+
+            if (commonProps.disabled) {
+              return (
+                <Skeleton visible={isFieldValuesLoading ?? false}>
+                  <p className="text-sm font-bold">{commonProps.label}</p>
+                  <Card withBorder className="mt-1 text-sm" padding="xs">
+                    <pre className="font-sans">{commonProps.value}</pre>
+                  </Card>
+                </Skeleton>
+              );
+            }
+
             if (sheetField.kind === "short-text") {
               return (
                 <Skeleton visible={isFieldValuesLoading ?? false}>

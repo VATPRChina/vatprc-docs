@@ -2,7 +2,7 @@ import { Sheet } from "../sheet";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { useLingui, Trans } from "@lingui/react/macro";
-import { TextInput, Alert, Skeleton, Checkbox } from "@mantine/core";
+import { Alert, Skeleton, Checkbox, Card } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
@@ -93,7 +93,8 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
   };
 
   const [value, setValue] = useState<string[]>([]);
-  const isEditDisabled = !!applicationId && existingApplication?.status !== "submitted";
+  const isEditDisabled =
+    !!applicationId && (existingApplication?.status !== "submitted" || existingApplication?.user_id !== user?.id);
 
   if (!user && !isUserLoading) {
     return <Alert icon={<TbUser />} title={<Trans>Please login to file an application.</Trans>}></Alert>;
@@ -104,15 +105,23 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
-      <Skeleton visible={isUserLoading}>
-        <TextInput label={t`CID`} value={existingApplication?.user?.cid ?? user?.cid ?? ""} disabled />
+      <Skeleton visible={isUserLoading || isValuesLoading}>
+        <p className="text-sm font-bold">
+          <Trans>CID</Trans>
+        </p>
+        <Card withBorder className="mt-1 text-sm" padding="xs">
+          <pre className="font-sans">{(applicationId ? existingApplication?.user?.cid : user?.cid) ?? ""}</pre>
+        </Card>
       </Skeleton>
-      <Skeleton visible={isUserLoading}>
-        <TextInput
-          label={t`Full Name`}
-          value={existingApplication?.user?.full_name ?? user?.full_name ?? ""}
-          disabled
-        />
+      <Skeleton visible={isUserLoading || isValuesLoading}>
+        <p className="text-sm font-bold">
+          <Trans>Full Name</Trans>
+        </p>
+        <Card withBorder className="mt-1 text-sm" padding="xs">
+          <pre className="font-sans">
+            {(applicationId ? existingApplication?.user?.full_name : (user?.full_name ?? user?.full_name)) ?? ""}
+          </pre>
+        </Card>
       </Skeleton>
       <h2 className="text-lg">
         <Trans>Application Information</Trans>
