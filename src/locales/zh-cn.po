@@ -50,7 +50,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/routes/index.tsx:129
+#: src/routes/index.tsx:127
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -164,11 +164,11 @@ msgstr "申请时间"
 msgid "Apply"
 msgstr "申请"
 
-#: src/routes/index.tsx:94
+#: src/routes/index.tsx:92
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
-#: src/components/atc-permission-modal.tsx:25
+#: src/components/atc-permission-modal.tsx:26
 msgid "Approach"
 msgstr "进近"
 
@@ -212,6 +212,7 @@ msgstr "管制员申请"
 
 #: src/components/app/app-nav-menu.tsx:195
 #: src/routes/controllers/applications/index.tsx:18
+#: src/routes/controllers/index.tsx:27
 msgid "ATC Applications"
 msgstr "管制员申请"
 
@@ -220,7 +221,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:160
-#: src/routes/index.tsx:63
+#: src/routes/index.tsx:61
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -233,6 +234,7 @@ msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
 #: src/components/app/app-nav-menu.tsx:200
+#: src/routes/controllers/index.tsx:32
 #: src/routes/controllers/trainings/index.tsx:16
 msgid "ATC Trainings"
 msgstr "管制员培训"
@@ -279,11 +281,11 @@ msgstr "呼号和机型"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/components/atc-permission-modal.tsx:26
+#: src/components/atc-permission-modal.tsx:27
 msgid "Center"
 msgstr "区域"
 
-#: src/components/atc-permission-modal.tsx:35
+#: src/components/atc-permission-modal.tsx:36
 msgid "Certified"
 msgstr "完整权限"
 
@@ -347,6 +349,14 @@ msgstr "管制员申请"
 #: src/routes/controllers/applications/new.tsx:24
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
+
+#: src/routes/controllers/index.tsx:13
+msgid "Controller Center"
+msgstr "管制员中心"
+
+#: src/routes/controllers/index.tsx:19
+msgid "Controller Center is under construction. We will improve this page to contain contents that fits controllers' needs."
+msgstr "管制员中心正在建设中。未来本页面会显示与管制员相关的内容。"
 
 #: src/routes/users/me.tsx:66
 msgid "Controller Info"
@@ -427,8 +437,8 @@ msgstr "巡航高度类型不允许"
 msgid "CTOT"
 msgstr "CTOT"
 
-#: src/components/atc-permission-modal.tsx:102
-#: src/components/atc-permission-modal.tsx:114
+#: src/components/atc-permission-modal.tsx:109
+#: src/components/atc-permission-modal.tsx:131
 msgid "Current Value: "
 msgstr "当前值："
 
@@ -436,7 +446,7 @@ msgstr "当前值："
 msgid "Dark"
 msgstr "暗色"
 
-#: src/components/atc-permission-modal.tsx:21
+#: src/components/atc-permission-modal.tsx:22
 msgid "Delivery"
 msgstr "放行"
 
@@ -468,7 +478,7 @@ msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 msgid "Edit"
 msgstr "编辑"
 
-#: src/components/atc-permission-modal.tsx:133
+#: src/components/atc-permission-modal.tsx:149
 msgid "Edit ATC permissions"
 msgstr "编辑管制员权限"
 
@@ -579,9 +589,9 @@ msgstr "活动"
 msgid "Failed to load document"
 msgstr "加载文档失败"
 
-#: src/routes/index.tsx:87
-#: src/routes/index.tsx:91
-#: src/routes/index.tsx:123
+#: src/routes/index.tsx:85
+#: src/routes/index.tsx:89
+#: src/routes/index.tsx:121
 msgid "Feedback"
 msgstr "反馈"
 
@@ -619,16 +629,16 @@ msgstr "飞行计划检查器"
 msgid "Flight Route"
 msgstr "航路"
 
-#: src/components/atc-permission-modal.tsx:27
+#: src/components/atc-permission-modal.tsx:28
 msgid "Flight Service Station"
 msgstr "飞服"
 
-#: src/components/atc-permission-modal.tsx:28
+#: src/components/atc-permission-modal.tsx:29
 msgid "Flow Management Position"
 msgstr "流量控制"
 
 #: src/components/app/app-nav-menu.tsx:77
-#: src/routes/index.tsx:119
+#: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "论坛"
 
@@ -664,7 +674,7 @@ msgstr "前往上一页"
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
-#: src/components/atc-permission-modal.tsx:22
+#: src/components/atc-permission-modal.tsx:23
 msgid "Ground"
 msgstr "地面"
 
@@ -855,7 +865,7 @@ msgstr "近期无活动计划。"
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
 
-#: src/components/atc-permission-modal.tsx:97
+#: src/components/atc-permission-modal.tsx:103
 msgid "No permission"
 msgstr "没有权限"
 
@@ -896,7 +906,7 @@ msgstr "英制单数飞行高度层"
 msgid "Online Controllers"
 msgstr "在线管制员"
 
-#: src/routes/index.tsx:75
+#: src/routes/index.tsx:73
 msgid "Online Pilots"
 msgstr "在线飞行员"
 
@@ -1121,11 +1131,11 @@ msgstr "显示部分"
 msgid "Slots"
 msgstr "时刻"
 
-#: src/components/atc-permission-modal.tsx:34
+#: src/components/atc-permission-modal.tsx:35
 msgid "Solo"
 msgstr "独立训练"
 
-#: src/components/atc-permission-modal.tsx:106
+#: src/components/atc-permission-modal.tsx:119
 msgid "Solo Expiration Date"
 msgstr "独立训练到期日"
 
@@ -1173,7 +1183,7 @@ msgstr "开始飞行"
 msgid "Status"
 msgstr "状态"
 
-#: src/components/atc-permission-modal.tsx:32
+#: src/components/atc-permission-modal.tsx:33
 msgid "Student"
 msgstr "理论学习"
 
@@ -1315,7 +1325,7 @@ msgstr "本页面仅支持简体中文。"
 msgid "Thu"
 msgstr "星期四"
 
-#: src/components/atc-permission-modal.tsx:24
+#: src/components/atc-permission-modal.tsx:25
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -1344,7 +1354,7 @@ msgstr "标题为必填项"
 msgid "Toggle theme"
 msgstr "切换主题"
 
-#: src/components/atc-permission-modal.tsx:23
+#: src/components/atc-permission-modal.tsx:24
 msgid "Tower"
 msgstr "塔台"
 
@@ -1396,7 +1406,7 @@ msgstr "应答机设备代码为空。"
 msgid "Tue"
 msgstr "星期二"
 
-#: src/components/atc-permission-modal.tsx:33
+#: src/components/atc-permission-modal.tsx:34
 msgid "Under Mentor"
 msgstr "教员监督"
 
@@ -1465,12 +1475,9 @@ msgid "VFR Policy"
 msgstr "目视飞行规则"
 
 #: src/components/atc-application/atc-application-list.tsx:45
+#: src/components/atc-training/training-application-responses.tsx:57
 msgid "View"
 msgstr "查看"
-
-#: src/components/atc-training/training-application-responses.tsx:57
-msgid "View Responses"
-msgstr "查看回复"
 
 #: src/components/app/app-nav-menu.tsx:156
 msgid "Visiting & Transfer"
