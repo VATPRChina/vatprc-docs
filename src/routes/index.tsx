@@ -54,10 +54,8 @@ const IndexWithLocale: React.FC = () => {
               <Button
                 variant="subtle"
                 component="a"
-                href="https://atc.vatprc.net"
-                target="_blank"
+                href="/controllers"
                 className="vatprc-big-btn-reverse mt-6"
-                rel="noreferrer"
                 rightSection={<TbArrowRight />}
               >
                 <Trans>ATC Center</Trans>

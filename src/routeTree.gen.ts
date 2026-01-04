@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
 import { Route as UsersMeRouteImport } from './routes/users/me'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
@@ -76,6 +77,11 @@ const EventsIndexRoute = EventsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => EventsRoute,
+} as any)
+const ControllersIndexRoute = ControllersIndexRouteImport.update({
+  id: '/controllers/',
+  path: '/controllers/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const UsersMeRoute = UsersMeRouteImport.update({
   id: '/users/me',
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
+  '/controllers': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
@@ -289,6 +296,7 @@ export interface FileRoutesByTo {
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
+  '/controllers': typeof ControllersIndexRoute
   '/events': typeof EventsIndexRoute
   '/flights': typeof FlightsIndexRoute
   '/users': typeof UsersIndexRoute
@@ -329,6 +337,7 @@ export interface FileRoutesById {
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
+  '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
   '/users/': typeof UsersIndexRoute
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
+    | '/controllers'
     | '/events/'
     | '/flights/'
     | '/users'
@@ -407,6 +417,7 @@ export interface FileRouteTypes {
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
+    | '/controllers'
     | '/events'
     | '/flights'
     | '/users'
@@ -446,6 +457,7 @@ export interface FileRouteTypes {
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
+    | '/controllers/'
     | '/events/'
     | '/flights/'
     | '/users/'
@@ -484,6 +496,7 @@ export interface RootRouteChildren {
   DocsSplatRoute: typeof DocsSplatRoute
   NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
   UsersMeRoute: typeof UsersMeRoute
+  ControllersIndexRoute: typeof ControllersIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
   DocAirspaceFirRoute: typeof DocAirspaceFirRoute
   DocAirspaceRvsmRoute: typeof DocAirspaceRvsmRoute
@@ -555,6 +568,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/events/'
       preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof EventsRoute
+    }
+    '/controllers/': {
+      id: '/controllers/'
+      path: '/controllers'
+      fullPath: '/controllers'
+      preLoaderRoute: typeof ControllersIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/users/me': {
       id: '/users/me'
@@ -810,6 +830,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsSplatRoute: DocsSplatRoute,
   NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,
   UsersMeRoute: UsersMeRoute,
+  ControllersIndexRoute: ControllersIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
   DocAirspaceFirRoute: DocAirspaceFirRoute,
   DocAirspaceRvsmRoute: DocAirspaceRvsmRoute,

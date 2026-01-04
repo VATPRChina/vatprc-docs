@@ -156,7 +156,7 @@ const contents = [
           <Trans>Visiting & Transfer</Trans>
         </NavMenuLink>
         <hr className="col-span-full" />
-        <NavMenuLink href="https://atc.vatprc.net" large external className="row-span-3">
+        <NavMenuLink href="/controllers" large className="row-span-3">
           <Trans>ATC Center</Trans>
         </NavMenuLink>
         <NavMenuLink href="https://moodle.vatprc.net" external>
