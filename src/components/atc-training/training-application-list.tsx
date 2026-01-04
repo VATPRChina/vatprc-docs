@@ -3,10 +3,18 @@ import { TrainingApplicationResponsesModal } from "./training-application-respon
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { renderWithMap } from "@/lib/utils";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { Badge } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FC } from "react";
+
+const STATUS_BADGE_LABEL_MAP: Map<components["schemas"]["TrainingApplicationStatus"], MessageDescriptor> = new Map([
+  ["pending", msg`Pending`],
+  ["accepted", msg`Accepted`],
+  ["rejected", msg`Rejected`],
+]);
 
 const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], FC> = new Map([
   [
@@ -41,6 +49,11 @@ const columns = [
   col.accessor("status", {
     header: () => <Trans>Status</Trans>,
     cell: ({ getValue }) => renderWithMap(STATUS_BADGE_MAP, getValue()),
+    meta: {
+      filterValues: STATUS_BADGE_LABEL_MAP.entries()
+        .map(([value, label]) => ({ value, label }))
+        .toArray(),
+    },
   }),
   col.accessor("trainee.cid", { header: () => <Trans>Trainee CID</Trans> }),
   col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
