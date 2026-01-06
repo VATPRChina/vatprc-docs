@@ -25,16 +25,18 @@ function RouteComponent() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <img src={event.image_url ?? NoEventImage} className="" />
           <div className="flex flex-col gap-4">
-            <Link
-              to="/events/$id"
-              params={{ id: event.id }}
-              role="heading"
-              aria-level={1}
-              className="text-4xl font-bold"
-            >
-              {event.title}
+            <div className="flex flex-row items-center gap-2">
+              <Link
+                to="/events/$id"
+                params={{ id: event.id }}
+                role="heading"
+                aria-level={1}
+                className="text-4xl font-bold"
+              >
+                {event.title}
+              </Link>
               <CreateEvent eventId={event?.id} />
-            </Link>
+            </div>
             <EventDetail eventId={event.id} />
           </div>
         </div>
