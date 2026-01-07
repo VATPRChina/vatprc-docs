@@ -34,6 +34,7 @@ export const POSITION_STATE_MAP: Map<components["schemas"]["UserControllerState"
   ["under-mentor", msg`Under Mentor`],
   ["solo", msg`Solo`],
   ["certified", msg`Certified`],
+  ["mentor", msg`Mentor`],
 ]);
 
 const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDescriptor }> = ({

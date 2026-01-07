@@ -14,6 +14,7 @@ const STATUS_BADGE_LABEL_MAP: Map<components["schemas"]["TrainingApplicationStat
   ["pending", msg`Pending`],
   ["accepted", msg`Accepted`],
   ["rejected", msg`Rejected`],
+  ["cancelled", msg`Cancelled`],
 ]);
 
 const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], FC> = new Map([
@@ -38,6 +39,14 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
     () => (
       <Badge variant="dot" color="red">
         <Trans>Rejected</Trans>
+      </Badge>
+    ),
+  ],
+  [
+    "cancelled",
+    () => (
+      <Badge variant="dot" color="gray">
+        <Trans>Cancelled</Trans>
       </Badge>
     ),
   ],

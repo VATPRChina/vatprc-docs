@@ -36,6 +36,7 @@ const POSITION_STATE_PRIORITY: Record<components["schemas"]["UserControllerState
   "under-mentor": 1,
   solo: 2,
   certified: 3,
+  mentor: 4,
 };
 
 export const useControllerPermission = (

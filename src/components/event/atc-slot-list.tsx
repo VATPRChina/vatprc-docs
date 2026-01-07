@@ -23,6 +23,7 @@ export const POSITION_STATE_PRIORITY: components["schemas"]["UserControllerState
   "under-mentor",
   "solo",
   "certified",
+  "mentor",
 ];
 
 const columnHelper = createColumnHelper<components["schemas"]["EventAtcPositionDto"]>();
