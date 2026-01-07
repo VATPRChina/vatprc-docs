@@ -20,8 +20,8 @@ const PermissionTag = ({ permissions, kind }: PermissionTagProps) => {
     <span
       className={cn(
         "flex items-end gap-1 px-2 py-1",
-        (permission.state === "certified" || permission.state === "mentor") &&
-          "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+        permission.state === "mentor" && "bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300",
+        permission.state === "certified" && "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
         permission.state === "under-mentor" && "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
         permission.state === "solo" && "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
         permission.state === "student" && "bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300",
@@ -79,6 +79,7 @@ export const ControllerList: React.FC = () => {
             return ca.user.cid.localeCompare(cb.user.cid);
           })
           ?.filter((ctr) => showAbsent || !ctr.is_absent)
+          ?.filter((ctr) => ctr.permissions.some((p) => p.state !== "student"))
           ?.map((ctr) => (
             <div key={ctr.user.id} className="hover:bg-secondary flex flex-col gap-4 border px-6 py-4">
               <div className="flex items-center gap-2">
