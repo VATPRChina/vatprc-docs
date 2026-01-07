@@ -20,6 +20,7 @@ const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "volunteer",
   "api-client",
   "user",
+  "controller-training-mentor",
 ];
 
 export const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
