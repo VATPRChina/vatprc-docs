@@ -52,17 +52,13 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
   const queryClient = useQueryClient();
 
   const { data: user, isLoading: isUserLoading } = $api.useQuery("get", "/api/users/me");
-  const {
-    data: applySheet,
-    error,
-    isLoading: isSheetLoading,
-  } = $api.useQuery("get", "/api/users/me/atc/applications/sheet");
+  const { data: applySheet, error, isLoading: isSheetLoading } = $api.useQuery("get", "/api/atc/applications/sheet");
   const { data: existingApplication, isLoading: isValuesLoading } = $api.useQuery("get", "/api/atc/applications/{id}", {
     params: { path: { id: applicationId ?? "" } },
     enabled: !!applicationId,
   });
-  const { mutateAsync: createAsync } = $api.useMutation("post", "/api/users/me/atc/applications");
-  const { mutateAsync: updateAsync } = $api.useMutation("put", "/api/users/me/atc/applications/{id}");
+  const { mutateAsync: createAsync } = $api.useMutation("post", "/api/atc/applications");
+  const { mutateAsync: updateAsync } = $api.useMutation("put", "/api/atc/applications/{id}");
 
   const onCreateSuccess = wrapPromiseWithLog(async () => {
     await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/applications"));

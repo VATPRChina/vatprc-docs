@@ -85,8 +85,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
     params: { path: { id: applicationId } },
   });
   const { data: sheet } = $api.useQuery("get", "/api/atc/applications/review-sheet");
-  const { mutateAsync: mutateApplicationAsync } = $api.useMutation("put", "/api/atc/applications/{id}");
-  const { mutateAsync: mutateReviewAsync } = $api.useMutation("put", "/api/atc/applications/{id}/review");
+  const { mutateAsync } = $api.useMutation("put", "/api/atc/applications/{id}/review");
 
   const [status, setStatus] = useState<components["schemas"]["AtcApplicationStatus"] | null>(
     application?.status ?? null,
@@ -94,10 +93,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
 
   const onSubmit: ComponentProps<typeof Sheet>["onSubmit"] = async (answers) => {
     if (!status) return;
-    await Promise.all([
-      mutateApplicationAsync({ params: { path: { id: applicationId } }, body: { status } }),
-      mutateReviewAsync({ params: { path: { id: applicationId } }, body: { review_answers: answers } }),
-    ]);
+    await mutateAsync({ params: { path: { id: applicationId } }, body: { status, review_answers: answers } });
     notifications.show({
       title: t`Application review updated`,
       message: t`The ATC application review has been updated successfully.`,
