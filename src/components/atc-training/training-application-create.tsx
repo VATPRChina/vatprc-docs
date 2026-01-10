@@ -60,7 +60,7 @@ export const TrainingApplicationCreateModal: FC = () => {
   });
 
   const controllerPermissions = useControllerPermissions();
-  const hasPermission = controllerPermissions.some((p) => p.state === "under-mentor" || p.state === "solo");
+  const hasPermission = controllerPermissions.length > 0;
 
   return (
     <>
