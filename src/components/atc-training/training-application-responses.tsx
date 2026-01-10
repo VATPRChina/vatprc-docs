@@ -2,7 +2,7 @@ import { RequireRole } from "../require-role";
 import { $api, useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, ComboboxData, Divider, Modal, Select, Textarea } from "@mantine/core";
+import { Alert, Badge, Button, Divider, Modal, Radio, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -32,7 +32,7 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
     { enabled: opened },
   );
 
-  const slots: ComboboxData = [
+  const slots = [
     ...(application?.slots?.map((slot) => ({
       value: slot.id,
       label: `${format(slot.start_at, "yyyy-MM-dd HH:mm'Z'", { in: utc })} - ${format(slot.end_at, "yyyy-MM-dd HH:mm'Z'", { in: utc })}`,
@@ -62,7 +62,13 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
             {user?.id && data?.some((response) => response.trainer_id === user?.id) && (
               <Alert color="green" title={<Trans>You have responded to this training request.</Trans>} />
             )}
-            <Select label={t`Time`} data={slots} value={slotId} onChange={(value) => setSlotId(value ?? "")} />
+            <Radio.Group label={t`Time`} value={slotId} onChange={setSlotId}>
+              <div className="mt-2 flex flex-col gap-2">
+                {slots.map((slot) => (
+                  <Radio key={slot.value} value={slot.value} label={slot.label} />
+                ))}
+              </div>
+            </Radio.Group>
             <Textarea label={t`Comment`} onChange={(e) => setComment(e.target.value)} autosize minRows={2} />
             <div className="flex flex-row gap-2">
               <Button
