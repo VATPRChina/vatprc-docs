@@ -9,11 +9,13 @@ type ConfirmButtonProps = PolymorphicComponentProps<"button", ButtonProps> & {
 
 export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
   const { onClick, actionDescription, type, ...rest } = props;
-  const handleClick: ConfirmButtonProps["onClick"] = (e) => {
-    onClick?.(e);
-  };
 
   const [opened, { open, close }] = useDisclosure(false);
+
+  const handleClick: ConfirmButtonProps["onClick"] = (e) => {
+    onClick?.(e);
+    close();
+  };
 
   return (
     <Popover withOverlay overlayProps={{ backgroundOpacity: 0.1 }} opened={opened} onDismiss={close}>
