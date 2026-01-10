@@ -4,7 +4,7 @@ import { Trans } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
-export const TrainingApplicationDeleteModal: FC<{ id: string }> = ({ id }) => {
+export const TrainingApplicationDeleteModal: FC<{ id: string; disabled: boolean }> = ({ id }) => {
   const queryClient = useQueryClient();
 
   const onSuccess = async () => {

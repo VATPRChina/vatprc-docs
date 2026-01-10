@@ -95,7 +95,7 @@ export const TrainingApplicationCreateModal: FC<{ id: string }> = ({ id }) => {
         </Button>
       )}
       {hasPermission && id && (
-        <Button onClick={toggle} variant="subtle" size="compact-sm">
+        <Button variant="subtle" size="compact-sm" onClick={toggle} disabled={data?.status !== "pending"}>
           <Trans>Edit</Trans>
         </Button>
       )}

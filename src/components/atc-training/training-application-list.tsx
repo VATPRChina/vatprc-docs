@@ -73,7 +73,7 @@ const columns = [
     cell: ({ row }) => (
       <>
         <TrainingApplicationCreateModal id={row.original.id} />
-        <TrainingApplicationDeleteModal id={row.original.id} />
+        <TrainingApplicationDeleteModal id={row.original.id} disabled={row.original.status !== "pending"} />
         <TrainingApplicationResponsesModal id={row.original.id} />
       </>
     ),
