@@ -3,6 +3,7 @@ import { $api, useUser } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Modal, Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { ComponentProps, FC } from "react";
 
@@ -35,6 +36,10 @@ export const TrainingRecordModal: FC<TrainingRecordModalProps> = ({ id }) => {
       await queryClient.invalidateQueries(
         $api.queryOptions("get", "/api/atc/trainings/{id}", { params: { path: { id } } }),
       );
+      notifications.show({
+        message: t`Training record saved successfully.`,
+        color: "green",
+      });
     },
   });
 
