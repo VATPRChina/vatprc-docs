@@ -158,11 +158,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
           rel: "stylesheet",
           href: "https://fonts.loli.net/css2?family=Outfit:wght@100..900&display=swap",
         },
-        {
-          href: "https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0",
-          rel: "preload",
-          as: "script",
-        },
       ],
     };
   },

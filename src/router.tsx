@@ -9,6 +9,7 @@ import { I18nProvider } from "@lingui/react";
 import { Skeleton } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
+import "es-iterator-helpers/auto";
 
 const getRouterBasepath = (pathname: string) => {
   if (pathname.startsWith("/en")) {
