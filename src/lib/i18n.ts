@@ -16,7 +16,13 @@ export const inferLocale = (): "en" | "zh-cn" => {
   if (typeof navigator !== "undefined" && navigator.language.startsWith("en")) {
     return "en";
   }
-  return "zh-cn";
+  if (typeof navigator !== "undefined" && navigator.languages.some((lang) => lang.startsWith("zh"))) {
+    return "zh-cn";
+  }
+  if (typeof navigator !== "undefined" && navigator.languages.some((lang) => lang.startsWith("en"))) {
+    return "en";
+  }
+  return "en";
 };
 
 export const getLocalPathname = (locale: "en" | "zh-cn" | "", path?: string) => {
