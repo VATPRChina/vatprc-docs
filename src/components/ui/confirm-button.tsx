@@ -8,7 +8,7 @@ type ConfirmButtonProps = PolymorphicComponentProps<"button", ButtonProps> & {
 };
 
 export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
-  const { onClick, actionDescription, ...rest } = props;
+  const { onClick, actionDescription, type, ...rest } = props;
   const handleClick: ConfirmButtonProps["onClick"] = (e) => {
     onClick?.(e);
   };
@@ -27,7 +27,7 @@ export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
             <Button size="xs" variant="subtle" onClick={close}>
               <Trans>Cancel</Trans>
             </Button>
-            <Button {...rest} variant="outline" size="xs" onClick={handleClick} />
+            <Button {...rest} type={type} variant="outline" size="xs" onClick={handleClick} />
           </div>
         </div>
       </Popover.Dropdown>

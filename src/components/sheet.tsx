@@ -1,6 +1,6 @@
 import { ConfirmButton } from "./ui/confirm-button";
 import { components } from "@/lib/api";
-import { promiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
 import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
@@ -135,8 +135,8 @@ export const Sheet: FC<SheetProps> = ({
                 actionDescription={confirm}
                 disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
                 loading={isSubmitting}
-                type="submit"
                 className="self-start"
+                onClick={wrapPromiseWithLog(() => form.handleSubmit())}
               >
                 {submitButtonContent}
               </ConfirmButton>
