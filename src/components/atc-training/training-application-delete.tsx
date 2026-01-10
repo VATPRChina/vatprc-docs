@@ -4,7 +4,12 @@ import { Trans } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
-export const TrainingApplicationDeleteModal: FC<{ id: string; disabled: boolean }> = ({ id }) => {
+interface TrainingApplicationDeleteModalProps {
+  id: string;
+  disabled: boolean;
+}
+
+export const TrainingApplicationDeleteModal: FC<TrainingApplicationDeleteModalProps> = ({ id, disabled }) => {
   const queryClient = useQueryClient();
 
   const onSuccess = async () => {
@@ -22,6 +27,7 @@ export const TrainingApplicationDeleteModal: FC<{ id: string; disabled: boolean 
       actionDescription={<Trans>Are you sure to withdraw this training application?</Trans>}
       onClick={() => mutate({ params: { path: { id } } })}
       loading={isPending}
+      disabled={disabled}
     >
       <Trans>Withdraw</Trans>
     </ConfirmButton>
