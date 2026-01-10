@@ -18,21 +18,46 @@ const DEFAULT_VALUES: components["schemas"]["TrainingApplicationCreateRequest"] 
   slots: [],
 };
 
-export const TrainingApplicationCreateModal: FC = () => {
+export const TrainingApplicationCreateModal: FC<{ id: string }> = ({ id }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
   const [opened, { toggle, close }] = useDisclosure(false);
 
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/atc/trainings/applications", {
-    onSuccess: async () => {
-      close();
-      await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/trainings/applications"));
+  const { data } = $api.useQuery(
+    "get",
+    "/api/atc/trainings/applications/{id}",
+    {
+      params: { path: { id } },
     },
+    { enabled: !!id && opened },
+  );
+
+  const onSuccess = async () => {
+    close();
+    await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/trainings/applications"));
+  };
+  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/atc/trainings/applications", {
+    onSuccess,
   });
+  const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
+    "put",
+    "/api/atc/trainings/applications/{id}",
+    {
+      onSuccess,
+    },
+  );
 
   const form = useForm({
-    defaultValues: DEFAULT_VALUES,
-    onSubmit: ({ value }) => create({ body: value }),
+    defaultValues:
+      (data && {
+        name: data.name,
+        slots: data.slots?.map((slot) => ({ start_at: slot.start_at, end_at: slot.end_at })) ?? [],
+      }) ??
+      DEFAULT_VALUES,
+    onSubmit: ({ value }) => {
+      if (!id) return create({ body: value });
+      return update({ params: { path: { id } }, body: value });
+    },
     validators: {
       onSubmit: ({ value }) => {
         const errors: Record<string, string> = {};
@@ -64,9 +89,14 @@ export const TrainingApplicationCreateModal: FC = () => {
 
   return (
     <>
-      {hasPermission && (
+      {hasPermission && !id && (
         <Button onClick={toggle} variant="outline">
           <Trans>Create Training Request</Trans>
+        </Button>
+      )}
+      {hasPermission && id && (
+        <Button onClick={toggle} variant="subtle" size="compact-sm">
+          <Trans>Edit</Trans>
         </Button>
       )}
       <Modal opened={opened} onClose={close} size="xl" title={t`Create Training Request`}>
@@ -168,8 +198,8 @@ export const TrainingApplicationCreateModal: FC = () => {
               )}
             </form.Field>
             <div>
-              <Button variant="subtle" type="submit" loading={isCreatePending}>
-                <Trans>Create</Trans>
+              <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
+                {id ? <Trans>Save</Trans> : <Trans>Create</Trans>}
               </Button>
             </div>
           </div>

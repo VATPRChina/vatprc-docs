@@ -54,7 +54,7 @@ msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/atc-training/training-application-create.tsx:111
+#: src/components/atc-training/training-application-create.tsx:141
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "训练申请可以包含多个时段。每个时段代表你可用于训练的一段时间，教员可以从这些时段中选择任意一个来安排训练。"
 
@@ -68,8 +68,8 @@ msgstr "缺席"
 
 #: src/components/atc-application/atc-application-status.tsx:16
 #: src/components/atc-application/atc-application-status.tsx:42
-#: src/components/atc-training/training-application-list.tsx:15
-#: src/components/atc-training/training-application-list.tsx:33
+#: src/components/atc-training/training-application-list.tsx:17
+#: src/components/atc-training/training-application-list.tsx:35
 #: src/components/atc-training/training-application-responses.tsx:89
 msgid "Accepted"
 msgstr "已通过"
@@ -136,19 +136,19 @@ msgstr "接口客户端"
 msgid "API Document"
 msgstr "API 文档"
 
-#: src/components/atc-application/atc-application-form.tsx:127
+#: src/components/atc-application/atc-application-form.tsx:123
 msgid "Application Information"
 msgstr "申请信息"
 
-#: src/components/atc-application/atc-application-status.tsx:102
+#: src/components/atc-application/atc-application-status.tsx:98
 msgid "Application review updated"
 msgstr "申请审核已更新"
 
-#: src/components/atc-application/atc-application-form.tsx:70
+#: src/components/atc-application/atc-application-form.tsx:66
 msgid "Application submitted"
 msgstr "申请已提交"
 
-#: src/components/atc-application/atc-application-form.tsx:81
+#: src/components/atc-application/atc-application-form.tsx:77
 msgid "Application updated"
 msgstr "申请已更新"
 
@@ -189,7 +189,11 @@ msgstr "确定要取消该预订吗？"
 msgid "Are you sure to release this ATC position?"
 msgstr "确定要取消该管制席位预订吗？"
 
-#: src/components/atc-application/atc-application-status.tsx:138
+#: src/components/atc-training/training-application-delete.tsx:22
+msgid "Are you sure to withdraw this training application?"
+msgstr "确定要撤回该训练申请吗？"
+
+#: src/components/atc-application/atc-application-status.tsx:134
 msgid "Are you sure you want to submit the application review?"
 msgstr "确定要提交申请审核结果吗？"
 
@@ -203,7 +207,7 @@ msgstr "区域"
 msgid "Arrival"
 msgstr "到达机场"
 
-#: src/components/atc-training/training-application-create.tsx:43
+#: src/components/atc-training/training-application-create.tsx:68
 msgid "At least one slot is required"
 msgstr "至少需要一个时段"
 
@@ -248,7 +252,7 @@ msgstr "返回"
 msgid "Basic Info"
 msgstr "基本信息"
 
-#: src/components/atc-application/atc-application-form.tsx:106
+#: src/components/atc-application/atc-application-form.tsx:102
 msgid "Basic Information"
 msgstr "基本信息"
 
@@ -261,7 +265,7 @@ msgstr "预订"
 msgid "Booking:"
 msgstr "预订时间："
 
-#: src/components/atc-training/training-application-create.tsx:89
+#: src/components/atc-training/training-application-create.tsx:119
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "简要描述训练目标，例如席位和课程内容。"
 
@@ -282,8 +286,8 @@ msgstr "呼号和机型"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/components/atc-training/training-application-list.tsx:17
-#: src/components/atc-training/training-application-list.tsx:49
+#: src/components/atc-training/training-application-list.tsx:19
+#: src/components/atc-training/training-application-list.tsx:51
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -303,7 +307,7 @@ msgstr "航图"
 msgid "Check at VATSIM"
 msgstr "去 VATSIM 确认"
 
-#: src/components/atc-application/atc-application-form.tsx:145
+#: src/components/atc-application/atc-application-form.tsx:141
 msgid "Checklist"
 msgstr "检查单"
 
@@ -323,7 +327,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/atc-application/atc-application-form.tsx:110
+#: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:18
 #: src/components/event/atc-slot-list.tsx:91
 #: src/routes/users/index.tsx:55
@@ -388,7 +392,7 @@ msgstr "管制员训练部行政事务助理"
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/atc-training/training-application-create.tsx:172
+#: src/components/atc-training/training-application-create.tsx:202
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:246
 #: src/components/preferred-route-create.tsx:202
@@ -410,8 +414,8 @@ msgstr "创建活动"
 msgid "Create Preferred Route"
 msgstr "创建推荐航路"
 
-#: src/components/atc-training/training-application-create.tsx:69
-#: src/components/atc-training/training-application-create.tsx:72
+#: src/components/atc-training/training-application-create.tsx:94
+#: src/components/atc-training/training-application-create.tsx:102
 msgid "Create Training Request"
 msgstr "创建训练申请"
 
@@ -479,7 +483,8 @@ msgstr "分部主席"
 msgid "Drag CSV here or click to select files"
 msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
-#: src/components/atc-application/atc-application-form.tsx:139
+#: src/components/atc-application/atc-application-form.tsx:135
+#: src/components/atc-training/training-application-create.tsx:99
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "编辑"
@@ -522,7 +527,7 @@ msgstr "在 VATSIM 上修改你的飞行计划。"
 msgid "ELDT"
 msgstr "ELDT"
 
-#: src/components/atc-training/training-application-create.tsx:149
+#: src/components/atc-training/training-application-create.tsx:179
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:47
@@ -538,11 +543,11 @@ msgstr "预订结束时间"
 msgid "End booking time must be after start booking time"
 msgstr "预订结束时间必须晚于开始预订时间"
 
-#: src/components/atc-training/training-application-create.tsx:50
+#: src/components/atc-training/training-application-create.tsx:75
 msgid "End time is required"
 msgstr "结束时间为必填项"
 
-#: src/components/atc-training/training-application-create.tsx:53
+#: src/components/atc-training/training-application-create.tsx:78
 #: src/components/event/event-create.tsx:81
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
@@ -555,7 +560,7 @@ msgstr "进入空域时间"
 msgid "Equipment"
 msgstr "设备代码"
 
-#: src/components/atc-training/training-application-create.tsx:118
+#: src/components/atc-training/training-application-create.tsx:148
 #: src/components/event/atc-slot-list.tsx:189
 #: src/routes/__root.tsx:125
 msgid "Error"
@@ -657,7 +662,7 @@ msgstr "星期五"
 msgid "Full name"
 msgstr "姓名"
 
-#: src/components/atc-application/atc-application-form.tsx:118
+#: src/components/atc-application/atc-application-form.tsx:114
 msgid "Full Name"
 msgstr "姓名"
 
@@ -954,8 +959,8 @@ msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者
 msgid "PBN"
 msgstr "PBN"
 
-#: src/components/atc-training/training-application-list.tsx:14
-#: src/components/atc-training/training-application-list.tsx:25
+#: src/components/atc-training/training-application-list.tsx:16
+#: src/components/atc-training/training-application-list.tsx:27
 msgid "Pending"
 msgstr "待处理"
 
@@ -997,7 +1002,7 @@ msgstr "请与管制员联系调整航路。"
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
-#: src/components/atc-application/atc-application-form.tsx:100
+#: src/components/atc-application/atc-application-form.tsx:96
 msgid "Please login to file an application."
 msgstr "递交申请前请先登入。"
 
@@ -1036,8 +1041,8 @@ msgstr "拒绝"
 
 #: src/components/atc-application/atc-application-status.tsx:17
 #: src/components/atc-application/atc-application-status.tsx:50
-#: src/components/atc-training/training-application-list.tsx:16
-#: src/components/atc-training/training-application-list.tsx:41
+#: src/components/atc-training/training-application-list.tsx:18
+#: src/components/atc-training/training-application-list.tsx:43
 #: src/components/atc-training/training-application-responses.tsx:93
 msgid "Rejected"
 msgstr "已拒绝"
@@ -1096,6 +1101,7 @@ msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间�
 msgid "Sat"
 msgstr "星期六"
 
+#: src/components/atc-training/training-application-create.tsx:202
 #: src/components/atc-training/training-response.tsx:64
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:246
@@ -1135,7 +1141,7 @@ msgstr "显示全部"
 msgid "Show less pilots"
 msgstr "显示部分"
 
-#: src/components/atc-training/training-application-create.tsx:98
+#: src/components/atc-training/training-application-create.tsx:128
 #: src/components/event/slot-list.tsx:154
 #: src/routes/events/$id.tsx:46
 msgid "Slots"
@@ -1163,7 +1169,7 @@ msgstr "职员"
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
 
-#: src/components/atc-training/training-application-create.tsx:132
+#: src/components/atc-training/training-application-create.tsx:162
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:110
 #: src/components/event/atc-slot-list.tsx:36
@@ -1179,7 +1185,7 @@ msgstr "管制员预订开始时间"
 msgid "Start booking at"
 msgstr "开始预订时间"
 
-#: src/components/atc-training/training-application-create.tsx:47
+#: src/components/atc-training/training-application-create.tsx:72
 msgid "Start time is required"
 msgstr "开始时间为必填项"
 
@@ -1188,8 +1194,8 @@ msgid "Start to Fly"
 msgstr "开始飞行"
 
 #: src/components/atc-application/atc-application-list.tsx:21
-#: src/components/atc-application/atc-application-status.tsx:119
-#: src/components/atc-training/training-application-list.tsx:59
+#: src/components/atc-application/atc-application-status.tsx:115
+#: src/components/atc-training/training-application-list.tsx:61
 msgid "Status"
 msgstr "状态"
 
@@ -1197,8 +1203,8 @@ msgstr "状态"
 msgid "Student"
 msgstr "理论学习"
 
-#: src/components/atc-application/atc-application-form.tsx:139
-#: src/components/atc-application/atc-application-status.tsx:136
+#: src/components/atc-application/atc-application-form.tsx:135
+#: src/components/atc-application/atc-application-status.tsx:132
 msgid "Submit"
 msgstr "提交"
 
@@ -1257,7 +1263,7 @@ msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 RNP AR（不带 RF 航段）程序。"
 
-#: src/components/atc-application/atc-application-status.tsx:103
+#: src/components/atc-application/atc-application-status.tsx:99
 msgid "The ATC application review has been updated successfully."
 msgstr "管制员申请审核已成功更新。"
 
@@ -1348,14 +1354,14 @@ msgstr "时间"
 msgid "Time:"
 msgstr "活动时间："
 
-#: src/components/atc-training/training-application-create.tsx:84
-#: src/components/atc-training/training-application-list.tsx:57
+#: src/components/atc-training/training-application-create.tsx:114
+#: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:116
 msgid "Title"
 msgstr "标题"
 
-#: src/components/atc-training/training-application-create.tsx:40
+#: src/components/atc-training/training-application-create.tsx:65
 #: src/components/event/event-create.tsx:78
 msgid "Title is required"
 msgstr "标题为必填项"
@@ -1368,12 +1374,12 @@ msgstr "切换主题"
 msgid "Tower"
 msgstr "塔台"
 
-#: src/components/atc-training/training-application-list.tsx:67
+#: src/components/atc-training/training-application-list.tsx:69
 #: src/components/atc-training/training-list.tsx:13
 msgid "Trainee CID"
 msgstr "学员 CID"
 
-#: src/components/atc-training/training-application-list.tsx:68
+#: src/components/atc-training/training-application-list.tsx:70
 #: src/components/atc-training/training-list.tsx:14
 msgid "Trainee Name"
 msgstr "学员姓名"
@@ -1517,6 +1523,10 @@ msgstr "天气"
 msgid "Wed"
 msgstr "星期三"
 
+#: src/components/atc-training/training-application-delete.tsx:26
+msgid "Withdraw"
+msgstr "撤回"
+
 #: src/routes/flights/$callsign.tsx:200
 msgid "Write your transponder equipment code."
 msgstr "给出你的应答机设备代码。"
@@ -1537,10 +1547,10 @@ msgstr "您的申请已被列入候补名单。如有空位将通知您。"
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "您的申请已提交，正在等待职员审核。"
 
-#: src/components/atc-application/atc-application-form.tsx:71
+#: src/components/atc-application/atc-application-form.tsx:67
 msgid "Your ATC application has been submitted successfully."
 msgstr "已经成功提交管制员申请。"
 
-#: src/components/atc-application/atc-application-form.tsx:82
+#: src/components/atc-application/atc-application-form.tsx:78
 msgid "Your ATC application has been updated successfully."
 msgstr "已经成功修改管制员申请。"

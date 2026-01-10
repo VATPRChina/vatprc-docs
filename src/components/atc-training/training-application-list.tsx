@@ -1,4 +1,6 @@
 import { RichTable } from "../table";
+import { TrainingApplicationCreateModal } from "./training-application-create";
+import { TrainingApplicationDeleteModal } from "./training-application-delete";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -68,7 +70,13 @@ const columns = [
   col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
   col.display({
     id: "actions",
-    cell: ({ row }) => <TrainingApplicationResponsesModal id={row.original.id} />,
+    cell: ({ row }) => (
+      <>
+        <TrainingApplicationCreateModal id={row.original.id} />
+        <TrainingApplicationDeleteModal id={row.original.id} />
+        <TrainingApplicationResponsesModal id={row.original.id} />
+      </>
+    ),
   }),
 ];
 
