@@ -18,7 +18,7 @@ const DEFAULT_VALUES: components["schemas"]["TrainingApplicationCreateRequest"] 
   slots: [],
 };
 
-export const TrainingApplicationCreateModal: FC<{ id: string }> = ({ id }) => {
+export const TrainingApplicationCreateModal: FC<{ id: string; disabled?: boolean }> = ({ id, disabled }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -90,12 +90,12 @@ export const TrainingApplicationCreateModal: FC<{ id: string }> = ({ id }) => {
   return (
     <>
       {hasPermission && !id && (
-        <Button onClick={toggle} variant="outline">
+        <Button onClick={toggle} variant="outline" disabled={disabled}>
           <Trans>Create Training Request</Trans>
         </Button>
       )}
       {hasPermission && id && (
-        <Button variant="subtle" size="compact-sm" onClick={toggle} disabled={data?.status !== "pending"}>
+        <Button variant="subtle" size="compact-sm" onClick={toggle} disabled={disabled}>
           <Trans>Edit</Trans>
         </Button>
       )}
