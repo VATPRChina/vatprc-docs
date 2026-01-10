@@ -18,7 +18,7 @@ const DEFAULT_VALUES: components["schemas"]["TrainingApplicationCreateRequest"] 
   slots: [],
 };
 
-export const TrainingApplicationCreateModal: FC<{ id: string; disabled?: boolean }> = ({ id, disabled }) => {
+export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolean }> = ({ id, disabled }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -26,9 +26,7 @@ export const TrainingApplicationCreateModal: FC<{ id: string; disabled?: boolean
   const { data } = $api.useQuery(
     "get",
     "/api/atc/trainings/applications/{id}",
-    {
-      params: { path: { id } },
-    },
+    { params: { path: { id: id ?? "" } } },
     { enabled: !!id && opened },
   );
 
