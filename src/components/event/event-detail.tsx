@@ -1,6 +1,7 @@
 import { DateTime } from "./datetime";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Anchor } from "@mantine/core";
 import { TbArrowRight } from "react-icons/tb";
 
 export const EventDetail = ({ eventId }: { eventId: string }) => {
@@ -44,14 +45,14 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
       )}
       <div className="flex flex-row items-baseline gap-2">
         {event?.community_link && event.community_link.length > 0 && (
-          <a href={event.community_link} target="_blank" rel="noreferrer">
+          <Anchor href={event.community_link} target="_blank" rel="noreferrer">
             <Trans>Forum</Trans>
-          </a>
+          </Anchor>
         )}
         {event?.vatsim_link && event.vatsim_link.length > 0 && (
-          <a href={event.vatsim_link} target="_blank" rel="noreferrer">
+          <Anchor href={event.vatsim_link} target="_blank" rel="noreferrer">
             <Trans>VATSIM</Trans>
-          </a>
+          </Anchor>
         )}
       </div>
       <div>{event?.description}</div>

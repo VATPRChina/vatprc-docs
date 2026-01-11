@@ -2,7 +2,7 @@ import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog, promiseWithToast } from "@/lib/utils";
+import { promiseWithLog, promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Group, Image, Modal, Stack, TextInput, Textarea } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
@@ -44,11 +44,18 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const { mutateAsync: create } = $api.useMutation("post", "/api/events", {
     onSuccess: () => {
       close();
-      promiseWithLog(queryClient.invalidateQueries({ queryKey: $api.queryOptions("get", "/api/events").queryKey }));
+      promiseWithLog(() => queryClient.invalidateQueries($api.queryOptions("get", "/api/events")));
     },
   });
   const { mutateAsync: update } = $api.useMutation("post", "/api/events/{eid}", {
-    onSuccess: () => close(),
+    onSuccess: wrapPromiseWithLog(async () => {
+      close();
+      if (eventId) {
+        await queryClient.invalidateQueries(
+          $api.queryOptions("get", "/api/events/{eid}", { params: { path: { eid: eventId } } }),
+        );
+      }
+    }),
   });
   const now = formatISO(setMinutes(setSeconds(addHours(Date.now(), 1), 0), 0));
   const form = useForm({
