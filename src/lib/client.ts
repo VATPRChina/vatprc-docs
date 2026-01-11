@@ -25,9 +25,11 @@ export const useUser = () => {
 };
 
 export const useControllerPermissions = () => {
-  const { data } = $api.useQuery("get", "/api/users/me/atc/permissions", {}, { retry: false });
+  const { data } = $api.useQuery("get", "/api/users/me/atc/status", {}, { retry: false });
   return (
-    data?.filter((p) => !(p.state === "solo" && p.solo_expires_at && isBefore(Date.now(), p.solo_expires_at))) ?? []
+    data?.permissions.filter(
+      (p) => !(p.state === "solo" && p.solo_expires_at && isBefore(Date.now(), p.solo_expires_at)),
+    ) ?? []
   );
 };
 
@@ -43,9 +45,9 @@ export const useControllerPermission = (
   positionKind: string,
   minimumState: components["schemas"]["UserControllerState"],
 ) => {
-  const { data } = $api.useQuery("get", "/api/users/me/atc/permissions", {}, { retry: false });
+  const { data } = $api.useQuery("get", "/api/users/me/atc/status", {}, { retry: false });
   if (!data) return false;
-  const permission = data.find((p) => p.position_kind_id === positionKind);
+  const permission = data.permissions.find((p) => p.position_kind_id === positionKind);
   if (!permission) return false;
   if (POSITION_STATE_PRIORITY[permission.state] < POSITION_STATE_PRIORITY[minimumState]) return false;
   if (permission.state === "solo" && permission.solo_expires_at && !isBefore(Date.now(), permission.solo_expires_at)) {

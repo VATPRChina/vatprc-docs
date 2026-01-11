@@ -33,7 +33,7 @@ function RouteComponent() {
   const user = useUser();
   const roles = usePermissions();
 
-  const { data } = $api.useQuery("get", "/api/users/me/atc/permissions");
+  const { data } = $api.useQuery("get", "/api/users/me/atc/status");
 
   if (!user) return null;
 
@@ -68,7 +68,7 @@ function RouteComponent() {
       <div className="grid grid-cols-4 gap-4">
         {POSITION_KINDS_MAP.entries()
           .map(([id, name]) => {
-            const state = data?.find((p) => p.position_kind_id === id)?.state;
+            const state = data?.permissions?.find((p) => p.position_kind_id === id)?.state;
             return (
               <Field key={id} label={i18n._(name)}>
                 {localizeWithMap(POSITION_STATE_MAP, state, i18n)}
@@ -76,6 +76,8 @@ function RouteComponent() {
             );
           })
           .toArray()}
+        <Field label={t`Visiting`}>{data?.is_visiting ? t`Yes` : t`No`}</Field>
+        <Field label={t`Absent`}>{data?.is_absent ? t`Yes` : t`No`}</Field>
       </div>
     </div>
   );

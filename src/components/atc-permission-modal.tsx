@@ -1,18 +1,16 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { localizeWithMap } from "@/lib/i18n";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Group, Modal, Select, Stack } from "@mantine/core";
+import { Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { endOfDay, format, parse } from "date-fns";
 import { ComponentProps, FC, FormEventHandler } from "react";
-import { TbDeviceFloppy } from "react-icons/tb";
 
 interface AtcPermissionModalProps extends ComponentProps<typeof Modal> {
   userId: string;
@@ -37,50 +35,33 @@ export const POSITION_STATE_MAP: Map<components["schemas"]["UserControllerState"
   ["mentor", msg`Mentor`],
 ]);
 
-const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDescriptor }> = ({
-  userId,
-  kindId,
-  kindName,
-}) => {
+export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...props }) => {
   const { i18n, t } = useLingui();
 
   const queryClient = useQueryClient();
-  const { data, isPending } = $api.useQuery("get", "/api/users/{id}/atc/permissions", {
+  const { data, isPending } = $api.useQuery("get", "/api/users/{id}/atc/status", {
     params: { path: { id: userId } },
   });
   const invalidateQueries = () =>
     promiseWithLog(
       queryClient.invalidateQueries(
-        $api.queryOptions("get", "/api/users/{id}/atc/permissions", { params: { path: { id: userId } } }),
+        $api.queryOptions("get", "/api/users/{id}/atc/status", { params: { path: { id: userId } } }),
       ),
     );
-  const permission = data?.find((p) => p.position_kind_id === kindId);
-  const { mutate: put, isPending: isPutPending } = $api.useMutation("put", "/api/users/{id}/atc/permissions/{kind}", {
+
+  const { mutate, isPending: isMutating } = $api.useMutation("put", "/api/users/{id}/atc/status", {
     onSuccess: invalidateQueries,
   });
-  const { mutate: del, isPending: isDelPending } = $api.useMutation(
-    "delete",
-    "/api/users/{id}/atc/permissions/{kind}",
-    { onSuccess: invalidateQueries },
-  );
 
   const form = useForm({
     defaultValues: {
-      state: permission?.state ?? null,
-      solo_expires_at: permission?.solo_expires_at ?? null,
-    } as {
-      state: components["schemas"]["UserControllerState"] | null;
-      solo_expires_at: string | null;
+      is_visiting: data?.is_visiting ?? false,
+      is_absent: data?.is_absent ?? false,
+      rating: data?.rating ?? "",
+      permissions: data?.permissions ?? [],
     },
-    onSubmit: ({ value: { state, solo_expires_at } }) => {
-      if (state !== null) {
-        put({
-          params: { path: { id: userId, kind: kindId } },
-          body: { state, solo_expires_at },
-        });
-      } else {
-        del({ params: { path: { id: userId, kind: kindId } } });
-      }
+    onSubmit: ({ value }) => {
+      mutate({ params: { path: { id: userId } }, body: value });
     },
   });
 
@@ -91,70 +72,124 @@ const PositionKindView: FC<{ userId: string; kindId: string; kindName: MessageDe
   };
 
   return (
-    <form onSubmit={onSave}>
-      <Group align="end">
-        <form.Field name="state">
-          {(field) => (
-            <Select
-              label={i18n._(kindName)}
-              data={POSITION_STATE_MAP.entries()
-                .map(([id, name]) => ({ value: id, label: i18n._(name) }))
-                .toArray()}
-              value={field.state.value}
-              placeholder={t`No permission`}
-              clearable
-              className="flex-1"
-              onChange={(value) => field.handleChange(value as components["schemas"]["UserControllerState"] | null)}
-              onBlur={field.handleBlur}
-              disabled={isPending || isPutPending || isDelPending}
-              description={t`Current Value: ` + localizeWithMap(POSITION_STATE_MAP, permission?.state ?? "", i18n)}
-            />
-          )}
-        </form.Field>
-        <form.Subscribe selector={(state) => state.values.state}>
-          {(value) =>
-            value === "solo" && (
-              <form.Field name="solo_expires_at">
-                {(field) => (
-                  <DateInput
-                    label={t`Solo Expiration Date`}
-                    value={field.state.value && format(field.state.value, "yyyy-MM-dd", { in: utc })}
-                    onChange={(v) =>
-                      field.handleChange(
-                        v !== null
-                          ? endOfDay(parse(v, "yyyy-MM-dd", Date.now(), { in: utc }), { in: utc }).toISOString()
-                          : null,
-                      )
-                    }
-                    valueFormat="YYYY-MM-DD"
-                    clearable
-                    className="flex-1"
-                    description={t`Current Value: ` + permission?.solo_expires_at}
-                    disabled={isPending || isPutPending || isDelPending}
-                  />
-                )}
-              </form.Field>
-            )
-          }
-        </form.Subscribe>
-        <ActionIcon variant="subtle" type="submit" size="input-sm" loading={isPutPending || isDelPending}>
-          <TbDeviceFloppy />
-        </ActionIcon>
-      </Group>
-    </form>
-  );
-};
-
-export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...props }) => {
-  return (
     <Modal {...props} title={<Trans>Edit ATC permissions</Trans>} size="lg">
-      <Stack>
-        {POSITION_KINDS_MAP.entries()
-          .map(([kindId, kindName]) => (
-            <PositionKindView key={kindId} userId={userId} kindId={kindId} kindName={kindName} />
-          ))
-          .toArray()}
-      </Stack>
+      <form onSubmit={onSave}>
+        <Stack>
+          <form.Field name="is_visiting">
+            {(field) => (
+              <Checkbox
+                label={t`Visiting`}
+                checked={field.state.value}
+                onChange={(e) => field.handleChange(e.target.checked)}
+                onBlur={field.handleBlur}
+                disabled={isPending || isMutating}
+              />
+            )}
+          </form.Field>
+          <form.Field name="is_absent">
+            {(field) => (
+              <Checkbox
+                label={t`Absent`}
+                checked={field.state.value}
+                onChange={(e) => field.handleChange(e.target.checked)}
+                onBlur={field.handleBlur}
+                disabled={isPending || isMutating}
+              />
+            )}
+          </form.Field>
+          <form.Field name="rating">
+            {(field) => (
+              <Select
+                label={t`Rating`}
+                value={field.state.value}
+                data={["OBS", "S1", "S2", "S3", "C1", "C3", "I1", "I3"]}
+                onChange={(e) => e && field.handleChange(e)}
+                onBlur={field.handleBlur}
+                disabled={isPending || isMutating}
+              />
+            )}
+          </form.Field>
+          <form.Field name="permissions" mode="array">
+            {(parentField) =>
+              POSITION_KINDS_MAP.entries()
+                .map(([kindId, kindName]) => (
+                  <form.Subscribe
+                    key={kindId}
+                    selector={(state) => state.values.permissions.findIndex((p) => p.position_kind_id === kindId)}
+                  >
+                    {(idx) => (
+                      <>
+                        <form.Field name={`permissions[${idx}].state`}>
+                          {(field) => (
+                            <Select
+                              label={i18n._(kindName)}
+                              data={POSITION_STATE_MAP.entries()
+                                .map(([id, name]) => ({ value: id, label: i18n._(name) }))
+                                .toArray()}
+                              value={idx >= 0 ? field.state.value : null}
+                              placeholder={t`No permission`}
+                              clearable
+                              className="flex-1"
+                              onChange={(value) => {
+                                if (!value) {
+                                  parentField.removeValue(idx);
+                                } else if (idx >= 0) {
+                                  field.handleChange(value as components["schemas"]["UserControllerState"]);
+                                  if (value !== "solo") {
+                                    form.setFieldValue(`permissions[${idx}].solo_expires_at`, null);
+                                  }
+                                } else {
+                                  parentField.insertValue(idx, {
+                                    position_kind_id: kindId,
+                                    state: value as components["schemas"]["UserControllerState"],
+                                    solo_expires_at: null,
+                                  });
+                                }
+                              }}
+                              onBlur={field.handleBlur}
+                              disabled={isPending || isMutating}
+                            />
+                          )}
+                        </form.Field>
+                        <form.Subscribe selector={(state) => state.values.permissions[idx]?.state}>
+                          {(value) =>
+                            value === "solo" && (
+                              <form.Field name={`permissions[${idx}].solo_expires_at`}>
+                                {(field) => (
+                                  <DateInput
+                                    label={t`Solo Expiration Date`}
+                                    value={field.state.value && format(field.state.value, "yyyy-MM-dd", { in: utc })}
+                                    onChange={(v) => {
+                                      field.handleChange(
+                                        v !== null
+                                          ? endOfDay(parse(v, "yyyy-MM-dd", Date.now(), { in: utc }), {
+                                              in: utc,
+                                            }).toISOString()
+                                          : null,
+                                      );
+                                    }}
+                                    valueFormat="YYYY-MM-DD"
+                                    clearable
+                                    className="flex-1"
+                                    disabled={isPending || isMutating}
+                                  />
+                                )}
+                              </form.Field>
+                            )
+                          }
+                        </form.Subscribe>
+                      </>
+                    )}
+                  </form.Subscribe>
+                ))
+                .toArray()
+            }
+          </form.Field>
+          <Button variant="subtle" type="submit" loading={isPending || isMutating}>
+            <Trans>Save</Trans>
+          </Button>
+        </Stack>
+      </form>
     </Modal>
   );
 };
