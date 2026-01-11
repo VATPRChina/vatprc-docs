@@ -93,7 +93,12 @@ const columns = [
       const isLoggedIn = !!session?.user.id;
       const isBookedByCurrentUser = isLoggedIn && slot.booking?.user_id === session.user.id;
       const isBookedByOtherUser = slot.booking && slot.booking.user_id !== session?.user.id;
-      const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
+      const isInBookingPeriod =
+        event &&
+        event.start_booking_at &&
+        event.end_booking_at &&
+        isPast(event.start_booking_at) &&
+        isFuture(event.end_booking_at);
       const isOverBookingLimit =
         (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
 
@@ -146,7 +151,12 @@ export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
   const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eid}/slots", {
     params: { path: { eid: eventId } },
   });
-  const isInBookingPeriod = event && isPast(event.start_booking_at) && isFuture(event.end_booking_at);
+  const isInBookingPeriod =
+    event &&
+    event.start_booking_at &&
+    event.end_booking_at &&
+    isPast(event.start_booking_at) &&
+    isFuture(event.end_booking_at);
 
   return (
     <>
