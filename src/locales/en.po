@@ -54,7 +54,7 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/atc-training/training-application-create.tsx:141
+#: src/components/atc-training/training-application-create.tsx:139
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 
@@ -62,7 +62,9 @@ msgstr "A training request may contain multiple slots. Each slot represents a ti
 msgid "About Us"
 msgstr "About Us"
 
+#: src/components/atc-permission-modal.tsx:92
 #: src/components/homepage/controller-list.tsx:94
+#: src/routes/users/me.tsx:80
 msgid "Absent"
 msgstr "Absent"
 
@@ -70,7 +72,7 @@ msgstr "Absent"
 #: src/components/atc-application/atc-application-status.tsx:42
 #: src/components/atc-training/training-application-list.tsx:17
 #: src/components/atc-training/training-application-list.tsx:35
-#: src/components/atc-training/training-application-responses.tsx:89
+#: src/components/atc-training/training-application-responses.tsx:95
 msgid "Accepted"
 msgstr "Accepted"
 
@@ -169,7 +171,7 @@ msgstr "Apply"
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
-#: src/components/atc-permission-modal.tsx:26
+#: src/components/atc-permission-modal.tsx:24
 msgid "Approach"
 msgstr "Approach"
 
@@ -189,7 +191,7 @@ msgstr "Are you sure to release the slot?"
 msgid "Are you sure to release this ATC position?"
 msgstr "Are you sure to release this ATC position?"
 
-#: src/components/atc-training/training-application-delete.tsx:22
+#: src/components/atc-training/training-application-delete.tsx:27
 msgid "Are you sure to withdraw this training application?"
 msgstr "Are you sure to withdraw this training application?"
 
@@ -207,7 +209,7 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
-#: src/components/atc-training/training-application-create.tsx:68
+#: src/components/atc-training/training-application-create.tsx:66
 msgid "At least one slot is required"
 msgstr "At least one slot is required"
 
@@ -265,7 +267,7 @@ msgstr "Book"
 msgid "Booking:"
 msgstr "Booking:"
 
-#: src/components/atc-training/training-application-create.tsx:119
+#: src/components/atc-training/training-application-create.tsx:117
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
@@ -291,11 +293,11 @@ msgstr "Cancel"
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: src/components/atc-permission-modal.tsx:27
+#: src/components/atc-permission-modal.tsx:25
 msgid "Center"
 msgstr "Center"
 
-#: src/components/atc-permission-modal.tsx:36
+#: src/components/atc-permission-modal.tsx:34
 msgid "Certified"
 msgstr "Certified"
 
@@ -335,8 +337,8 @@ msgstr "China RVSM odd flight level"
 msgid "CID"
 msgstr "CID"
 
-#: src/components/atc-training/training-application-responses.tsx:66
-#: src/components/atc-training/training-application-responses.tsx:100
+#: src/components/atc-training/training-application-responses.tsx:72
+#: src/components/atc-training/training-application-responses.tsx:106
 msgid "Comment"
 msgstr "Comment"
 
@@ -392,7 +394,7 @@ msgstr "Controller Training Director Assistant"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/atc-training/training-application-create.tsx:202
+#: src/components/atc-training/training-application-create.tsx:200
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:246
 #: src/components/preferred-route-create.tsx:202
@@ -414,8 +416,8 @@ msgstr "Create Event"
 msgid "Create Preferred Route"
 msgstr "Create Preferred Route"
 
-#: src/components/atc-training/training-application-create.tsx:94
-#: src/components/atc-training/training-application-create.tsx:102
+#: src/components/atc-training/training-application-create.tsx:92
+#: src/components/atc-training/training-application-create.tsx:100
 msgid "Create Training Request"
 msgstr "Create Training Request"
 
@@ -447,16 +449,11 @@ msgstr "Cruising Level Type Mismatch"
 msgid "CTOT"
 msgstr "CTOT"
 
-#: src/components/atc-permission-modal.tsx:110
-#: src/components/atc-permission-modal.tsx:132
-msgid "Current Value: "
-msgstr "Current Value: "
-
 #: src/components/app/theme-toggle.tsx:25
 msgid "Dark"
 msgstr "Dark"
 
-#: src/components/atc-permission-modal.tsx:22
+#: src/components/atc-permission-modal.tsx:20
 msgid "Delivery"
 msgstr "Delivery"
 
@@ -484,12 +481,12 @@ msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
 #: src/components/atc-application/atc-application-form.tsx:135
-#: src/components/atc-training/training-application-create.tsx:99
+#: src/components/atc-training/training-application-create.tsx:97
 #: src/components/event/atc-slot-create.tsx:84
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/atc-permission-modal.tsx:150
+#: src/components/atc-permission-modal.tsx:75
 msgid "Edit ATC permissions"
 msgstr "Edit ATC permissions"
 
@@ -527,7 +524,7 @@ msgstr "Edit your flight plan on VATSIM."
 msgid "ELDT"
 msgstr "ELDT"
 
-#: src/components/atc-training/training-application-create.tsx:179
+#: src/components/atc-training/training-application-create.tsx:177
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:47
@@ -543,11 +540,11 @@ msgstr "End booking at"
 msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
-#: src/components/atc-training/training-application-create.tsx:75
+#: src/components/atc-training/training-application-create.tsx:73
 msgid "End time is required"
 msgstr "End time is required"
 
-#: src/components/atc-training/training-application-create.tsx:78
+#: src/components/atc-training/training-application-create.tsx:76
 #: src/components/event/event-create.tsx:81
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
@@ -560,7 +557,7 @@ msgstr "Enter at"
 msgid "Equipment"
 msgstr "Equipment"
 
-#: src/components/atc-training/training-application-create.tsx:148
+#: src/components/atc-training/training-application-create.tsx:146
 #: src/components/event/atc-slot-list.tsx:189
 #: src/routes/__root.tsx:125
 msgid "Error"
@@ -641,11 +638,11 @@ msgstr "Flight Plan Checker"
 msgid "Flight Route"
 msgstr "Flight Route"
 
-#: src/components/atc-permission-modal.tsx:28
+#: src/components/atc-permission-modal.tsx:26
 msgid "Flight Service Station"
 msgstr "Flight Service Station"
 
-#: src/components/atc-permission-modal.tsx:29
+#: src/components/atc-permission-modal.tsx:27
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
@@ -686,7 +683,7 @@ msgstr "Go to previous page"
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
-#: src/components/atc-permission-modal.tsx:23
+#: src/components/atc-permission-modal.tsx:21
 msgid "Ground"
 msgstr "Ground"
 
@@ -820,7 +817,7 @@ msgstr "Match designated route"
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
-#: src/components/atc-permission-modal.tsx:37
+#: src/components/atc-permission-modal.tsx:35
 #: src/routes/users/index.tsx:31
 msgid "Mentor"
 msgstr "Mentor"
@@ -862,7 +859,12 @@ msgstr "Name"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
-#: src/components/atc-training/training-application-responses.tsx:102
+#: src/routes/users/me.tsx:79
+#: src/routes/users/me.tsx:80
+msgid "No"
+msgstr "No"
+
+#: src/components/atc-training/training-application-responses.tsx:108
 msgid "No comments"
 msgstr "No comments"
 
@@ -878,7 +880,7 @@ msgstr "No event is scheduled recently."
 msgid "No online pilot."
 msgstr "No online pilot."
 
-#: src/components/atc-permission-modal.tsx:104
+#: src/components/atc-permission-modal.tsx:130
 msgid "No permission"
 msgstr "No permission"
 
@@ -1031,6 +1033,10 @@ msgstr "Privacy Policy"
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
+#: src/components/atc-permission-modal.tsx:103
+msgid "Rating"
+msgstr "Rating"
+
 #: src/routes/index.tsx:40
 msgid "Recent Events"
 msgstr "Recent Events"
@@ -1043,7 +1049,7 @@ msgstr "Reject"
 #: src/components/atc-application/atc-application-status.tsx:50
 #: src/components/atc-training/training-application-list.tsx:18
 #: src/components/atc-training/training-application-list.tsx:43
-#: src/components/atc-training/training-application-responses.tsx:93
+#: src/components/atc-training/training-application-responses.tsx:99
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -1057,7 +1063,7 @@ msgstr "Release"
 msgid "Remark"
 msgstr "Remark"
 
-#: src/components/atc-training/training-application-responses.tsx:74
+#: src/components/atc-training/training-application-responses.tsx:80
 msgid "Respond"
 msgstr "Respond"
 
@@ -1101,7 +1107,8 @@ msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspa
 msgid "Sat"
 msgstr "Sat"
 
-#: src/components/atc-training/training-application-create.tsx:202
+#: src/components/atc-permission-modal.tsx:189
+#: src/components/atc-training/training-application-create.tsx:200
 #: src/components/atc-training/training-response.tsx:64
 #: src/components/event/atc-slot-create.tsx:182
 #: src/components/event/event-create.tsx:246
@@ -1141,17 +1148,17 @@ msgstr "Show all pilots"
 msgid "Show less pilots"
 msgstr "Show less pilots"
 
-#: src/components/atc-training/training-application-create.tsx:128
+#: src/components/atc-training/training-application-create.tsx:126
 #: src/components/event/slot-list.tsx:154
 #: src/routes/events/$id.tsx:46
 msgid "Slots"
 msgstr "Slots"
 
-#: src/components/atc-permission-modal.tsx:35
+#: src/components/atc-permission-modal.tsx:33
 msgid "Solo"
 msgstr "Solo"
 
-#: src/components/atc-permission-modal.tsx:120
+#: src/components/atc-permission-modal.tsx:160
 msgid "Solo Expiration Date"
 msgstr "Solo Expiration Date"
 
@@ -1169,7 +1176,7 @@ msgstr "Staff"
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
-#: src/components/atc-training/training-application-create.tsx:162
+#: src/components/atc-training/training-application-create.tsx:160
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:110
 #: src/components/event/atc-slot-list.tsx:36
@@ -1185,7 +1192,7 @@ msgstr "Start ATC booking at"
 msgid "Start booking at"
 msgstr "Start booking at"
 
-#: src/components/atc-training/training-application-create.tsx:72
+#: src/components/atc-training/training-application-create.tsx:70
 msgid "Start time is required"
 msgstr "Start time is required"
 
@@ -1199,7 +1206,7 @@ msgstr "Start to Fly"
 msgid "Status"
 msgstr "Status"
 
-#: src/components/atc-permission-modal.tsx:33
+#: src/components/atc-permission-modal.tsx:31
 msgid "Student"
 msgstr "Student"
 
@@ -1341,7 +1348,7 @@ msgstr "This page is not available in English."
 msgid "Thu"
 msgstr "Thu"
 
-#: src/components/atc-permission-modal.tsx:25
+#: src/components/atc-permission-modal.tsx:23
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -1354,14 +1361,14 @@ msgstr "Time"
 msgid "Time:"
 msgstr "Time:"
 
-#: src/components/atc-training/training-application-create.tsx:114
+#: src/components/atc-training/training-application-create.tsx:112
 #: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/event/event-create.tsx:116
 msgid "Title"
 msgstr "Title"
 
-#: src/components/atc-training/training-application-create.tsx:65
+#: src/components/atc-training/training-application-create.tsx:63
 #: src/components/event/event-create.tsx:78
 msgid "Title is required"
 msgstr "Title is required"
@@ -1370,7 +1377,7 @@ msgstr "Title is required"
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
-#: src/components/atc-permission-modal.tsx:24
+#: src/components/atc-permission-modal.tsx:22
 msgid "Tower"
 msgstr "Tower"
 
@@ -1384,7 +1391,7 @@ msgstr "Trainee CID"
 msgid "Trainee Name"
 msgstr "Trainee Name"
 
-#: src/components/atc-training/training-application-responses.tsx:83
+#: src/components/atc-training/training-application-responses.tsx:89
 msgid "Trainer"
 msgstr "Trainer"
 
@@ -1426,7 +1433,7 @@ msgstr "Transponder field is empty."
 msgid "Tue"
 msgstr "Tue"
 
-#: src/components/atc-permission-modal.tsx:34
+#: src/components/atc-permission-modal.tsx:32
 msgid "Under Mentor"
 msgstr "Under Mentor"
 
@@ -1499,6 +1506,11 @@ msgstr "VFR Policy"
 msgid "View"
 msgstr "View"
 
+#: src/components/atc-permission-modal.tsx:81
+#: src/routes/users/me.tsx:79
+msgid "Visiting"
+msgstr "Visiting"
+
 #: src/components/app/app-nav-menu.tsx:156
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
@@ -1523,13 +1535,18 @@ msgstr "Weather"
 msgid "Wed"
 msgstr "Wed"
 
-#: src/components/atc-training/training-application-delete.tsx:26
+#: src/components/atc-training/training-application-delete.tsx:32
 msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/routes/flights/$callsign.tsx:200
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
+
+#: src/routes/users/me.tsx:79
+#: src/routes/users/me.tsx:80
+msgid "Yes"
+msgstr "Yes"
 
 #: src/components/atc-training/training-application-responses.tsx:63
 msgid "You have responded to this training request."
