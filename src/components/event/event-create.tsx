@@ -60,6 +60,8 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
       end_booking_at: event?.end_booking_at,
       start_atc_booking_at: event?.start_atc_booking_at,
       image_url: event?.image_url ?? null,
+      community_link: event?.community_link ?? null,
+      vatsim_link: event?.vatsim_link ?? null,
       description: event?.description ?? "",
     } satisfies components["schemas"]["EventSaveRequest"],
     onSubmit: ({ value }) => {
@@ -204,6 +206,30 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
             </Dropzone>
             <form.Field name="image_url">
               {(field) => <TextInput label={t`Image URL`} value={field.state.value ?? ""} disabled />}
+            </form.Field>
+            <form.Field name="community_link">
+              {(field) => (
+                <TextInput
+                  label={t`Forum`}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  value={field.state.value ?? ""}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                  error={field.state.meta.errors.join("")}
+                />
+              )}
+            </form.Field>
+            <form.Field name="vatsim_link">
+              {(field) => (
+                <TextInput
+                  label={t`VATSIM`}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  value={field.state.value ?? ""}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                  error={field.state.meta.errors.join("")}
+                />
+              )}
             </form.Field>
             <form.Field name="description">
               {(field) => (

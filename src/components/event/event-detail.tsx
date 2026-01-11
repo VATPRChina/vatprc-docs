@@ -42,6 +42,18 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
           <DateTime>{event?.start_at}</DateTime>
         </div>
       )}
+      <div className="flex flex-row items-baseline gap-2">
+        {event?.community_link && event.community_link.length > 0 && (
+          <a href={event.community_link} target="_blank" rel="noreferrer">
+            <Trans>Forum</Trans>
+          </a>
+        )}
+        {event?.vatsim_link && event.vatsim_link.length > 0 && (
+          <a href={event.vatsim_link} target="_blank" rel="noreferrer">
+            <Trans>VATSIM</Trans>
+          </a>
+        )}
+      </div>
       <div>{event?.description}</div>
     </div>
   );

@@ -8845,6 +8845,8 @@ export interface components {
       /** Format: date-time */
       start_atc_booking_at: null | string;
       image_url: null | string;
+      community_link: null | string;
+      vatsim_link: null | string;
       description: string;
     };
     EventSaveRequest: {
@@ -8860,6 +8862,8 @@ export interface components {
       /** Format: date-time */
       start_atc_booking_at?: null | string;
       image_url?: null | string;
+      community_link?: null | string;
+      vatsim_link?: null | string;
       description: string;
     };
     EventSlotDto: {
