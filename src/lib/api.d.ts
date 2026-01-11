@@ -8839,9 +8839,9 @@ export interface components {
       /** Format: date-time */
       end_at: string;
       /** Format: date-time */
-      start_booking_at: string;
+      start_booking_at: null | string;
       /** Format: date-time */
-      end_booking_at: string;
+      end_booking_at: null | string;
       /** Format: date-time */
       start_atc_booking_at: null | string;
       image_url: null | string;
@@ -8854,9 +8854,9 @@ export interface components {
       /** Format: date-time */
       end_at: string;
       /** Format: date-time */
-      start_booking_at: string;
+      start_booking_at?: null | string;
       /** Format: date-time */
-      end_booking_at: string;
+      end_booking_at?: null | string;
       /** Format: date-time */
       start_atc_booking_at?: null | string;
       image_url?: null | string;

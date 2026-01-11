@@ -58,9 +58,9 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
       title: event?.title ?? "",
       start_at: event?.start_at ?? now,
       end_at: event?.end_at ?? now,
-      start_booking_at: event?.start_booking_at ?? now,
-      end_booking_at: event?.end_booking_at ?? now,
-      start_atc_booking_at: (event?.start_atc_booking_at ?? now) as string | null,
+      start_booking_at: event?.start_booking_at,
+      end_booking_at: event?.end_booking_at,
+      start_atc_booking_at: event?.start_atc_booking_at,
       image_url: event?.image_url ?? null,
       description: event?.description ?? "",
     } satisfies components["schemas"]["EventSaveRequest"],
@@ -80,8 +80,15 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
         if (new Date(value.start_at) >= new Date(value.end_at)) {
           fields["end_at"] = t`End time must be after start time`;
         }
-        if (new Date(value.start_booking_at) >= new Date(value.end_booking_at)) {
-          fields["end_booking_at"] = t`End booking time must be after start booking time`;
+        if (value.start_booking_at && value.end_booking_at) {
+          if (new Date(value.start_booking_at) >= new Date(value.end_booking_at)) {
+            fields["end_booking_at"] = t`End booking time must be after start booking time`;
+          }
+        } else if (!value.start_booking_at || !value.end_booking_at) {
+          // ignore
+        } else {
+          fields["start_booking_at"] = t`Start and End booking time must be both set or unset`;
+          fields["end_booking_at"] = t`Start and End booking time must be both set or unset`;
         }
         return { fields };
       },
@@ -166,9 +173,11 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   <Stack gap="xs">
                     <DateTimePicker
                       label={t`Start booking at`}
-                      onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
+                      placeholder={t`Booking not supported`}
+                      onChange={(e) => field.handleChange(e && formatISO(e ?? new Date(), { in: utc }))}
                       valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={new Date(field.state.value)}
+                      value={field.state.value && new Date(field.state.value)}
+                      clearable
                       onBlur={field.handleBlur}
                       disabled={isLoading}
                       error={field.state.meta.errors.join("")}
@@ -184,9 +193,11 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   <Stack gap="xs">
                     <DateTimePicker
                       label={t`End booking at`}
-                      onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
+                      placeholder={t`Booking not supported`}
+                      onChange={(e) => field.handleChange(e && formatISO(e ?? new Date(), { in: utc }))}
                       valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={new Date(field.state.value)}
+                      value={field.state.value && new Date(field.state.value)}
+                      clearable
                       onBlur={field.handleBlur}
                       disabled={isLoading}
                       error={field.state.meta.errors.join("")}
@@ -203,6 +214,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 <Stack gap="xs">
                   <DateTimePicker
                     label={t`Start ATC booking at`}
+                    placeholder={t`Start immediately`}
                     onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
                     valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                     value={field.state.value && new Date(field.state.value)}
