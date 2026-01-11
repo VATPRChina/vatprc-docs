@@ -1,4 +1,4 @@
-import { DateTime } from "./event/datetime";
+import { DateTimeInput } from "./ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { promiseWithToast } from "@/lib/utils";
@@ -6,8 +6,7 @@ import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Modal, Select, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { DateTimePicker } from "@mantine/dates";
+import { ActionIcon, Button, Group, Modal, Select, Stack, TextInput, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { formatISO } from "date-fns";
@@ -121,38 +120,28 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
             <Group grow>
               <form.Field name="valid_from">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`Valid From`}
-                      onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      clearable
-                      value={field.state.value && new Date(field.state.value)}
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`Valid From`}
+                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
+                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                    clearable
+                    value={field.state.value && new Date(field.state.value)}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                  />
                 )}
               </form.Field>
               <form.Field name="valid_until">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`Valid Until`}
-                      onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      clearable
-                      value={field.state.value && new Date(field.state.value)}
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`Valid Until`}
+                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
+                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                    clearable
+                    value={field.state.value && new Date(field.state.value)}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                  />
                 )}
               </form.Field>
             </Group>

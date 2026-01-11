@@ -1,11 +1,10 @@
-import { DateTime } from "../event/datetime";
+import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api, useControllerPermissions } from "@/lib/client";
 import { promiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Modal, Text, TextInput } from "@mantine/core";
-import { DateTimePicker } from "@mantine/dates";
+import { ActionIcon, Alert, Button, Modal, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -155,36 +154,26 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
                     <div className="flex flex-row items-start gap-1" key={i}>
                       <form.Field name={`slots[${i}].start_at`}>
                         {(field) => (
-                          <div className="flex flex-1 flex-col gap-1">
-                            <DateTimePicker
-                              label={t`Start at`}
-                              onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
-                              valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                              value={field.state.value && new Date(field.state.value)}
-                              onBlur={field.handleBlur}
-                              error={field.state.meta.errors.join("")}
-                            />
-                            <Text size="xs">
-                              <DateTime>{field.state.value}</DateTime>
-                            </Text>
-                          </div>
+                          <DateTimeInput
+                            label={t`Start at`}
+                            onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
+                            valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                            value={field.state.value && new Date(field.state.value)}
+                            onBlur={field.handleBlur}
+                            error={field.state.meta.errors.join("")}
+                          />
                         )}
                       </form.Field>
                       <form.Field name={`slots[${i}].end_at`}>
                         {(field) => (
-                          <div className="flex flex-1 flex-col gap-1">
-                            <DateTimePicker
-                              label={t`End at`}
-                              onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
-                              valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                              value={field.state.value && new Date(field.state.value)}
-                              onBlur={field.handleBlur}
-                              error={field.state.meta.errors.join("")}
-                            />
-                            <Text size="xs">
-                              <DateTime>{field.state.value}</DateTime>
-                            </Text>
-                          </div>
+                          <DateTimeInput
+                            label={t`End at`}
+                            onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
+                            valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                            value={field.state.value && new Date(field.state.value)}
+                            onBlur={field.handleBlur}
+                            error={field.state.meta.errors.join("")}
+                          />
                         )}
                       </form.Field>
                       <ActionIcon variant="subtle" className="self-center" onClick={() => field.removeValue(i)}>

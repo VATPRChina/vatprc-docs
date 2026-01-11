@@ -1,12 +1,10 @@
-import { DateTime } from "./datetime";
+import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { promiseWithLog, promiseWithToast } from "@/lib/utils";
-import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Image, Modal, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { DateTimePicker } from "@mantine/dates";
+import { ActionIcon, Button, Group, Image, Modal, Stack, TextInput, Textarea } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -132,101 +130,71 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
             <Group grow>
               <form.Field name="start_at">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`Start at`}
-                      onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={new Date(field.state.value)}
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                      error={field.state.meta.errors.join("")}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`Start at`}
+                    onChange={(e) => e && field.handleChange(e)}
+                    value={new Date(field.state.value)}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                    error={field.state.meta.errors.join("")}
+                  />
                 )}
               </form.Field>
               <form.Field name="end_at">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`End at`}
-                      onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={new Date(field.state.value)}
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                      error={field.state.meta.errors.join("")}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`End at`}
+                    onChange={(e) => e && field.handleChange(e)}
+                    value={new Date(field.state.value)}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                    error={field.state.meta.errors.join("")}
+                  />
                 )}
               </form.Field>
             </Group>
             <Group grow>
               <form.Field name="start_booking_at">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`Start booking at`}
-                      placeholder={t`Booking not supported`}
-                      onChange={(e) => field.handleChange(e && formatISO(e ?? new Date(), { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={field.state.value && new Date(field.state.value)}
-                      clearable
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                      error={field.state.meta.errors.join("")}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`Start booking at`}
+                    placeholder={t`Booking not supported`}
+                    onChange={(e) => field.handleChange(e)}
+                    value={field.state.value && new Date(field.state.value)}
+                    clearable
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                    error={field.state.meta.errors.join("")}
+                  />
                 )}
               </form.Field>
               <form.Field name="end_booking_at">
                 {(field) => (
-                  <Stack gap="xs">
-                    <DateTimePicker
-                      label={t`End booking at`}
-                      placeholder={t`Booking not supported`}
-                      onChange={(e) => field.handleChange(e && formatISO(e ?? new Date(), { in: utc }))}
-                      valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                      value={field.state.value && new Date(field.state.value)}
-                      clearable
-                      onBlur={field.handleBlur}
-                      disabled={isLoading}
-                      error={field.state.meta.errors.join("")}
-                    />
-                    <Text size="xs">
-                      <DateTime>{field.state.value}</DateTime>
-                    </Text>
-                  </Stack>
+                  <DateTimeInput
+                    label={t`End booking at`}
+                    placeholder={t`Booking not supported`}
+                    onChange={(e) => field.handleChange(e)}
+                    value={field.state.value && new Date(field.state.value)}
+                    clearable
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                    error={field.state.meta.errors.join("")}
+                  />
                 )}
               </form.Field>
             </Group>
             <form.Field name="start_atc_booking_at">
               {(field) => (
-                <Stack gap="xs">
-                  <DateTimePicker
-                    label={t`Start ATC booking at`}
-                    placeholder={t`Start immediately`}
-                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                    value={field.state.value && new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                    clearable
-                    error={field.state.meta.errors.join("")}
-                  />
-                  <Text size="xs">
-                    <DateTime>{field.state.value}</DateTime>
-                  </Text>
-                </Stack>
+                <DateTimeInput
+                  label={t`Start ATC booking at`}
+                  placeholder={t`Start immediately`}
+                  onChange={(e) => field.handleChange(e)}
+                  value={field.state.value && new Date(field.state.value)}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                  clearable
+                  error={field.state.meta.errors.join("")}
+                />
               )}
             </form.Field>
             <Dropzone onDrop={onUpload} accept={IMAGE_MIME_TYPE} loading={isImageUploading}>

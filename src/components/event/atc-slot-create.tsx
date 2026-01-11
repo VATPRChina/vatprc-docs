@@ -1,12 +1,11 @@
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal";
-import { DateTime } from "./datetime";
+import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { promiseWithLog, promiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Group, Modal, Select, Stack, Text, TextInput } from "@mantine/core";
-import { DateTimePicker } from "@mantine/dates";
+import { Button, Group, Modal, Select, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -105,36 +104,26 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
           <Group grow>
             <form.Field name="start_at">
               {(field) => (
-                <Stack gap="xs">
-                  <DateTimePicker
-                    label={t`Start at`}
-                    onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                    value={new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  />
-                  <Text size="xs">
-                    <DateTime>{field.state.value}</DateTime>
-                  </Text>
-                </Stack>
+                <DateTimeInput
+                  label={t`Start at`}
+                  onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
+                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                  value={new Date(field.state.value)}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                />
               )}
             </form.Field>
             <form.Field name="end_at">
               {(field) => (
-                <Stack gap="xs">
-                  <DateTimePicker
-                    label={t`End at`}
-                    onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
-                    value={new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  />
-                  <Text size="xs">
-                    <DateTime>{field.state.value}</DateTime>
-                  </Text>
-                </Stack>
+                <DateTimeInput
+                  label={t`End at`}
+                  onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
+                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
+                  value={new Date(field.state.value)}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                />
               )}
             </form.Field>
           </Group>
