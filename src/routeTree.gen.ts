@@ -25,6 +25,7 @@ import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ControllersTrainingsIndexRouteImport } from './routes/controllers/trainings/index'
 import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
+import { Route as ControllersTrainingsIdRouteImport } from './routes/controllers/trainings/$id'
 import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
 import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
 import { Route as DocPilotTs3RouteImport } from './routes/_doc/pilot/ts3'
@@ -128,6 +129,11 @@ const ControllersApplicationsIndexRoute =
 const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
   id: '/docs/utils/image',
   path: '/docs/utils/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControllersTrainingsIdRoute = ControllersTrainingsIdRouteImport.update({
+  id: '/controllers/trainings/$id',
+  path: '/controllers/trainings/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControllersApplicationsNewRoute =
@@ -284,6 +290,7 @@ export interface FileRoutesByFullPath {
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
+  '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
   '/controllers/trainings': typeof ControllersTrainingsIndexRoute
@@ -322,6 +329,7 @@ export interface FileRoutesByTo {
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
+  '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications': typeof ControllersApplicationsIndexRoute
   '/controllers/trainings': typeof ControllersTrainingsIndexRoute
@@ -363,6 +371,7 @@ export interface FileRoutesById {
   '/_doc/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
+  '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
   '/controllers/applications/': typeof ControllersApplicationsIndexRoute
   '/controllers/trainings/': typeof ControllersTrainingsIndexRoute
@@ -405,6 +414,7 @@ export interface FileRouteTypes {
     | '/pilot/ts3'
     | '/controllers/applications/$id'
     | '/controllers/applications/new'
+    | '/controllers/trainings/$id'
     | '/docs/utils/image'
     | '/controllers/applications'
     | '/controllers/trainings'
@@ -443,6 +453,7 @@ export interface FileRouteTypes {
     | '/pilot/ts3'
     | '/controllers/applications/$id'
     | '/controllers/applications/new'
+    | '/controllers/trainings/$id'
     | '/docs/utils/image'
     | '/controllers/applications'
     | '/controllers/trainings'
@@ -483,6 +494,7 @@ export interface FileRouteTypes {
     | '/_doc/pilot/ts3'
     | '/controllers/applications/$id'
     | '/controllers/applications/new'
+    | '/controllers/trainings/$id'
     | '/docs/utils/image'
     | '/controllers/applications/'
     | '/controllers/trainings/'
@@ -520,6 +532,7 @@ export interface RootRouteChildren {
   DocPilotTs3Route: typeof DocPilotTs3Route
   ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
   ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
+  ControllersTrainingsIdRoute: typeof ControllersTrainingsIdRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
   ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
   ControllersTrainingsIndexRoute: typeof ControllersTrainingsIndexRoute
@@ -637,6 +650,13 @@ declare module '@tanstack/react-router' {
       path: '/docs/utils/image'
       fullPath: '/docs/utils/image'
       preLoaderRoute: typeof DocsUtilsImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/trainings/$id': {
+      id: '/controllers/trainings/$id'
+      path: '/controllers/trainings/$id'
+      fullPath: '/controllers/trainings/$id'
+      preLoaderRoute: typeof ControllersTrainingsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers/applications/new': {
@@ -856,6 +876,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocPilotTs3Route: DocPilotTs3Route,
   ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
   ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
+  ControllersTrainingsIdRoute: ControllersTrainingsIdRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,
   ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,
   ControllersTrainingsIndexRoute: ControllersTrainingsIndexRoute,

@@ -1,15 +1,15 @@
 import { createDiscourseFileRoute } from "@/components/doc/discourse-doc";
+import { LinkButton } from "@/components/ui/link-button";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_doc/controller/become-a-controller")(
   createDiscourseFileRoute(
     "/_doc/controller/become-a-controller",
     "7188",
     "7214",
-    <Button renderRoot={(props) => <Link {...props} to="/controllers/applications/new" />} className="mb-8">
+    <LinkButton className="mb-8" to="/controllers/applications/new">
       <Trans>Apply</Trans>
-    </Button>,
+    </LinkButton>,
   ),
 );

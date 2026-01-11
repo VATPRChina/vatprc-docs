@@ -1,6 +1,6 @@
+import { LinkButton } from "../ui/link-button";
 import { Trans } from "@lingui/react/macro";
-import { Container, Title, Button, Text, Stack } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
+import { Container, Title, Text, Stack } from "@mantine/core";
 
 export const NotFound: React.FC = () => (
   <Container>
@@ -17,9 +17,9 @@ export const NotFound: React.FC = () => (
           another URL.
         </Trans>
       </Text>
-      <Button size="md" variant="light" renderRoot={(props) => <Link to="/" {...props} />}>
+      <LinkButton size="md" variant="light" to="/">
         <Trans>Take me back to home page</Trans>
-      </Button>
+      </LinkButton>
     </Stack>
   </Container>
 );

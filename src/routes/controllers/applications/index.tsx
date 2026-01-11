@@ -1,8 +1,8 @@
 import { AtcApplicationList } from "@/components/atc-application/atc-application-list";
+import { LinkButton } from "@/components/ui/link-button";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/")({
   component: RouteComponent,
@@ -17,16 +17,16 @@ function RouteComponent() {
       <h1 className="text-2xl">
         <Trans>ATC Applications</Trans>
       </h1>
-      <Button
+      <LinkButton
         className="self-start"
         variant="outline"
-        renderRoot={(props) => <Link to="/controllers/applications/new" {...props} />}
+        to="/controllers/applications/new"
         disabled={
           isLoading || (data && data.filter((a) => a.user_id === user?.id && a.status !== "rejected").length > 0)
         }
       >
         <Trans>Apply</Trans>
-      </Button>
+      </LinkButton>
       <AtcApplicationList />
     </div>
   );

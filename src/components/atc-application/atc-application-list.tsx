@@ -1,12 +1,11 @@
 import { RichTable } from "../table";
+import { LinkButton } from "../ui/link-button";
 import { APPLICATION_STATUS } from "./atc-application-status";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FC } from "react";
@@ -37,13 +36,14 @@ export const columns = [
     id: "actions",
     header: () => <Trans>Actions</Trans>,
     cell: ({ row }) => (
-      <Button
+      <LinkButton
         variant="subtle"
         leftSection={<TbFileDescription />}
-        renderRoot={(props) => <Link to="/controllers/applications/$id/" params={{ id: row.original.id }} {...props} />}
+        to="/controllers/applications/$id"
+        params={{ id: row.original.id }}
       >
         <Trans>View</Trans>
-      </Button>
+      </LinkButton>
     ),
   }),
 ];

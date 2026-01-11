@@ -1,6 +1,6 @@
 import { DateTime } from "../event/datetime";
 import { RichTable } from "../table";
-import { TrainingRecordModal } from "./training-response";
+import { LinkButton } from "../ui/link-button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -25,7 +25,15 @@ const columns = [
   col.display({
     id: "actions",
     header: () => <Trans>Actions</Trans>,
-    cell: ({ row }) => <TrainingRecordModal id={row.original.id} />,
+    cell: ({
+      row: {
+        original: { id },
+      },
+    }) => (
+      <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }}>
+        <Trans>View</Trans>
+      </LinkButton>
+    ),
   }),
 ];
 

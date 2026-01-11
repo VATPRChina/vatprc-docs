@@ -1,7 +1,7 @@
 import { ConfirmButton } from "./ui/confirm-button";
 import { components } from "@/lib/api";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
-import { useLingui } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { ComponentProps, FC, ReactNode } from "react";
@@ -88,6 +88,11 @@ export const Sheet: FC<SheetProps> = ({
                   <p className="text-sm font-bold">{commonProps.label}</p>
                   <Card withBorder className="mt-1 text-sm" padding="xs">
                     <pre className="font-sans text-wrap">{commonProps.value}</pre>
+                    {commonProps.value.length === 0 && (
+                      <span className="text-dimmed">
+                        <Trans>No content</Trans>
+                      </span>
+                    )}
                   </Card>
                 </Skeleton>
               );
