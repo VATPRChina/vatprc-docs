@@ -9,6 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  InitialTableState,
   SortDirection,
   useReactTable,
 } from "@tanstack/react-table";
@@ -51,11 +52,12 @@ export interface RichTableProps<TData> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
   isLoading?: boolean;
+  initialState?: InitialTableState;
 }
 
 const EMPTY_TABLE = [] as never[];
 
-export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<TData>) => {
+export const RichTable = <TData,>({ data, columns, isLoading, initialState }: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
   const table = useReactTable({
@@ -65,6 +67,7 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    initialState,
   });
 
   const currentPage = table.getState().pagination.pageIndex + 1;
@@ -107,6 +110,7 @@ export const RichTable = <TData,>({ data, columns, isLoading }: RichTableProps<T
                           className="font-normal"
                           size="xs"
                           data-field={header.column.id}
+                          value={(table.getColumn(header.column.id)?.getFilterValue() as string) ?? null}
                           onChange={(v) => onColumnFilterSelectChange(v, header.column.id)}
                           data={header.column.columnDef.meta.filterValues.map(({ value, label }) => ({
                             value,

@@ -195,7 +195,12 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
           <CreateAtcSlot eventId={eventId} />
         </div>
       </RequireRole>
-      <RichTable data={slots} columns={columns} isLoading={isLoading} />
+      <RichTable
+        data={slots}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ sorting: [{ desc: false, id: "position" }] }}
+      />
     </>
   );
 };

@@ -83,5 +83,12 @@ const columns = [
 export const TrainingApplicationList: FC = () => {
   const { data, isLoading } = $api.useQuery("get", "/api/atc/trainings/applications");
 
-  return <RichTable data={data} columns={columns} isLoading={isLoading} />;
+  return (
+    <RichTable
+      data={data}
+      columns={columns}
+      isLoading={isLoading}
+      initialState={{ columnFilters: [{ id: "status", value: "pending" }] }}
+    />
+  );
 };
