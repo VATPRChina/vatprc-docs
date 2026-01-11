@@ -1,3 +1,4 @@
+import { RequireRole } from "./require-role";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
@@ -7,10 +8,12 @@ import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
+import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { endOfDay, format, parse } from "date-fns";
 import { ComponentProps, FC, FormEventHandler } from "react";
+import { TbAirTrafficControl } from "react-icons/tb";
 
 interface AtcPermissionModalProps extends ComponentProps<typeof Modal> {
   userId: string;
@@ -191,5 +194,18 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
         </Stack>
       </form>
     </Modal>
+  );
+};
+
+export const AtcPermissionModalButton: FC<{ userId: string }> = ({ userId }) => {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <RequireRole role="controller-training-director-assistant">
+      <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
+        <Trans>ATC Permission</Trans>
+      </Button>
+      <AtcPermissionModal userId={userId} opened={opened} onClose={close} />
+    </RequireRole>
   );
 };

@@ -1,5 +1,4 @@
-import { AtcPermissionModal } from "@/components/atc-permission-modal";
-import { RequireRole } from "@/components/require-role";
+import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -12,7 +11,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { MouseEvent, useState } from "react";
-import { TbUserBolt, TbCheck, TbAirTrafficControl } from "react-icons/tb";
+import { TbUserBolt, TbCheck } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "controller",
@@ -131,16 +130,10 @@ const columns = [
     header: () => <Trans>Actions</Trans>,
     cell: ({ row }) => {
       const userId = row.original.id;
-      const [opened, { open, close }] = useDisclosure(false);
 
       return (
         <Group>
-          <RequireRole role="controller-training-director-assistant">
-            <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
-              <Trans>ATC Permission</Trans>
-            </Button>
-            <AtcPermissionModal userId={userId} opened={opened} onClose={close} />
-          </RequireRole>
+          <AtcPermissionModalButton userId={userId} />
         </Group>
       );
     },
