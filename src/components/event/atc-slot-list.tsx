@@ -3,6 +3,7 @@ import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { CreateAtcSlot } from "./atc-slot-create";
+import { AtcSlotDeleteButton } from "./atc-slot-delete";
 import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
 import { $api, useControllerPermission, useUser } from "@/lib/client";
@@ -142,6 +143,7 @@ const columns = [
         <div className="flex flex-row gap-2">
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
+            <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
           </RequireRole>
           <RequireRole role="controller">
             <ConfirmButton
