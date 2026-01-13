@@ -150,7 +150,7 @@ const columns = [
       };
 
       return (
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row items-center gap-2">
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
@@ -159,6 +159,7 @@ const columns = [
             <ConfirmButton
               actionDescription={<Trans>Are you sure to book this ATC position?</Trans>}
               variant="subtle"
+              size="compact-sm"
               onClick={onBook}
               loading={isBookPending}
               disabled={!!slot?.booking || !hasPermission || isNotInBookingPeriod}
@@ -168,6 +169,7 @@ const columns = [
             <ConfirmButton
               actionDescription={<Trans>Are you sure to release this ATC position?</Trans>}
               variant="subtle"
+              size="compact-sm"
               onClick={onRelease}
               loading={isReleasePending}
               disabled={!slot?.booking || !hasPermission || slot.booking.user_id !== user?.id || isNotInBookingPeriod}
@@ -211,7 +213,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
         data={slots}
         columns={columns}
         isLoading={isLoading}
-        initialState={{ sorting: [{ desc: false, id: "position" }] }}
+        initialState={{ sorting: [{ desc: false, id: "position" }], pagination: { pageSize: 20 } }}
       />
     </>
   );

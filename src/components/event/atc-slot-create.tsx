@@ -79,7 +79,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
           <Trans>Create ATC Position</Trans>
         </Button>
       ) : (
-        <Button variant="subtle" onClick={toggle}>
+        <Button variant="subtle" onClick={toggle} size="compact-sm">
           <Trans>Edit</Trans>
         </Button>
       )}
