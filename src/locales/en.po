@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/table.tsx:162
+#: src/components/table.tsx:166
 msgid "{size} items/page"
 msgstr "{size} items/page"
 
@@ -179,15 +179,19 @@ msgstr "Approach"
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 
-#: src/components/event/atc-slot-list.tsx:148
+#: src/components/event/atc-slot-list.tsx:150
 msgid "Are you sure to book this ATC position?"
 msgstr "Are you sure to book this ATC position?"
+
+#: src/components/event/atc-slot-delete.tsx:31
+msgid "Are you sure to delete this ATC position?"
+msgstr "Are you sure to delete this ATC position?"
 
 #: src/components/event/slot-list.tsx:137
 msgid "Are you sure to release the slot?"
 msgstr "Are you sure to release the slot?"
 
-#: src/components/event/atc-slot-list.tsx:157
+#: src/components/event/atc-slot-list.tsx:159
 msgid "Are you sure to release this ATC position?"
 msgstr "Are you sure to release this ATC position?"
 
@@ -223,7 +227,7 @@ msgstr "ATC Application"
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/event/event-detail.tsx:38
+#: src/components/event/event-detail.tsx:39
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
@@ -258,18 +262,18 @@ msgstr "Basic Info"
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/event/atc-slot-list.tsx:154
+#: src/components/event/atc-slot-list.tsx:156
 #: src/components/event/slot-list.tsx:123
 msgid "Book"
 msgstr "Book"
 
-#: src/components/event/event-create.tsx:163
-#: src/components/event/event-create.tsx:177
-#: src/components/event/event-detail.tsx:31
+#: src/components/event/event-create.tsx:170
+#: src/components/event/event-create.tsx:184
+#: src/components/event/event-detail.tsx:32
 msgid "Booking not supported"
 msgstr "Booking not supported"
 
-#: src/components/event/event-detail.tsx:22
+#: src/components/event/event-detail.tsx:23
 msgid "Booking:"
 msgstr "Booking:"
 
@@ -278,7 +282,7 @@ msgid "Briefly describe the target of the training, such as position and lesson 
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
 #: src/components/event/atc-slot-create.tsx:96
-#: src/components/event/atc-slot-list.tsx:33
+#: src/components/event/atc-slot-list.tsx:34
 #: src/components/event/slot-import.tsx:137
 #: src/routes/flights/$callsign.tsx:364
 #: src/routes/flights/index.tsx:49
@@ -337,7 +341,7 @@ msgstr "China RVSM odd flight level"
 
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
-#: src/components/event/atc-slot-list.tsx:91
+#: src/components/event/atc-slot-list.tsx:92
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -395,14 +399,14 @@ msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/event/atc-slot-list.tsx:186
+#: src/components/event/atc-slot-list.tsx:188
 #: src/routes/events/$id.tsx:49
 msgid "Controllers"
 msgstr "Controllers"
 
 #: src/components/atc-training/training-application-create.tsx:189
 #: src/components/event/atc-slot-create.tsx:171
-#: src/components/event/event-create.tsx:252
+#: src/components/event/event-create.tsx:259
 #: src/components/preferred-route-create.tsx:191
 msgid "Create"
 msgstr "Create"
@@ -412,8 +416,8 @@ msgstr "Create"
 msgid "Create ATC Position"
 msgstr "Create ATC Position"
 
-#: src/components/event/event-create.tsx:108
-#: src/components/event/event-create.tsx:111
+#: src/components/event/event-create.tsx:115
+#: src/components/event/event-create.tsx:118
 msgid "Create Event"
 msgstr "Create Event"
 
@@ -460,6 +464,10 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "Dark"
 
+#: src/components/event/atc-slot-delete.tsx:35
+msgid "Delete"
+msgstr "Delete"
+
 #: src/components/atc-permission-modal.tsx:23
 msgid "Delivery"
 msgstr "Delivery"
@@ -470,7 +478,7 @@ msgstr "Delivery"
 msgid "Departure"
 msgstr "Departure"
 
-#: src/components/event/event-create.tsx:237
+#: src/components/event/event-create.tsx:244
 #: src/components/preferred-route-create.tsx:179
 msgid "Description"
 msgstr "Description"
@@ -509,8 +517,8 @@ msgstr "Edit Chinese"
 msgid "Edit English"
 msgstr "Edit English"
 
-#: src/components/event/event-create.tsx:103
-#: src/components/event/event-create.tsx:111
+#: src/components/event/event-create.tsx:110
+#: src/components/event/event-create.tsx:118
 msgid "Edit Event {title}"
 msgstr "Edit Event {title}"
 
@@ -534,17 +542,17 @@ msgstr "ELDT"
 #: src/components/atc-training/training-application-create.tsx:170
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:120
-#: src/components/event/atc-slot-list.tsx:47
-#: src/components/event/event-create.tsx:148
+#: src/components/event/atc-slot-list.tsx:48
+#: src/components/event/event-create.tsx:155
 #: src/routes/controllers/trainings/$id.tsx:89
 msgid "End at"
 msgstr "End at"
 
-#: src/components/event/event-create.tsx:176
+#: src/components/event/event-create.tsx:183
 msgid "End booking at"
 msgstr "End booking at"
 
-#: src/components/event/event-create.tsx:85
+#: src/components/event/event-create.tsx:92
 msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
@@ -553,7 +561,7 @@ msgid "End time is required"
 msgstr "End time is required"
 
 #: src/components/atc-training/training-application-create.tsx:75
-#: src/components/event/event-create.tsx:81
+#: src/components/event/event-create.tsx:88
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
 
@@ -566,7 +574,7 @@ msgid "Equipment"
 msgstr "Equipment"
 
 #: src/components/atc-training/training-application-create.tsx:145
-#: src/components/event/atc-slot-list.tsx:189
+#: src/components/event/atc-slot-list.tsx:191
 #: src/routes/__root.tsx:125
 msgid "Error"
 msgstr "Error"
@@ -589,11 +597,11 @@ msgstr "Event & Organization Director"
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/components/event/atc-slot-list.tsx:50
+#: src/components/event/atc-slot-list.tsx:51
 msgid "Event end"
 msgstr "Event end"
 
-#: src/components/event/atc-slot-list.tsx:39
+#: src/components/event/atc-slot-list.tsx:40
 msgid "Event start"
 msgstr "Event start"
 
@@ -655,8 +663,8 @@ msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
 #: src/components/app/app-nav-menu.tsx:77
-#: src/components/event/event-create.tsx:213
-#: src/components/event/event-detail.tsx:48
+#: src/components/event/event-create.tsx:220
+#: src/components/event/event-detail.tsx:49
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "Forum"
@@ -673,19 +681,19 @@ msgstr "Full name"
 msgid "Full Name"
 msgstr "Full Name"
 
-#: src/components/table.tsx:174
+#: src/components/table.tsx:178
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/components/table.tsx:198
+#: src/components/table.tsx:202
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/components/table.tsx:190
+#: src/components/table.tsx:194
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/components/table.tsx:182
+#: src/components/table.tsx:186
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
@@ -725,7 +733,7 @@ msgstr "I will ensure to have sufficient ATC online time."
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
-#: src/components/event/event-create.tsx:208
+#: src/components/event/event-create.tsx:215
 msgid "Image URL"
 msgstr "Image URL"
 
@@ -886,7 +894,7 @@ msgstr "No comments"
 msgid "No content"
 msgstr "No content"
 
-#: src/components/table.tsx:155
+#: src/components/table.tsx:159
 msgid "No data"
 msgstr "No data"
 
@@ -914,7 +922,7 @@ msgstr "No RVSM"
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/event/atc-slot-list.tsx:92
+#: src/components/event/atc-slot-list.tsx:93
 msgid "Not booked"
 msgstr "Not booked"
 
@@ -967,7 +975,7 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/components/table.tsx:165
+#: src/components/table.tsx:169
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
 
@@ -1035,7 +1043,7 @@ msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
 #: src/components/event/atc-slot-create.tsx:133
-#: src/components/event/atc-slot-list.tsx:59
+#: src/components/event/atc-slot-list.tsx:60
 msgid "Position"
 msgstr "Position"
 
@@ -1071,7 +1079,7 @@ msgstr "Reject"
 msgid "Rejected"
 msgstr "Rejected"
 
-#: src/components/event/atc-slot-list.tsx:163
+#: src/components/event/atc-slot-list.tsx:165
 #: src/components/event/slot-list.tsx:139
 msgid "Release"
 msgstr "Release"
@@ -1128,7 +1136,7 @@ msgstr "Sat"
 #: src/components/atc-permission-modal.tsx:192
 #: src/components/atc-training/training-application-create.tsx:189
 #: src/components/event/atc-slot-create.tsx:171
-#: src/components/event/event-create.tsx:252
+#: src/components/event/event-create.tsx:259
 #: src/components/preferred-route-create.tsx:191
 #: src/routes/controllers/trainings/$id.tsx:130
 msgid "Save"
@@ -1138,7 +1146,7 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/components/table.tsx:88
+#: src/components/table.tsx:91
 msgid "Search..."
 msgstr "Search..."
 
@@ -1202,29 +1210,29 @@ msgstr "Staff"
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
 
-#: src/components/event/event-create.tsx:90
-#: src/components/event/event-create.tsx:91
+#: src/components/event/event-create.tsx:97
+#: src/components/event/event-create.tsx:98
 msgid "Start and End booking time must be both set or unset"
 msgstr "Start and End booking time must be both set or unset"
 
 #: src/components/atc-training/training-application-create.tsx:158
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:108
-#: src/components/event/atc-slot-list.tsx:36
-#: src/components/event/event-create.tsx:136
+#: src/components/event/atc-slot-list.tsx:37
+#: src/components/event/event-create.tsx:143
 #: src/routes/controllers/trainings/$id.tsx:81
 msgid "Start at"
 msgstr "Start at"
 
-#: src/components/event/event-create.tsx:191
+#: src/components/event/event-create.tsx:198
 msgid "Start ATC booking at"
 msgstr "Start ATC booking at"
 
-#: src/components/event/event-create.tsx:162
+#: src/components/event/event-create.tsx:169
 msgid "Start booking at"
 msgstr "Start booking at"
 
-#: src/components/event/event-create.tsx:192
+#: src/components/event/event-create.tsx:199
 msgid "Start immediately"
 msgstr "Start immediately"
 
@@ -1393,20 +1401,20 @@ msgstr "Tier 2"
 msgid "Time"
 msgstr "Time"
 
-#: src/components/event/event-detail.tsx:13
+#: src/components/event/event-detail.tsx:14
 msgid "Time:"
 msgstr "Time:"
 
 #: src/components/atc-training/training-application-create.tsx:111
 #: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:12
-#: src/components/event/event-create.tsx:123
+#: src/components/event/event-create.tsx:130
 #: src/routes/controllers/trainings/$id.tsx:57
 msgid "Title"
 msgstr "Title"
 
 #: src/components/atc-training/training-application-create.tsx:62
-#: src/components/event/event-create.tsx:78
+#: src/components/event/event-create.tsx:85
 msgid "Title is required"
 msgstr "Title is required"
 
@@ -1534,8 +1542,8 @@ msgstr "Validation Result"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/components/event/event-create.tsx:225
-#: src/components/event/event-detail.tsx:53
+#: src/components/event/event-create.tsx:232
+#: src/components/event/event-detail.tsx:54
 msgid "VATSIM"
 msgstr "VATSIM"
 
