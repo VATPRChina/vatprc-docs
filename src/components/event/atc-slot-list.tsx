@@ -88,9 +88,19 @@ const columns = [
       return stateA - stateB;
     },
   }),
-  columnHelper.accessor("booking.user.cid", {
+  columnHelper.accessor("booking.user", {
     header: () => <Trans>CID</Trans>,
-    cell: ({ getValue }) => getValue() ?? <Trans>Not booked</Trans>,
+    cell: ({ getValue }) => {
+      const user = getValue();
+      if (!user) return <Trans>Not booked</Trans>;
+
+      return (
+        <div>
+          <span>{user.full_name}</span>
+          <span className="text-dimmed ml-0.5">{user.cid}</span>
+        </div>
+      );
+    },
   }),
   columnHelper.display({
     id: "actions",
