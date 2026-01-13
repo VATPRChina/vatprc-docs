@@ -179,7 +179,7 @@ msgstr "进近"
 msgid "Are you sure to book the slot?"
 msgstr "确定要预订该时段吗？"
 
-#: src/components/event/atc-slot-list.tsx:150
+#: src/components/event/atc-slot-list.tsx:162
 msgid "Are you sure to book this ATC position?"
 msgstr "确定要预订该管制席位吗？"
 
@@ -191,7 +191,7 @@ msgstr "确定要删除该管制席位吗？"
 msgid "Are you sure to release the slot?"
 msgstr "确定要取消该预订吗？"
 
-#: src/components/event/atc-slot-list.tsx:159
+#: src/components/event/atc-slot-list.tsx:172
 msgid "Are you sure to release this ATC position?"
 msgstr "确定要取消该管制席位预订吗？"
 
@@ -212,6 +212,15 @@ msgstr "区域"
 #: src/routes/navdata/preferred-routes.tsx:16
 msgid "Arrival"
 msgstr "到达机场"
+
+#: src/components/event/atc-slot-assign.tsx:72
+#: src/components/event/atc-slot-assign.tsx:91
+msgid "Assign"
+msgstr "指派"
+
+#: src/components/event/atc-slot-assign.tsx:74
+msgid "Assign ATC Position {callsign}"
+msgstr "指派管制席位 {callsign}"
 
 #: src/components/atc-training/training-application-create.tsx:65
 msgid "At least one slot is required"
@@ -262,7 +271,7 @@ msgstr "基本信息"
 msgid "Basic Information"
 msgstr "基本信息"
 
-#: src/components/event/atc-slot-list.tsx:156
+#: src/components/event/atc-slot-list.tsx:169
 #: src/components/event/slot-list.tsx:123
 msgid "Book"
 msgstr "预订"
@@ -282,7 +291,7 @@ msgid "Briefly describe the target of the training, such as position and lesson 
 msgstr "简要描述训练目标，例如席位和课程内容。"
 
 #: src/components/event/atc-slot-create.tsx:96
-#: src/components/event/atc-slot-list.tsx:34
+#: src/components/event/atc-slot-list.tsx:35
 #: src/components/event/slot-import.tsx:137
 #: src/routes/flights/$callsign.tsx:364
 #: src/routes/flights/index.tsx:49
@@ -341,7 +350,8 @@ msgstr "中国 RVSM 单数高度层"
 
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
-#: src/components/event/atc-slot-list.tsx:92
+#: src/components/event/atc-slot-assign.tsx:79
+#: src/components/event/atc-slot-list.tsx:93
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -399,7 +409,7 @@ msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/event/atc-slot-list.tsx:188
+#: src/components/event/atc-slot-list.tsx:202
 #: src/routes/events/$id.tsx:49
 msgid "Controllers"
 msgstr "管制员"
@@ -542,7 +552,7 @@ msgstr "ELDT"
 #: src/components/atc-training/training-application-create.tsx:170
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:120
-#: src/components/event/atc-slot-list.tsx:48
+#: src/components/event/atc-slot-list.tsx:49
 #: src/components/event/event-create.tsx:155
 #: src/routes/controllers/trainings/$id.tsx:89
 msgid "End at"
@@ -574,7 +584,7 @@ msgid "Equipment"
 msgstr "设备代码"
 
 #: src/components/atc-training/training-application-create.tsx:145
-#: src/components/event/atc-slot-list.tsx:191
+#: src/components/event/atc-slot-list.tsx:205
 #: src/routes/__root.tsx:125
 msgid "Error"
 msgstr "错误"
@@ -597,11 +607,11 @@ msgstr "组织部主管"
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
-#: src/components/event/atc-slot-list.tsx:51
+#: src/components/event/atc-slot-list.tsx:52
 msgid "Event end"
 msgstr "活动结束"
 
-#: src/components/event/atc-slot-list.tsx:40
+#: src/components/event/atc-slot-list.tsx:41
 msgid "Event start"
 msgstr "活动开始"
 
@@ -922,7 +932,11 @@ msgstr "无 RVSM"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/event/atc-slot-list.tsx:93
+#: src/components/event/atc-slot-assign.tsx:84
+msgid "No user found with this CID"
+msgstr "未找到该 CID 对应的用户"
+
+#: src/components/event/atc-slot-list.tsx:96
 msgid "Not booked"
 msgstr "未预订"
 
@@ -1043,7 +1057,7 @@ msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
 #: src/components/event/atc-slot-create.tsx:133
-#: src/components/event/atc-slot-list.tsx:60
+#: src/components/event/atc-slot-list.tsx:61
 msgid "Position"
 msgstr "席位"
 
@@ -1079,7 +1093,7 @@ msgstr "拒绝"
 msgid "Rejected"
 msgstr "已拒绝"
 
-#: src/components/event/atc-slot-list.tsx:165
+#: src/components/event/atc-slot-list.tsx:179
 #: src/components/event/slot-list.tsx:139
 msgid "Release"
 msgstr "取消预订"
@@ -1218,7 +1232,7 @@ msgstr "开始和结束预订时间必须同时设置或同时不设置"
 #: src/components/atc-training/training-application-create.tsx:158
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:108
-#: src/components/event/atc-slot-list.tsx:37
+#: src/components/event/atc-slot-list.tsx:38
 #: src/components/event/event-create.tsx:143
 #: src/routes/controllers/trainings/$id.tsx:81
 msgid "Start at"
@@ -1481,6 +1495,10 @@ msgstr "应答机设备代码为空。"
 #: src/components/homepage/recent-events.tsx:165
 msgid "Tue"
 msgstr "星期二"
+
+#: src/components/event/atc-slot-assign.tsx:100
+msgid "Unassign"
+msgstr "取消指派"
 
 #: src/components/atc-permission-modal.tsx:35
 msgid "Under Mentor"

@@ -179,7 +179,7 @@ msgstr "Approach"
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 
-#: src/components/event/atc-slot-list.tsx:150
+#: src/components/event/atc-slot-list.tsx:162
 msgid "Are you sure to book this ATC position?"
 msgstr "Are you sure to book this ATC position?"
 
@@ -191,7 +191,7 @@ msgstr "Are you sure to delete this ATC position?"
 msgid "Are you sure to release the slot?"
 msgstr "Are you sure to release the slot?"
 
-#: src/components/event/atc-slot-list.tsx:159
+#: src/components/event/atc-slot-list.tsx:172
 msgid "Are you sure to release this ATC position?"
 msgstr "Are you sure to release this ATC position?"
 
@@ -212,6 +212,15 @@ msgstr "Area"
 #: src/routes/navdata/preferred-routes.tsx:16
 msgid "Arrival"
 msgstr "Arrival"
+
+#: src/components/event/atc-slot-assign.tsx:72
+#: src/components/event/atc-slot-assign.tsx:91
+msgid "Assign"
+msgstr "Assign"
+
+#: src/components/event/atc-slot-assign.tsx:74
+msgid "Assign ATC Position {callsign}"
+msgstr "Assign ATC Position {callsign}"
 
 #: src/components/atc-training/training-application-create.tsx:65
 msgid "At least one slot is required"
@@ -262,7 +271,7 @@ msgstr "Basic Info"
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/event/atc-slot-list.tsx:156
+#: src/components/event/atc-slot-list.tsx:169
 #: src/components/event/slot-list.tsx:123
 msgid "Book"
 msgstr "Book"
@@ -282,7 +291,7 @@ msgid "Briefly describe the target of the training, such as position and lesson 
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
 #: src/components/event/atc-slot-create.tsx:96
-#: src/components/event/atc-slot-list.tsx:34
+#: src/components/event/atc-slot-list.tsx:35
 #: src/components/event/slot-import.tsx:137
 #: src/routes/flights/$callsign.tsx:364
 #: src/routes/flights/index.tsx:49
@@ -341,7 +350,8 @@ msgstr "China RVSM odd flight level"
 
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
-#: src/components/event/atc-slot-list.tsx:92
+#: src/components/event/atc-slot-assign.tsx:79
+#: src/components/event/atc-slot-list.tsx:93
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -399,7 +409,7 @@ msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/event/atc-slot-list.tsx:188
+#: src/components/event/atc-slot-list.tsx:202
 #: src/routes/events/$id.tsx:49
 msgid "Controllers"
 msgstr "Controllers"
@@ -542,7 +552,7 @@ msgstr "ELDT"
 #: src/components/atc-training/training-application-create.tsx:170
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/event/atc-slot-create.tsx:120
-#: src/components/event/atc-slot-list.tsx:48
+#: src/components/event/atc-slot-list.tsx:49
 #: src/components/event/event-create.tsx:155
 #: src/routes/controllers/trainings/$id.tsx:89
 msgid "End at"
@@ -574,7 +584,7 @@ msgid "Equipment"
 msgstr "Equipment"
 
 #: src/components/atc-training/training-application-create.tsx:145
-#: src/components/event/atc-slot-list.tsx:191
+#: src/components/event/atc-slot-list.tsx:205
 #: src/routes/__root.tsx:125
 msgid "Error"
 msgstr "Error"
@@ -597,11 +607,11 @@ msgstr "Event & Organization Director"
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/components/event/atc-slot-list.tsx:51
+#: src/components/event/atc-slot-list.tsx:52
 msgid "Event end"
 msgstr "Event end"
 
-#: src/components/event/atc-slot-list.tsx:40
+#: src/components/event/atc-slot-list.tsx:41
 msgid "Event start"
 msgstr "Event start"
 
@@ -922,7 +932,11 @@ msgstr "No RVSM"
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/event/atc-slot-list.tsx:93
+#: src/components/event/atc-slot-assign.tsx:84
+msgid "No user found with this CID"
+msgstr "No user found with this CID"
+
+#: src/components/event/atc-slot-list.tsx:96
 msgid "Not booked"
 msgstr "Not booked"
 
@@ -1043,7 +1057,7 @@ msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
 #: src/components/event/atc-slot-create.tsx:133
-#: src/components/event/atc-slot-list.tsx:60
+#: src/components/event/atc-slot-list.tsx:61
 msgid "Position"
 msgstr "Position"
 
@@ -1079,7 +1093,7 @@ msgstr "Reject"
 msgid "Rejected"
 msgstr "Rejected"
 
-#: src/components/event/atc-slot-list.tsx:165
+#: src/components/event/atc-slot-list.tsx:179
 #: src/components/event/slot-list.tsx:139
 msgid "Release"
 msgstr "Release"
@@ -1218,7 +1232,7 @@ msgstr "Start and End booking time must be both set or unset"
 #: src/components/atc-training/training-application-create.tsx:158
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/event/atc-slot-create.tsx:108
-#: src/components/event/atc-slot-list.tsx:37
+#: src/components/event/atc-slot-list.tsx:38
 #: src/components/event/event-create.tsx:143
 #: src/routes/controllers/trainings/$id.tsx:81
 msgid "Start at"
@@ -1481,6 +1495,10 @@ msgstr "Transponder field is empty."
 #: src/components/homepage/recent-events.tsx:165
 msgid "Tue"
 msgstr "Tue"
+
+#: src/components/event/atc-slot-assign.tsx:100
+msgid "Unassign"
+msgstr "Unassign"
 
 #: src/components/atc-permission-modal.tsx:35
 msgid "Under Mentor"

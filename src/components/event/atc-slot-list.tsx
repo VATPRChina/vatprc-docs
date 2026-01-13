@@ -2,6 +2,7 @@ import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal"
 import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
+import { AssignAtcSlot } from "./atc-slot-assign";
 import { CreateAtcSlot } from "./atc-slot-create";
 import { AtcSlotDeleteButton } from "./atc-slot-delete";
 import { DateTime } from "./datetime";
@@ -154,6 +155,7 @@ const columns = [
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
+            <AssignAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
           </RequireRole>
           <RequireRole role="controller">
             <ConfirmButton
