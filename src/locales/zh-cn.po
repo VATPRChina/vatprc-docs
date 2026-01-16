@@ -408,6 +408,10 @@ msgstr "管制员训练部主管"
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
+#: src/routes/_doc/controller/controller-list.tsx:64
+msgid "Controller with Military Position Permission"
+msgstr "批准上线军用席位的管制员"
+
 #: src/components/app/app-nav-menu.tsx:143
 #: src/components/event/atc-slot-list.tsx:202
 #: src/routes/events/$id.tsx:49
