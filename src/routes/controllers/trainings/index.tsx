@@ -1,6 +1,7 @@
 import { TrainingApplicationCreateModal } from "@/components/atc-training/training-application-create";
 import { TrainingApplicationList } from "@/components/atc-training/training-application-list";
 import { TrainingList } from "@/components/atc-training/training-list";
+import { TrainingSaveModal } from "@/components/atc-training/training-save";
 import { Trans } from "@lingui/react/macro";
 import { Tabs } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
@@ -18,6 +19,9 @@ function RouteComponent() {
       <h1 className="text-xl">
         <Trans>Trainings</Trans>
       </h1>
+      <div className="flex flex-row gap-2">
+        <TrainingSaveModal />
+      </div>
       <Tabs defaultValue="active">
         <Tabs.List className="mb-2">
           <Tabs.Tab value="active">

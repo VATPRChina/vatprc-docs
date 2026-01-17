@@ -1,8 +1,7 @@
-import { BackButton } from "@/components/back-button";
+import { TrainingSaveModal } from "@/components/atc-training/training-save";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
 import { useUser, $api } from "@/lib/client";
-import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton, Table } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
@@ -34,7 +33,7 @@ function RouteComponent() {
         $api.queryOptions("get", "/api/atc/trainings/{id}", { params: { path: { id } } }),
       );
       notifications.show({
-        message: t`Training record saved successfully.`,
+        message: <Trans>Training record saved successfully.</Trans>,
         color: "green",
       });
     },
@@ -46,10 +45,12 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <BackButton />
-      <h1 className="text-3xl">
-        <Trans>Training</Trans>
-      </h1>
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="text-3xl">
+          <Trans>Training</Trans>
+        </h1>
+        <TrainingSaveModal id={id} />
+      </div>
       <Table variant="vertical" layout="fixed">
         <Table.Tbody>
           <Table.Tr>

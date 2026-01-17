@@ -1,7 +1,8 @@
+import { UserInput } from "../user-input";
 import { $api } from "@/lib/client";
 import { promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Modal, TextInput } from "@mantine/core";
+import { Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm, useStore } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -75,9 +76,9 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <form.Field name="cid">
             {(field) => (
-              <TextInput
+              <UserInput
                 label={<Trans>CID</Trans>}
-                onChange={(e) => field.handleChange(e.target.value)}
+                onChange={(v) => v && field.handleChange(v)}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 disabled={isLoading}

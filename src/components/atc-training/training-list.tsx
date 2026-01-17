@@ -30,7 +30,7 @@ const columns = [
         original: { id },
       },
     }) => (
-      <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }}>
+      <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }} target="_blank">
         <Trans>View</Trans>
       </LinkButton>
     ),

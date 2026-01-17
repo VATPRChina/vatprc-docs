@@ -157,7 +157,6 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
                           <DateTimeInput
                             label={t`Start at`}
                             onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
-                            valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                             value={field.state.value && new Date(field.state.value)}
                             onBlur={field.handleBlur}
                             error={field.state.meta.errors.join("")}
@@ -169,7 +168,6 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
                           <DateTimeInput
                             label={t`End at`}
                             onChange={(e) => e && field.handleChange(formatISO(e, { in: utc }))}
-                            valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                             value={field.state.value && new Date(field.state.value)}
                             onBlur={field.handleBlur}
                             error={field.state.meta.errors.join("")}
