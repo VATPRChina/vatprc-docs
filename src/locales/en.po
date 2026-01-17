@@ -236,7 +236,7 @@ msgstr "ATC Application"
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/event/event-detail.tsx:39
+#: src/components/event/event-detail.tsx:44
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
@@ -278,11 +278,10 @@ msgstr "Book"
 
 #: src/components/event/event-create.tsx:170
 #: src/components/event/event-create.tsx:184
-#: src/components/event/event-detail.tsx:32
 msgid "Booking not supported"
 msgstr "Booking not supported"
 
-#: src/components/event/event-detail.tsx:23
+#: src/components/event/event-detail.tsx:28
 msgid "Booking:"
 msgstr "Booking:"
 
@@ -687,7 +686,7 @@ msgstr "Flow Management Position"
 
 #: src/components/app/app-nav-menu.tsx:77
 #: src/components/event/event-create.tsx:220
-#: src/components/event/event-detail.tsx:49
+#: src/components/event/event-detail.tsx:64
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "Forum"
@@ -1412,6 +1411,10 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
+#: src/components/event/event-detail.tsx:37
+msgid "This event does not have pilot booking."
+msgstr "This event does not have pilot booking."
+
 #: src/routes/_doc/airspace/sop.tsx:26
 #: src/routes/_doc/controller/loa.tsx:26
 msgid "This page is not available in English."
@@ -1430,7 +1433,7 @@ msgstr "Tier 2"
 msgid "Time"
 msgstr "Time"
 
-#: src/components/event/event-detail.tsx:14
+#: src/components/event/event-detail.tsx:19
 msgid "Time:"
 msgstr "Time:"
 
@@ -1579,7 +1582,7 @@ msgid "VATPRC"
 msgstr "VATPRC"
 
 #: src/components/event/event-create.tsx:232
-#: src/components/event/event-detail.tsx:54
+#: src/components/event/event-detail.tsx:69
 msgid "VATSIM"
 msgstr "VATSIM"
 

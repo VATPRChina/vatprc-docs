@@ -236,7 +236,7 @@ msgstr "管制员申请"
 msgid "ATC Applications"
 msgstr "管制员申请"
 
-#: src/components/event/event-detail.tsx:39
+#: src/components/event/event-detail.tsx:44
 msgid "ATC Booking:"
 msgstr "管制员预订："
 
@@ -278,11 +278,10 @@ msgstr "预订"
 
 #: src/components/event/event-create.tsx:170
 #: src/components/event/event-create.tsx:184
-#: src/components/event/event-detail.tsx:32
 msgid "Booking not supported"
 msgstr "不支持预订"
 
-#: src/components/event/event-detail.tsx:23
+#: src/components/event/event-detail.tsx:28
 msgid "Booking:"
 msgstr "预订时间："
 
@@ -687,7 +686,7 @@ msgstr "流量控制"
 
 #: src/components/app/app-nav-menu.tsx:77
 #: src/components/event/event-create.tsx:220
-#: src/components/event/event-detail.tsx:49
+#: src/components/event/event-detail.tsx:64
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "论坛"
@@ -1412,6 +1411,10 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
+#: src/components/event/event-detail.tsx:37
+msgid "This event does not have pilot booking."
+msgstr "本活动不支持飞行员预订。"
+
 #: src/routes/_doc/airspace/sop.tsx:26
 #: src/routes/_doc/controller/loa.tsx:26
 msgid "This page is not available in English."
@@ -1430,7 +1433,7 @@ msgstr "Tier 2"
 msgid "Time"
 msgstr "时间"
 
-#: src/components/event/event-detail.tsx:14
+#: src/components/event/event-detail.tsx:19
 msgid "Time:"
 msgstr "活动时间："
 
@@ -1579,7 +1582,7 @@ msgid "VATPRC"
 msgstr "VATPRC"
 
 #: src/components/event/event-create.tsx:232
-#: src/components/event/event-detail.tsx:54
+#: src/components/event/event-detail.tsx:69
 msgid "VATSIM"
 msgstr "VATSIM"
 

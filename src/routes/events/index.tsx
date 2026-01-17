@@ -1,6 +1,6 @@
 import NoEventImage from "@/assets/no-event-image.svg";
 import { CreateEvent } from "@/components/event/event-create";
-import { EventDetail } from "@/components/event/event-detail";
+import { EventSummary } from "@/components/event/event-detail";
 import { EventList, useScheduledEvents } from "@/components/homepage/recent-events";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -28,7 +28,7 @@ function RouteComponent() {
           <Link to="/events/$id" params={{ id: event.id }} key={event.id} className="flex flex-col gap-2 border p-4">
             <img src={event.image_url ?? NoEventImage} className="mb-2" />
             <h2 className="text-2xl font-bold">{event.title}</h2>
-            <EventDetail eventId={event.id} />
+            <EventSummary {...event} />
           </Link>
         ))}
       </div>
