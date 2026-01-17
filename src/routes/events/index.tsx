@@ -3,7 +3,7 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventSummary } from "@/components/event/event-detail";
 import { EventList, useScheduledEvents } from "@/components/homepage/recent-events";
 import { $api } from "@/lib/client";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Loader } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
@@ -12,6 +12,8 @@ export const Route = createFileRoute("/events/")({
 });
 
 function RouteComponent() {
+  const { i18n } = useLingui();
+
   const { data: events } = $api.useQuery("get", "/api/events", { params: {} });
   const { scheduledEvents, isCnLoading, isEnLoading } = useScheduledEvents();
 
@@ -27,7 +29,9 @@ function RouteComponent() {
         {events?.map((event) => (
           <Link to="/events/$id" params={{ id: event.id }} key={event.id} className="flex flex-col gap-2 border p-4">
             <img src={event.image_url ?? NoEventImage} className="mb-2" />
-            <h2 className="text-2xl font-bold">{event.title}</h2>
+            <h2 className="text-2xl font-bold">
+              {i18n.locale === "en" ? (event.title_en ?? event.title) : event.title}
+            </h2>
             <EventSummary {...event} />
           </Link>
         ))}

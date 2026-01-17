@@ -36,8 +36,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     const form = new FormData();
     form.append("image", file, file?.name ?? "untitled");
     uploadImage({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-      body: form as any,
+      body: form as unknown as { image: string },
     });
   };
 
@@ -61,6 +60,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const form = useForm({
     defaultValues: {
       title: event?.title ?? "",
+      title_en: event?.title_en ?? null,
       start_at: event?.start_at ?? now,
       end_at: event?.end_at ?? now,
       start_booking_at: event?.start_booking_at,
@@ -133,7 +133,19 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   onBlur={field.handleBlur}
                   disabled={isLoading}
                   error={field.state.meta.errors.join("")}
-                ></TextInput>
+                />
+              )}
+            </form.Field>
+            <form.Field name="title_en">
+              {(field) => (
+                <TextInput
+                  label={t`Title (English)`}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  value={field.state.value ?? ""}
+                  onBlur={field.handleBlur}
+                  disabled={isLoading}
+                  error={field.state.meta.errors.join("")}
+                />
               )}
             </form.Field>
             <Group grow>

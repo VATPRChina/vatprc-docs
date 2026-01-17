@@ -9129,6 +9129,7 @@ export interface components {
       /** Format: date-time */
       updated_at: string;
       title: string;
+      title_en: null | string;
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */
@@ -9146,6 +9147,7 @@ export interface components {
     };
     EventSaveRequest: {
       title: string;
+      title_en?: null | string;
       /** Format: date-time */
       start_at: string;
       /** Format: date-time */

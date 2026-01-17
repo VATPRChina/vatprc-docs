@@ -276,8 +276,8 @@ msgstr "基本信息"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/event/event-create.tsx:170
-#: src/components/event/event-create.tsx:184
+#: src/components/event/event-create.tsx:182
+#: src/components/event/event-create.tsx:196
 msgid "Booking not supported"
 msgstr "不支持预订"
 
@@ -414,14 +414,14 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:143
 #: src/components/event/atc-slot-list.tsx:202
-#: src/routes/events/$id.tsx:49
+#: src/routes/events/$id.tsx:50
 msgid "Controllers"
 msgstr "管制员"
 
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
 #: src/components/event/atc-slot-create.tsx:171
-#: src/components/event/event-create.tsx:259
+#: src/components/event/event-create.tsx:271
 #: src/components/preferred-route-create.tsx:191
 msgid "Create"
 msgstr "创建"
@@ -498,7 +498,7 @@ msgstr "放行"
 msgid "Departure"
 msgstr "出发机场"
 
-#: src/components/event/event-create.tsx:244
+#: src/components/event/event-create.tsx:256
 #: src/components/preferred-route-create.tsx:179
 msgid "Description"
 msgstr "描述"
@@ -565,12 +565,12 @@ msgstr "ELDT"
 #: src/components/atc-training/training-save.tsx:132
 #: src/components/event/atc-slot-create.tsx:120
 #: src/components/event/atc-slot-list.tsx:49
-#: src/components/event/event-create.tsx:155
+#: src/components/event/event-create.tsx:167
 #: src/routes/controllers/trainings/$id.tsx:90
 msgid "End at"
 msgstr "结束时间"
 
-#: src/components/event/event-create.tsx:183
+#: src/components/event/event-create.tsx:195
 msgid "End booking at"
 msgstr "预订结束时间"
 
@@ -627,7 +627,7 @@ msgstr "活动结束"
 msgid "Event start"
 msgstr "活动开始"
 
-#: src/routes/events/index.tsx:21
+#: src/routes/events/index.tsx:23
 msgid "Events"
 msgstr "活动"
 
@@ -685,7 +685,7 @@ msgid "Flow Management Position"
 msgstr "流量控制"
 
 #: src/components/app/app-nav-menu.tsx:77
-#: src/components/event/event-create.tsx:220
+#: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:64
 #: src/routes/index.tsx:117
 msgid "Forum"
@@ -755,7 +755,7 @@ msgstr "我会保证具备充分的管制上线时间。"
 msgid "Image Upload Tool"
 msgstr "图床"
 
-#: src/components/event/event-create.tsx:215
+#: src/components/event/event-create.tsx:227
 msgid "Image URL"
 msgstr "图片 URL"
 
@@ -989,7 +989,7 @@ msgstr "运行部主管"
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
-#: src/routes/events/index.tsx:36
+#: src/routes/events/index.tsx:40
 msgid "Other Events"
 msgstr "其它活动"
 
@@ -1163,7 +1163,7 @@ msgstr "星期六"
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
 #: src/components/event/atc-slot-create.tsx:171
-#: src/components/event/event-create.tsx:259
+#: src/components/event/event-create.tsx:271
 #: src/components/preferred-route-create.tsx:191
 #: src/routes/controllers/trainings/$id.tsx:131
 msgid "Save"
@@ -1211,7 +1211,7 @@ msgstr "显示部分"
 
 #: src/components/atc-training/training-application-create.tsx:132
 #: src/components/event/slot-list.tsx:164
-#: src/routes/events/$id.tsx:46
+#: src/routes/events/$id.tsx:47
 msgid "Slots"
 msgstr "时刻"
 
@@ -1247,20 +1247,20 @@ msgstr "开始和结束预订时间必须同时设置或同时不设置"
 #: src/components/atc-training/training-save.tsx:121
 #: src/components/event/atc-slot-create.tsx:108
 #: src/components/event/atc-slot-list.tsx:38
-#: src/components/event/event-create.tsx:143
+#: src/components/event/event-create.tsx:155
 #: src/routes/controllers/trainings/$id.tsx:82
 msgid "Start at"
 msgstr "开始时间"
 
-#: src/components/event/event-create.tsx:198
+#: src/components/event/event-create.tsx:210
 msgid "Start ATC booking at"
 msgstr "管制员预订开始时间"
 
-#: src/components/event/event-create.tsx:169
+#: src/components/event/event-create.tsx:181
 msgid "Start booking at"
 msgstr "开始预订时间"
 
-#: src/components/event/event-create.tsx:199
+#: src/components/event/event-create.tsx:211
 msgid "Start immediately"
 msgstr "立即开始"
 
@@ -1446,6 +1446,10 @@ msgstr "活动时间："
 msgid "Title"
 msgstr "标题"
 
+#: src/components/event/event-create.tsx:142
+msgid "Title (English)"
+msgstr "标题（英文）"
+
 #: src/components/atc-training/training-application-create.tsx:69
 #: src/components/event/event-create.tsx:85
 msgid "Title is required"
@@ -1581,7 +1585,7 @@ msgstr "检查结果"
 msgid "VATPRC"
 msgstr "VATPRC"
 
-#: src/components/event/event-create.tsx:232
+#: src/components/event/event-create.tsx:244
 #: src/components/event/event-detail.tsx:69
 msgid "VATSIM"
 msgstr "VATSIM"

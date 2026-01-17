@@ -5,7 +5,7 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { SlotList } from "@/components/event/slot-list";
 import { $api } from "@/lib/client";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbAirTrafficControl, TbCalendar } from "react-icons/tb";
@@ -16,6 +16,7 @@ export const Route = createFileRoute("/events/$id")({
 
 function RouteComponent() {
   const { id } = Route.useParams();
+  const { i18n } = useLingui();
   const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: id } } });
 
   return (
@@ -33,7 +34,7 @@ function RouteComponent() {
                 aria-level={1}
                 className="text-4xl font-bold"
               >
-                {event.title}
+                {i18n.locale === "en" ? (event.title_en ?? event.title) : event.title}
               </Link>
               <CreateEvent eventId={event?.id} />
             </div>
