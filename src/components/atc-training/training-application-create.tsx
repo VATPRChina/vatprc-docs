@@ -32,6 +32,13 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
   const onSuccess = async () => {
     close();
     await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/trainings/applications"));
+    if (id) {
+      await queryClient.invalidateQueries(
+        $api.queryOptions("get", "/api/atc/trainings/applications/{id}", {
+          params: { path: { id } },
+        }),
+      );
+    }
   };
   const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/atc/trainings/applications", {
     onSuccess,
