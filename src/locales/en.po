@@ -54,7 +54,7 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
-#: src/components/atc-training/training-application-create.tsx:138
+#: src/components/atc-training/training-application-create.tsx:145
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 
@@ -222,6 +222,10 @@ msgstr "Assign"
 msgid "Assign ATC Position {callsign}"
 msgstr "Assign ATC Position {callsign}"
 
+#: src/components/atc-training/training-application-create.tsx:72
+msgid "At least one slot is required"
+msgstr "At least one slot is required"
+
 #: src/routes/controllers/applications/$id.tsx:28
 msgid "ATC Application"
 msgstr "ATC Application"
@@ -282,7 +286,7 @@ msgstr "Booking not supported"
 msgid "Booking:"
 msgstr "Booking:"
 
-#: src/components/atc-training/training-application-create.tsx:116
+#: src/components/atc-training/training-application-create.tsx:123
 #: src/components/atc-training/training-save.tsx:91
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "Briefly describe the target of the training, such as position and lesson content."
@@ -415,7 +419,7 @@ msgstr "Controller with Military Position Permission"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/atc-training/training-application-create.tsx:187
+#: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
 #: src/components/event/atc-slot-create.tsx:171
 #: src/components/event/event-create.tsx:259
@@ -443,8 +447,8 @@ msgstr "Create Preferred Route"
 msgid "Create Training"
 msgstr "Create Training"
 
-#: src/components/atc-training/training-application-create.tsx:91
-#: src/components/atc-training/training-application-create.tsx:99
+#: src/components/atc-training/training-application-create.tsx:98
+#: src/components/atc-training/training-application-create.tsx:106
 msgid "Create Training Request"
 msgstr "Create Training Request"
 
@@ -513,7 +517,7 @@ msgid "Drag CSV here or click to select files"
 msgstr "Drag CSV here or click to select files"
 
 #: src/components/atc-application/atc-application-form.tsx:135
-#: src/components/atc-training/training-application-create.tsx:96
+#: src/components/atc-training/training-application-create.tsx:103
 #: src/components/atc-training/training-save.tsx:71
 #: src/components/event/atc-slot-create.tsx:83
 msgid "Edit"
@@ -557,7 +561,7 @@ msgstr "Edit your flight plan on VATSIM."
 msgid "ELDT"
 msgstr "ELDT"
 
-#: src/components/atc-training/training-application-create.tsx:169
+#: src/components/atc-training/training-application-create.tsx:176
 #: src/components/atc-training/training-list.tsx:22
 #: src/components/atc-training/training-save.tsx:132
 #: src/components/event/atc-slot-create.tsx:120
@@ -575,6 +579,11 @@ msgstr "End booking at"
 msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
+#: src/components/atc-training/training-application-create.tsx:79
+msgid "End time is required"
+msgstr "End time is required"
+
+#: src/components/atc-training/training-application-create.tsx:82
 #: src/components/event/event-create.tsx:88
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
@@ -587,7 +596,7 @@ msgstr "Enter at"
 msgid "Equipment"
 msgstr "Equipment"
 
-#: src/components/atc-training/training-application-create.tsx:145
+#: src/components/atc-training/training-application-create.tsx:152
 #: src/components/event/atc-slot-list.tsx:205
 #: src/routes/__root.tsx:125
 msgid "Error"
@@ -1152,7 +1161,7 @@ msgid "Sat"
 msgstr "Sat"
 
 #: src/components/atc-permission-modal.tsx:192
-#: src/components/atc-training/training-application-create.tsx:187
+#: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
 #: src/components/event/atc-slot-create.tsx:171
 #: src/components/event/event-create.tsx:259
@@ -1201,7 +1210,7 @@ msgstr "Show all pilots"
 msgid "Show less pilots"
 msgstr "Show less pilots"
 
-#: src/components/atc-training/training-application-create.tsx:125
+#: src/components/atc-training/training-application-create.tsx:132
 #: src/components/event/slot-list.tsx:164
 #: src/routes/events/$id.tsx:46
 msgid "Slots"
@@ -1234,7 +1243,7 @@ msgstr "Standard Operation Procedures"
 msgid "Start and End booking time must be both set or unset"
 msgstr "Start and End booking time must be both set or unset"
 
-#: src/components/atc-training/training-application-create.tsx:158
+#: src/components/atc-training/training-application-create.tsx:165
 #: src/components/atc-training/training-list.tsx:18
 #: src/components/atc-training/training-save.tsx:121
 #: src/components/event/atc-slot-create.tsx:108
@@ -1255,6 +1264,10 @@ msgstr "Start booking at"
 #: src/components/event/event-create.tsx:199
 msgid "Start immediately"
 msgstr "Start immediately"
+
+#: src/components/atc-training/training-application-create.tsx:76
+msgid "Start time is required"
+msgstr "Start time is required"
 
 #: src/components/app/app-nav-menu.tsx:115
 msgid "Start to Fly"
@@ -1421,7 +1434,7 @@ msgstr "Time"
 msgid "Time:"
 msgstr "Time:"
 
-#: src/components/atc-training/training-application-create.tsx:111
+#: src/components/atc-training/training-application-create.tsx:118
 #: src/components/atc-training/training-application-list.tsx:59
 #: src/components/atc-training/training-list.tsx:12
 #: src/components/atc-training/training-save.tsx:86
@@ -1430,6 +1443,7 @@ msgstr "Time:"
 msgid "Title"
 msgstr "Title"
 
+#: src/components/atc-training/training-application-create.tsx:69
 #: src/components/event/event-create.tsx:85
 msgid "Title is required"
 msgstr "Title is required"
