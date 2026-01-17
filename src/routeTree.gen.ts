@@ -22,6 +22,8 @@ import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as DocSopRouteImport } from './routes/_doc/sop'
+import { Route as DocLoaRouteImport } from './routes/_doc/loa'
 import { Route as ControllersTrainingsIndexRouteImport } from './routes/controllers/trainings/index'
 import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
@@ -112,6 +114,16 @@ const DocsSplatRoute = DocsSplatRouteImport.update({
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
   id: '/auth/callback',
   path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocSopRoute = DocSopRouteImport.update({
+  id: '/_doc/sop',
+  path: '/sop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocLoaRoute = DocLoaRouteImport.update({
+  id: '/_doc/loa',
+  path: '/loa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControllersTrainingsIndexRoute =
@@ -258,6 +270,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/loa': typeof DocLoaRoute
+  '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -297,6 +311,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/loa': typeof DocLoaRoute
+  '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -339,6 +355,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/_doc/loa': typeof DocLoaRoute
+  '/_doc/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -382,6 +400,8 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/flights'
+    | '/loa'
+    | '/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -421,6 +441,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/loa'
+    | '/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -462,6 +484,8 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/flights'
+    | '/_doc/loa'
+    | '/_doc/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -504,6 +528,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRoute: typeof EventsRouteWithChildren
   FlightsRoute: typeof FlightsRouteWithChildren
+  DocLoaRoute: typeof DocLoaRoute
+  DocSopRoute: typeof DocSopRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   DocsSplatRoute: typeof DocsSplatRoute
   NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
@@ -629,6 +655,20 @@ declare module '@tanstack/react-router' {
       path: '/auth/callback'
       fullPath: '/auth/callback'
       preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/sop': {
+      id: '/_doc/sop'
+      path: '/sop'
+      fullPath: '/sop'
+      preLoaderRoute: typeof DocSopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/loa': {
+      id: '/_doc/loa'
+      path: '/loa'
+      fullPath: '/loa'
+      preLoaderRoute: typeof DocLoaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers/trainings/': {
@@ -846,6 +886,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRoute: EventsRouteWithChildren,
   FlightsRoute: FlightsRouteWithChildren,
+  DocLoaRoute: DocLoaRoute,
+  DocSopRoute: DocSopRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   DocsSplatRoute: DocsSplatRoute,
   NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,
