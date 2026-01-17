@@ -1,10 +1,8 @@
 import NoEventImage from "@/assets/no-event-image.svg";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventSummary } from "@/components/event/event-detail";
-import { EventList, useScheduledEvents } from "@/components/homepage/recent-events";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Loader } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/events/")({
@@ -15,7 +13,6 @@ function RouteComponent() {
   const { i18n } = useLingui();
 
   const { data: events } = $api.useQuery("get", "/api/events", { params: {} });
-  const { scheduledEvents, isCnLoading, isEnLoading } = useScheduledEvents();
 
   return (
     <div className="flex flex-col gap-4">
@@ -36,11 +33,6 @@ function RouteComponent() {
           </Link>
         ))}
       </div>
-      <h2 className="text-xl">
-        <Trans>Other Events</Trans>
-      </h2>
-      {(isCnLoading || isEnLoading) && <Loader />}
-      {!isCnLoading && !isEnLoading && <EventList events={scheduledEvents} direction="row" />}
     </div>
   );
 }

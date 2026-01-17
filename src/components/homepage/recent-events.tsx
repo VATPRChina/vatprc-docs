@@ -1,11 +1,9 @@
-import { CommunityEventData } from "@/lib/types/community";
-import { VatsimEventData } from "@/lib/types/vatsim";
+import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Anchor, Card, Loader } from "@mantine/core";
 import { ActionIcon, ActionIconGroup } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import {
   add,
@@ -24,32 +22,16 @@ import {
   startOfMonth,
   sub,
 } from "date-fns";
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 
-const COMMUNITY_EVENT_ENDPOINT = `${process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"}/discourse-post-event/events.json?category_id=66&include_subcategories=true&include_expired=true`;
-const VATSIM_EVENT_ENDPOINT = `${import.meta.env.VITE_API_ENDPOINT}/api/compat/homepage/events/vatsim`;
-
-const isChinaAirport = (ident: string) =>
-  ident[0] == "Z" &&
-  (ident[1] == "B" ||
-    ident[1] == "M" ||
-    ident[1] == "S" ||
-    ident[1] == "P" ||
-    ident[1] == "G" ||
-    ident[1] == "J" ||
-    ident[1] == "Y" ||
-    ident[1] == "W" ||
-    ident[1] == "L" ||
-    ident[1] == "H");
-
 const Event: React.FC<{
+  id: string;
   title: string;
   start: Date;
   end: Date;
-  url: string;
   isExam: boolean;
-}> = ({ title, start, end, url, isExam }) => {
+}> = ({ id, title, start, end, isExam }) => {
   const { i18n } = useLingui();
   const locale = i18n.locale;
 
@@ -58,9 +40,7 @@ const Event: React.FC<{
       component="a"
       className="flex min-w-48 flex-col gap-2 hover:bg-gray-200"
       withBorder
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
+      renderRoot={(props) => <Link to="/events/$id" params={{ id }} target="_blank" {...props} />}
     >
       <span
         className={cn(
@@ -107,10 +87,9 @@ const Event: React.FC<{
 };
 
 interface Event {
-  id: number;
+  id: string;
   start: Date;
   end: Date;
-  url: string;
   title: string;
   isExam: boolean;
 }
@@ -125,7 +104,7 @@ export const EventList: FC<{ events: Event[]; direction: "col" | "row" }> = ({ e
       )}
     >
       {events.map((e) => (
-        <Event key={e.id} title={e.title} url={e.url} start={e.start} end={e.end} isExam={e.isExam} />
+        <Event key={e.id} id={e.id} title={e.title} start={e.start} end={e.end} isExam={e.isExam} />
       ))}
       {events.length === 0 && (
         <span>
@@ -198,7 +177,7 @@ export const EventCalendar: FC<{ events: Event[] }> = ({ events }) => {
                   {format(d, "dd")}
                 </span>
                 {eventsOnDay.map((e) => (
-                  <a
+                  <Link
                     key={e.id}
                     className={cn(
                       "px-1 text-sm",
@@ -210,12 +189,12 @@ export const EventCalendar: FC<{ events: Event[] }> = ({ events }) => {
                           ? "border border-blue-300 font-bold dark:border-blue-700"
                           : "border border-red-300 font-bold dark:border-red-700"),
                     )}
-                    href={e.url}
+                    to="/events/$id"
+                    params={{ id: e.id }}
                     target="_blank"
-                    rel="noopener noreferrer"
                   >
                     {e.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
             );
@@ -228,52 +207,32 @@ export const EventCalendar: FC<{ events: Event[] }> = ({ events }) => {
 
 export const useScheduledEvents = () => {
   const { i18n } = useLingui();
-  const locale = i18n.locale;
-  const { data: cnData, isLoading: isCnLoading } = useQuery({
-    queryKey: [COMMUNITY_EVENT_ENDPOINT],
-    queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<CommunityEventData>),
-    enabled: locale === "zh-cn",
-  });
-  const { data: enData, isLoading: isEnLoading } = useQuery({
-    queryKey: [VATSIM_EVENT_ENDPOINT],
-    queryFn: (ctx) => fetch(ctx.queryKey[0]).then((res) => res.json() as Promise<VatsimEventData>),
-    enabled: locale === "en",
-  });
-  const events = [
-    ...(cnData?.events?.map(
-      (event) =>
-        ({
-          id: event.id,
-          start: new Date(event.starts_at),
-          end: new Date(event.ends_at),
-          url: `https://community.vatprc.net/${event?.post?.url}`,
-          title: event?.name ?? "Unknown event",
-          isExam: event.name?.includes?.("考试"),
-        }) satisfies Event,
-    ) ?? []),
-    ...(enData?.data
-      .filter((e) => e.airports.some((a) => isChinaAirport(a.icao)))
-      .map(
+
+  const { data, isLoading } = $api.useQuery("get", "/api/events");
+  const events = useMemo(
+    () => [
+      ...(data?.map(
         (event) =>
           ({
             id: event.id,
-            start: event.start_time,
-            end: event.end_time,
-            url: event.link,
-            title: event.name,
-            isExam: event.type !== "Event",
+            start: new Date(event.start_at),
+            end: new Date(event.end_at),
+            title: i18n.locale === "en" ? (event.title_en ?? event.title) : event.title,
+            isExam: event.title?.includes?.("考试"),
           }) satisfies Event,
       ) ?? []),
-  ];
+    ],
+    [data],
+  );
 
   const scheduledEvents = events.filter((e) => isAfter(e.end, Date.now()));
-  return { events, scheduledEvents, isCnLoading, isEnLoading };
+  return { events, scheduledEvents, isLoading };
 };
 
 export const RecentEvents: React.FC<{ className?: string }> = ({ className }) => {
-  const { events, scheduledEvents, isCnLoading, isEnLoading } = useScheduledEvents();
+  const { events, scheduledEvents, isLoading } = useScheduledEvents();
 
-  if (isCnLoading || isEnLoading) {
+  if (isLoading) {
     return <Loader />;
   }
 
