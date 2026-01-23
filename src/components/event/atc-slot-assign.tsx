@@ -4,7 +4,7 @@ import { promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useForm, useStore } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { FormEvent } from "react";
 
@@ -39,24 +39,15 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
 
   const form = useForm({
     defaultValues: {
-      cid: slot?.booking?.user?.cid ?? "",
+      user_id: slot?.booking?.user?.id ?? "",
     },
-    onSubmit: () => {
-      if (!user?.id) return;
+    onSubmit: ({ value }) => {
       assign({
         params: { path: { eventId, positionId } },
-        body: { user_id: user?.id },
+        body: value,
       });
     },
   });
-
-  const cid = useStore(form.store, (state) => state.values.cid);
-  const { data: user } = $api.useQuery(
-    "get",
-    "/api/users/by-cid/{cid}",
-    { params: { path: { cid } } },
-    { enabled: cid.length > 0 },
-  );
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -74,7 +65,7 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Assign ATC Position ${callsign}`}>
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          <form.Field name="cid">
+          <form.Field name="user_id">
             {(field) => (
               <UserInput
                 label={<Trans>CID</Trans>}
@@ -82,13 +73,11 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 disabled={isLoading}
-                error={!user && cid.length > 0 && !isLoading ? t`No user found with this CID` : undefined}
-                description={`${user?.full_name ?? user?.cid ?? ""}/${user?.id ?? ""}`}
               />
             )}
           </form.Field>
           <div className="flex flex-row gap-2">
-            <Button variant="subtle" type="submit" loading={isAssignPending} disabled={!user || !!slot?.booking}>
+            <Button variant="subtle" type="submit" loading={isAssignPending}>
               <Trans>Assign</Trans>
             </Button>
             <Button
