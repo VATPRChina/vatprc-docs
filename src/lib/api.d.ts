@@ -350,6 +350,74 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/compat/vplaaf/areas.json": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/events/{eid}/airspaces": {
     parameters: {
       query?: never;

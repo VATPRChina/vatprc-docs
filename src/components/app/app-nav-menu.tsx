@@ -104,6 +104,9 @@ const contents = [
         <NavMenuLink href="/airspace/vfr">
           <Trans>VFR Policy</Trans>
         </NavMenuLink>
+        <NavMenuLink href="/airspace/restricted">
+          <Trans>Restricted Airspaces</Trans>
+        </NavMenuLink>
       </ul>
     ),
   },

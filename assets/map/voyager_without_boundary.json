@@ -1,0 +1,82 @@
+{
+  "version": 8,
+  "name": "Voyager without labels",
+  "metadata": {"maputnik:renderer": "mlgljs"},
+  "sources": {
+    "carto": {
+      "type": "vector",
+      "url": "https://tiles.basemaps.cartocdn.com/vector/carto.streets/v1/tiles.json"
+    }
+  },
+  "sprite": "https://tiles.basemaps.cartocdn.com/gl/voyager-gl-style/sprite",
+  "glyphs": "https://tiles.basemaps.cartocdn.com/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "layout": {"visibility": "visible"},
+      "paint": {"background-color": "#fbf8f3", "background-opacity": 1}
+    },
+    {
+      "id": "landcover",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "landcover",
+      "filter": [
+        "any",
+        ["==", "class", "wood"],
+        ["==", "class", "grass"],
+        ["==", "subclass", "recreation_ground"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [8, "rgba(197, 225, 178, 0.2)"],
+            [9, "rgba(197, 225, 178, 0.25)"],
+            [11, "rgba(197, 225, 178, 0.35)"],
+            [13, "rgba(197, 225, 178, 0.4)"],
+            [15, "#e0ecd3"]
+          ]
+        },
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "water",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "filter": ["all", ["==", "$type", "Polygon"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "#b0d0d6",
+        "fill-antialias": true,
+        "fill-translate-anchor": "map",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "water_shadow",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "water",
+      "minzoom": 0,
+      "filter": ["all", ["==", "$type", "Polygon"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(203, 225, 228, 1)",
+        "fill-antialias": true,
+        "fill-translate-anchor": "map",
+        "fill-opacity": 1,
+        "fill-translate": {
+          "stops": [[0, [0, 2]], [6, [0, 1]], [14, [0, 1]], [17, [0, 2]]]
+        }
+      }
+    }
+  ],
+  "id": "voyager",
+  "owner": "Carto"
+}

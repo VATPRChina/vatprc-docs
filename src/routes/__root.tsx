@@ -21,6 +21,7 @@ import {
   useLocation,
   useRouterState,
 } from "@tanstack/react-router";
+import mapLibreCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { FC, PropsWithChildren, useEffect } from "react";
 
 const theme = createTheme({
@@ -147,6 +148,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: mantineDateStyle },
         { rel: "stylesheet", href: mantineDropzoneStyle },
         { rel: "stylesheet", href: mantineNotificationStyle },
+        { rel: "stylesheet", href: mapLibreCss },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },
         { rel: "alternate", hrefLang: "zh-cn", href: getLocalPathname("zh-cn", pathname) },
