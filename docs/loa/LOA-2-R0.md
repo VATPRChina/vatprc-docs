@@ -228,26 +228,25 @@ ICAO Doc 4444
 
 Positions on the below take over positions on the above if they are offline.
 
-|      TCP       |                      Altitude                      |               Transfer to               |             Remark            |
-| :------------: | :------------------------------------------------: | :-------------------------------------: | :------------------------------------: |
-|      AGAVO     |                 Metric Odd Levels                  | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR | To Daegu ACC |
-|      AGAVO     |     S0890(FL291) and below \*Metric Odd Levels     | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR | Arriving RKSI/RKSS |
-|      AGAVO     |                 Metric Even Levels                 |  ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)  | To Dalian ACC |
-|      AGAVO     |                    S0660(FL217)                    | ZYTL_CTR ZYSH_CTR | Arriving ZSWH/ZSYT |
-|      GOLOT     |                 Metric Odd Levels                  |    ZKKP_CTR    | To Pyongyang ACC |
-|      GOLOT     |            S0630(FL207) S0690(FL226)               |    ZKKP_CTR    |  Arriving ZKPY  |
-|      GOLOT     |                Metric Even Levels                  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) | To Dalian ACC |
-|      GOLOT     |                 S0660(FL217)                     |  ZYTL_CTR ZYSH_CTR  | Arriving ZYTX |
-|      LAMEN     |      FL270/330/350/370/410     | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR | To Incheon ACC \*Only for B576/Y722 direction |
-|      LAMEN     |          FL250/290/310/390     | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR | To Incheon ACC \*Only for Y591 direction |
-|      LAMEN     | FL240 and above \*Imperial Even Levels  | ZSSS_C_CTR ZSSS_CTR ZSHA_CTR PRC_FSS(if S0780/FL256+) | To Shanghai ACC |
-|      LAMEN     |       FL220/240/260        | ZSSS_C_CTR ZSSS_CTR ZSHA_CTR | Arriving ZSPD/ZSSS/ZSNB/ZSWX/ZSNJ/ZSCG/ZSNT/ZSHC |
-| FIR Boundary \*ONLY when Korea ATC offline | FL270/330/350/370/410 | Advisory Frequency | To Incheon ACC \*Only for B576/Y722 direction. Direct to SADLI/IKEDO. |
-| FIR Boundary \*ONLY when Korea ATC offline | FL250/290/310/390 | Advisory Frequency | To Incheon ACC \*Only for Y591 direction. Direct to SADLI/IKEDO. |
-|      TOMUK     |  Metric Odd Levels  |  ZKKP_CTR  |  To Pyongyang ACC  |
-|      TOMUK     |  S0630(FL207) S0690(FL226)  |  ZKKP_CTR  |  Arriving ZKPY  |
-|      TOMUK     |  Metric Even Levels  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) |  To Dalian ACC  |
-|      TOMUK     |  S0660(FL217)  |  ZYTL_CTR ZYSH_CTR  |  Arriving ZYTL  |
-|      VASRO     |  Metric Odd Levels  |  ZKKP_CTR  |  To Pyongyang ACC  |
-|      VASRO     |  Metric Even Levels  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) |  To Dalian ACC  |
-
+|                    TCP                     |                  Altitude                  |                                    Transfer to                                     |                                Remark                                 |
+| :----------------------------------------: | :----------------------------------------: | :--------------------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+|                   AGAVO                    |             Metric Odd Levels              | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR |                             To Daegu ACC                              |
+|                   AGAVO                    | S0890(FL291) and below \*Metric Odd Levels | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR |                          Arriving RKSI/RKSS                           |
+|                   AGAVO                    |             Metric Even Levels             |                     ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)                     |                             To Dalian ACC                             |
+|                   AGAVO                    |                S0660(FL217)                |                                 ZYTL_CTR ZYSH_CTR                                  |                          Arriving ZSWH/ZSYT                           |
+|                   GOLOT                    |             Metric Odd Levels              |                                      ZKKP_CTR                                      |                           To Pyongyang ACC                            |
+|                   GOLOT                    |         S0630(FL207) S0690(FL226)          |                                      ZKKP_CTR                                      |                             Arriving ZKPY                             |
+|                   GOLOT                    |             Metric Even Levels             |                     ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)                     |                             To Dalian ACC                             |
+|                   GOLOT                    |                S0660(FL217)                |                                 ZYTL_CTR ZYSH_CTR                                  |                             Arriving ZYTX                             |
+|                   LAMEN                    |           FL270/330/350/370/410            | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR |             To Incheon ACC \*Only for B576/Y722 direction             |
+|                   LAMEN                    |             FL250/290/310/390              | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR |               To Incheon ACC \*Only for Y591 direction                |
+|                   LAMEN                    |   FL240 and above \*Imperial Even Levels   |               ZSSS_C_CTR ZSSS_CTR ZSHA_CTR PRC_FSS(if S0780/FL256+)                |                            To Shanghai ACC                            |
+|                   LAMEN                    |               FL220/240/260                |                            ZSSS_C_CTR ZSSS_CTR ZSHA_CTR                            |           Arriving ZSPD/ZSSS/ZSNB/ZSWX/ZSNJ/ZSCG/ZSNT/ZSHC            |
+| FIR Boundary \*ONLY when Korea ATC offline |           FL270/330/350/370/410            |                                 Advisory Frequency                                 | To Incheon ACC \*Only for B576/Y722 direction. Direct to SADLI/IKEDO. |
+| FIR Boundary \*ONLY when Korea ATC offline |             FL250/290/310/390              |                                 Advisory Frequency                                 |   To Incheon ACC \*Only for Y591 direction. Direct to SADLI/IKEDO.    |
+|                   TOMUK                    |             Metric Odd Levels              |                                      ZKKP_CTR                                      |                           To Pyongyang ACC                            |
+|                   TOMUK                    |         S0630(FL207) S0690(FL226)          |                                      ZKKP_CTR                                      |                             Arriving ZKPY                             |
+|                   TOMUK                    |             Metric Even Levels             |                     ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)                     |                             To Dalian ACC                             |
+|                   TOMUK                    |                S0660(FL217)                |                                 ZYTL_CTR ZYSH_CTR                                  |                             Arriving ZYTL                             |
+|                   VASRO                    |             Metric Odd Levels              |                                      ZKKP_CTR                                      |                           To Pyongyang ACC                            |
+|                   VASRO                    |             Metric Even Levels             |                     ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)                     |                             To Dalian ACC                             |
