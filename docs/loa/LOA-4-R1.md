@@ -22,7 +22,7 @@ This document supersedes any agreements previously established in verbal or writ
 
 The information contained herein is supplementary to the rules established under VATSIM regulations, Aeronautical Information Publication (AIP) of the Socialist Republic of Vietnam published by the Civil Aviation Authority of Vietnam, AIP of Lao People's Democratic Republic published by the Department of Civil Aviation (Laos) and the AIP of the People's Republic of China published by the Civil Aviation Administration of China (CAAC).
 
-### 3.2 
+### 3.2
 
 While such regulations shall generally be strictly followed on the VATSIM network, in some circumstances exemptions or modifications to the real-world regulations are necessary due to operational needs in an online environment. Such deviation shall be discussed in this document.
 
@@ -40,7 +40,7 @@ This Letter of Agreement is officially and originally prepared and documented in
 
 Unless otherwise stated or coordinated, all transfers must be completed 10NM before the FIR boundary.
 
-### 6.2 
+### 6.2
 
 The separations between handovers need to be in accordance with the horizontal and vertical separations specified in ICAO Doc 4444.
 
@@ -54,7 +54,7 @@ All handoffs between VATPRC and VCL vACC adopt silent transfer. Controllers will
 
 ## 7. Control Airspace definitions
 
-### 7.1	Mainland China ATC
+### 7.1 Mainland China ATC
 
 #### 7.1.1 Sanya ACC
 
@@ -62,8 +62,8 @@ All handoffs between VATPRC and VCL vACC adopt silent transfer. Controllers will
 - There are 2 split sectors in Sanya ACC. Sanya ACC Land sector (ZJSY_L_CTR) and Sanya ACC Oceanic sector (ZJSY_O_CTR).
 - The Sanya ACC Land sector covers the whole of Hainan Island and the upper airspace (S0780/F256 and above) of Zhanjiang TMA. This sector uses fully metric operations.
 - The Sanya ACC Oceanic sector covers the oceanic area and uses fully imperial operations from F140 up to F410. The airspace below F140 is uncontrolled.
-- PRC_FSS (Callsign: Beijing Control) shall be responsible for  Sanya ACC above S0780 (F256) (not incl.) when none of the Sanya ACC controllers are online.
-- PRC_FSS can accept the handover on coordination, but only if their cruising level is higher than S0780 (F256).  
+- PRC_FSS (Callsign: Beijing Control) shall be responsible for Sanya ACC above S0780 (F256) (not incl.) when none of the Sanya ACC controllers are online.
+- PRC_FSS can accept the handover on coordination, but only if their cruising level is higher than S0780 (F256).
 - The horizontal boundary of Sanya ACC is shown in Figure 7.1
 - Handoffs to Sanya ACC shall be made in the following order:
   - ZJSY_L_CTR/ZJSY_O_CTR -> ZJSA_CTR -> PRC_FSS (Above S0780/F256)
@@ -76,7 +76,7 @@ Figure 7.1: Sanya ACC Sector
 
 - Position: ZGNN_CTR; Callsign: Nanning Control
 - In the absence of ZGNN_CTR, the Guangzhou FIR controller (ZGZU_CTR) shall be responsible for this sector.
-- The vertical airspace constraints of Nanning ACC in the area of TEBAK is GND-S1250(FL411). 
+- The vertical airspace constraints of Nanning ACC in the area of TEBAK is GND-S1250(FL411).
 - The horizontal boundary of Nanning ACC is shown in Figure 7.2
 - Handoffs to Nanning ACC shall be made in the following order:
   - ZGNN_CTR -> ZGZU_CTR -> PRC_FSS (Above S0780/F256)
@@ -89,7 +89,7 @@ Figure 7.2: Nanning ACC Sector
 
 - Position: ZPPP_CTR; Callsign: Kunming Control
 - In the absence of ZPPP_CTR, the Guangzhou FIR controller (ZPKM_CTR) shall be responsible for this sector.
-- The vertical airspace constraints of Kunming ACC in the area of TEBAK is GND-S1250(FL411). 
+- The vertical airspace constraints of Kunming ACC in the area of TEBAK is GND-S1250(FL411).
 - The horizontal boundary of Kunming ACC is shown in Figure 7.3
 - Handoffs to Kunming ACC shall be made in the following order:
   - ZPPP_CTR -> ZPKM_CTR -> PRC_FSS (Above S0780/F256)
@@ -122,56 +122,56 @@ Figure 7.3: Kunming ACC Sector
 
 Mainland China has stricter flight planning requirements. Generally shall not contain DCTs. Unless coordinated, VCL ATC shall make sure that all flight segments shall be connected via valid airways.
 
-### 8.2 
+### 8.2
 
 All cross-border VFR must be coordinated in advance.
 
 ## 9. Handoff altitude at transfer of control points (TCP)
 
-### 9.1	Hanoi ACC - Sanya ACC
+### 9.1 Hanoi ACC - Sanya ACC
 
-|  TCP  |   Route   |  Direction  |  Altitudes (FLAS)  |
-| :---: | :-------: | :---------: | :----------------: |
-| ASSAD | A202 A206 | To Hanoi ACC | FL280/300/340/380/400 |
-| ASSAD | A202 A206 | To Sanya ACC | FL290/330/370/390/410 |
+|  TCP  |   Route   |             Direction             |           Altitudes (FLAS)            |
+| :---: | :-------: | :-------------------------------: | :-----------------------------------: |
+| ASSAD | A202 A206 |           To Hanoi ACC            |         FL280/300/340/380/400         |
+| ASSAD | A202 A206 |           To Sanya ACC            |         FL290/330/370/390/410         |
 | ASSAD |    W10    | Delegated to Hanoi ACC from Sanya | FL310 (Northbound) FL320 (Southbound) |
 
-### 9.2	Ho Chi Minh ACC - Sanya ACC
+### 9.2 Ho Chi Minh ACC - Sanya ACC
 
-|  TCP  |   Route   |  Direction  |  Altitudes (FLAS)  |
-| :---: | :-------: | :---------: | :----------------: |
-| BUNTA |    A1     | To Hanoi ACC | FL300 or above \*Imperial Even Levels |
-| BUNTA |    A1     | To Sanya ACC | FL290 or above \*Imperial Odd Levels |
-| BUNTA |   G221    | To Ho Chi Minh ACC | FL320/360 \*Primary Level |
-| BUNTA |   G221    | To Sanya ACC | FL310/350 \*Primary Level |
-| BUNTA |           | Arriving ZJSY | FL250 and below |
-| BUNTA |           | Arriving VVDN | FL260 and below |
-| EXOTO |   L642    | To Ho Chi Minh ACC | FL310/320/350/360/390/400 |
-| DONDA |   M771    | To Sanya ACC | FL310/320/350/360/390/400 |
-| MONBO |   N892    | Delegated to Ho Chi Minh ACC | Delegated to VCL ATC |
+|  TCP  | Route |          Direction           |           Altitudes (FLAS)            |
+| :---: | :---: | :--------------------------: | :-----------------------------------: |
+| BUNTA |  A1   |         To Hanoi ACC         | FL300 or above \*Imperial Even Levels |
+| BUNTA |  A1   |         To Sanya ACC         | FL290 or above \*Imperial Odd Levels  |
+| BUNTA | G221  |      To Ho Chi Minh ACC      |       FL320/360 \*Primary Level       |
+| BUNTA | G221  |         To Sanya ACC         |       FL310/350 \*Primary Level       |
+| BUNTA |       |        Arriving ZJSY         |            FL250 and below            |
+| BUNTA |       |        Arriving VVDN         |            FL260 and below            |
+| EXOTO | L642  |      To Ho Chi Minh ACC      |       FL310/320/350/360/390/400       |
+| DONDA | M771  |         To Sanya ACC         |       FL310/320/350/360/390/400       |
+| MONBO | N892  | Delegated to Ho Chi Minh ACC |         Delegated to VCL ATC          |
 
-### 9.3	Hanoi ACC - Nanning ACC
+### 9.3 Hanoi ACC - Nanning ACC
 
-|  TCP  |   Route   |  Direction  |  Altitudes (FLAS)  |
-| :---: | :-------: | :---------: | :----------------: |
-| TEBAK |    R474   | To Hanoi ACC | FL200 or above \*Imperial Even Levels |
-| TEBAK |   R474   | To Nanning ACC | FL210 or above \*Imperial Odd Levels |
-| TEBAK |           | Arriving VVNB/VVCI | FL260 and below |
-| TEBAK |           | Arriving ZGNN/ZGBH/ZGZJ | FL270 and below |
+|  TCP  | Route |        Direction        |           Altitudes (FLAS)            |
+| :---: | :---: | :---------------------: | :-----------------------------------: |
+| TEBAK | R474  |      To Hanoi ACC       | FL200 or above \*Imperial Even Levels |
+| TEBAK | R474  |     To Nanning ACC      | FL210 or above \*Imperial Odd Levels  |
+| TEBAK |       |   Arriving VVNB/VVCI    |            FL260 and below            |
+| TEBAK |       | Arriving ZGNN/ZGBH/ZGZJ |            FL270 and below            |
 
-### 9.4	Hanoi ACC - Kunming ACC
+### 9.4 Hanoi ACC - Kunming ACC
 
-|  TCP  |   Route   |  Direction  |  Altitudes (FLAS)  |
-| :---: | :-------: | :---------: | :----------------: |
-| KATBO |   R471    | To Hanoi ACC | FL310/350 \*Other levels may be available subject to prior coordination |
-| KATBO |   R471    | To Kunming ACC | FL320/360 \*Other levels may be available subject to prior coordination |
+|  TCP  | Route |   Direction    |                            Altitudes (FLAS)                             |
+| :---: | :---: | :------------: | :---------------------------------------------------------------------: |
+| KATBO | R471  |  To Hanoi ACC  | FL310/350 \*Other levels may be available subject to prior coordination |
+| KATBO | R471  | To Kunming ACC | FL320/360 \*Other levels may be available subject to prior coordination |
 
-### 9.5	Vientiane ACC - Kunming ACC
+### 9.5 Vientiane ACC - Kunming ACC
 
-|  TCP  |   Route   |  Direction  |  Altitudes (FLAS)  |
-| :---: | :-------: | :---------: | :----------------: |
-| SAGAG | B218 A581 | To Vientiane ACC | Imperial Odd Levels |
-| SAGAG | B218 A581 | To Kunming ACC | Imperial Even Levels |
+|  TCP  |   Route   |    Direction     |   Altitudes (FLAS)   |
+| :---: | :-------: | :--------------: | :------------------: |
+| SAGAG | B218 A581 | To Vientiane ACC | Imperial Odd Levels  |
+| SAGAG | B218 A581 |  To Kunming ACC  | Imperial Even Levels |
 
 ## 10. Special agreement on FIR boundary
 
@@ -219,25 +219,25 @@ ICAO Doc 4444
 
 ## Appendix B: Quick Reference Table
 
-|  TCP  |          Altitude          |                 Transfer to                 |  Remark  |
-| :---: | :------------------------: | :-----------------------------------------: | :------: |
-| ASSAD | FL280 FL300 FL340 FL380 FL400 | VVHN_3_CTR VVHN_CTR VCL_CTR | To Hanoi ACC \*For En-Route |
-| ASSAD | FL290 FL330 FL370 FL390 FL410 | ZJSY_L_CTR ZJSA_CTR PRC_FSS | To Sanya ACC \*For En-Route |
-| ASSAD |          FL310 FL320          | Delegated to VCL ATC | W10 - Delegated to VCL ATC |
-| BUNTA | FL300 or above \*Imperial Even Levels | VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR | To Ho Chi Minh ACC \*For En-Route A1 Airway |
-| BUNTA | FL290 or above \*Imperial Odd Levels | ZJSY_O_CTR ZJSA_CTR PRC_FSS | To Sanya ACC \*For En-Route A1 Airway |
-| BUNTA | FL320 FL360 \*Primary use | VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR | To Ho Chi Minh ACC \*For En-Route G212 Airway |
-| BUNTA | FL310 FL350 \*Primary use | ZJSY_O_CTR ZJSA_CTR PRC_FSS | To Sanya ACC \*For En-Route G212 Airway
-| BUNTA | FL250 and below | ZJSY_O_CTR ZJSA_CTR PRC_FSS (if S0780+) | Arriving ZJSY |
-| BUNTA | FL260 and below | DNA_APP VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR | Arriving VVDN |
-| DONDA | FL310 FL320 FL350 FL360 FL390 FL400 | ZJSY_O_CTR ZJSA_CTR PRC_FSS | To Sanya ACC \*For En-Route |
-| EXOTO | FL310 FL320 FL350 FL360 FL390 FL400 | VVHM_5_CTR VVHM_A_CTR VVHM_CTR VCL_CTR | To Ho Chi Minh ACC \*For En-Route |
-| KATBO | FL310 FL350 \*Other levels may be available subject to prior coordination | VVHN_3_CTR VVHN_CTR VCL_CTR | To Hanoi ACC \*For En-Route |
-| KATBO | FL320 FL360 \*Other levels may be available subject to prior coordination | ZPPP_CTR ZPKM_CTR PRC_FSS (if S0780+) | To Kunming ACC \*For En-Route |
-| MONBO |  | Delegated to VCL ATC |  Delegated to VCL ATC |
-| SAGAG |  Imperial Odd Levels  | ZPPP_CTR ZPKM_CTR PRC_FSS (if S0780+) | To Kunming ACC \*For En-Route |
-| SAGAG |  Imperial Even Levels  | VLVT_CTR VCL_CTR | To Vientiane ACC \*For En-Route |
-| TEBAK | FL200 or above \*Imperial Even Levels | VVHN_1_CTR VVHN_CTR VCL_CTR | To Hanoi ACC \*For En-Route |
-| TEBAK | FL210 or above \*Imperial Odd Levels | ZGNN_CTR ZGZU_CTR PRC_FSS (if S0780+) | To Nanning ACC \*For En-Route |
-| TEBAK | FL260 and below | VVHN_1_CTR VVHN_CTR VCL_CTR | Arriving VVNB/VVCI | 
-| TEBAK | FL250 and below | ZGNN_CTR ZGZU_CTR PRC_FSS (if S0780+) | Arriving ZGNN/ZGBH/ZGZJ |
+|  TCP  |                                 Altitude                                  |                            Transfer to                             |                    Remark                     |
+| :---: | :-----------------------------------------------------------------------: | :----------------------------------------------------------------: | :-------------------------------------------: |
+| ASSAD |                       FL280 FL300 FL340 FL380 FL400                       |                    VVHN_3_CTR VVHN_CTR VCL_CTR                     |          To Hanoi ACC \*For En-Route          |
+| ASSAD |                       FL290 FL330 FL370 FL390 FL410                       |                    ZJSY_L_CTR ZJSA_CTR PRC_FSS                     |          To Sanya ACC \*For En-Route          |
+| ASSAD |                                FL310 FL320                                |                        Delegated to VCL ATC                        |          W10 - Delegated to VCL ATC           |
+| BUNTA |                   FL300 or above \*Imperial Even Levels                   |     VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR     |  To Ho Chi Minh ACC \*For En-Route A1 Airway  |
+| BUNTA |                   FL290 or above \*Imperial Odd Levels                    |                    ZJSY_O_CTR ZJSA_CTR PRC_FSS                     |     To Sanya ACC \*For En-Route A1 Airway     |
+| BUNTA |                         FL320 FL360 \*Primary use                         |     VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR     | To Ho Chi Minh ACC \*For En-Route G212 Airway |
+| BUNTA |                         FL310 FL350 \*Primary use                         |                    ZJSY_O_CTR ZJSA_CTR PRC_FSS                     |    To Sanya ACC \*For En-Route G212 Airway    |
+| BUNTA |                              FL250 and below                              |              ZJSY_O_CTR ZJSA_CTR PRC_FSS (if S0780+)               |                 Arriving ZJSY                 |
+| BUNTA |                              FL260 and below                              | DNA_APP VVHM_1_CTR VVHM_A_CTR VVHM_CTR VVHN_4_CTR VVHN_CTR VCL_CTR |                 Arriving VVDN                 |
+| DONDA |                    FL310 FL320 FL350 FL360 FL390 FL400                    |                    ZJSY_O_CTR ZJSA_CTR PRC_FSS                     |          To Sanya ACC \*For En-Route          |
+| EXOTO |                    FL310 FL320 FL350 FL360 FL390 FL400                    |               VVHM_5_CTR VVHM_A_CTR VVHM_CTR VCL_CTR               |       To Ho Chi Minh ACC \*For En-Route       |
+| KATBO | FL310 FL350 \*Other levels may be available subject to prior coordination |                    VVHN_3_CTR VVHN_CTR VCL_CTR                     |          To Hanoi ACC \*For En-Route          |
+| KATBO | FL320 FL360 \*Other levels may be available subject to prior coordination |               ZPPP_CTR ZPKM_CTR PRC_FSS (if S0780+)                |         To Kunming ACC \*For En-Route         |
+| MONBO |                                                                           |                        Delegated to VCL ATC                        |             Delegated to VCL ATC              |
+| SAGAG |                            Imperial Odd Levels                            |               ZPPP_CTR ZPKM_CTR PRC_FSS (if S0780+)                |         To Kunming ACC \*For En-Route         |
+| SAGAG |                           Imperial Even Levels                            |                          VLVT_CTR VCL_CTR                          |        To Vientiane ACC \*For En-Route        |
+| TEBAK |                   FL200 or above \*Imperial Even Levels                   |                    VVHN_1_CTR VVHN_CTR VCL_CTR                     |          To Hanoi ACC \*For En-Route          |
+| TEBAK |                   FL210 or above \*Imperial Odd Levels                    |               ZGNN_CTR ZGZU_CTR PRC_FSS (if S0780+)                |         To Nanning ACC \*For En-Route         |
+| TEBAK |                              FL260 and below                              |                    VVHN_1_CTR VVHN_CTR VCL_CTR                     |              Arriving VVNB/VVCI               |
+| TEBAK |                              FL250 and below                              |               ZGNN_CTR ZGZU_CTR PRC_FSS (if S0780+)                |            Arriving ZGNN/ZGBH/ZGZJ            |
