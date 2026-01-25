@@ -59,9 +59,10 @@ There are differences between Mainland China's flight levels and international f
 - In the absence of ZSSS_CTR and ZSSS_C_CTR, the Shanghai FIR controller (ZSHA_CTR) shall be responsible for this sector.
 - PRC_FSS (Callsign: Beijing Control) shall be responsible for Shanghai ACC above S0780(F256) (not incl.) when none of the Shanghai ACC controllers are online.
 - The horizontal boundary of Shanghai ACC is shown in Figure 7.1
-- Handoffs to Shanghai ACC shall be made in the following order: ZSSS_C_CTR -> ZSSS_CTR -> ZSHA_CTR -> PRC_FSS (Above S0780/F256)
+- Handoffs to Shanghai ACC shall be made in the following order:
+  - ZSSS_C_CTR -> ZSSS_CTR -> ZSHA_CTR -> PRC_FSS (Above S0780/F256)
 
-<img width="1146" height="1368" alt="QQ_1754550363996" src="https://github.com/user-attachments/assets/b2f1bd7e-1741-4a8c-adfc-8886c87f12eb" />
+<img src= https://cdn.sa.net/2026/01/26/RuH9Xjdpg4NUDBJ.png />
 
 Figure 7.1: Shanghai ACC Sector
 
@@ -72,9 +73,9 @@ Figure 7.1: Shanghai ACC Sector
 - PRC_FSS (Callsign: Beijing Control) shall be responsible for Dalian ACC above S0780(F256) (not incl.) when none of the Dalian ACC controllers are online.
 - The horizontal boundary of Dalian ACC is shown in Figure 7.2
 - Handoffs to Dalian ACC shall be made in the following order:
-  ZYTL_CTR -> ZYSH_CTR -> PRC_FSS (Above S0780/F256)
+  - ZYTL_CTR -> ZYSH_CTR -> PRC_FSS (Above S0780/F256)
 
-<img width="1022" height="844" alt="QQ_1754550448817" src="https://github.com/user-attachments/assets/d6357830-b95f-4742-a9ca-b216ec26c9f7" />
+<img src="https://cdn.sa.net/2026/01/26/76k8GYruxdePjqf.png" />
 
 Figure 7.2: Dalian ACC Sector
 
@@ -89,7 +90,7 @@ Figure 7.2: Dalian ACC Sector
   - AGAVO: RKDA_1_CTR (above FL295) or RKDA_2_CTR (below FL295) -> RKDA_W_CTR -> RKDA_CTR -> RKRR_A_CTR
   - LAMEN: RKRR_6_CTR (above FL335) or RKRR_7_CTR (below FL335) -> RKRR_S_CTR -> RKRR_CTR -> RKRR_A_CTR
 
-<img width="1084" height="1336" alt="QQ_1754550585689" src="https://github.com/user-attachments/assets/54025034-b68a-4cc5-a584-6dae6ed02d06" />
+<img src="https://cdn.sa.net/2026/01/26/2HWVtoD4dx6w3bk.png" />
 
 Figure 7.3: Incheon FIR Sector (basic operation)
 
@@ -102,17 +103,17 @@ Figure 7.3: Incheon FIR Sector (basic operation)
   - AGAVO: RKDA_1_CTR (above FL295) or RKDA_2_CTR (below FL295) -> RKDA_W_CTR -> RKDA_CTR -> RKRR_A_CTR
   - LAMEN: RKRR_6_CTR (above FL335) or RKRR_7_CTR (below FL335) -> RKRR_S_CTR -> RKRR_CTR -> RKRR_A_CTR
 
-<img width="1206" height="1402" alt="QQ_1754550661648" src="https://github.com/user-attachments/assets/7b236e48-764e-477e-b21e-3db751f55801" />
+<img src="https://cdn.sa.net/2026/01/26/jM8zONfHVo7REDc.png" />
 
-Figure 7.4: Incheon and Daegu FIR Sector(Phase 2 operation)
+Figure 7.4: Incheon and Daegu FIR Sector (Phase 2 operation)
 
-<img width="1174" height="1418" alt="QQ_1754550689126" src="https://github.com/user-attachments/assets/6cf8f3bd-b071-482e-be4c-f4c2507c246b" />
+<img src="https://cdn.sa.net/2026/01/26/x3EkOUJ47Ynftzq.png" />
 
-Figure 7.5: Incheon and Daegu FIR Sector(Phase 3 operation)
+Figure 7.5: Incheon and Daegu FIR Sector (Phase 3 operation)
 
-<img width="1178" height="1396" alt="QQ_1754550728622" src="https://github.com/user-attachments/assets/e83e7882-3358-4350-9755-0cd535f691af" />
+<img src="https://cdn.sa.net/2026/01/26/k6A9zFcoxwQHBbE.png" />
 
-Figure 7.6: Incheon and Daegu FIR Sector(Phase 4 operation)
+Figure 7.6: Incheon and Daegu FIR Sector (Phase 4 operation)
 
 #### 7.2.3 Pyongyang ACC
 
@@ -120,7 +121,7 @@ Figure 7.6: Incheon and Daegu FIR Sector(Phase 4 operation)
 - ZKKP_CTR (Callsign: Pyongyang Control) shall be responsible for all Pyongyang FIR.
 - The horizontal boundary of Pyongyang ACC is shown in Figure 7.7
 
-<img width="876" height="1102" alt="QQ_1754550785922" src="https://github.com/user-attachments/assets/1cbcc48e-a43c-460a-b9c9-2b753f6abe18" />
+<img src="https://cdn.sa.net/2026/01/26/BvwWcbR69i31kYP.png" />
 
 Figure 7.7: Pyongyang FIR Sector
 
@@ -189,7 +190,7 @@ To further avoid hotspot conflicts, VATPRC and VATKOR agreed to replace the dire
 
 The aircraft is required to maintain level flight before the handover 10nm from TCP, and all uncoordinated altitude changes shall be prohibited. If achieving the altitude agreed upon by both divisions is impossible, an alternative altitude may be assigned as an exception. However, in such cases, the counterpart ATC must be notified if they are online.
 
-<img width="1128" height="1050" alt="QQ_1754552302932" src="https://github.com/user-attachments/assets/7e7ef084-6d34-4580-803a-d00ce5ffed0b" />
+<img src="https://cdn.sa.net/2026/01/26/G6cTvVPyjtHAR3q.png" />
 
 Figure 10.1: Shanghai FIR boundary and Control Area as shown in China AIP ENR6.2.
 
@@ -213,7 +214,7 @@ Any parties wishing to amend this LOA (by adding, omitting or changing any claus
 
 This Letter of Agreement is approved on Jan 1, year 2025:
 
-<img width="1182" height="416" alt="QQ_1754552425926" src="https://github.com/user-attachments/assets/bdcd8c20-1803-41d0-a296-0556d8bcef5b" />
+<img src="https://cdn.sa.net/2026/01/26/nVcOP14Grto6S9v.png" />
 
 ## Appendix A: References
 
@@ -227,6 +228,26 @@ ICAO Doc 4444
 
 Positions on the below take over positions on the above if they are offline.
 
-<img width="1132" height="1212" alt="QQ_1754552573835" src="https://github.com/user-attachments/assets/bd59f369-7191-4b3f-aee2-02c426f6f6d2" />
+|      TCP       |                      Altitude                      |               Transfer to               |             Remark            |
+| :------------: | :------------------------------------------------: | :-------------------------------------: | :------------------------------------: |
+|      AGAVO     |                 Metric Odd Levels                  | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR | To Daegu ACC |
+|      AGAVO     |     S0890(FL291) and below \*Metric Odd Levels     | RKDA_1_CTR (above FL295) / RKDA_2_CTR (below FL295) RKDA_W_CTR RKDA_CTR RKRR_A_CTR | Arriving RKSI/RKSS |
+|      AGAVO     |                 Metric Even Levels                 |  ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+)  | To Dalian ACC |
+|      AGAVO     |                    S0660(FL217)                    | ZYTL_CTR ZYSH_CTR | Arriving ZSWH/ZSYT |
+|      GOLOT     |                 Metric Odd Levels                  |    ZKKP_CTR    | To Pyongyang ACC |
+|      GOLOT     |            S0630(FL207) S0690(FL226)               |    ZKKP_CTR    |  Arriving ZKPY  |
+|      GOLOT     |                Metric Even Levels                  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) | To Dalian ACC |
+|      GOLOT     |                 S0660(FL217)                     |  ZYTL_CTR ZYSH_CTR  | Arriving ZYTX |
+|      LAMEN     |      FL270/330/350/370/410     | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR | To Incheon ACC \*Only for B576/Y722 direction |
+|      LAMEN     |          FL250/290/310/390     | RKRR_6_CTR (above FL335) / RKRR_7_CTR (below FL335) RKRR_S_CTR RKRR_CTR RKRR_A_CTR | To Incheon ACC \*Only for Y591 direction |
+|      LAMEN     | FL240 and above \*Imperial Even Levels  | ZSSS_C_CTR ZSSS_CTR ZSHA_CTR PRC_FSS(if S0780/FL256+) | To Shanghai ACC |
+|      LAMEN     |       FL220/240/260        | ZSSS_C_CTR ZSSS_CTR ZSHA_CTR | Arriving ZSPD/ZSSS/ZSNB/ZSWX/ZSNJ/ZSCG/ZSNT/ZSHC |
+| FIR Boundary \*ONLY when Korea ATC offline | FL270/330/350/370/410 | Advisory Frequency | To Incheon ACC \*Only for B576/Y722 direction. Direct to SADLI/IKEDO. |
+| FIR Boundary \*ONLY when Korea ATC offline | FL250/290/310/390 | Advisory Frequency | To Incheon ACC \*Only for Y591 direction. Direct to SADLI/IKEDO. |
+|      TOMUK     |  Metric Odd Levels  |  ZKKP_CTR  |  To Pyongyang ACC  |
+|      TOMUK     |  S0630(FL207) S0690(FL226)  |  ZKKP_CTR  |  Arriving ZKPY  |
+|      TOMUK     |  Metric Even Levels  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) |  To Dalian ACC  |
+|      TOMUK     |  S0660(FL217)  |  ZYTL_CTR ZYSH_CTR  |  Arriving ZYTL  |
+|      VASRO     |  Metric Odd Levels  |  ZKKP_CTR  |  To Pyongyang ACC  |
+|      VASRO     |  Metric Even Levels  | ZYTL_CTR ZYSH_CTR PRC_FSS(if S0780/FL256+) |  To Dalian ACC  |
 
-<img width="1128" height="1288" alt="QQ_1754552601582" src="https://github.com/user-attachments/assets/9f8b1c10-276c-461b-b60e-a9190376747d" />
