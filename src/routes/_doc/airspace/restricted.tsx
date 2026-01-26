@@ -64,7 +64,11 @@ function RouteComponent() {
   const vplaafCentersGeojson = useMemo(
     () =>
       vplaafGeojson &&
-      turf.featureCollection(vplaafGeojson.map((area) => turf.center(area, { properties: area.properties }))),
+      turf.featureCollection(
+        vplaafGeojson
+          .filter((area) => area.properties.label)
+          .map((area) => turf.center(area, { properties: area.properties })),
+      ),
     [vplaafGeojson],
   );
 
