@@ -62,7 +62,7 @@ There are differences between Mainland China's flight levels and international f
 - Handoffs to Shanghai ACC shall be made in the following order:
   - ZSSS_C_CTR -> ZSSS_CTR -> ZSHA_CTR -> PRC_FSS (Above S0780/F256)
 
-<img src= https://cdn.sa.net/2026/01/26/RuH9Xjdpg4NUDBJ.png />
+<img src="https://cdn.sa.net/2026/01/26/RuH9Xjdpg4NUDBJ.png" />
 
 Figure 7.1: Shanghai ACC Sector
 
