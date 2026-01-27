@@ -27,21 +27,17 @@ UHHH Document ID: LOA-RUS-PRC-2406_1
 
 VATPRC Document ID: VATPRC-LOA-5-R0-EN
 
-
 VATRUS
 
 Khabarovsk FIR:
-
 
 Evgeny Vygornitsky – VATRUS1 Division Director
 
 Maxim Osmolovskiy - Head of the Regional ATM Center (Khabarovsk)
 
-
 VATPRC
 
 Shenyang FIR:
-
 
 Chang Ma – VATPRC1 Division Director
 
@@ -51,30 +47,28 @@ Chang Ma – VATPRC1 Division Director
 
 #### Khabarovsk FIR ATC adjacent positions:
 
-| Position | Frequency | Callsign | Border Point | Vertical Limits |
-| :------: | :-------: | :------: | :----------: | :-------------: |
-| RU-ERC_FSS | 135.550 | Eastern Russia Control | SIMLI, MAGIT, ARGUK, BISUN | GND-FL600 |
-| UHHH_CTR |  124.500  | Khabarovsk Control | SIMLI, MAGIT, ARGUK, BISUN | GND-FL600 |
-| UHHH_1_CTR \*\* | 126.600 | Khabarovsk Control | SIMLI, MAGIT, ARGUK | GND-FL600 |
-| UHHH_3_CTR \*\* | 133.700 | Khabarovsk Control |  BISUN  | GND-FL600 |
-| UHHH_APP | 125.200 | Khabarovsk Approach | ARGUK | GND-FL230 |
-| UHWW_APP | 124.700 | Vladivostok Approach | BISUN | GND-FL210 |
-| UHBB_TWR \* | 127.200 | Blagoveshchensk Tower | SIMLI | GND-FL120 |
+|    Position     | Frequency |        Callsign        |        Border Point        | Vertical Limits |
+| :-------------: | :-------: | :--------------------: | :------------------------: | :-------------: |
+|   RU-ERC_FSS    |  135.550  | Eastern Russia Control | SIMLI, MAGIT, ARGUK, BISUN |    GND-FL600    |
+|    UHHH_CTR     |  124.500  |   Khabarovsk Control   | SIMLI, MAGIT, ARGUK, BISUN |    GND-FL600    |
+| UHHH_1_CTR \*\* |  126.600  |   Khabarovsk Control   |    SIMLI, MAGIT, ARGUK     |    GND-FL600    |
+| UHHH_3_CTR \*\* |  133.700  |   Khabarovsk Control   |           BISUN            |    GND-FL600    |
+|    UHHH_APP     |  125.200  |  Khabarovsk Approach   |           ARGUK            |    GND-FL230    |
+|    UHWW_APP     |  124.700  |  Vladivostok Approach  |           BISUN            |    GND-FL210    |
+|   UHBB_TWR \*   |  127.200  | Blagoveshchensk Tower  |           SIMLI            |    GND-FL120    |
 
->[!NOTE]
-> \* - Procedural tower. Provides ATC and radar service as approach
+> [!NOTE] \* - Procedural tower. Provides ATC and radar service as approach
 >
 > \*\* - Online only for high-load events
 
 #### Shenyang FIR ATC adjacent positions:
 
-
-| Position | Frequency | Callsign | Border Point | Vertical Limits |
-| :------: | :-------: | :------: | :----------: | :-------------: |
-| PRC_FSS | 133.075 | Beijing Control | SIMLI, MAGIT, ARGUK, GILEB, BISUN | FL256(S0780)-FL411(S1250) |
-| ZYSH_CTR | 120.900 | Shenyang Control | SIMLI, MAGIT, ARGUK, GILEB, BISUN | GND-FL411(S1250) |
-| ZYHB_CTR | 133.200 | Harbin Control | SIMLI, MAGIT, ARGUK, GILEB | GND-FL411(S1250) |
-| ZYTL_CTR | 123.200 | Dalian Control | BISUN | GND-FL411(S1250) |
+| Position | Frequency |     Callsign     |           Border Point            |      Vertical Limits      |
+| :------: | :-------: | :--------------: | :-------------------------------: | :-----------------------: |
+| PRC_FSS  |  133.075  | Beijing Control  | SIMLI, MAGIT, ARGUK, GILEB, BISUN | FL256(S0780)-FL411(S1250) |
+| ZYSH_CTR |  120.900  | Shenyang Control | SIMLI, MAGIT, ARGUK, GILEB, BISUN |     GND-FL411(S1250)      |
+| ZYHB_CTR |  133.200  |  Harbin Control  |    SIMLI, MAGIT, ARGUK, GILEB     |     GND-FL411(S1250)      |
+| ZYTL_CTR |  123.200  |  Dalian Control  |               BISUN               |     GND-FL411(S1250)      |
 
 ### 2.2 General coordination procedures
 
@@ -93,71 +87,72 @@ border aircraft shall be handled to adjacent sector.
 
 #### Following exit points shall be used for aircraft joining UHHH airspace:
 
-| From FIR | To FIR | Entry/Exit Point |
-| :------: | :----: | :----------: |
-| ZYSH(ZYHB) | UHHH | SIMLI(E/X) |
-| ZYSH(ZYHB) | UHHH | ARGUK(E) |
-| ZYSH(ZYHB) | UHHH | MAGIT(X) |
-| ZYSH(ZYTL) | UHHH | BISUN(E/X) |
+|  From FIR  | To FIR | Entry/Exit Point |
+| :--------: | :----: | :--------------: |
+| ZYSH(ZYHB) |  UHHH  |    SIMLI(E/X)    |
+| ZYSH(ZYHB) |  UHHH  |     ARGUK(E)     |
+| ZYSH(ZYHB) |  UHHH  |     MAGIT(X)     |
+| ZYSH(ZYTL) |  UHHH  |    BISUN(E/X)    |
 
->[!NOTE]
+> [!NOTE]
 > \*E – Entry point / X – exit point
 
 #### For aircrafts arriving to Vladivostok airport (UHWW) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| BISUN | FL210(FL190\*) |
+| :------------: | :-------------: |
+|     BISUN      | FL210(FL190\*)  |
 
->[!NOTE]
+> [!NOTE]
 > \*If no opposing traffic
 
 #### For aircrafts arriving to Khabarovsk airport (UHHH) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| ARGUK | FL150 |
+| :------------: | :-------------: |
+|     ARGUK      |      FL150      |
 
 #### For aircrafts arriving to Blagoveshchensk airport (UHBB) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| SIMLI | FL090 |
+| :------------: | :-------------: |
+|     SIMLI      |      FL090      |
 
 ### 2.4 Coordination procedures from UHHH to ZYSH
 
 Aircraft leaving UHHH airspace shall be transferred to adjacent ZYSH FIR sector in following priority:
+
 - ZYHB_CTR/ZYTL_CTR -> ZYSH_CTR -> PRC_FSS
 
 #### Following exit points shall be used for aircraft joining ZYSH airspace:
 
-| From FIR | To FIR | Entry/Exit Point |
-| :------: | :----: | :----------: |
-| UHHH | ZYSH(ZYHB) | SIMLI(E/X) |
-| UHHH | ZYSH(ZYHB) | ARGUK(X) |
-| UHHH | ZYSH(ZYHB) | MAGIT(E) |
-| UHHH | ZYSH(ZYTL) | BISUN(E/X) |
+| From FIR |   To FIR   | Entry/Exit Point |
+| :------: | :--------: | :--------------: |
+|   UHHH   | ZYSH(ZYHB) |    SIMLI(E/X)    |
+|   UHHH   | ZYSH(ZYHB) |     ARGUK(X)     |
+|   UHHH   | ZYSH(ZYHB) |     MAGIT(E)     |
+|   UHHH   | ZYSH(ZYTL) |    BISUN(E/X)    |
 
->[!NOTE]
+> [!NOTE]
 > \*E – Entry point / X – exit point
 
 #### For aircrafts departing from Vladivostok airport (UHWW) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| BISUN | FL197(S0600) |
+| :------------: | :-------------: |
+|     BISUN      |  FL197(S0600)   |
 
 #### For aircrafts departing from Blagoveshchensk airport (UHBB) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| SIMLI | FL118(S0360) |
+| :------------: | :-------------: |
+|     SIMLI      |  FL118(S0360)   |
 
 #### For aircrafts arriving to Jiamusi airport (ZYJM) following level restrictions are applied:
 
 | FIR Exit Point | Vertical Limits |
-| :------: | :-----------: |
-| MAGIT | FL157(S0480) |
+| :------------: | :-------------: |
+|     MAGIT      |  FL157(S0480)   |
 
 ### 2.5 Delegated airspace
 
