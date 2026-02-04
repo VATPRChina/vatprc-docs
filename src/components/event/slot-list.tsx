@@ -1,6 +1,7 @@
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTime } from "./datetime";
+import { ExportSlot } from "./slot-export";
 import { ImportSlot } from "./slot-import";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -163,6 +164,7 @@ export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
       <h2 className="text-2xl">
         <Trans>Slots</Trans>
         <ImportSlot eventId={eventId} />
+        <ExportSlot eventId={eventId} />
       </h2>
       {!session && <Alert icon={<TbLockAccess />} color="blue" title={<Trans>Please login to book a slot.</Trans>} />}
       {!isInBookingPeriod && (
