@@ -9185,6 +9185,7 @@ export interface components {
     EventBookingDto: {
       id: components["schemas"]["Ulid"];
       user_id: components["schemas"]["Ulid"];
+      user?: null | components["schemas"]["UserDto"];
       /** Format: date-time */
       created_at: string;
       /** Format: date-time */

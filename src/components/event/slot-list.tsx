@@ -1,3 +1,5 @@
+import { User } from "../app/user";
+import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTime } from "./datetime";
@@ -111,7 +113,10 @@ const columns = [
       };
 
       return (
-        <div role="cell" className="flex gap-2">
+        <div role="cell" className="flex items-center gap-2">
+          <RequireRole role={["event-coordinator", "controller"]}>
+            <User user={slot.booking?.user} />
+          </RequireRole>
           {!isBookedByCurrentUser && !isBookedByOtherUser && (
             <ConfirmButton
               variant="subtle"

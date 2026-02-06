@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal";
 import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
@@ -93,14 +94,7 @@ const columns = [
     header: () => <Trans>CID</Trans>,
     cell: ({ getValue }) => {
       const user = getValue();
-      if (!user) return <Trans>Not booked</Trans>;
-
-      return (
-        <div>
-          <span>{user.full_name}</span>
-          <span className="text-dimmed ml-0.5">{user.cid}</span>
-        </div>
-      );
+      return <User user={user} />;
     },
   }),
   columnHelper.display({
