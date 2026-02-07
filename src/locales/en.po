@@ -77,7 +77,7 @@ msgid "Accepted"
 msgstr "Accepted"
 
 #: src/components/atc-application/atc-application-list.tsx:37
-#: src/components/atc-training/training-list.tsx:27
+#: src/components/atc-training/training-list.tsx:31
 #: src/routes/users/index.tsx:130
 msgid "Actions"
 msgstr "Actions"
@@ -122,7 +122,7 @@ msgstr "Airspace"
 msgid "Allowed levels are {level} (in feet)."
 msgstr "Allowed levels are {level} (in feet)."
 
-#: src/components/event/slot-list.tsx:128
+#: src/components/event/slot-list.tsx:134
 msgid "Already Booked"
 msgstr "Already Booked"
 
@@ -175,23 +175,27 @@ msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback
 msgid "Approach"
 msgstr "Approach"
 
-#: src/components/event/slot-list.tsx:121
+#: src/components/event/slot-list.tsx:127
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 
-#: src/components/event/atc-slot-list.tsx:162
+#: src/components/event/atc-slot-list.tsx:156
 msgid "Are you sure to book this ATC position?"
 msgstr "Are you sure to book this ATC position?"
+
+#: src/components/atc-training/training-list.tsx:62
+msgid "Are you sure to cancel this training?"
+msgstr "Are you sure to cancel this training?"
 
 #: src/components/event/atc-slot-delete.tsx:31
 msgid "Are you sure to delete this ATC position?"
 msgstr "Are you sure to delete this ATC position?"
 
-#: src/components/event/slot-list.tsx:137
+#: src/components/event/slot-list.tsx:143
 msgid "Are you sure to release the slot?"
 msgstr "Are you sure to release the slot?"
 
-#: src/components/event/atc-slot-list.tsx:172
+#: src/components/event/atc-slot-list.tsx:166
 msgid "Are you sure to release this ATC position?"
 msgstr "Are you sure to release this ATC position?"
 
@@ -271,8 +275,8 @@ msgstr "Basic Info"
 msgid "Basic Information"
 msgstr "Basic Information"
 
-#: src/components/event/atc-slot-list.tsx:169
-#: src/components/event/slot-list.tsx:123
+#: src/components/event/atc-slot-list.tsx:163
+#: src/components/event/slot-list.tsx:129
 msgid "Book"
 msgstr "Book"
 
@@ -291,17 +295,18 @@ msgid "Briefly describe the target of the training, such as position and lesson 
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
 #: src/components/event/atc-slot-create.tsx:96
-#: src/components/event/atc-slot-list.tsx:35
+#: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:137
 #: src/routes/flights/$callsign.tsx:364
 #: src/routes/flights/index.tsx:49
 msgid "Callsign"
 msgstr "Callsign"
 
-#: src/components/event/slot-list.tsx:49
+#: src/components/event/slot-list.tsx:52
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
+#: src/components/atc-training/training-list.tsx:63
 #: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/index.tsx:115
 msgid "Cancel"
@@ -309,6 +314,7 @@ msgstr "Cancel"
 
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:51
+#: src/components/atc-training/training-list.tsx:58
 msgid "Cancelled"
 msgstr "Cancelled"
 
@@ -351,7 +357,7 @@ msgstr "China RVSM odd flight level"
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
 #: src/components/event/atc-slot-assign.tsx:71
-#: src/components/event/atc-slot-list.tsx:93
+#: src/components/event/atc-slot-list.tsx:94
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -413,7 +419,7 @@ msgid "Controller with Military Position Permission"
 msgstr "Controller with Military Position Permission"
 
 #: src/components/app/app-nav-menu.tsx:146
-#: src/components/event/atc-slot-list.tsx:202
+#: src/components/event/atc-slot-list.tsx:196
 #: src/routes/events/$id.tsx:50
 msgid "Controllers"
 msgstr "Controllers"
@@ -561,10 +567,10 @@ msgid "ELDT"
 msgstr "ELDT"
 
 #: src/components/atc-training/training-application-create.tsx:176
-#: src/components/atc-training/training-list.tsx:22
+#: src/components/atc-training/training-list.tsx:26
 #: src/components/atc-training/training-save.tsx:132
 #: src/components/event/atc-slot-create.tsx:120
-#: src/components/event/atc-slot-list.tsx:49
+#: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:167
 #: src/routes/controllers/trainings/$id.tsx:90
 msgid "End at"
@@ -596,7 +602,7 @@ msgid "Equipment"
 msgstr "Equipment"
 
 #: src/components/atc-training/training-application-create.tsx:152
-#: src/components/event/atc-slot-list.tsx:205
+#: src/components/event/atc-slot-list.tsx:199
 #: src/routes/__root.tsx:126
 msgid "Error"
 msgstr "Error"
@@ -619,11 +625,11 @@ msgstr "Event & Organization Director"
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
-#: src/components/event/atc-slot-list.tsx:52
+#: src/components/event/atc-slot-list.tsx:53
 msgid "Event end"
 msgstr "Event end"
 
-#: src/components/event/atc-slot-list.tsx:41
+#: src/components/event/atc-slot-list.tsx:42
 msgid "Event start"
 msgstr "Event start"
 
@@ -684,7 +690,7 @@ msgstr "Flight Service Station"
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
-#: src/routes/_doc/airspace/restricted.tsx:162
+#: src/routes/_doc/airspace/restricted.tsx:166
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 
@@ -948,11 +954,11 @@ msgstr "No RVSM"
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/event/atc-slot-list.tsx:96
+#: src/components/app/user.tsx:6
 msgid "Not booked"
 msgstr "Not booked"
 
-#: src/components/event/slot-list.tsx:53
+#: src/components/event/slot-list.tsx:56
 msgid "Not designated"
 msgstr "Not designated"
 
@@ -1048,7 +1054,7 @@ msgstr "Please choose a designated route from the following list, or contact ATC
 msgid "Please contact ATC for help adjusting the route."
 msgstr "Please contact ATC for help adjusting the route."
 
-#: src/components/event/slot-list.tsx:167
+#: src/components/event/slot-list.tsx:174
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
@@ -1065,7 +1071,7 @@ msgid "Please wait while being logged in."
 msgstr "Please wait while being logged in."
 
 #: src/components/event/atc-slot-create.tsx:133
-#: src/components/event/atc-slot-list.tsx:61
+#: src/components/event/atc-slot-list.tsx:62
 msgid "Position"
 msgstr "Position"
 
@@ -1101,8 +1107,8 @@ msgstr "Reject"
 msgid "Rejected"
 msgstr "Rejected"
 
-#: src/components/event/atc-slot-list.tsx:179
-#: src/components/event/slot-list.tsx:139
+#: src/components/event/atc-slot-list.tsx:173
+#: src/components/event/slot-list.tsx:145
 msgid "Release"
 msgstr "Release"
 
@@ -1116,7 +1122,7 @@ msgid "Respond"
 msgstr "Respond"
 
 #: src/components/app/app-nav-menu.tsx:108
-#: src/routes/_doc/airspace/restricted.tsx:74
+#: src/routes/_doc/airspace/restricted.tsx:78
 msgid "Restricted Airspaces"
 msgstr "Restricted Airspaces"
 
@@ -1145,7 +1151,7 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
-#: src/components/event/slot-list.tsx:20
+#: src/components/event/slot-list.tsx:23
 #: src/components/preferred-route-create.tsx:151
 #: src/routes/flights/$callsign.tsx:389
 #: src/routes/navdata/preferred-routes.tsx:20
@@ -1211,7 +1217,7 @@ msgid "Show less pilots"
 msgstr "Show less pilots"
 
 #: src/components/atc-training/training-application-create.tsx:132
-#: src/components/event/slot-list.tsx:164
+#: src/components/event/slot-list.tsx:170
 #: src/routes/events/$id.tsx:47
 msgid "Slots"
 msgstr "Slots"
@@ -1244,10 +1250,10 @@ msgid "Start and End booking time must be both set or unset"
 msgstr "Start and End booking time must be both set or unset"
 
 #: src/components/atc-training/training-application-create.tsx:165
-#: src/components/atc-training/training-list.tsx:18
+#: src/components/atc-training/training-list.tsx:22
 #: src/components/atc-training/training-save.tsx:121
 #: src/components/event/atc-slot-create.tsx:108
-#: src/components/event/atc-slot-list.tsx:38
+#: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:155
 #: src/routes/controllers/trainings/$id.tsx:82
 msgid "Start at"
@@ -1292,6 +1298,10 @@ msgstr "Submit"
 #: src/components/atc-application/atc-application-status.tsx:24
 msgid "Submitted"
 msgstr "Submitted"
+
+#: src/components/atc-training/training-list.tsx:40
+msgid "Successfully cancelled the training."
+msgstr "Successfully cancelled the training."
 
 #: src/components/homepage/recent-events.tsx:159
 msgid "Sun"
@@ -1343,7 +1353,7 @@ msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to b
 msgid "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 msgstr "The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures without RF when possible."
 
-#: src/routes/_doc/airspace/restricted.tsx:77
+#: src/routes/_doc/airspace/restricted.tsx:81
 msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 msgstr "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 
@@ -1351,7 +1361,7 @@ msgstr "The airspaces listed on this map are either prohibited, restricted, or d
 msgid "The ATC application review has been updated successfully."
 msgstr "The ATC application review has been updated successfully."
 
-#: src/components/event/slot-list.tsx:172
+#: src/components/event/slot-list.tsx:179
 msgid "The booking has not started yet or has ended."
 msgstr "The booking has not started yet or has ended."
 
@@ -1420,7 +1430,7 @@ msgstr "There is currently no online ATC."
 msgid "This event does not have pilot booking."
 msgstr "This event does not have pilot booking."
 
-#: src/routes/_doc/airspace/restricted.tsx:154
+#: src/routes/_doc/airspace/restricted.tsx:158
 msgid "This map is intended for flight simulation use only. The boundaries shown on the map represent FIR boundaries within the simulation environment only and bear no relation to any real-world FIR boundaries or geopolitical borders. They do not represent the views or positions of any country, region, or international organization regarding geopolitical boundaries."
 msgstr "This map is intended for flight simulation use only. The boundaries shown on the map represent FIR boundaries within the simulation environment only and bear no relation to any real-world FIR boundaries or geopolitical borders. They do not represent the views or positions of any country, region, or international organization regarding geopolitical boundaries."
 
@@ -1438,7 +1448,7 @@ msgid "Tier 2"
 msgstr "Tier 2"
 
 #: src/components/atc-training/training-application-responses.tsx:65
-#: src/components/event/slot-list.tsx:24
+#: src/components/event/slot-list.tsx:27
 msgid "Time"
 msgstr "Time"
 
@@ -1448,7 +1458,7 @@ msgstr "Time:"
 
 #: src/components/atc-training/training-application-create.tsx:118
 #: src/components/atc-training/training-application-list.tsx:59
-#: src/components/atc-training/training-list.tsx:12
+#: src/components/atc-training/training-list.tsx:16
 #: src/components/atc-training/training-save.tsx:86
 #: src/components/event/event-create.tsx:130
 #: src/routes/controllers/trainings/$id.tsx:58
@@ -1478,12 +1488,12 @@ msgid "Trainee"
 msgstr "Trainee"
 
 #: src/components/atc-training/training-application-list.tsx:69
-#: src/components/atc-training/training-list.tsx:13
+#: src/components/atc-training/training-list.tsx:17
 msgid "Trainee CID"
 msgstr "Trainee CID"
 
 #: src/components/atc-training/training-application-list.tsx:70
-#: src/components/atc-training/training-list.tsx:14
+#: src/components/atc-training/training-list.tsx:18
 msgid "Trainee Name"
 msgstr "Trainee Name"
 
@@ -1493,11 +1503,11 @@ msgstr "Trainee Name"
 msgid "Trainer"
 msgstr "Trainer"
 
-#: src/components/atc-training/training-list.tsx:15
+#: src/components/atc-training/training-list.tsx:19
 msgid "Trainer CID"
 msgstr "Trainer CID"
 
-#: src/components/atc-training/training-list.tsx:16
+#: src/components/atc-training/training-list.tsx:20
 msgid "Trainer Name"
 msgstr "Trainer Name"
 
@@ -1609,9 +1619,9 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
-#: src/components/atc-application/atc-application-list.tsx:45
+#: src/components/atc-application/atc-application-list.tsx:46
 #: src/components/atc-training/training-application-responses.tsx:57
-#: src/components/atc-training/training-list.tsx:34
+#: src/components/atc-training/training-list.tsx:54
 msgid "View"
 msgstr "View"
 

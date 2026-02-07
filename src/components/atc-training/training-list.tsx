@@ -1,10 +1,13 @@
 import { DateTime } from "../event/datetime";
 import { RichTable } from "../table";
+import { ConfirmButton } from "../ui/confirm-button";
 import { LinkButton } from "../ui/link-button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { notifications } from "@mantine/notifications";
 import { createColumnHelper } from "@tanstack/react-table";
+import { isAfter } from "date-fns";
 import { FC } from "react";
 
 const col = createColumnHelper<components["schemas"]["TrainingDto"]>();
@@ -27,13 +30,41 @@ const columns = [
     header: () => <Trans>Actions</Trans>,
     cell: ({
       row: {
-        original: { id },
+        original: { id, start_at, deleted_at },
       },
-    }) => (
-      <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }} target="_blank">
-        <Trans>View</Trans>
-      </LinkButton>
-    ),
+    }) => {
+      const { mutate } = $api.useMutation("delete", `/api/atc/trainings/{id}`, {
+        onSuccess: () =>
+          notifications.show({
+            message: <Trans>Successfully cancelled the training.</Trans>,
+          }),
+      });
+      const onCancel = () => mutate({ params: { path: { id } } });
+
+      return (
+        <div className="flex flex-row items-center gap-2">
+          <LinkButton
+            variant="subtle"
+            size="compact-sm"
+            to="/controllers/trainings/$id"
+            params={{ id }}
+            target="_blank"
+          >
+            <Trans>View</Trans>
+          </LinkButton>
+          {deleted_at !== null && (
+            <span>
+              <Trans>Cancelled</Trans>
+            </span>
+          )}
+          {deleted_at === null && isAfter(start_at, Date.now()) && (
+            <ConfirmButton onClick={onCancel} actionDescription={<Trans>Are you sure to cancel this training?</Trans>}>
+              <Trans>Cancel</Trans>
+            </ConfirmButton>
+          )}
+        </div>
+      );
+    },
   }),
 ];
 

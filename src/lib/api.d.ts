@@ -8232,7 +8232,131 @@ export interface paths {
       };
     };
     post?: never;
-    delete?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "NOT_FOUND";
+              /**
+               * @description The requested resource {resource}/{id} was not found.
+               * @example The requested resource {resource}/{id} was not found.
+               */
+              message: string;
+              /**
+               * @description NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:not-found";
+              /**
+               * @description The requested resource {resource}/{id} was not found.
+               * @example The requested resource {resource}/{id} was not found.
+               */
+              title: string;
+              /**
+               * @description The requested resource {resource}/{id} was not found.
+               * @example The requested resource {resource}/{id} was not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
     options?: never;
     head?: never;
     patch?: never;
@@ -9470,6 +9594,8 @@ export interface components {
       created_at: string;
       /** Format: date-time */
       updated_at: string;
+      /** Format: date-time */
+      deleted_at?: null | string;
       record_sheet_filing_id: null | components["schemas"]["Ulid"];
       record_sheet_filing: null | components["schemas"]["SheetFieldAnswerDto"][];
     };
