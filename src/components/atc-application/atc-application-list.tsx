@@ -41,6 +41,7 @@ export const columns = [
         leftSection={<TbFileDescription />}
         to="/controllers/applications/$id"
         params={{ id: row.original.id }}
+        target="_blank"
       >
         <Trans>View</Trans>
       </LinkButton>
