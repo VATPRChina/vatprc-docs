@@ -1,3 +1,4 @@
+import { TrainingList } from "@/components/atc-training/training-list";
 import { TrainingSaveModal } from "@/components/atc-training/training-save";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
@@ -131,6 +132,11 @@ function RouteComponent() {
         submitButtonContent={<Trans>Save</Trans>}
         isSubmitHidden={training?.trainer_id !== user?.id}
       />
+      <h2 className="text-xl">
+        <Trans>Previous Trainings</Trans>
+      </h2>
+      {!training?.trainee_id && <Skeleton h={256} />}
+      {training?.trainee_id && <TrainingList mode="by-user/{userId}" userId={training?.trainee_id} />}
     </div>
   );
 }

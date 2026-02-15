@@ -77,7 +77,7 @@ msgid "Accepted"
 msgstr "已通过"
 
 #: src/components/atc-application/atc-application-list.tsx:37
-#: src/components/atc-training/training-list.tsx:31
+#: src/components/atc-training/training-list.tsx:30
 #: src/routes/users/index.tsx:130
 msgid "Actions"
 msgstr "操作"
@@ -183,7 +183,7 @@ msgstr "确定要预订该时段吗？"
 msgid "Are you sure to book this ATC position?"
 msgstr "确定要预订该管制席位吗？"
 
-#: src/components/atc-training/training-list.tsx:62
+#: src/components/atc-training/training-list.tsx:61
 msgid "Are you sure to cancel this training?"
 msgstr "确定要取消该训练吗？"
 
@@ -306,7 +306,7 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/components/atc-training/training-list.tsx:63
+#: src/components/atc-training/training-list.tsx:62
 #: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/index.tsx:115
 msgid "Cancel"
@@ -314,7 +314,7 @@ msgstr "取消"
 
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:51
-#: src/components/atc-training/training-list.tsx:58
+#: src/components/atc-training/training-list.tsx:57
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -457,7 +457,7 @@ msgstr "创建训练"
 msgid "Create Training Request"
 msgstr "创建训练申请"
 
-#: src/routes/controllers/trainings/$id.tsx:98
+#: src/routes/controllers/trainings/$id.tsx:99
 #: src/routes/users/me.tsx:52
 msgid "Created at"
 msgstr "创建时间"
@@ -567,12 +567,12 @@ msgid "ELDT"
 msgstr "ELDT"
 
 #: src/components/atc-training/training-application-create.tsx:176
-#: src/components/atc-training/training-list.tsx:26
+#: src/components/atc-training/training-list.tsx:25
 #: src/components/atc-training/training-save.tsx:132
 #: src/components/event/atc-slot-create.tsx:120
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:167
-#: src/routes/controllers/trainings/$id.tsx:90
+#: src/routes/controllers/trainings/$id.tsx:91
 msgid "End at"
 msgstr "结束时间"
 
@@ -872,7 +872,7 @@ msgstr "会议记录"
 msgid "Mentor"
 msgstr "教师"
 
-#: src/routes/controllers/trainings/$id.tsx:121
+#: src/routes/controllers/trainings/$id.tsx:122
 msgid "Mentor Feedback"
 msgstr "教员反馈"
 
@@ -1079,6 +1079,10 @@ msgstr "席位"
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
+#: src/routes/controllers/trainings/$id.tsx:136
+msgid "Previous Trainings"
+msgstr "历史训练"
+
 #: src/components/app/app-nav-menu.tsx:67
 msgid "Privacy Policy"
 msgstr "隐私政策"
@@ -1172,7 +1176,7 @@ msgstr "星期六"
 #: src/components/event/atc-slot-create.tsx:171
 #: src/components/event/event-create.tsx:271
 #: src/components/preferred-route-create.tsx:191
-#: src/routes/controllers/trainings/$id.tsx:131
+#: src/routes/controllers/trainings/$id.tsx:132
 msgid "Save"
 msgstr "保存"
 
@@ -1196,11 +1200,11 @@ msgstr "扇区文件"
 msgid "See All Events"
 msgstr "查看所有活动"
 
-#: src/routes/controllers/trainings/$id.tsx:115
+#: src/routes/controllers/trainings/$id.tsx:116
 msgid "Self Reflection"
 msgstr "自我反思"
 
-#: src/routes/controllers/trainings/$id.tsx:118
+#: src/routes/controllers/trainings/$id.tsx:119
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "自我反思功能将很快上线。目前请将你的自我反思发送给你的教员。"
 
@@ -1250,12 +1254,12 @@ msgid "Start and End booking time must be both set or unset"
 msgstr "开始和结束预订时间必须同时设置或同时不设置"
 
 #: src/components/atc-training/training-application-create.tsx:165
-#: src/components/atc-training/training-list.tsx:22
+#: src/components/atc-training/training-list.tsx:21
 #: src/components/atc-training/training-save.tsx:121
 #: src/components/event/atc-slot-create.tsx:108
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:155
-#: src/routes/controllers/trainings/$id.tsx:82
+#: src/routes/controllers/trainings/$id.tsx:83
 msgid "Start at"
 msgstr "开始时间"
 
@@ -1299,7 +1303,7 @@ msgstr "提交"
 msgid "Submitted"
 msgstr "已提交"
 
-#: src/components/atc-training/training-list.tsx:40
+#: src/components/atc-training/training-list.tsx:39
 msgid "Successfully cancelled the training."
 msgstr "已成功取消训练计划。"
 
@@ -1458,10 +1462,10 @@ msgstr "活动时间："
 
 #: src/components/atc-training/training-application-create.tsx:118
 #: src/components/atc-training/training-application-list.tsx:59
-#: src/components/atc-training/training-list.tsx:16
+#: src/components/atc-training/training-list.tsx:15
 #: src/components/atc-training/training-save.tsx:86
 #: src/components/event/event-create.tsx:130
-#: src/routes/controllers/trainings/$id.tsx:58
+#: src/routes/controllers/trainings/$id.tsx:59
 msgid "Title"
 msgstr "标题"
 
@@ -1483,35 +1487,35 @@ msgid "Tower"
 msgstr "塔台"
 
 #: src/components/atc-training/training-save.tsx:110
-#: src/routes/controllers/trainings/$id.tsx:64
+#: src/routes/controllers/trainings/$id.tsx:65
 msgid "Trainee"
 msgstr "学员"
 
 #: src/components/atc-training/training-application-list.tsx:69
-#: src/components/atc-training/training-list.tsx:17
+#: src/components/atc-training/training-list.tsx:16
 msgid "Trainee CID"
 msgstr "学员 CID"
 
 #: src/components/atc-training/training-application-list.tsx:70
-#: src/components/atc-training/training-list.tsx:18
+#: src/components/atc-training/training-list.tsx:17
 msgid "Trainee Name"
 msgstr "学员姓名"
 
 #: src/components/atc-training/training-application-responses.tsx:89
 #: src/components/atc-training/training-save.tsx:98
-#: src/routes/controllers/trainings/$id.tsx:73
+#: src/routes/controllers/trainings/$id.tsx:74
 msgid "Trainer"
 msgstr "教员"
 
-#: src/components/atc-training/training-list.tsx:19
+#: src/components/atc-training/training-list.tsx:18
 msgid "Trainer CID"
 msgstr "教员 CID"
 
-#: src/components/atc-training/training-list.tsx:20
+#: src/components/atc-training/training-list.tsx:19
 msgid "Trainer Name"
 msgstr "教员姓名"
 
-#: src/routes/controllers/trainings/$id.tsx:50
+#: src/routes/controllers/trainings/$id.tsx:51
 msgid "Training"
 msgstr "训练记录"
 
@@ -1519,7 +1523,7 @@ msgstr "训练记录"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers/trainings/$id.tsx:36
+#: src/routes/controllers/trainings/$id.tsx:37
 msgid "Training record saved successfully."
 msgstr "已成功保存训练记录。"
 
@@ -1557,7 +1561,7 @@ msgstr "未知：{value}"
 msgid "until"
 msgstr "直到"
 
-#: src/routes/controllers/trainings/$id.tsx:106
+#: src/routes/controllers/trainings/$id.tsx:107
 #: src/routes/users/me.tsx:53
 msgid "Updated at"
 msgstr "修改时间"
@@ -1621,7 +1625,7 @@ msgstr "目视飞行规则"
 
 #: src/components/atc-application/atc-application-list.tsx:46
 #: src/components/atc-training/training-application-responses.tsx:57
-#: src/components/atc-training/training-list.tsx:54
+#: src/components/atc-training/training-list.tsx:53
 msgid "View"
 msgstr "查看"
 

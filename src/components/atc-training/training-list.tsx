@@ -68,12 +68,22 @@ const columns = [
   }),
 ];
 
-interface TrainingListProps {
-  mode: "active" | "finished";
+interface UserTrainingListProps {
+  mode: "by-user/{userId}";
+  userId: string;
 }
 
-export const TrainingList: FC<TrainingListProps> = ({ mode }) => {
-  const { data, isLoading } = $api.useQuery("get", `/api/atc/trainings/${mode}`);
+type TrainingListProps =
+  | {
+      mode: "active" | "finished";
+      userId: never;
+    }
+  | UserTrainingListProps;
+
+export const TrainingList: FC<TrainingListProps> = ({ mode, userId }) => {
+  const { data, isLoading } = $api.useQuery("get", `/api/atc/trainings/${mode}`, {
+    params: { path: { userId } },
+  });
 
   return <RichTable data={data} columns={columns} isLoading={isLoading} />;
 };
