@@ -76,14 +76,15 @@ interface UserTrainingListProps {
 type TrainingListProps =
   | {
       mode: "active" | "finished";
-      userId: never;
     }
   | UserTrainingListProps;
 
-export const TrainingList: FC<TrainingListProps> = ({ mode, userId }) => {
-  const { data, isLoading } = $api.useQuery("get", `/api/atc/trainings/${mode}`, {
-    params: { path: { userId } },
-  });
+export const TrainingList: FC<TrainingListProps> = (props) => {
+  const { data, isLoading } = $api.useQuery(
+    "get",
+    `/api/atc/trainings/${props.mode}`,
+    props.mode === "by-user/{userId}" ? { params: { path: { userId: props.userId } } } : {},
+  );
 
   return <RichTable data={data} columns={columns} isLoading={isLoading} />;
 };
