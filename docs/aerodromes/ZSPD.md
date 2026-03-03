@@ -63,28 +63,28 @@
 
 #### 2.2.1 北向运行时跑道穿越联络道使用规则
 
-- 35L
+- 35L 跑道
   - P1 向东穿越，P2、P4、P6 可双向穿越
   - 去往 35R/34L 离场的航空器主用 P1、P2 向东穿越
   - 进港航空器去往西货坪主用 P4 向西穿越
 
-- 35R
+- 35R 跑道
   - P1、P5 向东穿越，P3 向西穿越，P2、P4、P6 可双向穿越
   - 去往 34L 离场的航空器主用 P1、P2 向东穿越
   - 去往 35L 离场的航空器主用 P3 向西穿越
   - 进港航空器去往西货坪主用 P4 向西穿越
   - 35L 进港航空器主用 P5、P6 向东穿越
 
-- 34R
+- 34R 跑道
   - 本跑道原则上不提供穿越，如有需要 R2 可供双向穿越，R1 可向西穿越
 
-- 34L
+- 34L 跑道
   - R4、R5、R6 供进港航空器使用，向西穿越
   - R2 可双向穿越
 
-![bc08e86feda7d0230068f7240fe66fb2](https://github.com/user-attachments/assets/78a78873-037c-4b42-8472-30009604431a)
+![北向跑道穿越](https://i.see.you/2026/03/03/fAe3/vatprc-2026-03-03-01KJSYY1YD4DK9)
 
-图 2.1 北向穿越图（红色箭头代表离场、蓝色代表进场、绿色代表混合使用）
+图 2.1 北向跑道穿越图（红色箭头代表离场、蓝色代表进场、绿色代表混合使用）
 
 #### 2.2.2 南向运行时跑道穿越联络道如下：
 
@@ -109,7 +109,7 @@
 - 16L
   - 本跑道原则上不提供穿越，如有需要 R2 可供双向穿越，R6 可向西穿越
 
-![5fd23b555a51169b38b274f3166e1c5f](https://github.com/user-attachments/assets/753bab8a-5f78-4d71-a72f-b4fa8e8cdf27)
+![南向跑道穿越](https://i.see.you/2026/03/03/cM3f/vatprc-2026-03-03-01KJSZ24PM3ZPE)
 
 图 2.2 南向穿越图（红色箭头代表离场、蓝色代表进场、绿色代表皆可使用）
 
@@ -150,7 +150,7 @@
 - ZSPD_TWR（分扇）：17L/35R、17R/35L 及对应联络道，C、D 滑行道（粉色）
 - ZSPD_E_TWR：16L/34R、16R/34L 及对应联络道，G、H 滑行道及 H 滑行道以东全部区域（橙色）
 
-![07f21845d758527de9c51bfc21c9b0e3](https://github.com/user-attachments/assets/c5e20873-2f1e-44d3-af1b-4aa40e8b3122)
+![塔台分扇](https://i.see.you/2026/03/03/4Tec/vatprc-2026-03-03-01KJSZ3GG0853F)
 
 图 3.1 塔台场面管制区范围图
 
@@ -164,7 +164,7 @@
 
 绿色为地面管制区，黄色与蓝色为机坪管制区，无机坪管制时 ZSPD_GND 需代管机坪管制区
 
-![46ef00cea98d23d6893a9d36fcc9b49d](https://github.com/user-attachments/assets/63795420-4c37-46be-ae80-99b36121b0c1)
+![地面分扇](https://i.see.you/2026/03/03/q4wO/vatprc-2026-03-03-01KJSZBWN7HH18)
 
 图 3.2 地面管制区范围图
 
@@ -192,7 +192,7 @@
 - ZSPD_RMP（分扇）：1-3、6-8 号机坪（黄色）
 - ZSPD_S_RMP：T1（含）、E（不含）、T4（含）、B（不含）之间的区域，4 号机坪（蓝色）
 
-![00e87df39394cc0e55c91420b9efe2b8](https://github.com/user-attachments/assets/eef0cca3-666c-472c-85dd-ebecf5f97bf1)
+![机坪分扇](https://i.see.you/2026/03/03/7hwQ/vatprc-2026-03-03-01KJSZFMA16TDV)
 
 图 3.3 机坪管制范围划分图
 
@@ -269,13 +269,13 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 
 #### 北向运行
 
-![2354f4b802d77ef0ce8943fc5c7e788b](https://github.com/user-attachments/assets/9022b3af-3561-4571-93a8-c75880ee3d75)
+![北向滑行路线](https://i.see.you/2026/03/03/1Nca/vatprc-2026-03-03-01KJSZMRJNPM59)
 
 图 4.1 北向滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
 #### 南向运行
 
-![30c4a6d38cf27e814cef37cafa4996d7](https://github.com/user-attachments/assets/faf9da21-7d24-4617-bace-35ec4fd471f2)
+![南向滑行路线](https://i.see.you/2026/03/03/m2Ek/vatprc-2026-03-03-01KJSZP224F466)
 
 图 4.2 南向滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
@@ -328,7 +328,7 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 
 #### 机坪内滑行路线
 
-![28b2600d9dec871768e5877c4ca54b4b](https://github.com/user-attachments/assets/d8a6734d-1629-4059-972d-624a358211dd)
+![机坪内滑行路线](https://i.see.you/2026/03/03/xT5v/vatprc-2026-03-03-01KJSZJKF2Q63D)
 
 图 4.3 机坪内部滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
@@ -555,7 +555,7 @@ A388 航空器不可使用 17L/35R 跑道，主用 16R/34L 跑道，可分配 17
 
 #### 可运行区域
 
-![b47836541f57a5b925890125f774e40d](https://github.com/user-attachments/assets/479190f7-b69c-4efe-9677-41b2a323cf09)
+![低能见度运行区域](https://i.see.you/2026/03/03/sT2c/vatprc-2026-03-03-01KJT0227ZZKQQ)
 
 图 5.1 低能见度运行范围图
 
@@ -583,7 +583,7 @@ A388 航空器不可使用 17L/35R 跑道，主用 16R/34L 跑道，可分配 17
 
 ##### 北向
 
-![334258cbfcfcc970daffda291285d239](https://github.com/user-attachments/assets/24760b0e-aed9-4550-8054-5a3c731f67c7)
+![北向低能见度滑行路线](https://i.see.you/2026/03/03/4dRe/vatprc-2026-03-03-01KJT04RNWY5M7)
 
 图 5.2 北向低能见度滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
@@ -591,7 +591,7 @@ A388 航空器不可使用 17L/35R 跑道，主用 16R/34L 跑道，可分配 17
 
 ##### 南向
 
-![dcc09d25d7470ad09bbbee5386c2260e](https://github.com/user-attachments/assets/23c563f0-6410-472e-bdd2-63d597084877)
+![南向低能见度滑行路线](https://i.see.you/2026/03/03/0ooK/vatprc-2026-03-03-01KJT05ZZ0988H)
 
 图 5.3 南向低能见度滑行图（红线表离场、蓝线表进场、绿线表进离场皆可、箭头代表运行方向）
 
