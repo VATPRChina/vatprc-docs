@@ -107,7 +107,6 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
                 <DateTimeInput
                   label={t`Start at`}
                   onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                   value={new Date(field.state.value)}
                   onBlur={field.handleBlur}
                   disabled={isLoading}
@@ -119,7 +118,6 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
                 <DateTimeInput
                   label={t`End at`}
                   onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                   value={new Date(field.state.value)}
                   onBlur={field.handleBlur}
                   disabled={isLoading}

@@ -38,7 +38,7 @@ const columns = [
   columnHelper.accessor("start_at", {
     header: () => <Trans>Start at</Trans>,
     cell: ({ getValue, row }) =>
-      isSameMinute(row.original.start_at, getValue()) ? (
+      isSameMinute(row.original.event.start_at, getValue()) ? (
         <Trans>Event start</Trans>
       ) : (
         <DateTime noDistance noDate>
@@ -49,7 +49,7 @@ const columns = [
   columnHelper.accessor("end_at", {
     header: () => <Trans>End at</Trans>,
     cell: ({ getValue, row }) =>
-      isSameMinute(row.original.end_at, getValue()) ? (
+      isSameMinute(row.original.event.end_at, getValue()) ? (
         <Trans>Event end</Trans>
       ) : (
         <DateTime noDistance noDate>

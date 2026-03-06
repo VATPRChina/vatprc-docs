@@ -123,7 +123,6 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   <DateTimeInput
                     label={t`Valid From`}
                     onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                     clearable
                     value={field.state.value && new Date(field.state.value)}
                     onBlur={field.handleBlur}
@@ -136,7 +135,6 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   <DateTimeInput
                     label={t`Valid Until`}
                     onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                     clearable
                     value={field.state.value && new Date(field.state.value)}
                     onBlur={field.handleBlur}
