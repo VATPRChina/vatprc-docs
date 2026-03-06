@@ -24,7 +24,7 @@ function RouteComponent() {
       <div key={event.id} className="flex flex-col gap-4">
         <BackButton />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <img src={event.image_url ?? NoEventImage} className="" />
+          <img src={event.image_url ?? NoEventImage} className="aspect-video" />
           <div className="flex flex-col gap-4">
             <div className="flex flex-row items-center gap-2">
               <Link

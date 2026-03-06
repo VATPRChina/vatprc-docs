@@ -25,7 +25,7 @@ function RouteComponent() {
       <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
         {events?.map((event) => (
           <Link to="/events/$id" params={{ id: event.id }} key={event.id} className="flex flex-col gap-2 border p-4">
-            <img src={event.image_url ?? NoEventImage} className="mb-2" />
+            <img src={event.image_url ?? NoEventImage} className="mb-2 aspect-video" />
             <h2 className="text-2xl font-bold">
               {i18n.locale === "en" ? (event.title_en ?? event.title) : event.title}
             </h2>
