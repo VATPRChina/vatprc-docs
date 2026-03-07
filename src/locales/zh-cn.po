@@ -58,6 +58,11 @@ msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "训练申请可以包含多个时段。每个时段代表你可用于训练的一段时间，教员可以从这些时段中选择任意一个来安排训练。"
 
+#: src/components/atc-application/atc-application-status.tsx:18
+#: src/components/atc-application/atc-application-status.tsx:61
+msgid "Aborted"
+msgstr "已中止"
+
 #: src/components/app/app-nav-menu.tsx:49
 msgid "About Us"
 msgstr "关于我们"
@@ -69,7 +74,7 @@ msgid "Absent"
 msgstr "缺席"
 
 #: src/components/atc-application/atc-application-status.tsx:16
-#: src/components/atc-application/atc-application-status.tsx:42
+#: src/components/atc-application/atc-application-status.tsx:43
 #: src/components/atc-training/training-application-list.tsx:17
 #: src/components/atc-training/training-application-list.tsx:35
 #: src/components/atc-training/training-application-responses.tsx:95
@@ -142,7 +147,7 @@ msgstr "API 文档"
 msgid "Application Information"
 msgstr "申请信息"
 
-#: src/components/atc-application/atc-application-status.tsx:98
+#: src/components/atc-application/atc-application-status.tsx:111
 msgid "Application review updated"
 msgstr "申请审核已更新"
 
@@ -203,7 +208,7 @@ msgstr "确定要取消该管制席位预订吗？"
 msgid "Are you sure to withdraw this training application?"
 msgstr "确定要撤回该训练申请吗？"
 
-#: src/components/atc-application/atc-application-status.tsx:134
+#: src/components/atc-application/atc-application-status.tsx:147
 msgid "Are you sure you want to submit the application review?"
 msgstr "确定要提交申请审核结果吗？"
 
@@ -426,9 +431,9 @@ msgstr "管制员"
 
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
-#: src/components/event/atc-slot-create.tsx:171
+#: src/components/event/atc-slot-create.tsx:169
 #: src/components/event/event-create.tsx:271
-#: src/components/preferred-route-create.tsx:191
+#: src/components/preferred-route-create.tsx:189
 msgid "Create"
 msgstr "创建"
 
@@ -474,7 +479,7 @@ msgstr "巡航高度不允许"
 msgid "Cruising Level Too Low"
 msgstr "巡航高度过低"
 
-#: src/components/preferred-route-create.tsx:164
+#: src/components/preferred-route-create.tsx:162
 msgid "Cruising Level Type"
 msgstr "巡航高度类型"
 
@@ -505,7 +510,7 @@ msgid "Departure"
 msgstr "出发机场"
 
 #: src/components/event/event-create.tsx:256
-#: src/components/preferred-route-create.tsx:179
+#: src/components/preferred-route-create.tsx:177
 msgid "Description"
 msgstr "描述"
 
@@ -569,7 +574,7 @@ msgstr "ELDT"
 #: src/components/atc-training/training-application-create.tsx:176
 #: src/components/atc-training/training-list.tsx:25
 #: src/components/atc-training/training-save.tsx:132
-#: src/components/event/atc-slot-create.tsx:120
+#: src/components/event/atc-slot-create.tsx:119
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:167
 #: src/routes/controllers/trainings/$id.tsx:91
@@ -794,7 +799,7 @@ msgid "In This Week"
 msgstr "本周"
 
 #: src/components/atc-application/atc-application-status.tsx:15
-#: src/components/atc-application/atc-application-status.tsx:32
+#: src/components/atc-application/atc-application-status.tsx:33
 msgid "In Waitlist"
 msgstr "等待中"
 
@@ -888,7 +893,7 @@ msgstr "公制飞行高度层"
 msgid "metric odd flight level (meters)"
 msgstr "公制单数飞行高度层（米）"
 
-#: src/components/event/atc-slot-create.tsx:147
+#: src/components/event/atc-slot-create.tsx:145
 msgid "Minimum State"
 msgstr "最低权限"
 
@@ -1070,7 +1075,7 @@ msgstr "请仔细阅读下列说明，并确保已完全满足所列条件。如
 msgid "Please wait while being logged in."
 msgstr "正在登入，请稍等片刻。"
 
-#: src/components/event/atc-slot-create.tsx:133
+#: src/components/event/atc-slot-create.tsx:131
 #: src/components/event/atc-slot-list.tsx:62
 msgid "Position"
 msgstr "席位"
@@ -1104,7 +1109,7 @@ msgid "Reject"
 msgstr "拒绝"
 
 #: src/components/atc-application/atc-application-status.tsx:17
-#: src/components/atc-application/atc-application-status.tsx:50
+#: src/components/atc-application/atc-application-status.tsx:51
 #: src/components/atc-training/training-application-list.tsx:18
 #: src/components/atc-training/training-application-list.tsx:43
 #: src/components/atc-training/training-application-responses.tsx:99
@@ -1116,7 +1121,7 @@ msgstr "已拒绝"
 msgid "Release"
 msgstr "取消预订"
 
-#: src/components/event/atc-slot-create.tsx:161
+#: src/components/event/atc-slot-create.tsx:159
 #: src/routes/navdata/preferred-routes.tsx:24
 msgid "Remark"
 msgstr "备注"
@@ -1156,7 +1161,7 @@ msgid "Roles"
 msgstr "权限"
 
 #: src/components/event/slot-list.tsx:23
-#: src/components/preferred-route-create.tsx:151
+#: src/components/preferred-route-create.tsx:149
 #: src/routes/flights/$callsign.tsx:389
 #: src/routes/navdata/preferred-routes.tsx:20
 msgid "Route"
@@ -1173,9 +1178,9 @@ msgstr "星期六"
 #: src/components/atc-permission-modal.tsx:192
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
-#: src/components/event/atc-slot-create.tsx:171
+#: src/components/event/atc-slot-create.tsx:169
 #: src/components/event/event-create.tsx:271
-#: src/components/preferred-route-create.tsx:191
+#: src/components/preferred-route-create.tsx:189
 #: src/routes/controllers/trainings/$id.tsx:132
 msgid "Save"
 msgstr "保存"
@@ -1284,7 +1289,7 @@ msgid "Start to Fly"
 msgstr "开始飞行"
 
 #: src/components/atc-application/atc-application-list.tsx:20
-#: src/components/atc-application/atc-application-status.tsx:115
+#: src/components/atc-application/atc-application-status.tsx:128
 #: src/components/atc-training/training-application-list.tsx:61
 msgid "Status"
 msgstr "状态"
@@ -1294,12 +1299,12 @@ msgid "Student"
 msgstr "理论学习"
 
 #: src/components/atc-application/atc-application-form.tsx:135
-#: src/components/atc-application/atc-application-status.tsx:132
+#: src/components/atc-application/atc-application-status.tsx:145
 msgid "Submit"
 msgstr "提交"
 
 #: src/components/atc-application/atc-application-status.tsx:14
-#: src/components/atc-application/atc-application-status.tsx:24
+#: src/components/atc-application/atc-application-status.tsx:25
 msgid "Submitted"
 msgstr "已提交"
 
@@ -1361,7 +1366,7 @@ msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 
 msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 msgstr "此处列出的空域是禁飞区、限制区或危险区。请访问 <0>vPLAAF 的网站</0>了解详情。这些空域由 vPLAAF 指定，并经 VATPRC 批准。"
 
-#: src/components/atc-application/atc-application-status.tsx:99
+#: src/components/atc-application/atc-application-status.tsx:112
 msgid "The ATC application review has been updated successfully."
 msgstr "管制员申请审核已成功更新。"
 
@@ -1596,7 +1601,7 @@ msgstr "模拟 A-CDM"
 msgid "Valid From"
 msgstr "生效自"
 
-#: src/components/preferred-route-create.tsx:137
+#: src/components/preferred-route-create.tsx:136
 msgid "Valid Until"
 msgstr "生效至"
 
@@ -1646,7 +1651,7 @@ msgstr "志愿者"
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
 
-#: src/components/atc-application/atc-application-status.tsx:51
+#: src/components/atc-application/atc-application-status.tsx:52
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
@@ -1675,15 +1680,15 @@ msgstr "是"
 msgid "You have responded to this training request."
 msgstr "您已回复该训练申请。"
 
-#: src/components/atc-application/atc-application-status.tsx:43
+#: src/components/atc-application/atc-application-status.tsx:44
 msgid "Your application has been approved. Welcome to start growing to be a controller!"
 msgstr "您的申请已通过。欢迎开始学习成为管制员！"
 
-#: src/components/atc-application/atc-application-status.tsx:33
+#: src/components/atc-application/atc-application-status.tsx:34
 msgid "Your application has been placed in the waitlist. You will be notified if a spot becomes available."
 msgstr "您的申请已被列入候补名单。如有空位将通知您。"
 
-#: src/components/atc-application/atc-application-status.tsx:25
+#: src/components/atc-application/atc-application-status.tsx:26
 msgid "Your application has been submitted and is pending review by the staff."
 msgstr "您的申请已提交，正在等待职员审核。"
 
@@ -1694,3 +1699,7 @@ msgstr "已经成功提交管制员申请。"
 #: src/components/atc-application/atc-application-form.tsx:78
 msgid "Your ATC application has been updated successfully."
 msgstr "已经成功修改管制员申请。"
+
+#: src/components/atc-application/atc-application-status.tsx:62
+msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
+msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"

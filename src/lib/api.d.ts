@@ -9247,7 +9247,7 @@ export interface components {
       review_answers: components["schemas"]["SheetRequestField"][];
     };
     /** @enum {unknown} */
-    AtcApplicationStatus: "submitted" | "in-waitlist" | "approved" | "rejected";
+    AtcApplicationStatus: "submitted" | "in-waitlist" | "approved" | "rejected" | "aborted";
     AtcApplicationSummaryDto: {
       id: components["schemas"]["Ulid"];
       user_id: components["schemas"]["Ulid"];

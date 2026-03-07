@@ -15,6 +15,7 @@ export const APPLICATION_STATUS: Map<components["schemas"]["AtcApplicationStatus
   ["in-waitlist", msg`In Waitlist`],
   ["approved", msg`Accepted`],
   ["rejected", msg`Rejected`],
+  ["aborted", msg`Aborted`],
 ]);
 
 const ATC_APPLICATION_STATUS_ALERTS: Map<components["schemas"]["AtcApplicationStatus"], FC> = new Map([
@@ -50,6 +51,18 @@ const ATC_APPLICATION_STATUS_ALERTS: Map<components["schemas"]["AtcApplicationSt
       <Alert title={<Trans>Rejected</Trans>} color="red">
         <Trans>
           We regret to inform you that your application has been rejected. Please check the remarks for more details.
+        </Trans>
+      </Alert>
+    ),
+  ],
+  [
+    "aborted",
+    () => (
+      <Alert title={<Trans>Aborted</Trans>} color="red">
+        <Trans>
+          Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details.
+          You may contact the staff if you have any questions, or file an application again, which will be considered in
+          priority.
         </Trans>
       </Alert>
     ),
