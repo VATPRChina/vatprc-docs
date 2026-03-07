@@ -127,7 +127,7 @@ msgstr "空域"
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
 
-#: src/components/event/slot-list.tsx:134
+#: src/components/event/slot-list.tsx:138
 msgid "Already Booked"
 msgstr "已被预订"
 
@@ -180,7 +180,7 @@ msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，
 msgid "Approach"
 msgstr "进近"
 
-#: src/components/event/slot-list.tsx:127
+#: src/components/event/slot-list.tsx:131
 msgid "Are you sure to book the slot?"
 msgstr "确定要预订该时段吗？"
 
@@ -196,7 +196,7 @@ msgstr "确定要取消该训练吗？"
 msgid "Are you sure to delete this ATC position?"
 msgstr "确定要删除该管制席位吗？"
 
-#: src/components/event/slot-list.tsx:143
+#: src/components/event/slot-list.tsx:147
 msgid "Are you sure to release the slot?"
 msgstr "确定要取消该预订吗？"
 
@@ -224,12 +224,18 @@ msgstr "到达机场"
 
 #: src/components/event/atc-slot-assign.tsx:64
 #: src/components/event/atc-slot-assign.tsx:81
+#: src/components/event/slot-assign.tsx:61
+#: src/components/event/slot-assign.tsx:78
 msgid "Assign"
 msgstr "指派"
 
 #: src/components/event/atc-slot-assign.tsx:66
 msgid "Assign ATC Position {callsign}"
 msgstr "指派管制席位 {callsign}"
+
+#: src/components/event/slot-assign.tsx:63
+msgid "Assign Slot {callsign}"
+msgstr "指派时刻 {callsign}"
 
 #: src/components/atc-training/training-application-create.tsx:72
 msgid "At least one slot is required"
@@ -281,7 +287,7 @@ msgid "Basic Information"
 msgstr "基本信息"
 
 #: src/components/event/atc-slot-list.tsx:163
-#: src/components/event/slot-list.tsx:129
+#: src/components/event/slot-list.tsx:133
 msgid "Book"
 msgstr "预订"
 
@@ -307,7 +313,7 @@ msgstr "简要描述训练目标，例如席位和课程内容。"
 msgid "Callsign"
 msgstr "呼号"
 
-#: src/components/event/slot-list.tsx:52
+#: src/components/event/slot-list.tsx:53
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
@@ -363,6 +369,7 @@ msgstr "中国 RVSM 单数高度层"
 #: src/components/atc-application/atc-application-list.tsx:17
 #: src/components/event/atc-slot-assign.tsx:71
 #: src/components/event/atc-slot-list.tsx:94
+#: src/components/event/slot-assign.tsx:68
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -963,7 +970,7 @@ msgstr "无应答机"
 msgid "Not booked"
 msgstr "未预订"
 
-#: src/components/event/slot-list.tsx:56
+#: src/components/event/slot-list.tsx:57
 msgid "Not designated"
 msgstr "任意"
 
@@ -1059,7 +1066,7 @@ msgstr "请从下列指定航路中选择一条作为计划航路，或与管制
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
-#: src/components/event/slot-list.tsx:174
+#: src/components/event/slot-list.tsx:178
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
 
@@ -1117,7 +1124,7 @@ msgid "Rejected"
 msgstr "已拒绝"
 
 #: src/components/event/atc-slot-list.tsx:173
-#: src/components/event/slot-list.tsx:145
+#: src/components/event/slot-list.tsx:149
 msgid "Release"
 msgstr "取消预订"
 
@@ -1160,7 +1167,7 @@ msgstr "RNP AR（无 RF 航段）"
 msgid "Roles"
 msgstr "权限"
 
-#: src/components/event/slot-list.tsx:23
+#: src/components/event/slot-list.tsx:24
 #: src/components/preferred-route-create.tsx:149
 #: src/routes/flights/$callsign.tsx:389
 #: src/routes/navdata/preferred-routes.tsx:20
@@ -1226,7 +1233,7 @@ msgid "Show less pilots"
 msgstr "显示部分"
 
 #: src/components/atc-training/training-application-create.tsx:132
-#: src/components/event/slot-list.tsx:170
+#: src/components/event/slot-list.tsx:174
 #: src/routes/events/$id.tsx:47
 msgid "Slots"
 msgstr "时刻"
@@ -1370,7 +1377,7 @@ msgstr "此处列出的空域是禁飞区、限制区或危险区。请访问 <0
 msgid "The ATC application review has been updated successfully."
 msgstr "管制员申请审核已成功更新。"
 
-#: src/components/event/slot-list.tsx:179
+#: src/components/event/slot-list.tsx:183
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
 
@@ -1457,7 +1464,7 @@ msgid "Tier 2"
 msgstr "Tier 2"
 
 #: src/components/atc-training/training-application-responses.tsx:65
-#: src/components/event/slot-list.tsx:27
+#: src/components/event/slot-list.tsx:28
 msgid "Time"
 msgstr "时间"
 
@@ -1550,6 +1557,7 @@ msgid "Tue"
 msgstr "星期二"
 
 #: src/components/event/atc-slot-assign.tsx:90
+#: src/components/event/slot-assign.tsx:87
 msgid "Unassign"
 msgstr "取消指派"
 

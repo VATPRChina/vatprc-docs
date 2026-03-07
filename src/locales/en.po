@@ -127,7 +127,7 @@ msgstr "Airspace"
 msgid "Allowed levels are {level} (in feet)."
 msgstr "Allowed levels are {level} (in feet)."
 
-#: src/components/event/slot-list.tsx:134
+#: src/components/event/slot-list.tsx:138
 msgid "Already Booked"
 msgstr "Already Booked"
 
@@ -180,7 +180,7 @@ msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback
 msgid "Approach"
 msgstr "Approach"
 
-#: src/components/event/slot-list.tsx:127
+#: src/components/event/slot-list.tsx:131
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 
@@ -196,7 +196,7 @@ msgstr "Are you sure to cancel this training?"
 msgid "Are you sure to delete this ATC position?"
 msgstr "Are you sure to delete this ATC position?"
 
-#: src/components/event/slot-list.tsx:143
+#: src/components/event/slot-list.tsx:147
 msgid "Are you sure to release the slot?"
 msgstr "Are you sure to release the slot?"
 
@@ -224,12 +224,18 @@ msgstr "Arrival"
 
 #: src/components/event/atc-slot-assign.tsx:64
 #: src/components/event/atc-slot-assign.tsx:81
+#: src/components/event/slot-assign.tsx:61
+#: src/components/event/slot-assign.tsx:78
 msgid "Assign"
 msgstr "Assign"
 
 #: src/components/event/atc-slot-assign.tsx:66
 msgid "Assign ATC Position {callsign}"
 msgstr "Assign ATC Position {callsign}"
+
+#: src/components/event/slot-assign.tsx:63
+msgid "Assign Slot {callsign}"
+msgstr "Assign Slot {callsign}"
 
 #: src/components/atc-training/training-application-create.tsx:72
 msgid "At least one slot is required"
@@ -281,7 +287,7 @@ msgid "Basic Information"
 msgstr "Basic Information"
 
 #: src/components/event/atc-slot-list.tsx:163
-#: src/components/event/slot-list.tsx:129
+#: src/components/event/slot-list.tsx:133
 msgid "Book"
 msgstr "Book"
 
@@ -307,7 +313,7 @@ msgstr "Briefly describe the target of the training, such as position and lesson
 msgid "Callsign"
 msgstr "Callsign"
 
-#: src/components/event/slot-list.tsx:52
+#: src/components/event/slot-list.tsx:53
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
@@ -363,6 +369,7 @@ msgstr "China RVSM odd flight level"
 #: src/components/atc-application/atc-application-list.tsx:17
 #: src/components/event/atc-slot-assign.tsx:71
 #: src/components/event/atc-slot-list.tsx:94
+#: src/components/event/slot-assign.tsx:68
 #: src/routes/users/index.tsx:54
 #: src/routes/users/me.tsx:50
 msgid "CID"
@@ -963,7 +970,7 @@ msgstr "No transponder"
 msgid "Not booked"
 msgstr "Not booked"
 
-#: src/components/event/slot-list.tsx:56
+#: src/components/event/slot-list.tsx:57
 msgid "Not designated"
 msgstr "Not designated"
 
@@ -1059,7 +1066,7 @@ msgstr "Please choose a designated route from the following list, or contact ATC
 msgid "Please contact ATC for help adjusting the route."
 msgstr "Please contact ATC for help adjusting the route."
 
-#: src/components/event/slot-list.tsx:174
+#: src/components/event/slot-list.tsx:178
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
 
@@ -1117,7 +1124,7 @@ msgid "Rejected"
 msgstr "Rejected"
 
 #: src/components/event/atc-slot-list.tsx:173
-#: src/components/event/slot-list.tsx:145
+#: src/components/event/slot-list.tsx:149
 msgid "Release"
 msgstr "Release"
 
@@ -1160,7 +1167,7 @@ msgstr "RNP AR without RF"
 msgid "Roles"
 msgstr "Roles"
 
-#: src/components/event/slot-list.tsx:23
+#: src/components/event/slot-list.tsx:24
 #: src/components/preferred-route-create.tsx:149
 #: src/routes/flights/$callsign.tsx:389
 #: src/routes/navdata/preferred-routes.tsx:20
@@ -1226,7 +1233,7 @@ msgid "Show less pilots"
 msgstr "Show less pilots"
 
 #: src/components/atc-training/training-application-create.tsx:132
-#: src/components/event/slot-list.tsx:170
+#: src/components/event/slot-list.tsx:174
 #: src/routes/events/$id.tsx:47
 msgid "Slots"
 msgstr "Slots"
@@ -1370,7 +1377,7 @@ msgstr "The airspaces listed on this map are either prohibited, restricted, or d
 msgid "The ATC application review has been updated successfully."
 msgstr "The ATC application review has been updated successfully."
 
-#: src/components/event/slot-list.tsx:179
+#: src/components/event/slot-list.tsx:183
 msgid "The booking has not started yet or has ended."
 msgstr "The booking has not started yet or has ended."
 
@@ -1457,7 +1464,7 @@ msgid "Tier 2"
 msgstr "Tier 2"
 
 #: src/components/atc-training/training-application-responses.tsx:65
-#: src/components/event/slot-list.tsx:27
+#: src/components/event/slot-list.tsx:28
 msgid "Time"
 msgstr "Time"
 
@@ -1550,6 +1557,7 @@ msgid "Tue"
 msgstr "Tue"
 
 #: src/components/event/atc-slot-assign.tsx:90
+#: src/components/event/slot-assign.tsx:87
 msgid "Unassign"
 msgstr "Unassign"
 

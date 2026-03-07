@@ -3,6 +3,7 @@ import { RequireRole } from "../require-role";
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTime } from "./datetime";
+import { AssignEventSlot } from "./slot-assign";
 import { ExportSlot } from "./slot-export";
 import { ImportSlot } from "./slot-import";
 import { components } from "@/lib/api";
@@ -106,7 +107,7 @@ const columns = [
         (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
 
       const onBook = () => {
-        book({ params: { path: { eid: slot.event_id, sid: slot.id } } });
+        book({ params: { path: { eid: slot.event_id, sid: slot.id } }, body: {} });
       };
       const onRelease = () => {
         release({ params: { path: { eid: slot.event_id, sid: slot.id } } });
@@ -116,6 +117,9 @@ const columns = [
         <div role="cell" className="flex items-center gap-2">
           <RequireRole role={["event-coordinator", "controller"]}>
             <User user={slot.booking?.user} />
+          </RequireRole>
+          <RequireRole role={["event-coordinator"]}>
+            <AssignEventSlot eventId={slot.event_id} slotId={slot.id} />
           </RequireRole>
           {!isBookedByCurrentUser && !isBookedByOtherUser && (
             <ConfirmButton

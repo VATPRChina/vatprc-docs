@@ -2085,7 +2085,11 @@ export interface paths {
         };
         cookie?: never;
       };
-      requestBody?: never;
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["EventSlotBookingRequest"];
+        };
+      };
       responses: {
         /** @description OK */
         200: {
@@ -9462,6 +9466,9 @@ export interface components {
       community_link?: null | string;
       vatsim_link?: null | string;
       description: string;
+    };
+    EventSlotBookingRequest: {
+      user_id?: null | components["schemas"]["Ulid"];
     };
     EventSlotDto: {
       id: components["schemas"]["Ulid"];
