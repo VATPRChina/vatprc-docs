@@ -58,7 +58,12 @@ const columns = [
             </span>
           )}
           {deleted_at === null && isAfter(start_at, Date.now()) && (
-            <ConfirmButton onClick={onCancel} actionDescription={<Trans>Are you sure to cancel this training?</Trans>}>
+            <ConfirmButton
+              onClick={onCancel}
+              actionDescription={<Trans>Are you sure to cancel this training?</Trans>}
+              variant="subtle"
+              size="compact-sm"
+            >
               <Trans>Cancel Training</Trans>
             </ConfirmButton>
           )}
