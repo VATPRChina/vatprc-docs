@@ -317,10 +317,13 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/components/atc-training/training-list.tsx:62
 #: src/routes/users/index.tsx:115
 msgid "Cancel"
 msgstr "取消"
+
+#: src/components/atc-training/training-list.tsx:62
+msgid "Cancel Training"
+msgstr "取消训练"
 
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:51

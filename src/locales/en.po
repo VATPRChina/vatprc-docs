@@ -317,10 +317,13 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/components/atc-training/training-list.tsx:62
 #: src/routes/users/index.tsx:115
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/components/atc-training/training-list.tsx:62
+msgid "Cancel Training"
+msgstr "Cancel Training"
 
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:51

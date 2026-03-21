@@ -59,7 +59,7 @@ const columns = [
           )}
           {deleted_at === null && isAfter(start_at, Date.now()) && (
             <ConfirmButton onClick={onCancel} actionDescription={<Trans>Are you sure to cancel this training?</Trans>}>
-              <Trans>Cancel</Trans>
+              <Trans>Cancel Training</Trans>
             </ConfirmButton>
           )}
         </div>
