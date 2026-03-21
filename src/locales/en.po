@@ -318,7 +318,6 @@ msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
 #: src/components/atc-training/training-list.tsx:62
-#: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/index.tsx:115
 msgid "Cancel"
 msgstr "Cancel"
@@ -925,6 +924,7 @@ msgstr "Name"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
+#: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/me.tsx:79
 #: src/routes/users/me.tsx:80
 msgid "No"

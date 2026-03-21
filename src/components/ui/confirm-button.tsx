@@ -27,7 +27,7 @@ export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
           {actionDescription}
           <div className="flex flex-row gap-2">
             <Button size="xs" variant="subtle" onClick={close}>
-              <Trans>Cancel</Trans>
+              <Trans>No</Trans>
             </Button>
             <Button {...rest} type={type} variant="outline" size="xs" onClick={handleClick} />
           </div>
