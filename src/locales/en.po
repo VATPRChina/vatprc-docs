@@ -83,7 +83,7 @@ msgstr "Accepted"
 
 #: src/components/atc-application/atc-application-list.tsx:37
 #: src/components/atc-training/training-list.tsx:30
-#: src/routes/users/index.tsx:130
+#: src/routes/users/index.tsx:131
 msgid "Actions"
 msgstr "Actions"
 
@@ -107,7 +107,7 @@ msgstr "Add <0>W</0> to equipment code."
 msgid "Admin"
 msgstr "Admin"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:43
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
 
@@ -135,7 +135,7 @@ msgstr "Already Booked"
 msgid "Announcement"
 msgstr "Announcement"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:47
 msgid "API Client"
 msgstr "API Client"
 
@@ -188,7 +188,7 @@ msgstr "Are you sure to book the slot?"
 msgid "Are you sure to book this ATC position?"
 msgstr "Are you sure to book this ATC position?"
 
-#: src/components/atc-training/training-list.tsx:61
+#: src/components/atc-training/training-list.tsx:63
 msgid "Are you sure to cancel this training?"
 msgstr "Are you sure to cancel this training?"
 
@@ -317,11 +317,11 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/routes/users/index.tsx:115
+#: src/routes/users/index.tsx:116
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/atc-training/training-list.tsx:62
+#: src/components/atc-training/training-list.tsx:67
 msgid "Cancel Training"
 msgstr "Cancel Training"
 
@@ -372,7 +372,7 @@ msgstr "China RVSM odd flight level"
 #: src/components/event/atc-slot-assign.tsx:71
 #: src/components/event/atc-slot-list.tsx:94
 #: src/components/event/slot-assign.tsx:68
-#: src/routes/users/index.tsx:54
+#: src/routes/users/index.tsx:55
 #: src/routes/users/me.tsx:50
 msgid "CID"
 msgstr "CID"
@@ -390,7 +390,7 @@ msgstr "Community & Membership Director"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:44
 msgid "Controller"
 msgstr "Controller"
 
@@ -568,7 +568,7 @@ msgstr "Edit Event {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "Edit Preferred Route {title}"
 
-#: src/routes/users/index.tsx:102
+#: src/routes/users/index.tsx:103
 msgid "Edit roles"
 msgstr "Edit roles"
 
@@ -635,7 +635,7 @@ msgstr "Event"
 msgid "Event & Organization Director"
 msgstr "Event & Organization Director"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:39
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
@@ -743,7 +743,7 @@ msgstr "Go to next page"
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:40
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
@@ -823,6 +823,10 @@ msgstr "Introduction"
 #: src/components/app/app-nav-menu.tsx:121
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
+
+#: src/routes/users/index.tsx:38
+msgid "Lead Event Coordinator"
+msgstr "Lead Event Coordinator"
 
 #: src/routes/flights/$callsign.tsx:83
 msgid "Learn more"
@@ -919,7 +923,7 @@ msgid "My account belongs to VATPRC division."
 msgstr "My account belongs to VATPRC division."
 
 #: src/components/atc-application/atc-application-list.tsx:18
-#: src/routes/users/index.tsx:57
+#: src/routes/users/index.tsx:58
 msgid "Name"
 msgstr "Name"
 
@@ -1165,7 +1169,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/users/index.tsx:60
+#: src/routes/users/index.tsx:61
 #: src/routes/users/me.tsx:55
 msgid "Roles"
 msgstr "Roles"
@@ -1195,7 +1199,7 @@ msgstr "Sat"
 msgid "Save"
 msgstr "Save"
 
-#: src/routes/users/index.tsx:119
+#: src/routes/users/index.tsx:120
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -1254,7 +1258,7 @@ msgid "SOP Editor"
 msgstr "SOP Editor"
 
 #: src/components/app/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:45
 msgid "Staff"
 msgstr "Staff"
 
@@ -1342,11 +1346,11 @@ msgstr "System"
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:41
 msgid "Tech Director"
 msgstr "Tech Director"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:42
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
 
@@ -1591,7 +1595,7 @@ msgid "Upload image"
 msgstr "Upload image"
 
 #: src/routes/controllers/applications/$id.tsx:37
-#: src/routes/users/index.tsx:47
+#: src/routes/users/index.tsx:48
 msgid "User"
 msgstr "User"
 
@@ -1654,7 +1658,7 @@ msgstr "Visiting"
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:46
 msgid "Volunteer"
 msgstr "Volunteer"
 

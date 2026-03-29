@@ -83,7 +83,7 @@ msgstr "已通过"
 
 #: src/components/atc-application/atc-application-list.tsx:37
 #: src/components/atc-training/training-list.tsx:30
-#: src/routes/users/index.tsx:130
+#: src/routes/users/index.tsx:131
 msgid "Actions"
 msgstr "操作"
 
@@ -107,7 +107,7 @@ msgstr "将 <0>W</0> 添加到设备代码。"
 msgid "Admin"
 msgstr "管理"
 
-#: src/routes/users/index.tsx:42
+#: src/routes/users/index.tsx:43
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
 
@@ -135,7 +135,7 @@ msgstr "已被预订"
 msgid "Announcement"
 msgstr "公告"
 
-#: src/routes/users/index.tsx:46
+#: src/routes/users/index.tsx:47
 msgid "API Client"
 msgstr "接口客户端"
 
@@ -188,7 +188,7 @@ msgstr "确定要预订该时段吗？"
 msgid "Are you sure to book this ATC position?"
 msgstr "确定要预订该管制席位吗？"
 
-#: src/components/atc-training/training-list.tsx:61
+#: src/components/atc-training/training-list.tsx:63
 msgid "Are you sure to cancel this training?"
 msgstr "确定要取消该训练吗？"
 
@@ -317,11 +317,11 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:115
+#: src/routes/users/index.tsx:116
 msgid "Cancel"
 msgstr "取消"
 
-#: src/components/atc-training/training-list.tsx:62
+#: src/components/atc-training/training-list.tsx:67
 msgid "Cancel Training"
 msgstr "取消训练"
 
@@ -372,7 +372,7 @@ msgstr "中国 RVSM 单数高度层"
 #: src/components/event/atc-slot-assign.tsx:71
 #: src/components/event/atc-slot-list.tsx:94
 #: src/components/event/slot-assign.tsx:68
-#: src/routes/users/index.tsx:54
+#: src/routes/users/index.tsx:55
 #: src/routes/users/me.tsx:50
 msgid "CID"
 msgstr "CID"
@@ -390,7 +390,7 @@ msgstr "社区会员部主管"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/users/index.tsx:43
+#: src/routes/users/index.tsx:44
 msgid "Controller"
 msgstr "管制员"
 
@@ -568,7 +568,7 @@ msgstr "编辑活动 {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "修改推荐航路 {title}"
 
-#: src/routes/users/index.tsx:102
+#: src/routes/users/index.tsx:103
 msgid "Edit roles"
 msgstr "编辑权限"
 
@@ -635,7 +635,7 @@ msgstr "活动"
 msgid "Event & Organization Director"
 msgstr "组织部主管"
 
-#: src/routes/users/index.tsx:38
+#: src/routes/users/index.tsx:39
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
@@ -743,7 +743,7 @@ msgstr "前往下一页"
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/users/index.tsx:39
+#: src/routes/users/index.tsx:40
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
@@ -823,6 +823,10 @@ msgstr "介绍"
 #: src/components/app/app-nav-menu.tsx:121
 msgid "Introduction to Fly"
 msgstr "飞行简介"
+
+#: src/routes/users/index.tsx:38
+msgid "Lead Event Coordinator"
+msgstr "活动协调员组长"
 
 #: src/routes/flights/$callsign.tsx:83
 msgid "Learn more"
@@ -919,7 +923,7 @@ msgid "My account belongs to VATPRC division."
 msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 
 #: src/components/atc-application/atc-application-list.tsx:18
-#: src/routes/users/index.tsx:57
+#: src/routes/users/index.tsx:58
 msgid "Name"
 msgstr "姓名"
 
@@ -1165,7 +1169,7 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:60
+#: src/routes/users/index.tsx:61
 #: src/routes/users/me.tsx:55
 msgid "Roles"
 msgstr "权限"
@@ -1195,7 +1199,7 @@ msgstr "星期六"
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:119
+#: src/routes/users/index.tsx:120
 msgid "Save changes"
 msgstr "保存变更"
 
@@ -1254,7 +1258,7 @@ msgid "SOP Editor"
 msgstr "SOP 组组员"
 
 #: src/components/app/app-nav-menu.tsx:64
-#: src/routes/users/index.tsx:44
+#: src/routes/users/index.tsx:45
 msgid "Staff"
 msgstr "职员"
 
@@ -1342,11 +1346,11 @@ msgstr "跟随系统"
 msgid "Take me back to home page"
 msgstr "返回首页"
 
-#: src/routes/users/index.tsx:40
+#: src/routes/users/index.tsx:41
 msgid "Tech Director"
 msgstr "技术部主管"
 
-#: src/routes/users/index.tsx:41
+#: src/routes/users/index.tsx:42
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
 
@@ -1591,7 +1595,7 @@ msgid "Upload image"
 msgstr "上传图片"
 
 #: src/routes/controllers/applications/$id.tsx:37
-#: src/routes/users/index.tsx:47
+#: src/routes/users/index.tsx:48
 msgid "User"
 msgstr "用户"
 
@@ -1654,7 +1658,7 @@ msgstr "客座"
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/users/index.tsx:45
+#: src/routes/users/index.tsx:46
 msgid "Volunteer"
 msgstr "志愿者"
 

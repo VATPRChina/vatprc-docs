@@ -35,6 +35,7 @@ export const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescri
   ["operation-sector-editor", msg`Sector Editor`],
   ["operation-loa-editor", msg`LOA Editor`],
   ["event-director", msg`Event & Organization Director`],
+  ["lead-event-coordinator", msg`Lead Event Coordinator`],
   ["event-coordinator", msg`Event Coordinator`],
   ["event-graphics-designer", msg`Graphics Designer`],
   ["tech-director", msg`Tech Director`],

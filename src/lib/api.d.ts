@@ -9745,6 +9745,10 @@ export interface components {
       updated_at: string;
       roles: components["schemas"]["UserRoleDto"][];
       direct_roles: components["schemas"]["UserRoleDto"][];
+      moodle_account: null | components["schemas"]["UserMoodleInfoDto"];
+    };
+    UserMoodleInfoDto: {
+      id: string;
     };
     /** @enum {unknown} */
     UserRoleDto:
@@ -9762,6 +9766,7 @@ export interface components {
       | "operation-sector-editor"
       | "operation-loa-editor"
       | "event-director"
+      | "lead-event-coordinator"
       | "event-coordinator"
       | "event-graphics-designer"
       | "tech-director"
