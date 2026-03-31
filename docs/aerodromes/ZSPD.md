@@ -350,11 +350,12 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 | :--------: | :-------: | :------------------------: | :--------------------------------: | :--------: |
 |  ZSPD_RMP  | 北向/南向 |      沿 L15/L15A 滑行      | L15/L15A 上，预计向东转向的道口前① |  ZSPD_TWR  |
 |  ZSPD_RMP  | 北向/南向 |      沿 W1/W4/W6 滑行      |               T4 前                | ZSPD_S_RMP |
-|  ZPPD_RMP  | 北向/南向 |      沿 B4/B5/B6 滑行      |                B 前                |  ZSPD_GND  |
+|  ZSPD_RMP  | 北向/南向 |      沿 B4/B5/B6 滑行      |                B 前                |  ZSPD_GND  |
 |  ZSPD_RMP  | 北向/南向 |      沿 R4/E5/E6 滑行      |               E 前②                | ZSPD_GND③  |
 |  ZSPD_RMP  |   北向    |        沿 L18 滑行         |               E8 前                |  ZSPD_GND  |
 |  ZSPD_RMP  |   北向    | 沿 B 滑出，预计沿B7/B8滑行 |              B7/B8 前              |  ZSPD_GND  |
 |  ZSPD_RMP  |   南向    |         沿 B 滑出          |              B8/P6 前              | ZSPD_GND④  |
+|  ZSPD_RMP  |   南向    |        沿 L18 滑行         |               E7 前                |  ZSPD_GND  |
 | ZSPD_S_RMP | 北向/南向 |       沿 T1/T3 滑行        |                B 前                | ZSPD_GND⑤  |
 | ZSPD_S_RMP | 北向/南向 |      沿 E2/T2/T4 滑行      |               E 前②                |  ZSPD_GND  |
 | ZSPD_S_RMP | 北向/南向 |      沿 L19/L22 滑行       |               B/E 前               |  ZSPD_GND  |
