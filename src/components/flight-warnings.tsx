@@ -1,5 +1,6 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { ChinaRvsmHelp, CRUISING_LEVEL_TEXT } from "@/routes/flights/$callsign";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
@@ -89,9 +90,52 @@ const descriptions: Record<
       </>
     );
   },
-  cruising_level_mismatch: () => null,
-  cruising_level_too_low: () => null,
-  cruising_level_not_allowed: () => null,
+  cruising_level_mismatch: (_, warning) => {
+    const level = warning.parameter && CRUISING_LEVEL_TEXT[warning.parameter];
+    return (
+      <>
+        <p>
+          {level ? (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Cruising level should be {level}.
+            </Trans>
+          ) : (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Please contact ATC for help.
+            </Trans>
+          )}
+        </p>
+        <p>
+          <Trans>Pick a suitable cruising level.</Trans>
+        </p>
+        <ChinaRvsmHelp />
+      </>
+    );
+  },
+  cruising_level_too_low: (_, { parameter: level }) => (
+    <>
+      <p>
+        <Trans>The cruising level is too low for route. The minimum is {level} feet.</Trans>
+      </p>
+      <p>
+        <Trans>Pick a suitable cruising level.</Trans>
+      </p>
+    </>
+  ),
+  cruising_level_not_allowed: (_, { parameter: level }) => (
+    <>
+      <p>
+        <Trans>The cruising level is not allowed for the route.</Trans>
+      </p>
+      <p>
+        <Trans>Allowed levels are {level} (in feet).</Trans>
+      </p>
+      <p>
+        <Trans>Pick a suitable cruising level.</Trans>
+      </p>
+      <ChinaRvsmHelp />
+    </>
+  ),
   route_match_preferred: (_, { parameter: route }) => (
     <p>
       <Trans>

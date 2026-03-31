@@ -87,7 +87,7 @@ const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
   );
 };
 
-const ChinaRvsmHelp = () => (
+export const ChinaRvsmHelp = () => (
   <>
     <p className="hover:text-primary/80 underline">
       <Link to="/airspace/rvsm">
