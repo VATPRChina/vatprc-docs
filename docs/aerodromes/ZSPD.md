@@ -151,7 +151,7 @@
 
 #### 席位开设规则
 
-1. ZSPD_TWR在线时，经ZSPD_TWR同意，可开设 ZSPD_E_TWR
+1. ZSPD_TWR 在线时，可开设 ZSPD_E_TWR。ZSPD_E_TWR 上线前应当与 ZSPD_TWR 协调
 2. 多个塔台管制席位同时在线时，若出现地面管制范围、放行管制席没有相应席位在线，一律由 ZSPD_TWR 提供相应管制服务
 
 #### 各塔台场面管制范围
@@ -191,7 +191,7 @@
 #### 席位开设规则
 
 1. 上海浦东机场有塔台或地面管制席位在线时，可开设 ZSPD_RMP
-2. ZSPD_RMP在线时，经ZSPD_RMP同意，可开设 ZSPD_S_RMP
+2. ZSPD_RMP在线时，可开设 ZSPD_S_RMP。ZSPD_S_RMP 上线前应当与 ZSPD_RMP 协调
 
 #### 各机坪管制范围
 
