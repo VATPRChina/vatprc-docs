@@ -531,7 +531,7 @@ A380 航空器不可使用 17L/35R 跑道，主用 16R/34L 跑道，可分配 17
 >   - ZSPD_RMP 在 E5 前移交 ZSPD_GND（使用 16R 跑道离场时经 ZSPD_GND 同意可以直接移交给 ZSPD_E_TWR）
 > - ③使用 168、170、173 机位时
 >   - ZSPD_GND 在 E1/E3 前移交 ZSPD_S_RMP
->   - ZSPD_S_RMP 在 L23 上 E2前移交 ZSPD_GND
+>   - ZSPD_S_RMP 在 L23 上 E2 前移交 ZSPD_GND
 
 #### B747-8
 
