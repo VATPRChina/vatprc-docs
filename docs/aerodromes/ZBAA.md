@@ -455,44 +455,42 @@
 > 灰色底纹标出跑道为在该离场点非主用跑道，需与进近管制员和对应跑道塔台管制员协调后才能使用
 
 | 离场点  | 跑道  | 离场程序 |
-| :-----: | :---: | :----------: |
-|  ELKUR  | `36L` |   ELKUR-9Z   |
-|  ELKUR  |  36R  |   ELKUR-7X   |
-|  ELKUR  |  01   |   ELKUR-7X   |
-|  IGMOR  | `36L` |   IGMOR-9Z   |
-|  IGMOR  |  36R  |   IGMOR-7X   |
-|  IGMOR  |  01   |   IGMOR-7X   |
-|  MUGLO  | `36L` |   MUGLO-9Z   |
-|  MUGLO  |  36R  |   MUGLO-7X   |
-|  MUGLO  |  01   |   MUGLO-7X   |
-|  DOTRA  | `36L` |   DOTRA-5Y   |
-|  DOTRA  |  36R  |   DOTRA-5Y   |
-|  DOTRA  |  01   |   DOTRA-7X   |
-|  IDKEX  | `36L` |   IDKEX-5Y   |
-|  IDKEX  |  36R  |   IDKEX-5Y   |
-|  IDKEX  |  01   |   IDKEX-7X   |
-|  BOTPU  |  36L  |   BOTPU-9Z   |
-|  BOTPU  |  36R  |   BOTPU-7X   |
-|  BOTPU  | `01`  |   BOTPU-7X   |
-|  RUSDO  |  36L  |   RUSDO-9Z   |
-|  RUSDO  |  36R  |   RUSDO-9Z   |
-|  RUSDO  | `01`  |   RUSDO-9Z   |
-| `PEGSO` |  36L  |   PEGSO-9Z   |
-| `PEGSO` |  36R  |   PEGSO-9Z   |
-| `PEGSO` | `01`  |   PEGSO-9Z   |
-| `OMDEK` |  36L  |   OMDEK-9Z   |
-| `OMDEK` |  36R  |   OMDEK-9Z   |
-| `OMDEK` | `01`  |   OMDEK-9Z   |
+| :-----: | :---: | :------: |
+|  ELKUR  | `36L` | ELKUR-9Z |
+|  ELKUR  |  36R  | ELKUR-7X |
+|  ELKUR  |  01   | ELKUR-7X |
+|  IGMOR  | `36L` | IGMOR-9Z |
+|  IGMOR  |  36R  | IGMOR-7X |
+|  IGMOR  |  01   | IGMOR-7X |
+|  MUGLO  | `36L` | MUGLO-9Z |
+|  MUGLO  |  36R  | MUGLO-7X |
+|  MUGLO  |  01   | MUGLO-7X |
+|  DOTRA  | `36L` | DOTRA-5Y |
+|  DOTRA  |  36R  | DOTRA-5Y |
+|  DOTRA  |  01   | DOTRA-7X |
+|  IDKEX  | `36L` | IDKEX-5Y |
+|  IDKEX  |  36R  | IDKEX-5Y |
+|  IDKEX  |  01   | IDKEX-7X |
+|  BOTPU  |  36L  | BOTPU-9Z |
+|  BOTPU  |  36R  | BOTPU-7X |
+|  BOTPU  | `01`  | BOTPU-7X |
+|  RUSDO  |  36L  | RUSDO-9Z |
+|  RUSDO  |  36R  | RUSDO-9Z |
+|  RUSDO  | `01`  | RUSDO-9Z |
+| `PEGSO` |  36L  | PEGSO-9Z |
+| `PEGSO` |  36R  | PEGSO-9Z |
+| `PEGSO` | `01`  | PEGSO-9Z |
+| `OMDEK` |  36L  | OMDEK-9Z |
+| `OMDEK` |  36R  | OMDEK-9Z |
+| `OMDEK` | `01`  | OMDEK-9Z |
 
-| 雷达引导离场 |  |  |  |
-| :----------: | :-----: | :-----: | :---: |
-|     **跑道**     | 36L | 36R | 01 |
-| **航向** |  330  |  跑道航向  | 030  |
-
+| 雷达引导离场 |     |          |     |
+| :----------: | :-: | :------: | :-: |
+|   **跑道**   | 36L |   36R    | 01  |
+|   **航向**   | 330 | 跑道航向 | 030 |
 
 > [!NOTE]
 > 以当班进近管制员同意为准，仅供参考
-
 
 ##### 南向
 
@@ -501,50 +499,49 @@
 > 灰色底纹标出跑道在该离场点为非主用跑道，需与进近管制员和对应跑道塔台管制员协调后才能使用
 
 | 离场点  | 跑道  | 离场程序 |
-| :-----: | :---: | :----------: |
-|  ELKUR  |  18L  |   ELKUR-2G   |
-|  ELKUR  | `18R` |   ELKUR-2G   |
-|  ELKUR  | `19`  |   ELKUR-6J   |
-|  IGMOR  |  18L  |   IGMOR-2G   |
-|  IGMOR  | `18R` |   IGMOR-2G   |
-|  IGMOR  |  19   |   IGMOR-6J   |
-|  MUGLO  |  18L  |   MUGLO-2G   |
-|  MUGLO  | `18R` |   MUGLO-2G   |
-|  MUGLO  |  19   |   MUGLO-6J   |
-|  DOTRA  |  18L  |   DOTRA-2G   |
-|  DOTRA  | `18R` |   DOTRA-2G   |
-|  DOTRA  |  19   |   DOTRA-2G   |
-|  IDKEX  |  18L  |   IDKEX-2G   |
-|  IDKEX  | `18R` |   IDKEX-2G   |
-|  IDKEX  |  19   |   IDKEX-2G   |
-|  BOTPU  |  18R  |   BOTPU-2G   |
-|  BOTPU  |  18L  |   BOTPU-6J   |
-|  BOTPU  | `19`  |   BOTPU-4E   |
-|  RUSDO  |  18R  |   RUSDO-2G   |
-|  RUSDO  |  18L  |   RUSDO-6J   |
-|  RUSDO  | `19`  |   RUSDO-4E   |
-| `PEGSO` |  18L  |   PEGSO-2G   |
-| `PEGSO` |  18R  |   PEGSO-2G   |
-| `PEGSO` | `19`  |   PEGSO-2G   |
-| `OMDEK` |  18L  |   OMDEK-2G   |
-| `OMDEK` |  18R  |   OMDEK-2G   |
-| `OMDEK` | `19`  |   OMDEK-2G   |
+| :-----: | :---: | :------: |
+|  ELKUR  |  18L  | ELKUR-2G |
+|  ELKUR  | `18R` | ELKUR-2G |
+|  ELKUR  | `19`  | ELKUR-6J |
+|  IGMOR  |  18L  | IGMOR-2G |
+|  IGMOR  | `18R` | IGMOR-2G |
+|  IGMOR  |  19   | IGMOR-6J |
+|  MUGLO  |  18L  | MUGLO-2G |
+|  MUGLO  | `18R` | MUGLO-2G |
+|  MUGLO  |  19   | MUGLO-6J |
+|  DOTRA  |  18L  | DOTRA-2G |
+|  DOTRA  | `18R` | DOTRA-2G |
+|  DOTRA  |  19   | DOTRA-2G |
+|  IDKEX  |  18L  | IDKEX-2G |
+|  IDKEX  | `18R` | IDKEX-2G |
+|  IDKEX  |  19   | IDKEX-2G |
+|  BOTPU  |  18R  | BOTPU-2G |
+|  BOTPU  |  18L  | BOTPU-6J |
+|  BOTPU  | `19`  | BOTPU-4E |
+|  RUSDO  |  18R  | RUSDO-2G |
+|  RUSDO  |  18L  | RUSDO-6J |
+|  RUSDO  | `19`  | RUSDO-4E |
+| `PEGSO` |  18L  | PEGSO-2G |
+| `PEGSO` |  18R  | PEGSO-2G |
+| `PEGSO` | `19`  | PEGSO-2G |
+| `OMDEK` |  18L  | OMDEK-2G |
+| `OMDEK` |  18R  | OMDEK-2G |
+| `OMDEK` | `19`  | OMDEK-2G |
 
-| 雷达引导离场 |  |  |  |
-| :----------: | :-----: | :-----: | :---: |
-|     **跑道**     | 18R | 18L | 19 |
-| **航向** |  195  |  跑道航向  | 150  |
+| 雷达引导离场 |     |          |     |
+| :----------: | :-: | :------: | :-: |
+|   **跑道**   | 18R |   18L    | 19  |
+|   **航向**   | 195 | 跑道航向 | 150 |
 
 > [!NOTE]
 > 以当班进近管制员同意为准，仅供参考
 
-
 #### 4.4.3 起始高度
 
-|  |  |  |  |
-| :----------: | :-----: | :-----: | :---: |
+|                  |         |         |       |
+| :--------------: | :-----: | :-----: | :---: |
 |     **跑道**     | 36L/18R | 36R/18L | 01/19 |
-| **默认起始高度** |  1200  |  1500  | 900  |
+| **默认起始高度** |  1200   |  1500   |  900  |
 
 使用起落航线的航空器、巡航高度低于默认起始高度的航空器，由对应塔台管制席与相关席位协调后确定起始高度。
 
