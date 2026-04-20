@@ -143,7 +143,7 @@
 #### 席位开设规则
 
 1. 北向运行时，F 滑行道 W7 与 S4 之间部分由 ZBAA_W_RMP 代管
-2. 经 ZBAA_TWR 同意后可开设 ZBAA_E_TWR 或 ZBAA_W_TWR。ZBAA_E_TWR、ZBAA_W_TWR 上线时仅对各自的职责范围提供管制服务，若部分塔台管制范围对应席位不在线，由 ZBAA_TWR 对相应范围提供管制服务
+2. ZBAA_TWR 在线时可开设 ZBAA_E_TWR 或 ZBAA_W_TWR，ZBAA_E_TWR 或 ZBAA_W_TWR 上线前应当与 ZBAA_TWR 协调。ZBAA_E_TWR、ZBAA_W_TWR 上线时仅对各自的职责范围提供管制服务，若部分塔台管制范围对应席位不在线，由 ZBAA_TWR 对相应范围提供管制服务
 3. 多个塔台管制席位同时在线时，若出现地面管制范围、放行管制席没有相应席位在线，一律由 ZBAA_TWR 提供相应管制服务
 
 #### 各塔台管制范围
@@ -182,7 +182,7 @@
 
 #### 席位开设规则
 
-1. 经 ZBAA_DEL 同意后可开设 ZBAA_E_DEL，开设后 ZBAA_DEL 管制范围为 36R/18L 跑道中线延长线以西
+1. ZBAA_DEL 在线时可开设 ZBAA_E_DEL，ZBAA_E_DEL 上线前需要与 ZBAA_DEL 协调。ZBAA_E_DEL 开设后 ZBAA_DEL 管制范围为 36R/18L 跑道中线延长线以西
 
 ### 3.4 机坪
 
@@ -196,7 +196,7 @@
 #### 席位开设规则
 
 1. 北京首都机场有塔台或地面管制席位在线时，可开设 ZBAA_RMP
-2. ZBAA_RMP 在线时，经 ZBAA_RMP 同意，可开设 ZBAA_W_RMP
+2. ZBAA_RMP 在线时，可开设 ZBAA_W_RMP，ZBAA_W_RMP 上线前需要与 ZBAA_RMP 协调
 
 #### 各机坪管制范围
 
