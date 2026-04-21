@@ -113,7 +113,7 @@
 
 #### 席位开设规则
 
-1. 经 ZGGG_TWR 同意后可开设 ZGGG_E_TWR 或 ZGGG_W_TWR。ZGGG_E_TWR、ZGGG_W_TWR 上线时仅对各自的职责范围提供管制服务，若部分塔台管制范围对应席位不在线，由 ZGGG_TWR 对相应范围提供管制服务
+1. ZGGG_TWR 在线时可开设 ZGGG_E_TWR 或 ZGGG_W_TWR，ZGGG_E_TWR 或 ZGGG_W_TWR上线前应当与 ZGGG_TWR 协调。ZGGG_E_TWR、ZGGG_W_TWR 上线时仅对各自的职责范围提供管制服务，若部分塔台管制范围对应席位不在线，由 ZGGG_TWR 对相应范围提供管制服务
 2. 多个塔台管制席位同时在线时，若出现地面管制范围、放行管制席没有相应席位在线，一律由 ZGGG_TWR 提供相应管制服务
 
 #### 各塔台席位管制范围
@@ -135,7 +135,7 @@
 #### 席位开设规则
 
 1. 机坪管制席位不在线时，地面席位需代管对应机坪管制范围。西机坪、东一机坪管制区由 ZGGG_GND 代管；东二、东三机坪管制区，联邦快递机坪，新科宇航机坪由ZGGG_E_GND 代管。
-2. 经 ZGGG_GND 同意后可开设 ZGGG_E_GND
+2. ZGGG_GND 在线时可开设 ZGGG_E_GND，ZGGG_E_GND 上线前应当与 ZGGG_GND 协调
 3. 多个地面管制席位同时在线时，若出现放行管制席没有相应席位在线，一律由 ZGGG_GND 提供相应管制服务
 
 #### 各地面席位管制范围
@@ -156,7 +156,7 @@
 
 #### 席位开设规则
 
-1. 经 ZGGG_DEL 同意后可开设 ZGGG_E_DEL，开设后 ZGGG_DEL 管制范围为 02R/20L 跑道中线延长线以西
+1. ZGGG_DEL 在线时可开设 ZGGG_E_DEL，ZGGG_E_DEL 上线前应当与 ZGGG_DEL 协调。ZGGG_E_DEL 开设后 ZGGG_DEL 管制范围为 02R/20L 跑道中线延长线以西
 
 ### 3.4 机坪
 
@@ -168,7 +168,7 @@
 #### 席位开设规则
 
 1. 广州白云机场有塔台或地面管制席位在线时，可开设 ZGGG_RMP
-2. ZGGG_RMP 在线时，经 ZGGG_RMP 同意，可开设 ZGGG_E_RMP
+2. ZGGG_RMP 在线时可开设 ZGGG_E_RMP，ZGGG_E_RMP 上线前应当与 ZGGG_RMP 协调
 
 #### 各机坪席位管制范围
 
