@@ -280,8 +280,21 @@ A、B 类航空器高度 300 m，C、D 类航空器高度 500-600 m。
 
 |  管制席位  | 运行方向  |                    先决条件                    |          移交位置           |  移交对象  |
 | :--------: | :-------: | :--------------------------------------------: | :-------------------------: | :--------: |
-|  ZGGG_TWR  | 北向/南向 | 向西脱离 02L/20R 跑道  | A 前 | ZGGG_GND |
-|  ZGGG_TWR  | 北向/南向 | 向东脱离 02R/20R 跑道  | M 前 | ZGGG_E_GND |
+|  ZGGG_TWR  | 北向/南向 | 向西脱离 02L/20R 跑道 | A 前 | ZGGG_GND |
+|  ZGGG_TWR  | 北向/南向 | 向东脱离 02R/20L 跑道 | M 前 | ZGGG_E_GND |
+|  ZGGG_TWR  | 北向/南向 | 一号绕滑 B 向南滑行，不去往 20R 跑道 | L22 前 | ZGGG_GND |
+|  ZGGG_TWR  | 北向/南向 | 一号绕滑 B 向南滑行，需沿 L22 进入维修机坪 | L22 前 | ZGGG_RMP |
+|  ZGGG_TWR  | 北向/南向 | 二号绕滑 B 向北滑行，不去往 02L 跑道 | T1 前 | ZGGG_GND |
+|  ZGGG_TWR  | 北向/南向 | 一号绕滑 Q 向南滑行, 去往东活动区 | Q6 前 | ZGGG_E_GND |
+|  ZGGG_TWR  | 北向/南向 | 二号绕滑 T61 向东滑行，去往东活动区 | M 前 | ZGGG_E_GND |
+|  ZGGG_TWR  | 北向/南向 | 需沿 L25 进入机位  | L25 前 | ZGGG_RMP |
+|  ZGGG_TWR  | 北向/南向 | 需沿 GT4 进入机位  | GT4 前 | ZGGG_RMP |
+|  ZGGG_TWR  | 北向 | 沿 Y1 向东滑行去往东活动区  | M 前 | ZGGG_E_GND |
+|  ZGGG_W_TWR  | 北向/南向 | 向东脱离 01R/19L 跑道 | F 前 | ZGGG_GND |
+|  ZGGG_W_TWR  | 北向/南向 | 四号绕滑 E 向南滑行 | J22 前 | ZGGG_GND |
+|  ZGGG_W_TWR  | 北向/南向 | 需沿 J23 进入机位 | J23 前 | ZGGG_RMP |
+|  ZGGG_W_TWR  | 北向/南向 | 三号绕滑 E 向北滑行 | J1 前 | ZGGG_GND |
+|  ZGGG_E_TWR  | 北向/南向 | 向西脱离 03/21 跑道 | W 前 | ZGGG_E_GND |
 
 
 ### 4.2 地面席位
