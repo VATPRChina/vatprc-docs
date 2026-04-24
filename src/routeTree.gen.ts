@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SheetsRouteImport } from './routes/sheets'
 import { Route as FlightsRouteImport } from './routes/flights'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as IndexRouteImport } from './routes/index'
@@ -53,6 +54,11 @@ import { Route as DocAirspaceRvsmRouteImport } from './routes/_doc/airspace/rvsm
 import { Route as DocAirspaceRestrictedRouteImport } from './routes/_doc/airspace/restricted'
 import { Route as DocAirspaceFirRouteImport } from './routes/_doc/airspace/fir'
 
+const SheetsRoute = SheetsRouteImport.update({
+  id: '/sheets',
+  path: '/sheets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlightsRoute = FlightsRouteImport.update({
   id: '/flights',
   path: '/flights',
@@ -282,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/sheets': typeof SheetsRoute
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -325,6 +332,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sheets': typeof SheetsRoute
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -371,6 +379,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/sheets': typeof SheetsRoute
   '/_doc/loa': typeof DocLoaRoute
   '/_doc/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -418,6 +427,7 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/flights'
+    | '/sheets'
     | '/loa'
     | '/sop'
     | '/auth/callback'
@@ -461,6 +471,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sheets'
     | '/loa'
     | '/sop'
     | '/auth/callback'
@@ -506,6 +517,7 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/flights'
+    | '/sheets'
     | '/_doc/loa'
     | '/_doc/sop'
     | '/auth/callback'
@@ -552,6 +564,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRoute: typeof EventsRouteWithChildren
   FlightsRoute: typeof FlightsRouteWithChildren
+  SheetsRoute: typeof SheetsRoute
   DocLoaRoute: typeof DocLoaRoute
   DocSopRoute: typeof DocSopRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
@@ -591,6 +604,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sheets': {
+      id: '/sheets'
+      path: '/sheets'
+      fullPath: '/sheets'
+      preLoaderRoute: typeof SheetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/flights': {
       id: '/flights'
       path: '/flights'
@@ -927,6 +947,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRoute: EventsRouteWithChildren,
   FlightsRoute: FlightsRouteWithChildren,
+  SheetsRoute: SheetsRoute,
   DocLoaRoute: DocLoaRoute,
   DocSopRoute: DocSopRoute,
   AuthCallbackRoute: AuthCallbackRoute,

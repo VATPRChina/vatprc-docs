@@ -3762,6 +3762,411 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/sheets": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["SheetDto"][];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/sheets/{sheetId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          sheetId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["SheetDto"];
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description SHEET_NOT_FOUND */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description SHEET_NOT_FOUND
+               * @enum {string}
+               */
+              error_code: "SHEET_NOT_FOUND";
+              /**
+               * @description Sheet {sheetId} not found.
+               * @example Sheet {sheetId} not found.
+               */
+              message: string;
+              /**
+               * @description SHEET_NOT_FOUND
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:sheet-not-found";
+              /**
+               * @description Sheet {sheetId} not found.
+               * @example Sheet {sheetId} not found.
+               */
+              title: string;
+              /**
+               * @description Sheet {sheetId} not found.
+               * @example Sheet {sheetId} not found.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          sheetId: string;
+        };
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          "application/json": components["schemas"]["SheetSaveRequest"];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["SheetDto"];
+          };
+        };
+        /** @description SHEET_FIELD_DUPLICATE_ID, SHEET_SINGLE_CHOICE_OPTIONS_MISSING */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json":
+              | {
+                  /**
+                   * @description SHEET_FIELD_DUPLICATE_ID
+                   * @enum {string}
+                   */
+                  error_code: "SHEET_FIELD_DUPLICATE_ID";
+                  /**
+                   * @description Sheet {sheetId} contains duplicate field id {fieldId}.
+                   * @example Sheet {sheetId} contains duplicate field id {fieldId}.
+                   */
+                  message: string;
+                  /**
+                   * @description SHEET_FIELD_DUPLICATE_ID
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:sheet-field-duplicate-id";
+                  /**
+                   * @description Sheet {sheetId} contains duplicate field id {fieldId}.
+                   * @example Sheet {sheetId} contains duplicate field id {fieldId}.
+                   */
+                  title: string;
+                  /**
+                   * @description Sheet {sheetId} contains duplicate field id {fieldId}.
+                   * @example Sheet {sheetId} contains duplicate field id {fieldId}.
+                   */
+                  detail: string;
+                }
+              | {
+                  /**
+                   * @description SHEET_SINGLE_CHOICE_OPTIONS_MISSING
+                   * @enum {string}
+                   */
+                  error_code: "SHEET_SINGLE_CHOICE_OPTIONS_MISSING";
+                  /**
+                   * @description Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   * @example Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   */
+                  message: string;
+                  /**
+                   * @description SHEET_SINGLE_CHOICE_OPTIONS_MISSING
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:sheet-single-choice-options-missing";
+                  /**
+                   * @description Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   * @example Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   */
+                  title: string;
+                  /**
+                   * @description Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   * @example Sheet {sheetId} field {fieldId} must define at least one single-choice option.
+                   */
+                  detail: string;
+                };
+          };
+        };
+        /** @description INVALID_TOKEN */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              error_code: "INVALID_TOKEN";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              message: string;
+              /**
+               * @description INVALID_TOKEN
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:invalid-token";
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              title: string;
+              /**
+               * @description Invalid token {oauth_code}: {oauth_desc}.
+               * @example Invalid token {oauth_code}: {oauth_desc}.
+               */
+              detail: string;
+            };
+          };
+        };
+        /** @description INTERNAL_SERVER_ERROR */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              error_code: "INTERNAL_SERVER_ERROR";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              message: string;
+              /**
+               * @description INTERNAL_SERVER_ERROR
+               * @enum {string}
+               */
+              type: "urn:vatprc-uniapi-error:internal-server-error";
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              title: string;
+              /**
+               * @description An internal server error occurred.
+               * @example An internal server error occurred.
+               */
+              detail: string;
+            };
+          };
+        };
+      };
+    };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/storage/images": {
     parameters: {
       query?: never;
@@ -9659,9 +10064,24 @@ export interface components {
     };
     /** @enum {unknown} */
     SheetFieldKind: "short-text" | "long-text" | "single-choice";
+    SheetFieldSaveRequest: {
+      id: string;
+      /** Format: uint32 */
+      sequence: number;
+      name_zh: string;
+      name_en?: null | string;
+      kind: components["schemas"]["SheetFieldKind"];
+      single_choice_options?: null | string[];
+      description_zh?: null | string;
+      description_en?: null | string;
+    };
     SheetRequestField: {
       id: string;
       answer: string;
+    };
+    SheetSaveRequest: {
+      name: string;
+      fields: components["schemas"]["SheetFieldSaveRequest"][];
     };
     TokenDto: {
       user: components["schemas"]["UserDto"];

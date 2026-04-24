@@ -91,6 +91,10 @@ msgstr "Actions"
 msgid "Active Trainings"
 msgstr "Active Trainings"
 
+#: src/routes/sheets.tsx:234
+msgid "Add field"
+msgstr "Add field"
+
 #: src/routes/flights/$callsign.tsx:178
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
@@ -246,7 +250,7 @@ msgstr "At least one slot is required"
 msgid "ATC Application"
 msgstr "ATC Application"
 
-#: src/components/app/app-nav-menu.tsx:198
+#: src/components/app/app-nav-menu.tsx:203
 #: src/routes/controllers/applications/index.tsx:18
 #: src/routes/controllers/index.tsx:27
 msgid "ATC Applications"
@@ -269,7 +273,7 @@ msgstr "ATC Permission"
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/components/app/app-nav-menu.tsx:203
+#: src/components/app/app-nav-menu.tsx:208
 #: src/routes/controllers/index.tsx:32
 #: src/routes/controllers/trainings/index.tsx:17
 msgid "ATC Trainings"
@@ -371,6 +375,14 @@ msgstr "China RVSM flight level"
 #: src/routes/flights/$callsign.tsx:102
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
+
+#: src/routes/sheets.tsx:350
+msgid "Chinese description"
+msgstr "Chinese description"
+
+#: src/routes/sheets.tsx:325
+msgid "Chinese name"
+msgstr "Chinese name"
 
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
@@ -612,6 +624,14 @@ msgstr "End time is required"
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
 
+#: src/routes/sheets.tsx:365
+msgid "English description"
+msgstr "English description"
+
+#: src/routes/sheets.tsx:336
+msgid "English name"
+msgstr "English name"
+
 #: src/components/event/slot-import.tsx:134
 msgid "Enter at"
 msgstr "Enter at"
@@ -665,11 +685,32 @@ msgstr "Failed to load document"
 msgid "Failed to load past events."
 msgstr "Failed to load past events."
 
+#. js-lingui-explicit-id
+#: src/routes/sheets.tsx:415
+msgid "sheet-save-failed"
+msgstr "Failed to save sheet."
+
 #: src/routes/index.tsx:85
 #: src/routes/index.tsx:89
 #: src/routes/index.tsx:121
 msgid "Feedback"
 msgstr "Feedback"
+
+#: src/routes/sheets.tsx:246
+msgid "Field {fieldNumber}"
+msgstr "Field {fieldNumber}"
+
+#: src/routes/sheets.tsx:292
+msgid "Field ID"
+msgstr "Field ID"
+
+#: src/routes/sheets.tsx:303
+msgid "Field type"
+msgstr "Field type"
+
+#: src/routes/sheets.tsx:227
+msgid "Fields"
+msgstr "Fields"
 
 #: src/components/event/slot-import.tsx:102
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
@@ -962,6 +1003,10 @@ msgstr "No data"
 msgid "No event is scheduled recently."
 msgstr "No event is scheduled recently."
 
+#: src/routes/sheets.tsx:408
+msgid "No fields."
+msgstr "No fields."
+
 #: src/components/homepage/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "No online pilot."
@@ -981,6 +1026,11 @@ msgstr "No RNAV1"
 #: src/routes/flights/$callsign.tsx:126
 msgid "No RVSM"
 msgstr "No RVSM"
+
+#: src/routes/sheets.tsx:200
+#: src/routes/sheets.tsx:212
+msgid "No sheet available."
+msgstr "No sheet available."
 
 #: src/routes/flights/$callsign.tsx:130
 msgid "No transponder"
@@ -1007,6 +1057,10 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
 
+#: src/routes/sheets.tsx:384
+msgid "One option per line."
+msgstr "One option per line."
+
 #: src/routes/index.tsx:51
 msgid "Online Controllers"
 msgstr "Online Controllers"
@@ -1014,6 +1068,10 @@ msgstr "Online Controllers"
 #: src/routes/index.tsx:73
 msgid "Online Pilots"
 msgstr "Online Pilots"
+
+#: src/routes/sheets.tsx:178
+msgid "Only staff can manage sheets. Changes are applied immediately after saving."
+msgstr "Only staff can manage sheets. Changes are applied immediately after saving."
 
 #: src/components/app/app-nav-menu.tsx:89
 msgid "Operation"
@@ -1026,6 +1084,10 @@ msgstr "Operation Director"
 #: src/routes/users/index.tsx:34
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
+
+#: src/routes/sheets.tsx:383
+msgid "Options"
+msgstr "Options"
 
 #: src/routes/_doc/controller/loa.tsx:35
 msgid "Other LOAs"
@@ -1114,7 +1176,7 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app/app-nav-menu.tsx:193
+#: src/components/app/app-nav-menu.tsx:198
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
@@ -1227,6 +1289,10 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
+#: src/routes/sheets.tsx:420
+msgid "Save sheet"
+msgstr "Save sheet"
+
 #: src/components/table.tsx:91
 msgid "Search..."
 msgstr "Search..."
@@ -1250,6 +1316,19 @@ msgstr "Self Reflection"
 #: src/routes/controllers/trainings/$id.tsx:119
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "Self reflection will be online soon. For now, please send your self reflection to your mentor."
+
+#: src/components/app/app-nav-menu.tsx:193
+#: src/routes/sheets.tsx:175
+msgid "Sheet Management"
+msgstr "Sheet Management"
+
+#: src/routes/sheets.tsx:219
+msgid "Sheet name"
+msgstr "Sheet name"
+
+#: src/routes/sheets.tsx:183
+msgid "Sheets"
+msgstr "Sheets"
 
 #: src/components/homepage/controller-list.tsx:59
 msgid "Show Absence Controllers"
@@ -1532,6 +1611,10 @@ msgstr "Title is required"
 #: src/components/app/theme-toggle.tsx:15
 msgid "Toggle theme"
 msgstr "Toggle theme"
+
+#: src/routes/sheets.tsx:205
+msgid "Total sheets: {totalSheets}"
+msgstr "Total sheets: {totalSheets}"
 
 #: src/components/atc-permission-modal.tsx:25
 msgid "Tower"

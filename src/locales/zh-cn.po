@@ -91,6 +91,10 @@ msgstr "操作"
 msgid "Active Trainings"
 msgstr "待进行的培训"
 
+#: src/routes/sheets.tsx:234
+msgid "Add field"
+msgstr "添加字段"
+
 #: src/routes/flights/$callsign.tsx:178
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
 msgstr "将 <0>D1</0> 或 <1>D2</1> 添加到 PBN。"
@@ -246,7 +250,7 @@ msgstr "至少需要一个时段"
 msgid "ATC Application"
 msgstr "管制员申请"
 
-#: src/components/app/app-nav-menu.tsx:198
+#: src/components/app/app-nav-menu.tsx:203
 #: src/routes/controllers/applications/index.tsx:18
 #: src/routes/controllers/index.tsx:27
 msgid "ATC Applications"
@@ -269,7 +273,7 @@ msgstr "管制员权限"
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/components/app/app-nav-menu.tsx:203
+#: src/components/app/app-nav-menu.tsx:208
 #: src/routes/controllers/index.tsx:32
 #: src/routes/controllers/trainings/index.tsx:17
 msgid "ATC Trainings"
@@ -371,6 +375,14 @@ msgstr "中国 RVSM 高度层"
 #: src/routes/flights/$callsign.tsx:102
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
+
+#: src/routes/sheets.tsx:350
+msgid "Chinese description"
+msgstr "中文说明"
+
+#: src/routes/sheets.tsx:325
+msgid "Chinese name"
+msgstr "中文名称"
 
 #: src/components/atc-application/atc-application-form.tsx:106
 #: src/components/atc-application/atc-application-list.tsx:17
@@ -612,6 +624,14 @@ msgstr "结束时间为必填项"
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
+#: src/routes/sheets.tsx:365
+msgid "English description"
+msgstr "英文说明"
+
+#: src/routes/sheets.tsx:336
+msgid "English name"
+msgstr "英文名称"
+
 #: src/components/event/slot-import.tsx:134
 msgid "Enter at"
 msgstr "进入空域时间"
@@ -665,11 +685,32 @@ msgstr "加载文档失败"
 msgid "Failed to load past events."
 msgstr "加载历史活动失败。"
 
+#. js-lingui-explicit-id
+#: src/routes/sheets.tsx:415
+msgid "sheet-save-failed"
+msgstr "无法保存表单。"
+
 #: src/routes/index.tsx:85
 #: src/routes/index.tsx:89
 #: src/routes/index.tsx:121
 msgid "Feedback"
 msgstr "反馈"
+
+#: src/routes/sheets.tsx:246
+msgid "Field {fieldNumber}"
+msgstr "字段 {fieldNumber}"
+
+#: src/routes/sheets.tsx:292
+msgid "Field ID"
+msgstr "字段 ID"
+
+#: src/routes/sheets.tsx:303
+msgid "Field type"
+msgstr "字段类型"
+
+#: src/routes/sheets.tsx:227
+msgid "Fields"
+msgstr "字段列表"
 
 #: src/components/event/slot-import.tsx:102
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
@@ -962,6 +1003,10 @@ msgstr "无数据"
 msgid "No event is scheduled recently."
 msgstr "近期无活动计划。"
 
+#: src/routes/sheets.tsx:408
+msgid "No fields."
+msgstr "没有字段。"
+
 #: src/components/homepage/online-pilots.tsx:53
 msgid "No online pilot."
 msgstr "当前无在线管制员。"
@@ -981,6 +1026,11 @@ msgstr "无 RNAV1"
 #: src/routes/flights/$callsign.tsx:126
 msgid "No RVSM"
 msgstr "无 RVSM"
+
+#: src/routes/sheets.tsx:200
+#: src/routes/sheets.tsx:212
+msgid "No sheet available."
+msgstr "当前没有表单。"
 
 #: src/routes/flights/$callsign.tsx:130
 msgid "No transponder"
@@ -1007,6 +1057,10 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "英制单数飞行高度层"
 
+#: src/routes/sheets.tsx:384
+msgid "One option per line."
+msgstr "每行一个选项。"
+
 #: src/routes/index.tsx:51
 msgid "Online Controllers"
 msgstr "在线管制员"
@@ -1014,6 +1068,10 @@ msgstr "在线管制员"
 #: src/routes/index.tsx:73
 msgid "Online Pilots"
 msgstr "在线飞行员"
+
+#: src/routes/sheets.tsx:178
+msgid "Only staff can manage sheets. Changes are applied immediately after saving."
+msgstr "只有职员可以管理表单。保存后立即生效。"
 
 #: src/components/app/app-nav-menu.tsx:89
 msgid "Operation"
@@ -1026,6 +1084,10 @@ msgstr "运行部主管"
 #: src/routes/users/index.tsx:34
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
+
+#: src/routes/sheets.tsx:383
+msgid "Options"
+msgstr "选项"
 
 #: src/routes/_doc/controller/loa.tsx:35
 msgid "Other LOAs"
@@ -1114,7 +1176,7 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
-#: src/components/app/app-nav-menu.tsx:193
+#: src/components/app/app-nav-menu.tsx:198
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
@@ -1227,6 +1289,10 @@ msgstr "保存"
 msgid "Save changes"
 msgstr "保存变更"
 
+#: src/routes/sheets.tsx:420
+msgid "Save sheet"
+msgstr "保存表单"
+
 #: src/components/table.tsx:91
 msgid "Search..."
 msgstr "搜索..."
@@ -1250,6 +1316,19 @@ msgstr "自我反思"
 #: src/routes/controllers/trainings/$id.tsx:119
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "自我反思功能将很快上线。目前请将你的自我反思发送给你的教员。"
+
+#: src/components/app/app-nav-menu.tsx:193
+#: src/routes/sheets.tsx:175
+msgid "Sheet Management"
+msgstr "表单管理"
+
+#: src/routes/sheets.tsx:219
+msgid "Sheet name"
+msgstr "表单名称"
+
+#: src/routes/sheets.tsx:183
+msgid "Sheets"
+msgstr "表单列表"
 
 #: src/components/homepage/controller-list.tsx:59
 msgid "Show Absence Controllers"
@@ -1532,6 +1611,10 @@ msgstr "标题为必填项"
 #: src/components/app/theme-toggle.tsx:15
 msgid "Toggle theme"
 msgstr "切换主题"
+
+#: src/routes/sheets.tsx:205
+msgid "Total sheets: {totalSheets}"
+msgstr "全部 {totalSheets} 个表单"
 
 #: src/components/atc-permission-modal.tsx:25
 msgid "Tower"

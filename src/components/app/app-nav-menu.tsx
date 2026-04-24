@@ -188,6 +188,11 @@ const contents = [
         <NavMenuLink href="/docs/utils/image">
           <Trans>Image Upload Tool</Trans>
         </NavMenuLink>
+        <RequireRole role="staff">
+          <NavMenuLink href="/sheets">
+            <Trans>Sheet Management</Trans>
+          </NavMenuLink>
+        </RequireRole>
         <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
           <NavMenuLink href="/navdata/preferred-routes">
             <Trans>Preferred Routes</Trans>
