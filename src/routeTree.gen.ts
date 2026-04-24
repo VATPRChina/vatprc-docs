@@ -19,6 +19,7 @@ import { Route as ControllersIndexRouteImport } from './routes/controllers/index
 import { Route as UsersMeRouteImport } from './routes/users/me'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
+import { Route as EventsHistoryRouteImport } from './routes/events/history'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
@@ -101,6 +102,11 @@ const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
   id: '/$callsign',
   path: '/$callsign',
   getParentRoute: () => FlightsRoute,
+} as any)
+const EventsHistoryRoute = EventsHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => EventsRoute,
 } as any)
 const EventsIdRoute = EventsIdRouteImport.update({
   id: '/$id',
@@ -281,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
@@ -323,6 +330,7 @@ export interface FileRoutesByTo {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
@@ -368,6 +376,7 @@ export interface FileRoutesById {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/users/me': typeof UsersMeRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
@@ -500,6 +511,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/users/me'
@@ -648,6 +660,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/flights/$callsign'
       preLoaderRoute: typeof FlightsCallsignRouteImport
       parentRoute: typeof FlightsRoute
+    }
+    '/events/history': {
+      id: '/events/history'
+      path: '/history'
+      fullPath: '/events/history'
+      preLoaderRoute: typeof EventsHistoryRouteImport
+      parentRoute: typeof EventsRoute
     }
     '/events/$id': {
       id: '/events/$id'
@@ -878,11 +897,13 @@ declare module '@tanstack/react-router' {
 
 interface EventsRouteChildren {
   EventsIdRoute: typeof EventsIdRoute
+  EventsHistoryRoute: typeof EventsHistoryRoute
   EventsIndexRoute: typeof EventsIndexRoute
 }
 
 const EventsRouteChildren: EventsRouteChildren = {
   EventsIdRoute: EventsIdRoute,
+  EventsHistoryRoute: EventsHistoryRoute,
   EventsIndexRoute: EventsIndexRoute,
 }
 

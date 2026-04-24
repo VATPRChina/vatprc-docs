@@ -1655,6 +1655,7 @@ export interface paths {
     get: {
       parameters: {
         query?: {
+          since?: string;
           until?: string;
         };
         header?: never;
@@ -1670,6 +1671,69 @@ export interface paths {
           };
           content: {
             "application/json": components["schemas"]["EventDto"][];
+          };
+        };
+        /** @description EVENT_PAST_INVALID_TIME_RANGE, EVENT_PAST_TIME_RANGE_TOO_LARGE */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json":
+              | {
+                  /**
+                   * @description EVENT_PAST_INVALID_TIME_RANGE
+                   * @enum {string}
+                   */
+                  error_code: "EVENT_PAST_INVALID_TIME_RANGE";
+                  /**
+                   * @description since must be earlier than or equal to until.
+                   * @example since must be earlier than or equal to until.
+                   */
+                  message: string;
+                  /**
+                   * @description EVENT_PAST_INVALID_TIME_RANGE
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:event-past-invalid-time-range";
+                  /**
+                   * @description since must be earlier than or equal to until.
+                   * @example since must be earlier than or equal to until.
+                   */
+                  title: string;
+                  /**
+                   * @description since must be earlier than or equal to until.
+                   * @example since must be earlier than or equal to until.
+                   */
+                  detail: string;
+                }
+              | {
+                  /**
+                   * @description EVENT_PAST_TIME_RANGE_TOO_LARGE
+                   * @enum {string}
+                   */
+                  error_code: "EVENT_PAST_TIME_RANGE_TOO_LARGE";
+                  /**
+                   * @description The selected time range must not exceed 3 months.
+                   * @example The selected time range must not exceed 3 months.
+                   */
+                  message: string;
+                  /**
+                   * @description EVENT_PAST_TIME_RANGE_TOO_LARGE
+                   * @enum {string}
+                   */
+                  type: "urn:vatprc-uniapi-error:event-past-time-range-too-large";
+                  /**
+                   * @description The selected time range must not exceed 3 months.
+                   * @example The selected time range must not exceed 3 months.
+                   */
+                  title: string;
+                  /**
+                   * @description The selected time range must not exceed 3 months.
+                   * @example The selected time range must not exceed 3 months.
+                   */
+                  detail: string;
+                };
           };
         };
         /** @description INTERNAL_SERVER_ERROR */

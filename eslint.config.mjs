@@ -17,6 +17,11 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
   },
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
