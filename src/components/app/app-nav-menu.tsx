@@ -66,6 +66,9 @@ const contents = [
         <NavMenuLink href="/division/privacy">
           <Trans>Privacy Policy</Trans>
         </NavMenuLink>
+        <NavMenuLink href="/division/policy">
+          <Trans>Division Policies</Trans>
+        </NavMenuLink>
         <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
           <Trans>Logo Pack</Trans>
         </NavMenuLink>

@@ -38,6 +38,7 @@ import { Route as DocPilotPilotSoftwaresRouteImport } from './routes/_doc/pilot/
 import { Route as DocPilotIntroductionToFlyRouteImport } from './routes/_doc/pilot/introduction-to-fly'
 import { Route as DocDivisionStaffRouteImport } from './routes/_doc/division/staff'
 import { Route as DocDivisionPrivacyRouteImport } from './routes/_doc/division/privacy'
+import { Route as DocDivisionPolicyRouteImport } from './routes/_doc/division/policy'
 import { Route as DocDivisionMeetingRouteImport } from './routes/_doc/division/meeting'
 import { Route as DocDivisionIntroductionRouteImport } from './routes/_doc/division/introduction'
 import { Route as DocDivisionApiRouteImport } from './routes/_doc/division/api'
@@ -204,6 +205,11 @@ const DocDivisionPrivacyRoute = DocDivisionPrivacyRouteImport.update({
   path: '/division/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocDivisionPolicyRoute = DocDivisionPolicyRouteImport.update({
+  id: '/_doc/division/policy',
+  path: '/division/policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocDivisionMeetingRoute = DocDivisionMeetingRouteImport.update({
   id: '/_doc/division/meeting',
   path: '/division/meeting',
@@ -317,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/division/api': typeof DocDivisionApiRoute
   '/division/introduction': typeof DocDivisionIntroductionRoute
   '/division/meeting': typeof DocDivisionMeetingRoute
+  '/division/policy': typeof DocDivisionPolicyRoute
   '/division/privacy': typeof DocDivisionPrivacyRoute
   '/division/staff': typeof DocDivisionStaffRoute
   '/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -361,6 +368,7 @@ export interface FileRoutesByTo {
   '/division/api': typeof DocDivisionApiRoute
   '/division/introduction': typeof DocDivisionIntroductionRoute
   '/division/meeting': typeof DocDivisionMeetingRoute
+  '/division/policy': typeof DocDivisionPolicyRoute
   '/division/privacy': typeof DocDivisionPrivacyRoute
   '/division/staff': typeof DocDivisionStaffRoute
   '/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -408,6 +416,7 @@ export interface FileRoutesById {
   '/_doc/division/api': typeof DocDivisionApiRoute
   '/_doc/division/introduction': typeof DocDivisionIntroductionRoute
   '/_doc/division/meeting': typeof DocDivisionMeetingRoute
+  '/_doc/division/policy': typeof DocDivisionPolicyRoute
   '/_doc/division/privacy': typeof DocDivisionPrivacyRoute
   '/_doc/division/staff': typeof DocDivisionStaffRoute
   '/_doc/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -456,6 +465,7 @@ export interface FileRouteTypes {
     | '/division/api'
     | '/division/introduction'
     | '/division/meeting'
+    | '/division/policy'
     | '/division/privacy'
     | '/division/staff'
     | '/pilot/introduction-to-fly'
@@ -500,6 +510,7 @@ export interface FileRouteTypes {
     | '/division/api'
     | '/division/introduction'
     | '/division/meeting'
+    | '/division/policy'
     | '/division/privacy'
     | '/division/staff'
     | '/pilot/introduction-to-fly'
@@ -546,6 +557,7 @@ export interface FileRouteTypes {
     | '/_doc/division/api'
     | '/_doc/division/introduction'
     | '/_doc/division/meeting'
+    | '/_doc/division/policy'
     | '/_doc/division/privacy'
     | '/_doc/division/staff'
     | '/_doc/pilot/introduction-to-fly'
@@ -588,6 +600,7 @@ export interface RootRouteChildren {
   DocDivisionApiRoute: typeof DocDivisionApiRoute
   DocDivisionIntroductionRoute: typeof DocDivisionIntroductionRoute
   DocDivisionMeetingRoute: typeof DocDivisionMeetingRoute
+  DocDivisionPolicyRoute: typeof DocDivisionPolicyRoute
   DocDivisionPrivacyRoute: typeof DocDivisionPrivacyRoute
   DocDivisionStaffRoute: typeof DocDivisionStaffRoute
   DocPilotIntroductionToFlyRoute: typeof DocPilotIntroductionToFlyRoute
@@ -807,6 +820,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocDivisionPrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_doc/division/policy': {
+      id: '/_doc/division/policy'
+      path: '/division/policy'
+      fullPath: '/division/policy'
+      preLoaderRoute: typeof DocDivisionPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_doc/division/meeting': {
       id: '/_doc/division/meeting'
       path: '/division/meeting'
@@ -973,6 +993,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocDivisionApiRoute: DocDivisionApiRoute,
   DocDivisionIntroductionRoute: DocDivisionIntroductionRoute,
   DocDivisionMeetingRoute: DocDivisionMeetingRoute,
+  DocDivisionPolicyRoute: DocDivisionPolicyRoute,
   DocDivisionPrivacyRoute: DocDivisionPrivacyRoute,
   DocDivisionStaffRoute: DocDivisionStaffRoute,
   DocPilotIntroductionToFlyRoute: DocPilotIntroductionToFlyRoute,

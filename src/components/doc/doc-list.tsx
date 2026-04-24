@@ -7,18 +7,16 @@ const DocCard = ({ title, fileName, webPath, children }: DocumentEntry) => {
     return (
       <div className="mb-4 flex flex-col gap-4">
         <h1 className="text-2xl">{title}</h1>
-        <div className="flex flex-row flex-wrap gap-8">
+        <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 lg:grid-cols-3">
           <DocList documents={children} />
         </div>
       </div>
     );
   }
   return (
-    <Link to={webPath}>
-      <div className="hover:bg-secondary flex w-96 flex-col gap-2 border p-2">
-        <span>{title}</span>
-        <span className="text-slate-500">{fileName}</span>
-      </div>
+    <Link to={webPath} className="hover:bg-secondary flex w-full flex-col gap-2 border p-2">
+      <span>{title}</span>
+      <span className="text-slate-500">{fileName}</span>
     </Link>
   );
 };
