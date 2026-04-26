@@ -1,10 +1,11 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { errorToast } from "@/lib/utils";
+import { errorToast, promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Card, Group, Select, TextInput, Textarea } from "@mantine/core";
+import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TbArrowDown, TbArrowUp, TbPlus, TbTrash } from "react-icons/tb";
 
 export const Route = createFileRoute("/sheets/$id")({
@@ -14,6 +15,11 @@ export const Route = createFileRoute("/sheets/$id")({
 type EditableField = components["schemas"]["SheetFieldSaveRequest"] & {
   localKey: string;
   optionsText: string;
+};
+
+type SheetFormData = {
+  name: string;
+  fields: EditableField[];
 };
 
 const FIELD_KIND_OPTIONS: components["schemas"]["SheetFieldKind"][] = ["short-text", "long-text", "single-choice"];
@@ -55,28 +61,6 @@ function renumberFields(fields: EditableField[]) {
   return fields.map((field, index) => ({ ...field, sequence: index }));
 }
 
-function toSaveRequest(name: string, fields: EditableField[]): components["schemas"]["SheetSaveRequest"] {
-  return {
-    name,
-    fields: renumberFields(fields).map((field) => ({
-      id: field.id.trim(),
-      sequence: field.sequence,
-      name_zh: field.name_zh.trim(),
-      name_en: field.name_en?.trim() || null,
-      kind: field.kind,
-      single_choice_options:
-        field.kind === "single-choice"
-          ? field.optionsText
-              .split("\n")
-              .map((option) => option.trim())
-              .filter(Boolean)
-          : [],
-      description_zh: field.description_zh?.trim() || null,
-      description_en: field.description_en?.trim() || null,
-    })),
-  };
-}
-
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
   if (typeof error === "object" && error && "message" in error && typeof error.message === "string") {
@@ -85,23 +69,46 @@ function getErrorMessage(error: unknown) {
   return "Unknown error";
 }
 
-function validateSheet(name: string, fields: EditableField[], t: ReturnType<typeof useLingui>["t"]) {
-  if (name.trim().length === 0) return t`Sheet name is required.`;
+function validateSheet(data: SheetFormData, t: ReturnType<typeof useLingui>["t"]) {
+  const errors: Record<string, string> = {};
 
-  for (const [index, field] of fields.entries()) {
-    const fieldNumber = index + 1;
-    if (field.id.trim().length === 0) return t`Field ${fieldNumber}: ID is required.`;
-    if (field.name_zh.trim().length === 0) return t`Field ${fieldNumber}: Chinese name is required.`;
+  if (data.name.trim().length === 0) {
+    errors.name = t`Sheet name is required.`;
+  }
+
+  const fieldErrors: Record<number, Record<string, string>> = {};
+
+  for (const [index, field] of data.fields.entries()) {
+    const currentFieldErrors: Record<string, string> = {};
+
+    if (field.id.trim().length === 0) {
+      currentFieldErrors.id = t`ID is required.`;
+    }
+
+    if (field.name_zh.trim().length === 0) {
+      currentFieldErrors.name_zh = t`Chinese name is required.`;
+    }
+
     if (field.kind === "single-choice") {
       const options = field.optionsText
         .split("\n")
         .map((option) => option.trim())
         .filter(Boolean);
-      if (options.length === 0) return t`Field ${fieldNumber}: single-choice fields need at least one option.`;
+      if (options.length === 0) {
+        currentFieldErrors.optionsText = t`Single-choice fields need at least one option.`;
+      }
+    }
+
+    if (Object.keys(currentFieldErrors).length > 0) {
+      fieldErrors[index] = currentFieldErrors;
     }
   }
 
-  return null;
+  if (Object.keys(fieldErrors).length > 0) {
+    errors.fields = t`Please fix errors in the fields.`;
+  }
+
+  return Object.keys(errors).length > 0 ? errors : null;
 }
 
 function RouteComponent() {
@@ -115,237 +122,297 @@ function RouteComponent() {
   );
   const { mutate: saveSheet, isPending: isSaving, error: saveError } = $api.useMutation("put", "/api/sheets/{sheetId}");
 
-  const [name, setName] = useState("");
-  const [fields, setFields] = useState<EditableField[]>([]);
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      fields: [],
+    } as SheetFormData,
+    validators: {
+      onChange: ({ value }: { value: SheetFormData }) => {
+        return validateSheet(value, t);
+      },
+    },
+    onSubmit: async ({ value }: { value: SheetFormData }) => {
+      if (!id) return;
+
+      const saveRequest = {
+        name: value.name,
+        fields: renumberFields(value.fields).map((field) => ({
+          id: field.id.trim(),
+          sequence: field.sequence,
+          name_zh: field.name_zh.trim(),
+          name_en: field.name_en?.trim() || null,
+          kind: field.kind,
+          single_choice_options:
+            field.kind === "single-choice"
+              ? field.optionsText
+                  .split("\n")
+                  .map((option) => option.trim())
+                  .filter(Boolean)
+              : [],
+          description_zh: field.description_zh?.trim() || null,
+          description_en: field.description_en?.trim() || null,
+        })),
+      };
+
+      return new Promise<void>((resolve) => {
+        saveSheet(
+          {
+            params: { path: { sheetId: id } },
+            body: saveRequest,
+          },
+          {
+            onSuccess: (updated) => {
+              form.setFieldValue("name", updated.name);
+              form.setFieldValue("fields", toEditableFields(updated.fields));
+              resolve();
+            },
+            onError: (err) => {
+              errorToast(new Error(getErrorMessage(err)));
+              resolve();
+            },
+          },
+        );
+      });
+    },
+  });
 
   useEffect(() => {
     if (!sheet) return;
-    setName(sheet.name);
-    setFields(toEditableFields(sheet.fields));
-  }, [sheet]);
-
-  const onSave = () => {
-    if (!id) return;
-
-    const error = validateSheet(name, fields, t);
-    if (error) {
-      errorToast(new Error(error));
-      return;
-    }
-
-    saveSheet(
-      {
-        params: { path: { sheetId: id } },
-        body: toSaveRequest(name, fields),
-      },
-      {
-        onSuccess: (updated) => {
-          setName(updated.name);
-          setFields(toEditableFields(updated.fields));
-        },
-        onError: (err) => errorToast(new Error(getErrorMessage(err))),
-      },
-    );
-  };
+    form.setFieldValue("name", sheet.name);
+    form.setFieldValue("fields", toEditableFields(sheet.fields));
+  }, [sheet, form]);
 
   return (
     <>
-      <TextInput
-        label={t`Sheet name`}
-        value={name}
-        onChange={(event) => setName(event.currentTarget.value)}
-        disabled={isSheetLoading}
-      />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          promiseWithLog(form.handleSubmit());
+        }}
+      >
+        <form.Field name="name">
+          {(field) => (
+            <TextInput
+              label={t`Sheet name`}
+              value={field.state.value}
+              onChange={(event) => field.handleChange(event.currentTarget.value)}
+              onBlur={field.handleBlur}
+              disabled={isSheetLoading}
+              error={field.state.meta.errors[0]}
+            />
+          )}
+        </form.Field>
 
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-medium">
-          <Trans>Fields</Trans>
-        </h2>
-        <Button
-          variant="light"
-          leftSection={<TbPlus size={16} />}
-          onClick={() => setFields((prev) => [...prev, { ...EMPTY_FIELD(), sequence: prev.length }])}
-        >
-          <Trans>Add field</Trans>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-medium">
+            <Trans>Fields</Trans>
+          </h2>
+          <Button
+            type="button"
+            variant="light"
+            leftSection={<TbPlus size={16} />}
+            onClick={() => {
+              const state = form.getFieldValue("fields" as const);
+              const currentFields = Array.isArray(state) ? state : [];
+              form.setFieldValue("fields" as const, [
+                ...currentFields,
+                { ...EMPTY_FIELD(), sequence: currentFields.length },
+              ]);
+            }}
+          >
+            <Trans>Add field</Trans>
+          </Button>
+        </div>
+
+        <form.Field name="fields" mode="array">
+          {(fieldsField) => {
+            const fields: EditableField[] = Array.isArray(fieldsField.state.value) ? fieldsField.state.value : [];
+            return (
+              <div className="flex flex-col gap-3">
+                {fields.map((field, index) => {
+                  const fieldNumber = index + 1;
+
+                  return (
+                    <Card key={field.localKey} withBorder className="flex flex-col gap-3">
+                      <Group justify="space-between" align="start">
+                        <div className="font-medium">
+                          <Trans>Field {fieldNumber}</Trans>
+                        </div>
+                        <Group gap="xs">
+                          <Button
+                            type="button"
+                            variant="subtle"
+                            size="compact-sm"
+                            onClick={() => {
+                              if (index === 0) return;
+                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                ? form.getFieldValue("fields")
+                                : [];
+                              const next = [...currentFields];
+                              [next[index - 1], next[index]] = [next[index], next[index - 1]];
+                              form.setFieldValue("fields" as const, renumberFields(next));
+                            }}
+                            disabled={index === 0}
+                          >
+                            <TbArrowUp size={16} />
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="subtle"
+                            size="compact-sm"
+                            onClick={() => {
+                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                ? form.getFieldValue("fields")
+                                : [];
+                              if (index === currentFields.length - 1) return;
+                              const next = [...currentFields];
+                              [next[index], next[index + 1]] = [next[index + 1], next[index]];
+                              form.setFieldValue("fields" as const, renumberFields(next));
+                            }}
+                            disabled={index === fields.length - 1}
+                          >
+                            <TbArrowDown size={16} />
+                          </Button>
+                          <Button
+                            type="button"
+                            color="red"
+                            variant="subtle"
+                            size="compact-sm"
+                            onClick={() => {
+                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                ? form.getFieldValue("fields")
+                                : [];
+                              form.setFieldValue(
+                                "fields" as const,
+                                renumberFields(currentFields.filter((_, i) => i !== index)),
+                              );
+                            }}
+                          >
+                            <TbTrash size={16} />
+                          </Button>
+                        </Group>
+                      </Group>
+
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <form.Field name={`fields[${index}].id`}>
+                          {(idField) => (
+                            <TextInput
+                              label={t`Field ID`}
+                              value={idField.state.value ?? ""}
+                              onChange={(event) => idField.handleChange(event.currentTarget.value)}
+                              onBlur={idField.handleBlur}
+                              error={idField.state.meta.errors[0]}
+                            />
+                          )}
+                        </form.Field>
+                        <form.Field name={`fields[${index}].kind`}>
+                          {(kindField) => (
+                            <Select
+                              label={t`Field type`}
+                              data={FIELD_KIND_OPTIONS.map((kind) => ({
+                                value: kind,
+                                label: kind,
+                              }))}
+                              value={kindField.state.value ?? ""}
+                              allowDeselect={false}
+                              onChange={(value) => {
+                                if (!value) return;
+                                kindField.handleChange(value as components["schemas"]["SheetFieldKind"]);
+                                if (value !== "single-choice") {
+                                  form.setFieldValue(`fields[${index}].optionsText`, "");
+                                }
+                              }}
+                              onBlur={kindField.handleBlur}
+                            />
+                          )}
+                        </form.Field>
+                        <form.Field name={`fields[${index}].name_zh`}>
+                          {(nameZhField) => (
+                            <TextInput
+                              label={t`Chinese name`}
+                              value={nameZhField.state.value ?? ""}
+                              onChange={(event) => nameZhField.handleChange(event.currentTarget.value)}
+                              onBlur={nameZhField.handleBlur}
+                              error={nameZhField.state.meta.errors[0]}
+                            />
+                          )}
+                        </form.Field>
+                        <form.Field name={`fields[${index}].name_en`}>
+                          {(nameEnField) => (
+                            <TextInput
+                              label={t`English name`}
+                              value={nameEnField.state.value ?? ""}
+                              onChange={(event) => nameEnField.handleChange(event.currentTarget.value)}
+                              onBlur={nameEnField.handleBlur}
+                            />
+                          )}
+                        </form.Field>
+                      </div>
+
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <form.Field name={`fields[${index}].description_zh`}>
+                          {(descZhField) => (
+                            <Textarea
+                              label={t`Chinese description`}
+                              value={descZhField.state.value ?? ""}
+                              onChange={(event) => descZhField.handleChange(event.currentTarget.value)}
+                              onBlur={descZhField.handleBlur}
+                              autosize
+                              minRows={2}
+                            />
+                          )}
+                        </form.Field>
+                        <form.Field name={`fields[${index}].description_en`}>
+                          {(descEnField) => (
+                            <Textarea
+                              label={t`English description`}
+                              value={descEnField.state.value ?? ""}
+                              onChange={(event) => descEnField.handleChange(event.currentTarget.value)}
+                              onBlur={descEnField.handleBlur}
+                              autosize
+                              minRows={2}
+                            />
+                          )}
+                        </form.Field>
+                      </div>
+
+                      {field.kind === "single-choice" && (
+                        <form.Field name={`fields[${index}].optionsText`}>
+                          {(optionsField) => (
+                            <Textarea
+                              label={t`Options`}
+                              description={t`One option per line.`}
+                              value={optionsField.state.value ?? ""}
+                              onChange={(event) => optionsField.handleChange(event.currentTarget.value)}
+                              onBlur={optionsField.handleBlur}
+                              error={optionsField.state.meta.errors[0]}
+                              autosize
+                              minRows={4}
+                            />
+                          )}
+                        </form.Field>
+                      )}
+                    </Card>
+                  );
+                })}
+
+                {fields.length === 0 && (
+                  <Alert>
+                    <Trans>No fields.</Trans>
+                  </Alert>
+                )}
+              </div>
+            );
+          }}
+        </form.Field>
+
+        {saveError && <Alert color="red">{saveError.message || t`Failed to save sheet.`}</Alert>}
+
+        <Button type="submit" loading={isSaving} className="self-start">
+          <Trans>Save sheet</Trans>
         </Button>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        {fields.map((field, index) => {
-          const fieldNumber = index + 1;
-
-          return (
-            <Card key={field.localKey} withBorder className="flex flex-col gap-3">
-              <Group justify="space-between" align="start">
-                <div className="font-medium">
-                  <Trans>Field {fieldNumber}</Trans>
-                </div>
-                <Group gap="xs">
-                  <Button
-                    variant="subtle"
-                    size="compact-sm"
-                    onClick={() =>
-                      setFields((prev) => {
-                        if (index === 0) return prev;
-                        const next = [...prev];
-                        [next[index - 1], next[index]] = [next[index], next[index - 1]];
-                        return renumberFields(next);
-                      })
-                    }
-                    disabled={index === 0}
-                  >
-                    <TbArrowUp size={16} />
-                  </Button>
-                  <Button
-                    variant="subtle"
-                    size="compact-sm"
-                    onClick={() =>
-                      setFields((prev) => {
-                        if (index === prev.length - 1) return prev;
-                        const next = [...prev];
-                        [next[index], next[index + 1]] = [next[index + 1], next[index]];
-                        return renumberFields(next);
-                      })
-                    }
-                    disabled={index === fields.length - 1}
-                  >
-                    <TbArrowDown size={16} />
-                  </Button>
-                  <Button
-                    color="red"
-                    variant="subtle"
-                    size="compact-sm"
-                    onClick={() => setFields((prev) => renumberFields(prev.filter((_, i) => i !== index)))}
-                  >
-                    <TbTrash size={16} />
-                  </Button>
-                </Group>
-              </Group>
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <TextInput
-                  label={t`Field ID`}
-                  value={field.id}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index ? { ...current, id: event.currentTarget.value } : current,
-                      ),
-                    )
-                  }
-                />
-                <Select
-                  label={t`Field type`}
-                  data={FIELD_KIND_OPTIONS.map((kind) => ({
-                    value: kind,
-                    label: kind,
-                  }))}
-                  value={field.kind}
-                  allowDeselect={false}
-                  onChange={(value) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index && value
-                          ? {
-                              ...current,
-                              kind: value as components["schemas"]["SheetFieldKind"],
-                              optionsText: value === "single-choice" ? current.optionsText : "",
-                            }
-                          : current,
-                      ),
-                    )
-                  }
-                />
-                <TextInput
-                  label={t`Chinese name`}
-                  value={field.name_zh}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index ? { ...current, name_zh: event.currentTarget.value } : current,
-                      ),
-                    )
-                  }
-                />
-                <TextInput
-                  label={t`English name`}
-                  value={field.name_en ?? ""}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index ? { ...current, name_en: event.currentTarget.value } : current,
-                      ),
-                    )
-                  }
-                />
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <Textarea
-                  label={t`Chinese description`}
-                  value={field.description_zh ?? ""}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index ? { ...current, description_zh: event.currentTarget.value } : current,
-                      ),
-                    )
-                  }
-                  autosize
-                  minRows={2}
-                />
-                <Textarea
-                  label={t`English description`}
-                  value={field.description_en ?? ""}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index ? { ...current, description_en: event.currentTarget.value } : current,
-                      ),
-                    )
-                  }
-                  autosize
-                  minRows={2}
-                />
-              </div>
-
-              {field.kind === "single-choice" && (
-                <Textarea
-                  label={t`Options`}
-                  description={t`One option per line.`}
-                  value={field.optionsText}
-                  onChange={(event) =>
-                    setFields((prev) =>
-                      prev.map((current, currentIndex) =>
-                        currentIndex === index
-                          ? {
-                              ...current,
-                              optionsText: event.currentTarget.value,
-                            }
-                          : current,
-                      ),
-                    )
-                  }
-                  autosize
-                  minRows={4}
-                />
-              )}
-            </Card>
-          );
-        })}
-
-        {fields.length === 0 && (
-          <Alert>
-            <Trans>No fields.</Trans>
-          </Alert>
-        )}
-      </div>
-
-      {saveError && <Alert color="red">{saveError.message || t`Failed to save sheet.`}</Alert>}
-
-      <Button onClick={onSave} loading={isSaving} className="self-start">
-        <Trans>Save sheet</Trans>
-      </Button>
+      </form>
     </>
   );
 }
