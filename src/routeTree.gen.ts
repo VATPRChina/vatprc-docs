@@ -18,6 +18,7 @@ import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
 import { Route as UsersMeRouteImport } from './routes/users/me'
+import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as EventsHistoryRouteImport } from './routes/events/history'
@@ -99,6 +100,11 @@ const UsersMeRoute = UsersMeRouteImport.update({
   id: '/users/me',
   path: '/users/me',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SheetsIdRoute = SheetsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SheetsRoute,
 } as any)
 const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
   id: '/navdata/preferred-routes',
@@ -294,7 +300,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
-  '/sheets': typeof SheetsRoute
+  '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -303,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
   '/users/me': typeof UsersMeRoute
   '/controllers': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -339,7 +346,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/sheets': typeof SheetsRoute
+  '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -348,6 +355,7 @@ export interface FileRoutesByTo {
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
   '/users/me': typeof UsersMeRoute
   '/controllers': typeof ControllersIndexRoute
   '/events': typeof EventsIndexRoute
@@ -387,7 +395,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
-  '/sheets': typeof SheetsRoute
+  '/sheets': typeof SheetsRouteWithChildren
   '/_doc/loa': typeof DocLoaRoute
   '/_doc/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
@@ -396,6 +404,7 @@ export interface FileRoutesById {
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
   '/users/me': typeof UsersMeRoute
   '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -445,6 +454,7 @@ export interface FileRouteTypes {
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
     | '/users/me'
     | '/controllers'
     | '/events/'
@@ -490,6 +500,7 @@ export interface FileRouteTypes {
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
     | '/users/me'
     | '/controllers'
     | '/events'
@@ -537,6 +548,7 @@ export interface FileRouteTypes {
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
     | '/users/me'
     | '/controllers/'
     | '/events/'
@@ -576,7 +588,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRoute: typeof EventsRouteWithChildren
   FlightsRoute: typeof FlightsRouteWithChildren
-  SheetsRoute: typeof SheetsRoute
+  SheetsRoute: typeof SheetsRouteWithChildren
   DocLoaRoute: typeof DocLoaRoute
   DocSopRoute: typeof DocSopRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
@@ -679,6 +691,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/users/me'
       preLoaderRoute: typeof UsersMeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/sheets/$id': {
+      id: '/sheets/$id'
+      path: '/$id'
+      fullPath: '/sheets/$id'
+      preLoaderRoute: typeof SheetsIdRouteImport
+      parentRoute: typeof SheetsRoute
     }
     '/navdata/preferred-routes': {
       id: '/navdata/preferred-routes'
@@ -963,11 +982,22 @@ const FlightsRouteChildren: FlightsRouteChildren = {
 const FlightsRouteWithChildren =
   FlightsRoute._addFileChildren(FlightsRouteChildren)
 
+interface SheetsRouteChildren {
+  SheetsIdRoute: typeof SheetsIdRoute
+}
+
+const SheetsRouteChildren: SheetsRouteChildren = {
+  SheetsIdRoute: SheetsIdRoute,
+}
+
+const SheetsRouteWithChildren =
+  SheetsRoute._addFileChildren(SheetsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRoute: EventsRouteWithChildren,
   FlightsRoute: FlightsRouteWithChildren,
-  SheetsRoute: SheetsRoute,
+  SheetsRoute: SheetsRouteWithChildren,
   DocLoaRoute: DocLoaRoute,
   DocSopRoute: DocSopRoute,
   AuthCallbackRoute: AuthCallbackRoute,
