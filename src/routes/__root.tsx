@@ -2,14 +2,7 @@ import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
-import {
-  COLOR_SCHEME_COOKIE_KEY,
-  cookieColorSchemeManager,
-  getCookie,
-  isColorScheme,
-  isLocale,
-  LANGUAGE_COOKIE_KEY,
-} from "@/lib/settings";
+import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorScheme } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
@@ -99,19 +92,6 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
       window.localStorage.removeItem("mantine-color-scheme-value");
     } catch {
       // Ignore storage access failures in restricted browser contexts.
-    }
-
-    if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
-      return;
-    }
-
-    if (publicHref.includes("/auth/callback")) {
-      return;
-    }
-
-    const locale = getCookie(LANGUAGE_COOKIE_KEY);
-    if (isLocale(locale)) {
-      setTimeout(() => window.location.replace(getLocalPathname(locale)));
     }
   });
 
