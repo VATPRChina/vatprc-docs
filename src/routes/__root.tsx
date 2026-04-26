@@ -2,7 +2,14 @@ import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
-import { cookieColorSchemeManager, getCookie, isLocale, LANGUAGE_COOKIE_KEY } from "@/lib/settings";
+import {
+  COLOR_SCHEME_COOKIE_KEY,
+  cookieColorSchemeManager,
+  getCookie,
+  isColorScheme,
+  isLocale,
+  LANGUAGE_COOKIE_KEY,
+} from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
@@ -83,6 +90,8 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   const { publicHref } = useLocation();
   const { i18n } = useLingui();
+  const colorScheme = getCookie(COLOR_SCHEME_COOKIE_KEY);
+  const htmlColorScheme = isColorScheme(colorScheme) && colorScheme !== "auto" ? colorScheme : "light";
 
   useEffect(() => {
     try {
@@ -107,7 +116,12 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   });
 
   return (
-    <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
+    <html
+      {...mantineHtmlProps}
+      lang={i18n.locale}
+      className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
+      data-mantine-color-scheme={htmlColorScheme}
+    >
       <head>
         <HeadContent />
       </head>
