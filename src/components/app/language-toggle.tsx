@@ -1,16 +1,15 @@
 import { getLocalPathname } from "@/lib/i18n";
+import { LANGUAGE_COOKIE_KEY, setCookie } from "@/lib/settings";
 import { useLingui } from "@lingui/react/macro";
 import { ActionIcon } from "@mantine/core";
 import { TbLanguage } from "react-icons/tb";
-
-export const LANGUAGE_STORAGE_KEY = "vatprc-homepage-locale";
 
 export const LanguageToggle = () => {
   const { i18n, t } = useLingui();
   const nextLang = i18n.locale === "zh-cn" ? "en" : "zh-cn";
 
   const onClick = () => {
-    localStorage.setItem("vatprc-homepage-locale", nextLang);
+    setCookie(LANGUAGE_COOKIE_KEY, nextLang);
     window.location.assign(getLocalPathname(nextLang));
   };
 

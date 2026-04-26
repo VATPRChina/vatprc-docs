@@ -2,11 +2,12 @@ import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
+import { cookieColorSchemeManager, getCookie, isLocale, LANGUAGE_COOKIE_KEY } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { Alert, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
@@ -46,6 +47,8 @@ const theme = createTheme({
   defaultRadius: 0,
 });
 
+const colorSchemeManager = cookieColorSchemeManager();
+
 interface ApplicationProps {
   children?: React.ReactNode;
 }
@@ -82,6 +85,13 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   const { i18n } = useLingui();
 
   useEffect(() => {
+    try {
+      window.localStorage.removeItem("vatprc-homepage-locale");
+      window.localStorage.removeItem("mantine-color-scheme-value");
+    } catch {
+      // Ignore storage access failures in restricted browser contexts.
+    }
+
     if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
       return;
     }
@@ -90,8 +100,8 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
-    const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
-    if (locale) {
+    const locale = getCookie(LANGUAGE_COOKIE_KEY);
+    if (isLocale(locale)) {
       setTimeout(() => window.location.replace(getLocalPathname(locale)));
     }
   });
@@ -100,10 +110,9 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
     <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
       <head>
         <HeadContent />
-        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body className="px-1 md:px-0">
-        <MantineProvider theme={theme} defaultColorScheme="auto">
+        <MantineProvider theme={theme} defaultColorScheme="auto" colorSchemeManager={colorSchemeManager}>
           <Application>{children}</Application>
           <Notifications position="top-center" />
         </MantineProvider>

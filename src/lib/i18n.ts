@@ -1,3 +1,4 @@
+import { getCookie, isLocale, LANGUAGE_COOKIE_KEY } from "./settings";
 import { getPathname } from "./utils";
 import { I18n, MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
@@ -10,6 +11,12 @@ export const inferLocale = (): "en" | "zh-cn" => {
   if (pathname.startsWith("/zh-cn")) {
     return "zh-cn";
   }
+
+  const cookieLocale = getCookie(LANGUAGE_COOKIE_KEY);
+  if (isLocale(cookieLocale)) {
+    return cookieLocale;
+  }
+
   if (typeof navigator !== "undefined" && navigator.language.startsWith("zh")) {
     return "zh-cn";
   }
