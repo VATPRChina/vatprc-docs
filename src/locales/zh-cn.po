@@ -494,8 +494,8 @@ msgid "Created at"
 msgstr "创建时间"
 
 #: src/routes/flights/$callsign.tsx:385
-msgid "Cruising Level (Feet)"
-msgstr "巡航高度（英尺）"
+msgid "Cruising Level"
+msgstr "巡航高度"
 
 #: src/routes/flights/$callsign.tsx:137
 msgid "Cruising Level Not Allowed"

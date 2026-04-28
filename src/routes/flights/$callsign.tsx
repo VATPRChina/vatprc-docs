@@ -1,5 +1,6 @@
 import { BackButton } from "@/components/back-button";
 import { FlightWarnings } from "@/components/flight-warnings";
+import { formatCruisingLevelInMeters, getCruisingLevelInMeters } from "@/lib/altitude";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
@@ -325,6 +326,23 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
 };
 
 const LEG_IDENTIFIER_DIRECT = "DCT";
+
+const CruisingLevelMeters = ({ feet }: { feet: number }) => {
+  const { t } = useLingui();
+  const { isChinaRvsm } = getCruisingLevelInMeters(feet);
+  const metricAltitude = <span className="text-muted-foreground text-sm">{formatCruisingLevelInMeters(feet)}</span>;
+
+  if (!isChinaRvsm) return metricAltitude;
+
+  return (
+    <Tooltip label={t`China RVSM`}>
+      <span className="text-muted-foreground text-sm underline decoration-dotted underline-offset-2">
+        {formatCruisingLevelInMeters(feet)}
+      </span>
+    </Tooltip>
+  );
+};
+
 function RouteComponent() {
   const { callsign } = Route.useParams();
 
@@ -382,8 +400,13 @@ function RouteComponent() {
             <FplField label={t`Departure`} value={flight.departure} className="col-start-1" />
             {/* <FplField label="Off Block" value="-" /> */}
             {/* <FplField label="Airspeed" value="-" /> */}
-            <FplField label={t`Cruising Level (Feet)`}>
-              {flight.cruising_level && <span className="text-mono">{flight.cruising_level}</span>}
+            <FplField label={t`Cruising Level`}>
+              {flight.cruising_level && (
+                <div className="flex items-baseline gap-2">
+                  <span>{flight.cruising_level} ft</span>
+                  <CruisingLevelMeters feet={flight.cruising_level} />
+                </div>
+              )}
               <Warning flight={flight} warnings={warnings} field="cruising_level" />
             </FplField>
             <FplField label={t`Route`} className="col-span-4">
