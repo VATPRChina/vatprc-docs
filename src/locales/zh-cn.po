@@ -535,6 +535,10 @@ msgstr "放行"
 msgid "Departure"
 msgstr "出发机场"
 
+#: src/routes/flights/index.tsx:77
+msgid "Departure or arrival airport"
+msgstr "出发或到达机场"
+
 #: src/components/event/event-create.tsx:256
 #: src/components/preferred-route-create.tsx:177
 msgid "Description"

@@ -4,7 +4,7 @@ import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Input } from "@mantine/core";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useMemo, useState } from "react";
 import * as React from "react";
 
 export const Route = createFileRoute("/flights/")({
@@ -37,24 +37,47 @@ function RouteComponent() {
   const { data: mine } = $api.useQuery("get", "/api/flights/mine");
 
   const [filter, setFilter] = useState("");
+  const [airportFilter, setAirportFilter] = useState("");
+
+  const normalizedFilter = filter.trim().toUpperCase();
+  const normalizedAirportFilter = airportFilter.trim().toUpperCase();
+  const filteredFlights = useMemo(
+    () =>
+      flights?.filter((flight) => {
+        const matchesCallsignOrCid =
+          normalizedFilter === "" ||
+          flight.callsign.toUpperCase().includes(normalizedFilter) ||
+          flight.cid.toUpperCase().includes(normalizedFilter);
+        const matchesAirport =
+          normalizedAirportFilter === "" ||
+          flight.departure.toUpperCase().includes(normalizedAirportFilter) ||
+          flight.arrival.toUpperCase().includes(normalizedAirportFilter);
+
+        return matchesCallsignOrCid && matchesAirport;
+      }),
+    [flights, normalizedAirportFilter, normalizedFilter],
+  );
+
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFilter(e.target.value);
+  };
+  const onAirportFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setAirportFilter(e.target.value);
   };
   return (
     <div className="flex flex-col items-start gap-8">
       <h1 className="text-3xl">
         <Trans>Flight Plan Checker</Trans>
       </h1>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row flex-wrap gap-4">
         <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
+        <Input placeholder={t`Departure or arrival airport`} value={airportFilter} onChange={onAirportFilterChange} />
       </div>
       <div className="grid w-full grid-cols-[repeat(auto-fill,_minmax(calc(var(--spacing)*64),_1fr))] gap-x-6 gap-y-4">
         {mine && <Flight flight={mine} />}
-        {flights
-          ?.filter((f) => f.callsign.includes(filter) || f.cid.includes(filter))
-          ?.map((flight) => (
-            <Flight flight={flight} key={flight.callsign} />
-          ))}
+        {filteredFlights?.map((flight) => (
+          <Flight flight={flight} key={flight.callsign} />
+        ))}
         <Outlet />
       </div>
     </div>

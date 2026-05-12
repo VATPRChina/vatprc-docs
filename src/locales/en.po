@@ -535,6 +535,10 @@ msgstr "Delivery"
 msgid "Departure"
 msgstr "Departure"
 
+#: src/routes/flights/index.tsx:77
+msgid "Departure or arrival airport"
+msgstr "Departure or arrival airport"
+
 #: src/components/event/event-create.tsx:256
 #: src/components/preferred-route-create.tsx:177
 msgid "Description"
