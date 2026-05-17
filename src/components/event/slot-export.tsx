@@ -6,8 +6,8 @@ import { TbFileExport } from "react-icons/tb";
 
 export const ExportSlot = ({ eventId }: { eventId: string }) => {
   const onClick = async () => {
-    const data = await client.GET("/api/events/{eid}/slots/bookings.csv", {
-      params: { path: { eid: eventId } },
+    const data = await client.GET("/api/events/{event_id}/slots/bookings.csv", {
+      params: { path: { event_id: eventId } },
       parseAs: "blob",
     });
     if (!data?.data) return;

@@ -53,7 +53,7 @@ export const EventSummary: FC<
 };
 
 export const EventDetail = ({ eventId }: { eventId: string }) => {
-  const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: eventId } } });
+  const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId } } });
 
   return (
     <div className="flex flex-col gap-2">

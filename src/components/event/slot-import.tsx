@@ -54,20 +54,20 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
   };
 
   const { isPending, mutate } = useMutation({
-    mutationKey: $api.queryOptions("get", "/api/events/{eid}/slots", { params: { path: { eid: eventId } } }).queryKey,
+    mutationKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }).queryKey,
     mutationFn: async () => {
       const airspaces = await Promise.all(
         unique(slots, (s) => s.airspace).map((slot) =>
-          client.POST("/api/events/{eid}/airspaces", {
-            params: { path: { eid: eventId } },
+          client.POST("/api/events/{event_id}/airspaces", {
+            params: { path: { event_id: eventId } },
             body: { name: slot.airspace, icao_codes: slot.icao_codes, description: "" },
           }),
         ),
       );
       await Promise.all(
         slots.map((slot) =>
-          client.POST("/api/events/{eid}/slots", {
-            params: { path: { eid: eventId } },
+          client.POST("/api/events/{event_id}/slots", {
+            params: { path: { event_id: eventId } },
             body: {
               airspace_id: airspaces.find((a) => a.data?.name === slot.airspace)?.data?.id ?? "",
               enter_at: slot.enter_at.toISOString(),
@@ -82,7 +82,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
     onSuccess: () => {
       close();
       return queryClient.invalidateQueries(
-        $api.queryOptions("get", "/api/events/{eid}/slots", { params: { path: { eid: eventId } } }),
+        $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }),
       );
     },
   });

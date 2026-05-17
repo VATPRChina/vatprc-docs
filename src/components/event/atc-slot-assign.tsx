@@ -13,8 +13,8 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const queryClient = useQueryClient();
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-    params: { path: { eventId } },
+  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+    params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === positionId);
   const callsign = slot?.callsign;
@@ -22,18 +22,18 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
     await queryClient.invalidateQueries({
-      queryKey: $api.queryOptions("get", "/api/events/{eventId}/controllers", { params: { path: { eventId } } })
+      queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", { params: { path: { event_id: eventId } } })
         .queryKey,
     });
   });
   const { mutate: assign, isPending: isAssignPending } = $api.useMutation(
     "put",
-    "/api/events/{eventId}/controllers/{positionId}/booking",
+    "/api/events/{event_id}/controllers/{position_id}/booking",
     { onSuccess },
   );
   const { mutate: unassign, isPending: isUnassignPending } = $api.useMutation(
     "delete",
-    "/api/events/{eventId}/controllers/{positionId}/booking",
+    "/api/events/{event_id}/controllers/{position_id}/booking",
     { onSuccess },
   );
 
@@ -43,7 +43,7 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     },
     onSubmit: ({ value }) => {
       assign({
-        params: { path: { eventId, positionId } },
+        params: { path: { event_id: eventId, position_id: positionId } },
         body: value,
       });
     },
@@ -55,7 +55,7 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     promiseWithToast(form.handleSubmit());
   };
   const onUnassign = () => {
-    unassign({ params: { path: { eventId, positionId } } });
+    unassign({ params: { path: { event_id: eventId, position_id: positionId } } });
   };
 
   return (

@@ -21,8 +21,8 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const queryClient = useQueryClient();
   const { data: event, isLoading } = $api.useQuery(
     "get",
-    "/api/events/{eid}",
-    { params: { path: { eid: eventId ?? NULL_ULID } } },
+    "/api/events/{id}",
+    { params: { path: { id: eventId ?? NULL_ULID } } },
     { enabled: !!eventId && opened },
   );
   const title = event?.title;
@@ -36,7 +36,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     const form = new FormData();
     form.append("image", file, file?.name ?? "untitled");
     uploadImage({
-      body: form as unknown as { image: string },
+      body: form as unknown as string,
     });
   };
 
@@ -46,12 +46,12 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
       promiseWithLog(() => queryClient.invalidateQueries($api.queryOptions("get", "/api/events")));
     },
   });
-  const { mutateAsync: update } = $api.useMutation("post", "/api/events/{eid}", {
+  const { mutateAsync: update } = $api.useMutation("put", "/api/events/{id}", {
     onSuccess: wrapPromiseWithLog(async () => {
       close();
       if (eventId) {
         await queryClient.invalidateQueries(
-          $api.queryOptions("get", "/api/events/{eid}", { params: { path: { eid: eventId } } }),
+          $api.queryOptions("get", "/api/events/{id}", { params: { path: { id: eventId } } }),
         );
       }
     }),
@@ -73,7 +73,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     } satisfies components["schemas"]["EventSaveRequest"],
     onSubmit: ({ value }) => {
       if (eventId) {
-        return update({ params: { path: { eid: eventId ?? NULL_ULID } }, body: value });
+        return update({ params: { path: { id: eventId ?? NULL_ULID } }, body: value });
       } else {
         return create({ body: value });
       }

@@ -17,7 +17,7 @@ export const Route = createFileRoute("/events/$id")({
 function RouteComponent() {
   const { id } = Route.useParams();
   const { i18n } = useLingui();
-  const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: id } } });
+  const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: id } } });
 
   return (
     event && (

@@ -13,8 +13,8 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const queryClient = useQueryClient();
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eid}/slots", {
-    params: { path: { eid: eventId } },
+  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{event_id}/slots", {
+    params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === slotId);
   const callsign = slot?.callsign ?? "";
@@ -22,18 +22,18 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
     await queryClient.invalidateQueries({
-      queryKey: $api.queryOptions("get", "/api/events/{eid}/slots", { params: { path: { eid: eventId } } }).queryKey,
+      queryKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }).queryKey,
     });
   });
 
   const { mutate: assign, isPending: isAssignPending } = $api.useMutation(
     "put",
-    "/api/events/{eid}/slots/{sid}/booking",
+    "/api/events/{event_id}/slots/{slot_id}/booking",
     { onSuccess },
   );
   const { mutate: unassign, isPending: isUnassignPending } = $api.useMutation(
     "delete",
-    "/api/events/{eid}/slots/{sid}/booking",
+    "/api/events/{event_id}/slots/{slot_id}/booking",
     { onSuccess },
   );
 
@@ -42,7 +42,7 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
       user_id: slot?.booking?.user?.id ?? "",
     },
     onSubmit: ({ value }) => {
-      assign({ params: { path: { eid: eventId, sid: slotId } }, body: value });
+      assign({ params: { path: { event_id: eventId, slot_id: slotId } }, body: value });
     },
   });
 
@@ -52,7 +52,7 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
     promiseWithToast(form.handleSubmit());
   };
   const onUnassign = () => {
-    unassign({ params: { path: { eid: eventId, sid: slotId } } });
+    unassign({ params: { path: { event_id: eventId, slot_id: slotId } } });
   };
 
   return (

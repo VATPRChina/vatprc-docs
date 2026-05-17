@@ -17,7 +17,7 @@ interface NavigationMenuLinkProps {
   external?: boolean;
   children: React.ReactNode;
   className?: string;
-  requireRole?: components["schemas"]["UserRoleDto"];
+  requireRole?: components["schemas"]["UserRole"];
 }
 
 const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLinkProps) => {

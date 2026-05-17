@@ -19,12 +19,12 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const queryClient = useQueryClient();
   const { data: event, isLoading } = $api.useQuery(
     "get",
-    "/api/events/{eid}",
-    { params: { path: { eid: eventId ?? "0" } } },
+    "/api/events/{id}",
+    { params: { path: { id: eventId ?? "0" } } },
     { enabled: opened },
   );
-  const { data: slots } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-    params: { path: { eventId } },
+  const { data: slots } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+    params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === positionId);
   const callsign = slot?.callsign;
@@ -33,17 +33,17 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     close();
     promiseWithLog(
       queryClient.invalidateQueries({
-        queryKey: $api.queryOptions("get", "/api/events/{eventId}/controllers", { params: { path: { eventId } } })
+        queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", { params: { path: { event_id: eventId } } })
           .queryKey,
       }),
     );
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events/{eventId}/controllers", {
+  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events/{event_id}/controllers", {
     onSuccess,
   });
   const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
     "put",
-    "/api/events/{eventId}/controllers/{positionId}",
+    "/api/events/{event_id}/controllers/{position_id}",
     { onSuccess },
   );
   const now = formatISO(setMinutes(setSeconds(Date.now(), 0), 0));
@@ -59,9 +59,9 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     } satisfies components["schemas"]["EventAtcPositionSaveRequest"],
     onSubmit: ({ value }) => {
       if (positionId) {
-        update({ params: { path: { eventId, positionId } }, body: value });
+        update({ params: { path: { event_id: eventId, position_id: positionId } }, body: value });
       } else {
-        create({ params: { path: { eventId } }, body: value });
+        create({ params: { path: { event_id: eventId } }, body: value });
       }
     },
   });

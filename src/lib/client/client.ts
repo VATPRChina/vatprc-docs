@@ -1,5 +1,4 @@
-import { paths } from "../api";
-import { ApiError } from "./ApiError";
+import { components, paths } from "../api";
 import { authMiddleware } from "./auth";
 import { notifications } from "@mantine/notifications";
 import createClient, { Middleware } from "openapi-fetch";
@@ -9,15 +8,13 @@ const throwMiddleware: Middleware = {
   async onResponse({ response }) {
     if (response.ok) return;
 
-    const body = (await response.clone().json()) as { message: string; error_code: string };
-    const err = new ApiError(body.message, response.status, body.error_code);
-    if (err.errorCode !== "INVALID_TOKEN") {
+    const body = (await response.clone().json()) as components["schemas"]["ProblemDetails"];
+    if (body.type !== "urn:vatprc-uniapi-error:unauthorized") {
       notifications.show({
-        title: err.name,
-        message: err.message,
+        title: body.title,
+        message: body.detail,
         color: "red",
       });
-      throw err;
     }
   },
 };

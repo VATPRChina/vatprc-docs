@@ -106,29 +106,29 @@ const columns = [
 
       const user = useUser();
 
-      const { data } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-        params: { path: { eventId: row.original.event.id } },
+      const { data } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+        params: { path: { event_id: row.original.event.id } },
       });
       const slot = data?.find((s) => s.id === row.original.id);
       const isNotInBookingPeriod =
         !!slot?.event.start_atc_booking_at && !isAfter(Date.now(), slot.event.start_atc_booking_at);
       const onMutateSuccess = wrapPromiseWithLog(() =>
         queryClient.invalidateQueries(
-          $api.queryOptions("get", "/api/events/{eventId}/controllers", {
-            params: { path: { eventId: row.original.event.id } },
+          $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+            params: { path: { event_id: row.original.event.id } },
           }),
         ),
       );
       const { mutate: book, isPending: isBookPending } = $api.useMutation(
         "put",
-        "/api/events/{eventId}/controllers/{positionId}/booking",
+        "/api/events/{event_id}/controllers/{position_id}/booking",
         {
           onSuccess: onMutateSuccess,
         },
       );
       const { mutate: release, isPending: isReleasePending } = $api.useMutation(
         "delete",
-        "/api/events/{eventId}/controllers/{positionId}/booking",
+        "/api/events/{event_id}/controllers/{position_id}/booking",
         { onSuccess: onMutateSuccess },
       );
 
@@ -138,10 +138,10 @@ const columns = [
       );
 
       const onBook = () => {
-        book({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } }, body: {} });
+        book({ params: { path: { event_id: row.original.event.id, position_id: row.original.id } }, body: {} });
       };
       const onRelease = () => {
-        release({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
+        release({ params: { path: { event_id: row.original.event.id, position_id: row.original.id } } });
       };
 
       return (
@@ -186,8 +186,8 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
     data: slots,
     isLoading,
     error,
-  } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-    params: { path: { eventId } },
+  } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+    params: { path: { event_id: eventId } },
   });
 
   return (

@@ -13,7 +13,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { MouseEvent, useState } from "react";
 import { TbUserBolt, TbCheck } from "react-icons/tb";
 
-const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
+const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
   "controller",
   "staff",
   "volunteer",
@@ -22,7 +22,7 @@ const AUTOMATIC_ROLES: components["schemas"]["UserRoleDto"][] = [
   "controller-training-mentor",
 ];
 
-export const ROLES = new Map<components["schemas"]["UserRoleDto"], MessageDescriptor>([
+export const ROLES = new Map<components["schemas"]["UserRole"], MessageDescriptor>([
   ["division-director", msg`Division Director`],
   ["controller-training-director", msg`Controller Training Director`],
   ["controller-training-director-assistant", msg`Controller Training Director Assistant`],
@@ -81,7 +81,7 @@ const columns = [
 
       const onToggleRole = (role: string) => (e: MouseEvent<HTMLInputElement>) =>
         e.currentTarget.checked
-          ? setRoles((pv) => [...pv.filter((r) => r !== role), role as components["schemas"]["UserRoleDto"]])
+          ? setRoles((pv) => [...pv.filter((r) => r !== role), role as components["schemas"]["UserRole"]])
           : setRoles((pv) => pv.filter((r) => r !== role));
 
       const computedRoles = row.original.roles;

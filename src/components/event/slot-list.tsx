@@ -72,10 +72,10 @@ const columns = [
       const slot = row.original;
 
       const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
-      const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: slot.event_id } } });
+      const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: slot.event_id } } });
 
-      const { data: slots, refetch } = $api.useQuery("get", "/api/events/{eid}/slots", {
-        params: { path: { eid: slot.event_id } },
+      const { data: slots, refetch } = $api.useQuery("get", "/api/events/{event_id}/slots", {
+        params: { path: { event_id: slot.event_id } },
       });
       const onMutateSuccess = () => {
         refetch().catch(console.error);
@@ -83,14 +83,14 @@ const columns = [
 
       const { mutate: book, isPending: isBookPending } = $api.useMutation(
         "put",
-        "/api/events/{eid}/slots/{sid}/booking",
+        "/api/events/{event_id}/slots/{slot_id}/booking",
         {
           onSuccess: onMutateSuccess,
         },
       );
       const { mutate: release, isPending: isReleasePending } = $api.useMutation(
         "delete",
-        "/api/events/{eid}/slots/{sid}/booking",
+        "/api/events/{event_id}/slots/{slot_id}/booking",
         { onSuccess: onMutateSuccess },
       );
 
@@ -107,10 +107,10 @@ const columns = [
         (slots?.filter((slot) => slot.booking?.user_id === session?.user?.id).length ?? 0) >= EVENT_BOOKING_LIMIT;
 
       const onBook = () => {
-        book({ params: { path: { eid: slot.event_id, sid: slot.id } }, body: {} });
+        book({ params: { path: { event_id: slot.event_id, slot_id: slot.id } }, body: {} });
       };
       const onRelease = () => {
-        release({ params: { path: { eid: slot.event_id, sid: slot.id } } });
+        release({ params: { path: { event_id: slot.event_id, slot_id: slot.id } } });
       };
 
       return (
@@ -157,9 +157,9 @@ const columns = [
 
 export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
-  const { data: event } = $api.useQuery("get", "/api/events/{eid}", { params: { path: { eid: eventId } } });
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{eid}/slots", {
-    params: { path: { eid: eventId } },
+  const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId } } });
+  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{event_id}/slots", {
+    params: { path: { event_id: eventId } },
   });
   const isInBookingPeriod =
     event &&

@@ -16,10 +16,10 @@ export const AtcSlotDeleteButton: FC<AtcSlotDeleteButtonProps> = ({ eventId, pos
   const onSuccess = async () => {
     close();
     await queryClient.invalidateQueries(
-      $api.queryOptions("get", "/api/events/{eventId}/controllers", { params: { path: { eventId } } }),
+      $api.queryOptions("get", "/api/events/{event_id}/controllers", { params: { path: { event_id: eventId } } }),
     );
   };
-  const { mutate, isPending } = $api.useMutation("delete", "/api/events/{eventId}/controllers/{positionId}", {
+  const { mutate, isPending } = $api.useMutation("delete", "/api/events/{event_id}/controllers/{position_id}", {
     onSuccess,
   });
 
@@ -29,7 +29,7 @@ export const AtcSlotDeleteButton: FC<AtcSlotDeleteButtonProps> = ({ eventId, pos
         variant="subtle"
         size="compact-sm"
         actionDescription={<Trans>Are you sure to delete this ATC position?</Trans>}
-        onClick={() => mutate({ params: { path: { eventId, positionId } } })}
+        onClick={() => mutate({ params: { path: { event_id: eventId, position_id: positionId } } })}
         loading={isPending}
       >
         <Trans>Delete</Trans>
