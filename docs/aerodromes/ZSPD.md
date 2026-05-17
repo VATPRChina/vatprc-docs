@@ -406,7 +406,7 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 |  MIGOL  |                 经 APITO 进入福冈飞行情报区①                 |    FL250/FL290/FL310/FL390    |                         仅供目的地在台北飞行情报区或由 APITO 进入福冈飞行情报区的航空器使用                         |
 |  LAMEN  |                        Y722/B576 向北                        | FL270/FL330/FL350/FL370/FL410 |                                     主用离场点;放行时初始巡航高度严格按要求执行                                     |
 |  LAMEN  |                          Y591 向东                           |    FL250/FL290/FL310/FL390    |                                     主用离场点;放行时初始巡航高度严格按要求执行                                     |
-|  SURAK  |         ZSWH、ZSYT 、东北、东西伯利亚、日朝韩、北美          |           米制双数②           |                            非主用离场点；注意与上海区域管制席协调是否接受 A326 北向飞行                             |
+|  SURAK  |         ZSWH、ZSYT 、东北、东西伯利亚、日朝韩、北美          |           米制双数②           |                            非主用离场点                             |
 |  ODULO  |       东西伯利亚、日朝韩、北美、东北、ZSQD、ZSWH、ZSYT       |           米制单数③           |                                                     主用离场点                                                      |
 | `ADBAS` |                                                              |           米制双数            |                        非主用离场点，仅在上海区域相应席位主动提出并取得上海进近同意后可使用                         |
 
@@ -421,26 +421,26 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 
 | 离场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| PIKAS  |   35R    | PIKAS95D |
-| SASAN  |   35R    | SASAN91D |
-|  NXD   |   35R    |  NXD91D  |
-|  AND   |   35R    |  AND91D  |
-|  HSN   |   34L    |  HSN92D  |
-| MIGOL  |   34L    | MIGOL92D |
+| PIKAS  |   35R    | PIKAS-2 |
+| SASAN  |   35R    | SASAN-C |
+|  NXD   |   35R    |  NXD-1  |
+|  AND   |   35R    |  AND-B  |
+|  HSN   |   34L    |  HSN-1  |
+| MIGOL  |   34L    | MIGOL-1 |
 | LAMEN  |   34L    |  见下表  |
-| SURAK  |   34L    | SURAK92D |
-| ODULO  |   34L    | ODULO94D |
+| SURAK  |   34L    | SURAK-2 |
+| ODULO  |   34L    | ODULO-2 |
 
 | 离场点 | 备选跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| PIKAS  |   34L    |  PIK96D  |
-| SASAN  |   34L    |  SAS92D  |
-|  NXD   |   34L    |  NXD92D  |
-|  HSN   |   35R    |  HSN91D  |
-| MIGOL  |   35R    |  MIG91D  |
+| PIKAS  |   34L    |  PIKAS-2  |
+| SASAN  |   34L    |  SASAN-D  |
+|  NXD   |   34L    |  NXD-2  |
+|  HSN   |   35R    |  HSN-1  |
+| MIGOL  |   35R    |  MIGOL-1  |
 | LAMEN  |   35R    |  见下表  |
-| SURAK  |   35R    |  SUR95D  |
-| ODULO  |   35R    |  ODU93D  |
+| SURAK  |   35R    |  SURAK-4 |
+| ODULO  |   35R    |  ODULO-2  |
 
 | 雷达引导离场 |     |     |
 | :----------- | :-: | :-: |
@@ -454,35 +454,35 @@ T5 滑行道向东运行，T6 滑行道向西运行。
 
 | 飞行计划航路走向 |    跑道     | 离场程序 |
 | :--------------: | :---------: | :------: |
-|  Y722/B576 向北  | 34L（主用） |  LAM92D  |
-|  Y722/B576 向北  | 35R（备选） |  LAM95D  |
-|    Y591 向东     | 34L（主用） |  LAM94D  |
-|    Y591 向东     | 35R（备选） |  LAM93D  |
+|  Y722/B576 向北  | 34L（主用） |  LAMEN-2  |
+|  Y722/B576 向北  | 35R（备选） |  LAMEN-4  |
+|    Y591 向东     | 34L（主用） |  LAMEN-1  |
+|    Y591 向东     | 35R（备选） |  LAMEN-1  |
 
 ##### 南向
 
 | 离场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| PIKAS  |   17L    |  PIK81D  |
-|  NXD   |   17L    |  NXD81D  |
-| SASAN  |   17L    |  SAS81D  |
-|  AND   |   17L    |  AND81D  |
-|  HSN   |   16R    |  HSN82D  |
-| MIGOL  |   16R    |  MIG82D  |
-| LAMEN  |   16R    |  LAM82D  |
-| SURAK  |   16R    |  SUR82D  |
-| ODULO  |   16R    |  ODU84D  |
+| PIKAS  |   17L    |  PIKAS-1  |
+|  NXD   |   17L    |  NXD-1  |
+| SASAN  |   17L    |  SASAN-B  |
+|  AND   |   17L    |  AND-B  |
+|  HSN   |   16R    |  HSN-1  |
+| MIGOL  |   16R    |  MIGOL-1  |
+| LAMEN  |   16R    |  LAMEN-1  |
+| SURAK  |   16R    |  SURAK-1  |
+| ODULO  |   16R    |  ODULO-2  |
 
 | 离场点 | 备选跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| PIKAS  |   16R    |  PIK84D  |
-|  NXD   |   16R    |  NXD82D  |
-| SASAN  |   16R    |  SAS82D  |
-|  HSN   |   17L    |  HSN81D  |
-| MIGOL  |   17L    |  MIG81D  |
-| LAMEN  |   17L    |  LAM81D  |
-| SURAK  |   17L    |  SUR81D  |
-| ODULO  |   17L    |  ODU83D  |
+| PIKAS  |   16R    |  PIKAS-3  |
+|  NXD   |   16R    |  NXD-3  |
+| SASAN  |   16R    |  SASAN-H  |
+|  HSN   |   17L    |  HSN-1  |
+| MIGOL  |   17L    |  MIGOL-1  |
+| LAMEN  |   17L    |  LAMEN-1  |
+| SURAK  |   17L    |  SURAK-1  |
+| ODULO  |   17L    |  ODULO-2  |
 
 | 雷达引导离场 |     |     |
 | :----------- | :-: | :-: |
