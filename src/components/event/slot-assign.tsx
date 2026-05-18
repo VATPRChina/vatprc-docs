@@ -22,7 +22,8 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
     await queryClient.invalidateQueries({
-      queryKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }).queryKey,
+      queryKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } })
+        .queryKey,
     });
   });
 

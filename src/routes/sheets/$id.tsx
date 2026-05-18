@@ -407,7 +407,7 @@ function RouteComponent() {
           }}
         </form.Field>
 
-        {saveError && <Alert color="red">{saveError.message || t`Failed to save sheet.`}</Alert>}
+        {saveError && <Alert color="red">{saveError.title || t`Failed to save sheet.`}</Alert>}
 
         <Button type="submit" loading={isSaving} className="self-start">
           <Trans>Save sheet</Trans>

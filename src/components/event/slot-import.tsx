@@ -54,7 +54,8 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
   };
 
   const { isPending, mutate } = useMutation({
-    mutationKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }).queryKey,
+    mutationKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } })
+      .queryKey,
     mutationFn: async () => {
       const airspaces = await Promise.all(
         unique(slots, (s) => s.airspace).map((slot) =>

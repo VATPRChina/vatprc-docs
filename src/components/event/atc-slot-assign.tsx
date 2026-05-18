@@ -22,8 +22,9 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
     await queryClient.invalidateQueries({
-      queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", { params: { path: { event_id: eventId } } })
-        .queryKey,
+      queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+        params: { path: { event_id: eventId } },
+      }).queryKey,
     });
   });
   const { mutate: assign, isPending: isAssignPending } = $api.useMutation(

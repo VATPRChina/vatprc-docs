@@ -39,8 +39,8 @@ function RouteComponent() {
   const { data: areas } = $api.useQuery("get", "/api/compat/vplaaf/areas.json");
   const vplaafGeojson = useMemo(
     () =>
-      (areas as unknown as Vplaaf) &&
-      (areas as unknown as Vplaaf).areas
+      (areas as Vplaaf) &&
+      (areas as Vplaaf).areas
         .map((area) => {
           if (area.vertices.length < 1) {
             if (area.circle)

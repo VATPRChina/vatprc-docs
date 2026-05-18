@@ -196,6 +196,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/atc/trainings/by-user/{userId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["list_by_user"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/atc/trainings/finished": {
     parameters: {
       query?: never;
@@ -452,6 +468,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/events/{event_id}/slots/bookings.csv": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["export_bookings"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/events/{event_id}/slots/{slot_id}/booking": {
     parameters: {
       query?: never;
@@ -644,6 +676,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/sheets": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["list_sheets"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/sheets/{sheetId}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["get_sheet"];
+    put: operations["upsert_sheet"];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/storage/images": {
     parameters: {
       query?: never;
@@ -715,7 +779,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get?: never;
+    get: operations["get_status"];
     put: operations["set_status"];
     post?: never;
     delete?: never;
@@ -1166,17 +1230,34 @@ export interface components {
       description_zh?: string | null;
       id: string;
       is_deleted: boolean;
-      kind: string;
+      kind: components["schemas"]["SheetFieldKind"];
       name_en?: string | null;
       name_zh: string;
-      /** Format: int64 */
+      /** Format: uint32 */
       sequence: number;
       sheet_id: string;
+      single_choice_options: string[];
+    };
+    /** @enum {string} */
+    SheetFieldKind: "short-text" | "long-text" | "single-choice";
+    SheetFieldSaveRequest: {
+      description_en?: string | null;
+      description_zh?: string | null;
+      id: string;
+      kind: components["schemas"]["SheetFieldKind"];
+      name_en?: string | null;
+      name_zh: string;
+      /** Format: uint32 */
+      sequence: number;
       single_choice_options: string[];
     };
     SheetRequestField: {
       answer: string;
       id: string;
+    };
+    SheetSaveRequest: {
+      fields: components["schemas"]["SheetFieldSaveRequest"][];
+      name: string;
     };
     TokenDto: {
       /** Format: date-time */
@@ -1777,6 +1858,30 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  list_by_user: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description User ULID */
+        userId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["TrainingDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   list_finished: {
     parameters: {
       query?: never;
@@ -2344,6 +2449,30 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  export_bookings: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Event ULID */
+        event_id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description CSV export of slot bookings */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "text/csv": unknown;
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   put_booking: {
     parameters: {
       query?: never;
@@ -2746,6 +2875,79 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  list_sheets: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["SheetDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  get_sheet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Sheet ID */
+        sheetId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["SheetDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  upsert_sheet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Sheet ID */
+        sheetId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["SheetSaveRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["SheetDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   upload_image: {
     parameters: {
       query?: never;
@@ -2818,6 +3020,30 @@ export interface operations {
       query?: never;
       header?: never;
       path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcStatusDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  get_status: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description User ULID */
+        id: string;
+      };
       cookie?: never;
     };
     requestBody?: never;

@@ -33,14 +33,19 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     close();
     promiseWithLog(
       queryClient.invalidateQueries({
-        queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", { params: { path: { event_id: eventId } } })
-          .queryKey,
+        queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+          params: { path: { event_id: eventId } },
+        }).queryKey,
       }),
     );
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events/{event_id}/controllers", {
-    onSuccess,
-  });
+  const { mutate: create, isPending: isCreatePending } = $api.useMutation(
+    "post",
+    "/api/events/{event_id}/controllers",
+    {
+      onSuccess,
+    },
+  );
   const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
     "put",
     "/api/events/{event_id}/controllers/{position_id}",
