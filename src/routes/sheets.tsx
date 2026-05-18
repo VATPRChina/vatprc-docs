@@ -13,7 +13,6 @@ function RouteComponent() {
   const navigate = useNavigate();
   const { id } = useParams({ from: "/sheets/$id" });
   const { data: sheets, isLoading: isSheetsLoading } = $api.useQuery("get", "/api/sheets");
-  console.log({ id, cur: sheets?.map((s) => s.id) });
 
   const totalSheets = sheets?.length ?? 0;
 

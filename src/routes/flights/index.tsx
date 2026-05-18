@@ -2,7 +2,7 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Input } from "@mantine/core";
+import { Alert, Input } from "@mantine/core";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ChangeEventHandler, useMemo, useState } from "react";
 import * as React from "react";
@@ -33,7 +33,7 @@ const Flight: React.FC<{
 function RouteComponent() {
   const { t } = useLingui();
 
-  const { data: flights } = $api.useQuery("get", "/api/flights/active");
+  const { data: flights, error } = $api.useQuery("get", "/api/flights/active");
   const { data: mine } = $api.useQuery("get", "/api/flights/mine");
 
   const [filter, setFilter] = useState("");
@@ -69,11 +69,12 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>Flight Plan Checker</Trans>
       </h1>
+      {error && <Alert title={error.title}>{error.detail}</Alert>}
       <div className="flex flex-row flex-wrap gap-4">
         <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
         <Input placeholder={t`Departure or arrival airport`} value={airportFilter} onChange={onAirportFilterChange} />
       </div>
-      <div className="grid w-full grid-cols-[repeat(auto-fill,_minmax(calc(var(--spacing)*64),_1fr))] gap-x-6 gap-y-4">
+      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-x-6 gap-y-4">
         {mine && <Flight flight={mine} />}
         {filteredFlights?.map((flight) => (
           <Flight flight={flight} key={flight.callsign} />

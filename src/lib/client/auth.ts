@@ -85,7 +85,7 @@ export const refresh = async () => {
     forceLogout();
     return;
   } else if (!result.data) {
-    throw new ApiError("Error response from server", result.response.status, result.error?.error, result.error);
+    throw new Error(`Error response from server: ${result.error.error_description} (${result.error.error})`);
   }
   handleSessionLoginResponse(result.data);
   const observers = refreshTokenObservers;

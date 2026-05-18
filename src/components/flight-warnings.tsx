@@ -21,7 +21,9 @@ const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactN
     </Trans>
   ),
   "no-transponder": <Trans>The aircraft does not specify transponder capability.</Trans>,
-  "route-direct-segment": <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>,
+  "route-direct-segment": (
+    <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>
+  ),
   "route-leg-direction": <Trans>The route contains a leg with an invalid direction.</Trans>,
   "airway-require-approval": <Trans>The route contains an airway that requires controller approval.</Trans>,
   "not-preferred-route": <Trans>The flight plan does not match the designated route for this flight.</Trans>,
@@ -167,7 +169,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   if (isLoading) return <Skeleton h={16} />;
   return (
     <div className="flex w-full flex-col items-stretch gap-2">
-      {error?.message && <Alert color="red">{error?.message}</Alert>}
+      {error?.title && <Alert color="red">{error?.title}</Alert>}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert color="green" icon={<TbCheck />}>
           <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>

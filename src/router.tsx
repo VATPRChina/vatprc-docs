@@ -36,7 +36,6 @@ export function getRouter() {
         staleTime: 60 * 1000,
         retry(failureCount, error) {
           // Don't retry 4xx errors
-          console.log(Object.getPrototypeOf(error));
           if (
             "status" in error &&
             error.status &&

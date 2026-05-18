@@ -37,7 +37,7 @@ function RouteComponent() {
         </Button>
       </div>
       <p>URL: {data?.url}</p>
-      <p>Error: {error?.message}</p>
+      <p>Error: {error?.title}</p>
     </div>
   );
 }

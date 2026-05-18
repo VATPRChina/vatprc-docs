@@ -121,7 +121,7 @@ function RouteComponent() {
       <h2 className="text-xl">
         <Trans>Mentor Feedback</Trans>
       </h2>
-      {error && <Alert title="Error">{error.message}</Alert>}
+      {error && <Alert title="Error">{error.title}</Alert>}
       {isSheetLoading && <Skeleton h={256} />}
       <Sheet
         className="flex flex-col gap-2"

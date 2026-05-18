@@ -197,7 +197,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
       </h2>
       {error && (
         <Alert color="red" icon={<TbExclamationCircle />} title={t`Error`}>
-          {error.message}
+          {error.title}
         </Alert>
       )}
       <RequireRole role={["event-coordinator", "operation-director-assistant"]}>

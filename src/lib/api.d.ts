@@ -886,6 +886,10 @@ export interface components {
       permissions: components["schemas"]["AtcPermissionRequest"][];
       rating: string;
     };
+    AuthApiErrorBody: {
+      error: components["schemas"]["OAuthErrorCode"];
+      error_description: string;
+    };
     CompatControllerDto: {
       callsign: string;
       /** Format: int32 */
@@ -1098,6 +1102,16 @@ export interface components {
       | "flight-level-even"
       | "flight-level-odd"
       | "flight-level";
+    /** @enum {string} */
+    OAuthErrorCode:
+      | "invalid_request"
+      | "invalid_client"
+      | "invalid_grant"
+      | "invalid_scope"
+      | "unauthorized_client"
+      | "unsupported_grant_type"
+      | "authorization_pending"
+      | "expired_token";
     PreferredRouteDto: {
       allowed_altitudes: number[];
       arrival: string;
@@ -1331,6 +1345,7 @@ export interface components {
       | "not-preferred-route"
       | "cruising-level-mismatch"
       | "cruising-level-not-allowed"
+      | "cruising-level-too-low"
       | "route-match-preferred";
     /** @enum {string} */
     WarningMessageField: "equipment" | "transponder" | "navigation-performance" | "route" | "cruising-level";
@@ -2897,6 +2912,24 @@ export interface operations {
           "application/json": components["schemas"]["TokenResponse"];
         };
       };
+      /** @description OAuth error response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
+        };
+      };
+      /** @description OAuth client authentication error */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
+        };
+      };
     };
   };
   authorize: {
@@ -2948,6 +2981,24 @@ export interface operations {
           "application/json": components["schemas"]["DeviceAuthorizationResponse"];
         };
       };
+      /** @description OAuth error response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
+        };
+      };
+      /** @description OAuth client authentication error */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
+        };
+      };
     };
   };
   token: {
@@ -2970,6 +3021,24 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["TokenResponse"];
+        };
+      };
+      /** @description OAuth error response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
+        };
+      };
+      /** @description OAuth client authentication error */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AuthApiErrorBody"];
         };
       };
     };

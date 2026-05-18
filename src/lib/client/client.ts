@@ -9,13 +9,33 @@ const throwMiddleware: Middleware = {
     if (response.ok) return;
 
     const body = (await response.clone().json()) as components["schemas"]["ProblemDetails"];
-    if (body.type !== "urn:vatprc-uniapi-error:unauthorized") {
+    if (
+      body.type !== "urn:vatprc-uniapi-error:unauthorized" &&
+      body.type !== "urn:vatprc-uniapi-error:invalid-token" &&
+      body.status !== 0
+    ) {
       notifications.show({
         title: body.title,
         message: body.detail,
         color: "red",
       });
     }
+  },
+
+  onError({ error }) {
+    if (error instanceof Error) {
+      return Response.json(
+        {
+          type: error.name,
+          title: error.name,
+          status: 0,
+          detail: error.message,
+        },
+        { status: 500 },
+      );
+    }
+
+    return;
   },
 };
 

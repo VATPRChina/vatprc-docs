@@ -363,7 +363,7 @@ function RouteComponent() {
   return (
     <div className="flex flex-col items-start gap-4">
       <BackButton />
-      {error?.message && <Alert color="red">{error?.message}</Alert>}
+      {error?.title && <Alert color="red">{error?.title}</Alert>}
       {isLoading && <Skeleton h={64} />}
       {!error && flight && (
         <div className="flex w-full flex-col gap-4">
