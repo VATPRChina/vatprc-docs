@@ -395,8 +395,8 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 
 | 优先级 | 席位 | 频率 |
 | :- | :-: | :-: |
-| 1 | ZGGG_APP | 126.55 |
-| 2 | ZGGG_CTR | 128.35 |
+| 1 | ZGGG_APP | 126.550 |
+| 2 | ZGGG_CTR | 128.350 |
 
 ### 4.2 地面
 
@@ -414,29 +414,25 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 
 |  管制席位  | 运行方向  |                    先决条件                    |          移交位置           |  移交对象  |
 | :--------: | :-------: | :--------------------------------------------: | :-------------------------: | :--------: |
-|  ZGGG_GND  | 北向 | 去往四号绕滑 | T4 E 前/F T3前 | ZGGG_W_TWR |
 |  ZGGG_GND  | 北向 | 沿 E/F 向南滑行去往 01R 跑道 | J2 前 | ZGGG_W_TWR |
-|  ZGGG_GND  | 北向 | 沿 T1 向东滑行去往 02L 跑道或去往二号绕滑 | C 前 | ZGGG_TWR |
+|  ZGGG_GND  | 北向 | 沿 T1 向东滑行去往 02L 跑道 | C 前 | ZGGG_TWR |
 |  ZGGG_GND  | 北向 | 沿 A 向南滑行去往 02L 跑道 | A9 前 | ZGGG_TWR |
-|  ZGGG_GND  | 北向 | 沿 B 向北滑行，去往一号绕滑或需向东穿越 02L 跑道 | L22 前 | ZGGG_TWR |
-|  ZGGG_GND  | 北向 | 沿 B 向南滑行，去往 02L 跑道或二号绕滑 | T2 前 | ZGGG_TWR |
+|  ZGGG_GND  | 北向 | 沿 B 向北滑行，需向东穿越 02L 跑道 | L22 前 | ZGGG_TWR |
+|  ZGGG_GND  | 北向 | 沿 B 向南滑行，去往 02L 跑道 | T2 前 | ZGGG_TWR |
+| ZGGG_GND | 北向 | 沿一号绕滑去往东活动区 | Q6 前 | ZGGG_E_GND |
 |  ZGGG_GND  | 南向 | 沿 E/F 向北滑行去往 19L 跑道 | J20 前 | ZGGG_W_TWR |
-|  ZGGG_GND  | 南向 | 沿 E 向北滑行去往四号绕滑 | T3 前 | ZGGG_W_TWR |
-|  ZGGG_GND  | 南向 | 沿 T4 向西滑行去往 19L 跑道或四号绕滑 | E 前 | ZGGG_W_TWR |
-|  ZGGG_GND  | 南向 | 沿 T1 向东滑行，去往二号绕滑 | C 前 | ZGGG_TWR |
-|  ZGGG_GND  | 南向 | 沿 A/B 向北滑行，去往 20R 跑道或一号绕滑 | L21 前 | ZGGG_TWR |
-|  ZGGG_GND  | 南向 | 沿 A 向南滑行，去往二号绕滑 | T1 前 | ZGGG_TWR |
+|  ZGGG_GND  | 南向 | 沿 T4 向西滑行去往 19L 跑道 | E 前 | ZGGG_W_TWR |
+|  ZGGG_GND  | 南向 | 沿 A/B 向北滑行，去往 20R 跑道 | L21 前 | ZGGG_TWR |
 |  ZGGG_GND  | 南向 | 沿 A 向北滑行，需向东穿越 20R 跑道 | P3 前 | ZGGG_TWR |
+| ZGGG_GND | 南向 | 沿二号绕滑去往东活动区 | M 前 | ZGGG_E_GND |
 | ZGGG_E_GND | 北向 | 沿 M 向南滑行，需向西穿越 02R 跑道 | P13 前 | ZGGG_TWR |
-| ZGGG_E_GND | 北向 | 沿 Q 向南滑行，去往二号绕滑 | T62 前 | ZGGG_TWR |
-| ZGGG_E_GND | 北向 | 沿 T62 向东滑行，去往二号绕滑 | Q 前 | ZGGG_TWR |
 | ZGGG_E_GND | 北向 | 沿 M 向北滑行，需向西穿越 02R 跑道 | M1 前 | ZGGG_TWR |
-| ZGGG_E_GND | 北向 | 沿 M 向北滑行，去往一号绕滑 | Q6 前 | ZGGG_TWR |
 | ZGGG_E_GND | 北向 | 沿 W/U 向南滑行，去往 03 跑道 | T62 前 | ZGGG_E_TWR |
 | ZGGG_E_GND | 北向 | 沿 T61 向东滑行，去往 03 跑道 | U 前 | ZGGG_E_TWR |
+| ZGGG_E_GND | 南向 | 沿 Q 向南滑行，去往二号绕滑 | T62 前 | ZGGG_GND |
+| ZGGG_E_GND | 南向 | 沿 T62 向西滑行，去往二号绕滑 | Q 前 | ZGGG_GND |
 | ZGGG_E_GND | 南向 | 沿 Q 向北滑行，需向西穿越 20L 跑道 | Q8 前 | ZGGG_TWR |
-| ZGGG_E_GND | 南向 | 沿 T62 向西滑行，去往二号绕滑 | Q 前 | ZGGG_TWR |
-| ZGGG_E_GND | 南向 | 沿 Q 向北滑行，去往一号绕滑 | Q6 前 | ZGGG_TWR |
+| ZGGG_E_GND | 南向 | 沿 Q 向北滑行，去往一号绕滑 | Q6 前 | ZGGG_GND |
 | ZGGG_E_GND | 南向 | 沿 W/U 向北滑行，去往 21 跑道 | L38 前 | ZGGG_E_TWR |
 | ZGGG_E_GND | 南向 | 沿 M 滑行，需向西穿越 20L 跑道 | P14 前 | ZGGG_TWR |
 
