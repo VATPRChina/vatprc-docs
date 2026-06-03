@@ -16,6 +16,7 @@ const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSum
 export const columns = [
   columnHelper.accessor("user.cid", { header: () => <Trans>CID</Trans> }),
   columnHelper.accessor("user.full_name", { header: () => <Trans>Name</Trans> }),
+  columnHelper.accessor("user_email", { header: () => <Trans>Email</Trans> }),
   columnHelper.accessor("status", {
     header: () => <Trans>Status</Trans>,
     cell: ({ getValue }) => {
