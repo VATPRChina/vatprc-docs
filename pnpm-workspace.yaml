@@ -1,0 +1,6 @@
+allowBuilds:
+  '@parcel/watcher': false
+  '@sentry/cli': false
+  esbuild: false
+  msw: false
+  vue-demi: false
