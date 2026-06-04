@@ -5,12 +5,12 @@
   "engines": {
     "node": ">=v22.11.0"
   },
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@11.5.1",
   "private": true,
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:api": "openapi-typescript https://uniapi.vatprc.net/openapi/v1.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
+    "build:api": "openapi-typescript https://uniapi.vatprc.net/openapi.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
     "start": "vite start",
     "lint": "concurrently --raw 'pnpm:lint:*'",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",

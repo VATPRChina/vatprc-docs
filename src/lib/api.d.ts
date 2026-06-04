@@ -885,7 +885,7 @@ export interface paths {
     trace?: never;
   };
 }
-export type webhooks = Record;
+export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     AccessTokenRequest: {
@@ -922,6 +922,7 @@ export interface components {
       id: string;
       status: components["schemas"]["AtcApplicationStatus"];
       user: components["schemas"]["UserDto"];
+      user_email?: string | null;
       user_id: string;
     };
     AtcPermissionDto: {
@@ -1293,6 +1294,7 @@ export interface components {
       status: components["schemas"]["TrainingApplicationStatus"];
       train_id?: string | null;
       trainee: components["schemas"]["UserDto"];
+      trainee_email?: string | null;
       trainee_id: string;
       /** Format: date-time */
       updated_at: string;
@@ -1447,7 +1449,7 @@ export interface components {
   headers: never;
   pathItems: never;
 }
-export type $defs = Record;
+export type $defs = Record<string, never>;
 export interface operations {
   list_applications: {
     parameters: {

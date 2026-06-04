@@ -17,7 +17,13 @@ export const Route = createFileRoute("/flights/")({
 const Flight: React.FC<{
   flight: components["schemas"]["FlightDto"];
 }> = ({ flight: { callsign, cid, departure, arrival, aircraft } }) => (
-  <Link to="/flights/$callsign" params={{ callsign }} key={callsign} className="flex flex-col gap-1 border px-3 py-2">
+  <Link
+    to="/flights/$callsign"
+    params={{ callsign }}
+    key={callsign}
+    className="flex flex-col gap-1 border px-3 py-2"
+    target="_blank"
+  >
     <span className="text-lg font-bold">
       {callsign}
       <span className="ml-1 text-sm font-light">{cid}</span>
