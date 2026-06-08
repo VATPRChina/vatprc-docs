@@ -264,6 +264,7 @@
 - ZGGG_E_GND：东二、东三地面管制区 (不含绕滑及跑道联络道)
 - ZGGG_GND（分扇）：西一、东一地面管制区 (不含跑道联络道、Y1 与 Y18 之间的 Y 滑行道)、全部绕滑
 
+![【20260608】白云地面管制范围](https://i.see.you/2026/06/08/t1tY/vatprc-2026-06-08-01KTKTNPKQ860F)
 图3.2 地面管制范围划分图
 
 
@@ -272,7 +273,7 @@
 |  登录名  |           呼号           |  频率   | 职责范围 |
 | :------: | :----------------------: | :-----: | :------: |
 | ZGGG_DEL | 白云放行 Baiyun Delivery | 121.950 |  全机场  |
-| ZGGG_E_DEL | 白云放行 Baiyun Delivery | 122.175 |  02R/20L 跑道中心线延长线以东  |
+| ZGGG_E_DEL | 白云放行 Baiyun Delivery | 122.175 |  东活动区  |
 
 #### 席位开设规则
 
@@ -376,15 +377,11 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 |  ZGGG_TWR  | 北向/南向 | 二号绕滑 B 向北滑行，不沿 T1 去往 A11 等待点② | T1 前 | ZGGG_GND |
 |  ZGGG_TWR  | 北向/南向 | 一号绕滑 Q 向南滑行, 去往东活动区 | Q6 前 | ZGGG_E_GND |
 |  ZGGG_TWR  | 北向/南向 | 二号绕滑 T61 向东滑行，去往东活动区 | M 前 | ZGGG_E_GND |
-|  ZGGG_TWR  | 北向/南向 | 需沿 L25 进入机位  | L25 前 | ZGGG_RMP |
-|  ZGGG_TWR  | 北向/南向 | 需沿 GT4 进入机位  | GT4 前 | ZGGG_RMP |
 |  ZGGG_TWR  | 北向 | 沿 Y1 向东滑行去往东活动区  | M 前 | ZGGG_E_GND |
 |  ZGGG_W_TWR  | 北向/南向 | 向东脱离 01R/19L 跑道 | F 前 | ZGGG_GND |
 |  ZGGG_W_TWR  | 北向/南向 | 四号绕滑 E 向南滑行，不去往货机坪 | J22 前 | ZGGG_GND |
-|  ZGGG_W_TWR  | 北向/南向 | 需沿 J23 进入机位 | J23 前 | ZGGG_RMP |
 |  ZGGG_W_TWR  | 北向/南向 | 三号绕滑 E 向北滑行 | J1 前 | ZGGG_GND |
 |  ZGGG_W_TWR  | 北向/南向 | 需沿 H 进入机位 | T7 H 前/H T6前 | ZGGG_RMP |
-|  ZGGG_W_TWR  | 北向 | 四号绕滑 E 向南滑行，需沿 J22 进入机位 | J22 前 | ZGGG_RMP |
 |  ZGGG_E_TWR  | 北向/南向 | 向西脱离 03/21 跑道 | W 前 | ZGGG_E_GND |
 
 > [!TIP]
@@ -419,12 +416,12 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 |  ZGGG_GND  | 北向 | 沿 A 向南滑行去往 02L 跑道 | A9 前 | ZGGG_TWR |
 |  ZGGG_GND  | 北向 | 沿 B 向北滑行，需向东穿越 02L 跑道 | L22 前 | ZGGG_TWR |
 |  ZGGG_GND  | 北向 | 沿 B 向南滑行，去往 02L 跑道 | T2 前 | ZGGG_TWR |
-| ZGGG_GND | 北向 | 沿一号绕滑去往东活动区 | Q6 前 | ZGGG_E_GND |
+|  ZGGG_GND  | 北向 | 沿一号绕滑去往东活动区 | Q6 前 | ZGGG_E_GND |
 |  ZGGG_GND  | 南向 | 沿 E/F 向北滑行去往 19L 跑道 | J20 前 | ZGGG_W_TWR |
 |  ZGGG_GND  | 南向 | 沿 T4 向西滑行去往 19L 跑道 | E 前 | ZGGG_W_TWR |
 |  ZGGG_GND  | 南向 | 沿 A/B 向北滑行，去往 20R 跑道 | L21 前 | ZGGG_TWR |
 |  ZGGG_GND  | 南向 | 沿 A 向北滑行，需向东穿越 20R 跑道 | P3 前 | ZGGG_TWR |
-| ZGGG_GND | 南向 | 沿二号绕滑去往东活动区 | M 前 | ZGGG_E_GND |
+|  ZGGG_GND  | 南向 | 沿二号绕滑去往东活动区 | M 前 | ZGGG_E_GND |
 | ZGGG_E_GND | 北向 | 沿 M 向南滑行，需向西穿越 02R 跑道 | P13 前 | ZGGG_TWR |
 | ZGGG_E_GND | 北向 | 沿 M 向北滑行，需向西穿越 02R 跑道 | M1 前 | ZGGG_TWR |
 | ZGGG_E_GND | 北向 | 沿 W/U 向南滑行，去往 03 跑道 | T62 前 | ZGGG_E_TWR |
@@ -440,11 +437,15 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 
 |  管制席位  | 运行方向  |                    先决条件                    |          移交位置           |  移交对象  |
 | :--------: | :-------: | :--------------------------------------------: | :-------------------------: | :--------: |
+| ZGGG_GND | 北向/南向 | 预计沿 L25 进入机位  | L25 前 | ZGGG_RMP |
+| ZGGG_GND | 北向/南向 | 预计沿 GT4 进入机位  | GT4 前 | ZGGG_RMP |
 | ZGGG_GND | 北向/南向 | 预计沿 D 进入货机坪 | D 前 | ZGGG_RMP |
+| ZGGG_GND | 北向/南向 | 预计沿 J22 进入货机坪 | J22 前 | ZGGG_RMP |
 | ZGGG_GND | 北向/南向 | 预计沿 D4/J21 进入机坪 | D4 前 | ZGGG_RMP |
 | ZGGG_GND | 北向/南向 | 预计沿 L16/C5 进入机坪 | C4 前 | ZGGG_RMP |
 | ZGGG_GND | 北向/南向 | 预计沿 C1 进入维修机坪 | C1 前 | ZGGG_RMP |
-| ZGGG_GND | 北向/南向 | 预计沿 L2 进入维修机坪 | L22 前 | ZGGG_RMP |
+| ZGGG_GND | 北向/南向 | 预计沿 L22 进入维修机坪 | L22 前 | ZGGG_RMP |
+| ZGGG_GND | 北向/南向 | 需沿 J23 进入机位 | J23 前 | ZGGG_RMP |
 | ZGGG_GND | 北向 | 预计沿 D 向南进入机坪（不含货机坪） | D 前 | ZGGG_RMP |
 | ZGGG_GND | 北向 | 预计沿 C 向南进入机坪 | C 前 | ZGGG_RMP |
 | ZGGG_GND | 北向 | 预计向东进入机坪 | 预计向东转向的道口①前 |
@@ -516,7 +517,7 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 |  ZGGG_E_RMP  | 北向/南向 | 沿 S2/S3 滑行⑦ | 预计向西滑出机坪的道口④前 | ZGGG_E_GND |
 |  ZGGG_E_RMP  | 北向/南向 | 沿 R 滑行 | T61/T62 前或预计向东滑出机坪的道口⑤前 | ZGGG_E_GND⑥ |
 |  ZGGG_E_RMP  | 北向/南向 | 沿 Q10/Q11/Q14/Q16 滑行 | Q 前 | ZGGG_E_GND |
-|  ZGGG_E_RMP  | 北向/南向 | 沿 Q17 滑行，去往一号绕滑 | Q 前 | ZGGG_TWR |
+|  ZGGG_E_RMP  | 北向/南向 | 沿 Q17 滑行，去往一号绕滑 | Q 前 | ZGGG_GND |
 |  ZGGG_E_RMP  | 北向 | 沿 Q17 滑行，不去往一号绕滑⑦ | Q 前 | ZGGG_E_GND |
 
 > [!NOTE]
