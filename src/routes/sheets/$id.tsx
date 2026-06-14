@@ -123,6 +123,7 @@ function RouteComponent() {
   const { mutate: saveSheet, isPending: isSaving, error: saveError } = $api.useMutation("put", "/api/sheets/{sheetId}");
 
   const form = useForm({
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     defaultValues: {
       name: "",
       fields: [],
@@ -318,7 +319,7 @@ function RouteComponent() {
                               allowDeselect={false}
                               onChange={(value) => {
                                 if (!value) return;
-                                kindField.handleChange(value as components["schemas"]["SheetFieldKind"]);
+                                kindField.handleChange(value);
                                 if (value !== "single-choice") {
                                   form.setFieldValue(`fields[${index}].optionsText`, "");
                                 }

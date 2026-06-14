@@ -130,7 +130,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
             .map(([id, name]) => ({ value: id, label: i18n.t(name) }))
             .toArray()}
           value={status ?? application.status}
-          onChange={(value) => setStatus(value as components["schemas"]["AtcApplicationStatus"] | null)}
+          onChange={(value) => setStatus(value)}
           disabled={!hasPermission}
         />
       </Skeleton>

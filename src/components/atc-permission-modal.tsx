@@ -137,14 +137,14 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
                                 if (!value) {
                                   parentField.removeValue(idx);
                                 } else if (idx >= 0) {
-                                  field.handleChange(value as components["schemas"]["UserControllerState"]);
+                                  field.handleChange(value);
                                   if (value !== "solo") {
                                     form.setFieldValue(`permissions[${idx}].solo_expires_at`, null);
                                   }
                                 } else {
                                   parentField.insertValue(idx, {
                                     position_kind_id: kindId,
-                                    state: value as components["schemas"]["UserControllerState"],
+                                    state: value,
                                     solo_expires_at: null,
                                   });
                                 }

@@ -58,8 +58,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       start_at: slot?.start_at ?? event?.start_at ?? now,
       end_at: slot?.end_at ?? event?.end_at ?? now,
       position_kind_id: slot?.position_kind_id ?? "DEL",
-      minimum_controller_state:
-        slot?.minimum_controller_state ?? ("student" as components["schemas"]["UserControllerState"]),
+      minimum_controller_state: slot?.minimum_controller_state ?? "student",
       remarks: slot?.remarks ?? "",
     } satisfies components["schemas"]["EventAtcPositionSaveRequest"],
     onSubmit: ({ value }) => {
@@ -148,7 +147,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
             {(field) => (
               <Select
                 label={t`Minimum State`}
-                onChange={(e) => e && field.handleChange(e as components["schemas"]["UserControllerState"])}
+                onChange={(e) => e && field.handleChange(e)}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 disabled={isLoading}

@@ -61,7 +61,7 @@ export const OnlinePilots: React.FC<{ className?: string }> = ({ className }) =>
   return (
     <div className="space-y-2">
       <div className={cn(className, "flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(0, 8)}</div>
-      <Collapse in={opened}>
+      <Collapse expanded={opened}>
         <div className={cn(className, "mt-2 flex flex-wrap justify-center gap-x-2 gap-y-2")}>{pilots?.slice(8)}</div>
       </Collapse>
       <div className="mt-2 flex items-center justify-center space-x-4 px-4">
