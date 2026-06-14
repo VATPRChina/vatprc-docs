@@ -22,7 +22,7 @@ RUN npm install -g pnpm
 ENV SENTRY_RELEASE=${VERSION}
 RUN --mount=type=secret,id=SENTRY_AUTH_TOKEN,env=SENTRY_AUTH_TOKEN \
   pnpm build
-RUN find /app/dist/client/assets -type f -name '*.map' -exec rm -vf {} +
+RUN find /app/.output/public/assets -type f -name '*.map' -exec rm -vf {} +
 
 FROM node:slim AS runner
 WORKDIR /app
@@ -34,4 +34,4 @@ COPY --from=builder /app/docs ./docs
 
 EXPOSE 3000
 
-CMD ["node", ".output/server/index.mjs"]
+ENTRYPOINT ["node", ".output/server/index.mjs"]
