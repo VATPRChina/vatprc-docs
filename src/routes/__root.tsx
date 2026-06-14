@@ -124,7 +124,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     return (
       <AppHtml>
-        <div className="mx-auto max-w-prose">
+        <div className="container mx-auto">
           <Alert color="red" title={<Trans>Error</Trans>}>
             <p className="font-medium">{error.message}</p>
             <p className="text-wrap">

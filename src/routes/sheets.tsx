@@ -11,7 +11,7 @@ export const Route = createFileRoute("/sheets")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { id } = useParams({ from: "/sheets/$id" });
+  const id = useParams({ from: "/sheets/$id", shouldThrow: false, select: ({ id }) => id });
   const { data: sheets, isLoading: isSheetsLoading } = $api.useQuery("get", "/api/sheets");
 
   const totalSheets = sheets?.length ?? 0;

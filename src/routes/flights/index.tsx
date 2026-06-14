@@ -80,7 +80,11 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>Flight Plan Checker</Trans>
       </h1>
-      {error && <Alert title={error.title}>{error.detail}</Alert>}
+      {error && (
+        <Alert className="w-full" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
       <div className="flex flex-row flex-wrap gap-4">
         <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
         <Input placeholder={t`Departure`} value={departureFilter} onChange={onDepartureFilterChange} />
