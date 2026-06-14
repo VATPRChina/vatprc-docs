@@ -13,7 +13,6 @@ import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
 import { Notifications } from "@mantine/notifications";
 import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
-import * as Sentry from "@sentry/tanstackstart-react";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -120,7 +119,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootLayout,
   errorComponent: ({ error }) => {
     useEffect(() => {
-      Sentry.captureException(error);
+      void import("@sentry/tanstackstart-react").then(({ captureException }) => captureException(error));
     }, [error]);
 
     return (

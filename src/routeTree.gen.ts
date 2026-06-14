@@ -311,10 +311,10 @@ export interface FileRoutesByFullPath {
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
   '/users/me': typeof UsersMeRoute
-  '/controllers': typeof ControllersIndexRoute
+  '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
-  '/users': typeof UsersIndexRoute
+  '/users/': typeof UsersIndexRoute
   '/airspace/fir': typeof DocAirspaceFirRoute
   '/airspace/restricted': typeof DocAirspaceRestrictedRoute
   '/airspace/rvsm': typeof DocAirspaceRvsmRoute
@@ -341,8 +341,8 @@ export interface FileRoutesByFullPath {
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
-  '/controllers/applications': typeof ControllersApplicationsIndexRoute
-  '/controllers/trainings': typeof ControllersTrainingsIndexRoute
+  '/controllers/applications/': typeof ControllersApplicationsIndexRoute
+  '/controllers/trainings/': typeof ControllersTrainingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -456,10 +456,10 @@ export interface FileRouteTypes {
     | '/navdata/preferred-routes'
     | '/sheets/$id'
     | '/users/me'
-    | '/controllers'
+    | '/controllers/'
     | '/events/'
     | '/flights/'
-    | '/users'
+    | '/users/'
     | '/airspace/fir'
     | '/airspace/restricted'
     | '/airspace/rvsm'
@@ -486,8 +486,8 @@ export interface FileRouteTypes {
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
-    | '/controllers/applications'
-    | '/controllers/trainings'
+    | '/controllers/applications/'
+    | '/controllers/trainings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -660,7 +660,7 @@ declare module '@tanstack/react-router' {
     '/users/': {
       id: '/users/'
       path: '/users'
-      fullPath: '/users'
+      fullPath: '/users/'
       preLoaderRoute: typeof UsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -681,7 +681,7 @@ declare module '@tanstack/react-router' {
     '/controllers/': {
       id: '/controllers/'
       path: '/controllers'
-      fullPath: '/controllers'
+      fullPath: '/controllers/'
       preLoaderRoute: typeof ControllersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -758,14 +758,14 @@ declare module '@tanstack/react-router' {
     '/controllers/trainings/': {
       id: '/controllers/trainings/'
       path: '/controllers/trainings'
-      fullPath: '/controllers/trainings'
+      fullPath: '/controllers/trainings/'
       preLoaderRoute: typeof ControllersTrainingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers/applications/': {
       id: '/controllers/applications/'
       path: '/controllers/applications'
-      fullPath: '/controllers/applications'
+      fullPath: '/controllers/applications/'
       preLoaderRoute: typeof ControllersApplicationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
