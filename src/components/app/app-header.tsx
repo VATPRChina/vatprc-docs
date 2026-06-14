@@ -33,7 +33,15 @@ export const AppHeader: React.FC = () => {
           <ActionIcon variant="subtle" onClick={open} className="ml-auto">
             <TbMenu2 />
           </ActionIcon>
-          <NavMenuDrawer opened={opened} onClose={close} />
+          <NavMenuDrawer
+            opened={opened}
+            onClose={close}
+            onClick={(event) => {
+              if (event.target instanceof Element && event.target.closest("a")) {
+                close();
+              }
+            }}
+          />
         </div>
       </div>
     </Paper>
