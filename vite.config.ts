@@ -10,10 +10,11 @@ import { defineConfig } from "vitest/config";
 
 /// <reference types="vitest/config" />
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     !process.env.VITEST && tanstackStart(),
-    !process.env.VITEST && nitro(),
+    // nitro is a list of plugins so gating with command
+    !process.env.VITEST && command !== "serve" && nitro(),
     tailwindcss(),
     viteReact(),
     lingui(),
@@ -40,6 +41,7 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/community/, ""),
       },
+      "/hi": "https://example.com",
     },
   },
   test: {
@@ -67,4 +69,4 @@ export default defineConfig({
       },
     ],
   },
-});
+}));
