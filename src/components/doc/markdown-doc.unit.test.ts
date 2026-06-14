@@ -40,53 +40,39 @@ const getAllDocumentPaths = async () => {
   const docPaths = documents
     .flatMap((doc) => doc.children)
     .filter((doc) => doc.children.length === 0)
-    .map((doc) =>
-      path.relative(
-        path.resolve(import.meta.filename, "../../../../docs"),
-        doc.path,
-      ),
-    );
+    .map((doc) => path.relative(path.resolve(import.meta.filename, "../../../../docs"), doc.path));
   return docPaths;
 };
 
 describe.concurrent("compileMarkdownDoc", async () => {
-  test.concurrent.each(await getAllDocumentPaths())(
-    'can compile doc at "%s"',
-    async (docPath) => {
-      const document = await getDocument({ data: docPath });
-      const markdown = await compileMarkdownDoc(document);
+  test.concurrent.each(await getAllDocumentPaths())('can compile doc at "%s"', async (docPath) => {
+    const document = await getDocument({ data: docPath });
+    const markdown = await compileMarkdownDoc(document);
 
-      expect(markdown).toBeDefined();
-    },
-  );
+    expect(markdown).toBeDefined();
+  });
 });
 
 describe.concurrent("buildMarkdownDoc", async () => {
-  test.concurrent.each(await getAllDocumentPaths())(
-    'can build doc at "%s"',
-    async (docPath) => {
-      const document = await getDocument({ data: docPath });
-      const markdown = await compileMarkdownDoc(document);
-      const built = await buildMarkdownDoc(markdown);
+  test.concurrent.each(await getAllDocumentPaths())('can build doc at "%s"', async (docPath) => {
+    const document = await getDocument({ data: docPath });
+    const markdown = await compileMarkdownDoc(document);
+    const built = await buildMarkdownDoc(markdown);
 
-      expect(built).toBeDefined();
-      expect(built.MDXContent).toBeDefined();
-      expect(built.title).toBeDefined();
-    },
-  );
+    expect(built).toBeDefined();
+    expect(built.MDXContent).toBeDefined();
+    expect(built.title).toBeDefined();
+  });
 });
 
 describe.concurrent("buildMarkdownDocSync", async () => {
-  test.concurrent.each(await getAllDocumentPaths())(
-    'can build doc at "%s"',
-    async (docPath) => {
-      const document = await getDocument({ data: docPath });
-      const markdown = await compileMarkdownDoc(document);
-      const built = buildMarkdownDocSync(markdown);
+  test.concurrent.each(await getAllDocumentPaths())('can build doc at "%s"', async (docPath) => {
+    const document = await getDocument({ data: docPath });
+    const markdown = await compileMarkdownDoc(document);
+    const built = buildMarkdownDocSync(markdown);
 
-      expect(built).toBeDefined();
-      expect(built.MDXContent).toBeDefined();
-      expect(built.title).toBeDefined();
-    },
-  );
+    expect(built).toBeDefined();
+    expect(built.MDXContent).toBeDefined();
+    expect(built.title).toBeDefined();
+  });
 });
