@@ -4,7 +4,9 @@ import {
   AtcApplicationStatusEdit,
 } from "@/components/atc-application/atc-application-status";
 import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
+import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { BackButton } from "@/components/back-button";
+import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton } from "@mantine/core";
@@ -39,6 +41,20 @@ function RouteComponent() {
       <div className="flex flex-row gap-2">
         {data?.user_id ? <AtcPermissionModalButton userId={data?.user_id} /> : <Skeleton h={24} w={144} />}
       </div>
+      <RequireRole role="volunteer">
+        <h2 className="text-lg">
+          <Trans>Audit Logs</Trans>
+        </h2>
+        <AtcApplicationAuditLogPanel applicationId={params.id} />
+      </RequireRole>
     </div>
   );
 }
+
+const AtcApplicationAuditLogPanel = ({ applicationId }: { applicationId: string }) => {
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications/{id}/audit", {
+    params: { path: { id: applicationId } },
+  });
+
+  return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
+};

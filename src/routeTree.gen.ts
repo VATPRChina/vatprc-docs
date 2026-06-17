@@ -18,10 +18,12 @@ import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
 import { Route as UsersMeRouteImport } from './routes/users/me'
+import { Route as UsersAuditRouteImport } from './routes/users/audit'
 import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
 import { Route as EventsHistoryRouteImport } from './routes/events/history'
+import { Route as EventsAuditRouteImport } from './routes/events/audit'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
@@ -32,6 +34,7 @@ import { Route as ControllersApplicationsIndexRouteImport } from './routes/contr
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 import { Route as ControllersTrainingsIdRouteImport } from './routes/controllers/trainings/$id'
 import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
+import { Route as ControllersApplicationsAuditRouteImport } from './routes/controllers/applications/audit'
 import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
 import { Route as DocPilotTs3RouteImport } from './routes/_doc/pilot/ts3'
 import { Route as DocPilotStartToFlyRouteImport } from './routes/_doc/pilot/start-to-fly'
@@ -101,6 +104,11 @@ const UsersMeRoute = UsersMeRouteImport.update({
   path: '/users/me',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UsersAuditRoute = UsersAuditRouteImport.update({
+  id: '/users/audit',
+  path: '/users/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SheetsIdRoute = SheetsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -119,6 +127,11 @@ const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
 const EventsHistoryRoute = EventsHistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsAuditRoute = EventsAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => EventsRoute,
 } as any)
 const EventsIdRoute = EventsIdRouteImport.update({
@@ -172,6 +185,12 @@ const ControllersApplicationsNewRoute =
   ControllersApplicationsNewRouteImport.update({
     id: '/controllers/applications/new',
     path: '/controllers/applications/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ControllersApplicationsAuditRoute =
+  ControllersApplicationsAuditRouteImport.update({
+    id: '/controllers/applications/audit',
+    path: '/controllers/applications/audit',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ControllersApplicationsIdRoute =
@@ -306,10 +325,12 @@ export interface FileRoutesByFullPath {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
   '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -338,6 +359,7 @@ export interface FileRoutesByFullPath {
   '/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
@@ -352,10 +374,12 @@ export interface FileRoutesByTo {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
   '/controllers': typeof ControllersIndexRoute
   '/events': typeof EventsIndexRoute
@@ -384,6 +408,7 @@ export interface FileRoutesByTo {
   '/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
@@ -401,10 +426,12 @@ export interface FileRoutesById {
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
   '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -433,6 +460,7 @@ export interface FileRoutesById {
   '/_doc/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/_doc/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
@@ -451,10 +479,12 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
     | '/controllers/'
     | '/events/'
@@ -483,6 +513,7 @@ export interface FileRouteTypes {
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
@@ -497,10 +528,12 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
     | '/controllers'
     | '/events'
@@ -529,6 +562,7 @@ export interface FileRouteTypes {
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
@@ -545,10 +579,12 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
     | '/controllers/'
     | '/events/'
@@ -577,6 +613,7 @@ export interface FileRouteTypes {
     | '/_doc/pilot/start-to-fly'
     | '/_doc/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
@@ -594,6 +631,7 @@ export interface RootRouteChildren {
   AuthCallbackRoute: typeof AuthCallbackRoute
   DocsSplatRoute: typeof DocsSplatRoute
   NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
+  UsersAuditRoute: typeof UsersAuditRoute
   UsersMeRoute: typeof UsersMeRoute
   ControllersIndexRoute: typeof ControllersIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
@@ -620,6 +658,7 @@ export interface RootRouteChildren {
   DocPilotStartToFlyRoute: typeof DocPilotStartToFlyRoute
   DocPilotTs3Route: typeof DocPilotTs3Route
   ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
+  ControllersApplicationsAuditRoute: typeof ControllersApplicationsAuditRoute
   ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
   ControllersTrainingsIdRoute: typeof ControllersTrainingsIdRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
@@ -692,6 +731,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersMeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/users/audit': {
+      id: '/users/audit'
+      path: '/users/audit'
+      fullPath: '/users/audit'
+      preLoaderRoute: typeof UsersAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sheets/$id': {
       id: '/sheets/$id'
       path: '/$id'
@@ -718,6 +764,13 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/events/history'
       preLoaderRoute: typeof EventsHistoryRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/audit': {
+      id: '/events/audit'
+      path: '/audit'
+      fullPath: '/events/audit'
+      preLoaderRoute: typeof EventsAuditRouteImport
       parentRoute: typeof EventsRoute
     }
     '/events/$id': {
@@ -788,6 +841,13 @@ declare module '@tanstack/react-router' {
       path: '/controllers/applications/new'
       fullPath: '/controllers/applications/new'
       preLoaderRoute: typeof ControllersApplicationsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/applications/audit': {
+      id: '/controllers/applications/audit'
+      path: '/controllers/applications/audit'
+      fullPath: '/controllers/applications/audit'
+      preLoaderRoute: typeof ControllersApplicationsAuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers/applications/$id': {
@@ -956,12 +1016,14 @@ declare module '@tanstack/react-router' {
 
 interface EventsRouteChildren {
   EventsIdRoute: typeof EventsIdRoute
+  EventsAuditRoute: typeof EventsAuditRoute
   EventsHistoryRoute: typeof EventsHistoryRoute
   EventsIndexRoute: typeof EventsIndexRoute
 }
 
 const EventsRouteChildren: EventsRouteChildren = {
   EventsIdRoute: EventsIdRoute,
+  EventsAuditRoute: EventsAuditRoute,
   EventsHistoryRoute: EventsHistoryRoute,
   EventsIndexRoute: EventsIndexRoute,
 }
@@ -1003,6 +1065,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthCallbackRoute: AuthCallbackRoute,
   DocsSplatRoute: DocsSplatRoute,
   NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,
+  UsersAuditRoute: UsersAuditRoute,
   UsersMeRoute: UsersMeRoute,
   ControllersIndexRoute: ControllersIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
@@ -1031,6 +1094,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocPilotStartToFlyRoute: DocPilotStartToFlyRoute,
   DocPilotTs3Route: DocPilotTs3Route,
   ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
+  ControllersApplicationsAuditRoute: ControllersApplicationsAuditRoute,
   ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
   ControllersTrainingsIdRoute: ControllersTrainingsIdRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,

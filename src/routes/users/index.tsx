@@ -1,4 +1,6 @@
 import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
+import { AuditLogTable } from "@/components/audit-log/audit-log-table";
+import { RequireRole } from "@/components/require-role";
 import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -8,10 +10,10 @@ import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Checkbox, Group, Modal, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { MouseEvent, useState } from "react";
-import { TbUserBolt, TbCheck } from "react-icons/tb";
+import { TbUserBolt, TbCheck, TbHistory } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
   "controller",
@@ -135,6 +137,9 @@ const columns = [
       return (
         <Group>
           <AtcPermissionModalButton userId={userId} />
+          <RequireRole role="volunteer">
+            <UserAuditLogButton userId={userId} />
+          </RequireRole>
         </Group>
       );
     },
@@ -149,8 +154,43 @@ function RouteComponent() {
   const { data, isLoading } = $api.useQuery("get", "/api/users");
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto flex flex-col gap-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <h1 className="text-2xl">
+          <Trans>Users</Trans>
+        </h1>
+        <RequireRole role="volunteer">
+          <Link to="/users/audit" className="text-sm underline">
+            <Trans>View audit logs</Trans>
+          </Link>
+        </RequireRole>
+      </div>
       <RichTable data={data} columns={columns} isLoading={isLoading} />
     </div>
   );
 }
+
+const UserAuditLogButton = ({ userId }: { userId: string }) => {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <Button size="xs" onClick={open} leftSection={<TbHistory />} variant="subtle">
+        <Trans>Audit Logs</Trans>
+      </Button>
+      {opened && (
+        <Modal opened={opened} onClose={close} title={<Trans>Audit Logs</Trans>} size="xl">
+          <UserAuditLogModalContent userId={userId} />
+        </Modal>
+      )}
+    </>
+  );
+};
+
+const UserAuditLogModalContent = ({ userId }: { userId: string }) => {
+  const { data, error, isLoading } = $api.useQuery("get", "/api/users/{id}/audit", {
+    params: { path: { id: userId } },
+  });
+
+  return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
+};

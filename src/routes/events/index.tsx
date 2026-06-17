@@ -1,5 +1,6 @@
 import { EventCard } from "@/components/event/event-card";
 import { CreateEvent } from "@/components/event/event-create";
+import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -17,9 +18,16 @@ function RouteComponent() {
         <h1 className="text-3xl">
           <Trans>Events</Trans>
         </h1>
-        <Link to="/events/history" search={{ range: "recent" }} className="text-sm underline">
-          <Trans>View past events</Trans>
-        </Link>
+        <div className="flex flex-row flex-wrap gap-3 text-sm">
+          <Link to="/events/history" search={{ range: "recent" }} className="underline">
+            <Trans>View past events</Trans>
+          </Link>
+          <RequireRole role="volunteer">
+            <Link to="/events/audit" className="underline">
+              <Trans>View audit logs</Trans>
+            </Link>
+          </RequireRole>
+        </div>
       </div>
       <div className="col-span-1 md:col-span-2">
         <CreateEvent />

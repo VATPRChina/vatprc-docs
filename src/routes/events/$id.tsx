@@ -1,14 +1,16 @@
 import NoEventImage from "@/assets/no-event-image.svg";
+import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { BackButton } from "@/components/back-button";
 import { AtcSlotList } from "@/components/event/atc-slot-list";
 import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { SlotList } from "@/components/event/slot-list";
+import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { TbAirTrafficControl, TbCalendar } from "react-icons/tb";
+import { TbAirTrafficControl, TbCalendar, TbHistory } from "react-icons/tb";
 
 export const Route = createFileRoute("/events/$id")({
   component: RouteComponent,
@@ -49,6 +51,11 @@ function RouteComponent() {
             <Tabs.Tab value="controller" leftSection={<TbAirTrafficControl />}>
               <Trans>Controllers</Trans>
             </Tabs.Tab>
+            <RequireRole role="volunteer">
+              <Tabs.Tab value="audit" leftSection={<TbHistory />}>
+                <Trans>Audit Logs</Trans>
+              </Tabs.Tab>
+            </RequireRole>
           </Tabs.List>
 
           <Tabs.Panel value="slot" className="flex flex-col gap-4">
@@ -58,8 +65,22 @@ function RouteComponent() {
           <Tabs.Panel value="controller" className="flex flex-col gap-4">
             <AtcSlotList eventId={event.id} />
           </Tabs.Panel>
+
+          <RequireRole role="volunteer">
+            <Tabs.Panel value="audit" className="flex flex-col gap-4">
+              <EventAuditLogPanel eventId={event.id} />
+            </Tabs.Panel>
+          </RequireRole>
         </Tabs>
       </div>
     )
   );
 }
+
+const EventAuditLogPanel = ({ eventId }: { eventId: string }) => {
+  const { data, error, isLoading } = $api.useQuery("get", "/api/events/{id}/audit", {
+    params: { path: { id: eventId } },
+  });
+
+  return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
+};
