@@ -24,6 +24,7 @@
 #### 2.2.1 上海虹桥
 
 ##### 2.2.1.1 跑道运行规则
+
 上海虹桥国际机场在非能见度运行的标准情况下，主用跑道规则为“西起东落”，即:
 
 - 南向运行时，跑道18L主要用于落地，跑道18R主要用于起飞。
@@ -34,28 +35,30 @@
 上海虹桥机场主用RNAV程序，无法使用RNAV程序的，塔台管制员应当与进近管制员协调使用传统程序或采用雷达引导离场。
 
 ###### 离场
+
 | 离场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| ADBAS  |   36L/18R    | ADBAS-8  |
-| PIKAS  |   36L/18R    | PIKAS-8  |
-| SASAN  |   36L/18R    | SASAN-Y  |
-|  NXD   |   36L/18R    |  NXD-8   |
-|  AND   |   36L/18R    |  AND-Z   |
-| PONAB  |   36L/18R    | PONAB-9  |
-| MIGOL  |   36L/18R    | MIGOL-8  |
-| LAMEN  |   36L/18R    | LAMEN-8  |
-| SURAK  |   36L/18R    | SURAK-8  |
-| IBEGI  |   36L/18R    | IBEGI-8  |
+| ADBAS  | 36L/18R  | ADBAS-8  |
+| PIKAS  | 36L/18R  | PIKAS-8  |
+| SASAN  | 36L/18R  | SASAN-Y  |
+|  NXD   | 36L/18R  |  NXD-8   |
+|  AND   | 36L/18R  |  AND-Z   |
+| PONAB  | 36L/18R  | PONAB-9  |
+| MIGOL  | 36L/18R  | MIGOL-8  |
+| LAMEN  | 36L/18R  | LAMEN-8  |
+| SURAK  | 36L/18R  | SURAK-8  |
+| IBEGI  | 36L/18R  | IBEGI-8  |
 
 ###### 进场
+
 | 进场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| AND  |   36R    | AND-8  |
-| PUD |   36R    | PUD-6  |
+|  AND   |   36R    |  AND-8   |
+|  PUD   |   36R    |  PUD-6   |
 | SASAN  |   36R    | SASAN-8  |
 | SUPAR  |   36R    | SUPAR-8  |
-| AND  |   18L    | AND-9  |
-| PUD |   18L    | PUD-9  |
+|  AND   |   18L    |  AND-9   |
+|  PUD   |   18L    |  PUD-9   |
 | SASAN  |   18L    | SASAN-9  |
 | SUPAR  |   18L    | SUPAR-9  |
 
@@ -68,15 +71,16 @@
 通话示范如下。
 
 **使用航路过渡**
+
 > 呼号，上海进近雷达看到了，SASAN-X 程序进场，**xxx过渡**，跑道xx”
 >
 > Callsign, Shanghai Approach radar contact, follow SASAN-x arrival, xxx transition, runway xx.
 
 **不使用航路过渡**
+
 > 呼号，上海进近雷达看到了，直飞SASAN，加入SASAN-X 程序进场，跑道xx”
 >
 > Callsign, Shanghai Approach radar contact, (proceed) direct to SASAN, join SASAN-X arrival, runway xx”
-
 
 如管制员选择使用该航路过渡程序，以下为部分运行提示：
 
@@ -86,6 +90,7 @@
 #### 2.2.2 上海浦东
 
 ##### 2.2.2.1 跑道运行规则
+
 上海浦东国际机场在非低能见度运行的标准情况下，主用运行规则为“内起外落”，即:
 
 - 南向运行时，跑道16L、跑道17R主要用于落地，跑道16R、跑道17L主要用于起飞。
@@ -94,25 +99,28 @@
 其余详见《上海浦东机场标准运行程序》。
 
 ##### 2.2.2.2 主用程序
+
 离场主用程序请参见《上海浦东机场标准运行程序》，本文仅列举进场主用程序。
 
 ###### 北向
+
 | 进场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| AND  |   35L    | AND-2  |
-| BK |   34R    | BK-2  |
+|  AND   |   35L    |  AND-2   |
+|   BK   |   34R    |   BK-2   |
 | DUMET  |   34R    | DUMET-2  |
 | MATNU  |   34R    | MATNU-8  |
-| SASAN  |   35L   | SASAN-2  |
+| SASAN  |   35L    | SASAN-2  |
 
 ###### 南向
+
 | 进场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| AND  |   17R    | AND-1  |
-| BK |   16L    | BK-3  |
+|  AND   |   17R    |  AND-1   |
+|   BK   |   16L    |   BK-3   |
 | DUMET  |   16L    | DUMET-1  |
 | MATNU  |   16L    | MATNU-1  |
-| SASAN  |   17R   | SASAN-1  |
+| SASAN  |   17R    | SASAN-1  |
 
 > [!NOTE]
 > 实际运行中，管制员可根据流量调配航空器到非主用跑道进场。
