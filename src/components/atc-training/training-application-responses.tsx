@@ -81,6 +81,9 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
               </Button>
             </div>
           </RequireRole>
+          {data?.length === 0 && (
+            <Alert color="yellow" title={<Trans>There is no response to this training request yet.</Trans>} />
+          )}
           {data?.map((response) => (
             <>
               <Divider />

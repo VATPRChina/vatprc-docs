@@ -77,7 +77,7 @@ msgstr "缺席"
 #: src/components/atc-application/atc-application-status.tsx:43
 #: src/components/atc-training/training-application-list.tsx:17
 #: src/components/atc-training/training-application-list.tsx:35
-#: src/components/atc-training/training-application-responses.tsx:95
+#: src/components/atc-training/training-application-responses.tsx:98
 msgid "Accepted"
 msgstr "已通过"
 
@@ -413,7 +413,7 @@ msgid "CID"
 msgstr "CID"
 
 #: src/components/atc-training/training-application-responses.tsx:72
-#: src/components/atc-training/training-application-responses.tsx:106
+#: src/components/atc-training/training-application-responses.tsx:109
 msgid "Comment"
 msgstr "评论"
 
@@ -1044,7 +1044,7 @@ msgstr "递交管制员申请"
 msgid "No"
 msgstr "否"
 
-#: src/components/atc-training/training-application-responses.tsx:108
+#: src/components/atc-training/training-application-responses.tsx:111
 msgid "No comments"
 msgstr "暂无评论"
 
@@ -1276,7 +1276,7 @@ msgstr "拒绝"
 #: src/components/atc-application/atc-application-status.tsx:51
 #: src/components/atc-training/training-application-list.tsx:18
 #: src/components/atc-training/training-application-list.tsx:43
-#: src/components/atc-training/training-application-responses.tsx:99
+#: src/components/atc-training/training-application-responses.tsx:102
 msgid "Rejected"
 msgstr "已拒绝"
 
@@ -1628,6 +1628,10 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
+#: src/components/atc-training/training-application-responses.tsx:85
+msgid "There is no response to this training request yet."
+msgstr "当前暂无对该管制训练申请的回应。"
+
 #: src/components/event/event-detail.tsx:37
 msgid "This event does not have pilot booking."
 msgstr "本活动不支持飞行员预订。"
@@ -1707,7 +1711,7 @@ msgstr "学员 CID"
 msgid "Trainee Name"
 msgstr "学员姓名"
 
-#: src/components/atc-training/training-application-responses.tsx:89
+#: src/components/atc-training/training-application-responses.tsx:92
 #: src/components/atc-training/training-save.tsx:98
 #: src/routes/controllers/trainings/$id.tsx:74
 msgid "Trainer"
