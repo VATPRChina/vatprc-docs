@@ -1,3 +1,4 @@
+import { DateTime } from "../event/datetime";
 import { RequireRole } from "../require-role";
 import { $api, useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
@@ -58,6 +59,20 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Training Application Responses`}>
         <div className="flex flex-col gap-2">
+          <div className="grid gap-2 text-sm sm:grid-cols-2">
+            <div>
+              <span className="text-dimmed mr-2">
+                <Trans>Created at</Trans>
+              </span>
+              <DateTime>{application?.created_at}</DateTime>
+            </div>
+            <div>
+              <span className="text-dimmed mr-2">
+                <Trans>Updated at</Trans>
+              </span>
+              <DateTime>{application?.updated_at}</DateTime>
+            </div>
+          </div>
           <RequireRole role="controller-training-mentor">
             {user?.id && data?.some((response) => response.trainer_id === user?.id) && (
               <Alert color="green" title={<Trans>You have responded to this training request.</Trans>} />
