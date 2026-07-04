@@ -80,7 +80,7 @@ export const ControllerList: React.FC = () => {
             return ca.user.cid.localeCompare(cb.user.cid);
           })
           ?.filter((ctr) => showAbsent || !ctr.is_absent)
-          ?.filter((ctr) => ctr.permissions.some((p) => p.state !== "student"))
+          ?.filter((ctr) => ctr.permissions.some((p) => p.state !== "student") || ctr.is_absent)
           ?.map((ctr) => (
             <div key={ctr.user.id} className="hover:bg-secondary flex flex-col gap-4 border px-6 py-4">
               <div className="flex items-center gap-2">
