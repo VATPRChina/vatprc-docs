@@ -1,3 +1,4 @@
+import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
@@ -85,6 +86,7 @@ export const ControllerList: React.FC = () => {
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold">{ctr.user.full_name}</span>
                 <span className="text-sm font-light">{ctr.user.cid}</span>
+                <AtcPermissionModalButton userId={ctr.user.id} iconOnly />
                 <span className="font-bold">
                   {ctr.rating}
                   {ctr.is_visiting && <span className="font-light">(V)</span>}

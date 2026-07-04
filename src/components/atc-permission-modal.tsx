@@ -6,7 +6,7 @@ import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -47,9 +47,12 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   });
   const invalidateQueries = () =>
     promiseWithLog(
-      queryClient.invalidateQueries(
-        $api.queryOptions("get", "/api/users/{id}/atc/status", { params: { path: { id: userId } } }),
-      ),
+      Promise.all([
+        queryClient.invalidateQueries(
+          $api.queryOptions("get", "/api/users/{id}/atc/status", { params: { path: { id: userId } } }),
+        ),
+        queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/controllers")),
+      ]),
     );
 
   const { mutate, isPending: isMutating } = $api.useMutation("put", "/api/users/{id}/atc/status", {
@@ -211,15 +214,23 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   );
 };
 
-export const AtcPermissionModalButton: FC<{ userId: string }> = ({ userId }) => {
+export const AtcPermissionModalButton: FC<{ userId: string; iconOnly?: boolean }> = ({ userId, iconOnly = false }) => {
+  const { t } = useLingui();
   const [opened, { open, close }] = useDisclosure(false);
+  const label = t`Edit ATC permissions`;
 
   return (
     <RequireRole role="controller-training-director-assistant">
-      <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
-        <Trans>ATC Permission</Trans>
-      </Button>
-      <AtcPermissionModal userId={userId} opened={opened} onClose={close} />
+      {iconOnly ? (
+        <ActionIcon variant="subtle" size="sm" onClick={open} aria-label={label} title={label}>
+          <TbAirTrafficControl />
+        </ActionIcon>
+      ) : (
+        <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
+          <Trans>ATC Permission</Trans>
+        </Button>
+      )}
+      {opened && <AtcPermissionModal userId={userId} opened={opened} onClose={close} />}
     </RequireRole>
   );
 };
