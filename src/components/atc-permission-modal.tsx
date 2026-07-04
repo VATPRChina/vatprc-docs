@@ -94,7 +94,21 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
               <Checkbox
                 label={t`Absent`}
                 checked={field.state.value}
-                onChange={(e) => field.handleChange(e.target.checked)}
+                onChange={(e) => {
+                  const isAbsent = e.target.checked;
+                  field.handleChange(isAbsent);
+
+                  if (isAbsent) {
+                    form.setFieldValue(
+                      "permissions",
+                      form.state.values.permissions.map((permission) =>
+                        permission.state === "student"
+                          ? permission
+                          : { ...permission, state: "under-mentor", solo_expires_at: null },
+                      ),
+                    );
+                  }
+                }}
                 onBlur={field.handleBlur}
                 disabled={isPending || isMutating}
               />
