@@ -8,7 +8,7 @@ import { wrapPromiseWithLog } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Group, Modal, Stack } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Group, Modal, Stack, Tabs } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -152,6 +152,10 @@ export const Route = createFileRoute("/users/")({
 
 function RouteComponent() {
   const { data, isLoading } = $api.useQuery("get", "/api/users");
+  const { data: controllerStatuses, isLoading: isControllersLoading } = $api.useQuery("get", "/api/atc/controllers");
+  const controllerIds = new Set(controllerStatuses?.map((status) => status.user_id));
+  const controllers = data?.filter((user) => controllerIds.has(user.id));
+  const usersWithRoles = data?.filter((user) => user.direct_roles.length > 0);
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
@@ -165,7 +169,29 @@ function RouteComponent() {
           </Link>
         </RequireRole>
       </div>
-      <RichTable data={data} columns={columns} isLoading={isLoading} />
+      <Tabs defaultValue="users">
+        <Tabs.List className="mb-2">
+          <Tabs.Tab value="users">
+            <Trans>Users</Trans>
+          </Tabs.Tab>
+          <Tabs.Tab value="controllers">
+            <Trans>Controllers</Trans>
+          </Tabs.Tab>
+          <Tabs.Tab value="roles">
+            <Trans>Roles</Trans>
+          </Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="users">
+          <RichTable data={data} columns={columns} isLoading={isLoading} />
+        </Tabs.Panel>
+        <Tabs.Panel value="controllers">
+          <RichTable data={controllers} columns={columns} isLoading={isLoading || isControllersLoading} />
+        </Tabs.Panel>
+        <Tabs.Panel value="roles">
+          <RichTable data={usersWithRoles} columns={columns} isLoading={isLoading} />
+        </Tabs.Panel>
+      </Tabs>
     </div>
   );
 }
