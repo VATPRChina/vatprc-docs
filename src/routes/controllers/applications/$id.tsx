@@ -91,7 +91,7 @@ const MoodleAccountProvisionButton = ({
   });
 
   return (
-    <RequireRole role="controller-training-director">
+    <RequireRole role="tech-director">
       <Tooltip label={t`Moodle account already exists`} disabled={!hasMoodleAccount}>
         <span>
           <Button
