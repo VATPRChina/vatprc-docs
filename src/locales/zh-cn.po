@@ -262,7 +262,7 @@ msgstr "管制员申请审计日志"
 msgid "ATC Applications"
 msgstr "管制员申请"
 
-#: src/components/event/event-detail.tsx:44
+#: src/components/event/event-detail.tsx:45
 msgid "ATC Booking:"
 msgstr "管制员预订："
 
@@ -318,7 +318,7 @@ msgstr "预订"
 msgid "Booking not supported"
 msgstr "不支持预订"
 
-#: src/components/event/event-detail.tsx:28
+#: src/components/event/event-detail.tsx:29
 msgid "Booking:"
 msgstr "预订时间："
 
@@ -820,7 +820,7 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
-#: src/components/event/event-detail.tsx:64
+#: src/components/event/event-detail.tsx:66
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "论坛"
@@ -926,6 +926,10 @@ msgstr "等待中"
 msgid "Instructor"
 msgstr "教员"
 
+#: src/components/event/atc-booking-warning.tsx:44
+msgid "Insufficient controller bookings"
+msgstr "活动管制员预订数量不足"
+
 #: src/components/app/app-nav-menu.tsx:61
 msgid "Introduction"
 msgstr "介绍"
@@ -949,6 +953,10 @@ msgstr "了解中国 RVSM"
 #: src/routes/flights/$callsign.tsx:133
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
+
+#: src/components/event/atc-booking-warning.tsx:45
+msgid "Less than half of the configured Center Control positions have been booked for this event."
+msgstr ""
 
 #: src/components/app/app-nav-menu.tsx:175
 #: src/routes/_doc/controller/loa.tsx:14
@@ -1652,7 +1660,7 @@ msgstr "当前无在线管制员。"
 msgid "There is no response to this training request yet."
 msgstr "当前暂无对该管制训练申请的回应。"
 
-#: src/components/event/event-detail.tsx:37
+#: src/components/event/event-detail.tsx:38
 msgid "This event does not have pilot booking."
 msgstr "本活动不支持飞行员预订。"
 
@@ -1682,7 +1690,7 @@ msgstr "时间"
 msgid "Time Range"
 msgstr "时间范围"
 
-#: src/components/event/event-detail.tsx:19
+#: src/components/event/event-detail.tsx:20
 msgid "Time:"
 msgstr "活动时间："
 
@@ -1859,7 +1867,7 @@ msgid "VATPRC"
 msgstr "VATPRC"
 
 #: src/components/event/event-create.tsx:244
-#: src/components/event/event-detail.tsx:69
+#: src/components/event/event-detail.tsx:71
 msgid "VATSIM"
 msgstr "VATSIM"
 

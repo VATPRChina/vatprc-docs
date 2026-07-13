@@ -262,7 +262,7 @@ msgstr "ATC Application Audit Logs"
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/event/event-detail.tsx:44
+#: src/components/event/event-detail.tsx:45
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
@@ -318,7 +318,7 @@ msgstr "Book"
 msgid "Booking not supported"
 msgstr "Booking not supported"
 
-#: src/components/event/event-detail.tsx:28
+#: src/components/event/event-detail.tsx:29
 msgid "Booking:"
 msgstr "Booking:"
 
@@ -820,7 +820,7 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
-#: src/components/event/event-detail.tsx:64
+#: src/components/event/event-detail.tsx:66
 #: src/routes/index.tsx:117
 msgid "Forum"
 msgstr "Forum"
@@ -926,6 +926,10 @@ msgstr "In Waitlist"
 msgid "Instructor"
 msgstr "Instructor"
 
+#: src/components/event/atc-booking-warning.tsx:44
+msgid "Insufficient controller bookings"
+msgstr "Insufficient controller bookings"
+
 #: src/components/app/app-nav-menu.tsx:61
 msgid "Introduction"
 msgstr "Introduction"
@@ -949,6 +953,10 @@ msgstr "Learn more about China RVSM"
 #: src/routes/flights/$callsign.tsx:133
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
+
+#: src/components/event/atc-booking-warning.tsx:45
+msgid "Less than half of the configured Center Control positions have been booked for this event."
+msgstr "Less than half of the configured Center Control positions have been booked for this event."
 
 #: src/components/app/app-nav-menu.tsx:175
 #: src/routes/_doc/controller/loa.tsx:14
@@ -1652,7 +1660,7 @@ msgstr "There is currently no online ATC."
 msgid "There is no response to this training request yet."
 msgstr "There is no response to this training request yet."
 
-#: src/components/event/event-detail.tsx:37
+#: src/components/event/event-detail.tsx:38
 msgid "This event does not have pilot booking."
 msgstr "This event does not have pilot booking."
 
@@ -1682,7 +1690,7 @@ msgstr "Time"
 msgid "Time Range"
 msgstr "Time Range"
 
-#: src/components/event/event-detail.tsx:19
+#: src/components/event/event-detail.tsx:20
 msgid "Time:"
 msgstr "Time:"
 
@@ -1859,7 +1867,7 @@ msgid "VATPRC"
 msgstr "VATPRC"
 
 #: src/components/event/event-create.tsx:244
-#: src/components/event/event-detail.tsx:69
+#: src/components/event/event-detail.tsx:71
 msgid "VATSIM"
 msgstr "VATSIM"
 

@@ -1,3 +1,4 @@
+import { AtcBookingWarning } from "./atc-booking-warning";
 import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -58,6 +59,7 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
   return (
     <div className="flex flex-col gap-2">
       {event && <EventSummary {...event} />}
+      {event && <AtcBookingWarning eventId={event.id} eventStart={event.start_at} />}
       <div className="flex flex-row items-baseline gap-2">
         {event?.community_link && event.community_link.length > 0 && (
           <Anchor href={event.community_link} target="_blank" rel="noreferrer">
