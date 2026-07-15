@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { RichTable } from "../table";
 import { LinkButton } from "../ui/link-button";
 import { APPLICATION_STATUS } from "./atc-application-status";
@@ -14,8 +15,11 @@ import { TbFileDescription } from "react-icons/tb";
 const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSummaryDto"]>();
 
 export const columns = [
-  columnHelper.accessor("user.cid", { header: () => <Trans>CID</Trans> }),
-  columnHelper.accessor("user.full_name", { header: () => <Trans>Name</Trans> }),
+  columnHelper.accessor((application) => `${application.user.full_name} ${application.user.cid}`.trim(), {
+    id: "user",
+    header: () => <Trans>User</Trans>,
+    cell: ({ row }) => <User user={row.original.user} />,
+  }),
   columnHelper.accessor("user_email", { header: () => <Trans>Email</Trans> }),
   columnHelper.accessor("status", {
     header: () => <Trans>Status</Trans>,

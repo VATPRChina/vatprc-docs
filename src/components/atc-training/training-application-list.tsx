@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { RichTable } from "../table";
 import { TrainingApplicationCreateModal } from "./training-application-create";
 import { TrainingApplicationDeleteModal } from "./training-application-delete";
@@ -66,8 +67,11 @@ const columns = [
         .toArray(),
     },
   }),
-  col.accessor("trainee.cid", { header: () => <Trans>Trainee CID</Trans> }),
-  col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
+  col.accessor((application) => `${application.trainee.full_name} ${application.trainee.cid}`.trim(), {
+    id: "trainee",
+    header: () => <Trans>Trainee</Trans>,
+    cell: ({ row }) => <User user={row.original.trainee} />,
+  }),
   col.display({
     id: "actions",
     cell: ({ row }) => (

@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { DateTime } from "../event/datetime";
 import { RichTable } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
@@ -13,10 +14,16 @@ import { FC } from "react";
 const col = createColumnHelper<components["schemas"]["TrainingDto"]>();
 const columns = [
   col.accessor("name", { header: () => <Trans>Title</Trans> }),
-  col.accessor("trainee.cid", { header: () => <Trans>Trainee CID</Trans> }),
-  col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
-  col.accessor("trainer.cid", { header: () => <Trans>Trainer CID</Trans> }),
-  col.accessor("trainer.full_name", { header: () => <Trans>Trainer Name</Trans> }),
+  col.accessor((training) => `${training.trainee.full_name} ${training.trainee.cid}`.trim(), {
+    id: "trainee",
+    header: () => <Trans>Trainee</Trans>,
+    cell: ({ row }) => <User user={row.original.trainee} />,
+  }),
+  col.accessor((training) => `${training.trainer.full_name} ${training.trainer.cid}`.trim(), {
+    id: "trainer",
+    header: () => <Trans>Trainer</Trans>,
+    cell: ({ row }) => <User user={row.original.trainer} />,
+  }),
   col.accessor("start_at", {
     header: () => <Trans>Start at</Trans>,
     cell: ({ getValue }) => <DateTime>{getValue()}</DateTime>,

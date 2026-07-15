@@ -1,3 +1,4 @@
+import { User } from "@/components/app/user";
 import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { RequireRole } from "@/components/require-role";
@@ -53,11 +54,10 @@ export const ROLES = new Map<components["schemas"]["UserRole"], MessageDescripto
 const columnHelper = createColumnHelper<components["schemas"]["UserDto"]>();
 
 const columns = [
-  columnHelper.accessor("cid", {
-    header: () => <Trans>CID</Trans>,
-  }),
-  columnHelper.accessor("full_name", {
-    header: () => <Trans>Name</Trans>,
+  columnHelper.accessor((user) => `${user.full_name} ${user.cid}`.trim(), {
+    id: "user",
+    header: () => <Trans>User</Trans>,
+    cell: ({ row }) => <User user={row.original} />,
   }),
   columnHelper.accessor("direct_roles", {
     header: () => <Trans>Roles</Trans>,
