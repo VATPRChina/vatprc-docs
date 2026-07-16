@@ -27,14 +27,9 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
 
   const booked = positions.filter((p) => p.booking).length;
   const total = positions.length;
-  const short = booked / total < 0.5;
+  const hue = Math.round((booked / total) * 140);
   return (
-    <span
-      className={cn(
-        "font-mono text-sm",
-        short ? "text-vatprc dark:text-vatprc-bright" : "text-gray-600 dark:text-gray-300",
-      )}
-    >
+    <span className="font-mono text-sm" style={{ color: `light-dark(hsl(${hue} 85% 36%), hsl(${hue} 85% 62%))` }}>
       <Trans>
         ATC booked {booked}/{total}
       </Trans>
@@ -64,13 +59,13 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
     <Link
       to="/events/$id"
       params={{ id: event.id }}
-      className="block"
+      className="group block"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
       <div
         ref={ref}
-        className="flex h-full flex-col overflow-hidden border border-gray-200 transition-transform duration-150 ease-out will-change-transform dark:border-gray-800"
+        className="flex h-full flex-col overflow-hidden border border-gray-300 transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:border-gray-600 dark:group-hover:shadow-black/70"
       >
         {event.imageUrl ? (
           <img src={event.imageUrl} alt={event.title} className="aspect-video w-full object-cover" />

@@ -18,7 +18,7 @@ const ControllerStrip: React.FC<{
     className={cn(
       "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-gray-200 px-4 py-3 font-mono text-sm last:border-b-0 dark:border-gray-800",
       "border-l-3",
-      schedule ? "border-l-gray-300 dark:border-l-gray-700" : "border-l-emerald-600",
+      schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
     )}
   >
     <span className="min-w-28 font-bold">{callsign}</span>
