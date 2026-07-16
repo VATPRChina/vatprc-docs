@@ -15,7 +15,7 @@ const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accen
 }) => (
   <div className="flex flex-col">
     <span className={accent ? "text-vatprc-bright text-2xl" : "text-2xl text-white"}>{value}</span>
-    <span className="text-xs text-gray-300">{label}</span>
+    <span className="text-sm text-gray-300">{label}</span>
   </div>
 );
 
@@ -25,11 +25,9 @@ export const Hero: React.FC = () => {
   const eventsThisWeek = events.filter((e) => isSameWeek(e.start, Date.now(), { weekStartsOn: 1 })).length;
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0a0f14]">
-      <div className="absolute inset-0">
-        <div className="relative mx-auto h-full w-full max-w-6xl [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-          <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
-        </div>
+    <section className="relative w-full overflow-hidden">
+      <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_calc(50%-36rem),black_calc(50%+36rem),transparent)]">
+        <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
         <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
       </div>
       <div className="relative mx-auto flex min-h-[28rem] w-full max-w-6xl flex-col justify-center px-6 py-14">

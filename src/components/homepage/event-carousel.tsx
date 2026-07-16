@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Loader } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
-import { format } from "date-fns";
+import { format, isSameWeek } from "date-fns";
 import React from "react";
 import { TbArrowRight, TbChevronLeft, TbChevronRight, TbPlaneDeparture } from "react-icons/tb";
 
-const VISIBLE_COUNT = 3;
 const TILT_MAX_DEG = 8;
 
 const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
@@ -17,10 +17,10 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
     params: { path: { event_id: eventId } },
   });
 
-  if (!positions) return <span className="font-mono text-sm text-gray-600 dark:text-gray-300">--</span>;
+  if (!positions) return <span className="font-mono text-base text-gray-600 dark:text-gray-300">--</span>;
   if (positions.length === 0)
     return (
-      <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
+      <span className="font-mono text-base text-gray-600 dark:text-gray-300">
         <Trans>ATC booking not open</Trans>
       </span>
     );
@@ -29,7 +29,7 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   const total = positions.length;
   const hue = Math.round((booked / total) * 140);
   return (
-    <span className="font-mono text-sm" style={{ color: `light-dark(hsl(${hue} 85% 36%), hsl(${hue} 85% 62%))` }}>
+    <span className="font-mono text-base" style={{ color: `light-dark(hsl(${hue} 85% 36%), hsl(${hue} 85% 62%))` }}>
       <Trans>
         ATC booked {booked}/{total}
       </Trans>
@@ -39,6 +39,7 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
 
 const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
   const ref = React.useRef<HTMLDivElement>(null);
+  const thisWeek = isSameWeek(event.start, Date.now(), { weekStartsOn: 1 });
 
   const handleMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -65,7 +66,10 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
     >
       <div
         ref={ref}
-        className="flex h-full flex-col overflow-hidden border border-gray-300 transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:border-gray-600 dark:group-hover:shadow-black/70"
+        className={cn(
+          "flex h-full flex-col overflow-hidden border transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:group-hover:shadow-black/70",
+          thisWeek ? "border-2 border-emerald-600 dark:border-emerald-400" : "border-gray-300 dark:border-gray-600",
+        )}
       >
         {event.imageUrl ? (
           <img src={event.imageUrl} alt={event.title} className="aspect-video w-full object-cover" />
@@ -75,8 +79,8 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
           </div>
         )}
         <div className="flex flex-col gap-1 px-4 py-3">
-          <span className="truncate font-medium">{event.title}</span>
-          <span className="font-mono text-sm text-gray-700 dark:text-gray-300">
+          <span className="truncate text-lg font-medium">{event.title}</span>
+          <span className="font-mono text-base text-gray-700 dark:text-gray-300">
             {format(event.start, "MM-dd HHmm", { in: utc })}Z–{format(event.end, "HHmm", { in: utc })}Z
           </span>
           <BookingCount eventId={event.id} />
@@ -90,15 +94,18 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
   const { t } = useLingui();
   const { scheduledEvents, isLoading } = useScheduledEvents();
   const [start, setStart] = React.useState(0);
+  const isSm = useMediaQuery("(min-width: 40rem)", true, { getInitialValueInEffect: true });
+  const isLg = useMediaQuery("(min-width: 64rem)", true, { getInitialValueInEffect: true });
 
   if (isLoading) return <Loader />;
 
   const upcoming = scheduledEvents.filter((e) => !e.isExam);
   if (upcoming.length === 0) return null;
 
-  const maxStart = Math.max(0, upcoming.length - VISIBLE_COUNT);
+  const visibleCount = isLg ? 3 : isSm ? 2 : 1;
+  const maxStart = Math.max(0, upcoming.length - visibleCount);
   const current = Math.min(start, maxStart);
-  const visible = upcoming.slice(current, current + VISIBLE_COUNT);
+  const visible = upcoming.slice(current, current + visibleCount);
 
   return (
     <section className={cn("w-full", className)}>
