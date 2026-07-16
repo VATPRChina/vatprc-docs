@@ -26,12 +26,18 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full overflow-hidden">
+      <img
+        src={heroImage}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full scale-110 object-cover blur-[50px]"
+      />
       <div className="absolute inset-0">
         <div className="relative mx-auto h-full w-full max-w-[84rem] [mask-image:linear-gradient(to_right,transparent,black_max(0px,calc((100%-72rem)/2)),black_calc(100%-max(0px,calc((100%-72rem)/2))),transparent)]">
           <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
-          <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
         </div>
       </div>
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
       <div className="relative mx-auto flex min-h-[28rem] w-full max-w-6xl flex-col justify-center px-6 py-14">
         <h1 className="text-3xl font-medium text-white md:text-4xl">
           <Trans>VATSIM P.R. China Division · VATPRC</Trans>
