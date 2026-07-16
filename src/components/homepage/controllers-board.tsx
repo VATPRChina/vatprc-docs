@@ -1,3 +1,4 @@
+import { useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
@@ -15,8 +16,9 @@ const ControllerStrip: React.FC<{
   callsign: string;
   name: string;
   frequency?: string;
+  eventTitle?: string;
   schedule?: [Date, Date];
-}> = ({ callsign, name, frequency, schedule }) => (
+}> = ({ callsign, name, frequency, eventTitle, schedule }) => (
   <div
     className={cn(
       "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-gray-200 px-4 py-3 font-mono text-base last:border-b-0 dark:border-gray-800",
@@ -25,7 +27,9 @@ const ControllerStrip: React.FC<{
     )}
   >
     <span className="min-w-28 font-bold">{callsign}</span>
-    <span className="min-w-20 text-gray-700 dark:text-gray-300">{frequency ?? "--"}</span>
+    <span className="min-w-20 truncate text-gray-700 dark:text-gray-300">
+      {(schedule ? eventTitle : frequency) ?? "--"}
+    </span>
     <span className="flex-1 text-gray-700 dark:text-gray-300">{name}</span>
     {schedule && (
       <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -63,11 +67,14 @@ const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode
 
 export const ControllersBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
+  const { events } = useScheduledEvents();
 
   if (isLoading) return <Loader />;
 
   const online = data?.controllers ?? [];
   const booked = data?.future_controllers ?? [];
+
+  const eventTitleFor = (start: Date, end: Date) => events.find((ev) => start < ev.end && end > ev.start)?.title;
 
   return (
     <section className={cn("w-full", className)}>
@@ -103,14 +110,18 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </h3>
           <StripList
             empty={<Trans>No upcoming ATC booking.</Trans>}
-            strips={booked.map((c) => (
-              <ControllerStrip
-                key={`${c.callsign}-${c.start_utc}`}
-                callsign={c.callsign}
-                name={c.name}
-                schedule={[parseISO(c.start_utc), parseISO(c.end_utc)]}
-              />
-            ))}
+            strips={booked.map((c) => {
+              const schedule: [Date, Date] = [parseISO(c.start_utc), parseISO(c.end_utc)];
+              return (
+                <ControllerStrip
+                  key={`${c.callsign}-${c.start_utc}`}
+                  callsign={c.callsign}
+                  name={c.name}
+                  eventTitle={eventTitleFor(schedule[0], schedule[1])}
+                  schedule={schedule}
+                />
+              );
+            })}
           />
         </div>
       </div>
