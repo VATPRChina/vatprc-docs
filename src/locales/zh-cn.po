@@ -50,7 +50,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/components/homepage/hero.tsx:36
+#: src/components/homepage/hero.tsx:46
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -177,7 +177,7 @@ msgstr "申请时间"
 msgid "Apply"
 msgstr "申请"
 
-#: src/routes/index.tsx:29
+#: src/routes/index.tsx:27
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
@@ -262,11 +262,11 @@ msgstr "管制员申请审计日志"
 msgid "ATC Applications"
 msgstr "管制员申请"
 
-#: src/components/homepage/event-carousel.tsx:32
+#: src/components/homepage/event-carousel.tsx:33
 msgid "ATC booked {booked}/{total}"
 msgstr "管制报名 {booked}/{total}"
 
-#: src/components/homepage/event-carousel.tsx:23
+#: src/components/homepage/event-carousel.tsx:24
 msgid "ATC booking not open"
 msgstr "未开放管制报名"
 
@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:166
-#: src/components/homepage/controllers-board.tsx:56
+#: src/components/homepage/controllers-board.tsx:85
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -321,7 +321,7 @@ msgstr "基本信息"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:77
+#: src/components/homepage/controllers-board.tsx:102
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -479,13 +479,13 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:47
+#: src/components/homepage/controllers-board.tsx:76
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/homepage/hero.tsx:70
+#: src/components/homepage/hero.tsx:80
 msgid "Controllers online"
 msgstr "在线管制"
 
@@ -748,7 +748,7 @@ msgstr "活动开始"
 msgid "Events"
 msgstr "活动"
 
-#: src/components/homepage/hero.tsx:71
+#: src/components/homepage/hero.tsx:81
 msgid "Events this week"
 msgstr "本周活动"
 
@@ -769,7 +769,7 @@ msgstr "加载历史活动失败。"
 msgid "Failed to save sheet."
 msgstr "无法保存表单。"
 
-#: src/routes/index.tsx:26
+#: src/routes/index.tsx:24
 msgid "Feedback"
 msgstr "反馈"
 
@@ -811,7 +811,7 @@ msgid "Flight Plan"
 msgstr "飞行计划"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/homepage/hero.tsx:53
+#: src/components/homepage/hero.tsx:63
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -839,8 +839,8 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/components/homepage/hero.tsx:64
-#: src/routes/index.tsx:53
+#: src/components/homepage/hero.tsx:74
+#: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
 
@@ -876,7 +876,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/homepage/hero.tsx:48
+#: src/components/homepage/hero.tsx:58
 msgid "How to fly"
 msgstr "如何飞行"
 
@@ -953,7 +953,7 @@ msgstr "介绍"
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/components/homepage/hero.tsx:45
+#: src/components/homepage/hero.tsx:55
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
@@ -1067,7 +1067,7 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "New ATC Application"
 msgstr "递交管制员申请"
 
-#: src/components/homepage/event-carousel.tsx:111
+#: src/components/homepage/event-carousel.tsx:149
 msgid "Next events"
 msgstr "下一批活动"
 
@@ -1117,7 +1117,7 @@ msgstr "当前没有表单。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:82
+#: src/components/homepage/controllers-board.tsx:105
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1150,7 +1150,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:62
+#: src/components/homepage/controllers-board.tsx:91
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1228,7 +1228,7 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/homepage/hero.tsx:69
+#: src/components/homepage/hero.tsx:79
 msgid "Pilots online"
 msgstr "在线机组"
 
@@ -1273,7 +1273,7 @@ msgstr "席位"
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
-#: src/components/homepage/event-carousel.tsx:96
+#: src/components/homepage/event-carousel.tsx:133
 msgid "Previous events"
 msgstr "上一批活动"
 
@@ -1301,7 +1301,7 @@ msgstr "评级"
 msgid "Recent 3 months"
 msgstr "最近三个月"
 
-#: src/components/homepage/event-carousel.tsx:84
+#: src/components/homepage/event-carousel.tsx:114
 msgid "Recent Events"
 msgstr "近期活动"
 
@@ -1403,7 +1403,7 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/homepage/event-carousel.tsx:87
+#: src/components/homepage/event-carousel.tsx:124
 msgid "See All Events"
 msgstr "查看所有活动"
 
@@ -1431,6 +1431,14 @@ msgstr "表单列表"
 #: src/components/homepage/controller-list.tsx:60
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
+
+#: src/components/homepage/controllers-board.tsx:51
+msgid "Show all controllers"
+msgstr "显示全部管制员"
+
+#: src/components/homepage/controllers-board.tsx:51
+msgid "Show fewer controllers"
+msgstr "收起管制员"
 
 #: src/components/audit-log/audit-log-table.tsx:98
 msgid "Show less"
@@ -1650,7 +1658,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/controllers-board.tsx:67
+#: src/components/homepage/controllers-board.tsx:94
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
@@ -1844,7 +1852,7 @@ msgstr "检查结果"
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:33
+#: src/components/homepage/hero.tsx:43
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM 中国分部 · VATPRC"
 

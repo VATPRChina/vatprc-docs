@@ -1,12 +1,15 @@
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Button, Loader } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
 import React from "react";
-import { TbArrowRight } from "react-icons/tb";
+import { TbArrowRight, TbChevronDown, TbChevronUp } from "react-icons/tb";
+
+const MAX_VISIBLE_STRIPS = 5;
 
 const ControllerStrip: React.FC<{
   callsign: string;
@@ -31,6 +34,32 @@ const ControllerStrip: React.FC<{
     )}
   </div>
 );
+
+const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode }> = ({ strips, empty }) => {
+  const { t } = useLingui();
+  const [opened, { toggle }] = useDisclosure(false);
+
+  return (
+    <div className="border border-gray-200 dark:border-gray-800">
+      {strips.length === 0 && <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>}
+      {strips.slice(0, MAX_VISIBLE_STRIPS)}
+      {strips.length > MAX_VISIBLE_STRIPS && (
+        <>
+          {opened && strips.slice(MAX_VISIBLE_STRIPS)}
+          <button
+            type="button"
+            aria-label={opened ? t`Show fewer controllers` : t`Show all controllers`}
+            aria-expanded={opened}
+            onClick={toggle}
+            className="flex w-full items-center justify-center border-t border-gray-200 py-1.5 text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-900"
+          >
+            {opened ? <TbChevronUp size={20} /> : <TbChevronDown size={20} />}
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
 
 export const ControllersBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
@@ -61,28 +90,20 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           <h3 className="mb-2 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Online Controllers</Trans>
           </h3>
-          <div className="border border-gray-200 dark:border-gray-800">
-            {online.length === 0 && (
-              <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">
-                <Trans>There is currently no online ATC.</Trans>
-              </p>
-            )}
-            {online.map((c) => (
+          <StripList
+            empty={<Trans>There is currently no online ATC.</Trans>}
+            strips={online.map((c) => (
               <ControllerStrip key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
             ))}
-          </div>
+          />
         </div>
         <div>
           <h3 className="mb-2 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Booked Controllers</Trans>
           </h3>
-          <div className="border border-gray-200 dark:border-gray-800">
-            {booked.length === 0 && (
-              <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">
-                <Trans>No upcoming ATC booking.</Trans>
-              </p>
-            )}
-            {booked.map((c) => (
+          <StripList
+            empty={<Trans>No upcoming ATC booking.</Trans>}
+            strips={booked.map((c) => (
               <ControllerStrip
                 key={`${c.callsign}-${c.start_utc}`}
                 callsign={c.callsign}
@@ -90,7 +111,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
                 schedule={[parseISO(c.start_utc), parseISO(c.end_utc)]}
               />
             ))}
-          </div>
+          />
         </div>
       </div>
     </section>
