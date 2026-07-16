@@ -38,7 +38,7 @@ const Event: React.FC<{
   return (
     <Card
       component="a"
-      className="flex min-w-48 flex-col gap-2 hover:bg-gray-200"
+      className="flex min-w-48 flex-col gap-2 font-mono hover:bg-gray-200"
       withBorder
       renderRoot={(props) => <Link to="/events/$id" params={{ id }} target="_blank" {...props} />}
     >
@@ -107,7 +107,7 @@ export const EventList: FC<{ events: Event[]; direction: "col" | "row" }> = ({ e
         <Event key={e.id} id={e.id} title={e.title} start={e.start} end={e.end} isExam={e.isExam} />
       ))}
       {events.length === 0 && (
-        <span>
+        <span className="font-mono text-sm text-gray-500">
           <Trans>No event is scheduled recently.</Trans>
         </span>
       )}
