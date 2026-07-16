@@ -50,7 +50,7 @@ msgstr "<0>T</0> In Training: This controller is eligible to provide service to 
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
-#: src/routes/index.tsx:60
+#: src/routes/index.tsx:55
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -177,7 +177,7 @@ msgstr "Applied At"
 msgid "Apply"
 msgstr "Apply"
 
-#: src/routes/index.tsx:32
+#: src/routes/index.tsx:27
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
@@ -262,12 +262,20 @@ msgstr "ATC Application Audit Logs"
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
+#: src/components/homepage/event-carousel.tsx:30
+msgid "ATC booked {booked}/{total}"
+msgstr "ATC booked {booked}/{total}"
+
+#: src/components/homepage/event-carousel.tsx:21
+msgid "ATC booking not open"
+msgstr "ATC booking not open"
+
 #: src/components/event/event-detail.tsx:45
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
 #: src/components/app/app-nav-menu.tsx:166
-#: src/components/homepage/live-network.tsx:77
+#: src/components/homepage/controllers-board.tsx:55
 msgid "ATC Center"
 msgstr "ATC Center"
 
@@ -312,6 +320,10 @@ msgstr "Basic Information"
 #: src/components/event/slot-list.tsx:133
 msgid "Book"
 msgstr "Book"
+
+#: src/components/homepage/controllers-board.tsx:76
+msgid "Booked Controllers"
+msgstr "Booked Controllers"
 
 #: src/components/event/event-create.tsx:182
 #: src/components/event/event-create.tsx:196
@@ -394,10 +406,6 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/components/homepage/hero.tsx:38
-msgid "Chinese airspace on the VATSIM network, where every radio call is answered by a human controller."
-msgstr "Chinese airspace on the VATSIM network, where every radio call is answered by a human controller."
-
 #: src/routes/sheets/$id.tsx:358
 msgid "Chinese description"
 msgstr "Chinese description"
@@ -471,12 +479,13 @@ msgstr "Controller with Military Position Permission"
 
 #: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:196
+#: src/components/homepage/controllers-board.tsx:46
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/homepage/hero.tsx:52
+#: src/components/homepage/hero.tsx:47
 msgid "Controllers online"
 msgstr "Controllers online"
 
@@ -739,7 +748,7 @@ msgstr "Event start"
 msgid "Events"
 msgstr "Events"
 
-#: src/components/homepage/hero.tsx:53
+#: src/components/homepage/hero.tsx:48
 msgid "Events this week"
 msgstr "Events this week"
 
@@ -760,7 +769,7 @@ msgstr "Failed to load past events."
 msgid "Failed to save sheet."
 msgstr "Failed to save sheet."
 
-#: src/routes/index.tsx:29
+#: src/routes/index.tsx:24
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -802,6 +811,7 @@ msgid "Flight Plan"
 msgstr "Flight Plan"
 
 #: src/components/app/app-nav-menu.tsx:143
+#: src/components/homepage/hero.tsx:42
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -822,10 +832,6 @@ msgstr "Flight Service Station"
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
-#: src/components/homepage/hero.tsx:35
-msgid "Fly with real people controlling real procedures"
-msgstr "Fly with real people controlling real procedures"
-
 #: src/routes/_doc/airspace/restricted.tsx:166
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
@@ -833,13 +839,9 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/routes/index.tsx:56
+#: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "Forum"
-
-#: src/components/homepage/recent-events.tsx:153
-msgid "Fri"
-msgstr "Fri"
 
 #: src/routes/users/me.tsx:51
 msgid "Full name"
@@ -925,10 +927,6 @@ msgstr "Import slots"
 msgid "Import Slots"
 msgstr "Import Slots"
 
-#: src/components/homepage/recent-events.tsx:57
-msgid "In This Week"
-msgstr "In This Week"
-
 #: src/components/atc-application/atc-application-status.tsx:15
 #: src/components/atc-application/atc-application-status.tsx:33
 msgid "In Waitlist"
@@ -947,12 +945,13 @@ msgid "Introduction"
 msgstr "Introduction"
 
 #: src/components/app/app-nav-menu.tsx:124
+#: src/components/homepage/hero.tsx:39
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
-#: src/components/homepage/hero.tsx:44
-msgid "Join VATPRC"
-msgstr "Join VATPRC"
+#: src/components/homepage/hero.tsx:36
+msgid "Join the controller team"
+msgstr "Join the controller team"
 
 #: src/routes/users/index.tsx:41
 msgid "Lead Event Coordinator"
@@ -1044,10 +1043,6 @@ msgstr "metric odd flight level (meters)"
 msgid "Minimum State"
 msgstr "Minimum State"
 
-#: src/components/homepage/recent-events.tsx:141
-msgid "Mon"
-msgstr "Mon"
-
 #: src/components/app/app-nav-menu.tsx:169
 msgid "Moodle"
 msgstr "Moodle"
@@ -1086,17 +1081,9 @@ msgstr "No content"
 msgid "No data"
 msgstr "No data"
 
-#: src/components/homepage/recent-events.tsx:111
-msgid "No event is scheduled recently."
-msgstr "No event is scheduled recently."
-
 #: src/routes/sheets/$id.tsx:403
 msgid "No fields."
 msgstr "No fields."
-
-#: src/components/homepage/live-network.tsx:106
-msgid "No online pilot."
-msgstr "No online pilot."
 
 #: src/routes/events/history.tsx:137
 msgid "No past events found in the selected time range."
@@ -1122,6 +1109,10 @@ msgstr "No sheet available."
 msgid "No transponder"
 msgstr "No transponder"
 
+#: src/components/homepage/controllers-board.tsx:81
+msgid "No upcoming ATC booking."
+msgstr "No upcoming ATC booking."
+
 #: src/components/app/user.tsx:6
 msgid "Not booked"
 msgstr "Not booked"
@@ -1134,7 +1125,7 @@ msgstr "Not designated"
 msgid "Not designated route"
 msgstr "Not designated route"
 
-#: src/components/homepage/notam-board.tsx:40
+#: src/components/homepage/notam-board.tsx:38
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · Announcements"
 
@@ -1151,17 +1142,9 @@ msgstr "odd flight level"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/live-network.tsx:33
-msgid "Online"
-msgstr "Online"
-
-#: src/components/homepage/live-network.tsx:68
+#: src/components/homepage/controllers-board.tsx:61
 msgid "Online Controllers"
 msgstr "Online Controllers"
-
-#: src/components/homepage/live-network.tsx:101
-msgid "Online Pilots"
-msgstr "Online Pilots"
 
 #: src/routes/sheets.tsx:26
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
@@ -1237,7 +1220,7 @@ msgstr "Pilot Softwares"
 msgid "Pilots"
 msgstr "Pilots"
 
-#: src/components/homepage/hero.tsx:51
+#: src/components/homepage/hero.tsx:46
 msgid "Pilots online"
 msgstr "Pilots online"
 
@@ -1306,7 +1289,7 @@ msgstr "Rating"
 msgid "Recent 3 months"
 msgstr "Recent 3 months"
 
-#: src/routes/index.tsx:23
+#: src/components/homepage/event-carousel.tsx:75
 msgid "Recent Events"
 msgstr "Recent Events"
 
@@ -1378,10 +1361,6 @@ msgstr "Route"
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 
-#: src/components/homepage/recent-events.tsx:156
-msgid "Sat"
-msgstr "Sat"
-
 #: src/components/atc-permission-modal.tsx:209
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
@@ -1412,7 +1391,7 @@ msgstr "Sector Editor"
 msgid "Sector Files"
 msgstr "Sector Files"
 
-#: src/components/homepage/recent-events.tsx:247
+#: src/components/homepage/event-carousel.tsx:79
 msgid "See All Events"
 msgstr "See All Events"
 
@@ -1441,17 +1420,9 @@ msgstr "Sheets"
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
 
-#: src/components/homepage/live-network.tsx:120
-msgid "Show all pilots"
-msgstr "Show all pilots"
-
 #: src/components/audit-log/audit-log-table.tsx:98
 msgid "Show less"
 msgstr "Show less"
-
-#: src/components/homepage/live-network.tsx:120
-msgid "Show less pilots"
-msgstr "Show less pilots"
 
 #: src/components/audit-log/audit-log-table.tsx:98
 msgid "Show more"
@@ -1517,7 +1488,6 @@ msgid "Start time is required"
 msgstr "Start time is required"
 
 #: src/components/app/app-nav-menu.tsx:121
-#: src/components/homepage/hero.tsx:47
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
@@ -1544,10 +1514,6 @@ msgstr "Submitted"
 #: src/components/atc-training/training-list.tsx:46
 msgid "Successfully cancelled the training."
 msgstr "Successfully cancelled the training."
-
-#: src/components/homepage/recent-events.tsx:159
-msgid "Sun"
-msgstr "Sun"
 
 #: src/components/app/language-toggle.tsx:16
 msgid "Switch to Chinese"
@@ -1672,7 +1638,7 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "The user's Moodle account has been provisioned successfully."
 
-#: src/components/homepage/live-network.tsx:83
+#: src/components/homepage/controllers-board.tsx:66
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
@@ -1692,10 +1658,6 @@ msgstr "This map is intended for flight simulation use only. The boundaries show
 #: src/routes/_doc/controller/loa.tsx:26
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
-
-#: src/components/homepage/recent-events.tsx:150
-msgid "Thu"
-msgstr "Thu"
 
 #: src/components/atc-permission-modal.tsx:26
 msgid "Tier 2"
@@ -1782,10 +1744,6 @@ msgstr "Transponder"
 #: src/routes/flights/$callsign.tsx:197
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
-
-#: src/components/homepage/recent-events.tsx:144
-msgid "Tue"
-msgstr "Tue"
 
 #: src/components/event/atc-slot-assign.tsx:91
 #: src/components/event/slot-assign.tsx:88
@@ -1927,10 +1885,6 @@ msgstr "We regret to inform you that your application has been rejected. Please 
 #: src/components/app/app-nav-menu.tsx:140
 msgid "Weather"
 msgstr "Weather"
-
-#: src/components/homepage/recent-events.tsx:147
-msgid "Wed"
-msgstr "Wed"
 
 #: src/components/atc-training/training-application-delete.tsx:32
 msgid "Withdraw"

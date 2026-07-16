@@ -22,7 +22,7 @@ export interface DiscourseCategoryResponse {
 const FORUM_BASE = "https://community.vatprc.net";
 const ANNOUNCEMENT_CATEGORY_JSON = `${FORUM_BASE}/c/69-category/12-category/12.json`;
 
-export const parseAnnouncements = (raw: DiscourseCategoryResponse, limit = 5): Announcement[] =>
+export const parseAnnouncements = (raw: DiscourseCategoryResponse, limit = 3): Announcement[] =>
   (raw.topic_list?.topics ?? [])
     .filter((t) => !t.pinned)
     .sort((a, b) => b.created_at.localeCompare(a.created_at))

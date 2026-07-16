@@ -1,5 +1,5 @@
 import heroImage from "@/assets/homepage/hero-placeholder.svg";
-import { useScheduledEvents } from "@/components/homepage/recent-events";
+import { useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
@@ -27,27 +27,22 @@ export const Hero: React.FC = () => {
     <section className="relative w-full overflow-hidden">
       <img src={heroImage} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-black/45" />
-      <div className="relative mx-auto flex min-h-[60vh] max-w-6xl flex-col justify-center px-6 py-20">
-        <p className="text-vatprc-bright mb-4 font-medium">
+      <div className="relative mx-auto flex max-w-6xl flex-col justify-center px-6 py-14">
+        <h1 className="text-3xl font-medium text-white md:text-4xl">
           <Trans>VATSIM P.R. China Division · VATPRC</Trans>
-        </p>
-        <h1 className="max-w-3xl text-5xl leading-tight font-medium text-white md:text-6xl">
-          <Trans>Fly with real people controlling real procedures</Trans>
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-gray-200">
-          <Trans>
-            Chinese airspace on the VATSIM network, where every radio call is answered by a human controller.
-          </Trans>
-        </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button size="lg" color="var(--color-vatprc)" component={Link} to="/division/introduction">
-            <Trans>Join VATPRC</Trans>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button color="var(--color-vatprc)" component={Link} to="/controllers/applications">
+            <Trans>Join the controller team</Trans>
           </Button>
-          <Button size="lg" variant="outline" color="gray.0" component={Link} to="/pilot/start-to-fly">
-            <Trans>Start to Fly</Trans>
+          <Button variant="outline" color="gray.0" component={Link} to="/pilot/introduction-to-fly">
+            <Trans>Introduction to Fly</Trans>
+          </Button>
+          <Button variant="outline" color="gray.0" component={Link} to="/flights">
+            <Trans>Flight plan checker</Trans>
           </Button>
         </div>
-        <div className="mt-14 flex gap-10 font-mono">
+        <div className="mt-8 flex gap-10 font-mono">
           <HeroStat value={data?.pilots?.length ?? "--"} label={<Trans>Pilots online</Trans>} />
           <HeroStat value={data?.controllers?.length ?? "--"} label={<Trans>Controllers online</Trans>} />
           <HeroStat value={eventsThisWeek} label={<Trans>Events this week</Trans>} accent />

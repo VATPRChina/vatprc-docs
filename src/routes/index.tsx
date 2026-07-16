@@ -1,7 +1,7 @@
+import { ControllersBoard } from "@/components/homepage/controllers-board";
+import { EventCarousel } from "@/components/homepage/event-carousel";
 import { Hero } from "@/components/homepage/hero";
-import { LiveNetwork } from "@/components/homepage/live-network";
 import { NotamBoard } from "@/components/homepage/notam-board";
-import { RecentEvents } from "@/components/homepage/recent-events";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
@@ -16,14 +16,9 @@ function RouteComponent() {
     <div className="flex w-full flex-col">
       <Hero />
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16">
+        <EventCarousel />
         <NotamBoard />
-        <LiveNetwork />
-        <section>
-          <h2 className="mb-4 text-2xl font-medium">
-            <Trans>Recent Events</Trans>
-          </h2>
-          <RecentEvents className="w-full" />
-        </section>
+        <ControllersBoard />
         <section className="flex flex-col items-center gap-6 border-t border-gray-200 pt-16 text-center dark:border-gray-800">
           <h2 className="text-2xl font-medium">
             <Trans>Feedback</Trans>

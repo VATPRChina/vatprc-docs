@@ -39,7 +39,7 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
       </h2>
       {hasAnnouncements && (
         <div className="border border-gray-200 dark:border-gray-800">
-          {announcements?.map((a, i) => (
+          {announcements?.map((a) => (
             <a
               key={a.id}
               href={a.url}
@@ -47,9 +47,6 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
               rel="noreferrer"
               className="flex items-baseline gap-4 border-b border-gray-200 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
             >
-              <span className="text-vatprc dark:text-vatprc-bright font-mono text-sm">
-                A{String(i + 1).padStart(4, "0")}
-              </span>
               <span className="font-mono text-xs text-gray-500">{format(parseISO(a.createdAt), "yyyy-MM-dd")}</span>
               <span className="flex-1 truncate text-sm">{a.title}</span>
             </a>

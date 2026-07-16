@@ -50,7 +50,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/routes/index.tsx:60
+#: src/routes/index.tsx:55
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -177,7 +177,7 @@ msgstr "申请时间"
 msgid "Apply"
 msgstr "申请"
 
-#: src/routes/index.tsx:32
+#: src/routes/index.tsx:27
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
@@ -262,12 +262,20 @@ msgstr "管制员申请审计日志"
 msgid "ATC Applications"
 msgstr "管制员申请"
 
+#: src/components/homepage/event-carousel.tsx:30
+msgid "ATC booked {booked}/{total}"
+msgstr "管制报名 {booked}/{total}"
+
+#: src/components/homepage/event-carousel.tsx:21
+msgid "ATC booking not open"
+msgstr "未开放管制报名"
+
 #: src/components/event/event-detail.tsx:45
 msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:166
-#: src/components/homepage/live-network.tsx:77
+#: src/components/homepage/controllers-board.tsx:55
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -312,6 +320,10 @@ msgstr "基本信息"
 #: src/components/event/slot-list.tsx:133
 msgid "Book"
 msgstr "预订"
+
+#: src/components/homepage/controllers-board.tsx:76
+msgid "Booked Controllers"
+msgstr "预约管制员"
 
 #: src/components/event/event-create.tsx:182
 #: src/components/event/event-create.tsx:196
@@ -394,10 +406,6 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/components/homepage/hero.tsx:38
-msgid "Chinese airspace on the VATSIM network, where every radio call is answered by a human controller."
-msgstr "遵循真实程序的中国空域，每一次陆空通话都由真人完成。"
-
 #: src/routes/sheets/$id.tsx:358
 msgid "Chinese description"
 msgstr "中文说明"
@@ -471,12 +479,13 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:196
+#: src/components/homepage/controllers-board.tsx:46
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/homepage/hero.tsx:52
+#: src/components/homepage/hero.tsx:47
 msgid "Controllers online"
 msgstr "在线管制"
 
@@ -739,7 +748,7 @@ msgstr "活动开始"
 msgid "Events"
 msgstr "活动"
 
-#: src/components/homepage/hero.tsx:53
+#: src/components/homepage/hero.tsx:48
 msgid "Events this week"
 msgstr "本周活动"
 
@@ -760,7 +769,7 @@ msgstr "加载历史活动失败。"
 msgid "Failed to save sheet."
 msgstr "无法保存表单。"
 
-#: src/routes/index.tsx:29
+#: src/routes/index.tsx:24
 msgid "Feedback"
 msgstr "反馈"
 
@@ -802,6 +811,7 @@ msgid "Flight Plan"
 msgstr "飞行计划"
 
 #: src/components/app/app-nav-menu.tsx:143
+#: src/components/homepage/hero.tsx:42
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -822,10 +832,6 @@ msgstr "飞服"
 msgid "Flow Management Position"
 msgstr "流量控制"
 
-#: src/components/homepage/hero.tsx:35
-msgid "Fly with real people controlling real procedures"
-msgstr "在这里，和真人管制一起模拟飞行"
-
 #: src/routes/_doc/airspace/restricted.tsx:166
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "由于技术限制，地图上显示的边界可能过时或者被简化。飞行时请遵守本地管制员指令。"
@@ -833,13 +839,9 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/routes/index.tsx:56
+#: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
-
-#: src/components/homepage/recent-events.tsx:153
-msgid "Fri"
-msgstr "星期五"
 
 #: src/routes/users/me.tsx:51
 msgid "Full name"
@@ -925,10 +927,6 @@ msgstr "导入时刻表"
 msgid "Import Slots"
 msgstr "导入时刻表"
 
-#: src/components/homepage/recent-events.tsx:57
-msgid "In This Week"
-msgstr "本周"
-
 #: src/components/atc-application/atc-application-status.tsx:15
 #: src/components/atc-application/atc-application-status.tsx:33
 msgid "In Waitlist"
@@ -947,12 +945,13 @@ msgid "Introduction"
 msgstr "介绍"
 
 #: src/components/app/app-nav-menu.tsx:124
+#: src/components/homepage/hero.tsx:39
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/components/homepage/hero.tsx:44
-msgid "Join VATPRC"
-msgstr "加入 VATPRC"
+#: src/components/homepage/hero.tsx:36
+msgid "Join the controller team"
+msgstr "加入管制员队伍"
 
 #: src/routes/users/index.tsx:41
 msgid "Lead Event Coordinator"
@@ -1044,10 +1043,6 @@ msgstr "公制单数飞行高度层（米）"
 msgid "Minimum State"
 msgstr "最低权限"
 
-#: src/components/homepage/recent-events.tsx:141
-msgid "Mon"
-msgstr "星期一"
-
 #: src/components/app/app-nav-menu.tsx:169
 msgid "Moodle"
 msgstr "Moodle"
@@ -1086,17 +1081,9 @@ msgstr "暂无内容"
 msgid "No data"
 msgstr "无数据"
 
-#: src/components/homepage/recent-events.tsx:111
-msgid "No event is scheduled recently."
-msgstr "近期无活动计划。"
-
 #: src/routes/sheets/$id.tsx:403
 msgid "No fields."
 msgstr "没有字段。"
-
-#: src/components/homepage/live-network.tsx:106
-msgid "No online pilot."
-msgstr "当前无在线管制员。"
 
 #: src/routes/events/history.tsx:137
 msgid "No past events found in the selected time range."
@@ -1122,6 +1109,10 @@ msgstr "当前没有表单。"
 msgid "No transponder"
 msgstr "无应答机"
 
+#: src/components/homepage/controllers-board.tsx:81
+msgid "No upcoming ATC booking."
+msgstr "暂无管制预约。"
+
 #: src/components/app/user.tsx:6
 msgid "Not booked"
 msgstr "未预订"
@@ -1134,7 +1125,7 @@ msgstr "任意"
 msgid "Not designated route"
 msgstr "不符合指定航路"
 
-#: src/components/homepage/notam-board.tsx:40
+#: src/components/homepage/notam-board.tsx:38
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · 分部公告"
 
@@ -1151,17 +1142,9 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/live-network.tsx:33
-msgid "Online"
-msgstr "在线"
-
-#: src/components/homepage/live-network.tsx:68
+#: src/components/homepage/controllers-board.tsx:61
 msgid "Online Controllers"
 msgstr "在线管制员"
-
-#: src/components/homepage/live-network.tsx:101
-msgid "Online Pilots"
-msgstr "在线飞行员"
 
 #: src/routes/sheets.tsx:26
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
@@ -1237,7 +1220,7 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/homepage/hero.tsx:51
+#: src/components/homepage/hero.tsx:46
 msgid "Pilots online"
 msgstr "在线机组"
 
@@ -1306,7 +1289,7 @@ msgstr "评级"
 msgid "Recent 3 months"
 msgstr "最近三个月"
 
-#: src/routes/index.tsx:23
+#: src/components/homepage/event-carousel.tsx:75
 msgid "Recent Events"
 msgstr "近期活动"
 
@@ -1378,10 +1361,6 @@ msgstr "航路"
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
 msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
 
-#: src/components/homepage/recent-events.tsx:156
-msgid "Sat"
-msgstr "星期六"
-
 #: src/components/atc-permission-modal.tsx:209
 #: src/components/atc-training/training-application-create.tsx:194
 #: src/components/atc-training/training-save.tsx:142
@@ -1412,7 +1391,7 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/homepage/recent-events.tsx:247
+#: src/components/homepage/event-carousel.tsx:79
 msgid "See All Events"
 msgstr "查看所有活动"
 
@@ -1441,17 +1420,9 @@ msgstr "表单列表"
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
 
-#: src/components/homepage/live-network.tsx:120
-msgid "Show all pilots"
-msgstr "显示全部"
-
 #: src/components/audit-log/audit-log-table.tsx:98
 msgid "Show less"
 msgstr "收起"
-
-#: src/components/homepage/live-network.tsx:120
-msgid "Show less pilots"
-msgstr "显示部分"
 
 #: src/components/audit-log/audit-log-table.tsx:98
 msgid "Show more"
@@ -1517,7 +1488,6 @@ msgid "Start time is required"
 msgstr "开始时间为必填项"
 
 #: src/components/app/app-nav-menu.tsx:121
-#: src/components/homepage/hero.tsx:47
 msgid "Start to Fly"
 msgstr "开始飞行"
 
@@ -1544,10 +1514,6 @@ msgstr "已提交"
 #: src/components/atc-training/training-list.tsx:46
 msgid "Successfully cancelled the training."
 msgstr "已成功取消训练计划。"
-
-#: src/components/homepage/recent-events.tsx:159
-msgid "Sun"
-msgstr "星期日"
 
 #: src/components/app/language-toggle.tsx:16
 msgid "Switch to Chinese"
@@ -1672,7 +1638,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/live-network.tsx:83
+#: src/components/homepage/controllers-board.tsx:66
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
@@ -1692,10 +1658,6 @@ msgstr "本地图仅供模拟飞行使用。地图上的边界仅代表模拟飞
 #: src/routes/_doc/controller/loa.tsx:26
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
-
-#: src/components/homepage/recent-events.tsx:150
-msgid "Thu"
-msgstr "星期四"
 
 #: src/components/atc-permission-modal.tsx:26
 msgid "Tier 2"
@@ -1782,10 +1744,6 @@ msgstr "应答机"
 #: src/routes/flights/$callsign.tsx:197
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
-
-#: src/components/homepage/recent-events.tsx:144
-msgid "Tue"
-msgstr "星期二"
 
 #: src/components/event/atc-slot-assign.tsx:91
 #: src/components/event/slot-assign.tsx:88
@@ -1927,10 +1885,6 @@ msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注
 #: src/components/app/app-nav-menu.tsx:140
 msgid "Weather"
 msgstr "天气"
-
-#: src/components/homepage/recent-events.tsx:147
-msgid "Wed"
-msgstr "星期三"
 
 #: src/components/atc-training/training-application-delete.tsx:32
 msgid "Withdraw"
