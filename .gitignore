@@ -182,3 +182,10 @@ dist
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# AI assistant files (local only, do not commit)
+.claude/
+CLAUDE.md
+.mcp.json
+.remember/
+docs/superpowers/

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
+import mantineCarouselStyle from "@mantine/carousel/styles.css?url";
 import { Alert, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
@@ -73,7 +74,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
         </a>
       )}
-      <div className="pt-4">{children}</div>
+      <div className={route.location.pathname === "/" ? undefined : "pt-4"}>{children}</div>
       <AppFooter />
     </>
   );
@@ -148,6 +149,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "stylesheet", href: mantineDateStyle },
+        { rel: "stylesheet", href: mantineCarouselStyle },
         { rel: "stylesheet", href: mantineDropzoneStyle },
         { rel: "stylesheet", href: mantineNotificationStyle },
         { rel: "stylesheet", href: mapLibreCss },
