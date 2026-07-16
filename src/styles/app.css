@@ -13,6 +13,7 @@
   --color-dimmed: var(--mantine-color-dimmed);
   --font-sans: var(--mantine-font-family);
   --font-mono: var(--mantine-font-family-monospace);
+  --color-vatprc: #c8102e;
 }
 
 .nav-list-grid {
