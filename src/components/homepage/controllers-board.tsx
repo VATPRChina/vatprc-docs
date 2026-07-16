@@ -1,5 +1,5 @@
-import { useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
+import { getEventTitle } from "@/lib/event";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -67,14 +67,18 @@ const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode
 
 export const ControllersBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
-  const { events } = useScheduledEvents();
+  const { data: events } = $api.useQuery("get", "/api/events");
+  const { i18n } = useLingui();
 
   if (isLoading) return <Loader />;
 
   const online = data?.controllers ?? [];
   const booked = data?.future_controllers ?? [];
 
-  const eventTitleFor = (start: Date, end: Date) => events.find((ev) => start < ev.end && end > ev.start)?.title;
+  const eventTitleFor = (start: Date, end: Date) => {
+    const event = events?.find((ev) => start < parseISO(ev.end_at) && end > parseISO(ev.start_at));
+    return event && getEventTitle(event, i18n.locale);
+  };
 
   return (
     <section className={cn("w-full", className)}>

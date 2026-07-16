@@ -1,10 +1,9 @@
 import heroImage from "@/assets/homepage/hero.jpg";
-import { useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { isSameWeek } from "date-fns";
+import { isSameWeek, parseISO } from "date-fns";
 import React from "react";
 import { TbExternalLink } from "react-icons/tb";
 
@@ -21,8 +20,9 @@ const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accen
 
 export const Hero: React.FC = () => {
   const { data } = $api.useQuery("get", "/api/compat/online-status");
-  const { events } = useScheduledEvents();
-  const eventsThisWeek = events.filter((e) => isSameWeek(e.start, Date.now(), { weekStartsOn: 1 })).length;
+  const { data: events } = $api.useQuery("get", "/api/events");
+  const eventsThisWeek =
+    events?.filter((e) => isSameWeek(parseISO(e.start_at), Date.now(), { weekStartsOn: 1 })).length ?? 0;
 
   return (
     <section className="relative w-full overflow-hidden">

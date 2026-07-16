@@ -1,14 +1,17 @@
-import { ScheduledEvent, useScheduledEvents } from "@/components/homepage/use-scheduled-events";
+import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { getEventTitle } from "@/lib/event";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Loader } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { Carousel } from "@mantine/carousel";
+import { Button, Loader } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { format, isSameWeek } from "date-fns";
+import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
-import { TbArrowRight, TbChevronLeft, TbChevronRight, TbPlaneDeparture } from "react-icons/tb";
+import { TbArrowRight, TbPlaneDeparture } from "react-icons/tb";
+
+type EventDto = components["schemas"]["EventDto"];
 
 const TILT_MAX_DEG = 8;
 
@@ -37,9 +40,13 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   );
 };
 
-const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
+const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
+  const { i18n } = useLingui();
   const ref = React.useRef<HTMLDivElement>(null);
-  const thisWeek = isSameWeek(event.start, Date.now(), { weekStartsOn: 1 });
+  const start = parseISO(event.start_at);
+  const end = parseISO(event.end_at);
+  const title = getEventTitle(event, i18n.locale);
+  const thisWeek = isSameWeek(start, Date.now(), { weekStartsOn: 1 });
 
   const handleMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -60,7 +67,7 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
     <Link
       to="/events/$id"
       params={{ id: event.id }}
-      className="group block"
+      className="group block h-full"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -71,17 +78,17 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
           thisWeek ? "border-2 border-emerald-600 dark:border-emerald-400" : "border-gray-300 dark:border-gray-600",
         )}
       >
-        {event.imageUrl ? (
-          <img src={event.imageUrl} alt={event.title} className="aspect-video w-full object-cover" />
+        {event.image_url ? (
+          <img src={event.image_url} alt={title} className="aspect-video w-full object-cover" />
         ) : (
           <div className="flex aspect-video w-full items-center justify-center bg-gray-100 text-gray-400 dark:bg-gray-900">
             <TbPlaneDeparture size={36} />
           </div>
         )}
         <div className="flex flex-col gap-1 px-4 py-3">
-          <span className="truncate text-lg font-medium">{event.title}</span>
+          <span className="truncate text-lg font-medium">{title}</span>
           <span className="font-mono text-base text-gray-700 dark:text-gray-300">
-            {format(event.start, "MM-dd HHmm", { in: utc })}Z–{format(event.end, "HHmm", { in: utc })}Z
+            {format(start, "MM-dd HHmm", { in: utc })}Z–{format(end, "HHmm", { in: utc })}Z
           </span>
           <BookingCount eventId={event.id} />
         </div>
@@ -92,20 +99,12 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
 
 export const EventCarousel: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useLingui();
-  const { scheduledEvents, isLoading } = useScheduledEvents();
-  const [start, setStart] = React.useState(0);
-  const isSm = useMediaQuery("(min-width: 40rem)", true, { getInitialValueInEffect: true });
-  const isLg = useMediaQuery("(min-width: 64rem)", true, { getInitialValueInEffect: true });
+  const { data: events, isLoading } = $api.useQuery("get", "/api/events");
 
   if (isLoading) return <Loader />;
 
-  const upcoming = scheduledEvents.filter((e) => !e.isExam);
+  const upcoming = events?.filter((e) => !e.title.includes("考试")) ?? [];
   if (upcoming.length === 0) return null;
-
-  const visibleCount = isLg ? 3 : isSm ? 2 : 1;
-  const maxStart = Math.max(0, upcoming.length - visibleCount);
-  const current = Math.min(start, maxStart);
-  const visible = upcoming.slice(current, current + visibleCount);
 
   return (
     <section className={cn("w-full", className)}>
@@ -124,35 +123,22 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
           <Trans>See All Events</Trans>
         </Button>
       </div>
-      <div className="flex items-stretch gap-3">
-        <ActionIcon
-          variant="default"
-          size="xl"
-          className="self-stretch"
-          style={{ height: "auto" }}
-          aria-label={t`Previous events`}
-          disabled={current === 0}
-          onClick={() => setStart(Math.max(0, current - 1))}
-        >
-          <TbChevronLeft size={24} />
-        </ActionIcon>
-        <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((e) => (
-            <EventCard key={e.id} event={e} />
-          ))}
-        </div>
-        <ActionIcon
-          variant="default"
-          size="xl"
-          className="self-stretch"
-          style={{ height: "auto" }}
-          aria-label={t`Next events`}
-          disabled={current >= maxStart}
-          onClick={() => setStart(Math.min(maxStart, current + 1))}
-        >
-          <TbChevronRight size={24} />
-        </ActionIcon>
-      </div>
+      <Carousel
+        slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
+        slideGap="md"
+        controlSize={40}
+        controlsOffset={0}
+        emblaOptions={{ align: "start" }}
+        previousControlProps={{ "aria-label": t`Previous events` }}
+        nextControlProps={{ "aria-label": t`Next events` }}
+        classNames={{ slide: "py-1" }}
+      >
+        {upcoming.map((e) => (
+          <Carousel.Slide key={e.id}>
+            <EventCard event={e} />
+          </Carousel.Slide>
+        ))}
+      </Carousel>
     </section>
   );
 };
