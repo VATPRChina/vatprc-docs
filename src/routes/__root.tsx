@@ -73,7 +73,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
         </a>
       )}
-      <div className="pt-4">{children}</div>
+      <div className={route.location.pathname === "/" ? undefined : "pt-4"}>{children}</div>
       <AppFooter />
     </>
   );
