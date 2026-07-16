@@ -26,9 +26,11 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_calc(50%-36rem),black_calc(50%+36rem),transparent)]">
-        <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
-        <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+      <div className="absolute inset-0">
+        <div className="relative mx-auto h-full w-full max-w-[84rem] [mask-image:linear-gradient(to_right,transparent,black_max(0px,calc((100%-72rem)/2)),black_calc(100%-max(0px,calc((100%-72rem)/2))),transparent)]">
+          <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+        </div>
       </div>
       <div className="relative mx-auto flex min-h-[28rem] w-full max-w-6xl flex-col justify-center px-6 py-14">
         <h1 className="text-3xl font-medium text-white md:text-4xl">
