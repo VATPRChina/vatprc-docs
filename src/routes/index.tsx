@@ -14,7 +14,9 @@ export const Route = createFileRoute("/")({
 function RouteComponent() {
   return (
     <div className="flex w-full flex-col">
-      <Hero />
+      <div className="mx-auto w-full max-w-6xl px-6 pt-10">
+        <Hero />
+      </div>
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16">
         <EventCarousel />
         <NotamBoard />
@@ -51,13 +53,6 @@ function RouteComponent() {
               <Trans>Forum</Trans>
             </Button>
           </div>
-          <p className="text-vatprc dark:text-vatprc-bright pt-6 text-2xl font-medium italic">
-            <Trans>
-              <b>VATPRC 有你更精彩</b>
-              <br />
-              You make the difference!
-            </Trans>
-          </p>
         </section>
       </div>
     </div>

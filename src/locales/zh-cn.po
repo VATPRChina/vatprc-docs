@@ -50,7 +50,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/routes/index.tsx:55
+#: src/components/homepage/hero.tsx:36
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -177,7 +177,7 @@ msgstr "申请时间"
 msgid "Apply"
 msgstr "申请"
 
-#: src/routes/index.tsx:27
+#: src/routes/index.tsx:29
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
@@ -262,11 +262,11 @@ msgstr "管制员申请审计日志"
 msgid "ATC Applications"
 msgstr "管制员申请"
 
-#: src/components/homepage/event-carousel.tsx:30
+#: src/components/homepage/event-carousel.tsx:32
 msgid "ATC booked {booked}/{total}"
 msgstr "管制报名 {booked}/{total}"
 
-#: src/components/homepage/event-carousel.tsx:21
+#: src/components/homepage/event-carousel.tsx:23
 msgid "ATC booking not open"
 msgstr "未开放管制报名"
 
@@ -485,7 +485,7 @@ msgstr "批准上线军用席位的管制员"
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/homepage/hero.tsx:47
+#: src/components/homepage/hero.tsx:70
 msgid "Controllers online"
 msgstr "在线管制"
 
@@ -748,7 +748,7 @@ msgstr "活动开始"
 msgid "Events"
 msgstr "活动"
 
-#: src/components/homepage/hero.tsx:48
+#: src/components/homepage/hero.tsx:71
 msgid "Events this week"
 msgstr "本周活动"
 
@@ -769,7 +769,7 @@ msgstr "加载历史活动失败。"
 msgid "Failed to save sheet."
 msgstr "无法保存表单。"
 
-#: src/routes/index.tsx:24
+#: src/routes/index.tsx:26
 msgid "Feedback"
 msgstr "反馈"
 
@@ -811,7 +811,7 @@ msgid "Flight Plan"
 msgstr "飞行计划"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/homepage/hero.tsx:42
+#: src/components/homepage/hero.tsx:53
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -839,7 +839,8 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/routes/index.tsx:51
+#: src/components/homepage/hero.tsx:64
+#: src/routes/index.tsx:53
 msgid "Forum"
 msgstr "论坛"
 
@@ -874,6 +875,10 @@ msgstr "图形设计师"
 #: src/components/atc-permission-modal.tsx:24
 msgid "Ground"
 msgstr "地面"
+
+#: src/components/homepage/hero.tsx:48
+msgid "How to fly"
+msgstr "如何飞行"
 
 #: src/components/atc-application/atc-application-form.tsx:36
 msgid "I agree to the Privacy Policy of VATSIM and VATPRC, and I consent to my full name, CID, and controller rating being publicized in VATSIM."
@@ -945,11 +950,10 @@ msgid "Introduction"
 msgstr "介绍"
 
 #: src/components/app/app-nav-menu.tsx:124
-#: src/components/homepage/hero.tsx:39
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/components/homepage/hero.tsx:36
+#: src/components/homepage/hero.tsx:45
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
@@ -1063,7 +1067,7 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "New ATC Application"
 msgstr "递交管制员申请"
 
-#: src/components/homepage/event-carousel.tsx:96
+#: src/components/homepage/event-carousel.tsx:111
 msgid "Next events"
 msgstr "下一批活动"
 
@@ -1129,7 +1133,7 @@ msgstr "任意"
 msgid "Not designated route"
 msgstr "不符合指定航路"
 
-#: src/components/homepage/notam-board.tsx:38
+#: src/components/homepage/notam-board.tsx:20
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · 分部公告"
 
@@ -1224,7 +1228,7 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/homepage/hero.tsx:46
+#: src/components/homepage/hero.tsx:69
 msgid "Pilots online"
 msgstr "在线机组"
 
@@ -1269,7 +1273,7 @@ msgstr "席位"
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
-#: src/components/homepage/event-carousel.tsx:88
+#: src/components/homepage/event-carousel.tsx:96
 msgid "Previous events"
 msgstr "上一批活动"
 
@@ -1297,7 +1301,7 @@ msgstr "评级"
 msgid "Recent 3 months"
 msgstr "最近三个月"
 
-#: src/components/homepage/event-carousel.tsx:79
+#: src/components/homepage/event-carousel.tsx:84
 msgid "Recent Events"
 msgstr "近期活动"
 
@@ -1399,7 +1403,7 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/homepage/event-carousel.tsx:83
+#: src/components/homepage/event-carousel.tsx:87
 msgid "See All Events"
 msgstr "查看所有活动"
 
@@ -1840,7 +1844,7 @@ msgstr "检查结果"
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:32
+#: src/components/homepage/hero.tsx:33
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM 中国分部 · VATPRC"
 

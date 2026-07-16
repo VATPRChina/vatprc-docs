@@ -50,7 +50,7 @@ msgstr "<0>T</0> In Training: This controller is eligible to provide service to 
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
-#: src/routes/index.tsx:55
+#: src/components/homepage/hero.tsx:36
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -177,7 +177,7 @@ msgstr "Applied At"
 msgid "Apply"
 msgstr "Apply"
 
-#: src/routes/index.tsx:27
+#: src/routes/index.tsx:29
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
@@ -262,11 +262,11 @@ msgstr "ATC Application Audit Logs"
 msgid "ATC Applications"
 msgstr "ATC Applications"
 
-#: src/components/homepage/event-carousel.tsx:30
+#: src/components/homepage/event-carousel.tsx:32
 msgid "ATC booked {booked}/{total}"
 msgstr "ATC booked {booked}/{total}"
 
-#: src/components/homepage/event-carousel.tsx:21
+#: src/components/homepage/event-carousel.tsx:23
 msgid "ATC booking not open"
 msgstr "ATC booking not open"
 
@@ -485,7 +485,7 @@ msgstr "Controller with Military Position Permission"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/homepage/hero.tsx:47
+#: src/components/homepage/hero.tsx:70
 msgid "Controllers online"
 msgstr "Controllers online"
 
@@ -748,7 +748,7 @@ msgstr "Event start"
 msgid "Events"
 msgstr "Events"
 
-#: src/components/homepage/hero.tsx:48
+#: src/components/homepage/hero.tsx:71
 msgid "Events this week"
 msgstr "Events this week"
 
@@ -769,7 +769,7 @@ msgstr "Failed to load past events."
 msgid "Failed to save sheet."
 msgstr "Failed to save sheet."
 
-#: src/routes/index.tsx:24
+#: src/routes/index.tsx:26
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -811,7 +811,7 @@ msgid "Flight Plan"
 msgstr "Flight Plan"
 
 #: src/components/app/app-nav-menu.tsx:143
-#: src/components/homepage/hero.tsx:42
+#: src/components/homepage/hero.tsx:53
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -839,7 +839,8 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/components/app/app-nav-menu.tsx:80
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/routes/index.tsx:51
+#: src/components/homepage/hero.tsx:64
+#: src/routes/index.tsx:53
 msgid "Forum"
 msgstr "Forum"
 
@@ -874,6 +875,10 @@ msgstr "Graphics Designer"
 #: src/components/atc-permission-modal.tsx:24
 msgid "Ground"
 msgstr "Ground"
+
+#: src/components/homepage/hero.tsx:48
+msgid "How to fly"
+msgstr "How to fly"
 
 #: src/components/atc-application/atc-application-form.tsx:36
 msgid "I agree to the Privacy Policy of VATSIM and VATPRC, and I consent to my full name, CID, and controller rating being publicized in VATSIM."
@@ -945,11 +950,10 @@ msgid "Introduction"
 msgstr "Introduction"
 
 #: src/components/app/app-nav-menu.tsx:124
-#: src/components/homepage/hero.tsx:39
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
-#: src/components/homepage/hero.tsx:36
+#: src/components/homepage/hero.tsx:45
 msgid "Join the controller team"
 msgstr "Join the controller team"
 
@@ -1063,7 +1067,7 @@ msgstr "My account belongs to VATPRC division."
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
-#: src/components/homepage/event-carousel.tsx:96
+#: src/components/homepage/event-carousel.tsx:111
 msgid "Next events"
 msgstr "Next events"
 
@@ -1129,7 +1133,7 @@ msgstr "Not designated"
 msgid "Not designated route"
 msgstr "Not designated route"
 
-#: src/components/homepage/notam-board.tsx:38
+#: src/components/homepage/notam-board.tsx:20
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · Announcements"
 
@@ -1224,7 +1228,7 @@ msgstr "Pilot Softwares"
 msgid "Pilots"
 msgstr "Pilots"
 
-#: src/components/homepage/hero.tsx:46
+#: src/components/homepage/hero.tsx:69
 msgid "Pilots online"
 msgstr "Pilots online"
 
@@ -1269,7 +1273,7 @@ msgstr "Position"
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
-#: src/components/homepage/event-carousel.tsx:88
+#: src/components/homepage/event-carousel.tsx:96
 msgid "Previous events"
 msgstr "Previous events"
 
@@ -1297,7 +1301,7 @@ msgstr "Rating"
 msgid "Recent 3 months"
 msgstr "Recent 3 months"
 
-#: src/components/homepage/event-carousel.tsx:79
+#: src/components/homepage/event-carousel.tsx:84
 msgid "Recent Events"
 msgstr "Recent Events"
 
@@ -1399,7 +1403,7 @@ msgstr "Sector Editor"
 msgid "Sector Files"
 msgstr "Sector Files"
 
-#: src/components/homepage/event-carousel.tsx:83
+#: src/components/homepage/event-carousel.tsx:87
 msgid "See All Events"
 msgstr "See All Events"
 
@@ -1840,7 +1844,7 @@ msgstr "Validation Result"
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:32
+#: src/components/homepage/hero.tsx:33
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM P.R. China Division · VATPRC"
 

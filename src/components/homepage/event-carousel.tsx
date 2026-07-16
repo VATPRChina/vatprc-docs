@@ -1,11 +1,13 @@
 import { ScheduledEvent, useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
+import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, ActionIconGroup, Anchor, Loader } from "@mantine/core";
+import { ActionIcon, Anchor, Loader } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
+import { format } from "date-fns";
 import React from "react";
-import { TbChevronLeft, TbChevronRight, TbPlaneDeparture } from "react-icons/tb";
+import { TbArrowRight, TbChevronLeft, TbChevronRight, TbPlaneDeparture } from "react-icons/tb";
 
 const VISIBLE_COUNT = 3;
 
@@ -53,6 +55,9 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => (
     )}
     <div className="flex flex-col gap-1 px-4 py-3">
       <span className="truncate font-medium">{event.title}</span>
+      <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
+        {format(event.start, "MM-dd HHmm", { in: utc })}Z–{format(event.end, "HHmm", { in: utc })}Z
+      </span>
       <BookingCount eventId={event.id} />
     </div>
   </Link>
@@ -78,34 +83,39 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         <h2 className="text-2xl font-medium">
           <Trans>Recent Events</Trans>
         </h2>
-        <div className="flex items-center gap-4">
-          <Anchor renderRoot={(props) => <Link to="/events" {...props} />}>
-            <Trans>See All Events</Trans>
-          </Anchor>
-          <ActionIconGroup>
-            <ActionIcon
-              variant="default"
-              aria-label={t`Previous events`}
-              disabled={current === 0}
-              onClick={() => setStart(Math.max(0, current - 1))}
-            >
-              <TbChevronLeft />
-            </ActionIcon>
-            <ActionIcon
-              variant="default"
-              aria-label={t`Next events`}
-              disabled={current >= maxStart}
-              onClick={() => setStart(Math.min(maxStart, current + 1))}
-            >
-              <TbChevronRight />
-            </ActionIcon>
-          </ActionIconGroup>
-        </div>
+        <Anchor className="inline-flex items-center gap-1" renderRoot={(props) => <Link to="/events" {...props} />}>
+          <Trans>See All Events</Trans>
+          <TbArrowRight size={14} />
+        </Anchor>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((e) => (
-          <EventCard key={e.id} event={e} />
-        ))}
+      <div className="flex items-stretch gap-3">
+        <ActionIcon
+          variant="default"
+          size="xl"
+          className="self-stretch"
+          style={{ height: "auto" }}
+          aria-label={t`Previous events`}
+          disabled={current === 0}
+          onClick={() => setStart(Math.max(0, current - 1))}
+        >
+          <TbChevronLeft size={24} />
+        </ActionIcon>
+        <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((e) => (
+            <EventCard key={e.id} event={e} />
+          ))}
+        </div>
+        <ActionIcon
+          variant="default"
+          size="xl"
+          className="self-stretch"
+          style={{ height: "auto" }}
+          aria-label={t`Next events`}
+          disabled={current >= maxStart}
+          onClick={() => setStart(Math.min(maxStart, current + 1))}
+        >
+          <TbChevronRight size={24} />
+        </ActionIcon>
       </div>
     </section>
   );
