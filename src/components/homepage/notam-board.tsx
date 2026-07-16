@@ -28,7 +28,9 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
             rel="noreferrer"
             className="flex items-baseline gap-4 border-b border-gray-200 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
           >
-            <span className="font-mono text-xs text-gray-500">{format(parseISO(a.createdAt), "yyyy-MM-dd")}</span>
+            <span className="font-mono text-xs text-gray-600 dark:text-gray-300">
+              {format(parseISO(a.createdAt), "yyyy-MM-dd")}
+            </span>
             <span className="flex-1 truncate text-sm">{a.title}</span>
           </a>
         ))}

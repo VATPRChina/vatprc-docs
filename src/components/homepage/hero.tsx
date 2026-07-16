@@ -1,4 +1,4 @@
-import heroImage from "@/assets/homepage/hero-placeholder.svg";
+import heroImage from "@/assets/homepage/hero.jpg";
 import { useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -25,10 +25,10 @@ export const Hero: React.FC = () => {
   const eventsThisWeek = events.filter((e) => isSameWeek(e.start, Date.now(), { weekStartsOn: 1 })).length;
 
   return (
-    <section className="relative w-full overflow-hidden rounded-xl">
+    <section className="relative w-full overflow-hidden">
       <img src={heroImage} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-black/45" />
-      <div className="relative flex min-h-[28rem] flex-col justify-center p-10 md:p-14">
+      <div className="absolute inset-0 bg-black/25 dark:bg-black/45" />
+      <div className="relative mx-auto flex min-h-[28rem] w-full max-w-6xl flex-col justify-center px-6 py-14">
         <h1 className="text-3xl font-medium text-white md:text-4xl">
           <Trans>VATSIM P.R. China Division · VATPRC</Trans>
         </h1>

@@ -22,10 +22,10 @@ const ControllerStrip: React.FC<{
     )}
   >
     <span className="min-w-28 font-bold">{callsign}</span>
-    <span className="min-w-20 text-gray-600 dark:text-gray-400">{frequency ?? "--"}</span>
-    <span className="flex-1 text-gray-500">{name}</span>
+    <span className="min-w-20 text-gray-700 dark:text-gray-300">{frequency ?? "--"}</span>
+    <span className="flex-1 text-gray-700 dark:text-gray-300">{name}</span>
     {schedule && (
-      <span className="text-xs text-gray-500">
+      <span className="text-xs text-gray-600 dark:text-gray-400">
         {format(schedule[0], "MM-dd HHmm", { in: utc })}Z–{format(schedule[1], "HHmm", { in: utc })}Z
       </span>
     )}
@@ -58,12 +58,12 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
       </div>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div>
-          <h3 className="mb-2 font-mono text-sm text-gray-500 uppercase">
+          <h3 className="mb-2 font-mono text-sm text-gray-700 uppercase dark:text-gray-300">
             <Trans>Online Controllers</Trans>
           </h3>
           <div className="border border-gray-200 dark:border-gray-800">
             {online.length === 0 && (
-              <p className="px-4 py-6 font-mono text-sm text-gray-500">
+              <p className="px-4 py-6 font-mono text-sm text-gray-600 dark:text-gray-300">
                 <Trans>There is currently no online ATC.</Trans>
               </p>
             )}
@@ -73,12 +73,12 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </div>
         </div>
         <div>
-          <h3 className="mb-2 font-mono text-sm text-gray-500 uppercase">
+          <h3 className="mb-2 font-mono text-sm text-gray-700 uppercase dark:text-gray-300">
             <Trans>Booked Controllers</Trans>
           </h3>
           <div className="border border-gray-200 dark:border-gray-800">
             {booked.length === 0 && (
-              <p className="px-4 py-6 font-mono text-sm text-gray-500">
+              <p className="px-4 py-6 font-mono text-sm text-gray-600 dark:text-gray-300">
                 <Trans>No upcoming ATC booking.</Trans>
               </p>
             )}

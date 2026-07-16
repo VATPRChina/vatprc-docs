@@ -14,9 +14,7 @@ export const Route = createFileRoute("/")({
 function RouteComponent() {
   return (
     <div className="flex w-full flex-col">
-      <div className="mx-auto w-full max-w-6xl px-6 pt-10">
-        <Hero />
-      </div>
+      <Hero />
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16">
         <EventCarousel />
         <NotamBoard />

@@ -3,23 +3,24 @@ import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Anchor, Loader } from "@mantine/core";
+import { ActionIcon, Button, Loader } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import React from "react";
 import { TbArrowRight, TbChevronLeft, TbChevronRight, TbPlaneDeparture } from "react-icons/tb";
 
 const VISIBLE_COUNT = 3;
+const TILT_MAX_DEG = 8;
 
 const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   const { data: positions } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
   });
 
-  if (!positions) return <span className="font-mono text-sm text-gray-500">--</span>;
+  if (!positions) return <span className="font-mono text-sm text-gray-600 dark:text-gray-300">--</span>;
   if (positions.length === 0)
     return (
-      <span className="font-mono text-sm text-gray-500">
+      <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
         <Trans>ATC booking not open</Trans>
       </span>
     );
@@ -28,7 +29,12 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   const total = positions.length;
   const short = booked / total < 0.5;
   return (
-    <span className={cn("font-mono text-sm", short ? "text-vatprc dark:text-vatprc-bright" : "text-gray-500")}>
+    <span
+      className={cn(
+        "font-mono text-sm",
+        short ? "text-vatprc dark:text-vatprc-bright" : "text-gray-600 dark:text-gray-300",
+      )}
+    >
       <Trans>
         ATC booked {booked}/{total}
       </Trans>
@@ -36,32 +42,54 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   );
 };
 
-const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => (
-  <Link
-    to="/events/$id"
-    params={{ id: event.id }}
-    className="group flex flex-col overflow-hidden border border-gray-200 dark:border-gray-800"
-  >
-    {event.imageUrl ? (
-      <img
-        src={event.imageUrl}
-        alt={event.title}
-        className="aspect-video w-full object-cover transition-transform group-hover:scale-105"
-      />
-    ) : (
-      <div className="flex aspect-video w-full items-center justify-center bg-gray-100 text-gray-400 dark:bg-gray-900">
-        <TbPlaneDeparture size={36} />
+const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const handleMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(800px) rotateX(${(-y * TILT_MAX_DEG).toFixed(2)}deg) rotateY(${(
+      x * TILT_MAX_DEG
+    ).toFixed(2)}deg) scale(1.03)`;
+  };
+
+  const handleLeave = () => {
+    if (ref.current) ref.current.style.transform = "";
+  };
+
+  return (
+    <Link
+      to="/events/$id"
+      params={{ id: event.id }}
+      className="block"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
+      <div
+        ref={ref}
+        className="flex h-full flex-col overflow-hidden border border-gray-200 transition-transform duration-150 ease-out will-change-transform dark:border-gray-800"
+      >
+        {event.imageUrl ? (
+          <img src={event.imageUrl} alt={event.title} className="aspect-video w-full object-cover" />
+        ) : (
+          <div className="flex aspect-video w-full items-center justify-center bg-gray-100 text-gray-400 dark:bg-gray-900">
+            <TbPlaneDeparture size={36} />
+          </div>
+        )}
+        <div className="flex flex-col gap-1 px-4 py-3">
+          <span className="truncate font-medium">{event.title}</span>
+          <span className="font-mono text-sm text-gray-700 dark:text-gray-300">
+            {format(event.start, "MM-dd HHmm", { in: utc })}Z–{format(event.end, "HHmm", { in: utc })}Z
+          </span>
+          <BookingCount eventId={event.id} />
+        </div>
       </div>
-    )}
-    <div className="flex flex-col gap-1 px-4 py-3">
-      <span className="truncate font-medium">{event.title}</span>
-      <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
-        {format(event.start, "MM-dd HHmm", { in: utc })}Z–{format(event.end, "HHmm", { in: utc })}Z
-      </span>
-      <BookingCount eventId={event.id} />
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 export const EventCarousel: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useLingui();
@@ -83,10 +111,16 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         <h2 className="text-2xl font-medium">
           <Trans>Recent Events</Trans>
         </h2>
-        <Anchor className="inline-flex items-center gap-1" renderRoot={(props) => <Link to="/events" {...props} />}>
+        <Button
+          variant="subtle"
+          color="red"
+          className="shrink-0 whitespace-nowrap"
+          component={Link}
+          to="/events"
+          rightSection={<TbArrowRight size={14} />}
+        >
           <Trans>See All Events</Trans>
-          <TbArrowRight size={14} />
-        </Anchor>
+        </Button>
       </div>
       <div className="flex items-stretch gap-3">
         <ActionIcon
