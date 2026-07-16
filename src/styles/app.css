@@ -14,6 +14,7 @@
   --font-sans: var(--mantine-font-family);
   --font-mono: var(--mantine-font-family-monospace);
   --color-vatprc: #c8102e;
+  --color-vatprc-bright: #ff5a68;
 }
 
 .nav-list-grid {

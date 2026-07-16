@@ -40,7 +40,10 @@ const CACHE_TTL_MS = 5 * 60 * 1000;
 export const getAnnouncements = createServerFn().handler(async (): Promise<Announcement[]> => {
   if (cache && Date.now() - cache.at < CACHE_TTL_MS) return cache.data;
   try {
-    const res = await fetch(ANNOUNCEMENT_CATEGORY_JSON, { headers: { accept: "application/json" } });
+    const res = await fetch(ANNOUNCEMENT_CATEGORY_JSON, {
+      headers: { accept: "application/json" },
+      signal: AbortSignal.timeout(5000),
+    });
     if (!res.ok) return cache?.data ?? [];
     const data = parseAnnouncements((await res.json()) as DiscourseCategoryResponse);
     cache = { at: Date.now(), data };

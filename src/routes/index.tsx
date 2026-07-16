@@ -19,15 +19,15 @@ function RouteComponent() {
         <NotamBoard />
         <LiveNetwork />
         <section>
-          <h3 className="mb-4 text-2xl font-medium">
+          <h2 className="mb-4 text-2xl font-medium">
             <Trans>Recent Events</Trans>
-          </h3>
+          </h2>
           <RecentEvents className="w-full" />
         </section>
         <section className="flex flex-col items-center gap-6 border-t border-gray-200 pt-16 text-center dark:border-gray-800">
-          <h3 className="text-2xl font-medium">
+          <h2 className="text-2xl font-medium">
             <Trans>Feedback</Trans>
-          </h3>
+          </h2>
           <p className="max-w-xl text-gray-600 dark:text-gray-400">
             <Trans>
               Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or
@@ -56,7 +56,7 @@ function RouteComponent() {
               <Trans>Forum</Trans>
             </Button>
           </div>
-          <p className="text-vatprc pt-6 text-2xl font-medium italic">
+          <p className="text-vatprc dark:text-vatprc-bright pt-6 text-2xl font-medium italic">
             <Trans>
               <b>VATPRC 有你更精彩</b>
               <br />

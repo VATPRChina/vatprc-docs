@@ -46,7 +46,7 @@ const PilotStrip: React.FC<{
     <span className="min-w-24 font-bold">{callsign}</span>
     <span className="min-w-14 text-gray-500">{aircraft}</span>
     <span className="text-gray-600 dark:text-gray-400">
-      {departure}→{arrival}
+      {departure ?? "----"}→{arrival ?? "----"}
     </span>
   </div>
 );
@@ -64,9 +64,9 @@ export const LiveNetwork: React.FC<{ className?: string }> = ({ className }) => 
     <div className={cn("grid grid-cols-1 gap-8 lg:grid-cols-5", className)}>
       <section className="lg:col-span-3">
         <div className="mb-4 flex items-baseline justify-between">
-          <h3 className="text-2xl font-medium">
+          <h2 className="text-2xl font-medium">
             <Trans>Online Controllers</Trans>
-          </h3>
+          </h2>
           <Button
             variant="subtle"
             color="red"
@@ -84,11 +84,11 @@ export const LiveNetwork: React.FC<{ className?: string }> = ({ className }) => 
             </p>
           )}
           {data?.controllers?.map((c) => (
-            <ControllerStrip key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
+            <ControllerStrip key={`online-${c.callsign}`} callsign={c.callsign} name={c.name} frequency={c.frequency} />
           ))}
           {data?.future_controllers?.map((c) => (
             <ControllerStrip
-              key={c.callsign}
+              key={`booked-${c.callsign}`}
               callsign={c.callsign}
               name={c.name}
               schedule={[parseISO(c.start_utc), parseISO(c.end_utc)]}
@@ -97,9 +97,9 @@ export const LiveNetwork: React.FC<{ className?: string }> = ({ className }) => 
         </div>
       </section>
       <section className="lg:col-span-2">
-        <h3 className="mb-4 text-2xl font-medium">
+        <h2 className="mb-4 text-2xl font-medium">
           <Trans>Online Pilots</Trans>
-        </h3>
+        </h2>
         <div className="border border-gray-200 dark:border-gray-800">
           {pilots.length === 0 && (
             <p className="px-4 py-6 font-mono text-sm text-gray-500">

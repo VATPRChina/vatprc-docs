@@ -13,22 +13,22 @@ const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accen
   accent,
 }) => (
   <div className="flex flex-col">
-    <span className={accent ? "text-vatprc text-2xl" : "text-2xl text-white"}>{value}</span>
+    <span className={accent ? "text-vatprc-bright text-2xl" : "text-2xl text-white"}>{value}</span>
     <span className="text-xs text-gray-300">{label}</span>
   </div>
 );
 
 export const Hero: React.FC = () => {
   const { data } = $api.useQuery("get", "/api/compat/online-status");
-  const { scheduledEvents } = useScheduledEvents();
-  const eventsThisWeek = scheduledEvents.filter((e) => isSameWeek(e.start, Date.now(), { weekStartsOn: 1 })).length;
+  const { events } = useScheduledEvents();
+  const eventsThisWeek = events.filter((e) => isSameWeek(e.start, Date.now(), { weekStartsOn: 1 })).length;
 
   return (
     <section className="relative w-full overflow-hidden">
       <img src={heroImage} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-black/45" />
       <div className="relative mx-auto flex min-h-[60vh] max-w-6xl flex-col justify-center px-6 py-20">
-        <p className="text-vatprc mb-4 font-medium">
+        <p className="text-vatprc-bright mb-4 font-medium">
           <Trans>VATSIM P.R. China Division · VATPRC</Trans>
         </p>
         <h1 className="max-w-3xl text-5xl leading-tight font-medium text-white md:text-6xl">
@@ -40,7 +40,7 @@ export const Hero: React.FC = () => {
           </Trans>
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <Button size="lg" color="#c8102e" component={Link} to="/division/introduction">
+          <Button size="lg" color="var(--color-vatprc)" component={Link} to="/division/introduction">
             <Trans>Join VATPRC</Trans>
           </Button>
           <Button size="lg" variant="outline" color="gray.0" component={Link} to="/pilot/start-to-fly">
