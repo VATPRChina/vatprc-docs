@@ -22,7 +22,7 @@ export interface DiscourseCategoryResponse {
 const FORUM_BASE = "https://community.vatprc.net";
 const ANNOUNCEMENT_CATEGORY_JSON = `${FORUM_BASE}/c/69-category/12-category/12.json`;
 
-export const parseAnnouncements = (raw: DiscourseCategoryResponse, limit = 3): Announcement[] =>
+export const parseAnnouncements = (raw: DiscourseCategoryResponse, limit = 5): Announcement[] =>
   (raw.topic_list?.topics ?? [])
     .filter((t) => !t.pinned)
     .sort((a, b) => b.created_at.localeCompare(a.created_at))
@@ -45,7 +45,7 @@ export const getAnnouncements = createServerFn().handler(async (): Promise<Annou
       signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) return cache?.data ?? [];
-    const data = parseAnnouncements((await res.json()) as DiscourseCategoryResponse);
+    const data = parseAnnouncements((await res.json()) as DiscourseCategoryResponse, 3);
     cache = { at: Date.now(), data };
     return data;
   } catch {

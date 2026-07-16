@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:166
-#: src/components/homepage/controllers-board.tsx:55
+#: src/components/homepage/controllers-board.tsx:56
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -321,7 +321,7 @@ msgstr "基本信息"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:76
+#: src/components/homepage/controllers-board.tsx:77
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -479,7 +479,7 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:46
+#: src/components/homepage/controllers-board.tsx:47
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1063,6 +1063,10 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "New ATC Application"
 msgstr "递交管制员申请"
 
+#: src/components/homepage/event-carousel.tsx:96
+msgid "Next events"
+msgstr "下一批活动"
+
 #: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/me.tsx:79
 #: src/routes/users/me.tsx:80
@@ -1109,7 +1113,7 @@ msgstr "当前没有表单。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:81
+#: src/components/homepage/controllers-board.tsx:82
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1142,7 +1146,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:61
+#: src/components/homepage/controllers-board.tsx:62
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1265,6 +1269,10 @@ msgstr "席位"
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
+#: src/components/homepage/event-carousel.tsx:88
+msgid "Previous events"
+msgstr "上一批活动"
+
 #: src/routes/controllers/trainings/$id.tsx:136
 msgid "Previous Trainings"
 msgstr "历史训练"
@@ -1289,7 +1297,7 @@ msgstr "评级"
 msgid "Recent 3 months"
 msgstr "最近三个月"
 
-#: src/components/homepage/event-carousel.tsx:75
+#: src/components/homepage/event-carousel.tsx:79
 msgid "Recent Events"
 msgstr "近期活动"
 
@@ -1391,7 +1399,7 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/homepage/event-carousel.tsx:79
+#: src/components/homepage/event-carousel.tsx:83
 msgid "See All Events"
 msgstr "查看所有活动"
 
@@ -1638,7 +1646,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/controllers-board.tsx:66
+#: src/components/homepage/controllers-board.tsx:67
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 

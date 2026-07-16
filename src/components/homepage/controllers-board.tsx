@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
 import { Button, Loader } from "@mantine/core";
+import { Link } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
 import React from "react";
 import { TbArrowRight } from "react-icons/tb";
@@ -48,8 +49,8 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
         <Button
           variant="subtle"
           color="red"
-          component="a"
-          href="/controllers"
+          component={Link}
+          to="/controllers"
           rightSection={<TbArrowRight size={14} />}
         >
           <Trans>ATC Center</Trans>
@@ -83,7 +84,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
             )}
             {booked.map((c) => (
               <ControllerStrip
-                key={c.callsign}
+                key={`${c.callsign}-${c.start_utc}`}
                 callsign={c.callsign}
                 name={c.name}
                 schedule={[parseISO(c.start_utc), parseISO(c.end_utc)]}

@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
 #: src/components/app/app-nav-menu.tsx:166
-#: src/components/homepage/controllers-board.tsx:55
+#: src/components/homepage/controllers-board.tsx:56
 msgid "ATC Center"
 msgstr "ATC Center"
 
@@ -321,7 +321,7 @@ msgstr "Basic Information"
 msgid "Book"
 msgstr "Book"
 
-#: src/components/homepage/controllers-board.tsx:76
+#: src/components/homepage/controllers-board.tsx:77
 msgid "Booked Controllers"
 msgstr "Booked Controllers"
 
@@ -479,7 +479,7 @@ msgstr "Controller with Military Position Permission"
 
 #: src/components/app/app-nav-menu.tsx:149
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:46
+#: src/components/homepage/controllers-board.tsx:47
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1063,6 +1063,10 @@ msgstr "My account belongs to VATPRC division."
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
+#: src/components/homepage/event-carousel.tsx:96
+msgid "Next events"
+msgstr "Next events"
+
 #: src/components/ui/confirm-button.tsx:30
 #: src/routes/users/me.tsx:79
 #: src/routes/users/me.tsx:80
@@ -1109,7 +1113,7 @@ msgstr "No sheet available."
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/homepage/controllers-board.tsx:81
+#: src/components/homepage/controllers-board.tsx:82
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
 
@@ -1142,7 +1146,7 @@ msgstr "odd flight level"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/controllers-board.tsx:61
+#: src/components/homepage/controllers-board.tsx:62
 msgid "Online Controllers"
 msgstr "Online Controllers"
 
@@ -1265,6 +1269,10 @@ msgstr "Position"
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
+#: src/components/homepage/event-carousel.tsx:88
+msgid "Previous events"
+msgstr "Previous events"
+
 #: src/routes/controllers/trainings/$id.tsx:136
 msgid "Previous Trainings"
 msgstr "Previous Trainings"
@@ -1289,7 +1297,7 @@ msgstr "Rating"
 msgid "Recent 3 months"
 msgstr "Recent 3 months"
 
-#: src/components/homepage/event-carousel.tsx:75
+#: src/components/homepage/event-carousel.tsx:79
 msgid "Recent Events"
 msgstr "Recent Events"
 
@@ -1391,7 +1399,7 @@ msgstr "Sector Editor"
 msgid "Sector Files"
 msgstr "Sector Files"
 
-#: src/components/homepage/event-carousel.tsx:79
+#: src/components/homepage/event-carousel.tsx:83
 msgid "See All Events"
 msgstr "See All Events"
 
@@ -1638,7 +1646,7 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "The user's Moodle account has been provisioned successfully."
 
-#: src/components/homepage/controllers-board.tsx:66
+#: src/components/homepage/controllers-board.tsx:67
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 

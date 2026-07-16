@@ -1,7 +1,7 @@
 import { ScheduledEvent, useScheduledEvents } from "@/components/homepage/use-scheduled-events";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, ActionIconGroup, Anchor, Loader } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import React from "react";
@@ -59,14 +59,18 @@ const EventCard: React.FC<{ event: ScheduledEvent }> = ({ event }) => (
 );
 
 export const EventCarousel: React.FC<{ className?: string }> = ({ className }) => {
+  const { t } = useLingui();
   const { scheduledEvents, isLoading } = useScheduledEvents();
   const [start, setStart] = React.useState(0);
 
   if (isLoading) return <Loader />;
-  if (scheduledEvents.length === 0) return null;
 
-  const maxStart = Math.max(0, scheduledEvents.length - VISIBLE_COUNT);
-  const visible = scheduledEvents.slice(start, start + VISIBLE_COUNT);
+  const upcoming = scheduledEvents.filter((e) => !e.isExam);
+  if (upcoming.length === 0) return null;
+
+  const maxStart = Math.max(0, upcoming.length - VISIBLE_COUNT);
+  const current = Math.min(start, maxStart);
+  const visible = upcoming.slice(current, current + VISIBLE_COUNT);
 
   return (
     <section className={cn("w-full", className)}>
@@ -81,17 +85,17 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
           <ActionIconGroup>
             <ActionIcon
               variant="default"
-              aria-label="previous event"
-              disabled={start === 0}
-              onClick={() => setStart((s) => Math.max(0, s - 1))}
+              aria-label={t`Previous events`}
+              disabled={current === 0}
+              onClick={() => setStart(Math.max(0, current - 1))}
             >
               <TbChevronLeft />
             </ActionIcon>
             <ActionIcon
               variant="default"
-              aria-label="next event"
-              disabled={start >= maxStart}
-              onClick={() => setStart((s) => Math.min(maxStart, s + 1))}
+              aria-label={t`Next events`}
+              disabled={current >= maxStart}
+              onClick={() => setStart(Math.min(maxStart, current + 1))}
             >
               <TbChevronRight />
             </ActionIcon>
