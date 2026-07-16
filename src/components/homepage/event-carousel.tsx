@@ -67,7 +67,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
     <Link
       to="/events/$id"
       params={{ id: event.id }}
-      className="group block h-full"
+      className="group relative z-0 block h-full hover:z-20 focus-visible:z-20"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -131,7 +131,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         emblaOptions={{ align: "start" }}
         previousControlProps={{ "aria-label": t`Previous events` }}
         nextControlProps={{ "aria-label": t`Next events` }}
-        classNames={{ slide: "py-1" }}
+        classNames={{ slide: "px-3 py-4", viewport: "px-14" }}
       >
         {upcoming.map((e) => (
           <Carousel.Slide key={e.id}>
