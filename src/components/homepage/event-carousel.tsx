@@ -131,7 +131,8 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         emblaOptions={{ align: "start" }}
         previousControlProps={{ "aria-label": t`Previous events` }}
         nextControlProps={{ "aria-label": t`Next events` }}
-        classNames={{ slide: "px-3 py-4", viewport: "px-14" }}
+        classNames={{ viewport: "px-14" }}
+        styles={{ viewport: { overflow: "visible", clipPath: "inset(-100rem 0)" } }}
       >
         {upcoming.map((e) => (
           <Carousel.Slide key={e.id}>
