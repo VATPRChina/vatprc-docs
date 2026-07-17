@@ -1,32 +1,52 @@
-import { nextColorScheme } from "@/lib/color-scheme";
 import { isColorScheme } from "@/lib/settings";
-import { useLingui } from "@lingui/react/macro";
-import { ActionIcon, SegmentedControl, useMantineColorScheme } from "@mantine/core";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { SegmentedControl, useMantineColorScheme, VisuallyHidden } from "@mantine/core";
 import { TbDeviceDesktop, TbMoon, TbSun } from "react-icons/tb";
 
 export function ModeToggle() {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
-  const { t } = useLingui();
-
-  const label =
-    colorScheme === "light"
-      ? t`Color scheme: light`
-      : colorScheme === "dark"
-        ? t`Color scheme: dark`
-        : t`Color scheme: follow system`;
 
   return (
-    <ActionIcon
-      variant="subtle"
-      color="gray"
-      onClick={() => setColorScheme(nextColorScheme(colorScheme))}
-      aria-label={label}
-      title={label}
-    >
-      {colorScheme === "light" && <TbSun />}
-      {colorScheme === "dark" && <TbMoon />}
-      {colorScheme === "auto" && <TbDeviceDesktop />}
-    </ActionIcon>
+    <SegmentedControl
+      size="xs"
+      value={colorScheme}
+      onChange={(value) => isColorScheme(value) && setColorScheme(value)}
+      data={[
+        {
+          value: "light",
+          label: (
+            <span className="flex items-center">
+              <TbSun size={16} />
+              <VisuallyHidden>
+                <Trans>Light</Trans>
+              </VisuallyHidden>
+            </span>
+          ),
+        },
+        {
+          value: "dark",
+          label: (
+            <span className="flex items-center">
+              <TbMoon size={16} />
+              <VisuallyHidden>
+                <Trans>Dark</Trans>
+              </VisuallyHidden>
+            </span>
+          ),
+        },
+        {
+          value: "auto",
+          label: (
+            <span className="flex items-center">
+              <TbDeviceDesktop size={16} />
+              <VisuallyHidden>
+                <Trans>System</Trans>
+              </VisuallyHidden>
+            </span>
+          ),
+        },
+      ]}
+    />
   );
 }
 
