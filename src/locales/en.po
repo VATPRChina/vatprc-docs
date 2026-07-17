@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
 #: src/components/app/app-nav-menu.tsx:65
-#: src/components/homepage/controllers-board.tsx:98
+#: src/components/homepage/controllers-board.tsx:96
 msgid "ATC Center"
 msgstr "ATC Center"
 
@@ -321,7 +321,7 @@ msgstr "Basic Information"
 msgid "Book"
 msgstr "Book"
 
-#: src/components/homepage/controllers-board.tsx:115
+#: src/components/homepage/controllers-board.tsx:113
 msgid "Booked Controllers"
 msgstr "Booked Controllers"
 
@@ -483,7 +483,7 @@ msgstr "Controller with Military Position Permission"
 
 #: src/components/app/app-nav-menu.tsx:59
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:89
+#: src/components/homepage/controllers-board.tsx:87
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1123,7 +1123,7 @@ msgstr "No sheet available."
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/homepage/controllers-board.tsx:118
+#: src/components/homepage/controllers-board.tsx:116
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
 
@@ -1156,7 +1156,7 @@ msgstr "odd flight level"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/controllers-board.tsx:104
+#: src/components/homepage/controllers-board.tsx:102
 msgid "Online Controllers"
 msgstr "Online Controllers"
 
@@ -1665,7 +1665,7 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "The user's Moodle account has been provisioned successfully."
 
-#: src/components/homepage/controllers-board.tsx:107
+#: src/components/homepage/controllers-board.tsx:105
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 

@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:65
-#: src/components/homepage/controllers-board.tsx:98
+#: src/components/homepage/controllers-board.tsx:96
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -321,7 +321,7 @@ msgstr "基本信息"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:115
+#: src/components/homepage/controllers-board.tsx:113
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -483,7 +483,7 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:59
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:89
+#: src/components/homepage/controllers-board.tsx:87
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1123,7 +1123,7 @@ msgstr "当前没有表单。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:118
+#: src/components/homepage/controllers-board.tsx:116
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1156,7 +1156,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:104
+#: src/components/homepage/controllers-board.tsx:102
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1665,7 +1665,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/controllers-board.tsx:107
+#: src/components/homepage/controllers-board.tsx:105
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
