@@ -147,7 +147,7 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   group: NavGroupData;
   row?: boolean;
 }) => (
-  <ul className={row ? "flex flex-col" : group.singleColumn ? "grid w-80 max-w-[90vw] gap-3 p-2" : "nav-list-grid"}>
+  <ul className={row ? "flex flex-col" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
     {group.items.map((item, i) => (
       <Fragment key={i}>
         {item.divider && <hr className={row ? "my-1" : "col-span-full"} />}
