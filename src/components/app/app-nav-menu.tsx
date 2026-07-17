@@ -176,7 +176,10 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
               <Button
                 variant="subtle"
                 color="gray"
-                className={cn("group border-b-2", i === activeIndex ? "border-vatprc" : "border-transparent")}
+                className="group"
+                style={{
+                  borderBottom: `2px solid ${i === activeIndex ? "var(--color-vatprc)" : "transparent"}`,
+                }}
                 rightSection={
                   <TbChevronDown size={14} className="transition-transform group-aria-expanded:rotate-180" />
                 }
