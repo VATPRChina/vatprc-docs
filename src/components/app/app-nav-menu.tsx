@@ -9,7 +9,7 @@ import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react/macro";
 import { Accordion, Button, Drawer, Group, Menu, Stack } from "@mantine/core";
 import { Link, useLocation } from "@tanstack/react-router";
-import { ComponentProps, Fragment, PropsWithChildren } from "react";
+import { ComponentProps, Fragment, PropsWithChildren, useState } from "react";
 import { TbChevronDown, TbExternalLink } from "react-icons/tb";
 
 const contents: NavGroupData[] = [
@@ -163,6 +163,7 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
   const { i18n } = useLingui();
   const pathname = useLocation({ select: (location) => location.pathname });
   const activeIndex = getActiveGroup(pathname, contents);
+  const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
   return (
     <Group gap="md" {...props}>
@@ -171,7 +172,13 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
           return null;
         }
         return (
-          <Menu key={i} trigger="click-hover" position="bottom-start">
+          <Menu
+            key={i}
+            trigger="click-hover"
+            position="bottom-start"
+            opened={openedIndex === i}
+            onChange={(opened) => setOpenedIndex((current) => (opened ? i : current === i ? null : current))}
+          >
             <Menu.Target>
               <Button
                 variant="subtle"
