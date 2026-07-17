@@ -18,6 +18,8 @@ export interface NavItem {
 export interface NavGroup {
   title: MessageDescriptor;
   requireRole?: UserRole;
+  /** Renders the desktop mega-menu as a single narrow column instead of the two-column grid. */
+  singleColumn?: boolean;
   items: NavItem[];
 }
 

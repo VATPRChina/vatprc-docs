@@ -70,6 +70,7 @@ const contents: NavGroupData[] = [
   },
   {
     title: msg`Community`,
+    singleColumn: true,
     items: [
       { label: msg`Forum`, href: "https://community.vatprc.net", external: true, large: true },
       { label: msg`Event`, href: "/events", large: true },
@@ -146,7 +147,7 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   group: NavGroupData;
   row?: boolean;
 }) => (
-  <ul className={row ? "flex flex-col" : "nav-list-grid"}>
+  <ul className={row ? "flex flex-col" : group.singleColumn ? "grid w-80 max-w-[90vw] gap-3 p-2" : "nav-list-grid"}>
     {group.items.map((item, i) => (
       <Fragment key={i}>
         {item.divider && <hr className={row ? "my-1" : "col-span-full"} />}
