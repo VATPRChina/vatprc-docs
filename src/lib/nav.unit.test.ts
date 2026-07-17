@@ -29,6 +29,8 @@ describe("getActiveGroup", () => {
   });
 
   it("does not match external links", () => {
+    const internalFormExternal = [{ items: [{ href: "/c/69-category", external: true }] }];
+    expect(getActiveGroup("/c/69-category", internalFormExternal)).toBeUndefined();
     expect(getActiveGroup("/c/69-category", groups)).toBeUndefined();
   });
 
