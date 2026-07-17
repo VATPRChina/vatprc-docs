@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:145
+#: src/routes/__root.tsx:149
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
@@ -107,7 +107,7 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app/app-nav-menu.tsx:84
+#: src/components/app/app-nav-menu.tsx:85
 msgid "Admin"
 msgstr "Admin"
 
@@ -136,7 +136,7 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/components/app/app-nav-menu.tsx:77
+#: src/components/app/app-nav-menu.tsx:78
 msgid "Announcement"
 msgstr "Announcement"
 
@@ -256,7 +256,7 @@ msgstr "ATC Application"
 msgid "ATC Application Audit Logs"
 msgstr "ATC Application Audit Logs"
 
-#: src/components/app/app-nav-menu.tsx:97
+#: src/components/app/app-nav-menu.tsx:98
 #: src/routes/controllers/applications/index.tsx:20
 #: src/routes/controllers/index.tsx:27
 msgid "ATC Applications"
@@ -287,7 +287,7 @@ msgstr "ATC Permission"
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/components/app/app-nav-menu.tsx:102
+#: src/components/app/app-nav-menu.tsx:103
 #: src/routes/controllers/index.tsx:32
 #: src/routes/controllers/trainings/index.tsx:17
 msgid "ATC Trainings"
@@ -421,18 +421,6 @@ msgstr "Chinese name"
 #: src/routes/users/me.tsx:50
 msgid "CID"
 msgstr "CID"
-
-#: src/components/app/theme-toggle.tsx:15
-msgid "Color scheme: dark"
-msgstr "Color scheme: dark"
-
-#: src/components/app/theme-toggle.tsx:16
-msgid "Color scheme: follow system"
-msgstr "Color scheme: follow system"
-
-#: src/components/app/theme-toggle.tsx:13
-msgid "Color scheme: light"
-msgstr "Color scheme: light"
 
 #: src/components/atc-training/training-application-responses.tsx:87
 #: src/components/atc-training/training-application-responses.tsx:124
@@ -572,7 +560,8 @@ msgstr "Cruising Level Type Mismatch"
 msgid "CTOT"
 msgstr "CTOT"
 
-#: src/components/app/theme-toggle.tsx:43
+#: src/components/app/theme-toggle.tsx:32
+#: src/components/app/theme-toggle.tsx:63
 msgid "Dark"
 msgstr "Dark"
 
@@ -717,7 +706,7 @@ msgstr "Equipment"
 
 #: src/components/atc-training/training-application-create.tsx:152
 #: src/components/event/atc-slot-list.tsx:199
-#: src/routes/__root.tsx:129
+#: src/routes/__root.tsx:133
 msgid "Error"
 msgstr "Error"
 
@@ -726,8 +715,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/components/app/app-nav-menu.tsx:75
-#: src/components/app/app-nav-menu.tsx:87
+#: src/components/app/app-nav-menu.tsx:76
+#: src/components/app/app-nav-menu.tsx:88
 #: src/components/audit-log/audit-log-table.tsx:14
 msgid "Event"
 msgstr "Event"
@@ -852,7 +841,7 @@ msgstr "Flow Management Position"
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 
-#: src/components/app/app-nav-menu.tsx:74
+#: src/components/app/app-nav-menu.tsx:75
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
 #: src/components/homepage/hero.tsx:71
@@ -920,7 +909,7 @@ msgstr "I have sufficient experience on VATSIM. I have connected as a pilot for 
 msgid "I will ensure to have sufficient ATC online time."
 msgstr "I will ensure to have sufficient ATC online time."
 
-#: src/components/app/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:90
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -998,7 +987,8 @@ msgstr "Less than half of the configured area control positions have been booked
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
 
-#: src/components/app/theme-toggle.tsx:42
+#: src/components/app/theme-toggle.tsx:21
+#: src/components/app/theme-toggle.tsx:62
 msgid "Light"
 msgstr "Light"
 
@@ -1285,7 +1275,7 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app/app-nav-menu.tsx:92
+#: src/components/app/app-nav-menu.tsx:93
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
@@ -1431,7 +1421,7 @@ msgstr "Self Reflection"
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 
-#: src/components/app/app-nav-menu.tsx:90
+#: src/components/app/app-nav-menu.tsx:91
 #: src/routes/sheets.tsx:23
 msgid "Sheet Management"
 msgstr "Sheet Management"
@@ -1559,7 +1549,8 @@ msgstr "Switch to Chinese"
 msgid "Switch to English"
 msgstr "Switch to English"
 
-#: src/components/app/theme-toggle.tsx:44
+#: src/components/app/theme-toggle.tsx:43
+#: src/components/app/theme-toggle.tsx:64
 msgid "System"
 msgstr "System"
 
@@ -1830,7 +1821,7 @@ msgstr "User Audit Logs"
 msgid "User Info"
 msgstr "User Info"
 
-#: src/components/app/app-nav-menu.tsx:88
+#: src/components/app/app-nav-menu.tsx:89
 msgid "User List"
 msgstr "User List"
 
@@ -1906,7 +1897,7 @@ msgstr "Visiting & Transfer"
 msgid "Volunteer"
 msgstr "Volunteer"
 
-#: src/routes/__root.tsx:74
+#: src/routes/__root.tsx:78
 msgid "We need your help! Donate to VATPRC to help us to improve!"
 msgstr "We need your help! Donate to VATPRC to help us to improve!"
 
