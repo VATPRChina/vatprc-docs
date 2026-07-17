@@ -26,9 +26,9 @@ msgstr "每页 {size} 条"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
-#: src/components/app/app-footer.tsx:7
-msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
-msgstr "© 2010 - 2025，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
+#: src/components/app/app-footer.tsx:9
+msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgstr "© 2010 - {year}，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
 
 #: src/routes/_doc/controller/controller-list.tsx:47
 msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:65
-#: src/components/homepage/controllers-board.tsx:96
+#: src/components/homepage/controllers-board.tsx:98
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -321,7 +321,7 @@ msgstr "基本信息"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:113
+#: src/components/homepage/controllers-board.tsx:115
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -483,7 +483,7 @@ msgstr "批准上线军用席位的管制员"
 
 #: src/components/app/app-nav-menu.tsx:59
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:87
+#: src/components/homepage/controllers-board.tsx:89
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1123,7 +1123,7 @@ msgstr "当前没有表单。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:116
+#: src/components/homepage/controllers-board.tsx:118
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1156,7 +1156,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:102
+#: src/components/homepage/controllers-board.tsx:104
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1665,7 +1665,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/controllers-board.tsx:105
+#: src/components/homepage/controllers-board.tsx:107
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 

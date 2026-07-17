@@ -26,9 +26,9 @@ msgstr "{size} items/page"
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
-#: src/components/app/app-footer.tsx:7
-msgid "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
-msgstr "© 2010 - 2025, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+#: src/components/app/app-footer.tsx:9
+msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgstr "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
 
 #: src/routes/_doc/controller/controller-list.tsx:47
 msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
@@ -275,7 +275,7 @@ msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
 #: src/components/app/app-nav-menu.tsx:65
-#: src/components/homepage/controllers-board.tsx:96
+#: src/components/homepage/controllers-board.tsx:98
 msgid "ATC Center"
 msgstr "ATC Center"
 
@@ -321,7 +321,7 @@ msgstr "Basic Information"
 msgid "Book"
 msgstr "Book"
 
-#: src/components/homepage/controllers-board.tsx:113
+#: src/components/homepage/controllers-board.tsx:115
 msgid "Booked Controllers"
 msgstr "Booked Controllers"
 
@@ -483,7 +483,7 @@ msgstr "Controller with Military Position Permission"
 
 #: src/components/app/app-nav-menu.tsx:59
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:87
+#: src/components/homepage/controllers-board.tsx:89
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:178
 msgid "Controllers"
@@ -1123,7 +1123,7 @@ msgstr "No sheet available."
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/homepage/controllers-board.tsx:116
+#: src/components/homepage/controllers-board.tsx:118
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
 
@@ -1156,7 +1156,7 @@ msgstr "odd flight level"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/controllers-board.tsx:102
+#: src/components/homepage/controllers-board.tsx:104
 msgid "Online Controllers"
 msgstr "Online Controllers"
 
@@ -1665,7 +1665,7 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "The user's Moodle account has been provisioned successfully."
 
-#: src/components/homepage/controllers-board.tsx:105
+#: src/components/homepage/controllers-board.tsx:107
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
