@@ -97,15 +97,15 @@ msgstr "Add field"
 
 #: src/routes/flights/$callsign.tsx:179
 msgid "Add<0>D1</0>or<1>D2</1>to PBN."
-msgstr "Add<0>D1</0>or<1>D2</1>to PBN."
+msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
 
 #: src/routes/flights/$callsign.tsx:170
 msgid "Add<0>R</0>to equipment code."
-msgstr "Add<0>R</0>to equipment code."
+msgstr "Add <0>R</0> to equipment code."
 
 #: src/routes/flights/$callsign.tsx:152
 msgid "Add<0>W</0>to equipment code."
-msgstr "Add<0>W</0>to equipment code."
+msgstr "Add <0>W</0> to equipment code."
 
 #: src/components/app/app-nav-menu.tsx:84
 msgid "Admin"
@@ -1668,7 +1668,7 @@ msgstr "The route contains an airway that requires controller approval."
 
 #: src/components/flight-warnings.tsx:75
 msgid "The submitted route is:<0>{route}</0>"
-msgstr "The submitted route is:<0>{route}</0>"
+msgstr "The submitted route is: <0>{route}</0>"
 
 #: src/routes/controllers/applications/$id.tsx:83
 msgid "The user's Moodle account has been provisioned successfully."
