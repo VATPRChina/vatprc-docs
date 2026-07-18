@@ -1,4 +1,5 @@
 import { AtcApplicationList } from "@/components/atc-application/atc-application-list";
+import { MyApplicationCard } from "@/components/atc-application/my-application-card";
 import { RequireRole } from "@/components/require-role";
 import { LinkButton } from "@/components/ui/link-button";
 import { $api, useUser } from "@/lib/client";
@@ -13,29 +14,36 @@ function RouteComponent() {
   const user = useUser();
   const { data, isLoading } = $api.useQuery("get", "/api/atc/applications");
 
+  const canApply =
+    !isLoading &&
+    !(data ?? []).some((a) => a.user_id === user?.id && a.status !== "rejected" && a.status !== "aborted");
+
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <h1 className="text-2xl">
-          <Trans>ATC Applications</Trans>
-        </h1>
-        <RequireRole role="volunteer">
-          <Link to="/controllers/applications/audit" className="text-sm underline">
-            <Trans>View audit logs</Trans>
-          </Link>
-        </RequireRole>
-      </div>
-      <LinkButton
-        className="self-start"
-        variant="outline"
-        to="/controllers/applications/new"
-        disabled={
-          isLoading || (data && data.filter((a) => a.user_id === user?.id && a.status !== "rejected").length > 0)
-        }
-      >
-        <Trans>Apply</Trans>
-      </LinkButton>
-      <AtcApplicationList />
+      <h1 className="text-2xl">
+        <Trans>ATC Applications</Trans>
+      </h1>
+      <MyApplicationCard applications={data ?? []} />
+      {canApply && (
+        <LinkButton className="self-start" variant="outline" to="/controllers/applications/new">
+          <Trans>Apply</Trans>
+        </LinkButton>
+      )}
+      <RequireRole role="controller-training-director-assistant">
+        <div className="mt-4 flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-medium">
+              <Trans>Review</Trans>
+            </h2>
+            <RequireRole role="volunteer">
+              <Link to="/controllers/applications/audit" className="text-sm underline">
+                <Trans>View audit logs</Trans>
+              </Link>
+            </RequireRole>
+          </div>
+          <AtcApplicationList />
+        </div>
+      </RequireRole>
     </div>
   );
 }
