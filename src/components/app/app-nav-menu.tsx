@@ -102,7 +102,7 @@ const contents: NavGroupData[] = [
       {
         label: msg`ATC Trainings`,
         href: "/controllers/trainings",
-        requireRole: ["controller", "controller-training-mentor"],
+        requireRole: ["controller-training-mentor", "controller-training-director-assistant"],
       },
     ],
   },
