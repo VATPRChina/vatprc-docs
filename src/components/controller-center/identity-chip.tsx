@@ -16,7 +16,7 @@ export const IdentityChip: FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="bg-gray-900 px-3 py-1 font-mono text-sm text-white dark:bg-gray-100 dark:text-gray-900">
+      <span className="bg-emerald-700 px-3 py-1 font-mono text-sm text-white dark:bg-emerald-400 dark:text-gray-950">
         {user.cid} · {status.rating}
       </span>
       {getStatusBadges(status).map((badge) => (

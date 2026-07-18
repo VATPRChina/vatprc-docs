@@ -109,7 +109,12 @@ export const TrainingBrowser: FC = () => {
             </p>
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <div className={cn("border border-gray-200 dark:border-gray-800", mobileDetailOpen && "hidden md:block")}>
+              <div
+                className={cn(
+                  "max-h-[32rem] self-start overflow-y-auto border border-gray-200 dark:border-gray-800",
+                  mobileDetailOpen && "hidden md:block",
+                )}
+              >
                 {sorted.map((training) => (
                   <TrainingListItem
                     key={training.id}

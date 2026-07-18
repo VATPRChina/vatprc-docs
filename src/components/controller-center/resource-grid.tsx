@@ -1,10 +1,22 @@
+import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
 import { IconType } from "react-icons";
-import { TbBook2, TbExternalLink, TbListDetails, TbMap2, TbRadar2, TbSchool, TbUsers, TbWorld } from "react-icons/tb";
+import {
+  TbBook2,
+  TbClipboardList,
+  TbExternalLink,
+  TbFileText,
+  TbListDetails,
+  TbMap2,
+  TbRadar2,
+  TbSchool,
+  TbUsers,
+  TbWorld,
+} from "react-icons/tb";
 
 interface ResourceItem {
   label: MessageDescriptor;
@@ -62,6 +74,20 @@ const CONTROLLING_RESOURCES: ResourceItem[] = [
     icon: TbListDetails,
     isPublic: true,
   },
+  {
+    label: msg`Standard Operation Procedures`,
+    description: msg`Operating procedures for controllers`,
+    href: "/airspace/sop",
+    icon: TbClipboardList,
+    isPublic: true,
+  },
+  {
+    label: msg`Letter of Agreement`,
+    description: msg`Agreements with adjacent facilities`,
+    href: "/controller/loa",
+    icon: TbFileText,
+    isPublic: true,
+  },
 ];
 
 const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
@@ -96,7 +122,10 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
 const filterItems = (items: ResourceItem[], publicOnly: boolean) =>
   publicOnly ? items.filter((item) => item.isPublic) : items;
 
-export const ResourceGrid: FC<{ publicOnly?: boolean }> = ({ publicOnly = false }) => {
+export const ResourceGrid: FC<{ publicOnly?: boolean; compact?: boolean }> = ({
+  publicOnly = false,
+  compact = false,
+}) => {
   const groups = [
     {
       key: "training",
@@ -120,7 +149,7 @@ export const ResourceGrid: FC<{ publicOnly?: boolean }> = ({ publicOnly = false 
           <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
             {group.title}
           </h3>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className={cn("grid grid-cols-1 gap-3", !compact && "md:grid-cols-2 lg:grid-cols-3")}>
             {group.items.map((item) => (
               <ResourceCard key={item.href} item={item} />
             ))}

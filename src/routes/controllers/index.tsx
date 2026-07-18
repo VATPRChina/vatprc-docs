@@ -31,11 +31,15 @@ function RouteComponent() {
         {isController && <IdentityChip />}
       </div>
       {isController ? (
-        <>
-          <TrainingBrowser />
-          <MyEventBookings />
-          <ResourceGrid />
-        </>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+          <div className="flex min-w-0 flex-col gap-8">
+            <TrainingBrowser />
+            <MyEventBookings />
+          </div>
+          <aside className="lg:sticky lg:top-20 lg:self-start">
+            <ResourceGrid compact />
+          </aside>
+        </div>
       ) : (
         <>
           <BecomeController />
