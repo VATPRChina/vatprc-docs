@@ -26,8 +26,9 @@ const TrainingListItem: FC<{
   training: TrainingDto;
   isUpcoming: boolean;
   isSelected: boolean;
+  counterpartName: string;
   onSelect: () => void;
-}> = ({ training, isUpcoming, isSelected, onSelect }) => (
+}> = ({ training, isUpcoming, isSelected, counterpartName, onSelect }) => (
   <button
     type="button"
     onClick={onSelect}
@@ -47,7 +48,7 @@ const TrainingListItem: FC<{
       )}
     </span>
     <span className="text-sm font-medium">{training.name}</span>
-    <span className="text-xs text-gray-600 dark:text-gray-400">{training.trainer.full_name}</span>
+    <span className="text-xs text-gray-600 dark:text-gray-400">{counterpartName}</span>
   </button>
 );
 
@@ -111,7 +112,7 @@ export const TrainingBrowser: FC = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div
                 className={cn(
-                  "max-h-[32rem] self-start overflow-y-auto border border-gray-200 dark:border-gray-800",
+                  "border border-gray-200 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-gray-800",
                   mobileDetailOpen && "hidden md:block",
                 )}
               >
@@ -121,6 +122,9 @@ export const TrainingBrowser: FC = () => {
                     training={training}
                     isUpcoming={new Date(training.start_at) >= now}
                     isSelected={training.id === selected?.id}
+                    counterpartName={
+                      training.trainer_id === user?.id ? training.trainee.full_name : training.trainer.full_name
+                    }
                     onSelect={() => {
                       setSelectedId(training.id);
                       setMobileDetailOpen(true);

@@ -1,5 +1,6 @@
 import { User } from "@/components/app/user";
 import { components } from "@/lib/api";
+import { useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { format } from "date-fns";
@@ -9,6 +10,7 @@ type TrainingDto = components["schemas"]["TrainingDto"];
 
 export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
   const { i18n } = useLingui();
+  const user = useUser();
 
   return (
     <article className="flex flex-col gap-3 border border-gray-200 p-4 dark:border-gray-800">
@@ -21,6 +23,11 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
         <span className="flex items-center gap-1">
           <Trans>Trainer</Trans>: <User user={training.trainer} />
         </span>
+        {user?.id === training.trainer_id && (
+          <span className="flex items-center gap-1">
+            <Trans>Trainee</Trans>: <User user={training.trainee} />
+          </span>
+        )}
       </p>
       {(training.record_sheet_filing?.length ?? 0) === 0 ? (
         <p className="text-gray-500 dark:text-gray-400">
