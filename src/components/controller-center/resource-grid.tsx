@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { UnstyledButton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
 import { IconType } from "react-icons";
@@ -58,13 +57,13 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
     "flex items-center gap-3 border border-gray-200 px-4 py-3 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900";
 
   return item.external ? (
-    <UnstyledButton component="a" href={item.href} target="_blank" rel="noreferrer" className={className}>
+    <a href={item.href} target="_blank" rel="noreferrer" className={className}>
       {body}
-    </UnstyledButton>
+    </a>
   ) : (
-    <UnstyledButton component={Link} to={item.href} className={className}>
+    <Link to={item.href} className={className}>
       {body}
-    </UnstyledButton>
+    </Link>
   );
 };
 

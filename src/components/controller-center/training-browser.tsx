@@ -5,7 +5,7 @@ import { $api, useUser } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Button, Skeleton, UnstyledButton } from "@mantine/core";
+import { Alert, Badge, Skeleton } from "@mantine/core";
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbArrowLeft } from "react-icons/tb";
@@ -29,7 +29,8 @@ const TrainingListItem: FC<{
   counterpartName: string;
   onSelect: () => void;
 }> = ({ training, isUpcoming, isSelected, counterpartName, onSelect }) => (
-  <UnstyledButton
+  <button
+    type="button"
     onClick={onSelect}
     aria-current={isSelected}
     className={cn(
@@ -49,7 +50,7 @@ const TrainingListItem: FC<{
     </span>
     <span className="text-sm font-medium">{training.name}</span>
     <span className="text-xs text-gray-600 dark:text-gray-400">{counterpartName}</span>
-  </UnstyledButton>
+  </button>
 );
 
 export const TrainingBrowser: FC = () => {
@@ -133,16 +134,14 @@ export const TrainingBrowser: FC = () => {
                 ))}
               </div>
               <div className={cn("min-w-0", !mobileDetailOpen && "hidden md:block")}>
-                <Button
-                  variant="subtle"
-                  color="gray"
-                  size="compact-sm"
-                  leftSection={<TbArrowLeft size={16} />}
+                <button
+                  type="button"
                   onClick={() => setMobileDetailOpen(false)}
-                  className="mb-2 md:hidden"
+                  className="mb-2 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
                 >
+                  <TbArrowLeft size={16} />
                   <Trans>Back to list</Trans>
-                </Button>
+                </button>
                 {selected && <TrainingDetail training={selected} />}
               </div>
             </div>
