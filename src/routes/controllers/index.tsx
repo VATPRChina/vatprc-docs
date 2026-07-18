@@ -1,4 +1,5 @@
 import { IdentityChip } from "@/components/controller-center/identity-chip";
+import { MyEventBookings } from "@/components/controller-center/my-event-bookings";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
 import { msg } from "@lingui/core/macro";
@@ -22,6 +23,7 @@ function RouteComponent() {
         <IdentityChip />
       </div>
       <TrainingBrowser />
+      <MyEventBookings />
       <ResourceGrid />
     </div>
   );
