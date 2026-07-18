@@ -18,7 +18,7 @@ export const selectMyPositions = <T extends { booking?: { user_id: string } | nu
 export const MyEventBookings: FC = () => {
   const user = useUser();
   const { i18n } = useLingui();
-  const { data: events } = $api.useQuery("get", "/api/events");
+  const { data: events, error } = $api.useQuery("get", "/api/events");
 
   const upcoming = selectUpcomingEvents(events ?? [], new Date());
   const results = useQueries({
@@ -33,7 +33,20 @@ export const MyEventBookings: FC = () => {
     user?.id ?? "",
   );
 
-  if (!user || mine.length === 0) return null;
+  if (!user) return null;
+  if (error) {
+    return (
+      <section className="flex flex-col gap-4">
+        <h2 className="text-2xl font-medium">
+          <Trans>My Event Positions</Trans>
+        </h2>
+        <p className="border border-gray-200 px-4 py-3 font-mono text-sm text-gray-600 dark:border-gray-800 dark:text-gray-300">
+          <Trans>Failed to load event bookings.</Trans>
+        </p>
+      </section>
+    );
+  }
+  if (mine.length === 0) return null;
 
   return (
     <section className="flex flex-col gap-4">

@@ -5,7 +5,7 @@ import { $api, useUser } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Badge, Skeleton } from "@mantine/core";
+import { Alert, Badge, Skeleton } from "@mantine/core";
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbArrowLeft } from "react-icons/tb";
@@ -55,13 +55,22 @@ export const TrainingBrowser: FC = () => {
   const user = useUser();
   const now = new Date();
 
-  const { data: trainings, isLoading } = $api.useQuery(
+  const {
+    data: trainings,
+    isLoading,
+    error,
+  } = $api.useQuery(
     "get",
     "/api/atc/trainings/by-user/{userId}",
     { params: { path: { userId: user?.id ?? "" } } },
     { enabled: !!user },
   );
-  const { data: applications } = $api.useQuery("get", "/api/atc/trainings/applications", {}, { enabled: !!user });
+  const { data: applications } = $api.useQuery(
+    "get",
+    "/api/atc/trainings/applications",
+    {},
+    { enabled: !!user, retry: false },
+  );
 
   const sorted = sortTrainings(trainings ?? [], now);
   const myPendingApplications = (applications ?? []).filter((a) => a.trainee_id === user?.id && a.status === "pending");
@@ -80,46 +89,54 @@ export const TrainingBrowser: FC = () => {
         </h2>
         <TrainingApplicationCreateModal />
       </div>
-      {myPendingApplications.map((application) => (
-        <p
-          key={application.id}
-          className="border border-l-3 border-gray-200 border-l-gray-300 px-3 py-2 font-mono text-sm text-gray-600 dark:border-gray-800 dark:border-l-gray-600 dark:text-gray-300"
-        >
-          <Trans>Application pending review</Trans> · {application.name}
-        </p>
-      ))}
-      {sorted.length === 0 ? (
-        <p className="border border-gray-200 px-4 py-6 text-gray-600 dark:border-gray-800 dark:text-gray-300">
-          <Trans>You have no training sessions yet. Apply for a training to get started.</Trans>
-        </p>
+      {error ? (
+        <Alert color="red" title={<Trans>Failed to load trainings</Trans>}>
+          <Trans>Please refresh the page or try again later.</Trans>
+        </Alert>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className={cn("border border-gray-200 dark:border-gray-800", mobileDetailOpen && "hidden md:block")}>
-            {sorted.map((training) => (
-              <TrainingListItem
-                key={training.id}
-                training={training}
-                isUpcoming={new Date(training.start_at) >= now}
-                isSelected={training.id === selected?.id}
-                onSelect={() => {
-                  setSelectedId(training.id);
-                  setMobileDetailOpen(true);
-                }}
-              />
-            ))}
-          </div>
-          <div className={cn("md:col-span-2", !mobileDetailOpen && "hidden md:block")}>
-            <button
-              type="button"
-              onClick={() => setMobileDetailOpen(false)}
-              className="mb-2 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
+        <>
+          {myPendingApplications.map((application) => (
+            <p
+              key={application.id}
+              className="border border-l-3 border-gray-200 border-l-gray-300 px-3 py-2 font-mono text-sm text-gray-600 dark:border-gray-800 dark:border-l-gray-600 dark:text-gray-300"
             >
-              <TbArrowLeft size={16} />
-              <Trans>Back to list</Trans>
-            </button>
-            {selected && <TrainingDetail training={selected} />}
-          </div>
-        </div>
+              <Trans>Application pending review</Trans> · {application.name}
+            </p>
+          ))}
+          {sorted.length === 0 ? (
+            <p className="border border-gray-200 px-4 py-6 text-gray-600 dark:border-gray-800 dark:text-gray-300">
+              <Trans>You have no training sessions yet. Apply for a training to get started.</Trans>
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div className={cn("border border-gray-200 dark:border-gray-800", mobileDetailOpen && "hidden md:block")}>
+                {sorted.map((training) => (
+                  <TrainingListItem
+                    key={training.id}
+                    training={training}
+                    isUpcoming={new Date(training.start_at) >= now}
+                    isSelected={training.id === selected?.id}
+                    onSelect={() => {
+                      setSelectedId(training.id);
+                      setMobileDetailOpen(true);
+                    }}
+                  />
+                ))}
+              </div>
+              <div className={cn("md:col-span-2", !mobileDetailOpen && "hidden md:block")}>
+                <button
+                  type="button"
+                  onClick={() => setMobileDetailOpen(false)}
+                  className="mb-2 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
+                >
+                  <TbArrowLeft size={16} />
+                  <Trans>Back to list</Trans>
+                </button>
+                {selected && <TrainingDetail training={selected} />}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
