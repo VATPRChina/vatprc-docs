@@ -1,3 +1,4 @@
+import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
@@ -17,6 +18,7 @@ function RouteComponent() {
         <h1 className="text-3xl font-medium">
           <Trans>Controller Center</Trans>
         </h1>
+        <IdentityChip />
       </div>
       <ResourceGrid />
     </div>
