@@ -98,8 +98,16 @@ const filterItems = (items: ResourceItem[], publicOnly: boolean) =>
 
 export const ResourceGrid: FC<{ publicOnly?: boolean }> = ({ publicOnly = false }) => {
   const groups = [
-    { key: "training", title: <Trans>Training</Trans>, items: filterItems(TRAINING_RESOURCES, publicOnly) },
-    { key: "controlling", title: <Trans>Controlling</Trans>, items: filterItems(CONTROLLING_RESOURCES, publicOnly) },
+    {
+      key: "training",
+      title: <Trans context="resource group">Training</Trans>,
+      items: filterItems(TRAINING_RESOURCES, publicOnly),
+    },
+    {
+      key: "controlling",
+      title: <Trans context="resource group">Controlling</Trans>,
+      items: filterItems(CONTROLLING_RESOURCES, publicOnly),
+    },
   ].filter((group) => group.items.length > 0);
 
   return (
