@@ -1,37 +1,24 @@
+import { ResourceGrid } from "@/components/controller-center/resource-grid";
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Card } from "@mantine/core";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/")({
   component: RouteComponent,
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Controller Center`) }],
+  }),
 });
 
 function RouteComponent() {
   return (
-    <div className="container mx-auto grid grid-cols-2 gap-4">
-      <h1 className="col-span-2 text-3xl font-medium">
-        <Trans>Controller Center</Trans>
-      </h1>
-      <Alert
-        className="col-span-2"
-        color="blue"
-        title={
-          <Trans>
-            Controller Center is under construction. We will improve this page to contain contents that fits
-            controllers&apos; needs.
-          </Trans>
-        }
-      />
-      <Card withBorder renderRoot={(props) => <Link to="/controllers/applications" {...props} />}>
-        <h2 className="text-xl font-medium">
-          <Trans>ATC Applications</Trans>
-        </h2>
-      </Card>
-      <Card withBorder renderRoot={(props) => <Link to="/controllers/trainings" {...props} />}>
-        <h2 className="text-xl font-medium">
-          <Trans>ATC Trainings</Trans>
-        </h2>
-      </Card>
+    <div className="container mx-auto flex flex-col gap-8">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h1 className="text-3xl font-medium">
+          <Trans>Controller Center</Trans>
+        </h1>
+      </div>
+      <ResourceGrid />
     </div>
   );
 }
