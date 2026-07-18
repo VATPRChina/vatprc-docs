@@ -73,7 +73,7 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
       <span className="flex flex-col">
         <span className="flex items-center gap-1 font-medium">
           {i18n._(item.label)}
-          {item.external && <TbExternalLink size={14} className="text-gray-500" />}
+          {item.external && <TbExternalLink size={14} className="text-gray-500 dark:text-gray-400" />}
         </span>
         <span className="text-sm text-gray-600 dark:text-gray-400">{i18n._(item.description)}</span>
       </span>
@@ -98,8 +98,8 @@ const filterItems = (items: ResourceItem[], publicOnly: boolean) =>
 
 export const ResourceGrid: FC<{ publicOnly?: boolean }> = ({ publicOnly = false }) => {
   const groups = [
-    { title: <Trans>Training</Trans>, items: filterItems(TRAINING_RESOURCES, publicOnly) },
-    { title: <Trans>Controlling</Trans>, items: filterItems(CONTROLLING_RESOURCES, publicOnly) },
+    { key: "training", title: <Trans>Training</Trans>, items: filterItems(TRAINING_RESOURCES, publicOnly) },
+    { key: "controlling", title: <Trans>Controlling</Trans>, items: filterItems(CONTROLLING_RESOURCES, publicOnly) },
   ].filter((group) => group.items.length > 0);
 
   return (
@@ -107,8 +107,8 @@ export const ResourceGrid: FC<{ publicOnly?: boolean }> = ({ publicOnly = false 
       <h2 className="text-2xl font-medium">
         <Trans>Resources</Trans>
       </h2>
-      {groups.map((group, i) => (
-        <div key={i} className="flex flex-col gap-2">
+      {groups.map((group) => (
+        <div key={group.key} className="flex flex-col gap-2">
           <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
             {group.title}
           </h3>
