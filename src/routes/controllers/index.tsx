@@ -1,5 +1,6 @@
 import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
+import { TrainingBrowser } from "@/components/controller-center/training-browser";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -20,6 +21,7 @@ function RouteComponent() {
         </h1>
         <IdentityChip />
       </div>
+      <TrainingBrowser />
       <ResourceGrid />
     </div>
   );
