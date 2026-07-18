@@ -20,7 +20,6 @@ import {
 
 interface ResourceItem {
   label: MessageDescriptor;
-  description: MessageDescriptor;
   href: string;
   icon: IconType;
   external?: boolean;
@@ -28,66 +27,18 @@ interface ResourceItem {
 }
 
 const TRAINING_RESOURCES: ResourceItem[] = [
-  {
-    label: msg`Moodle`,
-    description: msg`Online training courses`,
-    href: "https://moodle.vatprc.net",
-    icon: TbSchool,
-    external: true,
-  },
-  {
-    label: msg`Progression Guide`,
-    description: msg`Controller rating progression`,
-    href: "/controller/controller-regulations",
-    icon: TbBook2,
-    isPublic: true,
-  },
-  {
-    label: msg`Visiting & Transfer`,
-    description: msg`Join us from another division`,
-    href: "/controller/visiting-and-transferring",
-    icon: TbWorld,
-    isPublic: true,
-  },
+  { label: msg`Moodle`, href: "https://moodle.vatprc.net", icon: TbSchool, external: true },
+  { label: msg`Progression Guide`, href: "/controller/controller-regulations", icon: TbBook2, isPublic: true },
+  { label: msg`Visiting & Transfer`, href: "/controller/visiting-and-transferring", icon: TbWorld, isPublic: true },
 ];
 
 const CONTROLLING_RESOURCES: ResourceItem[] = [
-  { label: msg`Sector Files`, description: msg`Sector files and plugins`, href: "/controller/sector", icon: TbMap2 },
-  {
-    label: msg`Controller List`,
-    description: msg`Roster and permissions`,
-    href: "/controller/controller-list",
-    icon: TbUsers,
-    isPublic: true,
-  },
-  {
-    label: msg`Station & Frequency`,
-    description: msg`Position and frequency list`,
-    href: "/airspace/station",
-    icon: TbRadar2,
-    isPublic: true,
-  },
-  {
-    label: msg`Restricted Airspace`,
-    description: msg`Restricted airspace list`,
-    href: "/airspace/restricted",
-    icon: TbListDetails,
-    isPublic: true,
-  },
-  {
-    label: msg`Standard Operation Procedures`,
-    description: msg`Operating procedures for controllers`,
-    href: "/airspace/sop",
-    icon: TbClipboardList,
-    isPublic: true,
-  },
-  {
-    label: msg`Letter of Agreement`,
-    description: msg`Agreements with adjacent facilities`,
-    href: "/controller/loa",
-    icon: TbFileText,
-    isPublic: true,
-  },
+  { label: msg`Sector Files`, href: "/controller/sector", icon: TbMap2 },
+  { label: msg`Controller List`, href: "/controller/controller-list", icon: TbUsers, isPublic: true },
+  { label: msg`Station & Frequency`, href: "/airspace/station", icon: TbRadar2, isPublic: true },
+  { label: msg`Restricted Airspace`, href: "/airspace/restricted", icon: TbListDetails, isPublic: true },
+  { label: msg`Standard Operation Procedures`, href: "/airspace/sop", icon: TbClipboardList, isPublic: true },
+  { label: msg`Letter of Agreement`, href: "/controller/loa", icon: TbFileText, isPublic: true },
 ];
 
 const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
@@ -95,13 +46,10 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
   const Icon = item.icon;
   const body = (
     <>
-      <Icon size={22} className="shrink-0 text-red-700 dark:text-red-400" />
-      <span className="flex flex-col">
-        <span className="flex items-center gap-1 font-medium">
-          {i18n._(item.label)}
-          {item.external && <TbExternalLink size={14} className="text-gray-500 dark:text-gray-400" />}
-        </span>
-        <span className="text-sm text-gray-600 dark:text-gray-400">{i18n._(item.description)}</span>
+      <Icon size={20} className="shrink-0 text-red-700 dark:text-red-400" />
+      <span className="flex items-center gap-1 font-medium">
+        {i18n._(item.label)}
+        {item.external && <TbExternalLink size={14} className="text-gray-500 dark:text-gray-400" />}
       </span>
     </>
   );
