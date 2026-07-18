@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { UnstyledButton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
 import { IconType } from "react-icons";
@@ -57,13 +58,13 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
     "flex items-center gap-3 border border-gray-200 px-4 py-3 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900";
 
   return item.external ? (
-    <a href={item.href} target="_blank" rel="noreferrer" className={className}>
+    <UnstyledButton component="a" href={item.href} target="_blank" rel="noreferrer" className={className}>
       {body}
-    </a>
+    </UnstyledButton>
   ) : (
-    <Link to={item.href} className={className}>
+    <UnstyledButton component={Link} to={item.href} className={className}>
       {body}
-    </Link>
+    </UnstyledButton>
   );
 };
 
@@ -97,7 +98,7 @@ export const ResourceGrid: FC<{ publicOnly?: boolean; compact?: boolean }> = ({
           <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
             {group.title}
           </h3>
-          <div className={cn("grid grid-cols-1 gap-3", !compact && "md:grid-cols-2 lg:grid-cols-3")}>
+          <div className={cn("grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3", compact && "xl:grid-cols-1")}>
             {group.items.map((item) => (
               <ResourceCard key={item.href} item={item} />
             ))}

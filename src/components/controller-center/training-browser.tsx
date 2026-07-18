@@ -5,7 +5,7 @@ import { $api, useUser } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Skeleton } from "@mantine/core";
+import { Alert, Badge, Button, Skeleton, UnstyledButton } from "@mantine/core";
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbArrowLeft } from "react-icons/tb";
@@ -29,14 +29,14 @@ const TrainingListItem: FC<{
   counterpartName: string;
   onSelect: () => void;
 }> = ({ training, isUpcoming, isSelected, counterpartName, onSelect }) => (
-  <button
-    type="button"
+  <UnstyledButton
     onClick={onSelect}
     aria-current={isSelected}
     className={cn(
       "flex w-full flex-col gap-0.5 border-b border-l-3 border-b-gray-200 px-3 py-2 text-left last:border-b-0 dark:border-b-gray-800",
-      isUpcoming ? "border-l-emerald-600 dark:border-l-emerald-400" : "border-l-gray-300 dark:border-l-gray-600",
-      isSelected ? "bg-gray-100 dark:bg-gray-900" : "hover:bg-gray-50 dark:hover:bg-gray-900/50",
+      isSelected
+        ? "border-l-emerald-600 bg-gray-100 dark:border-l-emerald-400 dark:bg-gray-900"
+        : "border-l-transparent hover:bg-gray-50 dark:hover:bg-gray-900/50",
     )}
   >
     <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
@@ -49,7 +49,7 @@ const TrainingListItem: FC<{
     </span>
     <span className="text-sm font-medium">{training.name}</span>
     <span className="text-xs text-gray-600 dark:text-gray-400">{counterpartName}</span>
-  </button>
+  </UnstyledButton>
 );
 
 export const TrainingBrowser: FC = () => {
@@ -109,10 +109,10 @@ export const TrainingBrowser: FC = () => {
               <Trans>You have no training sessions yet. Apply for a training to get started.</Trans>
             </p>
           ) : (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
               <div
                 className={cn(
-                  "border border-gray-200 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-gray-800",
+                  "min-w-0 border border-gray-200 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-gray-800",
                   mobileDetailOpen && "hidden md:block",
                 )}
               >
@@ -132,15 +132,17 @@ export const TrainingBrowser: FC = () => {
                   />
                 ))}
               </div>
-              <div className={cn("md:col-span-2", !mobileDetailOpen && "hidden md:block")}>
-                <button
-                  type="button"
+              <div className={cn("min-w-0", !mobileDetailOpen && "hidden md:block")}>
+                <Button
+                  variant="subtle"
+                  color="gray"
+                  size="compact-sm"
+                  leftSection={<TbArrowLeft size={16} />}
                   onClick={() => setMobileDetailOpen(false)}
-                  className="mb-2 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
+                  className="mb-2 md:hidden"
                 >
-                  <TbArrowLeft size={16} />
                   <Trans>Back to list</Trans>
-                </button>
+                </Button>
                 {selected && <TrainingDetail training={selected} />}
               </div>
             </div>

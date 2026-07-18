@@ -13,7 +13,7 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
   const user = useUser();
 
   return (
-    <article className="flex flex-col gap-3 border border-gray-200 p-4 dark:border-gray-800">
+    <article className="flex min-w-0 flex-col gap-3 border border-gray-200 p-4 dark:border-gray-800">
       <h3 className="text-xl font-medium">{training.name}</h3>
       <p className="flex flex-wrap gap-x-4 gap-y-1 border-b border-dashed border-gray-300 pb-3 font-mono text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
         <span>
@@ -40,7 +40,7 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {i18n.locale === "en" ? (answer.field.name_en ?? answer.field.name_zh) : answer.field.name_zh}
               </dt>
-              <dd className="whitespace-pre-wrap">{answer.answer}</dd>
+              <dd className="break-words whitespace-pre-wrap">{answer.answer}</dd>
             </div>
           ))}
         </dl>
