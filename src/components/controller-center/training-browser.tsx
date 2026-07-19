@@ -53,7 +53,7 @@ const TrainingListItem: FC<{
   </button>
 );
 
-export const TrainingBrowser: FC = () => {
+export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) => {
   const user = useUser();
   const now = new Date();
 
@@ -85,12 +85,14 @@ export const TrainingBrowser: FC = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-2xl font-medium">
-          <Trans>My Trainings</Trans>
-        </h2>
-        <TrainingApplicationCreateModal />
-      </div>
+      {!hideHeader && (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-2xl font-medium">
+            <Trans>My Trainings</Trans>
+          </h2>
+          <TrainingApplicationCreateModal />
+        </div>
+      )}
       {error ? (
         <Alert color="red" title={<Trans>Failed to load trainings</Trans>}>
           <Trans>Please refresh the page or try again later.</Trans>
