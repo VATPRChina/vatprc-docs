@@ -153,7 +153,7 @@ msgstr "API 文档"
 msgid "Application Information"
 msgstr "申请信息"
 
-#: src/components/controller-center/training-browser.tsx:105
+#: src/components/controller-center/training-browser.tsx:107
 msgid "Application pending review"
 msgstr "报名审核中"
 
@@ -306,7 +306,7 @@ msgstr "审计日志"
 msgid "Back"
 msgstr "返回"
 
-#: src/components/controller-center/training-browser.tsx:143
+#: src/components/controller-center/training-browser.tsx:145
 msgid "Back to list"
 msgstr "返回列表"
 
@@ -461,9 +461,9 @@ msgstr "管制员申请"
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
 
-#: src/routes/controllers/index.tsx:23
-#: src/routes/controllers/index.tsx:50
-#: src/routes/controllers/index.tsx:62
+#: src/routes/controllers/index.tsx:25
+#: src/routes/controllers/index.tsx:79
+#: src/routes/controllers/index.tsx:91
 msgid "Controller Center"
 msgstr "管制员中心"
 
@@ -788,7 +788,7 @@ msgstr "活动席位信息加载失败。"
 msgid "Failed to load past events."
 msgstr "加载历史活动失败。"
 
-#: src/components/controller-center/training-browser.tsx:95
+#: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "训练信息加载失败"
 
@@ -1101,16 +1101,13 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "My Application"
 msgstr "我的申请"
 
-#: src/routes/controllers/index.tsx:76
-msgid "My Center"
-msgstr "我的"
-
 #: src/components/controller-center/my-event-bookings.tsx:41
 #: src/components/controller-center/my-event-bookings.tsx:54
 msgid "My Event Positions"
 msgstr "我的活动席位"
 
-#: src/components/controller-center/training-browser.tsx:90
+#: src/components/controller-center/training-browser.tsx:91
+#: src/routes/controllers/index.tsx:103
 msgid "My Trainings"
 msgstr "我的训练"
 
@@ -1311,7 +1308,7 @@ msgstr "递交申请前请先登入。"
 msgid "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
 msgstr "请仔细阅读下列说明，并确保已完全满足所列条件。如先前的申请被拒绝，该情况将在后续申请中予以考量。目前所有申请管制员职位者均须具备中文水平。"
 
-#: src/components/controller-center/training-browser.tsx:96
+#: src/components/controller-center/training-browser.tsx:98
 msgid "Please refresh the page or try again later."
 msgstr "请刷新页面或稍后再试。"
 
@@ -1843,7 +1840,7 @@ msgstr "训练"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers/index.tsx:77
+#: src/routes/controllers/index.tsx:106
 msgid "Training Management"
 msgstr "训练管理"
 
@@ -2029,7 +2026,7 @@ msgstr "给出你的应答机设备代码。"
 msgid "Yes"
 msgstr "是"
 
-#: src/components/controller-center/training-browser.tsx:110
+#: src/components/controller-center/training-browser.tsx:112
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "你还没有训练记录，报名一次训练开始你的进阶之旅。"
 

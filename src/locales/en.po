@@ -153,7 +153,7 @@ msgstr "API Document"
 msgid "Application Information"
 msgstr "Application Information"
 
-#: src/components/controller-center/training-browser.tsx:105
+#: src/components/controller-center/training-browser.tsx:107
 msgid "Application pending review"
 msgstr "Application pending review"
 
@@ -306,7 +306,7 @@ msgstr "Audit Logs"
 msgid "Back"
 msgstr "Back"
 
-#: src/components/controller-center/training-browser.tsx:143
+#: src/components/controller-center/training-browser.tsx:145
 msgid "Back to list"
 msgstr "Back to list"
 
@@ -461,9 +461,9 @@ msgstr "Controller Application"
 msgid "Controller Application Guideline"
 msgstr "Controller Application Guideline"
 
-#: src/routes/controllers/index.tsx:23
-#: src/routes/controllers/index.tsx:50
-#: src/routes/controllers/index.tsx:62
+#: src/routes/controllers/index.tsx:25
+#: src/routes/controllers/index.tsx:79
+#: src/routes/controllers/index.tsx:91
 msgid "Controller Center"
 msgstr "Controller Center"
 
@@ -788,7 +788,7 @@ msgstr "Failed to load event bookings."
 msgid "Failed to load past events."
 msgstr "Failed to load past events."
 
-#: src/components/controller-center/training-browser.tsx:95
+#: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "Failed to load trainings"
 
@@ -1101,16 +1101,13 @@ msgstr "My account belongs to VATPRC division."
 msgid "My Application"
 msgstr "My Application"
 
-#: src/routes/controllers/index.tsx:76
-msgid "My Center"
-msgstr "My Center"
-
 #: src/components/controller-center/my-event-bookings.tsx:41
 #: src/components/controller-center/my-event-bookings.tsx:54
 msgid "My Event Positions"
 msgstr "My Event Positions"
 
-#: src/components/controller-center/training-browser.tsx:90
+#: src/components/controller-center/training-browser.tsx:91
+#: src/routes/controllers/index.tsx:103
 msgid "My Trainings"
 msgstr "My Trainings"
 
@@ -1311,7 +1308,7 @@ msgstr "Please login to file an application."
 msgid "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
 msgstr "Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied. If a previous application has been rejected, it will be taked into consideration for future applications. Chinese proficiency is currently required for all ATC applicants."
 
-#: src/components/controller-center/training-browser.tsx:96
+#: src/components/controller-center/training-browser.tsx:98
 msgid "Please refresh the page or try again later."
 msgstr "Please refresh the page or try again later."
 
@@ -1843,7 +1840,7 @@ msgstr "Training"
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
 
-#: src/routes/controllers/index.tsx:77
+#: src/routes/controllers/index.tsx:106
 msgid "Training Management"
 msgstr "Training Management"
 
@@ -2029,7 +2026,7 @@ msgstr "Write your transponder equipment code."
 msgid "Yes"
 msgstr "Yes"
 
-#: src/components/controller-center/training-browser.tsx:110
+#: src/components/controller-center/training-browser.tsx:112
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "You have no training sessions yet. Apply for a training to get started."
 
