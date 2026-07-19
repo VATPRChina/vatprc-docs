@@ -88,7 +88,7 @@ msgstr "已通过"
 msgid "Actions"
 msgstr "操作"
 
-#: src/routes/controllers/trainings/index.tsx:55
+#: src/components/controller-center/training-management.tsx:28
 msgid "Active Trainings"
 msgstr "待进行的培训"
 
@@ -295,10 +295,6 @@ msgstr "管制员权限"
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/components/app/app-nav-menu.tsx:103
-msgid "ATC Trainings"
-msgstr "管制员培训"
-
 #: src/routes/controllers/applications/$id.tsx:60
 #: src/routes/events/$id.tsx:57
 #: src/routes/users/index.tsx:205
@@ -465,9 +461,9 @@ msgstr "管制员申请"
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
 
-#: src/routes/controllers/index.tsx:15
-#: src/routes/controllers/index.tsx:37
-#: src/routes/controllers/index.tsx:49
+#: src/routes/controllers/index.tsx:23
+#: src/routes/controllers/index.tsx:50
+#: src/routes/controllers/index.tsx:62
 msgid "Controller Center"
 msgstr "管制员中心"
 
@@ -824,7 +820,7 @@ msgstr "字段列表"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH:mm), 到达机场, 到达时间 (yyyy-MM-dd HH:mm), 呼号, 机型"
 
-#: src/routes/controllers/trainings/index.tsx:58
+#: src/components/controller-center/training-management.tsx:31
 msgid "Finished Trainings"
 msgstr "已完成培训"
 
@@ -882,10 +878,6 @@ msgstr "姓名"
 #: src/components/atc-application/atc-application-form.tsx:114
 msgid "Full Name"
 msgstr "姓名"
-
-#: src/routes/controllers/trainings/index.tsx:27
-msgid "Go to Controller Center"
-msgstr "前往管制员中心"
 
 #: src/components/table.tsx:178
 msgid "Go to first page"
@@ -1051,10 +1043,6 @@ msgstr "视觉标识包"
 msgid "Logout"
 msgstr "登出"
 
-#: src/routes/controllers/trainings/index.tsx:23
-msgid "Looking for your trainings?"
-msgstr "在找你的训练吗？"
-
 #: src/routes/flights/$callsign.tsx:139
 msgid "Match designated route"
 msgstr "符合指定航路"
@@ -1112,6 +1100,10 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 #: src/components/atc-application/my-application-card.tsx:35
 msgid "My Application"
 msgstr "我的申请"
+
+#: src/routes/controllers/index.tsx:76
+msgid "My Center"
+msgstr "我的"
 
 #: src/components/controller-center/my-event-bookings.tsx:41
 #: src/components/controller-center/my-event-bookings.tsx:54
@@ -1826,7 +1818,7 @@ msgstr "塔台"
 msgid "Trainee"
 msgstr "学员"
 
-#: src/routes/controllers/trainings/index.tsx:44
+#: src/components/controller-center/training-management.tsx:17
 msgid "Trainee Applications"
 msgstr "学员报名"
 
@@ -1851,7 +1843,7 @@ msgstr "训练"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers/trainings/index.tsx:36
+#: src/routes/controllers/index.tsx:77
 msgid "Training Management"
 msgstr "训练管理"
 
@@ -1859,7 +1851,7 @@ msgstr "训练管理"
 msgid "Training record saved successfully."
 msgstr "已成功保存训练记录。"
 
-#: src/routes/controllers/trainings/index.tsx:41
+#: src/components/controller-center/training-management.tsx:14
 msgid "Trainings"
 msgstr "培训"
 
@@ -2068,7 +2060,3 @@ msgstr "已经成功修改管制员申请。"
 #: src/components/atc-application/atc-application-status.tsx:62
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"
-
-#: src/routes/controllers/trainings/index.tsx:24
-msgid "Your training sessions and applications now live in the Controller Center."
-msgstr "你的训练与报名信息已移至管制员中心。"

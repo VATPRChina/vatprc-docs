@@ -88,7 +88,7 @@ msgstr "Accepted"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/routes/controllers/trainings/index.tsx:55
+#: src/components/controller-center/training-management.tsx:28
 msgid "Active Trainings"
 msgstr "Active Trainings"
 
@@ -295,10 +295,6 @@ msgstr "ATC Permission"
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/components/app/app-nav-menu.tsx:103
-msgid "ATC Trainings"
-msgstr "ATC Trainings"
-
 #: src/routes/controllers/applications/$id.tsx:60
 #: src/routes/events/$id.tsx:57
 #: src/routes/users/index.tsx:205
@@ -465,9 +461,9 @@ msgstr "Controller Application"
 msgid "Controller Application Guideline"
 msgstr "Controller Application Guideline"
 
-#: src/routes/controllers/index.tsx:15
-#: src/routes/controllers/index.tsx:37
-#: src/routes/controllers/index.tsx:49
+#: src/routes/controllers/index.tsx:23
+#: src/routes/controllers/index.tsx:50
+#: src/routes/controllers/index.tsx:62
 msgid "Controller Center"
 msgstr "Controller Center"
 
@@ -824,7 +820,7 @@ msgstr "Fields"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 
-#: src/routes/controllers/trainings/index.tsx:58
+#: src/components/controller-center/training-management.tsx:31
 msgid "Finished Trainings"
 msgstr "Finished Trainings"
 
@@ -882,10 +878,6 @@ msgstr "Full name"
 #: src/components/atc-application/atc-application-form.tsx:114
 msgid "Full Name"
 msgstr "Full Name"
-
-#: src/routes/controllers/trainings/index.tsx:27
-msgid "Go to Controller Center"
-msgstr "Go to Controller Center"
 
 #: src/components/table.tsx:178
 msgid "Go to first page"
@@ -1051,10 +1043,6 @@ msgstr "Logo Pack"
 msgid "Logout"
 msgstr "Logout"
 
-#: src/routes/controllers/trainings/index.tsx:23
-msgid "Looking for your trainings?"
-msgstr "Looking for your trainings?"
-
 #: src/routes/flights/$callsign.tsx:139
 msgid "Match designated route"
 msgstr "Match designated route"
@@ -1112,6 +1100,10 @@ msgstr "My account belongs to VATPRC division."
 #: src/components/atc-application/my-application-card.tsx:35
 msgid "My Application"
 msgstr "My Application"
+
+#: src/routes/controllers/index.tsx:76
+msgid "My Center"
+msgstr "My Center"
 
 #: src/components/controller-center/my-event-bookings.tsx:41
 #: src/components/controller-center/my-event-bookings.tsx:54
@@ -1826,7 +1818,7 @@ msgstr "Tower"
 msgid "Trainee"
 msgstr "Trainee"
 
-#: src/routes/controllers/trainings/index.tsx:44
+#: src/components/controller-center/training-management.tsx:17
 msgid "Trainee Applications"
 msgstr "Trainee Applications"
 
@@ -1851,7 +1843,7 @@ msgstr "Training"
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
 
-#: src/routes/controllers/trainings/index.tsx:36
+#: src/routes/controllers/index.tsx:77
 msgid "Training Management"
 msgstr "Training Management"
 
@@ -1859,7 +1851,7 @@ msgstr "Training Management"
 msgid "Training record saved successfully."
 msgstr "Training record saved successfully."
 
-#: src/routes/controllers/trainings/index.tsx:41
+#: src/components/controller-center/training-management.tsx:14
 msgid "Trainings"
 msgstr "Trainings"
 
@@ -2068,7 +2060,3 @@ msgstr "Your ATC application has been updated successfully."
 #: src/components/atc-application/atc-application-status.tsx:62
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
-
-#: src/routes/controllers/trainings/index.tsx:24
-msgid "Your training sessions and applications now live in the Controller Center."
-msgstr "Your training sessions and applications now live in the Controller Center."
