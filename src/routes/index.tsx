@@ -19,7 +19,7 @@ function RouteComponent() {
         <EventCarousel />
         <NotamBoard />
         <ControllersBoard />
-        <section className="flex flex-col items-center gap-6 border-t border-gray-200 pt-16 text-center dark:border-gray-700">
+        <section className="flex flex-col items-center gap-6 border-t border-black/15 pt-16 text-center dark:border-white/20">
           <h2 className="text-2xl font-medium">
             <Trans>Feedback</Trans>
           </h2>

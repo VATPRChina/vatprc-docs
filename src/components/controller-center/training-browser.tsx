@@ -100,20 +100,20 @@ export const TrainingBrowser: FC = () => {
           {myPendingApplications.map((application) => (
             <p
               key={application.id}
-              className="border border-l-3 border-gray-200 border-l-gray-300 px-3 py-2 font-mono text-sm text-gray-600 dark:border-gray-800 dark:border-l-gray-600 dark:text-gray-300"
+              className="border border-l-3 border-black/15 border-l-gray-300 px-3 py-2 font-mono text-sm text-gray-600 dark:border-white/20 dark:border-l-gray-600 dark:text-gray-300"
             >
               <Trans>Application pending review</Trans> · {application.name}
             </p>
           ))}
           {sorted.length === 0 ? (
-            <p className="border border-gray-200 px-4 py-6 text-gray-600 dark:border-gray-800 dark:text-gray-300">
+            <p className="border border-black/15 px-4 py-6 text-gray-600 dark:border-white/20 dark:text-gray-300">
               <Trans>You have no training sessions yet. Apply for a training to get started.</Trans>
             </p>
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
               <div
                 className={cn(
-                  "min-w-0 border border-gray-200 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-gray-800",
+                  "min-w-0 border border-black/15 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-white/20",
                   mobileDetailOpen && "hidden md:block",
                 )}
               >

@@ -153,7 +153,7 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   <ul className={row ? "flex flex-col" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
     {group.items.map((item, i) => (
       <Fragment key={i}>
-        {item.divider && <hr className={row ? "my-2 border-gray-200 dark:border-gray-700" : "col-span-full"} />}
+        {item.divider && <hr className={row ? "my-2 border-black/15 dark:border-white/20" : "col-span-full"} />}
         <MaybeRequireRole role={item.requireRole}>
           <NavMenuLink item={item} row={row} />
         </MaybeRequireRole>

@@ -54,7 +54,7 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
     </>
   );
   const className =
-    "flex items-center gap-3 border border-gray-200 px-4 py-3 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900";
+    "flex items-center gap-3 border border-black/15 px-4 py-3 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900";
 
   return item.external ? (
     <a href={item.href} target="_blank" rel="noreferrer" className={className}>

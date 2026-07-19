@@ -3,7 +3,7 @@ import { Trans } from "@lingui/react/macro";
 import { FC, ReactNode } from "react";
 
 const Step: FC<{ index: number; title: ReactNode }> = ({ index, title }) => (
-  <li className="flex flex-1 items-center gap-3 border border-gray-200 px-4 py-3 dark:border-gray-800">
+  <li className="flex flex-1 items-center gap-3 border border-black/15 px-4 py-3 dark:border-white/20">
     <span className="font-mono text-2xl font-bold text-red-700 dark:text-red-400">{index}</span>
     <span className="font-medium">{title}</span>
   </li>

@@ -37,7 +37,7 @@ export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ appl
       {mine.map((application) => (
         <div
           key={application.id}
-          className="flex flex-wrap items-center gap-x-4 gap-y-2 border border-gray-200 px-4 py-3 dark:border-gray-800"
+          className="flex flex-wrap items-center gap-x-4 gap-y-2 border border-black/15 px-4 py-3 dark:border-white/20"
         >
           <Badge color={STATUS_COLOR[application.status]} variant="filled" radius={0}>
             {localizeWithMap(APPLICATION_STATUS, application.status, i18n)}

@@ -40,7 +40,7 @@ export const MyEventBookings: FC = () => {
         <h2 className="text-2xl font-medium">
           <Trans>My Event Positions</Trans>
         </h2>
-        <p className="border border-gray-200 px-4 py-3 font-mono text-sm text-gray-600 dark:border-gray-800 dark:text-gray-300">
+        <p className="border border-black/15 px-4 py-3 font-mono text-sm text-gray-600 dark:border-white/20 dark:text-gray-300">
           <Trans>Failed to load event bookings.</Trans>
         </p>
       </section>
@@ -53,13 +53,13 @@ export const MyEventBookings: FC = () => {
       <h2 className="text-2xl font-medium">
         <Trans>My Event Positions</Trans>
       </h2>
-      <div className="border border-gray-200 dark:border-gray-800">
+      <div className="border border-black/15 dark:border-white/20">
         {mine.map((position) => (
           <Link
             key={position.id}
             to="/events/$id"
             params={{ id: position.event.id }}
-            className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-l-3 border-gray-200 border-l-emerald-600 px-4 py-3 font-mono text-base last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:border-l-emerald-400 dark:hover:bg-gray-900"
+            className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-l-3 border-black/15 border-l-emerald-600 px-4 py-3 font-mono text-base last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:border-l-emerald-400 dark:hover:bg-gray-900"
           >
             <span className="min-w-28 font-bold">{position.callsign}</span>
             <span className="flex-1 truncate text-gray-700 dark:text-gray-300">
