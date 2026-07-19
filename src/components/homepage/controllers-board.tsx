@@ -21,7 +21,7 @@ const ControllerStrip: React.FC<{
 }> = ({ callsign, name, frequency, eventTitle, schedule }) => (
   <div
     className={cn(
-      "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-gray-200 px-4 py-3 font-mono text-base last:border-b-0 dark:border-gray-800",
+      "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-gray-200 px-4 py-3 font-mono text-base last:border-b-0 dark:border-gray-700",
       "border-l-3",
       schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
     )}
@@ -44,7 +44,7 @@ const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
-    <div className="border border-gray-200 dark:border-gray-800">
+    <div className="border border-gray-200 dark:border-gray-700">
       {strips.length === 0 && <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>}
       {strips.slice(0, MAX_VISIBLE_STRIPS)}
       {strips.length > MAX_VISIBLE_STRIPS && (
@@ -55,7 +55,7 @@ const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode
             aria-label={opened ? t`Show fewer controllers` : t`Show all controllers`}
             aria-expanded={opened}
             onClick={toggle}
-            className="flex w-full items-center justify-center border-t border-gray-200 py-1.5 text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-900"
+            className="flex w-full items-center justify-center border-t border-gray-200 py-1.5 text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-900"
           >
             {opened ? <TbChevronUp size={20} /> : <TbChevronDown size={20} />}
           </button>
