@@ -15,7 +15,7 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
   return (
     <article className="flex min-w-0 flex-col gap-3 border border-black/15 p-4 dark:border-white/20">
       <h3 className="text-xl font-medium">{training.name}</h3>
-      <p className="flex flex-wrap gap-x-4 gap-y-1 border-b border-dashed border-gray-300 pb-3 font-mono text-sm text-gray-600 dark:border-white/20 dark:text-gray-400">
+      <p className="flex flex-wrap gap-x-4 gap-y-1 border-b border-dashed border-black/20 pb-3 font-mono text-sm text-gray-600 dark:border-white/20 dark:text-gray-400">
         <span>
           {format(training.start_at, "yyyy-MM-dd HHmm'Z'", { in: utc })}–
           {format(training.end_at, "HHmm'Z'", { in: utc })}
