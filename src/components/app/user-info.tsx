@@ -36,10 +36,12 @@ export const UserInfo = () => {
     );
   }
 
-  if (!error) {
-    <Button variant="subtle">
-      <Trans>Loading</Trans>
-    </Button>;
+  if (!data && !error) {
+    return (
+      <Button variant="subtle">
+        <Trans>Loading</Trans>
+      </Button>
+    );
   }
 
   const url = new URL("/auth/authorize", import.meta.env.VITE_API_AUTH_ENDPOINT);

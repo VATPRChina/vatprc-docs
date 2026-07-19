@@ -1,241 +1,204 @@
 import { RequireRole } from "../require-role";
 import { LanguageToggle } from "./language-toggle";
-import { ModeToggle } from "./theme-toggle";
+import { ModeToggleSegmented } from "./theme-toggle";
 import { UserInfo } from "./user-info";
-import { components } from "@/lib/api";
-import { usePermissions } from "@/lib/client";
+import { usePermissions, UserRole } from "@/lib/client";
+import { getActiveGroup, NavGroup as NavGroupData, NavItem } from "@/lib/nav";
 import { cn } from "@/lib/utils";
-import { Trans } from "@lingui/react/macro";
-import { Button, Drawer, Group, HoverCard, Stack } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
-import { ComponentProps } from "react";
-import { TbExternalLink } from "react-icons/tb";
+import { msg } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react/macro";
+import { Accordion, Button, Drawer, Group, Menu, Stack } from "@mantine/core";
+import { Link, useLocation } from "@tanstack/react-router";
+import { ComponentProps, Fragment, PropsWithChildren, useState } from "react";
+import { TbChevronDown, TbExternalLink } from "react-icons/tb";
 
-interface NavigationMenuLinkProps {
-  large?: boolean;
-  href: string;
-  external?: boolean;
-  children: React.ReactNode;
-  className?: string;
-  requireRole?: components["schemas"]["UserRole"];
-}
-
-const NavMenuLink: React.FC<NavigationMenuLinkProps> = (props: NavigationMenuLinkProps) => {
-  const { large, href, external, children, className } = props;
-
-  const cnLink = large ? "large-item flex items-end" : "item";
-  const inner = (
-    <h3 className={cn(external && "flex items-center gap-2")}>
-      {children}
-      {external && <TbExternalLink size={12} />}
-    </h3>
-  );
-
-  const link = external ? (
-    <a role="listitem" className={cn(cnLink, className)} href={href} target="_blank" rel="noopener noreferrer">
-      {inner}
-    </a>
-  ) : (
-    <Link role="listitem" className={cn(cnLink, className)} to={href}>
-      {inner}
-    </Link>
-  );
-
-  return link;
-};
-
-const contents = [
+const contents: NavGroupData[] = [
   {
-    title: <Trans>About Us</Trans>,
-    content: () => (
-      <ul className="nav-list-grid">
-        <NavMenuLink
-          href="https://community.vatprc.net/c/69-category/12-category/12"
-          large
-          external
-          className="row-span-4"
-        >
-          <Trans>Announcement</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/introduction">
-          <Trans>Introduction</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/staff">
-          <Trans>Staff</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/privacy">
-          <Trans>Privacy Policy</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/policy">
-          <Trans>Division Policies</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip" external>
-          <Trans>Logo Pack</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/meeting">
-          <Trans>Meeting Notes</Trans>
-        </NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="https://community.vatprc.net" external>
-          <Trans>Forum</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/events">
-          <Trans>Event</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/division/api" external>
-          <Trans>API Document</Trans>
-        </NavMenuLink>
-      </ul>
-    ),
+    title: msg`About Us`,
+    items: [
+      { label: msg`Introduction`, href: "/division/introduction", large: true, className: "row-span-3" },
+      { label: msg`Staff`, href: "/division/staff" },
+      { label: msg`Privacy Policy`, href: "/division/privacy" },
+      { label: msg`Division Policies`, href: "/division/policy" },
+      { label: msg`Meeting Notes`, href: "/division/meeting" },
+      { label: msg`Logo Pack`, href: "https://files.vatprc.net/VATPRC_2022_Logo_Pack_v1.0.zip", external: true },
+      { label: msg`API Document`, href: "/division/api", external: true, divider: true },
+    ],
   },
   {
-    title: <Trans>Operation</Trans>,
-    content: () => (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/airspace/fir" large className="row-span-4">
-          <Trans>Airspace</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/rvsm">
-          <Trans>China RVSM</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/station">
-          <Trans>ATC Positions & Frequencies</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/sop">
-          <Trans>Standard Operation Procedures</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/vfr">
-          <Trans>VFR Policy</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/airspace/restricted">
-          <Trans>Restricted Airspaces</Trans>
-        </NavMenuLink>
-      </ul>
-    ),
+    title: msg`Operation`,
+    items: [
+      { label: msg`Airspace`, href: "/airspace/fir", large: true, className: "row-span-4" },
+      { label: msg`China RVSM`, href: "/airspace/rvsm" },
+      { label: msg`ATC Positions & Frequencies`, href: "/airspace/station" },
+      { label: msg`Standard Operation Procedures`, href: "/airspace/sop" },
+      { label: msg`VFR Policy`, href: "/airspace/vfr" },
+      { label: msg`Restricted Airspaces`, href: "/airspace/restricted" },
+    ],
   },
   {
-    title: <Trans>Pilots</Trans>,
-    content: () => (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/pilot/start-to-fly" large className="row-span-2">
-          <Trans>Start to Fly</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/pilot/introduction-to-fly">
-          <Trans>Introduction to Fly</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/pilot/ts3">
-          <Trans>Community & Teamspeak 3</Trans>
-        </NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="/pilot/pilot-softwares" large className="row-span-3">
-          <Trans>Pilot Softwares</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="https://chartfox.org/" external>
-          <Trans>Charts</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="https://vacdm.vatprc.net/" external>
-          <Trans>vACDM</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="https://metar-taf.com/" external>
-          <Trans>Weather</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/flights">
-          <Trans>Flight plan checker</Trans>
-        </NavMenuLink>
-      </ul>
-    ),
+    title: msg`Pilots`,
+    items: [
+      { label: msg`Start to Fly`, href: "/pilot/start-to-fly", large: true, className: "row-span-2" },
+      { label: msg`Introduction to Fly`, href: "/pilot/introduction-to-fly" },
+      { label: msg`Community & Teamspeak 3`, href: "/pilot/ts3" },
+      {
+        label: msg`Pilot Softwares`,
+        href: "/pilot/pilot-softwares",
+        large: true,
+        className: "row-span-3",
+        divider: true,
+      },
+      { label: msg`Charts`, href: "https://chartfox.org/", external: true },
+      { label: msg`vACDM`, href: "https://vacdm.vatprc.net/", external: true },
+      { label: msg`Weather`, href: "https://metar-taf.com/", external: true },
+      { label: msg`Flight plan checker`, href: "/flights" },
+    ],
   },
   {
-    title: <Trans>Controllers</Trans>,
-    content: () => (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/controller/controller-list" large className="row-span-3">
-          <Trans>Controller List</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/controller/controller-regulations">
-          <Trans>Progression Guide</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/controllers/applications">
-          <Trans>Controller Application</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/controller/visiting-and-transferring">
-          <Trans>Visiting & Transfer</Trans>
-        </NavMenuLink>
-        <hr className="col-span-full" />
-        <NavMenuLink href="/controllers" large className="row-span-3">
-          <Trans>ATC Center</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="https://moodle.vatprc.net" external>
-          <Trans>Moodle</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/controller/sector">
-          <Trans>Sector Files</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/controller/loa">
-          <Trans>Letter of Agreement</Trans>
-        </NavMenuLink>
-      </ul>
-    ),
+    title: msg`Controllers`,
+    items: [
+      { label: msg`Controller List`, href: "/controller/controller-list", large: true, className: "row-span-3" },
+      { label: msg`Progression Guide`, href: "/controller/controller-regulations" },
+      { label: msg`Controller Application`, href: "/controllers/applications" },
+      { label: msg`Visiting & Transfer`, href: "/controller/visiting-and-transferring" },
+      { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-3", divider: true },
+      { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true },
+      { label: msg`Sector Files`, href: "/controller/sector" },
+      { label: msg`Letter of Agreement`, href: "/controller/loa" },
+    ],
   },
   {
-    title: <Trans>Admin</Trans>,
-    requiresRole: "volunteer" as const,
-    content: () => (
-      <ul className="nav-list-grid">
-        <NavMenuLink href="/events">
-          <Trans>Event</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/users">
-          <Trans>User List</Trans>
-        </NavMenuLink>
-        <NavMenuLink href="/docs/utils/image">
-          <Trans>Image Upload Tool</Trans>
-        </NavMenuLink>
-        <RequireRole role="staff">
-          <NavMenuLink href="/sheets">
-            <Trans>Sheet Management</Trans>
-          </NavMenuLink>
-        </RequireRole>
-        <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
-          <NavMenuLink href="/navdata/preferred-routes">
-            <Trans>Preferred Routes</Trans>
-          </NavMenuLink>
-        </RequireRole>
-        <RequireRole role="controller-training-director-assistant">
-          <NavMenuLink href="/controllers/applications">
-            <Trans>ATC Applications</Trans>
-          </NavMenuLink>
-        </RequireRole>
-        <RequireRole role={["controller", "controller-training-mentor"]}>
-          <NavMenuLink href="/controllers/trainings">
-            <Trans>ATC Trainings</Trans>
-          </NavMenuLink>
-        </RequireRole>
-      </ul>
-    ),
+    title: msg`Community`,
+    singleColumn: true,
+    items: [
+      { label: msg`Forum`, href: "https://community.vatprc.net", external: true, large: true },
+      { label: msg`Event`, href: "/events", large: true },
+      {
+        label: msg`Announcement`,
+        href: "https://community.vatprc.net/c/69-category/12-category/12",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: msg`Admin`,
+    requireRole: "volunteer",
+    items: [
+      { label: msg`Event`, href: "/events" },
+      { label: msg`User List`, href: "/users" },
+      { label: msg`Image Upload Tool`, href: "/docs/utils/image" },
+      { label: msg`Sheet Management`, href: "/sheets", requireRole: "staff" },
+      {
+        label: msg`Preferred Routes`,
+        href: "/navdata/preferred-routes",
+        requireRole: ["event-coordinator", "operation-director-assistant"],
+      },
+      {
+        label: msg`ATC Applications`,
+        href: "/controllers/applications",
+        requireRole: "controller-training-director-assistant",
+      },
+      {
+        label: msg`ATC Trainings`,
+        href: "/controllers/trainings",
+        requireRole: ["controller", "controller-training-mentor"],
+      },
+    ],
   },
 ];
 
+const MaybeRequireRole: React.FC<PropsWithChildren<{ role?: UserRole | UserRole[] }>> = ({
+  role,
+  children,
+}: PropsWithChildren<{ role?: UserRole | UserRole[] }>) =>
+  role ? <RequireRole role={role}>{children}</RequireRole> : children;
+
+const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: { item: NavItem; row?: boolean }) => {
+  const { i18n } = useLingui();
+  const cnLink = row
+    ? cn("item", item.large && "font-bold")
+    : item.large
+      ? cn("large-item flex items-end", item.className)
+      : cn("item", item.className);
+
+  const inner = (
+    <h3 className={cn(item.external && "flex items-center gap-2")}>
+      {i18n._(item.label)}
+      {item.external && <TbExternalLink size={12} />}
+    </h3>
+  );
+
+  return item.external ? (
+    <a role="listitem" className={cnLink} href={item.href} target="_blank" rel="noopener noreferrer">
+      {inner}
+    </a>
+  ) : (
+    <Link role="listitem" className={cnLink} to={item.href}>
+      {inner}
+    </Link>
+  );
+};
+
+const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
+  group,
+  row,
+}: {
+  group: NavGroupData;
+  row?: boolean;
+}) => (
+  <ul className={row ? "flex flex-col" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
+    {group.items.map((item, i) => (
+      <Fragment key={i}>
+        {item.divider && <hr className={row ? "my-1" : "col-span-full"} />}
+        <MaybeRequireRole role={item.requireRole}>
+          <NavMenuLink item={item} row={row} />
+        </MaybeRequireRole>
+      </Fragment>
+    ))}
+  </ul>
+);
+
 export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
   const roles = usePermissions();
+  const { i18n } = useLingui();
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const activeIndex = getActiveGroup(pathname, contents);
+  const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
   return (
     <Group gap="md" {...props}>
-      {contents.map((content, i) => {
-        if (content.requiresRole && !roles.includes(content.requiresRole)) {
+      {contents.map((group, i) => {
+        if (group.requireRole && !roles.includes(group.requireRole)) {
           return null;
         }
         return (
-          <HoverCard key={i}>
-            <HoverCard.Target>
-              <Button variant="subtle" color="gray">
-                {content.title}
+          <Menu
+            key={i}
+            trigger="click-hover"
+            position="bottom-start"
+            opened={openedIndex === i}
+            onChange={(opened) => setOpenedIndex((current) => (opened ? i : current === i ? null : current))}
+          >
+            <Menu.Target>
+              <Button
+                variant="subtle"
+                color="gray"
+                className="group"
+                style={{
+                  borderBottom: `2px solid ${i === activeIndex ? "var(--color-vatprc)" : "transparent"}`,
+                }}
+                rightSection={
+                  <TbChevronDown size={14} className="transition-transform group-aria-expanded:rotate-180" />
+                }
+              >
+                {i18n._(group.title)}
               </Button>
-            </HoverCard.Target>
-            <HoverCard.Dropdown>
-              <content.content />
-            </HoverCard.Dropdown>
-          </HoverCard>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <NavGroupItems group={group} />
+            </Menu.Dropdown>
+          </Menu>
         );
       })}
     </Group>
@@ -244,26 +207,33 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
 
 export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) => {
   const roles = usePermissions();
+  const { i18n } = useLingui();
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const activeIndex = getActiveGroup(pathname, contents);
 
   return (
     <Drawer {...props}>
       <Stack>
         <Group>
-          <ModeToggle />
+          <ModeToggleSegmented />
           <LanguageToggle />
           <UserInfo />
         </Group>
-        {contents.map((content, i) => {
-          if (content.requiresRole && !roles.includes(content.requiresRole)) {
-            return null;
-          }
-          return (
-            <div key={i}>
-              <h3 className="mb-2 font-semibold">{content.title}</h3>
-              <content.content />
-            </div>
-          );
-        })}
+        <Accordion defaultValue={activeIndex === undefined ? null : String(activeIndex)}>
+          {contents.map((group, i) => {
+            if (group.requireRole && !roles.includes(group.requireRole)) {
+              return null;
+            }
+            return (
+              <Accordion.Item key={i} value={String(i)}>
+                <Accordion.Control>{i18n._(group.title)}</Accordion.Control>
+                <Accordion.Panel>
+                  <NavGroupItems group={group} row />
+                </Accordion.Panel>
+              </Accordion.Item>
+            );
+          })}
+        </Accordion>
       </Stack>
     </Drawer>
   );

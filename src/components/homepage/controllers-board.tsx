@@ -73,7 +73,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
   if (isLoading) return <Loader />;
 
   const online = data?.controllers ?? [];
-  const booked = data?.future_controllers ?? [];
+  const booked = [...(data?.future_controllers ?? [])].sort((a, b) => +parseISO(a.start_utc) - +parseISO(b.start_utc));
 
   const eventTitleFor = (start: Date, end: Date) => {
     const event = events?.find((ev) => start < parseISO(ev.end_at) && end > parseISO(ev.start_at));

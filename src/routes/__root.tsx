@@ -44,6 +44,10 @@ const theme = createTheme({
   },
   fontFamily:
     '"Outfit", ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+  // CJK sans fonts before the generic keyword: otherwise Chinese glyphs in monospace
+  // contexts fall through to the browser's default fixed font (SimSun on Windows).
+  fontFamilyMonospace:
+    'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",monospace',
   defaultRadius: 0,
 });
 

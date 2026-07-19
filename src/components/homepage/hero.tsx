@@ -49,31 +49,27 @@ export const Hero: React.FC = () => {
             You make the difference!
           </Trans>
         </p>
-        <div className="mt-8 flex flex-col items-start gap-3">
-          <div className="flex flex-wrap gap-3">
-            <Button color="var(--color-vatprc)" component={Link} to="/controllers/applications">
-              <Trans>Join the controller team</Trans>
-            </Button>
-            <Button variant="outline" color="gray.0" component={Link} to="/pilot/introduction-to-fly">
-              <Trans>How to fly</Trans>
-            </Button>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="outline" color="gray.0" component={Link} to="/flights">
-              <Trans>Flight plan checker</Trans>
-            </Button>
-            <Button
-              variant="outline"
-              color="gray.0"
-              component="a"
-              href="https://community.vatprc.net"
-              target="_blank"
-              rel="noreferrer"
-              rightSection={<TbExternalLink size={14} />}
-            >
-              <Trans>Forum</Trans>
-            </Button>
-          </div>
+        <div className="mt-8 grid w-fit grid-cols-2 gap-3">
+          <Button color="var(--color-vatprc)" component={Link} to="/controllers/applications">
+            <Trans>Join the controller team</Trans>
+          </Button>
+          <Button variant="outline" color="gray.0" component={Link} to="/pilot/introduction-to-fly">
+            <Trans>How to fly</Trans>
+          </Button>
+          <Button variant="outline" color="gray.0" component={Link} to="/flights">
+            <Trans>Flight plan checker</Trans>
+          </Button>
+          <Button
+            variant="outline"
+            color="gray.0"
+            component="a"
+            href="https://community.vatprc.net"
+            target="_blank"
+            rel="noreferrer"
+            rightSection={<TbExternalLink size={14} />}
+          >
+            <Trans>Forum</Trans>
+          </Button>
         </div>
         <div className="mt-10 flex gap-10 font-mono">
           <HeroStat value={data?.pilots?.length ?? "--"} label={<Trans>Pilots online</Trans>} />
