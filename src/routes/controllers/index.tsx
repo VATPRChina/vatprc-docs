@@ -3,9 +3,10 @@ import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { MyEventBookings } from "@/components/controller-center/my-event-bookings";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
-import { $api, usePermissions, useUser } from "@/lib/client";
+import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { Skeleton } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/")({
@@ -16,11 +17,30 @@ export const Route = createFileRoute("/controllers/")({
 });
 
 function RouteComponent() {
-  const user = useUser();
-  const roles = usePermissions();
-  const { data: status } = $api.useQuery("get", "/api/users/me/atc/status", {}, { retry: false, enabled: !!user });
+  const { data: session, isLoading: isSessionLoading } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  const user = session?.user;
+  const roles = user?.roles ?? [];
+  const { data: status, isLoading: isStatusLoading } = $api.useQuery(
+    "get",
+    "/api/users/me/atc/status",
+    {},
+    { retry: false, enabled: !!user },
+  );
 
+  const isPending = isSessionLoading || (!!user && isStatusLoading);
   const isController = roles.includes("controller") || (status?.permissions.length ?? 0) > 0;
+
+  if (isPending) {
+    return (
+      <div className="container mx-auto flex flex-col gap-8">
+        <h1 className="text-3xl font-medium">
+          <Trans>Controller Center</Trans>
+        </h1>
+        <Skeleton h={320} />
+        <Skeleton h={140} />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto flex flex-col gap-8">
