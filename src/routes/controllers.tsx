@@ -41,17 +41,19 @@ const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: C
 function RouteComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
   const tab: CenterTab = resolveCenterTab(pathname);
-  const { data: session, isLoading: isSessionLoading } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  const { data: session, error: sessionError } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const user = session?.user;
   const roles = user?.roles ?? [];
-  const { data: status, isLoading: isStatusLoading } = $api.useQuery(
+  const { data: status, error: statusError } = $api.useQuery(
     "get",
     "/api/users/me/atc/status",
     {},
     { retry: false, enabled: !!user },
   );
 
-  const isPending = isSessionLoading || (!!user && isStatusLoading);
+  const sessionSettled = session !== undefined || sessionError !== undefined;
+  const statusSettled = !user || status !== undefined || statusError !== undefined;
+  const isPending = !sessionSettled || !statusSettled;
   const isController = roles.includes("controller") || (status?.permissions.length ?? 0) > 0;
   const canManageTrainings = MANAGEMENT_ROLES.some((role) => roles.includes(role));
   const canReviewApplications = roles.includes("controller-training-director-assistant");
