@@ -1,8 +1,7 @@
 import { AtcApplicationList } from "@/components/atc-application/atc-application-list";
+import { useCenterRoles } from "@/components/controller-center/center-context";
 import { RequireRole } from "@/components/require-role";
-import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Skeleton } from "@mantine/core";
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/")({
@@ -10,11 +9,8 @@ export const Route = createFileRoute("/controllers/applications/")({
 });
 
 function RouteComponent() {
-  const { data: session, isLoading } = $api.useQuery("get", "/api/session", {}, { retry: false });
-  const roles = session?.user?.roles ?? [];
-
-  if (isLoading) return <Skeleton h={320} />;
-  if (!roles.includes("controller-training-director-assistant")) return <Navigate to="/controllers" replace />;
+  const { canReviewApplications } = useCenterRoles();
+  if (!canReviewApplications) return <Navigate to="/controllers" replace />;
 
   return (
     <section className="flex flex-col gap-3">

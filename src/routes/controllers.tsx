@@ -1,3 +1,4 @@
+import { CenterRolesProvider } from "@/components/controller-center/center-context";
 import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { MANAGEMENT_ROLES } from "@/components/controller-center/training-management";
@@ -96,7 +97,9 @@ function RouteComponent() {
       )}
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="flex min-w-0 flex-col gap-8">
-          <Outlet />
+          <CenterRolesProvider value={{ userId: user?.id, isController, canManageTrainings, canReviewApplications }}>
+            <Outlet />
+          </CenterRolesProvider>
         </div>
         <aside className="xl:sticky xl:top-20 xl:self-start">
           {hasInternalRole ? <ResourceGrid compact /> : <ResourceGrid publicOnly />}
