@@ -16,11 +16,11 @@ function RouteComponent() {
   const [docCode] = Route.useLoaderData();
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl">
+      <h2 className="text-2xl font-medium">
         <Trans>New ATC Application</Trans>
-      </h1>
+      </h2>
       <Alert color="yellow" title={<Trans>Controller Application Guideline</Trans>}>
         <Trans>
           Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied.

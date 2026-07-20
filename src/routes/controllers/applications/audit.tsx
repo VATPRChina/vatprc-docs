@@ -21,11 +21,11 @@ const AtcApplicationAuditLogPage = () => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications/audit");
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl">
+      <h2 className="text-2xl font-medium">
         <Trans>ATC Application Audit Logs</Trans>
-      </h1>
+      </h2>
       <AuditLogTable data={data} error={error} isLoading={isLoading} />
     </div>
   );

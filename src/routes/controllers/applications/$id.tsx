@@ -27,11 +27,11 @@ function RouteComponent() {
   });
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl">
+      <h2 className="text-2xl font-medium">
         <Trans>ATC Application</Trans>
-      </h1>
+      </h2>
       <AtcApplicationStatusAlert applicationId={params.id} />
       <AtcApplicationForm applicationId={params.id} />
       <h2 className="text-lg">
