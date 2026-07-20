@@ -9,7 +9,7 @@ const Step: FC<{ index: number; title: ReactNode }> = ({ index, title }) => (
   </li>
 );
 
-export const BecomeController: FC = () => (
+export const BecomeController: FC<{ showApply?: boolean }> = ({ showApply = true }) => (
   <section className="flex flex-col gap-4">
     <h2 className="text-2xl font-medium">
       <Trans>Become a Controller</Trans>
@@ -26,8 +26,10 @@ export const BecomeController: FC = () => (
       <Step index={3} title={<Trans>Mentor assignment</Trans>} />
       <Step index={4} title={<Trans>Start training</Trans>} />
     </ol>
-    <LinkButton className="self-start" color="red" to="/controllers/applications">
-      <Trans>Apply Now</Trans>
-    </LinkButton>
+    {showApply && (
+      <LinkButton className="self-start" color="red" to="/controllers/applications/new">
+        <Trans>Apply Now</Trans>
+      </LinkButton>
+    )}
   </section>
 );
