@@ -1,8 +1,18 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { MANAGEMENT_ROLES, TrainingManagement } from "@/components/controller-center/training-management";
+import { $api } from "@/lib/client";
+import { Skeleton } from "@mantine/core";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/trainings/")({
-  beforeLoad: () => {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw redirect({ to: "/controllers", search: { view: "management" } });
-  },
+  component: RouteComponent,
 });
+
+function RouteComponent() {
+  const { data: session, isLoading } = $api.useQuery("get", "/api/session", {}, { retry: false });
+  const roles = session?.user?.roles ?? [];
+
+  if (isLoading) return <Skeleton h={320} />;
+  if (!MANAGEMENT_ROLES.some((role) => roles.includes(role))) return <Navigate to="/controllers" replace />;
+
+  return <TrainingManagement />;
+}

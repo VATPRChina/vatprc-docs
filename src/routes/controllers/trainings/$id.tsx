@@ -45,11 +45,11 @@ function RouteComponent() {
   };
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-row items-center gap-4">
-        <h1 className="text-3xl">
+        <h2 className="text-2xl font-medium">
           <Trans>Training</Trans>
-        </h1>
+        </h2>
         <TrainingSaveModal id={id} />
       </div>
       <Table variant="vertical" layout="fixed">
