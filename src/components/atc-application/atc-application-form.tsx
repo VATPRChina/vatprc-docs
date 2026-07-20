@@ -67,7 +67,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
       message: t`Your ATC application has been submitted successfully.`,
       color: "green",
     });
-    await navigate({ to: "/controllers/applications" });
+    await navigate({ to: "/controllers" });
   });
   const onUpdateSuccess = wrapPromiseWithLog(async () => {
     await queryClient.invalidateQueries(
