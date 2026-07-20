@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
           </Trans>
         </p>
         <div className="mt-8 grid w-fit grid-cols-2 gap-3">
-          <Button color="var(--color-vatprc)" component={Link} to="/controllers/applications">
+          <Button color="var(--color-vatprc)" component={Link} to="/controllers">
             <Trans>Join the controller team</Trans>
           </Button>
           <Button variant="outline" color="gray.0" component={Link} to="/pilot/introduction-to-fly">

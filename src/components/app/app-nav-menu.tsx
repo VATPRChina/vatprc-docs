@@ -60,7 +60,7 @@ const contents: NavGroupData[] = [
     items: [
       { label: msg`Controller List`, href: "/controller/controller-list", large: true, className: "row-span-3" },
       { label: msg`Progression Guide`, href: "/controller/controller-regulations" },
-      { label: msg`Controller Application`, href: "/controllers/applications" },
+      { label: msg`Controller Application`, href: "/controllers" },
       { label: msg`Visiting & Transfer`, href: "/controller/visiting-and-transferring" },
       { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-3", divider: true },
       { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true },
@@ -93,11 +93,6 @@ const contents: NavGroupData[] = [
         label: msg`Preferred Routes`,
         href: "/navdata/preferred-routes",
         requireRole: ["event-coordinator", "operation-director-assistant"],
-      },
-      {
-        label: msg`ATC Applications`,
-        href: "/controllers/applications",
-        requireRole: "controller-training-director-assistant",
       },
     ],
   },
