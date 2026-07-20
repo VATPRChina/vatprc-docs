@@ -157,6 +157,10 @@ msgstr "申请信息"
 msgid "Application pending review"
 msgstr "报名审核中"
 
+#: src/routes/controllers.tsx:92
+msgid "Application Review"
+msgstr "申请审核"
+
 #: src/components/atc-application/atc-application-status.tsx:111
 msgid "Application review updated"
 msgstr "申请审核已更新"
@@ -178,11 +182,10 @@ msgid "Applied At"
 msgstr "申请时间"
 
 #: src/routes/_doc/controller/become-a-controller.tsx:12
-#: src/routes/controllers/applications/index.tsx:29
 msgid "Apply"
 msgstr "申请"
 
-#: src/components/controller-center/become-controller.tsx:30
+#: src/components/controller-center/become-controller.tsx:31
 msgid "Apply Now"
 msgstr "立即申请"
 
@@ -264,11 +267,6 @@ msgstr "管制员申请"
 #: src/routes/controllers/applications/audit.tsx:27
 msgid "ATC Application Audit Logs"
 msgstr "管制员申请审计日志"
-
-#: src/components/app/app-nav-menu.tsx:98
-#: src/routes/controllers/applications/index.tsx:24
-msgid "ATC Applications"
-msgstr "管制员申请"
 
 #: src/components/homepage/event-carousel.tsx:36
 msgid "ATC booked {booked}/{total}"
@@ -461,9 +459,9 @@ msgstr "管制员申请"
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
 
-#: src/routes/controllers/index.tsx:25
-#: src/routes/controllers/index.tsx:79
-#: src/routes/controllers/index.tsx:91
+#: src/routes/controllers.tsx:15
+#: src/routes/controllers.tsx:64
+#: src/routes/controllers.tsx:76
 msgid "Controller Center"
 msgstr "管制员中心"
 
@@ -1107,7 +1105,7 @@ msgid "My Event Positions"
 msgstr "我的活动席位"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers/index.tsx:103
+#: src/routes/controllers.tsx:83
 msgid "My Trainings"
 msgstr "我的训练"
 
@@ -1406,7 +1404,7 @@ msgid "Restricted airway"
 msgstr "受限航路"
 
 #: src/routes/controllers/applications/$id.tsx:38
-#: src/routes/controllers/applications/index.tsx:36
+#: src/routes/controllers/applications/index.tsx:23
 msgid "Review"
 msgstr "审核"
 
@@ -1840,7 +1838,7 @@ msgstr "训练"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers/index.tsx:106
+#: src/routes/controllers.tsx:87
 msgid "Training Management"
 msgstr "训练管理"
 
@@ -1976,7 +1974,7 @@ msgstr "目视飞行规则"
 msgid "View"
 msgstr "查看"
 
-#: src/routes/controllers/applications/index.tsx:40
+#: src/routes/controllers/applications/index.tsx:27
 #: src/routes/events/index.tsx:27
 #: src/routes/users/index.tsx:168
 msgid "View audit logs"

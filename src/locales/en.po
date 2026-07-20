@@ -157,6 +157,10 @@ msgstr "Application Information"
 msgid "Application pending review"
 msgstr "Application pending review"
 
+#: src/routes/controllers.tsx:92
+msgid "Application Review"
+msgstr "Application Review"
+
 #: src/components/atc-application/atc-application-status.tsx:111
 msgid "Application review updated"
 msgstr "Application review updated"
@@ -178,11 +182,10 @@ msgid "Applied At"
 msgstr "Applied At"
 
 #: src/routes/_doc/controller/become-a-controller.tsx:12
-#: src/routes/controllers/applications/index.tsx:29
 msgid "Apply"
 msgstr "Apply"
 
-#: src/components/controller-center/become-controller.tsx:30
+#: src/components/controller-center/become-controller.tsx:31
 msgid "Apply Now"
 msgstr "Apply Now"
 
@@ -264,11 +267,6 @@ msgstr "ATC Application"
 #: src/routes/controllers/applications/audit.tsx:27
 msgid "ATC Application Audit Logs"
 msgstr "ATC Application Audit Logs"
-
-#: src/components/app/app-nav-menu.tsx:98
-#: src/routes/controllers/applications/index.tsx:24
-msgid "ATC Applications"
-msgstr "ATC Applications"
 
 #: src/components/homepage/event-carousel.tsx:36
 msgid "ATC booked {booked}/{total}"
@@ -461,9 +459,9 @@ msgstr "Controller Application"
 msgid "Controller Application Guideline"
 msgstr "Controller Application Guideline"
 
-#: src/routes/controllers/index.tsx:25
-#: src/routes/controllers/index.tsx:79
-#: src/routes/controllers/index.tsx:91
+#: src/routes/controllers.tsx:15
+#: src/routes/controllers.tsx:64
+#: src/routes/controllers.tsx:76
 msgid "Controller Center"
 msgstr "Controller Center"
 
@@ -1107,7 +1105,7 @@ msgid "My Event Positions"
 msgstr "My Event Positions"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers/index.tsx:103
+#: src/routes/controllers.tsx:83
 msgid "My Trainings"
 msgstr "My Trainings"
 
@@ -1406,7 +1404,7 @@ msgid "Restricted airway"
 msgstr "Restricted airway"
 
 #: src/routes/controllers/applications/$id.tsx:38
-#: src/routes/controllers/applications/index.tsx:36
+#: src/routes/controllers/applications/index.tsx:23
 msgid "Review"
 msgstr "Review"
 
@@ -1840,7 +1838,7 @@ msgstr "Training"
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
 
-#: src/routes/controllers/index.tsx:106
+#: src/routes/controllers.tsx:87
 msgid "Training Management"
 msgstr "Training Management"
 
@@ -1976,7 +1974,7 @@ msgstr "VFR Policy"
 msgid "View"
 msgstr "View"
 
-#: src/routes/controllers/applications/index.tsx:40
+#: src/routes/controllers/applications/index.tsx:27
 #: src/routes/events/index.tsx:27
 #: src/routes/users/index.tsx:168
 msgid "View audit logs"
