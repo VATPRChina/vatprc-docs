@@ -104,7 +104,7 @@ function RouteComponent() {
           </CenterRolesProvider>
         </div>
         <aside className="xl:sticky xl:top-20 xl:self-start">
-          {hasInternalRole ? <ResourceGrid compact /> : <ResourceGrid publicOnly />}
+          <ResourceGrid compact publicOnly={!hasInternalRole} />
         </aside>
       </div>
     </div>
