@@ -55,7 +55,9 @@ function RouteComponent() {
   const statusSettled = !user || status !== undefined || statusError !== undefined;
   const isPending = !sessionSettled || !statusSettled;
   const isController = roles.includes("controller") || (status?.permissions.length ?? 0) > 0;
-  const canManageTrainings = MANAGEMENT_ROLES.some((role) => roles.includes(role));
+  // 教员身份存在 ATC 席位权限的 state 里（UserControllerState "mentor"），不是 UserRole。
+  const isPositionMentor = (status?.permissions ?? []).some((permission) => permission.state === "mentor");
+  const canManageTrainings = isPositionMentor || MANAGEMENT_ROLES.some((role) => roles.includes(role));
   const canReviewApplications = roles.includes("controller-training-director-assistant");
   const hasInternalRole = isController || canManageTrainings || canReviewApplications;
   const showTabs = canManageTrainings || canReviewApplications;
