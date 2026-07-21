@@ -1,9 +1,9 @@
 import { CenterRolesProvider } from "@/components/controller-center/center-context";
 import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
-import { MANAGEMENT_ROLES } from "@/components/controller-center/training-management";
 import { CenterTab, resolveCenterTab } from "@/lib/center-tab";
 import { $api } from "@/lib/client";
+import { MANAGEMENT_ROLES } from "@/lib/management-roles";
 import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";

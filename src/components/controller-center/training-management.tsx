@@ -5,8 +5,6 @@ import { Trans } from "@lingui/react/macro";
 import { Tabs } from "@mantine/core";
 import React from "react";
 
-export const MANAGEMENT_ROLES = ["controller-training-mentor", "controller-training-director-assistant"] as const;
-
 export const TrainingManagement: React.FC = () => (
   <Tabs defaultValue="trainings">
     <Tabs.List className="mb-2">

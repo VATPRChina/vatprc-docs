@@ -17,7 +17,7 @@ function RouteComponent() {
     "get",
     "/api/atc/applications",
     {},
-    { retry: false, enabled: !!userId },
+    { retry: false, enabled: !!userId && !isController },
   );
 
   const showTabs = canManageTrainings || canReviewApplications;
