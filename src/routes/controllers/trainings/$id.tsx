@@ -1,5 +1,6 @@
 import { TrainingList } from "@/components/atc-training/training-list";
 import { TrainingSaveModal } from "@/components/atc-training/training-save";
+import { BackButton } from "@/components/back-button";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
 import { useUser, $api } from "@/lib/client";
@@ -46,6 +47,7 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-4">
+      <BackButton />
       <div className="flex flex-row items-center gap-4">
         <h2 className="text-2xl font-medium">
           <Trans>Training</Trans>
