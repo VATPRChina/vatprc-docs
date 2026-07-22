@@ -108,7 +108,7 @@ const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: 
   const { i18n } = useLingui();
   const cnLink = row
     ? cn(
-        "block px-2 py-2.5 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-gray-900 dark:active:bg-gray-800",
+        "block px-2 py-2.5 hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-900 dark:active:bg-gray-800",
         item.large && "font-bold",
       )
     : item.large
