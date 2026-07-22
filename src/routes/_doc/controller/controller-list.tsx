@@ -55,7 +55,7 @@ function Page() {
           </li>
           <li>
             <Trans>
-              The <b>Military</b> column marks controllers with military position permission.
+              The <b>MIL</b> column marks controllers with military position permission.
             </Trans>
           </li>
         </ul>

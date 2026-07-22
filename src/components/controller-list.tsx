@@ -36,7 +36,7 @@ const PermissionBadge: React.FC<{ permissions: AtcPermissionDto[]; kind: string 
     <span
       className={cn(
         "flex items-center justify-center px-2 py-1 font-mono text-sm",
-        permission.state === "mentor" && "bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300",
+        permission.state === "mentor" && "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
         permission.state === "certified" && "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
         permission.state === "under-mentor" && "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
         permission.state === "solo" && "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
@@ -98,18 +98,29 @@ const columns = [
   ...POSITION_KINDS.map((kind) =>
     col.display({
       id: `permission-${kind}`,
-      header: () => kind,
+      header: () => <div className="text-center">{kind}</div>,
       enableSorting: false,
       enableColumnFilter: false,
-      cell: ({ row }) => <PermissionBadge permissions={row.original.permissions} kind={kind} />,
+      cell: ({ row }) => (
+        <div className="flex justify-center">
+          <PermissionBadge permissions={row.original.permissions} kind={kind} />
+        </div>
+      ),
     }),
   ),
   col.display({
     id: "military",
-    header: () => <Trans>Military</Trans>,
+    header: () => <div className="text-center">MIL</div>,
     enableSorting: false,
     enableColumnFilter: false,
-    cell: ({ row }) => (isMilitaryController(row.original.user.cid) ? <span>✓</span> : null),
+    cell: ({ row }) =>
+      isMilitaryController(row.original.user.cid) ? (
+        <div className="flex justify-center">
+          <span className="flex items-center justify-center bg-green-100 px-2 py-1 font-mono text-sm text-green-700 dark:bg-green-900 dark:text-green-300">
+            ✓
+          </span>
+        </div>
+      ) : null,
   }),
 ];
 
@@ -134,6 +145,8 @@ export const ControllerListTable: React.FC = () => {
         columns={columns}
         isLoading={isLoading}
         initialState={{ pagination: { pageSize: Number.MAX_SAFE_INTEGER } }}
+        hideGlobalSearch
+        stickyHeader
       />
     </div>
   );

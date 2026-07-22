@@ -53,11 +53,22 @@ export interface RichTableProps<TData> {
   columns: ColumnDef<TData, any>[];
   isLoading?: boolean;
   initialState?: InitialTableState;
+  /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
+  hideGlobalSearch?: boolean;
+  /** Keep the header row visible while the table body scrolls past it. */
+  stickyHeader?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
 
-export const RichTable = <TData,>({ data, columns, isLoading, initialState }: RichTableProps<TData>) => {
+export const RichTable = <TData,>({
+  data,
+  columns,
+  isLoading,
+  initialState,
+  hideGlobalSearch,
+  stickyHeader,
+}: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
   const table = useReactTable({
@@ -88,9 +99,17 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
 
   return (
     <div className="flex flex-col gap-4">
-      <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+      {!hideGlobalSearch && (
+        <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+      )}
       <Table highlightOnHover>
-        <Table.Thead>
+        <Table.Thead
+          style={
+            stickyHeader
+              ? { position: "sticky", top: 53, zIndex: 10, backgroundColor: "var(--mantine-color-body)" }
+              : undefined
+          }
+        >
           <Table.Tr>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
