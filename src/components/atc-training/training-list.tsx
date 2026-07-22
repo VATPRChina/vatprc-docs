@@ -50,13 +50,7 @@ const columns = [
 
       return (
         <div className="flex flex-row items-center gap-2">
-          <LinkButton
-            variant="subtle"
-            size="compact-sm"
-            to="/controllers/trainings/$id"
-            params={{ id }}
-            target="_blank"
-          >
+          <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }}>
             <Trans>View</Trans>
           </LinkButton>
           {deleted_at !== null && (

@@ -58,12 +58,12 @@ const contents: NavGroupData[] = [
   {
     title: msg`Controllers`,
     items: [
-      { label: msg`Controller List`, href: "/controller/controller-list", large: true, className: "row-span-3" },
+      { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-4" },
+      { label: msg`Controller List`, href: "/controller/controller-list" },
       { label: msg`Progression Guide`, href: "/controller/controller-regulations" },
-      { label: msg`Controller Application`, href: "/controllers/applications" },
+      { label: msg`Controller Application`, href: "/controllers/applications/new" },
       { label: msg`Visiting & Transfer`, href: "/controller/visiting-and-transferring" },
-      { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-3", divider: true },
-      { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true },
+      { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true, divider: true },
       { label: msg`Sector Files`, href: "/controller/sector" },
       { label: msg`Letter of Agreement`, href: "/controller/loa" },
     ],
@@ -94,16 +94,6 @@ const contents: NavGroupData[] = [
         href: "/navdata/preferred-routes",
         requireRole: ["event-coordinator", "operation-director-assistant"],
       },
-      {
-        label: msg`ATC Applications`,
-        href: "/controllers/applications",
-        requireRole: "controller-training-director-assistant",
-      },
-      {
-        label: msg`ATC Trainings`,
-        href: "/controllers/trainings",
-        requireRole: ["controller", "controller-training-mentor"],
-      },
     ],
   },
 ];
@@ -117,7 +107,10 @@ const MaybeRequireRole: React.FC<PropsWithChildren<{ role?: UserRole | UserRole[
 const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: { item: NavItem; row?: boolean }) => {
   const { i18n } = useLingui();
   const cnLink = row
-    ? cn("item", item.large && "font-bold")
+    ? cn(
+        "block px-2 py-2.5 hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-900 dark:active:bg-gray-800",
+        item.large && "font-bold",
+      )
     : item.large
       ? cn("large-item flex items-end", item.className)
       : cn("item", item.className);
@@ -150,7 +143,7 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   <ul className={row ? "flex flex-col" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
     {group.items.map((item, i) => (
       <Fragment key={i}>
-        {item.divider && <hr className={row ? "my-1" : "col-span-full"} />}
+        {item.divider && <hr className={row ? "my-2 border-black/15 dark:border-white/20" : "col-span-full"} />}
         <MaybeRequireRole role={item.requireRole}>
           <NavMenuLink item={item} row={row} />
         </MaybeRequireRole>
@@ -214,9 +207,11 @@ export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) =>
   return (
     <Drawer {...props}>
       <Stack>
-        <Group>
-          <ModeToggleSegmented />
-          <LanguageToggle />
+        <Group justify="space-between" className="mb-2">
+          <Group gap="xs">
+            <ModeToggleSegmented />
+            <LanguageToggle />
+          </Group>
           <UserInfo />
         </Group>
         <Accordion defaultValue={activeIndex === undefined ? null : String(activeIndex)}>
