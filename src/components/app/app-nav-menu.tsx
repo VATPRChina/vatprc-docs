@@ -58,12 +58,12 @@ const contents: NavGroupData[] = [
   {
     title: msg`Controllers`,
     items: [
-      { label: msg`Controller List`, href: "/controller/controller-list", large: true, className: "row-span-3" },
+      { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-4" },
+      { label: msg`Controller List`, href: "/controller/controller-list" },
       { label: msg`Progression Guide`, href: "/controller/controller-regulations" },
-      { label: msg`Controller Application`, href: "/controllers" },
+      { label: msg`Controller Application`, href: "/controllers/applications/new" },
       { label: msg`Visiting & Transfer`, href: "/controller/visiting-and-transferring" },
-      { label: msg`ATC Center`, href: "/controllers", large: true, className: "row-span-3", divider: true },
-      { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true },
+      { label: msg`Moodle`, href: "https://moodle.vatprc.net", external: true, divider: true },
       { label: msg`Sector Files`, href: "/controller/sector" },
       { label: msg`Letter of Agreement`, href: "/controller/loa" },
     ],
