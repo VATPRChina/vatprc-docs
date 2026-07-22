@@ -141,7 +141,7 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
             </Table.Tr>
           ))}
           {isLoading &&
-            Array(table.getState().pagination.pageSize)
+            Array(Math.min(table.getState().pagination.pageSize, 15))
               .fill(0)
               .map((_, i) => (
                 <Table.Tr key={i}>
@@ -161,9 +161,12 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
       )}
       <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
         <Select
-          value={`${table.getState().pagination.pageSize}`}
-          onChange={(value) => table.setPageSize(Number(value))}
-          data={[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` }))}
+          value={table.getState().pagination.pageSize > 100 ? "all" : `${table.getState().pagination.pageSize}`}
+          onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
+          data={[
+            ...[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` })),
+            { value: "all", label: t`All` },
+          ]}
         />
         <div className="flex items-center justify-center text-sm font-medium">
           <Trans>
