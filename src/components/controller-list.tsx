@@ -15,7 +15,7 @@ import React, { ChangeEvent, useState } from "react";
 type AtcStatusDto = components["schemas"]["AtcStatusDto"];
 type AtcPermissionDto = components["schemas"]["AtcPermissionDto"];
 
-const POSITION_KINDS = ["DEL", "GND", "TWR", "T2", "APP", "CTR", "FSS", "FMP"];
+const POSITION_KINDS = ["DEL", "GND", "TWR", "T2", "APP", "CTR", "FMP"];
 
 const RATING_FILTER_VALUES = [
   { value: "OBS", label: msg`OBS` },

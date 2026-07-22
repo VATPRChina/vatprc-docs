@@ -1,7 +1,8 @@
 import { CenterRolesProvider } from "@/components/controller-center/center-context";
 import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
-import { CenterTab, resolveCenterTab } from "@/lib/center-tab";
+import { RequireRole } from "@/components/require-role";
+import { AtcCenterTab, resolveCenterTab } from "@/lib/center-tab";
 import { $api } from "@/lib/client";
 import { MANAGEMENT_ROLES } from "@/lib/management-roles";
 import { cn } from "@/lib/utils";
@@ -40,7 +41,7 @@ const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: C
 
 function RouteComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const tab: CenterTab = resolveCenterTab(pathname);
+  const tab: AtcCenterTab = resolveCenterTab(pathname);
   const { data: session, error: sessionError } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const user = session?.user;
   const roles = user?.roles ?? [];
@@ -55,9 +56,7 @@ function RouteComponent() {
   const statusSettled = !user || status !== undefined || statusError !== undefined;
   const isPending = !sessionSettled || !statusSettled;
   const isController = roles.includes("controller") || (status?.permissions.length ?? 0) > 0;
-  // 教员身份存在 ATC 席位权限的 state 里（UserControllerState "mentor"），不是 UserRole。
-  const isPositionMentor = (status?.permissions ?? []).some((permission) => permission.state === "mentor");
-  const canManageTrainings = isPositionMentor || MANAGEMENT_ROLES.some((role) => roles.includes(role));
+  const canManageTrainings = MANAGEMENT_ROLES.some((role) => roles.includes(role));
   const canReviewApplications = roles.includes("controller-training-director-assistant");
   const hasInternalRole = isController || canManageTrainings || canReviewApplications;
   const showTabs = canManageTrainings || canReviewApplications;
@@ -87,16 +86,16 @@ function RouteComponent() {
           <CenterTabLink to="/controllers" active={tab === "mine"}>
             <Trans>My Trainings</Trans>
           </CenterTabLink>
-          {canManageTrainings && (
+          <RequireRole role={[...MANAGEMENT_ROLES]}>
             <CenterTabLink to="/controllers/trainings" active={tab === "trainings"}>
               <Trans>Training Management</Trans>
             </CenterTabLink>
-          )}
-          {canReviewApplications && (
+          </RequireRole>
+          <RequireRole role="controller-training-director-assistant">
             <CenterTabLink to="/controllers/applications" active={tab === "applications"}>
               <Trans>Application Review</Trans>
             </CenterTabLink>
-          )}
+          </RequireRole>
         </div>
       )}
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
@@ -103,13 +104,7 @@ export const RichTable = <TData,>({
         <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
       )}
       <Table highlightOnHover>
-        <Table.Thead
-          style={
-            stickyHeader
-              ? { position: "sticky", top: 53, zIndex: 10, backgroundColor: "var(--mantine-color-body)" }
-              : undefined
-          }
-        >
+        <Table.Thead className={cn(stickyHeader && "sticky !top-[53px] !z-10 bg-[var(--mantine-color-body)]")}>
           <Table.Tr>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
