@@ -1555,6 +1555,7 @@ export interface components {
       | "event-graphics-designer"
       | "tech-director"
       | "tech-director-assistant"
+      | "software-engineer"
       | "tech-afv-facility-engineer"
       | "controller"
       | "api-client"

@@ -5,9 +5,8 @@ import { RequireRole } from "@/components/require-role";
 import { RichTable } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { USER_ROLES } from "@/lib/user-roles";
 import { wrapPromiseWithLog } from "@/lib/utils";
-import { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Button, Checkbox, Group, Modal, Stack, Tabs } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -24,32 +23,6 @@ const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
   "user",
   "controller-training-mentor",
 ];
-
-export const ROLES = new Map<components["schemas"]["UserRole"], MessageDescriptor>([
-  ["division-director", msg`Division Director`],
-  ["controller-training-director", msg`Controller Training Director`],
-  ["controller-training-director-assistant", msg`Controller Training Director Assistant`],
-  ["controller-training-instructor", msg`Instructor`],
-  ["controller-training-mentor", msg`Mentor`],
-  ["controller-training-sop-editor", msg`SOP Editor`],
-  ["community-director", msg`Community & Membership Director`],
-  ["operation-director", msg`Operation Director`],
-  ["operation-director-assistant", msg`Operation Director Assistant`],
-  ["operation-sector-editor", msg`Sector Editor`],
-  ["operation-loa-editor", msg`LOA Editor`],
-  ["event-director", msg`Event & Organization Director`],
-  ["lead-event-coordinator", msg`Lead Event Coordinator`],
-  ["event-coordinator", msg`Event Coordinator`],
-  ["event-graphics-designer", msg`Graphics Designer`],
-  ["tech-director", msg`Tech Director`],
-  ["tech-director-assistant", msg`Tech Director Assistant`],
-  ["tech-afv-facility-engineer", msg`AFV Facility Engineer`],
-  ["controller", msg`Controller`],
-  ["staff", msg`Staff`],
-  ["volunteer", msg`Volunteer`],
-  ["api-client", msg`API Client`],
-  ["user", msg`User`],
-]);
 
 const columnHelper = createColumnHelper<components["schemas"]["UserDto"]>();
 
@@ -93,7 +66,7 @@ const columns = [
           {savedRoles.length > 0 && (
             <div className="flex flex-col flex-wrap gap-x-1">
               {savedRoles.map((role) => {
-                const roleName = ROLES.get(role);
+                const roleName = USER_ROLES.get(role);
                 if (!roleName) return null;
                 return <span key={role}>{i18n._(roleName)}</span>;
               })}
@@ -104,7 +77,7 @@ const columns = [
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
             <Stack>
-              {ROLES.entries().map(([role, name]) => (
+              {USER_ROLES.entries().map(([role, name]) => (
                 <Checkbox
                   key={role}
                   onClick={onToggleRole(role)}

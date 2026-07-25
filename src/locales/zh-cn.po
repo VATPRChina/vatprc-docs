@@ -18,11 +18,11 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/components/table.tsx:186
+#: src/components/table.tsx:181
 msgid "{size} items/page"
 msgstr "每页 {size} 条"
 
-#: src/routes/_doc/controller/controller-list.tsx:63
+#: src/routes/_doc/controller/controller-list.tsx:68
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
@@ -38,6 +38,10 @@ msgstr "<0>✓</0> 已认证：此管制员可以在此席位提供全方面的�
 msgid "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
 msgstr "<0>✘</0> 限制的：管制员没有权利在此席位提供任何的服务。(Restricted)"
 
+#: src/routes/_doc/controller/controller-list.tsx:52
+msgid "<0>M</0> Mentor: This controller is eligible to mentor trainees on this type of position."
+msgstr "<0>M</0> 教师：此管制员可以在此类席位上指导学员。"
+
 #: src/routes/_doc/controller/controller-list.tsx:41
 msgid "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
 msgstr "<0>S</0> 训练中：此管制员为了训练原因，可以在本席位提供独立的管制服务。(Solo)"
@@ -46,7 +50,7 @@ msgstr "<0>S</0> 训练中：此管制员为了训练原因，可以在本席位
 msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员的监督下开扇。(Under Supervision)"
 
-#: src/routes/_doc/controller/controller-list.tsx:52
+#: src/routes/_doc/controller/controller-list.tsx:57
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
@@ -84,7 +88,7 @@ msgstr "已通过"
 
 #: src/components/atc-application/atc-application-list.tsx:42
 #: src/components/atc-training/training-list.tsx:37
-#: src/routes/users/index.tsx:133
+#: src/routes/users/index.tsx:106
 msgid "Actions"
 msgstr "操作"
 
@@ -112,7 +116,7 @@ msgstr "将 <0>W</0> 添加到设备代码。"
 msgid "Admin"
 msgstr "管理"
 
-#: src/routes/users/index.tsx:46
+#: src/lib/user-roles.ts:24
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
 
@@ -128,7 +132,7 @@ msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 msgid "Airspace"
 msgstr "空域"
 
-#: src/components/table.tsx:187
+#: src/components/table.tsx:182
 msgid "All"
 msgstr "全部"
 
@@ -145,7 +149,7 @@ msgstr "已被预订"
 msgid "Announcement"
 msgstr "公告"
 
-#: src/routes/users/index.tsx:50
+#: src/lib/user-roles.ts:28
 msgid "API Client"
 msgstr "接口客户端"
 
@@ -161,7 +165,7 @@ msgstr "申请信息"
 msgid "Application pending review"
 msgstr "报名审核中"
 
-#: src/routes/controllers.tsx:97
+#: src/routes/controllers.tsx:96
 msgid "Application Review"
 msgstr "申请审核"
 
@@ -259,6 +263,11 @@ msgstr "指派管制席位 {callsign}"
 msgid "Assign Slot {callsign}"
 msgstr "指派时刻 {callsign}"
 
+#: src/components/app/assume-role-modal.tsx:30
+#: src/components/app/user-info.tsx:41
+msgid "Assume Role"
+msgstr "模拟角色"
+
 #: src/components/atc-training/training-application-create.tsx:72
 msgid "At least one slot is required"
 msgstr "至少需要一个时段"
@@ -299,8 +308,8 @@ msgstr "管制席位及频率"
 
 #: src/routes/controllers/applications/$id.tsx:60
 #: src/routes/events/$id.tsx:57
-#: src/routes/users/index.tsx:205
-#: src/routes/users/index.tsx:208
+#: src/routes/users/index.tsx:178
+#: src/routes/users/index.tsx:181
 msgid "Audit Logs"
 msgstr "审计日志"
 
@@ -371,7 +380,8 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/routes/users/index.tsx:118
+#: src/components/app/assume-role-modal.tsx:41
+#: src/routes/users/index.tsx:91
 msgid "Cancel"
 msgstr "取消"
 
@@ -451,7 +461,7 @@ msgstr "评论"
 msgid "Community"
 msgstr "社区"
 
-#: src/routes/users/index.tsx:35
+#: src/lib/user-roles.ts:12
 msgid "Community & Membership Director"
 msgstr "社区会员部主管"
 
@@ -460,7 +470,7 @@ msgid "Community & Teamspeak 3"
 msgstr "社群"
 
 #: src/components/controller-list.tsx:73
-#: src/routes/users/index.tsx:47
+#: src/lib/user-roles.ts:25
 msgid "Controller"
 msgstr "管制员"
 
@@ -472,9 +482,9 @@ msgstr "管制员申请"
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
 
-#: src/routes/controllers.tsx:16
-#: src/routes/controllers.tsx:69
-#: src/routes/controllers.tsx:81
+#: src/routes/controllers.tsx:17
+#: src/routes/controllers.tsx:68
+#: src/routes/controllers.tsx:80
 msgid "Controller Center"
 msgstr "管制员中心"
 
@@ -489,11 +499,11 @@ msgstr "管制员信息"
 msgid "Controller List"
 msgstr "管制员列表"
 
-#: src/routes/users/index.tsx:30
+#: src/lib/user-roles.ts:7
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
 
-#: src/routes/users/index.tsx:31
+#: src/lib/user-roles.ts:8
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
@@ -501,7 +511,7 @@ msgstr "管制员训练部行政事务助理"
 #: src/components/event/atc-slot-list.tsx:196
 #: src/components/homepage/controllers-board.tsx:87
 #: src/routes/events/$id.tsx:53
-#: src/routes/users/index.tsx:178
+#: src/routes/users/index.tsx:151
 msgid "Controllers"
 msgstr "管制员"
 
@@ -614,7 +624,7 @@ msgstr "差异"
 msgid "Direct leg"
 msgstr "直飞段"
 
-#: src/routes/users/index.tsx:29
+#: src/lib/user-roles.ts:6
 msgid "Division Director"
 msgstr "分部主席"
 
@@ -662,7 +672,7 @@ msgstr "编辑活动 {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "修改推荐航路 {title}"
 
-#: src/routes/users/index.tsx:105
+#: src/routes/users/index.tsx:78
 msgid "Edit roles"
 msgstr "编辑权限"
 
@@ -742,7 +752,7 @@ msgstr "英制双数飞行高度层"
 msgid "Event"
 msgstr "活动"
 
-#: src/routes/users/index.tsx:40
+#: src/lib/user-roles.ts:17
 msgid "Event & Organization Director"
 msgstr "组织部主管"
 
@@ -754,7 +764,7 @@ msgstr "活动管制席位"
 msgid "Event Audit Logs"
 msgstr "活动审计日志"
 
-#: src/routes/users/index.tsx:42
+#: src/lib/user-roles.ts:19
 msgid "Event Coordinator"
 msgstr "活动协调员"
 
@@ -886,23 +896,23 @@ msgstr "姓名"
 msgid "Full Name"
 msgstr "姓名"
 
-#: src/components/table.tsx:200
+#: src/components/table.tsx:195
 msgid "Go to first page"
 msgstr "前往第一页"
 
-#: src/components/table.tsx:224
+#: src/components/table.tsx:219
 msgid "Go to last page"
 msgstr "前往最后页"
 
-#: src/components/table.tsx:216
+#: src/components/table.tsx:211
 msgid "Go to next page"
 msgstr "前往下一页"
 
-#: src/components/table.tsx:208
+#: src/components/table.tsx:203
 msgid "Go to previous page"
 msgstr "前往上一页"
 
-#: src/routes/users/index.tsx:43
+#: src/lib/user-roles.ts:20
 msgid "Graphics Designer"
 msgstr "图形设计师"
 
@@ -979,7 +989,7 @@ msgstr "导入时刻表"
 msgid "In Waitlist"
 msgstr "等待中"
 
-#: src/routes/users/index.tsx:32
+#: src/lib/user-roles.ts:9
 msgid "Instructor"
 msgstr "教员"
 
@@ -999,7 +1009,7 @@ msgstr "飞行简介"
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
-#: src/routes/users/index.tsx:41
+#: src/lib/user-roles.ts:18
 msgid "Lead Event Coordinator"
 msgstr "活动协调员组长"
 
@@ -1038,15 +1048,15 @@ msgstr "移交协议书列表"
 msgid "List of SOPs"
 msgstr "标准运行程序列表"
 
-#: src/routes/users/index.tsx:39
+#: src/lib/user-roles.ts:16
 msgid "LOA Editor"
 msgstr "移交协议书编辑"
 
-#: src/components/app/user-info.tsx:42
+#: src/components/app/user-info.tsx:64
 msgid "Loading"
 msgstr "正在加载"
 
-#: src/components/app/user-info.tsx:59
+#: src/components/app/user-info.tsx:81
 msgid "Login"
 msgstr "登入"
 
@@ -1054,7 +1064,7 @@ msgstr "登入"
 msgid "Logo Pack"
 msgstr "视觉标识包"
 
-#: src/components/app/user-info.tsx:32
+#: src/components/app/user-info.tsx:46
 msgid "Logout"
 msgstr "登出"
 
@@ -1067,7 +1077,7 @@ msgid "Meeting Notes"
 msgstr "会议记录"
 
 #: src/components/atc-permission-modal.tsx:38
-#: src/routes/users/index.tsx:33
+#: src/lib/user-roles.ts:10
 msgid "Mentor"
 msgstr "教师"
 
@@ -1122,7 +1132,7 @@ msgid "My Event Positions"
 msgstr "我的活动席位"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers.tsx:88
+#: src/routes/controllers.tsx:87
 msgid "My Trainings"
 msgstr "我的训练"
 
@@ -1148,7 +1158,7 @@ msgstr "暂无评论"
 msgid "No content"
 msgstr "暂无内容"
 
-#: src/components/table.tsx:178
+#: src/components/table.tsx:173
 msgid "No data"
 msgstr "无数据"
 
@@ -1237,11 +1247,11 @@ msgstr "操作人"
 msgid "Operation"
 msgstr "运行"
 
-#: src/routes/users/index.tsx:36
+#: src/lib/user-roles.ts:13
 msgid "Operation Director"
 msgstr "运行部主管"
 
-#: src/routes/users/index.tsx:37
+#: src/lib/user-roles.ts:14
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
@@ -1257,7 +1267,7 @@ msgstr "其他移交协议书"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/components/table.tsx:191
+#: src/components/table.tsx:186
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
 
@@ -1442,8 +1452,8 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
 
-#: src/routes/users/index.tsx:63
-#: src/routes/users/index.tsx:181
+#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:154
 #: src/routes/users/me.tsx:55
 msgid "Roles"
 msgstr "权限"
@@ -1481,7 +1491,8 @@ msgstr "S3"
 msgid "Save"
 msgstr "保存"
 
-#: src/routes/users/index.tsx:122
+#: src/components/app/assume-role-modal.tsx:44
+#: src/routes/users/index.tsx:95
 msgid "Save changes"
 msgstr "保存变更"
 
@@ -1489,11 +1500,11 @@ msgstr "保存变更"
 msgid "Save sheet"
 msgstr "保存表单"
 
-#: src/components/table.tsx:103
+#: src/components/table.tsx:104
 msgid "Search..."
 msgstr "搜索..."
 
-#: src/routes/users/index.tsx:38
+#: src/lib/user-roles.ts:15
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
@@ -1553,6 +1564,10 @@ msgstr "显示更多"
 msgid "Slots"
 msgstr "时刻"
 
+#: src/lib/user-roles.ts:23
+msgid "Software Engineer"
+msgstr "软件工程师"
+
 #: src/components/atc-permission-modal.tsx:36
 msgid "Solo"
 msgstr "独立训练"
@@ -1561,12 +1576,12 @@ msgstr "独立训练"
 msgid "Solo Expiration Date"
 msgstr "独立训练到期日"
 
-#: src/routes/users/index.tsx:34
+#: src/lib/user-roles.ts:11
 msgid "SOP Editor"
 msgstr "SOP 组组员"
 
 #: src/components/app/app-nav-menu.tsx:20
-#: src/routes/users/index.tsx:48
+#: src/lib/user-roles.ts:26
 msgid "Staff"
 msgstr "职员"
 
@@ -1668,15 +1683,15 @@ msgstr "跟随系统"
 msgid "Take me back to home page"
 msgstr "返回首页"
 
-#: src/routes/users/index.tsx:44
+#: src/lib/user-roles.ts:21
 msgid "Tech Director"
 msgstr "技术部主管"
 
-#: src/routes/users/index.tsx:45
+#: src/lib/user-roles.ts:22
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
 
-#: src/routes/_doc/controller/controller-list.tsx:57
+#: src/routes/_doc/controller/controller-list.tsx:62
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "MIL 列标记具有军用席位权限的管制员。"
 
@@ -1876,7 +1891,7 @@ msgstr "训练"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers.tsx:92
+#: src/routes/controllers.tsx:91
 msgid "Training Management"
 msgstr "训练管理"
 
@@ -1935,9 +1950,9 @@ msgstr "上传图片"
 
 #: src/components/atc-application/atc-application-list.tsx:20
 #: src/components/audit-log/audit-log-table.tsx:16
+#: src/lib/user-roles.ts:29
 #: src/routes/controllers/applications/$id.tsx:42
-#: src/routes/users/index.tsx:51
-#: src/routes/users/index.tsx:59
+#: src/routes/users/index.tsx:32
 msgid "User"
 msgstr "用户"
 
@@ -1949,7 +1964,7 @@ msgstr "用户管制权限"
 msgid "User Audit Logs"
 msgstr "用户审计日志"
 
-#: src/components/app/user-info.tsx:29
+#: src/components/app/user-info.tsx:36
 #: src/routes/users/me.tsx:43
 msgid "User Info"
 msgstr "用户信息"
@@ -1962,8 +1977,8 @@ msgstr "用户列表"
 msgid "User Role"
 msgstr "用户角色"
 
-#: src/routes/users/index.tsx:164
-#: src/routes/users/index.tsx:175
+#: src/routes/users/index.tsx:137
+#: src/routes/users/index.tsx:148
 msgid "Users"
 msgstr "用户"
 
@@ -2014,7 +2029,7 @@ msgstr "查看"
 
 #: src/routes/controllers/applications/index.tsx:23
 #: src/routes/events/index.tsx:27
-#: src/routes/users/index.tsx:168
+#: src/routes/users/index.tsx:141
 msgid "View audit logs"
 msgstr "查看审计日志"
 
@@ -2033,7 +2048,7 @@ msgstr "客座"
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
 
-#: src/routes/users/index.tsx:49
+#: src/lib/user-roles.ts:27
 msgid "Volunteer"
 msgstr "志愿者"
 

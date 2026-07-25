@@ -50,6 +50,11 @@ function Page() {
           </li>
           <li>
             <Trans>
+              <b>M</b> Mentor: This controller is eligible to mentor trainees on this type of position.
+            </Trans>
+          </li>
+          <li>
+            <Trans>
               <b>V</b> Visiting: This controller is a visiting controller.
             </Trans>
           </li>

@@ -1,7 +1,7 @@
-import { ROLES } from ".";
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "@/components/atc-permission-modal";
 import { $api, usePermissions, useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
+import { USER_ROLES } from "@/lib/user-roles";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Badge } from "@mantine/core";
@@ -56,7 +56,7 @@ function RouteComponent() {
         <div className="flex flex-wrap gap-4">
           {roles.map((role) => (
             <Badge key={role} variant="dot" size="lg" color={user.direct_roles.includes(role) ? "green" : "blue"}>
-              {localizeWithMap(ROLES, role, i18n)}
+              {localizeWithMap(USER_ROLES, role, i18n)}
             </Badge>
           ))}
         </div>

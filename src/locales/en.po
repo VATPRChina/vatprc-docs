@@ -18,11 +18,11 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/table.tsx:186
+#: src/components/table.tsx:181
 msgid "{size} items/page"
 msgstr "{size} items/page"
 
-#: src/routes/_doc/controller/controller-list.tsx:63
+#: src/routes/_doc/controller/controller-list.tsx:68
 msgid "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
@@ -38,6 +38,10 @@ msgstr "<0>✓</0> Certified: The controller is fully eligible to provide solo s
 msgid "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
 msgstr "<0>✘</0> Restricted: This controller is not eligible to provide service to this position."
 
+#: src/routes/_doc/controller/controller-list.tsx:52
+msgid "<0>M</0> Mentor: This controller is eligible to mentor trainees on this type of position."
+msgstr "<0>M</0> Mentor: This controller is eligible to mentor trainees on this type of position."
+
 #: src/routes/_doc/controller/controller-list.tsx:41
 msgid "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
 msgstr "<0>S</0> Solo Training: This controller is eligible to provide solo service to this position for the purpose of position familiarization and fluency training."
@@ -46,7 +50,7 @@ msgstr "<0>S</0> Solo Training: This controller is eligible to provide solo serv
 msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 msgstr "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 
-#: src/routes/_doc/controller/controller-list.tsx:52
+#: src/routes/_doc/controller/controller-list.tsx:57
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
@@ -84,7 +88,7 @@ msgstr "Accepted"
 
 #: src/components/atc-application/atc-application-list.tsx:42
 #: src/components/atc-training/training-list.tsx:37
-#: src/routes/users/index.tsx:133
+#: src/routes/users/index.tsx:106
 msgid "Actions"
 msgstr "Actions"
 
@@ -112,7 +116,7 @@ msgstr "Add <0>W</0> to equipment code."
 msgid "Admin"
 msgstr "Admin"
 
-#: src/routes/users/index.tsx:46
+#: src/lib/user-roles.ts:24
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
 
@@ -128,7 +132,7 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
-#: src/components/table.tsx:187
+#: src/components/table.tsx:182
 msgid "All"
 msgstr "All"
 
@@ -145,7 +149,7 @@ msgstr "Already Booked"
 msgid "Announcement"
 msgstr "Announcement"
 
-#: src/routes/users/index.tsx:50
+#: src/lib/user-roles.ts:28
 msgid "API Client"
 msgstr "API Client"
 
@@ -161,7 +165,7 @@ msgstr "Application Information"
 msgid "Application pending review"
 msgstr "Application pending review"
 
-#: src/routes/controllers.tsx:97
+#: src/routes/controllers.tsx:96
 msgid "Application Review"
 msgstr "Application Review"
 
@@ -259,6 +263,11 @@ msgstr "Assign ATC Position {callsign}"
 msgid "Assign Slot {callsign}"
 msgstr "Assign Slot {callsign}"
 
+#: src/components/app/assume-role-modal.tsx:30
+#: src/components/app/user-info.tsx:41
+msgid "Assume Role"
+msgstr "Assume Role"
+
 #: src/components/atc-training/training-application-create.tsx:72
 msgid "At least one slot is required"
 msgstr "At least one slot is required"
@@ -299,8 +308,8 @@ msgstr "ATC Positions & Frequencies"
 
 #: src/routes/controllers/applications/$id.tsx:60
 #: src/routes/events/$id.tsx:57
-#: src/routes/users/index.tsx:205
-#: src/routes/users/index.tsx:208
+#: src/routes/users/index.tsx:178
+#: src/routes/users/index.tsx:181
 msgid "Audit Logs"
 msgstr "Audit Logs"
 
@@ -371,7 +380,8 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/routes/users/index.tsx:118
+#: src/components/app/assume-role-modal.tsx:41
+#: src/routes/users/index.tsx:91
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -451,7 +461,7 @@ msgstr "Comment"
 msgid "Community"
 msgstr "Community"
 
-#: src/routes/users/index.tsx:35
+#: src/lib/user-roles.ts:12
 msgid "Community & Membership Director"
 msgstr "Community & Membership Director"
 
@@ -460,7 +470,7 @@ msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
 #: src/components/controller-list.tsx:73
-#: src/routes/users/index.tsx:47
+#: src/lib/user-roles.ts:25
 msgid "Controller"
 msgstr "Controller"
 
@@ -472,9 +482,9 @@ msgstr "Controller Application"
 msgid "Controller Application Guideline"
 msgstr "Controller Application Guideline"
 
-#: src/routes/controllers.tsx:16
-#: src/routes/controllers.tsx:69
-#: src/routes/controllers.tsx:81
+#: src/routes/controllers.tsx:17
+#: src/routes/controllers.tsx:68
+#: src/routes/controllers.tsx:80
 msgid "Controller Center"
 msgstr "Controller Center"
 
@@ -489,11 +499,11 @@ msgstr "Controller Info"
 msgid "Controller List"
 msgstr "Controller List"
 
-#: src/routes/users/index.tsx:30
+#: src/lib/user-roles.ts:7
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
 
-#: src/routes/users/index.tsx:31
+#: src/lib/user-roles.ts:8
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
@@ -501,7 +511,7 @@ msgstr "Controller Training Director Assistant"
 #: src/components/event/atc-slot-list.tsx:196
 #: src/components/homepage/controllers-board.tsx:87
 #: src/routes/events/$id.tsx:53
-#: src/routes/users/index.tsx:178
+#: src/routes/users/index.tsx:151
 msgid "Controllers"
 msgstr "Controllers"
 
@@ -614,7 +624,7 @@ msgstr "Diff"
 msgid "Direct leg"
 msgstr "Direct leg"
 
-#: src/routes/users/index.tsx:29
+#: src/lib/user-roles.ts:6
 msgid "Division Director"
 msgstr "Division Director"
 
@@ -662,7 +672,7 @@ msgstr "Edit Event {title}"
 msgid "Edit Preferred Route {title}"
 msgstr "Edit Preferred Route {title}"
 
-#: src/routes/users/index.tsx:105
+#: src/routes/users/index.tsx:78
 msgid "Edit roles"
 msgstr "Edit roles"
 
@@ -742,7 +752,7 @@ msgstr "even flight level"
 msgid "Event"
 msgstr "Event"
 
-#: src/routes/users/index.tsx:40
+#: src/lib/user-roles.ts:17
 msgid "Event & Organization Director"
 msgstr "Event & Organization Director"
 
@@ -754,7 +764,7 @@ msgstr "Event ATC Position"
 msgid "Event Audit Logs"
 msgstr "Event Audit Logs"
 
-#: src/routes/users/index.tsx:42
+#: src/lib/user-roles.ts:19
 msgid "Event Coordinator"
 msgstr "Event Coordinator"
 
@@ -886,23 +896,23 @@ msgstr "Full name"
 msgid "Full Name"
 msgstr "Full Name"
 
-#: src/components/table.tsx:200
+#: src/components/table.tsx:195
 msgid "Go to first page"
 msgstr "Go to first page"
 
-#: src/components/table.tsx:224
+#: src/components/table.tsx:219
 msgid "Go to last page"
 msgstr "Go to last page"
 
-#: src/components/table.tsx:216
+#: src/components/table.tsx:211
 msgid "Go to next page"
 msgstr "Go to next page"
 
-#: src/components/table.tsx:208
+#: src/components/table.tsx:203
 msgid "Go to previous page"
 msgstr "Go to previous page"
 
-#: src/routes/users/index.tsx:43
+#: src/lib/user-roles.ts:20
 msgid "Graphics Designer"
 msgstr "Graphics Designer"
 
@@ -979,7 +989,7 @@ msgstr "Import Slots"
 msgid "In Waitlist"
 msgstr "In Waitlist"
 
-#: src/routes/users/index.tsx:32
+#: src/lib/user-roles.ts:9
 msgid "Instructor"
 msgstr "Instructor"
 
@@ -999,7 +1009,7 @@ msgstr "Introduction to Fly"
 msgid "Join the controller team"
 msgstr "Join the controller team"
 
-#: src/routes/users/index.tsx:41
+#: src/lib/user-roles.ts:18
 msgid "Lead Event Coordinator"
 msgstr "Lead Event Coordinator"
 
@@ -1038,15 +1048,15 @@ msgstr "List of LOAs"
 msgid "List of SOPs"
 msgstr "List of SOPs"
 
-#: src/routes/users/index.tsx:39
+#: src/lib/user-roles.ts:16
 msgid "LOA Editor"
 msgstr "LOA Editor"
 
-#: src/components/app/user-info.tsx:42
+#: src/components/app/user-info.tsx:64
 msgid "Loading"
 msgstr "Loading"
 
-#: src/components/app/user-info.tsx:59
+#: src/components/app/user-info.tsx:81
 msgid "Login"
 msgstr "Login"
 
@@ -1054,7 +1064,7 @@ msgstr "Login"
 msgid "Logo Pack"
 msgstr "Logo Pack"
 
-#: src/components/app/user-info.tsx:32
+#: src/components/app/user-info.tsx:46
 msgid "Logout"
 msgstr "Logout"
 
@@ -1067,7 +1077,7 @@ msgid "Meeting Notes"
 msgstr "Meeting Notes"
 
 #: src/components/atc-permission-modal.tsx:38
-#: src/routes/users/index.tsx:33
+#: src/lib/user-roles.ts:10
 msgid "Mentor"
 msgstr "Mentor"
 
@@ -1122,7 +1132,7 @@ msgid "My Event Positions"
 msgstr "My Event Positions"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers.tsx:88
+#: src/routes/controllers.tsx:87
 msgid "My Trainings"
 msgstr "My Trainings"
 
@@ -1148,7 +1158,7 @@ msgstr "No comments"
 msgid "No content"
 msgstr "No content"
 
-#: src/components/table.tsx:178
+#: src/components/table.tsx:173
 msgid "No data"
 msgstr "No data"
 
@@ -1237,11 +1247,11 @@ msgstr "Operated By"
 msgid "Operation"
 msgstr "Operation"
 
-#: src/routes/users/index.tsx:36
+#: src/lib/user-roles.ts:13
 msgid "Operation Director"
 msgstr "Operation Director"
 
-#: src/routes/users/index.tsx:37
+#: src/lib/user-roles.ts:14
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
 
@@ -1257,7 +1267,7 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
-#: src/components/table.tsx:191
+#: src/components/table.tsx:186
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
 
@@ -1442,8 +1452,8 @@ msgstr "RNP AR"
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
 
-#: src/routes/users/index.tsx:63
-#: src/routes/users/index.tsx:181
+#: src/routes/users/index.tsx:36
+#: src/routes/users/index.tsx:154
 #: src/routes/users/me.tsx:55
 msgid "Roles"
 msgstr "Roles"
@@ -1481,7 +1491,8 @@ msgstr "S3"
 msgid "Save"
 msgstr "Save"
 
-#: src/routes/users/index.tsx:122
+#: src/components/app/assume-role-modal.tsx:44
+#: src/routes/users/index.tsx:95
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -1489,11 +1500,11 @@ msgstr "Save changes"
 msgid "Save sheet"
 msgstr "Save sheet"
 
-#: src/components/table.tsx:103
+#: src/components/table.tsx:104
 msgid "Search..."
 msgstr "Search..."
 
-#: src/routes/users/index.tsx:38
+#: src/lib/user-roles.ts:15
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
@@ -1553,6 +1564,10 @@ msgstr "Show more"
 msgid "Slots"
 msgstr "Slots"
 
+#: src/lib/user-roles.ts:23
+msgid "Software Engineer"
+msgstr "Software Engineer"
+
 #: src/components/atc-permission-modal.tsx:36
 msgid "Solo"
 msgstr "Solo"
@@ -1561,12 +1576,12 @@ msgstr "Solo"
 msgid "Solo Expiration Date"
 msgstr "Solo Expiration Date"
 
-#: src/routes/users/index.tsx:34
+#: src/lib/user-roles.ts:11
 msgid "SOP Editor"
 msgstr "SOP Editor"
 
 #: src/components/app/app-nav-menu.tsx:20
-#: src/routes/users/index.tsx:48
+#: src/lib/user-roles.ts:26
 msgid "Staff"
 msgstr "Staff"
 
@@ -1668,15 +1683,15 @@ msgstr "System"
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
 
-#: src/routes/users/index.tsx:44
+#: src/lib/user-roles.ts:21
 msgid "Tech Director"
 msgstr "Tech Director"
 
-#: src/routes/users/index.tsx:45
+#: src/lib/user-roles.ts:22
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
 
-#: src/routes/_doc/controller/controller-list.tsx:57
+#: src/routes/_doc/controller/controller-list.tsx:62
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "The <0>MIL</0> column marks controllers with military position permission."
 
@@ -1876,7 +1891,7 @@ msgstr "Training"
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
 
-#: src/routes/controllers.tsx:92
+#: src/routes/controllers.tsx:91
 msgid "Training Management"
 msgstr "Training Management"
 
@@ -1935,9 +1950,9 @@ msgstr "Upload image"
 
 #: src/components/atc-application/atc-application-list.tsx:20
 #: src/components/audit-log/audit-log-table.tsx:16
+#: src/lib/user-roles.ts:29
 #: src/routes/controllers/applications/$id.tsx:42
-#: src/routes/users/index.tsx:51
-#: src/routes/users/index.tsx:59
+#: src/routes/users/index.tsx:32
 msgid "User"
 msgstr "User"
 
@@ -1949,7 +1964,7 @@ msgstr "User ATC Permission"
 msgid "User Audit Logs"
 msgstr "User Audit Logs"
 
-#: src/components/app/user-info.tsx:29
+#: src/components/app/user-info.tsx:36
 #: src/routes/users/me.tsx:43
 msgid "User Info"
 msgstr "User Info"
@@ -1962,8 +1977,8 @@ msgstr "User List"
 msgid "User Role"
 msgstr "User Role"
 
-#: src/routes/users/index.tsx:164
-#: src/routes/users/index.tsx:175
+#: src/routes/users/index.tsx:137
+#: src/routes/users/index.tsx:148
 msgid "Users"
 msgstr "Users"
 
@@ -2014,7 +2029,7 @@ msgstr "View"
 
 #: src/routes/controllers/applications/index.tsx:23
 #: src/routes/events/index.tsx:27
-#: src/routes/users/index.tsx:168
+#: src/routes/users/index.tsx:141
 msgid "View audit logs"
 msgstr "View audit logs"
 
@@ -2033,7 +2048,7 @@ msgstr "Visiting"
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
 
-#: src/routes/users/index.tsx:49
+#: src/lib/user-roles.ts:27
 msgid "Volunteer"
 msgstr "Volunteer"
 
