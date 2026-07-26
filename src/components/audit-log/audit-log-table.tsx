@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { RichTable } from "../table";
 import { components } from "@/lib/api";
 import { localizeWithMap } from "@/lib/i18n";
@@ -130,7 +131,7 @@ const columns = [
   }),
   columnHelper.accessor("operated_by", {
     header: () => <Trans>Operated By</Trans>,
-    cell: ({ getValue }) => <Code>{getValue()}</Code>,
+    cell: ({ getValue }) => <User user={getValue()} />,
   }),
   columnHelper.accessor("entity", {
     header: () => <Trans>Entity</Trans>,

@@ -1086,7 +1086,7 @@ export interface components {
       /** Format: date-time */
       created_at: string;
       entity: components["schemas"]["AuditLogEntityDto"];
-      operated_by: string;
+      operated_by: components["schemas"]["UserDto"];
     };
     AuditLogEntityDto: {
       id: string;
