@@ -1,5 +1,4 @@
 import { $api, useUser } from "@/lib/client";
-import { getEventTitle } from "@/lib/event";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useQueries } from "@tanstack/react-query";
@@ -63,7 +62,7 @@ export const MyEventBookings: FC = () => {
           >
             <span className="min-w-28 font-bold">{position.callsign}</span>
             <span className="flex-1 truncate text-gray-700 dark:text-gray-300">
-              {getEventTitle(position.event, i18n.locale)}
+              {i18n.locale === "en" ? (position.event.title_en ?? position.event.title) : position.event.title}
             </span>
             <span className="text-sm text-gray-600 dark:text-gray-400">
               {format(position.start_at, "MM-dd HHmm", { in: utc })}Z–{format(position.end_at, "HHmm", { in: utc })}Z

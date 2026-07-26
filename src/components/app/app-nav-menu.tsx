@@ -3,14 +3,43 @@ import { LanguageToggle } from "./language-toggle";
 import { ModeToggleSegmented } from "./theme-toggle";
 import { UserInfo } from "./user-info";
 import { usePermissions, UserRole } from "@/lib/client";
-import { getActiveGroup, NavGroup as NavGroupData, NavItem } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react/macro";
 import { Accordion, Button, Drawer, Group, Menu, Stack } from "@mantine/core";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ComponentProps, Fragment, PropsWithChildren, useState } from "react";
 import { TbChevronDown, TbExternalLink } from "react-icons/tb";
+
+interface NavItem {
+  label: MessageDescriptor;
+  href: string;
+  external?: boolean;
+  large?: boolean;
+  divider?: boolean;
+  requireRole?: UserRole | UserRole[];
+  className?: string;
+}
+
+interface NavGroupData {
+  title: MessageDescriptor;
+  requireRole?: UserRole;
+  singleColumn?: boolean;
+  items: NavItem[];
+}
+
+const firstPathSegment = (path: string) => "/" + (path.split("/")[1] ?? "");
+
+const getActiveGroup = (pathname: string, groups: readonly NavGroupData[]): number | undefined => {
+  const segment = firstPathSegment(pathname.replace(/^\/(en|zh-cn)(?=\/|$)/, ""));
+  if (segment === "/") return undefined;
+
+  const index = groups.findIndex((group) =>
+    group.items.some((item) => !item.external && firstPathSegment(item.href) === segment),
+  );
+  return index === -1 ? undefined : index;
+};
 
 const contents: NavGroupData[] = [
   {

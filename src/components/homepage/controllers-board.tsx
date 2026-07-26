@@ -1,5 +1,4 @@
 import { $api } from "@/lib/client";
-import { getEventTitle } from "@/lib/event";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -77,7 +76,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
 
   const eventTitleFor = (start: Date, end: Date) => {
     const event = events?.find((ev) => start < parseISO(ev.end_at) && end > parseISO(ev.start_at));
-    return event && getEventTitle(event, i18n.locale);
+    return event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
   };
 
   return (

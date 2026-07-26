@@ -1,6 +1,5 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { getEventTitle } from "@/lib/event";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -45,7 +44,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const start = parseISO(event.start_at);
   const end = parseISO(event.end_at);
-  const title = getEventTitle(event, i18n.locale);
+  const title = i18n.locale === "en" ? (event.title_en ?? event.title) : event.title;
   const thisWeek = isSameWeek(start, Date.now(), { weekStartsOn: 1 });
 
   const handleMove = (e: React.MouseEvent) => {
