@@ -54,7 +54,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/components/homepage/hero.tsx:46
+#: src/components/homepage/hero.tsx:40
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -272,7 +272,7 @@ msgstr "模拟角色"
 msgid "At least one slot is required"
 msgstr "至少需要一个时段"
 
-#: src/components/audit-log/audit-log-table.tsx:15
+#: src/components/audit-log/audit-log-table.tsx:16
 #: src/routes/controllers/applications/$id.tsx:33
 msgid "ATC Application"
 msgstr "管制员申请"
@@ -294,7 +294,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:61
-#: src/components/homepage/controllers-board.tsx:96
+#: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -342,7 +342,7 @@ msgstr "成为管制员"
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:113
+#: src/components/homepage/controllers-board.tsx:128
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -415,7 +415,7 @@ msgstr "去 VATSIM 确认"
 msgid "Checklist"
 msgstr "检查单"
 
-#: src/components/audit-log/audit-log-table.tsx:140
+#: src/components/audit-log/audit-log-table.tsx:141
 msgid "Child Entity"
 msgstr "子实体"
 
@@ -509,13 +509,13 @@ msgstr "管制员训练部行政事务助理"
 
 #: src/components/app/app-nav-menu.tsx:59
 #: src/components/event/atc-slot-list.tsx:196
-#: src/components/homepage/controllers-board.tsx:87
+#: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:53
 #: src/routes/users/index.tsx:151
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/homepage/hero.tsx:76
+#: src/components/homepage/hero.tsx:69
 msgid "Controllers online"
 msgstr "在线管制"
 
@@ -563,7 +563,7 @@ msgstr "创建训练申请"
 msgid "Created at"
 msgstr "创建时间"
 
-#: src/components/audit-log/audit-log-table.tsx:128
+#: src/components/audit-log/audit-log-table.tsx:129
 msgid "Created At"
 msgstr "创建时间"
 
@@ -616,7 +616,7 @@ msgstr "出发机场"
 msgid "Description"
 msgstr "描述"
 
-#: src/components/audit-log/audit-log-table.tsx:145
+#: src/components/audit-log/audit-log-table.tsx:146
 msgid "Diff"
 msgstr "差异"
 
@@ -727,7 +727,7 @@ msgstr "英文名称"
 msgid "Enter at"
 msgstr "进入空域时间"
 
-#: src/components/audit-log/audit-log-table.tsx:136
+#: src/components/audit-log/audit-log-table.tsx:137
 msgid "Entity"
 msgstr "实体"
 
@@ -748,7 +748,7 @@ msgstr "英制双数飞行高度层"
 
 #: src/components/app/app-nav-menu.tsx:76
 #: src/components/app/app-nav-menu.tsx:88
-#: src/components/audit-log/audit-log-table.tsx:14
+#: src/components/audit-log/audit-log-table.tsx:15
 msgid "Event"
 msgstr "活动"
 
@@ -756,7 +756,7 @@ msgstr "活动"
 msgid "Event & Organization Director"
 msgstr "组织部主管"
 
-#: src/components/audit-log/audit-log-table.tsx:19
+#: src/components/audit-log/audit-log-table.tsx:20
 msgid "Event ATC Position"
 msgstr "活动管制席位"
 
@@ -772,7 +772,7 @@ msgstr "活动协调员"
 msgid "Event end"
 msgstr "活动结束"
 
-#: src/components/audit-log/audit-log-table.tsx:20
+#: src/components/audit-log/audit-log-table.tsx:21
 msgid "Event Slot"
 msgstr "活动时段"
 
@@ -784,11 +784,11 @@ msgstr "活动开始"
 msgid "Events"
 msgstr "活动"
 
-#: src/components/homepage/hero.tsx:77
+#: src/components/homepage/hero.tsx:70
 msgid "Events this week"
 msgstr "本周活动"
 
-#: src/components/audit-log/audit-log-table.tsx:162
+#: src/components/audit-log/audit-log-table.tsx:163
 msgid "Failed to load audit logs"
 msgstr "审计日志加载失败"
 
@@ -855,7 +855,7 @@ msgid "Flight Plan"
 msgstr "飞行计划"
 
 #: src/components/app/app-nav-menu.tsx:55
-#: src/components/homepage/hero.tsx:60
+#: src/components/homepage/hero.tsx:54
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -883,7 +883,7 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/app/app-nav-menu.tsx:75
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/components/homepage/hero.tsx:71
+#: src/components/homepage/hero.tsx:64
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
@@ -920,7 +920,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/homepage/hero.tsx:57
+#: src/components/homepage/hero.tsx:51
 msgid "How to fly"
 msgstr "如何飞行"
 
@@ -1005,7 +1005,7 @@ msgstr "介绍"
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/components/homepage/hero.tsx:54
+#: src/components/homepage/hero.tsx:48
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
@@ -1140,7 +1140,7 @@ msgstr "我的训练"
 msgid "New ATC Application"
 msgstr "递交管制员申请"
 
-#: src/components/homepage/event-carousel.tsx:133
+#: src/components/homepage/event-carousel.tsx:145
 msgid "Next events"
 msgstr "下一批活动"
 
@@ -1194,7 +1194,7 @@ msgstr "尚未填写训练记录。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:116
+#: src/components/homepage/controllers-board.tsx:131
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1210,7 +1210,7 @@ msgstr "任意"
 msgid "Not designated route"
 msgstr "不符合指定航路"
 
-#: src/components/homepage/notam-board.tsx:20
+#: src/components/homepage/notam-board.tsx:19
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · 分部公告"
 
@@ -1231,7 +1231,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:102
+#: src/components/homepage/controllers-board.tsx:116
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1239,7 +1239,7 @@ msgstr "在线管制员"
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
 msgstr "只有职员可以管理表单。保存后立即生效。"
 
-#: src/components/audit-log/audit-log-table.tsx:132
+#: src/components/audit-log/audit-log-table.tsx:133
 msgid "Operated By"
 msgstr "操作人"
 
@@ -1309,7 +1309,7 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/homepage/hero.tsx:75
+#: src/components/homepage/hero.tsx:68
 msgid "Pilots online"
 msgstr "在线机组"
 
@@ -1341,7 +1341,7 @@ msgstr "请仔细阅读下列说明，并确保已完全满足所列条件。如
 msgid "Please refresh the page or try again later."
 msgstr "请刷新页面或稍后再试。"
 
-#: src/components/audit-log/audit-log-table.tsx:163
+#: src/components/audit-log/audit-log-table.tsx:164
 msgid "Please try again later."
 msgstr "请稍后重试。"
 
@@ -1358,7 +1358,7 @@ msgstr "席位"
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
-#: src/components/homepage/event-carousel.tsx:132
+#: src/components/homepage/event-carousel.tsx:144
 msgid "Previous events"
 msgstr "上一批活动"
 
@@ -1388,7 +1388,7 @@ msgstr "评级"
 msgid "Recent 3 months"
 msgstr "最近三个月"
 
-#: src/components/homepage/event-carousel.tsx:113
+#: src/components/homepage/event-carousel.tsx:110
 msgid "Recent Events"
 msgstr "近期活动"
 
@@ -1513,7 +1513,7 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
-#: src/components/homepage/event-carousel.tsx:123
+#: src/components/homepage/event-carousel.tsx:120
 msgid "See All Events"
 msgstr "查看所有活动"
 
@@ -1542,19 +1542,19 @@ msgstr "表单列表"
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
 
-#: src/components/homepage/controllers-board.tsx:55
+#: src/components/homepage/controllers-board.tsx:71
 msgid "Show all controllers"
 msgstr "显示全部管制员"
 
-#: src/components/homepage/controllers-board.tsx:55
+#: src/components/homepage/controllers-board.tsx:71
 msgid "Show fewer controllers"
 msgstr "收起管制员"
 
-#: src/components/audit-log/audit-log-table.tsx:98
+#: src/components/audit-log/audit-log-table.tsx:99
 msgid "Show less"
 msgstr "收起"
 
-#: src/components/audit-log/audit-log-table.tsx:98
+#: src/components/audit-log/audit-log-table.tsx:99
 msgid "Show more"
 msgstr "显示更多"
 
@@ -1794,13 +1794,21 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
-#: src/components/homepage/controllers-board.tsx:105
+#: src/components/homepage/controllers-board.tsx:119
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
+
+#: src/components/homepage/notam-board.tsx:35
+msgid "There is no NOTAMs / announcements."
+msgstr "当前无 NOTAM 或通知。"
 
 #: src/components/atc-training/training-application-responses.tsx:100
 msgid "There is no response to this training request yet."
 msgstr "当前暂无对该管制训练申请的回应。"
+
+#: src/components/homepage/event-carousel.tsx:134
+msgid "There is no upcoming events."
+msgstr "当前无活动计划。"
 
 #: src/components/event/event-detail.tsx:38
 msgid "This event does not have pilot booking."
@@ -1949,14 +1957,14 @@ msgid "Upload image"
 msgstr "上传图片"
 
 #: src/components/atc-application/atc-application-list.tsx:20
-#: src/components/audit-log/audit-log-table.tsx:16
+#: src/components/audit-log/audit-log-table.tsx:17
 #: src/lib/user-roles.ts:29
 #: src/routes/controllers/applications/$id.tsx:42
 #: src/routes/users/index.tsx:32
 msgid "User"
 msgstr "用户"
 
-#: src/components/audit-log/audit-log-table.tsx:18
+#: src/components/audit-log/audit-log-table.tsx:19
 msgid "User ATC Permission"
 msgstr "用户管制权限"
 
@@ -1973,7 +1981,7 @@ msgstr "用户信息"
 msgid "User List"
 msgstr "用户列表"
 
-#: src/components/audit-log/audit-log-table.tsx:17
+#: src/components/audit-log/audit-log-table.tsx:18
 msgid "User Role"
 msgstr "用户角色"
 
@@ -2007,7 +2015,7 @@ msgstr "VATPRC 提供从放行到区调的完整训练体系。提交申请，�
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:43
+#: src/components/homepage/hero.tsx:37
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM 中国分部 · VATPRC"
 

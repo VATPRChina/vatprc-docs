@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Carousel } from "@mantine/carousel";
-import { Button, Loader } from "@mantine/core";
+import { Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -101,10 +101,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
   const { t } = useLingui();
   const { data: events, isLoading } = $api.useQuery("get", "/api/events");
 
-  if (isLoading) return <Loader />;
-
   const upcoming = events?.filter((e) => !e.title.includes("考试")) ?? [];
-  if (upcoming.length === 0) return null;
 
   return (
     <section className={cn("w-full", className)}>
@@ -123,23 +120,39 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
           <Trans>See All Events</Trans>
         </Button>
       </div>
-      <Carousel
-        slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
-        slideGap="md"
-        controlSize={40}
-        controlsOffset={0}
-        emblaOptions={{ align: "start" }}
-        previousControlProps={{ "aria-label": t`Previous events` }}
-        nextControlProps={{ "aria-label": t`Next events` }}
-        classNames={{ viewport: "px-14" }}
-        styles={{ viewport: { overflow: "visible", clipPath: "inset(-100rem 0)" } }}
-      >
-        {upcoming.map((e) => (
-          <Carousel.Slide key={e.id}>
-            <EventCard event={e} />
-          </Carousel.Slide>
-        ))}
-      </Carousel>
+      {isLoading && (
+        <div className="flex flex-row gap-4">
+          {Array(5)
+            .fill(0)
+            .map((_, i) => (
+              <Skeleton width="100%" height={144} key={i} />
+            ))}
+        </div>
+      )}
+      {upcoming.length === 0 && (
+        <p>
+          <Trans>There is no upcoming events.</Trans>
+        </p>
+      )}
+      {upcoming.length > 0 && (
+        <Carousel
+          slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
+          slideGap="md"
+          controlSize={40}
+          controlsOffset={0}
+          emblaOptions={{ align: "start" }}
+          previousControlProps={{ "aria-label": t`Previous events` }}
+          nextControlProps={{ "aria-label": t`Next events` }}
+          classNames={{ viewport: "px-14" }}
+          styles={{ viewport: { overflow: "visible", clipPath: "inset(-100rem 0)" } }}
+        >
+          {upcoming.map((e) => (
+            <Carousel.Slide key={e.id}>
+              <EventCard event={e} />
+            </Carousel.Slide>
+          ))}
+        </Carousel>
+      )}
     </section>
   );
 };

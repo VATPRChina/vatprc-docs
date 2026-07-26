@@ -26,23 +26,17 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full overflow-hidden">
-      <img
-        src={heroImage}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full scale-110 object-cover blur-[50px]"
-      />
+      <img src={heroImage} aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover blur-[50px]" />
       <div className="absolute inset-0">
-        <div className="relative mx-auto h-full w-full max-w-[84rem] [mask-image:linear-gradient(to_right,transparent,black_max(0px,calc((100%-72rem)/2)),black_calc(100%-max(0px,calc((100%-72rem)/2))),transparent)]">
-          <img src={heroImage} alt="" aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
+        <div className="relative mx-auto h-full w-full max-w-336 mask-[linear-gradient(to_right,transparent,black_max(0px,calc((100%-72rem)/2)),black_calc(100%-max(0px,calc((100%-72rem)/2))),transparent)]">
+          <img src={heroImage} aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
         </div>
       </div>
-      <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
-      <div className="relative mx-auto flex min-h-[28rem] w-full max-w-6xl flex-col justify-center px-6 py-14">
-        <h1 className="text-3xl font-medium text-white md:text-4xl">
+      <div className="relative mx-auto flex min-h-112 w-full max-w-6xl flex-col items-start justify-center px-4 py-16">
+        <h1 className="bg-black/70 px-4 py-2 text-3xl font-medium text-white md:text-4xl">
           <Trans>VATSIM P.R. China Division · VATPRC</Trans>
         </h1>
-        <p className="text-vatprc-bright mt-4 text-xl font-medium italic">
+        <p className="mt-4 bg-black/70 px-4 py-2 text-xl font-medium text-white italic">
           <Trans>
             <b>VATPRC 有你更精彩</b>
             <br />
@@ -50,18 +44,17 @@ export const Hero: React.FC = () => {
           </Trans>
         </p>
         <div className="mt-8 grid w-fit grid-cols-2 gap-3">
-          <Button color="var(--color-vatprc)" component={Link} to="/controllers">
+          <Button color="vatprc" component={Link} to="/controllers">
             <Trans>Join the controller team</Trans>
           </Button>
-          <Button variant="outline" color="gray.0" component={Link} to="/pilot/introduction-to-fly">
+          <Button color="dark" component={Link} to="/pilot/introduction-to-fly">
             <Trans>How to fly</Trans>
           </Button>
-          <Button variant="outline" color="gray.0" component={Link} to="/flights">
+          <Button color="dark" component={Link} to="/flights">
             <Trans>Flight plan checker</Trans>
           </Button>
           <Button
-            variant="outline"
-            color="gray.0"
+            color="dark"
             component="a"
             href="https://community.vatprc.net"
             target="_blank"
@@ -71,7 +64,7 @@ export const Hero: React.FC = () => {
             <Trans>Forum</Trans>
           </Button>
         </div>
-        <div className="mt-10 flex gap-10 font-mono">
+        <div className="mt-10 flex gap-10 bg-black/70 px-4 py-2 font-mono">
           <HeroStat value={data?.pilots?.length ?? "--"} label={<Trans>Pilots online</Trans>} />
           <HeroStat value={data?.controllers?.length ?? "--"} label={<Trans>Controllers online</Trans>} />
           <HeroStat value={eventsThisWeek} label={<Trans>Events this week</Trans>} accent />

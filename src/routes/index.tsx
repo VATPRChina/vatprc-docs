@@ -15,7 +15,7 @@ function RouteComponent() {
   return (
     <div className="flex w-full flex-col">
       <Hero />
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16">
         <EventCarousel />
         <NotamBoard />
         <ControllersBoard />

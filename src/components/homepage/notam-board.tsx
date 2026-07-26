@@ -1,18 +1,17 @@
 import { getAnnouncements } from "@/lib/news";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
+import { Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import React from "react";
 
 export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
-  const { data: announcements } = useQuery({
+  const { data: announcements, isLoading } = useQuery({
     queryKey: ["forum-announcements"],
     queryFn: () => getAnnouncements(),
     staleTime: 5 * 60 * 1000,
   });
-
-  if (!announcements || announcements.length === 0) return null;
 
   return (
     <section className={cn("w-full", className)}>
@@ -20,7 +19,23 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
         <Trans>NOTAM · Announcements</Trans>
       </h2>
       <div className="border border-black/15 dark:border-white/20">
-        {announcements.map((a) => (
+        {isLoading && (
+          <>
+            {Array(5)
+              .fill(0)
+              .map((_, i) => (
+                <div key={i} className="border-b border-black/15 px-4 py-3 last:border-b-0 dark:border-white/20">
+                  <Skeleton width="100%" height={24} />
+                </div>
+              ))}
+          </>
+        )}
+        {announcements?.length === 0 && (
+          <p>
+            <Trans>There is no NOTAMs / announcements.</Trans>
+          </p>
+        )}
+        {announcements?.map((a) => (
           <a
             key={a.id}
             href={a.url}

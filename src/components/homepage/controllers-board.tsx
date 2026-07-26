@@ -3,7 +3,7 @@ import { getEventTitle } from "@/lib/event";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Loader } from "@mantine/core";
+import { Button, Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
@@ -39,12 +39,28 @@ const ControllerStrip: React.FC<{
   </div>
 );
 
-const StripList: React.FC<{ strips: React.ReactElement[]; empty: React.ReactNode }> = ({ strips, empty }) => {
+interface StripListProps {
+  strips: React.ReactElement[];
+  empty: React.ReactNode;
+  isLoading?: boolean;
+}
+const StripList: React.FC<StripListProps> = ({ strips, empty, isLoading }) => {
   const { t } = useLingui();
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
     <div className="border border-black/15 dark:border-white/20">
+      {isLoading && (
+        <>
+          {Array(5)
+            .fill(0)
+            .map((_, i) => (
+              <div key={i} className="border-b border-black/15 px-4 py-3 last:border-b-0 dark:border-white/20">
+                <Skeleton width="100%" height={24} />
+              </div>
+            ))}
+        </>
+      )}
       {strips.length === 0 && <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>}
       {strips.slice(0, MAX_VISIBLE_STRIPS)}
       {strips.length > MAX_VISIBLE_STRIPS && (
@@ -69,8 +85,6 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
   const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
   const { data: events } = $api.useQuery("get", "/api/events");
   const { i18n } = useLingui();
-
-  if (isLoading) return <Loader />;
 
   const online = data?.controllers ?? [];
   const booked = [...(data?.future_controllers ?? [])].sort((a, b) => +parseISO(a.start_utc) - +parseISO(b.start_utc));
@@ -103,6 +117,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </h3>
           <StripList
             empty={<Trans>There is currently no online ATC.</Trans>}
+            isLoading={isLoading}
             strips={online.map((c) => (
               <ControllerStrip key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
             ))}
@@ -114,6 +129,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </h3>
           <StripList
             empty={<Trans>No upcoming ATC booking.</Trans>}
+            isLoading={isLoading}
             strips={booked.map((c) => {
               const schedule: [Date, Date] = [parseISO(c.start_utc), parseISO(c.end_utc)];
               return (
