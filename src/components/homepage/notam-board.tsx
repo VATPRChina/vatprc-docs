@@ -1,10 +1,11 @@
 import { COMMUNITY_ENDPOINT } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Skeleton } from "@mantine/core";
+import { Button, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import React from "react";
+import { TbArrowRight } from "react-icons/tb";
 
 interface DiscourseCategoryResponse {
   topic_list?: {
@@ -18,7 +19,8 @@ interface DiscourseCategoryResponse {
   };
 }
 
-const ANNOUNCEMENT_CATEGORY_JSON = `${COMMUNITY_ENDPOINT}/c/69-category/12-category/12.json`;
+const ANNOUNCEMENT_CATEGORY_URL = `${COMMUNITY_ENDPOINT}/c/69-category/12-category/12`;
+const ANNOUNCEMENT_CATEGORY_JSON = `${ANNOUNCEMENT_CATEGORY_URL}.json`;
 
 export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data: announcements, isLoading } = useQuery({
@@ -47,9 +49,23 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
 
   return (
     <section className={cn("w-full", className)}>
-      <h2 className="mb-4 text-2xl font-medium">
-        <Trans>NOTAM · Announcements</Trans>
-      </h2>
+      <div className="mb-4 flex items-baseline justify-between">
+        <h2 className="text-2xl font-medium">
+          <Trans>NOTAM · Announcements</Trans>
+        </h2>
+        <Button
+          variant="subtle"
+          color="red"
+          className="shrink-0 whitespace-nowrap"
+          component="a"
+          href={ANNOUNCEMENT_CATEGORY_URL}
+          target="_blank"
+          rel="noreferrer"
+          rightSection={<TbArrowRight size={14} />}
+        >
+          <Trans>See All Announcements</Trans>
+        </Button>
+      </div>
       <div className="border border-black/15 dark:border-white/20">
         {isLoading && (
           <>
