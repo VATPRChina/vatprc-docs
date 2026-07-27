@@ -1,5 +1,6 @@
 import { components } from "./api";
 import { $api } from "./client/client";
+import { createIsomorphicFn } from "@tanstack/react-start";
 import { isBefore } from "date-fns";
 
 export { $api } from "./client/client";
@@ -56,3 +57,7 @@ export const useControllerPermission = (
   }
   return true;
 };
+
+export const COMMUNITY_ENDPOINT = createIsomorphicFn()
+  .server(() => "https://community.vatprc.net")
+  .client(() => (process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"))();

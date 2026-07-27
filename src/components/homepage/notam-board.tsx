@@ -1,4 +1,4 @@
-import { getAnnouncements } from "@/lib/news";
+import { COMMUNITY_ENDPOINT } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton } from "@mantine/core";
@@ -6,10 +6,42 @@ import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import React from "react";
 
+interface DiscourseCategoryResponse {
+  topic_list?: {
+    topics?: {
+      id: number;
+      title: string;
+      created_at: string;
+      pinned: boolean;
+      slug: string;
+    }[];
+  };
+}
+
+const ANNOUNCEMENT_CATEGORY_JSON = `${COMMUNITY_ENDPOINT}/c/69-category/12-category/12.json`;
+
 export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data: announcements, isLoading } = useQuery({
     queryKey: ["forum-announcements"],
-    queryFn: () => getAnnouncements(),
+    queryFn: async () => {
+      const response = await fetch(ANNOUNCEMENT_CATEGORY_JSON, {
+        headers: { accept: "application/json" },
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!response.ok) throw new Error(`Failed to load announcements: ${response.status}`);
+
+      const raw = (await response.json()) as DiscourseCategoryResponse;
+      return (raw.topic_list?.topics ?? [])
+        .filter((topic) => !topic.pinned)
+        .sort((a, b) => b.created_at.localeCompare(a.created_at))
+        .slice(0, 3)
+        .map((topic) => ({
+          id: topic.id,
+          title: topic.title,
+          url: `${COMMUNITY_ENDPOINT}/t/${topic.slug}/${topic.id}`,
+          createdAt: topic.created_at,
+        }));
+    },
     staleTime: 5 * 60 * 1000,
   });
 

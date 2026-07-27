@@ -2,9 +2,7 @@ import { CenterRolesProvider } from "@/components/controller-center/center-conte
 import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { RequireRole } from "@/components/require-role";
-import { AtcCenterTab, resolveCenterTab } from "@/lib/center-tab";
 import { $api } from "@/lib/client";
-import { MANAGEMENT_ROLES } from "@/lib/management-roles";
 import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
@@ -41,7 +39,11 @@ const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: C
 
 function RouteComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const tab: AtcCenterTab = resolveCenterTab(pathname);
+  const tab = pathname.startsWith("/controllers/trainings")
+    ? "trainings"
+    : pathname.startsWith("/controllers/applications")
+      ? "applications"
+      : "mine";
   const { data: session, error: sessionError } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const user = session?.user;
   const roles = user?.roles ?? [];
@@ -56,7 +58,7 @@ function RouteComponent() {
   const statusSettled = !user || status !== undefined || statusError !== undefined;
   const isPending = !sessionSettled || !statusSettled;
   const isController = roles.includes("controller") || (status?.permissions.length ?? 0) > 0;
-  const canManageTrainings = MANAGEMENT_ROLES.some((role) => roles.includes(role));
+  const canManageTrainings = roles.includes("controller-training-mentor");
   const canReviewApplications = roles.includes("controller-training-director-assistant");
   const hasInternalRole = isController || canManageTrainings || canReviewApplications;
   const showTabs = canManageTrainings || canReviewApplications;
@@ -86,7 +88,7 @@ function RouteComponent() {
           <CenterTabLink to="/controllers" active={tab === "mine"}>
             <Trans>My Trainings</Trans>
           </CenterTabLink>
-          <RequireRole role={[...MANAGEMENT_ROLES]}>
+          <RequireRole role={"controller-training-mentor"}>
             <CenterTabLink to="/controllers/trainings" active={tab === "trainings"}>
               <Trans>Training Management</Trans>
             </CenterTabLink>

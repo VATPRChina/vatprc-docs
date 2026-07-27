@@ -7,7 +7,6 @@ import { EventDetail } from "@/components/event/event-detail";
 import { SlotList } from "@/components/event/slot-list";
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
-import { getDefaultEventTab } from "@/lib/event";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -44,7 +43,7 @@ function RouteComponent() {
             <EventDetail eventId={event.id} />
           </div>
         </div>
-        <Tabs defaultValue={getDefaultEventTab(event)}>
+        <Tabs defaultValue={event.start_booking_at && event.end_booking_at ? "slot" : "controller"}>
           <Tabs.List className="mb-4">
             <Tabs.Tab value="slot" leftSection={<TbCalendar />}>
               <Trans>Slots</Trans>
