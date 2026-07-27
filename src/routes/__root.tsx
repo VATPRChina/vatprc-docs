@@ -27,7 +27,7 @@ import { FC, PropsWithChildren, useEffect } from "react";
 
 const theme = createTheme({
   primaryColor: "vatprc",
-  primaryShade: { light: 8, dark: 2 },
+  primaryShade: 8,
   colors: {
     vatprc: [
       "#ffebeb",
