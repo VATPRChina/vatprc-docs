@@ -21,6 +21,27 @@ const throwMiddleware: Middleware = {
       body.type !== "urn:vatprc-uniapi-error:invalid-token" &&
       status >= 500
     ) {
+      const error = new Error(body.detail ?? response.statusText, {
+        cause: {
+          status,
+          title: body.title,
+          type: body.type,
+          url: response.url,
+        },
+      });
+      error.name = body.title ?? "ServerError";
+      console.error(error);
+      void import("@sentry/tanstackstart-react")
+        .then(({ captureException }) =>
+          captureException(error, {
+            extra: {
+              problem: body,
+              status,
+              url: response.url,
+            },
+          }),
+        )
+        .catch((sentryError) => console.error("Failed to report API error to Sentry", sentryError));
       notifications.show({
         title: body.title ?? response.statusText,
         message: body.detail,
@@ -30,6 +51,8 @@ const throwMiddleware: Middleware = {
   },
 
   onError({ error }) {
+    if (error instanceof Error && error.name === "AbortError") return;
+
     if (error instanceof Error) {
       return Response.json(
         {
