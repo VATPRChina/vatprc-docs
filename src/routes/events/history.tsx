@@ -2,7 +2,7 @@ import { EventCard } from "@/components/event/event-card";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Select } from "@mantine/core";
+import { Alert, Select, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { endOfDay, endOfQuarter, formatISO, startOfDay, startOfQuarter, subMonths } from "date-fns";
 
@@ -88,7 +88,11 @@ function RouteComponent() {
   const rangeOptions: RangeOption[] = [{ value: RECENT_RANGE, label: t`Recent 3 months` }, ...getQuarterOptions()];
   const query = getRangeQuery(range);
 
-  const { data: events, error } = $api.useQuery("get", "/api/events/past", {
+  const {
+    data: events,
+    error,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/past", {
     params: {
       query,
     },
@@ -132,16 +136,25 @@ function RouteComponent() {
           <Trans>Failed to load past events.</Trans>
         </Alert>
       )}
-      {!error && sortedEvents?.length === 0 && (
+      {isLoading && (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2" aria-label={t`Loading past events`}>
+          {Array.from({ length: 2 }, (_, index) => (
+            <Skeleton key={index} className="aspect-video w-full" />
+          ))}
+        </div>
+      )}
+      {!isLoading && !error && sortedEvents?.length === 0 && (
         <Alert>
           <Trans>No past events found in the selected time range.</Trans>
         </Alert>
       )}
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-        {sortedEvents?.map((event) => (
-          <EventCard event={event} key={event.id} />
-        ))}
-      </div>
+      {!isLoading && !error && (
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+          {sortedEvents?.map((event) => (
+            <EventCard event={event} key={event.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

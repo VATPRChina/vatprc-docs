@@ -20,13 +20,13 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
   const user = useUser();
   const [opened, { toggle, close }] = useDisclosure(false);
 
-  const { data: application } = $api.useQuery(
+  const { data: application, error: applicationError } = $api.useQuery(
     "get",
     "/api/atc/trainings/applications/{id}",
     { params: { path: { id } } },
     { enabled: opened },
   );
-  const { data } = $api.useQuery(
+  const { data, error: responsesError } = $api.useQuery(
     "get",
     "/api/atc/trainings/applications/{id}/responses",
     { params: { path: { id } } },
@@ -43,7 +43,11 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
 
   const [slotId, setSlotId] = useState("");
   const [comment, setComment] = useState("");
-  const { mutate, isPending } = $api.useMutation("put", "/api/atc/trainings/applications/{id}/response", {
+  const {
+    mutate,
+    error: mutationError,
+    isPending,
+  } = $api.useMutation("put", "/api/atc/trainings/applications/{id}/response", {
     onSuccess: async () => {
       await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/trainings/applications"));
       await queryClient.invalidateQueries(
@@ -59,6 +63,11 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Training Application Responses`}>
         <div className="flex flex-col gap-2">
+          {(applicationError ?? responsesError ?? mutationError) && (
+            <Alert color="red" title={(applicationError ?? responsesError ?? mutationError)?.title}>
+              {(applicationError ?? responsesError ?? mutationError)?.detail}
+            </Alert>
+          )}
           <div className="grid gap-2 text-sm sm:grid-cols-2">
             <div>
               <span className="text-dimmed mr-1">

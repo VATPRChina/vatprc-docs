@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Carousel } from "@mantine/carousel";
-import { Button, Skeleton } from "@mantine/core";
+import { Alert, Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -15,10 +15,17 @@ type EventDto = components["schemas"]["EventDto"];
 const TILT_MAX_DEG = 8;
 
 const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
-  const { data: positions } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+  const { data: positions, error } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
   });
 
+  if (error) {
+    return (
+      <Alert color="red" title={error.title}>
+        {error.detail}
+      </Alert>
+    );
+  }
   if (!positions) return <span className="font-mono text-base text-gray-600 dark:text-gray-300">--</span>;
   if (positions.length === 0)
     return (
@@ -98,7 +105,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
 
 export const EventCarousel: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useLingui();
-  const { data: events, isLoading } = $api.useQuery("get", "/api/events");
+  const { data: events, error, isLoading } = $api.useQuery("get", "/api/events");
 
   const upcoming = events?.filter((e) => !e.title.includes("考试")) ?? [];
 
@@ -128,12 +135,17 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
             ))}
         </div>
       )}
-      {upcoming.length === 0 && (
+      {error && (
+        <Alert color="red">
+          <Trans>Failed to load events.</Trans>
+        </Alert>
+      )}
+      {!isLoading && !error && upcoming.length === 0 && (
         <p>
           <Trans>There is no upcoming events.</Trans>
         </p>
       )}
-      {upcoming.length > 0 && (
+      {!isLoading && !error && upcoming.length > 0 && (
         <Carousel
           slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
           slideGap="calc(var(--spacing) * 2)"

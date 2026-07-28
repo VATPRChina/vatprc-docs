@@ -3,7 +3,7 @@ import { CreateEvent } from "@/components/event/event-create";
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Skeleton } from "@mantine/core";
+import { Alert, Button, Skeleton } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowRight, TbCalendarOff } from "react-icons/tb";
 
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/events/")({
 
 function RouteComponent() {
   const { t } = useLingui();
-  const { data: events, isLoading } = $api.useQuery("get", "/api/events", { params: {} });
+  const { data: events, error, isLoading } = $api.useQuery("get", "/api/events", { params: {} });
 
   return (
     <div className="flex flex-col gap-4">
@@ -35,6 +35,11 @@ function RouteComponent() {
       <div className="col-span-1 md:col-span-2">
         <CreateEvent />
       </div>
+      {error && (
+        <Alert color="red" title={<Trans>Failed to load events</Trans>}>
+          {error.detail}
+        </Alert>
+      )}
       {isLoading && (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2" aria-label={t`Loading events`}>
           {Array.from({ length: 2 }, (_, index) => (
@@ -49,7 +54,7 @@ function RouteComponent() {
           ))}
         </div>
       )}
-      {!isLoading && events?.length === 0 && (
+      {!isLoading && !error && events?.length === 0 && (
         <section
           role="status"
           className="relative isolate flex min-h-64 items-center justify-center overflow-hidden border border-dashed border-black/20 bg-linear-to-br from-gray-50 via-white to-red-50 p-4 dark:border-white/20 dark:from-gray-950 dark:via-gray-950 dark:to-red-950/30"
@@ -80,7 +85,7 @@ function RouteComponent() {
           </div>
         </section>
       )}
-      {!isLoading && (
+      {!isLoading && !error && (
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           {events?.map((event) => (
             <EventCard event={event} key={event.id} />

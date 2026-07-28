@@ -6,7 +6,7 @@ import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Skeleton } from "@mantine/core";
+import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers")({
@@ -83,6 +83,11 @@ function RouteComponent() {
         </h1>
         {isController && <IdentityChip />}
       </div>
+      {(sessionError ?? statusError) && (
+        <Alert color="red" title={(sessionError ?? statusError)?.title}>
+          {(sessionError ?? statusError)?.detail}
+        </Alert>
+      )}
       {showTabs && (
         <div className="flex flex-wrap items-baseline gap-2">
           <CenterTabLink to="/controllers" active={tab === "mine"}>

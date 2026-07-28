@@ -2,7 +2,7 @@ import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Skeleton } from "@mantine/core";
+import { Alert, Button, Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
 import { format, parseISO } from "date-fns";
@@ -60,8 +60,10 @@ const StripList: React.FC<StripListProps> = ({ strips, empty, isLoading }) => {
             ))}
         </>
       )}
-      {strips.length === 0 && <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>}
-      {strips.slice(0, MAX_VISIBLE_STRIPS)}
+      {!isLoading && strips.length === 0 && (
+        <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>
+      )}
+      {!isLoading && strips.slice(0, MAX_VISIBLE_STRIPS)}
       {strips.length > MAX_VISIBLE_STRIPS && (
         <>
           {opened && strips.slice(MAX_VISIBLE_STRIPS)}
@@ -81,8 +83,8 @@ const StripList: React.FC<StripListProps> = ({ strips, empty, isLoading }) => {
 };
 
 export const ControllersBoard: React.FC<{ className?: string }> = ({ className }) => {
-  const { data, isLoading } = $api.useQuery("get", "/api/compat/online-status");
-  const { data: events } = $api.useQuery("get", "/api/events");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/compat/online-status");
+  const { data: events, error: eventsError } = $api.useQuery("get", "/api/events");
   const { i18n } = useLingui();
 
   const online = data?.controllers ?? [];
@@ -110,6 +112,11 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
         </Button>
       </div>
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+        {(error ?? eventsError) && (
+          <Alert color="red" className="lg:col-span-2">
+            <Trans>Failed to load controller information.</Trans>
+          </Alert>
+        )}
         <div>
           <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Online Controllers</Trans>

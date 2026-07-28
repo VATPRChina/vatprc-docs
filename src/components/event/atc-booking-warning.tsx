@@ -34,10 +34,17 @@ export const AtcBookingWarning = ({ eventId, eventStart }: { eventId: string; ev
     return interval.stop;
   }, [interval]);
 
-  const { data: positions } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+  const { data: positions, error } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
   });
 
+  if (error) {
+    return (
+      <Alert color="red" title={error.title}>
+        {error.detail}
+      </Alert>
+    );
+  }
   if (!positions || !hasInsufficientAreaControllerBookings(eventStart, positions, now)) return null;
 
   return (

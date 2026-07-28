@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Checkbox, Tooltip } from "@mantine/core";
+import { Alert, Checkbox, Tooltip } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import React, { ChangeEvent, useState } from "react";
@@ -126,7 +126,7 @@ const columns = [
 
 export const ControllerListTable: React.FC = () => {
   const [showAbsent, setShowAbsent] = useState(false);
-  const { data, isLoading } = $api.useQuery("get", "/api/atc/controllers");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/controllers");
 
   const rows = (data ?? [])
     .filter((c) => showAbsent || !c.is_absent)
@@ -135,6 +135,11 @@ export const ControllerListTable: React.FC = () => {
 
   return (
     <div className="mt-4 flex flex-col gap-4">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
       <Checkbox
         checked={showAbsent}
         onChange={(e: ChangeEvent<HTMLInputElement>) => setShowAbsent(e.target.checked)}

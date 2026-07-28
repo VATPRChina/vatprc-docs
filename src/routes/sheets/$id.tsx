@@ -1,6 +1,6 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { errorToast, promiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Card, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
@@ -61,14 +61,6 @@ function renumberFields(fields: EditableField[]) {
   return fields.map((field, index) => ({ ...field, sequence: index }));
 }
 
-function getErrorMessage(error: unknown) {
-  if (error instanceof Error) return error.message;
-  if (typeof error === "object" && error && "message" in error && typeof error.message === "string") {
-    return error.message;
-  }
-  return "Unknown error";
-}
-
 function validateSheet(data: SheetFormData, t: ReturnType<typeof useLingui>["t"]) {
   const errors: Record<string, string> = {};
 
@@ -114,12 +106,11 @@ function validateSheet(data: SheetFormData, t: ReturnType<typeof useLingui>["t"]
 function RouteComponent() {
   const { id } = Route.useParams();
   const { t } = useLingui();
-  const { data: sheet, isLoading: isSheetLoading } = $api.useQuery(
-    "get",
-    "/api/sheets/{sheetId}",
-    { params: { path: { sheetId: id ?? "" } } },
-    { enabled: !!id },
-  );
+  const {
+    data: sheet,
+    error: sheetError,
+    isLoading: isSheetLoading,
+  } = $api.useQuery("get", "/api/sheets/{sheetId}", { params: { path: { sheetId: id ?? "" } } }, { enabled: !!id });
   const { mutate: saveSheet, isPending: isSaving, error: saveError } = $api.useMutation("put", "/api/sheets/{sheetId}");
 
   const form = useForm({
@@ -168,10 +159,7 @@ function RouteComponent() {
               form.setFieldValue("fields", toEditableFields(updated.fields));
               resolve();
             },
-            onError: (err) => {
-              errorToast(new Error(getErrorMessage(err)));
-              resolve();
-            },
+            onError: () => resolve(),
           },
         );
       });
@@ -193,6 +181,11 @@ function RouteComponent() {
           promiseWithLog(form.handleSubmit());
         }}
       >
+        {sheetError && (
+          <Alert color="red" title={sheetError.title}>
+            {sheetError.detail}
+          </Alert>
+        )}
         <form.Field name="name">
           {(field) => (
             <TextInput

@@ -1,10 +1,9 @@
 import { DateTime } from "./datetime";
 import { useUser } from "@/lib/client";
 import { $api, client } from "@/lib/client/client";
-import { wrapPromiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Alert, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
 import { Dropzone, FileWithPath } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -30,30 +29,36 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
   const queryClient = useQueryClient();
 
   const [slots, setSlots] = useState<Slot[]>([]);
+  const [fileError, setFileError] = useState<Error | null>(null);
 
   const onDrop = async (files: FileWithPath[]) => {
-    const file = files[0];
-    const data = (await file?.text()) ?? "";
-    setSlots(
-      data
-        .split("\n")
-        .map((line) => {
-          const [dep, dep_time, arr, arr_time, callsign, aircraft_type_icao] = line.split(",");
-          if (!dep || !dep_time || !arr) return;
-          return {
-            airspace: `${dep} - ${arr}`,
-            icao_codes: [dep, arr],
-            enter_at: parse(dep_time ?? "", "yyyy-MM-dd HH:mm", Date.now(), { in: utc }),
-            leave_at: arr_time ? parse(arr_time, "yyyy-MM-dd HH:mm", Date.now(), { in: utc }) : undefined,
-            callsign: callsign,
-            aircraft_type_icao: aircraft_type_icao,
-          };
-        })
-        .filter((x) => !!x),
-    );
+    try {
+      setFileError(null);
+      const file = files[0];
+      const data = (await file?.text()) ?? "";
+      setSlots(
+        data
+          .split("\n")
+          .map((line) => {
+            const [dep, dep_time, arr, arr_time, callsign, aircraft_type_icao] = line.split(",");
+            if (!dep || !dep_time || !arr) return;
+            return {
+              airspace: `${dep} - ${arr}`,
+              icao_codes: [dep, arr],
+              enter_at: parse(dep_time ?? "", "yyyy-MM-dd HH:mm", Date.now(), { in: utc }),
+              leave_at: arr_time ? parse(arr_time, "yyyy-MM-dd HH:mm", Date.now(), { in: utc }) : undefined,
+              callsign: callsign,
+              aircraft_type_icao: aircraft_type_icao,
+            };
+          })
+          .filter((x) => !!x),
+      );
+    } catch (caught) {
+      setFileError(caught instanceof Error ? caught : new Error(t`Failed to read the CSV file.`));
+    }
   };
 
-  const { isPending, mutate } = useMutation({
+  const { error, isPending, mutate } = useMutation({
     mutationKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } })
       .queryKey,
     mutationFn: async () => {
@@ -65,7 +70,12 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
           }),
         ),
       );
-      await Promise.all(
+      const airspaceError = airspaces.find((response) => response.error)?.error;
+      if (airspaceError) {
+        throw new Error(airspaceError.detail || airspaceError.title || t`Failed to import slots.`);
+      }
+
+      const slotResponses = await Promise.all(
         slots.map((slot) =>
           client.POST("/api/events/{event_id}/slots", {
             params: { path: { event_id: eventId } },
@@ -79,6 +89,10 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
           }),
         ),
       );
+      const slotError = slotResponses.find((response) => response.error)?.error;
+      if (slotError) {
+        throw new Error(slotError.detail || slotError.title || t`Failed to import slots.`);
+      }
     },
     onSuccess: () => {
       close();
@@ -99,22 +113,27 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
       </ActionIcon>
       <Modal opened={opened} onClose={close} title={t`Import slots`} size="xl">
         <div className="flex flex-col gap-4">
+          {(fileError ?? error) && (
+            <Alert color="red" title={<Trans>Failed to import slots.</Trans>}>
+              {(fileError ?? error)?.message}
+            </Alert>
+          )}
           <Text>
             <Trans>
               File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign,
               aircraft_type_icao
             </Trans>
           </Text>
-          <Dropzone onDrop={(f) => wrapPromiseWithToast(onDrop(f))}>
+          <Dropzone onDrop={(files) => void onDrop(files)}>
             <div className="pointer-events-none flex flex-wrap items-center justify-center gap-2">
               <Dropzone.Accept>
-                <TbUpload color={theme.colors.green[7]} size={52} stroke="1.5" />
+                <TbUpload color={theme.colors.green[7]} size={52} strokeWidth={1.5} />
               </Dropzone.Accept>
               <Dropzone.Reject>
-                <TbX color={theme.colors.red[7]} size={52} stroke="1.5" />
+                <TbX color={theme.colors.red[7]} size={52} strokeWidth={1.5} />
               </Dropzone.Reject>
               <Dropzone.Idle>
-                <TbFileTypeCsv color={theme.colors.gray[7]} size={52} stroke="1.5" />
+                <TbFileTypeCsv color={theme.colors.gray[7]} size={52} strokeWidth={1.5} />
               </Dropzone.Idle>
 
               <Text size="xl" inline>
@@ -123,7 +142,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
             </div>
           </Dropzone>
           <Button onClick={onSubmit} disabled={slots.length === 0} loading={isPending}>
-            Create Slots
+            <Trans>Create Slots</Trans>
           </Button>
           <Table highlightOnHover>
             <Table.Thead>

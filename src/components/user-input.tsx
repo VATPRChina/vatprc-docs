@@ -3,7 +3,7 @@ import { ComboboxItem, Select, SelectProps, Skeleton } from "@mantine/core";
 import { FC, useMemo } from "react";
 
 export const UserInput: FC<SelectProps> = ({ ...props }) => {
-  const { data: users, isLoading } = $api.useQuery("get", "/api/users");
+  const { data: users, error, isLoading } = $api.useQuery("get", "/api/users");
 
   const selectOptions = useMemo(
     () =>
@@ -19,7 +19,13 @@ export const UserInput: FC<SelectProps> = ({ ...props }) => {
 
   return (
     <Skeleton visible={isLoading}>
-      <Select data={selectOptions} limit={5} searchable {...props} />
+      <Select
+        data={selectOptions}
+        limit={5}
+        searchable
+        {...props}
+        error={props.error ?? error?.detail ?? error?.title}
+      />
     </Skeleton>
   );
 };

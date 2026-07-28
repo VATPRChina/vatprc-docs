@@ -67,7 +67,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
     { params: { path: { userId: user?.id ?? "" } } },
     { enabled: !!user },
   );
-  const { data: applications } = $api.useQuery(
+  const { data: applications, error: applicationsError } = $api.useQuery(
     "get",
     "/api/atc/trainings/applications",
     {},
@@ -93,9 +93,9 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
           <TrainingApplicationCreateModal />
         </div>
       )}
-      {error ? (
+      {(error ?? applicationsError) ? (
         <Alert color="red" title={<Trans>Failed to load trainings</Trans>}>
-          <Trans>Please refresh the page or try again later.</Trans>
+          {(error ?? applicationsError)?.detail || <Trans>Please refresh the page or try again later.</Trans>}
         </Alert>
       ) : (
         <>

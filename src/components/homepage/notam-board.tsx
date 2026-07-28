@@ -1,7 +1,7 @@
 import { COMMUNITY_ENDPOINT } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Button, Skeleton } from "@mantine/core";
+import { Alert, Button, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import React from "react";
@@ -23,7 +23,11 @@ const ANNOUNCEMENT_CATEGORY_URL = `${COMMUNITY_ENDPOINT}/c/69-category/12-catego
 const ANNOUNCEMENT_CATEGORY_JSON = `${ANNOUNCEMENT_CATEGORY_URL}.json`;
 
 export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
-  const { data: announcements, isLoading } = useQuery({
+  const {
+    data: announcements,
+    error,
+    isLoading,
+  } = useQuery({
     queryKey: ["forum-announcements"],
     queryFn: async () => {
       const response = await fetch(ANNOUNCEMENT_CATEGORY_JSON, {
@@ -78,25 +82,32 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
               ))}
           </>
         )}
-        {announcements?.length === 0 && (
-          <p>
+        {error && (
+          <Alert color="red">
+            <Trans>Failed to load announcements.</Trans>
+          </Alert>
+        )}
+        {!isLoading && !error && announcements?.length === 0 && (
+          <p className="px-4 py-3">
             <Trans>There is no NOTAMs / announcements.</Trans>
           </p>
         )}
-        {announcements?.map((a) => (
-          <a
-            key={a.id}
-            href={a.url}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-baseline gap-1 border-b border-black/15 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900"
-          >
-            <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
-              {format(parseISO(a.createdAt), "yyyy-MM-dd")}
-            </span>
-            <span className="flex-1 truncate text-base">{a.title}</span>
-          </a>
-        ))}
+        {!isLoading &&
+          !error &&
+          announcements?.map((a) => (
+            <a
+              key={a.id}
+              href={a.url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-baseline gap-1 border-b border-black/15 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900"
+            >
+              <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
+                {format(parseISO(a.createdAt), "yyyy-MM-dd")}
+              </span>
+              <span className="flex-1 truncate text-base">{a.title}</span>
+            </a>
+          ))}
       </div>
     </section>
   );

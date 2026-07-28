@@ -7,6 +7,7 @@ import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FC } from "react";
@@ -55,14 +56,21 @@ export const columns = [
 ];
 
 export const AtcApplicationList: FC = () => {
-  const { data, isLoading } = $api.useQuery("get", "/api/atc/applications");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications");
 
   return (
-    <RichTable
-      data={data}
-      columns={columns}
-      isLoading={isLoading}
-      initialState={{ columnFilters: [{ id: "status", value: "submitted" }] }}
-    />
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <RichTable
+        data={data}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ columnFilters: [{ id: "status", value: "submitted" }] }}
+      />
+    </div>
   );
 };

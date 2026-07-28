@@ -12,7 +12,7 @@ export const Route = createFileRoute("/sheets")({
 function RouteComponent() {
   const navigate = useNavigate();
   const id = useParams({ from: "/sheets/$id", shouldThrow: false, select: ({ id }) => id });
-  const { data: sheets, isLoading: isSheetsLoading } = $api.useQuery("get", "/api/sheets");
+  const { data: sheets, error: sheetsError, isLoading: isSheetsLoading } = $api.useQuery("get", "/api/sheets");
 
   const totalSheets = sheets?.length ?? 0;
 
@@ -25,6 +25,11 @@ function RouteComponent() {
         <Alert color="blue">
           <Trans>Only staff can manage sheets. Changes are applied immediately after saving.</Trans>
         </Alert>
+        {sheetsError && (
+          <Alert color="red" title={sheetsError.title}>
+            {sheetsError.detail}
+          </Alert>
+        )}
         <div className="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
           <Card withBorder className="flex flex-col gap-1">
             <h2 className="text-xl font-medium">

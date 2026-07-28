@@ -3,7 +3,7 @@ import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Anchor } from "@mantine/core";
+import { Alert, Anchor } from "@mantine/core";
 import { FC } from "react";
 import { TbArrowRight } from "react-icons/tb";
 
@@ -54,10 +54,17 @@ export const EventSummary: FC<
 };
 
 export const EventDetail = ({ eventId }: { eventId: string }) => {
-  const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId } } });
+  const { data: event, error } = $api.useQuery("get", "/api/events/{id}", {
+    params: { path: { id: eventId } },
+  });
 
   return (
     <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
       {event && <EventSummary {...event} />}
       {event && <AtcBookingWarning eventId={event.id} eventStart={event.start_at} />}
       <div className="flex flex-row items-baseline gap-1">

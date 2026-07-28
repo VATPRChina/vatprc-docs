@@ -353,17 +353,25 @@ function RouteComponent() {
     data: flight,
     isLoading,
   } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", { params: { path: { callsign } } });
-  const { data: warnings } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/warnings", {
-    params: { path: { callsign } },
-  });
-  const { data: route } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/route", {
+  const { data: warnings, error: warningsError } = $api.useQuery(
+    "get",
+    "/api/flights/by-callsign/{callsign}/warnings",
+    {
+      params: { path: { callsign } },
+    },
+  );
+  const { data: route, error: routeError } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/route", {
     params: { path: { callsign } },
   });
 
   return (
     <div className="flex flex-col items-start gap-4">
       <BackButton />
-      {error?.title && <Alert color="red">{error?.title}</Alert>}
+      {(error ?? warningsError ?? routeError) && (
+        <Alert color="red" title={(error ?? warningsError ?? routeError)?.title}>
+          {(error ?? warningsError ?? routeError)?.detail}
+        </Alert>
+      )}
       {isLoading && <Skeleton h={64} />}
       {!error && flight && (
         <div className="flex w-full flex-col gap-2">

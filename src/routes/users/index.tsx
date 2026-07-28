@@ -8,7 +8,7 @@ import { $api } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Modal, Tabs } from "@mantine/core";
+import { ActionIcon, Alert, Button, Checkbox, Modal, Tabs } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -39,7 +39,7 @@ const columns = [
 
       const savedRoles = getValue();
       const [roles, setRoles] = useState(getValue());
-      const { mutate, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/roles");
+      const { mutate, error: mutationError, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/roles");
       const { refetch } = $api.useQuery("get", "/api/users");
       const [opened, { open, close }] = useDisclosure(false);
 
@@ -77,6 +77,11 @@ const columns = [
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
             <div className="flex flex-col gap-4">
+              {mutationError && (
+                <Alert color="red" title={mutationError.title}>
+                  {mutationError.detail}
+                </Alert>
+              )}
               {USER_ROLES.entries().map(([role, name]) => (
                 <Checkbox
                   key={role}
@@ -124,8 +129,12 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
-  const { data, isLoading } = $api.useQuery("get", "/api/users");
-  const { data: controllerStatuses, isLoading: isControllersLoading } = $api.useQuery("get", "/api/atc/controllers");
+  const { data, error: usersError, isLoading } = $api.useQuery("get", "/api/users");
+  const {
+    data: controllerStatuses,
+    error: controllersError,
+    isLoading: isControllersLoading,
+  } = $api.useQuery("get", "/api/atc/controllers");
   const controllerIds = new Set(controllerStatuses?.map((status) => status.user_id));
   const controllers = data?.filter((user) => controllerIds.has(user.id));
   const usersWithRoles = data?.filter((user) => user.direct_roles.length > 0);
@@ -142,6 +151,11 @@ function RouteComponent() {
           </Link>
         </RequireRole>
       </div>
+      {(usersError ?? controllersError) && (
+        <Alert color="red" title={(usersError ?? controllersError)?.title}>
+          {(usersError ?? controllersError)?.detail}
+        </Alert>
+      )}
       <Tabs defaultValue="users">
         <Tabs.List className="mb-2">
           <Tabs.Tab value="users">

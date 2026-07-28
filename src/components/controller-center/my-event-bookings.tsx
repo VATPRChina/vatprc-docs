@@ -1,6 +1,7 @@
 import { $api, useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { useQueries } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
@@ -31,17 +32,18 @@ export const MyEventBookings: FC = () => {
     results.flatMap((result) => result.data ?? []),
     user?.id ?? "",
   );
+  const positionsError = results.find((result) => result.error)?.error;
 
   if (!user) return null;
-  if (error) {
+  if (error ?? positionsError) {
     return (
       <section className="flex flex-col gap-1">
         <h2 className="text-2xl font-medium">
           <Trans>My Event Positions</Trans>
         </h2>
-        <p className="border border-black/15 px-4 py-3 font-mono text-sm text-gray-600 dark:border-white/20 dark:text-gray-300">
-          <Trans>Failed to load event bookings.</Trans>
-        </p>
+        <Alert color="red" title={(error ?? positionsError)?.title}>
+          {(error ?? positionsError)?.detail}
+        </Alert>
       </section>
     );
   }

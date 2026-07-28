@@ -9,8 +9,7 @@ import { BackButton } from "@/components/back-button";
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Skeleton, Tooltip } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
+import { Alert, Button, Skeleton, Tooltip } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbSchool } from "react-icons/tb";
@@ -22,13 +21,18 @@ export const Route = createFileRoute("/controllers/applications/$id")({
 function RouteComponent() {
   const { params } = Route.useMatch();
 
-  const { data } = $api.useQuery("get", "/api/atc/applications/{id}", {
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications/{id}", {
     params: { path: { id: params.id } },
   });
 
   return (
     <div className="flex flex-col gap-4">
       <BackButton />
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
       <h2 className="text-2xl font-medium">
         <Trans>ATC Application</Trans>
       </h2>
@@ -42,7 +46,9 @@ function RouteComponent() {
         <Trans>User</Trans>
       </h2>
       <div className="flex flex-row gap-1">
-        {data?.user_id ? (
+        {isLoading ? (
+          <Skeleton h={24} w={144} />
+        ) : data?.user_id ? (
           <>
             <AtcPermissionModalButton userId={data.user_id} />
             <MoodleAccountProvisionButton
@@ -51,9 +57,7 @@ function RouteComponent() {
               hasMoodleAccount={!!data.user.moodle_account}
             />
           </>
-        ) : (
-          <Skeleton h={24} w={144} />
-        )}
+        ) : null}
       </div>
       <RequireRole role="volunteer">
         <h2 className="text-lg">
@@ -76,13 +80,8 @@ const MoodleAccountProvisionButton = ({
 }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
-  const { mutate, isPending } = $api.useMutation("put", "/api/users/{id}/moodle-account", {
+  const { mutate, error, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/moodle-account", {
     onSuccess: async () => {
-      notifications.show({
-        title: t`Moodle account provisioned`,
-        message: t`The user's Moodle account has been provisioned successfully.`,
-        color: "green",
-      });
       await queryClient.invalidateQueries(
         $api.queryOptions("get", "/api/atc/applications/{id}", { params: { path: { id: applicationId } } }),
       );
@@ -92,20 +91,32 @@ const MoodleAccountProvisionButton = ({
 
   return (
     <RequireRole role="tech-director">
-      <Tooltip label={t`Moodle account already exists`} disabled={!hasMoodleAccount}>
-        <span>
-          <Button
-            size="xs"
-            onClick={() => mutate({ params: { path: { id: userId } } })}
-            leftSection={<TbSchool />}
-            variant="subtle"
-            loading={isPending}
-            disabled={hasMoodleAccount}
-          >
-            <Trans>Provision Moodle</Trans>
-          </Button>
-        </span>
-      </Tooltip>
+      <div className="flex flex-col gap-1">
+        {isSuccess && (
+          <Alert color="green">
+            <Trans>The Moodle account has been provisioned successfully.</Trans>
+          </Alert>
+        )}
+        {error && (
+          <Alert color="red" title={error.title}>
+            {error.detail}
+          </Alert>
+        )}
+        <Tooltip label={t`Moodle account already exists`} disabled={!hasMoodleAccount}>
+          <span>
+            <Button
+              size="xs"
+              onClick={() => mutate({ params: { path: { id: userId } } })}
+              leftSection={<TbSchool />}
+              variant="subtle"
+              loading={isPending}
+              disabled={hasMoodleAccount}
+            >
+              <Trans>Provision Moodle</Trans>
+            </Button>
+          </span>
+        </Tooltip>
+      </div>
     </RequireRole>
   );
 };

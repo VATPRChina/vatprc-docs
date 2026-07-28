@@ -119,18 +119,20 @@ const columns = [
           }),
         ),
       );
-      const { mutate: book, isPending: isBookPending } = $api.useMutation(
-        "put",
-        "/api/events/{event_id}/controllers/{position_id}/booking",
-        {
-          onSuccess: onMutateSuccess,
-        },
-      );
-      const { mutate: release, isPending: isReleasePending } = $api.useMutation(
-        "delete",
-        "/api/events/{event_id}/controllers/{position_id}/booking",
-        { onSuccess: onMutateSuccess },
-      );
+      const {
+        mutate: book,
+        error: bookError,
+        isPending: isBookPending,
+      } = $api.useMutation("put", "/api/events/{event_id}/controllers/{position_id}/booking", {
+        onSuccess: onMutateSuccess,
+      });
+      const {
+        mutate: release,
+        error: releaseError,
+        isPending: isReleasePending,
+      } = $api.useMutation("delete", "/api/events/{event_id}/controllers/{position_id}/booking", {
+        onSuccess: onMutateSuccess,
+      });
 
       const hasPermission = useControllerPermission(
         row.original.position_kind_id,
@@ -145,7 +147,12 @@ const columns = [
       };
 
       return (
-        <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-wrap items-center gap-1">
+          {(bookError ?? releaseError) && (
+            <Alert color="red" title={(bookError ?? releaseError)?.title}>
+              {(bookError ?? releaseError)?.detail}
+            </Alert>
+          )}
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />

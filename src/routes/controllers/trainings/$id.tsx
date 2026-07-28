@@ -6,7 +6,6 @@ import { Sheet } from "@/components/sheet";
 import { useUser, $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton, Table } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComponentProps } from "react";
@@ -21,7 +20,13 @@ function RouteComponent() {
   const queryClient = useQueryClient();
 
   const user = useUser();
-  const { data: training, isLoading } = $api.useQuery("get", "/api/atc/trainings/{id}", { params: { path: { id } } });
+  const {
+    data: training,
+    error: trainingError,
+    isLoading,
+  } = $api.useQuery("get", "/api/atc/trainings/{id}", {
+    params: { path: { id } },
+  });
 
   const {
     data: applySheet,
@@ -29,15 +34,15 @@ function RouteComponent() {
     isLoading: isSheetLoading,
   } = $api.useQuery("get", "/api/atc/trainings/record-sheet");
 
-  const { mutateAsync } = $api.useMutation("put", "/api/atc/trainings/{id}/record", {
+  const {
+    mutateAsync,
+    error: mutationError,
+    isSuccess,
+  } = $api.useMutation("put", "/api/atc/trainings/{id}/record", {
     onSuccess: async () => {
       await queryClient.invalidateQueries(
         $api.queryOptions("get", "/api/atc/trainings/{id}", { params: { path: { id } } }),
       );
-      notifications.show({
-        message: <Trans>Training record saved successfully.</Trans>,
-        color: "green",
-      });
     },
   });
 
@@ -48,6 +53,11 @@ function RouteComponent() {
   return (
     <div className="flex flex-col gap-4">
       <BackButton />
+      {trainingError && (
+        <Alert color="red" title={trainingError.title}>
+          {trainingError.detail}
+        </Alert>
+      )}
       <div className="flex flex-row items-center gap-1">
         <h2 className="text-2xl font-medium">
           <Trans>Training</Trans>
@@ -123,6 +133,16 @@ function RouteComponent() {
       <h2 className="text-xl">
         <Trans>Mentor Feedback</Trans>
       </h2>
+      {isSuccess && (
+        <Alert color="green">
+          <Trans>Training record saved successfully.</Trans>
+        </Alert>
+      )}
+      {mutationError && (
+        <Alert color="red" title={mutationError.title}>
+          {mutationError.detail}
+        </Alert>
+      )}
       {error && <Alert title="Error">{error.title}</Alert>}
       {isSheetLoading && <Skeleton h={256} />}
       <Sheet

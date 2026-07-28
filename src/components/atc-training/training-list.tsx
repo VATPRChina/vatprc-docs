@@ -6,7 +6,7 @@ import { LinkButton } from "../ui/link-button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { notifications } from "@mantine/notifications";
+import { Alert } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter } from "date-fns";
 import { FC } from "react";
@@ -40,12 +40,7 @@ const columns = [
         original: { id, start_at, deleted_at },
       },
     }) => {
-      const { mutate } = $api.useMutation("delete", `/api/atc/trainings/{id}`, {
-        onSuccess: () =>
-          notifications.show({
-            message: <Trans>Successfully cancelled the training.</Trans>,
-          }),
-      });
+      const { mutate, error, isPending, isSuccess } = $api.useMutation("delete", `/api/atc/trainings/{id}`);
       const onCancel = () => mutate({ params: { path: { id } } });
 
       return (
@@ -61,12 +56,23 @@ const columns = [
           {deleted_at === null && isAfter(start_at, Date.now()) && (
             <ConfirmButton
               onClick={onCancel}
+              loading={isPending}
               actionDescription={<Trans>Are you sure to cancel this training?</Trans>}
               variant="subtle"
               size="compact-sm"
             >
               <Trans>Cancel Training</Trans>
             </ConfirmButton>
+          )}
+          {isSuccess && (
+            <span className="text-green-700 dark:text-green-400">
+              <Trans>Successfully cancelled the training.</Trans>
+            </span>
+          )}
+          {error && (
+            <Alert color="red" title={error.title}>
+              {error.detail}
+            </Alert>
           )}
         </div>
       );
@@ -86,11 +92,20 @@ type TrainingListProps =
   | UserTrainingListProps;
 
 export const TrainingList: FC<TrainingListProps> = (props) => {
-  const { data, isLoading } = $api.useQuery(
+  const { data, error, isLoading } = $api.useQuery(
     "get",
     `/api/atc/trainings/${props.mode}`,
     props.mode === "by-user/{userId}" ? { params: { path: { userId: props.userId } } } : {},
   );
 
-  return <RichTable data={data} columns={columns} isLoading={isLoading} />;
+  return (
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <RichTable data={data} columns={columns} isLoading={isLoading} />
+    </div>
+  );
 };

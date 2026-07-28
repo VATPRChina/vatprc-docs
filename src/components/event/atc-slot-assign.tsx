@@ -1,8 +1,8 @@
 import { UserInput } from "../user-input";
 import { $api } from "@/lib/client";
-import { promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Modal } from "@mantine/core";
+import { Alert, Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,7 +13,11 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const queryClient = useQueryClient();
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+  const {
+    data: slots,
+    error: loadError,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === positionId);
@@ -27,16 +31,16 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       }).queryKey,
     });
   });
-  const { mutate: assign, isPending: isAssignPending } = $api.useMutation(
-    "put",
-    "/api/events/{event_id}/controllers/{position_id}/booking",
-    { onSuccess },
-  );
-  const { mutate: unassign, isPending: isUnassignPending } = $api.useMutation(
-    "delete",
-    "/api/events/{event_id}/controllers/{position_id}/booking",
-    { onSuccess },
-  );
+  const {
+    mutate: assign,
+    isPending: isAssignPending,
+    error: assignError,
+  } = $api.useMutation("put", "/api/events/{event_id}/controllers/{position_id}/booking", { onSuccess });
+  const {
+    mutate: unassign,
+    isPending: isUnassignPending,
+    error: unassignError,
+  } = $api.useMutation("delete", "/api/events/{event_id}/controllers/{position_id}/booking", { onSuccess });
 
   const form = useForm({
     defaultValues: {
@@ -53,7 +57,7 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    promiseWithToast(form.handleSubmit());
+    promiseWithLog(form.handleSubmit());
   };
   const onUnassign = () => {
     unassign({ params: { path: { event_id: eventId, position_id: positionId } } });
@@ -66,6 +70,11 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       </Button>
       <Modal opened={opened} onClose={close} size="xl" title={t`Assign ATC Position ${callsign}`}>
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
+          {(loadError ?? assignError ?? unassignError) && (
+            <Alert color="red" title={(loadError ?? assignError ?? unassignError)?.title}>
+              {(loadError ?? assignError ?? unassignError)?.detail}
+            </Alert>
+          )}
           <form.Field name="user_id">
             {(field) => (
               <UserInput

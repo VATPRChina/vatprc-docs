@@ -1,6 +1,6 @@
 import { RequireRole } from "../require-role";
 import { client } from "@/lib/client/client";
-import { wrapPromiseWithToast } from "@/lib/utils";
+import { wrapPromiseWithLog } from "@/lib/utils";
 import { ActionIcon } from "@mantine/core";
 import { TbFileExport } from "react-icons/tb";
 
@@ -20,7 +20,7 @@ export const ExportSlot = ({ eventId }: { eventId: string }) => {
 
   return (
     <RequireRole role="event-coordinator">
-      <ActionIcon variant="subtle" aria-label="Export slots" onClick={wrapPromiseWithToast(onClick)}>
+      <ActionIcon variant="subtle" aria-label="Export slots" onClick={wrapPromiseWithLog(onClick)}>
         <TbFileExport />
       </ActionIcon>
     </RequireRole>

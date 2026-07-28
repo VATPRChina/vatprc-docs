@@ -4,7 +4,7 @@ import { localizeWithMap } from "@/lib/i18n";
 import { USER_ROLES } from "@/lib/user-roles";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
+import { Alert, Badge } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { formatDate } from "date-fns";
 
@@ -33,7 +33,7 @@ function RouteComponent() {
   const user = useUser();
   const roles = usePermissions();
 
-  const { data } = $api.useQuery("get", "/api/users/me/atc/status");
+  const { data, error } = $api.useQuery("get", "/api/users/me/atc/status");
 
   if (!user) return null;
 
@@ -42,6 +42,11 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>User Info</Trans>
       </h1>
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
 
       <h2 className="text-xl">
         <Trans>Basic Info</Trans>

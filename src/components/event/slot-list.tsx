@@ -81,18 +81,18 @@ const columns = [
         refetch().catch(console.error);
       };
 
-      const { mutate: book, isPending: isBookPending } = $api.useMutation(
-        "put",
-        "/api/events/{event_id}/slots/{slot_id}/booking",
-        {
-          onSuccess: onMutateSuccess,
-        },
-      );
-      const { mutate: release, isPending: isReleasePending } = $api.useMutation(
-        "delete",
-        "/api/events/{event_id}/slots/{slot_id}/booking",
-        { onSuccess: onMutateSuccess },
-      );
+      const {
+        mutate: book,
+        error: bookError,
+        isPending: isBookPending,
+      } = $api.useMutation("put", "/api/events/{event_id}/slots/{slot_id}/booking", {
+        onSuccess: onMutateSuccess,
+      });
+      const {
+        mutate: release,
+        error: releaseError,
+        isPending: isReleasePending,
+      } = $api.useMutation("delete", "/api/events/{event_id}/slots/{slot_id}/booking", { onSuccess: onMutateSuccess });
 
       const isLoggedIn = !!session?.user.id;
       const isBookedByCurrentUser = isLoggedIn && slot.booking?.user_id === session.user.id;
@@ -114,7 +114,12 @@ const columns = [
       };
 
       return (
-        <div role="cell" className="flex items-center gap-1">
+        <div role="cell" className="flex flex-wrap items-center gap-1">
+          {(bookError ?? releaseError) && (
+            <Alert color="red" title={(bookError ?? releaseError)?.title}>
+              {(bookError ?? releaseError)?.detail}
+            </Alert>
+          )}
           <RequireRole role={["event-coordinator", "controller"]}>
             <User user={slot.booking?.user} />
           </RequireRole>
@@ -157,8 +162,14 @@ const columns = [
 
 export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
   const { data: session } = $api.useQuery("get", "/api/session", {}, { retry: false });
-  const { data: event } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId } } });
-  const { data: slots, isLoading } = $api.useQuery("get", "/api/events/{event_id}/slots", {
+  const { data: event, error: eventError } = $api.useQuery("get", "/api/events/{id}", {
+    params: { path: { id: eventId } },
+  });
+  const {
+    data: slots,
+    error: slotsError,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/{event_id}/slots", {
     params: { path: { event_id: eventId } },
   });
   const isInBookingPeriod =
@@ -175,6 +186,11 @@ export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
         <ImportSlot eventId={eventId} />
         <ExportSlot eventId={eventId} />
       </h2>
+      {(eventError ?? slotsError) && (
+        <Alert color="red" title={(eventError ?? slotsError)?.title}>
+          {(eventError ?? slotsError)?.detail}
+        </Alert>
+      )}
       {!session && <Alert icon={<TbLockAccess />} color="blue" title={<Trans>Please login to book a slot.</Trans>} />}
       {!isInBookingPeriod && (
         <Alert

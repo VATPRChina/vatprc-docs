@@ -6,6 +6,7 @@ import { Alert, Input } from "@mantine/core";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ChangeEventHandler, useMemo, useState } from "react";
 import * as React from "react";
+import { TbPlaneOff } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/")({
   component: RouteComponent,
@@ -36,11 +37,26 @@ const Flight: React.FC<{
   </Link>
 );
 
+const OfflineFlight = () => (
+  <div className="flex flex-col gap-1 border border-dashed px-3 py-2 text-gray-600 dark:text-gray-400">
+    <span className="flex items-center gap-1 text-lg font-bold">
+      <TbPlaneOff />
+      <Trans>Your flight is not online</Trans>
+    </span>
+    <span className="text-sm">
+      <Trans>Connect to the VATSIM network to see your flight here.</Trans>
+    </span>
+  </div>
+);
+
 function RouteComponent() {
   const { t } = useLingui();
 
   const { data: flights, error } = $api.useQuery("get", "/api/flights/active");
-  const { data: mine } = $api.useQuery("get", "/api/flights/mine");
+  const { data: mine, error: mineError } = $api.useQuery("get", "/api/flights/mine");
+  const isCurrentUserOffline =
+    mineError?.type === "urn:vatprc-uniapi-error:flight-not-found-for-cid" && mineError.status === 404;
+  const visibleError = error ?? (isCurrentUserOffline ? undefined : mineError);
 
   const [filter, setFilter] = useState("");
   const [departureFilter, setDepartureFilter] = useState("");
@@ -80,9 +96,9 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>Flight Plan Checker</Trans>
       </h1>
-      {error && (
-        <Alert className="w-full" title={error.title}>
-          {error.detail}
+      {visibleError && (
+        <Alert className="w-full" color="red" title={visibleError.title}>
+          {visibleError.detail}
         </Alert>
       )}
       <div className="flex flex-row flex-wrap gap-2">
@@ -92,6 +108,7 @@ function RouteComponent() {
       </div>
       <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-2">
         {mine && <Flight flight={mine} />}
+        {isCurrentUserOffline && <OfflineFlight />}
         {filteredFlights?.map((flight) => (
           <Flight flight={flight} key={flight.callsign} />
         ))}

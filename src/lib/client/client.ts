@@ -10,14 +10,19 @@ const throwMiddleware: Middleware = {
   async onResponse({ response }) {
     if (response.ok) return;
 
-    const body = (await response.clone().json()) as components["schemas"]["ProblemDetails"];
+    const body = (await response
+      .clone()
+      .json()
+      .catch(() => ({}))) as Partial<components["schemas"]["ProblemDetails"]>;
+    const status = response.status;
     if (
+      typeof window !== "undefined" &&
       body.type !== "urn:vatprc-uniapi-error:unauthorized" &&
       body.type !== "urn:vatprc-uniapi-error:invalid-token" &&
-      body.status !== 0
+      status >= 500
     ) {
       notifications.show({
-        title: body.title,
+        title: body.title ?? response.statusText,
         message: body.detail,
         color: "red",
       });

@@ -3,10 +3,10 @@ import { DateTimeInput } from "../ui/datetime-input";
 import { UserInput } from "../user-input";
 import { components } from "@/lib/api";
 import { $api, usePermission, useUser } from "@/lib/client";
-import { promiseWithToast } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Modal, TextInput } from "@mantine/core";
+import { Alert, Button, Modal, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -21,7 +21,7 @@ export const TrainingSaveModal: FC<{ id?: string; disabled?: boolean }> = ({ id,
   const user = useUser();
   const isSuperAdmin = usePermission("controller-training-director-assistant");
 
-  const { data } = $api.useQuery(
+  const { data, error: loadError } = $api.useQuery(
     "get",
     "/api/atc/trainings/{id}",
     { params: { path: { id: id ?? "" } } },
@@ -38,12 +38,16 @@ export const TrainingSaveModal: FC<{ id?: string; disabled?: boolean }> = ({ id,
       );
     }
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/atc/trainings", {
-    onSuccess,
-  });
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation("put", "/api/atc/trainings/{id}", {
-    onSuccess,
-  });
+  const {
+    mutate: create,
+    isPending: isCreatePending,
+    error: createError,
+  } = $api.useMutation("post", "/api/atc/trainings", { onSuccess });
+  const {
+    mutate: update,
+    isPending: isUpdatePending,
+    error: updateError,
+  } = $api.useMutation("put", "/api/atc/trainings/{id}", { onSuccess });
 
   const form = useForm({
     defaultValues: {
@@ -76,10 +80,15 @@ export const TrainingSaveModal: FC<{ id?: string; disabled?: boolean }> = ({ id,
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            promiseWithToast(form.handleSubmit());
+            promiseWithLog(form.handleSubmit());
           }}
         >
           <div className="flex flex-col gap-2">
+            {(loadError ?? createError ?? updateError) && (
+              <Alert color="red" title={(loadError ?? createError ?? updateError)?.title}>
+                {(loadError ?? createError ?? updateError)?.detail}
+              </Alert>
+            )}
             <form.Field name="name">
               {(field) => (
                 <TextInput

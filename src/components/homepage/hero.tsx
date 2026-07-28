@@ -1,7 +1,7 @@
 import heroImage from "@/assets/homepage/hero.jpg";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
+import { Alert, Button } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -19,8 +19,8 @@ const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accen
 );
 
 export const Hero: React.FC = () => {
-  const { data } = $api.useQuery("get", "/api/compat/online-status");
-  const { data: events } = $api.useQuery("get", "/api/events");
+  const { data, error: statusError } = $api.useQuery("get", "/api/compat/online-status");
+  const { data: events, error: eventsError } = $api.useQuery("get", "/api/events");
   const eventsThisWeek =
     events?.filter((e) => isSameWeek(parseISO(e.start_at), Date.now(), { weekStartsOn: 1 })).length ?? 0;
 
@@ -33,6 +33,11 @@ export const Hero: React.FC = () => {
         </div>
       </div>
       <div className="relative mx-auto flex min-h-112 w-full max-w-6xl flex-col items-start justify-center gap-4 px-4 py-16">
+        {(statusError ?? eventsError) && (
+          <Alert color="red" title={(statusError ?? eventsError)?.title}>
+            {(statusError ?? eventsError)?.detail}
+          </Alert>
+        )}
         <div className="flex flex-col items-start gap-2">
           <h1 className="bg-black/70 px-4 py-2 text-3xl font-medium text-white md:text-4xl">
             <Trans>VATSIM P.R. China Division · VATPRC</Trans>

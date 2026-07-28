@@ -2,10 +2,10 @@ import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal"
 import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog, promiseWithToast } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Modal, Select, TextInput } from "@mantine/core";
+import { Alert, Button, Modal, Select, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,13 +17,12 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const queryClient = useQueryClient();
-  const { data: event, isLoading } = $api.useQuery(
-    "get",
-    "/api/events/{id}",
-    { params: { path: { id: eventId ?? "0" } } },
-    { enabled: opened },
-  );
-  const { data: slots } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+  const {
+    data: event,
+    error: eventError,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId ?? "0" } } }, { enabled: opened });
+  const { data: slots, error: slotsError } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === positionId);
@@ -39,18 +38,18 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       }),
     );
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation(
-    "post",
-    "/api/events/{event_id}/controllers",
-    {
-      onSuccess,
-    },
-  );
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
-    "put",
-    "/api/events/{event_id}/controllers/{position_id}",
-    { onSuccess },
-  );
+  const {
+    mutate: create,
+    isPending: isCreatePending,
+    error: createError,
+  } = $api.useMutation("post", "/api/events/{event_id}/controllers", {
+    onSuccess,
+  });
+  const {
+    mutate: update,
+    isPending: isUpdatePending,
+    error: updateError,
+  } = $api.useMutation("put", "/api/events/{event_id}/controllers/{position_id}", { onSuccess });
   const now = formatISO(setMinutes(setSeconds(Date.now(), 0), 0));
   const form = useForm({
     defaultValues: {
@@ -73,7 +72,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    promiseWithToast(form.handleSubmit());
+    promiseWithLog(form.handleSubmit());
   };
 
   return (
@@ -94,6 +93,11 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
         title={positionId ? t`Edit ATC Position ${callsign}` : t`Create ATC Position`}
       >
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
+          {(eventError ?? slotsError ?? createError ?? updateError) && (
+            <Alert color="red" title={(eventError ?? slotsError ?? createError ?? updateError)?.title}>
+              {(eventError ?? slotsError ?? createError ?? updateError)?.detail}
+            </Alert>
+          )}
           <form.Field name="callsign">
             {(field) => (
               <TextInput

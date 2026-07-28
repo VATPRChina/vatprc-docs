@@ -157,7 +157,7 @@ const uniqWith = <T,>(arr: T[], fn: (a: T, b: T) => boolean) =>
   arr.filter((element, index) => arr.findIndex((step) => fn(element, step)) === index);
 
 export const FlightWarnings = ({ callsign }: { callsign: string }) => {
-  const { data: flight } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
+  const { data: flight, error: flightError } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
     params: { path: { callsign } },
   });
   const {
@@ -169,7 +169,11 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
   if (isLoading) return <Skeleton h={16} />;
   return (
     <div className="flex w-full flex-col items-stretch gap-1">
-      {error?.title && <Alert color="red">{error?.title}</Alert>}
+      {(flightError ?? error) && (
+        <Alert color="red" title={(flightError ?? error)?.title}>
+          {(flightError ?? error)?.detail}
+        </Alert>
+      )}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert color="green" icon={<TbCheck />}>
           <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>

@@ -1,12 +1,12 @@
 import { RequireRole } from "./require-role";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Modal, Select } from "@mantine/core";
+import { ActionIcon, Alert, Button, Checkbox, Modal, Select } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -42,7 +42,11 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   const { i18n, t } = useLingui();
 
   const queryClient = useQueryClient();
-  const { data, isPending } = $api.useQuery("get", "/api/users/{id}/atc/status", {
+  const {
+    data,
+    error: loadError,
+    isPending,
+  } = $api.useQuery("get", "/api/users/{id}/atc/status", {
     params: { path: { id: userId } },
   });
   const invalidateQueries = () =>
@@ -55,9 +59,11 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
       ]),
     );
 
-  const { mutate, isPending: isMutating } = $api.useMutation("put", "/api/users/{id}/atc/status", {
-    onSuccess: invalidateQueries,
-  });
+  const {
+    mutate,
+    error: mutationError,
+    isPending: isMutating,
+  } = $api.useMutation("put", "/api/users/{id}/atc/status", { onSuccess: invalidateQueries });
 
   const form = useForm({
     defaultValues: {
@@ -74,13 +80,18 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   const onSave: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    wrapPromiseWithLog(form.handleSubmit());
+    promiseWithLog(form.handleSubmit());
   };
 
   return (
     <Modal {...props} title={<Trans>Edit ATC permissions</Trans>} size="lg">
       <form onSubmit={onSave}>
         <div className="flex flex-col gap-4">
+          {(loadError ?? mutationError) && (
+            <Alert color="red" title={(loadError ?? mutationError)?.title}>
+              {(loadError ?? mutationError)?.detail}
+            </Alert>
+          )}
           <form.Field name="is_visiting">
             {(field) => (
               <Checkbox

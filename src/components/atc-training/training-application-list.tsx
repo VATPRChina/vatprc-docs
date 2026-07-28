@@ -9,7 +9,7 @@ import { renderWithMap } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
+import { Alert, Badge } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FC } from "react";
 
@@ -85,14 +85,21 @@ const columns = [
 ];
 
 export const TrainingApplicationList: FC = () => {
-  const { data, isLoading } = $api.useQuery("get", "/api/atc/trainings/applications");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/trainings/applications");
 
   return (
-    <RichTable
-      data={data}
-      columns={columns}
-      isLoading={isLoading}
-      initialState={{ columnFilters: [{ id: "status", value: "pending" }] }}
-    />
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <RichTable
+        data={data}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ columnFilters: [{ id: "status", value: "pending" }] }}
+      />
+    </div>
   );
 };

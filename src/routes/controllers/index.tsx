@@ -5,6 +5,7 @@ import { useCenterRoles } from "@/components/controller-center/center-context";
 import { MyEventBookings } from "@/components/controller-center/my-event-bookings";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
 import { $api } from "@/lib/client";
+import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/")({
@@ -13,12 +14,11 @@ export const Route = createFileRoute("/controllers/")({
 
 function RouteComponent() {
   const { userId, isController, canManageTrainings, canReviewApplications } = useCenterRoles();
-  const { data: applications, isLoading: isApplicationsLoading } = $api.useQuery(
-    "get",
-    "/api/atc/applications",
-    {},
-    { retry: false, enabled: !!userId && !isController },
-  );
+  const {
+    data: applications,
+    error: applicationsError,
+    isLoading: isApplicationsLoading,
+  } = $api.useQuery("get", "/api/atc/applications", {}, { retry: false, enabled: !!userId && !isController });
 
   const showTabs = canManageTrainings || canReviewApplications;
 
@@ -46,6 +46,11 @@ function RouteComponent() {
 
   return (
     <>
+      {applicationsError && (
+        <Alert color="red" title={applicationsError.title}>
+          {applicationsError.detail}
+        </Alert>
+      )}
       <BecomeController showApply={canApply} />
       {userId && <MyApplicationCard applications={applications ?? []} />}
     </>
