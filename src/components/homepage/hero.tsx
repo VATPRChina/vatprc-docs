@@ -32,18 +32,20 @@ export const Hero: React.FC = () => {
           <img src={heroImage} aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
         </div>
       </div>
-      <div className="relative mx-auto flex min-h-112 w-full max-w-6xl flex-col items-start justify-center px-4 py-16">
-        <h1 className="bg-black/70 px-4 py-2 text-3xl font-medium text-white md:text-4xl">
-          <Trans>VATSIM P.R. China Division · VATPRC</Trans>
-        </h1>
-        <p className="mt-4 bg-black/70 px-4 py-2 text-xl font-medium text-white italic">
-          <Trans>
-            <b>VATPRC 有你更精彩</b>
-            <br />
-            You make the difference!
-          </Trans>
-        </p>
-        <div className="mt-8 grid w-fit grid-cols-2 gap-3">
+      <div className="relative mx-auto flex min-h-112 w-full max-w-6xl flex-col items-start justify-center gap-4 px-4 py-16">
+        <div className="flex flex-col items-start gap-2">
+          <h1 className="bg-black/70 px-4 py-2 text-3xl font-medium text-white md:text-4xl">
+            <Trans>VATSIM P.R. China Division · VATPRC</Trans>
+          </h1>
+          <p className="bg-black/70 px-4 py-2 text-xl font-medium text-white italic">
+            <Trans>
+              <b>VATPRC 有你更精彩</b>
+              <br />
+              You make the difference!
+            </Trans>
+          </p>
+        </div>
+        <div className="grid w-fit grid-cols-2 gap-1">
           <Button color="vatprc" component={Link} to="/controllers">
             <Trans>Join the controller team</Trans>
           </Button>
@@ -64,7 +66,7 @@ export const Hero: React.FC = () => {
             <Trans>Forum</Trans>
           </Button>
         </div>
-        <div className="mt-10 flex gap-10 bg-black/70 px-4 py-2 font-mono">
+        <div className="flex gap-2 bg-black/70 px-4 py-2 font-mono">
           <HeroStat value={data?.pilots?.length ?? "--"} label={<Trans>Pilots online</Trans>} />
           <HeroStat value={data?.controllers?.length ?? "--"} label={<Trans>Controllers online</Trans>} />
           <HeroStat value={eventsThisWeek} label={<Trans>Events this week</Trans>} accent />

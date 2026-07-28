@@ -40,7 +40,7 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
 
   return (
     <UnstyledButton onClick={onSort} className="w-full">
-      <div className="flex flex-row items-center justify-between gap-2">
+      <div className="flex flex-row items-center justify-between gap-1">
         <div>{children}</div>
         <Icon size={16} />
       </div>
@@ -99,7 +99,7 @@ export const RichTable = <TData,>({
   }, 200);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-1">
       {!hideGlobalSearch && (
         <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
       )}
@@ -109,7 +109,7 @@ export const RichTable = <TData,>({
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
                 <Table.Th key={`${headerGroup.id}/${header.id}`}>
-                  <div className="flex h-full flex-col gap-0.5">
+                  <div className="flex h-full flex-col gap-1">
                     <SortableHeader
                       key={header.id}
                       sorted={header.column.getIsSorted()}
@@ -173,7 +173,7 @@ export const RichTable = <TData,>({
           <Trans>No data</Trans>
         </div>
       )}
-      <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
+      <div className="flex items-center justify-between gap-2 self-stretch px-2">
         <Select
           value={table.getState().pagination.pageSize > 100 ? "all" : `${table.getState().pagination.pageSize}`}
           onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
@@ -187,7 +187,7 @@ export const RichTable = <TData,>({
             Page {currentPage} of {totalPages}
           </Trans>
         </div>
-        <ActionIconGroup>
+        <ActionIconGroup className="gap-1!">
           <ActionIcon
             variant="subtle"
             onClick={() => table.setPageIndex(0)}

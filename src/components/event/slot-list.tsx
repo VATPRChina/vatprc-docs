@@ -29,7 +29,7 @@ const columns = [
     cell: ({ getValue }) => {
       const [enterAt, leaveAt] = getValue();
       return (
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <span>
             <span className="text-muted-foreground">CTOT/</span>
             <DateTime noDistance noDate>
@@ -114,7 +114,7 @@ const columns = [
       };
 
       return (
-        <div role="cell" className="flex items-center gap-2">
+        <div role="cell" className="flex items-center gap-1">
           <RequireRole role={["event-coordinator", "controller"]}>
             <User user={slot.booking?.user} />
           </RequireRole>

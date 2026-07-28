@@ -8,7 +8,7 @@ import { $api } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Group, Modal, Stack, Tabs } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Modal, Tabs } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -62,9 +62,9 @@ const columns = [
       const computedRoles = row.original.roles;
 
       return (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-1">
           {savedRoles.length > 0 && (
-            <div className="flex flex-col flex-wrap gap-x-1">
+            <div className="flex flex-col flex-wrap gap-1">
               {savedRoles.map((role) => {
                 const roleName = USER_ROLES.get(role);
                 if (!roleName) return null;
@@ -76,7 +76,7 @@ const columns = [
             <TbUserBolt />
           </ActionIcon>
           <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
-            <Stack>
+            <div className="flex flex-col gap-4">
               {USER_ROLES.entries().map(([role, name]) => (
                 <Checkbox
                   key={role}
@@ -86,7 +86,7 @@ const columns = [
                   disabled={AUTOMATIC_ROLES.includes(role)}
                 />
               ))}
-              <Group>
+              <div className="flex flex-wrap items-center gap-1">
                 <Button variant="outline" size="xs" onClick={close}>
                   <Trans>Cancel</Trans>
                 </Button>
@@ -94,8 +94,8 @@ const columns = [
                   {isSuccess && <TbCheck />}
                   <Trans>Save changes</Trans>
                 </Button>
-              </Group>
-            </Stack>
+              </div>
+            </div>
           </Modal>
         </div>
       );
@@ -108,12 +108,12 @@ const columns = [
       const userId = row.original.id;
 
       return (
-        <Group>
+        <div className="flex flex-wrap items-center gap-1">
           <AtcPermissionModalButton userId={userId} />
           <RequireRole role="volunteer">
             <UserAuditLogButton userId={userId} />
           </RequireRole>
-        </Group>
+        </div>
       );
     },
   }),
@@ -132,7 +132,7 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <h1 className="text-2xl">
           <Trans>Users</Trans>
         </h1>

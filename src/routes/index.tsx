@@ -15,11 +15,11 @@ function RouteComponent() {
   return (
     <div className="flex w-full flex-col">
       <Hero />
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-16">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-16">
         <EventCarousel />
         <NotamBoard />
         <ControllersBoard />
-        <section className="flex flex-col items-center gap-6 border-t border-black/15 pt-16 text-center dark:border-white/20">
+        <section className="flex flex-col items-center gap-2 border-t border-black/15 pt-16 text-center dark:border-white/20">
           <h2 className="text-2xl font-medium">
             <Trans>Feedback</Trans>
           </h2>
@@ -29,7 +29,7 @@ function RouteComponent() {
               join the discussion on our forum!
             </Trans>
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-1">
             <Button
               variant="subtle"
               color="red"

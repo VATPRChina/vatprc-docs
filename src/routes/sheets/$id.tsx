@@ -2,7 +2,7 @@ import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { errorToast, promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Card, Group, Select, TextInput, Textarea } from "@mantine/core";
+import { Alert, Button, Card, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -187,6 +187,7 @@ function RouteComponent() {
   return (
     <>
       <form
+        className="flex flex-col gap-1"
         onSubmit={(e) => {
           e.preventDefault();
           promiseWithLog(form.handleSubmit());
@@ -230,17 +231,17 @@ function RouteComponent() {
           {(fieldsField) => {
             const fields: EditableField[] = Array.isArray(fieldsField.state.value) ? fieldsField.state.value : [];
             return (
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
                 {fields.map((field, index) => {
                   const fieldNumber = index + 1;
 
                   return (
-                    <Card key={field.localKey} withBorder className="flex flex-col gap-3">
-                      <Group justify="space-between" align="start">
+                    <Card key={field.localKey} withBorder className="flex flex-col gap-1">
+                      <div className="flex items-start justify-between gap-1">
                         <div className="font-medium">
                           <Trans>Field {fieldNumber}</Trans>
                         </div>
-                        <Group gap="xs">
+                        <div className="flex flex-wrap items-center gap-1">
                           <Button
                             type="button"
                             variant="subtle"
@@ -292,10 +293,10 @@ function RouteComponent() {
                           >
                             <TbTrash size={16} />
                           </Button>
-                        </Group>
-                      </Group>
+                        </div>
+                      </div>
 
-                      <div className="grid gap-3 md:grid-cols-2">
+                      <div className="grid gap-1 md:grid-cols-2">
                         <form.Field name={`fields[${index}].id`}>
                           {(idField) => (
                             <TextInput
@@ -351,7 +352,7 @@ function RouteComponent() {
                         </form.Field>
                       </div>
 
-                      <div className="grid gap-3 md:grid-cols-2">
+                      <div className="grid gap-1 md:grid-cols-2">
                         <form.Field name={`fields[${index}].description_zh`}>
                           {(descZhField) => (
                             <Textarea

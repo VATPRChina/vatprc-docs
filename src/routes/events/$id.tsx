@@ -25,10 +25,10 @@ function RouteComponent() {
     event && (
       <div key={event.id} className="flex flex-col gap-4">
         <BackButton />
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           <img src={event.image_url ?? NoEventImage} className="aspect-video" />
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-col gap-1">
+            <div className="flex flex-row items-center gap-1">
               <Link
                 to="/events/$id"
                 params={{ id: event.id }}
@@ -44,7 +44,7 @@ function RouteComponent() {
           </div>
         </div>
         <Tabs defaultValue={event.start_booking_at && event.end_booking_at ? "slot" : "controller"}>
-          <Tabs.List className="mb-4">
+          <Tabs.List className="mb-2">
             <Tabs.Tab value="slot" leftSection={<TbCalendar />}>
               <Trans>Slots</Trans>
             </Tabs.Tab>
@@ -58,16 +58,16 @@ function RouteComponent() {
             </RequireRole>
           </Tabs.List>
 
-          <Tabs.Panel value="slot" className="flex flex-col gap-4">
+          <Tabs.Panel value="slot" className="flex flex-col gap-1">
             <SlotList eventId={event.id} />
           </Tabs.Panel>
 
-          <Tabs.Panel value="controller" className="flex flex-col gap-4">
+          <Tabs.Panel value="controller" className="flex flex-col gap-1">
             <AtcSlotList eventId={event.id} />
           </Tabs.Panel>
 
           <RequireRole role="volunteer">
-            <Tabs.Panel value="audit" className="flex flex-col gap-4">
+            <Tabs.Panel value="audit" className="flex flex-col gap-1">
               <EventAuditLogPanel eventId={event.id} />
             </Tabs.Panel>
           </RequireRole>

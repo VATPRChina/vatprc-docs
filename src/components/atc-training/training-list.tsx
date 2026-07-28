@@ -49,7 +49,7 @@ const columns = [
       const onCancel = () => mutate({ params: { path: { id } } });
 
       return (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-1">
           <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }}>
             <Trans>View</Trans>
           </LinkButton>

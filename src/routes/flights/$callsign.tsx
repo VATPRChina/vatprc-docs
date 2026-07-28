@@ -50,7 +50,7 @@ const FplField = ({
   );
 
   return (
-    <div className={cn("flex flex-col items-start gap-2", className)} {...props}>
+    <div className={cn("flex flex-col items-start gap-1", className)} {...props}>
       {labelC}
       {value && value !== "-" && <span className="font-mono">{value}</span>}
       {value === "-" && (
@@ -281,7 +281,7 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
   if (localWarnings.length === 0) return null;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       {localWarnings.map((warning) => {
         const message = WARNING_CODE_TO_MESSAGE[warning.message_code] ?? warning.message_code;
         const content = WARNING_MESSAGE_TO_POPOVER[warning.message_code]?.({ warning, flight }) as React.ReactNode;
@@ -291,7 +291,7 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
             <Button
               variant="outline"
               size="xs"
-              className={cn(content && "underline", popoverText && "-ml-2")}
+              className={cn(content && "underline", popoverText && "-ml-1")}
               key={warning.message_code}
               leftSection={<TbInfoCircleFilled />}
               color={((WARNING_MESSAGE_TO_SEVERITY[warning.message_code] ?? "error") === "error" && "red") || "gray"}
@@ -366,10 +366,10 @@ function RouteComponent() {
       {error?.title && <Alert color="red">{error?.title}</Alert>}
       {isLoading && <Skeleton h={64} />}
       {!error && flight && (
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col gap-2">
           <h1 className="flex items-baseline">
             <span className="text-3xl">{callsign}</span>
-            <span className="text-muted-foreground ml-2 flex gap-1 text-2xl">
+            <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
               <span>{flight.departure}</span>
               <TbPlaneInflight />
               <span>{flight.arrival}</span>
@@ -378,7 +378,7 @@ function RouteComponent() {
           <h2 className="text-2xl">
             <Trans>Flight Plan</Trans>
           </h2>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-1">
             <FplField label={t`Callsign`} value={flight.callsign} />
             {/* <FplField label="Flight Rules" value="-" /> */}
             {/* <FplField label="Date of Flight" value="-" /> */}
@@ -386,13 +386,13 @@ function RouteComponent() {
             {/* <FplField label="Aircraft Type" value="-" /> */}
             {/* <FplField label="Wake Category" value="-" /> */}
             <FplField label={t`Equipment`}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
                 <Warning flight={flight} warnings={warnings} field="equipment" />
               </div>
             </FplField>
             <FplField label={t`Transponder`}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
                 <Warning flight={flight} warnings={warnings} field="transponder" />
               </div>
@@ -402,7 +402,7 @@ function RouteComponent() {
             {/* <FplField label="Airspeed" value="-" /> */}
             <FplField label={t`Cruising Level`}>
               {flight.cruising_level && (
-                <div className="flex items-baseline gap-2">
+                <div className="flex items-baseline gap-1">
                   <span>{flight.cruising_level} ft</span>
                   <CruisingLevelMeters feet={flight.cruising_level} />
                 </div>
@@ -418,7 +418,7 @@ function RouteComponent() {
             {/* <FplField label="Alternate" value="-" /> */}
             {/* <FplField label="Endurance" value="-" /> */}
             <FplField label={t`PBN`} tooltip={t`Performance Based Navigation`}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
                 <Warning flight={flight} warnings={warnings} field="navigation-performance" />
               </div>
@@ -446,7 +446,7 @@ function RouteComponent() {
           <h2 className="text-2xl">
             <Trans>Flight Route</Trans>
           </h2>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <div className="flex flex-wrap items-center gap-1">
             <span className="text-lg">{route?.[0].from.identifier}</span>
             {route &&
               route.map((r, i) => (

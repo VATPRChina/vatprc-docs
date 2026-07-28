@@ -61,13 +61,13 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
         <div className="flex flex-col gap-2">
           <div className="grid gap-2 text-sm sm:grid-cols-2">
             <div>
-              <span className="text-dimmed mr-2">
+              <span className="text-dimmed mr-1">
                 <Trans>Created at</Trans>
               </span>
               <DateTime>{application?.created_at}</DateTime>
             </div>
             <div>
-              <span className="text-dimmed mr-2">
+              <span className="text-dimmed mr-1">
                 <Trans>Updated at</Trans>
               </span>
               <DateTime>{application?.updated_at}</DateTime>
@@ -78,14 +78,14 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
               <Alert color="green" title={<Trans>You have responded to this training request.</Trans>} />
             )}
             <Radio.Group label={t`Time`} value={slotId} onChange={setSlotId}>
-              <div className="mt-2 flex flex-col gap-2">
+              <div className="mt-1 flex flex-col gap-2">
                 {slots.map((slot) => (
                   <Radio key={slot.value} value={slot.value} label={slot.label} />
                 ))}
               </div>
             </Radio.Group>
             <Textarea label={t`Comment`} onChange={(e) => setComment(e.target.value)} autosize minRows={2} />
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-1">
               <Button
                 variant="subtle"
                 size="compact-sm"
@@ -109,18 +109,18 @@ export const TrainingApplicationResponsesModal: FC<TrainingApplicationResponsesM
                 <span>{response.trainer.full_name}</span>
                 <span>{response.trainer.cid}</span>
                 {response.is_accepted ? (
-                  <Badge variant="outline" color="green" className="mx-4">
+                  <Badge variant="outline" color="green" className="mx-1">
                     <Trans>Accepted</Trans>
                   </Badge>
                 ) : (
-                  <Badge variant="outline" color="red" className="mx-4">
+                  <Badge variant="outline" color="red" className="mx-1">
                     <Trans>Rejected</Trans>
                   </Badge>
                 )}
                 <span className="text-dimmed">{format(response.created_at, "yyyy-MM-dd HH:mm")}</span>
               </div>
               <p>
-                <span className="text-dimmed mr-4">
+                <span className="text-dimmed mr-1">
                   <Trans>Comment</Trans>
                 </span>
                 {response.comment || <Trans>No comments</Trans>}

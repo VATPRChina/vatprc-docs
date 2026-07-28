@@ -65,7 +65,7 @@ function RouteComponent() {
 
   if (isPending) {
     return (
-      <div className="container mx-auto flex flex-col gap-8">
+      <div className="container mx-auto flex flex-col gap-4">
         <h1 className="text-3xl font-medium">
           <Trans>Controller Center</Trans>
         </h1>
@@ -76,7 +76,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="container mx-auto flex flex-col gap-8">
+    <div className="container mx-auto flex flex-col gap-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="text-3xl font-medium">
           <Trans>Controller Center</Trans>
@@ -84,7 +84,7 @@ function RouteComponent() {
         {isController && <IdentityChip />}
       </div>
       {showTabs && (
-        <div className="flex flex-wrap items-baseline gap-6">
+        <div className="flex flex-wrap items-baseline gap-2">
           <CenterTabLink to="/controllers" active={tab === "mine"}>
             <Trans>My Trainings</Trans>
           </CenterTabLink>
@@ -100,8 +100,8 @@ function RouteComponent() {
           </RequireRole>
         </div>
       )}
-      <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
-        <div className="flex min-w-0 flex-col gap-8">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
+        <div className="flex min-w-0 flex-col gap-2">
           <CenterRolesProvider value={{ userId: user?.id, isController, canManageTrainings, canReviewApplications }}>
             <Outlet />
           </CenterRolesProvider>

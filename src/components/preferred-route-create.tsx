@@ -6,7 +6,7 @@ import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Modal, Select, Stack, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Button, Modal, Select, TextInput, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { formatISO } from "date-fns";
@@ -92,8 +92,8 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
             promiseWithToast(form.handleSubmit());
           }}
         >
-          <Stack>
-            <Group grow>
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="departure">
                 {(field) => (
                   <TextInput
@@ -116,8 +116,8 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   ></TextInput>
                 )}
               </form.Field>
-            </Group>
-            <Group grow>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="valid_from">
                 {(field) => (
                   <DateTimeInput
@@ -142,7 +142,7 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   />
                 )}
               </form.Field>
-            </Group>
+            </div>
             <form.Field name="raw_route">
               {(field) => (
                 <Textarea
@@ -184,12 +184,12 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                 />
               )}
             </form.Field>
-            <Group>
+            <div className="flex flex-wrap items-center gap-1">
               <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
                 {id ? t`Save` : t`Create`}
               </Button>
-            </Group>
-          </Stack>
+            </div>
+          </div>
         </form>
       </Modal>
     </>

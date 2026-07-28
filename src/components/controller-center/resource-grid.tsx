@@ -54,7 +54,7 @@ const ResourceCard: FC<{ item: ResourceItem }> = ({ item }) => {
     </>
   );
   const className =
-    "flex items-center gap-3 border border-black/15 px-4 py-3 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900";
+    "flex items-center gap-1 border border-black/15 px-4 py-3 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900";
 
   return item.external ? (
     <a href={item.href} target="_blank" rel="noreferrer" className={className}>
@@ -88,16 +88,16 @@ export const ResourceGrid: FC<{ publicOnly?: boolean; compact?: boolean }> = ({
   ].filter((group) => group.items.length > 0);
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-1">
       <h2 className="text-2xl font-medium">
         <Trans>Resources</Trans>
       </h2>
       {groups.map((group) => (
-        <div key={group.key} className="flex flex-col gap-2">
+        <div key={group.key} className="flex flex-col gap-1">
           <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
             {group.title}
           </h3>
-          <div className={cn("grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3", compact && "xl:grid-cols-1")}>
+          <div className={cn("grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3", compact && "xl:grid-cols-1")}>
             {group.items.map((item) => (
               <ResourceCard key={item.href} item={item} />
             ))}

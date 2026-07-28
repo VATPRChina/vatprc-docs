@@ -1,7 +1,7 @@
 import { assumedRolesAtom, UserRole } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Checkbox, Group, Modal, Stack } from "@mantine/core";
+import { Button, Checkbox, Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import { FC, useEffect, useState } from "react";
 
@@ -28,23 +28,23 @@ export const AssumeRoleModal: FC<AssumeRoleModalProps> = ({ opened, onClose, onS
 
   return (
     <Modal opened={opened} onClose={onClose} title={<Trans>Assume Role</Trans>}>
-      <Stack>
+      <div className="flex flex-col gap-4">
         <Checkbox.Group value={roles} onChange={setRoles}>
-          <Stack gap="xs">
+          <div className="grid grid-cols-2 gap-1">
             {USER_ROLES.entries().map(([role, name]) => (
               <Checkbox key={role} value={role} label={i18n._(name)} />
             ))}
-          </Stack>
+          </div>
         </Checkbox.Group>
-        <Group>
+        <div className="flex flex-wrap items-center gap-1">
           <Button variant="outline" size="xs" onClick={onClose}>
             <Trans>Cancel</Trans>
           </Button>
           <Button size="xs" onClick={onSave}>
             <Trans>Save changes</Trans>
           </Button>
-        </Group>
-      </Stack>
+        </div>
+      </div>
     </Modal>
   );
 };

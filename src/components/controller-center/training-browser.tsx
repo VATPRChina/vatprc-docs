@@ -34,7 +34,7 @@ const TrainingListItem: FC<{
     onClick={onSelect}
     aria-current={isSelected}
     className={cn(
-      "flex w-full flex-col gap-0.5 border-b border-l-3 border-b-gray-200 px-3 py-2 text-left last:border-b-0 dark:border-b-gray-800",
+      "flex w-full flex-col gap-1 border-b border-l-3 border-b-gray-200 px-3 py-2 text-left last:border-b-0 dark:border-b-gray-800",
       isSelected
         ? "border-l-emerald-600 bg-gray-100 dark:border-l-emerald-400 dark:bg-gray-900"
         : "border-l-transparent hover:bg-gray-50 dark:hover:bg-gray-900/50",
@@ -43,7 +43,7 @@ const TrainingListItem: FC<{
     <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
       {format(training.start_at, "yyyy-MM-dd HHmm'Z'", { in: utc })}
       {isUpcoming && (
-        <Badge component="span" ml={8} size="xs" color="green" radius={0}>
+        <Badge component="span" className="ml-1" size="xs" color="green" radius={0}>
           <Trans>Upcoming</Trans>
         </Badge>
       )}
@@ -84,7 +84,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
   if (isLoading) return <Skeleton w="100%" h={240} />;
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-1">
       {!hideHeader && (
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-2xl font-medium">
@@ -112,7 +112,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
               <Trans>You have no training sessions yet. Apply for a training to get started.</Trans>
             </p>
           ) : (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
               <div
                 className={cn(
                   "min-w-0 border border-black/15 md:max-h-[max(24rem,calc(100dvh-16rem))] md:self-start md:overflow-y-auto dark:border-white/20",
@@ -139,7 +139,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
                 <button
                   type="button"
                   onClick={() => setMobileDetailOpen(false)}
-                  className="mb-2 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
+                  className="mb-1 flex items-center gap-1 text-sm text-gray-600 md:hidden dark:text-gray-300"
                 >
                   <TbArrowLeft size={16} />
                   <Trans>Back to list</Trans>

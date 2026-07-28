@@ -31,7 +31,7 @@ export const UserInfo = () => {
             </Button>
           </Menu.Target>
 
-          <Menu.Dropdown>
+          <Menu.Dropdown className="flex flex-col gap-1">
             <Menu.Item renderRoot={(props) => <Link to="/users/me" {...props} />}>
               <Trans>User Info</Trans>
             </Menu.Item>

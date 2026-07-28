@@ -21,7 +21,7 @@ function Page() {
       <h1 className="my-4 text-center text-3xl font-bold">
         <Trans>Division Policies</Trans>
       </h1>
-      <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-3">
         <DocList documents={documents} />
       </div>
     </div>

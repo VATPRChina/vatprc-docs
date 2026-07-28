@@ -50,7 +50,7 @@ export const DiscourseDocument: React.FC<{
 
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
-    <ButtonGroup mb="md">
+    <ButtonGroup className="mb-2 gap-1!">
       <Button
         component="a"
         variant="subtle"

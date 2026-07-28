@@ -6,7 +6,7 @@ import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Modal, Select } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -80,7 +80,7 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   return (
     <Modal {...props} title={<Trans>Edit ATC permissions</Trans>} size="lg">
       <form onSubmit={onSave}>
-        <Stack>
+        <div className="flex flex-col gap-4">
           <form.Field name="is_visiting">
             {(field) => (
               <Checkbox
@@ -208,7 +208,7 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
           <Button variant="subtle" type="submit" loading={isPending || isMutating}>
             <Trans>Save</Trans>
           </Button>
-        </Stack>
+        </div>
       </form>
     </Modal>
   );

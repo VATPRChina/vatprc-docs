@@ -111,7 +111,7 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
             promiseWithToast(form.handleSubmit());
           }}
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <form.Field name="name">
               {(field) => (
                 <TextInput
@@ -127,7 +127,7 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
             <form.Field name="slots" mode="array">
               {(field) => (
                 <>
-                  <div className="flex flex-row items-center gap-2">
+                  <div className="flex flex-row items-center gap-1">
                     <span className="font-bold">
                       <Trans>Slots</Trans>
                     </span>

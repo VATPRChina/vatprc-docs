@@ -15,7 +15,7 @@ export const IdentityChip: FC = () => {
   if (!user || !status) return null;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       <span className="bg-emerald-700 px-3 py-1 font-mono text-sm text-white dark:bg-emerald-400 dark:text-gray-950">
         {user.cid} · {status.rating}
       </span>

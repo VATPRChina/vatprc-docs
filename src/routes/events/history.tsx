@@ -100,13 +100,13 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-1">
           <h1 className="text-3xl">
             <Trans>Past Events</Trans>
           </h1>
         </div>
-        <div className="flex flex-row items-center gap-1.5">
+        <div className="flex flex-row items-center gap-1">
           <Link to="/events" className="w-full text-sm underline">
             <Trans>Back to upcoming events</Trans>
           </Link>
@@ -137,7 +137,7 @@ function RouteComponent() {
           <Trans>No past events found in the selected time range.</Trans>
         </Alert>
       )}
-      <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {sortedEvents?.map((event) => (
           <EventCard event={event} key={event.id} />
         ))}

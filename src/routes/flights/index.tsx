@@ -28,9 +28,9 @@ const Flight: React.FC<{
       {callsign}
       <span className="ml-1 text-sm font-light">{cid}</span>
     </span>
-    <div className="flex items-center gap-x-1">
+    <div className="flex items-center gap-1">
       <span>{departure}</span>
-      <span className="mx-2 font-mono text-xs font-light text-gray-400">{aircraft}</span>
+      <span className="mx-1 font-mono text-xs font-light text-gray-400">{aircraft}</span>
       <span>{arrival}</span>
     </div>
   </Link>
@@ -76,7 +76,7 @@ function RouteComponent() {
     setArrivalFilter(e.target.value);
   };
   return (
-    <div className="flex flex-col items-start gap-8">
+    <div className="flex flex-col items-start gap-4">
       <h1 className="text-3xl">
         <Trans>Flight Plan Checker</Trans>
       </h1>
@@ -85,12 +85,12 @@ function RouteComponent() {
           {error.detail}
         </Alert>
       )}
-      <div className="flex flex-row flex-wrap gap-4">
+      <div className="flex flex-row flex-wrap gap-2">
         <Input placeholder={t`Callsign`} value={filter} onChange={onChange} />
         <Input placeholder={t`Departure`} value={departureFilter} onChange={onDepartureFilterChange} />
         <Input placeholder={t`Arrival`} value={arrivalFilter} onChange={onArrivalFilterChange} />
       </div>
-      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-x-6 gap-y-4">
+      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-2">
         {mine && <Flight flight={mine} />}
         {filteredFlights?.map((flight) => (
           <Flight flight={flight} key={flight.callsign} />

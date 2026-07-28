@@ -77,7 +77,7 @@ export const AssignAtcSlot = ({ eventId, positionId }: { eventId: string; positi
               />
             )}
           </form.Field>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-1">
             <Button variant="subtle" type="submit" loading={isAssignPending}>
               <Trans>Assign</Trans>
             </Button>

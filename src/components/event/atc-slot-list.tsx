@@ -145,7 +145,7 @@ const columns = [
       };
 
       return (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-1">
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
@@ -201,7 +201,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
         </Alert>
       )}
       <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-1">
           <CreateAtcSlot eventId={eventId} />
         </div>
       </RequireRole>

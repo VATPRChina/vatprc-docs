@@ -1,3 +1,5 @@
+@reference "./app.css";
+
 :root {
   --github-alert-default-color: rgb(208, 215, 222);
   --github-alert-note-color: rgb(9, 105, 218);
@@ -19,17 +21,16 @@
 }
 
 .markdown-alert {
-  padding: 0.5rem 1rem;
-  margin-bottom: 16px;
+  @apply mb-4 px-4 py-2;
   border-left: 0.25em solid var(--github-alert-default-color);
 }
 
 .markdown-alert > :first-child {
-  margin-top: 0;
+  @apply mt-0;
 }
 
 .markdown-alert > :last-child {
-  margin-bottom: 0;
+  @apply mb-0;
 }
 
 .markdown-alert-note {
@@ -53,13 +54,11 @@
 }
 
 .markdown-alert-title {
-  display: flex;
-  margin-bottom: 4px;
-  align-items: center;
+  @apply mb-1 flex items-center;
 }
 
 .markdown-alert-title > svg {
-  margin-right: 8px;
+  @apply mr-1;
 }
 
 .markdown-alert-note .markdown-alert-title {

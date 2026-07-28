@@ -26,11 +26,11 @@ function RouteComponent() {
           <Trans>Only staff can manage sheets. Changes are applied immediately after saving.</Trans>
         </Alert>
         <div className="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
-          <Card withBorder className="flex flex-col gap-3">
+          <Card withBorder className="flex flex-col gap-1">
             <h2 className="text-xl font-medium">
               <Trans>Sheets</Trans>
             </h2>
-            <div className="flex max-h-128 flex-col gap-2 overflow-y-auto">
+            <div className="flex max-h-128 flex-col gap-1 overflow-y-auto">
               {sheets?.map((currentSheet) => (
                 <UnstyledButton
                   key={currentSheet.id}
@@ -59,7 +59,7 @@ function RouteComponent() {
             </div>
           </Card>
 
-          <Card withBorder className="flex flex-col gap-4">
+          <Card withBorder className="flex flex-col gap-1">
             <Outlet />
           </Card>
         </div>

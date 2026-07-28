@@ -13,7 +13,7 @@ function RouteComponent() {
   if (!canReviewApplications) return <Navigate to="/controllers" replace />;
 
   return (
-    <section className="flex flex-col gap-3">
+    <section className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-medium">
           <Trans>Review</Trans>

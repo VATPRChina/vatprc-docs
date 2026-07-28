@@ -30,14 +30,14 @@ export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ appl
   if (mine.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <h2 className="text-xl font-medium">
         <Trans>My Application</Trans>
       </h2>
       {mine.map((application) => (
         <div
           key={application.id}
-          className="flex flex-wrap items-center gap-x-4 gap-y-2 border border-black/15 px-4 py-3 dark:border-white/20"
+          className="flex flex-wrap items-center gap-1 border border-black/15 px-4 py-3 dark:border-white/20"
         >
           <Badge color={STATUS_COLOR[application.status]} variant="filled" radius={0}>
             {localizeWithMap(APPLICATION_STATUS, application.status, i18n)}

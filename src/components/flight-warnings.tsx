@@ -168,7 +168,7 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
 
   if (isLoading) return <Skeleton h={16} />;
   return (
-    <div className="flex w-full flex-col items-stretch gap-2">
+    <div className="flex w-full flex-col items-stretch gap-1">
       {error?.title && <Alert color="red">{error?.title}</Alert>}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert color="green" icon={<TbCheck />}>

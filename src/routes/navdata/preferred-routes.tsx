@@ -24,7 +24,7 @@ const columns: ColumnDef<components["schemas"]["PreferredRouteDto"]>[] = [
     header: () => <Trans>Remark</Trans>,
     cell: ({ row, getValue }) => {
       return (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-1">
           <span>{getValue<string>()}</span>
           <CreatePreferredRoute id={row.original.id} />
         </div>

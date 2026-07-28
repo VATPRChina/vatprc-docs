@@ -14,11 +14,11 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <h1 className="text-3xl">
           <Trans>Events</Trans>
         </h1>
-        <div className="flex flex-row flex-wrap gap-3 text-sm">
+        <div className="flex flex-row flex-wrap gap-1 text-sm">
           <Link to="/events/history" search={{ range: "recent" }} className="underline">
             <Trans>View past events</Trans>
           </Link>
@@ -32,7 +32,7 @@ function RouteComponent() {
       <div className="col-span-1 md:col-span-2">
         <CreateEvent />
       </div>
-      <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {events?.map((event) => (
           <EventCard event={event} key={event.id} />
         ))}

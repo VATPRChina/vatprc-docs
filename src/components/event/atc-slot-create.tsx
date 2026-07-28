@@ -5,7 +5,7 @@ import { $api } from "@/lib/client";
 import { promiseWithLog, promiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Group, Modal, Select, TextInput } from "@mantine/core";
+import { Button, Modal, Select, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -105,7 +105,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
               />
             )}
           </form.Field>
-          <Group grow>
+          <div className="grid grid-cols-2 gap-2">
             <form.Field name="start_at">
               {(field) => (
                 <DateTimeInput
@@ -128,7 +128,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
                 />
               )}
             </form.Field>
-          </Group>
+          </div>
           <form.Field name="position_kind_id">
             {(field) => (
               <Select
@@ -168,11 +168,11 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
               ></TextInput>
             )}
           </form.Field>
-          <Group>
+          <div className="flex flex-wrap items-center gap-1">
             <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
               {eventId ? t`Save` : t`Create`}
             </Button>
-          </Group>
+          </div>
         </form>
       </Modal>
     </>

@@ -72,7 +72,7 @@ const columns = [
     id: "controller",
     header: () => <Trans>Controller</Trans>,
     cell: ({ row }) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <span className="font-medium">{row.original.user.full_name}</span>
         <span className="text-dimmed text-sm">{row.original.user.cid}</span>
         <AtcPermissionModalButton userId={row.original.user_id} iconOnly />

@@ -4,7 +4,7 @@ import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { promiseWithLog, promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Image, Modal, Stack, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -123,7 +123,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
             promiseWithToast(form.handleSubmit());
           }}
         >
-          <Stack>
+          <div className="flex flex-col gap-4">
             <form.Field name="title">
               {(field) => (
                 <TextInput
@@ -148,7 +148,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 />
               )}
             </form.Field>
-            <Group grow>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="start_at">
                 {(field) => (
                   <DateTimeInput
@@ -173,8 +173,8 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   />
                 )}
               </form.Field>
-            </Group>
-            <Group grow>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="start_booking_at">
                 {(field) => (
                   <DateTimeInput
@@ -203,7 +203,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   />
                 )}
               </form.Field>
-            </Group>
+            </div>
             <form.Field name="start_atc_booking_at">
               {(field) => (
                 <DateTimeInput
@@ -273,7 +273,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 )}
               </form.Subscribe>
             </div>
-          </Stack>
+          </div>
         </form>
       </Modal>
     </>

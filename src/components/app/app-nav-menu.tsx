@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react/macro";
-import { Accordion, Button, Drawer, Group, Menu, Stack } from "@mantine/core";
+import { Accordion, Button, Drawer, Menu } from "@mantine/core";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ComponentProps, Fragment, PropsWithChildren, useState } from "react";
 import { TbChevronDown, TbExternalLink } from "react-icons/tb";
@@ -137,7 +137,7 @@ const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: 
   const { i18n } = useLingui();
   const cnLink = row
     ? cn(
-        "block px-2 py-2.5 hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-900 dark:active:bg-gray-800",
+        "block p-4 hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-gray-900 dark:active:bg-gray-800",
         item.large && "font-bold",
       )
     : item.large
@@ -145,7 +145,7 @@ const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: 
       : cn("item", item.className);
 
   const inner = (
-    <h3 className={cn(item.external && "flex items-center gap-2")}>
+    <h3 className={cn(item.external && "flex items-center gap-1")}>
       {i18n._(item.label)}
       {item.external && <TbExternalLink size={12} />}
     </h3>
@@ -169,10 +169,10 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   group: NavGroupData;
   row?: boolean;
 }) => (
-  <ul className={row ? "flex flex-col" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
+  <ul className={row ? "flex flex-col gap-1" : group.singleColumn ? "nav-list-column" : "nav-list-grid"}>
     {group.items.map((item, i) => (
       <Fragment key={i}>
-        {item.divider && <hr className={row ? "my-2 border-black/15 dark:border-white/20" : "col-span-full"} />}
+        {item.divider && <hr className={row ? "my-1 border-black/15 dark:border-white/20" : "col-span-full"} />}
         <MaybeRequireRole role={item.requireRole}>
           <NavMenuLink item={item} row={row} />
         </MaybeRequireRole>
@@ -181,7 +181,7 @@ const NavGroupItems: React.FC<{ group: NavGroupData; row?: boolean }> = ({
   </ul>
 );
 
-export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
+export const NavMenu: React.FC<ComponentProps<"div">> = (props) => {
   const roles = usePermissions();
   const { i18n } = useLingui();
   const pathname = useLocation({ select: (location) => location.pathname });
@@ -189,7 +189,7 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
   const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
   return (
-    <Group gap="md" {...props}>
+    <div {...props} className="flex flex-wrap items-center gap-1">
       {contents.map((group, i) => {
         if (group.requireRole && !roles.includes(group.requireRole)) {
           return null;
@@ -217,13 +217,13 @@ export const NavMenu: React.FC<ComponentProps<typeof Group>> = (props) => {
                 {i18n._(group.title)}
               </Button>
             </Menu.Target>
-            <Menu.Dropdown>
+            <Menu.Dropdown className="flex flex-col gap-1">
               <NavGroupItems group={group} />
             </Menu.Dropdown>
           </Menu>
         );
       })}
-    </Group>
+    </div>
   );
 };
 
@@ -235,14 +235,14 @@ export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) =>
 
   return (
     <Drawer {...props}>
-      <Stack>
-        <Group justify="space-between" className="mb-2">
-          <Group gap="xs">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-1">
             <ModeToggleSegmented />
             <LanguageToggle />
-          </Group>
+          </div>
           <UserInfo />
-        </Group>
+        </div>
         <Accordion defaultValue={activeIndex === undefined ? null : String(activeIndex)}>
           {contents.map((group, i) => {
             if (group.requireRole && !roles.includes(group.requireRole)) {
@@ -251,14 +251,14 @@ export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) =>
             return (
               <Accordion.Item key={i} value={String(i)}>
                 <Accordion.Control>{i18n._(group.title)}</Accordion.Control>
-                <Accordion.Panel>
+                <Accordion.Panel className="flex flex-col gap-1">
                   <NavGroupItems group={group} row />
                 </Accordion.Panel>
               </Accordion.Item>
             );
           })}
         </Accordion>
-      </Stack>
+      </div>
     </Drawer>
   );
 };

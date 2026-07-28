@@ -104,7 +104,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
 
   return (
     <section className={cn("w-full", className)}>
-      <div className="mb-4 flex items-baseline justify-between">
+      <div className="mb-2 flex items-baseline justify-between">
         <h2 className="text-2xl font-medium">
           <Trans>Recent Events</Trans>
         </h2>
@@ -120,7 +120,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         </Button>
       </div>
       {isLoading && (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-2">
           {Array(5)
             .fill(0)
             .map((_, i) => (
@@ -136,7 +136,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
       {upcoming.length > 0 && (
         <Carousel
           slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
-          slideGap="md"
+          slideGap="calc(var(--spacing) * 2)"
           controlSize={40}
           controlsOffset={0}
           emblaOptions={{ align: "start" }}

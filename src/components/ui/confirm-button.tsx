@@ -25,7 +25,7 @@ export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
       <Popover.Dropdown>
         <div className="flex flex-col items-start gap-2">
           {actionDescription}
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-1">
             <Button size="xs" variant="subtle" onClick={close}>
               <Trans>No</Trans>
             </Button>

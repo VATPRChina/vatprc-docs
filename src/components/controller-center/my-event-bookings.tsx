@@ -35,7 +35,7 @@ export const MyEventBookings: FC = () => {
   if (!user) return null;
   if (error) {
     return (
-      <section className="flex flex-col gap-4">
+      <section className="flex flex-col gap-1">
         <h2 className="text-2xl font-medium">
           <Trans>My Event Positions</Trans>
         </h2>
@@ -48,7 +48,7 @@ export const MyEventBookings: FC = () => {
   if (mine.length === 0) return null;
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-1">
       <h2 className="text-2xl font-medium">
         <Trans>My Event Positions</Trans>
       </h2>
@@ -58,7 +58,7 @@ export const MyEventBookings: FC = () => {
             key={position.id}
             to="/events/$id"
             params={{ id: position.event.id }}
-            className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-l-3 border-black/15 border-l-emerald-600 px-4 py-3 font-mono text-base last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:border-l-emerald-400 dark:hover:bg-gray-900"
+            className="flex flex-wrap items-baseline gap-1 border-b border-l-3 border-black/15 border-l-emerald-600 px-4 py-3 font-mono text-base last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:border-l-emerald-400 dark:hover:bg-gray-900"
           >
             <span className="min-w-28 font-bold">{position.callsign}</span>
             <span className="flex-1 truncate text-gray-700 dark:text-gray-300">

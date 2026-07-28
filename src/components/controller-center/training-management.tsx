@@ -16,7 +16,7 @@ export const TrainingManagement: React.FC = () => (
       </Tabs.Tab>
     </Tabs.List>
 
-    <Tabs.Panel value="trainings" className="flex flex-col gap-3">
+    <Tabs.Panel value="trainings" className="flex flex-col gap-1">
       <div className="flex flex-row gap-2">
         <TrainingSaveModal />
       </div>

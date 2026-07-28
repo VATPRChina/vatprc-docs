@@ -4,7 +4,7 @@ import { $api, client } from "@/lib/client/client";
 import { wrapPromiseWithToast } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Modal, Pill, Stack, Table, Text, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
 import { Dropzone, FileWithPath } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -98,7 +98,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
         <TbFileImport size={18} />
       </ActionIcon>
       <Modal opened={opened} onClose={close} title={t`Import slots`} size="xl">
-        <Stack>
+        <div className="flex flex-col gap-4">
           <Text>
             <Trans>
               File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign,
@@ -106,7 +106,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
             </Trans>
           </Text>
           <Dropzone onDrop={(f) => wrapPromiseWithToast(onDrop(f))}>
-            <Group justify="center" gap="xl" style={{ pointerEvents: "none" }}>
+            <div className="pointer-events-none flex flex-wrap items-center justify-center gap-2">
               <Dropzone.Accept>
                 <TbUpload color={theme.colors.green[7]} size={52} stroke="1.5" />
               </Dropzone.Accept>
@@ -120,7 +120,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
               <Text size="xl" inline>
                 <Trans>Drag CSV here or click to select files</Trans>
               </Text>
-            </Group>
+            </div>
           </Dropzone>
           <Button onClick={onSubmit} disabled={slots.length === 0} loading={isPending}>
             Create Slots
@@ -147,20 +147,20 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
                 <Table.Tr key={i}>
                   <Table.Td>{slot.airspace}</Table.Td>
                   <Table.Td>
-                    <Stack>
+                    <div className="flex flex-col gap-1">
                       <Text>
-                        <Pill mr="xs">
+                        <Pill className="mr-1">
                           <Trans>CTOT</Trans>
                         </Pill>
                         <DateTime noDate>{slot.enter_at}</DateTime>
                       </Text>
                       <Text>
-                        <Pill mr="xs">
+                        <Pill className="mr-1">
                           <Trans>ELDT</Trans>
                         </Pill>
                         <DateTime noDate>{slot.leave_at}</DateTime>
                       </Text>
-                    </Stack>
+                    </div>
                   </Table.Td>
                   <Table.Td>{slot.callsign}</Table.Td>
                   <Table.Td>{slot.aircraft_type_icao}</Table.Td>
@@ -168,7 +168,7 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
               ))}
             </Table.Tbody>
           </Table>
-        </Stack>
+        </div>
       </Modal>
     </>
   );

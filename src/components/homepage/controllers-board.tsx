@@ -20,7 +20,7 @@ const ControllerStrip: React.FC<{
 }> = ({ callsign, name, frequency, eventTitle, schedule }) => (
   <div
     className={cn(
-      "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-black/15 px-4 py-3 font-mono text-base last:border-b-0 dark:border-white/20",
+      "flex flex-wrap items-baseline gap-1 border-b border-black/15 px-4 py-3 font-mono text-base last:border-b-0 dark:border-white/20",
       "border-l-3",
       schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
     )}
@@ -95,7 +95,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
 
   return (
     <section className={cn("w-full", className)}>
-      <div className="mb-4 flex items-baseline justify-between">
+      <div className="mb-2 flex items-baseline justify-between">
         <h2 className="text-2xl font-medium">
           <Trans>Controllers</Trans>
         </h2>
@@ -109,9 +109,9 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           <Trans>ATC Center</Trans>
         </Button>
       </div>
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div>
-          <h3 className="mb-2 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
+          <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Online Controllers</Trans>
           </h3>
           <StripList
@@ -123,7 +123,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           />
         </div>
         <div>
-          <h3 className="mb-2 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
+          <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Booked Controllers</Trans>
           </h3>
           <StripList

@@ -41,7 +41,7 @@ function RouteComponent() {
       <h2 className="text-lg">
         <Trans>User</Trans>
       </h2>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-1">
         {data?.user_id ? (
           <>
             <AtcPermissionModalButton userId={data.user_id} />

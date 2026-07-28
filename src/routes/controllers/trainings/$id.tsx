@@ -48,7 +48,7 @@ function RouteComponent() {
   return (
     <div className="flex flex-col gap-4">
       <BackButton />
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-1">
         <h2 className="text-2xl font-medium">
           <Trans>Training</Trans>
         </h2>

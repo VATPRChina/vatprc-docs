@@ -97,7 +97,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
@@ -141,7 +141,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
                   <Trans>Checklist</Trans>
                 </h2>
                 <Checkbox.Group value={value} onChange={setValue}>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1">
                     {CHECKLIST.map((item) => (
                       <Checkbox key={item.value} value={item.value} label={item.label} />
                     ))}
