@@ -54,7 +54,7 @@ msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
-#: src/components/homepage/hero.tsx:40
+#: src/components/homepage/hero.tsx:41
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -96,7 +96,7 @@ msgstr "操作"
 msgid "Active Trainings"
 msgstr "待进行的培训"
 
-#: src/routes/sheets/$id.tsx:225
+#: src/routes/sheets/$id.tsx:226
 msgid "Add field"
 msgstr "添加字段"
 
@@ -360,6 +360,10 @@ msgstr "预订时间："
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "简要描述训练目标，例如席位和课程内容。"
 
+#: src/routes/events/index.tsx:77
+msgid "Browse past events"
+msgstr "浏览往期活动"
+
 #: src/components/controller-list.tsx:25
 msgid "C1"
 msgstr "C1"
@@ -436,11 +440,11 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/sheets/$id.tsx:358
+#: src/routes/sheets/$id.tsx:359
 msgid "Chinese description"
 msgstr "中文说明"
 
-#: src/routes/sheets/$id.tsx:334
+#: src/routes/sheets/$id.tsx:335
 msgid "Chinese name"
 msgstr "中文名称"
 
@@ -515,7 +519,7 @@ msgstr "管制员训练部行政事务助理"
 msgid "Controllers"
 msgstr "管制员"
 
-#: src/components/homepage/hero.tsx:69
+#: src/components/homepage/hero.tsx:71
 msgid "Controllers online"
 msgstr "在线管制"
 
@@ -715,11 +719,11 @@ msgstr "结束时间为必填项"
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
-#: src/routes/sheets/$id.tsx:370
+#: src/routes/sheets/$id.tsx:371
 msgid "English description"
 msgstr "英文说明"
 
-#: src/routes/sheets/$id.tsx:345
+#: src/routes/sheets/$id.tsx:346
 msgid "English name"
 msgstr "英文名称"
 
@@ -780,11 +784,11 @@ msgstr "活动时段"
 msgid "Event start"
 msgstr "活动开始"
 
-#: src/routes/events/index.tsx:19
+#: src/routes/events/index.tsx:22
 msgid "Events"
 msgstr "活动"
 
-#: src/components/homepage/hero.tsx:70
+#: src/components/homepage/hero.tsx:72
 msgid "Events this week"
 msgstr "本周活动"
 
@@ -809,7 +813,7 @@ msgstr "加载历史活动失败。"
 msgid "Failed to load trainings"
 msgstr "训练信息加载失败"
 
-#: src/routes/sheets/$id.tsx:411
+#: src/routes/sheets/$id.tsx:412
 msgid "Failed to save sheet."
 msgstr "无法保存表单。"
 
@@ -817,19 +821,19 @@ msgstr "无法保存表单。"
 msgid "Feedback"
 msgstr "反馈"
 
-#: src/routes/sheets/$id.tsx:241
+#: src/routes/sheets/$id.tsx:242
 msgid "Field {fieldNumber}"
 msgstr "字段 {fieldNumber}"
 
-#: src/routes/sheets/$id.tsx:302
+#: src/routes/sheets/$id.tsx:303
 msgid "Field ID"
 msgstr "字段 ID"
 
-#: src/routes/sheets/$id.tsx:313
+#: src/routes/sheets/$id.tsx:314
 msgid "Field type"
 msgstr "字段类型"
 
-#: src/routes/sheets/$id.tsx:210
+#: src/routes/sheets/$id.tsx:211
 msgid "Fields"
 msgstr "字段列表"
 
@@ -855,7 +859,7 @@ msgid "Flight Plan"
 msgstr "飞行计划"
 
 #: src/components/app/app-nav-menu.tsx:84
-#: src/components/homepage/hero.tsx:54
+#: src/components/homepage/hero.tsx:56
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
@@ -883,7 +887,7 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/app/app-nav-menu.tsx:104
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/components/homepage/hero.tsx:64
+#: src/components/homepage/hero.tsx:66
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
@@ -920,7 +924,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/homepage/hero.tsx:51
+#: src/components/homepage/hero.tsx:53
 msgid "How to fly"
 msgstr "如何飞行"
 
@@ -1005,7 +1009,7 @@ msgstr "介绍"
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
-#: src/components/homepage/hero.tsx:48
+#: src/components/homepage/hero.tsx:50
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
@@ -1055,6 +1059,10 @@ msgstr "移交协议书编辑"
 #: src/components/app/user-info.tsx:64
 msgid "Loading"
 msgstr "正在加载"
+
+#: src/routes/events/index.tsx:39
+msgid "Loading events"
+msgstr "正在加载活动"
 
 #: src/components/app/user-info.tsx:81
 msgid "Login"
@@ -1162,7 +1170,7 @@ msgstr "暂无内容"
 msgid "No data"
 msgstr "无数据"
 
-#: src/routes/sheets/$id.tsx:403
+#: src/routes/sheets/$id.tsx:404
 msgid "No fields."
 msgstr "没有字段。"
 
@@ -1214,6 +1222,10 @@ msgstr "不符合指定航路"
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · 分部公告"
 
+#: src/routes/events/index.tsx:70
+msgid "Nothing on the calendar yet"
+msgstr "活动日历暂时空空如也"
+
 #: src/components/app/app-not-found.tsx:12
 msgid "Nothing to see here"
 msgstr "这里空无一物"
@@ -1227,7 +1239,7 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "英制单数飞行高度层"
 
-#: src/routes/sheets/$id.tsx:386
+#: src/routes/sheets/$id.tsx:387
 msgid "One option per line."
 msgstr "每行一个选项。"
 
@@ -1255,7 +1267,7 @@ msgstr "运行部主管"
 msgid "Operation Director Assistant"
 msgstr "运行部主管助理"
 
-#: src/routes/sheets/$id.tsx:385
+#: src/routes/sheets/$id.tsx:386
 msgid "Options"
 msgstr "选项"
 
@@ -1309,7 +1321,7 @@ msgstr "飞行员软件"
 msgid "Pilots"
 msgstr "飞行员"
 
-#: src/components/homepage/hero.tsx:68
+#: src/components/homepage/hero.tsx:70
 msgid "Pilots online"
 msgstr "在线机组"
 
@@ -1496,7 +1508,7 @@ msgstr "保存"
 msgid "Save changes"
 msgstr "保存变更"
 
-#: src/routes/sheets/$id.tsx:414
+#: src/routes/sheets/$id.tsx:415
 msgid "Save sheet"
 msgstr "保存表单"
 
@@ -1534,7 +1546,7 @@ msgstr "自我反思功能将很快上线。目前请将你的自我反思发送
 msgid "Sheet Management"
 msgstr "表单管理"
 
-#: src/routes/sheets/$id.tsx:198
+#: src/routes/sheets/$id.tsx:199
 msgid "Sheet name"
 msgstr "表单名称"
 
@@ -1798,6 +1810,10 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "用户的 Moodle 账号已成功开通。"
 
+#: src/routes/events/index.tsx:73
+msgid "There are no upcoming events right now. Check back soon or explore events from the past."
+msgstr "目前暂无即将开始的活动。请稍后再来看看，或浏览往期活动。"
+
 #: src/components/homepage/controllers-board.tsx:118
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
@@ -2019,7 +2035,7 @@ msgstr "VATPRC 提供从放行到区调的完整训练体系。提交申请，�
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:37
+#: src/components/homepage/hero.tsx:38
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM 中国分部 · VATPRC"
 
@@ -2040,12 +2056,12 @@ msgid "View"
 msgstr "查看"
 
 #: src/routes/controllers/applications/index.tsx:23
-#: src/routes/events/index.tsx:27
+#: src/routes/events/index.tsx:30
 #: src/routes/users/index.tsx:141
 msgid "View audit logs"
 msgstr "查看审计日志"
 
-#: src/routes/events/index.tsx:23
+#: src/routes/events/index.tsx:26
 msgid "View past events"
 msgstr "查看过去活动"
 

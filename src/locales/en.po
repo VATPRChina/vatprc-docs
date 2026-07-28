@@ -54,7 +54,7 @@ msgstr "<0>T</0> In Training: This controller is eligible to provide service to 
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
-#: src/components/homepage/hero.tsx:40
+#: src/components/homepage/hero.tsx:41
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
@@ -96,7 +96,7 @@ msgstr "Actions"
 msgid "Active Trainings"
 msgstr "Active Trainings"
 
-#: src/routes/sheets/$id.tsx:225
+#: src/routes/sheets/$id.tsx:226
 msgid "Add field"
 msgstr "Add field"
 
@@ -360,6 +360,10 @@ msgstr "Booking:"
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
+#: src/routes/events/index.tsx:77
+msgid "Browse past events"
+msgstr "Browse past events"
+
 #: src/components/controller-list.tsx:25
 msgid "C1"
 msgstr "C1"
@@ -436,11 +440,11 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/sheets/$id.tsx:358
+#: src/routes/sheets/$id.tsx:359
 msgid "Chinese description"
 msgstr "Chinese description"
 
-#: src/routes/sheets/$id.tsx:334
+#: src/routes/sheets/$id.tsx:335
 msgid "Chinese name"
 msgstr "Chinese name"
 
@@ -515,7 +519,7 @@ msgstr "Controller Training Director Assistant"
 msgid "Controllers"
 msgstr "Controllers"
 
-#: src/components/homepage/hero.tsx:69
+#: src/components/homepage/hero.tsx:71
 msgid "Controllers online"
 msgstr "Controllers online"
 
@@ -715,11 +719,11 @@ msgstr "End time is required"
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
 
-#: src/routes/sheets/$id.tsx:370
+#: src/routes/sheets/$id.tsx:371
 msgid "English description"
 msgstr "English description"
 
-#: src/routes/sheets/$id.tsx:345
+#: src/routes/sheets/$id.tsx:346
 msgid "English name"
 msgstr "English name"
 
@@ -780,11 +784,11 @@ msgstr "Event Slot"
 msgid "Event start"
 msgstr "Event start"
 
-#: src/routes/events/index.tsx:19
+#: src/routes/events/index.tsx:22
 msgid "Events"
 msgstr "Events"
 
-#: src/components/homepage/hero.tsx:70
+#: src/components/homepage/hero.tsx:72
 msgid "Events this week"
 msgstr "Events this week"
 
@@ -809,7 +813,7 @@ msgstr "Failed to load past events."
 msgid "Failed to load trainings"
 msgstr "Failed to load trainings"
 
-#: src/routes/sheets/$id.tsx:411
+#: src/routes/sheets/$id.tsx:412
 msgid "Failed to save sheet."
 msgstr "Failed to save sheet."
 
@@ -817,19 +821,19 @@ msgstr "Failed to save sheet."
 msgid "Feedback"
 msgstr "Feedback"
 
-#: src/routes/sheets/$id.tsx:241
+#: src/routes/sheets/$id.tsx:242
 msgid "Field {fieldNumber}"
 msgstr "Field {fieldNumber}"
 
-#: src/routes/sheets/$id.tsx:302
+#: src/routes/sheets/$id.tsx:303
 msgid "Field ID"
 msgstr "Field ID"
 
-#: src/routes/sheets/$id.tsx:313
+#: src/routes/sheets/$id.tsx:314
 msgid "Field type"
 msgstr "Field type"
 
-#: src/routes/sheets/$id.tsx:210
+#: src/routes/sheets/$id.tsx:211
 msgid "Fields"
 msgstr "Fields"
 
@@ -855,7 +859,7 @@ msgid "Flight Plan"
 msgstr "Flight Plan"
 
 #: src/components/app/app-nav-menu.tsx:84
-#: src/components/homepage/hero.tsx:54
+#: src/components/homepage/hero.tsx:56
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
@@ -883,7 +887,7 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/components/app/app-nav-menu.tsx:104
 #: src/components/event/event-create.tsx:232
 #: src/components/event/event-detail.tsx:66
-#: src/components/homepage/hero.tsx:64
+#: src/components/homepage/hero.tsx:66
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "Forum"
@@ -920,7 +924,7 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/homepage/hero.tsx:51
+#: src/components/homepage/hero.tsx:53
 msgid "How to fly"
 msgstr "How to fly"
 
@@ -1005,7 +1009,7 @@ msgstr "Introduction"
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
-#: src/components/homepage/hero.tsx:48
+#: src/components/homepage/hero.tsx:50
 msgid "Join the controller team"
 msgstr "Join the controller team"
 
@@ -1055,6 +1059,10 @@ msgstr "LOA Editor"
 #: src/components/app/user-info.tsx:64
 msgid "Loading"
 msgstr "Loading"
+
+#: src/routes/events/index.tsx:39
+msgid "Loading events"
+msgstr "Loading events"
 
 #: src/components/app/user-info.tsx:81
 msgid "Login"
@@ -1162,7 +1170,7 @@ msgstr "No content"
 msgid "No data"
 msgstr "No data"
 
-#: src/routes/sheets/$id.tsx:403
+#: src/routes/sheets/$id.tsx:404
 msgid "No fields."
 msgstr "No fields."
 
@@ -1214,6 +1222,10 @@ msgstr "Not designated route"
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · Announcements"
 
+#: src/routes/events/index.tsx:70
+msgid "Nothing on the calendar yet"
+msgstr "Nothing on the calendar yet"
+
 #: src/components/app/app-not-found.tsx:12
 msgid "Nothing to see here"
 msgstr "Nothing to see here"
@@ -1227,7 +1239,7 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
 
-#: src/routes/sheets/$id.tsx:386
+#: src/routes/sheets/$id.tsx:387
 msgid "One option per line."
 msgstr "One option per line."
 
@@ -1255,7 +1267,7 @@ msgstr "Operation Director"
 msgid "Operation Director Assistant"
 msgstr "Operation Director Assistant"
 
-#: src/routes/sheets/$id.tsx:385
+#: src/routes/sheets/$id.tsx:386
 msgid "Options"
 msgstr "Options"
 
@@ -1309,7 +1321,7 @@ msgstr "Pilot Softwares"
 msgid "Pilots"
 msgstr "Pilots"
 
-#: src/components/homepage/hero.tsx:68
+#: src/components/homepage/hero.tsx:70
 msgid "Pilots online"
 msgstr "Pilots online"
 
@@ -1496,7 +1508,7 @@ msgstr "Save"
 msgid "Save changes"
 msgstr "Save changes"
 
-#: src/routes/sheets/$id.tsx:414
+#: src/routes/sheets/$id.tsx:415
 msgid "Save sheet"
 msgstr "Save sheet"
 
@@ -1534,7 +1546,7 @@ msgstr "Self reflection will be online soon. For now, please send your self refl
 msgid "Sheet Management"
 msgstr "Sheet Management"
 
-#: src/routes/sheets/$id.tsx:198
+#: src/routes/sheets/$id.tsx:199
 msgid "Sheet name"
 msgstr "Sheet name"
 
@@ -1798,6 +1810,10 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "The user's Moodle account has been provisioned successfully."
 msgstr "The user's Moodle account has been provisioned successfully."
 
+#: src/routes/events/index.tsx:73
+msgid "There are no upcoming events right now. Check back soon or explore events from the past."
+msgstr "There are no upcoming events right now. Check back soon or explore events from the past."
+
 #: src/components/homepage/controllers-board.tsx:118
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
@@ -2019,7 +2035,7 @@ msgstr "VATPRC provides a complete training program from Delivery to Center. Sub
 msgid "VATSIM"
 msgstr "VATSIM"
 
-#: src/components/homepage/hero.tsx:37
+#: src/components/homepage/hero.tsx:38
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM P.R. China Division · VATPRC"
 
@@ -2040,12 +2056,12 @@ msgid "View"
 msgstr "View"
 
 #: src/routes/controllers/applications/index.tsx:23
-#: src/routes/events/index.tsx:27
+#: src/routes/events/index.tsx:30
 #: src/routes/users/index.tsx:141
 msgid "View audit logs"
 msgstr "View audit logs"
 
-#: src/routes/events/index.tsx:23
+#: src/routes/events/index.tsx:26
 msgid "View past events"
 msgstr "View past events"
 
