@@ -7,7 +7,7 @@
 
 ### 1.1 根据
 
-为了确保 VATPRC 管辖范围内的广州白云机场（ZGGG）安全、合规和高效的运行，依据中国民用航空局（CAAC）发布的[《中华人民共和国航空资料汇编（AIP CHINA）》](https://www.eaipchina.cn)，结合 VATPRC 实际运行情况，制定了适用于广州白云机场（ZGGG）的标准运行程序。
+为了确保 VATPRC 管辖范围内的广州白云机场（ZGGG）安全、合规、高效地运行，根据中国民用航空局（CAAC）发布的[《中华人民共和国航空资料汇编（AIP CHINA）》](https://www.eaipchina.cn)，结合 VATPRC 实际运行情况，制定适用于广州白云机场（ZGGG）的标准运行程序。
 
 ### 1.2 原则
 
