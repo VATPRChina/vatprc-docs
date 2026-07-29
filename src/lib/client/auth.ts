@@ -1,5 +1,4 @@
 import { components, paths } from "../api";
-import { ApiError } from "./ApiError";
 import { atom, getDefaultStore } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { SyncStringStorage } from "jotai/vanilla/utils/atomWithStorage";
@@ -60,7 +59,7 @@ export const login = async (code: string) => {
     },
   });
   if (data.error) {
-    throw new ApiError("Error response from server", data.response.status, data.error?.error, data.error);
+    throw new Error(`Error response from server: ${data.response.status} ${data.error?.error}`);
   }
   handleSessionLoginResponse(data.data);
 };
@@ -86,7 +85,7 @@ export const refresh = async () => {
     forceLogout();
     return;
   } else if (!result.data) {
-    throw new ApiError("Error response from server", result.response.status, result.error?.error, result.error);
+    throw new Error(`Error response from server: ${result.error.error_description} (${result.error.error})`);
   }
   handleSessionLoginResponse(result.data);
   const observers = refreshTokenObservers;

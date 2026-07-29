@@ -2,10 +2,10 @@ import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal"
 import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog, promiseWithToast } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Group, Modal, Select, TextInput } from "@mantine/core";
+import { Alert, Button, Modal, Select, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,14 +17,13 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const queryClient = useQueryClient();
-  const { data: event, isLoading } = $api.useQuery(
-    "get",
-    "/api/events/{eid}",
-    { params: { path: { eid: eventId ?? "0" } } },
-    { enabled: opened },
-  );
-  const { data: slots } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-    params: { path: { eventId } },
+  const {
+    data: event,
+    error: eventError,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/{id}", { params: { path: { id: eventId ?? "0" } } }, { enabled: opened });
+  const { data: slots, error: slotsError } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+    params: { path: { event_id: eventId } },
   });
   const slot = slots?.find((s) => s.id === positionId);
   const callsign = slot?.callsign;
@@ -33,19 +32,24 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
     close();
     promiseWithLog(
       queryClient.invalidateQueries({
-        queryKey: $api.queryOptions("get", "/api/events/{eventId}/controllers", { params: { path: { eventId } } })
-          .queryKey,
+        queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+          params: { path: { event_id: eventId } },
+        }).queryKey,
       }),
     );
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/events/{eventId}/controllers", {
+  const {
+    mutate: create,
+    isPending: isCreatePending,
+    error: createError,
+  } = $api.useMutation("post", "/api/events/{event_id}/controllers", {
     onSuccess,
   });
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
-    "put",
-    "/api/events/{eventId}/controllers/{positionId}",
-    { onSuccess },
-  );
+  const {
+    mutate: update,
+    isPending: isUpdatePending,
+    error: updateError,
+  } = $api.useMutation("put", "/api/events/{event_id}/controllers/{position_id}", { onSuccess });
   const now = formatISO(setMinutes(setSeconds(Date.now(), 0), 0));
   const form = useForm({
     defaultValues: {
@@ -53,15 +57,14 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
       start_at: slot?.start_at ?? event?.start_at ?? now,
       end_at: slot?.end_at ?? event?.end_at ?? now,
       position_kind_id: slot?.position_kind_id ?? "DEL",
-      minimum_controller_state:
-        slot?.minimum_controller_state ?? ("student" as components["schemas"]["UserControllerState"]),
+      minimum_controller_state: slot?.minimum_controller_state ?? "student",
       remarks: slot?.remarks ?? "",
     } satisfies components["schemas"]["EventAtcPositionSaveRequest"],
     onSubmit: ({ value }) => {
       if (positionId) {
-        update({ params: { path: { eventId, positionId } }, body: value });
+        update({ params: { path: { event_id: eventId, position_id: positionId } }, body: value });
       } else {
-        create({ params: { path: { eventId } }, body: value });
+        create({ params: { path: { event_id: eventId } }, body: value });
       }
     },
   });
@@ -69,7 +72,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    promiseWithToast(form.handleSubmit());
+    promiseWithLog(form.handleSubmit());
   };
 
   return (
@@ -90,6 +93,11 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
         title={positionId ? t`Edit ATC Position ${callsign}` : t`Create ATC Position`}
       >
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
+          {(eventError ?? slotsError ?? createError ?? updateError) && (
+            <Alert color="red" title={(eventError ?? slotsError ?? createError ?? updateError)?.title}>
+              {(eventError ?? slotsError ?? createError ?? updateError)?.detail}
+            </Alert>
+          )}
           <form.Field name="callsign">
             {(field) => (
               <TextInput
@@ -101,13 +109,12 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
               />
             )}
           </form.Field>
-          <Group grow>
+          <div className="grid grid-cols-2 gap-2">
             <form.Field name="start_at">
               {(field) => (
                 <DateTimeInput
                   label={t`Start at`}
                   onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                   value={new Date(field.state.value)}
                   onBlur={field.handleBlur}
                   disabled={isLoading}
@@ -119,14 +126,13 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
                 <DateTimeInput
                   label={t`End at`}
                   onChange={(e) => field.handleChange(formatISO(e ?? new Date(), { in: utc }))}
-                  valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                   value={new Date(field.state.value)}
                   onBlur={field.handleBlur}
                   disabled={isLoading}
                 />
               )}
             </form.Field>
-          </Group>
+          </div>
           <form.Field name="position_kind_id">
             {(field) => (
               <Select
@@ -145,7 +151,7 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
             {(field) => (
               <Select
                 label={t`Minimum State`}
-                onChange={(e) => e && field.handleChange(e as components["schemas"]["UserControllerState"])}
+                onChange={(e) => e && field.handleChange(e)}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 disabled={isLoading}
@@ -166,11 +172,11 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
               ></TextInput>
             )}
           </form.Field>
-          <Group>
+          <div className="flex flex-wrap items-center gap-1">
             <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
               {eventId ? t`Save` : t`Create`}
             </Button>
-          </Group>
+          </div>
         </form>
       </Modal>
     </>

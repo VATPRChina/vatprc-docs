@@ -1,0 +1,104 @@
+import { UserInput } from "../user-input";
+import { $api } from "@/lib/client";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { Alert, Button, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
+import { FormEvent } from "react";
+
+export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: string }) => {
+  const { t } = useLingui();
+  const [opened, { toggle, close }] = useDisclosure(false);
+
+  const queryClient = useQueryClient();
+  const {
+    data: slots,
+    error: loadError,
+    isLoading,
+  } = $api.useQuery("get", "/api/events/{event_id}/slots", {
+    params: { path: { event_id: eventId } },
+  });
+  const slot = slots?.find((s) => s.id === slotId);
+  const callsign = slot?.callsign ?? "";
+
+  const onSuccess = wrapPromiseWithLog(async () => {
+    close();
+    await queryClient.invalidateQueries({
+      queryKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } })
+        .queryKey,
+    });
+  });
+
+  const {
+    mutate: assign,
+    isPending: isAssignPending,
+    error: assignError,
+  } = $api.useMutation("put", "/api/events/{event_id}/slots/{slot_id}/booking", { onSuccess });
+  const {
+    mutate: unassign,
+    isPending: isUnassignPending,
+    error: unassignError,
+  } = $api.useMutation("delete", "/api/events/{event_id}/slots/{slot_id}/booking", { onSuccess });
+
+  const form = useForm({
+    defaultValues: {
+      user_id: slot?.booking?.user?.id ?? "",
+    },
+    onSubmit: ({ value }) => {
+      assign({ params: { path: { event_id: eventId, slot_id: slotId } }, body: value });
+    },
+  });
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    promiseWithLog(form.handleSubmit());
+  };
+  const onUnassign = () => {
+    unassign({ params: { path: { event_id: eventId, slot_id: slotId } } });
+  };
+
+  return (
+    <>
+      <Button variant="subtle" onClick={toggle} size="compact-sm">
+        <Trans>Assign</Trans>
+      </Button>
+      <Modal opened={opened} onClose={close} size="xl" title={t`Assign Slot ${callsign}`}>
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+          {(loadError ?? assignError ?? unassignError) && (
+            <Alert color="red" title={(loadError ?? assignError ?? unassignError)?.title}>
+              {(loadError ?? assignError ?? unassignError)?.detail}
+            </Alert>
+          )}
+          <form.Field name="user_id">
+            {(field) => (
+              <UserInput
+                label={<Trans>CID</Trans>}
+                onChange={(v) => v && field.handleChange(v)}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                disabled={isLoading}
+              />
+            )}
+          </form.Field>
+          <div className="flex flex-row gap-1">
+            <Button variant="subtle" type="submit" loading={isAssignPending}>
+              <Trans>Assign</Trans>
+            </Button>
+            <Button
+              variant="subtle"
+              type="button"
+              loading={isUnassignPending}
+              disabled={slot?.booking == null}
+              onClick={onUnassign}
+            >
+              <Trans>Unassign</Trans>
+            </Button>
+          </div>
+        </form>
+      </Modal>
+    </>
+  );
+};

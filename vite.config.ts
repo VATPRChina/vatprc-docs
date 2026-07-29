@@ -1,27 +1,26 @@
-import { lingui } from "@lingui/vite-plugin";
+import { lingui, linguiTransformerBabelPreset } from "@lingui/vite-plugin";
+import babel from "@rolldown/plugin-babel";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
-import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
+import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
-import tsConfigPaths from "vite-tsconfig-paths";
+import { nitro } from "nitro/vite";
 import { defineConfig } from "vitest/config";
 
 /// <reference types="vitest/config" />
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
-    tsConfigPaths({
-      projects: ["./tsconfig.json"],
-    }),
     !process.env.VITEST && tanstackStart(),
-    !process.env.VITEST && nitroV2Plugin({ preset: "node-server" }),
-    viteReact({
-      babel: {
-        plugins: ["@lingui/babel-plugin-lingui-macro"],
-      },
-    }),
+    // nitro is a list of plugins so gating with command
+    !process.env.VITEST && command !== "serve" && nitro(),
+    tailwindcss(),
+    viteReact(),
     lingui(),
+    babel({
+      presets: [linguiTransformerBabelPreset()],
+    }),
     sentryVitePlugin({
       org: "xfoxfu",
       project: "vatprc-homepage",
@@ -29,6 +28,7 @@ export default defineConfig({
     }),
   ],
   build: { sourcemap: true },
+  resolve: { tsconfigPaths: true },
   server: {
     proxy: {
       "/uniapi": {
@@ -41,6 +41,7 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/community/, ""),
       },
+      "/hi": "https://example.com",
     },
   },
   test: {
@@ -68,4 +69,4 @@ export default defineConfig({
       },
     ],
   },
-});
+}));

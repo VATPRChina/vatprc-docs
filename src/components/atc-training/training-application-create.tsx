@@ -1,7 +1,7 @@
 import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api, useControllerPermissions } from "@/lib/client";
-import { promiseWithToast } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Alert, Button, Modal, TextInput } from "@mantine/core";
@@ -22,7 +22,7 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
   const queryClient = useQueryClient();
   const [opened, { toggle, close }] = useDisclosure(false);
 
-  const { data } = $api.useQuery(
+  const { data, error: loadError } = $api.useQuery(
     "get",
     "/api/atc/trainings/applications/{id}",
     { params: { path: { id: id ?? "" } } },
@@ -40,16 +40,18 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
       );
     }
   };
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/atc/trainings/applications", {
+  const {
+    mutate: create,
+    isPending: isCreatePending,
+    error: createError,
+  } = $api.useMutation("post", "/api/atc/trainings/applications", { onSuccess });
+  const {
+    mutate: update,
+    isPending: isUpdatePending,
+    error: updateError,
+  } = $api.useMutation("put", "/api/atc/trainings/applications/{id}", {
     onSuccess,
   });
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation(
-    "put",
-    "/api/atc/trainings/applications/{id}",
-    {
-      onSuccess,
-    },
-  );
 
   const form = useForm({
     defaultValues:
@@ -108,10 +110,15 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            promiseWithToast(form.handleSubmit());
+            promiseWithLog(form.handleSubmit());
           }}
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
+            {(loadError ?? createError ?? updateError) && (
+              <Alert color="red" title={(loadError ?? createError ?? updateError)?.title}>
+                {(loadError ?? createError ?? updateError)?.detail}
+              </Alert>
+            )}
             <form.Field name="name">
               {(field) => (
                 <TextInput
@@ -127,7 +134,7 @@ export const TrainingApplicationCreateModal: FC<{ id?: string; disabled?: boolea
             <form.Field name="slots" mode="array">
               {(field) => (
                 <>
-                  <div className="flex flex-row items-center gap-2">
+                  <div className="flex flex-row items-center gap-1">
                     <span className="font-bold">
                       <Trans>Slots</Trans>
                     </span>

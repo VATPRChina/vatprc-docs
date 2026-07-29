@@ -1,11 +1,13 @@
 import { components } from "./api";
 import { $api } from "./client/client";
+import { createIsomorphicFn } from "@tanstack/react-start";
 import { isBefore } from "date-fns";
 
 export { $api } from "./client/client";
 export { login, logout } from "./client/auth";
+export { assumedRolesAtom } from "./client/role-assumption";
 
-export type UserRole = components["schemas"]["UserRoleDto"];
+export type UserRole = components["schemas"]["UserRole"];
 
 export const usePermission = (role: UserRole) => {
   const { data } = $api.useQuery("get", "/api/session", {}, { retry: false });
@@ -55,3 +57,7 @@ export const useControllerPermission = (
   }
   return true;
 };
+
+export const COMMUNITY_ENDPOINT = createIsomorphicFn()
+  .server(() => "https://community.vatprc.net")
+  .client(() => (process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"))();

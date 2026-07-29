@@ -2,9 +2,9 @@ import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog, promiseWithToast, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Image, Modal, Stack, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Alert, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -19,15 +19,23 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
 
   const user = useUser();
   const queryClient = useQueryClient();
-  const { data: event, isLoading } = $api.useQuery(
+  const {
+    data: event,
+    error: loadError,
+    isLoading,
+  } = $api.useQuery(
     "get",
-    "/api/events/{eid}",
-    { params: { path: { eid: eventId ?? NULL_ULID } } },
+    "/api/events/{id}",
+    { params: { path: { id: eventId ?? NULL_ULID } } },
     { enabled: !!eventId && opened },
   );
   const title = event?.title;
 
-  const { mutate: uploadImage, isPending: isImageUploading } = $api.useMutation("post", "/api/storage/images", {
+  const {
+    mutate: uploadImage,
+    isPending: isImageUploading,
+    error: uploadError,
+  } = $api.useMutation("post", "/api/storage/images", {
     onSuccess: (data) => form.setFieldValue("image_url", data.url),
   });
   const onUpload = (files: File[]) => {
@@ -36,22 +44,22 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     const form = new FormData();
     form.append("image", file, file?.name ?? "untitled");
     uploadImage({
-      body: form as unknown as { image: string },
+      body: form as unknown as string,
     });
   };
 
-  const { mutateAsync: create } = $api.useMutation("post", "/api/events", {
+  const { mutateAsync: create, error: createError } = $api.useMutation("post", "/api/events", {
     onSuccess: () => {
       close();
       promiseWithLog(() => queryClient.invalidateQueries($api.queryOptions("get", "/api/events")));
     },
   });
-  const { mutateAsync: update } = $api.useMutation("post", "/api/events/{eid}", {
+  const { mutateAsync: update, error: updateError } = $api.useMutation("put", "/api/events/{id}", {
     onSuccess: wrapPromiseWithLog(async () => {
       close();
       if (eventId) {
         await queryClient.invalidateQueries(
-          $api.queryOptions("get", "/api/events/{eid}", { params: { path: { eid: eventId } } }),
+          $api.queryOptions("get", "/api/events/{id}", { params: { path: { id: eventId } } }),
         );
       }
     }),
@@ -73,7 +81,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     } satisfies components["schemas"]["EventSaveRequest"],
     onSubmit: ({ value }) => {
       if (eventId) {
-        return update({ params: { path: { eid: eventId ?? NULL_ULID } }, body: value });
+        return update({ params: { path: { id: eventId ?? NULL_ULID } }, body: value });
       } else {
         return create({ body: value });
       }
@@ -120,10 +128,15 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            promiseWithToast(form.handleSubmit());
+            promiseWithLog(form.handleSubmit());
           }}
         >
-          <Stack>
+          <div className="flex flex-col gap-4">
+            {(loadError ?? uploadError ?? createError ?? updateError) && (
+              <Alert color="red" title={(loadError ?? uploadError ?? createError ?? updateError)?.title}>
+                {(loadError ?? uploadError ?? createError ?? updateError)?.detail}
+              </Alert>
+            )}
             <form.Field name="title">
               {(field) => (
                 <TextInput
@@ -148,7 +161,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 />
               )}
             </form.Field>
-            <Group grow>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="start_at">
                 {(field) => (
                   <DateTimeInput
@@ -173,8 +186,8 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   />
                 )}
               </form.Field>
-            </Group>
-            <Group grow>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="start_booking_at">
                 {(field) => (
                   <DateTimeInput
@@ -203,7 +216,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                   />
                 )}
               </form.Field>
-            </Group>
+            </div>
             <form.Field name="start_atc_booking_at">
               {(field) => (
                 <DateTimeInput
@@ -273,7 +286,7 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
                 )}
               </form.Subscribe>
             </div>
-          </Stack>
+          </div>
         </form>
       </Modal>
     </>

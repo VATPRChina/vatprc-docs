@@ -1,3 +1,4 @@
+import { User } from "../app/user";
 import { RichTable } from "../table";
 import { LinkButton } from "../ui/link-button";
 import { APPLICATION_STATUS } from "./atc-application-status";
@@ -6,6 +7,7 @@ import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FC } from "react";
@@ -14,8 +16,12 @@ import { TbFileDescription } from "react-icons/tb";
 const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSummaryDto"]>();
 
 export const columns = [
-  columnHelper.accessor("user.cid", { header: () => <Trans>CID</Trans> }),
-  columnHelper.accessor("user.full_name", { header: () => <Trans>Name</Trans> }),
+  columnHelper.accessor((application) => `${application.user.full_name} ${application.user.cid}`.trim(), {
+    id: "user",
+    header: () => <Trans>User</Trans>,
+    cell: ({ row }) => <User user={row.original.user} />,
+  }),
+  columnHelper.accessor("user_email", { header: () => <Trans>Email</Trans> }),
   columnHelper.accessor("status", {
     header: () => <Trans>Status</Trans>,
     cell: ({ getValue }) => {
@@ -50,14 +56,21 @@ export const columns = [
 ];
 
 export const AtcApplicationList: FC = () => {
-  const { data, isLoading } = $api.useQuery("get", "/api/atc/applications");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications");
 
   return (
-    <RichTable
-      data={data}
-      columns={columns}
-      isLoading={isLoading}
-      initialState={{ columnFilters: [{ id: "status", value: "submitted" }] }}
-    />
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <RichTable
+        data={data}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ columnFilters: [{ id: "status", value: "submitted" }] }}
+      />
+    </div>
   );
 };

@@ -1,12 +1,12 @@
 import { DateTimeInput } from "./ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithToast } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Button, Group, Modal, Select, Stack, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Alert, Button, Modal, Select, TextInput, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { formatISO } from "date-fns";
@@ -31,7 +31,11 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const user = useUser();
-  const { data, isLoading } = $api.useQuery(
+  const {
+    data,
+    error: loadError,
+    isLoading,
+  } = $api.useQuery(
     "get",
     "/api/navdata/preferred-routes/{id}",
     { params: { path: { id: id ?? "" } } },
@@ -39,12 +43,16 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
   );
   const title = data?.departure && data?.arrival ? `${data.departure} - ${data.arrival}` : null;
 
-  const { mutate: create, isPending: isCreatePending } = $api.useMutation("post", "/api/navdata/preferred-routes", {
-    onSuccess: () => close(),
-  });
-  const { mutate: update, isPending: isUpdatePending } = $api.useMutation("put", "/api/navdata/preferred-routes/{id}", {
-    onSuccess: () => close(),
-  });
+  const {
+    mutate: create,
+    isPending: isCreatePending,
+    error: createError,
+  } = $api.useMutation("post", "/api/navdata/preferred-routes", { onSuccess: () => close() });
+  const {
+    mutate: update,
+    isPending: isUpdatePending,
+    error: updateError,
+  } = $api.useMutation("put", "/api/navdata/preferred-routes/{id}", { onSuccess: () => close() });
   const form = useForm({
     defaultValues: {
       departure: data?.departure ?? "",
@@ -89,11 +97,16 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            promiseWithToast(form.handleSubmit());
+            promiseWithLog(form.handleSubmit());
           }}
         >
-          <Stack>
-            <Group grow>
+          <div className="flex flex-col gap-4">
+            {(loadError ?? createError ?? updateError) && (
+              <Alert color="red" title={(loadError ?? createError ?? updateError)?.title}>
+                {(loadError ?? createError ?? updateError)?.detail}
+              </Alert>
+            )}
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="departure">
                 {(field) => (
                   <TextInput
@@ -116,14 +129,13 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   ></TextInput>
                 )}
               </form.Field>
-            </Group>
-            <Group grow>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <form.Field name="valid_from">
                 {(field) => (
                   <DateTimeInput
                     label={t`Valid From`}
                     onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                     clearable
                     value={field.state.value && new Date(field.state.value)}
                     onBlur={field.handleBlur}
@@ -136,7 +148,6 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   <DateTimeInput
                     label={t`Valid Until`}
                     onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    valueFormat="YYYY-MM-DD HH:mm:ss ZZ"
                     clearable
                     value={field.state.value && new Date(field.state.value)}
                     onBlur={field.handleBlur}
@@ -144,7 +155,7 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                   />
                 )}
               </form.Field>
-            </Group>
+            </div>
             <form.Field name="raw_route">
               {(field) => (
                 <Textarea
@@ -186,12 +197,12 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
                 />
               )}
             </form.Field>
-            <Group>
+            <div className="flex flex-wrap items-center gap-1">
               <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
                 {id ? t`Save` : t`Create`}
               </Button>
-            </Group>
-          </Stack>
+            </div>
+          </div>
         </form>
       </Modal>
     </>

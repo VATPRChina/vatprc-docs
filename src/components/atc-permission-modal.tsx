@@ -1,12 +1,12 @@
 import { RequireRole } from "./require-role";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Checkbox, Modal, Select, Stack } from "@mantine/core";
+import { ActionIcon, Alert, Button, Checkbox, Modal, Select } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -42,19 +42,28 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   const { i18n, t } = useLingui();
 
   const queryClient = useQueryClient();
-  const { data, isPending } = $api.useQuery("get", "/api/users/{id}/atc/status", {
+  const {
+    data,
+    error: loadError,
+    isPending,
+  } = $api.useQuery("get", "/api/users/{id}/atc/status", {
     params: { path: { id: userId } },
   });
   const invalidateQueries = () =>
     promiseWithLog(
-      queryClient.invalidateQueries(
-        $api.queryOptions("get", "/api/users/{id}/atc/status", { params: { path: { id: userId } } }),
-      ),
+      Promise.all([
+        queryClient.invalidateQueries(
+          $api.queryOptions("get", "/api/users/{id}/atc/status", { params: { path: { id: userId } } }),
+        ),
+        queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/controllers")),
+      ]),
     );
 
-  const { mutate, isPending: isMutating } = $api.useMutation("put", "/api/users/{id}/atc/status", {
-    onSuccess: invalidateQueries,
-  });
+  const {
+    mutate,
+    error: mutationError,
+    isPending: isMutating,
+  } = $api.useMutation("put", "/api/users/{id}/atc/status", { onSuccess: invalidateQueries });
 
   const form = useForm({
     defaultValues: {
@@ -71,13 +80,18 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   const onSave: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    wrapPromiseWithLog(form.handleSubmit());
+    promiseWithLog(form.handleSubmit());
   };
 
   return (
     <Modal {...props} title={<Trans>Edit ATC permissions</Trans>} size="lg">
       <form onSubmit={onSave}>
-        <Stack>
+        <div className="flex flex-col gap-4">
+          {(loadError ?? mutationError) && (
+            <Alert color="red" title={(loadError ?? mutationError)?.title}>
+              {(loadError ?? mutationError)?.detail}
+            </Alert>
+          )}
           <form.Field name="is_visiting">
             {(field) => (
               <Checkbox
@@ -94,7 +108,21 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
               <Checkbox
                 label={t`Absent`}
                 checked={field.state.value}
-                onChange={(e) => field.handleChange(e.target.checked)}
+                onChange={(e) => {
+                  const isAbsent = e.target.checked;
+                  field.handleChange(isAbsent);
+
+                  if (isAbsent) {
+                    form.setFieldValue(
+                      "permissions",
+                      form.state.values.permissions.map((permission) =>
+                        permission.state === "student"
+                          ? permission
+                          : { ...permission, state: "under-mentor", solo_expires_at: null },
+                      ),
+                    );
+                  }
+                }}
                 onBlur={field.handleBlur}
                 disabled={isPending || isMutating}
               />
@@ -137,14 +165,14 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
                                 if (!value) {
                                   parentField.removeValue(idx);
                                 } else if (idx >= 0) {
-                                  field.handleChange(value as components["schemas"]["UserControllerState"]);
+                                  field.handleChange(value);
                                   if (value !== "solo") {
                                     form.setFieldValue(`permissions[${idx}].solo_expires_at`, null);
                                   }
                                 } else {
                                   parentField.insertValue(idx, {
                                     position_kind_id: kindId,
-                                    state: value as components["schemas"]["UserControllerState"],
+                                    state: value,
                                     solo_expires_at: null,
                                   });
                                 }
@@ -191,21 +219,29 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
           <Button variant="subtle" type="submit" loading={isPending || isMutating}>
             <Trans>Save</Trans>
           </Button>
-        </Stack>
+        </div>
       </form>
     </Modal>
   );
 };
 
-export const AtcPermissionModalButton: FC<{ userId: string }> = ({ userId }) => {
+export const AtcPermissionModalButton: FC<{ userId: string; iconOnly?: boolean }> = ({ userId, iconOnly = false }) => {
+  const { t } = useLingui();
   const [opened, { open, close }] = useDisclosure(false);
+  const label = t`Edit ATC permissions`;
 
   return (
     <RequireRole role="controller-training-director-assistant">
-      <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
-        <Trans>ATC Permission</Trans>
-      </Button>
-      <AtcPermissionModal userId={userId} opened={opened} onClose={close} />
+      {iconOnly ? (
+        <ActionIcon variant="subtle" size="sm" onClick={open} aria-label={label} title={label}>
+          <TbAirTrafficControl />
+        </ActionIcon>
+      ) : (
+        <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
+          <Trans>ATC Permission</Trans>
+        </Button>
+      )}
+      {opened && <AtcPermissionModal userId={userId} opened={opened} onClose={close} />}
     </RequireRole>
   );
 };

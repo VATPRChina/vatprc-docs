@@ -9,16 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SheetsRouteImport } from './routes/sheets'
 import { Route as FlightsRouteImport } from './routes/flights'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as ControllersRouteImport } from './routes/controllers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
 import { Route as UsersMeRouteImport } from './routes/users/me'
+import { Route as UsersAuditRouteImport } from './routes/users/audit'
+import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
+import { Route as EventsHistoryRouteImport } from './routes/events/history'
+import { Route as EventsAuditRouteImport } from './routes/events/audit'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
@@ -29,6 +35,7 @@ import { Route as ControllersApplicationsIndexRouteImport } from './routes/contr
 import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 import { Route as ControllersTrainingsIdRouteImport } from './routes/controllers/trainings/$id'
 import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
+import { Route as ControllersApplicationsAuditRouteImport } from './routes/controllers/applications/audit'
 import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
 import { Route as DocPilotTs3RouteImport } from './routes/_doc/pilot/ts3'
 import { Route as DocPilotStartToFlyRouteImport } from './routes/_doc/pilot/start-to-fly'
@@ -36,6 +43,7 @@ import { Route as DocPilotPilotSoftwaresRouteImport } from './routes/_doc/pilot/
 import { Route as DocPilotIntroductionToFlyRouteImport } from './routes/_doc/pilot/introduction-to-fly'
 import { Route as DocDivisionStaffRouteImport } from './routes/_doc/division/staff'
 import { Route as DocDivisionPrivacyRouteImport } from './routes/_doc/division/privacy'
+import { Route as DocDivisionPolicyRouteImport } from './routes/_doc/division/policy'
 import { Route as DocDivisionMeetingRouteImport } from './routes/_doc/division/meeting'
 import { Route as DocDivisionIntroductionRouteImport } from './routes/_doc/division/introduction'
 import { Route as DocDivisionApiRouteImport } from './routes/_doc/division/api'
@@ -52,6 +60,11 @@ import { Route as DocAirspaceRvsmRouteImport } from './routes/_doc/airspace/rvsm
 import { Route as DocAirspaceRestrictedRouteImport } from './routes/_doc/airspace/restricted'
 import { Route as DocAirspaceFirRouteImport } from './routes/_doc/airspace/fir'
 
+const SheetsRoute = SheetsRouteImport.update({
+  id: '/sheets',
+  path: '/sheets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlightsRoute = FlightsRouteImport.update({
   id: '/flights',
   path: '/flights',
@@ -60,6 +73,11 @@ const FlightsRoute = FlightsRouteImport.update({
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControllersRoute = ControllersRouteImport.update({
+  id: '/controllers',
+  path: '/controllers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -83,14 +101,24 @@ const EventsIndexRoute = EventsIndexRouteImport.update({
   getParentRoute: () => EventsRoute,
 } as any)
 const ControllersIndexRoute = ControllersIndexRouteImport.update({
-  id: '/controllers/',
-  path: '/controllers/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ControllersRoute,
 } as any)
 const UsersMeRoute = UsersMeRouteImport.update({
   id: '/users/me',
   path: '/users/me',
   getParentRoute: () => rootRouteImport,
+} as any)
+const UsersAuditRoute = UsersAuditRouteImport.update({
+  id: '/users/audit',
+  path: '/users/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SheetsIdRoute = SheetsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SheetsRoute,
 } as any)
 const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
   id: '/navdata/preferred-routes',
@@ -101,6 +129,16 @@ const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
   id: '/$callsign',
   path: '/$callsign',
   getParentRoute: () => FlightsRoute,
+} as any)
+const EventsHistoryRoute = EventsHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsAuditRoute = EventsAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => EventsRoute,
 } as any)
 const EventsIdRoute = EventsIdRouteImport.update({
   id: '/$id',
@@ -129,15 +167,15 @@ const DocLoaRoute = DocLoaRouteImport.update({
 } as any)
 const ControllersTrainingsIndexRoute =
   ControllersTrainingsIndexRouteImport.update({
-    id: '/controllers/trainings/',
-    path: '/controllers/trainings/',
-    getParentRoute: () => rootRouteImport,
+    id: '/trainings/',
+    path: '/trainings/',
+    getParentRoute: () => ControllersRoute,
   } as any)
 const ControllersApplicationsIndexRoute =
   ControllersApplicationsIndexRouteImport.update({
-    id: '/controllers/applications/',
-    path: '/controllers/applications/',
-    getParentRoute: () => rootRouteImport,
+    id: '/applications/',
+    path: '/applications/',
+    getParentRoute: () => ControllersRoute,
   } as any)
 const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
   id: '/docs/utils/image',
@@ -145,21 +183,27 @@ const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControllersTrainingsIdRoute = ControllersTrainingsIdRouteImport.update({
-  id: '/controllers/trainings/$id',
-  path: '/controllers/trainings/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/trainings/$id',
+  path: '/trainings/$id',
+  getParentRoute: () => ControllersRoute,
 } as any)
 const ControllersApplicationsNewRoute =
   ControllersApplicationsNewRouteImport.update({
-    id: '/controllers/applications/new',
-    path: '/controllers/applications/new',
-    getParentRoute: () => rootRouteImport,
+    id: '/applications/new',
+    path: '/applications/new',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersApplicationsAuditRoute =
+  ControllersApplicationsAuditRouteImport.update({
+    id: '/applications/audit',
+    path: '/applications/audit',
+    getParentRoute: () => ControllersRoute,
   } as any)
 const ControllersApplicationsIdRoute =
   ControllersApplicationsIdRouteImport.update({
-    id: '/controllers/applications/$id',
-    path: '/controllers/applications/$id',
-    getParentRoute: () => rootRouteImport,
+    id: '/applications/$id',
+    path: '/applications/$id',
+    getParentRoute: () => ControllersRoute,
   } as any)
 const DocPilotTs3Route = DocPilotTs3RouteImport.update({
   id: '/_doc/pilot/ts3',
@@ -190,6 +234,11 @@ const DocDivisionStaffRoute = DocDivisionStaffRouteImport.update({
 const DocDivisionPrivacyRoute = DocDivisionPrivacyRouteImport.update({
   id: '/_doc/division/privacy',
   path: '/division/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocDivisionPolicyRoute = DocDivisionPolicyRouteImport.update({
+  id: '/_doc/division/policy',
+  path: '/division/policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocDivisionMeetingRoute = DocDivisionMeetingRouteImport.update({
@@ -274,20 +323,26 @@ const DocAirspaceFirRoute = DocAirspaceFirRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/controllers': typeof ControllersRouteWithChildren
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
-  '/controllers': typeof ControllersIndexRoute
+  '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
   '/flights/': typeof FlightsIndexRoute
-  '/users': typeof UsersIndexRoute
+  '/users/': typeof UsersIndexRoute
   '/airspace/fir': typeof DocAirspaceFirRoute
   '/airspace/restricted': typeof DocAirspaceRestrictedRoute
   '/airspace/rvsm': typeof DocAirspaceRvsmRoute
@@ -303,6 +358,7 @@ export interface FileRoutesByFullPath {
   '/division/api': typeof DocDivisionApiRoute
   '/division/introduction': typeof DocDivisionIntroductionRoute
   '/division/meeting': typeof DocDivisionMeetingRoute
+  '/division/policy': typeof DocDivisionPolicyRoute
   '/division/privacy': typeof DocDivisionPrivacyRoute
   '/division/staff': typeof DocDivisionStaffRoute
   '/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -310,21 +366,27 @@ export interface FileRoutesByFullPath {
   '/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
-  '/controllers/applications': typeof ControllersApplicationsIndexRoute
-  '/controllers/trainings': typeof ControllersTrainingsIndexRoute
+  '/controllers/applications/': typeof ControllersApplicationsIndexRoute
+  '/controllers/trainings/': typeof ControllersTrainingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
   '/controllers': typeof ControllersIndexRoute
   '/events': typeof EventsIndexRoute
@@ -345,6 +407,7 @@ export interface FileRoutesByTo {
   '/division/api': typeof DocDivisionApiRoute
   '/division/introduction': typeof DocDivisionIntroductionRoute
   '/division/meeting': typeof DocDivisionMeetingRoute
+  '/division/policy': typeof DocDivisionPolicyRoute
   '/division/privacy': typeof DocDivisionPrivacyRoute
   '/division/staff': typeof DocDivisionStaffRoute
   '/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -352,6 +415,7 @@ export interface FileRoutesByTo {
   '/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
@@ -361,15 +425,21 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/controllers': typeof ControllersRouteWithChildren
   '/events': typeof EventsRouteWithChildren
   '/flights': typeof FlightsRouteWithChildren
+  '/sheets': typeof SheetsRouteWithChildren
   '/_doc/loa': typeof DocLoaRoute
   '/_doc/sop': typeof DocSopRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
+  '/events/audit': typeof EventsAuditRoute
+  '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
+  '/sheets/$id': typeof SheetsIdRoute
+  '/users/audit': typeof UsersAuditRoute
   '/users/me': typeof UsersMeRoute
   '/controllers/': typeof ControllersIndexRoute
   '/events/': typeof EventsIndexRoute
@@ -390,6 +460,7 @@ export interface FileRoutesById {
   '/_doc/division/api': typeof DocDivisionApiRoute
   '/_doc/division/introduction': typeof DocDivisionIntroductionRoute
   '/_doc/division/meeting': typeof DocDivisionMeetingRoute
+  '/_doc/division/policy': typeof DocDivisionPolicyRoute
   '/_doc/division/privacy': typeof DocDivisionPrivacyRoute
   '/_doc/division/staff': typeof DocDivisionStaffRoute
   '/_doc/pilot/introduction-to-fly': typeof DocPilotIntroductionToFlyRoute
@@ -397,6 +468,7 @@ export interface FileRoutesById {
   '/_doc/pilot/start-to-fly': typeof DocPilotStartToFlyRoute
   '/_doc/pilot/ts3': typeof DocPilotTs3Route
   '/controllers/applications/$id': typeof ControllersApplicationsIdRoute
+  '/controllers/applications/audit': typeof ControllersApplicationsAuditRoute
   '/controllers/applications/new': typeof ControllersApplicationsNewRoute
   '/controllers/trainings/$id': typeof ControllersTrainingsIdRoute
   '/docs/utils/image': typeof DocsUtilsImageRoute
@@ -407,20 +479,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/controllers'
     | '/events'
     | '/flights'
+    | '/sheets'
     | '/loa'
     | '/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
-    | '/controllers'
+    | '/controllers/'
     | '/events/'
     | '/flights/'
-    | '/users'
+    | '/users/'
     | '/airspace/fir'
     | '/airspace/restricted'
     | '/airspace/rvsm'
@@ -436,6 +514,7 @@ export interface FileRouteTypes {
     | '/division/api'
     | '/division/introduction'
     | '/division/meeting'
+    | '/division/policy'
     | '/division/privacy'
     | '/division/staff'
     | '/pilot/introduction-to-fly'
@@ -443,21 +522,27 @@ export interface FileRouteTypes {
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
-    | '/controllers/applications'
-    | '/controllers/trainings'
+    | '/controllers/applications/'
+    | '/controllers/trainings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sheets'
     | '/loa'
     | '/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
     | '/controllers'
     | '/events'
@@ -478,6 +563,7 @@ export interface FileRouteTypes {
     | '/division/api'
     | '/division/introduction'
     | '/division/meeting'
+    | '/division/policy'
     | '/division/privacy'
     | '/division/staff'
     | '/pilot/introduction-to-fly'
@@ -485,6 +571,7 @@ export interface FileRouteTypes {
     | '/pilot/start-to-fly'
     | '/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
@@ -493,15 +580,21 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/controllers'
     | '/events'
     | '/flights'
+    | '/sheets'
     | '/_doc/loa'
     | '/_doc/sop'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
+    | '/events/audit'
+    | '/events/history'
     | '/flights/$callsign'
     | '/navdata/preferred-routes'
+    | '/sheets/$id'
+    | '/users/audit'
     | '/users/me'
     | '/controllers/'
     | '/events/'
@@ -522,6 +615,7 @@ export interface FileRouteTypes {
     | '/_doc/division/api'
     | '/_doc/division/introduction'
     | '/_doc/division/meeting'
+    | '/_doc/division/policy'
     | '/_doc/division/privacy'
     | '/_doc/division/staff'
     | '/_doc/pilot/introduction-to-fly'
@@ -529,6 +623,7 @@ export interface FileRouteTypes {
     | '/_doc/pilot/start-to-fly'
     | '/_doc/pilot/ts3'
     | '/controllers/applications/$id'
+    | '/controllers/applications/audit'
     | '/controllers/applications/new'
     | '/controllers/trainings/$id'
     | '/docs/utils/image'
@@ -538,15 +633,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ControllersRoute: typeof ControllersRouteWithChildren
   EventsRoute: typeof EventsRouteWithChildren
   FlightsRoute: typeof FlightsRouteWithChildren
+  SheetsRoute: typeof SheetsRouteWithChildren
   DocLoaRoute: typeof DocLoaRoute
   DocSopRoute: typeof DocSopRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   DocsSplatRoute: typeof DocsSplatRoute
   NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
+  UsersAuditRoute: typeof UsersAuditRoute
   UsersMeRoute: typeof UsersMeRoute
-  ControllersIndexRoute: typeof ControllersIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
   DocAirspaceFirRoute: typeof DocAirspaceFirRoute
   DocAirspaceRestrictedRoute: typeof DocAirspaceRestrictedRoute
@@ -563,22 +660,25 @@ export interface RootRouteChildren {
   DocDivisionApiRoute: typeof DocDivisionApiRoute
   DocDivisionIntroductionRoute: typeof DocDivisionIntroductionRoute
   DocDivisionMeetingRoute: typeof DocDivisionMeetingRoute
+  DocDivisionPolicyRoute: typeof DocDivisionPolicyRoute
   DocDivisionPrivacyRoute: typeof DocDivisionPrivacyRoute
   DocDivisionStaffRoute: typeof DocDivisionStaffRoute
   DocPilotIntroductionToFlyRoute: typeof DocPilotIntroductionToFlyRoute
   DocPilotPilotSoftwaresRoute: typeof DocPilotPilotSoftwaresRoute
   DocPilotStartToFlyRoute: typeof DocPilotStartToFlyRoute
   DocPilotTs3Route: typeof DocPilotTs3Route
-  ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
-  ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
-  ControllersTrainingsIdRoute: typeof ControllersTrainingsIdRoute
   DocsUtilsImageRoute: typeof DocsUtilsImageRoute
-  ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
-  ControllersTrainingsIndexRoute: typeof ControllersTrainingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sheets': {
+      id: '/sheets'
+      path: '/sheets'
+      fullPath: '/sheets'
+      preLoaderRoute: typeof SheetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/flights': {
       id: '/flights'
       path: '/flights'
@@ -593,6 +693,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/controllers': {
+      id: '/controllers'
+      path: '/controllers'
+      fullPath: '/controllers'
+      preLoaderRoute: typeof ControllersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -603,7 +710,7 @@ declare module '@tanstack/react-router' {
     '/users/': {
       id: '/users/'
       path: '/users'
-      fullPath: '/users'
+      fullPath: '/users/'
       preLoaderRoute: typeof UsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -623,10 +730,10 @@ declare module '@tanstack/react-router' {
     }
     '/controllers/': {
       id: '/controllers/'
-      path: '/controllers'
-      fullPath: '/controllers'
+      path: '/'
+      fullPath: '/controllers/'
       preLoaderRoute: typeof ControllersIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/users/me': {
       id: '/users/me'
@@ -634,6 +741,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/users/me'
       preLoaderRoute: typeof UsersMeRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/users/audit': {
+      id: '/users/audit'
+      path: '/users/audit'
+      fullPath: '/users/audit'
+      preLoaderRoute: typeof UsersAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sheets/$id': {
+      id: '/sheets/$id'
+      path: '/$id'
+      fullPath: '/sheets/$id'
+      preLoaderRoute: typeof SheetsIdRouteImport
+      parentRoute: typeof SheetsRoute
     }
     '/navdata/preferred-routes': {
       id: '/navdata/preferred-routes'
@@ -648,6 +769,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/flights/$callsign'
       preLoaderRoute: typeof FlightsCallsignRouteImport
       parentRoute: typeof FlightsRoute
+    }
+    '/events/history': {
+      id: '/events/history'
+      path: '/history'
+      fullPath: '/events/history'
+      preLoaderRoute: typeof EventsHistoryRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/audit': {
+      id: '/events/audit'
+      path: '/audit'
+      fullPath: '/events/audit'
+      preLoaderRoute: typeof EventsAuditRouteImport
+      parentRoute: typeof EventsRoute
     }
     '/events/$id': {
       id: '/events/$id'
@@ -686,17 +821,17 @@ declare module '@tanstack/react-router' {
     }
     '/controllers/trainings/': {
       id: '/controllers/trainings/'
-      path: '/controllers/trainings'
-      fullPath: '/controllers/trainings'
+      path: '/trainings'
+      fullPath: '/controllers/trainings/'
       preLoaderRoute: typeof ControllersTrainingsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/controllers/applications/': {
       id: '/controllers/applications/'
-      path: '/controllers/applications'
-      fullPath: '/controllers/applications'
+      path: '/applications'
+      fullPath: '/controllers/applications/'
       preLoaderRoute: typeof ControllersApplicationsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/docs/utils/image': {
       id: '/docs/utils/image'
@@ -707,24 +842,31 @@ declare module '@tanstack/react-router' {
     }
     '/controllers/trainings/$id': {
       id: '/controllers/trainings/$id'
-      path: '/controllers/trainings/$id'
+      path: '/trainings/$id'
       fullPath: '/controllers/trainings/$id'
       preLoaderRoute: typeof ControllersTrainingsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/controllers/applications/new': {
       id: '/controllers/applications/new'
-      path: '/controllers/applications/new'
+      path: '/applications/new'
       fullPath: '/controllers/applications/new'
       preLoaderRoute: typeof ControllersApplicationsNewRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/applications/audit': {
+      id: '/controllers/applications/audit'
+      path: '/applications/audit'
+      fullPath: '/controllers/applications/audit'
+      preLoaderRoute: typeof ControllersApplicationsAuditRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/controllers/applications/$id': {
       id: '/controllers/applications/$id'
-      path: '/controllers/applications/$id'
+      path: '/applications/$id'
       fullPath: '/controllers/applications/$id'
       preLoaderRoute: typeof ControllersApplicationsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ControllersRoute
     }
     '/_doc/pilot/ts3': {
       id: '/_doc/pilot/ts3'
@@ -766,6 +908,13 @@ declare module '@tanstack/react-router' {
       path: '/division/privacy'
       fullPath: '/division/privacy'
       preLoaderRoute: typeof DocDivisionPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/policy': {
+      id: '/_doc/division/policy'
+      path: '/division/policy'
+      fullPath: '/division/policy'
+      preLoaderRoute: typeof DocDivisionPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_doc/division/meeting': {
@@ -876,13 +1025,41 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ControllersRouteChildren {
+  ControllersIndexRoute: typeof ControllersIndexRoute
+  ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
+  ControllersApplicationsAuditRoute: typeof ControllersApplicationsAuditRoute
+  ControllersApplicationsNewRoute: typeof ControllersApplicationsNewRoute
+  ControllersTrainingsIdRoute: typeof ControllersTrainingsIdRoute
+  ControllersApplicationsIndexRoute: typeof ControllersApplicationsIndexRoute
+  ControllersTrainingsIndexRoute: typeof ControllersTrainingsIndexRoute
+}
+
+const ControllersRouteChildren: ControllersRouteChildren = {
+  ControllersIndexRoute: ControllersIndexRoute,
+  ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
+  ControllersApplicationsAuditRoute: ControllersApplicationsAuditRoute,
+  ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
+  ControllersTrainingsIdRoute: ControllersTrainingsIdRoute,
+  ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,
+  ControllersTrainingsIndexRoute: ControllersTrainingsIndexRoute,
+}
+
+const ControllersRouteWithChildren = ControllersRoute._addFileChildren(
+  ControllersRouteChildren,
+)
+
 interface EventsRouteChildren {
   EventsIdRoute: typeof EventsIdRoute
+  EventsAuditRoute: typeof EventsAuditRoute
+  EventsHistoryRoute: typeof EventsHistoryRoute
   EventsIndexRoute: typeof EventsIndexRoute
 }
 
 const EventsRouteChildren: EventsRouteChildren = {
   EventsIdRoute: EventsIdRoute,
+  EventsAuditRoute: EventsAuditRoute,
+  EventsHistoryRoute: EventsHistoryRoute,
   EventsIndexRoute: EventsIndexRoute,
 }
 
@@ -902,17 +1079,30 @@ const FlightsRouteChildren: FlightsRouteChildren = {
 const FlightsRouteWithChildren =
   FlightsRoute._addFileChildren(FlightsRouteChildren)
 
+interface SheetsRouteChildren {
+  SheetsIdRoute: typeof SheetsIdRoute
+}
+
+const SheetsRouteChildren: SheetsRouteChildren = {
+  SheetsIdRoute: SheetsIdRoute,
+}
+
+const SheetsRouteWithChildren =
+  SheetsRoute._addFileChildren(SheetsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ControllersRoute: ControllersRouteWithChildren,
   EventsRoute: EventsRouteWithChildren,
   FlightsRoute: FlightsRouteWithChildren,
+  SheetsRoute: SheetsRouteWithChildren,
   DocLoaRoute: DocLoaRoute,
   DocSopRoute: DocSopRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   DocsSplatRoute: DocsSplatRoute,
   NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,
+  UsersAuditRoute: UsersAuditRoute,
   UsersMeRoute: UsersMeRoute,
-  ControllersIndexRoute: ControllersIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
   DocAirspaceFirRoute: DocAirspaceFirRoute,
   DocAirspaceRestrictedRoute: DocAirspaceRestrictedRoute,
@@ -931,18 +1121,14 @@ const rootRouteChildren: RootRouteChildren = {
   DocDivisionApiRoute: DocDivisionApiRoute,
   DocDivisionIntroductionRoute: DocDivisionIntroductionRoute,
   DocDivisionMeetingRoute: DocDivisionMeetingRoute,
+  DocDivisionPolicyRoute: DocDivisionPolicyRoute,
   DocDivisionPrivacyRoute: DocDivisionPrivacyRoute,
   DocDivisionStaffRoute: DocDivisionStaffRoute,
   DocPilotIntroductionToFlyRoute: DocPilotIntroductionToFlyRoute,
   DocPilotPilotSoftwaresRoute: DocPilotPilotSoftwaresRoute,
   DocPilotStartToFlyRoute: DocPilotStartToFlyRoute,
   DocPilotTs3Route: DocPilotTs3Route,
-  ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
-  ControllersApplicationsNewRoute: ControllersApplicationsNewRoute,
-  ControllersTrainingsIdRoute: ControllersTrainingsIdRoute,
   DocsUtilsImageRoute: DocsUtilsImageRoute,
-  ControllersApplicationsIndexRoute: ControllersApplicationsIndexRoute,
-  ControllersTrainingsIndexRoute: ControllersTrainingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

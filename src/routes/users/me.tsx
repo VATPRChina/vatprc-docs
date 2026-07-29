@@ -1,10 +1,10 @@
-import { ROLES } from ".";
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "@/components/atc-permission-modal";
 import { $api, usePermissions, useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
+import { USER_ROLES } from "@/lib/user-roles";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
+import { Alert, Badge } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { formatDate } from "date-fns";
 
@@ -15,7 +15,7 @@ interface FieldProps {
 
 const Field = ({ label, value, children, className, ...props }: FieldProps & React.ComponentProps<"div">) => {
   return (
-    <div className={cn("flex flex-col items-start gap-2", className)} {...props}>
+    <div className={cn("flex flex-col items-start gap-1", className)} {...props}>
       <span className="text-dimmed">{label}</span>
       {value && <span>{value}</span>}
       {children}
@@ -33,30 +33,35 @@ function RouteComponent() {
   const user = useUser();
   const roles = usePermissions();
 
-  const { data } = $api.useQuery("get", "/api/users/me/atc/status");
+  const { data, error } = $api.useQuery("get", "/api/users/me/atc/status");
 
   if (!user) return null;
 
   return (
-    <div className="container mx-auto space-y-4">
+    <div className="container mx-auto flex flex-col gap-4">
       <h1 className="text-3xl">
         <Trans>User Info</Trans>
       </h1>
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
 
       <h2 className="text-xl">
         <Trans>Basic Info</Trans>
       </h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-2">
         <Field label={t`CID`} value={user.cid} />
         <Field label={t`Full name`} value={user.full_name} />
         <Field label={t`Created at`} value={formatDate(user.created_at, "yyyy-MM-dd")} />
         <Field label={t`Updated at`} value={formatDate(user.updated_at, "yyyy-MM-dd")} />
       </div>
       <Field label={t`Roles`}>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-1">
           {roles.map((role) => (
             <Badge key={role} variant="dot" size="lg" color={user.direct_roles.includes(role) ? "green" : "blue"}>
-              {localizeWithMap(ROLES, role, i18n)}
+              {localizeWithMap(USER_ROLES, role, i18n)}
             </Badge>
           ))}
         </div>
@@ -65,7 +70,7 @@ function RouteComponent() {
       <h2 className="text-xl">
         <Trans>Controller Info</Trans>
       </h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-2">
         {POSITION_KINDS_MAP.entries()
           .map(([id, name]) => {
             const state = data?.permissions?.find((p) => p.position_kind_id === id)?.state;

@@ -1,11 +1,10 @@
 import { MarkdownDoc } from "./markdown-doc";
 import { buildMarkdownDocSync } from "./markdown-doc-run";
-import { usePermission } from "@/lib/client";
+import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
-import { createIsomorphicFn } from "@tanstack/react-start";
 import React, { ReactNode, useMemo } from "react";
 import { TbCloudX } from "react-icons/tb";
 
@@ -15,10 +14,6 @@ export interface PostMeta {
     url?: string;
   }[];
 }
-
-const COMMUNITY_ENDPOINT = createIsomorphicFn()
-  .server(() => "https://community.vatprc.net")
-  .client(() => (process.env.NODE_ENV === "development" ? "/community" : "https://community.vatprc.net"))();
 
 export const getDiscourseDocumentCode = async (postId: string) => {
   const postPath = `${postId}/1`;
@@ -55,7 +50,7 @@ export const DiscourseDocument: React.FC<{
 
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
-    <ButtonGroup mb="md">
+    <ButtonGroup className="mb-2 gap-1!">
       <Button
         component="a"
         variant="subtle"

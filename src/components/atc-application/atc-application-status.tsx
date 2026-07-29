@@ -6,7 +6,6 @@ import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Select, Skeleton } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { ComponentProps, FC, useState } from "react";
 
@@ -15,6 +14,7 @@ export const APPLICATION_STATUS: Map<components["schemas"]["AtcApplicationStatus
   ["in-waitlist", msg`In Waitlist`],
   ["approved", msg`Accepted`],
   ["rejected", msg`Rejected`],
+  ["aborted", msg`Aborted`],
 ]);
 
 const ATC_APPLICATION_STATUS_ALERTS: Map<components["schemas"]["AtcApplicationStatus"], FC> = new Map([
@@ -54,6 +54,18 @@ const ATC_APPLICATION_STATUS_ALERTS: Map<components["schemas"]["AtcApplicationSt
       </Alert>
     ),
   ],
+  [
+    "aborted",
+    () => (
+      <Alert title={<Trans>Aborted</Trans>} color="red">
+        <Trans>
+          Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details.
+          You may contact the staff if you have any questions, or file an application again, which will be considered in
+          priority.
+        </Trans>
+      </Alert>
+    ),
+  ],
 ]);
 
 interface AtcApplicationStatusAlertProps {
@@ -61,13 +73,19 @@ interface AtcApplicationStatusAlertProps {
 }
 
 export const AtcApplicationStatusAlert: FC<AtcApplicationStatusAlertProps> = ({ applicationId }) => {
-  const { data: application } = $api.useQuery("get", "/api/atc/applications/{id}", {
+  const {
+    data: application,
+    error,
+    isLoading,
+  } = $api.useQuery("get", "/api/atc/applications/{id}", {
     params: { path: { id: applicationId } },
   });
 
-  if (!application) {
+  if (isLoading) {
     return <Skeleton height={64} />;
   }
+  if (error) return <Alert color="red">{error.detail || error.title}</Alert>;
+  if (!application) return null;
 
   return renderWithMap(ATC_APPLICATION_STATUS_ALERTS, application.status);
 };
@@ -81,11 +99,15 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
   const queryClient = useQueryClient();
   const hasPermission = usePermission("controller-training-director-assistant");
 
-  const { data: application, isLoading: isApplicationLoading } = $api.useQuery("get", "/api/atc/applications/{id}", {
+  const {
+    data: application,
+    error: applicationError,
+    isLoading: isApplicationLoading,
+  } = $api.useQuery("get", "/api/atc/applications/{id}", {
     params: { path: { id: applicationId } },
   });
-  const { data: sheet } = $api.useQuery("get", "/api/atc/applications/review-sheet");
-  const { mutateAsync } = $api.useMutation("put", "/api/atc/applications/{id}/review");
+  const { data: sheet, error: sheetError } = $api.useQuery("get", "/api/atc/applications/review-sheet");
+  const { mutateAsync, error: mutationError, isSuccess } = $api.useMutation("put", "/api/atc/applications/{id}/review");
 
   const [status, setStatus] = useState<components["schemas"]["AtcApplicationStatus"] | null>(
     application?.status ?? null,
@@ -94,22 +116,34 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
   const onSubmit: ComponentProps<typeof Sheet>["onSubmit"] = async (answers) => {
     if (!status) return;
     await mutateAsync({ params: { path: { id: applicationId } }, body: { status, review_answers: answers } });
-    notifications.show({
-      title: t`Application review updated`,
-      message: t`The ATC application review has been updated successfully.`,
-      color: "green",
-    });
     await queryClient.invalidateQueries(
       $api.queryOptions("get", "/api/atc/applications/{id}", { params: { path: { id: applicationId ?? "" } } }),
     );
   };
 
-  if (!application) {
+  if (isApplicationLoading) {
     return <Skeleton height={64} />;
   }
+  if (applicationError) return <Alert color="red">{applicationError.detail || applicationError.title}</Alert>;
+  if (!application) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
+      {isSuccess && (
+        <Alert color="green">
+          <Trans>The ATC application review has been updated successfully.</Trans>
+        </Alert>
+      )}
+      {mutationError && (
+        <Alert color="red" title={mutationError.title}>
+          {mutationError.detail}
+        </Alert>
+      )}
+      {sheetError && (
+        <Alert color="red" title={sheetError.title}>
+          {sheetError.detail}
+        </Alert>
+      )}
       <Skeleton visible={isApplicationLoading}>
         <Select
           label={t`Status`}
@@ -117,7 +151,7 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
             .map(([id, name]) => ({ value: id, label: i18n.t(name) }))
             .toArray()}
           value={status ?? application.status}
-          onChange={(value) => setStatus(value as components["schemas"]["AtcApplicationStatus"] | null)}
+          onChange={(value) => setStatus(value)}
           disabled={!hasPermission}
         />
       </Skeleton>

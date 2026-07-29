@@ -36,11 +36,11 @@ const COLOR_MAP = [
 ] satisfies DataDrivenPropertyValueSpecification<ColorSpecification>;
 
 function RouteComponent() {
-  const { data: areas } = $api.useQuery("get", "/api/compat/vplaaf/areas.json");
+  const { data: areas, error, isLoading } = $api.useQuery("get", "/api/compat/vplaaf/areas.json");
   const vplaafGeojson = useMemo(
     () =>
-      (areas as unknown as Vplaaf) &&
-      (areas as unknown as Vplaaf).areas
+      (areas as Vplaaf) &&
+      (areas as Vplaaf).areas
         .map((area) => {
           if (area.vertices.length < 1) {
             if (area.circle)
@@ -86,6 +86,11 @@ function RouteComponent() {
           for the details. These airspaces are designated by vPLAAF and approved by VATPRC.
         </Trans>
       </Alert>
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
       <section className="aspect-video max-h-svh w-full">
         <Map
           initialViewState={INITIAL_VIEW_STATE}
@@ -94,7 +99,7 @@ function RouteComponent() {
           mapStyle={mapStyle as unknown as StyleSpecification}
           maxZoom={10}
         >
-          <LoadingOverlay visible={!areas} />
+          <LoadingOverlay visible={isLoading} />
           {PRC_OUTLINE && (
             <Source id="firs" type="geojson" data={PRC_OUTLINE}>
               <Layer id="firs-line" type="line" source="firs" paint={{ "line-color": "#ffa8a8" }} />

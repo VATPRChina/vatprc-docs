@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
@@ -39,7 +40,7 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
 
   return (
     <UnstyledButton onClick={onSort} className="w-full">
-      <div className="flex flex-row items-center justify-between gap-2">
+      <div className="flex flex-row items-center justify-between gap-1">
         <div>{children}</div>
         <Icon size={16} />
       </div>
@@ -53,11 +54,22 @@ export interface RichTableProps<TData> {
   columns: ColumnDef<TData, any>[];
   isLoading?: boolean;
   initialState?: InitialTableState;
+  /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
+  hideGlobalSearch?: boolean;
+  /** Keep the header row visible while the table body scrolls past it. */
+  stickyHeader?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
 
-export const RichTable = <TData,>({ data, columns, isLoading, initialState }: RichTableProps<TData>) => {
+export const RichTable = <TData,>({
+  data,
+  columns,
+  isLoading,
+  initialState,
+  hideGlobalSearch,
+  stickyHeader,
+}: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
   const table = useReactTable({
@@ -87,15 +99,17 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
   }, 200);
 
   return (
-    <div className="flex flex-col gap-4">
-      <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+    <div className="flex flex-col gap-1">
+      {!hideGlobalSearch && (
+        <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+      )}
       <Table highlightOnHover>
-        <Table.Thead>
+        <Table.Thead className={cn(stickyHeader && "sticky !top-[53px] !z-10 bg-[var(--mantine-color-body)]")}>
           <Table.Tr>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
                 <Table.Th key={`${headerGroup.id}/${header.id}`}>
-                  <div className="flex h-full flex-col gap-0.5">
+                  <div className="flex h-full flex-col gap-1">
                     <SortableHeader
                       key={header.id}
                       sorted={header.column.getIsSorted()}
@@ -141,7 +155,7 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
             </Table.Tr>
           ))}
           {isLoading &&
-            Array(table.getState().pagination.pageSize)
+            Array(Math.min(table.getState().pagination.pageSize, 15))
               .fill(0)
               .map((_, i) => (
                 <Table.Tr key={i}>
@@ -159,18 +173,21 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
           <Trans>No data</Trans>
         </div>
       )}
-      <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
+      <div className="flex items-center justify-between gap-2 self-stretch px-2">
         <Select
-          value={`${table.getState().pagination.pageSize}`}
-          onChange={(value) => table.setPageSize(Number(value))}
-          data={[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` }))}
+          value={table.getState().pagination.pageSize > 100 ? "all" : `${table.getState().pagination.pageSize}`}
+          onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
+          data={[
+            ...[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` })),
+            { value: "all", label: t`All` },
+          ]}
         />
         <div className="flex items-center justify-center text-sm font-medium">
           <Trans>
             Page {currentPage} of {totalPages}
           </Trans>
         </div>
-        <ActionIconGroup>
+        <ActionIconGroup className="gap-1!">
           <ActionIcon
             variant="subtle"
             onClick={() => table.setPageIndex(0)}

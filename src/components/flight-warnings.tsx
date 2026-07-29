@@ -1,40 +1,43 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { ChinaRvsmHelp, CRUISING_LEVEL_TEXT } from "@/routes/flights/$callsign";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";
 
 const messages: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
-  no_rvsm: <Trans>The aircraft does not specify RVSM capability.</Trans>,
-  no_rnav1: <Trans>The aircraft does not specify RNAV1 capability.</Trans>,
-  rnp_ar: (
+  "no-rvsm": <Trans>The aircraft does not specify RVSM capability.</Trans>,
+  "no-rnav1": <Trans>The aircraft does not specify RNAV1 capability.</Trans>,
+  "rnp-ar": (
     <Trans>
       The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when
       possible.
     </Trans>
   ),
-  rnp_ar_without_rf: (
+  "rnp-ar-without-rf": (
     <Trans>
       The aircraft specifies RNP AR capability without RF, which is eligible to be cleared with RNP AR procedures
       without RF when possible.
     </Trans>
   ),
-  no_transponder: <Trans>The aircraft does not specify transponder capability.</Trans>,
-  route_direct_segment: <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>,
-  route_leg_direction: <Trans>The route contains a leg with an invalid direction.</Trans>,
-  airway_require_approval: <Trans>The route contains an airway that requires controller approval.</Trans>,
-  not_preferred_route: <Trans>The flight plan does not match the designated route for this flight.</Trans>,
-  cruising_level_mismatch: <Trans>The cruising level type does not meet the requirement of the route.</Trans>,
-  cruising_level_too_low: <Trans>The cruising level is too low for the route.</Trans>,
-  cruising_level_not_allowed: <Trans>The cruising level is not allowed for the route.</Trans>,
-  route_match_preferred: <Trans>The planned route matches designated route.</Trans>,
+  "no-transponder": <Trans>The aircraft does not specify transponder capability.</Trans>,
+  "route-direct-segment": (
+    <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>
+  ),
+  "route-leg-direction": <Trans>The route contains a leg with an invalid direction.</Trans>,
+  "airway-require-approval": <Trans>The route contains an airway that requires controller approval.</Trans>,
+  "not-preferred-route": <Trans>The flight plan does not match the designated route for this flight.</Trans>,
+  "cruising-level-mismatch": <Trans>The cruising level type does not meet the requirement of the route.</Trans>,
+  "cruising-level-too-low": <Trans>The cruising level is too low for the route.</Trans>,
+  "cruising-level-not-allowed": <Trans>The cruising level is not allowed for the route.</Trans>,
+  "route-match-preferred": <Trans>The planned route matches designated route.</Trans>,
 };
 
 const descriptions: Record<
   components["schemas"]["WarningMessageCode"],
   (flight: components["schemas"]["FlightDto"], warning: components["schemas"]["WarningMessage"]) => React.ReactNode
 > = {
-  no_rvsm: () => (
+  "no-rvsm": () => (
     <>
       <p>
         <Trans>Aircraft without RVSM capability will not be allowed to enter RVSM airspace.</Trans>
@@ -48,7 +51,7 @@ const descriptions: Record<
       </p>
     </>
   ),
-  no_rnav1: () => (
+  "no-rnav1": () => (
     <>
       <p>
         <Trans>
@@ -58,13 +61,13 @@ const descriptions: Record<
       </p>
     </>
   ),
-  rnp_ar: () => null,
-  rnp_ar_without_rf: () => null,
-  no_transponder: () => <Trans>Transponder field is empty.</Trans>,
-  route_direct_segment: () => null,
-  route_leg_direction: () => null,
-  airway_require_approval: () => null,
-  not_preferred_route: ({ raw_route: route }, warning) => {
+  "rnp-ar": () => null,
+  "rnp-ar-without-rf": () => null,
+  "no-transponder": () => <Trans>Transponder field is empty.</Trans>,
+  "route-direct-segment": () => null,
+  "route-leg-direction": () => null,
+  "airway-require-approval": () => null,
+  "not-preferred-route": ({ raw_route: route }, warning) => {
     const routes = warning.parameter?.split(",").filter((r) => !!r.trim());
     return (
       <>
@@ -89,10 +92,53 @@ const descriptions: Record<
       </>
     );
   },
-  cruising_level_mismatch: () => null,
-  cruising_level_too_low: () => null,
-  cruising_level_not_allowed: () => null,
-  route_match_preferred: (_, { parameter: route }) => (
+  "cruising-level-mismatch": (_, warning) => {
+    const level = warning.parameter && CRUISING_LEVEL_TEXT[warning.parameter];
+    return (
+      <>
+        <p>
+          {level ? (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Cruising level should be {level}.
+            </Trans>
+          ) : (
+            <Trans>
+              The cruising level type does not meet the requirement of the route. Please contact ATC for help.
+            </Trans>
+          )}
+        </p>
+        <p>
+          <Trans>Pick a suitable cruising level.</Trans>
+        </p>
+        <ChinaRvsmHelp />
+      </>
+    );
+  },
+  "cruising-level-too-low": (_, { parameter: level }) => (
+    <>
+      <p>
+        <Trans>The cruising level is too low for route. The minimum is {level} feet.</Trans>
+      </p>
+      <p>
+        <Trans>Pick a suitable cruising level.</Trans>
+      </p>
+    </>
+  ),
+  "cruising-level-not-allowed": (_, { parameter: level }) => (
+    <>
+      <p>
+        <Trans>The cruising level is not allowed for the route.</Trans>
+      </p>
+      <p>
+        <Trans>Allowed levels are {level} (in feet).</Trans>
+      </p>
+      <p>
+        <Trans>Pick a suitable cruising level.</Trans>
+      </p>
+      <ChinaRvsmHelp />
+    </>
+  ),
+  "route-match-preferred": (_, { parameter: route }) => (
     <p>
       <Trans>
         Planned route matches a designated route:
@@ -103,15 +149,15 @@ const descriptions: Record<
 };
 
 const ALLOWED_MESSAGE_CODES: components["schemas"]["WarningMessageCode"][] = [
-  "rnp_ar",
-  "rnp_ar_without_rf",
-  "route_match_preferred",
+  "rnp-ar",
+  "rnp-ar-without-rf",
+  "route-match-preferred",
 ];
 const uniqWith = <T,>(arr: T[], fn: (a: T, b: T) => boolean) =>
   arr.filter((element, index) => arr.findIndex((step) => fn(element, step)) === index);
 
 export const FlightWarnings = ({ callsign }: { callsign: string }) => {
-  const { data: flight } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
+  const { data: flight, error: flightError } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
     params: { path: { callsign } },
   });
   const {
@@ -122,8 +168,12 @@ export const FlightWarnings = ({ callsign }: { callsign: string }) => {
 
   if (isLoading) return <Skeleton h={16} />;
   return (
-    <div className="flex w-full flex-col items-stretch gap-2">
-      {error?.message && <Alert color="red">{error?.message}</Alert>}
+    <div className="flex w-full flex-col items-stretch gap-1">
+      {(flightError ?? error) && (
+        <Alert color="red" title={(flightError ?? error)?.title}>
+          {(flightError ?? error)?.detail}
+        </Alert>
+      )}
       {warnings && (warnings.filter((w) => !ALLOWED_MESSAGE_CODES.includes(w.message_code)).length ?? 0) === 0 && (
         <Alert color="green" icon={<TbCheck />}>
           <Trans>Flight looks good. Please confirm with the clearance delivery controller.</Trans>

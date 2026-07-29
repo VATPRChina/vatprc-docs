@@ -2,17 +2,18 @@ import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
+import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorScheme } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, ColorSchemeScript, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import mantineCarouselStyle from "@mantine/carousel/styles.css?url";
+import { Alert, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
 import { Notifications } from "@mantine/notifications";
 import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
-import * as Sentry from "@sentry/tanstackstart-react";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -26,7 +27,7 @@ import { FC, PropsWithChildren, useEffect } from "react";
 
 const theme = createTheme({
   primaryColor: "vatprc",
-  primaryShade: { light: 8, dark: 2 },
+  primaryShade: 8,
   colors: {
     vatprc: [
       "#ffebeb",
@@ -43,8 +44,14 @@ const theme = createTheme({
   },
   fontFamily:
     '"Outfit", ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+  // CJK sans fonts before the generic keyword: otherwise Chinese glyphs in monospace
+  // contexts fall through to the browser's default fixed font (SimSun on Windows).
+  fontFamilyMonospace:
+    'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",monospace',
   defaultRadius: 0,
 });
+
+const colorSchemeManager = cookieColorSchemeManager();
 
 interface ApplicationProps {
   children?: React.ReactNode;
@@ -71,7 +78,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
           <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
         </a>
       )}
-      <div className="pt-4">{children}</div>
+      <div className={route.location.pathname === "/" ? undefined : "pt-4"}>{children}</div>
       <AppFooter />
     </>
   );
@@ -80,30 +87,30 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   const { publicHref } = useLocation();
   const { i18n } = useLingui();
+  const colorScheme = getCookie(COLOR_SCHEME_COOKIE_KEY);
+  const htmlColorScheme = isColorScheme(colorScheme) && colorScheme !== "auto" ? colorScheme : "light";
 
   useEffect(() => {
-    if (publicHref.startsWith("/en") || publicHref.startsWith("/zh-cn")) {
-      return;
-    }
-
-    if (publicHref.includes("/auth/callback")) {
-      return;
-    }
-
-    const locale = localStorage.getItem("vatprc-homepage-locale") as "en" | "zh-cn" | null;
-    if (locale) {
-      setTimeout(() => window.location.replace(getLocalPathname(locale)));
+    try {
+      window.localStorage.removeItem("vatprc-homepage-locale");
+      window.localStorage.removeItem("mantine-color-scheme-value");
+    } catch {
+      // Ignore storage access failures in restricted browser contexts.
     }
   });
 
   return (
-    <html lang={i18n.locale} className={cn(publicHref !== "/division/api" && "scroll-pt-16")} {...mantineHtmlProps}>
+    <html
+      {...mantineHtmlProps}
+      lang={i18n.locale}
+      className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
+      data-mantine-color-scheme={htmlColorScheme}
+    >
       <head>
         <HeadContent />
-        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body className="px-1 md:px-0">
-        <MantineProvider theme={theme} defaultColorScheme="auto">
+        <MantineProvider theme={theme} defaultColorScheme="auto" colorSchemeManager={colorSchemeManager}>
           <Application>{children}</Application>
           <Notifications position="top-center" />
         </MantineProvider>
@@ -117,12 +124,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootLayout,
   errorComponent: ({ error }) => {
     useEffect(() => {
-      Sentry.captureException(error);
+      void import("@sentry/tanstackstart-react").then(({ captureException }) => captureException(error));
     }, [error]);
 
     return (
       <AppHtml>
-        <div className="mx-auto max-w-prose">
+        <div className="container mx-auto">
           <Alert color="red" title={<Trans>Error</Trans>}>
             <p className="font-medium">{error.message}</p>
             <p className="text-wrap">
@@ -146,6 +153,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "stylesheet", href: mantineDateStyle },
+        { rel: "stylesheet", href: mantineCarouselStyle },
         { rel: "stylesheet", href: mantineDropzoneStyle },
         { rel: "stylesheet", href: mantineNotificationStyle },
         { rel: "stylesheet", href: mapLibreCss },

@@ -38,7 +38,7 @@ const columns = [
   columnHelper.accessor("start_at", {
     header: () => <Trans>Start at</Trans>,
     cell: ({ getValue, row }) =>
-      isSameMinute(row.original.start_at, getValue()) ? (
+      isSameMinute(row.original.event.start_at, getValue()) ? (
         <Trans>Event start</Trans>
       ) : (
         <DateTime noDistance noDate>
@@ -49,7 +49,7 @@ const columns = [
   columnHelper.accessor("end_at", {
     header: () => <Trans>End at</Trans>,
     cell: ({ getValue, row }) =>
-      isSameMinute(row.original.end_at, getValue()) ? (
+      isSameMinute(row.original.event.end_at, getValue()) ? (
         <Trans>Event end</Trans>
       ) : (
         <DateTime noDistance noDate>
@@ -106,31 +106,33 @@ const columns = [
 
       const user = useUser();
 
-      const { data } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-        params: { path: { eventId: row.original.event.id } },
+      const { data } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+        params: { path: { event_id: row.original.event.id } },
       });
       const slot = data?.find((s) => s.id === row.original.id);
       const isNotInBookingPeriod =
         !!slot?.event.start_atc_booking_at && !isAfter(Date.now(), slot.event.start_atc_booking_at);
       const onMutateSuccess = wrapPromiseWithLog(() =>
         queryClient.invalidateQueries(
-          $api.queryOptions("get", "/api/events/{eventId}/controllers", {
-            params: { path: { eventId: row.original.event.id } },
+          $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+            params: { path: { event_id: row.original.event.id } },
           }),
         ),
       );
-      const { mutate: book, isPending: isBookPending } = $api.useMutation(
-        "put",
-        "/api/events/{eventId}/controllers/{positionId}/booking",
-        {
-          onSuccess: onMutateSuccess,
-        },
-      );
-      const { mutate: release, isPending: isReleasePending } = $api.useMutation(
-        "delete",
-        "/api/events/{eventId}/controllers/{positionId}/booking",
-        { onSuccess: onMutateSuccess },
-      );
+      const {
+        mutate: book,
+        error: bookError,
+        isPending: isBookPending,
+      } = $api.useMutation("put", "/api/events/{event_id}/controllers/{position_id}/booking", {
+        onSuccess: onMutateSuccess,
+      });
+      const {
+        mutate: release,
+        error: releaseError,
+        isPending: isReleasePending,
+      } = $api.useMutation("delete", "/api/events/{event_id}/controllers/{position_id}/booking", {
+        onSuccess: onMutateSuccess,
+      });
 
       const hasPermission = useControllerPermission(
         row.original.position_kind_id,
@@ -138,14 +140,19 @@ const columns = [
       );
 
       const onBook = () => {
-        book({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } }, body: {} });
+        book({ params: { path: { event_id: row.original.event.id, position_id: row.original.id } }, body: {} });
       };
       const onRelease = () => {
-        release({ params: { path: { eventId: row.original.event.id, positionId: row.original.id } } });
+        release({ params: { path: { event_id: row.original.event.id, position_id: row.original.id } } });
       };
 
       return (
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1">
+          {(bookError ?? releaseError) && (
+            <Alert color="red" title={(bookError ?? releaseError)?.title}>
+              {(bookError ?? releaseError)?.detail}
+            </Alert>
+          )}
           <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
@@ -186,8 +193,8 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
     data: slots,
     isLoading,
     error,
-  } = $api.useQuery("get", "/api/events/{eventId}/controllers", {
-    params: { path: { eventId } },
+  } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
+    params: { path: { event_id: eventId } },
   });
 
   return (
@@ -197,11 +204,11 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
       </h2>
       {error && (
         <Alert color="red" icon={<TbExclamationCircle />} title={t`Error`}>
-          {error.message}
+          {error.title}
         </Alert>
       )}
       <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-1">
           <CreateAtcSlot eventId={eventId} />
         </div>
       </RequireRole>

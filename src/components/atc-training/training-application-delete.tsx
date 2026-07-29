@@ -1,6 +1,7 @@
 import { ConfirmButton } from "../ui/confirm-button";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
+import { Alert } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -13,23 +14,29 @@ export const TrainingApplicationDeleteModal: FC<TrainingApplicationDeleteModalPr
   const queryClient = useQueryClient();
 
   const onSuccess = async () => {
-    close();
     await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/trainings/applications"));
   };
-  const { mutate, isPending } = $api.useMutation("delete", "/api/atc/trainings/applications/{id}", {
+  const { mutate, error, isPending } = $api.useMutation("delete", "/api/atc/trainings/applications/{id}", {
     onSuccess,
   });
 
   return (
-    <ConfirmButton
-      variant="subtle"
-      size="compact-sm"
-      actionDescription={<Trans>Are you sure to withdraw this training application?</Trans>}
-      onClick={() => mutate({ params: { path: { id } } })}
-      loading={isPending}
-      disabled={disabled}
-    >
-      <Trans>Withdraw</Trans>
-    </ConfirmButton>
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <ConfirmButton
+        variant="subtle"
+        size="compact-sm"
+        actionDescription={<Trans>Are you sure to withdraw this training application?</Trans>}
+        onClick={() => mutate({ params: { path: { id } } })}
+        loading={isPending}
+        disabled={disabled}
+      >
+        <Trans>Withdraw</Trans>
+      </ConfirmButton>
+    </div>
   );
 };
