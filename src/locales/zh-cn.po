@@ -231,7 +231,7 @@ msgstr "区域"
 
 #: src/components/preferred-route-create.tsx:124
 #: src/routes/flights/$callsign.tsx:424
-#: src/routes/flights/index.tsx:100
+#: src/routes/flights/index.tsx:107
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
 msgstr "到达机场"
@@ -364,7 +364,7 @@ msgstr "C3"
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
 #: src/routes/flights/$callsign.tsx:390
-#: src/routes/flights/index.tsx:98
+#: src/routes/flights/index.tsx:105
 msgid "Callsign"
 msgstr "呼号"
 
@@ -461,7 +461,7 @@ msgstr "社区会员部主管"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-#: src/routes/flights/index.tsx:94
+#: src/routes/flights/index.tsx:47
 msgid "Connect to the VATSIM network to see your flight here."
 msgstr "连接到 VATSIM 网络后，你的航班将显示在这里。"
 
@@ -606,7 +606,7 @@ msgstr "放行"
 
 #: src/components/preferred-route-create.tsx:113
 #: src/routes/flights/$callsign.tsx:408
-#: src/routes/flights/index.tsx:99
+#: src/routes/flights/index.tsx:106
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
 msgstr "出发机场"
@@ -788,6 +788,10 @@ msgstr "活动"
 msgid "Events this week"
 msgstr "本周活动"
 
+#: src/lib/client/client.tsx:29
+msgid "Failed to fetch contents due to {detail}."
+msgstr "暂时无法获取页面内容，由于 {detail}。"
+
 #: src/components/event/slot-import.tsx:75
 #: src/components/event/slot-import.tsx:94
 #: src/components/event/slot-import.tsx:117
@@ -882,7 +886,7 @@ msgid "Flight plan checker"
 msgstr "飞行计划检查器"
 
 #: src/routes/flights/index.tsx:14
-#: src/routes/flights/index.tsx:85
+#: src/routes/flights/index.tsx:97
 msgid "Flight Plan Checker"
 msgstr "飞行计划检查器"
 
@@ -1161,6 +1165,10 @@ msgstr "我的活动席位"
 #: src/routes/controllers.tsx:94
 msgid "My Trainings"
 msgstr "我的训练"
+
+#: src/lib/client/client.tsx:28
+msgid "Network Error"
+msgstr "网络故障"
 
 #: src/routes/controllers/applications/new.tsx:26
 msgid "New ATC Application"
@@ -2147,7 +2155,7 @@ msgstr "您的申请已提交，正在等待职员审核。"
 msgid "Your ATC application has been updated successfully."
 msgstr "已经成功修改管制员申请。"
 
-#: src/routes/flights/index.tsx:93
+#: src/routes/flights/index.tsx:44
 msgid "Your flight is not online"
 msgstr "你的航班当前不在线"
 

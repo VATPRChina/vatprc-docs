@@ -1,6 +1,7 @@
 import { components, paths } from "../api";
 import { authMiddleware } from "./auth";
 import { assumedRolesAtom, createRoleAssumptionMiddleware } from "./role-assumption";
+import { Trans } from "@lingui/react/macro";
 import { notifications } from "@mantine/notifications";
 import { getDefaultStore } from "jotai";
 import createClient, { Middleware } from "openapi-fetch";
@@ -22,9 +23,10 @@ const throwMiddleware: Middleware = {
     if (status !== 0 && status < 500) return;
 
     if (body.type === "TypeError" && body.detail?.includes("Failed to fetch")) {
+      const detail = body.detail ?? "unknown network error";
       notifications.show({
-        title: "Network Error",
-        message: `Failed to fetch contents due to ${body.detail ?? "unknown network error"}.`,
+        title: <Trans>Network Error</Trans>,
+        message: <Trans>Failed to fetch contents due to {{ detail }}.</Trans>,
         color: "red",
       });
       return;

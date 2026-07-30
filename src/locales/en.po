@@ -231,7 +231,7 @@ msgstr "Area"
 
 #: src/components/preferred-route-create.tsx:124
 #: src/routes/flights/$callsign.tsx:424
-#: src/routes/flights/index.tsx:100
+#: src/routes/flights/index.tsx:107
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
 msgstr "Arrival"
@@ -364,7 +364,7 @@ msgstr "C3"
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
 #: src/routes/flights/$callsign.tsx:390
-#: src/routes/flights/index.tsx:98
+#: src/routes/flights/index.tsx:105
 msgid "Callsign"
 msgstr "Callsign"
 
@@ -461,7 +461,7 @@ msgstr "Community & Membership Director"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-#: src/routes/flights/index.tsx:94
+#: src/routes/flights/index.tsx:47
 msgid "Connect to the VATSIM network to see your flight here."
 msgstr "Connect to the VATSIM network to see your flight here."
 
@@ -606,7 +606,7 @@ msgstr "Delivery"
 
 #: src/components/preferred-route-create.tsx:113
 #: src/routes/flights/$callsign.tsx:408
-#: src/routes/flights/index.tsx:99
+#: src/routes/flights/index.tsx:106
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
 msgstr "Departure"
@@ -788,6 +788,10 @@ msgstr "Events"
 msgid "Events this week"
 msgstr "Events this week"
 
+#: src/lib/client/client.tsx:29
+msgid "Failed to fetch contents due to {detail}."
+msgstr "Failed to fetch contents due to {detail}."
+
 #: src/components/event/slot-import.tsx:75
 #: src/components/event/slot-import.tsx:94
 #: src/components/event/slot-import.tsx:117
@@ -882,7 +886,7 @@ msgid "Flight plan checker"
 msgstr "Flight plan checker"
 
 #: src/routes/flights/index.tsx:14
-#: src/routes/flights/index.tsx:85
+#: src/routes/flights/index.tsx:97
 msgid "Flight Plan Checker"
 msgstr "Flight Plan Checker"
 
@@ -1161,6 +1165,10 @@ msgstr "My Event Positions"
 #: src/routes/controllers.tsx:94
 msgid "My Trainings"
 msgstr "My Trainings"
+
+#: src/lib/client/client.tsx:28
+msgid "Network Error"
+msgstr "Network Error"
 
 #: src/routes/controllers/applications/new.tsx:26
 msgid "New ATC Application"
@@ -2147,7 +2155,7 @@ msgstr "Your application has been submitted and is pending review by the staff."
 msgid "Your ATC application has been updated successfully."
 msgstr "Your ATC application has been updated successfully."
 
-#: src/routes/flights/index.tsx:93
+#: src/routes/flights/index.tsx:44
 msgid "Your flight is not online"
 msgstr "Your flight is not online"
 
