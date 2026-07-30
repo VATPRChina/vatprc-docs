@@ -15,39 +15,47 @@ const throwMiddleware: Middleware = {
       .json()
       .catch(() => ({}))) as Partial<components["schemas"]["ProblemDetails"]>;
     const status = response.status;
-    if (
-      typeof window !== "undefined" &&
-      body.type !== "urn:vatprc-uniapi-error:unauthorized" &&
-      body.type !== "urn:vatprc-uniapi-error:invalid-token" &&
-      status >= 500
-    ) {
-      const error = new Error(body.detail ?? response.statusText, {
-        cause: {
-          status,
-          title: body.title,
-          type: body.type,
-          url: response.url,
-        },
-      });
-      error.name = body.title ?? "ServerError";
-      console.error(error);
-      void import("@sentry/tanstackstart-react")
-        .then(({ captureException }) =>
-          captureException(error, {
-            extra: {
-              problem: body,
-              status,
-              url: response.url,
-            },
-          }),
-        )
-        .catch((sentryError) => console.error("Failed to report API error to Sentry", sentryError));
+
+    if (typeof window === "undefined") return;
+    if (body.type === "urn:vatprc-uniapi-error:unauthorized") return;
+    if (body.type === "urn:vatprc-uniapi-error:invalid-token") return;
+    if (status !== 0 && status < 500) return;
+
+    if (body.type === "TypeError" && body.detail?.includes("Failed to fetch")) {
       notifications.show({
-        title: body.title ?? response.statusText,
-        message: body.detail,
+        title: "Network Error",
+        message: `Failed to fetch contents due to ${body.detail ?? "unknown network error"}.`,
         color: "red",
       });
+      return;
     }
+
+    const error = new Error(body.detail ?? response.statusText, {
+      cause: {
+        status,
+        title: body.title,
+        type: body.type,
+        url: response.url,
+      },
+    });
+    error.name = body.title ?? "ServerError";
+    console.error("Unexpected error", error);
+    void import("@sentry/tanstackstart-react")
+      .then(({ captureException }) =>
+        captureException(error, {
+          extra: {
+            problem: body,
+            status,
+            url: response.url,
+          },
+        }),
+      )
+      .catch((sentryError) => console.error("Failed to report API error to Sentry", sentryError));
+    notifications.show({
+      title: body.title ?? response.statusText,
+      message: body.detail,
+      color: "red",
+    });
   },
 
   onError({ error }) {
@@ -58,7 +66,7 @@ const throwMiddleware: Middleware = {
         {
           type: error.name,
           title: error.name,
-          status: 0,
+          status: 500,
           detail: error.message,
         },
         { status: 500 },
