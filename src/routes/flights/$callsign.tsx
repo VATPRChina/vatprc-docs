@@ -327,6 +327,25 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
 
 const LEG_IDENTIFIER_DIRECT = "DCT";
 
+interface DisplayableFlightFix {
+  identifier?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+}
+
+const formatCoordinate = (coordinate: number, positiveHemisphere: string, negativeHemisphere: string) =>
+  `${Math.abs(coordinate).toFixed(4)}°${coordinate < 0 ? negativeHemisphere : positiveHemisphere}`;
+
+export const formatFlightFix = ({ identifier, latitude, longitude }: DisplayableFlightFix) => {
+  const normalizedIdentifier = identifier?.trim();
+  if (normalizedIdentifier) return normalizedIdentifier;
+
+  if (typeof latitude !== "number" || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return "—";
+  if (typeof longitude !== "number" || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) return "—";
+
+  return `${formatCoordinate(latitude, "N", "S")} ${formatCoordinate(longitude, "E", "W")}`;
+};
+
 const CruisingLevelMeters = ({ feet }: { feet: number }) => {
   const { t } = useLingui();
   const { isChinaRvsm } = getCruisingLevelInMeters(feet);
@@ -455,10 +474,10 @@ function RouteComponent() {
             <Trans>Flight Route</Trans>
           </h2>
           <div className="flex flex-wrap items-center gap-1">
-            <span className="text-lg">{route?.[0].from.identifier}</span>
+            <span className="text-lg">{route?.[0] && formatFlightFix(route[0].from)}</span>
             {route &&
               route.map((r, i) => (
-                <Fragment key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`}>
+                <Fragment key={`${formatFlightFix(r.from)}-${r.leg_identifier}-${formatFlightFix(r.to)}-${i}`}>
                   {r.leg_identifier !== LEG_IDENTIFIER_DIRECT && (
                     <span className="font-light text-slate-700 dark:text-slate-300">{r.leg_identifier}</span>
                   )}
@@ -468,7 +487,7 @@ function RouteComponent() {
                     </span>
                   )}
                   <Warning flight={flight} warnings={warnings} field="route" field_index={i} popoverText />
-                  <span className="text-lg">{r.to.identifier}</span>
+                  <span className="text-lg">{formatFlightFix(r.to)}</span>
                 </Fragment>
               ))}
           </div>
