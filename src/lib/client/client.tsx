@@ -22,7 +22,10 @@ const throwMiddleware: Middleware = {
     if (body.type === "urn:vatprc-uniapi-error:invalid-token") return;
     if (status !== 0 && status < 500) return;
 
-    if (body.type === "TypeError" && body.detail?.includes("Failed to fetch")) {
+    if (
+      body.type === "TypeError" &&
+      (body.detail?.includes("Failed to fetch") || body.detail?.includes("Load failed"))
+    ) {
       const detail = body.detail ?? "unknown network error";
       notifications.show({
         title: <Trans>Network Error</Trans>,
