@@ -278,8 +278,8 @@
 
 #### 席位开设规则
 
-1. 机坪管制席位不在线时，地面席位需代管对应机坪管制范围。西机坪、东一机坪管制区由 ZGGG_GND 代管；东二、东三机坪管制区，联邦快递机坪，新科宇航机坪由 ZGGG_E_GND 代管。
-2. ZGGG_GND 在线时可开设 ZGGG_E_GND、ZGGG_W_GND，ZGGG_E_GND、ZGGG_W_GND 上线前应当与 ZGGG_GND 协调。
+1. ZGGG_GND 在线时可开设 ZGGG_E_GND、ZGGG_W_GND，ZGGG_E_GND、ZGGG_W_GND 上线前应当与 ZGGG_GND 协调。
+2. 机坪管制席位不在线时，地面席位需代管对应机坪管制范围。西机坪、东一机坪管制区由 ZGGG_GND 代管；东二、东三机坪管制区，联邦快递机坪，新科宇航机坪由 ZGGG_E_GND 代管。
 3. 多个地面管制席位同时在线时，若出现放行管制席没有相应席位在线，一律由 ZGGG_GND 提供相应管制服务。
 
 #### 各地面席位管制范围
@@ -614,20 +614,22 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 
 | 离场点 |  主用跑道  | 主用离场程序 |
 | :----: | :--------: | :----------: |
-| MIKIP  | 01R,02L,03 |   MIKIP-9    |
-| AGVIL  |  01R,02L   |   AGVIL-9    |
-| VIBOS  |  01R,02L   |   VIBOS-9    |
-| SAREX  |  01R,02L   |   SAREX-9    |
-| BOVMA  |   02L,03   |   BOVMA-9    |
-|  LMN   |   02L,03   |    LMN-9     |
+| MIKIP  | 01R,02L,03 |   MIKIP-6    |
+| AGVIL  |  01R,02L   |   AGVIL-6    |
+| VIBOS  |  01R,02L   |   VIBOS-6    |
+| SAREX  |  01R,02L   |   SAREX-6    |
+| BOVMA  |   02L   |   BOVMA-6    |
+| BOVMA  |   03   |   BOVMA-4    |
+|  LMN   |   02L   |    LMN-6     |
+|  LMN   |   03   |    LMN-4     |
 
 | 离场点 | 备选跑道 | 备选离场程序 |
 | :----: | :------: | :----------: |
-| AGVIL  |    03    |   AGVIL-9    |
-| VIBOS  |    03    |   VIBOS-9    |
-| SAREX  |    03    |   SAREX-9    |
-| BOVMA  |   01R    |   BOVMA-9    |
-|  LMN   |   01R    |    LMN-9     |
+| AGVIL  |    03    |   AGVIL-6    |
+| VIBOS  |    03    |   VIBOS-6    |
+| SAREX  |    03    |   SAREX-6    |
+| BOVMA  |   01R    |   BOVMA-6    |
+|  LMN   |   01R    |    LMN-6     |
 
 | 雷达引导 |     |          |     |
 | :------- | :-: | :------: | :-: |
@@ -641,28 +643,26 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 
 | 离场点 | 主用跑道 | 离场程序 |
 | :----: | :------: | :------: |
-| MIKIP  |   19L    | MIKIP-7  |
-| MIKIP  |   20R    | MIKIP-9  |
-| AGVIL  |   19L    | AGVIL-7  |
-| AGVIL  |   20R    | AGVIL-9  |
-| VIBOS  | 19L,20R  | VIBOS-9  |
-| VIBOS  |    21    | VIBOS-8  |
-| SAREX  |   20R    | SAREX-9  |
-| SAREX  |    21    | SAREX-8  |
-| BOVMA  |   20R    | BOVMA-9  |
-| BOVMA  |    21    | BOVMA-8  |
-|  LMN   |   20R    |  LMN-9   |
-|  LMN   |    21    |  LMN-8   |
+| MIKIP  |   19L    | MIKIP-4  |
+| MIKIP  |   20R    | MIKIP-6  |
+| AGVIL  |   19L    | AGVIL-4  |
+| AGVIL  |   20R    | AGVIL-6  |
+| VIBOS  | 19L,20R  | VIBOS-6  |
+| VIBOS  |    21    | VIBOS-4  |
+| SAREX  |   20R    | SAREX-6  |
+| SAREX  |    21    | SAREX-4  |
+| BOVMA  |   20R    | BOVMA-6  |
+| BOVMA  |    21    | BOVMA-4  |
+|  LMN   |   20R    |  LMN-6   |
+|  LMN   |    21    |  LMN-4   |
 
 | 离场点 | 备选跑道 | 备选程序 |
 | :----: | :------: | :------: |
-| MIKIP  |    21    | MIKIP-7  |
-| MIKIP  |   20R    | MIKIP-8  |
-| AGVIL  |    21    | AGVIL-7  |
-| AGVIL  |   20R    | AGVIL-8  |
-| SAREX  |   19L    | SAREX-9  |
-| BOVMA  |   19L    | BOVMA-9  |
-|  LMN   |   19L    |  LMN-9   |
+| MIKIP  |    20R,21    | MIKIP-4  |
+| AGVIL  |    20R,21    | AGVIL-4  |
+| SAREX  |   19L    | SAREX-6  |
+| BOVMA  |   19L    | BOVMA-6  |
+|  LMN   |   19L    |  LMN-6   |
 
 | 雷达引导 |     |          |     |
 | :------- | :-: | :------: | :-: |
