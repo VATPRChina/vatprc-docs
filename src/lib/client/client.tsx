@@ -7,6 +7,26 @@ import { getDefaultStore } from "jotai";
 import createClient, { Middleware } from "openapi-fetch";
 import createQueryClient from "openapi-react-query";
 
+const NETWORK_ERROR_MESSAGES = [
+  "failed to fetch",
+  "fetch failed",
+  "load failed",
+  "networkerror when attempting to fetch resource",
+  "network request failed",
+  "the internet connection appears to be offline",
+  "the network connection was lost",
+  "could not connect to the server",
+  "a server with the specified hostname could not be found",
+];
+
+function isNetworkError(name: string | undefined, message: string | undefined) {
+  if (name === "NetworkError") return true;
+  if (name !== "TypeError") return false;
+
+  const normalizedMessage = message?.toLowerCase();
+  return normalizedMessage !== undefined && NETWORK_ERROR_MESSAGES.some((value) => normalizedMessage.includes(value));
+}
+
 const throwMiddleware: Middleware = {
   async onResponse({ response }) {
     if (response.ok) return;
@@ -22,10 +42,7 @@ const throwMiddleware: Middleware = {
     if (body.type === "urn:vatprc-uniapi-error:invalid-token") return;
     if (status !== 0 && status < 500) return;
 
-    if (
-      body.type === "TypeError" &&
-      (body.detail?.includes("Failed to fetch") || body.detail?.includes("Load failed"))
-    ) {
+    if (isNetworkError(body.type, body.detail)) {
       const detail = body.detail ?? "unknown network error";
       notifications.show({
         title: <Trans>Network Error</Trans>,
