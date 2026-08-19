@@ -1,6 +1,6 @@
 import { RequireRole } from "../require-role";
 import { DateTimeInput } from "../ui/datetime-input";
-import { UserInput } from "../user-input";
+import { ControllerInput } from "../user-input";
 import { components } from "@/lib/api";
 import { $api, usePermission, useUser } from "@/lib/client";
 import { promiseWithLog } from "@/lib/utils";
@@ -103,7 +103,7 @@ export const TrainingSaveModal: FC<{ id?: string; disabled?: boolean }> = ({ id,
             </form.Field>
             <form.Field name="trainer_id">
               {(field) => (
-                <UserInput
+                <ControllerInput
                   label={<Trans>Trainer</Trans>}
                   onChange={(v) => v && field.handleChange(v)}
                   value={field.state.value}
@@ -115,7 +115,7 @@ export const TrainingSaveModal: FC<{ id?: string; disabled?: boolean }> = ({ id,
             </form.Field>
             <form.Field name="trainee_id">
               {(field) => (
-                <UserInput
+                <ControllerInput
                   label={<Trans>Trainee</Trans>}
                   onChange={(v) => v && field.handleChange(v)}
                   value={field.state.value}
