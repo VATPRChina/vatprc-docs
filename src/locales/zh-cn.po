@@ -520,6 +520,10 @@ msgctxt "resource group"
 msgid "Controlling"
 msgstr "管制"
 
+#: src/components/controller-center/quarterly-controlling-time.tsx:21
+msgid "Controlling History"
+msgstr "管制上线记录"
+
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
 #: src/components/event/atc-slot-create.tsx:177
@@ -788,7 +792,7 @@ msgstr "活动"
 msgid "Events this week"
 msgstr "本周活动"
 
-#: src/lib/client/client.tsx:29
+#: src/lib/client/client.tsx:49
 msgid "Failed to fetch contents due to {detail}."
 msgstr "暂时无法获取页面内容，由于 {detail}。"
 
@@ -809,6 +813,10 @@ msgstr "审计日志加载失败"
 #: src/components/homepage/controllers-board.tsx:117
 msgid "Failed to load controller information."
 msgstr "无法加载管制员信息。"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:26
+msgid "Failed to load controlling time."
+msgstr "无法加载管制上线时间。"
 
 #: src/components/doc/discourse-doc.tsx:122
 #: src/routes/docs/$.tsx:38
@@ -945,6 +953,10 @@ msgstr "图形设计师"
 #: src/components/atc-permission-modal.tsx:24
 msgid "Ground"
 msgstr "地面"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:40
+msgid "hours"
+msgstr "小时"
 
 #: src/components/homepage/hero.tsx:58
 msgid "How to fly"
@@ -1166,7 +1178,7 @@ msgstr "我的活动席位"
 msgid "My Trainings"
 msgstr "我的训练"
 
-#: src/lib/client/client.tsx:28
+#: src/lib/client/client.tsx:48
 msgid "Network Error"
 msgstr "网络故障"
 
@@ -2051,6 +2063,10 @@ msgstr "生效至"
 #: src/routes/flights/$callsign.tsx:451
 msgid "Validation Result"
 msgstr "检查结果"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:34
+msgid "VATPRC positions in the current calendar quarter"
+msgstr "当前自然季度内的 VATPRC 席位"
 
 #: src/components/controller-center/become-controller.tsx:18
 msgid "VATPRC provides a complete training program from Delivery to Center. Submit an application to start your controller journey."

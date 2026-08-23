@@ -3,6 +3,7 @@ import { TrainingApplicationCreateModal } from "@/components/atc-training/traini
 import { BecomeController } from "@/components/controller-center/become-controller";
 import { useCenterRoles } from "@/components/controller-center/center-context";
 import { MyEventBookings } from "@/components/controller-center/my-event-bookings";
+import { QuarterlyControllingTime } from "@/components/controller-center/quarterly-controlling-time";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
 import { $api } from "@/lib/client";
 import { Alert } from "@mantine/core";
@@ -36,6 +37,7 @@ function RouteComponent() {
           <TrainingBrowser />
         )}
         <MyEventBookings />
+        <QuarterlyControllingTime />
       </>
     );
   }

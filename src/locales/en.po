@@ -520,6 +520,10 @@ msgctxt "resource group"
 msgid "Controlling"
 msgstr "Controlling"
 
+#: src/components/controller-center/quarterly-controlling-time.tsx:21
+msgid "Controlling History"
+msgstr "Controlling History"
+
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
 #: src/components/event/atc-slot-create.tsx:177
@@ -788,7 +792,7 @@ msgstr "Events"
 msgid "Events this week"
 msgstr "Events this week"
 
-#: src/lib/client/client.tsx:29
+#: src/lib/client/client.tsx:49
 msgid "Failed to fetch contents due to {detail}."
 msgstr "Failed to fetch contents due to {detail}."
 
@@ -809,6 +813,10 @@ msgstr "Failed to load audit logs"
 #: src/components/homepage/controllers-board.tsx:117
 msgid "Failed to load controller information."
 msgstr "Failed to load controller information."
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:26
+msgid "Failed to load controlling time."
+msgstr "Failed to load controlling time."
 
 #: src/components/doc/discourse-doc.tsx:122
 #: src/routes/docs/$.tsx:38
@@ -945,6 +953,10 @@ msgstr "Graphics Designer"
 #: src/components/atc-permission-modal.tsx:24
 msgid "Ground"
 msgstr "Ground"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:40
+msgid "hours"
+msgstr "hours"
 
 #: src/components/homepage/hero.tsx:58
 msgid "How to fly"
@@ -1166,7 +1178,7 @@ msgstr "My Event Positions"
 msgid "My Trainings"
 msgstr "My Trainings"
 
-#: src/lib/client/client.tsx:28
+#: src/lib/client/client.tsx:48
 msgid "Network Error"
 msgstr "Network Error"
 
@@ -2051,6 +2063,10 @@ msgstr "Valid Until"
 #: src/routes/flights/$callsign.tsx:451
 msgid "Validation Result"
 msgstr "Validation Result"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:34
+msgid "VATPRC positions in the current calendar quarter"
+msgstr "VATPRC positions in the current calendar quarter"
 
 #: src/components/controller-center/become-controller.tsx:18
 msgid "VATPRC provides a complete training program from Delivery to Center. Submit an application to start your controller journey."

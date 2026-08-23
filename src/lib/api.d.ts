@@ -836,6 +836,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/users/me/atc/online-time": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["get_my_online_time"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/users/me/atc/status": {
     parameters: {
       query?: never;
@@ -1137,6 +1153,15 @@ export interface components {
       /** Format: date-time */
       last_updated: string;
       pilots: components["schemas"]["CompatPilotDto"][];
+    };
+    ControllerOnlineTimeDto: {
+      /** Format: date-time */
+      as_of: string;
+      period: string;
+      /** Format: date-time */
+      period_start: string;
+      /** Format: int64 */
+      total_seconds: number;
     };
     DeviceAuthorizationRequest: {
       client_id: string;
@@ -2405,6 +2430,8 @@ export interface operations {
   list_past_events: {
     parameters: {
       query?: {
+        /** @description Earliest event start time to include */
+        since?: string;
         /** @description Latest event start time to include */
         until?: string;
       };
@@ -3274,6 +3301,27 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["UserDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  get_my_online_time: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Current calendar-quarter VATPRC controlling time */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ControllerOnlineTimeDto"];
         };
       };
       500: components["responses"]["InternalServerError"];

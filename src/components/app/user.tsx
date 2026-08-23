@@ -8,9 +8,9 @@ export const User: FC<{ user?: components["schemas"]["UserDto"] | null }> = ({ u
   const hasFullName = user.full_name.trim().length > 0;
 
   return (
-    <div>
+    <span>
       {hasFullName && <span>{user.full_name}</span>}
       <span className={hasFullName ? "text-dimmed ml-1" : undefined}>{user.cid}</span>
-    </div>
+    </span>
   );
 };
