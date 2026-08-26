@@ -282,7 +282,7 @@ msgid "ATC Booking:"
 msgstr "管制员预订："
 
 #: src/components/app/app-nav-menu.tsx:90
-#: src/components/homepage/controllers-board.tsx:111
+#: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC 中心"
 
@@ -325,12 +325,18 @@ msgstr "基本信息"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
+#: src/components/controller-center/my-atc-bookings.tsx:153
 #: src/components/event/atc-slot-list.tsx:170
 #: src/components/event/slot-list.tsx:138
 msgid "Book"
 msgstr "预订"
 
-#: src/components/homepage/controllers-board.tsx:134
+#: src/components/controller-center/my-atc-bookings.tsx:90
+#: src/components/controller-center/my-atc-bookings.tsx:93
+msgid "Book ATC Position"
+msgstr "预约管制席位"
+
+#: src/components/homepage/controllers-board.tsx:133
 msgid "Booked Controllers"
 msgstr "预约管制员"
 
@@ -360,6 +366,7 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
+#: src/components/controller-center/my-atc-bookings.tsx:103
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
@@ -372,10 +379,19 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
+#: src/components/controller-center/my-atc-bookings.tsx:65
+msgid "Callsign is required"
+msgstr "必须填写席位呼号"
+
 #: src/components/app/assume-role-modal.tsx:41
+#: src/components/controller-center/my-atc-bookings.tsx:184
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
 msgstr "取消"
+
+#: src/components/controller-center/my-atc-bookings.tsx:170
+msgid "Cancel the booking for {callsign}?"
+msgstr "确定取消 {callsign} 的预约吗？"
 
 #: src/components/atc-training/training-list.tsx:64
 msgid "Cancel Training"
@@ -505,7 +521,7 @@ msgstr "管制员训练部行政事务助理"
 
 #: src/components/app/app-nav-menu.tsx:88
 #: src/components/event/atc-slot-list.tsx:203
-#: src/components/homepage/controllers-board.tsx:102
+#: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
 #: src/routes/users/index.tsx:165
 msgid "Controllers"
@@ -520,7 +536,7 @@ msgctxt "resource group"
 msgid "Controlling"
 msgstr "管制"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:21
+#: src/components/controller-center/quarterly-controlling-time.tsx:16
 msgid "Controlling History"
 msgstr "管制上线记录"
 
@@ -645,9 +661,14 @@ msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 #: src/components/atc-application/atc-application-form.tsx:148
 #: src/components/atc-training/training-application-create.tsx:105
 #: src/components/atc-training/training-save.tsx:75
+#: src/components/controller-center/my-atc-bookings.tsx:86
 #: src/components/event/atc-slot-create.tsx:86
 msgid "Edit"
 msgstr "编辑"
+
+#: src/components/controller-center/my-atc-bookings.tsx:93
+msgid "Edit ATC Booking"
+msgstr "编辑管制席位预约"
 
 #: src/components/atc-permission-modal.tsx:87
 #: src/components/atc-permission-modal.tsx:231
@@ -695,6 +716,7 @@ msgstr "电子邮箱"
 #: src/components/atc-training/training-application-create.tsx:183
 #: src/components/atc-training/training-list.tsx:32
 #: src/components/atc-training/training-save.tsx:141
+#: src/components/controller-center/my-atc-bookings.tsx:129
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:180
@@ -711,10 +733,12 @@ msgid "End booking time must be after start booking time"
 msgstr "预订结束时间必须晚于开始预订时间"
 
 #: src/components/atc-training/training-application-create.tsx:81
+#: src/components/controller-center/my-atc-bookings.tsx:67
 msgid "End time is required"
 msgstr "结束时间为必填项"
 
 #: src/components/atc-training/training-application-create.tsx:84
+#: src/components/controller-center/my-atc-bookings.tsx:69
 #: src/components/event/event-create.tsx:96
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
@@ -753,6 +777,7 @@ msgstr "英制双数飞行高度层"
 #: src/components/app/app-nav-menu.tsx:105
 #: src/components/app/app-nav-menu.tsx:117
 #: src/components/audit-log/audit-log-table.tsx:15
+#: src/components/controller-center/my-atc-bookings.tsx:229
 msgid "Event"
 msgstr "活动"
 
@@ -810,11 +835,11 @@ msgstr "无法加载公告。"
 msgid "Failed to load audit logs"
 msgstr "审计日志加载失败"
 
-#: src/components/homepage/controllers-board.tsx:117
+#: src/components/homepage/controllers-board.tsx:116
 msgid "Failed to load controller information."
 msgstr "无法加载管制员信息。"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:26
+#: src/components/controller-center/quarterly-controlling-time.tsx:21
 msgid "Failed to load controlling time."
 msgstr "无法加载管制上线时间。"
 
@@ -954,7 +979,7 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:40
+#: src/components/controller-center/quarterly-controlling-time.tsx:35
 msgid "hours"
 msgstr "小时"
 
@@ -1168,6 +1193,10 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "My Application"
 msgstr "我的申请"
 
+#: src/components/controller-center/my-atc-bookings.tsx:199
+msgid "My ATC Bookings"
+msgstr "我的管制席位预约"
+
 #: src/components/controller-center/my-event-bookings.tsx:42
 #: src/components/controller-center/my-event-bookings.tsx:55
 msgid "My Event Positions"
@@ -1240,7 +1269,7 @@ msgstr "尚未填写训练记录。"
 msgid "No transponder"
 msgstr "无应答机"
 
-#: src/components/homepage/controllers-board.tsx:137
+#: src/components/homepage/controllers-board.tsx:136
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
@@ -1281,7 +1310,7 @@ msgstr "英制单数飞行高度层"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/controllers-board.tsx:122
+#: src/components/homepage/controllers-board.tsx:121
 msgid "Online Controllers"
 msgstr "在线管制员"
 
@@ -1464,6 +1493,10 @@ msgstr "取消预订"
 msgid "Remark"
 msgstr "备注"
 
+#: src/components/controller-center/my-atc-bookings.tsx:142
+msgid "Remarks"
+msgstr "备注"
+
 #: src/components/controller-center/resource-grid.tsx:93
 msgid "Resources"
 msgstr "资源"
@@ -1534,6 +1567,7 @@ msgstr "S3"
 #: src/components/atc-permission-modal.tsx:220
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
+#: src/components/controller-center/my-atc-bookings.tsx:153
 #: src/components/event/atc-slot-create.tsx:177
 #: src/components/event/event-create.tsx:284
 #: src/components/preferred-route-create.tsx:202
@@ -1657,6 +1691,7 @@ msgstr "开始和结束预订时间必须同时设置或同时不设置"
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/atc-training/training-list.tsx:28
 #: src/components/atc-training/training-save.tsx:130
+#: src/components/controller-center/my-atc-bookings.tsx:117
 #: src/components/event/atc-slot-create.tsx:116
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:168
@@ -1677,6 +1712,7 @@ msgid "Start immediately"
 msgstr "立即开始"
 
 #: src/components/atc-training/training-application-create.tsx:78
+#: src/components/controller-center/my-atc-bookings.tsx:66
 msgid "Start time is required"
 msgstr "开始时间为必填项"
 
@@ -1852,7 +1888,7 @@ msgstr "提交的航路是 <0>{route}</0>。"
 msgid "There are no upcoming events right now. Check back soon or explore events from the past."
 msgstr "目前暂无即将开始的活动。请稍后再来看看，或浏览往期活动。"
 
-#: src/components/homepage/controllers-board.tsx:125
+#: src/components/homepage/controllers-board.tsx:124
 msgid "There is currently no online ATC."
 msgstr "当前无在线管制员。"
 
@@ -2064,7 +2100,7 @@ msgstr "生效至"
 msgid "Validation Result"
 msgstr "检查结果"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:34
+#: src/components/controller-center/quarterly-controlling-time.tsx:29
 msgid "VATPRC positions in the current calendar quarter"
 msgstr "当前自然季度内的 VATPRC 席位"
 
@@ -2150,6 +2186,10 @@ msgstr "是"
 #: src/components/controller-center/training-browser.tsx:112
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "你还没有训练记录，报名一次训练开始你的进阶之旅。"
+
+#: src/components/controller-center/my-atc-bookings.tsx:211
+msgid "You have no upcoming ATC bookings."
+msgstr "您没有即将开始的管制席位预约。"
 
 #: src/components/atc-training/training-application-responses.tsx:87
 msgid "You have responded to this training request."

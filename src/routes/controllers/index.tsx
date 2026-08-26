@@ -2,7 +2,7 @@ import { MyApplicationCard } from "@/components/atc-application/my-application-c
 import { TrainingApplicationCreateModal } from "@/components/atc-training/training-application-create";
 import { BecomeController } from "@/components/controller-center/become-controller";
 import { useCenterRoles } from "@/components/controller-center/center-context";
-import { MyEventBookings } from "@/components/controller-center/my-event-bookings";
+import { MyAtcBookings } from "@/components/controller-center/my-atc-bookings";
 import { QuarterlyControllingTime } from "@/components/controller-center/quarterly-controlling-time";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
 import { $api } from "@/lib/client";
@@ -36,7 +36,7 @@ function RouteComponent() {
         ) : (
           <TrainingBrowser />
         )}
-        <MyEventBookings />
+        <MyAtcBookings />
         <QuarterlyControllingTime />
       </>
     );

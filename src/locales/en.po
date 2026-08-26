@@ -282,7 +282,7 @@ msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
 #: src/components/app/app-nav-menu.tsx:90
-#: src/components/homepage/controllers-board.tsx:111
+#: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC Center"
 
@@ -325,12 +325,18 @@ msgstr "Basic Information"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
+#: src/components/controller-center/my-atc-bookings.tsx:153
 #: src/components/event/atc-slot-list.tsx:170
 #: src/components/event/slot-list.tsx:138
 msgid "Book"
 msgstr "Book"
 
-#: src/components/homepage/controllers-board.tsx:134
+#: src/components/controller-center/my-atc-bookings.tsx:90
+#: src/components/controller-center/my-atc-bookings.tsx:93
+msgid "Book ATC Position"
+msgstr "Book ATC Position"
+
+#: src/components/homepage/controllers-board.tsx:133
 msgid "Booked Controllers"
 msgstr "Booked Controllers"
 
@@ -360,6 +366,7 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
+#: src/components/controller-center/my-atc-bookings.tsx:103
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
@@ -372,10 +379,19 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
+#: src/components/controller-center/my-atc-bookings.tsx:65
+msgid "Callsign is required"
+msgstr "Callsign is required"
+
 #: src/components/app/assume-role-modal.tsx:41
+#: src/components/controller-center/my-atc-bookings.tsx:184
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/components/controller-center/my-atc-bookings.tsx:170
+msgid "Cancel the booking for {callsign}?"
+msgstr "Cancel the booking for {callsign}?"
 
 #: src/components/atc-training/training-list.tsx:64
 msgid "Cancel Training"
@@ -505,7 +521,7 @@ msgstr "Controller Training Director Assistant"
 
 #: src/components/app/app-nav-menu.tsx:88
 #: src/components/event/atc-slot-list.tsx:203
-#: src/components/homepage/controllers-board.tsx:102
+#: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
 #: src/routes/users/index.tsx:165
 msgid "Controllers"
@@ -520,7 +536,7 @@ msgctxt "resource group"
 msgid "Controlling"
 msgstr "Controlling"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:21
+#: src/components/controller-center/quarterly-controlling-time.tsx:16
 msgid "Controlling History"
 msgstr "Controlling History"
 
@@ -645,9 +661,14 @@ msgstr "Drag CSV here or click to select files"
 #: src/components/atc-application/atc-application-form.tsx:148
 #: src/components/atc-training/training-application-create.tsx:105
 #: src/components/atc-training/training-save.tsx:75
+#: src/components/controller-center/my-atc-bookings.tsx:86
 #: src/components/event/atc-slot-create.tsx:86
 msgid "Edit"
 msgstr "Edit"
+
+#: src/components/controller-center/my-atc-bookings.tsx:93
+msgid "Edit ATC Booking"
+msgstr "Edit ATC Booking"
 
 #: src/components/atc-permission-modal.tsx:87
 #: src/components/atc-permission-modal.tsx:231
@@ -695,6 +716,7 @@ msgstr "Email"
 #: src/components/atc-training/training-application-create.tsx:183
 #: src/components/atc-training/training-list.tsx:32
 #: src/components/atc-training/training-save.tsx:141
+#: src/components/controller-center/my-atc-bookings.tsx:129
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:180
@@ -711,10 +733,12 @@ msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
 #: src/components/atc-training/training-application-create.tsx:81
+#: src/components/controller-center/my-atc-bookings.tsx:67
 msgid "End time is required"
 msgstr "End time is required"
 
 #: src/components/atc-training/training-application-create.tsx:84
+#: src/components/controller-center/my-atc-bookings.tsx:69
 #: src/components/event/event-create.tsx:96
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
@@ -753,6 +777,7 @@ msgstr "even flight level"
 #: src/components/app/app-nav-menu.tsx:105
 #: src/components/app/app-nav-menu.tsx:117
 #: src/components/audit-log/audit-log-table.tsx:15
+#: src/components/controller-center/my-atc-bookings.tsx:229
 msgid "Event"
 msgstr "Event"
 
@@ -810,11 +835,11 @@ msgstr "Failed to load announcements."
 msgid "Failed to load audit logs"
 msgstr "Failed to load audit logs"
 
-#: src/components/homepage/controllers-board.tsx:117
+#: src/components/homepage/controllers-board.tsx:116
 msgid "Failed to load controller information."
 msgstr "Failed to load controller information."
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:26
+#: src/components/controller-center/quarterly-controlling-time.tsx:21
 msgid "Failed to load controlling time."
 msgstr "Failed to load controlling time."
 
@@ -954,7 +979,7 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:40
+#: src/components/controller-center/quarterly-controlling-time.tsx:35
 msgid "hours"
 msgstr "hours"
 
@@ -1168,6 +1193,10 @@ msgstr "My account belongs to VATPRC division."
 msgid "My Application"
 msgstr "My Application"
 
+#: src/components/controller-center/my-atc-bookings.tsx:199
+msgid "My ATC Bookings"
+msgstr "My ATC Bookings"
+
 #: src/components/controller-center/my-event-bookings.tsx:42
 #: src/components/controller-center/my-event-bookings.tsx:55
 msgid "My Event Positions"
@@ -1240,7 +1269,7 @@ msgstr "No training record has been filed yet."
 msgid "No transponder"
 msgstr "No transponder"
 
-#: src/components/homepage/controllers-board.tsx:137
+#: src/components/homepage/controllers-board.tsx:136
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
 
@@ -1281,7 +1310,7 @@ msgstr "odd flight level"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/controllers-board.tsx:122
+#: src/components/homepage/controllers-board.tsx:121
 msgid "Online Controllers"
 msgstr "Online Controllers"
 
@@ -1464,6 +1493,10 @@ msgstr "Release"
 msgid "Remark"
 msgstr "Remark"
 
+#: src/components/controller-center/my-atc-bookings.tsx:142
+msgid "Remarks"
+msgstr "Remarks"
+
 #: src/components/controller-center/resource-grid.tsx:93
 msgid "Resources"
 msgstr "Resources"
@@ -1534,6 +1567,7 @@ msgstr "S3"
 #: src/components/atc-permission-modal.tsx:220
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
+#: src/components/controller-center/my-atc-bookings.tsx:153
 #: src/components/event/atc-slot-create.tsx:177
 #: src/components/event/event-create.tsx:284
 #: src/components/preferred-route-create.tsx:202
@@ -1657,6 +1691,7 @@ msgstr "Start and End booking time must be both set or unset"
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/atc-training/training-list.tsx:28
 #: src/components/atc-training/training-save.tsx:130
+#: src/components/controller-center/my-atc-bookings.tsx:117
 #: src/components/event/atc-slot-create.tsx:116
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:168
@@ -1677,6 +1712,7 @@ msgid "Start immediately"
 msgstr "Start immediately"
 
 #: src/components/atc-training/training-application-create.tsx:78
+#: src/components/controller-center/my-atc-bookings.tsx:66
 msgid "Start time is required"
 msgstr "Start time is required"
 
@@ -1852,7 +1888,7 @@ msgstr "The submitted route is: <0>{route}</0>"
 msgid "There are no upcoming events right now. Check back soon or explore events from the past."
 msgstr "There are no upcoming events right now. Check back soon or explore events from the past."
 
-#: src/components/homepage/controllers-board.tsx:125
+#: src/components/homepage/controllers-board.tsx:124
 msgid "There is currently no online ATC."
 msgstr "There is currently no online ATC."
 
@@ -2064,7 +2100,7 @@ msgstr "Valid Until"
 msgid "Validation Result"
 msgstr "Validation Result"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:34
+#: src/components/controller-center/quarterly-controlling-time.tsx:29
 msgid "VATPRC positions in the current calendar quarter"
 msgstr "VATPRC positions in the current calendar quarter"
 
@@ -2150,6 +2186,10 @@ msgstr "Yes"
 #: src/components/controller-center/training-browser.tsx:112
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "You have no training sessions yet. Apply for a training to get started."
+
+#: src/components/controller-center/my-atc-bookings.tsx:211
+msgid "You have no upcoming ATC bookings."
+msgstr "You have no upcoming ATC bookings."
 
 #: src/components/atc-training/training-application-responses.tsx:87
 msgid "You have responded to this training request."

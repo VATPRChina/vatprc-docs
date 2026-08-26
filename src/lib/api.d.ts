@@ -116,6 +116,70 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/atc/bookings": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations["create"];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/atc/bookings/mine/upcoming": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["list_mine_upcoming"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/atc/bookings/upcoming": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["list_upcoming"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/atc/bookings/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations["update"];
+    post?: never;
+    delete: operations["delete"];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/atc/controllers": {
     parameters: {
       query?: never;
@@ -1069,6 +1133,31 @@ export interface components {
       user_email?: string | null;
       user_id: string;
     };
+    AtcBookingDto: {
+      callsign: string;
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      deleted_at?: string | null;
+      /** Format: date-time */
+      end_at: string;
+      event_position?: null | components["schemas"]["EventAtcPositionDto"];
+      id: string;
+      remarks?: string | null;
+      /** Format: date-time */
+      start_at: string;
+      /** Format: date-time */
+      updated_at: string;
+      user: components["schemas"]["UserDto"];
+    };
+    AtcBookingSaveRequest: {
+      callsign: string;
+      /** Format: date-time */
+      end_at: string;
+      remarks?: string | null;
+      /** Format: date-time */
+      start_at: string;
+    };
     AtcPermissionDto: {
       position_kind_id: string;
       /** Format: date-time */
@@ -1835,6 +1924,125 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["AtcApplicationDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AtcBookingSaveRequest"];
+      };
+    };
+    responses: {
+      /** @description ATC booking created */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcBookingDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  list_mine_upcoming: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Current user's upcoming ATC bookings */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcBookingDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  list_upcoming: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Upcoming ATC bookings */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcBookingDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description ATC booking ULID */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AtcBookingSaveRequest"];
+      };
+    };
+    responses: {
+      /** @description ATC booking updated */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcBookingDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description ATC booking ULID */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description ATC booking cancelled */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["AtcBookingDto"];
         };
       };
       500: components["responses"]["InternalServerError"];

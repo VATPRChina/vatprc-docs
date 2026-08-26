@@ -84,16 +84,15 @@ const StripList: React.FC<StripListProps> = ({ strips, empty, isLoading }) => {
 
 export const ControllersBoard: React.FC<{ className?: string }> = ({ className }) => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/compat/online-status");
-  const { data: events, error: eventsError } = $api.useQuery("get", "/api/events");
+  const {
+    data: bookings,
+    error: bookingsError,
+    isLoading: areBookingsLoading,
+  } = $api.useQuery("get", "/api/atc/bookings/upcoming");
   const { i18n } = useLingui();
 
   const online = data?.controllers ?? [];
-  const booked = [...(data?.future_controllers ?? [])].sort((a, b) => +parseISO(a.start_utc) - +parseISO(b.start_utc));
-
-  const eventTitleFor = (start: Date, end: Date) => {
-    const event = events?.find((ev) => start < parseISO(ev.end_at) && end > parseISO(ev.start_at));
-    return event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
-  };
+  const booked = [...(bookings ?? [])].sort((a, b) => +parseISO(a.start_at) - +parseISO(b.start_at));
 
   return (
     <section className={cn("w-full", className)}>
@@ -112,7 +111,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
         </Button>
       </div>
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
-        {(error ?? eventsError) && (
+        {(error ?? bookingsError) && (
           <Alert color="red" className="lg:col-span-2">
             <Trans>Failed to load controller information.</Trans>
           </Alert>
@@ -135,15 +134,17 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </h3>
           <StripList
             empty={<Trans>No upcoming ATC booking.</Trans>}
-            isLoading={isLoading}
+            isLoading={areBookingsLoading}
             strips={booked.map((c) => {
-              const schedule: [Date, Date] = [parseISO(c.start_utc), parseISO(c.end_utc)];
+              const schedule: [Date, Date] = [parseISO(c.start_at), parseISO(c.end_at)];
+              const event = c.event_position?.event;
+              const eventTitle = event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
               return (
                 <ControllerStrip
-                  key={`${c.callsign}-${c.start_utc}`}
+                  key={c.id}
                   callsign={c.callsign}
-                  name={c.name}
-                  eventTitle={eventTitleFor(schedule[0], schedule[1])}
+                  name={c.user.full_name}
+                  eventTitle={eventTitle ?? c.remarks ?? undefined}
                   schedule={schedule}
                 />
               );
