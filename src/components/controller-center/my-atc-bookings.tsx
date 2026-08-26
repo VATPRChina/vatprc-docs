@@ -1,3 +1,4 @@
+import { ConfirmButton } from "../ui/confirm-button";
 import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -160,20 +161,17 @@ const BookingModal: FC<{ booking?: Booking }> = ({ booking }) => {
 };
 
 const CancelBookingButton: FC<{ booking: Booking }> = ({ booking }) => {
-  const { t } = useLingui();
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = $api.useMutation("delete", "/api/atc/bookings/{id}", {
     onSuccess: wrapPromiseWithLog(() => invalidateBookings(queryClient)),
   });
-  const cancel = () => {
-    const callsign = booking.callsign;
-    if (window.confirm(t`Cancel the booking for ${callsign}?`)) {
-      mutate({ params: { path: { id: booking.id } } });
-    }
-  };
+  const callsign = booking.callsign;
+  const cancel = () => mutate({ params: { path: { id: booking.id } } });
+
   return (
     <>
-      <Button
+      <ConfirmButton
+        actionDescription={<Trans>Cancel the booking for {callsign}?</Trans>}
         color="red"
         variant="subtle"
         size="compact-sm"
@@ -182,7 +180,7 @@ const CancelBookingButton: FC<{ booking: Booking }> = ({ booking }) => {
         loading={isPending}
       >
         <Trans>Cancel</Trans>
-      </Button>
+      </ConfirmButton>
       {error && <span className="text-sm text-red-700 dark:text-red-300">{error.detail}</span>}
     </>
   );
