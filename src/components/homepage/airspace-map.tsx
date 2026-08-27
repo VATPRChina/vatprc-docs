@@ -4,7 +4,7 @@ import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { SegmentedControl } from "@mantine/core";
 import * as turf from "@turf/turf";
-import { Layer, Map as MapView, NavigationControl, Popup, Source, StyleSpecification } from "@vis.gl/react-maplibre";
+import { Layer, Map as MapView, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { FilterSpecification } from "maplibre-gl";
 import { useMemo, useState } from "react";
 
@@ -26,11 +26,12 @@ interface SectorProperties {
 interface SectorSelection {
   sectors: SectorProperties[];
   selectedSectorId: string;
-  longitude: number;
-  latitude: number;
 }
 
 const sectorsZbpe = sectorsZbpeRaw as GeoJSON.FeatureCollection<GeoJSON.Polygon, SectorProperties>;
+const sectorAreaById = new Map(
+  sectorsZbpe.features.map((feature) => [feature.properties.sector_id, turf.area(feature)]),
+);
 const center = turf.center(sectorsZbpe);
 const geofence = turf.bbox(turf.transformScale(sectorsZbpe, 1.5)) as [number, number, number, number];
 const initialViewState = {
@@ -149,12 +150,16 @@ export const AirspaceMap = () => {
                   controllerTypeOrder[b.controller_type ?? getControllerType(b.atc_id)] ||
                 a.atc_id.localeCompare(b.atc_id),
             );
+            const smallestSector = clickedSectors.reduce((smallest, sector) =>
+              (sectorAreaById.get(sector.sector_id) ?? Number.POSITIVE_INFINITY) <
+              (sectorAreaById.get(smallest.sector_id) ?? Number.POSITIVE_INFINITY)
+                ? sector
+                : smallest,
+            );
 
             setSelection({
               sectors: clickedSectors,
-              selectedSectorId: clickedSectors[0].sector_id,
-              longitude: event.lngLat.lng,
-              latitude: event.lngLat.lat,
+              selectedSectorId: smallestSector.sector_id,
             });
           }}
           onMouseMove={(event) => {
@@ -256,68 +261,56 @@ export const AirspaceMap = () => {
               }}
             />
           </Source>
-          {selection && (
-            <Popup
-              longitude={selection.longitude}
-              latitude={selection.latitude}
-              anchor="bottom"
-              maxWidth="min(28rem, calc(100vw - 2rem))"
-              closeOnClick={false}
-              onClose={() => setSelection(undefined)}
-            >
-              <div className="w-104 max-w-[calc(100vw-4rem)] font-mono text-sm text-gray-950">
-                {selection.sectors.length > 1 && (
-                  <p className="mb-2 text-xs font-bold text-gray-600">
-                    <Trans>{selectedSectorCount} sectors at this point</Trans>
-                  </p>
-                )}
-                <div className="max-h-64 overflow-y-auto pr-1">
-                  {selection.sectors.map((sector) => (
-                    <button
-                      key={sector.sector_id}
-                      type="button"
-                      aria-pressed={sector.sector_id === selection.selectedSectorId}
-                      onClick={() =>
-                        setSelection((current) =>
-                          current ? { ...current, selectedSectorId: sector.sector_id } : current,
-                        )
-                      }
-                      className="block w-full border-b border-gray-200 py-2 text-left first:pt-0 last:border-b-0 last:pb-0"
-                    >
-                      <div
-                        className={`w-full px-2 py-1 text-left ${
-                          sector.sector_id === selection.selectedSectorId
-                            ? "border-l-3 border-red-700 bg-red-50"
-                            : "border-l-3 border-transparent hover:bg-gray-50"
-                        }`}
-                      >
-                        <div className="flex items-baseline justify-between gap-2">
-                          <p className="font-bold">{sector.atc_id}</p>
-                          <span className="text-[10px] text-gray-500">{sector.controller_type}</span>
-                        </div>
-                        <p>{sector.name}</p>
-                        <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 text-xs">
-                          <dt className="text-gray-500">
-                            <Trans>Frequency</Trans>
-                          </dt>
-                          <dd>{sector.frequency_mhz.toFixed(3).replace(/0+$/, "").replace(/\.$/, "")} MHz</dd>
-                          <dt className="text-gray-500">
-                            <Trans>Altitude</Trans>
-                          </dt>
-                          <dd>
-                            {formatAltitude(sector.lower_limit)} – {formatAltitude(sector.upper_limit, true)}
-                          </dd>
-                        </dl>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </Popup>
-          )}
           <NavigationControl showCompass={false} />
         </MapView>
       </div>
+      {selection && (
+        <aside
+          aria-live="polite"
+          className="mt-2 border border-black/15 bg-white p-3 font-mono text-sm text-gray-950 dark:border-white/20 dark:bg-gray-950 dark:text-gray-50"
+        >
+          {selection.sectors.length > 1 && (
+            <p className="mb-2 text-xs font-bold text-gray-600 dark:text-gray-400">
+              <Trans>{selectedSectorCount} sectors at this point</Trans>
+            </p>
+          )}
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+            {selection.sectors.map((sector) => (
+              <button
+                key={sector.sector_id}
+                type="button"
+                aria-pressed={sector.sector_id === selection.selectedSectorId}
+                onClick={() =>
+                  setSelection((current) => (current ? { ...current, selectedSectorId: sector.sector_id } : current))
+                }
+                className={`min-w-0 border p-3 text-left transition-colors ${
+                  sector.sector_id === selection.selectedSectorId
+                    ? "border-red-700 bg-red-50 dark:border-red-500 dark:bg-red-950/40"
+                    : "border-gray-200 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-900"
+                }`}
+              >
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className="font-bold">{sector.atc_id}</p>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400">{sector.controller_type}</span>
+                </div>
+                <p>{sector.name}</p>
+                <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 text-xs">
+                  <dt className="text-gray-500 dark:text-gray-400">
+                    <Trans>Frequency</Trans>
+                  </dt>
+                  <dd>{sector.frequency_mhz.toFixed(3).replace(/0+$/, "").replace(/\.$/, "")} MHz</dd>
+                  <dt className="text-gray-500 dark:text-gray-400">
+                    <Trans>Altitude</Trans>
+                  </dt>
+                  <dd>
+                    {formatAltitude(sector.lower_limit)} – {formatAltitude(sector.upper_limit, true)}
+                  </dd>
+                </dl>
+              </button>
+            ))}
+          </div>
+        </aside>
+      )}
     </section>
   );
 };
