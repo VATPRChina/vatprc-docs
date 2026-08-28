@@ -18,6 +18,10 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
+#: src/components/airspace/sector-map.tsx:288
+msgid "{selectedSectorCount} sectors at this point"
+msgstr "{selectedSectorCount} sectors at this point"
+
 #: src/components/table.tsx:181
 msgid "{size} items/page"
 msgstr "{size} items/page"
@@ -132,6 +136,7 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
+#: src/components/airspace/sector-map.tsx:121
 #: src/components/table.tsx:182
 msgid "All"
 msgstr "All"
@@ -144,6 +149,10 @@ msgstr "Allowed levels are {level} (in feet)."
 #: src/components/event/slot-list.tsx:143
 msgid "Already Booked"
 msgstr "Already Booked"
+
+#: src/components/airspace/sector-map.tsx:317
+msgid "Altitude"
+msgstr "Altitude"
 
 #: src/components/app/app-nav-menu.tsx:107
 msgid "Announcement"
@@ -325,14 +334,18 @@ msgstr "Basic Information"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
-#: src/components/controller-center/my-atc-bookings.tsx:153
+#: src/components/airspace/sector-map.tsx:105
+msgid "Beijing FIR Airspace"
+msgstr "Beijing FIR Airspace"
+
+#: src/components/controller-center/my-atc-bookings.tsx:154
 #: src/components/event/atc-slot-list.tsx:170
 #: src/components/event/slot-list.tsx:138
 msgid "Book"
 msgstr "Book"
 
-#: src/components/controller-center/my-atc-bookings.tsx:90
-#: src/components/controller-center/my-atc-bookings.tsx:93
+#: src/components/controller-center/my-atc-bookings.tsx:91
+#: src/components/controller-center/my-atc-bookings.tsx:94
 msgid "Book ATC Position"
 msgstr "Book ATC Position"
 
@@ -366,7 +379,7 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
-#: src/components/controller-center/my-atc-bookings.tsx:103
+#: src/components/controller-center/my-atc-bookings.tsx:104
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
@@ -379,17 +392,17 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/components/controller-center/my-atc-bookings.tsx:65
+#: src/components/controller-center/my-atc-bookings.tsx:66
 msgid "Callsign is required"
 msgstr "Callsign is required"
 
 #: src/components/app/assume-role-modal.tsx:41
-#: src/components/controller-center/my-atc-bookings.tsx:184
+#: src/components/controller-center/my-atc-bookings.tsx:182
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/controller-center/my-atc-bookings.tsx:170
+#: src/components/controller-center/my-atc-bookings.tsx:174
 msgid "Cancel the booking for {callsign}?"
 msgstr "Cancel the booking for {callsign}?"
 
@@ -661,12 +674,12 @@ msgstr "Drag CSV here or click to select files"
 #: src/components/atc-application/atc-application-form.tsx:148
 #: src/components/atc-training/training-application-create.tsx:105
 #: src/components/atc-training/training-save.tsx:75
-#: src/components/controller-center/my-atc-bookings.tsx:86
+#: src/components/controller-center/my-atc-bookings.tsx:87
 #: src/components/event/atc-slot-create.tsx:86
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/controller-center/my-atc-bookings.tsx:93
+#: src/components/controller-center/my-atc-bookings.tsx:94
 msgid "Edit ATC Booking"
 msgstr "Edit ATC Booking"
 
@@ -716,7 +729,7 @@ msgstr "Email"
 #: src/components/atc-training/training-application-create.tsx:183
 #: src/components/atc-training/training-list.tsx:32
 #: src/components/atc-training/training-save.tsx:141
-#: src/components/controller-center/my-atc-bookings.tsx:129
+#: src/components/controller-center/my-atc-bookings.tsx:130
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:180
@@ -733,12 +746,12 @@ msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
 #: src/components/atc-training/training-application-create.tsx:81
-#: src/components/controller-center/my-atc-bookings.tsx:67
+#: src/components/controller-center/my-atc-bookings.tsx:68
 msgid "End time is required"
 msgstr "End time is required"
 
 #: src/components/atc-training/training-application-create.tsx:84
-#: src/components/controller-center/my-atc-bookings.tsx:69
+#: src/components/controller-center/my-atc-bookings.tsx:70
 #: src/components/event/event-create.tsx:96
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
@@ -777,7 +790,7 @@ msgstr "even flight level"
 #: src/components/app/app-nav-menu.tsx:105
 #: src/components/app/app-nav-menu.tsx:117
 #: src/components/audit-log/audit-log-table.tsx:15
-#: src/components/controller-center/my-atc-bookings.tsx:229
+#: src/components/controller-center/my-atc-bookings.tsx:227
 msgid "Event"
 msgstr "Event"
 
@@ -860,6 +873,10 @@ msgstr "Failed to load events."
 msgid "Failed to load past events."
 msgstr "Failed to load past events."
 
+#: src/routes/_doc/airspace/sectors.tsx:25
+msgid "Failed to load sector data."
+msgstr "Failed to load sector data."
+
 #: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "Failed to load trainings"
@@ -895,6 +912,10 @@ msgstr "Fields"
 #: src/components/event/slot-import.tsx:122
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
+
+#: src/components/airspace/sector-map.tsx:114
+msgid "Filter sectors by controller type"
+msgstr "Filter sectors by controller type"
 
 #: src/components/controller-center/training-management.tsx:29
 msgid "Finished Trainings"
@@ -946,6 +967,10 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "Forum"
+
+#: src/components/airspace/sector-map.tsx:313
+msgid "Frequency"
+msgstr "Frequency"
 
 #: src/routes/users/me.tsx:56
 msgid "Full name"
@@ -1193,7 +1218,7 @@ msgstr "My account belongs to VATPRC division."
 msgid "My Application"
 msgstr "My Application"
 
-#: src/components/controller-center/my-atc-bookings.tsx:199
+#: src/components/controller-center/my-atc-bookings.tsx:197
 msgid "My ATC Bookings"
 msgstr "My ATC Bookings"
 
@@ -1306,13 +1331,25 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
 
+#: src/components/airspace/sector-map.tsx:134
+msgid "Offline"
+msgstr "Offline"
+
 #: src/routes/sheets/$id.tsx:380
 msgid "One option per line."
 msgstr "One option per line."
 
+#: src/components/airspace/sector-map.tsx:130
+msgid "Online"
+msgstr "Online"
+
 #: src/components/homepage/controllers-board.tsx:121
 msgid "Online Controllers"
 msgstr "Online Controllers"
+
+#: src/components/airspace/sector-map.tsx:108
+msgid "Online sectors are highlighted. Select an area to view overlapping sectors."
+msgstr "Online sectors are highlighted. Select an area to view overlapping sectors."
 
 #: src/routes/sheets.tsx:26
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
@@ -1493,7 +1530,7 @@ msgstr "Release"
 msgid "Remark"
 msgstr "Remark"
 
-#: src/components/controller-center/my-atc-bookings.tsx:142
+#: src/components/controller-center/my-atc-bookings.tsx:143
 msgid "Remarks"
 msgstr "Remarks"
 
@@ -1567,7 +1604,7 @@ msgstr "S3"
 #: src/components/atc-permission-modal.tsx:220
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
-#: src/components/controller-center/my-atc-bookings.tsx:153
+#: src/components/controller-center/my-atc-bookings.tsx:154
 #: src/components/event/atc-slot-create.tsx:177
 #: src/components/event/event-create.tsx:284
 #: src/components/preferred-route-create.tsx:202
@@ -1596,6 +1633,10 @@ msgstr "Sector Editor"
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "Sector Files"
+
+#: src/routes/_doc/airspace/sectors.tsx:11
+msgid "Sector Map"
+msgstr "Sector Map"
 
 #: src/components/homepage/notam-board.tsx:70
 msgid "See All Announcements"
@@ -1691,7 +1732,7 @@ msgstr "Start and End booking time must be both set or unset"
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/atc-training/training-list.tsx:28
 #: src/components/atc-training/training-save.tsx:130
-#: src/components/controller-center/my-atc-bookings.tsx:117
+#: src/components/controller-center/my-atc-bookings.tsx:118
 #: src/components/event/atc-slot-create.tsx:116
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:168
@@ -1712,7 +1753,7 @@ msgid "Start immediately"
 msgstr "Start immediately"
 
 #: src/components/atc-training/training-application-create.tsx:78
-#: src/components/controller-center/my-atc-bookings.tsx:66
+#: src/components/controller-center/my-atc-bookings.tsx:67
 msgid "Start time is required"
 msgstr "Start time is required"
 
@@ -2187,7 +2228,7 @@ msgstr "Yes"
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "You have no training sessions yet. Apply for a training to get started."
 
-#: src/components/controller-center/my-atc-bookings.tsx:211
+#: src/components/controller-center/my-atc-bookings.tsx:209
 msgid "You have no upcoming ATC bookings."
 msgstr "You have no upcoming ATC bookings."
 
