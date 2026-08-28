@@ -32,12 +32,21 @@ const sectorsZbpe = sectorsZbpeRaw as GeoJSON.FeatureCollection<GeoJSON.Polygon,
 const sectorAreaById = new Map(
   sectorsZbpe.features.map((feature) => [feature.properties.sector_id, turf.area(feature)]),
 );
-const center = turf.center(sectorsZbpe);
-const geofence = turf.bbox(turf.transformScale(sectorsZbpe, 1.5)) as [number, number, number, number];
+const rawAirspaceBounds = turf.bbox(sectorsZbpe) as [number, number, number, number];
+const expandBounds = (
+  [west, south, east, north]: [number, number, number, number],
+  paddingRatio: number,
+): [number, number, number, number] => {
+  const longitudePadding = (east - west) * paddingRatio;
+  const latitudePadding = (north - south) * paddingRatio;
+
+  return [west - longitudePadding, south - latitudePadding, east + longitudePadding, north + latitudePadding];
+};
+const airspaceBounds = expandBounds(rawAirspaceBounds, 0.05);
+const geofence = expandBounds(rawAirspaceBounds, 0.25);
 const initialViewState = {
-  longitude: center.geometry.coordinates[0],
-  latitude: center.geometry.coordinates[1],
-  zoom: 4,
+  bounds: airspaceBounds,
+  fitBoundsOptions: { padding: 24 },
 };
 const controllerTypeOrder: Record<ControllerType, number> = { TWR: 0, APP: 1, CTR: 2 };
 
@@ -122,15 +131,19 @@ export const AirspaceMap = () => {
           </div>
         </div>
       </div>
-      <div className="h-96 w-full overflow-hidden border border-black/15 md:h-120 dark:border-white/20">
+      <div className="aspect-video max-h-svh w-full overflow-hidden border border-black/15 dark:border-white/20">
         <MapView
           initialViewState={initialViewState}
           maxBounds={geofence}
-          minZoom={3}
+          minZoom={2}
           maxZoom={10}
+          style={{ width: "100%", height: "100%" }}
           mapStyle={mapStyle as unknown as StyleSpecification}
           scrollZoom={false}
           interactiveLayerIds={["airspace-fill"]}
+          onLoad={(event) => {
+            event.target.fitBounds(airspaceBounds, { padding: 24, duration: 0 });
+          }}
           onClick={(event) => {
             if (!event.features?.length) {
               setSelection(undefined);
