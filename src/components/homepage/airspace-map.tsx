@@ -33,20 +33,37 @@ const sectorAreaById = new Map(
   sectorsZbpe.features.map((feature) => [feature.properties.sector_id, turf.area(feature)]),
 );
 const rawAirspaceBounds = turf.bbox(sectorsZbpe) as [number, number, number, number];
-const expandBounds = (
+const geofenceAspectRatio = 12 / 5;
+const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
+const radiansToDegrees = (radians: number) => (radians * 180) / Math.PI;
+const latitudeToMercatorY = (latitude: number) => Math.log(Math.tan(Math.PI / 4 + degreesToRadians(latitude) / 2));
+const mercatorYToLatitude = (mercatorY: number) => radiansToDegrees(Math.atan(Math.sinh(mercatorY)));
+const createAspectRatioBounds = (
   [west, south, east, north]: [number, number, number, number],
+  aspectRatio: number,
   paddingRatio: number,
 ): [number, number, number, number] => {
-  const longitudePadding = (east - west) * paddingRatio;
-  const latitudePadding = (north - south) * paddingRatio;
+  const westX = degreesToRadians(west);
+  const eastX = degreesToRadians(east);
+  const southY = latitudeToMercatorY(south);
+  const northY = latitudeToMercatorY(north);
+  const paddedWidth = (eastX - westX) * (1 + paddingRatio * 2);
+  const paddedHeight = (northY - southY) * (1 + paddingRatio * 2);
+  const boundsWidth = Math.max(paddedWidth, paddedHeight * aspectRatio);
+  const boundsHeight = Math.max(paddedHeight, paddedWidth / aspectRatio);
+  const centerX = (westX + eastX) / 2;
+  const centerY = (southY + northY) / 2;
 
-  return [west - longitudePadding, south - latitudePadding, east + longitudePadding, north + latitudePadding];
+  return [
+    radiansToDegrees(centerX - boundsWidth / 2),
+    mercatorYToLatitude(centerY - boundsHeight / 2),
+    radiansToDegrees(centerX + boundsWidth / 2),
+    mercatorYToLatitude(centerY + boundsHeight / 2),
+  ];
 };
-const airspaceBounds = expandBounds(rawAirspaceBounds, 0.05);
-const geofence = expandBounds(rawAirspaceBounds, 0.25);
+const geofence = createAspectRatioBounds(rawAirspaceBounds, geofenceAspectRatio, 0.08);
 const initialViewState = {
-  bounds: airspaceBounds,
-  fitBoundsOptions: { padding: 24 },
+  bounds: geofence,
 };
 const controllerTypeOrder: Record<ControllerType, number> = { TWR: 0, APP: 1, CTR: 2 };
 
@@ -131,19 +148,15 @@ export const AirspaceMap = () => {
           </div>
         </div>
       </div>
-      <div className="aspect-video max-h-svh w-full overflow-hidden border border-black/15 dark:border-white/20">
+      <div className="h-96 w-full overflow-hidden border border-black/15 md:h-120 dark:border-white/20">
         <MapView
           initialViewState={initialViewState}
           maxBounds={geofence}
-          minZoom={2}
+          minZoom={3}
           maxZoom={10}
-          style={{ width: "100%", height: "100%" }}
           mapStyle={mapStyle as unknown as StyleSpecification}
           scrollZoom={false}
           interactiveLayerIds={["airspace-fill"]}
-          onLoad={(event) => {
-            event.target.fitBounds(airspaceBounds, { padding: 24, duration: 0 });
-          }}
           onClick={(event) => {
             if (!event.features?.length) {
               setSelection(undefined);
