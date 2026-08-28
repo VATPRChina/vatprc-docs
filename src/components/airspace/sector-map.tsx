@@ -1,6 +1,6 @@
-import sectorsZbpeRaw from "@/assets/map/sectors_zbpe.geojson.json";
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { $api } from "@/lib/client";
+import type { SectorFeatureCollection, SectorProperties } from "@/lib/sector-data";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { SegmentedControl } from "@mantine/core";
 import * as turf from "@turf/turf";
@@ -11,28 +11,11 @@ import { useMemo, useState } from "react";
 type ControllerType = "TWR" | "APP" | "CTR";
 type ControllerTypeFilter = "ALL" | ControllerType;
 
-interface SectorProperties {
-  sector_id: string;
-  atc_id: string;
-  name: string;
-  callsign: string;
-  frequency_mhz: number;
-  lower_limit: number;
-  upper_limit: number;
-  online?: boolean;
-  controller_type?: ControllerType;
-}
-
 interface SectorSelection {
   sectors: SectorProperties[];
   selectedSectorId: string;
 }
 
-const sectorsZbpe = sectorsZbpeRaw as GeoJSON.FeatureCollection<GeoJSON.Polygon, SectorProperties>;
-const sectorAreaById = new Map(
-  sectorsZbpe.features.map((feature) => [feature.properties.sector_id, turf.area(feature)]),
-);
-const rawAirspaceBounds = turf.bbox(sectorsZbpe) as [number, number, number, number];
 const geofenceAspectRatio = 12 / 5;
 const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
 const radiansToDegrees = (radians: number) => (radians * 180) / Math.PI;
@@ -61,10 +44,6 @@ const createAspectRatioBounds = (
     mercatorYToLatitude(centerY + boundsHeight / 2),
   ];
 };
-const geofence = createAspectRatioBounds(rawAirspaceBounds, geofenceAspectRatio, 0.08);
-const initialViewState = {
-  bounds: geofence,
-};
 const controllerTypeOrder: Record<ControllerType, number> = { TWR: 0, APP: 1, CTR: 2 };
 
 const getControllerType = (atcId: string): ControllerType => {
@@ -79,18 +58,27 @@ const formatAltitude = (altitude: number, isUpperLimit = false) => {
   return `${altitude.toLocaleString()} ft`;
 };
 
-export const AirspaceMap = () => {
+export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection }) => {
   const { data } = $api.useQuery("get", "/api/compat/online-status");
   const { t } = useLingui();
   const [controllerTypeFilter, setControllerTypeFilter] = useState<ControllerTypeFilter>("ALL");
   const [selection, setSelection] = useState<SectorSelection>();
 
+  const { sectorAreaById, geofence } = useMemo(() => {
+    const rawAirspaceBounds = turf.bbox(sectorData) as [number, number, number, number];
+
+    return {
+      sectorAreaById: new Map(sectorData.features.map((feature) => [feature.properties.sector_id, turf.area(feature)])),
+      geofence: createAspectRatioBounds(rawAirspaceBounds, geofenceAspectRatio, 0.08),
+    };
+  }, [sectorData]);
+
   const sectors = useMemo(() => {
     const onlineCallsigns = new Set(data?.controllers.map((controller) => controller.callsign) ?? []);
 
     return {
-      ...sectorsZbpe,
-      features: sectorsZbpe.features.map((feature) => ({
+      ...sectorData,
+      features: sectorData.features.map((feature) => ({
         ...feature,
         properties: {
           ...feature.properties,
@@ -99,7 +87,7 @@ export const AirspaceMap = () => {
         },
       })),
     } satisfies GeoJSON.FeatureCollection<GeoJSON.Polygon, SectorProperties>;
-  }, [data?.controllers]);
+  }, [data?.controllers, sectorData]);
   const visibleControllerTypes = controllerTypeFilter === "ALL" ? ["TWR", "APP", "CTR"] : [controllerTypeFilter];
   const visibleSectorFilter = [
     "in",
@@ -113,9 +101,9 @@ export const AirspaceMap = () => {
     <section className="w-full">
       <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="text-2xl font-medium">
+          <h1 className="text-3xl font-medium">
             <Trans>Beijing FIR Airspace</Trans>
-          </h2>
+          </h1>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <Trans>Online sectors are highlighted. Select an area to view overlapping sectors.</Trans>
           </p>
@@ -150,7 +138,7 @@ export const AirspaceMap = () => {
       </div>
       <div className="h-96 w-full overflow-hidden border border-black/15 md:h-120 dark:border-white/20">
         <MapView
-          initialViewState={initialViewState}
+          initialViewState={{ bounds: geofence }}
           maxBounds={geofence}
           minZoom={3}
           maxZoom={10}

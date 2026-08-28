@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/components/homepage/airspace-map.tsx:272
+#: src/components/airspace/sector-map.tsx:288
 msgid "{selectedSectorCount} sectors at this point"
 msgstr "此处有 {selectedSectorCount} 个重叠扇区"
 
@@ -136,7 +136,7 @@ msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 msgid "Airspace"
 msgstr "空域"
 
-#: src/components/homepage/airspace-map.tsx:107
+#: src/components/airspace/sector-map.tsx:121
 #: src/components/table.tsx:182
 msgid "All"
 msgstr "全部"
@@ -150,7 +150,7 @@ msgstr "允许的巡航高度是 {level} （英尺）。"
 msgid "Already Booked"
 msgstr "已被预订"
 
-#: src/components/homepage/airspace-map.tsx:305
+#: src/components/airspace/sector-map.tsx:317
 msgid "Altitude"
 msgstr "高度范围"
 
@@ -194,7 +194,7 @@ msgstr "申请"
 msgid "Apply Now"
 msgstr "立即申请"
 
-#: src/routes/index.tsx:29
+#: src/routes/index.tsx:27
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，或在我们的论坛参与讨论。"
 
@@ -334,7 +334,7 @@ msgstr "基本信息"
 msgid "Become a Controller"
 msgstr "成为管制员"
 
-#: src/components/homepage/airspace-map.tsx:91
+#: src/components/airspace/sector-map.tsx:105
 msgid "Beijing FIR Airspace"
 msgstr "北京飞行情报区空域"
 
@@ -873,6 +873,10 @@ msgstr "无法加载活动。"
 msgid "Failed to load past events."
 msgstr "加载历史活动失败。"
 
+#: src/routes/_doc/airspace/sectors.tsx:25
+msgid "Failed to load sector data."
+msgstr "加载扇区数据失败。"
+
 #: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "训练信息加载失败"
@@ -885,7 +889,7 @@ msgstr "无法读取 CSV 文件。"
 msgid "Failed to save sheet."
 msgstr "无法保存表单。"
 
-#: src/routes/index.tsx:26
+#: src/routes/index.tsx:24
 msgid "Feedback"
 msgstr "反馈"
 
@@ -909,7 +913,7 @@ msgstr "字段列表"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH:mm), 到达机场, 到达时间 (yyyy-MM-dd HH:mm), 呼号, 机型"
 
-#: src/components/homepage/airspace-map.tsx:100
+#: src/components/airspace/sector-map.tsx:114
 msgid "Filter sectors by controller type"
 msgstr "按管制类型筛选扇区"
 
@@ -960,11 +964,11 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
-#: src/routes/index.tsx:53
+#: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
 
-#: src/components/homepage/airspace-map.tsx:301
+#: src/components/airspace/sector-map.tsx:313
 msgid "Frequency"
 msgstr "频率"
 
@@ -1327,7 +1331,7 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "英制单数飞行高度层"
 
-#: src/components/homepage/airspace-map.tsx:120
+#: src/components/airspace/sector-map.tsx:134
 msgid "Offline"
 msgstr "未上线"
 
@@ -1335,7 +1339,7 @@ msgstr "未上线"
 msgid "One option per line."
 msgstr "每行一个选项。"
 
-#: src/components/homepage/airspace-map.tsx:116
+#: src/components/airspace/sector-map.tsx:130
 msgid "Online"
 msgstr "在线"
 
@@ -1343,7 +1347,7 @@ msgstr "在线"
 msgid "Online Controllers"
 msgstr "在线管制员"
 
-#: src/components/homepage/airspace-map.tsx:94
+#: src/components/airspace/sector-map.tsx:108
 msgid "Online sectors are highlighted. Select an area to view overlapping sectors."
 msgstr "已上线的扇区将高亮显示。选择区域可查看重叠扇区。"
 
@@ -1629,6 +1633,10 @@ msgstr "扇区组组员"
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "扇区文件"
+
+#: src/routes/_doc/airspace/sectors.tsx:11
+msgid "Sector Map"
+msgstr "扇区地图"
 
 #: src/components/homepage/notam-board.tsx:70
 msgid "See All Announcements"

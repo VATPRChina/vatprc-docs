@@ -1,4 +1,3 @@
-import { AirspaceMap } from "@/components/homepage/airspace-map";
 import { ControllersBoard } from "@/components/homepage/controllers-board";
 import { EventCarousel } from "@/components/homepage/event-carousel";
 import { Hero } from "@/components/homepage/hero";
@@ -17,7 +16,6 @@ function RouteComponent() {
     <div className="flex w-full flex-col">
       <Hero />
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-16">
-        <AirspaceMap />
         <EventCarousel />
         <NotamBoard />
         <ControllersBoard />

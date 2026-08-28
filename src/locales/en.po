@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/homepage/airspace-map.tsx:272
+#: src/components/airspace/sector-map.tsx:288
 msgid "{selectedSectorCount} sectors at this point"
 msgstr "{selectedSectorCount} sectors at this point"
 
@@ -136,7 +136,7 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
-#: src/components/homepage/airspace-map.tsx:107
+#: src/components/airspace/sector-map.tsx:121
 #: src/components/table.tsx:182
 msgid "All"
 msgstr "All"
@@ -150,7 +150,7 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/components/homepage/airspace-map.tsx:305
+#: src/components/airspace/sector-map.tsx:317
 msgid "Altitude"
 msgstr "Altitude"
 
@@ -194,7 +194,7 @@ msgstr "Apply"
 msgid "Apply Now"
 msgstr "Apply Now"
 
-#: src/routes/index.tsx:29
+#: src/routes/index.tsx:27
 msgid "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or join the discussion on our forum!"
 
@@ -334,7 +334,7 @@ msgstr "Basic Information"
 msgid "Become a Controller"
 msgstr "Become a Controller"
 
-#: src/components/homepage/airspace-map.tsx:91
+#: src/components/airspace/sector-map.tsx:105
 msgid "Beijing FIR Airspace"
 msgstr "Beijing FIR Airspace"
 
@@ -873,6 +873,10 @@ msgstr "Failed to load events."
 msgid "Failed to load past events."
 msgstr "Failed to load past events."
 
+#: src/routes/_doc/airspace/sectors.tsx:25
+msgid "Failed to load sector data."
+msgstr "Failed to load sector data."
+
 #: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "Failed to load trainings"
@@ -885,7 +889,7 @@ msgstr "Failed to read the CSV file."
 msgid "Failed to save sheet."
 msgstr "Failed to save sheet."
 
-#: src/routes/index.tsx:26
+#: src/routes/index.tsx:24
 msgid "Feedback"
 msgstr "Feedback"
 
@@ -909,7 +913,7 @@ msgstr "Fields"
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 
-#: src/components/homepage/airspace-map.tsx:100
+#: src/components/airspace/sector-map.tsx:114
 msgid "Filter sectors by controller type"
 msgstr "Filter sectors by controller type"
 
@@ -960,11 +964,11 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
-#: src/routes/index.tsx:53
+#: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "Forum"
 
-#: src/components/homepage/airspace-map.tsx:301
+#: src/components/airspace/sector-map.tsx:313
 msgid "Frequency"
 msgstr "Frequency"
 
@@ -1327,7 +1331,7 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
 
-#: src/components/homepage/airspace-map.tsx:120
+#: src/components/airspace/sector-map.tsx:134
 msgid "Offline"
 msgstr "Offline"
 
@@ -1335,7 +1339,7 @@ msgstr "Offline"
 msgid "One option per line."
 msgstr "One option per line."
 
-#: src/components/homepage/airspace-map.tsx:116
+#: src/components/airspace/sector-map.tsx:130
 msgid "Online"
 msgstr "Online"
 
@@ -1343,7 +1347,7 @@ msgstr "Online"
 msgid "Online Controllers"
 msgstr "Online Controllers"
 
-#: src/components/homepage/airspace-map.tsx:94
+#: src/components/airspace/sector-map.tsx:108
 msgid "Online sectors are highlighted. Select an area to view overlapping sectors."
 msgstr "Online sectors are highlighted. Select an area to view overlapping sectors."
 
@@ -1629,6 +1633,10 @@ msgstr "Sector Editor"
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "Sector Files"
+
+#: src/routes/_doc/airspace/sectors.tsx:11
+msgid "Sector Map"
+msgstr "Sector Map"
 
 #: src/components/homepage/notam-board.tsx:70
 msgid "See All Announcements"

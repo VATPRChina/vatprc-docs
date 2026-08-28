@@ -56,6 +56,7 @@ import { Route as DocControllerBecomeAControllerRouteImport } from './routes/_do
 import { Route as DocAirspaceVfrRouteImport } from './routes/_doc/airspace/vfr'
 import { Route as DocAirspaceStationRouteImport } from './routes/_doc/airspace/station'
 import { Route as DocAirspaceSopRouteImport } from './routes/_doc/airspace/sop'
+import { Route as DocAirspaceSectorsRouteImport } from './routes/_doc/airspace/sectors'
 import { Route as DocAirspaceRvsmRouteImport } from './routes/_doc/airspace/rvsm'
 import { Route as DocAirspaceRestrictedRouteImport } from './routes/_doc/airspace/restricted'
 import { Route as DocAirspaceFirRouteImport } from './routes/_doc/airspace/fir'
@@ -305,6 +306,11 @@ const DocAirspaceSopRoute = DocAirspaceSopRouteImport.update({
   path: '/airspace/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocAirspaceSectorsRoute = DocAirspaceSectorsRouteImport.update({
+  id: '/_doc/airspace/sectors',
+  path: '/airspace/sectors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocAirspaceRvsmRoute = DocAirspaceRvsmRouteImport.update({
   id: '/_doc/airspace/rvsm',
   path: '/airspace/rvsm',
@@ -346,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/airspace/fir': typeof DocAirspaceFirRoute
   '/airspace/restricted': typeof DocAirspaceRestrictedRoute
   '/airspace/rvsm': typeof DocAirspaceRvsmRoute
+  '/airspace/sectors': typeof DocAirspaceSectorsRoute
   '/airspace/sop': typeof DocAirspaceSopRoute
   '/airspace/station': typeof DocAirspaceStationRoute
   '/airspace/vfr': typeof DocAirspaceVfrRoute
@@ -395,6 +402,7 @@ export interface FileRoutesByTo {
   '/airspace/fir': typeof DocAirspaceFirRoute
   '/airspace/restricted': typeof DocAirspaceRestrictedRoute
   '/airspace/rvsm': typeof DocAirspaceRvsmRoute
+  '/airspace/sectors': typeof DocAirspaceSectorsRoute
   '/airspace/sop': typeof DocAirspaceSopRoute
   '/airspace/station': typeof DocAirspaceStationRoute
   '/airspace/vfr': typeof DocAirspaceVfrRoute
@@ -448,6 +456,7 @@ export interface FileRoutesById {
   '/_doc/airspace/fir': typeof DocAirspaceFirRoute
   '/_doc/airspace/restricted': typeof DocAirspaceRestrictedRoute
   '/_doc/airspace/rvsm': typeof DocAirspaceRvsmRoute
+  '/_doc/airspace/sectors': typeof DocAirspaceSectorsRoute
   '/_doc/airspace/sop': typeof DocAirspaceSopRoute
   '/_doc/airspace/station': typeof DocAirspaceStationRoute
   '/_doc/airspace/vfr': typeof DocAirspaceVfrRoute
@@ -502,6 +511,7 @@ export interface FileRouteTypes {
     | '/airspace/fir'
     | '/airspace/restricted'
     | '/airspace/rvsm'
+    | '/airspace/sectors'
     | '/airspace/sop'
     | '/airspace/station'
     | '/airspace/vfr'
@@ -551,6 +561,7 @@ export interface FileRouteTypes {
     | '/airspace/fir'
     | '/airspace/restricted'
     | '/airspace/rvsm'
+    | '/airspace/sectors'
     | '/airspace/sop'
     | '/airspace/station'
     | '/airspace/vfr'
@@ -603,6 +614,7 @@ export interface FileRouteTypes {
     | '/_doc/airspace/fir'
     | '/_doc/airspace/restricted'
     | '/_doc/airspace/rvsm'
+    | '/_doc/airspace/sectors'
     | '/_doc/airspace/sop'
     | '/_doc/airspace/station'
     | '/_doc/airspace/vfr'
@@ -648,6 +660,7 @@ export interface RootRouteChildren {
   DocAirspaceFirRoute: typeof DocAirspaceFirRoute
   DocAirspaceRestrictedRoute: typeof DocAirspaceRestrictedRoute
   DocAirspaceRvsmRoute: typeof DocAirspaceRvsmRoute
+  DocAirspaceSectorsRoute: typeof DocAirspaceSectorsRoute
   DocAirspaceSopRoute: typeof DocAirspaceSopRoute
   DocAirspaceStationRoute: typeof DocAirspaceStationRoute
   DocAirspaceVfrRoute: typeof DocAirspaceVfrRoute
@@ -1001,6 +1014,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocAirspaceSopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_doc/airspace/sectors': {
+      id: '/_doc/airspace/sectors'
+      path: '/airspace/sectors'
+      fullPath: '/airspace/sectors'
+      preLoaderRoute: typeof DocAirspaceSectorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_doc/airspace/rvsm': {
       id: '/_doc/airspace/rvsm'
       path: '/airspace/rvsm'
@@ -1107,6 +1127,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocAirspaceFirRoute: DocAirspaceFirRoute,
   DocAirspaceRestrictedRoute: DocAirspaceRestrictedRoute,
   DocAirspaceRvsmRoute: DocAirspaceRvsmRoute,
+  DocAirspaceSectorsRoute: DocAirspaceSectorsRoute,
   DocAirspaceSopRoute: DocAirspaceSopRoute,
   DocAirspaceStationRoute: DocAirspaceStationRoute,
   DocAirspaceVfrRoute: DocAirspaceVfrRoute,
