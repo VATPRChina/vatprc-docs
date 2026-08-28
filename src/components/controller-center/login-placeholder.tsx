@@ -4,9 +4,7 @@ import { Button } from "@mantine/core";
 import { TbLockAccess, TbLogin2 } from "react-icons/tb";
 
 export const ControllerCenterLoginPlaceholder = () => (
-  <section
-    className="relative isolate flex min-h-80 items-center justify-center overflow-hidden border border-dashed border-black/20 bg-linear-to-br from-gray-50 via-white to-red-50 p-4 dark:border-white/20 dark:from-gray-950 dark:via-gray-950 dark:to-red-950/30"
-  >
+  <section className="relative isolate flex min-h-80 items-center justify-center overflow-hidden border border-dashed border-black/20 bg-linear-to-br from-gray-50 via-white to-red-50 p-4 dark:border-white/20 dark:from-gray-950 dark:via-gray-950 dark:to-red-950/30">
     <div
       aria-hidden
       className="absolute -top-20 -right-20 size-56 rounded-full bg-red-200/30 blur-3xl dark:bg-red-900/20"
