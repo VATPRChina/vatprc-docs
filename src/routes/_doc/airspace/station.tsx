@@ -30,25 +30,22 @@ const columns: ColumnDef<AtcPosition>[] = [
   {
     accessorKey: "callsign",
     header: () => <Trans>ATC Position</Trans>,
-    cell: ({ getValue }) => <code className="whitespace-nowrap">{getValue<string>()}</code>,
+    cell: ({ getValue, row }) => (
+      <span className="flex flex-row gap-1">
+        <code className="whitespace-nowrap">{getValue<string>()}</code>
+        {row.original.is_tier_2 && (
+          <Badge color="green" variant="outline">
+            <Trans>Tier 2</Trans>
+          </Badge>
+        )}
+      </span>
+    ),
   },
   {
     accessorKey: "category",
     header: () => <Trans>Category</Trans>,
     cell: ({ getValue }) => <CategoryLabel category={getValue<AtcPositionCategory>()} />,
     meta: { filterValues: CATEGORY_FILTERS },
-  },
-  {
-    accessorKey: "is_tier_2",
-    header: () => <Trans>Tier 2</Trans>,
-    cell: ({ getValue }) =>
-      getValue<boolean>() ? (
-        <Badge color="green" variant="light">
-          <Trans>Yes</Trans>
-        </Badge>
-      ) : null,
-    enableGlobalFilter: false,
-    enableColumnFilter: false,
   },
   {
     accessorKey: "callsign_zh",
@@ -95,14 +92,9 @@ function RouteComponent() {
 
   return (
     <main className="container mx-auto flex flex-col gap-4">
-      <div>
-        <h1 className="text-3xl">
-          <Trans>ATC Positions and Frequencies</Trans>
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          <Trans>Search by position, callsign, frequency, category, or CPDLC code.</Trans>
-        </p>
-      </div>
+      <h1 className="text-3xl">
+        <Trans>ATC Positions and Frequencies</Trans>
+      </h1>
 
       <Alert color="blue">
         <Trans>
@@ -117,15 +109,13 @@ function RouteComponent() {
         </Alert>
       )}
 
-      <div className="overflow-x-auto">
-        <RichTable
-          data={data}
-          columns={columns}
-          isLoading={isLoading}
-          stickyHeader
-          initialState={{ pagination: { pageIndex: 0, pageSize: 50 } }}
-        />
-      </div>
+      <RichTable
+        data={data}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ pagination: { pageIndex: 0, pageSize: 50 } }}
+        hideGlobalSearch
+      />
     </main>
   );
 }

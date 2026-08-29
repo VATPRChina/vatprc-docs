@@ -151,7 +151,6 @@ export const ControllerListTable: React.FC = () => {
         isLoading={isLoading}
         initialState={{ pagination: { pageSize: Number.MAX_SAFE_INTEGER } }}
         hideGlobalSearch
-        stickyHeader
       />
     </div>
   );
