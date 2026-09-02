@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
@@ -56,8 +55,6 @@ export interface RichTableProps<TData> {
   initialState?: InitialTableState;
   /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
   hideGlobalSearch?: boolean;
-  /** Keep the header row visible while the table body scrolls past it. */
-  stickyHeader?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
@@ -68,7 +65,6 @@ export const RichTable = <TData,>({
   isLoading,
   initialState,
   hideGlobalSearch,
-  stickyHeader,
 }: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
@@ -104,7 +100,7 @@ export const RichTable = <TData,>({
         <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
       )}
       <Table highlightOnHover>
-        <Table.Thead className={cn(stickyHeader && "sticky !top-[53px] !z-10 bg-[var(--mantine-color-body)]")}>
+        <Table.Thead>
           <Table.Tr>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
