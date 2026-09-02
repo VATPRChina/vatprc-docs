@@ -165,7 +165,7 @@ msgstr "Application Information"
 msgid "Application pending review"
 msgstr "Application pending review"
 
-#: src/routes/controllers.tsx:103
+#: src/routes/controllers.tsx:115
 msgid "Application Review"
 msgstr "Application Review"
 
@@ -521,9 +521,10 @@ msgstr "Controller Application"
 msgid "Controller Application Guideline"
 msgstr "Controller Application Guideline"
 
-#: src/routes/controllers.tsx:15
-#: src/routes/controllers.tsx:70
-#: src/routes/controllers.tsx:82
+#: src/routes/controllers.tsx:16
+#: src/routes/controllers.tsx:71
+#: src/routes/controllers.tsx:83
+#: src/routes/controllers.tsx:94
 msgid "Controller Center"
 msgstr "Controller Center"
 
@@ -1170,7 +1171,16 @@ msgstr "Loading events"
 msgid "Loading past events"
 msgstr "Loading past events"
 
-#: src/components/app/user-info.tsx:81
+#: src/components/controller-center/login-placeholder.tsx:23
+msgid "Log in to Controller Center"
+msgstr "Log in to Controller Center"
+
+#: src/components/controller-center/login-placeholder.tsx:26
+msgid "Log in with your VATSIM account to view your controller training, applications, and bookings."
+msgstr "Log in with your VATSIM account to view your controller training, applications, and bookings."
+
+#: src/components/app/user-info.tsx:71
+#: src/components/controller-center/login-placeholder.tsx:29
 msgid "Login"
 msgstr "Login"
 
@@ -1251,7 +1261,7 @@ msgid "My Event Positions"
 msgstr "My Event Positions"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers.tsx:94
+#: src/routes/controllers.tsx:106
 msgid "My Trainings"
 msgstr "My Trainings"
 
@@ -2052,7 +2062,7 @@ msgstr "Training"
 msgid "Training Application Responses"
 msgstr "Training Application Responses"
 
-#: src/routes/controllers.tsx:98
+#: src/routes/controllers.tsx:110
 msgid "Training Management"
 msgstr "Training Management"
 

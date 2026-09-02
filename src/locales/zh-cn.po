@@ -165,7 +165,7 @@ msgstr "申请信息"
 msgid "Application pending review"
 msgstr "报名审核中"
 
-#: src/routes/controllers.tsx:103
+#: src/routes/controllers.tsx:115
 msgid "Application Review"
 msgstr "申请审核"
 
@@ -521,9 +521,10 @@ msgstr "管制员申请"
 msgid "Controller Application Guideline"
 msgstr "管制员申请指引"
 
-#: src/routes/controllers.tsx:15
-#: src/routes/controllers.tsx:70
-#: src/routes/controllers.tsx:82
+#: src/routes/controllers.tsx:16
+#: src/routes/controllers.tsx:71
+#: src/routes/controllers.tsx:83
+#: src/routes/controllers.tsx:94
 msgid "Controller Center"
 msgstr "管制员中心"
 
@@ -1170,7 +1171,16 @@ msgstr "正在加载活动"
 msgid "Loading past events"
 msgstr "正在加载往期活动"
 
-#: src/components/app/user-info.tsx:81
+#: src/components/controller-center/login-placeholder.tsx:23
+msgid "Log in to Controller Center"
+msgstr "登入管制员中心"
+
+#: src/components/controller-center/login-placeholder.tsx:26
+msgid "Log in with your VATSIM account to view your controller training, applications, and bookings."
+msgstr "使用您的 VATSIM 账户登入，以查看您的管制员培训、申请和预约。"
+
+#: src/components/app/user-info.tsx:71
+#: src/components/controller-center/login-placeholder.tsx:29
 msgid "Login"
 msgstr "登入"
 
@@ -1251,7 +1261,7 @@ msgid "My Event Positions"
 msgstr "我的活动席位"
 
 #: src/components/controller-center/training-browser.tsx:91
-#: src/routes/controllers.tsx:94
+#: src/routes/controllers.tsx:106
 msgid "My Trainings"
 msgstr "我的训练"
 
@@ -2052,7 +2062,7 @@ msgstr "训练"
 msgid "Training Application Responses"
 msgstr "训练申请回复"
 
-#: src/routes/controllers.tsx:98
+#: src/routes/controllers.tsx:110
 msgid "Training Management"
 msgstr "训练管理"
 

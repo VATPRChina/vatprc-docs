@@ -1,5 +1,6 @@
 import { CenterRolesProvider } from "@/components/controller-center/center-context";
 import { IdentityChip } from "@/components/controller-center/identity-chip";
+import { ControllerCenterLoginPlaceholder } from "@/components/controller-center/login-placeholder";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
@@ -71,6 +72,17 @@ function RouteComponent() {
         </h1>
         <Skeleton h={320} />
         <Skeleton h={140} />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="container mx-auto flex flex-col gap-4">
+        <h1 className="text-3xl font-medium">
+          <Trans>Controller Center</Trans>
+        </h1>
+        <ControllerCenterLoginPlaceholder />
       </div>
     );
   }
