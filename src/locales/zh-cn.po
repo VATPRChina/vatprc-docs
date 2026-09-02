@@ -290,9 +290,23 @@ msgstr "ATC 中心"
 msgid "ATC Permission"
 msgstr "管制员权限"
 
+#: src/routes/_doc/airspace/station.tsx:32
+msgid "ATC Position"
+msgstr "管制席位"
+
 #: src/components/app/app-nav-menu.tsx:62
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
+
+#: src/routes/_doc/airspace/station.tsx:84
+#: src/routes/_doc/airspace/station.tsx:100
+msgid "ATC Positions and Frequencies"
+msgstr "管制席位及频率"
+
+#: src/routes/_doc/airspace/station.tsx:19
+#: src/routes/_doc/airspace/station.tsx:26
+msgid "ATIS"
+msgstr "自动终端情报服务（ATIS）"
 
 #: src/routes/controllers/applications/$id.tsx:64
 #: src/routes/events/$id.tsx:69
@@ -403,6 +417,10 @@ msgstr "取消训练"
 msgid "Cancelled"
 msgstr "已取消"
 
+#: src/routes/_doc/airspace/station.tsx:37
+msgid "Category"
+msgstr "类别"
+
 #: src/components/atc-permission-modal.tsx:28
 msgid "Center"
 msgstr "区域"
@@ -422,6 +440,11 @@ msgstr "去 VATSIM 确认"
 #: src/components/atc-application/atc-application-form.tsx:154
 msgid "Checklist"
 msgstr "检查单"
+
+#: src/routes/_doc/airspace/station.tsx:17
+#: src/routes/_doc/airspace/station.tsx:24
+msgid "Chengdu Low Area"
+msgstr "成都低空"
 
 #: src/components/audit-log/audit-log-table.tsx:141
 msgid "Child Entity"
@@ -443,6 +466,10 @@ msgstr "中国 RVSM 高度层"
 #: src/routes/flights/$callsign.tsx:103
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
+
+#: src/routes/_doc/airspace/station.tsx:55
+msgid "Chinese Callsign"
+msgstr "中文呼号"
 
 #: src/routes/sheets/$id.tsx:352
 msgid "Chinese description"
@@ -540,6 +567,10 @@ msgstr "管制"
 #: src/components/controller-center/quarterly-controlling-time.tsx:16
 msgid "Controlling History"
 msgstr "管制上线记录"
+
+#: src/routes/_doc/airspace/station.tsx:108
+msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
+msgstr "是否提供 CPDLC 服务由管制员决定。CPDLC 适用于 7,800 米及以上高度，具体请参阅管制员发布的管制信息。"
 
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
@@ -744,6 +775,10 @@ msgstr "结束时间为必填项"
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
+#: src/routes/_doc/airspace/station.tsx:60
+msgid "English Callsign"
+msgstr "英文呼号"
+
 #: src/routes/sheets/$id.tsx:364
 msgid "English description"
 msgstr "英文说明"
@@ -831,6 +866,10 @@ msgstr "无法导入时刻。"
 #: src/components/homepage/notam-board.tsx:87
 msgid "Failed to load announcements."
 msgstr "无法加载公告。"
+
+#: src/routes/_doc/airspace/station.tsx:115
+msgid "Failed to load ATC positions"
+msgstr "无法加载管制席位"
 
 #: src/components/audit-log/audit-log-table.tsx:163
 msgid "Failed to load audit logs"
@@ -947,6 +986,10 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "论坛"
+
+#: src/routes/_doc/airspace/station.tsx:66
+msgid "Frequency"
+msgstr "频率"
 
 #: src/routes/users/me.tsx:56
 msgid "Full name"
@@ -1181,6 +1224,11 @@ msgstr "公制飞行高度层"
 #: src/components/preferred-route-create.tsx:18
 msgid "metric odd flight level (meters)"
 msgstr "公制单数飞行高度层（米）"
+
+#: src/routes/_doc/airspace/station.tsx:18
+#: src/routes/_doc/airspace/station.tsx:25
+msgid "Military"
+msgstr "军用"
 
 #: src/components/event/atc-slot-create.tsx:153
 msgid "Minimum State"
@@ -1504,6 +1552,7 @@ msgid "Remark"
 msgstr "备注"
 
 #: src/components/controller-center/my-atc-bookings.tsx:143
+#: src/routes/_doc/airspace/station.tsx:76
 msgid "Remarks"
 msgstr "备注"
 
@@ -1593,6 +1642,10 @@ msgstr "保存变更"
 #: src/routes/sheets/$id.tsx:408
 msgid "Save sheet"
 msgstr "保存表单"
+
+#: src/routes/_doc/airspace/station.tsx:103
+msgid "Search by position, callsign, frequency, category, or CPDLC code."
+msgstr "可按席位、呼号、频率、类别或 CPDLC 代码搜索。"
 
 #: src/components/table.tsx:104
 msgid "Search..."
@@ -1686,6 +1739,11 @@ msgstr "职员"
 #: src/components/controller-center/become-controller.tsx:25
 msgid "Staff review"
 msgstr "审核"
+
+#: src/routes/_doc/airspace/station.tsx:16
+#: src/routes/_doc/airspace/station.tsx:23
+msgid "Standard"
+msgstr "常规"
 
 #: src/components/app/app-nav-menu.tsx:63
 #: src/components/controller-center/resource-grid.tsx:40
@@ -1928,6 +1986,7 @@ msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
 #: src/components/atc-permission-modal.tsx:26
+#: src/routes/_doc/airspace/station.tsx:43
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -2188,6 +2247,7 @@ msgstr "撤回"
 msgid "Write your transponder equipment code."
 msgstr "给出你的应答机设备代码。"
 
+#: src/routes/_doc/airspace/station.tsx:47
 #: src/routes/users/me.tsx:84
 #: src/routes/users/me.tsx:85
 msgid "Yes"

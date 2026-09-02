@@ -290,9 +290,23 @@ msgstr "ATC Center"
 msgid "ATC Permission"
 msgstr "ATC Permission"
 
+#: src/routes/_doc/airspace/station.tsx:32
+msgid "ATC Position"
+msgstr "ATC Position"
+
 #: src/components/app/app-nav-menu.tsx:62
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
+
+#: src/routes/_doc/airspace/station.tsx:84
+#: src/routes/_doc/airspace/station.tsx:100
+msgid "ATC Positions and Frequencies"
+msgstr "ATC Positions and Frequencies"
+
+#: src/routes/_doc/airspace/station.tsx:19
+#: src/routes/_doc/airspace/station.tsx:26
+msgid "ATIS"
+msgstr "ATIS"
 
 #: src/routes/controllers/applications/$id.tsx:64
 #: src/routes/events/$id.tsx:69
@@ -403,6 +417,10 @@ msgstr "Cancel Training"
 msgid "Cancelled"
 msgstr "Cancelled"
 
+#: src/routes/_doc/airspace/station.tsx:37
+msgid "Category"
+msgstr "Category"
+
 #: src/components/atc-permission-modal.tsx:28
 msgid "Center"
 msgstr "Center"
@@ -422,6 +440,11 @@ msgstr "Check at VATSIM"
 #: src/components/atc-application/atc-application-form.tsx:154
 msgid "Checklist"
 msgstr "Checklist"
+
+#: src/routes/_doc/airspace/station.tsx:17
+#: src/routes/_doc/airspace/station.tsx:24
+msgid "Chengdu Low Area"
+msgstr "Chengdu Low Area"
 
 #: src/components/audit-log/audit-log-table.tsx:141
 msgid "Child Entity"
@@ -443,6 +466,10 @@ msgstr "China RVSM flight level"
 #: src/routes/flights/$callsign.tsx:103
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
+
+#: src/routes/_doc/airspace/station.tsx:55
+msgid "Chinese Callsign"
+msgstr "Chinese Callsign"
 
 #: src/routes/sheets/$id.tsx:352
 msgid "Chinese description"
@@ -540,6 +567,10 @@ msgstr "Controlling"
 #: src/components/controller-center/quarterly-controlling-time.tsx:16
 msgid "Controlling History"
 msgstr "Controlling History"
+
+#: src/routes/_doc/airspace/station.tsx:108
+msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
+msgstr "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
 
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
@@ -744,6 +775,10 @@ msgstr "End time is required"
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
 
+#: src/routes/_doc/airspace/station.tsx:60
+msgid "English Callsign"
+msgstr "English Callsign"
+
 #: src/routes/sheets/$id.tsx:364
 msgid "English description"
 msgstr "English description"
@@ -831,6 +866,10 @@ msgstr "Failed to import slots."
 #: src/components/homepage/notam-board.tsx:87
 msgid "Failed to load announcements."
 msgstr "Failed to load announcements."
+
+#: src/routes/_doc/airspace/station.tsx:115
+msgid "Failed to load ATC positions"
+msgstr "Failed to load ATC positions"
 
 #: src/components/audit-log/audit-log-table.tsx:163
 msgid "Failed to load audit logs"
@@ -947,6 +986,10 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 #: src/routes/index.tsx:51
 msgid "Forum"
 msgstr "Forum"
+
+#: src/routes/_doc/airspace/station.tsx:66
+msgid "Frequency"
+msgstr "Frequency"
 
 #: src/routes/users/me.tsx:56
 msgid "Full name"
@@ -1181,6 +1224,11 @@ msgstr "metric flight level (meters)"
 #: src/components/preferred-route-create.tsx:18
 msgid "metric odd flight level (meters)"
 msgstr "metric odd flight level (meters)"
+
+#: src/routes/_doc/airspace/station.tsx:18
+#: src/routes/_doc/airspace/station.tsx:25
+msgid "Military"
+msgstr "Military"
 
 #: src/components/event/atc-slot-create.tsx:153
 msgid "Minimum State"
@@ -1504,6 +1552,7 @@ msgid "Remark"
 msgstr "Remark"
 
 #: src/components/controller-center/my-atc-bookings.tsx:143
+#: src/routes/_doc/airspace/station.tsx:76
 msgid "Remarks"
 msgstr "Remarks"
 
@@ -1593,6 +1642,10 @@ msgstr "Save changes"
 #: src/routes/sheets/$id.tsx:408
 msgid "Save sheet"
 msgstr "Save sheet"
+
+#: src/routes/_doc/airspace/station.tsx:103
+msgid "Search by position, callsign, frequency, category, or CPDLC code."
+msgstr "Search by position, callsign, frequency, category, or CPDLC code."
 
 #: src/components/table.tsx:104
 msgid "Search..."
@@ -1686,6 +1739,11 @@ msgstr "Staff"
 #: src/components/controller-center/become-controller.tsx:25
 msgid "Staff review"
 msgstr "Staff review"
+
+#: src/routes/_doc/airspace/station.tsx:16
+#: src/routes/_doc/airspace/station.tsx:23
+msgid "Standard"
+msgstr "Standard"
 
 #: src/components/app/app-nav-menu.tsx:63
 #: src/components/controller-center/resource-grid.tsx:40
@@ -1928,6 +1986,7 @@ msgid "This page is not available in English."
 msgstr "This page is not available in English."
 
 #: src/components/atc-permission-modal.tsx:26
+#: src/routes/_doc/airspace/station.tsx:43
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -2188,6 +2247,7 @@ msgstr "Withdraw"
 msgid "Write your transponder equipment code."
 msgstr "Write your transponder equipment code."
 
+#: src/routes/_doc/airspace/station.tsx:47
 #: src/routes/users/me.tsx:84
 #: src/routes/users/me.tsx:85
 msgid "Yes"
