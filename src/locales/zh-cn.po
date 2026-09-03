@@ -27,8 +27,8 @@ msgid "*T2: Tier 2 Permission. Training status for this permission is not displa
 msgstr "*T2: Tier 2 管制权限，该权限暂无 T 或 S 状态。"
 
 #: src/components/app/app-footer.tsx:9
-msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
-msgstr "© 2010 - {year}，VATSIM 中国分部。保留所有权利。使用 Microsoft Azure、.NET、TanStack 和 shadcn/ui 构建。仅供模拟飞行使用。"
+msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. For simulation use only."
+msgstr "© 2010 - {year}，VATSIM 中国分部。保留所有权利。仅供模拟飞行使用。"
 
 #: src/routes/_doc/controller/controller-list.tsx:47
 msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
@@ -230,7 +230,7 @@ msgid "Area"
 msgstr "区域"
 
 #: src/components/preferred-route-create.tsx:124
-#: src/routes/flights/$callsign.tsx:421
+#: src/routes/flights/$callsign.tsx:419
 #: src/routes/flights/index.tsx:107
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
@@ -384,7 +384,7 @@ msgstr "C3"
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
-#: src/routes/flights/$callsign.tsx:387
+#: src/routes/flights/$callsign.tsx:385
 #: src/routes/flights/index.tsx:105
 msgid "Callsign"
 msgstr "呼号"
@@ -451,7 +451,7 @@ msgid "Child Entity"
 msgstr "子实体"
 
 #: src/components/app/app-nav-menu.tsx:61
-#: src/routes/flights/$callsign.tsx:338
+#: src/routes/flights/$callsign.tsx:336
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
@@ -619,7 +619,7 @@ msgstr "创建时间"
 msgid "Created At"
 msgstr "创建时间"
 
-#: src/routes/flights/$callsign.tsx:408
+#: src/routes/flights/$callsign.tsx:406
 msgid "Cruising Level"
 msgstr "巡航高度"
 
@@ -657,7 +657,7 @@ msgid "Delivery"
 msgstr "放行"
 
 #: src/components/preferred-route-create.tsx:113
-#: src/routes/flights/$callsign.tsx:405
+#: src/routes/flights/$callsign.tsx:403
 #: src/routes/flights/index.tsx:106
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
@@ -795,7 +795,7 @@ msgstr "进入空域时间"
 msgid "Entity"
 msgstr "实体"
 
-#: src/routes/flights/$callsign.tsx:393
+#: src/routes/flights/$callsign.tsx:391
 msgid "Equipment"
 msgstr "设备代码"
 
@@ -949,7 +949,7 @@ msgstr "英制高度层"
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 
-#: src/routes/flights/$callsign.tsx:384
+#: src/routes/flights/$callsign.tsx:382
 msgid "Flight Plan"
 msgstr "飞行计划"
 
@@ -963,7 +963,7 @@ msgstr "飞行计划检查器"
 msgid "Flight Plan Checker"
 msgstr "飞行计划检查器"
 
-#: src/routes/flights/$callsign.tsx:452
+#: src/routes/flights/$callsign.tsx:450
 msgid "Flight Route"
 msgstr "航路"
 
@@ -1416,7 +1416,7 @@ msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者
 msgid "Past Events"
 msgstr "历史活动"
 
-#: src/routes/flights/$callsign.tsx:425
+#: src/routes/flights/$callsign.tsx:423
 msgid "PBN"
 msgstr "PBN"
 
@@ -1425,7 +1425,7 @@ msgstr "PBN"
 msgid "Pending"
 msgstr "待处理"
 
-#: src/routes/flights/$callsign.tsx:425
+#: src/routes/flights/$callsign.tsx:423
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
@@ -1602,16 +1602,16 @@ msgstr "权限"
 
 #: src/components/event/slot-list.tsx:24
 #: src/components/preferred-route-create.tsx:162
-#: src/routes/flights/$callsign.tsx:417
+#: src/routes/flights/$callsign.tsx:415
 #: src/routes/navdata/preferred-routes.tsx:21
 msgid "Route"
 msgstr "航路"
 
-#: src/routes/flights/$callsign.tsx:456
+#: src/routes/flights/$callsign.tsx:454
 msgid "Route display is temporarily disabled due to data protection requirement from our navigation data source."
 msgstr "目前航路显示功能已被禁用，由于导航数据提供方的信息安全要求。"
 
-#: src/routes/flights/$callsign.tsx:455
+#: src/routes/flights/$callsign.tsx:453
 msgid "Route Not Available"
 msgstr "航路信息不可用"
 
@@ -2078,7 +2078,7 @@ msgstr "已成功保存训练记录。"
 msgid "Trainings"
 msgstr "培训"
 
-#: src/routes/flights/$callsign.tsx:399
+#: src/routes/flights/$callsign.tsx:397
 msgid "Transponder"
 msgstr "应答机"
 
@@ -2169,7 +2169,7 @@ msgstr "生效自"
 msgid "Valid Until"
 msgstr "生效至"
 
-#: src/routes/flights/$callsign.tsx:448
+#: src/routes/flights/$callsign.tsx:446
 msgid "Validation Result"
 msgstr "检查结果"
 

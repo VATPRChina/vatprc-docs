@@ -6,10 +6,7 @@ export const AppFooter: React.FC = () => {
   return (
     <footer className="container mx-auto my-4 px-6">
       <p className="text-center text-slate-500 dark:text-slate-300">
-        <Trans>
-          &copy; 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET,
-          TanStack and shadcn/ui. For simulation use only.
-        </Trans>
+        <Trans>&copy; 2010 - {year}, VATSIM P.R. China Division. All rights reserved. For simulation use only.</Trans>
       </p>
     </footer>
   );

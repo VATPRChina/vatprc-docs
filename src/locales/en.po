@@ -27,8 +27,8 @@ msgid "*T2: Tier 2 Permission. Training status for this permission is not displa
 msgstr "*T2: Tier 2 Permission. Training status for this permission is not displayed on this page."
 
 #: src/components/app/app-footer.tsx:9
-msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
-msgstr "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. Powered by Microsoft Azure, .NET, TanStack and shadcn/ui. For simulation use only."
+msgid "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. For simulation use only."
+msgstr "© 2010 - {year}, VATSIM P.R. China Division. All rights reserved. For simulation use only."
 
 #: src/routes/_doc/controller/controller-list.tsx:47
 msgid "<0>✓</0> Certified: The controller is fully eligible to provide solo service to this position."
@@ -230,7 +230,7 @@ msgid "Area"
 msgstr "Area"
 
 #: src/components/preferred-route-create.tsx:124
-#: src/routes/flights/$callsign.tsx:421
+#: src/routes/flights/$callsign.tsx:419
 #: src/routes/flights/index.tsx:107
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
@@ -384,7 +384,7 @@ msgstr "C3"
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
-#: src/routes/flights/$callsign.tsx:387
+#: src/routes/flights/$callsign.tsx:385
 #: src/routes/flights/index.tsx:105
 msgid "Callsign"
 msgstr "Callsign"
@@ -451,7 +451,7 @@ msgid "Child Entity"
 msgstr "Child Entity"
 
 #: src/components/app/app-nav-menu.tsx:61
-#: src/routes/flights/$callsign.tsx:338
+#: src/routes/flights/$callsign.tsx:336
 msgid "China RVSM"
 msgstr "China RVSM"
 
@@ -619,7 +619,7 @@ msgstr "Created at"
 msgid "Created At"
 msgstr "Created At"
 
-#: src/routes/flights/$callsign.tsx:408
+#: src/routes/flights/$callsign.tsx:406
 msgid "Cruising Level"
 msgstr "Cruising Level"
 
@@ -657,7 +657,7 @@ msgid "Delivery"
 msgstr "Delivery"
 
 #: src/components/preferred-route-create.tsx:113
-#: src/routes/flights/$callsign.tsx:405
+#: src/routes/flights/$callsign.tsx:403
 #: src/routes/flights/index.tsx:106
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
@@ -795,7 +795,7 @@ msgstr "Enter at"
 msgid "Entity"
 msgstr "Entity"
 
-#: src/routes/flights/$callsign.tsx:393
+#: src/routes/flights/$callsign.tsx:391
 msgid "Equipment"
 msgstr "Equipment"
 
@@ -949,7 +949,7 @@ msgstr "flight level"
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "Flight looks good. Please confirm with the clearance delivery controller."
 
-#: src/routes/flights/$callsign.tsx:384
+#: src/routes/flights/$callsign.tsx:382
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
@@ -963,7 +963,7 @@ msgstr "Flight plan checker"
 msgid "Flight Plan Checker"
 msgstr "Flight Plan Checker"
 
-#: src/routes/flights/$callsign.tsx:452
+#: src/routes/flights/$callsign.tsx:450
 msgid "Flight Route"
 msgstr "Flight Route"
 
@@ -1416,7 +1416,7 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "Past Events"
 msgstr "Past Events"
 
-#: src/routes/flights/$callsign.tsx:425
+#: src/routes/flights/$callsign.tsx:423
 msgid "PBN"
 msgstr "PBN"
 
@@ -1425,7 +1425,7 @@ msgstr "PBN"
 msgid "Pending"
 msgstr "Pending"
 
-#: src/routes/flights/$callsign.tsx:425
+#: src/routes/flights/$callsign.tsx:423
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
 
@@ -1602,16 +1602,16 @@ msgstr "Roles"
 
 #: src/components/event/slot-list.tsx:24
 #: src/components/preferred-route-create.tsx:162
-#: src/routes/flights/$callsign.tsx:417
+#: src/routes/flights/$callsign.tsx:415
 #: src/routes/navdata/preferred-routes.tsx:21
 msgid "Route"
 msgstr "Route"
 
-#: src/routes/flights/$callsign.tsx:456
+#: src/routes/flights/$callsign.tsx:454
 msgid "Route display is temporarily disabled due to data protection requirement from our navigation data source."
 msgstr "Route display is temporarily disabled due to data protection requirement from our navigation data source."
 
-#: src/routes/flights/$callsign.tsx:455
+#: src/routes/flights/$callsign.tsx:453
 msgid "Route Not Available"
 msgstr "Route Not Available"
 
@@ -2078,7 +2078,7 @@ msgstr "Training record saved successfully."
 msgid "Trainings"
 msgstr "Trainings"
 
-#: src/routes/flights/$callsign.tsx:399
+#: src/routes/flights/$callsign.tsx:397
 msgid "Transponder"
 msgstr "Transponder"
 
@@ -2169,7 +2169,7 @@ msgstr "Valid From"
 msgid "Valid Until"
 msgstr "Valid Until"
 
-#: src/routes/flights/$callsign.tsx:448
+#: src/routes/flights/$callsign.tsx:446
 msgid "Validation Result"
 msgstr "Validation Result"
 
