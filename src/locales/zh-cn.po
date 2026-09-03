@@ -112,7 +112,7 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/components/app/app-nav-menu.tsx:114
+#: src/components/app/app-nav-menu.tsx:113
 msgid "Admin"
 msgstr "管理"
 
@@ -145,7 +145,7 @@ msgstr "允许的巡航高度是 {level} （英尺）。"
 msgid "Already Booked"
 msgstr "已被预订"
 
-#: src/components/app/app-nav-menu.tsx:107
+#: src/components/app/app-nav-menu.tsx:106
 msgid "Announcement"
 msgstr "公告"
 
@@ -281,7 +281,7 @@ msgstr "未开放管制报名"
 msgid "ATC Booking:"
 msgstr "管制员预订："
 
-#: src/components/app/app-nav-menu.tsx:90
+#: src/components/app/app-nav-menu.tsx:89
 #: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC 中心"
@@ -492,7 +492,7 @@ msgstr "CID"
 msgid "Comment"
 msgstr "评论"
 
-#: src/components/app/app-nav-menu.tsx:101
+#: src/components/app/app-nav-menu.tsx:100
 msgid "Community"
 msgstr "社区"
 
@@ -513,7 +513,7 @@ msgstr "连接到 VATSIM 网络后，你的航班将显示在这里。"
 msgid "Controller"
 msgstr "管制员"
 
-#: src/components/app/app-nav-menu.tsx:93
+#: src/components/app/app-nav-menu.tsx:92
 msgid "Controller Application"
 msgstr "管制员申请"
 
@@ -532,7 +532,7 @@ msgstr "管制员中心"
 msgid "Controller Info"
 msgstr "管制员信息"
 
-#: src/components/app/app-nav-menu.tsx:91
+#: src/components/app/app-nav-menu.tsx:90
 #: src/components/controller-center/resource-grid.tsx:37
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:18
@@ -547,7 +547,7 @@ msgstr "管制员训练部主管"
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
-#: src/components/app/app-nav-menu.tsx:88
+#: src/components/app/app-nav-menu.tsx:87
 #: src/components/event/atc-slot-list.tsx:203
 #: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
@@ -810,8 +810,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
-#: src/components/app/app-nav-menu.tsx:105
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:104
+#: src/components/app/app-nav-menu.tsx:116
 #: src/components/audit-log/audit-log-table.tsx:15
 #: src/components/controller-center/my-atc-bookings.tsx:227
 msgid "Event"
@@ -953,7 +953,7 @@ msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 msgid "Flight Plan"
 msgstr "飞行计划"
 
-#: src/components/app/app-nav-menu.tsx:84
+#: src/components/app/app-nav-menu.tsx:83
 #: src/components/homepage/hero.tsx:61
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
@@ -979,7 +979,7 @@ msgstr "流量控制"
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "由于技术限制，地图上显示的边界可能过时或者被简化。飞行时请遵守本地管制员指令。"
 
-#: src/components/app/app-nav-menu.tsx:104
+#: src/components/app/app-nav-menu.tsx:103
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
@@ -1063,7 +1063,7 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-#: src/components/app/app-nav-menu.tsx:119
+#: src/components/app/app-nav-menu.tsx:118
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -1136,7 +1136,7 @@ msgstr "航段方向不允许"
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "本活动配置的区域管制席位预约数不足一半。"
 
-#: src/components/app/app-nav-menu.tsx:97
+#: src/components/app/app-nav-menu.tsx:96
 #: src/components/controller-center/resource-grid.tsx:41
 #: src/routes/_doc/controller/loa.tsx:14
 msgid "Letter of Agreement"
@@ -1234,7 +1234,7 @@ msgstr "军用"
 msgid "Minimum State"
 msgstr "最低权限"
 
-#: src/components/app/app-nav-menu.tsx:95
+#: src/components/app/app-nav-menu.tsx:94
 #: src/components/controller-center/resource-grid.tsx:30
 msgid "Moodle"
 msgstr "Moodle"
@@ -1491,7 +1491,7 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
-#: src/components/app/app-nav-menu.tsx:122
+#: src/components/app/app-nav-menu.tsx:121
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
@@ -1507,7 +1507,7 @@ msgstr "历史训练"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/components/app/app-nav-menu.tsx:92
+#: src/components/app/app-nav-menu.tsx:91
 #: src/components/controller-center/resource-grid.tsx:31
 msgid "Progression Guide"
 msgstr "晋升指引"
@@ -1659,7 +1659,7 @@ msgstr "搜索..."
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
-#: src/components/app/app-nav-menu.tsx:96
+#: src/components/app/app-nav-menu.tsx:95
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "扇区文件"
@@ -1680,7 +1680,7 @@ msgstr "自我反思"
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "自我反思功能将很快上线。目前请将你的自我反思发送给你的教员。"
 
-#: src/components/app/app-nav-menu.tsx:120
+#: src/components/app/app-nav-menu.tsx:119
 #: src/routes/sheets.tsx:23
 msgid "Sheet Management"
 msgstr "表单管理"
@@ -2144,7 +2144,7 @@ msgstr "用户审计日志"
 msgid "User Info"
 msgstr "用户信息"
 
-#: src/components/app/app-nav-menu.tsx:118
+#: src/components/app/app-nav-menu.tsx:117
 msgid "User List"
 msgstr "用户列表"
 
@@ -2156,10 +2156,6 @@ msgstr "用户角色"
 #: src/routes/users/index.tsx:162
 msgid "Users"
 msgstr "用户"
-
-#: src/components/app/app-nav-menu.tsx:82
-msgid "vACDM"
-msgstr "模拟 A-CDM"
 
 #: src/components/preferred-route-create.tsx:137
 msgid "Valid From"
@@ -2222,7 +2218,7 @@ msgstr "查看过去活动"
 msgid "Visiting"
 msgstr "客座"
 
-#: src/components/app/app-nav-menu.tsx:94
+#: src/components/app/app-nav-menu.tsx:93
 #: src/components/controller-center/resource-grid.tsx:32
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
@@ -2239,7 +2235,7 @@ msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧�
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
-#: src/components/app/app-nav-menu.tsx:83
+#: src/components/app/app-nav-menu.tsx:82
 msgid "Weather"
 msgstr "天气"
 

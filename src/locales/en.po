@@ -112,7 +112,7 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app/app-nav-menu.tsx:114
+#: src/components/app/app-nav-menu.tsx:113
 msgid "Admin"
 msgstr "Admin"
 
@@ -145,7 +145,7 @@ msgstr "Allowed levels are {level} (in feet)."
 msgid "Already Booked"
 msgstr "Already Booked"
 
-#: src/components/app/app-nav-menu.tsx:107
+#: src/components/app/app-nav-menu.tsx:106
 msgid "Announcement"
 msgstr "Announcement"
 
@@ -281,7 +281,7 @@ msgstr "ATC booking not open"
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
-#: src/components/app/app-nav-menu.tsx:90
+#: src/components/app/app-nav-menu.tsx:89
 #: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -492,7 +492,7 @@ msgstr "CID"
 msgid "Comment"
 msgstr "Comment"
 
-#: src/components/app/app-nav-menu.tsx:101
+#: src/components/app/app-nav-menu.tsx:100
 msgid "Community"
 msgstr "Community"
 
@@ -513,7 +513,7 @@ msgstr "Connect to the VATSIM network to see your flight here."
 msgid "Controller"
 msgstr "Controller"
 
-#: src/components/app/app-nav-menu.tsx:93
+#: src/components/app/app-nav-menu.tsx:92
 msgid "Controller Application"
 msgstr "Controller Application"
 
@@ -532,7 +532,7 @@ msgstr "Controller Center"
 msgid "Controller Info"
 msgstr "Controller Info"
 
-#: src/components/app/app-nav-menu.tsx:91
+#: src/components/app/app-nav-menu.tsx:90
 #: src/components/controller-center/resource-grid.tsx:37
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:18
@@ -547,7 +547,7 @@ msgstr "Controller Training Director"
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
-#: src/components/app/app-nav-menu.tsx:88
+#: src/components/app/app-nav-menu.tsx:87
 #: src/components/event/atc-slot-list.tsx:203
 #: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
@@ -810,8 +810,8 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/components/app/app-nav-menu.tsx:105
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:104
+#: src/components/app/app-nav-menu.tsx:116
 #: src/components/audit-log/audit-log-table.tsx:15
 #: src/components/controller-center/my-atc-bookings.tsx:227
 msgid "Event"
@@ -953,7 +953,7 @@ msgstr "Flight looks good. Please confirm with the clearance delivery controller
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
-#: src/components/app/app-nav-menu.tsx:84
+#: src/components/app/app-nav-menu.tsx:83
 #: src/components/homepage/hero.tsx:61
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
@@ -979,7 +979,7 @@ msgstr "Flow Management Position"
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 
-#: src/components/app/app-nav-menu.tsx:104
+#: src/components/app/app-nav-menu.tsx:103
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
@@ -1063,7 +1063,7 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-#: src/components/app/app-nav-menu.tsx:119
+#: src/components/app/app-nav-menu.tsx:118
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -1136,7 +1136,7 @@ msgstr "Leg direction violation"
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "Less than half of the configured area control positions have been booked for this event."
 
-#: src/components/app/app-nav-menu.tsx:97
+#: src/components/app/app-nav-menu.tsx:96
 #: src/components/controller-center/resource-grid.tsx:41
 #: src/routes/_doc/controller/loa.tsx:14
 msgid "Letter of Agreement"
@@ -1234,7 +1234,7 @@ msgstr "Military"
 msgid "Minimum State"
 msgstr "Minimum State"
 
-#: src/components/app/app-nav-menu.tsx:95
+#: src/components/app/app-nav-menu.tsx:94
 #: src/components/controller-center/resource-grid.tsx:30
 msgid "Moodle"
 msgstr "Moodle"
@@ -1491,7 +1491,7 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app/app-nav-menu.tsx:122
+#: src/components/app/app-nav-menu.tsx:121
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
@@ -1507,7 +1507,7 @@ msgstr "Previous Trainings"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/app/app-nav-menu.tsx:92
+#: src/components/app/app-nav-menu.tsx:91
 #: src/components/controller-center/resource-grid.tsx:31
 msgid "Progression Guide"
 msgstr "Progression Guide"
@@ -1659,7 +1659,7 @@ msgstr "Search..."
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
-#: src/components/app/app-nav-menu.tsx:96
+#: src/components/app/app-nav-menu.tsx:95
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "Sector Files"
@@ -1680,7 +1680,7 @@ msgstr "Self Reflection"
 msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 msgstr "Self reflection will be online soon. For now, please send your self reflection to your mentor."
 
-#: src/components/app/app-nav-menu.tsx:120
+#: src/components/app/app-nav-menu.tsx:119
 #: src/routes/sheets.tsx:23
 msgid "Sheet Management"
 msgstr "Sheet Management"
@@ -2144,7 +2144,7 @@ msgstr "User Audit Logs"
 msgid "User Info"
 msgstr "User Info"
 
-#: src/components/app/app-nav-menu.tsx:118
+#: src/components/app/app-nav-menu.tsx:117
 msgid "User List"
 msgstr "User List"
 
@@ -2156,10 +2156,6 @@ msgstr "User Role"
 #: src/routes/users/index.tsx:162
 msgid "Users"
 msgstr "Users"
-
-#: src/components/app/app-nav-menu.tsx:82
-msgid "vACDM"
-msgstr "vACDM"
 
 #: src/components/preferred-route-create.tsx:137
 msgid "Valid From"
@@ -2222,7 +2218,7 @@ msgstr "View past events"
 msgid "Visiting"
 msgstr "Visiting"
 
-#: src/components/app/app-nav-menu.tsx:94
+#: src/components/app/app-nav-menu.tsx:93
 #: src/components/controller-center/resource-grid.tsx:32
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
@@ -2239,7 +2235,7 @@ msgstr "We need your help! Donate to VATPRC to help us to improve!"
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
-#: src/components/app/app-nav-menu.tsx:83
+#: src/components/app/app-nav-menu.tsx:82
 msgid "Weather"
 msgstr "Weather"
 
