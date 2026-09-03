@@ -740,22 +740,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/api/flights/by-callsign/{callsign}/route": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations["route_by_callsign"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/api/flights/by-callsign/{callsign}/warnings": {
     parameters: {
       query?: never;
@@ -1514,14 +1498,6 @@ export interface components {
       navigation_performance: string;
       raw_route: string;
       transponder: string;
-    };
-    FlightFix: {
-      identifier: string;
-    };
-    FlightLeg: {
-      from: components["schemas"]["FlightFix"];
-      leg_identifier: string;
-      to: components["schemas"]["FlightFix"];
     };
     HealthResponse: {
       database: string;
@@ -3368,30 +3344,6 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["FlightDto"];
-        };
-      };
-      500: components["responses"]["InternalServerError"];
-    };
-  };
-  route_by_callsign: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description Callsign */
-        callsign: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FlightLeg"][];
         };
       };
       500: components["responses"]["InternalServerError"];

@@ -18,7 +18,7 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/components/table.tsx:181
+#: src/components/table.tsx:177
 msgid "{size} items/page"
 msgstr "每页 {size} 条"
 
@@ -132,7 +132,7 @@ msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 msgid "Airspace"
 msgstr "空域"
 
-#: src/components/table.tsx:182
+#: src/components/table.tsx:178
 msgid "All"
 msgstr "全部"
 
@@ -230,7 +230,7 @@ msgid "Area"
 msgstr "区域"
 
 #: src/components/preferred-route-create.tsx:124
-#: src/routes/flights/$callsign.tsx:424
+#: src/routes/flights/$callsign.tsx:421
 #: src/routes/flights/index.tsx:107
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
@@ -298,8 +298,8 @@ msgstr "管制席位"
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/routes/_doc/airspace/station.tsx:84
-#: src/routes/_doc/airspace/station.tsx:100
+#: src/routes/_doc/airspace/station.tsx:81
+#: src/routes/_doc/airspace/station.tsx:96
 msgid "ATC Positions and Frequencies"
 msgstr "管制席位及频率"
 
@@ -384,7 +384,7 @@ msgstr "C3"
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
-#: src/routes/flights/$callsign.tsx:390
+#: src/routes/flights/$callsign.tsx:387
 #: src/routes/flights/index.tsx:105
 msgid "Callsign"
 msgstr "呼号"
@@ -417,7 +417,7 @@ msgstr "取消训练"
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/routes/_doc/airspace/station.tsx:37
+#: src/routes/_doc/airspace/station.tsx:46
 msgid "Category"
 msgstr "类别"
 
@@ -467,7 +467,7 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/_doc/airspace/station.tsx:55
+#: src/routes/_doc/airspace/station.tsx:52
 msgid "Chinese Callsign"
 msgstr "中文呼号"
 
@@ -568,7 +568,7 @@ msgstr "管制"
 msgid "Controlling History"
 msgstr "管制上线记录"
 
-#: src/routes/_doc/airspace/station.tsx:108
+#: src/routes/_doc/airspace/station.tsx:100
 msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
 msgstr "是否提供 CPDLC 服务由管制员决定。CPDLC 适用于 7,800 米及以上高度，具体请参阅管制员发布的管制信息。"
 
@@ -619,7 +619,7 @@ msgstr "创建时间"
 msgid "Created At"
 msgstr "创建时间"
 
-#: src/routes/flights/$callsign.tsx:411
+#: src/routes/flights/$callsign.tsx:408
 msgid "Cruising Level"
 msgstr "巡航高度"
 
@@ -657,7 +657,7 @@ msgid "Delivery"
 msgstr "放行"
 
 #: src/components/preferred-route-create.tsx:113
-#: src/routes/flights/$callsign.tsx:408
+#: src/routes/flights/$callsign.tsx:405
 #: src/routes/flights/index.tsx:106
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
@@ -775,7 +775,7 @@ msgstr "结束时间为必填项"
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
-#: src/routes/_doc/airspace/station.tsx:60
+#: src/routes/_doc/airspace/station.tsx:57
 msgid "English Callsign"
 msgstr "英文呼号"
 
@@ -795,7 +795,7 @@ msgstr "进入空域时间"
 msgid "Entity"
 msgstr "实体"
 
-#: src/routes/flights/$callsign.tsx:396
+#: src/routes/flights/$callsign.tsx:393
 msgid "Equipment"
 msgstr "设备代码"
 
@@ -867,7 +867,7 @@ msgstr "无法导入时刻。"
 msgid "Failed to load announcements."
 msgstr "无法加载公告。"
 
-#: src/routes/_doc/airspace/station.tsx:115
+#: src/routes/_doc/airspace/station.tsx:107
 msgid "Failed to load ATC positions"
 msgstr "无法加载管制席位"
 
@@ -949,7 +949,7 @@ msgstr "英制高度层"
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 
-#: src/routes/flights/$callsign.tsx:387
+#: src/routes/flights/$callsign.tsx:384
 msgid "Flight Plan"
 msgstr "飞行计划"
 
@@ -963,7 +963,7 @@ msgstr "飞行计划检查器"
 msgid "Flight Plan Checker"
 msgstr "飞行计划检查器"
 
-#: src/routes/flights/$callsign.tsx:455
+#: src/routes/flights/$callsign.tsx:452
 msgid "Flight Route"
 msgstr "航路"
 
@@ -987,7 +987,7 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 msgid "Forum"
 msgstr "论坛"
 
-#: src/routes/_doc/airspace/station.tsx:66
+#: src/routes/_doc/airspace/station.tsx:63
 msgid "Frequency"
 msgstr "频率"
 
@@ -999,19 +999,19 @@ msgstr "姓名"
 msgid "Full Name"
 msgstr "姓名"
 
-#: src/components/table.tsx:195
+#: src/components/table.tsx:191
 msgid "Go to first page"
 msgstr "前往第一页"
 
-#: src/components/table.tsx:219
+#: src/components/table.tsx:215
 msgid "Go to last page"
 msgstr "前往最后页"
 
-#: src/components/table.tsx:211
+#: src/components/table.tsx:207
 msgid "Go to next page"
 msgstr "前往下一页"
 
-#: src/components/table.tsx:203
+#: src/components/table.tsx:199
 msgid "Go to previous page"
 msgstr "前往上一页"
 
@@ -1171,16 +1171,16 @@ msgstr "正在加载活动"
 msgid "Loading past events"
 msgstr "正在加载往期活动"
 
-#: src/components/controller-center/login-placeholder.tsx:23
+#: src/components/controller-center/login-placeholder.tsx:21
 msgid "Log in to Controller Center"
 msgstr "登入管制员中心"
 
-#: src/components/controller-center/login-placeholder.tsx:26
+#: src/components/controller-center/login-placeholder.tsx:24
 msgid "Log in with your VATSIM account to view your controller training, applications, and bookings."
 msgstr "使用您的 VATSIM 账户登入，以查看您的管制员培训、申请和预约。"
 
 #: src/components/app/user-info.tsx:71
-#: src/components/controller-center/login-placeholder.tsx:29
+#: src/components/controller-center/login-placeholder.tsx:27
 msgid "Login"
 msgstr "登入"
 
@@ -1291,7 +1291,7 @@ msgstr "暂无评论"
 msgid "No content"
 msgstr "暂无内容"
 
-#: src/components/table.tsx:173
+#: src/components/table.tsx:169
 msgid "No data"
 msgstr "无数据"
 
@@ -1404,7 +1404,7 @@ msgstr "其他移交协议书"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
-#: src/components/table.tsx:186
+#: src/components/table.tsx:182
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
 
@@ -1416,7 +1416,7 @@ msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者
 msgid "Past Events"
 msgstr "历史活动"
 
-#: src/routes/flights/$callsign.tsx:428
+#: src/routes/flights/$callsign.tsx:425
 msgid "PBN"
 msgstr "PBN"
 
@@ -1425,7 +1425,7 @@ msgstr "PBN"
 msgid "Pending"
 msgstr "待处理"
 
-#: src/routes/flights/$callsign.tsx:428
+#: src/routes/flights/$callsign.tsx:425
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
@@ -1552,7 +1552,7 @@ msgid "Remark"
 msgstr "备注"
 
 #: src/components/controller-center/my-atc-bookings.tsx:143
-#: src/routes/_doc/airspace/station.tsx:76
+#: src/routes/_doc/airspace/station.tsx:73
 msgid "Remarks"
 msgstr "备注"
 
@@ -1602,10 +1602,18 @@ msgstr "权限"
 
 #: src/components/event/slot-list.tsx:24
 #: src/components/preferred-route-create.tsx:162
-#: src/routes/flights/$callsign.tsx:420
+#: src/routes/flights/$callsign.tsx:417
 #: src/routes/navdata/preferred-routes.tsx:21
 msgid "Route"
 msgstr "航路"
+
+#: src/routes/flights/$callsign.tsx:456
+msgid "Route display is temporarily disabled due to data protection requirement from our navigation data source."
+msgstr "目前航路显示功能已被禁用，由于导航数据提供方的信息安全要求。"
+
+#: src/routes/flights/$callsign.tsx:455
+msgid "Route Not Available"
+msgstr "航路信息不可用"
 
 #: src/components/flight-warnings.tsx:46
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
@@ -1643,11 +1651,7 @@ msgstr "保存变更"
 msgid "Save sheet"
 msgstr "保存表单"
 
-#: src/routes/_doc/airspace/station.tsx:103
-msgid "Search by position, callsign, frequency, category, or CPDLC code."
-msgstr "可按席位、呼号、频率、类别或 CPDLC 代码搜索。"
-
-#: src/components/table.tsx:104
+#: src/components/table.tsx:100
 msgid "Search..."
 msgstr "搜索..."
 
@@ -1986,7 +1990,7 @@ msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
 #: src/components/atc-permission-modal.tsx:26
-#: src/routes/_doc/airspace/station.tsx:43
+#: src/routes/_doc/airspace/station.tsx:38
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -2074,7 +2078,7 @@ msgstr "已成功保存训练记录。"
 msgid "Trainings"
 msgstr "培训"
 
-#: src/routes/flights/$callsign.tsx:402
+#: src/routes/flights/$callsign.tsx:399
 msgid "Transponder"
 msgstr "应答机"
 
@@ -2165,7 +2169,7 @@ msgstr "生效自"
 msgid "Valid Until"
 msgstr "生效至"
 
-#: src/routes/flights/$callsign.tsx:451
+#: src/routes/flights/$callsign.tsx:448
 msgid "Validation Result"
 msgstr "检查结果"
 
@@ -2247,7 +2251,6 @@ msgstr "撤回"
 msgid "Write your transponder equipment code."
 msgstr "给出你的应答机设备代码。"
 
-#: src/routes/_doc/airspace/station.tsx:47
 #: src/routes/users/me.tsx:84
 #: src/routes/users/me.tsx:85
 msgid "Yes"
