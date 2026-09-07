@@ -79,7 +79,6 @@ const contents: NavGroupData[] = [
         divider: true,
       },
       { label: msg`Charts`, href: "https://chartfox.org/", external: true },
-      { label: msg`vACDM`, href: "https://vacdm.vatprc.net/", external: true },
       { label: msg`Weather`, href: "https://metar-taf.com/", external: true },
       { label: msg`Flight plan checker`, href: "/flights" },
     ],

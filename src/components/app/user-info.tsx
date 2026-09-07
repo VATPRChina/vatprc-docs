@@ -1,6 +1,6 @@
 import { AssumeRoleModal } from "./assume-role-modal";
 import { RequireRole } from "@/components/require-role";
-import { $api, assumedRolesAtom, logout } from "@/lib/client";
+import { $api, assumedRolesAtom, logout, redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button, Indicator, Menu } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -66,18 +66,8 @@ export const UserInfo = () => {
     );
   }
 
-  const url = new URL("/auth/authorize", import.meta.env.VITE_API_AUTH_ENDPOINT);
-  url.searchParams.set("client_id", import.meta.env.VITE_API_CLIENT_ID);
-  url.searchParams.set("redirect_uri", import.meta.env.VITE_API_REDIRECT_URI);
-  url.searchParams.set("response_type", "code");
-
-  const onLogin = () => {
-    localStorage.setItem("pre_oauth_path", window.location.pathname);
-    location.assign(url.toString());
-  };
-
   return (
-    <Button variant="subtle" onClick={onLogin}>
+    <Button variant="subtle" onClick={redirectToLogin}>
       <Trans>Login</Trans>
     </Button>
   );

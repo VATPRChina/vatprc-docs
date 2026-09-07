@@ -35,6 +35,16 @@ export const hasAuthenticatedAtom = atom(
 
 export const getAccessToken = () => sessionStore.get(accessTokenAtom)?.access_token;
 
+export const redirectToLogin = () => {
+  const url = new URL("/auth/authorize", import.meta.env.VITE_API_AUTH_ENDPOINT);
+  url.searchParams.set("client_id", import.meta.env.VITE_API_CLIENT_ID);
+  url.searchParams.set("redirect_uri", import.meta.env.VITE_API_REDIRECT_URI);
+  url.searchParams.set("response_type", "code");
+
+  localStorage.setItem("pre_oauth_path", window.location.pathname);
+  location.assign(url.toString());
+};
+
 const handleSessionLoginResponse = (
   result: Pick<components["schemas"]["TokenResponse"], "access_token" | "expires_in" | "refresh_token">,
 ) => {

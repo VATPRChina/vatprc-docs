@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { ActionIcon, Alert, Button, Popover, Skeleton, Tooltip } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { FC, Fragment } from "react";
-import { TbArrowRight, TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
+import { FC } from "react";
+import { TbInfoCircleFilled, TbPlaneInflight } from "react-icons/tb";
 
 export const Route = createFileRoute("/flights/$callsign")({
   component: RouteComponent,
@@ -325,8 +325,6 @@ const Warning: FC<WarningProps & React.ComponentProps<typeof Popover>> = ({
   );
 };
 
-const LEG_IDENTIFIER_DIRECT = "DCT";
-
 const CruisingLevelMeters = ({ feet }: { feet: number }) => {
   const { t } = useLingui();
   const { isChinaRvsm } = getCruisingLevelInMeters(feet);
@@ -360,16 +358,13 @@ function RouteComponent() {
       params: { path: { callsign } },
     },
   );
-  const { data: route, error: routeError } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}/route", {
-    params: { path: { callsign } },
-  });
 
   return (
     <div className="flex flex-col items-start gap-4">
       <BackButton />
-      {(error ?? warningsError ?? routeError) && (
-        <Alert color="red" title={(error ?? warningsError ?? routeError)?.title}>
-          {(error ?? warningsError ?? routeError)?.detail}
+      {(error ?? warningsError) && (
+        <Alert color="red" title={(error ?? warningsError)?.title}>
+          {(error ?? warningsError)?.detail}
         </Alert>
       )}
       {isLoading && <Skeleton h={64} />}
@@ -455,22 +450,12 @@ function RouteComponent() {
             <Trans>Flight Route</Trans>
           </h2>
           <div className="flex flex-wrap items-center gap-1">
-            <span className="text-lg">{route?.[0].from.identifier}</span>
-            {route &&
-              route.map((r, i) => (
-                <Fragment key={`${r.from.identifier}-${r.leg_identifier}-${r.to.identifier}`}>
-                  {r.leg_identifier !== LEG_IDENTIFIER_DIRECT && (
-                    <span className="font-light text-slate-700 dark:text-slate-300">{r.leg_identifier}</span>
-                  )}
-                  {r.leg_identifier === LEG_IDENTIFIER_DIRECT && (
-                    <span className="font-light text-slate-700 dark:text-slate-300">
-                      <TbArrowRight />
-                    </span>
-                  )}
-                  <Warning flight={flight} warnings={warnings} field="route" field_index={i} popoverText />
-                  <span className="text-lg">{r.to.identifier}</span>
-                </Fragment>
-              ))}
+            <Alert title={<Trans>Route Not Available</Trans>}>
+              <Trans>
+                Route display is temporarily disabled due to data protection requirement from our navigation data
+                source.
+              </Trans>
+            </Alert>
           </div>
         </div>
       )}

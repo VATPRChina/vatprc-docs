@@ -4,7 +4,7 @@ import { createIsomorphicFn } from "@tanstack/react-start";
 import { isBefore } from "date-fns";
 
 export { $api } from "./client/client";
-export { login, logout } from "./client/auth";
+export { login, logout, redirectToLogin } from "./client/auth";
 export { assumedRolesAtom } from "./client/role-assumption";
 
 export type UserRole = components["schemas"]["UserRole"];
