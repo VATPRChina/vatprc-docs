@@ -59,18 +59,15 @@ const formatAltitude = (altitude: number, isUpperLimit = false) => {
 };
 
 export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection }) => {
-  const { data } = $api.useQuery("get", "/api/compat/online-status");
+  const { data } = $api.useQuery("get", "/api/compat/online-status", {}, { refetchInterval: 60_000 });
   const { t } = useLingui();
   const [controllerTypeFilter, setControllerTypeFilter] = useState<ControllerTypeFilter>("ALL");
   const [selection, setSelection] = useState<SectorSelection>();
 
-  const { sectorAreaById, geofence } = useMemo(() => {
+  const geofence = useMemo(() => {
     const rawAirspaceBounds = turf.bbox(sectorData) as [number, number, number, number];
 
-    return {
-      sectorAreaById: new Map(sectorData.features.map((feature) => [feature.properties.sector_id, turf.area(feature)])),
-      geofence: createAspectRatioBounds(rawAirspaceBounds, geofenceAspectRatio, 0.08),
-    };
+    return createAspectRatioBounds(rawAirspaceBounds, geofenceAspectRatio, 0.08);
   }, [sectorData]);
 
   const sectors = useMemo(() => {
@@ -164,16 +161,11 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
                   controllerTypeOrder[b.controller_type ?? getControllerType(b.atc_id)] ||
                 a.atc_id.localeCompare(b.atc_id),
             );
-            const smallestSector = clickedSectors.reduce((smallest, sector) =>
-              (sectorAreaById.get(sector.sector_id) ?? Number.POSITIVE_INFINITY) <
-              (sectorAreaById.get(smallest.sector_id) ?? Number.POSITIVE_INFINITY)
-                ? sector
-                : smallest,
-            );
+            const defaultSector = clickedSectors[0];
 
             setSelection({
               sectors: clickedSectors,
-              selectedSectorId: smallestSector.sector_id,
+              selectedSectorId: defaultSector.sector_id,
             });
           }}
           onMouseMove={(event) => {
