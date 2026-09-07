@@ -18,10 +18,6 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
-#: src/components/airspace/sector-map.tsx:288
-msgid "{selectedSectorCount} sectors at this point"
-msgstr "此处有 {selectedSectorCount} 个重叠扇区"
-
 #: src/components/table.tsx:181
 msgid "{size} items/page"
 msgstr "每页 {size} 条"

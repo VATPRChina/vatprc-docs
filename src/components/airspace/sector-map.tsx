@@ -59,7 +59,7 @@ const formatAltitude = (altitude: number, isUpperLimit = false) => {
 };
 
 export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection }) => {
-  const { data } = $api.useQuery("get", "/api/compat/online-status", {}, { refetchInterval: 60_000 });
+  const { data } = $api.useQuery("get", "/api/compat/online-status");
   const { t } = useLingui();
   const [controllerTypeFilter, setControllerTypeFilter] = useState<ControllerTypeFilter>("ALL");
   const [selection, setSelection] = useState<SectorSelection>();
@@ -92,7 +92,6 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
     ["literal", visibleControllerTypes],
   ] as FilterSpecification;
   const clickedSectorFilter = ["==", ["get", "sector_id"], selection?.selectedSectorId ?? ""] as FilterSpecification;
-  const selectedSectorCount = selection?.sectors.length ?? 0;
 
   return (
     <section className="w-full">
@@ -271,15 +270,7 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
         </MapView>
       </div>
       {selection && (
-        <aside
-          aria-live="polite"
-          className="mt-2 border border-black/15 bg-white p-3 font-mono text-sm text-gray-950 dark:border-white/20 dark:bg-gray-950 dark:text-gray-50"
-        >
-          {selection.sectors.length > 1 && (
-            <p className="mb-2 text-xs font-bold text-gray-600 dark:text-gray-400">
-              <Trans>{selectedSectorCount} sectors at this point</Trans>
-            </p>
-          )}
+        <aside aria-live="polite" className="mt-2 font-mono text-sm text-gray-950 dark:text-gray-50">
           <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
             {selection.sectors.map((sector) => (
               <button

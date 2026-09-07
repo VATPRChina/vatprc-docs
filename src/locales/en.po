@@ -18,10 +18,6 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
-#: src/components/airspace/sector-map.tsx:288
-msgid "{selectedSectorCount} sectors at this point"
-msgstr "{selectedSectorCount} sectors at this point"
-
 #: src/components/table.tsx:181
 msgid "{size} items/page"
 msgstr "{size} items/page"
