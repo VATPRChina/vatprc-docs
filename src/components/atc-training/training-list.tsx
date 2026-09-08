@@ -1,6 +1,6 @@
 import { User } from "../app/user";
 import { DateTime } from "../event/datetime";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { LinkButton } from "../ui/link-button";
 import { components } from "@/lib/api";
@@ -11,7 +11,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter } from "date-fns";
 import { FC } from "react";
 
-const col = createColumnHelper<components["schemas"]["TrainingDto"]>();
+const col = createColumnHelper<RichTableFeatures, components["schemas"]["TrainingDto"]>();
 const columns = [
   col.accessor("name", { header: () => <Trans>Title</Trans> }),
   col.accessor((training) => `${training.trainee.full_name} ${training.trainee.cid}`.trim(), {

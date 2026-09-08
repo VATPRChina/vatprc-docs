@@ -2,7 +2,7 @@ import { User } from "@/components/app/user";
 import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { RequireRole } from "@/components/require-role";
-import { RichTable } from "@/components/table";
+import { RichTable, RichTableFeatures } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
@@ -24,7 +24,7 @@ const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
   "controller-training-mentor",
 ];
 
-const columnHelper = createColumnHelper<components["schemas"]["UserDto"]>();
+const columnHelper = createColumnHelper<RichTableFeatures, components["schemas"]["UserDto"]>();
 
 const columns = [
   columnHelper.accessor((user) => `${user.full_name} ${user.cid}`.trim(), {

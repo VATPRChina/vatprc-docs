@@ -1,5 +1,5 @@
 import { User } from "../app/user";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { LinkButton } from "../ui/link-button";
 import { APPLICATION_STATUS } from "./atc-application-status";
 import { components } from "@/lib/api";
@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { FC } from "react";
 import { TbFileDescription } from "react-icons/tb";
 
-const columnHelper = createColumnHelper<components["schemas"]["AtcApplicationSummaryDto"]>();
+const columnHelper = createColumnHelper<RichTableFeatures, components["schemas"]["AtcApplicationSummaryDto"]>();
 
 export const columns = [
   columnHelper.accessor((application) => `${application.user.full_name} ${application.user.cid}`.trim(), {

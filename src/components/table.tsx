@@ -3,15 +3,24 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import {
+  columnFilteringFeature,
+  columnVisibilityFeature,
+  createFilteredRowModel,
+  createPaginatedRowModel,
+  createSortedRowModel,
+  filterFns,
+  globalFilteringFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  sortFns,
+  tableFeatures,
   ColumnDef,
   flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  InitialTableState,
+  TableState,
+  RowData,
   SortDirection,
-  useReactTable,
+  useTable,
 } from "@tanstack/react-table";
 import { ChangeEvent, FC } from "react";
 import {
@@ -24,6 +33,25 @@ import {
   TbSelector,
   TbSearch,
 } from "react-icons/tb";
+
+const columnMeta: { filterValues?: { value: string; label: MessageDescriptor }[] } = {};
+
+const richTableFeatures = tableFeatures({
+  columnFilteringFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  filteredRowModel: createFilteredRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+  sortedRowModel: createSortedRowModel(),
+  filterFns,
+  sortFns,
+  columnMeta,
+});
+
+export type RichTableFeatures = typeof richTableFeatures;
 
 interface SortableHeaderProps {
   children: React.ReactNode;
@@ -47,19 +75,19 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
   );
 };
 
-export interface RichTableProps<TData> {
+export interface RichTableProps<TData extends RowData> {
   data?: TData[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<RichTableFeatures, TData, any>[];
   isLoading?: boolean;
-  initialState?: InitialTableState;
+  initialState?: Partial<TableState<RichTableFeatures>>;
   /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
   hideGlobalSearch?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
 
-export const RichTable = <TData,>({
+export const RichTable = <TData extends RowData>({
   data,
   columns,
   isLoading,
@@ -68,17 +96,14 @@ export const RichTable = <TData,>({
 }: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
-  const table = useReactTable({
+  const table = useTable({
+    features: richTableFeatures,
     data: data ?? EMPTY_TABLE,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     initialState,
   });
 
-  const currentPage = table.getState().pagination.pageIndex + 1;
+  const currentPage = table.state.pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
   const onGlobalFilterChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -151,7 +176,7 @@ export const RichTable = <TData,>({
             </Table.Tr>
           ))}
           {isLoading &&
-            Array(Math.min(table.getState().pagination.pageSize, 15))
+            Array(Math.min(table.state.pagination.pageSize, 15))
               .fill(0)
               .map((_, i) => (
                 <Table.Tr key={i}>
@@ -171,7 +196,7 @@ export const RichTable = <TData,>({
       )}
       <div className="flex items-center justify-between gap-2 self-stretch px-2">
         <Select
-          value={table.getState().pagination.pageSize > 100 ? "all" : `${table.getState().pagination.pageSize}`}
+          value={table.state.pagination.pageSize > 100 ? "all" : `${table.state.pagination.pageSize}`}
           onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
           data={[
             ...[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` })),
@@ -221,10 +246,3 @@ export const RichTable = <TData,>({
     </div>
   );
 };
-
-declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<TData, TValue> {
-    filterValues?: { value: string; label: MessageDescriptor }[];
-  }
-}

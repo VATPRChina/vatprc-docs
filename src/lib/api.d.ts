@@ -1505,12 +1505,7 @@ export interface components {
     };
     /** @enum {string} */
     LevelRestrictionType:
-      | "standard-even"
-      | "standard-odd"
-      | "standard"
-      | "flight-level-even"
-      | "flight-level-odd"
-      | "flight-level";
+      "standard-even" | "standard-odd" | "standard" | "flight-level-even" | "flight-level-odd" | "flight-level";
     /** @enum {string} */
     OAuthErrorCode:
       | "invalid_request"

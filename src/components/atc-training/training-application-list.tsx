@@ -1,5 +1,5 @@
 import { User } from "../app/user";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { TrainingApplicationCreateModal } from "./training-application-create";
 import { TrainingApplicationDeleteModal } from "./training-application-delete";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
@@ -55,7 +55,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   ],
 ]);
 
-const col = createColumnHelper<components["schemas"]["TrainingApplicationDto"]>();
+const col = createColumnHelper<RichTableFeatures, components["schemas"]["TrainingApplicationDto"]>();
 const columns = [
   col.accessor("name", { header: () => <Trans>Title</Trans> }),
   col.accessor("status", {
