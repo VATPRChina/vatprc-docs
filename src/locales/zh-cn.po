@@ -2323,3 +2323,23 @@ msgstr "你的航班当前不在线"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"
+
+#: src/components/event/event-create.tsx:178
+msgid "Publish to Discord"
+msgstr "发布到 Discord"
+
+#: src/components/event/event-create.tsx:178
+msgid "Retry Discord sync"
+msgstr "重试 Discord 同步"
+
+#: src/components/event/event-create.tsx:182
+msgid "Save changes before publishing to Discord."
+msgstr "请先保存修改，再发布到 Discord。"
+
+#: src/components/event/event-create.tsx:165
+msgid "The event is saved, but the Discord post could not be updated. Please retry syncing."
+msgstr "活动已保存，但 Discord 帖子更新失败，请重试同步。"
+
+#: src/components/event/event-create.tsx:160
+msgid "View Discord post"
+msgstr "查看 Discord 帖子"
