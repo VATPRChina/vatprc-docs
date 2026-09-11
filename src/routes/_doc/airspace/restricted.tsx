@@ -1,12 +1,13 @@
 import firGeoJsonRaw from "@/assets/map/fir.geojson.json";
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
+import { Map } from "@/components/airspace/map";
 import { $api } from "@/lib/client";
 import { Vplaaf } from "@/lib/client/vplaaf";
 import { Trans } from "@lingui/react/macro";
 import { Alert, LoadingOverlay } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import * as turf from "@turf/turf";
-import { Layer, Map, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
+import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { DataDrivenPropertyValueSpecification, ColorSpecification } from "maplibre-gl";
 import { useMemo } from "react";
 

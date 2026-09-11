@@ -1,10 +1,11 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
+import { Map as MapView } from "@/components/airspace/map";
 import { $api } from "@/lib/client";
 import type { SectorFeatureCollection, SectorProperties } from "@/lib/sector-data";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { SegmentedControl } from "@mantine/core";
 import * as turf from "@turf/turf";
-import { Layer, Map as MapView, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
+import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { FilterSpecification } from "maplibre-gl";
 import { useMemo, useState } from "react";
 
