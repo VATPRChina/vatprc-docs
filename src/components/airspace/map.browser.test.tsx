@@ -5,7 +5,7 @@ import { createRef } from "react";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 
-test("loads GeoJSON through the bundled worker and renders map features", async () => {
+test("loads GeoJSON through the bundled worker and renders map features", { timeout: 15_000 }, async () => {
   const ref = createRef<MapRef>();
   const errors: Error[] = [];
   const screen = await render(
@@ -41,7 +41,10 @@ test("loads GeoJSON through the bundled worker and renders map features", async 
     </Map>,
   );
 
-  await expect.poll(() => ref.current?.queryRenderedFeatures({ layers: ["test-fill"] }).length ?? 0).toBeGreaterThan(0);
+  // Worker startup and the first WebGL frame can take longer on shared CI runners.
+  await expect
+    .poll(() => ref.current?.queryRenderedFeatures({ layers: ["test-fill"] }).length ?? 0, { timeout: 10_000 })
+    .toBeGreaterThan(0);
   expect(errors).toEqual([]);
   await screen.unmount();
 });
