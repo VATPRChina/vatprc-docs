@@ -18,6 +18,8 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
+      - name: Install browser for testing
+        run: pnpm exec playwright install
       - name: Lint
         run: pnpm lint
       - name: Test

@@ -1,5 +1,5 @@
 import { CreatePreferredRoute } from "@/components/preferred-route-create";
-import { RichTable } from "@/components/table";
+import { RichTable, RichTableFeatures } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -7,7 +7,7 @@ import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
 
-const columns: ColumnDef<components["schemas"]["PreferredRouteDto"]>[] = [
+const columns: ColumnDef<RichTableFeatures, components["schemas"]["PreferredRouteDto"]>[] = [
   {
     accessorKey: "departure",
     header: () => <Trans>Departure</Trans>,

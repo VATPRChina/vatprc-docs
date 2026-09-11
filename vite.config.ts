@@ -59,10 +59,12 @@ export default defineConfig(({ command }) => ({
         test: {
           include: ["**/*.browser.{test,spec}.{ts,tsx}"],
           name: "browser",
+          setupFiles: ["./src/test/browser.setup.ts"],
           browser: {
             provider: playwright(),
             enabled: true,
             headless: true,
+            viewport: { width: 1024, height: 768 },
             instances: [{ browser: "chromium" }],
           },
         },

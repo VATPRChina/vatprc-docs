@@ -41,20 +41,18 @@ function toEditableFields(fields: components["schemas"]["SheetFieldDto"][]) {
   return fields
     .filter((field) => !field.is_deleted)
     .toSorted((a, b) => a.sequence - b.sequence)
-    .map(
-      (field, index): EditableField => ({
-        localKey: field.id || crypto.randomUUID(),
-        id: field.id,
-        sequence: index,
-        name_zh: field.name_zh,
-        name_en: field.name_en ?? "",
-        kind: field.kind,
-        single_choice_options: field.single_choice_options,
-        optionsText: field.single_choice_options.join("\n"),
-        description_zh: field.description_zh ?? "",
-        description_en: field.description_en ?? "",
-      }),
-    );
+    .map((field, index): EditableField => ({
+      localKey: field.id || crypto.randomUUID(),
+      id: field.id,
+      sequence: index,
+      name_zh: field.name_zh,
+      name_en: field.name_en ?? "",
+      kind: field.kind,
+      single_choice_options: field.single_choice_options,
+      optionsText: field.single_choice_options.join("\n"),
+      description_zh: field.description_zh ?? "",
+      description_en: field.description_en ?? "",
+    }));
 }
 
 function renumberFields(fields: EditableField[]) {

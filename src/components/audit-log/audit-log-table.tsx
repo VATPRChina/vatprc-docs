@@ -1,5 +1,5 @@
 import { User } from "../app/user";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { components } from "@/lib/api";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
@@ -122,7 +122,7 @@ const EntityCell = ({ entity }: { entity?: null | components["schemas"]["AuditLo
   );
 };
 
-const columnHelper = createColumnHelper<components["schemas"]["AuditLogDto"]>();
+const columnHelper = createColumnHelper<RichTableFeatures, components["schemas"]["AuditLogDto"]>();
 
 const columns = [
   columnHelper.accessor("created_at", {

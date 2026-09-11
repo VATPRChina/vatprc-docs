@@ -6,9 +6,10 @@ import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorSc
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
+import { theme } from "@/theme";
 import { Trans, useLingui } from "@lingui/react/macro";
 import mantineCarouselStyle from "@mantine/carousel/styles.css?url";
-import { Alert, createTheme, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { Alert, mantineHtmlProps, MantineProvider } from "@mantine/core";
 import mantineCoreStyle from "@mantine/core/styles.css?url";
 import mantineDateStyle from "@mantine/dates/styles.css?url";
 import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
@@ -24,32 +25,6 @@ import {
 } from "@tanstack/react-router";
 import mapLibreCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { FC, PropsWithChildren, useEffect } from "react";
-
-const theme = createTheme({
-  primaryColor: "vatprc",
-  primaryShade: 8,
-  colors: {
-    vatprc: [
-      "#ffebeb",
-      "#fad5d5",
-      "#f2a8a7",
-      "#eb7877",
-      "#e6504e",
-      "#e33834",
-      "#e22b26",
-      "#c91e1a",
-      "#ab1615",
-      "#9d0b10",
-    ],
-  },
-  fontFamily:
-    '"Outfit", ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
-  // CJK sans fonts before the generic keyword: otherwise Chinese glyphs in monospace
-  // contexts fall through to the browser's default fixed font (SimSun on Windows).
-  fontFamilyMonospace:
-    'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",monospace',
-  defaultRadius: 0,
-});
 
 const colorSchemeManager = cookieColorSchemeManager();
 

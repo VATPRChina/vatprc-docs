@@ -1,4 +1,5 @@
 // @ts-check
+import { fixupConfigRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import router from "@tanstack/eslint-plugin-router";
 import pluginLingui from "eslint-plugin-lingui";
@@ -24,8 +25,8 @@ export default defineConfig(
       },
     },
   },
-  react.configs.flat.recommended,
-  react.configs.flat["jsx-runtime"],
+  // eslint-plugin-react still uses context APIs removed in ESLint 10.
+  ...fixupConfigRules([react.configs.flat.recommended, react.configs.flat["jsx-runtime"]]),
   // reactHooks.configs.flat.recommended,
   router.configs["flat/recommended"],
   { ignores: ["app/lib/api.d.ts"] },

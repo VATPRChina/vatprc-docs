@@ -1,6 +1,6 @@
 import { User } from "../app/user";
 import { RequireRole } from "../require-role";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTime } from "./datetime";
 import { AssignEventSlot } from "./slot-assign";
@@ -17,7 +17,7 @@ import { TbLockAccess } from "react-icons/tb";
 
 const EVENT_BOOKING_LIMIT = 1;
 
-const columnHelper = createColumnHelper<components["schemas"]["EventSlotDto"]>();
+const columnHelper = createColumnHelper<RichTableFeatures, components["schemas"]["EventSlotDto"]>();
 
 const columns = [
   columnHelper.accessor("airspace.name", {

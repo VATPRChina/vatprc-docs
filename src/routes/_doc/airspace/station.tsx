@@ -1,4 +1,4 @@
-import { RichTable } from "@/components/table";
+import { RichTable, RichTableFeatures } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import type { MessageDescriptor } from "@lingui/core";
@@ -26,7 +26,7 @@ const CATEGORY_FILTERS: { value: AtcPositionCategory; label: MessageDescriptor }
   { value: "atis", label: msg`ATIS` },
 ];
 
-const columns: ColumnDef<AtcPosition>[] = [
+const columns: ColumnDef<RichTableFeatures, AtcPosition>[] = [
   {
     accessorKey: "callsign",
     header: () => <Trans>ATC Position</Trans>,

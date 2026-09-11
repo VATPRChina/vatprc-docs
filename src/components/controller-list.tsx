@@ -1,5 +1,5 @@
 import { AtcPermissionModalButton } from "./atc-permission-modal";
-import { RichTable } from "./table";
+import { RichTable, RichTableFeatures } from "./table";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { compareControllers, compareRatings, isMilitaryController } from "@/lib/controller-list";
@@ -65,7 +65,7 @@ const PermissionBadge: React.FC<{ permissions: AtcPermissionDto[]; kind: string 
   );
 };
 
-const col = createColumnHelper<AtcStatusDto>();
+const col = createColumnHelper<RichTableFeatures, AtcStatusDto>();
 
 const columns = [
   col.accessor((c) => `${c.user.full_name} ${c.user.cid}`.trim(), {
@@ -81,7 +81,7 @@ const columns = [
   }),
   col.accessor("rating", {
     header: () => <Trans>Rating</Trans>,
-    sortingFn: (rowA, rowB) => compareRatings(rowA.original.rating, rowB.original.rating),
+    sortFn: (rowA, rowB) => compareRatings(rowA.original.rating, rowB.original.rating),
     cell: ({ row }) => (
       <div className="flex items-center gap-2 font-mono">
         <span className="font-bold">{row.original.rating}</span>
@@ -149,7 +149,7 @@ export const ControllerListTable: React.FC = () => {
         data={rows}
         columns={columns}
         isLoading={isLoading}
-        initialState={{ pagination: { pageSize: Number.MAX_SAFE_INTEGER } }}
+        initialState={{ pagination: { pageIndex: 0, pageSize: Number.MAX_SAFE_INTEGER } }}
         hideGlobalSearch
       />
     </div>

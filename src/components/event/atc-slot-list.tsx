@@ -1,7 +1,7 @@
 import { User } from "../app/user";
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal";
 import { RequireRole } from "../require-role";
-import { RichTable } from "../table";
+import { RichTable, RichTableFeatures } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { AssignAtcSlot } from "./atc-slot-assign";
 import { CreateAtcSlot } from "./atc-slot-create";
@@ -29,7 +29,7 @@ export const POSITION_STATE_PRIORITY: components["schemas"]["UserControllerState
   "mentor",
 ];
 
-const columnHelper = createColumnHelper<components["schemas"]["EventAtcPositionDto"]>();
+const columnHelper = createColumnHelper<RichTableFeatures, components["schemas"]["EventAtcPositionDto"]>();
 
 const columns = [
   columnHelper.accessor("callsign", {
@@ -78,7 +78,7 @@ const columns = [
         </div>
       );
     },
-    sortingFn: (a, b) => {
+    sortFn: (a, b) => {
       const kindA = POSITION_KINDS_PRIORITY.indexOf(a.original.position_kind_id);
       const kindB = POSITION_KINDS_PRIORITY.indexOf(b.original.position_kind_id);
       if (kindA !== kindB) {
@@ -216,7 +216,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
         data={slots}
         columns={columns}
         isLoading={isLoading}
-        initialState={{ sorting: [{ desc: false, id: "position" }], pagination: { pageSize: 20 } }}
+        initialState={{ sorting: [{ desc: false, id: "position" }], pagination: { pageIndex: 0, pageSize: 20 } }}
       />
     </>
   );

@@ -9,71 +9,61 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SheetsRouteImport } from './routes/sheets'
-import { Route as FlightsRouteImport } from './routes/flights'
-import { Route as EventsRouteImport } from './routes/events'
-import { Route as ControllersRouteImport } from './routes/controllers'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as UsersIndexRouteImport } from './routes/users/index'
-import { Route as FlightsIndexRouteImport } from './routes/flights/index'
-import { Route as EventsIndexRouteImport } from './routes/events/index'
-import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
-import { Route as UsersMeRouteImport } from './routes/users/me'
-import { Route as UsersAuditRouteImport } from './routes/users/audit'
-import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
-import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
-import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
-import { Route as EventsHistoryRouteImport } from './routes/events/history'
-import { Route as EventsAuditRouteImport } from './routes/events/audit'
-import { Route as EventsIdRouteImport } from './routes/events/$id'
-import { Route as DocsSplatRouteImport } from './routes/docs/$'
-import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
-import { Route as DocSopRouteImport } from './routes/_doc/sop'
+import { Route as ControllersRouteImport } from './routes/controllers'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as FlightsRouteImport } from './routes/flights'
+import { Route as SheetsRouteImport } from './routes/sheets'
 import { Route as DocLoaRouteImport } from './routes/_doc/loa'
-import { Route as ControllersTrainingsIndexRouteImport } from './routes/controllers/trainings/index'
-import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
-import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
-import { Route as ControllersTrainingsIdRouteImport } from './routes/controllers/trainings/$id'
-import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
-import { Route as ControllersApplicationsAuditRouteImport } from './routes/controllers/applications/audit'
-import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
-import { Route as DocPilotTs3RouteImport } from './routes/_doc/pilot/ts3'
-import { Route as DocPilotStartToFlyRouteImport } from './routes/_doc/pilot/start-to-fly'
-import { Route as DocPilotPilotSoftwaresRouteImport } from './routes/_doc/pilot/pilot-softwares'
-import { Route as DocPilotIntroductionToFlyRouteImport } from './routes/_doc/pilot/introduction-to-fly'
-import { Route as DocDivisionStaffRouteImport } from './routes/_doc/division/staff'
-import { Route as DocDivisionPrivacyRouteImport } from './routes/_doc/division/privacy'
-import { Route as DocDivisionPolicyRouteImport } from './routes/_doc/division/policy'
-import { Route as DocDivisionMeetingRouteImport } from './routes/_doc/division/meeting'
-import { Route as DocDivisionIntroductionRouteImport } from './routes/_doc/division/introduction'
-import { Route as DocDivisionApiRouteImport } from './routes/_doc/division/api'
-import { Route as DocControllerVisitingAndTransferringRouteImport } from './routes/_doc/controller/visiting-and-transferring'
-import { Route as DocControllerSectorRouteImport } from './routes/_doc/controller/sector'
-import { Route as DocControllerLoaRouteImport } from './routes/_doc/controller/loa'
-import { Route as DocControllerControllerRegulationsRouteImport } from './routes/_doc/controller/controller-regulations'
-import { Route as DocControllerControllerListRouteImport } from './routes/_doc/controller/controller-list'
-import { Route as DocControllerBecomeAControllerRouteImport } from './routes/_doc/controller/become-a-controller'
-import { Route as DocAirspaceVfrRouteImport } from './routes/_doc/airspace/vfr'
-import { Route as DocAirspaceStationRouteImport } from './routes/_doc/airspace/station'
-import { Route as DocAirspaceSopRouteImport } from './routes/_doc/airspace/sop'
-import { Route as DocAirspaceSectorsRouteImport } from './routes/_doc/airspace/sectors'
-import { Route as DocAirspaceRvsmRouteImport } from './routes/_doc/airspace/rvsm'
-import { Route as DocAirspaceRestrictedRouteImport } from './routes/_doc/airspace/restricted'
+import { Route as DocSopRouteImport } from './routes/_doc/sop'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
+import { Route as DocsSplatRouteImport } from './routes/docs/$'
+import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as EventsIdRouteImport } from './routes/events/$id'
+import { Route as EventsAuditRouteImport } from './routes/events/audit'
+import { Route as EventsHistoryRouteImport } from './routes/events/history'
+import { Route as FlightsIndexRouteImport } from './routes/flights/index'
+import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
+import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
+import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
+import { Route as UsersIndexRouteImport } from './routes/users/index'
+import { Route as UsersAuditRouteImport } from './routes/users/audit'
+import { Route as UsersMeRouteImport } from './routes/users/me'
 import { Route as DocAirspaceFirRouteImport } from './routes/_doc/airspace/fir'
+import { Route as DocAirspaceRestrictedRouteImport } from './routes/_doc/airspace/restricted'
+import { Route as DocAirspaceRvsmRouteImport } from './routes/_doc/airspace/rvsm'
+import { Route as DocAirspaceSectorsRouteImport } from './routes/_doc/airspace/sectors'
+import { Route as DocAirspaceSopRouteImport } from './routes/_doc/airspace/sop'
+import { Route as DocAirspaceStationRouteImport } from './routes/_doc/airspace/station'
+import { Route as DocAirspaceVfrRouteImport } from './routes/_doc/airspace/vfr'
+import { Route as DocControllerBecomeAControllerRouteImport } from './routes/_doc/controller/become-a-controller'
+import { Route as DocControllerControllerListRouteImport } from './routes/_doc/controller/controller-list'
+import { Route as DocControllerControllerRegulationsRouteImport } from './routes/_doc/controller/controller-regulations'
+import { Route as DocControllerLoaRouteImport } from './routes/_doc/controller/loa'
+import { Route as DocControllerSectorRouteImport } from './routes/_doc/controller/sector'
+import { Route as DocControllerVisitingAndTransferringRouteImport } from './routes/_doc/controller/visiting-and-transferring'
+import { Route as DocDivisionApiRouteImport } from './routes/_doc/division/api'
+import { Route as DocDivisionIntroductionRouteImport } from './routes/_doc/division/introduction'
+import { Route as DocDivisionMeetingRouteImport } from './routes/_doc/division/meeting'
+import { Route as DocDivisionPolicyRouteImport } from './routes/_doc/division/policy'
+import { Route as DocDivisionPrivacyRouteImport } from './routes/_doc/division/privacy'
+import { Route as DocDivisionStaffRouteImport } from './routes/_doc/division/staff'
+import { Route as DocPilotIntroductionToFlyRouteImport } from './routes/_doc/pilot/introduction-to-fly'
+import { Route as DocPilotPilotSoftwaresRouteImport } from './routes/_doc/pilot/pilot-softwares'
+import { Route as DocPilotStartToFlyRouteImport } from './routes/_doc/pilot/start-to-fly'
+import { Route as DocPilotTs3RouteImport } from './routes/_doc/pilot/ts3'
+import { Route as ControllersApplicationsIndexRouteImport } from './routes/controllers/applications/index'
+import { Route as ControllersApplicationsIdRouteImport } from './routes/controllers/applications/$id'
+import { Route as ControllersApplicationsAuditRouteImport } from './routes/controllers/applications/audit'
+import { Route as ControllersApplicationsNewRouteImport } from './routes/controllers/applications/new'
+import { Route as ControllersTrainingsIndexRouteImport } from './routes/controllers/trainings/index'
+import { Route as ControllersTrainingsIdRouteImport } from './routes/controllers/trainings/$id'
+import { Route as DocsUtilsImageRouteImport } from './routes/docs/utils/image'
 
-const SheetsRoute = SheetsRouteImport.update({
-  id: '/sheets',
-  path: '/sheets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlightsRoute = FlightsRouteImport.update({
-  id: '/flights',
-  path: '/flights',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControllersRoute = ControllersRouteImport.update({
@@ -81,84 +71,19 @@ const ControllersRoute = ControllersRouteImport.update({
   path: '/controllers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UsersIndexRoute = UsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
+const FlightsRoute = FlightsRouteImport.update({
+  id: '/flights',
+  path: '/flights',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FlightsIndexRoute = FlightsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => FlightsRoute,
-} as any)
-const EventsIndexRoute = EventsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => EventsRoute,
-} as any)
-const ControllersIndexRoute = ControllersIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ControllersRoute,
-} as any)
-const UsersMeRoute = UsersMeRouteImport.update({
-  id: '/users/me',
-  path: '/users/me',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UsersAuditRoute = UsersAuditRouteImport.update({
-  id: '/users/audit',
-  path: '/users/audit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SheetsIdRoute = SheetsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => SheetsRoute,
-} as any)
-const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
-  id: '/navdata/preferred-routes',
-  path: '/navdata/preferred-routes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
-  id: '/$callsign',
-  path: '/$callsign',
-  getParentRoute: () => FlightsRoute,
-} as any)
-const EventsHistoryRoute = EventsHistoryRouteImport.update({
-  id: '/history',
-  path: '/history',
-  getParentRoute: () => EventsRoute,
-} as any)
-const EventsAuditRoute = EventsAuditRouteImport.update({
-  id: '/audit',
-  path: '/audit',
-  getParentRoute: () => EventsRoute,
-} as any)
-const EventsIdRoute = EventsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => EventsRoute,
-} as any)
-const DocsSplatRoute = DocsSplatRouteImport.update({
-  id: '/docs/$',
-  path: '/docs/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/auth/callback',
-  path: '/auth/callback',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DocSopRoute = DocSopRouteImport.update({
-  id: '/_doc/sop',
-  path: '/sop',
+const SheetsRoute = SheetsRouteImport.update({
+  id: '/sheets',
+  path: '/sheets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocLoaRoute = DocLoaRouteImport.update({
@@ -166,117 +91,120 @@ const DocLoaRoute = DocLoaRouteImport.update({
   path: '/loa',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ControllersTrainingsIndexRoute =
-  ControllersTrainingsIndexRouteImport.update({
-    id: '/trainings/',
-    path: '/trainings/',
-    getParentRoute: () => ControllersRoute,
-  } as any)
-const ControllersApplicationsIndexRoute =
-  ControllersApplicationsIndexRouteImport.update({
-    id: '/applications/',
-    path: '/applications/',
-    getParentRoute: () => ControllersRoute,
-  } as any)
-const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
-  id: '/docs/utils/image',
-  path: '/docs/utils/image',
+const DocSopRoute = DocSopRouteImport.update({
+  id: '/_doc/sop',
+  path: '/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ControllersTrainingsIdRoute = ControllersTrainingsIdRouteImport.update({
-  id: '/trainings/$id',
-  path: '/trainings/$id',
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControllersIndexRoute = ControllersIndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => ControllersRoute,
 } as any)
-const ControllersApplicationsNewRoute =
-  ControllersApplicationsNewRouteImport.update({
-    id: '/applications/new',
-    path: '/applications/new',
-    getParentRoute: () => ControllersRoute,
-  } as any)
-const ControllersApplicationsAuditRoute =
-  ControllersApplicationsAuditRouteImport.update({
-    id: '/applications/audit',
-    path: '/applications/audit',
-    getParentRoute: () => ControllersRoute,
-  } as any)
-const ControllersApplicationsIdRoute =
-  ControllersApplicationsIdRouteImport.update({
-    id: '/applications/$id',
-    path: '/applications/$id',
-    getParentRoute: () => ControllersRoute,
-  } as any)
-const DocPilotTs3Route = DocPilotTs3RouteImport.update({
-  id: '/_doc/pilot/ts3',
-  path: '/pilot/ts3',
+const DocsSplatRoute = DocsSplatRouteImport.update({
+  id: '/docs/$',
+  path: '/docs/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocPilotStartToFlyRoute = DocPilotStartToFlyRouteImport.update({
-  id: '/_doc/pilot/start-to-fly',
-  path: '/pilot/start-to-fly',
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsIdRoute = EventsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsAuditRoute = EventsAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsHistoryRoute = EventsHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => EventsRoute,
+} as any)
+const FlightsIndexRoute = FlightsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FlightsRoute,
+} as any)
+const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
+  id: '/$callsign',
+  path: '/$callsign',
+  getParentRoute: () => FlightsRoute,
+} as any)
+const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
+  id: '/navdata/preferred-routes',
+  path: '/navdata/preferred-routes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocPilotPilotSoftwaresRoute = DocPilotPilotSoftwaresRouteImport.update({
-  id: '/_doc/pilot/pilot-softwares',
-  path: '/pilot/pilot-softwares',
+const SheetsIdRoute = SheetsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SheetsRoute,
+} as any)
+const UsersIndexRoute = UsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocPilotIntroductionToFlyRoute =
-  DocPilotIntroductionToFlyRouteImport.update({
-    id: '/_doc/pilot/introduction-to-fly',
-    path: '/pilot/introduction-to-fly',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const DocDivisionStaffRoute = DocDivisionStaffRouteImport.update({
-  id: '/_doc/division/staff',
-  path: '/division/staff',
+const UsersAuditRoute = UsersAuditRouteImport.update({
+  id: '/users/audit',
+  path: '/users/audit',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocDivisionPrivacyRoute = DocDivisionPrivacyRouteImport.update({
-  id: '/_doc/division/privacy',
-  path: '/division/privacy',
+const UsersMeRoute = UsersMeRouteImport.update({
+  id: '/users/me',
+  path: '/users/me',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocDivisionPolicyRoute = DocDivisionPolicyRouteImport.update({
-  id: '/_doc/division/policy',
-  path: '/division/policy',
+const DocAirspaceFirRoute = DocAirspaceFirRouteImport.update({
+  id: '/_doc/airspace/fir',
+  path: '/airspace/fir',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocDivisionMeetingRoute = DocDivisionMeetingRouteImport.update({
-  id: '/_doc/division/meeting',
-  path: '/division/meeting',
+const DocAirspaceRestrictedRoute = DocAirspaceRestrictedRouteImport.update({
+  id: '/_doc/airspace/restricted',
+  path: '/airspace/restricted',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocDivisionIntroductionRoute = DocDivisionIntroductionRouteImport.update({
-  id: '/_doc/division/introduction',
-  path: '/division/introduction',
+const DocAirspaceRvsmRoute = DocAirspaceRvsmRouteImport.update({
+  id: '/_doc/airspace/rvsm',
+  path: '/airspace/rvsm',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocDivisionApiRoute = DocDivisionApiRouteImport.update({
-  id: '/_doc/division/api',
-  path: '/division/api',
+const DocAirspaceSectorsRoute = DocAirspaceSectorsRouteImport.update({
+  id: '/_doc/airspace/sectors',
+  path: '/airspace/sectors',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocControllerVisitingAndTransferringRoute =
-  DocControllerVisitingAndTransferringRouteImport.update({
-    id: '/_doc/controller/visiting-and-transferring',
-    path: '/controller/visiting-and-transferring',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const DocControllerSectorRoute = DocControllerSectorRouteImport.update({
-  id: '/_doc/controller/sector',
-  path: '/controller/sector',
+const DocAirspaceSopRoute = DocAirspaceSopRouteImport.update({
+  id: '/_doc/airspace/sop',
+  path: '/airspace/sop',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocControllerLoaRoute = DocControllerLoaRouteImport.update({
-  id: '/_doc/controller/loa',
-  path: '/controller/loa',
+const DocAirspaceStationRoute = DocAirspaceStationRouteImport.update({
+  id: '/_doc/airspace/station',
+  path: '/airspace/station',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocControllerControllerRegulationsRoute =
-  DocControllerControllerRegulationsRouteImport.update({
-    id: '/_doc/controller/controller-regulations',
-    path: '/controller/controller-regulations',
+const DocAirspaceVfrRoute = DocAirspaceVfrRouteImport.update({
+  id: '/_doc/airspace/vfr',
+  path: '/airspace/vfr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocControllerBecomeAControllerRoute =
+  DocControllerBecomeAControllerRouteImport.update({
+    id: '/_doc/controller/become-a-controller',
+    path: '/controller/become-a-controller',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DocControllerControllerListRoute =
@@ -285,45 +213,117 @@ const DocControllerControllerListRoute =
     path: '/controller/controller-list',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DocControllerBecomeAControllerRoute =
-  DocControllerBecomeAControllerRouteImport.update({
-    id: '/_doc/controller/become-a-controller',
-    path: '/controller/become-a-controller',
+const DocControllerControllerRegulationsRoute =
+  DocControllerControllerRegulationsRouteImport.update({
+    id: '/_doc/controller/controller-regulations',
+    path: '/controller/controller-regulations',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DocAirspaceVfrRoute = DocAirspaceVfrRouteImport.update({
-  id: '/_doc/airspace/vfr',
-  path: '/airspace/vfr',
+const DocControllerLoaRoute = DocControllerLoaRouteImport.update({
+  id: '/_doc/controller/loa',
+  path: '/controller/loa',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceStationRoute = DocAirspaceStationRouteImport.update({
-  id: '/_doc/airspace/station',
-  path: '/airspace/station',
+const DocControllerSectorRoute = DocControllerSectorRouteImport.update({
+  id: '/_doc/controller/sector',
+  path: '/controller/sector',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceSopRoute = DocAirspaceSopRouteImport.update({
-  id: '/_doc/airspace/sop',
-  path: '/airspace/sop',
+const DocControllerVisitingAndTransferringRoute =
+  DocControllerVisitingAndTransferringRouteImport.update({
+    id: '/_doc/controller/visiting-and-transferring',
+    path: '/controller/visiting-and-transferring',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocDivisionApiRoute = DocDivisionApiRouteImport.update({
+  id: '/_doc/division/api',
+  path: '/division/api',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceSectorsRoute = DocAirspaceSectorsRouteImport.update({
-  id: '/_doc/airspace/sectors',
-  path: '/airspace/sectors',
+const DocDivisionIntroductionRoute = DocDivisionIntroductionRouteImport.update({
+  id: '/_doc/division/introduction',
+  path: '/division/introduction',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceRvsmRoute = DocAirspaceRvsmRouteImport.update({
-  id: '/_doc/airspace/rvsm',
-  path: '/airspace/rvsm',
+const DocDivisionMeetingRoute = DocDivisionMeetingRouteImport.update({
+  id: '/_doc/division/meeting',
+  path: '/division/meeting',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceRestrictedRoute = DocAirspaceRestrictedRouteImport.update({
-  id: '/_doc/airspace/restricted',
-  path: '/airspace/restricted',
+const DocDivisionPolicyRoute = DocDivisionPolicyRouteImport.update({
+  id: '/_doc/division/policy',
+  path: '/division/policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocAirspaceFirRoute = DocAirspaceFirRouteImport.update({
-  id: '/_doc/airspace/fir',
-  path: '/airspace/fir',
+const DocDivisionPrivacyRoute = DocDivisionPrivacyRouteImport.update({
+  id: '/_doc/division/privacy',
+  path: '/division/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocDivisionStaffRoute = DocDivisionStaffRouteImport.update({
+  id: '/_doc/division/staff',
+  path: '/division/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocPilotIntroductionToFlyRoute =
+  DocPilotIntroductionToFlyRouteImport.update({
+    id: '/_doc/pilot/introduction-to-fly',
+    path: '/pilot/introduction-to-fly',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocPilotPilotSoftwaresRoute = DocPilotPilotSoftwaresRouteImport.update({
+  id: '/_doc/pilot/pilot-softwares',
+  path: '/pilot/pilot-softwares',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocPilotStartToFlyRoute = DocPilotStartToFlyRouteImport.update({
+  id: '/_doc/pilot/start-to-fly',
+  path: '/pilot/start-to-fly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocPilotTs3Route = DocPilotTs3RouteImport.update({
+  id: '/_doc/pilot/ts3',
+  path: '/pilot/ts3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControllersApplicationsIndexRoute =
+  ControllersApplicationsIndexRouteImport.update({
+    id: '/applications/',
+    path: '/applications/',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersApplicationsIdRoute =
+  ControllersApplicationsIdRouteImport.update({
+    id: '/applications/$id',
+    path: '/applications/$id',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersApplicationsAuditRoute =
+  ControllersApplicationsAuditRouteImport.update({
+    id: '/applications/audit',
+    path: '/applications/audit',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersApplicationsNewRoute =
+  ControllersApplicationsNewRouteImport.update({
+    id: '/applications/new',
+    path: '/applications/new',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersTrainingsIndexRoute =
+  ControllersTrainingsIndexRouteImport.update({
+    id: '/trainings/',
+    path: '/trainings/',
+    getParentRoute: () => ControllersRoute,
+  } as any)
+const ControllersTrainingsIdRoute = ControllersTrainingsIdRouteImport.update({
+  id: '/trainings/$id',
+  path: '/trainings/$id',
+  getParentRoute: () => ControllersRoute,
+} as any)
+const DocsUtilsImageRoute = DocsUtilsImageRouteImport.update({
+  id: '/docs/utils/image',
+  path: '/docs/utils/image',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -685,25 +685,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sheets': {
-      id: '/sheets'
-      path: '/sheets'
-      fullPath: '/sheets'
-      preLoaderRoute: typeof SheetsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flights': {
-      id: '/flights'
-      path: '/flights'
-      fullPath: '/flights'
-      preLoaderRoute: typeof FlightsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/controllers': {
@@ -713,116 +699,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControllersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/users/': {
-      id: '/users/'
-      path: '/users'
-      fullPath: '/users/'
-      preLoaderRoute: typeof UsersIndexRouteImport
+    '/flights': {
+      id: '/flights'
+      path: '/flights'
+      fullPath: '/flights'
+      preLoaderRoute: typeof FlightsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/flights/': {
-      id: '/flights/'
-      path: '/'
-      fullPath: '/flights/'
-      preLoaderRoute: typeof FlightsIndexRouteImport
-      parentRoute: typeof FlightsRoute
-    }
-    '/events/': {
-      id: '/events/'
-      path: '/'
-      fullPath: '/events/'
-      preLoaderRoute: typeof EventsIndexRouteImport
-      parentRoute: typeof EventsRoute
-    }
-    '/controllers/': {
-      id: '/controllers/'
-      path: '/'
-      fullPath: '/controllers/'
-      preLoaderRoute: typeof ControllersIndexRouteImport
-      parentRoute: typeof ControllersRoute
-    }
-    '/users/me': {
-      id: '/users/me'
-      path: '/users/me'
-      fullPath: '/users/me'
-      preLoaderRoute: typeof UsersMeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/users/audit': {
-      id: '/users/audit'
-      path: '/users/audit'
-      fullPath: '/users/audit'
-      preLoaderRoute: typeof UsersAuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sheets/$id': {
-      id: '/sheets/$id'
-      path: '/$id'
-      fullPath: '/sheets/$id'
-      preLoaderRoute: typeof SheetsIdRouteImport
-      parentRoute: typeof SheetsRoute
-    }
-    '/navdata/preferred-routes': {
-      id: '/navdata/preferred-routes'
-      path: '/navdata/preferred-routes'
-      fullPath: '/navdata/preferred-routes'
-      preLoaderRoute: typeof NavdataPreferredRoutesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flights/$callsign': {
-      id: '/flights/$callsign'
-      path: '/$callsign'
-      fullPath: '/flights/$callsign'
-      preLoaderRoute: typeof FlightsCallsignRouteImport
-      parentRoute: typeof FlightsRoute
-    }
-    '/events/history': {
-      id: '/events/history'
-      path: '/history'
-      fullPath: '/events/history'
-      preLoaderRoute: typeof EventsHistoryRouteImport
-      parentRoute: typeof EventsRoute
-    }
-    '/events/audit': {
-      id: '/events/audit'
-      path: '/audit'
-      fullPath: '/events/audit'
-      preLoaderRoute: typeof EventsAuditRouteImport
-      parentRoute: typeof EventsRoute
-    }
-    '/events/$id': {
-      id: '/events/$id'
-      path: '/$id'
-      fullPath: '/events/$id'
-      preLoaderRoute: typeof EventsIdRouteImport
-      parentRoute: typeof EventsRoute
-    }
-    '/docs/$': {
-      id: '/docs/$'
-      path: '/docs/$'
-      fullPath: '/docs/$'
-      preLoaderRoute: typeof DocsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/auth/callback'
-      fullPath: '/auth/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/sop': {
-      id: '/_doc/sop'
-      path: '/sop'
-      fullPath: '/sop'
-      preLoaderRoute: typeof DocSopRouteImport
+    '/sheets': {
+      id: '/sheets'
+      path: '/sheets'
+      fullPath: '/sheets'
+      preLoaderRoute: typeof SheetsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_doc/loa': {
@@ -832,200 +727,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocLoaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/controllers/trainings/': {
-      id: '/controllers/trainings/'
-      path: '/trainings'
-      fullPath: '/controllers/trainings/'
-      preLoaderRoute: typeof ControllersTrainingsIndexRouteImport
+    '/_doc/sop': {
+      id: '/_doc/sop'
+      path: '/sop'
+      fullPath: '/sop'
+      preLoaderRoute: typeof DocSopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/': {
+      id: '/controllers/'
+      path: '/'
+      fullPath: '/controllers/'
+      preLoaderRoute: typeof ControllersIndexRouteImport
       parentRoute: typeof ControllersRoute
     }
-    '/controllers/applications/': {
-      id: '/controllers/applications/'
-      path: '/applications'
-      fullPath: '/controllers/applications/'
-      preLoaderRoute: typeof ControllersApplicationsIndexRouteImport
-      parentRoute: typeof ControllersRoute
-    }
-    '/docs/utils/image': {
-      id: '/docs/utils/image'
-      path: '/docs/utils/image'
-      fullPath: '/docs/utils/image'
-      preLoaderRoute: typeof DocsUtilsImageRouteImport
+    '/docs/$': {
+      id: '/docs/$'
+      path: '/docs/$'
+      fullPath: '/docs/$'
+      preLoaderRoute: typeof DocsSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/controllers/trainings/$id': {
-      id: '/controllers/trainings/$id'
-      path: '/trainings/$id'
-      fullPath: '/controllers/trainings/$id'
-      preLoaderRoute: typeof ControllersTrainingsIdRouteImport
-      parentRoute: typeof ControllersRoute
+    '/events/': {
+      id: '/events/'
+      path: '/'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof EventsRoute
     }
-    '/controllers/applications/new': {
-      id: '/controllers/applications/new'
-      path: '/applications/new'
-      fullPath: '/controllers/applications/new'
-      preLoaderRoute: typeof ControllersApplicationsNewRouteImport
-      parentRoute: typeof ControllersRoute
+    '/events/$id': {
+      id: '/events/$id'
+      path: '/$id'
+      fullPath: '/events/$id'
+      preLoaderRoute: typeof EventsIdRouteImport
+      parentRoute: typeof EventsRoute
     }
-    '/controllers/applications/audit': {
-      id: '/controllers/applications/audit'
-      path: '/applications/audit'
-      fullPath: '/controllers/applications/audit'
-      preLoaderRoute: typeof ControllersApplicationsAuditRouteImport
-      parentRoute: typeof ControllersRoute
+    '/events/audit': {
+      id: '/events/audit'
+      path: '/audit'
+      fullPath: '/events/audit'
+      preLoaderRoute: typeof EventsAuditRouteImport
+      parentRoute: typeof EventsRoute
     }
-    '/controllers/applications/$id': {
-      id: '/controllers/applications/$id'
-      path: '/applications/$id'
-      fullPath: '/controllers/applications/$id'
-      preLoaderRoute: typeof ControllersApplicationsIdRouteImport
-      parentRoute: typeof ControllersRoute
+    '/events/history': {
+      id: '/events/history'
+      path: '/history'
+      fullPath: '/events/history'
+      preLoaderRoute: typeof EventsHistoryRouteImport
+      parentRoute: typeof EventsRoute
     }
-    '/_doc/pilot/ts3': {
-      id: '/_doc/pilot/ts3'
-      path: '/pilot/ts3'
-      fullPath: '/pilot/ts3'
-      preLoaderRoute: typeof DocPilotTs3RouteImport
+    '/flights/': {
+      id: '/flights/'
+      path: '/'
+      fullPath: '/flights/'
+      preLoaderRoute: typeof FlightsIndexRouteImport
+      parentRoute: typeof FlightsRoute
+    }
+    '/flights/$callsign': {
+      id: '/flights/$callsign'
+      path: '/$callsign'
+      fullPath: '/flights/$callsign'
+      preLoaderRoute: typeof FlightsCallsignRouteImport
+      parentRoute: typeof FlightsRoute
+    }
+    '/navdata/preferred-routes': {
+      id: '/navdata/preferred-routes'
+      path: '/navdata/preferred-routes'
+      fullPath: '/navdata/preferred-routes'
+      preLoaderRoute: typeof NavdataPreferredRoutesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_doc/pilot/start-to-fly': {
-      id: '/_doc/pilot/start-to-fly'
-      path: '/pilot/start-to-fly'
-      fullPath: '/pilot/start-to-fly'
-      preLoaderRoute: typeof DocPilotStartToFlyRouteImport
+    '/sheets/$id': {
+      id: '/sheets/$id'
+      path: '/$id'
+      fullPath: '/sheets/$id'
+      preLoaderRoute: typeof SheetsIdRouteImport
+      parentRoute: typeof SheetsRoute
+    }
+    '/users/': {
+      id: '/users/'
+      path: '/users'
+      fullPath: '/users/'
+      preLoaderRoute: typeof UsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_doc/pilot/pilot-softwares': {
-      id: '/_doc/pilot/pilot-softwares'
-      path: '/pilot/pilot-softwares'
-      fullPath: '/pilot/pilot-softwares'
-      preLoaderRoute: typeof DocPilotPilotSoftwaresRouteImport
+    '/users/audit': {
+      id: '/users/audit'
+      path: '/users/audit'
+      fullPath: '/users/audit'
+      preLoaderRoute: typeof UsersAuditRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_doc/pilot/introduction-to-fly': {
-      id: '/_doc/pilot/introduction-to-fly'
-      path: '/pilot/introduction-to-fly'
-      fullPath: '/pilot/introduction-to-fly'
-      preLoaderRoute: typeof DocPilotIntroductionToFlyRouteImport
+    '/users/me': {
+      id: '/users/me'
+      path: '/users/me'
+      fullPath: '/users/me'
+      preLoaderRoute: typeof UsersMeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_doc/division/staff': {
-      id: '/_doc/division/staff'
-      path: '/division/staff'
-      fullPath: '/division/staff'
-      preLoaderRoute: typeof DocDivisionStaffRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/division/privacy': {
-      id: '/_doc/division/privacy'
-      path: '/division/privacy'
-      fullPath: '/division/privacy'
-      preLoaderRoute: typeof DocDivisionPrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/division/policy': {
-      id: '/_doc/division/policy'
-      path: '/division/policy'
-      fullPath: '/division/policy'
-      preLoaderRoute: typeof DocDivisionPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/division/meeting': {
-      id: '/_doc/division/meeting'
-      path: '/division/meeting'
-      fullPath: '/division/meeting'
-      preLoaderRoute: typeof DocDivisionMeetingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/division/introduction': {
-      id: '/_doc/division/introduction'
-      path: '/division/introduction'
-      fullPath: '/division/introduction'
-      preLoaderRoute: typeof DocDivisionIntroductionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/division/api': {
-      id: '/_doc/division/api'
-      path: '/division/api'
-      fullPath: '/division/api'
-      preLoaderRoute: typeof DocDivisionApiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/visiting-and-transferring': {
-      id: '/_doc/controller/visiting-and-transferring'
-      path: '/controller/visiting-and-transferring'
-      fullPath: '/controller/visiting-and-transferring'
-      preLoaderRoute: typeof DocControllerVisitingAndTransferringRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/sector': {
-      id: '/_doc/controller/sector'
-      path: '/controller/sector'
-      fullPath: '/controller/sector'
-      preLoaderRoute: typeof DocControllerSectorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/loa': {
-      id: '/_doc/controller/loa'
-      path: '/controller/loa'
-      fullPath: '/controller/loa'
-      preLoaderRoute: typeof DocControllerLoaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/controller-regulations': {
-      id: '/_doc/controller/controller-regulations'
-      path: '/controller/controller-regulations'
-      fullPath: '/controller/controller-regulations'
-      preLoaderRoute: typeof DocControllerControllerRegulationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/controller-list': {
-      id: '/_doc/controller/controller-list'
-      path: '/controller/controller-list'
-      fullPath: '/controller/controller-list'
-      preLoaderRoute: typeof DocControllerControllerListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/controller/become-a-controller': {
-      id: '/_doc/controller/become-a-controller'
-      path: '/controller/become-a-controller'
-      fullPath: '/controller/become-a-controller'
-      preLoaderRoute: typeof DocControllerBecomeAControllerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/airspace/vfr': {
-      id: '/_doc/airspace/vfr'
-      path: '/airspace/vfr'
-      fullPath: '/airspace/vfr'
-      preLoaderRoute: typeof DocAirspaceVfrRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/airspace/station': {
-      id: '/_doc/airspace/station'
-      path: '/airspace/station'
-      fullPath: '/airspace/station'
-      preLoaderRoute: typeof DocAirspaceStationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/airspace/sop': {
-      id: '/_doc/airspace/sop'
-      path: '/airspace/sop'
-      fullPath: '/airspace/sop'
-      preLoaderRoute: typeof DocAirspaceSopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/airspace/sectors': {
-      id: '/_doc/airspace/sectors'
-      path: '/airspace/sectors'
-      fullPath: '/airspace/sectors'
-      preLoaderRoute: typeof DocAirspaceSectorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_doc/airspace/rvsm': {
-      id: '/_doc/airspace/rvsm'
-      path: '/airspace/rvsm'
-      fullPath: '/airspace/rvsm'
-      preLoaderRoute: typeof DocAirspaceRvsmRouteImport
+    '/_doc/airspace/fir': {
+      id: '/_doc/airspace/fir'
+      path: '/airspace/fir'
+      fullPath: '/airspace/fir'
+      preLoaderRoute: typeof DocAirspaceFirRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_doc/airspace/restricted': {
@@ -1035,11 +846,200 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocAirspaceRestrictedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_doc/airspace/fir': {
-      id: '/_doc/airspace/fir'
-      path: '/airspace/fir'
-      fullPath: '/airspace/fir'
-      preLoaderRoute: typeof DocAirspaceFirRouteImport
+    '/_doc/airspace/rvsm': {
+      id: '/_doc/airspace/rvsm'
+      path: '/airspace/rvsm'
+      fullPath: '/airspace/rvsm'
+      preLoaderRoute: typeof DocAirspaceRvsmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/airspace/sectors': {
+      id: '/_doc/airspace/sectors'
+      path: '/airspace/sectors'
+      fullPath: '/airspace/sectors'
+      preLoaderRoute: typeof DocAirspaceSectorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/airspace/sop': {
+      id: '/_doc/airspace/sop'
+      path: '/airspace/sop'
+      fullPath: '/airspace/sop'
+      preLoaderRoute: typeof DocAirspaceSopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/airspace/station': {
+      id: '/_doc/airspace/station'
+      path: '/airspace/station'
+      fullPath: '/airspace/station'
+      preLoaderRoute: typeof DocAirspaceStationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/airspace/vfr': {
+      id: '/_doc/airspace/vfr'
+      path: '/airspace/vfr'
+      fullPath: '/airspace/vfr'
+      preLoaderRoute: typeof DocAirspaceVfrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/become-a-controller': {
+      id: '/_doc/controller/become-a-controller'
+      path: '/controller/become-a-controller'
+      fullPath: '/controller/become-a-controller'
+      preLoaderRoute: typeof DocControllerBecomeAControllerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/controller-list': {
+      id: '/_doc/controller/controller-list'
+      path: '/controller/controller-list'
+      fullPath: '/controller/controller-list'
+      preLoaderRoute: typeof DocControllerControllerListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/controller-regulations': {
+      id: '/_doc/controller/controller-regulations'
+      path: '/controller/controller-regulations'
+      fullPath: '/controller/controller-regulations'
+      preLoaderRoute: typeof DocControllerControllerRegulationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/loa': {
+      id: '/_doc/controller/loa'
+      path: '/controller/loa'
+      fullPath: '/controller/loa'
+      preLoaderRoute: typeof DocControllerLoaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/sector': {
+      id: '/_doc/controller/sector'
+      path: '/controller/sector'
+      fullPath: '/controller/sector'
+      preLoaderRoute: typeof DocControllerSectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/controller/visiting-and-transferring': {
+      id: '/_doc/controller/visiting-and-transferring'
+      path: '/controller/visiting-and-transferring'
+      fullPath: '/controller/visiting-and-transferring'
+      preLoaderRoute: typeof DocControllerVisitingAndTransferringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/api': {
+      id: '/_doc/division/api'
+      path: '/division/api'
+      fullPath: '/division/api'
+      preLoaderRoute: typeof DocDivisionApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/introduction': {
+      id: '/_doc/division/introduction'
+      path: '/division/introduction'
+      fullPath: '/division/introduction'
+      preLoaderRoute: typeof DocDivisionIntroductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/meeting': {
+      id: '/_doc/division/meeting'
+      path: '/division/meeting'
+      fullPath: '/division/meeting'
+      preLoaderRoute: typeof DocDivisionMeetingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/policy': {
+      id: '/_doc/division/policy'
+      path: '/division/policy'
+      fullPath: '/division/policy'
+      preLoaderRoute: typeof DocDivisionPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/privacy': {
+      id: '/_doc/division/privacy'
+      path: '/division/privacy'
+      fullPath: '/division/privacy'
+      preLoaderRoute: typeof DocDivisionPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/division/staff': {
+      id: '/_doc/division/staff'
+      path: '/division/staff'
+      fullPath: '/division/staff'
+      preLoaderRoute: typeof DocDivisionStaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/pilot/introduction-to-fly': {
+      id: '/_doc/pilot/introduction-to-fly'
+      path: '/pilot/introduction-to-fly'
+      fullPath: '/pilot/introduction-to-fly'
+      preLoaderRoute: typeof DocPilotIntroductionToFlyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/pilot/pilot-softwares': {
+      id: '/_doc/pilot/pilot-softwares'
+      path: '/pilot/pilot-softwares'
+      fullPath: '/pilot/pilot-softwares'
+      preLoaderRoute: typeof DocPilotPilotSoftwaresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/pilot/start-to-fly': {
+      id: '/_doc/pilot/start-to-fly'
+      path: '/pilot/start-to-fly'
+      fullPath: '/pilot/start-to-fly'
+      preLoaderRoute: typeof DocPilotStartToFlyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_doc/pilot/ts3': {
+      id: '/_doc/pilot/ts3'
+      path: '/pilot/ts3'
+      fullPath: '/pilot/ts3'
+      preLoaderRoute: typeof DocPilotTs3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/controllers/applications/': {
+      id: '/controllers/applications/'
+      path: '/applications'
+      fullPath: '/controllers/applications/'
+      preLoaderRoute: typeof ControllersApplicationsIndexRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/applications/$id': {
+      id: '/controllers/applications/$id'
+      path: '/applications/$id'
+      fullPath: '/controllers/applications/$id'
+      preLoaderRoute: typeof ControllersApplicationsIdRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/applications/audit': {
+      id: '/controllers/applications/audit'
+      path: '/applications/audit'
+      fullPath: '/controllers/applications/audit'
+      preLoaderRoute: typeof ControllersApplicationsAuditRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/applications/new': {
+      id: '/controllers/applications/new'
+      path: '/applications/new'
+      fullPath: '/controllers/applications/new'
+      preLoaderRoute: typeof ControllersApplicationsNewRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/trainings/': {
+      id: '/controllers/trainings/'
+      path: '/trainings'
+      fullPath: '/controllers/trainings/'
+      preLoaderRoute: typeof ControllersTrainingsIndexRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/trainings/$id': {
+      id: '/controllers/trainings/$id'
+      path: '/trainings/$id'
+      fullPath: '/controllers/trainings/$id'
+      preLoaderRoute: typeof ControllersTrainingsIdRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/docs/utils/image': {
+      id: '/docs/utils/image'
+      path: '/docs/utils/image'
+      fullPath: '/docs/utils/image'
+      preLoaderRoute: typeof DocsUtilsImageRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
