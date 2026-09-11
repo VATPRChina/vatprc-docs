@@ -2323,3 +2323,23 @@ msgstr "Your flight is not online"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
+
+#: src/components/event/event-create.tsx:178
+msgid "Publish to Discord"
+msgstr "Publish to Discord"
+
+#: src/components/event/event-create.tsx:178
+msgid "Retry Discord sync"
+msgstr "Retry Discord sync"
+
+#: src/components/event/event-create.tsx:182
+msgid "Save changes before publishing to Discord."
+msgstr "Save changes before publishing to Discord."
+
+#: src/components/event/event-create.tsx:165
+msgid "The event is saved, but the Discord post could not be updated. Please retry syncing."
+msgstr "The event is saved, but the Discord post could not be updated. Please retry syncing."
+
+#: src/components/event/event-create.tsx:160
+msgid "View Discord post"
+msgstr "View Discord post"
