@@ -16,6 +16,7 @@ import { Route as FlightsRouteImport } from './routes/flights'
 import { Route as SheetsRouteImport } from './routes/sheets'
 import { Route as DocLoaRouteImport } from './routes/_doc/loa'
 import { Route as DocSopRouteImport } from './routes/_doc/sop'
+import { Route as AirspaceRadarCoverageRouteImport } from './routes/airspace/radar-coverage'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
@@ -93,6 +94,11 @@ const DocLoaRoute = DocLoaRouteImport.update({
 const DocSopRoute = DocSopRouteImport.update({
   id: '/_doc/sop',
   path: '/sop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AirspaceRadarCoverageRoute = AirspaceRadarCoverageRouteImport.update({
+  id: '/airspace/radar-coverage',
+  path: '/airspace/radar-coverage',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
@@ -329,6 +335,7 @@ export interface FileRoutesByFullPath {
   '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
+  '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -378,6 +385,7 @@ export interface FileRoutesByTo {
   '/sheets': typeof SheetsRouteWithChildren
   '/loa': typeof DocLoaRoute
   '/sop': typeof DocSopRoute
+  '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -431,6 +439,7 @@ export interface FileRoutesById {
   '/sheets': typeof SheetsRouteWithChildren
   '/_doc/loa': typeof DocLoaRoute
   '/_doc/sop': typeof DocSopRoute
+  '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
@@ -485,6 +494,7 @@ export interface FileRouteTypes {
     | '/sheets'
     | '/loa'
     | '/sop'
+    | '/airspace/radar-coverage'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -534,6 +544,7 @@ export interface FileRouteTypes {
     | '/sheets'
     | '/loa'
     | '/sop'
+    | '/airspace/radar-coverage'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/sheets'
     | '/_doc/loa'
     | '/_doc/sop'
+    | '/airspace/radar-coverage'
     | '/auth/callback'
     | '/docs/$'
     | '/events/$id'
@@ -639,6 +651,7 @@ export interface RootRouteChildren {
   SheetsRoute: typeof SheetsRouteWithChildren
   DocLoaRoute: typeof DocLoaRoute
   DocSopRoute: typeof DocSopRoute
+  AirspaceRadarCoverageRoute: typeof AirspaceRadarCoverageRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   DocsSplatRoute: typeof DocsSplatRoute
   NavdataPreferredRoutesRoute: typeof NavdataPreferredRoutesRoute
@@ -719,6 +732,13 @@ declare module '@tanstack/react-router' {
       path: '/sop'
       fullPath: '/sop'
       preLoaderRoute: typeof DocSopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/airspace/radar-coverage': {
+      id: '/airspace/radar-coverage'
+      path: '/airspace/radar-coverage'
+      fullPath: '/airspace/radar-coverage'
+      preLoaderRoute: typeof AirspaceRadarCoverageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/callback': {
@@ -1098,6 +1118,7 @@ const rootRouteChildren: RootRouteChildren = {
   SheetsRoute: SheetsRouteWithChildren,
   DocLoaRoute: DocLoaRoute,
   DocSopRoute: DocSopRoute,
+  AirspaceRadarCoverageRoute: AirspaceRadarCoverageRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   DocsSplatRoute: DocsSplatRoute,
   NavdataPreferredRoutesRoute: NavdataPreferredRoutesRoute,

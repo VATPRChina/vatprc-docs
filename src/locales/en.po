@@ -2287,3 +2287,103 @@ msgstr "Your flight is not online"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
+
+#: src/components/radar-coverage/viewer.tsx:283
+msgid "Airspace boundaries"
+msgstr "Airspace boundaries"
+
+#: src/components/radar-coverage/viewer.tsx:306
+msgid "Calculating coverage"
+msgstr "Calculating coverage"
+
+#: src/components/radar-coverage/viewer.tsx:361
+msgid "Computed station height"
+msgstr "Computed station height"
+
+#: src/components/radar-coverage/viewer.tsx:322
+msgid "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
+msgstr "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
+
+#: src/components/radar-coverage/viewer.tsx:302
+msgid "FIR coverage estimate"
+msgstr "FIR coverage estimate"
+
+#: src/components/radar-coverage/map.tsx:205
+msgid "Fit region"
+msgstr "Fit region"
+
+#: src/components/radar-coverage/viewer.tsx:209
+msgid "Flight information region"
+msgstr "Flight information region"
+
+#: src/components/radar-coverage/viewer.tsx:380
+msgid "Loading map"
+msgstr "Loading map"
+
+#: src/components/radar-coverage/viewer.tsx:189
+msgid "Loading region data…"
+msgstr "Loading region data…"
+
+#: src/components/radar-coverage/viewer.tsx:210
+msgid "No region loaded"
+msgstr "No region loaded"
+
+#: src/components/app/app-nav-menu.tsx:66
+#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/radar-coverage/viewer.tsx:133
+#: src/routes/airspace/radar-coverage.tsx:7
+msgid "Radar Coverage"
+msgstr "Radar Coverage"
+
+#: src/components/radar-coverage/map.tsx:120
+msgid "Radar coverage map"
+msgstr "Radar coverage map"
+
+#: src/components/radar-coverage/viewer.tsx:342
+msgid "Radar details"
+msgstr "Radar details"
+
+#: src/components/radar-coverage/viewer.tsx:194
+msgid "Region data could not be loaded."
+msgstr "Region data could not be loaded."
+
+#: src/components/radar-coverage/viewer.tsx:202
+msgid "Retry"
+msgstr "Retry"
+
+#: src/components/radar-coverage/viewer.tsx:343
+msgid "Select a radar or click its map marker"
+msgstr "Select a radar or click its map marker"
+
+#: src/components/radar-coverage/map.tsx:209
+msgid "Some map resources could not be loaded. Check your connection and reload the page."
+msgstr "Some map resources could not be loaded. Check your connection and reload the page."
+
+#: src/components/radar-coverage/viewer.tsx:334
+msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+msgstr "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+
+#: src/components/radar-coverage/viewer.tsx:258
+msgid "Surveillance sources"
+msgstr "Surveillance sources"
+
+#: src/components/radar-coverage/viewer.tsx:229
+#: src/components/radar-coverage/viewer.tsx:241
+msgid "Target altitude"
+msgstr "Target altitude"
+
+#: src/components/radar-coverage/viewer.tsx:314
+msgid "Visible radars"
+msgstr "Visible radars"
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "Coverage calculation failed. Please reload the page."
+msgstr "Coverage calculation failed. Please reload the page."
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "Maximum available coverage range"
+msgstr "Maximum available coverage range"
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "SSR and ADS-B fusion"
+msgstr "SSR and ADS-B fusion"
