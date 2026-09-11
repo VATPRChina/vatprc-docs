@@ -59,7 +59,7 @@ const formatAltitude = (altitude: number, isUpperLimit = false) => {
 };
 
 export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection }) => {
-  const { data } = $api.useQuery("get", "/api/compat/online-status");
+  const { data } = $api.useQuery("get", "/api/compat/online-status", {}, { refetchInterval: 60000 });
   const { t } = useLingui();
   const [controllerTypeFilter, setControllerTypeFilter] = useState<ControllerTypeFilter>("ALL");
   const [selection, setSelection] = useState<SectorSelection>();
