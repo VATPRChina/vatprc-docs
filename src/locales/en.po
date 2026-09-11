@@ -132,6 +132,7 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
+#: src/components/airspace/sector-map.tsx:117
 #: src/components/table.tsx:178
 msgid "All"
 msgstr "All"
@@ -144,6 +145,10 @@ msgstr "Allowed levels are {level} (in feet)."
 #: src/components/event/slot-list.tsx:143
 msgid "Already Booked"
 msgstr "Already Booked"
+
+#: src/components/airspace/sector-map.tsx:300
+msgid "Altitude"
+msgstr "Altitude"
 
 #: src/components/app/app-nav-menu.tsx:106
 msgid "Announcement"
@@ -338,6 +343,10 @@ msgstr "Basic Information"
 #: src/components/controller-center/become-controller.tsx:15
 msgid "Become a Controller"
 msgstr "Become a Controller"
+
+#: src/components/airspace/sector-map.tsx:101
+msgid "Beijing FIR Airspace"
+msgstr "Beijing FIR Airspace"
 
 #: src/components/controller-center/my-atc-bookings.tsx:154
 #: src/components/event/atc-slot-list.tsx:170
@@ -900,6 +909,10 @@ msgstr "Failed to load events."
 msgid "Failed to load past events."
 msgstr "Failed to load past events."
 
+#: src/routes/_doc/airspace/sectors.tsx:25
+msgid "Failed to load sector data."
+msgstr "Failed to load sector data."
+
 #: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "Failed to load trainings"
@@ -935,6 +948,10 @@ msgstr "Fields"
 #: src/components/event/slot-import.tsx:122
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
+
+#: src/components/airspace/sector-map.tsx:110
+msgid "Filter sectors by controller type"
+msgstr "Filter sectors by controller type"
 
 #: src/components/controller-center/training-management.tsx:29
 msgid "Finished Trainings"
@@ -976,6 +993,7 @@ msgid "Flow Management Position"
 msgstr "Flow Management Position"
 
 #: src/routes/_doc/airspace/restricted.tsx:171
+#: src/routes/_doc/airspace/sectors.tsx:40
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 
@@ -987,6 +1005,7 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 msgid "Forum"
 msgstr "Forum"
 
+#: src/components/airspace/sector-map.tsx:296
 #: src/routes/_doc/airspace/station.tsx:63
 msgid "Frequency"
 msgstr "Frequency"
@@ -1364,13 +1383,25 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "odd flight level"
 
+#: src/components/airspace/sector-map.tsx:130
+msgid "Offline"
+msgstr "Offline"
+
 #: src/routes/sheets/$id.tsx:380
 msgid "One option per line."
 msgstr "One option per line."
 
+#: src/components/airspace/sector-map.tsx:126
+msgid "Online"
+msgstr "Online"
+
 #: src/components/homepage/controllers-board.tsx:121
 msgid "Online Controllers"
 msgstr "Online Controllers"
+
+#: src/components/airspace/sector-map.tsx:104
+msgid "Online sectors are highlighted. Select an area to view overlapping sectors."
+msgstr "Online sectors are highlighted. Select an area to view overlapping sectors."
 
 #: src/routes/sheets.tsx:26
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
@@ -1663,6 +1694,10 @@ msgstr "Sector Editor"
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "Sector Files"
+
+#: src/routes/_doc/airspace/sectors.tsx:11
+msgid "Sector Map"
+msgstr "Sector Map"
 
 #: src/components/homepage/notam-board.tsx:70
 msgid "See All Announcements"
@@ -1981,6 +2016,7 @@ msgid "This event does not have pilot booking."
 msgstr "This event does not have pilot booking."
 
 #: src/routes/_doc/airspace/restricted.tsx:163
+#: src/routes/_doc/airspace/sectors.tsx:32
 msgid "This map is intended for flight simulation use only. The boundaries shown on the map represent FIR boundaries within the simulation environment only and bear no relation to any real-world FIR boundaries or geopolitical borders. They do not represent the views or positions of any country, region, or international organization regarding geopolitical boundaries."
 msgstr "This map is intended for flight simulation use only. The boundaries shown on the map represent FIR boundaries within the simulation environment only and bear no relation to any real-world FIR boundaries or geopolitical borders. They do not represent the views or positions of any country, region, or international organization regarding geopolitical boundaries."
 

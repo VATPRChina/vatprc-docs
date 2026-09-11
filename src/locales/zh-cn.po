@@ -132,6 +132,7 @@ msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 msgid "Airspace"
 msgstr "空域"
 
+#: src/components/airspace/sector-map.tsx:117
 #: src/components/table.tsx:178
 msgid "All"
 msgstr "全部"
@@ -144,6 +145,10 @@ msgstr "允许的巡航高度是 {level} （英尺）。"
 #: src/components/event/slot-list.tsx:143
 msgid "Already Booked"
 msgstr "已被预订"
+
+#: src/components/airspace/sector-map.tsx:300
+msgid "Altitude"
+msgstr "高度范围"
 
 #: src/components/app/app-nav-menu.tsx:106
 msgid "Announcement"
@@ -338,6 +343,10 @@ msgstr "基本信息"
 #: src/components/controller-center/become-controller.tsx:15
 msgid "Become a Controller"
 msgstr "成为管制员"
+
+#: src/components/airspace/sector-map.tsx:101
+msgid "Beijing FIR Airspace"
+msgstr "北京飞行情报区空域"
 
 #: src/components/controller-center/my-atc-bookings.tsx:154
 #: src/components/event/atc-slot-list.tsx:170
@@ -900,6 +909,10 @@ msgstr "无法加载活动。"
 msgid "Failed to load past events."
 msgstr "加载历史活动失败。"
 
+#: src/routes/_doc/airspace/sectors.tsx:25
+msgid "Failed to load sector data."
+msgstr "加载扇区数据失败。"
+
 #: src/components/controller-center/training-browser.tsx:97
 msgid "Failed to load trainings"
 msgstr "训练信息加载失败"
@@ -935,6 +948,10 @@ msgstr "字段列表"
 #: src/components/event/slot-import.tsx:122
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH:mm), 到达机场, 到达时间 (yyyy-MM-dd HH:mm), 呼号, 机型"
+
+#: src/components/airspace/sector-map.tsx:110
+msgid "Filter sectors by controller type"
+msgstr "按管制类型筛选扇区"
 
 #: src/components/controller-center/training-management.tsx:29
 msgid "Finished Trainings"
@@ -976,6 +993,7 @@ msgid "Flow Management Position"
 msgstr "流量控制"
 
 #: src/routes/_doc/airspace/restricted.tsx:171
+#: src/routes/_doc/airspace/sectors.tsx:40
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "由于技术限制，地图上显示的边界可能过时或者被简化。飞行时请遵守本地管制员指令。"
 
@@ -987,6 +1005,7 @@ msgstr "由于技术限制，地图上显示的边界可能过时或者被简化
 msgid "Forum"
 msgstr "论坛"
 
+#: src/components/airspace/sector-map.tsx:296
 #: src/routes/_doc/airspace/station.tsx:63
 msgid "Frequency"
 msgstr "频率"
@@ -1364,13 +1383,25 @@ msgctxt "feet"
 msgid "odd flight level"
 msgstr "英制单数飞行高度层"
 
+#: src/components/airspace/sector-map.tsx:130
+msgid "Offline"
+msgstr "未上线"
+
 #: src/routes/sheets/$id.tsx:380
 msgid "One option per line."
 msgstr "每行一个选项。"
 
+#: src/components/airspace/sector-map.tsx:126
+msgid "Online"
+msgstr "在线"
+
 #: src/components/homepage/controllers-board.tsx:121
 msgid "Online Controllers"
 msgstr "在线管制员"
+
+#: src/components/airspace/sector-map.tsx:104
+msgid "Online sectors are highlighted. Select an area to view overlapping sectors."
+msgstr "已上线的扇区将高亮显示。选择区域可查看重叠扇区。"
 
 #: src/routes/sheets.tsx:26
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
@@ -1663,6 +1694,10 @@ msgstr "扇区组组员"
 #: src/components/controller-center/resource-grid.tsx:36
 msgid "Sector Files"
 msgstr "扇区文件"
+
+#: src/routes/_doc/airspace/sectors.tsx:11
+msgid "Sector Map"
+msgstr "扇区地图"
 
 #: src/components/homepage/notam-board.tsx:70
 msgid "See All Announcements"
@@ -1981,6 +2016,7 @@ msgid "This event does not have pilot booking."
 msgstr "本活动不支持飞行员预订。"
 
 #: src/routes/_doc/airspace/restricted.tsx:163
+#: src/routes/_doc/airspace/sectors.tsx:32
 msgid "This map is intended for flight simulation use only. The boundaries shown on the map represent FIR boundaries within the simulation environment only and bear no relation to any real-world FIR boundaries or geopolitical borders. They do not represent the views or positions of any country, region, or international organization regarding geopolitical boundaries."
 msgstr "本地图仅供模拟飞行使用。地图上的边界仅代表模拟飞行中的飞行情报区边界，与任何现实世界中的飞行情报区边界或政治地理分界无关，也不代表任何国家、地区或国际组织对于政治地理分界的观点。"
 
