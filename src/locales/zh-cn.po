@@ -2323,3 +2323,103 @@ msgstr "你的航班当前不在线"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"
+
+#: src/components/radar-coverage/viewer.tsx:283
+msgid "Airspace boundaries"
+msgstr "空域边界"
+
+#: src/components/radar-coverage/viewer.tsx:306
+msgid "Calculating coverage"
+msgstr "正在计算覆盖范围"
+
+#: src/components/radar-coverage/viewer.tsx:361
+msgid "Computed station height"
+msgstr "计算站高"
+
+#: src/components/radar-coverage/viewer.tsx:322
+msgid "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
+msgstr "计算覆盖范围需要 FIR 边界和 DEM 数据。虚线圆仅表示 XML 中的最大距离。"
+
+#: src/components/radar-coverage/viewer.tsx:302
+msgid "FIR coverage estimate"
+msgstr "FIR 覆盖估算"
+
+#: src/components/radar-coverage/map.tsx:205
+msgid "Fit region"
+msgstr "适配区域"
+
+#: src/components/radar-coverage/viewer.tsx:209
+msgid "Flight information region"
+msgstr "飞行情报区"
+
+#: src/components/radar-coverage/viewer.tsx:380
+msgid "Loading map"
+msgstr "正在加载地图"
+
+#: src/components/radar-coverage/viewer.tsx:189
+msgid "Loading region data…"
+msgstr "正在加载区域数据…"
+
+#: src/components/radar-coverage/viewer.tsx:210
+msgid "No region loaded"
+msgstr "尚未加载区域"
+
+#: src/components/app/app-nav-menu.tsx:66
+#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/radar-coverage/viewer.tsx:133
+#: src/routes/airspace/radar-coverage.tsx:7
+msgid "Radar Coverage"
+msgstr "雷达覆盖范围"
+
+#: src/components/radar-coverage/map.tsx:120
+msgid "Radar coverage map"
+msgstr "雷达覆盖地图"
+
+#: src/components/radar-coverage/viewer.tsx:342
+msgid "Radar details"
+msgstr "雷达详情"
+
+#: src/components/radar-coverage/viewer.tsx:194
+msgid "Region data could not be loaded."
+msgstr "无法加载区域数据。"
+
+#: src/components/radar-coverage/viewer.tsx:202
+msgid "Retry"
+msgstr "重试"
+
+#: src/components/radar-coverage/viewer.tsx:343
+msgid "Select a radar or click its map marker"
+msgstr "选择雷达或点击地图上的站点"
+
+#: src/components/radar-coverage/map.tsx:209
+msgid "Some map resources could not be loaded. Check your connection and reload the page."
+msgstr "部分地图资源加载失败。请检查网络连接并重新加载页面。"
+
+#: src/components/radar-coverage/viewer.tsx:334
+msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+msgstr "部分地形采样缺失。灰色区域表示未知区域，无法给出完整覆盖百分比。"
+
+#: src/components/radar-coverage/viewer.tsx:258
+msgid "Surveillance sources"
+msgstr "监视源"
+
+#: src/components/radar-coverage/viewer.tsx:229
+#: src/components/radar-coverage/viewer.tsx:241
+msgid "Target altitude"
+msgstr "目标高度"
+
+#: src/components/radar-coverage/viewer.tsx:314
+msgid "Visible radars"
+msgstr "当前雷达"
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "Coverage calculation failed. Please reload the page."
+msgstr "覆盖范围计算失败，请重新加载页面。"
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "Maximum available coverage range"
+msgstr "最大可用覆盖范围"
+
+#: src/components/radar-coverage/viewer.tsx
+msgid "SSR and ADS-B fusion"
+msgstr "SSR 与 ADS-B 融合运行"
