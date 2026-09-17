@@ -63,6 +63,7 @@ const contents: NavGroupData[] = [
       { label: msg`Standard Operation Procedures`, href: "/airspace/sop" },
       { label: msg`VFR Policy`, href: "/airspace/vfr" },
       { label: msg`Restricted Airspaces`, href: "/airspace/restricted" },
+      { label: msg`Radar Coverage`, href: "/airspace/radar-coverage" },
     ],
   },
   {
