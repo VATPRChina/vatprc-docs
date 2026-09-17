@@ -708,6 +708,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/events/{id}/discord": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: operations["publish_discord"];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/active": {
     parameters: {
       query?: never;
@@ -1354,6 +1370,20 @@ export interface components {
       verification_uri: string;
       verification_uri_complete?: string | null;
     };
+    DiscordMessage: {
+      /** @description Discord snowflake serialized as a string to preserve precision in JavaScript. */
+      guild_id: string;
+      /** @description The forum starter message and thread share this ID. */
+      message_id: string;
+      status: components["schemas"]["DiscordSyncStatus"];
+      /**
+       * Format: date-time
+       * @description Time of the most recent successful synchronization.
+       */
+      synced_at: string;
+    };
+    /** @enum {string} */
+    DiscordSyncStatus: "OutOfSync" | "Sync";
     EventAirspaceDto: {
       /** Format: date-time */
       created_at: string;
@@ -1416,6 +1446,7 @@ export interface components {
       /** Format: date-time */
       created_at: string;
       description: string;
+      discord_message?: null | components["schemas"]["DiscordMessage"];
       /** Format: date-time */
       end_at: string;
       /** Format: date-time */
@@ -3294,6 +3325,30 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["AuditLogDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  publish_discord: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Event ULID */
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Published or synchronized Discord post */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["EventDto"];
         };
       };
       500: components["responses"]["InternalServerError"];
