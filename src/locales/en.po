@@ -58,6 +58,10 @@ msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
+#: src/components/atc-position/position-modal.tsx:127
+msgid "118.000–136.975 MHz, in steps of 0.005 MHz."
+msgstr "118.000–136.975 MHz, in steps of 0.005 MHz."
+
 #: src/components/atc-training/training-application-create.tsx:152
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
@@ -88,6 +92,7 @@ msgstr "Accepted"
 
 #: src/components/atc-application/atc-application-list.tsx:43
 #: src/components/atc-training/training-list.tsx:37
+#: src/routes/_doc/airspace/station.tsx:84
 #: src/routes/users/index.tsx:111
 msgid "Actions"
 msgstr "Actions"
@@ -210,6 +215,7 @@ msgstr "Are you sure to book this ATC position?"
 msgid "Are you sure to cancel this training?"
 msgstr "Are you sure to cancel this training?"
 
+#: src/components/atc-position/position-modal.tsx:91
 #: src/components/event/atc-slot-delete.tsx:37
 msgid "Are you sure to delete this ATC position?"
 msgstr "Are you sure to delete this ATC position?"
@@ -295,7 +301,7 @@ msgstr "ATC Center"
 msgid "ATC Permission"
 msgstr "ATC Permission"
 
-#: src/routes/_doc/airspace/station.tsx:32
+#: src/routes/_doc/airspace/station.tsx:19
 msgid "ATC Position"
 msgstr "ATC Position"
 
@@ -303,13 +309,12 @@ msgstr "ATC Position"
 msgid "ATC Positions & Frequencies"
 msgstr "ATC Positions & Frequencies"
 
-#: src/routes/_doc/airspace/station.tsx:81
-#: src/routes/_doc/airspace/station.tsx:96
+#: src/routes/_doc/airspace/station.tsx:68
+#: src/routes/_doc/airspace/station.tsx:114
 msgid "ATC Positions and Frequencies"
 msgstr "ATC Positions and Frequencies"
 
-#: src/routes/_doc/airspace/station.tsx:19
-#: src/routes/_doc/airspace/station.tsx:26
+#: src/components/atc-position/position-modal.tsx:15
 msgid "ATIS"
 msgstr "ATIS"
 
@@ -389,6 +394,7 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
+#: src/components/atc-position/position-modal.tsx:96
 #: src/components/controller-center/my-atc-bookings.tsx:104
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
@@ -407,6 +413,7 @@ msgid "Callsign is required"
 msgstr "Callsign is required"
 
 #: src/components/app/assume-role-modal.tsx:41
+#: src/components/atc-position/position-modal.tsx:160
 #: src/components/controller-center/my-atc-bookings.tsx:182
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
@@ -426,7 +433,8 @@ msgstr "Cancel Training"
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: src/routes/_doc/airspace/station.tsx:46
+#: src/components/atc-position/position-modal.tsx:110
+#: src/routes/_doc/airspace/station.tsx:33
 msgid "Category"
 msgstr "Category"
 
@@ -450,8 +458,7 @@ msgstr "Check at VATSIM"
 msgid "Checklist"
 msgstr "Checklist"
 
-#: src/routes/_doc/airspace/station.tsx:17
-#: src/routes/_doc/airspace/station.tsx:24
+#: src/components/atc-position/position-modal.tsx:13
 msgid "Chengdu Low Area"
 msgstr "Chengdu Low Area"
 
@@ -476,7 +483,8 @@ msgstr "China RVSM flight level"
 msgid "China RVSM odd flight level"
 msgstr "China RVSM odd flight level"
 
-#: src/routes/_doc/airspace/station.tsx:52
+#: src/components/atc-position/position-modal.tsx:137
+#: src/routes/_doc/airspace/station.tsx:39
 msgid "Chinese Callsign"
 msgstr "Chinese Callsign"
 
@@ -577,7 +585,7 @@ msgstr "Controlling"
 msgid "Controlling History"
 msgstr "Controlling History"
 
-#: src/routes/_doc/airspace/station.tsx:100
+#: src/routes/_doc/airspace/station.tsx:118
 msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
 msgstr "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
 
@@ -589,8 +597,10 @@ msgstr "CPDLC availability is decided by the controller. It is used at or above 
 msgid "Create"
 msgstr "Create"
 
+#: src/components/atc-position/position-modal.tsx:53
 #: src/components/event/atc-slot-create.tsx:82
 #: src/components/event/atc-slot-create.tsx:93
+#: src/routes/_doc/airspace/station.tsx:133
 msgid "Create ATC Position"
 msgstr "Create ATC Position"
 
@@ -657,9 +667,15 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "Dark"
 
+#: src/components/atc-position/position-modal.tsx:163
 #: src/components/event/atc-slot-delete.tsx:41
+#: src/routes/_doc/airspace/station.tsx:102
 msgid "Delete"
 msgstr "Delete"
+
+#: src/components/atc-position/position-modal.tsx:56
+msgid "Delete ATC Position {callsign}"
+msgstr "Delete ATC Position {callsign}"
 
 #: src/components/atc-permission-modal.tsx:23
 msgid "Delivery"
@@ -704,6 +720,7 @@ msgstr "Drag CSV here or click to select files"
 #: src/components/atc-training/training-save.tsx:75
 #: src/components/controller-center/my-atc-bookings.tsx:87
 #: src/components/event/atc-slot-create.tsx:86
+#: src/routes/_doc/airspace/station.tsx:94
 msgid "Edit"
 msgstr "Edit"
 
@@ -716,6 +733,7 @@ msgstr "Edit ATC Booking"
 msgid "Edit ATC permissions"
 msgstr "Edit ATC permissions"
 
+#: src/components/atc-position/position-modal.tsx:55
 #: src/components/event/atc-slot-create.tsx:93
 msgid "Edit ATC Position {callsign}"
 msgstr "Edit ATC Position {callsign}"
@@ -784,7 +802,8 @@ msgstr "End time is required"
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
 
-#: src/routes/_doc/airspace/station.tsx:57
+#: src/components/atc-position/position-modal.tsx:142
+#: src/routes/_doc/airspace/station.tsx:44
 msgid "English Callsign"
 msgstr "English Callsign"
 
@@ -876,7 +895,7 @@ msgstr "Failed to import slots."
 msgid "Failed to load announcements."
 msgstr "Failed to load announcements."
 
-#: src/routes/_doc/airspace/station.tsx:107
+#: src/routes/_doc/airspace/station.tsx:125
 msgid "Failed to load ATC positions"
 msgstr "Failed to load ATC positions"
 
@@ -1005,10 +1024,14 @@ msgstr "For technical limitations, the boundaries shown on the map may be outdat
 msgid "Forum"
 msgstr "Forum"
 
-#: src/components/airspace/sector-map.tsx:296
-#: src/routes/_doc/airspace/station.tsx:63
+#: src/components/airspace/sector-map.tsx:297
+#: src/routes/_doc/airspace/station.tsx:50
 msgid "Frequency"
 msgstr "Frequency"
+
+#: src/components/atc-position/position-modal.tsx:126
+msgid "Frequency (MHz)"
+msgstr "Frequency (MHz)"
 
 #: src/routes/users/me.tsx:56
 msgid "Full name"
@@ -1244,8 +1267,7 @@ msgstr "metric flight level (meters)"
 msgid "metric odd flight level (meters)"
 msgstr "metric odd flight level (meters)"
 
-#: src/routes/_doc/airspace/station.tsx:18
-#: src/routes/_doc/airspace/station.tsx:25
+#: src/components/atc-position/position-modal.tsx:14
 msgid "Military"
 msgstr "Military"
 
@@ -1582,8 +1604,9 @@ msgstr "Release"
 msgid "Remark"
 msgstr "Remark"
 
+#: src/components/atc-position/position-modal.tsx:152
 #: src/components/controller-center/my-atc-bookings.tsx:143
-#: src/routes/_doc/airspace/station.tsx:73
+#: src/routes/_doc/airspace/station.tsx:60
 msgid "Remarks"
 msgstr "Remarks"
 
@@ -1663,6 +1686,7 @@ msgid "S3"
 msgstr "S3"
 
 #: src/components/atc-permission-modal.tsx:220
+#: src/components/atc-position/position-modal.tsx:163
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
 #: src/components/controller-center/my-atc-bookings.tsx:154
@@ -1779,8 +1803,7 @@ msgstr "Staff"
 msgid "Staff review"
 msgstr "Staff review"
 
-#: src/routes/_doc/airspace/station.tsx:16
-#: src/routes/_doc/airspace/station.tsx:23
+#: src/components/atc-position/position-modal.tsx:12
 msgid "Standard"
 msgstr "Standard"
 
@@ -1926,6 +1949,10 @@ msgstr "The ATC application review has been updated successfully."
 msgid "The booking has not started yet or has ended."
 msgstr "The booking has not started yet or has ended."
 
+#: src/components/atc-position/position-modal.tsx:102
+msgid "The callsign cannot be changed after creation."
+msgstr "The callsign cannot be changed after creation."
+
 #: src/components/flight-warnings.tsx:32
 #: src/components/flight-warnings.tsx:130
 #: src/routes/flights/$callsign.tsx:247
@@ -2026,7 +2053,8 @@ msgid "This page is not available in English."
 msgstr "This page is not available in English."
 
 #: src/components/atc-permission-modal.tsx:26
-#: src/routes/_doc/airspace/station.tsx:38
+#: src/components/atc-position/position-modal.tsx:121
+#: src/routes/_doc/airspace/station.tsx:25
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -2158,6 +2186,10 @@ msgstr "Upload"
 #: src/routes/docs/utils/image.tsx:31
 msgid "Upload image"
 msgstr "Upload image"
+
+#: src/components/atc-position/position-modal.tsx:103
+msgid "Use up to 32 letters, digits, underscores or asterisks."
+msgstr "Use up to 32 letters, digits, underscores or asterisks."
 
 #: src/components/atc-application/atc-application-list.tsx:21
 #: src/components/audit-log/audit-log-table.tsx:17
