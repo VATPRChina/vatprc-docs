@@ -37,6 +37,10 @@ export const BUILTIN_REGIONS = [
     code: "ZYSH",
     name: "ZYSH FIR Shenyang",
   },
+  {
+    code: "ZMUB",
+    name: "ZMUB FIR Ulaanbaatar",
+  },
 ];
 
 // Keep the supplied export intact and load it only when the viewer needs it.
