@@ -40,7 +40,14 @@ const UserSelect: FC<SelectProps & { users?: UserOption[]; isLoading: boolean; l
 
   return (
     <Skeleton visible={isLoading}>
-      <Select data={selectOptions} limit={5} searchable filter={fuzzyFilter} {...props} error={props.error ?? loadError} />
+      <Select
+        data={selectOptions}
+        limit={5}
+        searchable
+        filter={fuzzyFilter}
+        {...props}
+        error={props.error ?? loadError}
+      />
     </Skeleton>
   );
 };
