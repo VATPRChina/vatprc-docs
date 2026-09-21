@@ -1,11 +1,23 @@
 import { $api } from "@/lib/client";
-import { ComboboxItem, Select, SelectProps, Skeleton } from "@mantine/core";
+import { ComboboxItem, OptionsFilter, Select, SelectProps, Skeleton } from "@mantine/core";
 import { FC, useMemo } from "react";
 
 type UserOption = {
   id: string;
   full_name: string;
   cid: string;
+};
+
+// Match ignoring case and spaces ("zhanlong" -> "Zhan Long Bei"), or by every space-separated token in any order.
+const fuzzyFilter: OptionsFilter = ({ options, search, limit }) => {
+  const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
+  const joined = tokens.join("");
+  return (options as ComboboxItem[])
+    .filter((option) => {
+      const label = option.label.toLowerCase();
+      return label.replace(/\s+/g, "").includes(joined) || tokens.every((token) => label.includes(token));
+    })
+    .slice(0, limit);
 };
 
 const UserSelect: FC<SelectProps & { users?: UserOption[]; isLoading: boolean; loadError?: string }> = ({
@@ -28,7 +40,14 @@ const UserSelect: FC<SelectProps & { users?: UserOption[]; isLoading: boolean; l
 
   return (
     <Skeleton visible={isLoading}>
-      <Select data={selectOptions} limit={5} searchable {...props} error={props.error ?? loadError} />
+      <Select
+        data={selectOptions}
+        limit={5}
+        searchable
+        filter={fuzzyFilter}
+        {...props}
+        error={props.error ?? loadError}
+      />
     </Skeleton>
   );
 };
