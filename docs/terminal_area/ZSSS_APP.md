@@ -109,7 +109,7 @@
 |  AND   |   35L    |  AND-2   |
 |   BK   |   35L    |   BK-2   |
 | DUMET  |   34R    | DUMET-2  |
-| MATNU  |   34R    | MATNU-8  |
+| MATNU  |   34R    | MATNU-2  |
 | SASAN  |   35L    | SASAN-2  |
 
 ###### 南向
