@@ -68,24 +68,24 @@
 
 因此，我们要求，在使用虹桥机场PMS程序前，当班进近管制员与区域管制员必须提前协调当班是否使用航路过渡。如果上述席位中任意一个不在线，则请管制员自行判断并决定是否使用。
 
-通话示范如下。
-
-**使用航路过渡**
-
-> 呼号，上海进近雷达看到了，SASAN-X 程序进场，**xxx过渡**，跑道xx”
->
-> Callsign, Shanghai Approach radar contact, follow SASAN-x arrival, xxx transition, runway xx.
-
-**不使用航路过渡**
-
-> 呼号，上海进近雷达看到了，直飞SASAN，加入SASAN-X 程序进场，跑道xx”
->
-> Callsign, Shanghai Approach radar contact, (proceed) direct to SASAN, join SASAN-X arrival, runway xx”
-
-如管制员选择使用该航路过渡程序，以下为部分运行提示：
+如管制员选择使用该航路过渡程序，请注意：
 
 1. 内外弧选择，PIMOL/ZJ使用外弧,ESBAG使用内弧
 2. 内外弧扇子速度AT260kt，在高高度尤其是冬季侧风较大，导致航空器偏离程序路径。
+
+通话范例如下：
+
+**使用航路过渡**
+
+> `呼号`，上海进近雷达看到了，SASAN-`X` 程序进场，**`过渡点` 过渡**，跑道`跑道号`。
+>
+> `Callsign`, Shanghai Approach radar contact, follow SASAN-`x` arrival, `TransitionIdent` transition, runway `RunwayIdent`.
+
+**不使用航路过渡**
+
+> `呼号`，上海进近雷达看到了，直飞SASAN，加入SASAN-`X` 程序进场，跑道`跑道号`。
+> `Callsign`, Shanghai Approach radar contact, (proceed) direct to SASAN, join SASAN-`X` arrival, runway `RunwayIdent`.
+
 
 #### 2.2.2 上海浦东
 
