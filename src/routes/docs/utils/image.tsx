@@ -30,14 +30,14 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>Upload image</Trans>
       </h1>
-      <div className="flex w-full max-w-3xl flex-row items-end gap-4">
+      <div className="flex w-full max-w-3xl flex-row items-end gap-2">
         <FileInput id="picture" onChange={onSelectFile} label="Picture" />
         <Button onClick={onUpload} variant="secondary" loading={isPending}>
           <Trans>Upload</Trans>
         </Button>
       </div>
       <p>URL: {data?.url}</p>
-      <p>Error: {error?.message}</p>
+      <p>Error: {error?.title}</p>
     </div>
   );
 }

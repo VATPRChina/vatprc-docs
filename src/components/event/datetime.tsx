@@ -26,9 +26,9 @@ export const DateTime = ({
     <Tooltip label={format(time, tooltipFormat, tooltipFormatOptions)}>
       <span>
         <span>{format(time, textFormat, textFormatOptions)}</span>
-        <span className="text-dimmed ml-0.5 text-xs">{localFirst ? format(time, "zzzz") : "Z"}</span>
+        <span className="text-dimmed ml-1 text-xs">{localFirst ? format(time, "zzzz") : "Z"}</span>
         {!noDistance && (
-          <span className="ml-0.5">
+          <span className="ml-1">
             ({intlFormatDistance(time, Date.now(), { locale: i18n.locale, numeric: "always" })})
           </span>
         )}

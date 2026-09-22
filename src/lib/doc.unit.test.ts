@@ -10,7 +10,7 @@ type ServerFnBuilder = ReturnType<CreateServerFn>;
 const mockServerFunctionBuider: ServerFnBuilder = vi.hoisted(() => {
   return {
     middleware: vi.fn(() => mockServerFunctionBuider),
-    inputValidator: vi.fn(() => mockServerFunctionBuider),
+    validator: vi.fn(() => mockServerFunctionBuider),
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     handler: vi.fn((func) => func),
   } as unknown as ServerFnBuilder;

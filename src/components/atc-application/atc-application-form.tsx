@@ -1,9 +1,8 @@
 import { Sheet } from "../sheet";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
-import { useLingui, Trans } from "@lingui/react/macro";
+import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton, Checkbox, Card } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { ComponentProps, FC, useState } from "react";
@@ -46,38 +45,38 @@ interface AtcApplicationFormProps {
 }
 
 export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId }) => {
-  const { t } = useLingui();
-
   const { navigate } = useRouter();
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading: isUserLoading } = $api.useQuery("get", "/api/users/me");
-  const { data: applySheet, error, isLoading: isSheetLoading } = $api.useQuery("get", "/api/atc/applications/sheet");
-  const { data: existingApplication, isLoading: isValuesLoading } = $api.useQuery("get", "/api/atc/applications/{id}", {
+  const { data: user, error: userError, isLoading: isUserLoading } = $api.useQuery("get", "/api/users/me");
+  const {
+    data: applySheet,
+    error: sheetError,
+    isLoading: isSheetLoading,
+  } = $api.useQuery("get", "/api/atc/applications/sheet");
+  const {
+    data: existingApplication,
+    error: applicationError,
+    isLoading: isValuesLoading,
+  } = $api.useQuery("get", "/api/atc/applications/{id}", {
     params: { path: { id: applicationId ?? "" } },
     enabled: !!applicationId,
   });
-  const { mutateAsync: createAsync } = $api.useMutation("post", "/api/atc/applications");
-  const { mutateAsync: updateAsync } = $api.useMutation("put", "/api/atc/applications/{id}");
+  const { mutateAsync: createAsync, error: createError } = $api.useMutation("post", "/api/atc/applications");
+  const {
+    mutateAsync: updateAsync,
+    error: updateError,
+    isSuccess: isUpdateSuccess,
+  } = $api.useMutation("put", "/api/atc/applications/{id}");
 
   const onCreateSuccess = wrapPromiseWithLog(async () => {
     await queryClient.invalidateQueries($api.queryOptions("get", "/api/atc/applications"));
-    notifications.show({
-      title: t`Application submitted`,
-      message: t`Your ATC application has been submitted successfully.`,
-      color: "green",
-    });
-    await navigate({ to: "/controllers/applications" });
+    await navigate({ to: "/controllers" });
   });
   const onUpdateSuccess = wrapPromiseWithLog(async () => {
     await queryClient.invalidateQueries(
       $api.queryOptions("get", "/api/atc/applications/{id}", { params: { path: { id: applicationId ?? "" } } }),
     );
-    notifications.show({
-      title: t`Application updated`,
-      message: t`Your ATC application has been updated successfully.`,
-      color: "green",
-    });
   });
 
   const onSubmit: ComponentProps<typeof Sheet>["onSubmit"] = (answers) => {
@@ -97,7 +96,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
@@ -122,7 +121,21 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
       <h2 className="text-lg">
         <Trans>Application Information</Trans>
       </h2>
-      {error && <Alert title="Error">{error.message}</Alert>}
+      {isUpdateSuccess && (
+        <Alert color="green">
+          <Trans>Your ATC application has been updated successfully.</Trans>
+        </Alert>
+      )}
+      {(createError ?? updateError) && (
+        <Alert color="red" title={(createError ?? updateError)?.title}>
+          {(createError ?? updateError)?.detail}
+        </Alert>
+      )}
+      {(userError ?? sheetError ?? applicationError) && (
+        <Alert color="red" title={(userError ?? sheetError ?? applicationError)?.title}>
+          {(userError ?? sheetError ?? applicationError)?.detail}
+        </Alert>
+      )}
       {isSheetLoading && <Skeleton h={256} />}
       <Sheet
         className="contents"
@@ -141,7 +154,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
                   <Trans>Checklist</Trans>
                 </h2>
                 <Checkbox.Group value={value} onChange={setValue}>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1">
                     {CHECKLIST.map((item) => (
                       <Checkbox key={item.value} value={item.value} label={item.label} />
                     ))}

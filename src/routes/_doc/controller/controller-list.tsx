@@ -1,4 +1,4 @@
-import { ControllerList } from "@/components/homepage/controller-list";
+import { ControllerListTable } from "@/components/controller-list";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
@@ -9,6 +9,12 @@ export const Route = createFileRoute("/_doc/controller/controller-list")({
     meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],
   }),
 });
+
+const SOLO_POSITIONS = [
+  { type: "CTR", positions: ["ZBAA_CTR", "ZGGG_CTR", "ZSSS_CTR", "ZYTL_CTR", "ZJSY_CTR"] },
+  { type: "APP", positions: ["ZBAA_APP", "ZSSS_APP", "ZGGG_APP", "ZYTL_APP", "ZJSY_APP"] },
+  { type: "TWR", positions: ["ZBAA_TWR", "ZSPD_TWR", "ZSSS_TWR", "ZYTL_TWR", "ZJSY_TWR"] },
+];
 
 function Page() {
   return (
@@ -42,6 +48,15 @@ function Page() {
               <b>S</b> Solo Training: This controller is eligible to provide solo service to this position for the
               purpose of position familiarization and fluency training.
             </Trans>
+            <br />
+            <Trans>Solo is limited to the following positions:</Trans>
+            <ul>
+              {SOLO_POSITIONS.map(({ type, positions }) => (
+                <li key={type}>
+                  {type} Solo: {positions.join(", ")}
+                </li>
+              ))}
+            </ul>
           </li>
           <li>
             <Trans>
@@ -50,7 +65,17 @@ function Page() {
           </li>
           <li>
             <Trans>
+              <b>M</b> Mentor: This controller is eligible to mentor trainees on this type of position.
+            </Trans>
+          </li>
+          <li>
+            <Trans>
               <b>V</b> Visiting: This controller is a visiting controller.
+            </Trans>
+          </li>
+          <li>
+            <Trans>
+              The <b>MIL</b> column marks controllers with military position permission.
             </Trans>
           </li>
         </ul>
@@ -58,24 +83,7 @@ function Page() {
           <Trans>*T2: Tier 2 Permission. Training status for this permission is not displayed on this page.</Trans>
         </p>
       </div>
-      <ControllerList />
-      <div className="prose vatprc-prose mt-4">
-        <p>
-          <Trans>Controller with Military Position Permission</Trans>
-        </p>
-        <ul>
-          <li>1326158 Hongye Rudi Zhang</li>
-          <li>1340265 Junzhe Yan</li>
-          <li>1435267 Lihan Bao</li>
-          <li>1478847 Jingyuan Yin</li>
-          <li>1496934 Weiqi Yu</li>
-          <li>1621162 Haoyu Wu</li>
-          <li>1676022 Shengbo Yang</li>
-          <li>1679151 Jiashu Ye</li>
-          <li>1752734 Steven Zhang</li>
-          <li>1897662 Xinrui Wan</li>
-        </ul>
-      </div>
+      <ControllerListTable />
     </div>
   );
 }

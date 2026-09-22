@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_doc/controller/become-a-controller")(
     "/_doc/controller/become-a-controller",
     "7188",
     "7214",
-    <LinkButton className="mb-8" to="/controllers/applications/new">
+    <LinkButton className="mb-4" to="/controllers/applications/new">
       <Trans>Apply</Trans>
     </LinkButton>,
   ),

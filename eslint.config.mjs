@@ -1,13 +1,15 @@
 // @ts-check
+import { fixupConfigRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import router from "@tanstack/eslint-plugin-router";
 import pluginLingui from "eslint-plugin-lingui";
 import react from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
 // import reactHooks from "eslint-plugin-react-hooks";
 
-export default tseslint.config(
+export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
   {
@@ -17,11 +19,23 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
   },
-  react.configs.flat.recommended,
-  react.configs.flat["jsx-runtime"],
+  // eslint-plugin-react still uses context APIs removed in ESLint 10.
+  ...fixupConfigRules([react.configs.flat.recommended, react.configs.flat["jsx-runtime"]]),
   // reactHooks.configs.flat.recommended,
   router.configs["flat/recommended"],
   { ignores: ["app/lib/api.d.ts"] },
   pluginLingui.configs["flat/recommended"],
+  {
+    files: ["**/*.test.{ts,tsx}"],
+    rules: {
+      // workaround for RangeError: Maximum call stack size exceeded
+      "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    },
+  },
 );

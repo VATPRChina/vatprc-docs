@@ -86,7 +86,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
 export const getAllDocuments = createServerFn().handler(async () => findAllDocuments());
 
 export const getDocument = createServerFn()
-  .inputValidator((data: string) => data)
+  .validator((data: string) => data)
   .handler(async (ctx) => {
     const filePath = `docs/${ctx.data}`;
     const content = await fs.readFile(filePath, "utf-8");

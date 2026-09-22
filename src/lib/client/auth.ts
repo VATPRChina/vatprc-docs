@@ -1,5 +1,4 @@
 import { components, paths } from "../api";
-import { ApiError } from "./ApiError";
 import { atom, getDefaultStore } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { SyncStringStorage } from "jotai/vanilla/utils/atomWithStorage";
@@ -36,6 +35,16 @@ export const hasAuthenticatedAtom = atom(
 
 export const getAccessToken = () => sessionStore.get(accessTokenAtom)?.access_token;
 
+export const redirectToLogin = () => {
+  const url = new URL("/auth/authorize", import.meta.env.VITE_API_AUTH_ENDPOINT);
+  url.searchParams.set("client_id", import.meta.env.VITE_API_CLIENT_ID);
+  url.searchParams.set("redirect_uri", import.meta.env.VITE_API_REDIRECT_URI);
+  url.searchParams.set("response_type", "code");
+
+  localStorage.setItem("pre_oauth_path", window.location.pathname);
+  location.assign(url.toString());
+};
+
 const handleSessionLoginResponse = (
   result: Pick<components["schemas"]["TokenResponse"], "access_token" | "expires_in" | "refresh_token">,
 ) => {
@@ -60,7 +69,7 @@ export const login = async (code: string) => {
     },
   });
   if (data.error) {
-    throw new ApiError("Error response from server", data.response.status, data.error?.error, data.error);
+    throw new Error(`Error response from server: ${data.response.status} ${data.error?.error}`);
   }
   handleSessionLoginResponse(data.data);
 };
@@ -86,7 +95,7 @@ export const refresh = async () => {
     forceLogout();
     return;
   } else if (!result.data) {
-    throw new ApiError("Error response from server", result.response.status, result.error?.error, result.error);
+    throw new Error(`Error response from server: ${result.error.error_description} (${result.error.error})`);
   }
   handleSessionLoginResponse(result.data);
   const observers = refreshTokenObservers;

@@ -1,13 +1,13 @@
 import { RequireRole } from "../require-role";
 import { client } from "@/lib/client/client";
-import { wrapPromiseWithToast } from "@/lib/utils";
+import { wrapPromiseWithLog } from "@/lib/utils";
 import { ActionIcon } from "@mantine/core";
 import { TbFileExport } from "react-icons/tb";
 
 export const ExportSlot = ({ eventId }: { eventId: string }) => {
   const onClick = async () => {
-    const data = await client.GET("/api/events/{eid}/slots/bookings.csv", {
-      params: { path: { eid: eventId } },
+    const data = await client.GET("/api/events/{event_id}/slots/bookings.csv", {
+      params: { path: { event_id: eventId } },
       parseAs: "blob",
     });
     if (!data?.data) return;
@@ -20,7 +20,7 @@ export const ExportSlot = ({ eventId }: { eventId: string }) => {
 
   return (
     <RequireRole role="event-coordinator">
-      <ActionIcon variant="subtle" aria-label="Export slots" onClick={wrapPromiseWithToast(onClick)}>
+      <ActionIcon variant="subtle" aria-label="Export slots" onClick={wrapPromiseWithLog(onClick)}>
         <TbFileExport />
       </ActionIcon>
     </RequireRole>

@@ -16,8 +16,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@/assets/*": ["./assets/*"],
-      "@/styles/*": ["./styles/*"]
+      "@/assets/*": ["./assets/*"]
     },
     "verbatimModuleSyntax": false
   },

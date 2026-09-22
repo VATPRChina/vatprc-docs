@@ -1,9 +1,10 @@
 import { AtcApplicationForm } from "@/components/atc-application/atc-application-form";
 import { BackButton } from "@/components/back-button";
+import { useCenterRoles } from "@/components/controller-center/center-context";
 import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/doc/discourse-doc";
 import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/new")({
   component: RouteComponent,
@@ -14,13 +15,16 @@ export const Route = createFileRoute("/controllers/applications/new")({
 
 function RouteComponent() {
   const [docCode] = Route.useLoaderData();
+  const { isController } = useCenterRoles();
+
+  if (isController) return <Navigate to="/controllers" replace />;
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl">
+      <h2 className="text-2xl font-medium">
         <Trans>New ATC Application</Trans>
-      </h1>
+      </h2>
       <Alert color="yellow" title={<Trans>Controller Application Guideline</Trans>}>
         <Trans>
           Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied.

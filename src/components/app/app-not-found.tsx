@@ -1,10 +1,10 @@
 import { LinkButton } from "../ui/link-button";
 import { Trans } from "@lingui/react/macro";
-import { Container, Title, Text, Stack } from "@mantine/core";
+import { Title, Text } from "@mantine/core";
 
 export const NotFound: React.FC = () => (
-  <Container>
-    <Stack gap="xl" align="start">
+  <div className="container mx-auto">
+    <div className="flex flex-col items-start gap-4">
       <Title order={1} size={192} c="dimmed">
         404
       </Title>
@@ -20,6 +20,6 @@ export const NotFound: React.FC = () => (
       <LinkButton size="md" variant="light" to="/">
         <Trans>Take me back to home page</Trans>
       </LinkButton>
-    </Stack>
-  </Container>
+    </div>
+  </div>
 );

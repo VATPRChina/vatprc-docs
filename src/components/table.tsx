@@ -3,15 +3,24 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import {
+  columnFilteringFeature,
+  columnVisibilityFeature,
+  createFilteredRowModel,
+  createPaginatedRowModel,
+  createSortedRowModel,
+  filterFns,
+  globalFilteringFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  sortFns,
+  tableFeatures,
   ColumnDef,
   flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  InitialTableState,
+  TableState,
+  RowData,
   SortDirection,
-  useReactTable,
+  useTable,
 } from "@tanstack/react-table";
 import { ChangeEvent, FC } from "react";
 import {
@@ -24,6 +33,25 @@ import {
   TbSelector,
   TbSearch,
 } from "react-icons/tb";
+
+const columnMeta: { filterValues?: { value: string; label: MessageDescriptor }[] } = {};
+
+const richTableFeatures = tableFeatures({
+  columnFilteringFeature,
+  columnVisibilityFeature,
+  globalFilteringFeature,
+  rowPaginationFeature,
+  rowSelectionFeature,
+  rowSortingFeature,
+  filteredRowModel: createFilteredRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+  sortedRowModel: createSortedRowModel(),
+  filterFns,
+  sortFns,
+  columnMeta,
+});
+
+export type RichTableFeatures = typeof richTableFeatures;
 
 interface SortableHeaderProps {
   children: React.ReactNode;
@@ -39,7 +67,7 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
 
   return (
     <UnstyledButton onClick={onSort} className="w-full">
-      <div className="flex flex-row items-center justify-between gap-2">
+      <div className="flex flex-row items-center justify-between gap-1">
         <div>{children}</div>
         <Icon size={16} />
       </div>
@@ -47,30 +75,35 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
   );
 };
 
-export interface RichTableProps<TData> {
+export interface RichTableProps<TData extends RowData> {
   data?: TData[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<RichTableFeatures, TData, any>[];
   isLoading?: boolean;
-  initialState?: InitialTableState;
+  initialState?: Partial<TableState<RichTableFeatures>>;
+  /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
+  hideGlobalSearch?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
 
-export const RichTable = <TData,>({ data, columns, isLoading, initialState }: RichTableProps<TData>) => {
+export const RichTable = <TData extends RowData>({
+  data,
+  columns,
+  isLoading,
+  initialState,
+  hideGlobalSearch,
+}: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
-  const table = useReactTable({
+  const table = useTable({
+    features: richTableFeatures,
     data: data ?? EMPTY_TABLE,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     initialState,
   });
 
-  const currentPage = table.getState().pagination.pageIndex + 1;
+  const currentPage = table.state.pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
   const onGlobalFilterChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -87,15 +120,17 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
   }, 200);
 
   return (
-    <div className="flex flex-col gap-4">
-      <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+    <div className="flex flex-col gap-1">
+      {!hideGlobalSearch && (
+        <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+      )}
       <Table highlightOnHover>
         <Table.Thead>
           <Table.Tr>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
                 <Table.Th key={`${headerGroup.id}/${header.id}`}>
-                  <div className="flex h-full flex-col gap-0.5">
+                  <div className="flex h-full flex-col gap-1">
                     <SortableHeader
                       key={header.id}
                       sorted={header.column.getIsSorted()}
@@ -141,7 +176,7 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
             </Table.Tr>
           ))}
           {isLoading &&
-            Array(table.getState().pagination.pageSize)
+            Array(Math.min(table.state.pagination.pageSize, 15))
               .fill(0)
               .map((_, i) => (
                 <Table.Tr key={i}>
@@ -159,18 +194,21 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
           <Trans>No data</Trans>
         </div>
       )}
-      <div className="flex items-center justify-between space-x-6 self-stretch px-2 lg:space-x-8">
+      <div className="flex items-center justify-between gap-2 self-stretch px-2">
         <Select
-          value={`${table.getState().pagination.pageSize}`}
-          onChange={(value) => table.setPageSize(Number(value))}
-          data={[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` }))}
+          value={table.state.pagination.pageSize > 100 ? "all" : `${table.state.pagination.pageSize}`}
+          onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
+          data={[
+            ...[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` })),
+            { value: "all", label: t`All` },
+          ]}
         />
         <div className="flex items-center justify-center text-sm font-medium">
           <Trans>
             Page {currentPage} of {totalPages}
           </Trans>
         </div>
-        <ActionIconGroup>
+        <ActionIconGroup className="gap-1!">
           <ActionIcon
             variant="subtle"
             onClick={() => table.setPageIndex(0)}
@@ -208,10 +246,3 @@ export const RichTable = <TData,>({ data, columns, isLoading, initialState }: Ri
     </div>
   );
 };
-
-declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<TData, TValue> {
-    filterValues?: { value: string; label: MessageDescriptor }[];
-  }
-}

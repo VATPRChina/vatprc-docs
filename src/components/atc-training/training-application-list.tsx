@@ -1,4 +1,5 @@
-import { RichTable } from "../table";
+import { User } from "../app/user";
+import { RichTable, RichTableFeatures } from "../table";
 import { TrainingApplicationCreateModal } from "./training-application-create";
 import { TrainingApplicationDeleteModal } from "./training-application-delete";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
@@ -8,7 +9,7 @@ import { renderWithMap } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
+import { Alert, Badge } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FC } from "react";
 
@@ -54,7 +55,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   ],
 ]);
 
-const col = createColumnHelper<components["schemas"]["TrainingApplicationDto"]>();
+const col = createColumnHelper<RichTableFeatures, components["schemas"]["TrainingApplicationDto"]>();
 const columns = [
   col.accessor("name", { header: () => <Trans>Title</Trans> }),
   col.accessor("status", {
@@ -66,8 +67,11 @@ const columns = [
         .toArray(),
     },
   }),
-  col.accessor("trainee.cid", { header: () => <Trans>Trainee CID</Trans> }),
-  col.accessor("trainee.full_name", { header: () => <Trans>Trainee Name</Trans> }),
+  col.accessor((application) => `${application.trainee.full_name} ${application.trainee.cid}`.trim(), {
+    id: "trainee",
+    header: () => <Trans>Trainee</Trans>,
+    cell: ({ row }) => <User user={row.original.trainee} />,
+  }),
   col.display({
     id: "actions",
     cell: ({ row }) => (
@@ -81,14 +85,21 @@ const columns = [
 ];
 
 export const TrainingApplicationList: FC = () => {
-  const { data, isLoading } = $api.useQuery("get", "/api/atc/trainings/applications");
+  const { data, error, isLoading } = $api.useQuery("get", "/api/atc/trainings/applications");
 
   return (
-    <RichTable
-      data={data}
-      columns={columns}
-      isLoading={isLoading}
-      initialState={{ columnFilters: [{ id: "status", value: "pending" }] }}
-    />
+    <div className="flex flex-col gap-1">
+      {error && (
+        <Alert color="red" title={error.title}>
+          {error.detail}
+        </Alert>
+      )}
+      <RichTable
+        data={data}
+        columns={columns}
+        isLoading={isLoading}
+        initialState={{ columnFilters: [{ id: "status", value: "pending" }] }}
+      />
+    </div>
   );
 };
