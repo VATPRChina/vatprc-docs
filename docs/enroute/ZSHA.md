@@ -276,6 +276,7 @@ N26.07.50 E119.45.26
 N26.20.36 E120.00.00
 ```
 
+<img width="491" height="380" alt="马祖终端管制区" src="https://github.com/user-attachments/assets/edc067f6-d089-4698-9f31-d823e1b7e6ad" />
 
 
 图 5: 马祖 TMA 空域示意图
