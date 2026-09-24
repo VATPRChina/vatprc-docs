@@ -2327,3 +2327,7 @@ msgstr "Your flight is not online"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
+
+#: src/components/controller-center/training-detail.tsx
+msgid "No self reflection has been filed yet."
+msgstr "No self reflection has been filed yet."

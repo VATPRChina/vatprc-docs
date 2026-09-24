@@ -9,7 +9,6 @@ import { FC } from "react";
 type TrainingDto = components["schemas"]["TrainingDto"];
 
 export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
-  const { i18n } = useLingui();
   const user = useUser();
 
   return (
@@ -29,22 +28,42 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
           </span>
         )}
       </p>
+      <h4 className="mt-2 font-medium">
+        <Trans>Mentor Feedback</Trans>
+      </h4>
       {(training.record_sheet_filing?.length ?? 0) === 0 ? (
         <p className="text-gray-500 dark:text-gray-400">
           <Trans>No training record has been filed yet.</Trans>
         </p>
       ) : (
-        <dl className="flex flex-col gap-1">
-          {training.record_sheet_filing?.map((answer) => (
-            <div key={answer.field.id}>
-              <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                {i18n.locale === "en" ? (answer.field.name_en ?? answer.field.name_zh) : answer.field.name_zh}
-              </dt>
-              <dd className="break-words whitespace-pre-wrap">{answer.answer}</dd>
-            </div>
-          ))}
-        </dl>
+        <FilingAnswers answers={training.record_sheet_filing!} />
+      )}
+      <h4 className="mt-2 font-medium">
+        <Trans>Self Reflection</Trans>
+      </h4>
+      {(training.self_reflection_sheet_filing?.length ?? 0) === 0 ? (
+        <p className="text-gray-500 dark:text-gray-400">
+          <Trans>No self reflection has been filed yet.</Trans>
+        </p>
+      ) : (
+        <FilingAnswers answers={training.self_reflection_sheet_filing!} />
       )}
     </article>
+  );
+};
+
+const FilingAnswers: FC<{ answers: components["schemas"]["SheetFieldAnswerDto"][] }> = ({ answers }) => {
+  const { i18n } = useLingui();
+  return (
+    <dl className="flex flex-col gap-1">
+      {answers.map((answer) => (
+        <div key={answer.field.id}>
+          <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            {i18n.locale === "en" ? (answer.field.name_en ?? answer.field.name_zh) : answer.field.name_zh}
+          </dt>
+          <dd className="break-words whitespace-pre-wrap">{answer.answer}</dd>
+        </div>
+      ))}
+    </dl>
   );
 };
