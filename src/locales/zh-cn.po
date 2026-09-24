@@ -1228,7 +1228,7 @@ msgstr "教师"
 msgid "Mentor assignment"
 msgstr "分配教员"
 
-#: src/routes/controllers/trainings/$id.tsx:134
+#: src/components/controller-center/training-detail.tsx:38
 msgid "Mentor Feedback"
 msgstr "教员反馈"
 
@@ -1334,11 +1334,15 @@ msgstr "无 RNAV1"
 msgid "No RVSM"
 msgstr "无 RVSM"
 
+#: src/components/controller-center/training-detail.tsx:52
+msgid "No self reflection has been filed yet."
+msgstr "尚未填写自我反思。"
+
 #: src/routes/sheets.tsx:58
 msgid "No sheet available."
 msgstr "当前没有表单。"
 
-#: src/components/controller-center/training-detail.tsx:34
+#: src/components/controller-center/training-detail.tsx:42
 msgid "No training record has been filed yet."
 msgstr "尚未填写训练记录。"
 
@@ -1707,7 +1711,7 @@ msgstr "查看所有公告"
 msgid "See All Events"
 msgstr "查看所有活动"
 
-#: src/components/atc-training/training-self-reflection.tsx:37
+#: src/components/controller-center/training-detail.tsx:48
 msgid "Self Reflection"
 msgstr "自我反思"
 
@@ -2073,11 +2077,7 @@ msgstr "全部 {totalSheets} 个表单"
 msgid "Tower"
 msgstr "塔台"
 
-#: src/components/atc-training/training-application-list.tsx:72
-#: src/components/atc-training/training-list.tsx:19
-#: src/components/atc-training/training-save.tsx:119
-#: src/components/controller-center/training-detail.tsx:28
-#: src/routes/controllers/trainings/$id.tsx:77
+#: src/components/controller-center/training-detail.tsx:33
 msgid "Trainee"
 msgstr "学员"
 
@@ -2085,11 +2085,7 @@ msgstr "学员"
 msgid "Trainee Applications"
 msgstr "学员报名"
 
-#: src/components/atc-training/training-application-responses.tsx:116
-#: src/components/atc-training/training-list.tsx:24
-#: src/components/atc-training/training-save.tsx:107
-#: src/components/controller-center/training-detail.tsx:24
-#: src/routes/controllers/trainings/$id.tsx:86
+#: src/components/controller-center/training-detail.tsx:29
 msgid "Trainer"
 msgstr "教员"
 
@@ -2251,6 +2247,10 @@ msgstr "查看审计日志"
 #: src/routes/events/index.tsx:26
 msgid "View past events"
 msgstr "查看过去活动"
+
+#: src/components/controller-center/training-detail.tsx:20
+msgid "View training details"
+msgstr ""
 
 #: src/components/atc-permission-modal.tsx:98
 #: src/components/controller-center/identity-chip.tsx:24
