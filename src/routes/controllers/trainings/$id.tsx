@@ -1,5 +1,6 @@
 import { TrainingList } from "@/components/atc-training/training-list";
 import { TrainingSaveModal } from "@/components/atc-training/training-save";
+import { TrainingSelfReflection } from "@/components/atc-training/training-self-reflection";
 import { BackButton } from "@/components/back-button";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
@@ -124,12 +125,8 @@ function RouteComponent() {
           </Table.Tr>
         </Table.Tbody>
       </Table>
-      <h2 className="text-xl">
-        <Trans>Self Reflection</Trans>
-      </h2>
-      <Alert color="blue">
-        <Trans>Self reflection will be online soon. For now, please send your self reflection to your mentor.</Trans>
-      </Alert>
+      {isLoading && <Skeleton h={160} />}
+      {training && <TrainingSelfReflection key={training.id} training={training} />}
       <h2 className="text-xl">
         <Trans>Mentor Feedback</Trans>
       </h2>
