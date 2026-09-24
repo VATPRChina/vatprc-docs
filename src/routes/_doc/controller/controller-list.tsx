@@ -10,6 +10,12 @@ export const Route = createFileRoute("/_doc/controller/controller-list")({
   }),
 });
 
+const SOLO_POSITIONS = [
+  { type: "CTR", positions: ["ZBAA_CTR", "ZGGG_CTR", "ZSSS_CTR", "ZYTL_CTR", "ZJSY_CTR"] },
+  { type: "APP", positions: ["ZBAA_APP", "ZSSS_APP", "ZGGG_APP", "ZYTL_APP", "ZJSY_APP"] },
+  { type: "TWR", positions: ["ZBAA_TWR", "ZSPD_TWR", "ZSSS_TWR", "ZYTL_TWR", "ZJSY_TWR"] },
+];
+
 function Page() {
   return (
     <div className="container mx-auto">
@@ -42,6 +48,15 @@ function Page() {
               <b>S</b> Solo Training: This controller is eligible to provide solo service to this position for the
               purpose of position familiarization and fluency training.
             </Trans>
+            <br />
+            <Trans>Solo is limited to the following positions:</Trans>
+            <ul>
+              {SOLO_POSITIONS.map(({ type, positions }) => (
+                <li key={type}>
+                  {type} Solo: {positions.join(", ")}
+                </li>
+              ))}
+            </ul>
           </li>
           <li>
             <Trans>
