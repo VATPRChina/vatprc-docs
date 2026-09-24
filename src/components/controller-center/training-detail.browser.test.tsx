@@ -40,6 +40,9 @@ test("shows mentor feedback and all configured reflection answers read-only", as
   await expect.element(screen.getByRole("heading", { name: "Mentor Feedback" })).toBeVisible();
   await expect.element(screen.getByText("Good handoffs")).toBeVisible();
   await expect.element(screen.getByRole("heading", { name: "Self Reflection" })).toBeVisible();
+  await expect
+    .element(screen.getByRole("link", { name: "View training details" }))
+    .toHaveAttribute("href", "/controllers/trainings/training");
   await expect.element(screen.getByText("What I learned")).toBeVisible();
   await expect.element(screen.getByText("Improve scanning Coordinate sooner")).toBeVisible();
   await expect.element(screen.getByText("Practice departures")).toBeVisible();
