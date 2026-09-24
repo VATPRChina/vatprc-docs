@@ -1,11 +1,12 @@
 import { TrainingDetail } from "./training-detail";
 import { components } from "@/lib/api";
 import { renderComponent } from "@/test/render-component";
+import { ReactNode } from "react";
 import { expect, test, vi } from "vitest";
 
 vi.mock("@/lib/client", () => ({ useUser: () => ({ id: "mentor" }) }));
 vi.mock("@/components/ui/link-button", () => ({
-  LinkButton: ({ children }: { children: unknown }) => <a href="/controllers/trainings/training">{children}</a>,
+  LinkButton: ({ children }: { children: ReactNode }) => <a href="/controllers/trainings/training">{children}</a>,
 }));
 
 type Answer = components["schemas"]["SheetFieldAnswerDto"];
