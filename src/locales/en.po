@@ -1707,13 +1707,13 @@ msgstr "See All Announcements"
 msgid "See All Events"
 msgstr "See All Events"
 
-#: src/routes/controllers/trainings/$id.tsx:128
+#: src/components/atc-training/training-self-reflection.tsx:37
 msgid "Self Reflection"
 msgstr "Self Reflection"
 
-#: src/routes/controllers/trainings/$id.tsx:131
-msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
-msgstr "Self reflection will be online soon. For now, please send your self reflection to your mentor."
+#: src/components/atc-training/training-self-reflection.tsx:41
+msgid "Self reflection saved successfully."
+msgstr "Self reflection saved successfully."
 
 #: src/components/app/app-nav-menu.tsx:119
 #: src/routes/sheets.tsx:23

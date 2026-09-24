@@ -1707,13 +1707,13 @@ msgstr "查看所有公告"
 msgid "See All Events"
 msgstr "查看所有活动"
 
-#: src/routes/controllers/trainings/$id.tsx:128
+#: src/components/atc-training/training-self-reflection.tsx:37
 msgid "Self Reflection"
 msgstr "自我反思"
 
-#: src/routes/controllers/trainings/$id.tsx:131
-msgid "Self reflection will be online soon. For now, please send your self reflection to your mentor."
-msgstr "自我反思功能将很快上线。目前请将你的自我反思发送给你的教员。"
+#: src/components/atc-training/training-self-reflection.tsx:41
+msgid "Self reflection saved successfully."
+msgstr "自我反思保存成功。"
 
 #: src/components/app/app-nav-menu.tsx:119
 #: src/routes/sheets.tsx:23
