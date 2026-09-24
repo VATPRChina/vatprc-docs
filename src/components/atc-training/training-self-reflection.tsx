@@ -11,7 +11,8 @@ export const TrainingSelfReflection: FC<{ training: components["schemas"]["Train
   const queryClient = useQueryClient();
   const isAdmin = user?.roles.includes("controller-training-director-assistant") ?? false;
   const canEdit = !!user && (user.id === training.trainee_id || isAdmin);
-  const canRead = canEdit || (!!user && user.id === training.trainer_id);
+  const canRead =
+    canEdit || (!!user && (user.id === training.trainer_id || user.roles.includes("controller-training-mentor")));
   const {
     data: sheet,
     error: loadError,

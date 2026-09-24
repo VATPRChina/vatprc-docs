@@ -85,10 +85,11 @@ test("allows the training director assistant to edit", async () => {
   });
 });
 
-test("hides self reflection from an unrelated mentor", async () => {
+test("shows other mentors read-only reflection", async () => {
   state.userId = "other-mentor";
   state.roles = ["controller-training-mentor"];
   const screen = await renderReflection();
-  await expect.element(screen.getByRole("heading", { name: "Self Reflection" })).not.toBeInTheDocument();
-  await expect.element(screen.getByText("Existing reflection")).not.toBeInTheDocument();
+  await expect.element(screen.getByText("Existing reflection")).toBeVisible();
+  await expect.element(screen.getByRole("textbox")).not.toBeInTheDocument();
+  await expect.element(screen.getByRole("button", { name: "Save", exact: true })).not.toBeInTheDocument();
 });
