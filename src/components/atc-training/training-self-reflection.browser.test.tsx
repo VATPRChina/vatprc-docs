@@ -6,6 +6,7 @@ import { beforeEach, expect, test, vi } from "vitest";
 
 const state = vi.hoisted(() => ({
   userId: "trainee",
+  roles: [] as string[],
   save: vi.fn().mockResolvedValue(undefined),
 }));
 const field: components["schemas"]["SheetFieldDto"] = {
@@ -25,7 +26,7 @@ vi.mock("@/lib/utils", () => ({
 }));
 
 vi.mock("@/lib/client", () => ({
-  useUser: () => ({ id: state.userId }),
+  useUser: () => ({ id: state.userId, roles: state.roles }),
   $api: {
     useQuery: () => ({ data: { id: field.sheet_id, name: "Self Reflection", fields: [field] } }),
     useMutation: () => ({ mutateAsync: state.save }),
@@ -48,6 +49,7 @@ const renderReflection = () =>
 
 beforeEach(() => {
   state.userId = "trainee";
+  state.roles = [];
   state.save.mockClear();
 });
 
@@ -69,4 +71,24 @@ test("shows the mentor read-only content without a save button", async () => {
   await expect.element(screen.getByText("Existing reflection")).toBeVisible();
   await expect.element(screen.getByRole("textbox")).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Save", exact: true })).not.toBeInTheDocument();
+});
+
+test("allows the training director assistant to edit", async () => {
+  state.userId = "admin";
+  state.roles = ["controller-training-director-assistant"];
+  const screen = await renderReflection();
+  await screen.getByRole("textbox", { name: "Self Reflection" }).fill("Admin edit");
+  await screen.getByRole("button", { name: "Save", exact: true }).click();
+  expect(state.save).toHaveBeenCalledWith({
+    params: { path: { id: "training" } },
+    body: { request_answers: [{ id: "reflection", answer: "Admin edit" }] },
+  });
+});
+
+test("hides self reflection from an unrelated mentor", async () => {
+  state.userId = "other-mentor";
+  state.roles = ["controller-training-mentor"];
+  const screen = await renderReflection();
+  await expect.element(screen.getByRole("heading", { name: "Self Reflection" })).not.toBeInTheDocument();
+  await expect.element(screen.getByText("Existing reflection")).not.toBeInTheDocument();
 });

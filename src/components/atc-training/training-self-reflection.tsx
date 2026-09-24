@@ -9,7 +9,19 @@ import { FC } from "react";
 export const TrainingSelfReflection: FC<{ training: components["schemas"]["TrainingDto"] }> = ({ training }) => {
   const user = useUser();
   const queryClient = useQueryClient();
-  const { data: sheet, error: loadError, isLoading } = $api.useQuery("get", "/api/atc/trainings/self-reflection-sheet");
+  const isAdmin = user?.roles.includes("controller-training-director-assistant") ?? false;
+  const canEdit = !!user && (user.id === training.trainee_id || isAdmin);
+  const canRead = canEdit || (!!user && user.id === training.trainer_id);
+  const {
+    data: sheet,
+    error: loadError,
+    isLoading,
+  } = $api.useQuery(
+    "get",
+    "/api/atc/trainings/{id}/self-reflection-sheet",
+    { params: { path: { id: training.id } } },
+    { enabled: canRead },
+  );
   const {
     mutateAsync,
     error: saveError,
@@ -30,6 +42,8 @@ export const TrainingSelfReflection: FC<{ training: components["schemas"]["Train
       ]);
     },
   });
+
+  if (!canRead) return null;
 
   return (
     <section className="flex flex-col gap-2">
@@ -52,9 +66,9 @@ export const TrainingSelfReflection: FC<{ training: components["schemas"]["Train
           className="flex flex-col gap-2"
           sheet={sheet}
           existingFillingAnswers={training.self_reflection_sheet_filing ?? undefined}
-          isSubmitHidden={user?.id !== training.trainee_id}
+          isSubmitHidden={!canEdit}
           onSubmit={async (answers) => {
-            if (user?.id !== training.trainee_id) return;
+            if (!canEdit) return;
             await mutateAsync({ params: { path: { id: training.id } }, body: { request_answers: answers } });
           }}
           submitButtonContent={<Trans>Save</Trans>}
