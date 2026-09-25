@@ -1,4 +1,5 @@
-import { Coordinate, CoverageRequest, CoverageResult, Radar, RadarRegion, Terrain } from "./types";
+import { DEM_NODATA, ElevationSource, traverseCells } from "./dem";
+import { Coordinate, CoverageRequest, CoverageResult, Radar, RadarRegion } from "./types";
 
 const DEG = Math.PI / 180;
 const EARTH_NM = 3440.065;
@@ -20,18 +21,6 @@ export function pointInside(point: Coordinate, polygon: Coordinate[]): boolean {
   }
   return inside;
 }
-export function decodeTerrain(t: Terrain): Int16Array {
-  const raw = atob(t.values);
-  const view = new DataView(Uint8Array.from(raw, (c) => c.charCodeAt(0)).buffer);
-  return Int16Array.from({ length: t.rows * t.cols }, (_, i) => view.getInt16(i * 2, true));
-}
-export function terrainMeters(t: Terrain, values: Int16Array, [lat, lon]: Coordinate): number | null {
-  if (lat < t.minLat || lat > t.maxLat || lon < t.minLon || lon > t.maxLon) return null;
-  const row = Math.max(0, Math.min(t.rows - 1, Math.round((t.maxLat - lat) / t.step)));
-  const col = Math.max(0, Math.min(t.cols - 1, Math.round((lon - t.minLon) / t.step)));
-  const value = values[row * t.cols + col];
-  return value === undefined || value === -32768 ? null : value;
-}
 /** Great-circle interpolation avoids a straight latitude/longitude path at high latitudes. */
 function interpolate(a: Coordinate, b: Coordinate, fraction: number, angle: number): Coordinate {
   if (angle < 1e-10) return a;
@@ -44,8 +33,7 @@ function interpolate(a: Coordinate, b: Coordinate, fraction: number, angle: numb
 }
 /** null means unavailable terrain, never assumed sea level. */
 export function hasLineOfSight(
-  t: Terrain,
-  values: Int16Array,
+  terrain: ElevationSource,
   radar: Radar,
   target: Coordinate,
   altitude: number,
@@ -53,26 +41,35 @@ export function hasLineOfSight(
   const stationPoint: Coordinate = [radar.lat, radar.lon];
   const distance = distanceNm(stationPoint, target);
   if (distance > radar.maxRange) return false;
-  const targetGround = terrainMeters(t, values, target),
-    stationGround = terrainMeters(t, values, stationPoint);
+  const targetGround = terrain.elevation(target),
+    stationGround = terrain.elevation(stationPoint);
   if (targetGround === null || stationGround === null) return null;
   if (altitude <= targetGround * 3.28084) return false;
   if (distance < 0.01) return true;
   const station = Math.max(radar.elevation, stationGround * 3.28084);
   const distanceFt = distance * FT_PER_NM;
   const targetSlope = (altitude - station) / distanceFt - distanceFt / (2 * EFFECTIVE_EARTH_FT);
-  // Sample more frequently than the supplied 0.1-degree DEM spacing to reduce skipped cells.
-  const steps = Math.max(2, Math.ceil(distance));
+  // Approximate the great-circle with short segments, then traverse every raster cell
+  // crossed by each segment. The interval scales to the DEM, not the map zoom.
+  const segmentLength = Math.min(1, terrain.step * DEG * EARTH_NM);
+  const steps = Math.max(1, Math.ceil(distance / segmentLength));
   let missing = false;
-  for (let i = 1; i < steps; i++) {
-    const sample = terrainMeters(t, values, interpolate(stationPoint, target, i / steps, distance / EARTH_NM));
-    if (sample === null) {
-      missing = true;
-      continue;
+  let previous = stationPoint;
+  for (let i = 1; i <= steps; i++) {
+    const next = interpolate(stationPoint, target, i / steps, distance / EARTH_NM);
+    for (const cell of traverseCells(previous, next, terrain.step)) {
+      const fraction = (i - 1 + cell.fraction) / steps;
+      if (fraction <= 1e-8 || fraction >= 1 - 1e-8) continue;
+      const sample = terrain.elevation(cell.point);
+      if (sample === null) {
+        missing = true;
+        continue;
+      }
+      const sampleFt = distanceFt * fraction;
+      const slope = (sample * 3.28084 - station) / sampleFt - sampleFt / (2 * EFFECTIVE_EARTH_FT);
+      if (slope > targetSlope + 1e-6) return false;
     }
-    const sampleFt = (distanceFt * i) / steps;
-    const slope = (sample * 3.28084 - station) / sampleFt - sampleFt / (2 * EFFECTIVE_EARTH_FT);
-    if (slope > targetSlope + 1e-6) return false;
+    previous = next;
   }
   return missing ? null : true;
 }
@@ -111,17 +108,22 @@ export function coverageBounds(region: RadarRegion): [number, number, number, nu
   return bounds;
 }
 
-export function calculateCoverage({ region, altitude, enabled }: CoverageRequest): CoverageResult {
+function* coverageRows(
+  { region, altitude, enabled }: CoverageRequest,
+  terrain: ElevationSource,
+): Generator<void, CoverageResult> {
   const result: CoverageResult = {
     cells: { type: "FeatureCollection", features: [] },
     percentage: null,
     unknownPercentage: 0,
+    stationHeights: region.radars.map((radar) => {
+      const ground = terrain.elevation([radar.lat, radar.lon]);
+      return ground === null ? null : Math.max(radar.elevation, ground * 3.28084);
+    }),
   };
-  const bounds = coverageBounds(region),
-    t = region.terrain;
-  if (!bounds || !t || !region.radars.length) return result;
-  const values = decodeTerrain(t),
-    radars = region.radars.filter((r) => enabled.includes(r.type));
+  const bounds = coverageBounds(region);
+  if (!bounds || !region.radars.length) return result;
+  const radars = region.radars.filter((r) => enabled.includes(r.type));
   const [west, south, east, north] = bounds;
   const cols = 300,
     rows = Math.min(320, Math.max(140, Math.round((cols * (north - south)) / (east - west))));
@@ -130,7 +132,7 @@ export function calculateCoverage({ region, altitude, enabled }: CoverageRequest
   let total = 0,
     covered = 0,
     unknown = 0;
-  for (let row = 0; row < rows; row++)
+  for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const lon = west + (col + 0.5) * dx,
         lat = south + (row + 0.5) * dy;
@@ -141,7 +143,7 @@ export function calculateCoverage({ region, altitude, enabled }: CoverageRequest
       let missing = false;
       for (const radar of radars) {
         if (visibleTypes.has(radar.type)) continue;
-        const visible = hasLineOfSight(t, values, radar, [lat, lon], altitude);
+        const visible = hasLineOfSight(terrain, radar, [lat, lon], altitude);
         if (visible) visibleTypes.add(radar.type);
         if (visible === null) missing = true;
         // Fusion requires a confirmed line of sight to both enabled surveillance types.
@@ -162,11 +164,20 @@ export function calculateCoverage({ region, altitude, enabled }: CoverageRequest
         else if (missing) unknown += weight;
       }
       // Missing DEM still affects FIR statistics, but is not drawn beyond available terrain.
-      if (terrainMeters(t, values, [lat, lon]) === null || (!hit && !missing)) continue;
-      const x = Math.max(t.minLon, west + col * dx),
-        y = Math.max(t.minLat, south + row * dy),
-        right = Math.min(t.maxLon, west + (col + 1) * dx),
-        top = Math.min(t.maxLat, south + (row + 1) * dy);
+      if (terrain.elevation([lat, lon]) === null || (!hit && !missing)) continue;
+      const x = west + col * dx,
+        y = south + row * dy,
+        right = west + (col + 1) * dx,
+        top = south + (row + 1) * dy;
+      if (
+        [
+          [y, x],
+          [top, x],
+          [top, right],
+          [y, right],
+        ].some(([lat, lon]) => terrain.elevation([lat, lon]) === null)
+      )
+        continue;
       result.cells.features.push({
         type: "Feature",
         properties: { type: hit ?? "unknown" },
@@ -184,8 +195,54 @@ export function calculateCoverage({ region, altitude, enabled }: CoverageRequest
         },
       });
     }
+    yield;
+  }
   // A single exact percentage is misleading when any sampled cell is unresolved.
   result.percentage = total && !unknown ? Math.round((covered / total) * 100) : null;
   result.unknownPercentage = total ? Math.round((unknown / total) * 100) : 0;
   return result;
+}
+
+/** Synchronous entry point for deterministic model tests. */
+export function calculateCoverage(request: CoverageRequest, terrain: ElevationSource): CoverageResult {
+  const rows = coverageRows(request, terrain);
+  let step = rows.next();
+  while (!step.done) step = rows.next();
+  return step.value;
+}
+/** Yield between rows so the persistent worker can cancel stale jobs without losing DEM cache. */
+export async function calculateCoverageAsync(
+  request: CoverageRequest,
+  terrain: ElevationSource,
+  cancelled: () => boolean,
+): Promise<CoverageResult | null> {
+  const rows = coverageRows(request, terrain);
+  let step = rows.next();
+  let count = 0;
+  while (!step.done) {
+    if (++count % 2 === 0) await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    if (cancelled()) return null;
+    step = rows.next();
+  }
+  return step.value;
+}
+export function terrainPreview(
+  region: RadarRegion,
+  terrain: ElevationSource,
+): NonNullable<CoverageResult["terrain"]> | undefined {
+  const bounds = coverageBounds(region);
+  if (!bounds) return undefined;
+  const [minLon, minLat, maxLon, maxLat] = bounds;
+  const cols = 240,
+    rows = 240;
+  const values = new Int16Array(rows * cols);
+  for (let row = 0; row < rows; row++)
+    for (let col = 0; col < cols; col++) {
+      values[row * cols + col] =
+        terrain.elevation([
+          maxLat - ((row + 0.5) * (maxLat - minLat)) / rows,
+          minLon + ((col + 0.5) * (maxLon - minLon)) / cols,
+        ]) ?? DEM_NODATA;
+    }
+  return { minLon, minLat, maxLon, maxLat, rows, cols, values };
 }

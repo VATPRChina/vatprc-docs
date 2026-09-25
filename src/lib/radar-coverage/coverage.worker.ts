@@ -1,13 +1,28 @@
 import { coverageContours } from "./contours";
-import { calculateCoverage } from "./model";
+import { DemLoader } from "./dem";
+import { calculateCoverageAsync, coverageBounds, terrainPreview } from "./model";
 import { CoverageRequest } from "./types";
 
-self.onmessage = (event: MessageEvent<CoverageRequest>) => {
-  try {
-    const result = calculateCoverage(event.data);
-    result.cells = coverageContours(result.cells);
-    self.postMessage({ result });
-  } catch {
-    self.postMessage({ error: true });
-  }
+const dem = new DemLoader();
+let generation = 0;
+self.onmessage = (event: MessageEvent<{ id: number; request?: CoverageRequest }>) => {
+  const { id, request } = event.data;
+  const current = ++generation;
+  if (!request) return;
+  const cancelled = () => current !== generation;
+  void (async () => {
+    try {
+      const bounds = coverageBounds(request.region);
+      if (!bounds) throw new Error("No coverage extent");
+      const terrain = await dem.load(bounds);
+      if (cancelled()) return;
+      const result = await calculateCoverageAsync(request, terrain, cancelled);
+      if (!result || cancelled()) return;
+      result.cells = coverageContours(result.cells);
+      result.terrain = terrainPreview(request.region, terrain);
+      self.postMessage({ id, result });
+    } catch {
+      if (!cancelled()) self.postMessage({ id, error: true });
+    }
+  })();
 };

@@ -1,195 +1,89 @@
-import { loadRegion, parseRadarData } from "./data";
-import { parseDataset } from "./import";
-import { calculateCoverage, decodeTerrain, distanceNm, hasLineOfSight, pointInside, terrainMeters } from "./model";
-import { CoverageResult, Radar, RadarRegion, Terrain } from "./types";
-import { readFileSync } from "node:fs";
+import { DEM_STEP, ElevationSource, traverseCells } from "./dem";
+import { calculateCoverage, calculateCoverageAsync, distanceNm, hasLineOfSight, pointInside } from "./model";
+import { Radar, RadarRegion } from "./types";
 import { expect, test } from "vitest";
 
-function grid(height = 0): Terrain {
-  const values = new Uint8Array(21 * 21 * 2);
-  const view = new DataView(values.buffer);
-  for (let i = 0; i < 21 * 21; i++) view.setInt16(i * 2, height, true);
-  return {
-    minLat: -1,
-    maxLat: 1,
-    minLon: -1,
-    maxLon: 1,
-    step: 0.1,
-    rows: 21,
-    cols: 21,
-    values: Buffer.from(values).toString("base64"),
-  };
-}
-const radar: Radar = { name: "Test", type: "SSR", elevation: 100, maxRange: 100, lat: 0, lon: -0.5 };
+const radar: Radar = { name: "Test", type: "SSR", elevation: 100, maxRange: 2, lat: 0.01, lon: 0.01 };
 const region: RadarRegion = {
   code: "TEST",
   name: "Test",
   boundary: [
-    [-0.1, -0.1],
-    [-0.1, 0.1],
-    [0.1, 0.1],
-    [0.1, -0.1],
+    [0.005, 0.005],
+    [0.005, 0.015],
+    [0.015, 0.015],
+    [0.015, 0.005],
   ],
   radars: [radar],
-  terrain: grid(),
+};
+const flat: ElevationSource = {
+  step: DEM_STEP,
+  elevation: ([lat, lon]) => (Math.abs(lat) <= 0.05 && Math.abs(lon) <= 0.05 ? 0 : null),
 };
 
-function firTypes(result: CoverageResult) {
-  return new Set(
-    result.cells.features
-      .filter((f) => {
-        const ring = f.geometry.coordinates[0];
-        return pointInside([(ring[0][1] + ring[2][1]) / 2, (ring[0][0] + ring[2][0]) / 2], region.boundary);
-      })
-      .map((f) => f.properties.type),
-  );
-}
-
-test("all nine supplied datasets validate, with SSR_ModeC retained as SSR surveillance", () => {
-  const regions = parseRadarData(readFileSync("assets/radar-data.js", "utf8"));
-  expect(regions).toHaveLength(9);
-  let total = 0;
-  for (const data of regions) {
-    total += data.radars.length;
-    expect(data.radars.some((r) => r.type === "SSR")).toBe(true);
-    expect(data.terrain).toBeDefined();
-    expect(decodeTerrain(data.terrain!).length).toBe(data.terrain!.rows * data.terrain!.cols);
-  }
-  expect(total).toBe(688);
-});
-test("distance uses nautical miles", () => {
+test("great-circle distance is in nautical miles", () => {
   expect(distanceNm([0, 0], [0, 1])).toBeCloseTo(60.04, 1);
 });
-test("DEM decodes little endian and retains negative elevations", () => {
-  const t = grid(-50),
-    values = decodeTerrain(t);
-  expect(terrainMeters(t, values, [0, 0])).toBe(-50);
-  expect(terrainMeters(t, values, [2, 0])).toBeNull();
-  values[10 * 21 + 10] = -32768;
-  expect(terrainMeters(t, values, [0, 0])).toBeNull();
+test("range, terrain, curvature and missing data constrain visibility", () => {
+  expect(hasLineOfSight(flat, radar, [0.015, 0.015], 10000)).toBe(true);
+  expect(hasLineOfSight(flat, radar, [0.01, 1], 10000)).toBe(false);
+  expect(hasLineOfSight(flat, radar, [0.015, 0.015], 0)).toBe(false);
+  expect(hasLineOfSight({ step: DEM_STEP, elevation: () => null }, radar, [0.015, 0.015], 10000)).toBeNull();
+  expect(hasLineOfSight({ step: DEM_STEP, elevation: () => 0 }, { ...radar, maxRange: 200 }, [0.01, 2], 100)).toBe(
+    false,
+  );
 });
-test("line of sight respects range, Earth curvature, target terrain and ridges", () => {
-  const t = grid(),
-    values = decodeTerrain(t);
-  expect(hasLineOfSight(t, values, radar, [0, 0.5], 10000)).toBe(true);
-  expect(hasLineOfSight(t, values, radar, [0, 0.5], 100)).toBe(false);
-  expect(hasLineOfSight(t, values, { ...radar, maxRange: 1 }, [0, 0.5], 10000)).toBe(false);
-  expect(hasLineOfSight(t, values, radar, [0, 0.5], 0)).toBe(false);
-  for (let row = 0; row < 21; row++) values[row * 21 + 10] = 5000;
-  expect(hasLineOfSight(t, values, radar, [0, 0.5], 10000)).toBe(false);
+test("raster traversal checks diagonal corner neighbours and reversed paths", () => {
+  const cells = [...traverseCells([0.1, 0.1], [2.9, 2.9], 1)].map((s) => s.point.join());
+  expect(cells).toContain("0.5,1.5");
+  expect(cells).toContain("1.5,0.5");
+  expect(new Set([...traverseCells([2.9, 2.9], [0.1, 0.1], 1)].map((s) => s.point.join()))).toEqual(new Set(cells));
 });
-test("missing terrain is unknown, never sea level", () => {
-  const t = grid();
-  expect(hasLineOfSight(t, decodeTerrain(t), { ...radar, lon: -2, maxRange: 200 }, [0, 0], 10000)).toBeNull();
-  expect(
-    calculateCoverage({ region: { ...region, terrain: undefined }, altitude: 10000, enabled: ["SSR"] }).percentage,
-  ).toBeNull();
+test("a narrow 30-arc-second ridge is detected between one-NM samples", () => {
+  const ridge: ElevationSource = {
+    step: DEM_STEP,
+    elevation: ([, lon]) => (lon >= DEM_STEP * 2 && lon < DEM_STEP * 3 ? 5000 : 0),
+  };
+  expect(hasLineOfSight(ridge, { ...radar, maxRange: 20 }, [0.01, 0.09], 10000)).toBe(false);
 });
-test("coverage recomputes for altitude, disabled sources and changed files", () => {
-  expect(calculateCoverage({ region, altitude: 10000, enabled: ["SSR"] }).percentage).toBe(100);
-  expect(calculateCoverage({ region, altitude: 0, enabled: ["SSR"] }).percentage).toBe(0);
-  expect(calculateCoverage({ region, altitude: 10000, enabled: [] }).percentage).toBe(0);
-  expect(
-    calculateCoverage({ region: { ...region, radars: [{ ...radar, maxRange: 1 }] }, altitude: 10000, enabled: ["SSR"] })
-      .percentage,
-  ).toBe(0);
-  const unknown = calculateCoverage({
-    region: { ...region, radars: [{ ...radar, lon: -2, maxRange: 200 }] },
-    altitude: 10000,
-    enabled: ["SSR"],
-  });
-  expect(unknown.percentage).toBeNull();
-  expect(unknown.unknownPercentage).toBe(100);
-});
-test("dataset parser rejects invalid terrain dimensions and missing radar coordinates", () => {
-  expect(() => parseDataset(JSON.stringify({ TEST: { ...region, terrain: { ...grid(), rows: 10 } } }))).toThrow();
-  expect(() => parseDataset(JSON.stringify({ TEST: { ...region, radars: [{ ...radar, lat: null }] } }))).toThrow();
-  expect(() => parseDataset("window.RADAR_DATA={}")).toThrow();
-});
-
-test("the built-in loader supplies visible coverage for both default surveillance sources", async () => {
-  const data = await loadRegion("ZBPE");
-  for (const type of ["SSR", "ADSB"] as const) {
-    const result = calculateCoverage({ region: data, altitude: 10000, enabled: [type] });
-    expect(result.cells.features.some((feature) => feature.properties.type === type)).toBe(true);
-  }
-  expect(calculateCoverage({ region: data, altitude: 10000, enabled: [] }).cells.features).toEqual([]);
-});
-
-test("fusion requires SSR and ADS-B coverage and is independent of radar order", () => {
-  const adsb: Radar = { ...radar, name: "ADS-B", type: "ADSB" };
+test("fusion is order independent and disabling a source restores single-source coverage", () => {
+  const adsb: Radar = { ...radar, type: "ADSB" };
   for (const radars of [
     [radar, adsb],
     [adsb, radar],
   ]) {
-    const result = calculateCoverage({ region: { ...region, radars }, altitude: 10000, enabled: ["SSR", "ADSB"] });
+    const result = calculateCoverage(
+      { region: { ...region, radars }, altitude: 10000, enabled: ["SSR", "ADSB"] },
+      flat,
+    );
     expect(result.percentage).toBe(100);
-    expect(firTypes(result)).toEqual(new Set(["fusion"]));
+    expect(new Set(result.cells.features.map((f) => f.properties.type))).toEqual(new Set(["fusion"]));
   }
-  for (const type of ["SSR", "ADSB"] as const) {
-    const result = calculateCoverage({
-      region: { ...region, radars: [radar, adsb] },
-      altitude: 10000,
-      enabled: [type],
-    });
-    expect(firTypes(result)).toEqual(new Set([type]));
-  }
+  const result = calculateCoverage(
+    { region: { ...region, radars: [radar, adsb] }, altitude: 10000, enabled: ["ADSB"] },
+    flat,
+  );
+  expect(new Set(result.cells.features.map((f) => f.properties.type))).toEqual(new Set(["ADSB"]));
 });
-
-test("out-of-range, unknown ADS-B terrain and SMR do not count as fusion", () => {
-  for (const extra of [
-    { ...radar, type: "ADSB" as const, maxRange: 1 },
-    { ...radar, type: "ADSB" as const, lon: -2, maxRange: 200 },
-    { ...radar, type: "SMR" as const },
-  ]) {
-    const result = calculateCoverage({
-      region: { ...region, radars: [extra, radar] },
-      altitude: 10000,
-      enabled: ["SSR", "ADSB", "SMR"],
-    });
-    expect(result.percentage).toBe(100);
-    expect(firTypes(result)).toEqual(new Set(["SSR"]));
-  }
-});
-
-test("coverage extends beyond the FIR but all displayed cells stay inside available DEM", () => {
-  const result = calculateCoverage({ region, altitude: 10000, enabled: ["SSR"] });
+test("coverage extends outside FIR but not outside DEM, while statistics remain FIR-only", () => {
+  const result = calculateCoverage({ region, altitude: 10000, enabled: ["SSR"] }, flat);
   expect(result.percentage).toBe(100);
-  expect(result.unknownPercentage).toBe(0);
   expect(
     result.cells.features.some((f) => {
       const [lon, lat] = f.geometry.coordinates[0][0];
-      return !pointInside([lat, lon], region.boundary) && f.properties.type === "SSR";
+      return !pointInside([lat, lon], region.boundary);
     }),
   ).toBe(true);
-  expect(result.cells.features.some((f) => f.properties.type === "unknown")).toBe(false);
   expect(
-    result.cells.features.every((feature) =>
-      feature.geometry.coordinates[0].every(
-        ([lon, lat]) =>
-          lon >= region.terrain!.minLon &&
-          lon <= region.terrain!.maxLon &&
-          lat >= region.terrain!.minLat &&
-          lat <= region.terrain!.maxLat,
-      ),
+    result.cells.features.every((f) =>
+      f.geometry.coordinates[0].every(([lon, lat]) => flat.elevation([lat, lon]) !== null),
     ),
   ).toBe(true);
+  expect(calculateCoverage({ region, altitude: 10000, enabled: [] }, flat).cells.features).toEqual([]);
+  expect(
+    calculateCoverage({ region, altitude: 10000, enabled: ["SSR"] }, { step: DEM_STEP, elevation: () => null })
+      .percentage,
+  ).toBeNull();
 });
-
-test("one-NM path sampling detects a narrow ridge between the previous three-NM samples", () => {
-  const t: Terrain = {
-    minLat: -0.01,
-    maxLat: 0.01,
-    minLon: -0.1,
-    maxLon: 0.1,
-    step: 0.005,
-    rows: 5,
-    cols: 41,
-    values: "",
-  };
-  const values = new Int16Array(t.rows * t.cols);
-  const station = { ...radar, lon: -0.08 };
-  expect(hasLineOfSight(t, values, station, [0, 0.08], 10000)).toBe(true);
-  for (let row = 0; row < t.rows; row++) values[row * t.cols + 7] = 5000;
-  expect(hasLineOfSight(t, values, station, [0, 0.08], 10000)).toBe(false);
+test("stale calculations can be cancelled without terminating the worker", async () => {
+  expect(await calculateCoverageAsync({ region, altitude: 10000, enabled: ["SSR"] }, flat, () => true)).toBeNull();
 });

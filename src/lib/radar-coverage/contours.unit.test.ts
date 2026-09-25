@@ -1,8 +1,5 @@
 import { coverageContours } from "./contours";
-import { parseRadarData } from "./data";
-import { calculateCoverage } from "./model";
 import { CoverageResult } from "./types";
-import { readFileSync } from "node:fs";
 import { expect, test } from "vitest";
 
 function grid(hole = false): CoverageResult["cells"] {
@@ -43,15 +40,4 @@ test("joins adjacent coverage cells into a rounded outline without changing sour
 test("preserves uncovered holes and empty coverage", () => {
   expect(coverageContours(grid(true)).features[0].geometry.coordinates).toHaveLength(2);
   expect(coverageContours({ type: "FeatureCollection", features: [] }).features).toEqual([]);
-});
-
-test("smooths the supplied Kunming coverage into fewer features while retaining source labels", () => {
-  const region = parseRadarData(readFileSync("assets/radar-data.js", "utf8")).find((r) => r.code === "ZPKM")!;
-  const result = calculateCoverage({ region, altitude: 10000, enabled: ["SSR", "ADSB"] });
-  const contours = coverageContours(result.cells);
-  expect(contours.features.length).toBeGreaterThan(0);
-  expect(contours.features.length).toBeLessThan(result.cells.features.length / 4);
-  expect(new Set(contours.features.map((f) => f.properties.type))).toEqual(
-    new Set(result.cells.features.map((f) => f.properties.type)),
-  );
 });

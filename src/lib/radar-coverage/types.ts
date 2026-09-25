@@ -10,15 +10,14 @@ export interface Radar {
   lat: number;
   lon: number;
 }
-export interface Terrain {
+export interface TerrainPreview {
   minLat: number;
   maxLat: number;
   minLon: number;
   maxLon: number;
-  step: number;
   rows: number;
   cols: number;
-  values: string; // base64, signed little-endian Int16 metres, north to south
+  values: Int16Array;
 }
 export interface Airspace {
   name: string;
@@ -29,7 +28,6 @@ export interface RadarRegion {
   name: string;
   boundary: Coordinate[];
   radars: Radar[];
-  terrain?: Terrain | null;
   airspace?: { tma: Airspace[]; twr: Airspace[] };
 }
 export interface CoverageRequest {
@@ -41,4 +39,6 @@ export interface CoverageResult {
   cells: GeoJSON.FeatureCollection<GeoJSON.Polygon, { type: RadarType | "fusion" | "unknown" }>;
   percentage: number | null;
   unknownPercentage: number;
+  stationHeights: (number | null)[];
+  terrain?: TerrainPreview;
 }

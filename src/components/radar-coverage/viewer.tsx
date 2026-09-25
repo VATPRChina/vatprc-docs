@@ -1,11 +1,11 @@
 import { RadarMap } from "./map";
 import { BUILTIN_REGIONS, loadRegion } from "@/lib/radar-coverage/data";
-import { decodeTerrain, RADAR_COLORS, terrainMeters } from "@/lib/radar-coverage/model";
+import { RADAR_COLORS } from "@/lib/radar-coverage/model";
 import { CoverageRequest, CoverageResult, RADAR_TYPES, RadarRegion, RadarType } from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const EMPTY_REGION: RadarRegion = { code: "local", name: "", boundary: [], radars: [] };
 const QUICK_HEIGHTS = [0, 3000, 10000, 20000, 30000, 40000];
@@ -16,32 +16,47 @@ function useCoverage(region: RadarRegion, altitude: number, enabled: RadarType[]
     failed: boolean;
   } | null>(null);
   const request = useMemo(() => ({ region, altitude, enabled }), [region, altitude, enabled]);
-  const canCalculate = !!region.terrain && region.radars.length > 0;
+  const canCalculate = region.radars.length > 0;
+  const workerRef = useRef<Worker | null>(null);
+  const active = useRef<{ id: number; request: CoverageRequest } | null>(null);
+  const nextId = useRef(0);
+  useEffect(() => {
+    try {
+      const worker = new Worker(new URL("../../lib/radar-coverage/coverage.worker.ts", import.meta.url), {
+        type: "module",
+      });
+      workerRef.current = worker;
+      worker.onmessage = (event: MessageEvent<{ id: number; result?: CoverageResult; error?: boolean }>) => {
+        const current = active.current;
+        if (!current || event.data.id !== current.id) return;
+        setState({ request: current.request, result: event.data.result ?? null, failed: !!event.data.error });
+      };
+      worker.onerror = () => {
+        if (active.current) setState({ request: active.current.request, result: null, failed: true });
+      };
+      return () => {
+        workerRef.current = null;
+        worker.terminate();
+      };
+    } catch {
+      workerRef.current = null;
+    }
+  }, []);
   useEffect(() => {
     if (!canCalculate) return;
-    let worker: Worker | undefined;
-    // Debounce slider changes and terminate stale work, including on route exit.
+    const id = ++nextId.current;
+    active.current = { id, request };
     const timer = setTimeout(() => {
-      try {
-        worker = new Worker(new URL("../../lib/radar-coverage/coverage.worker.ts", import.meta.url), {
-          type: "module",
-        });
-        worker.onmessage = (event: MessageEvent<{ result?: CoverageResult; error?: boolean }>) => {
-          setState({ request, result: event.data.result ?? null, failed: !!event.data.error });
-          worker?.terminate();
-        };
-        worker.onerror = () => {
-          setState({ request, result: null, failed: true });
-          worker?.terminate();
-        };
-        worker.postMessage(request);
-      } catch {
+      if (!workerRef.current) {
         setState({ request, result: null, failed: true });
+        return;
       }
+      workerRef.current.postMessage({ id, request });
     }, 150);
     return () => {
       clearTimeout(timer);
-      worker?.terminate();
+      active.current = null;
+      workerRef.current?.postMessage({ id });
     };
   }, [request, canCalculate]);
   return {
@@ -68,14 +83,11 @@ export function RadarCoverageViewer() {
   const region = builtin.data ?? EMPTY_REGION;
   const loadingRegion = builtin.isPending;
   const { coverage, pending, failed } = useCoverage(region, altitude, enabled);
-  const terrain = useMemo(() => (region.terrain ? decodeTerrain(region.terrain) : null), [region]);
   const radar = selected === null ? undefined : region.radars[selected];
-  const ground =
-    radar && terrain && region.terrain ? terrainMeters(region.terrain, terrain, [radar.lat, radar.lon]) : null;
   useEffect(() => {
     setMounted(true);
   }, []);
-  const stationHeight = radar && ground !== null ? Math.max(radar.elevation, ground * 3.28084) : null;
+  const stationHeight = selected === null ? null : (coverage?.stationHeights[selected] ?? null);
   const format = (value: number) => i18n.number(value);
   return (
     <div className="container mx-auto flex flex-col gap-4">
@@ -173,7 +185,7 @@ export function RadarCoverageViewer() {
               />
             ))}
             <span className="flex items-center gap-2 text-sm">
-              <span className="h-3 w-3 shrink-0" style={{ backgroundColor: RADAR_COLORS.fusion }} aria-hidden="true" />
+              <span className="h-3 w-3 shrink-0 bg-blue-600" aria-hidden="true" />
               <Trans>SSR and ADS-B fusion</Trans>
             </span>
           </section>
@@ -216,13 +228,6 @@ export function RadarCoverageViewer() {
               {region.radars.filter((r) => enabled.includes(r.type)).length} / {region.radars.length}
             </dd>
           </dl>
-          {region.radars.length > 0 && (!region.terrain || !region.boundary.length) && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              <Trans>
-                Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only.
-              </Trans>
-            </p>
-          )}
           {failed && (
             <Alert color="red">
               <Trans>Coverage calculation failed. Please reload the page.</Trans>

@@ -27,8 +27,6 @@ export default defineConfig(({ command }) => ({
       telemetry: false,
     }),
   ],
-  // MapLibre resolves its module worker relative to its entry point.
-  optimizeDeps: { exclude: ["maplibre-gl"] },
   build: { sourcemap: true },
   resolve: { tsconfigPaths: true },
   server: {

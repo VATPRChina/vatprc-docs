@@ -1,5 +1,5 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
-import { coverageBounds, decodeTerrain, RADAR_COLORS } from "@/lib/radar-coverage/model";
+import { coverageBounds, RADAR_COLORS } from "@/lib/radar-coverage/model";
 import { CoverageResult, RadarRegion, RadarType } from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
@@ -29,9 +29,9 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, onSelectR
     if (loaded && bounds) ref.current?.fitBounds(bounds, { padding: 50, maxZoom: 8, duration: 0 });
   }, [bounds, loaded]);
   const terrainImage = useMemo(() => {
-    const t = region.terrain;
+    const t = coverage?.terrain;
     if (!t) return null;
-    const values = decodeTerrain(t);
+    const values = t.values;
     const canvas = document.createElement("canvas");
     canvas.width = t.cols;
     canvas.height = t.rows;
@@ -39,7 +39,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, onSelectR
     if (!ctx) return null;
     const pixels = ctx.createImageData(t.cols, t.rows);
     values.forEach((height, index) => {
-      if (height === -32768) return;
+      if (height === -9999) return;
       const color =
         height < 200
           ? [159, 190, 165]
@@ -64,7 +64,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, onSelectR
         [t.minLon, t.minLat],
       ] as [number, number][],
     };
-  }, [region]);
+  }, [coverage?.terrain]);
   const sites = useMemo(
     () =>
       featureCollection(
@@ -117,7 +117,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, onSelectR
   );
   return (
     <div
-      className="relative h-[60vh] min-h-96 w-full border border-black/15 lg:h-[680px] dark:border-white/20"
+      className="relative h-[60vh] min-h-96 w-full border border-black/15 lg:h-[680px] dark:border-white/20 [&>.maplibregl-map]:h-full [&>.maplibregl-map]:w-full"
       aria-label={t`Radar coverage map`}
     >
       <Map
@@ -127,7 +127,6 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, onSelectR
           bounds ? { bounds, fitBoundsOptions: { padding: 50, maxZoom: 8 } } : { longitude: 105, latitude: 35, zoom: 3 }
         }
         mapStyle={mapStyle as unknown as StyleSpecification}
-        style={{ width: "100%", height: "100%" }}
         interactiveLayerIds={["radar-sites"]}
         onStyleData={() => setLoaded(true)}
         onError={() => setMapError(true)}
