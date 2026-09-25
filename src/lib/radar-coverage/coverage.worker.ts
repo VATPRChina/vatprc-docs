@@ -21,8 +21,11 @@ self.onmessage = (event: MessageEvent<{ id: number; request?: CoverageRequest }>
       result.cells = coverageContours(result.cells);
       result.terrain = terrainPreview(request.region, terrain);
       self.postMessage({ id, result });
-    } catch {
-      if (!cancelled()) self.postMessage({ id, error: true });
+    } catch (error) {
+      if (!cancelled()) {
+        console.error("Radar coverage calculation failed:", error);
+        self.postMessage({ id, error: true });
+      }
     }
   })();
 };

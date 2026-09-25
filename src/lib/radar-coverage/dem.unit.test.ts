@@ -16,6 +16,8 @@ ULXMAP ${DEM_STEP / 2}
 ULYMAP ${10 - DEM_STEP / 2}
 XDIM 0.00833333333333
 YDIM 0.00833333333333`;
+const requestUrl = (url: string | URL | Request) =>
+  typeof url === "string" ? url : url instanceof URL ? url.href : url.url;
 const bytes = new Uint8Array(8);
 [-50, 200, -9999, 3000].forEach((height, i) => new DataView(bytes.buffer).setInt16(i * 2, height, false));
 
@@ -52,20 +54,23 @@ test("adjacent tiles share an edge without a half-cell shift", () => {
   ]);
 });
 test("decompresses hosted ZIPs once and reuses tiles across bounds and altitude changes", async () => {
-  const fetcher = vi.fn(
-    async (url: string | URL | Request) =>
+  const fetcher = vi.fn((url: string | URL | Request) =>
+    Promise.resolve(
       new Response(
         new Uint8Array(
-          zipSync(String(url).endsWith("hdr.zip") ? { "E000N10.HDR": strToU8(headerText) } : { "E000N10.DEM": bytes }),
+          zipSync(
+            requestUrl(url).endsWith("hdr.zip") ? { "E000N10.HDR": strToU8(headerText) } : { "E000N10.DEM": bytes },
+          ),
         ),
       ),
+    ),
   );
   const loader = new DemLoader(fetcher);
   const [first, second] = await Promise.all([loader.load([0, 9, 1, 10]), loader.load([0, 8, 2, 10])]);
   expect(first.elevation([10 - DEM_STEP / 2, DEM_STEP / 2])).toBe(-50);
   expect(second.elevation([10 - DEM_STEP / 2, DEM_STEP / 2])).toBe(-50);
   expect(fetcher).toHaveBeenCalledTimes(2);
-  expect(String(fetcher.mock.calls[0][0])).toBe("https://files.vatprc.net/DEM/e000n10/e000n10.hdr.zip");
+  expect(fetcher.mock.calls[0][0]).toBe("https://files.vatprc.net/DEM/e000n10/e000n10.hdr.zip");
 });
 test("failed downloads are retryable and absent tiles never become sea level", async () => {
   const fetcher = vi
@@ -77,4 +82,27 @@ test("failed downloads are retryable and absent tiles never become sea level", a
   await expect(loader.load([0, 9, 1, 10])).rejects.toThrow("No DEM");
   await expect(loader.load([0, 9, 1, 10])).rejects.toThrow("No DEM");
   expect(fetcher).toHaveBeenCalledTimes(2);
+});
+
+test("default browser fetch is not invoked with a DemLoader receiver", async () => {
+  const browserFetch = vi.fn(function (this: unknown, url: string | URL | Request) {
+    if (this !== undefined && this !== globalThis) throw new TypeError("Illegal invocation");
+    return Promise.resolve(
+      new Response(
+        new Uint8Array(
+          zipSync(
+            requestUrl(url).endsWith("hdr.zip") ? { "E000N10.HDR": strToU8(headerText) } : { "E000N10.DEM": bytes },
+          ),
+        ),
+      ),
+    );
+  });
+  vi.stubGlobal("fetch", browserFetch);
+  try {
+    const terrain = await new DemLoader().load([0, 9, 1, 10]);
+    expect(terrain.elevation([10 - DEM_STEP / 2, DEM_STEP / 2])).toBe(-50);
+    expect(browserFetch).toHaveBeenCalledTimes(2);
+  } finally {
+    vi.unstubAllGlobals();
+  }
 });

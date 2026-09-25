@@ -25,7 +25,10 @@ export function parseDemHeader(text: string): DemHeader {
     text
       .trim()
       .split(/\r?\n/)
-      .map((line) => line.trim().split(/\s+/)),
+      .map((line): [string, string] => {
+        const [key, value] = line.trim().split(/\s+/);
+        return [key, value];
+      }),
   );
   const number = (key: string) => Number(fields[key]);
   const rows = number("NROWS"),
@@ -86,7 +89,9 @@ export function tilesForBounds([west, south, east, north]: Bounds): string[] {
 export class DemLoader {
   private cache = new Map<string, Promise<DemTile | null>>();
   constructor(
-    private fetcher: typeof fetch = fetch,
+    // Keep native fetch on its global receiver; calling this.fetcher = fetch
+    // directly makes browsers reject the DemLoader receiver (Illegal invocation).
+    private fetcher: typeof fetch = (...args) => globalThis.fetch(...args),
     private baseUrl = DEM_URL,
     private capacity = 48,
   ) {}
