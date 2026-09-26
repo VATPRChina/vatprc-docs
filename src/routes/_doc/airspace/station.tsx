@@ -1,30 +1,17 @@
+import { POSITION_CATEGORIES, PositionModal, type PositionAction } from "@/components/atc-position/position-modal";
 import { RichTable, RichTableFeatures } from "@/components/table";
 import { components } from "@/lib/api";
-import { $api } from "@/lib/client";
-import type { MessageDescriptor } from "@lingui/core";
+import { $api, usePermission } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
+import { Alert, Badge, Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 
 type AtcPosition = components["schemas"]["AtcPositionDto"];
 type AtcPositionCategory = components["schemas"]["AtcPositionCategory"];
-
-const CATEGORY_LABELS: Record<AtcPositionCategory, MessageDescriptor> = {
-  standard: msg`Standard`,
-  "chengdu-low-area": msg`Chengdu Low Area`,
-  military: msg`Military`,
-  atis: msg`ATIS`,
-};
-
-const CATEGORY_FILTERS: { value: AtcPositionCategory; label: MessageDescriptor }[] = [
-  { value: "standard", label: msg`Standard` },
-  { value: "chengdu-low-area", label: msg`Chengdu Low Area` },
-  { value: "military", label: msg`Military` },
-  { value: "atis", label: msg`ATIS` },
-];
 
 const columns: ColumnDef<RichTableFeatures, AtcPosition>[] = [
   {
@@ -45,7 +32,7 @@ const columns: ColumnDef<RichTableFeatures, AtcPosition>[] = [
     accessorKey: "category",
     header: () => <Trans>Category</Trans>,
     cell: ({ getValue }) => <CategoryLabel category={getValue<AtcPositionCategory>()} />,
-    meta: { filterValues: CATEGORY_FILTERS },
+    meta: { filterValues: POSITION_CATEGORIES },
   },
   {
     accessorKey: "callsign_zh",
@@ -76,7 +63,7 @@ const columns: ColumnDef<RichTableFeatures, AtcPosition>[] = [
 ];
 
 export const Route = createFileRoute("/_doc/airspace/station")({
-  component: RouteComponent,
+  component: StationPage,
   head: (ctx) => ({
     meta: [{ title: ctx.match.context.i18n._(msg`ATC Positions and Frequencies`) }],
   }),
@@ -84,10 +71,41 @@ export const Route = createFileRoute("/_doc/airspace/station")({
 
 function CategoryLabel({ category }: { category: AtcPositionCategory }) {
   const { i18n } = useLingui();
-  return i18n._(CATEGORY_LABELS[category]);
+  return i18n._(POSITION_CATEGORIES.find((item) => item.value === category)!.label);
 }
 
-function RouteComponent() {
+export function StationPage() {
+  const canManage = usePermission("tech-afv-facility-engineer");
+  const [action, setAction] = useState<PositionAction | null>(null);
+  const managementColumns: ColumnDef<RichTableFeatures, AtcPosition>[] = canManage
+    ? [
+        {
+          id: "actions",
+          header: () => <Trans>Actions</Trans>,
+          enableSorting: false,
+          enableColumnFilter: false,
+          cell: ({ row }) => (
+            <div className="flex gap-1">
+              <Button
+                variant="subtle"
+                size="compact-sm"
+                onClick={() => setAction({ kind: "edit", position: row.original })}
+              >
+                <Trans>Edit</Trans>
+              </Button>
+              <Button
+                variant="subtle"
+                color="red"
+                size="compact-sm"
+                onClick={() => setAction({ kind: "delete", position: row.original })}
+              >
+                <Trans>Delete</Trans>
+              </Button>
+            </div>
+          ),
+        },
+      ]
+    : [];
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/positions");
 
   return (
@@ -109,9 +127,18 @@ function RouteComponent() {
         </Alert>
       )}
 
+      {canManage && (
+        <div>
+          <Button onClick={() => setAction({ kind: "create" })}>
+            <Trans>Create ATC Position</Trans>
+          </Button>
+        </div>
+      )}
+      {canManage && action && <PositionModal action={action} onClose={() => setAction(null)} />}
+
       <RichTable
         data={data}
-        columns={columns}
+        columns={[...columns, ...managementColumns]}
         isLoading={isLoading}
         initialState={{ pagination: { pageIndex: 0, pageSize: 50 } }}
         hideGlobalSearch
