@@ -134,7 +134,7 @@ export function parseRegion(code: string, airspace: unknown, stations: unknown):
     airspace: { tma: airspaces(a.tma), twr: airspaces(a.twr) },
   };
 }
-const DATA_URL = import.meta.env.VITE_RADAR_DATA_URL ?? "https://files.vatprc.net/radar-coverage/";
+const DATA_URL = "https://files.vatprc.net/radar-coverage/";
 const cache = new Map<string, Promise<RadarRegion>>();
 async function readJson(url: string): Promise<unknown> {
   const response = await fetch(url);
