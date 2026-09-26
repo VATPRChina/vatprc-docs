@@ -53,6 +53,21 @@ test("adjacent tiles share an edge without a half-cell shift", () => {
     "e110n50",
   ]);
 });
+test("numeric tile lookup handles negative coordinates, latitude seams and cached misses", () => {
+  const header = parseDemHeader(headerText);
+  const north = { ...header, west: -10 + DEM_STEP / 2, rows: 1200, cols: 1, values: new Int16Array(1200).fill(100) };
+  const south = { ...north, north: -DEM_STEP / 2, values: new Int16Array(1200).fill(200) };
+  const terrain = new TiledElevation([north, south]);
+  const lon = north.west;
+  expect(terrain.elevation([DEM_STEP / 2, lon])).toBe(100);
+  expect(terrain.elevation([0, lon])).toBe(200);
+  expect(terrain.elevation([-DEM_STEP / 2, lon])).toBe(200);
+  expect(terrain.elevation([-DEM_STEP / 2, 0])).toBeNull();
+  expect(terrain.elevation([-DEM_STEP, 0])).toBeNull();
+  expect(terrain.elevation([DEM_STEP / 2, lon])).toBe(100);
+  expect(terrain.elevation([DEM_STEP / 2, lon + DEM_STEP])).toBeNull();
+  expect(terrain.elevation([DEM_STEP / 2, lon])).toBe(100);
+});
 test("decompresses hosted ZIPs once and reuses tiles across bounds and altitude changes", async () => {
   const fetcher = vi.fn((url: string | URL | Request) =>
     Promise.resolve(
@@ -69,6 +84,7 @@ test("decompresses hosted ZIPs once and reuses tiles across bounds and altitude 
   const [first, second] = await Promise.all([loader.load([0, 9, 1, 10]), loader.load([0, 8, 2, 10])]);
   expect(first.elevation([10 - DEM_STEP / 2, DEM_STEP / 2])).toBe(-50);
   expect(second.elevation([10 - DEM_STEP / 2, DEM_STEP / 2])).toBe(-50);
+  expect(second).toBe(first);
   expect(fetcher).toHaveBeenCalledTimes(2);
   expect(fetcher.mock.calls[0][0]).toBe("https://files.vatprc.net/DEM/e000n10/e000n10.hdr.zip");
 });
@@ -105,4 +121,42 @@ test("default browser fetch is not invoked with a DemLoader receiver", async () 
   } finally {
     vi.unstubAllGlobals();
   }
+});
+
+test("direct raster sampling matches cell centres across tile seams and missing tiles", () => {
+  const header = parseDemHeader(headerText);
+  const tiles = [-10, 0].flatMap((west) =>
+    [0, 10].map((north) => ({
+      ...header,
+      west: west + DEM_STEP / 2,
+      north: north - DEM_STEP / 2,
+      rows: 1200,
+      cols: 1200,
+      values: new Int16Array(1200 * 1200).fill(west + north - 20),
+    })),
+  );
+  tiles[3].values[1199 * 1200] = -9999;
+  const terrain = new TiledElevation(tiles);
+  for (const x of [-1201, -1200, -1199, -1, 0, 1, 1199, 1200]) {
+    for (const y of [-1201, -1200, -1199, -1, 0, 1, 1199, 1200]) {
+      expect(terrain.elevationCell(x, y)).toBe(terrain.elevation([(y + 0.5) * DEM_STEP, (x + 0.5) * DEM_STEP]));
+    }
+  }
+});
+test("a changed set of loaded tiles gets a new terrain snapshot", async () => {
+  const fetcher = vi.fn((url: string | URL | Request) =>
+    Promise.resolve(
+      new Response(
+        new Uint8Array(
+          zipSync(requestUrl(url).endsWith("hdr.zip") ? { "tile.hdr": strToU8(headerText) } : { "tile.dem": bytes }),
+        ),
+      ),
+    ),
+  );
+  const loader = new DemLoader(fetcher, "https://example.test/", 1);
+  const first = await loader.load([0, 9, 1, 10]);
+  await loader.load([10, 9, 11, 10]);
+  const reloaded = await loader.load([0, 9, 1, 10]);
+  expect(reloaded).not.toBe(first);
+  expect(fetcher).toHaveBeenCalledTimes(6);
 });
