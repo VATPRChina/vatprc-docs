@@ -1,7 +1,14 @@
-import { DEM_STEP, ElevationSource, traverseCells } from "./dem";
-import { calculateCoverage, calculateCoverageAsync, distanceNm, hasLineOfSight, pointInside } from "./model";
-import { Radar, RadarRegion } from "./types";
-import { expect, test } from "vitest";
+import { DEM_STEP, ElevationSource, TiledElevation, traverseCells } from "./dem";
+import {
+  calculateCoverage,
+  calculateCoverageAsync,
+  CoverageCache,
+  distanceNm,
+  hasLineOfSight,
+  pointInside,
+} from "./model";
+import { Coordinate, Radar, RadarRegion } from "./types";
+import { expect, test, vi } from "vitest";
 
 const radar: Radar = { name: "Test", type: "SSR", elevation: 100, maxRange: 2, lat: 0.01, lon: 0.01 };
 const region: RadarRegion = {
@@ -33,10 +40,50 @@ test("range, terrain, curvature and missing data constrain visibility", () => {
   );
 });
 test("raster traversal checks diagonal corner neighbours and reversed paths", () => {
-  const cells = [...traverseCells([0.1, 0.1], [2.9, 2.9], 1)].map((s) => s.point.join());
+  const collect = (a: Coordinate, b: Coordinate) => {
+    const cells: string[] = [];
+    expect(
+      traverseCells(a, b, 1, (x, y) => {
+        cells.push([y + 0.5, x + 0.5].join());
+        return true;
+      }),
+    ).toBe(true);
+    return cells;
+  };
+  const cells = collect([0.1, 0.1], [2.9, 2.9]);
   expect(cells).toContain("0.5,1.5");
   expect(cells).toContain("1.5,0.5");
-  expect(new Set([...traverseCells([2.9, 2.9], [0.1, 0.1], 1)].map((s) => s.point.join()))).toEqual(new Set(cells));
+  expect(new Set(collect([2.9, 2.9], [0.1, 0.1]))).toEqual(new Set(cells));
+});
+test("raster traversal preserves sample fractions and stops immediately at an obstruction", () => {
+  const samples: number[][] = [];
+  expect(
+    traverseCells([0.5, 0.5], [0.5, 2.5], 1, (x, y, fraction) => {
+      samples.push([y + 0.5, x + 0.5, fraction]);
+      return true;
+    }),
+  ).toBe(true);
+  expect(samples).toEqual([
+    [0.5, 0.5, 0.125],
+    [0.5, 1.5, 0.5],
+    [0.5, 2.5, 0.875],
+  ]);
+  let visits = 0;
+  expect(traverseCells([0.1, 0.1], [2.9, 2.9], 1, () => ++visits < 2)).toBe(false);
+  expect(visits).toBe(2);
+});
+test("missing terrain on a ray stays unknown unless an obstruction is found", () => {
+  const station = { ...radar, maxRange: 20 };
+  const missing: ElevationSource = {
+    step: DEM_STEP,
+    elevation: ([, lon]) => (lon >= DEM_STEP * 2 && lon < DEM_STEP * 3 ? null : 0),
+  };
+  expect(hasLineOfSight(missing, station, [0.01, 0.09], 10000)).toBeNull();
+  const ridge: ElevationSource = {
+    step: DEM_STEP,
+    elevation: (point) => (point[1] >= DEM_STEP * 5 && point[1] < DEM_STEP * 6 ? 5000 : missing.elevation(point)),
+  };
+  expect(hasLineOfSight(ridge, station, [0.01, 0.09], 10000)).toBe(false);
 });
 test("a narrow 30-arc-second ridge is detected between one-NM samples", () => {
   const ridge: ElevationSource = {
@@ -44,6 +91,37 @@ test("a narrow 30-arc-second ridge is detected between one-NM samples", () => {
     elevation: ([, lon]) => (lon >= DEM_STEP * 2 && lon < DEM_STEP * 3 ? 5000 : 0),
   };
   expect(hasLineOfSight(ridge, { ...radar, maxRange: 20 }, [0.01, 0.09], 10000)).toBe(false);
+});
+test("direct raster rays agree with geographic sampling for ridges and missing terrain", () => {
+  const values = new Int16Array(1200 * 1200);
+  for (let row = 0; row < 1200; row++) {
+    values[row * 1200 + 2] = -9999;
+    values[row * 1200 + 5] = 5000;
+  }
+  const terrain = new TiledElevation([
+    {
+      rows: 1200,
+      cols: 1200,
+      west: DEM_STEP / 2,
+      north: 10 - DEM_STEP / 2,
+      dx: DEM_STEP,
+      dy: DEM_STEP,
+      values,
+    },
+  ]);
+  const geographic = { step: terrain.step, elevation: (point: Coordinate) => terrain.elevation(point) };
+  const station = { ...radar, maxRange: 20 };
+  for (const altitude of [0, 3000, 10000, 30000]) {
+    for (const target of [
+      [0.01, 0.09],
+      [0.01, 0.03],
+      [0.01, 0.015],
+    ] as Coordinate[]) {
+      expect(hasLineOfSight(terrain, station, target, altitude)).toBe(
+        hasLineOfSight(geographic, station, target, altitude),
+      );
+    }
+  }
 });
 test("fusion is order independent and disabling a source restores single-source coverage", () => {
   const adsb: Radar = { ...radar, type: "ADSB" };
@@ -86,4 +164,44 @@ test("coverage extends outside FIR but not outside DEM, while statistics remain 
 });
 test("stale calculations can be cancelled without terminating the worker", async () => {
   expect(await calculateCoverageAsync({ region, altitude: 10000, enabled: ["SSR"] }, flat, () => true)).toBeNull();
+});
+
+test("grid cache reuses terrain samples across cloned regions and altitude changes", () => {
+  const elevation = vi.fn((point: Coordinate) => flat.elevation(point));
+  const terrain = { step: DEM_STEP, elevation };
+  const cache = new CoverageCache();
+  calculateCoverage({ region, altitude: 0, enabled: [] }, terrain, cache);
+  expect(elevation.mock.calls.length).toBeGreaterThan(1000);
+  elevation.mockClear();
+  calculateCoverage({ region: structuredClone(region), altitude: 30000, enabled: [] }, terrain, cache);
+  expect(elevation).not.toHaveBeenCalled();
+  for (const altitude of [0, 3000, 10000]) {
+    for (const enabled of [[], ["SSR"], ["ADSB"]] as ("SSR" | "ADSB")[][]) {
+      const request = { region: structuredClone(region), altitude, enabled };
+      expect(calculateCoverage(request, terrain, cache)).toEqual(calculateCoverage(request, terrain));
+    }
+  }
+});
+test("grid cache invalidates changed boundaries, stations and terrain snapshots", () => {
+  const cache = new CoverageCache();
+  const request = { region: structuredClone(region), altitude: 10000, enabled: ["SSR"] as const };
+  const calculate = (r: RadarRegion, terrain: ElevationSource) => {
+    const input = { ...request, region: r, enabled: [...request.enabled] };
+    expect(calculateCoverage(input, terrain, cache)).toEqual(calculateCoverage(input, terrain));
+  };
+  calculate(request.region, flat);
+  request.region.boundary[0][0] += 0.005;
+  calculate(request.region, flat);
+  request.region.radars[0].lat += 0.01;
+  calculate(request.region, flat);
+  request.region.radars[0].maxRange = 1;
+  calculate(request.region, flat);
+  calculate(request.region, { step: DEM_STEP, elevation: () => null });
+  calculate(request.region, flat);
+});
+test("a cancelled partial grid can be safely reused by the next request", async () => {
+  const cache = new CoverageCache();
+  const request = { region, altitude: 10000, enabled: ["SSR"] as "SSR"[] };
+  expect(await calculateCoverageAsync(request, flat, () => true, cache)).toBeNull();
+  expect(await calculateCoverageAsync(request, flat, () => false, cache)).toEqual(calculateCoverage(request, flat));
 });

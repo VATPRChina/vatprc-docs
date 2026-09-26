@@ -18,6 +18,8 @@ export interface DemTile extends DemHeader {
 }
 export interface ElevationSource {
   elevation(point: Coordinate): number | null;
+  /** Global raster indices: x increases east, y increases north; sample the cell centre. */
+  elevationCell?(x: number, y: number): number | null;
   step: number;
 }
 export function parseDemHeader(text: string): DemHeader {
@@ -88,6 +90,8 @@ export function tilesForBounds([west, south, east, north]: Bounds): string[] {
 /** One loader lives in the persistent worker. Promise caching deduplicates overlapping requests. */
 export class DemLoader {
   private cache = new Map<string, Promise<DemTile | null>>();
+  private lastTiles: DemTile[] = [];
+  private lastTerrain?: TiledElevation;
   constructor(
     // Keep native fetch on its global receiver; calling this.fetcher = fetch
     // directly makes browsers reject the DemLoader receiver (Illegal invocation).
@@ -129,21 +133,51 @@ export class DemLoader {
       for (const tile of batch) if (tile) tiles.push(tile);
     }
     if (!tiles.length) throw new Error("No DEM tiles available for this region");
-    return new TiledElevation(tiles);
+    // Preserve sampler identity only while the loaded tile objects are unchanged.
+    // Failed downloads still retry above, and newly available tiles invalidate it.
+    if (
+      !this.lastTerrain ||
+      tiles.length !== this.lastTiles.length ||
+      tiles.some((tile, i) => tile !== this.lastTiles[i])
+    ) {
+      this.lastTiles = tiles;
+      this.lastTerrain = new TiledElevation(tiles);
+    }
+    return this.lastTerrain;
   }
+}
+interface IndexedTile extends DemTile {
+  westCell: number;
+  northCell: number;
 }
 export class TiledElevation implements ElevationSource {
   readonly step = DEM_STEP;
-  private index = new Map<string, DemTile>();
+  private index = new Map<number, Map<number, IndexedTile>>();
+  private lastX = NaN;
+  private lastY = NaN;
+  private lastTile: IndexedTile | undefined;
   constructor(tiles: DemTile[]) {
     for (const tile of tiles) {
       const west = tile.west - tile.dx / 2;
       const north = tile.north + tile.dy / 2;
-      this.index.set(tileName(Math.round(west), Math.round(north)), tile);
+      const x = Math.round(west) / 10;
+      const y = Math.round(north) / 10;
+      let column = this.index.get(x);
+      if (!column) this.index.set(x, (column = new Map<number, IndexedTile>()));
+      column.set(y, { ...tile, westCell: Math.round(west / DEM_STEP), northCell: Math.round(north / DEM_STEP) });
     }
   }
   elevation([lat, lon]: Coordinate): number | null {
-    const tile = this.index.get(tileName(Math.floor(lon / 10) * 10, Math.ceil(lat / 10) * 10));
+    // Successive samples on a ray usually stay in the same tile. Numeric keys
+    // avoid formatting a filename for every elevation lookup, including misses.
+    const x = Math.floor(lon / 10);
+    const y = Math.ceil(lat / 10);
+    if (x !== this.lastX || y !== this.lastY) {
+      this.lastX = x;
+      this.lastY = y;
+      this.lastTile = this.index.get(x)?.get(y);
+    }
+    const tile = this.lastTile;
     if (!tile) return null;
     const col = Math.floor((lon - (tile.west - tile.dx / 2)) / tile.dx + 1e-9);
     const row = Math.floor((tile.north + tile.dy / 2 - lat) / tile.dy + 1e-9);
@@ -151,14 +185,31 @@ export class TiledElevation implements ElevationSource {
     const height = tile.values[row * tile.cols + col];
     return height === DEM_NODATA ? null : height;
   }
+  elevationCell(x: number, y: number): number | null {
+    const tileX = Math.floor(x / 1200);
+    const tileY = Math.floor(y / 1200) + 1;
+    if (tileX !== this.lastX || tileY !== this.lastY) {
+      this.lastX = tileX;
+      this.lastY = tileY;
+      this.lastTile = this.index.get(tileX)?.get(tileY);
+    }
+    const tile = this.lastTile;
+    if (!tile) return null;
+    const col = x - tile.westCell;
+    const row = tile.northCell - y - 1;
+    if (row < 0 || row >= tile.rows || col < 0 || col >= tile.cols) return null;
+    const height = tile.values[row * tile.cols + col];
+    return height === DEM_NODATA ? null : height;
+  }
 }
 
-/** Supercover traversal: inspect each raster cell crossed by a short geographic segment. */
-export function* traverseCells(
+/** Visit global raster indices, including corner neighbours. False stops traversal. */
+export function traverseCells(
   a: Coordinate,
   b: Coordinate,
   step: number,
-): Generator<{ point: Coordinate; fraction: number }> {
+  visit: (x: number, y: number, fraction: number) => boolean,
+): boolean {
   const x0 = a[1] / step,
     y0 = a[0] / step,
     dx = (b[1] - a[1]) / step,
@@ -174,13 +225,13 @@ export function* traverseCells(
     deltaY = dy === 0 ? Infinity : 1 / Math.abs(dy);
   while (start < 1) {
     const end = Math.min(1, tx, ty);
-    if (end > start) yield { point: [(y + 0.5) * step, (x + 0.5) * step], fraction: (start + end) / 2 };
+    if (end > start && !visit(x, y, (start + end) / 2)) return false;
     if (end >= 1) break;
     const crossX = tx <= ty,
       crossY = ty <= tx;
     if (crossX && crossY && end > 0) {
-      yield { point: [(y + 0.5) * step, (x + sx + 0.5) * step], fraction: end };
-      yield { point: [(y + sy + 0.5) * step, (x + 0.5) * step], fraction: end };
+      if (!visit(x + sx, y, end)) return false;
+      if (!visit(x, y + sy, end)) return false;
     }
     if (crossX) {
       x += sx;
@@ -192,4 +243,5 @@ export function* traverseCells(
     }
     start = end;
   }
+  return true;
 }

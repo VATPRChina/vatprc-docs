@@ -1,9 +1,10 @@
 import { coverageContours } from "./contours";
 import { DemLoader } from "./dem";
-import { calculateCoverageAsync, coverageBounds, terrainPreview } from "./model";
+import { calculateCoverageAsync, CoverageCache, coverageBounds, terrainPreview } from "./model";
 import { CoverageRequest } from "./types";
 
 const dem = new DemLoader();
+const cache = new CoverageCache();
 let generation = 0;
 self.onmessage = (event: MessageEvent<{ id: number; request?: CoverageRequest }>) => {
   const { id, request } = event.data;
@@ -16,7 +17,7 @@ self.onmessage = (event: MessageEvent<{ id: number; request?: CoverageRequest }>
       if (!bounds) throw new Error("No coverage extent");
       const terrain = await dem.load(bounds);
       if (cancelled()) return;
-      const result = await calculateCoverageAsync(request, terrain, cancelled);
+      const result = await calculateCoverageAsync(request, terrain, cancelled, cache);
       if (!result || cancelled()) return;
       result.cells = coverageContours(result.cells);
       result.terrain = terrainPreview(request.region, terrain);
