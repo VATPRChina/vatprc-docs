@@ -33,6 +33,7 @@ const TRAINING_RESOURCES: ResourceItem[] = [
 ];
 
 const CONTROLLING_RESOURCES: ResourceItem[] = [
+  { label: msg`Radar Coverage`, href: "/airspace/radar-coverage", icon: TbRadar2, isPublic: true },
   { label: msg`Sector Files`, href: "/controller/sector", icon: TbMap2 },
   { label: msg`Controller List`, href: "/controller/controller-list", icon: TbUsers, isPublic: true },
   { label: msg`Station & Frequency`, href: "/airspace/station", icon: TbRadar2, isPublic: true },

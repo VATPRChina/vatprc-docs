@@ -51,6 +51,7 @@
     "date-fns": "^4.4.0",
     "embla-carousel-react": "^8.6.0",
     "es-iterator-helpers": "^1.4.0",
+    "fflate": "^0.8.3",
     "github-slugger": "^2.0.0",
     "jotai": "^2.20.3",
     "maplibre-gl": "^6.7.0",
