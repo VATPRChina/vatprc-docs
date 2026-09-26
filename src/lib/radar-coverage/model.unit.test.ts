@@ -8,7 +8,8 @@ import {
   pointInside,
 } from "./model";
 import { Coordinate, Radar, RadarRegion } from "./types";
-import { expect, test, vi } from "vitest";
+import { deepStrictEqual } from "node:assert";
+import { expect, test } from "vitest";
 
 const radar: Radar = { name: "Test", type: "SSR", elevation: 100, maxRange: 2, lat: 0.01, lon: 0.01 };
 const region: RadarRegion = {
@@ -167,41 +168,44 @@ test("stale calculations can be cancelled without terminating the worker", async
 });
 
 test("grid cache reuses terrain samples across cloned regions and altitude changes", () => {
-  const elevation = vi.fn((point: Coordinate) => flat.elevation(point));
+  let samples = 0;
+  const elevation = (point: Coordinate) => {
+    samples++;
+    return flat.elevation(point);
+  };
   const terrain = { step: DEM_STEP, elevation };
   const cache = new CoverageCache();
   calculateCoverage({ region, altitude: 0, enabled: [] }, terrain, cache);
-  expect(elevation.mock.calls.length).toBeGreaterThan(1000);
-  elevation.mockClear();
+  expect(samples).toBeGreaterThan(1000);
+  samples = 0;
   calculateCoverage({ region: structuredClone(region), altitude: 30000, enabled: [] }, terrain, cache);
-  expect(elevation).not.toHaveBeenCalled();
+  expect(samples).toBe(0);
   for (const altitude of [0, 3000, 10000]) {
     for (const enabled of [[], ["SSR"], ["ADSB"]] as ("SSR" | "ADSB")[][]) {
       const request = { region: structuredClone(region), altitude, enabled };
-      expect(calculateCoverage(request, terrain, cache)).toEqual(calculateCoverage(request, terrain));
+      deepStrictEqual(calculateCoverage(request, terrain, cache), calculateCoverage(request, terrain));
     }
   }
 });
-test("grid cache invalidates changed boundaries, stations and terrain snapshots", () => {
-  const cache = new CoverageCache();
-  const request = { region: structuredClone(region), altitude: 10000, enabled: ["SSR"] as const };
-  const calculate = (r: RadarRegion, terrain: ElevationSource) => {
-    const input = { ...request, region: r, enabled: [...request.enabled] };
-    expect(calculateCoverage(input, terrain, cache)).toEqual(calculateCoverage(input, terrain));
-  };
-  calculate(request.region, flat);
-  request.region.boundary[0][0] += 0.005;
-  calculate(request.region, flat);
-  request.region.radars[0].lat += 0.01;
-  calculate(request.region, flat);
-  request.region.radars[0].maxRange = 1;
-  calculate(request.region, flat);
-  calculate(request.region, { step: DEM_STEP, elevation: () => null });
-  calculate(request.region, flat);
-});
+test.each(["boundary", "station position", "station range", "terrain"] as const)(
+  "grid cache invalidates a changed %s and can restore the original snapshot",
+  (change) => {
+    const cache = new CoverageCache();
+    const original = { region, altitude: 10000, enabled: ["SSR"] as "SSR"[] };
+    const expected = calculateCoverage(original, flat, cache);
+    const changed = { ...original, region: structuredClone(region) };
+    let terrain: ElevationSource = flat;
+    if (change === "boundary") changed.region.boundary[0][0] += 0.005;
+    if (change === "station position") changed.region.radars[0].lat += 0.01;
+    if (change === "station range") changed.region.radars[0].maxRange = 1;
+    if (change === "terrain") terrain = { step: DEM_STEP, elevation: () => null };
+    deepStrictEqual(calculateCoverage(changed, terrain, cache), calculateCoverage(changed, terrain));
+    deepStrictEqual(calculateCoverage(original, flat, cache), expected);
+  },
+);
 test("a cancelled partial grid can be safely reused by the next request", async () => {
   const cache = new CoverageCache();
   const request = { region, altitude: 10000, enabled: ["SSR"] as "SSR"[] };
   expect(await calculateCoverageAsync(request, flat, () => true, cache)).toBeNull();
-  expect(await calculateCoverageAsync(request, flat, () => false, cache)).toEqual(calculateCoverage(request, flat));
+  deepStrictEqual(await calculateCoverageAsync(request, flat, () => false, cache), calculateCoverage(request, flat));
 });
