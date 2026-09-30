@@ -14,6 +14,15 @@
 
 本文件的使用范围是 VATPRC 管辖内北京飞行情报区。
 
+### 1.4 名词解释
+
+本文件中出现的“主扇”一词指：具有独立管辖空域和独立运行权限的扇区，可自行上线。主扇对其固有空域具有优先管辖权，即使相关合扇在线，也可直接上线并接回对应空域，无需取得合扇同意。
+
+本文件中出现的“分扇”一词指：由某一主扇划分部分空域形成的扇区，不具有独立固有空域。分扇上线需经所属主扇同意，并在获准后接管相应空域。
+
+本文件中出现的“合扇”一词指：由两个或多个主扇空域组合形成的扇区，本身不具有独立固有空域。合扇在线期间，各主扇仍可直接上线并接回自身空域。若其所包含的全部主扇均已上线，合扇将无剩余管辖空域，因此必须下线。
+
+
 > [!WARNING]
 >
 > 本文件严禁用于真实运行!
@@ -40,6 +49,17 @@
 
 #### 3.1.1 北京区域管制区
 
+> [!NOTE]
+>
+> - 下列席位中，ZBAA_\{i}\_CTR为主扇，ZBAA\_{i, j}\_CTR为分扇。
+>- 当ZBAA_CTR在线时，ZBAA_\{i}\_CTR上线，无需经过ZBAA_CTR同意；当ZBAA\_{i}\_CTR不在线时，ZBAA\_CTR对其提供管制服务。
+> - ZBAA\_{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_{i}\_CTR在线时，经ZBAA\_{i}\_CTR同意后可开设ZBAA\_{i, j}\_CTR；当ZBAA\_{i, j}\_CTR不在线时，ZBAA\_{i}\_CTR对其提供管制服务。
+
+> [!TIP]
+>
+> 强烈建议管制员在上线前，与当前负责该扇区的管制员协调并达成一致。
+
+
 |   登录名    |            呼号            |  频率   |
 | :---------: | :------------------------: | :-----: |
 |  ZBAA_CTR   | 北京区域 / Beijing Control | 128.300 |
@@ -65,9 +85,9 @@
 
 #### 3.2.1 北京区域管制区合扇
 
-|  登录名  |  频率   |    职责范围    |
-| :------: | :-----: | :------------: |
-| ZBAA_CTR | 128.300 | 北京区域管制区 |
+|  登录名  |  频率   |
+| :------: | :-----: |
+| ZBAA_CTR | 128.300 |
 
 #### 3.2.2 北京区域管制区分扇
 
@@ -109,10 +129,10 @@
 
 > [!IMPORTANT]
 >
-> 1) 一般情况下，在1.3小节中所述的适用范围内，应执行以下移交协议。任何未包含在移交协议中的飞行活动，或偏离移交协议的飞行活动均应通过语音、管制员客户端内置聊天等方式进行协调。
-> 2) 航空器应在下述移交协议中分配的高度层进行移交。若航空器当前巡航高度低于移交程序中分配的高度层，在保证无潜在冲突的情况下，则可在较低的高度层进行移交。否则，该飞行活动必须进行协调。
+> 1. 一般情况下，在1.3小节中所述的适用范围内，应执行以下移交协议。任何未包含在移交协议中的飞行活动，或偏离移交协议的飞行活动均应通过语音、管制员客户端内置聊天等方式进行协调。
+> 2. 管制员应在活动时段，按照下述移交协议中分配的高度层进行移交；日常上线中，该移交高度仅供参考。若航空器当前巡航高度低于移交程序中分配的高度层，在保证无潜在冲突的情况下，则可在较低的高度层进行移交。否则，该飞行活动必须进行协调。
 > 
->3. 当3.2小节中所述的分扇不在线时，以下程序同样适用于负责该分扇的上一级管制席位。
+> 3. 当3.2小节中所述的分扇不在线时，以下程序同样适用于负责该分扇的上一级管制席位。
 > 4. 当移交协议中的“下一席位”不在线时，应当移交给当前负责该扇区的上一级管制席位。管制席位归属参见 [VATPRC塔台及进近管制席位归属列表](https://community.vatprc.net/t/topic/8796)。
 
 ### 4.1 北京区域东扇
@@ -138,7 +158,7 @@
       <td>ZBAA_APP</td>
     </tr>
     <tr>
-      <td>经由AVBO7X</td>
+      <td>经由 AVBO7X</td>
       <td rowspan="2">ZBAA_S_APP</td>
     </tr>
     <tr>
@@ -148,7 +168,7 @@
     </tr>
     <tr>
       <td>ZBTJ</td>
-      <td>2700/3000</td>
+      <td>2700/3000（STD）</td>
       <td>-</td>
       <td>ZBTJ_APP</td>
     </tr>
@@ -280,7 +300,7 @@
     </tr>
     <tr>
       <td>ZBTJ</td>
-      <td>2700/3000</td>
+      <td>2700/3000（STD）</td>
       <td>-</td>
     </tr>
     <tr>
@@ -343,14 +363,14 @@
     <tr>
       <td>ZBTJ</td>
       <td>AVBOX</td>
-      <td>2700/3000</td>
-      <td>经由OMDEK STARs</td>
+      <td>2700/3000（STD）</td>
+      <td>经由 OMDEK 进场</td>
       <td>ZBTJ_APP</td>
     </tr>
     <tr>
       <td rowspan="3">ZBSJ</td>
       <td>IDGIS</td>
-      <td>3000/3600</td>
+      <td>3000/3600（STD）</td>
       <td>-</td>
       <td rowspan="3">ZBSJ_APP</td>
     </tr>
@@ -460,7 +480,7 @@
     <tr>
       <td>LAXIB前60km</td>
       <td>5100/5700</td>
-      <td>经由TODAM STARs</td>
+      <td>经由 TODAM 进场</td>
     </tr>
     <tr>
       <td>ZSJN</td>
@@ -683,7 +703,7 @@
     <tr>
       <td>ZHCC</td>
       <td colspan="2">临时协调</td>
-      <td>经由W4</td>
+      <td>经由 W4</td>
       <td>ZSJN_CTR</td>
     </tr>
     <tr>
@@ -748,7 +768,7 @@
     <tr>
       <td>ZSJN</td>
       <td colspan="2">临时协调</td>
-      <td>经由W59</td>
+      <td>经由 W59</td>
       <td>ZSJN_CTR</td>
     </tr>
     <tr>
@@ -760,7 +780,7 @@
     </tr>
     <tr>
       <td colspan="2">临时协调</td>
-      <td>经由W37</td>
+      <td>经由 W37</td>
       <td>ZHCC_CTR</td>
     </tr>
   </tbody>
@@ -784,7 +804,7 @@
       <td>ZBAA</td>
       <td rowspan="3">URGOM</td>
       <td>5700/6300</td>
-      <td rowspan="3">经由W52</td>
+      <td rowspan="3">经由 W52</td>
       <td rowspan="3">ZBAA_E1_CTR</td>
     </tr>
     <tr>
@@ -799,12 +819,12 @@
       <td rowspan="2">ZBHH</td>
       <td>HH615前60km</td>
       <td rowspan="2">4800/5400</td>
-      <td>运行跑道为08<br>经由TMR STARs</td>
+      <td>运行跑道为08<br>经由 TMR 进场</td>
       <td rowspan="2">ZBHH_APP</td>
     </tr>
     <tr>
       <td>IGPAS</td>
-      <td>运行跑道为26<br>经由TMR STARs</td>
+      <td>运行跑道为26<br>经由 TMR 进场</td>
     </tr>
   </tbody>
 </table>
@@ -826,29 +846,29 @@
       <td rowspan="2">ZBHH</td>
       <td rowspan="2">RUSER前20km</td>
       <td>3900/4500</td>
-      <td>运行跑道为08<br>经由VALNI STARs</td>
+      <td>运行跑道为08<br>经由 VALNI 进场</td>
       <td rowspan="2">ZBHH_APP</td>
     </tr>
     <tr>
       <td>5100/5700</td>
-      <td>运行跑道为26<br>经由VALNI STARs</td>
+      <td>运行跑道为26<br>经由 VALNI 进场</td>
     </tr>
     <tr>
       <td rowspan="3">ZBDS</td>
       <td>DS601</td>
       <td>3000/3600</td>
-      <td>经由ALGOV STARs</td>
+      <td>经由 ALGOV 进场</td>
       <td rowspan="3">ZBDS_TWR</td>
     </tr>
     <tr>
       <td>VEXEB前20km</td>
       <td>2700/3600</td>
-      <td>经由UGPOR STARs</td>
+      <td>经由 UGPOR 进场</td>
     </tr>
     <tr>
       <td>DS606</td>
       <td>2700/3600</td>
-      <td>经由VIKON STARs</td>
+      <td>经由 VIKON 进场</td>
     </tr>
     <tr>
       <td>ZLIC</td>
