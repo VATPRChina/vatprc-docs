@@ -93,8 +93,6 @@
 
 > [!NOTE]
 >
-> - 当ZBAA_CTR在线时，经ZBAA_CTR同意后可开设ZBAA_\{i}\_CTR。
->
 > - ZBAA\_{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_{i}\_CTR在线时，经ZBAA\_{i}\_CTR同意后可开设ZBAA\_{i, j}\_CTR。
 >
 > - 当ZBAA\_{i, j}\_CTR不在线时，ZBAA\_{i}\_CTR对其提供管制服务。
