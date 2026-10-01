@@ -1,3 +1,4 @@
+import { DateTime } from "../event/datetime";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTimeInput } from "../ui/datetime-input";
 import { components } from "@/lib/api";
@@ -5,12 +6,12 @@ import { $api } from "@/lib/client";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
+import { Alert, Anchor, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { addHours, format, formatISO } from "date-fns";
+import { addHours, formatISO } from "date-fns";
 import { FC, SubmitEvent } from "react";
 import { TbEdit, TbPlus, TbTrash } from "react-icons/tb";
 
@@ -191,7 +192,7 @@ export const MyAtcBookings: FC = () => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/bookings/mine/upcoming");
 
   return (
-    <section className="flex flex-col gap-1">
+    <section className="flex flex-col gap-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-2xl font-medium">
           <Trans>My ATC Bookings</Trans>
@@ -210,44 +211,38 @@ export const MyAtcBookings: FC = () => {
         </div>
       )}
       {data && data.length > 0 && (
-        <div className="border border-black/15 dark:border-white/20">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {data.map((booking) => {
             const event = booking.event_position?.event;
             const eventTitle = event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
             return (
-              <div
-                key={booking.id}
-                className="flex flex-wrap items-center gap-3 border-b border-l-3 border-black/15 border-l-emerald-600 px-4 py-3 last:border-b-0 dark:border-white/20 dark:border-l-emerald-400"
-              >
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-base font-bold">{booking.callsign}</span>
-                    {event && (
-                      <Badge variant="light" color="gray">
-                        <Trans>Event</Trans>
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="font-mono text-sm text-gray-600 dark:text-gray-400">
-                    {format(booking.start_at, "yyyy-MM-dd HHmm", { in: utc })}Z–
-                    {format(booking.end_at, "yyyy-MM-dd HHmm", { in: utc })}Z
-                  </div>
-                  {booking.remarks && (
-                    <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">{booking.remarks}</p>
-                  )}
+              <Card key={booking.id} withBorder className="flex flex-col items-start gap-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-base font-bold">{booking.callsign}</span>
                   {event && (
-                    <Link to="/events/$id" params={{ id: event.id }} className="text-vatprc text-sm hover:underline">
-                      {eventTitle}
-                    </Link>
+                    <Badge variant="light" color="gray">
+                      <Trans>Event</Trans>
+                    </Badge>
                   )}
                 </div>
+                <DateTime>{booking.start_at}</DateTime>
+                <DateTime>{booking.end_at}</DateTime>
+                {booking.remarks && <p className="text-sm text-gray-700 dark:text-gray-300">{booking.remarks}</p>}
+                {event && (
+                  <Anchor
+                    renderRoot={(props) => <Link to="/events/$id" params={{ id: event.id }} {...props} />}
+                    size="sm"
+                  >
+                    {eventTitle}
+                  </Anchor>
+                )}
                 {!event && (
                   <div className="flex flex-wrap items-center gap-1">
                     <BookingModal booking={booking} />
                     <CancelBookingButton booking={booking} />
                   </div>
                 )}
-              </div>
+              </Card>
             );
           })}
         </div>

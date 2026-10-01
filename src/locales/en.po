@@ -112,7 +112,7 @@ msgstr "Add <0>R</0> to equipment code."
 msgid "Add<0>W</0>to equipment code."
 msgstr "Add <0>W</0> to equipment code."
 
-#: src/components/app/app-nav-menu.tsx:113
+#: src/components/app/app-nav-menu.tsx:114
 msgid "Admin"
 msgstr "Admin"
 
@@ -132,10 +132,18 @@ msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airsp
 msgid "Airspace"
 msgstr "Airspace"
 
+#: src/components/radar-coverage/viewer.tsx:194
+msgid "Airspace boundaries"
+msgstr "Airspace boundaries"
+
 #: src/components/airspace/sector-map.tsx:118
 #: src/components/table.tsx:203
 msgid "All"
 msgstr "All"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:38
+msgid "All VATPRC positions incl. FSS."
+msgstr "All VATPRC positions incl. FSS."
 
 #: src/components/flight-warnings.tsx:133
 #: src/routes/flights/$callsign.tsx:250
@@ -150,7 +158,7 @@ msgstr "Already Booked"
 msgid "Altitude"
 msgstr "Altitude"
 
-#: src/components/app/app-nav-menu.tsx:106
+#: src/components/app/app-nav-menu.tsx:107
 msgid "Announcement"
 msgstr "Announcement"
 
@@ -286,7 +294,7 @@ msgstr "ATC booking not open"
 msgid "ATC Booking:"
 msgstr "ATC Booking:"
 
-#: src/components/app/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:90
 #: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC Center"
@@ -348,14 +356,14 @@ msgstr "Become a Controller"
 msgid "Beijing FIR Airspace"
 msgstr "Beijing FIR Airspace"
 
-#: src/components/controller-center/my-atc-bookings.tsx:154
+#: src/components/controller-center/my-atc-bookings.tsx:155
 #: src/components/event/atc-slot-list.tsx:170
 #: src/components/event/slot-list.tsx:138
 msgid "Book"
 msgstr "Book"
 
-#: src/components/controller-center/my-atc-bookings.tsx:91
-#: src/components/controller-center/my-atc-bookings.tsx:94
+#: src/components/controller-center/my-atc-bookings.tsx:92
+#: src/components/controller-center/my-atc-bookings.tsx:95
 msgid "Book ATC Position"
 msgstr "Book ATC Position"
 
@@ -389,7 +397,11 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
-#: src/components/controller-center/my-atc-bookings.tsx:104
+#: src/components/radar-coverage/viewer.tsx:217
+msgid "Calculating coverage"
+msgstr "Calculating coverage"
+
+#: src/components/controller-center/my-atc-bookings.tsx:105
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
@@ -402,17 +414,17 @@ msgstr "Callsign"
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
-#: src/components/controller-center/my-atc-bookings.tsx:66
+#: src/components/controller-center/my-atc-bookings.tsx:67
 msgid "Callsign is required"
 msgstr "Callsign is required"
 
 #: src/components/app/assume-role-modal.tsx:41
-#: src/components/controller-center/my-atc-bookings.tsx:182
+#: src/components/controller-center/my-atc-bookings.tsx:183
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/controller-center/my-atc-bookings.tsx:174
+#: src/components/controller-center/my-atc-bookings.tsx:175
 msgid "Cancel the booking for {callsign}?"
 msgstr "Cancel the booking for {callsign}?"
 
@@ -438,7 +450,7 @@ msgstr "Center"
 msgid "Certified"
 msgstr "Certified"
 
-#: src/components/app/app-nav-menu.tsx:81
+#: src/components/app/app-nav-menu.tsx:82
 msgid "Charts"
 msgstr "Charts"
 
@@ -501,7 +513,7 @@ msgstr "CID"
 msgid "Comment"
 msgstr "Comment"
 
-#: src/components/app/app-nav-menu.tsx:100
+#: src/components/app/app-nav-menu.tsx:101
 msgid "Community"
 msgstr "Community"
 
@@ -509,9 +521,13 @@ msgstr "Community"
 msgid "Community & Membership Director"
 msgstr "Community & Membership Director"
 
-#: src/components/app/app-nav-menu.tsx:73
+#: src/components/app/app-nav-menu.tsx:74
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
+
+#: src/components/radar-coverage/viewer.tsx:257
+msgid "Computed station height"
+msgstr "Computed station height"
 
 #: src/routes/flights/index.tsx:47
 msgid "Connect to the VATSIM network to see your flight here."
@@ -522,7 +538,7 @@ msgstr "Connect to the VATSIM network to see your flight here."
 msgid "Controller"
 msgstr "Controller"
 
-#: src/components/app/app-nav-menu.tsx:92
+#: src/components/app/app-nav-menu.tsx:93
 msgid "Controller Application"
 msgstr "Controller Application"
 
@@ -541,8 +557,8 @@ msgstr "Controller Center"
 msgid "Controller Info"
 msgstr "Controller Info"
 
-#: src/components/app/app-nav-menu.tsx:90
-#: src/components/controller-center/resource-grid.tsx:37
+#: src/components/app/app-nav-menu.tsx:91
+#: src/components/controller-center/resource-grid.tsx:38
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:24
 msgid "Controller List"
@@ -556,7 +572,7 @@ msgstr "Controller Training Director"
 msgid "Controller Training Director Assistant"
 msgstr "Controller Training Director Assistant"
 
-#: src/components/app/app-nav-menu.tsx:87
+#: src/components/app/app-nav-menu.tsx:88
 #: src/components/event/atc-slot-list.tsx:203
 #: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
@@ -568,14 +584,18 @@ msgstr "Controllers"
 msgid "Controllers online"
 msgstr "Controllers online"
 
-#: src/components/controller-center/resource-grid.tsx:85
+#: src/components/controller-center/resource-grid.tsx:86
 msgctxt "resource group"
 msgid "Controlling"
 msgstr "Controlling"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:16
+#: src/components/controller-center/quarterly-controlling-time.tsx:23
 msgid "Controlling History"
 msgstr "Controlling History"
+
+#: src/components/radar-coverage/viewer.tsx:233
+msgid "Coverage calculation failed. Please reload the page."
+msgstr "Coverage calculation failed. Please reload the page."
 
 #: src/routes/_doc/airspace/station.tsx:100
 msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
@@ -619,7 +639,7 @@ msgid "Create Training Request"
 msgstr "Create Training Request"
 
 #: src/components/atc-training/training-application-responses.tsx:74
-#: src/routes/controllers/trainings/$id.tsx:111
+#: src/routes/controllers/trainings/$id.tsx:112
 #: src/routes/users/me.tsx:57
 msgid "Created at"
 msgstr "Created at"
@@ -651,6 +671,10 @@ msgstr "Cruising Level Type Mismatch"
 #: src/components/event/slot-import.tsx:172
 msgid "CTOT"
 msgstr "CTOT"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:57
+msgid "Current quarter"
+msgstr "Current quarter"
 
 #: src/components/app/theme-toggle.tsx:32
 #: src/components/app/theme-toggle.tsx:63
@@ -702,12 +726,12 @@ msgstr "Drag CSV here or click to select files"
 #: src/components/atc-application/atc-application-form.tsx:148
 #: src/components/atc-training/training-application-create.tsx:105
 #: src/components/atc-training/training-save.tsx:75
-#: src/components/controller-center/my-atc-bookings.tsx:87
+#: src/components/controller-center/my-atc-bookings.tsx:88
 #: src/components/event/atc-slot-create.tsx:86
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/controller-center/my-atc-bookings.tsx:94
+#: src/components/controller-center/my-atc-bookings.tsx:95
 msgid "Edit ATC Booking"
 msgstr "Edit ATC Booking"
 
@@ -757,11 +781,11 @@ msgstr "Email"
 #: src/components/atc-training/training-application-create.tsx:183
 #: src/components/atc-training/training-list.tsx:32
 #: src/components/atc-training/training-save.tsx:141
-#: src/components/controller-center/my-atc-bookings.tsx:130
+#: src/components/controller-center/my-atc-bookings.tsx:131
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:180
-#: src/routes/controllers/trainings/$id.tsx:103
+#: src/routes/controllers/trainings/$id.tsx:104
 msgid "End at"
 msgstr "End at"
 
@@ -774,12 +798,12 @@ msgid "End booking time must be after start booking time"
 msgstr "End booking time must be after start booking time"
 
 #: src/components/atc-training/training-application-create.tsx:81
-#: src/components/controller-center/my-atc-bookings.tsx:68
+#: src/components/controller-center/my-atc-bookings.tsx:69
 msgid "End time is required"
 msgstr "End time is required"
 
 #: src/components/atc-training/training-application-create.tsx:84
-#: src/components/controller-center/my-atc-bookings.tsx:70
+#: src/components/controller-center/my-atc-bookings.tsx:71
 #: src/components/event/event-create.tsx:96
 msgid "End time must be after start time"
 msgstr "End time must be after start time"
@@ -819,10 +843,10 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "even flight level"
 
-#: src/components/app/app-nav-menu.tsx:104
-#: src/components/app/app-nav-menu.tsx:116
+#: src/components/app/app-nav-menu.tsx:105
+#: src/components/app/app-nav-menu.tsx:117
 #: src/components/audit-log/audit-log-table.tsx:15
-#: src/components/controller-center/my-atc-bookings.tsx:227
+#: src/components/controller-center/my-atc-bookings.tsx:224
 msgid "Event"
 msgstr "Event"
 
@@ -888,7 +912,7 @@ msgstr "Failed to load audit logs"
 msgid "Failed to load controller information."
 msgstr "Failed to load controller information."
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:21
+#: src/components/controller-center/quarterly-controlling-time.tsx:29
 msgid "Failed to load controlling time."
 msgstr "Failed to load controlling time."
 
@@ -957,6 +981,18 @@ msgstr "Filter sectors by controller type"
 msgid "Finished Trainings"
 msgstr "Finished Trainings"
 
+#: src/components/radar-coverage/viewer.tsx:213
+msgid "FIR coverage estimate"
+msgstr "FIR coverage estimate"
+
+#: src/components/radar-coverage/map.tsx:241
+msgid "Fit region"
+msgstr "Fit region"
+
+#: src/components/radar-coverage/viewer.tsx:121
+msgid "Flight information region"
+msgstr "Flight information region"
+
 #: src/routes/flights/$callsign.tsx:107
 msgctxt "feet"
 msgid "flight level"
@@ -970,7 +1006,7 @@ msgstr "Flight looks good. Please confirm with the clearance delivery controller
 msgid "Flight Plan"
 msgstr "Flight Plan"
 
-#: src/components/app/app-nav-menu.tsx:83
+#: src/components/app/app-nav-menu.tsx:84
 #: src/components/homepage/hero.tsx:61
 msgid "Flight plan checker"
 msgstr "Flight plan checker"
@@ -997,7 +1033,7 @@ msgstr "Flow Management Position"
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 
-#: src/components/app/app-nav-menu.tsx:103
+#: src/components/app/app-nav-menu.tsx:104
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
@@ -1042,10 +1078,6 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:35
-msgid "hours"
-msgstr "hours"
-
 #: src/components/homepage/hero.tsx:58
 msgid "How to fly"
 msgstr "How to fly"
@@ -1082,7 +1114,7 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-#: src/components/app/app-nav-menu.tsx:118
+#: src/components/app/app-nav-menu.tsx:119
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -1127,7 +1159,7 @@ msgstr "Insufficient controller bookings"
 msgid "Introduction"
 msgstr "Introduction"
 
-#: src/components/app/app-nav-menu.tsx:72
+#: src/components/app/app-nav-menu.tsx:73
 msgid "Introduction to Fly"
 msgstr "Introduction to Fly"
 
@@ -1155,11 +1187,15 @@ msgstr "Leg direction violation"
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "Less than half of the configured area control positions have been booked for this event."
 
-#: src/components/app/app-nav-menu.tsx:96
-#: src/components/controller-center/resource-grid.tsx:41
+#: src/components/app/app-nav-menu.tsx:97
+#: src/components/controller-center/resource-grid.tsx:42
 #: src/routes/_doc/controller/loa.tsx:14
 msgid "Letter of Agreement"
 msgstr "Letter of Agreement"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:64
+msgid "Lifetime"
+msgstr "Lifetime"
 
 #: src/components/app/theme-toggle.tsx:21
 #: src/components/app/theme-toggle.tsx:62
@@ -1186,9 +1222,17 @@ msgstr "Loading"
 msgid "Loading events"
 msgstr "Loading events"
 
+#: src/components/radar-coverage/viewer.tsx:294
+msgid "Loading map"
+msgstr "Loading map"
+
 #: src/routes/events/history.tsx:140
 msgid "Loading past events"
 msgstr "Loading past events"
+
+#: src/components/radar-coverage/viewer.tsx:101
+msgid "Loading region data…"
+msgstr "Loading region data…"
 
 #: src/components/controller-center/login-placeholder.tsx:21
 msgid "Log in to Controller Center"
@@ -1215,6 +1259,10 @@ msgstr "Logout"
 msgid "Match designated route"
 msgstr "Match designated route"
 
+#: src/components/radar-coverage/viewer.tsx:272
+msgid "Maximum available coverage range"
+msgstr "Maximum available coverage range"
+
 #: src/components/app/app-nav-menu.tsx:52
 msgid "Meeting Notes"
 msgstr "Meeting Notes"
@@ -1229,6 +1277,7 @@ msgid "Mentor assignment"
 msgstr "Mentor assignment"
 
 #: src/components/controller-center/training-detail.tsx:38
+#: src/routes/controllers/trainings/$id.tsx:131
 msgid "Mentor Feedback"
 msgstr "Mentor Feedback"
 
@@ -1253,7 +1302,7 @@ msgstr "Military"
 msgid "Minimum State"
 msgstr "Minimum State"
 
-#: src/components/app/app-nav-menu.tsx:94
+#: src/components/app/app-nav-menu.tsx:95
 #: src/components/controller-center/resource-grid.tsx:30
 msgid "Moodle"
 msgstr "Moodle"
@@ -1270,7 +1319,7 @@ msgstr "My account belongs to VATPRC division."
 msgid "My Application"
 msgstr "My Application"
 
-#: src/components/controller-center/my-atc-bookings.tsx:197
+#: src/components/controller-center/my-atc-bookings.tsx:198
 msgid "My ATC Bookings"
 msgstr "My ATC Bookings"
 
@@ -1325,6 +1374,10 @@ msgstr "No past events found in the selected time range."
 #: src/components/atc-permission-modal.tsx:161
 msgid "No permission"
 msgstr "No permission"
+
+#: src/components/radar-coverage/viewer.tsx:122
+msgid "No region loaded"
+msgstr "No region loaded"
 
 #: src/routes/flights/$callsign.tsx:128
 msgid "No RNAV1"
@@ -1473,11 +1526,11 @@ msgstr "Performance Based Navigation"
 msgid "Pick a suitable cruising level."
 msgstr "Pick a suitable cruising level."
 
-#: src/components/app/app-nav-menu.tsx:75
+#: src/components/app/app-nav-menu.tsx:76
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
-#: src/components/app/app-nav-menu.tsx:69
+#: src/components/app/app-nav-menu.tsx:70
 msgid "Pilots"
 msgstr "Pilots"
 
@@ -1526,7 +1579,7 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/app/app-nav-menu.tsx:121
+#: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
 
@@ -1534,7 +1587,7 @@ msgstr "Preferred Routes"
 msgid "Previous events"
 msgstr "Previous events"
 
-#: src/routes/controllers/trainings/$id.tsx:158
+#: src/routes/controllers/trainings/$id.tsx:155
 msgid "Previous Trainings"
 msgstr "Previous Trainings"
 
@@ -1542,7 +1595,7 @@ msgstr "Previous Trainings"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/app/app-nav-menu.tsx:91
+#: src/components/app/app-nav-menu.tsx:92
 #: src/components/controller-center/resource-grid.tsx:31
 msgid "Progression Guide"
 msgstr "Progression Guide"
@@ -1550,6 +1603,21 @@ msgstr "Progression Guide"
 #: src/routes/controllers/applications/$id.tsx:115
 msgid "Provision Moodle"
 msgstr "Provision Moodle"
+
+#: src/components/app/app-nav-menu.tsx:66
+#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/radar-coverage/viewer.tsx:96
+#: src/routes/airspace/radar-coverage.tsx:7
+msgid "Radar Coverage"
+msgstr "Radar Coverage"
+
+#: src/components/radar-coverage/map.tsx:121
+msgid "Radar coverage map"
+msgstr "Radar coverage map"
+
+#: src/components/radar-coverage/viewer.tsx:246
+msgid "Radar details"
+msgstr "Radar details"
 
 #: src/components/atc-permission-modal.tsx:134
 #: src/components/controller-list.tsx:83
@@ -1563,6 +1631,10 @@ msgstr "Recent 3 months"
 #: src/components/homepage/event-carousel.tsx:116
 msgid "Recent Events"
 msgstr "Recent Events"
+
+#: src/components/radar-coverage/viewer.tsx:106
+msgid "Region data could not be loaded."
+msgstr "Region data could not be loaded."
 
 #: src/components/atc-training/training-application-responses.tsx:41
 msgid "Reject"
@@ -1586,12 +1658,12 @@ msgstr "Release"
 msgid "Remark"
 msgstr "Remark"
 
-#: src/components/controller-center/my-atc-bookings.tsx:143
+#: src/components/controller-center/my-atc-bookings.tsx:144
 #: src/routes/_doc/airspace/station.tsx:73
 msgid "Remarks"
 msgstr "Remarks"
 
-#: src/components/controller-center/resource-grid.tsx:93
+#: src/components/controller-center/resource-grid.tsx:94
 msgid "Resources"
 msgstr "Resources"
 
@@ -1599,7 +1671,7 @@ msgstr "Resources"
 msgid "Respond"
 msgstr "Respond"
 
-#: src/components/controller-center/resource-grid.tsx:39
+#: src/components/controller-center/resource-grid.tsx:40
 msgid "Restricted Airspace"
 msgstr "Restricted Airspace"
 
@@ -1611,6 +1683,10 @@ msgstr "Restricted Airspaces"
 #: src/routes/flights/$callsign.tsx:134
 msgid "Restricted airway"
 msgstr "Restricted airway"
+
+#: src/components/radar-coverage/viewer.tsx:114
+msgid "Retry"
+msgstr "Retry"
 
 #: src/routes/controllers/applications/$id.tsx:42
 #: src/routes/controllers/applications/index.tsx:19
@@ -1669,11 +1745,12 @@ msgstr "S3"
 #: src/components/atc-permission-modal.tsx:220
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
-#: src/components/controller-center/my-atc-bookings.tsx:154
+#: src/components/atc-training/training-self-reflection.tsx:75
+#: src/components/controller-center/my-atc-bookings.tsx:155
 #: src/components/event/atc-slot-create.tsx:177
 #: src/components/event/event-create.tsx:284
 #: src/components/preferred-route-create.tsx:202
-#: src/routes/controllers/trainings/$id.tsx:154
+#: src/routes/controllers/trainings/$id.tsx:151
 msgid "Save"
 msgstr "Save"
 
@@ -1694,8 +1771,8 @@ msgstr "Search..."
 msgid "Sector Editor"
 msgstr "Sector Editor"
 
-#: src/components/app/app-nav-menu.tsx:95
-#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/app/app-nav-menu.tsx:96
+#: src/components/controller-center/resource-grid.tsx:37
 msgid "Sector Files"
 msgstr "Sector Files"
 
@@ -1711,15 +1788,20 @@ msgstr "See All Announcements"
 msgid "See All Events"
 msgstr "See All Events"
 
+#: src/components/radar-coverage/viewer.tsx:247
+msgid "Select a radar or click its map marker"
+msgstr "Select a radar or click its map marker"
+
+#: src/components/atc-training/training-self-reflection.tsx:52
 #: src/components/controller-center/training-detail.tsx:48
 msgid "Self Reflection"
 msgstr "Self Reflection"
 
-#: src/components/atc-training/training-self-reflection.tsx:41
+#: src/components/atc-training/training-self-reflection.tsx:56
 msgid "Self reflection saved successfully."
 msgstr "Self reflection saved successfully."
 
-#: src/components/app/app-nav-menu.tsx:119
+#: src/components/app/app-nav-menu.tsx:120
 #: src/routes/sheets.tsx:23
 msgid "Sheet Management"
 msgstr "Sheet Management"
@@ -1774,9 +1856,21 @@ msgstr "Solo Expiration Date"
 msgid "Solo is limited to the following positions:"
 msgstr "Solo is limited to the following positions:"
 
+#: src/components/radar-coverage/map.tsx:245
+msgid "Some map resources could not be loaded. Check your connection and reload the page."
+msgstr "Some map resources could not be loaded. Check your connection and reload the page."
+
+#: src/components/radar-coverage/viewer.tsx:238
+msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+msgstr "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+
 #: src/lib/user-roles.ts:11
 msgid "SOP Editor"
 msgstr "SOP Editor"
+
+#: src/components/radar-coverage/viewer.tsx:189
+msgid "SSR and ADS-B fusion"
+msgstr "SSR and ADS-B fusion"
 
 #: src/components/app/app-nav-menu.tsx:49
 #: src/lib/user-roles.ts:26
@@ -1793,7 +1887,7 @@ msgid "Standard"
 msgstr "Standard"
 
 #: src/components/app/app-nav-menu.tsx:63
-#: src/components/controller-center/resource-grid.tsx:40
+#: src/components/controller-center/resource-grid.tsx:41
 #: src/routes/_doc/airspace/sop.tsx:14
 msgid "Standard Operation Procedures"
 msgstr "Standard Operation Procedures"
@@ -1806,11 +1900,11 @@ msgstr "Start and End booking time must be both set or unset"
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/atc-training/training-list.tsx:28
 #: src/components/atc-training/training-save.tsx:130
-#: src/components/controller-center/my-atc-bookings.tsx:118
+#: src/components/controller-center/my-atc-bookings.tsx:119
 #: src/components/event/atc-slot-create.tsx:116
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:168
-#: src/routes/controllers/trainings/$id.tsx:95
+#: src/routes/controllers/trainings/$id.tsx:96
 msgid "Start at"
 msgstr "Start at"
 
@@ -1827,11 +1921,11 @@ msgid "Start immediately"
 msgstr "Start immediately"
 
 #: src/components/atc-training/training-application-create.tsx:78
-#: src/components/controller-center/my-atc-bookings.tsx:67
+#: src/components/controller-center/my-atc-bookings.tsx:68
 msgid "Start time is required"
 msgstr "Start time is required"
 
-#: src/components/app/app-nav-menu.tsx:71
+#: src/components/app/app-nav-menu.tsx:72
 msgid "Start to Fly"
 msgstr "Start to Fly"
 
@@ -1839,7 +1933,7 @@ msgstr "Start to Fly"
 msgid "Start training"
 msgstr "Start training"
 
-#: src/components/controller-center/resource-grid.tsx:38
+#: src/components/controller-center/resource-grid.tsx:39
 msgid "Station & Frequency"
 msgstr "Station & Frequency"
 
@@ -1871,6 +1965,10 @@ msgstr "Submitted"
 msgid "Successfully cancelled the training."
 msgstr "Successfully cancelled the training."
 
+#: src/components/radar-coverage/viewer.tsx:165
+msgid "Surveillance sources"
+msgstr "Surveillance sources"
+
 #: src/components/app/language-toggle.tsx:16
 msgid "Switch to Chinese"
 msgstr "Switch to Chinese"
@@ -1887,6 +1985,11 @@ msgstr "System"
 #: src/components/app/app-not-found.tsx:21
 msgid "Take me back to home page"
 msgstr "Take me back to home page"
+
+#: src/components/radar-coverage/viewer.tsx:133
+#: src/components/radar-coverage/viewer.tsx:148
+msgid "Target altitude"
+msgstr "Target altitude"
 
 #: src/lib/user-roles.ts:21
 msgid "Tech Director"
@@ -2056,7 +2159,7 @@ msgstr "Time:"
 #: src/components/atc-training/training-list.tsx:16
 #: src/components/atc-training/training-save.tsx:95
 #: src/components/event/event-create.tsx:143
-#: src/routes/controllers/trainings/$id.tsx:71
+#: src/routes/controllers/trainings/$id.tsx:72
 msgid "Title"
 msgstr "Title"
 
@@ -2069,6 +2172,10 @@ msgstr "Title (English)"
 msgid "Title is required"
 msgstr "Title is required"
 
+#: src/components/controller-center/quarterly-controlling-time.tsx:36
+msgid "Total"
+msgstr "Total"
+
 #: src/routes/sheets.tsx:63
 msgid "Total sheets: {totalSheets}"
 msgstr "Total sheets: {totalSheets}"
@@ -2077,7 +2184,11 @@ msgstr "Total sheets: {totalSheets}"
 msgid "Tower"
 msgstr "Tower"
 
+#: src/components/atc-training/training-application-list.tsx:72
+#: src/components/atc-training/training-list.tsx:19
+#: src/components/atc-training/training-save.tsx:119
 #: src/components/controller-center/training-detail.tsx:33
+#: src/routes/controllers/trainings/$id.tsx:78
 msgid "Trainee"
 msgstr "Trainee"
 
@@ -2085,15 +2196,19 @@ msgstr "Trainee"
 msgid "Trainee Applications"
 msgstr "Trainee Applications"
 
+#: src/components/atc-training/training-application-responses.tsx:116
+#: src/components/atc-training/training-list.tsx:24
+#: src/components/atc-training/training-save.tsx:107
 #: src/components/controller-center/training-detail.tsx:29
+#: src/routes/controllers/trainings/$id.tsx:87
 msgid "Trainer"
 msgstr "Trainer"
 
-#: src/routes/controllers/trainings/$id.tsx:63
+#: src/routes/controllers/trainings/$id.tsx:64
 msgid "Training"
 msgstr "Training"
 
-#: src/components/controller-center/resource-grid.tsx:80
+#: src/components/controller-center/resource-grid.tsx:81
 msgctxt "resource group"
 msgid "Training"
 msgstr "Training"
@@ -2106,7 +2221,7 @@ msgstr "Training Application Responses"
 msgid "Training Management"
 msgstr "Training Management"
 
-#: src/routes/controllers/trainings/$id.tsx:138
+#: src/routes/controllers/trainings/$id.tsx:135
 msgid "Training record saved successfully."
 msgstr "Training record saved successfully."
 
@@ -2146,7 +2261,7 @@ msgid "Upcoming"
 msgstr "Upcoming"
 
 #: src/components/atc-training/training-application-responses.tsx:80
-#: src/routes/controllers/trainings/$id.tsx:119
+#: src/routes/controllers/trainings/$id.tsx:120
 #: src/routes/users/me.tsx:58
 msgid "Updated at"
 msgstr "Updated at"
@@ -2180,7 +2295,7 @@ msgstr "User Audit Logs"
 msgid "User Info"
 msgstr "User Info"
 
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:118
 msgid "User List"
 msgstr "User List"
 
@@ -2204,10 +2319,6 @@ msgstr "Valid Until"
 #: src/routes/flights/$callsign.tsx:446
 msgid "Validation Result"
 msgstr "Validation Result"
-
-#: src/components/controller-center/quarterly-controlling-time.tsx:29
-msgid "VATPRC positions in the current calendar quarter"
-msgstr "VATPRC positions in the current calendar quarter"
 
 #: src/components/controller-center/become-controller.tsx:18
 msgid "VATPRC provides a complete training program from Delivery to Center. Submit an application to start your controller journey."
@@ -2252,13 +2363,17 @@ msgstr "View past events"
 msgid "View training details"
 msgstr "View training details"
 
+#: src/components/radar-coverage/viewer.tsx:225
+msgid "Visible radars"
+msgstr "Visible radars"
+
 #: src/components/atc-permission-modal.tsx:98
 #: src/components/controller-center/identity-chip.tsx:24
 #: src/routes/users/me.tsx:84
 msgid "Visiting"
 msgstr "Visiting"
 
-#: src/components/app/app-nav-menu.tsx:93
+#: src/components/app/app-nav-menu.tsx:94
 #: src/components/controller-center/resource-grid.tsx:32
 msgid "Visiting & Transfer"
 msgstr "Visiting & Transfer"
@@ -2275,7 +2390,7 @@ msgstr "We need your help! Donate to VATPRC to help us to improve!"
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
-#: src/components/app/app-nav-menu.tsx:82
+#: src/components/app/app-nav-menu.tsx:83
 msgid "Weather"
 msgstr "Weather"
 
@@ -2296,7 +2411,7 @@ msgstr "Yes"
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "You have no training sessions yet. Apply for a training to get started."
 
-#: src/components/controller-center/my-atc-bookings.tsx:209
+#: src/components/controller-center/my-atc-bookings.tsx:210
 msgid "You have no upcoming ATC bookings."
 msgstr "You have no upcoming ATC bookings."
 
@@ -2327,103 +2442,3 @@ msgstr "Your flight is not online"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
-
-#: src/components/radar-coverage/viewer.tsx:283
-msgid "Airspace boundaries"
-msgstr "Airspace boundaries"
-
-#: src/components/radar-coverage/viewer.tsx:306
-msgid "Calculating coverage"
-msgstr "Calculating coverage"
-
-#: src/components/radar-coverage/viewer.tsx:361
-msgid "Computed station height"
-msgstr "Computed station height"
-
-#: src/components/radar-coverage/viewer.tsx:322
-msgid "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
-msgstr "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
-
-#: src/components/radar-coverage/viewer.tsx:302
-msgid "FIR coverage estimate"
-msgstr "FIR coverage estimate"
-
-#: src/components/radar-coverage/map.tsx:205
-msgid "Fit region"
-msgstr "Fit region"
-
-#: src/components/radar-coverage/viewer.tsx:209
-msgid "Flight information region"
-msgstr "Flight information region"
-
-#: src/components/radar-coverage/viewer.tsx:380
-msgid "Loading map"
-msgstr "Loading map"
-
-#: src/components/radar-coverage/viewer.tsx:189
-msgid "Loading region data…"
-msgstr "Loading region data…"
-
-#: src/components/radar-coverage/viewer.tsx:210
-msgid "No region loaded"
-msgstr "No region loaded"
-
-#: src/components/app/app-nav-menu.tsx:66
-#: src/components/controller-center/resource-grid.tsx:36
-#: src/components/radar-coverage/viewer.tsx:133
-#: src/routes/airspace/radar-coverage.tsx:7
-msgid "Radar Coverage"
-msgstr "Radar Coverage"
-
-#: src/components/radar-coverage/map.tsx:120
-msgid "Radar coverage map"
-msgstr "Radar coverage map"
-
-#: src/components/radar-coverage/viewer.tsx:342
-msgid "Radar details"
-msgstr "Radar details"
-
-#: src/components/radar-coverage/viewer.tsx:194
-msgid "Region data could not be loaded."
-msgstr "Region data could not be loaded."
-
-#: src/components/radar-coverage/viewer.tsx:202
-msgid "Retry"
-msgstr "Retry"
-
-#: src/components/radar-coverage/viewer.tsx:343
-msgid "Select a radar or click its map marker"
-msgstr "Select a radar or click its map marker"
-
-#: src/components/radar-coverage/map.tsx:209
-msgid "Some map resources could not be loaded. Check your connection and reload the page."
-msgstr "Some map resources could not be loaded. Check your connection and reload the page."
-
-#: src/components/radar-coverage/viewer.tsx:334
-msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
-msgstr "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
-
-#: src/components/radar-coverage/viewer.tsx:258
-msgid "Surveillance sources"
-msgstr "Surveillance sources"
-
-#: src/components/radar-coverage/viewer.tsx:229
-#: src/components/radar-coverage/viewer.tsx:241
-msgid "Target altitude"
-msgstr "Target altitude"
-
-#: src/components/radar-coverage/viewer.tsx:314
-msgid "Visible radars"
-msgstr "Visible radars"
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "Coverage calculation failed. Please reload the page."
-msgstr "Coverage calculation failed. Please reload the page."
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "Maximum available coverage range"
-msgstr "Maximum available coverage range"
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "SSR and ADS-B fusion"
-msgstr "SSR and ADS-B fusion"

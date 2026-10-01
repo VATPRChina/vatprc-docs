@@ -112,7 +112,7 @@ msgstr "将 <0>R</0> 添加到设备代码。"
 msgid "Add<0>W</0>to equipment code."
 msgstr "将 <0>W</0> 添加到设备代码。"
 
-#: src/components/app/app-nav-menu.tsx:113
+#: src/components/app/app-nav-menu.tsx:114
 msgid "Admin"
 msgstr "管理"
 
@@ -132,10 +132,18 @@ msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 msgid "Airspace"
 msgstr "空域"
 
+#: src/components/radar-coverage/viewer.tsx:194
+msgid "Airspace boundaries"
+msgstr "空域边界"
+
 #: src/components/airspace/sector-map.tsx:118
 #: src/components/table.tsx:203
 msgid "All"
 msgstr "全部"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:38
+msgid "All VATPRC positions incl. FSS."
+msgstr "包含 FSS 在内的所有 VATPRC 席位。"
 
 #: src/components/flight-warnings.tsx:133
 #: src/routes/flights/$callsign.tsx:250
@@ -150,7 +158,7 @@ msgstr "已被预订"
 msgid "Altitude"
 msgstr "高度范围"
 
-#: src/components/app/app-nav-menu.tsx:106
+#: src/components/app/app-nav-menu.tsx:107
 msgid "Announcement"
 msgstr "公告"
 
@@ -286,7 +294,7 @@ msgstr "未开放管制报名"
 msgid "ATC Booking:"
 msgstr "管制员预订："
 
-#: src/components/app/app-nav-menu.tsx:89
+#: src/components/app/app-nav-menu.tsx:90
 #: src/components/homepage/controllers-board.tsx:110
 msgid "ATC Center"
 msgstr "ATC 中心"
@@ -348,14 +356,14 @@ msgstr "成为管制员"
 msgid "Beijing FIR Airspace"
 msgstr "北京飞行情报区空域"
 
-#: src/components/controller-center/my-atc-bookings.tsx:154
+#: src/components/controller-center/my-atc-bookings.tsx:155
 #: src/components/event/atc-slot-list.tsx:170
 #: src/components/event/slot-list.tsx:138
 msgid "Book"
 msgstr "预订"
 
-#: src/components/controller-center/my-atc-bookings.tsx:91
-#: src/components/controller-center/my-atc-bookings.tsx:94
+#: src/components/controller-center/my-atc-bookings.tsx:92
+#: src/components/controller-center/my-atc-bookings.tsx:95
 msgid "Book ATC Position"
 msgstr "预约管制席位"
 
@@ -389,7 +397,11 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
-#: src/components/controller-center/my-atc-bookings.tsx:104
+#: src/components/radar-coverage/viewer.tsx:217
+msgid "Calculating coverage"
+msgstr "正在计算覆盖范围"
+
+#: src/components/controller-center/my-atc-bookings.tsx:105
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
 #: src/components/event/slot-import.tsx:157
@@ -402,17 +414,17 @@ msgstr "呼号"
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
-#: src/components/controller-center/my-atc-bookings.tsx:66
+#: src/components/controller-center/my-atc-bookings.tsx:67
 msgid "Callsign is required"
 msgstr "必须填写席位呼号"
 
 #: src/components/app/assume-role-modal.tsx:41
-#: src/components/controller-center/my-atc-bookings.tsx:182
+#: src/components/controller-center/my-atc-bookings.tsx:183
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
 msgstr "取消"
 
-#: src/components/controller-center/my-atc-bookings.tsx:174
+#: src/components/controller-center/my-atc-bookings.tsx:175
 msgid "Cancel the booking for {callsign}?"
 msgstr "确定取消 {callsign} 的预约吗？"
 
@@ -438,7 +450,7 @@ msgstr "区域"
 msgid "Certified"
 msgstr "完整权限"
 
-#: src/components/app/app-nav-menu.tsx:81
+#: src/components/app/app-nav-menu.tsx:82
 msgid "Charts"
 msgstr "航图"
 
@@ -501,7 +513,7 @@ msgstr "CID"
 msgid "Comment"
 msgstr "评论"
 
-#: src/components/app/app-nav-menu.tsx:100
+#: src/components/app/app-nav-menu.tsx:101
 msgid "Community"
 msgstr "社区"
 
@@ -509,9 +521,13 @@ msgstr "社区"
 msgid "Community & Membership Director"
 msgstr "社区会员部主管"
 
-#: src/components/app/app-nav-menu.tsx:73
+#: src/components/app/app-nav-menu.tsx:74
 msgid "Community & Teamspeak 3"
 msgstr "社群"
+
+#: src/components/radar-coverage/viewer.tsx:257
+msgid "Computed station height"
+msgstr "计算站高"
 
 #: src/routes/flights/index.tsx:47
 msgid "Connect to the VATSIM network to see your flight here."
@@ -522,7 +538,7 @@ msgstr "连接到 VATSIM 网络后，你的航班将显示在这里。"
 msgid "Controller"
 msgstr "管制员"
 
-#: src/components/app/app-nav-menu.tsx:92
+#: src/components/app/app-nav-menu.tsx:93
 msgid "Controller Application"
 msgstr "管制员申请"
 
@@ -541,8 +557,8 @@ msgstr "管制员中心"
 msgid "Controller Info"
 msgstr "管制员信息"
 
-#: src/components/app/app-nav-menu.tsx:90
-#: src/components/controller-center/resource-grid.tsx:37
+#: src/components/app/app-nav-menu.tsx:91
+#: src/components/controller-center/resource-grid.tsx:38
 #: src/routes/_doc/controller/controller-list.tsx:9
 #: src/routes/_doc/controller/controller-list.tsx:24
 msgid "Controller List"
@@ -556,7 +572,7 @@ msgstr "管制员训练部主管"
 msgid "Controller Training Director Assistant"
 msgstr "管制员训练部行政事务助理"
 
-#: src/components/app/app-nav-menu.tsx:87
+#: src/components/app/app-nav-menu.tsx:88
 #: src/components/event/atc-slot-list.tsx:203
 #: src/components/homepage/controllers-board.tsx:101
 #: src/routes/events/$id.tsx:65
@@ -568,14 +584,18 @@ msgstr "管制员"
 msgid "Controllers online"
 msgstr "在线管制"
 
-#: src/components/controller-center/resource-grid.tsx:85
+#: src/components/controller-center/resource-grid.tsx:86
 msgctxt "resource group"
 msgid "Controlling"
 msgstr "管制"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:16
+#: src/components/controller-center/quarterly-controlling-time.tsx:23
 msgid "Controlling History"
 msgstr "管制上线记录"
+
+#: src/components/radar-coverage/viewer.tsx:233
+msgid "Coverage calculation failed. Please reload the page."
+msgstr "覆盖范围计算失败，请重新加载页面。"
 
 #: src/routes/_doc/airspace/station.tsx:100
 msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
@@ -619,7 +639,7 @@ msgid "Create Training Request"
 msgstr "创建训练申请"
 
 #: src/components/atc-training/training-application-responses.tsx:74
-#: src/routes/controllers/trainings/$id.tsx:111
+#: src/routes/controllers/trainings/$id.tsx:112
 #: src/routes/users/me.tsx:57
 msgid "Created at"
 msgstr "创建时间"
@@ -651,6 +671,10 @@ msgstr "巡航高度类型不允许"
 #: src/components/event/slot-import.tsx:172
 msgid "CTOT"
 msgstr "CTOT"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:57
+msgid "Current quarter"
+msgstr "本季度"
 
 #: src/components/app/theme-toggle.tsx:32
 #: src/components/app/theme-toggle.tsx:63
@@ -702,12 +726,12 @@ msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 #: src/components/atc-application/atc-application-form.tsx:148
 #: src/components/atc-training/training-application-create.tsx:105
 #: src/components/atc-training/training-save.tsx:75
-#: src/components/controller-center/my-atc-bookings.tsx:87
+#: src/components/controller-center/my-atc-bookings.tsx:88
 #: src/components/event/atc-slot-create.tsx:86
 msgid "Edit"
 msgstr "编辑"
 
-#: src/components/controller-center/my-atc-bookings.tsx:94
+#: src/components/controller-center/my-atc-bookings.tsx:95
 msgid "Edit ATC Booking"
 msgstr "编辑管制席位预约"
 
@@ -757,11 +781,11 @@ msgstr "电子邮箱"
 #: src/components/atc-training/training-application-create.tsx:183
 #: src/components/atc-training/training-list.tsx:32
 #: src/components/atc-training/training-save.tsx:141
-#: src/components/controller-center/my-atc-bookings.tsx:130
+#: src/components/controller-center/my-atc-bookings.tsx:131
 #: src/components/event/atc-slot-create.tsx:127
 #: src/components/event/atc-slot-list.tsx:50
 #: src/components/event/event-create.tsx:180
-#: src/routes/controllers/trainings/$id.tsx:103
+#: src/routes/controllers/trainings/$id.tsx:104
 msgid "End at"
 msgstr "结束时间"
 
@@ -774,12 +798,12 @@ msgid "End booking time must be after start booking time"
 msgstr "预订结束时间必须晚于开始预订时间"
 
 #: src/components/atc-training/training-application-create.tsx:81
-#: src/components/controller-center/my-atc-bookings.tsx:68
+#: src/components/controller-center/my-atc-bookings.tsx:69
 msgid "End time is required"
 msgstr "结束时间为必填项"
 
 #: src/components/atc-training/training-application-create.tsx:84
-#: src/components/controller-center/my-atc-bookings.tsx:70
+#: src/components/controller-center/my-atc-bookings.tsx:71
 #: src/components/event/event-create.tsx:96
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
@@ -819,10 +843,10 @@ msgctxt "feet"
 msgid "even flight level"
 msgstr "英制双数飞行高度层"
 
-#: src/components/app/app-nav-menu.tsx:104
-#: src/components/app/app-nav-menu.tsx:116
+#: src/components/app/app-nav-menu.tsx:105
+#: src/components/app/app-nav-menu.tsx:117
 #: src/components/audit-log/audit-log-table.tsx:15
-#: src/components/controller-center/my-atc-bookings.tsx:227
+#: src/components/controller-center/my-atc-bookings.tsx:224
 msgid "Event"
 msgstr "活动"
 
@@ -888,7 +912,7 @@ msgstr "审计日志加载失败"
 msgid "Failed to load controller information."
 msgstr "无法加载管制员信息。"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:21
+#: src/components/controller-center/quarterly-controlling-time.tsx:29
 msgid "Failed to load controlling time."
 msgstr "无法加载管制上线时间。"
 
@@ -957,6 +981,18 @@ msgstr "按管制类型筛选扇区"
 msgid "Finished Trainings"
 msgstr "已完成培训"
 
+#: src/components/radar-coverage/viewer.tsx:213
+msgid "FIR coverage estimate"
+msgstr "FIR 覆盖估算"
+
+#: src/components/radar-coverage/map.tsx:241
+msgid "Fit region"
+msgstr "适配区域"
+
+#: src/components/radar-coverage/viewer.tsx:121
+msgid "Flight information region"
+msgstr "飞行情报区"
+
 #: src/routes/flights/$callsign.tsx:107
 msgctxt "feet"
 msgid "flight level"
@@ -970,7 +1006,7 @@ msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 msgid "Flight Plan"
 msgstr "飞行计划"
 
-#: src/components/app/app-nav-menu.tsx:83
+#: src/components/app/app-nav-menu.tsx:84
 #: src/components/homepage/hero.tsx:61
 msgid "Flight plan checker"
 msgstr "飞行计划检查器"
@@ -997,7 +1033,7 @@ msgstr "流量控制"
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "由于技术限制，地图上显示的边界可能过时或者被简化。飞行时请遵守本地管制员指令。"
 
-#: src/components/app/app-nav-menu.tsx:103
+#: src/components/app/app-nav-menu.tsx:104
 #: src/components/event/event-create.tsx:245
 #: src/components/event/event-detail.tsx:73
 #: src/components/homepage/hero.tsx:71
@@ -1042,10 +1078,6 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-#: src/components/controller-center/quarterly-controlling-time.tsx:35
-msgid "hours"
-msgstr "小时"
-
 #: src/components/homepage/hero.tsx:58
 msgid "How to fly"
 msgstr "如何飞行"
@@ -1082,7 +1114,7 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-#: src/components/app/app-nav-menu.tsx:118
+#: src/components/app/app-nav-menu.tsx:119
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -1127,7 +1159,7 @@ msgstr "活动管制员预订数量不足"
 msgid "Introduction"
 msgstr "介绍"
 
-#: src/components/app/app-nav-menu.tsx:72
+#: src/components/app/app-nav-menu.tsx:73
 msgid "Introduction to Fly"
 msgstr "飞行简介"
 
@@ -1155,11 +1187,15 @@ msgstr "航段方向不允许"
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "本活动配置的区域管制席位预约数不足一半。"
 
-#: src/components/app/app-nav-menu.tsx:96
-#: src/components/controller-center/resource-grid.tsx:41
+#: src/components/app/app-nav-menu.tsx:97
+#: src/components/controller-center/resource-grid.tsx:42
 #: src/routes/_doc/controller/loa.tsx:14
 msgid "Letter of Agreement"
 msgstr "移交协议书"
+
+#: src/components/controller-center/quarterly-controlling-time.tsx:64
+msgid "Lifetime"
+msgstr "累计"
 
 #: src/components/app/theme-toggle.tsx:21
 #: src/components/app/theme-toggle.tsx:62
@@ -1186,9 +1222,17 @@ msgstr "正在加载"
 msgid "Loading events"
 msgstr "正在加载活动"
 
+#: src/components/radar-coverage/viewer.tsx:294
+msgid "Loading map"
+msgstr "正在加载地图"
+
 #: src/routes/events/history.tsx:140
 msgid "Loading past events"
 msgstr "正在加载往期活动"
+
+#: src/components/radar-coverage/viewer.tsx:101
+msgid "Loading region data…"
+msgstr "正在加载区域数据…"
 
 #: src/components/controller-center/login-placeholder.tsx:21
 msgid "Log in to Controller Center"
@@ -1215,6 +1259,10 @@ msgstr "登出"
 msgid "Match designated route"
 msgstr "符合指定航路"
 
+#: src/components/radar-coverage/viewer.tsx:272
+msgid "Maximum available coverage range"
+msgstr "最大可用覆盖范围"
+
 #: src/components/app/app-nav-menu.tsx:52
 msgid "Meeting Notes"
 msgstr "会议记录"
@@ -1229,6 +1277,7 @@ msgid "Mentor assignment"
 msgstr "分配教员"
 
 #: src/components/controller-center/training-detail.tsx:38
+#: src/routes/controllers/trainings/$id.tsx:131
 msgid "Mentor Feedback"
 msgstr "教员反馈"
 
@@ -1253,7 +1302,7 @@ msgstr "军用"
 msgid "Minimum State"
 msgstr "最低权限"
 
-#: src/components/app/app-nav-menu.tsx:94
+#: src/components/app/app-nav-menu.tsx:95
 #: src/components/controller-center/resource-grid.tsx:30
 msgid "Moodle"
 msgstr "Moodle"
@@ -1270,7 +1319,7 @@ msgstr "我的 VATSIM 账号属于 VATPRC 分部。"
 msgid "My Application"
 msgstr "我的申请"
 
-#: src/components/controller-center/my-atc-bookings.tsx:197
+#: src/components/controller-center/my-atc-bookings.tsx:198
 msgid "My ATC Bookings"
 msgstr "我的管制席位预约"
 
@@ -1325,6 +1374,10 @@ msgstr "所选时间范围内没有历史活动。"
 #: src/components/atc-permission-modal.tsx:161
 msgid "No permission"
 msgstr "没有权限"
+
+#: src/components/radar-coverage/viewer.tsx:122
+msgid "No region loaded"
+msgstr "尚未加载区域"
 
 #: src/routes/flights/$callsign.tsx:128
 msgid "No RNAV1"
@@ -1473,11 +1526,11 @@ msgstr "所需导航性能能力"
 msgid "Pick a suitable cruising level."
 msgstr "选择合适的巡航高度。"
 
-#: src/components/app/app-nav-menu.tsx:75
+#: src/components/app/app-nav-menu.tsx:76
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
 
-#: src/components/app/app-nav-menu.tsx:69
+#: src/components/app/app-nav-menu.tsx:70
 msgid "Pilots"
 msgstr "飞行员"
 
@@ -1526,7 +1579,7 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
-#: src/components/app/app-nav-menu.tsx:121
+#: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
 msgstr "推荐航路"
 
@@ -1534,7 +1587,7 @@ msgstr "推荐航路"
 msgid "Previous events"
 msgstr "上一批活动"
 
-#: src/routes/controllers/trainings/$id.tsx:158
+#: src/routes/controllers/trainings/$id.tsx:155
 msgid "Previous Trainings"
 msgstr "历史训练"
 
@@ -1542,7 +1595,7 @@ msgstr "历史训练"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/components/app/app-nav-menu.tsx:91
+#: src/components/app/app-nav-menu.tsx:92
 #: src/components/controller-center/resource-grid.tsx:31
 msgid "Progression Guide"
 msgstr "晋升指引"
@@ -1550,6 +1603,21 @@ msgstr "晋升指引"
 #: src/routes/controllers/applications/$id.tsx:115
 msgid "Provision Moodle"
 msgstr "开通 Moodle"
+
+#: src/components/app/app-nav-menu.tsx:66
+#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/radar-coverage/viewer.tsx:96
+#: src/routes/airspace/radar-coverage.tsx:7
+msgid "Radar Coverage"
+msgstr "雷达覆盖范围"
+
+#: src/components/radar-coverage/map.tsx:121
+msgid "Radar coverage map"
+msgstr "雷达覆盖地图"
+
+#: src/components/radar-coverage/viewer.tsx:246
+msgid "Radar details"
+msgstr "雷达详情"
 
 #: src/components/atc-permission-modal.tsx:134
 #: src/components/controller-list.tsx:83
@@ -1563,6 +1631,10 @@ msgstr "最近三个月"
 #: src/components/homepage/event-carousel.tsx:116
 msgid "Recent Events"
 msgstr "近期活动"
+
+#: src/components/radar-coverage/viewer.tsx:106
+msgid "Region data could not be loaded."
+msgstr "无法加载区域数据。"
 
 #: src/components/atc-training/training-application-responses.tsx:41
 msgid "Reject"
@@ -1586,12 +1658,12 @@ msgstr "取消预订"
 msgid "Remark"
 msgstr "备注"
 
-#: src/components/controller-center/my-atc-bookings.tsx:143
+#: src/components/controller-center/my-atc-bookings.tsx:144
 #: src/routes/_doc/airspace/station.tsx:73
 msgid "Remarks"
 msgstr "备注"
 
-#: src/components/controller-center/resource-grid.tsx:93
+#: src/components/controller-center/resource-grid.tsx:94
 msgid "Resources"
 msgstr "资源"
 
@@ -1599,7 +1671,7 @@ msgstr "资源"
 msgid "Respond"
 msgstr "回复"
 
-#: src/components/controller-center/resource-grid.tsx:39
+#: src/components/controller-center/resource-grid.tsx:40
 msgid "Restricted Airspace"
 msgstr "受限空域"
 
@@ -1611,6 +1683,10 @@ msgstr "受限空域"
 #: src/routes/flights/$callsign.tsx:134
 msgid "Restricted airway"
 msgstr "受限航路"
+
+#: src/components/radar-coverage/viewer.tsx:114
+msgid "Retry"
+msgstr "重试"
 
 #: src/routes/controllers/applications/$id.tsx:42
 #: src/routes/controllers/applications/index.tsx:19
@@ -1669,11 +1745,12 @@ msgstr "S3"
 #: src/components/atc-permission-modal.tsx:220
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
-#: src/components/controller-center/my-atc-bookings.tsx:154
+#: src/components/atc-training/training-self-reflection.tsx:75
+#: src/components/controller-center/my-atc-bookings.tsx:155
 #: src/components/event/atc-slot-create.tsx:177
 #: src/components/event/event-create.tsx:284
 #: src/components/preferred-route-create.tsx:202
-#: src/routes/controllers/trainings/$id.tsx:154
+#: src/routes/controllers/trainings/$id.tsx:151
 msgid "Save"
 msgstr "保存"
 
@@ -1694,8 +1771,8 @@ msgstr "搜索..."
 msgid "Sector Editor"
 msgstr "扇区组组员"
 
-#: src/components/app/app-nav-menu.tsx:95
-#: src/components/controller-center/resource-grid.tsx:36
+#: src/components/app/app-nav-menu.tsx:96
+#: src/components/controller-center/resource-grid.tsx:37
 msgid "Sector Files"
 msgstr "扇区文件"
 
@@ -1711,15 +1788,20 @@ msgstr "查看所有公告"
 msgid "See All Events"
 msgstr "查看所有活动"
 
+#: src/components/radar-coverage/viewer.tsx:247
+msgid "Select a radar or click its map marker"
+msgstr "选择雷达或点击地图上的站点"
+
+#: src/components/atc-training/training-self-reflection.tsx:52
 #: src/components/controller-center/training-detail.tsx:48
 msgid "Self Reflection"
 msgstr "自我反思"
 
-#: src/components/atc-training/training-self-reflection.tsx:41
+#: src/components/atc-training/training-self-reflection.tsx:56
 msgid "Self reflection saved successfully."
 msgstr "自我反思保存成功。"
 
-#: src/components/app/app-nav-menu.tsx:119
+#: src/components/app/app-nav-menu.tsx:120
 #: src/routes/sheets.tsx:23
 msgid "Sheet Management"
 msgstr "表单管理"
@@ -1774,9 +1856,21 @@ msgstr "独立训练到期日"
 msgid "Solo is limited to the following positions:"
 msgstr "Solo 权限仅限以下席位："
 
+#: src/components/radar-coverage/map.tsx:245
+msgid "Some map resources could not be loaded. Check your connection and reload the page."
+msgstr "部分地图资源加载失败。请检查网络连接并重新加载页面。"
+
+#: src/components/radar-coverage/viewer.tsx:238
+msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
+msgstr "部分地形采样缺失。灰色区域表示未知区域，无法给出完整覆盖百分比。"
+
 #: src/lib/user-roles.ts:11
 msgid "SOP Editor"
 msgstr "SOP 组组员"
+
+#: src/components/radar-coverage/viewer.tsx:189
+msgid "SSR and ADS-B fusion"
+msgstr "SSR 与 ADS-B 融合运行"
 
 #: src/components/app/app-nav-menu.tsx:49
 #: src/lib/user-roles.ts:26
@@ -1793,7 +1887,7 @@ msgid "Standard"
 msgstr "常规"
 
 #: src/components/app/app-nav-menu.tsx:63
-#: src/components/controller-center/resource-grid.tsx:40
+#: src/components/controller-center/resource-grid.tsx:41
 #: src/routes/_doc/airspace/sop.tsx:14
 msgid "Standard Operation Procedures"
 msgstr "标准运行程序"
@@ -1806,11 +1900,11 @@ msgstr "开始和结束预订时间必须同时设置或同时不设置"
 #: src/components/atc-training/training-application-create.tsx:172
 #: src/components/atc-training/training-list.tsx:28
 #: src/components/atc-training/training-save.tsx:130
-#: src/components/controller-center/my-atc-bookings.tsx:118
+#: src/components/controller-center/my-atc-bookings.tsx:119
 #: src/components/event/atc-slot-create.tsx:116
 #: src/components/event/atc-slot-list.tsx:39
 #: src/components/event/event-create.tsx:168
-#: src/routes/controllers/trainings/$id.tsx:95
+#: src/routes/controllers/trainings/$id.tsx:96
 msgid "Start at"
 msgstr "开始时间"
 
@@ -1827,11 +1921,11 @@ msgid "Start immediately"
 msgstr "立即开始"
 
 #: src/components/atc-training/training-application-create.tsx:78
-#: src/components/controller-center/my-atc-bookings.tsx:67
+#: src/components/controller-center/my-atc-bookings.tsx:68
 msgid "Start time is required"
 msgstr "开始时间为必填项"
 
-#: src/components/app/app-nav-menu.tsx:71
+#: src/components/app/app-nav-menu.tsx:72
 msgid "Start to Fly"
 msgstr "开始飞行"
 
@@ -1839,7 +1933,7 @@ msgstr "开始飞行"
 msgid "Start training"
 msgstr "开始训练"
 
-#: src/components/controller-center/resource-grid.tsx:38
+#: src/components/controller-center/resource-grid.tsx:39
 msgid "Station & Frequency"
 msgstr "席位与频率"
 
@@ -1871,6 +1965,10 @@ msgstr "已提交"
 msgid "Successfully cancelled the training."
 msgstr "已成功取消训练计划。"
 
+#: src/components/radar-coverage/viewer.tsx:165
+msgid "Surveillance sources"
+msgstr "监视源"
+
 #: src/components/app/language-toggle.tsx:16
 msgid "Switch to Chinese"
 msgstr "切换到中文"
@@ -1887,6 +1985,11 @@ msgstr "跟随系统"
 #: src/components/app/app-not-found.tsx:21
 msgid "Take me back to home page"
 msgstr "返回首页"
+
+#: src/components/radar-coverage/viewer.tsx:133
+#: src/components/radar-coverage/viewer.tsx:148
+msgid "Target altitude"
+msgstr "目标高度"
 
 #: src/lib/user-roles.ts:21
 msgid "Tech Director"
@@ -2056,7 +2159,7 @@ msgstr "活动时间："
 #: src/components/atc-training/training-list.tsx:16
 #: src/components/atc-training/training-save.tsx:95
 #: src/components/event/event-create.tsx:143
-#: src/routes/controllers/trainings/$id.tsx:71
+#: src/routes/controllers/trainings/$id.tsx:72
 msgid "Title"
 msgstr "标题"
 
@@ -2069,6 +2172,10 @@ msgstr "标题（英文）"
 msgid "Title is required"
 msgstr "标题为必填项"
 
+#: src/components/controller-center/quarterly-controlling-time.tsx:36
+msgid "Total"
+msgstr "总计"
+
 #: src/routes/sheets.tsx:63
 msgid "Total sheets: {totalSheets}"
 msgstr "全部 {totalSheets} 个表单"
@@ -2077,7 +2184,11 @@ msgstr "全部 {totalSheets} 个表单"
 msgid "Tower"
 msgstr "塔台"
 
+#: src/components/atc-training/training-application-list.tsx:72
+#: src/components/atc-training/training-list.tsx:19
+#: src/components/atc-training/training-save.tsx:119
 #: src/components/controller-center/training-detail.tsx:33
+#: src/routes/controllers/trainings/$id.tsx:78
 msgid "Trainee"
 msgstr "学员"
 
@@ -2085,15 +2196,19 @@ msgstr "学员"
 msgid "Trainee Applications"
 msgstr "学员报名"
 
+#: src/components/atc-training/training-application-responses.tsx:116
+#: src/components/atc-training/training-list.tsx:24
+#: src/components/atc-training/training-save.tsx:107
 #: src/components/controller-center/training-detail.tsx:29
+#: src/routes/controllers/trainings/$id.tsx:87
 msgid "Trainer"
 msgstr "教员"
 
-#: src/routes/controllers/trainings/$id.tsx:63
+#: src/routes/controllers/trainings/$id.tsx:64
 msgid "Training"
 msgstr "训练记录"
 
-#: src/components/controller-center/resource-grid.tsx:80
+#: src/components/controller-center/resource-grid.tsx:81
 msgctxt "resource group"
 msgid "Training"
 msgstr "训练"
@@ -2106,7 +2221,7 @@ msgstr "训练申请回复"
 msgid "Training Management"
 msgstr "训练管理"
 
-#: src/routes/controllers/trainings/$id.tsx:138
+#: src/routes/controllers/trainings/$id.tsx:135
 msgid "Training record saved successfully."
 msgstr "已成功保存训练记录。"
 
@@ -2146,7 +2261,7 @@ msgid "Upcoming"
 msgstr "即将进行"
 
 #: src/components/atc-training/training-application-responses.tsx:80
-#: src/routes/controllers/trainings/$id.tsx:119
+#: src/routes/controllers/trainings/$id.tsx:120
 #: src/routes/users/me.tsx:58
 msgid "Updated at"
 msgstr "修改时间"
@@ -2180,7 +2295,7 @@ msgstr "用户审计日志"
 msgid "User Info"
 msgstr "用户信息"
 
-#: src/components/app/app-nav-menu.tsx:117
+#: src/components/app/app-nav-menu.tsx:118
 msgid "User List"
 msgstr "用户列表"
 
@@ -2204,10 +2319,6 @@ msgstr "生效至"
 #: src/routes/flights/$callsign.tsx:446
 msgid "Validation Result"
 msgstr "检查结果"
-
-#: src/components/controller-center/quarterly-controlling-time.tsx:29
-msgid "VATPRC positions in the current calendar quarter"
-msgstr "当前自然季度内的 VATPRC 席位"
 
 #: src/components/controller-center/become-controller.tsx:18
 msgid "VATPRC provides a complete training program from Delivery to Center. Submit an application to start your controller journey."
@@ -2250,7 +2361,11 @@ msgstr "查看过去活动"
 
 #: src/components/controller-center/training-detail.tsx:20
 msgid "View training details"
-msgstr ""
+msgstr "查看训练详情"
+
+#: src/components/radar-coverage/viewer.tsx:225
+msgid "Visible radars"
+msgstr "当前雷达"
 
 #: src/components/atc-permission-modal.tsx:98
 #: src/components/controller-center/identity-chip.tsx:24
@@ -2258,7 +2373,7 @@ msgstr ""
 msgid "Visiting"
 msgstr "客座"
 
-#: src/components/app/app-nav-menu.tsx:93
+#: src/components/app/app-nav-menu.tsx:94
 #: src/components/controller-center/resource-grid.tsx:32
 msgid "Visiting & Transfer"
 msgstr "访问和转移"
@@ -2275,7 +2390,7 @@ msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧�
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
-#: src/components/app/app-nav-menu.tsx:82
+#: src/components/app/app-nav-menu.tsx:83
 msgid "Weather"
 msgstr "天气"
 
@@ -2296,7 +2411,7 @@ msgstr "是"
 msgid "You have no training sessions yet. Apply for a training to get started."
 msgstr "你还没有训练记录，报名一次训练开始你的进阶之旅。"
 
-#: src/components/controller-center/my-atc-bookings.tsx:209
+#: src/components/controller-center/my-atc-bookings.tsx:210
 msgid "You have no upcoming ATC bookings."
 msgstr "您没有即将开始的管制席位预约。"
 
@@ -2327,103 +2442,3 @@ msgstr "你的航班当前不在线"
 #: src/components/atc-application/atc-application-status.tsx:61
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"
-
-#: src/components/radar-coverage/viewer.tsx:283
-msgid "Airspace boundaries"
-msgstr "空域边界"
-
-#: src/components/radar-coverage/viewer.tsx:306
-msgid "Calculating coverage"
-msgstr "正在计算覆盖范围"
-
-#: src/components/radar-coverage/viewer.tsx:361
-msgid "Computed station height"
-msgstr "计算站高"
-
-#: src/components/radar-coverage/viewer.tsx:322
-msgid "Coverage calculation requires both a FIR boundary and DEM data. Dashed rings show XML MaxRange only."
-msgstr "计算覆盖范围需要 FIR 边界和 DEM 数据。虚线圆仅表示 XML 中的最大距离。"
-
-#: src/components/radar-coverage/viewer.tsx:302
-msgid "FIR coverage estimate"
-msgstr "FIR 覆盖估算"
-
-#: src/components/radar-coverage/map.tsx:205
-msgid "Fit region"
-msgstr "适配区域"
-
-#: src/components/radar-coverage/viewer.tsx:209
-msgid "Flight information region"
-msgstr "飞行情报区"
-
-#: src/components/radar-coverage/viewer.tsx:380
-msgid "Loading map"
-msgstr "正在加载地图"
-
-#: src/components/radar-coverage/viewer.tsx:189
-msgid "Loading region data…"
-msgstr "正在加载区域数据…"
-
-#: src/components/radar-coverage/viewer.tsx:210
-msgid "No region loaded"
-msgstr "尚未加载区域"
-
-#: src/components/app/app-nav-menu.tsx:66
-#: src/components/controller-center/resource-grid.tsx:36
-#: src/components/radar-coverage/viewer.tsx:133
-#: src/routes/airspace/radar-coverage.tsx:7
-msgid "Radar Coverage"
-msgstr "雷达覆盖范围"
-
-#: src/components/radar-coverage/map.tsx:120
-msgid "Radar coverage map"
-msgstr "雷达覆盖地图"
-
-#: src/components/radar-coverage/viewer.tsx:342
-msgid "Radar details"
-msgstr "雷达详情"
-
-#: src/components/radar-coverage/viewer.tsx:194
-msgid "Region data could not be loaded."
-msgstr "无法加载区域数据。"
-
-#: src/components/radar-coverage/viewer.tsx:202
-msgid "Retry"
-msgstr "重试"
-
-#: src/components/radar-coverage/viewer.tsx:343
-msgid "Select a radar or click its map marker"
-msgstr "选择雷达或点击地图上的站点"
-
-#: src/components/radar-coverage/map.tsx:209
-msgid "Some map resources could not be loaded. Check your connection and reload the page."
-msgstr "部分地图资源加载失败。请检查网络连接并重新加载页面。"
-
-#: src/components/radar-coverage/viewer.tsx:334
-msgid "Some terrain samples are missing. Grey areas are unknown; a complete coverage percentage is unavailable."
-msgstr "部分地形采样缺失。灰色区域表示未知区域，无法给出完整覆盖百分比。"
-
-#: src/components/radar-coverage/viewer.tsx:258
-msgid "Surveillance sources"
-msgstr "监视源"
-
-#: src/components/radar-coverage/viewer.tsx:229
-#: src/components/radar-coverage/viewer.tsx:241
-msgid "Target altitude"
-msgstr "目标高度"
-
-#: src/components/radar-coverage/viewer.tsx:314
-msgid "Visible radars"
-msgstr "当前雷达"
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "Coverage calculation failed. Please reload the page."
-msgstr "覆盖范围计算失败，请重新加载页面。"
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "Maximum available coverage range"
-msgstr "最大可用覆盖范围"
-
-#: src/components/radar-coverage/viewer.tsx
-msgid "SSR and ADS-B fusion"
-msgstr "SSR 与 ADS-B 融合运行"
