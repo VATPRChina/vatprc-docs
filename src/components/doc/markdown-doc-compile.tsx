@@ -10,7 +10,7 @@ import gfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 export const compileMarkdownDoc = async (source: string) => {
-  source = source.replaceAll("<-", "{'<-'}");
+  source = source.replaceAll("<-", "{'<-'}").replaceAll("<br>", "<br/>");
 
   const code = String(
     await compile(source, {
