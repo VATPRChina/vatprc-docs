@@ -58,6 +58,10 @@ msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 msgid "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 msgstr "<0>VATPRC 有你更精彩</0><1/>You make the difference!"
 
+#: src/components/atc-position/position-modal.tsx:127
+msgid "118.000–136.975 MHz, in steps of 0.005 MHz."
+msgstr "118.000–136.975 MHz，间隔为 0.005 MHz。"
+
 #: src/components/atc-training/training-application-create.tsx:152
 msgid "A training request may contain multiple slots. Each slot represents a time period when you are available for training. The instructor can then choose any of the provided slots to schedule the training session."
 msgstr "训练申请可以包含多个时段。每个时段代表你可用于训练的一段时间，教员可以从这些时段中选择任意一个来安排训练。"
@@ -88,6 +92,7 @@ msgstr "已通过"
 
 #: src/components/atc-application/atc-application-list.tsx:43
 #: src/components/atc-training/training-list.tsx:37
+#: src/routes/_doc/airspace/station.tsx:84
 #: src/routes/users/index.tsx:111
 msgid "Actions"
 msgstr "操作"
@@ -210,6 +215,7 @@ msgstr "确定要预订该管制席位吗？"
 msgid "Are you sure to cancel this training?"
 msgstr "确定要取消该训练吗？"
 
+#: src/components/atc-position/position-modal.tsx:91
 #: src/components/event/atc-slot-delete.tsx:37
 msgid "Are you sure to delete this ATC position?"
 msgstr "确定要删除该管制席位吗？"
@@ -295,7 +301,7 @@ msgstr "ATC 中心"
 msgid "ATC Permission"
 msgstr "管制员权限"
 
-#: src/routes/_doc/airspace/station.tsx:32
+#: src/routes/_doc/airspace/station.tsx:19
 msgid "ATC Position"
 msgstr "管制席位"
 
@@ -303,13 +309,12 @@ msgstr "管制席位"
 msgid "ATC Positions & Frequencies"
 msgstr "管制席位及频率"
 
-#: src/routes/_doc/airspace/station.tsx:81
-#: src/routes/_doc/airspace/station.tsx:96
+#: src/routes/_doc/airspace/station.tsx:68
+#: src/routes/_doc/airspace/station.tsx:114
 msgid "ATC Positions and Frequencies"
 msgstr "管制席位及频率"
 
-#: src/routes/_doc/airspace/station.tsx:19
-#: src/routes/_doc/airspace/station.tsx:26
+#: src/components/atc-position/position-modal.tsx:15
 msgid "ATIS"
 msgstr "自动终端情报服务（ATIS）"
 
@@ -389,6 +394,7 @@ msgstr "C1"
 msgid "C3"
 msgstr "C3"
 
+#: src/components/atc-position/position-modal.tsx:96
 #: src/components/controller-center/my-atc-bookings.tsx:104
 #: src/components/event/atc-slot-create.tsx:104
 #: src/components/event/atc-slot-list.tsx:36
@@ -407,6 +413,7 @@ msgid "Callsign is required"
 msgstr "必须填写席位呼号"
 
 #: src/components/app/assume-role-modal.tsx:41
+#: src/components/atc-position/position-modal.tsx:160
 #: src/components/controller-center/my-atc-bookings.tsx:182
 #: src/routes/users/index.tsx:96
 msgid "Cancel"
@@ -426,7 +433,8 @@ msgstr "取消训练"
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/routes/_doc/airspace/station.tsx:46
+#: src/components/atc-position/position-modal.tsx:110
+#: src/routes/_doc/airspace/station.tsx:33
 msgid "Category"
 msgstr "类别"
 
@@ -450,8 +458,7 @@ msgstr "去 VATSIM 确认"
 msgid "Checklist"
 msgstr "检查单"
 
-#: src/routes/_doc/airspace/station.tsx:17
-#: src/routes/_doc/airspace/station.tsx:24
+#: src/components/atc-position/position-modal.tsx:13
 msgid "Chengdu Low Area"
 msgstr "成都低空"
 
@@ -476,7 +483,8 @@ msgstr "中国 RVSM 高度层"
 msgid "China RVSM odd flight level"
 msgstr "中国 RVSM 单数高度层"
 
-#: src/routes/_doc/airspace/station.tsx:52
+#: src/components/atc-position/position-modal.tsx:137
+#: src/routes/_doc/airspace/station.tsx:39
 msgid "Chinese Callsign"
 msgstr "中文呼号"
 
@@ -577,7 +585,7 @@ msgstr "管制"
 msgid "Controlling History"
 msgstr "管制上线记录"
 
-#: src/routes/_doc/airspace/station.tsx:100
+#: src/routes/_doc/airspace/station.tsx:118
 msgid "CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the controller's ATC information."
 msgstr "是否提供 CPDLC 服务由管制员决定。CPDLC 适用于 7,800 米及以上高度，具体请参阅管制员发布的管制信息。"
 
@@ -589,8 +597,10 @@ msgstr "是否提供 CPDLC 服务由管制员决定。CPDLC 适用于 7,800 米�
 msgid "Create"
 msgstr "创建"
 
+#: src/components/atc-position/position-modal.tsx:53
 #: src/components/event/atc-slot-create.tsx:82
 #: src/components/event/atc-slot-create.tsx:93
+#: src/routes/_doc/airspace/station.tsx:133
 msgid "Create ATC Position"
 msgstr "创建管制席位"
 
@@ -657,9 +667,15 @@ msgstr "CTOT"
 msgid "Dark"
 msgstr "暗色"
 
+#: src/components/atc-position/position-modal.tsx:163
 #: src/components/event/atc-slot-delete.tsx:41
+#: src/routes/_doc/airspace/station.tsx:102
 msgid "Delete"
 msgstr "删除"
+
+#: src/components/atc-position/position-modal.tsx:56
+msgid "Delete ATC Position {callsign}"
+msgstr "删除管制席位 {callsign}"
 
 #: src/components/atc-permission-modal.tsx:23
 msgid "Delivery"
@@ -704,6 +720,7 @@ msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 #: src/components/atc-training/training-save.tsx:75
 #: src/components/controller-center/my-atc-bookings.tsx:87
 #: src/components/event/atc-slot-create.tsx:86
+#: src/routes/_doc/airspace/station.tsx:94
 msgid "Edit"
 msgstr "编辑"
 
@@ -716,6 +733,7 @@ msgstr "编辑管制席位预约"
 msgid "Edit ATC permissions"
 msgstr "编辑管制员权限"
 
+#: src/components/atc-position/position-modal.tsx:55
 #: src/components/event/atc-slot-create.tsx:93
 msgid "Edit ATC Position {callsign}"
 msgstr "编辑管制席位 {callsign}"
@@ -784,7 +802,8 @@ msgstr "结束时间为必填项"
 msgid "End time must be after start time"
 msgstr "结束时间必须晚于开始时间"
 
-#: src/routes/_doc/airspace/station.tsx:57
+#: src/components/atc-position/position-modal.tsx:142
+#: src/routes/_doc/airspace/station.tsx:44
 msgid "English Callsign"
 msgstr "英文呼号"
 
@@ -876,7 +895,7 @@ msgstr "无法导入时刻。"
 msgid "Failed to load announcements."
 msgstr "无法加载公告。"
 
-#: src/routes/_doc/airspace/station.tsx:107
+#: src/routes/_doc/airspace/station.tsx:125
 msgid "Failed to load ATC positions"
 msgstr "无法加载管制席位"
 
@@ -1006,9 +1025,13 @@ msgid "Forum"
 msgstr "论坛"
 
 #: src/components/airspace/sector-map.tsx:297
-#: src/routes/_doc/airspace/station.tsx:63
+#: src/routes/_doc/airspace/station.tsx:50
 msgid "Frequency"
 msgstr "频率"
+
+#: src/components/atc-position/position-modal.tsx:126
+msgid "Frequency (MHz)"
+msgstr "频率（MHz）"
 
 #: src/routes/users/me.tsx:56
 msgid "Full name"
@@ -1244,8 +1267,7 @@ msgstr "公制飞行高度层"
 msgid "metric odd flight level (meters)"
 msgstr "公制单数飞行高度层（米）"
 
-#: src/routes/_doc/airspace/station.tsx:18
-#: src/routes/_doc/airspace/station.tsx:25
+#: src/components/atc-position/position-modal.tsx:14
 msgid "Military"
 msgstr "军用"
 
@@ -1586,8 +1608,9 @@ msgstr "取消预订"
 msgid "Remark"
 msgstr "备注"
 
+#: src/components/atc-position/position-modal.tsx:152
 #: src/components/controller-center/my-atc-bookings.tsx:143
-#: src/routes/_doc/airspace/station.tsx:73
+#: src/routes/_doc/airspace/station.tsx:60
 msgid "Remarks"
 msgstr "备注"
 
@@ -1667,6 +1690,7 @@ msgid "S3"
 msgstr "S3"
 
 #: src/components/atc-permission-modal.tsx:220
+#: src/components/atc-position/position-modal.tsx:163
 #: src/components/atc-training/training-application-create.tsx:201
 #: src/components/atc-training/training-save.tsx:151
 #: src/components/controller-center/my-atc-bookings.tsx:154
@@ -1787,8 +1811,7 @@ msgstr "职员"
 msgid "Staff review"
 msgstr "审核"
 
-#: src/routes/_doc/airspace/station.tsx:16
-#: src/routes/_doc/airspace/station.tsx:23
+#: src/components/atc-position/position-modal.tsx:12
 msgid "Standard"
 msgstr "常规"
 
@@ -1934,6 +1957,10 @@ msgstr "管制员申请审核已成功更新。"
 msgid "The booking has not started yet or has ended."
 msgstr "时刻预订尚未开始或已经结束。"
 
+#: src/components/atc-position/position-modal.tsx:102
+msgid "The callsign cannot be changed after creation."
+msgstr "创建后无法修改呼号。"
+
 #: src/components/flight-warnings.tsx:32
 #: src/components/flight-warnings.tsx:130
 #: src/routes/flights/$callsign.tsx:247
@@ -2034,7 +2061,8 @@ msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
 
 #: src/components/atc-permission-modal.tsx:26
-#: src/routes/_doc/airspace/station.tsx:38
+#: src/components/atc-position/position-modal.tsx:121
+#: src/routes/_doc/airspace/station.tsx:25
 msgid "Tier 2"
 msgstr "Tier 2"
 
@@ -2158,6 +2186,10 @@ msgstr "上传"
 #: src/routes/docs/utils/image.tsx:31
 msgid "Upload image"
 msgstr "上传图片"
+
+#: src/components/atc-position/position-modal.tsx:103
+msgid "Use up to 32 letters, digits, underscores or asterisks."
+msgstr "最多 32 个字母、数字、下划线或星号。"
 
 #: src/components/atc-application/atc-application-list.tsx:21
 #: src/components/audit-log/audit-log-table.tsx:17
