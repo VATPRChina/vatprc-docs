@@ -1,5 +1,4 @@
 import { compileMarkdownDoc } from "./markdown-doc-compile";
-import { buildMarkdownDoc, buildMarkdownDocSync } from "./markdown-doc-run";
 import { getAllDocuments, getDocument } from "@/lib/doc";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import path from "node:path";
@@ -45,34 +44,92 @@ const getAllDocumentPaths = async () => {
 };
 
 describe.concurrent("compileMarkdownDoc", async () => {
+  test("extracts YAML metadata and falls back to the first heading", async () => {
+    const doc = await compileMarkdownDoc('---\ntitle: "Document title"\norder: 0\n---\n# Heading');
+    expect(doc.title).toBe("Document title");
+    expect(doc.frontmatter).toEqual({ title: "Document title", order: 0 });
+    expect(doc.html).toBe('<h1 id="heading">Heading</h1>');
+    expect(doc.tableOfContents).toEqual([{ depth: 1, value: "Heading" }]);
+    expect((await compileMarkdownDoc("# Heading")).title).toBe("Heading");
+    expect((await compileMarkdownDoc("No heading")).title).toBeUndefined();
+  });
+
+  test("renders Markdown features and unique heading anchors", async () => {
+    const doc = await compileMarkdownDoc(
+      [
+        "# 标题",
+        "# 标题",
+        "",
+        "| A | B |",
+        "| - | - |",
+        "| 1 | 2 |",
+        "",
+        "- [x] Done",
+        "",
+        "> [!NOTE]",
+        "> Alert",
+        "",
+        "line one",
+        "line two",
+        "",
+        "[external](https://example.com) [local](#标题)",
+      ].join("\n"),
+    );
+    expect(doc.html).toContain('id="标题"');
+    expect(doc.html).toContain('id="标题-1"');
+    expect(doc.html).toContain("<table>");
+    expect(doc.html).toContain('type="checkbox"');
+    expect(doc.html).toContain("markdown-alert-note");
+    expect(doc.html).toContain("<p>Alert</p>");
+    expect(doc.html).toContain("<br>");
+    expect(doc.html).toContain('target="_blank"');
+    expect(doc.html).toContain('rel="noopener noreferrer"');
+    expect(doc.html).toContain('<a href="#%E6%A0%87%E9%A2%98">local</a>');
+  });
+
+  test("preserves raw HTML tables, images and literal Markdown text", async () => {
+    const doc = await compileMarkdownDoc(
+      [
+        "# Test",
+        "",
+        "{value} <- text<br>next",
+        "",
+        '<table style="text-align:center; border-collapse:collapse" border="1" cellpadding="6"><tr><td rowspan="2">Cell</td></tr></table>',
+        "",
+        '<img src="https://example.com/image.png" width="100" alt="image">',
+      ].join("\n"),
+    );
+    expect(doc.html).toContain("{value} &#x3C;- text<br>next");
+    expect(doc.html).toContain('style="text-align:center; border-collapse:collapse"');
+    expect(doc.html).toContain('rowspan="2"');
+    expect(doc.html).toContain('cellpadding="6"');
+    expect(doc.html).toContain('src="https://example.com/image.png"');
+  });
+
+  test("strips executable HTML and treats MDX expressions as text", async () => {
+    const doc = await compileMarkdownDoc(
+      [
+        "{globalThis.alert('expression')}",
+        "",
+        "<script>alert('script')</script>",
+        "",
+        '<img src="https://example.com/image.png" onerror="alert(1)">',
+        "",
+        '<a href="javascript:alert(1)">unsafe</a>',
+        "",
+        '<iframe src="https://example.com"></iframe>',
+      ].join("\n"),
+    );
+    expect(doc.html).toContain("{globalThis.alert('expression')}");
+    expect(doc.html).not.toMatch(/<script|onerror|javascript:|<iframe/);
+  });
+
   test.concurrent.each(await getAllDocumentPaths())('can compile doc at "%s"', async (docPath) => {
     const document = await getDocument({ data: docPath });
     const markdown = await compileMarkdownDoc(document);
 
-    expect(markdown).toBeDefined();
-  });
-});
-
-describe.concurrent("buildMarkdownDoc", async () => {
-  test.concurrent.each(await getAllDocumentPaths())('can build doc at "%s"', async (docPath) => {
-    const document = await getDocument({ data: docPath });
-    const markdown = await compileMarkdownDoc(document);
-    const built = await buildMarkdownDoc(markdown);
-
-    expect(built).toBeDefined();
-    expect(built.MDXContent).toBeDefined();
-    expect(built.title).toBeDefined();
-  });
-});
-
-describe.concurrent("buildMarkdownDocSync", async () => {
-  test.concurrent.each(await getAllDocumentPaths())('can build doc at "%s"', async (docPath) => {
-    const document = await getDocument({ data: docPath });
-    const markdown = await compileMarkdownDoc(document);
-    const built = buildMarkdownDocSync(markdown);
-
-    expect(built).toBeDefined();
-    expect(built.MDXContent).toBeDefined();
-    expect(built.title).toBeDefined();
+    expect(markdown.html).toBeTruthy();
+    expect(markdown.title).toBeTruthy();
+    expect(JSON.parse(JSON.stringify(markdown))).toEqual(markdown);
   });
 });

@@ -50,9 +50,9 @@
 
 > [!NOTE]
 >
-> - 下列席位中，ZBAA_\{i}\_CTR为主扇，ZBAA\_{i, j}\_CTR为分扇。
-> - 当ZBAA_CTR在线时，ZBAA_\{i}\_CTR上线，无需经过ZBAA_CTR同意；当ZBAA\_{i}\_CTR不在线时，ZBAA\_CTR对其提供管制服务。
-> - ZBAA\_{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_{i}\_CTR在线时，经ZBAA\_{i}\_CTR同意后可开设ZBAA\_{i, j}\_CTR；当ZBAA\_{i, j}\_CTR不在线时，ZBAA\_{i}\_CTR对其提供管制服务。
+> - 下列席位中，ZBAA_\{i}\_CTR为主扇，ZBAA\_\{i, j}\_CTR为分扇。
+> - 当ZBAA_CTR在线时，ZBAA_\{i}\_CTR上线，无需经过ZBAA_CTR同意；当ZBAA\_\{i}\_CTR不在线时，ZBAA\_CTR对其提供管制服务。
+> - ZBAA\_\{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_\{i}\_CTR在线时，经ZBAA\_\{i}\_CTR同意后可开设ZBAA\_\{i, j}\_CTR；当ZBAA\_\{i, j}\_CTR不在线时，ZBAA\_\{i}\_CTR对其提供管制服务。
 
 > [!TIP]
 >
@@ -91,9 +91,9 @@
 
 > [!NOTE]
 >
-> - ZBAA\_{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_{i}\_CTR在线时，经ZBAA\_{i}\_CTR同意后可开设ZBAA\_{i, j}\_CTR。
+> - ZBAA\_\{i, j}\_CTR为ZBAA_\{i}\_CTR的分扇，仅当ZBAA\_\{i}\_CTR在线时，经ZBAA\_\{i}\_CTR同意后可开设ZBAA\_\{i, j}\_CTR。
 >
-> - 当ZBAA\_{i, j}\_CTR不在线时，ZBAA\_{i}\_CTR对其提供管制服务。
+> - 当ZBAA\_\{i, j}\_CTR不在线时，ZBAA\_\{i}\_CTR对其提供管制服务。
 
 |   登录名    |  频率   |         职责范围          |
 | :---------: | :-----: | :-----------------------: |

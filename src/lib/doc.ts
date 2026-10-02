@@ -13,26 +13,20 @@ export interface DocumentEntry {
 
 const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
   const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
-  const { buildMarkdownDoc } = await import("@/components/doc/markdown-doc-run");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
   for await (const entry of dirEntries) {
-    if (
-      entry.isFile() &&
-      [".md", ".mdx"].includes(path.extname(entry.name)) &&
-      entry.name.startsWith("index") === false
-    ) {
+    if (entry.isFile() && path.extname(entry.name) === ".md" && entry.name.startsWith("index") === false) {
       const filePath = path.resolve(entry.parentPath, entry.name);
       const fileContent = await fs.readFile(filePath, "utf-8");
       try {
-        const compiled = await compileMarkdownDoc(fileContent);
-        const file = await buildMarkdownDoc(compiled);
+        const file = await compileMarkdownDoc(fileContent);
 
         documents.push({
-          title: file.title,
+          title: file.title ?? entry.name,
           path: filePath,
           children: [],
-          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.mdx?$/, ""),
+          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.md$/, ""),
           fileName: path.basename(filePath, path.extname(filePath)),
           order: typeof file.frontmatter?.order === "number" ? file.frontmatter?.order : undefined,
         });
@@ -42,7 +36,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
           title: entry.name,
           path: filePath,
           children: [],
-          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.mdx?$/, ""),
+          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.md$/, ""),
           fileName: path.basename(filePath, path.extname(filePath)),
           order: undefined,
         });
@@ -57,9 +51,8 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
       let order = undefined;
       if (indexExists) {
         const fileContent = await fs.readFile(indexFilePath, "utf-8");
-        const compiled = await compileMarkdownDoc(fileContent);
-        const file = await buildMarkdownDoc(compiled);
-        title = file.title;
+        const file = await compileMarkdownDoc(fileContent);
+        title = file.title ?? entry.name;
         if (typeof file.frontmatter?.order === "number") {
           order = file.frontmatter?.order;
         }
@@ -68,7 +61,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
         title,
         path: path.resolve(entry.parentPath, entry.name),
         children: await findAllDocuments(path.resolve(prefix, entry.name)),
-        webPath: "/docs/" + path.relative("docs", path.resolve(entry.parentPath, entry.name)).replace(/\.mdx?$/, ""),
+        webPath: "/docs/" + path.relative("docs", path.resolve(entry.parentPath, entry.name)).replace(/\.md$/, ""),
         fileName: entry.name,
         order,
       });
