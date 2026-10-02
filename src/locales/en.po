@@ -2459,3 +2459,76 @@ msgstr "Maximum available coverage range"
 #: src/components/radar-coverage/viewer.tsx
 msgid "SSR and ADS-B fusion"
 msgstr "SSR and ADS-B fusion"
+
+#: src/components/atc-position/batch-create-modal.tsx:217
+msgid "Add position"
+msgstr "Add position"
+
+#: src/components/atc-position/batch-delete-modal.tsx:57
+msgid "Are you sure you want to delete these {count} ATC positions? Successful deletions cannot be undone."
+msgstr "Are you sure you want to delete these {count} ATC positions? Successful deletions cannot be undone."
+
+#: src/components/atc-position/batch-create-modal.tsx:85
+#: src/routes/_doc/airspace/station.tsx:184
+msgid "Batch Create ATC Positions"
+msgstr "Batch Create ATC Positions"
+
+#: src/components/atc-position/batch-create-modal.tsx:131
+msgid "Callsign row {rowNumber}"
+msgstr "Callsign row {rowNumber}"
+
+#: src/components/atc-position/batch-create-modal.tsx:157
+msgid "Category {callsign}"
+msgstr "Category {callsign}"
+
+#: src/components/atc-position/batch-delete-modal.tsx:74
+msgid "Delete {count} positions"
+msgstr "Delete {count} positions"
+
+#: src/routes/_doc/airspace/station.tsx:191
+msgid "Delete selected ({selectedCount})"
+msgstr "Delete selected ({selectedCount})"
+
+#: src/components/atc-position/batch-delete-modal.tsx:51
+msgid "Delete selected ATC positions"
+msgstr "Delete selected ATC positions"
+
+#: src/components/atc-position/batch-create-modal.tsx:46
+msgid "Duplicate callsign"
+msgstr "Duplicate callsign"
+
+#: src/components/atc-position/batch-create-modal.tsx:97
+msgid "Each position is saved separately. Successfully created positions remain saved if another position fails."
+msgstr "Each position is saved separately. Successfully created positions remain saved if another position fails."
+
+#: src/components/atc-position/batch-delete-modal.tsx:35
+msgid "Failed to delete ATC position"
+msgstr "Failed to delete ATC position"
+
+#: src/components/atc-position/batch-create-modal.tsx:65
+msgid "Failed to save ATC position"
+msgstr "Failed to save ATC position"
+
+#: src/components/atc-position/batch-create-modal.tsx:178
+msgid "Frequency (MHz) {callsign}"
+msgstr "Frequency (MHz) {callsign}"
+
+#: src/components/atc-position/batch-create-modal.tsx:152
+msgid "Remove row"
+msgstr "Remove row"
+
+#: src/components/atc-position/batch-create-modal.tsx:223
+msgid "Save {count} positions"
+msgstr "Save {count} positions"
+
+#: src/routes/_doc/airspace/station.tsx:119
+msgid "Select {callsign}"
+msgstr "Select {callsign}"
+
+#: src/routes/_doc/airspace/station.tsx:107
+msgid "Select all positions on this page"
+msgstr "Select all positions on this page"
+
+#: src/components/atc-position/batch-create-modal.tsx:171
+msgid "Tier 2 {callsign}"
+msgstr "Tier 2 {callsign}"

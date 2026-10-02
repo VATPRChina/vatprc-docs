@@ -2459,3 +2459,76 @@ msgstr "最大可用覆盖范围"
 #: src/components/radar-coverage/viewer.tsx
 msgid "SSR and ADS-B fusion"
 msgstr "SSR 与 ADS-B 融合运行"
+
+#: src/components/atc-position/batch-create-modal.tsx:217
+msgid "Add position"
+msgstr "添加席位"
+
+#: src/components/atc-position/batch-delete-modal.tsx:57
+msgid "Are you sure you want to delete these {count} ATC positions? Successful deletions cannot be undone."
+msgstr "确定删除这 {count} 个管制席位吗？成功删除后无法撤销。"
+
+#: src/components/atc-position/batch-create-modal.tsx:85
+#: src/routes/_doc/airspace/station.tsx:184
+msgid "Batch Create ATC Positions"
+msgstr "批量创建管制席位"
+
+#: src/components/atc-position/batch-create-modal.tsx:131
+msgid "Callsign row {rowNumber}"
+msgstr "第 {rowNumber} 行呼号"
+
+#: src/components/atc-position/batch-create-modal.tsx:157
+msgid "Category {callsign}"
+msgstr "{callsign} 类别"
+
+#: src/components/atc-position/batch-delete-modal.tsx:74
+msgid "Delete {count} positions"
+msgstr "删除 {count} 个席位"
+
+#: src/routes/_doc/airspace/station.tsx:191
+msgid "Delete selected ({selectedCount})"
+msgstr "删除选中席位（{selectedCount}）"
+
+#: src/components/atc-position/batch-delete-modal.tsx:51
+msgid "Delete selected ATC positions"
+msgstr "删除选中的管制席位"
+
+#: src/components/atc-position/batch-create-modal.tsx:46
+msgid "Duplicate callsign"
+msgstr "呼号重复"
+
+#: src/components/atc-position/batch-create-modal.tsx:97
+msgid "Each position is saved separately. Successfully created positions remain saved if another position fails."
+msgstr "每个席位分别保存。若部分席位创建失败，其他席位已成功创建的结果仍然保留。"
+
+#: src/components/atc-position/batch-delete-modal.tsx:35
+msgid "Failed to delete ATC position"
+msgstr "删除管制席位失败"
+
+#: src/components/atc-position/batch-create-modal.tsx:65
+msgid "Failed to save ATC position"
+msgstr "保存管制席位失败"
+
+#: src/components/atc-position/batch-create-modal.tsx:178
+msgid "Frequency (MHz) {callsign}"
+msgstr "{callsign} 频率（MHz）"
+
+#: src/components/atc-position/batch-create-modal.tsx:152
+msgid "Remove row"
+msgstr "移除此行"
+
+#: src/components/atc-position/batch-create-modal.tsx:223
+msgid "Save {count} positions"
+msgstr "保存 {count} 个席位"
+
+#: src/routes/_doc/airspace/station.tsx:119
+msgid "Select {callsign}"
+msgstr "选择 {callsign}"
+
+#: src/routes/_doc/airspace/station.tsx:107
+msgid "Select all positions on this page"
+msgstr "选择当前页所有席位"
+
+#: src/components/atc-position/batch-create-modal.tsx:171
+msgid "Tier 2 {callsign}"
+msgstr "{callsign} Tier 2"

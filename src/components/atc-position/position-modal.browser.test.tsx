@@ -33,24 +33,30 @@ const initialPosition: AtcPosition = {
 let positions: AtcPosition[];
 let writes: { method: string; path: string; body?: unknown }[];
 let failWrite: boolean;
+let failCallsign: string | undefined;
 
 beforeEach(() => {
   positions = [{ ...initialPosition }];
   writes = [];
   failWrite = false;
+  failCallsign = undefined;
   vi.mocked(usePermission).mockReturnValue(true);
   request.mockImplementation(async (req) => {
     const path = new URL(req.url).pathname;
     if (req.method === "GET") return Response.json(positions);
     const body = req.method === "DELETE" ? undefined : ((await req.json()) as AtcPosition);
     writes.push({ method: req.method, path, body });
-    if (failWrite) return Response.json({ title: "Conflict", detail: "Callsign already exists" }, { status: 409 });
+    if (failWrite || (failCallsign && (body?.callsign === failCallsign || path.endsWith(`/${failCallsign}`))))
+      return Response.json({ title: "Conflict", detail: "Callsign already exists" }, { status: 409 });
     if (req.method === "DELETE") {
       positions = positions.filter((p) => !path.endsWith(p.callsign));
       return new Response(null, { status: 204 });
     }
     const saved = { ...initialPosition, ...body, frequency_khz: Math.round(body!.frequency * 1000) };
-    positions = req.method === "POST" ? [...positions, saved] : [saved];
+    positions =
+      req.method === "POST"
+        ? [...positions, saved]
+        : positions.map((position) => (position.callsign === saved.callsign ? saved : position));
     return Response.json(saved);
   });
 });
@@ -67,6 +73,9 @@ test("read-only visitors can see positions without management controls", async (
   const screen = await renderPage();
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
   await expect.element(screen.getByRole("button", { name: "Create ATC Position" })).not.toBeInTheDocument();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (0)" })).not.toBeInTheDocument();
+  await expect.element(screen.getByRole("checkbox")).not.toBeInTheDocument();
+  await expect.element(screen.getByRole("button", { name: "Batch Create ATC Positions" })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Edit", exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Delete", exact: true })).not.toBeInTheDocument();
 });
@@ -144,4 +153,108 @@ test("deletion requires confirmation, supports cancel and refreshes the list", a
   await screen.getByRole("dialog").getByRole("button", { name: "Delete", exact: true }).click();
   await expect.element(screen.getByText("No data", { exact: true })).toBeVisible();
   expect(writes).toEqual([{ method: "DELETE", path: "/api/atc/positions/ZBAA_TWR", body: undefined }]);
+});
+
+test("batch deletion confirms selected positions, retains failures and retries only failed deletions", async () => {
+  positions.push({ ...initialPosition, callsign: "ZBAA_GND" }, { ...initialPosition, callsign: "ZBAA_DEL" });
+  const screen = await renderPage();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (0)" })).toBeDisabled();
+  await expect.element(screen.getByRole("button", { name: "Batch Edit ATC Positions" })).not.toBeInTheDocument();
+  await screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true }).click();
+  await screen.getByRole("checkbox", { name: "Select ZBAA_GND", exact: true }).click();
+  await screen.getByRole("button", { name: "Delete selected (2)" }).click();
+  let dialog = screen.getByRole("dialog");
+  await expect.element(dialog.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
+  await expect.element(dialog.getByText("ZBAA_DEL", { exact: true })).not.toBeInTheDocument();
+  await dialog.getByRole("button", { name: "Cancel" }).click();
+  expect(writes).toHaveLength(0);
+  await screen.getByRole("button", { name: "Delete selected (2)" }).click();
+  dialog = screen.getByRole("dialog");
+  failCallsign = "ZBAA_GND";
+  await dialog.getByRole("button", { name: "Delete 2 positions" }).click();
+  await expect.element(dialog.getByText("Callsign already exists")).toBeVisible();
+  await expect.element(dialog.getByRole("button", { name: "Delete 1 positions" })).toBeEnabled();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (1)" })).toBeVisible();
+  expect(writes.map((write) => write.path)).toEqual(["/api/atc/positions/ZBAA_TWR", "/api/atc/positions/ZBAA_GND"]);
+  failCallsign = undefined;
+  await dialog.getByRole("button", { name: "Delete 1 positions" }).click();
+  await expect.element(dialog).not.toBeInTheDocument();
+  expect(writes).toHaveLength(3);
+  expect(writes[2]).toMatchObject({ method: "DELETE", path: "/api/atc/positions/ZBAA_GND" });
+  await expect.element(screen.getByText("ZBAA_DEL", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (0)" })).toBeDisabled();
+});
+
+test("page selection and deselection preserve selections across pagination", async () => {
+  positions = Array.from({ length: 51 }, (_, index) => ({ ...initialPosition, callsign: `TEST_${index}_TWR` }));
+  const screen = await renderPage();
+  await screen.getByRole("checkbox", { name: "Select TEST_0_TWR", exact: true }).click();
+  await expect
+    .element(screen.getByRole("checkbox", { name: "Select all positions on this page" }))
+    .toBePartiallyChecked();
+  await screen.getByRole("button", { name: "Go to next page" }).click();
+  await expect.element(screen.getByRole("checkbox", { name: "Select TEST_50_TWR", exact: true })).not.toBeChecked();
+  await screen.getByRole("checkbox", { name: "Select all positions on this page" }).click();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (2)" })).toBeEnabled();
+  await screen.getByRole("button", { name: "Go to previous page" }).click();
+  await expect.element(screen.getByRole("checkbox", { name: "Select TEST_0_TWR", exact: true })).toBeChecked();
+  await screen.getByRole("checkbox", { name: "Select all positions on this page" }).click();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (51)" })).toBeEnabled();
+  await screen.getByRole("checkbox", { name: "Select all positions on this page" }).click();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (1)" })).toBeEnabled();
+  expect(writes).toHaveLength(0);
+});
+
+test("batch create validates rows and duplicate callsigns and retries only failed creations", async () => {
+  const screen = await renderPage();
+  await screen.getByRole("button", { name: "Batch Create ATC Positions" }).click();
+  const dialog = screen.getByRole("dialog");
+  await dialog.getByRole("button", { name: "Save 1 positions" }).click();
+  expect(writes).toHaveLength(0);
+  await dialog.getByRole("textbox", { name: "Callsign row 1" }).fill("zbaa_gnd");
+  await dialog.getByRole("spinbutton", { name: "Frequency (MHz) ZBAA_GND" }).fill("121.825");
+  await dialog.getByRole("button", { name: "Add position" }).click();
+  await dialog.getByRole("textbox", { name: "Callsign row 2" }).fill("ZBAA_GND");
+  await dialog.getByRole("spinbutton", { name: "Frequency (MHz) ZBAA_GND" }).nth(1).fill("118.500");
+  await dialog.getByRole("button", { name: "Save 2 positions" }).click();
+  await expect.element(dialog.getByText("Duplicate callsign").first()).toBeVisible();
+  expect(writes).toHaveLength(0);
+  await dialog.getByRole("textbox", { name: "Callsign row 2" }).fill("ZBAA_DEL");
+  failCallsign = "ZBAA_DEL";
+  await dialog.getByRole("button", { name: "Save 2 positions" }).click();
+  await expect.element(dialog.getByText("Callsign already exists")).toBeVisible();
+  await expect.element(dialog.getByRole("button", { name: "Save 1 positions" })).toBeEnabled();
+  expect(writes.map((write) => (write.body as AtcPosition).callsign)).toEqual(["ZBAA_GND", "ZBAA_DEL"]);
+  failCallsign = undefined;
+  await dialog.getByRole("button", { name: "Save 1 positions" }).click();
+  await expect.element(dialog).not.toBeInTheDocument();
+  expect(writes).toHaveLength(3);
+  expect(writes[2]).toMatchObject({ method: "POST", body: { callsign: "ZBAA_DEL", frequency: 118.5 } });
+});
+
+test("batch create can remove draft rows and cancel without saving", async () => {
+  const screen = await renderPage();
+  await screen.getByRole("button", { name: "Batch Create ATC Positions" }).click();
+  const dialog = screen.getByRole("dialog");
+  await dialog.getByRole("button", { name: "Add position" }).click();
+  await dialog.getByRole("button", { name: "Remove row" }).first().click();
+  await expect.element(dialog.getByRole("textbox", { name: "Callsign row 2" })).not.toBeInTheDocument();
+  await dialog.getByRole("button", { name: "Cancel" }).click();
+  expect(writes).toHaveLength(0);
+});
+
+test("select all respects filters and keeps previously selected hidden positions", async () => {
+  positions.push({ ...initialPosition, callsign: "ZBAA_GND" }, { ...initialPosition, callsign: "ZBAA_DEL" });
+  const screen = await renderPage();
+  await screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true }).click();
+  const filter = screen.getByRole("textbox").first();
+  await filter.fill("ZBAA_GND");
+  await expect.element(screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true })).not.toBeInTheDocument();
+  await screen.getByRole("checkbox", { name: "Select all positions on this page" }).click();
+  await expect.element(screen.getByRole("button", { name: "Delete selected (2)" })).toBeEnabled();
+  await filter.fill("");
+  await expect.element(screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true })).toBeChecked();
+  await expect.element(screen.getByRole("checkbox", { name: "Select ZBAA_GND", exact: true })).toBeChecked();
+  await expect.element(screen.getByRole("checkbox", { name: "Select ZBAA_DEL", exact: true })).not.toBeChecked();
+  expect(writes).toHaveLength(0);
 });

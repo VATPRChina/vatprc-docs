@@ -1,11 +1,12 @@
+import { BatchCreateModal } from "@/components/atc-position/batch-create-modal";
+import { BatchDeleteModal } from "@/components/atc-position/batch-delete-modal";
 import { POSITION_CATEGORIES, PositionModal, type PositionAction } from "@/components/atc-position/position-modal";
 import { RichTable, RichTableFeatures } from "@/components/table";
 import { components } from "@/lib/api";
 import { $api, usePermission } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
-import { useLingui } from "@lingui/react";
-import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Button } from "@mantine/core";
+import { Trans, useLingui } from "@lingui/react/macro";
+import { Alert, Badge, Button, Checkbox } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
@@ -75,10 +76,53 @@ function CategoryLabel({ category }: { category: AtcPositionCategory }) {
 }
 
 export function StationPage() {
+  const { t } = useLingui();
   const canManage = usePermission("tech-afv-facility-engineer");
   const [action, setAction] = useState<PositionAction | null>(null);
+  const [batchCreating, setBatchCreating] = useState(false);
+  const [selected, setSelected] = useState<Set<string>>(() => new Set());
+  const [deleting, setDeleting] = useState<string[] | null>(null);
+  const toggleSelection = (callsigns: string[], checked: boolean) => {
+    setSelected((current) => {
+      const next = new Set(current);
+      for (const callsign of callsigns) {
+        if (checked) next.add(callsign);
+        else next.delete(callsign);
+      }
+      return next;
+    });
+  };
+
   const managementColumns: ColumnDef<RichTableFeatures, AtcPosition>[] = canManage
     ? [
+        {
+          id: "selection",
+          enableSorting: false,
+          enableColumnFilter: false,
+          header: ({ table }) => {
+            const callsigns = table.getRowModel().rows.map((row) => row.original.callsign);
+            const count = callsigns.filter((callsign) => selected.has(callsign)).length;
+            return (
+              <Checkbox
+                aria-label={t`Select all positions on this page`}
+                checked={callsigns.length > 0 && count === callsigns.length}
+                indeterminate={count > 0 && count < callsigns.length}
+                disabled={callsigns.length === 0}
+                onChange={(event) => toggleSelection(callsigns, event.currentTarget.checked)}
+              />
+            );
+          },
+          cell: ({ row }) => {
+            const callsign = row.original.callsign;
+            return (
+              <Checkbox
+                aria-label={t`Select ${callsign}`}
+                checked={selected.has(callsign)}
+                onChange={(event) => toggleSelection([callsign], event.currentTarget.checked)}
+              />
+            );
+          },
+        },
         {
           id: "actions",
           header: () => <Trans>Actions</Trans>,
@@ -107,6 +151,10 @@ export function StationPage() {
       ]
     : [];
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/positions");
+  const selectedCallsigns = (data ?? [])
+    .filter((position) => selected.has(position.callsign))
+    .map((position) => position.callsign);
+  const selectedCount = selectedCallsigns.length;
 
   return (
     <main className="container mx-auto flex flex-col gap-4">
@@ -128,17 +176,35 @@ export function StationPage() {
       )}
 
       {canManage && (
-        <div>
+        <div className="flex gap-2">
           <Button onClick={() => setAction({ kind: "create" })}>
             <Trans>Create ATC Position</Trans>
+          </Button>
+          <Button variant="default" onClick={() => setBatchCreating(true)}>
+            <Trans>Batch Create ATC Positions</Trans>
+          </Button>
+          <Button
+            color="red"
+            disabled={selectedCount === 0 || isLoading || !!error}
+            onClick={() => setDeleting(selectedCallsigns)}
+          >
+            <Trans>Delete selected ({selectedCount})</Trans>
           </Button>
         </div>
       )}
       {canManage && action && <PositionModal action={action} onClose={() => setAction(null)} />}
+      {canManage && batchCreating && <BatchCreateModal onClose={() => setBatchCreating(false)} />}
+      {canManage && deleting && (
+        <BatchDeleteModal
+          callsigns={deleting}
+          onDeleted={(callsign) => toggleSelection([callsign], false)}
+          onClose={() => setDeleting(null)}
+        />
+      )}
 
       <RichTable
         data={data}
-        columns={[...columns, ...managementColumns]}
+        columns={canManage ? [managementColumns[0], ...columns, ...managementColumns.slice(1)] : columns}
         isLoading={isLoading}
         initialState={{ pagination: { pageIndex: 0, pageSize: 50 } }}
         hideGlobalSearch
