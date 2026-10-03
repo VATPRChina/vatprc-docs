@@ -56,7 +56,8 @@ function RouteComponent() {
   const { data: mine, error: mineError } = $api.useQuery("get", "/api/flights/mine");
   const isCurrentUserOffline =
     mineError?.type === "urn:vatprc-uniapi-error:flight-not-found-for-cid" && mineError.status === 404;
-  const visibleError = error ?? (isCurrentUserOffline ? undefined : mineError);
+  const isUnauthenticated = mineError?.type === "urn:vatprc-uniapi-error:unauthorized" && mineError.status === 401;
+  const visibleError = error ?? (isCurrentUserOffline || isUnauthenticated ? undefined : mineError);
 
   const [filter, setFilter] = useState("");
   const [departureFilter, setDepartureFilter] = useState("");
@@ -106,7 +107,7 @@ function RouteComponent() {
         <Input placeholder={t`Departure`} value={departureFilter} onChange={onDepartureFilterChange} />
         <Input placeholder={t`Arrival`} value={arrivalFilter} onChange={onArrivalFilterChange} />
       </div>
-      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-2">
+      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(--spacing(64),1fr))] gap-2">
         {mine && <Flight flight={mine} />}
         {isCurrentUserOffline && <OfflineFlight />}
         {filteredFlights?.map((flight) => (
