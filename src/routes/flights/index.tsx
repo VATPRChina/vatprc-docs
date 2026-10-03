@@ -1,5 +1,6 @@
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Input } from "@mantine/core";
@@ -17,12 +18,13 @@ export const Route = createFileRoute("/flights/")({
 
 const Flight: React.FC<{
   flight: components["schemas"]["FlightDto"];
-}> = ({ flight: { callsign, cid, departure, arrival, aircraft } }) => (
+  mine?: boolean;
+}> = ({ flight: { callsign, cid, departure, arrival, aircraft }, mine }) => (
   <Link
     to="/flights/$callsign"
     params={{ callsign }}
     key={callsign}
-    className="flex flex-col gap-1 border px-3 py-2"
+    className={cn("flex flex-col gap-1 border px-3 py-2", mine && "border-red-700 dark:border-red-300")}
     target="_blank"
   >
     <span className="text-lg font-bold">
@@ -84,13 +86,13 @@ function RouteComponent() {
   );
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setFilter(e.target.value);
+    setFilter(e.target.value.toUpperCase());
   };
   const onDepartureFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDepartureFilter(e.target.value);
+    setDepartureFilter(e.target.value.toUpperCase());
   };
   const onArrivalFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setArrivalFilter(e.target.value);
+    setArrivalFilter(e.target.value.toUpperCase());
   };
   return (
     <div className="flex flex-col items-start gap-4">
@@ -108,7 +110,7 @@ function RouteComponent() {
         <Input placeholder={t`Arrival`} value={arrivalFilter} onChange={onArrivalFilterChange} />
       </div>
       <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(--spacing(64),1fr))] gap-2">
-        {mine && <Flight flight={mine} />}
+        {mine && <Flight flight={mine} mine />}
         {isCurrentUserOffline && <OfflineFlight />}
         {filteredFlights?.map((flight) => (
           <Flight flight={flight} key={flight.callsign} />
