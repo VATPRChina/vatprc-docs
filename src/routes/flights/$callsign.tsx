@@ -1,5 +1,7 @@
 import { BackButton } from "@/components/back-button";
+import { FlightParsedRoute } from "@/components/flight-parsed-route";
 import { FlightWarnings } from "@/components/flight-warnings";
+import { RequireRole } from "@/components/require-role";
 import { formatCruisingLevelInMeters, getCruisingLevelInMeters } from "@/lib/altitude";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -449,14 +451,9 @@ function RouteComponent() {
           <h2 className="text-2xl">
             <Trans>Flight Route</Trans>
           </h2>
-          <div className="flex flex-wrap items-center gap-1">
-            <Alert title={<Trans>Route Not Available</Trans>}>
-              <Trans>
-                Route display is temporarily disabled due to data protection requirement from our navigation data
-                source.
-              </Trans>
-            </Alert>
-          </div>
+          <RequireRole role="software-engineer">
+            <FlightParsedRoute flight={flight} />
+          </RequireRole>
         </div>
       )}
     </div>

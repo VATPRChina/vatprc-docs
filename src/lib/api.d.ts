@@ -804,6 +804,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/route/v2": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Parse a complete route with v2 and return its expanded leg segments.
+     *     Requires the software-engineer role.
+     */
+    get: operations["route_v2"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/temporary/by-plan/warnings": {
     parameters: {
       query?: never;
@@ -1363,13 +1383,48 @@ export interface components {
       last_updated: string;
       pilots: components["schemas"]["CompatPilotDto"][];
     };
+    /** @description Eligible seconds grouped by the controller rating required for the position. */
+    ControllerOnlineTimeByPosition: {
+      /**
+       * Format: int64
+       * @description CTR seconds.
+       */
+      "C1+": number;
+      /**
+       * Format: int64
+       * @description GND, DEL and RMP seconds.
+       */
+      S1: number;
+      /**
+       * Format: int64
+       * @description TWR seconds.
+       */
+      S2: number;
+      /**
+       * Format: int64
+       * @description APP seconds.
+       */
+      S3: number;
+    };
     ControllerOnlineTimeDto: {
       /** Format: date-time */
       as_of: string;
+      /** @description Current-quarter eligible seconds for S1 (GND/DEL/RMP), S2 (TWR), S3 (APP), C1+ (CTR). */
+      by_position: components["schemas"]["ControllerOnlineTimeByPosition"];
+      lifetime: components["schemas"]["ControllerOnlineTimeSummaryDto"];
       period: string;
       /** Format: date-time */
       period_start: string;
       /** Format: int64 */
+      total_seconds: number;
+    };
+    ControllerOnlineTimeSummaryDto: {
+      /** @description Eligible position groups in seconds. */
+      by_position: components["schemas"]["ControllerOnlineTimeByPosition"];
+      /**
+       * Format: int64
+       * @description All eligible VATPRC controlling seconds, including the current session.
+       */
       total_seconds: number;
     };
     DeviceAuthorizationRequest: {
@@ -1530,6 +1585,23 @@ export interface components {
       navigation_performance: string;
       raw_route: string;
       transponder: string;
+    };
+    /** @description Coordinates are exposed only by the developer-only v2 route endpoint. */
+    FlightRouteFix: {
+      identifier: string;
+      is_unknown: boolean;
+      /** Format: double */
+      latitude?: number | null;
+      /** Format: double */
+      longitude?: number | null;
+    };
+    FlightRouteLeg: {
+      from: components["schemas"]["FlightRouteFix"];
+      is_sid: boolean;
+      is_star: boolean;
+      is_unknown: boolean;
+      leg_identifier: string;
+      to: components["schemas"]["FlightRouteFix"];
     };
     HealthResponse: {
       database: string;
@@ -3475,6 +3547,51 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  route_v2: {
+    parameters: {
+      query: {
+        /** @description Complete route including departure and arrival */
+        route: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Expanded route segments with coordinates */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["FlightRouteLeg"][];
+        };
+      };
+      /** @description Invalid or incomplete route */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Authentication required */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Software engineer role required */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   temporary_warnings: {
     parameters: {
       query?: never;
@@ -3825,7 +3942,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Current calendar-quarter VATPRC controlling time */
+      /** @description Current calendar-quarter and lifetime VATPRC controlling time by position */
       200: {
         headers: {
           [name: string]: unknown;

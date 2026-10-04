@@ -1,3 +1,5 @@
+import { RequireRole } from "@/components/require-role";
+import { LinkButton } from "@/components/ui/link-button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
@@ -96,9 +98,16 @@ function RouteComponent() {
   };
   return (
     <div className="flex flex-col items-start gap-4">
-      <h1 className="text-3xl">
-        <Trans>Flight Plan Checker</Trans>
-      </h1>
+      <div className="flex w-full flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl">
+          <Trans>Flight Plan Checker</Trans>
+        </h1>
+        <RequireRole role="software-engineer">
+          <LinkButton to="/flights/route-viewer" variant="default">
+            <Trans>Route Viewer</Trans>
+          </LinkButton>
+        </RequireRole>
+      </div>
       {visibleError && (
         <Alert className="w-full" color="red" title={visibleError.title}>
           {visibleError.detail}
