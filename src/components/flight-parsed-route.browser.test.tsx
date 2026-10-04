@@ -12,6 +12,8 @@ const legs = [
     to: { identifier: "ZSPD", latitude: 31, longitude: 121, is_unknown: false },
     leg_identifier: "",
     is_unknown: false,
+    is_sid: false,
+    is_star: false,
   },
 ];
 
