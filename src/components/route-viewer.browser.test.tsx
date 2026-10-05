@@ -4,6 +4,8 @@ import { beforeEach, expect, test, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({ permissions: vi.fn(), query: vi.fn(), refetch: vi.fn() }));
 vi.mock("@/lib/client", () => ({ usePermissions: mocks.permissions, $api: { useQuery: mocks.query } }));
+// Start's server helpers require virtual entries unavailable in component tests.
+vi.mock("@/lib/utils", async () => ({ cn: (await import("clsx")).clsx }));
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -64,9 +66,8 @@ test("shows parsing errors and highlights unknown fixes and legs in the result",
   await screen.getByRole("textbox", { name: "Complete route" }).fill("MISSING NOLEG UNKNOWN");
   await screen.getByRole("button", { name: "Parse route", exact: true }).click();
   await expect.element(screen.getByText("Missing arrival")).not.toBeInTheDocument();
-  await expect.element(screen.getByRole("table")).toBeVisible();
-  await expect.element(screen.getByText("Unresolved fixes", { exact: true })).toBeVisible();
-  await expect.element(screen.getByText("Unresolved legs", { exact: true })).toBeVisible();
-  await expect.element(screen.getByRole("cell", { name: /NOLEG/ }).getByText("NOLEG")).toHaveClass("text-red-600");
-  await expect.element(screen.getByRole("cell", { name: /UNKNOWN/ }).getByText("UNKNOWN")).toHaveClass("text-red-600");
+  await expect.element(screen.getByText("MISSING", { exact: true })).toHaveClass("text-red-600");
+  await expect.element(screen.getByText("NOLEG", { exact: true })).toHaveClass("text-red-600");
+  await expect.element(screen.getByText("UNKNOWN", { exact: true })).toHaveClass("text-red-600");
+  await expect.element(screen.getByText("No resolved coordinates are available to display on the map.")).toBeVisible();
 });

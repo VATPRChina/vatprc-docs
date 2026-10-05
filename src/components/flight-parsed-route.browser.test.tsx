@@ -4,6 +4,8 @@ import { expect, test, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({ permissions: vi.fn(), query: vi.fn() }));
 vi.mock("@/lib/client", () => ({ usePermissions: mocks.permissions, $api: { useQuery: mocks.query } }));
+// Start's server helpers require virtual entries unavailable in component tests.
+vi.mock("@/lib/utils", async () => ({ cn: (await import("clsx")).clsx }));
 
 const flight = { departure: "ZBAA", raw_route: " ELKUR W40 YQG ", arrival: "ZSPD" };
 const legs = [
@@ -62,7 +64,9 @@ test("shows parser errors and keeps missing routes from triggering a request", a
 
 test("renders route segments and a real map, then reports unresolved coordinates", async () => {
   const screen = await renderComponent(<RouteResult legs={legs} style={{ version: 8, sources: {}, layers: [] }} />);
-  await expect.element(screen.getByRole("table")).toBeVisible();
+  await expect.element(screen.getByText("ZBAA", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("DCT", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("ZSPD", { exact: true })).toBeVisible();
   await expect.element(screen.getByLabelText("Parsed route map")).toBeVisible();
   await expect.poll(() => document.querySelector(".maplibregl-canvas")?.clientWidth ?? 0).toBeGreaterThan(0);
   await screen.rerender(
@@ -71,11 +75,7 @@ test("renders route segments and a real map, then reports unresolved coordinates
       style={{ version: 8, sources: {}, layers: [] }}
     />,
   );
-  await expect.element(screen.getByText("Unresolved fixes", { exact: true })).toBeVisible();
-  await expect.element(screen.getByText("Unresolved", { exact: true })).toBeVisible();
-  await expect
-    .element(screen.getByRole("cell", { name: /UNKNOWN/ }).getByText("UNKNOWN", { exact: true }))
-    .toHaveClass("text-red-600");
+  await expect.element(screen.getByText("UNKNOWN", { exact: true })).toHaveClass("text-red-600");
 });
 
 test("flags an unknown connection in red even with known endpoints", async () => {
@@ -85,9 +85,7 @@ test("flags an unknown connection in red even with known endpoints", async () =>
       style={{ version: 8, sources: {}, layers: [] }}
     />,
   );
-  await expect.element(screen.getByText("Unresolved legs", { exact: true })).toBeVisible();
-  await expect
-    .element(screen.getByRole("cell", { name: /NOLEG/ }).getByText("NOLEG", { exact: true }))
-    .toHaveClass("text-red-600");
-  await expect.element(screen.getByText("Unresolved fixes", { exact: true })).not.toBeInTheDocument();
+  await expect.element(screen.getByText("NOLEG", { exact: true })).toHaveClass("text-red-600");
+  await expect.element(screen.getByText("ZBAA", { exact: true })).not.toHaveClass("text-red-600");
+  await expect.element(screen.getByText("ZSPD", { exact: true })).not.toHaveClass("text-red-600");
 });
