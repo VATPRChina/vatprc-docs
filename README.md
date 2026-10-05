@@ -22,6 +22,33 @@ Please use an online image service, and include the absolute link to it.
 - For VATPRC staff, you may use <https://www.vatprc.net/docs/utils/image>.
 - For others, please use an online image CDN service.
 
+#### GeoJSON maps
+
+Use a fenced `geojson` block to embed an interactive map in a local or Discourse
+Markdown document. Coordinates use longitude, latitude order. Features,
+FeatureCollections, and bare geometries are supported, including points, lines,
+polygons, multi-geometries, and GeometryCollections. Each block gets its own map,
+with the view fitted to its geometry. The original JSON remains available in a
+collapsible section; malformed JSON or invalid geometries render as code.
+
+````markdown
+```geojson
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Beijing Capital"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      116.5975,
+      40.0799
+    ]
+  }
+}
+```
+````
+
 ### Code
 
 For coding-related contributions, please reach out to VATPRC8 as there is no clear
