@@ -38,7 +38,10 @@ export const buildRouteMap = (legs: readonly RouteLeg[]) => {
           ? [
               {
                 type: "Feature",
-                properties: { identifier: leg.leg_identifier || "DCT", is_unknown: leg.is_unknown },
+                properties: {
+                  identifier: leg.leg_identifier || "DCT",
+                  is_unknown: leg.is_unknown || !leg.leg_identifier,
+                },
                 geometry: { type: "LineString", coordinates: [from, to] },
               },
             ]

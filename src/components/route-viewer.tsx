@@ -35,7 +35,7 @@ function RouteViewerForm() {
           description={t`Include the departure and arrival airports, for example: ZBAA DCT ZSPD.`}
           placeholder="ZBAA DCT ZSPD"
           value={input}
-          onChange={(event) => setInput(event.currentTarget.value)}
+          onChange={(event) => setInput(event.currentTarget.value.toUpperCase())}
           autosize
           minRows={3}
           maxRows={10}
