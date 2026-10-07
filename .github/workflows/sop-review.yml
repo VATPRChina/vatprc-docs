@@ -7,8 +7,42 @@ on:
 
 jobs:
   add-reviews:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
     steps:
-      - uses: kentaro-m/auto-assign-action@v2.0.0
+      - name: Assign SOP reviewers
+        uses: actions/github-script@v9
         with:
-          configuration-path: ".github/auto_assign_sop.yml"
+          script: |
+            const pullRequest = context.payload.pull_request;
+            const author = pullRequest.user.login.toLowerCase();
+            const reviewer = author === 'aaronzsam101' ? 'JingyuanYin' : 'AaronZSAM101';
+            const finalReviewer = 'klc05';
+            const requestedReviewers = new Set(
+              pullRequest.requested_reviewers.map(user => user.login.toLowerCase())
+            );
+            const reviewers = [reviewer, finalReviewer].filter(
+              login => login.toLowerCase() !== author && !requestedReviewers.has(login.toLowerCase())
+            );
+            const params = {
+              ...context.repo,
+              pull_number: pullRequest.number,
+            };
+
+            if (reviewers.length > 0) {
+              await github.rest.pulls.requestReviewers({ ...params, reviewers });
+            }
+
+            // Preserve the existing final reviewer's assignee role.
+            if (finalReviewer.toLowerCase() !== author && !pullRequest.assignees.some(
+              user => user.login.toLowerCase() === finalReviewer.toLowerCase()
+            )) {
+              await github.rest.issues.addAssignees({
+                ...context.repo,
+                issue_number: pullRequest.number,
+                assignees: [finalReviewer],
+              });
+            }
