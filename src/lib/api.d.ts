@@ -812,7 +812,7 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Parse a complete route with v2 and return its expanded leg segments.
+     * Parse a complete route with v2 and return expanded legs and matching SIDs.
      *     Requires the software-engineer role.
      */
     get: operations["route_v2"];
@@ -1656,6 +1656,10 @@ export interface components {
       title: string;
       type: string;
     };
+    RouteDeliveryInfo: {
+      legs: components["schemas"]["FlightRouteLeg"][];
+      sid_candidates: components["schemas"]["SidCandidate"][];
+    };
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;
@@ -1702,6 +1706,11 @@ export interface components {
     SheetSaveRequest: {
       fields: components["schemas"]["SheetFieldSaveRequest"][];
       name: string;
+    };
+    SidCandidate: {
+      identifier: string;
+      is_rnav: boolean;
+      runway_transitions: string[];
     };
     TokenDto: {
       /** Format: date-time */
@@ -3559,13 +3568,13 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Expanded route segments with coordinates */
+      /** @description Expanded route segments and SID candidates */
       200: {
         headers: {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["FlightRouteLeg"][];
+          "application/json": components["schemas"]["RouteDeliveryInfo"];
         };
       };
       /** @description Invalid or incomplete route */

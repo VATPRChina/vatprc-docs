@@ -1,6 +1,7 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { Map } from "@/components/airspace/map";
 import { RequireRole } from "@/components/require-role";
+import { SidCandidates } from "@/components/sid-candidates";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { buildRouteMap, hasPosition, type RouteLeg } from "@/lib/flight-route-map";
@@ -61,7 +62,12 @@ export function ParsedRoute({ route, available = true }: { route: string; availa
         </Alert>
       )}
       {isLoading && <Skeleton h={384} />}
-      {available && !error && data && <RouteResult key={route} legs={data} />}
+      {available && !error && data && (
+        <Fragment key={route}>
+          <RouteResult legs={data.legs} />
+          <SidCandidates candidates={data.sid_candidates} />
+        </Fragment>
+      )}
     </section>
   );
 }

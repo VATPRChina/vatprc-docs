@@ -53,14 +53,23 @@ test("shows parsing errors and highlights unknown fixes and legs in the result",
   await expect.element(screen.getByText("Missing arrival")).toBeVisible();
 
   mocks.query.mockReturnValue({
-    data: [
-      {
-        from: { identifier: "MISSING", latitude: null, longitude: null, is_unknown: true },
-        to: { identifier: "UNKNOWN", latitude: null, longitude: null, is_unknown: true },
-        leg_identifier: "NOLEG",
-        is_unknown: true,
-      },
-    ],
+    data: {
+      legs: [
+        {
+          from: { identifier: "MISSING", latitude: null, longitude: null, is_unknown: true },
+          to: { identifier: "UNKNOWN", latitude: null, longitude: null, is_unknown: true },
+          leg_identifier: "NOLEG",
+          is_unknown: true,
+          is_sid: false,
+          is_star: false,
+        },
+      ],
+      sid_candidates: [
+        { identifier: "BOTP7X", runway_transitions: ["36R", "01"], is_rnav: true },
+        { identifier: "BOTP9Z", runway_transitions: ["36L"], is_rnav: true },
+        { identifier: "CONV1A", runway_transitions: ["01"], is_rnav: false },
+      ],
+    },
     refetch: mocks.refetch,
   });
   await screen.getByRole("textbox", { name: "Complete route" }).fill("MISSING NOLEG UNKNOWN");
@@ -70,4 +79,13 @@ test("shows parsing errors and highlights unknown fixes and legs in the result",
   await expect.element(screen.getByText("NOLEG", { exact: true })).toHaveClass("text-red-600");
   await expect.element(screen.getByText("UNKNOWN", { exact: true })).toHaveClass("text-red-600");
   await expect.element(screen.getByText("No resolved coordinates are available to display on the map.")).toBeVisible();
+  const runway01 = screen.getByRole("row", { name: /^01\b/ });
+  await expect.element(runway01.getByText("BOTP7X")).toBeVisible();
+  await expect.element(runway01.getByText("CONV1A")).toBeVisible();
+  await expect.element(runway01.getByText("BOTP7X · RNAV", { exact: true })).toBeVisible();
+  await expect.element(runway01.getByText("CONV1A · Conventional", { exact: true })).toBeVisible();
+  await expect.element(runway01.getByText("BOTP9Z")).not.toBeInTheDocument();
+  const runway36R = screen.getByRole("row", { name: /^36R\b/ });
+  await expect.element(runway36R.getByText("BOTP7X")).toBeVisible();
+  await expect.element(runway36R.getByText("CONV1A")).not.toBeInTheDocument();
 });

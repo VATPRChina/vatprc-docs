@@ -51,6 +51,10 @@ test("requests the complete current route and updates when the flight plan chang
     { params: { query: { route: "ZBAA ZSPD" } } },
     { enabled: true, retry: false },
   );
+  mocks.query.mockReturnValue({ data: { legs: [], sid_candidates: [] }, refetch: vi.fn() });
+  await screen.rerender(<FlightParsedRoute flight={flight} />);
+  await expect.element(screen.getByText("The parser returned no route segments.")).toBeVisible();
+  await expect.element(screen.getByText("No SID candidates match this route.")).toBeVisible();
 });
 
 test("shows parser errors and keeps missing routes from triggering a request", async () => {

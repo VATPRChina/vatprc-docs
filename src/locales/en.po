@@ -150,6 +150,10 @@ msgstr "Airspace boundaries"
 msgid "All"
 msgstr "All"
 
+#: src/components/sid-candidates.tsx:32
+msgid "All runways"
+msgstr "All runways"
+
 #: src/components/flight-warnings.tsx:133
 #: src/routes/flights/$callsign.tsx:252
 msgid "Allowed levels are {level} (in feet)."
@@ -337,6 +341,10 @@ msgstr "ATIS"
 #: src/routes/users/index.tsx:195
 msgid "Audit Logs"
 msgstr "Audit Logs"
+
+#: src/components/sid-candidates.tsx:24
+msgid "Available SIDs"
+msgstr "Available SIDs"
 
 #: src/components/back-button.tsx:8
 msgid "Back"
@@ -626,6 +634,10 @@ msgstr "Controlling"
 #: src/components/controller-center/quarterly-controlling-time.tsx:16
 msgid "Controlling History"
 msgstr "Controlling History"
+
+#: src/components/sid-candidates.tsx:42
+msgid "Conventional"
+msgstr "Conventional"
 
 #: src/components/radar-coverage/viewer.tsx:233
 msgid "Coverage calculation failed. Please reload the page."
@@ -1437,7 +1449,7 @@ msgstr "No"
 msgid "No comments"
 msgstr "No comments"
 
-#: src/components/flight-parsed-route.tsx:55
+#: src/components/flight-parsed-route.tsx:56
 msgid "No complete flight plan route is available."
 msgstr "No complete flight plan route is available."
 
@@ -1465,7 +1477,7 @@ msgstr "No permission"
 msgid "No region loaded"
 msgstr "No region loaded"
 
-#: src/components/flight-parsed-route.tsx:163
+#: src/components/flight-parsed-route.tsx:169
 msgid "No resolved coordinates are available to display on the map."
 msgstr "No resolved coordinates are available to display on the map."
 
@@ -1484,6 +1496,10 @@ msgstr "No self reflection has been filed yet."
 #: src/routes/sheets.tsx:58
 msgid "No sheet available."
 msgstr "No sheet available."
+
+#: src/components/sid-candidates.tsx:53
+msgid "No SID candidates match this route."
+msgstr "No SID candidates match this route."
 
 #: src/components/controller-center/training-detail.tsx:42
 msgid "No training record has been filed yet."
@@ -1594,12 +1610,12 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "Parse route"
 msgstr "Parse route"
 
-#: src/components/flight-parsed-route.tsx:39
-#: src/components/flight-parsed-route.tsx:43
+#: src/components/flight-parsed-route.tsx:40
+#: src/components/flight-parsed-route.tsx:44
 msgid "Parsed route"
 msgstr "Parsed route"
 
-#: src/components/flight-parsed-route.tsx:114
+#: src/components/flight-parsed-route.tsx:120
 msgid "Parsed route map"
 msgstr "Parsed route map"
 
@@ -1735,7 +1751,7 @@ msgstr "Recent 3 months"
 msgid "Recent Events"
 msgstr "Recent Events"
 
-#: src/components/flight-parsed-route.tsx:50
+#: src/components/flight-parsed-route.tsx:51
 msgid "Refresh"
 msgstr "Refresh"
 
@@ -1806,6 +1822,10 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
+#: src/components/sid-candidates.tsx:42
+msgid "RNAV"
+msgstr "RNAV"
+
 #: src/components/flight-warnings.tsx:57
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 msgstr "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
@@ -1831,7 +1851,7 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
-#: src/components/flight-parsed-route.tsx:59
+#: src/components/flight-parsed-route.tsx:60
 msgid "Route parsing failed"
 msgstr "Route parsing failed"
 
@@ -1840,6 +1860,10 @@ msgstr "Route parsing failed"
 #: src/routes/flights/route-viewer.tsx:10
 msgid "Route Viewer"
 msgstr "Route Viewer"
+
+#: src/components/sid-candidates.tsx:21
+msgid "Runway"
+msgstr "Runway"
 
 #: src/components/flight-warnings.tsx:46
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
@@ -1962,13 +1986,18 @@ msgstr "Show less"
 msgid "Show more"
 msgstr "Show more"
 
+#: src/components/sid-candidates.tsx:12
+#: src/components/sid-candidates.tsx:14
+msgid "SID candidates by runway"
+msgstr "SID candidates by runway"
+
 #: src/components/atc-training/training-application-create.tsx:139
 #: src/components/event/slot-list.tsx:185
 #: src/routes/events/$id.tsx:62
 msgid "Slots"
 msgstr "Slots"
 
-#: src/components/flight-parsed-route.tsx:46
+#: src/components/flight-parsed-route.tsx:47
 #: src/lib/user-roles.ts:23
 msgid "Software Engineer"
 msgstr "Software Engineer"
@@ -2214,7 +2243,7 @@ msgstr "The list below is displayed based on the controller data in our ATC Cent
 msgid "The Moodle account has been provisioned successfully."
 msgstr "The Moodle account has been provisioned successfully."
 
-#: src/components/flight-parsed-route.tsx:89
+#: src/components/flight-parsed-route.tsx:95
 msgid "The parser returned no route segments."
 msgstr "The parser returned no route segments."
 
@@ -2376,7 +2405,7 @@ msgstr "Transponder"
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
 
-#: src/components/flight-parsed-route.tsx:60
+#: src/components/flight-parsed-route.tsx:61
 msgid "Unable to load the parsed route."
 msgstr "Unable to load the parsed route."
 
