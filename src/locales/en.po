@@ -150,7 +150,7 @@ msgstr "Airspace boundaries"
 msgid "All"
 msgstr "All"
 
-#: src/components/sid-candidates.tsx:32
+#: src/components/sid-candidates.tsx:33
 msgid "All runways"
 msgstr "All runways"
 
@@ -342,7 +342,7 @@ msgstr "ATIS"
 msgid "Audit Logs"
 msgstr "Audit Logs"
 
-#: src/components/sid-candidates.tsx:24
+#: src/components/sid-candidates.tsx:25
 msgid "Available SIDs"
 msgstr "Available SIDs"
 
@@ -635,7 +635,7 @@ msgstr "Controlling"
 msgid "Controlling History"
 msgstr "Controlling History"
 
-#: src/components/sid-candidates.tsx:42
+#: src/components/sid-candidates.tsx:48
 msgid "Conventional"
 msgstr "Conventional"
 
@@ -1497,7 +1497,7 @@ msgstr "No self reflection has been filed yet."
 msgid "No sheet available."
 msgstr "No sheet available."
 
-#: src/components/sid-candidates.tsx:53
+#: src/components/sid-candidates.tsx:66
 msgid "No SID candidates match this route."
 msgstr "No SID candidates match this route."
 
@@ -1698,6 +1698,10 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
+#: src/components/sid-candidates.tsx:53
+msgid "Preferred"
+msgstr "Preferred"
+
 #: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
@@ -1822,7 +1826,7 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
-#: src/components/sid-candidates.tsx:42
+#: src/components/sid-candidates.tsx:44
 msgid "RNAV"
 msgstr "RNAV"
 
@@ -1861,7 +1865,7 @@ msgstr "Route parsing failed"
 msgid "Route Viewer"
 msgstr "Route Viewer"
 
-#: src/components/sid-candidates.tsx:21
+#: src/components/sid-candidates.tsx:22
 msgid "Runway"
 msgstr "Runway"
 
@@ -1986,8 +1990,8 @@ msgstr "Show less"
 msgid "Show more"
 msgstr "Show more"
 
-#: src/components/sid-candidates.tsx:12
-#: src/components/sid-candidates.tsx:14
+#: src/components/sid-candidates.tsx:13
+#: src/components/sid-candidates.tsx:15
 msgid "SID candidates by runway"
 msgstr "SID candidates by runway"
 

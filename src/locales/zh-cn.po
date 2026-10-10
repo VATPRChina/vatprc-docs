@@ -150,7 +150,7 @@ msgstr "空域边界"
 msgid "All"
 msgstr "全部"
 
-#: src/components/sid-candidates.tsx:32
+#: src/components/sid-candidates.tsx:33
 msgid "All runways"
 msgstr "所有跑道"
 
@@ -342,7 +342,7 @@ msgstr "自动终端情报服务（ATIS）"
 msgid "Audit Logs"
 msgstr "审计日志"
 
-#: src/components/sid-candidates.tsx:24
+#: src/components/sid-candidates.tsx:25
 msgid "Available SIDs"
 msgstr "可用 SID"
 
@@ -635,7 +635,7 @@ msgstr "管制"
 msgid "Controlling History"
 msgstr "管制上线记录"
 
-#: src/components/sid-candidates.tsx:42
+#: src/components/sid-candidates.tsx:48
 msgid "Conventional"
 msgstr "传统导航"
 
@@ -1497,7 +1497,7 @@ msgstr "尚未填写自我反思。"
 msgid "No sheet available."
 msgstr "当前没有表单。"
 
-#: src/components/sid-candidates.tsx:53
+#: src/components/sid-candidates.tsx:66
 msgid "No SID candidates match this route."
 msgstr "没有与此航路匹配的 SID。"
 
@@ -1698,6 +1698,10 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
+#: src/components/sid-candidates.tsx:53
+msgid "Preferred"
+msgstr "主用程序"
+
 #: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
 msgstr "推荐航路"
@@ -1822,7 +1826,7 @@ msgstr "重试"
 msgid "Review"
 msgstr "审核"
 
-#: src/components/sid-candidates.tsx:42
+#: src/components/sid-candidates.tsx:44
 msgid "RNAV"
 msgstr "RNAV"
 
@@ -1861,7 +1865,7 @@ msgstr "航路解析失败"
 msgid "Route Viewer"
 msgstr "航路查看器"
 
-#: src/components/sid-candidates.tsx:21
+#: src/components/sid-candidates.tsx:22
 msgid "Runway"
 msgstr "跑道"
 
@@ -1986,8 +1990,8 @@ msgstr "收起"
 msgid "Show more"
 msgstr "显示更多"
 
-#: src/components/sid-candidates.tsx:12
-#: src/components/sid-candidates.tsx:14
+#: src/components/sid-candidates.tsx:13
+#: src/components/sid-candidates.tsx:15
 msgid "SID candidates by runway"
 msgstr "按跑道分组的 SID 候选"
 

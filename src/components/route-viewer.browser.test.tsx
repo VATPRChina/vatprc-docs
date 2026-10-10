@@ -82,8 +82,8 @@ test("shows parsing errors and highlights unknown fixes and legs in the result",
   const runway01 = screen.getByRole("row", { name: /^01\b/ });
   await expect.element(runway01.getByText("BOTP7X")).toBeVisible();
   await expect.element(runway01.getByText("CONV1A")).toBeVisible();
-  await expect.element(runway01.getByText("BOTP7X · RNAV", { exact: true })).toBeVisible();
-  await expect.element(runway01.getByText("CONV1A · Conventional", { exact: true })).toBeVisible();
+  await expect.element(runway01.getByText("RNAV", { exact: true })).toBeVisible();
+  await expect.element(runway01.getByText("Conventional", { exact: true })).toBeVisible();
   await expect.element(runway01.getByText("BOTP9Z")).not.toBeInTheDocument();
   const runway36R = screen.getByRole("row", { name: /^36R\b/ });
   await expect.element(runway36R.getByText("BOTP7X")).toBeVisible();

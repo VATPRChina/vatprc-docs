@@ -4,6 +4,8 @@ import { Alert, Badge, Table } from "@mantine/core";
 
 type SidCandidate = components["schemas"]["SidCandidate"];
 
+const IS_PREFERRED_SID_PLACEHOLDER = false;
+
 export function SidCandidates({ candidates }: { candidates: SidCandidate[] }) {
   const { t } = useLingui();
   const runways = [...new Set(candidates.flatMap((candidate) => candidate.runway_transitions))].sort();
@@ -36,11 +38,23 @@ export function SidCandidates({ candidates }: { candidates: SidCandidate[] }) {
                     {candidates
                       .filter((candidate) => candidate.runway_transitions.includes(runway))
                       .map((candidate) => (
-                        <Badge key={candidate.identifier} color={candidate.is_rnav ? "blue" : "gray"} variant="light">
+                        <div key={candidate.identifier} className="flex flex-wrap items-center gap-1">
                           <span className="font-mono">{candidate.identifier}</span>
-                          {" · "}
-                          {candidate.is_rnav ? <Trans>RNAV</Trans> : <Trans>Conventional</Trans>}
-                        </Badge>
+                          {candidate.is_rnav ? (
+                            <Badge color="blue" variant="outline" size="xs">
+                              <Trans>RNAV</Trans>
+                            </Badge>
+                          ) : (
+                            <Badge color="gray" variant="outline" size="xs">
+                              <Trans>Conventional</Trans>
+                            </Badge>
+                          )}
+                          {IS_PREFERRED_SID_PLACEHOLDER && (
+                            <Badge color="green" variant="light" size="xs">
+                              <Trans>Preferred</Trans>
+                            </Badge>
+                          )}
+                        </div>
                       ))}
                   </div>
                 </Table.Td>
