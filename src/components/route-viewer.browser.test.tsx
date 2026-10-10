@@ -35,8 +35,7 @@ test("parses submitted complete routes, leaving edits unsubmitted until the next
     { enabled: true, retry: false },
   );
   await expect.element(parse).toBeDisabled();
-  await screen.getByRole("button", { name: "Refresh", exact: true }).click();
-  expect(mocks.refetch).toHaveBeenCalledOnce();
+  await expect.element(screen.getByRole("button", { name: "Refresh", exact: true })).not.toBeInTheDocument();
   await input.fill("ZBAA ZSSS");
   expect(mocks.query.mock.calls.at(-1)?.[2]).toEqual({ params: { query: { route: "ZBAA DCT ZSPD" } } });
   await parse.click();
@@ -79,13 +78,13 @@ test("shows parsing errors and highlights unknown fixes and legs in the result",
   await expect.element(screen.getByText("NOLEG", { exact: true })).toHaveClass("text-red-600");
   await expect.element(screen.getByText("UNKNOWN", { exact: true })).toHaveClass("text-red-600");
   await expect.element(screen.getByText("No resolved coordinates are available to display on the map.")).toBeVisible();
-  const runway01 = screen.getByRole("row", { name: /^01\b/ });
+  const runway01 = screen.getByRole("group", { name: "Runway 01", exact: true });
   await expect.element(runway01.getByText("BOTP7X")).toBeVisible();
   await expect.element(runway01.getByText("CONV1A")).toBeVisible();
   await expect.element(runway01.getByText("RNAV", { exact: true })).toBeVisible();
   await expect.element(runway01.getByText("Conventional", { exact: true })).toBeVisible();
   await expect.element(runway01.getByText("BOTP9Z")).not.toBeInTheDocument();
-  const runway36R = screen.getByRole("row", { name: /^36R\b/ });
+  const runway36R = screen.getByRole("group", { name: "Runway 36R", exact: true });
   await expect.element(runway36R.getByText("BOTP7X")).toBeVisible();
   await expect.element(runway36R.getByText("CONV1A")).not.toBeInTheDocument();
 });

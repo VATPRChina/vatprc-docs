@@ -151,7 +151,8 @@ msgstr "Airspace boundaries"
 msgid "All"
 msgstr "All"
 
-#: src/components/sid-candidates.tsx:22
+#: src/components/sid-candidates.tsx:24
+#: src/components/sid-candidates.tsx:28
 msgid "All runways"
 msgstr "All runways"
 
@@ -632,7 +633,7 @@ msgstr "Controlling"
 msgid "Controlling History"
 msgstr "Controlling History"
 
-#: src/components/sid-candidates.tsx:35
+#: src/components/sid-candidates.tsx:41
 msgid "Conventional"
 msgstr "Conventional"
 
@@ -1498,7 +1499,7 @@ msgstr "No self reflection has been filed yet."
 msgid "No sheet available."
 msgstr "No sheet available."
 
-#: src/components/sid-candidates.tsx:51
+#: src/components/sid-candidates.tsx:57
 msgid "No SID candidates match this route."
 msgstr "No SID candidates match this route."
 
@@ -1706,7 +1707,7 @@ msgstr "Please wait while being logged in."
 msgid "Position"
 msgstr "Position"
 
-#: src/components/sid-candidates.tsx:40
+#: src/components/sid-candidates.tsx:46
 msgid "Preferred"
 msgstr "Preferred"
 
@@ -1831,7 +1832,7 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
-#: src/components/sid-candidates.tsx:31
+#: src/components/sid-candidates.tsx:37
 msgid "RNAV"
 msgstr "RNAV"
 
@@ -1869,6 +1870,10 @@ msgstr "Route parsing failed"
 #: src/routes/flights/route-viewer.tsx:10
 msgid "Route Viewer"
 msgstr "Route Viewer"
+
+#: src/components/sid-candidates.tsx:24
+msgid "Runway {runway}"
+msgstr "Runway {runway}"
 
 #: src/components/flight-warnings.tsx:19
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."

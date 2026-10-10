@@ -18,7 +18,13 @@ export function SidCandidates({ candidates }: { candidates: SidCandidate[] }) {
       {runways.length ? (
         <div className="flex flex-wrap gap-2">
           {runways.map((runway) => (
-            <Card key={runway} withBorder className="p-4">
+            <Card
+              key={runway}
+              role="group"
+              aria-label={runway === "ALL" ? t`All runways` : t`Runway ${runway}`}
+              withBorder
+              className="p-4"
+            >
               <b className="text-lg">{runway === "ALL" ? <Trans>All runways</Trans> : runway}</b>
               <div className="flex flex-col flex-wrap gap-1 pt-2">
                 {candidates

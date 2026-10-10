@@ -151,7 +151,8 @@ msgstr "空域边界"
 msgid "All"
 msgstr "全部"
 
-#: src/components/sid-candidates.tsx:22
+#: src/components/sid-candidates.tsx:24
+#: src/components/sid-candidates.tsx:28
 msgid "All runways"
 msgstr "所有跑道"
 
@@ -632,7 +633,7 @@ msgstr "管制"
 msgid "Controlling History"
 msgstr "管制上线记录"
 
-#: src/components/sid-candidates.tsx:35
+#: src/components/sid-candidates.tsx:41
 msgid "Conventional"
 msgstr "传统导航"
 
@@ -1498,7 +1499,7 @@ msgstr "尚未填写自我反思。"
 msgid "No sheet available."
 msgstr "当前没有表单。"
 
-#: src/components/sid-candidates.tsx:51
+#: src/components/sid-candidates.tsx:57
 msgid "No SID candidates match this route."
 msgstr "没有与此航路匹配的 SID。"
 
@@ -1706,7 +1707,7 @@ msgstr "正在登入，请稍等片刻。"
 msgid "Position"
 msgstr "席位"
 
-#: src/components/sid-candidates.tsx:40
+#: src/components/sid-candidates.tsx:46
 msgid "Preferred"
 msgstr "主用程序"
 
@@ -1831,7 +1832,7 @@ msgstr "重试"
 msgid "Review"
 msgstr "审核"
 
-#: src/components/sid-candidates.tsx:31
+#: src/components/sid-candidates.tsx:37
 msgid "RNAV"
 msgstr "RNAV"
 
@@ -1869,6 +1870,10 @@ msgstr "航路解析失败"
 #: src/routes/flights/route-viewer.tsx:10
 msgid "Route Viewer"
 msgstr "航路查看器"
+
+#: src/components/sid-candidates.tsx:24
+msgid "Runway {runway}"
+msgstr "跑道 {runway}"
 
 #: src/components/flight-warnings.tsx:19
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
