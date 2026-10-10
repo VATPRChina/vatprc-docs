@@ -1595,12 +1595,14 @@ export interface components {
       cruising_level: number;
       departure: string;
       equipment: string;
+      flight_rules: string;
       id: string;
       /** Format: date-time */
       last_observed_at: string;
       navigation_performance: string;
       raw_route: string;
       transponder: string;
+      wake_category: string;
     };
     /** @description Coordinates are exposed only by the developer-only v2 route endpoint. */
     FlightRouteFix: {
@@ -1896,12 +1898,16 @@ export interface components {
     };
     /** @enum {string} */
     WarningMessageCode:
+      | "invalid-airport"
+      | "invalid-aircraft-type"
+      | "wake-category-mismatch"
       | "no-rvsm"
       | "no-rnav1"
       | "rnp-ar"
       | "rnp-ar-without-rf"
       | "no-transponder"
       | "route-direct-segment"
+      | "route-unknown-leg-or-fix"
       | "route-leg-direction"
       | "airway-require-approval"
       | "not-preferred-route"

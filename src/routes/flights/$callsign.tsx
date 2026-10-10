@@ -116,11 +116,15 @@ export const CRUISING_LEVEL_TEXT: Record<string, React.ReactElement> = {
 };
 
 const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageCode"], "error" | "warning"> = {
+  "invalid-aircraft-type": "error",
+  "wake-category-mismatch": "error",
+  "invalid-airport": "error",
   "no-rvsm": "error",
   "no-rnav1": "error",
   "rnp-ar": "warning",
   "rnp-ar-without-rf": "warning",
   "no-transponder": "error",
+  "route-unknown-leg-or-fix": "error",
   "route-direct-segment": "error",
   "route-leg-direction": "error",
   "airway-require-approval": "error",
@@ -132,11 +136,15 @@ const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageC
 };
 
 const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  "invalid-aircraft-type": <Trans>Invalid aircraft type</Trans>,
+  "wake-category-mismatch": <Trans>Wake category mismatch</Trans>,
+  "invalid-airport": <Trans>Invalid airport</Trans>,
   "no-rvsm": <Trans>No RVSM</Trans>,
   "no-rnav1": <Trans>No RNAV1</Trans>,
   "rnp-ar": <Trans>RNP AR</Trans>,
   "rnp-ar-without-rf": <Trans>RNP AR without RF</Trans>,
   "no-transponder": <Trans>No transponder</Trans>,
+  "route-unknown-leg-or-fix": <Trans>Unknown leg or fix</Trans>,
   "route-direct-segment": <Trans>Direct leg</Trans>,
   "route-leg-direction": <Trans>Leg direction violation</Trans>,
   "airway-require-approval": <Trans>Restricted airway</Trans>,
@@ -197,6 +205,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
       <AircraftCodeCommonHelp type="PBN" />
     </>
   ),
+  "invalid-airport": () => null,
   "rnp-ar": () => null,
   "rnp-ar-without-rf": () => null,
   "no-transponder": () => (
@@ -211,6 +220,7 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
+  "route-unknown-leg-or-fix": () => null,
   "route-direct-segment": () => null,
   "route-leg-direction": () => null,
   "airway-require-approval": () => null,
@@ -263,6 +273,10 @@ const WARNING_MESSAGE_TO_POPOVER: Record<
       </p>
       <ChinaRvsmHelp />
     </>
+  ),
+  "invalid-aircraft-type": () => null,
+  "wake-category-mismatch": ({ warning: { parameter: categories } }) => (
+    <Trans>Expected wake category: {categories}.</Trans>
   ),
   "route-match-preferred": () => null,
 };
@@ -392,11 +406,11 @@ function RouteComponent() {
             </h2>
             <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-4">
               <FplField field="callsign" label={t`Callsign`} value={flight.callsign} />
-              <FplField field="flight-rules" label={t`Flight Rules`} value="N/A" />
+              <FplField field="flight-rules" label={t`Flight Rules`} value={flight.flight_rules} />
               {/* <FplField label="Date of Flight" value="-" /> */}
               {/* <FplField label="Voice Rules" value="-" /> */}
-              <FplField field="aircraft-type" label={t`Aircraft Type`} value={flight.aircraft ?? "-"} />
-              <FplField field="wake-category" label={t`Wake Category`} value="N/A" />
+              <FplField field="aircraft-type" label={t`Aircraft Type`} value={flight.aircraft} />
+              <FplField field="wake-category" label={t`Wake Category`} value={flight.wake_category} />
               <FplField field="equipment" label={t`Equipment`}>
                 <div className="flex items-center gap-1">
                   {flight.equipment && <span className="text-mono">{flight.equipment}</span>}

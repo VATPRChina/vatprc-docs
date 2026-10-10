@@ -2,6 +2,9 @@ import type { components } from "@/lib/api";
 import { Trans } from "@lingui/react/macro";
 
 export const FLIGHT_WARNING_MESSAGES: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  "invalid-aircraft-type": <Trans>The aircraft type designator is not recognized.</Trans>,
+  "wake-category-mismatch": <Trans>The declared wake category does not match the aircraft type.</Trans>,
+  "invalid-airport": <Trans>The specified airport could not be resolved as a valid airport.</Trans>,
   "no-rvsm": <Trans>The aircraft does not specify RVSM capability.</Trans>,
   "no-rnav1": <Trans>The aircraft does not specify RNAV1 capability.</Trans>,
   "rnp-ar": (
@@ -17,6 +20,7 @@ export const FLIGHT_WARNING_MESSAGES: Record<components["schemas"]["WarningMessa
     </Trans>
   ),
   "no-transponder": <Trans>The aircraft does not specify transponder capability.</Trans>,
+  "route-unknown-leg-or-fix": <Trans>The route contains an unknown leg or fix.</Trans>,
   "route-direct-segment": (
     <Trans>The route contains a direct leg. Please ensure that the direct segment is valid.</Trans>
   ),
