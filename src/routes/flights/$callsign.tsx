@@ -1,5 +1,6 @@
 import { BackButton } from "@/components/back-button";
 import { FlightParsedRoute } from "@/components/flight-parsed-route";
+import { FlightValidationProvider, FlightValidationTags } from "@/components/flight-validations";
 import { FlightWarnings } from "@/components/flight-warnings";
 import { RequireRole } from "@/components/require-role";
 import { formatCruisingLevelInMeters, getCruisingLevelInMeters } from "@/lib/altitude";
@@ -34,11 +35,13 @@ interface FplFieldProps {
   label: string;
   value?: string;
   tooltip?: string;
+  field?: components["schemas"]["WarningMessageField"];
 }
 const FplField = ({
   label,
   value,
   tooltip,
+  field,
   children,
   className,
   ...props
@@ -53,7 +56,10 @@ const FplField = ({
 
   return (
     <div className={cn("flex flex-col items-start gap-1", className)} {...props}>
-      {labelC}
+      <div className="flex flex-wrap items-center gap-1">
+        {labelC}
+        {field && <FlightValidationTags field={field} />}
+      </div>
       {value && value !== "-" && <span className="font-mono">{value}</span>}
       {value === "-" && (
         <Tooltip label={<Trans>Check at VATSIM</Trans>}>
@@ -362,100 +368,102 @@ function RouteComponent() {
   );
 
   return (
-    <div className="flex flex-col items-start gap-4">
-      <BackButton />
-      {(error ?? warningsError) && (
-        <Alert color="red" title={(error ?? warningsError)?.title}>
-          {(error ?? warningsError)?.detail}
-        </Alert>
-      )}
-      {isLoading && <Skeleton h={64} />}
-      {!error && flight && (
-        <div className="flex w-full flex-col gap-2">
-          <h1 className="flex items-baseline">
-            <span className="text-3xl">{callsign}</span>
-            <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
-              <span>{flight.departure}</span>
-              <TbPlaneInflight />
-              <span>{flight.arrival}</span>
-            </span>
-          </h1>
-          <h2 className="text-2xl">
-            <Trans>Flight Plan</Trans>
-          </h2>
-          <div className="grid grid-cols-4 gap-1">
-            <FplField label={t`Callsign`} value={flight.callsign} />
-            {/* <FplField label="Flight Rules" value="-" /> */}
-            {/* <FplField label="Date of Flight" value="-" /> */}
-            {/* <FplField label="Voice Rules" value="-" /> */}
-            {/* <FplField label="Aircraft Type" value="-" /> */}
-            {/* <FplField label="Wake Category" value="-" /> */}
-            <FplField label={t`Equipment`}>
-              <div className="flex items-center gap-1">
-                {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
-                <Warning flight={flight} warnings={warnings} field="equipment" />
-              </div>
-            </FplField>
-            <FplField label={t`Transponder`}>
-              <div className="flex items-center gap-1">
-                {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
-                <Warning flight={flight} warnings={warnings} field="transponder" />
-              </div>
-            </FplField>
-            <FplField label={t`Departure`} value={flight.departure} className="col-start-1" />
-            {/* <FplField label="Off Block" value="-" /> */}
-            {/* <FplField label="Airspeed" value="-" /> */}
-            <FplField label={t`Cruising Level`}>
-              {flight.cruising_level && (
-                <div className="flex items-baseline gap-1">
-                  <span>{flight.cruising_level} ft</span>
-                  <CruisingLevelMeters feet={flight.cruising_level} />
+    <FlightValidationProvider callsign={callsign}>
+      <div className="flex flex-col items-start gap-4">
+        <BackButton />
+        {(error ?? warningsError) && (
+          <Alert color="red" title={(error ?? warningsError)?.title}>
+            {(error ?? warningsError)?.detail}
+          </Alert>
+        )}
+        {isLoading && <Skeleton h={64} />}
+        {!error && flight && (
+          <div className="flex w-full flex-col gap-2">
+            <h1 className="flex items-baseline">
+              <span className="text-3xl">{callsign}</span>
+              <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
+                <span>{flight.departure}</span>
+                <TbPlaneInflight />
+                <span>{flight.arrival}</span>
+              </span>
+            </h1>
+            <h2 className="text-2xl">
+              <Trans>Flight Plan</Trans>
+            </h2>
+            <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-4">
+              <FplField field="callsign" label={t`Callsign`} value={flight.callsign} />
+              <FplField field="flight-rules" label={t`Flight Rules`} value="N/A" />
+              {/* <FplField label="Date of Flight" value="-" /> */}
+              {/* <FplField label="Voice Rules" value="-" /> */}
+              <FplField field="aircraft-type" label={t`Aircraft Type`} value={flight.aircraft ?? "-"} />
+              <FplField field="wake-category" label={t`Wake Category`} value="N/A" />
+              <FplField field="equipment" label={t`Equipment`}>
+                <div className="flex items-center gap-1">
+                  {flight.equipment && <span className="text-mono">{flight.equipment}</span>}
+                  <Warning flight={flight} warnings={warnings} field="equipment" />
                 </div>
-              )}
-              <Warning flight={flight} warnings={warnings} field="cruising-level" />
-            </FplField>
-            <FplField label={t`Route`} className="col-span-4">
-              {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
-              <Warning flight={flight} warnings={warnings} field="route" />
-            </FplField>
-            <FplField label={t`Arrival`} value={flight.arrival} />
-            {/* <FplField label="Enroute Time" value="-" /> */}
-            {/* <FplField label="Alternate" value="-" /> */}
-            {/* <FplField label="Endurance" value="-" /> */}
-            <FplField label={t`PBN`} tooltip={t`Performance Based Navigation`}>
-              <div className="flex items-center gap-1">
-                {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
-                <Warning flight={flight} warnings={warnings} field="navigation-performance" />
-              </div>
-            </FplField>
-            {/* <FplField label="CODE" value="-" tooltip="ADSB Hex Code" /> */}
-            {/* <FplField label="RVR" value="-" tooltip="Runway Visual Range Limit" /> */}
-            {/* <FplField label="PER" value="-" tooltip="Performance Code" /> */}
-            {/* <FplField label="SEL" value="-" tooltip="SELCAL Code" /> */}
-            {/* <FplField label="NAV" value="-" tooltip="NAV Equipment" /> */}
-            {/* <FplField label="DAT" value="-" tooltip="Additional Data" /> */}
-            {/* <FplField label="REG" value="-" tooltip="Aircraft Registration" /> */}
-            {/* <FplField label="COM" value="-" tooltip="Communication Codes" /> */}
-            {/* <FplField label="OPR" value="-" tooltip="Operator" /> */}
-            {/* <FplField label="SUR" value="-" tooltip="Surveillance Equipment" /> */}
-            {/* <FplField label="ORGN" value="-" tooltip="Origin of Flightplan" /> */}
-            {/* <FplField label="RALT" value="-" tooltip="Enroute Alternates" /> */}
-            {/* <FplField label="TALT" value="-" tooltip="Takeoff Alternate" /> */}
-            {/* <FplField label="EET" value="-" tooltip="Estimated Elapsed Times" /> */}
-            {/* <FplField label="RMK" value="-" tooltip="Additional Remarks" className="col-span-4" /> */}
+              </FplField>
+              <FplField field="transponder" label={t`Transponder`}>
+                <div className="flex items-center gap-1">
+                  {flight.transponder && <span className="text-mono">{flight.transponder}</span>}
+                  <Warning flight={flight} warnings={warnings} field="transponder" />
+                </div>
+              </FplField>
+              <FplField field="departure" label={t`Departure`} value={flight.departure} className="col-start-1" />
+              {/* <FplField label="Off Block" value="-" /> */}
+              {/* <FplField label="Airspeed" value="-" /> */}
+              <FplField field="cruising-level" label={t`Cruising Level`}>
+                {flight.cruising_level && (
+                  <div className="flex items-baseline gap-1">
+                    <span>{flight.cruising_level} ft</span>
+                    <CruisingLevelMeters feet={flight.cruising_level} />
+                  </div>
+                )}
+                <Warning flight={flight} warnings={warnings} field="cruising-level" />
+              </FplField>
+              <FplField field="route" label={t`Route`} className="md:col-span-2 lg:col-span-4">
+                {flight.raw_route && <span className="text-mono">{flight.raw_route}</span>}
+                <Warning flight={flight} warnings={warnings} field="route" />
+              </FplField>
+              <FplField field="arrival" label={t`Arrival`} value={flight.arrival} />
+              {/* <FplField label="Enroute Time" value="-" /> */}
+              {/* <FplField label="Alternate" value="-" /> */}
+              {/* <FplField label="Endurance" value="-" /> */}
+              <FplField field="navigation-performance" label={t`PBN`} tooltip={t`Performance Based Navigation`}>
+                <div className="flex items-center gap-1">
+                  {flight.navigation_performance && <span className="text-mono">{flight.navigation_performance}</span>}
+                  <Warning flight={flight} warnings={warnings} field="navigation-performance" />
+                </div>
+              </FplField>
+              {/* <FplField label="CODE" value="-" tooltip="ADSB Hex Code" /> */}
+              {/* <FplField label="RVR" value="-" tooltip="Runway Visual Range Limit" /> */}
+              {/* <FplField label="PER" value="-" tooltip="Performance Code" /> */}
+              {/* <FplField label="SEL" value="-" tooltip="SELCAL Code" /> */}
+              {/* <FplField label="NAV" value="-" tooltip="NAV Equipment" /> */}
+              {/* <FplField label="DAT" value="-" tooltip="Additional Data" /> */}
+              {/* <FplField label="REG" value="-" tooltip="Aircraft Registration" /> */}
+              {/* <FplField label="COM" value="-" tooltip="Communication Codes" /> */}
+              {/* <FplField label="OPR" value="-" tooltip="Operator" /> */}
+              {/* <FplField label="SUR" value="-" tooltip="Surveillance Equipment" /> */}
+              {/* <FplField label="ORGN" value="-" tooltip="Origin of Flightplan" /> */}
+              {/* <FplField label="RALT" value="-" tooltip="Enroute Alternates" /> */}
+              {/* <FplField label="TALT" value="-" tooltip="Takeoff Alternate" /> */}
+              {/* <FplField label="EET" value="-" tooltip="Estimated Elapsed Times" /> */}
+              {/* <FplField label="RMK" value="-" tooltip="Additional Remarks" className="col-span-4" /> */}
+            </div>
+            <h2 className="text-2xl">
+              <Trans>Validation Result</Trans>
+            </h2>
+            <FlightWarnings callsign={callsign} />
+            <RequireRole role="software-engineer">
+              <h2 className="text-2xl">
+                <Trans>Flight Route</Trans>
+              </h2>
+              <FlightParsedRoute flight={flight} />
+            </RequireRole>
           </div>
-          <h2 className="text-2xl">
-            <Trans>Validation Result</Trans>
-          </h2>
-          <FlightWarnings callsign={callsign} />
-          <h2 className="text-2xl">
-            <Trans>Flight Route</Trans>
-          </h2>
-          <RequireRole role="software-engineer">
-            <FlightParsedRoute flight={flight} />
-          </RequireRole>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </FlightValidationProvider>
   );
 }

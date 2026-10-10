@@ -7,7 +7,7 @@ import { $api } from "@/lib/client";
 import { buildRouteMap, hasPosition, type RouteLeg } from "@/lib/flight-route-map";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Skeleton } from "@mantine/core";
+import { Alert, Skeleton } from "@mantine/core";
 import { Layer, NavigationControl, Source, type MapRef, type StyleSpecification } from "@vis.gl/react-maplibre";
 import { Fragment, useCallback, useEffect, useMemo, useRef } from "react";
 
@@ -29,7 +29,7 @@ export const FlightParsedRoute = ({ flight }: { flight: FlightPlan }) => (
 
 export function ParsedRoute({ route, available = true }: { route: string; available?: boolean }) {
   const { t } = useLingui();
-  const { data, error, isLoading, isFetching, refetch } = $api.useQuery(
+  const { data, error, isLoading } = $api.useQuery(
     "get",
     "/api/flights/route/v2",
     { params: { query: { route } } },
@@ -38,19 +38,6 @@ export function ParsedRoute({ route, available = true }: { route: string; availa
 
   return (
     <section aria-label={t`Parsed route`} className="flex w-full flex-col gap-3">
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <h3 className="text-lg">
-            <Trans>Parsed route</Trans> <span className="text-muted-foreground">v2</span>
-          </h3>
-          <Badge variant="light">
-            <Trans>Software Engineer</Trans>
-          </Badge>
-        </div>
-        <Button size="xs" variant="default" disabled={!available} loading={isFetching} onClick={() => void refetch()}>
-          <Trans>Refresh</Trans>
-        </Button>
-      </div>
       {!available && (
         <Alert>
           <Trans>No complete flight plan route is available.</Trans>
@@ -98,23 +85,6 @@ export function RouteResult({
 
   return (
     <>
-      <p className="flex flex-wrap items-center gap-2 font-mono">
-        <span className={!hasPosition(legs[0].from) ? UNKNOWN_COLOR : undefined}>{legs[0].from.identifier}</span>
-        {legs.map((leg, index) => (
-          <Fragment key={index}>
-            <span
-              className={cn(
-                (leg.is_unknown || !leg.leg_identifier) && UNKNOWN_COLOR,
-                (leg.is_sid || leg.is_star) && SID_STAR_STYLE,
-                "text-sm",
-              )}
-            >
-              {leg.leg_identifier || "DCT"}
-            </span>
-            <span className={cn(!hasPosition(leg.to) && UNKNOWN_COLOR)}>{leg.to.identifier}</span>
-          </Fragment>
-        ))}
-      </p>
       {geometry.bounds ? (
         <div
           aria-label={t`Parsed route map`}
@@ -169,6 +139,23 @@ export function RouteResult({
           <Trans>No resolved coordinates are available to display on the map.</Trans>
         </Alert>
       )}
+      <p className="flex flex-wrap items-center gap-2 font-mono">
+        <span className={!hasPosition(legs[0].from) ? UNKNOWN_COLOR : undefined}>{legs[0].from.identifier}</span>
+        {legs.map((leg, index) => (
+          <Fragment key={index}>
+            <span
+              className={cn(
+                (leg.is_unknown || !leg.leg_identifier) && UNKNOWN_COLOR,
+                (leg.is_sid || leg.is_star) && SID_STAR_STYLE,
+                "text-sm",
+              )}
+            >
+              {leg.leg_identifier || "DCT"}
+            </span>
+            <span className={cn(!hasPosition(leg.to) && UNKNOWN_COLOR)}>{leg.to.identifier}</span>
+          </Fragment>
+        ))}
+      </p>
     </>
   );
 }

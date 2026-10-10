@@ -772,6 +772,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/by-callsign/{callsign}/validations": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["validations_by_callsign"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/by-callsign/{callsign}/warnings": {
     parameters: {
       query?: never;
@@ -1864,6 +1880,14 @@ export interface components {
       | "controller"
       | "api-client"
       | "user";
+    ValidatorResult: {
+      field: components["schemas"]["WarningMessageField"];
+      status: components["schemas"]["ValidatorStatus"];
+      validator_ident: string;
+      warnings: components["schemas"]["WarningMessage"][];
+    };
+    /** @enum {string} */
+    ValidatorStatus: "pass" | "suppressed" | "rejected" | "unavailable";
     WarningMessage: {
       field: components["schemas"]["WarningMessageField"];
       field_index?: number | null;
@@ -1886,7 +1910,19 @@ export interface components {
       | "cruising-level-too-low"
       | "route-match-preferred";
     /** @enum {string} */
-    WarningMessageField: "equipment" | "transponder" | "navigation-performance" | "route" | "cruising-level";
+    WarningMessageField:
+      | "callsign"
+      | "flight-rules"
+      | "aircraft-type"
+      | "wake-category"
+      | "equipment"
+      | "transponder"
+      | "departure"
+      | "airspeed"
+      | "cruising-level"
+      | "route"
+      | "arrival"
+      | "navigation-performance";
   };
   responses: {
     /** @description Internal server error */
@@ -3506,6 +3542,30 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["FlightDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  validations_by_callsign: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Callsign */
+        callsign: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Results of all flight-plan validators */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ValidatorResult"][];
         };
       };
       500: components["responses"]["InternalServerError"];
