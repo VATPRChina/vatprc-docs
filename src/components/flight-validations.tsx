@@ -32,7 +32,7 @@ type ValidatorStatus = components["schemas"]["ValidatorStatus"];
 
 const statuses: Record<ValidatorStatus, { color: string; character: string; label: ReactNode }> = {
   pass: { color: "green", character: "P", label: <Trans>Pass</Trans> },
-  suppressed: { color: "lime", character: "S", label: <Trans>Suppressed</Trans> },
+  suppressed: { color: "teal", character: "S", label: <Trans>Suppressed</Trans> },
   rejected: { color: "red", character: "R", label: <Trans>Rejected</Trans> },
   unavailable: { color: "yellow", character: "U", label: <Trans>Unavailable</Trans> },
 };
