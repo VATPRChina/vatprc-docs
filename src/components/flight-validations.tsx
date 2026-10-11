@@ -1,9 +1,32 @@
 import { FLIGHT_WARNING_MESSAGES } from "@/components/flight-warning-messages";
 import type { components } from "@/lib/api";
 import { $api, usePermissions } from "@/lib/client";
+import { msg } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
 import { Trans } from "@lingui/react/macro";
 import { Badge, Popover, Tooltip } from "@mantine/core";
 import { createContext, useContext, type ReactNode } from "react";
+
+const VALIDATOR_NAMES = {
+  callsign: msg`callsign`,
+  "flight-rule-weather": msg`VFR weather`,
+  "aircraft-type": msg`ICAO aircraft type existence`,
+  "wake-category": msg`wake category matches aircraft`,
+  "departure-aircraft-type": msg`wingspan limit at departure`,
+  "departure-airport": msg`departure airport existence`,
+  "arrival-aircraft-type": msg`wingspan limit at arrival`,
+  "arrival-airport": msg`arrival airport existence`,
+  "cruise-altitude-preferred-route": msg`altitude restriction from designated route`,
+  "cruise-altitude-directional": msg`altitude type from first leg`,
+  "equipment-rvsm": msg`RVSM capability`,
+  "equipment-rnav1": msg`RNAV 1 capability`,
+  "equipment-rnp-ar": msg`RNP AR capability`,
+  "route-preferred": msg`designated route`,
+  "route-direct-leg": msg`no direct route legs`,
+  "route-unknown-leg-or-fix": msg`no unknown leg or fix`,
+  "route-airway-approval": msg`no airway requiring approval`,
+  "route-airway-direction": msg`compliance with airway direction restrictions`,
+};
 
 type ValidatorStatus = components["schemas"]["ValidatorStatus"];
 
@@ -52,21 +75,23 @@ export function FlightValidationTags({ field }: { field: components["schemas"]["
 }
 
 function ValidationTag({ result }: { result: components["schemas"]["ValidatorResult"] }) {
+  const { i18n } = useLingui();
+  const name = Object.hasOwn(VALIDATOR_NAMES, result.validator_ident)
+    ? i18n._(VALIDATOR_NAMES[result.validator_ident as keyof typeof VALIDATOR_NAMES])
+    : result.validator_ident;
   const status = statuses[result.status];
   return (
-    <Popover width={360} position="bottom-start" withArrow shadow="md">
+    <Popover withArrow>
       <Popover.Target>
-        <Tooltip label={result.validator_ident}>
+        <Tooltip label={name}>
           <Badge
             component="button"
             type="button"
             variant="filled"
             color={status.color}
             size="sm"
-            radius="sm"
-            className="cursor-pointer"
-            style={{ paddingInline: 5, minWidth: 20 }}
-            aria-label={`${result.validator_ident}: ${status.character}`}
+            radius="xs"
+            aria-label={`${name}: ${status.character}`}
           >
             {status.character}
           </Badge>
@@ -74,7 +99,10 @@ function ValidationTag({ result }: { result: components["schemas"]["ValidatorRes
       </Popover.Target>
       <Popover.Dropdown>
         <div className="flex flex-col gap-2">
-          <strong className="font-mono text-sm wrap-break-word">{result.validator_ident}</strong>
+          <div>
+            <strong className="text-sm">{name}</strong>
+            <span className="ml-2 font-mono text-xs">{result.validator_ident}</span>
+          </div>
           <div>{status.label}</div>
           <ValidationWarnings warnings={result.warnings} />
         </div>
@@ -84,7 +112,14 @@ function ValidationTag({ result }: { result: components["schemas"]["ValidatorRes
 }
 
 function ValidationWarnings({ warnings }: { warnings: components["schemas"]["WarningMessage"][] }) {
-  return warnings.length ? (
+  if (warnings.length <= 0) {
+    return (
+      <span>
+        <Trans>No warnings</Trans>
+      </span>
+    );
+  }
+  return (
     <ul className="flex flex-col gap-2">
       {warnings.map((warning, index) => (
         <li key={index} className="flex flex-col gap-1 text-sm wrap-break-word">
@@ -97,9 +132,5 @@ function ValidationWarnings({ warnings }: { warnings: components["schemas"]["War
         </li>
       ))}
     </ul>
-  ) : (
-    <span className="text-muted-foreground">
-      <Trans>No warnings</Trans>
-    </span>
   );
 }

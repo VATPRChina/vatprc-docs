@@ -156,7 +156,7 @@ msgstr "All"
 msgid "All runways"
 msgstr "All runways"
 
-#: src/components/flight-warnings.tsx:106
+#: src/components/flight-warnings.tsx:104
 #: src/routes/flights/$callsign.tsx:268
 msgid "Allowed levels are {level} (in feet)."
 msgstr "Allowed levels are {level} (in feet)."
@@ -168,6 +168,14 @@ msgstr "Already Booked"
 #: src/components/airspace/sector-map.tsx:301
 msgid "Altitude"
 msgstr "Altitude"
+
+#: src/components/flight-validations.tsx:19
+msgid "altitude restriction from preferred route"
+msgstr "altitude restriction from preferred route"
+
+#: src/components/flight-validations.tsx:20
+msgid "altitude type from first leg"
+msgstr "altitude type from first leg"
 
 #: src/components/app/app-nav-menu.tsx:107
 msgid "Announcement"
@@ -264,6 +272,10 @@ msgstr "Area"
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
 msgstr "Arrival"
+
+#: src/components/flight-validations.tsx:18
+msgid "arrival airport existence"
+msgstr "arrival airport existence"
 
 #: src/components/event/atc-slot-assign.tsx:69
 #: src/components/event/atc-slot-assign.tsx:91
@@ -422,6 +434,10 @@ msgstr "C3"
 msgid "Calculating coverage"
 msgstr "Calculating coverage"
 
+#: src/components/flight-validations.tsx:11
+msgid "callsign"
+msgstr "callsign"
+
 #: src/components/atc-position/position-modal.tsx:96
 #: src/components/controller-center/my-atc-bookings.tsx:104
 #: src/components/event/atc-slot-create.tsx:104
@@ -564,6 +580,10 @@ msgstr "Community & Teamspeak 3"
 #: src/components/route-viewer.tsx:34
 msgid "Complete route"
 msgstr "Complete route"
+
+#: src/components/flight-validations.tsx:28
+msgid "compliance with airway direction restrictions"
+msgstr "compliance with airway direction restrictions"
 
 #: src/components/radar-coverage/viewer.tsx:257
 msgid "Computed station height"
@@ -755,6 +775,10 @@ msgstr "Delivery"
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
 msgstr "Departure"
+
+#: src/components/flight-validations.tsx:16
+msgid "departure airport existence"
+msgstr "departure airport existence"
 
 #: src/components/event/event-create.tsx:269
 #: src/components/preferred-route-create.tsx:190
@@ -958,7 +982,7 @@ msgstr "Events"
 msgid "Events this week"
 msgstr "Events this week"
 
-#: src/components/flight-warnings.tsx:41
+#: src/components/flight-warnings.tsx:40
 #: src/routes/flights/$callsign.tsx:279
 msgid "Expected wake category: {categories}."
 msgstr "Expected wake category: {categories}."
@@ -1083,7 +1107,7 @@ msgctxt "feet"
 msgid "flight level"
 msgstr "flight level"
 
-#: src/components/flight-warnings.tsx:152
+#: src/components/flight-warnings.tsx:150
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "Flight looks good. Please confirm with the clearance delivery controller."
 
@@ -1215,6 +1239,10 @@ msgstr "I1"
 #: src/components/controller-list.tsx:28
 msgid "I3"
 msgstr "I3"
+
+#: src/components/flight-validations.tsx:13
+msgid "ICAO aircraft type existence"
+msgstr "ICAO aircraft type existence"
 
 #: src/components/app/app-nav-menu.tsx:119
 msgid "Image Upload Tool"
@@ -1460,6 +1488,10 @@ msgstr "Next events"
 msgid "No"
 msgstr "No"
 
+#: src/components/flight-validations.tsx:27
+msgid "no airway requiring approval"
+msgstr "no airway requiring approval"
+
 #: src/components/atc-training/training-application-responses.tsx:135
 msgid "No comments"
 msgstr "No comments"
@@ -1475,6 +1507,10 @@ msgstr "No content"
 #: src/components/table.tsx:194
 msgid "No data"
 msgstr "No data"
+
+#: src/components/flight-validations.tsx:25
+msgid "no direct route legs"
+msgstr "no direct route legs"
 
 #: src/routes/sheets/$id.tsx:395
 msgid "No fields."
@@ -1524,11 +1560,15 @@ msgstr "No training record has been filed yet."
 msgid "No transponder"
 msgstr "No transponder"
 
+#: src/components/flight-validations.tsx:26
+msgid "no unknown leg or fix"
+msgstr "no unknown leg or fix"
+
 #: src/components/homepage/controllers-board.tsx:136
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
 
-#: src/components/flight-validations.tsx:102
+#: src/components/flight-validations.tsx:130
 msgid "No warnings"
 msgstr "No warnings"
 
@@ -1637,7 +1677,7 @@ msgstr "Parsed route"
 msgid "Parsed route map"
 msgstr "Parsed route map"
 
-#: src/components/flight-validations.tsx:11
+#: src/components/flight-validations.tsx:34
 msgid "Pass"
 msgstr "Pass"
 
@@ -1658,9 +1698,9 @@ msgstr "Pending"
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
 
-#: src/components/flight-warnings.tsx:84
-#: src/components/flight-warnings.tsx:96
-#: src/components/flight-warnings.tsx:109
+#: src/components/flight-warnings.tsx:82
+#: src/components/flight-warnings.tsx:94
+#: src/components/flight-warnings.tsx:107
 #: src/routes/flights/$callsign.tsx:245
 #: src/routes/flights/$callsign.tsx:258
 #: src/routes/flights/$callsign.tsx:272
@@ -1679,15 +1719,15 @@ msgstr "Pilots"
 msgid "Pilots online"
 msgstr "Pilots online"
 
-#: src/components/flight-warnings.tsx:116
+#: src/components/flight-warnings.tsx:114
 msgid "Planned route matches a designated route:<0>{route}</0>"
 msgstr "Planned route matches a designated route:<0>{route}</0>"
 
-#: src/components/flight-warnings.tsx:55
+#: src/components/flight-warnings.tsx:53
 msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
 msgstr "Please choose a designated route from the following list, or contact ATC for assistance:"
 
-#: src/components/flight-warnings.tsx:57
+#: src/components/flight-warnings.tsx:55
 msgid "Please contact ATC for help adjusting the route."
 msgstr "Please contact ATC for help adjusting the route."
 
@@ -1723,6 +1763,10 @@ msgstr "Position"
 #: src/components/sid-candidates.tsx:46
 msgid "Preferred"
 msgstr "Preferred"
+
+#: src/components/flight-validations.tsx:24
+msgid "preferred route"
+msgstr "preferred route"
 
 #: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
@@ -1790,7 +1834,7 @@ msgstr "Reject"
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:44
 #: src/components/atc-training/training-application-responses.tsx:126
-#: src/components/flight-validations.tsx:13
+#: src/components/flight-validations.tsx:36
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -1849,6 +1893,10 @@ msgstr "Review"
 msgid "RNAV"
 msgstr "RNAV"
 
+#: src/components/flight-validations.tsx:22
+msgid "RNAV 1 capability"
+msgstr "RNAV 1 capability"
+
 #: src/components/flight-warnings.tsx:30
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 msgstr "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
@@ -1856,6 +1904,10 @@ msgstr "RNAV1 is implemented in the entire VATPRC airspace. It is not possible t
 #: src/routes/flights/$callsign.tsx:144
 msgid "RNP AR"
 msgstr "RNP AR"
+
+#: src/components/flight-validations.tsx:23
+msgid "RNP AR capability"
+msgstr "RNP AR capability"
 
 #: src/routes/flights/$callsign.tsx:145
 msgid "RNP AR without RF"
@@ -1887,6 +1939,10 @@ msgstr "Route Viewer"
 #: src/components/sid-candidates.tsx:24
 msgid "Runway {runway}"
 msgstr "Runway {runway}"
+
+#: src/components/flight-validations.tsx:21
+msgid "RVSM capability"
+msgstr "RVSM capability"
 
 #: src/components/flight-warnings.tsx:19
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
@@ -2144,7 +2200,7 @@ msgstr "Submitted"
 msgid "Successfully cancelled the training."
 msgstr "Successfully cancelled the training."
 
-#: src/components/flight-validations.tsx:12
+#: src/components/flight-validations.tsx:35
 msgid "Suppressed"
 msgstr "Suppressed"
 
@@ -2229,12 +2285,12 @@ msgid "The callsign cannot be changed after creation."
 msgstr "The callsign cannot be changed after creation."
 
 #: src/components/flight-warning-messages.tsx:32
-#: src/components/flight-warnings.tsx:103
+#: src/components/flight-warnings.tsx:101
 #: src/routes/flights/$callsign.tsx:265
 msgid "The cruising level is not allowed for the route."
 msgstr "The cruising level is not allowed for the route."
 
-#: src/components/flight-warnings.tsx:93
+#: src/components/flight-warnings.tsx:91
 #: src/routes/flights/$callsign.tsx:254
 msgid "The cruising level is too low for route. The minimum is {level} feet."
 msgstr "The cruising level is too low for route. The minimum is {level} feet."
@@ -2247,12 +2303,12 @@ msgstr "The cruising level is too low for the route."
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "The cruising level type does not meet the requirement of the route."
 
-#: src/components/flight-warnings.tsx:74
+#: src/components/flight-warnings.tsx:72
 #: src/routes/flights/$callsign.tsx:234
 msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 msgstr "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 
-#: src/components/flight-warnings.tsx:78
+#: src/components/flight-warnings.tsx:76
 #: src/routes/flights/$callsign.tsx:238
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
@@ -2438,7 +2494,7 @@ msgstr "Trainings"
 msgid "Transponder"
 msgstr "Transponder"
 
-#: src/components/flight-warnings.tsx:44
+#: src/components/flight-warnings.tsx:42
 #: src/routes/flights/$callsign.tsx:214
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
@@ -2452,7 +2508,7 @@ msgstr "Unable to load the parsed route."
 msgid "Unassign"
 msgstr "Unassign"
 
-#: src/components/flight-validations.tsx:14
+#: src/components/flight-validations.tsx:37
 msgid "Unavailable"
 msgstr "Unavailable"
 
@@ -2567,6 +2623,10 @@ msgstr "VATSIM P.R.China Division"
 msgid "VFR Policy"
 msgstr "VFR Policy"
 
+#: src/components/flight-validations.tsx:12
+msgid "VFR weather"
+msgstr "VFR weather"
+
 #: src/components/atc-application/atc-application-list.tsx:52
 #: src/components/atc-application/my-application-card.tsx:54
 #: src/components/atc-training/training-application-responses.tsx:62
@@ -2611,6 +2671,10 @@ msgstr "Volunteer"
 msgid "Wake Category"
 msgstr "Wake Category"
 
+#: src/components/flight-validations.tsx:14
+msgid "wake category matches aircraft"
+msgstr "wake category matches aircraft"
+
 #: src/routes/flights/$callsign.tsx:140
 msgid "Wake category mismatch"
 msgstr "Wake category mismatch"
@@ -2626,6 +2690,14 @@ msgstr "We regret to inform you that your application has been rejected. Please 
 #: src/components/app/app-nav-menu.tsx:83
 msgid "Weather"
 msgstr "Weather"
+
+#: src/components/flight-validations.tsx:17
+msgid "wingspan limit at arrival"
+msgstr "wingspan limit at arrival"
+
+#: src/components/flight-validations.tsx:15
+msgid "wingspan limit at departure"
+msgstr "wingspan limit at departure"
 
 #: src/components/atc-training/training-application-delete.tsx:38
 msgid "Withdraw"

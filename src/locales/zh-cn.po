@@ -156,7 +156,7 @@ msgstr "全部"
 msgid "All runways"
 msgstr "所有跑道"
 
-#: src/components/flight-warnings.tsx:106
+#: src/components/flight-warnings.tsx:104
 #: src/routes/flights/$callsign.tsx:268
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
@@ -168,6 +168,14 @@ msgstr "已被预订"
 #: src/components/airspace/sector-map.tsx:301
 msgid "Altitude"
 msgstr "高度范围"
+
+#: src/components/flight-validations.tsx:19
+msgid "altitude restriction from designated route"
+msgstr "指定航路高度限制"
+
+#: src/components/flight-validations.tsx:20
+msgid "altitude type from first leg"
+msgstr "第一个航段高度层类型"
 
 #: src/components/app/app-nav-menu.tsx:107
 msgid "Announcement"
@@ -264,6 +272,10 @@ msgstr "区域"
 #: src/routes/navdata/preferred-routes.tsx:17
 msgid "Arrival"
 msgstr "到达机场"
+
+#: src/components/flight-validations.tsx:18
+msgid "arrival airport existence"
+msgstr "到达机场有效"
 
 #: src/components/event/atc-slot-assign.tsx:69
 #: src/components/event/atc-slot-assign.tsx:91
@@ -422,6 +434,10 @@ msgstr "C3"
 msgid "Calculating coverage"
 msgstr "正在计算覆盖范围"
 
+#: src/components/flight-validations.tsx:11
+msgid "callsign"
+msgstr "呼号"
+
 #: src/components/atc-position/position-modal.tsx:96
 #: src/components/controller-center/my-atc-bookings.tsx:104
 #: src/components/event/atc-slot-create.tsx:104
@@ -564,6 +580,10 @@ msgstr "社群"
 #: src/components/route-viewer.tsx:34
 msgid "Complete route"
 msgstr "完整航路"
+
+#: src/components/flight-validations.tsx:28
+msgid "compliance with airway direction restrictions"
+msgstr "航路方向限制"
 
 #: src/components/radar-coverage/viewer.tsx:257
 msgid "Computed station height"
@@ -755,6 +775,10 @@ msgstr "放行"
 #: src/routes/navdata/preferred-routes.tsx:13
 msgid "Departure"
 msgstr "出发机场"
+
+#: src/components/flight-validations.tsx:16
+msgid "departure airport existence"
+msgstr "出发机场有效"
 
 #: src/components/event/event-create.tsx:269
 #: src/components/preferred-route-create.tsx:190
@@ -958,7 +982,7 @@ msgstr "活动"
 msgid "Events this week"
 msgstr "本周活动"
 
-#: src/components/flight-warnings.tsx:41
+#: src/components/flight-warnings.tsx:40
 #: src/routes/flights/$callsign.tsx:279
 msgid "Expected wake category: {categories}."
 msgstr "预期尾流类别：{categories}。"
@@ -1083,7 +1107,7 @@ msgctxt "feet"
 msgid "flight level"
 msgstr "英制高度层"
 
-#: src/components/flight-warnings.tsx:152
+#: src/components/flight-warnings.tsx:150
 msgid "Flight looks good. Please confirm with the clearance delivery controller."
 msgstr "未发现飞行计划问题，但请以放行管制员为准。"
 
@@ -1215,6 +1239,10 @@ msgstr "I1"
 #: src/components/controller-list.tsx:28
 msgid "I3"
 msgstr "I3"
+
+#: src/components/flight-validations.tsx:13
+msgid "ICAO aircraft type existence"
+msgstr "ICAO机型代码有效"
 
 #: src/components/app/app-nav-menu.tsx:119
 msgid "Image Upload Tool"
@@ -1460,6 +1488,10 @@ msgstr "下一批活动"
 msgid "No"
 msgstr "否"
 
+#: src/components/flight-validations.tsx:27
+msgid "no airway requiring approval"
+msgstr "无需要许可的航路"
+
 #: src/components/atc-training/training-application-responses.tsx:135
 msgid "No comments"
 msgstr "暂无评论"
@@ -1475,6 +1507,10 @@ msgstr "暂无内容"
 #: src/components/table.tsx:194
 msgid "No data"
 msgstr "无数据"
+
+#: src/components/flight-validations.tsx:25
+msgid "no direct route legs"
+msgstr "无直飞段"
 
 #: src/routes/sheets/$id.tsx:395
 msgid "No fields."
@@ -1524,11 +1560,15 @@ msgstr "尚未填写训练记录。"
 msgid "No transponder"
 msgstr "无应答机"
 
+#: src/components/flight-validations.tsx:26
+msgid "no unknown leg or fix"
+msgstr "无未知航段或航点"
+
 #: src/components/homepage/controllers-board.tsx:136
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
 
-#: src/components/flight-validations.tsx:102
+#: src/components/flight-validations.tsx:130
 msgid "No warnings"
 msgstr "无警告"
 
@@ -1637,7 +1677,7 @@ msgstr "解析后的航路"
 msgid "Parsed route map"
 msgstr "解析航路地图"
 
-#: src/components/flight-validations.tsx:11
+#: src/components/flight-validations.tsx:34
 msgid "Pass"
 msgstr "通过"
 
@@ -1658,9 +1698,9 @@ msgstr "待处理"
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
-#: src/components/flight-warnings.tsx:84
-#: src/components/flight-warnings.tsx:96
-#: src/components/flight-warnings.tsx:109
+#: src/components/flight-warnings.tsx:82
+#: src/components/flight-warnings.tsx:94
+#: src/components/flight-warnings.tsx:107
 #: src/routes/flights/$callsign.tsx:245
 #: src/routes/flights/$callsign.tsx:258
 #: src/routes/flights/$callsign.tsx:272
@@ -1679,15 +1719,15 @@ msgstr "飞行员"
 msgid "Pilots online"
 msgstr "在线机组"
 
-#: src/components/flight-warnings.tsx:116
+#: src/components/flight-warnings.tsx:114
 msgid "Planned route matches a designated route:<0>{route}</0>"
 msgstr "计划航路与指定航路 <0>{route}</0> 匹配。"
 
-#: src/components/flight-warnings.tsx:55
+#: src/components/flight-warnings.tsx:53
 msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
 msgstr "请从下列指定航路中选择一条作为计划航路，或与管制员联系。"
 
-#: src/components/flight-warnings.tsx:57
+#: src/components/flight-warnings.tsx:55
 msgid "Please contact ATC for help adjusting the route."
 msgstr "请与管制员联系调整航路。"
 
@@ -1723,6 +1763,10 @@ msgstr "席位"
 #: src/components/sid-candidates.tsx:46
 msgid "Preferred"
 msgstr "主用程序"
+
+#: src/components/flight-validations.tsx:24
+msgid "designated route"
+msgstr "指定航路"
 
 #: src/components/app/app-nav-menu.tsx:122
 msgid "Preferred Routes"
@@ -1790,7 +1834,7 @@ msgstr "拒绝"
 #: src/components/atc-training/training-application-list.tsx:19
 #: src/components/atc-training/training-application-list.tsx:44
 #: src/components/atc-training/training-application-responses.tsx:126
-#: src/components/flight-validations.tsx:13
+#: src/components/flight-validations.tsx:36
 msgid "Rejected"
 msgstr "已拒绝"
 
@@ -1849,6 +1893,10 @@ msgstr "审核"
 msgid "RNAV"
 msgstr "RNAV"
 
+#: src/components/flight-validations.tsx:22
+msgid "RNAV 1 capability"
+msgstr "RNAV 1 能力"
+
 #: src/components/flight-warnings.tsx:30
 msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
 msgstr "VATPRC 全空域实施 RNAV1 运行，不具备 RNAV1 能力的航空器将无法执行航路及标准进离场。不具备 RNAV1 能力的航空器，需要联系 ATC 申请特别航路许可。"
@@ -1856,6 +1904,10 @@ msgstr "VATPRC 全空域实施 RNAV1 运行，不具备 RNAV1 能力的航空器
 #: src/routes/flights/$callsign.tsx:144
 msgid "RNP AR"
 msgstr "RNP AR"
+
+#: src/components/flight-validations.tsx:23
+msgid "RNP AR capability"
+msgstr "RNP AR 能力"
 
 #: src/routes/flights/$callsign.tsx:145
 msgid "RNP AR without RF"
@@ -1887,6 +1939,10 @@ msgstr "航路查看器"
 #: src/components/sid-candidates.tsx:24
 msgid "Runway {runway}"
 msgstr "跑道 {runway}"
+
+#: src/components/flight-validations.tsx:21
+msgid "RVSM capability"
+msgstr "RVSM 能力"
 
 #: src/components/flight-warnings.tsx:19
 msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
@@ -2144,7 +2200,7 @@ msgstr "已提交"
 msgid "Successfully cancelled the training."
 msgstr "已成功取消训练计划。"
 
-#: src/components/flight-validations.tsx:12
+#: src/components/flight-validations.tsx:35
 msgid "Suppressed"
 msgstr "无需执行"
 
@@ -2229,12 +2285,12 @@ msgid "The callsign cannot be changed after creation."
 msgstr "创建后无法修改呼号。"
 
 #: src/components/flight-warning-messages.tsx:32
-#: src/components/flight-warnings.tsx:103
+#: src/components/flight-warnings.tsx:101
 #: src/routes/flights/$callsign.tsx:265
 msgid "The cruising level is not allowed for the route."
 msgstr "巡航高度违反航路限制。"
 
-#: src/components/flight-warnings.tsx:93
+#: src/components/flight-warnings.tsx:91
 #: src/routes/flights/$callsign.tsx:254
 msgid "The cruising level is too low for route. The minimum is {level} feet."
 msgstr "巡航高度过低，不满足航路要求。至少应当为 {level} 英尺。"
@@ -2247,12 +2303,12 @@ msgstr "巡航高度过低，不满足航路要求。"
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "巡航高度类型不符合航路要求。"
 
-#: src/components/flight-warnings.tsx:74
+#: src/components/flight-warnings.tsx:72
 #: src/routes/flights/$callsign.tsx:234
 msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
 msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}。"
 
-#: src/components/flight-warnings.tsx:78
+#: src/components/flight-warnings.tsx:76
 #: src/routes/flights/$callsign.tsx:238
 msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
 msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
@@ -2438,7 +2494,7 @@ msgstr "培训"
 msgid "Transponder"
 msgstr "应答机"
 
-#: src/components/flight-warnings.tsx:44
+#: src/components/flight-warnings.tsx:42
 #: src/routes/flights/$callsign.tsx:214
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
@@ -2452,7 +2508,7 @@ msgstr "无法加载解析后的航路。"
 msgid "Unassign"
 msgstr "取消指派"
 
-#: src/components/flight-validations.tsx:14
+#: src/components/flight-validations.tsx:37
 msgid "Unavailable"
 msgstr "无法执行"
 
@@ -2567,6 +2623,10 @@ msgstr "VATSIM 中国分部"
 msgid "VFR Policy"
 msgstr "目视飞行规则"
 
+#: src/components/flight-validations.tsx:12
+msgid "VFR weather"
+msgstr "VFR 天气"
+
 #: src/components/atc-application/atc-application-list.tsx:52
 #: src/components/atc-application/my-application-card.tsx:54
 #: src/components/atc-training/training-application-responses.tsx:62
@@ -2611,6 +2671,10 @@ msgstr "志愿者"
 msgid "Wake Category"
 msgstr "尾流类别"
 
+#: src/components/flight-validations.tsx:14
+msgid "wake category matches aircraft"
+msgstr "尾流类别符合机型"
+
 #: src/routes/flights/$callsign.tsx:140
 msgid "Wake category mismatch"
 msgstr "尾流类别不匹配"
@@ -2626,6 +2690,14 @@ msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注
 #: src/components/app/app-nav-menu.tsx:83
 msgid "Weather"
 msgstr "天气"
+
+#: src/components/flight-validations.tsx:17
+msgid "wingspan limit at arrival"
+msgstr "到达机场翼展限制"
+
+#: src/components/flight-validations.tsx:15
+msgid "wingspan limit at departure"
+msgstr "出发机场翼展限制"
 
 #: src/components/atc-training/training-application-delete.tsx:38
 msgid "Withdraw"
