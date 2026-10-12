@@ -1,5 +1,4 @@
 import { MarkdownDoc } from "@/components/doc/markdown-doc";
-import { buildMarkdownDocSync } from "@/components/doc/markdown-doc-run";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton, Alert } from "@mantine/core";
@@ -17,9 +16,8 @@ export const Route = createFileRoute("/docs/$")({
     } catch (exception) {
       if (exception instanceof Error && exception.message.startsWith("ENOENT")) {
         notFound({ throw: true });
-      } else {
-        throw exception;
       }
+      throw exception;
     }
   },
   head: () => ({
@@ -46,12 +44,11 @@ export const Route = createFileRoute("/docs/$")({
 });
 
 function RouteComponent() {
-  const compiled: string = Route.useLoaderData();
-  const doc = buildMarkdownDocSync(compiled);
+  const doc = Route.useLoaderData();
 
   return (
     <MarkdownDoc>
-      <doc.MDXContent />
+      <div dangerouslySetInnerHTML={{ __html: doc.html }} />
     </MarkdownDoc>
   );
 }

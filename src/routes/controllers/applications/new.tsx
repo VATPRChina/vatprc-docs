@@ -1,7 +1,7 @@
 import { AtcApplicationForm } from "@/components/atc-application/atc-application-form";
 import { BackButton } from "@/components/back-button";
 import { useCenterRoles } from "@/components/controller-center/center-context";
-import { DiscourseDocument, getDiscourseDocumentCode } from "@/components/doc/discourse-doc";
+import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
 import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
@@ -9,12 +9,12 @@ import { createFileRoute, Navigate } from "@tanstack/react-router";
 export const Route = createFileRoute("/controllers/applications/new")({
   component: RouteComponent,
   async loader() {
-    return [await getDiscourseDocumentCode("7188")] as const;
+    return [await getDiscourseDocument("7188")] as const;
   },
 });
 
 function RouteComponent() {
-  const [docCode] = Route.useLoaderData();
+  const [document] = Route.useLoaderData();
   const { isController } = useCenterRoles();
 
   if (isController) return <Navigate to="/controllers" replace />;
@@ -32,7 +32,7 @@ function RouteComponent() {
           Chinese proficiency is currently required for all ATC applicants.
         </Trans>
       </Alert>
-      <DiscourseDocument code={docCode} cn="7188" en="7188" inline />
+      <DiscourseDocument document={document} cn="7188" en="7188" inline />
       <AtcApplicationForm />
     </div>
   );

@@ -14,6 +14,12 @@ For SOP docs, it requires review first by VATPRC3, and after VATPRC3 approves, i
 requires assigning to VATPRC5 for approval. If both approved, the merge request
 can be merged at discretion.
 
+Temporarily, SOP pull requests automatically request review from
+[Aaron Liu (1478665)](https://github.com/AaronZSAM101). When Aaron authors the
+pull request, [Jingyuan Yin (1478847)](https://github.com/JingyuanYin) reviews it
+instead. [Shengbo Yang](https://github.com/klc05) remains a reviewer for final
+review. GitHub does not allow authors to review their own pull requests.
+
 #### Image
 
 This repository recommends against placing static assets inside the repository.

@@ -1,11 +1,11 @@
 import { MarkdownDoc } from "./markdown-doc";
-import { buildMarkdownDocSync } from "./markdown-doc-run";
+import type { CompiledMarkdownDoc } from "./markdown-doc-compile";
 import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode } from "react";
 import { TbCloudX } from "react-icons/tb";
 
 export interface PostMeta {
@@ -15,7 +15,7 @@ export interface PostMeta {
   }[];
 }
 
-export const getDiscourseDocumentCode = async (postId: string) => {
+export const getDiscourseDocument = async (postId: string) => {
   const postPath = `${postId}/1`;
   const [meta, raw] = await Promise.all([
     fetch(`${COMMUNITY_ENDPOINT}/t/topic/${postPath}.json`).then((res) => {
@@ -40,14 +40,12 @@ export const getDiscourseDocumentCode = async (postId: string) => {
 };
 
 export const DiscourseDocument: React.FC<{
-  code: string;
+  document: CompiledMarkdownDoc;
   en: string;
   cn: string;
   inline?: boolean;
   extraHeader?: ReactNode;
-}> = ({ code, en, cn, inline, extraHeader }) => {
-  const data = useMemo(() => buildMarkdownDocSync(code), [code]);
-
+}> = ({ document, en, cn, inline, extraHeader }) => {
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
     <ButtonGroup className="mb-2 gap-1!">
@@ -75,8 +73,8 @@ export const DiscourseDocument: React.FC<{
   return (
     <MarkdownDoc tocHeader={editButtons} inline={inline}>
       {extraHeader}
-      <h1 className="text-2xl">{data.title}</h1>
-      {<data.MDXContent />}
+      <h1 className="text-2xl">{document.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: document.html }} />
     </MarkdownDoc>
   );
 };
@@ -88,8 +86,8 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   extraHeader?: ReactNode,
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
   component: () => {
-    const code: string = useLoaderData({ strict: false });
-    return <DiscourseDocument code={code} en={en} cn={cn} extraHeader={extraHeader} />;
+    const document: CompiledMarkdownDoc = useLoaderData({ strict: false });
+    return <DiscourseDocument document={document} en={en} cn={cn} extraHeader={extraHeader} />;
   },
   async head(ctx) {
     const postId = (ctx.match.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
@@ -107,7 +105,7 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   },
   async loader(ctx) {
     const postId = (ctx.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
-    return await getDiscourseDocumentCode(postId);
+    return await getDiscourseDocument(postId);
   },
   pendingMs: 100,
   pendingComponent: () => (

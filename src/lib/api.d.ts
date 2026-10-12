@@ -772,6 +772,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/by-callsign/{callsign}/validations": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["validations_by_callsign"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/by-callsign/{callsign}/warnings": {
     parameters: {
       query?: never;
@@ -796,6 +812,26 @@ export interface paths {
       cookie?: never;
     };
     get: operations["my_flight"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/flights/route/v2": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Parse a complete route with v2 and return expanded legs and matching SIDs.
+     *     Requires the software-engineer role.
+     */
+    get: operations["route_v2"];
     put?: never;
     post?: never;
     delete?: never;
@@ -1363,7 +1399,7 @@ export interface components {
       last_updated: string;
       pilots: components["schemas"]["CompatPilotDto"][];
     };
-    /** @description Seconds grouped by position suffix, independently of the controller's rating. */
+    /** @description Eligible seconds grouped by the controller rating required for the position. */
     ControllerOnlineTimeByPosition: {
       /**
        * Format: int64
@@ -1389,10 +1425,7 @@ export interface components {
     ControllerOnlineTimeDto: {
       /** Format: date-time */
       as_of: string;
-      /**
-       * @description Current-quarter seconds for S1 (GND/DEL/RMP), S2 (TWR), S3 (APP), C1+ (CTR).
-       *     DEP and FSS count toward total_seconds only.
-       */
+      /** @description Current-quarter eligible seconds for S1 (GND/DEL/RMP), S2 (TWR), S3 (APP), C1+ (CTR). */
       by_position: components["schemas"]["ControllerOnlineTimeByPosition"];
       lifetime: components["schemas"]["ControllerOnlineTimeSummaryDto"];
       period: string;
@@ -1402,11 +1435,11 @@ export interface components {
       total_seconds: number;
     };
     ControllerOnlineTimeSummaryDto: {
-      /** @description Position groups in seconds. DEP and FSS count toward total_seconds only. */
+      /** @description Eligible position groups in seconds. */
       by_position: components["schemas"]["ControllerOnlineTimeByPosition"];
       /**
        * Format: int64
-       * @description All recorded VATPRC controlling seconds, including the current session.
+       * @description All eligible VATPRC controlling seconds, including the current session.
        */
       total_seconds: number;
     };
@@ -1562,12 +1595,31 @@ export interface components {
       cruising_level: number;
       departure: string;
       equipment: string;
+      flight_rules: string;
       id: string;
       /** Format: date-time */
       last_observed_at: string;
       navigation_performance: string;
       raw_route: string;
       transponder: string;
+      wake_category: string;
+    };
+    /** @description Coordinates are exposed only by the developer-only v2 route endpoint. */
+    FlightRouteFix: {
+      identifier: string;
+      is_unknown: boolean;
+      /** Format: double */
+      latitude?: number | null;
+      /** Format: double */
+      longitude?: number | null;
+    };
+    FlightRouteLeg: {
+      from: components["schemas"]["FlightRouteFix"];
+      is_sid: boolean;
+      is_star: boolean;
+      is_unknown: boolean;
+      leg_identifier: string;
+      to: components["schemas"]["FlightRouteFix"];
     };
     HealthResponse: {
       database: string;
@@ -1622,6 +1674,10 @@ export interface components {
       title: string;
       type: string;
     };
+    RouteDeliveryInfo: {
+      legs: components["schemas"]["FlightRouteLeg"][];
+      sid_candidates: components["schemas"]["SidCandidate"][];
+    };
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;
@@ -1668,6 +1724,11 @@ export interface components {
     SheetSaveRequest: {
       fields: components["schemas"]["SheetFieldSaveRequest"][];
       name: string;
+    };
+    SidCandidate: {
+      identifier: string;
+      is_rnav: boolean;
+      runway_transitions: string[];
     };
     TokenDto: {
       /** Format: date-time */
@@ -1821,6 +1882,14 @@ export interface components {
       | "controller"
       | "api-client"
       | "user";
+    ValidatorResult: {
+      field: components["schemas"]["WarningMessageField"];
+      status: components["schemas"]["ValidatorStatus"];
+      validator_ident: string;
+      warnings: components["schemas"]["WarningMessage"][];
+    };
+    /** @enum {string} */
+    ValidatorStatus: "pass" | "suppressed" | "rejected" | "unavailable";
     WarningMessage: {
       field: components["schemas"]["WarningMessageField"];
       field_index?: number | null;
@@ -1829,12 +1898,16 @@ export interface components {
     };
     /** @enum {string} */
     WarningMessageCode:
+      | "invalid-airport"
+      | "invalid-aircraft-type"
+      | "wake-category-mismatch"
       | "no-rvsm"
       | "no-rnav1"
       | "rnp-ar"
       | "rnp-ar-without-rf"
       | "no-transponder"
       | "route-direct-segment"
+      | "route-unknown-leg-or-fix"
       | "route-leg-direction"
       | "airway-require-approval"
       | "not-preferred-route"
@@ -1843,7 +1916,19 @@ export interface components {
       | "cruising-level-too-low"
       | "route-match-preferred";
     /** @enum {string} */
-    WarningMessageField: "equipment" | "transponder" | "navigation-performance" | "route" | "cruising-level";
+    WarningMessageField:
+      | "callsign"
+      | "flight-rules"
+      | "aircraft-type"
+      | "wake-category"
+      | "equipment"
+      | "transponder"
+      | "departure"
+      | "airspeed"
+      | "cruising-level"
+      | "route"
+      | "arrival"
+      | "navigation-performance";
   };
   responses: {
     /** @description Internal server error */
@@ -3468,6 +3553,30 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  validations_by_callsign: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Callsign */
+        callsign: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Results of all flight-plan validators */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ValidatorResult"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   warnings_by_callsign: {
     parameters: {
       query?: never;
@@ -3509,6 +3618,51 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["FlightDto"];
         };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  route_v2: {
+    parameters: {
+      query: {
+        /** @description Complete route including departure and arrival */
+        route: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Expanded route segments and SID candidates */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["RouteDeliveryInfo"];
+        };
+      };
+      /** @description Invalid or incomplete route */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Authentication required */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Software engineer role required */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
       500: components["responses"]["InternalServerError"];
     };

@@ -26,6 +26,7 @@ import { Route as EventsAuditRouteImport } from './routes/events/audit'
 import { Route as EventsHistoryRouteImport } from './routes/events/history'
 import { Route as FlightsIndexRouteImport } from './routes/flights/index'
 import { Route as FlightsCallsignRouteImport } from './routes/flights/$callsign'
+import { Route as FlightsRouteViewerRouteImport } from './routes/flights/route-viewer'
 import { Route as NavdataPreferredRoutesRouteImport } from './routes/navdata/preferred-routes'
 import { Route as SheetsIdRouteImport } from './routes/sheets/$id'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
@@ -145,6 +146,11 @@ const FlightsIndexRoute = FlightsIndexRouteImport.update({
 const FlightsCallsignRoute = FlightsCallsignRouteImport.update({
   id: '/$callsign',
   path: '/$callsign',
+  getParentRoute: () => FlightsRoute,
+} as any)
+const FlightsRouteViewerRoute = FlightsRouteViewerRouteImport.update({
+  id: '/route-viewer',
+  path: '/route-viewer',
   getParentRoute: () => FlightsRoute,
 } as any)
 const NavdataPreferredRoutesRoute = NavdataPreferredRoutesRouteImport.update({
@@ -348,6 +354,7 @@ export interface FileRoutesByFullPath {
   '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/flights/route-viewer': typeof FlightsRouteViewerRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
   '/users/audit': typeof UsersAuditRoute
@@ -399,6 +406,7 @@ export interface FileRoutesByTo {
   '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/flights/route-viewer': typeof FlightsRouteViewerRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
   '/users/audit': typeof UsersAuditRoute
@@ -454,6 +462,7 @@ export interface FileRoutesById {
   '/events/audit': typeof EventsAuditRoute
   '/events/history': typeof EventsHistoryRoute
   '/flights/$callsign': typeof FlightsCallsignRoute
+  '/flights/route-viewer': typeof FlightsRouteViewerRoute
   '/navdata/preferred-routes': typeof NavdataPreferredRoutesRoute
   '/sheets/$id': typeof SheetsIdRoute
   '/users/audit': typeof UsersAuditRoute
@@ -510,6 +519,7 @@ export interface FileRouteTypes {
     | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
+    | '/flights/route-viewer'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
     | '/users/audit'
@@ -561,6 +571,7 @@ export interface FileRouteTypes {
     | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
+    | '/flights/route-viewer'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
     | '/users/audit'
@@ -615,6 +626,7 @@ export interface FileRouteTypes {
     | '/events/audit'
     | '/events/history'
     | '/flights/$callsign'
+    | '/flights/route-viewer'
     | '/navdata/preferred-routes'
     | '/sheets/$id'
     | '/users/audit'
@@ -815,6 +827,13 @@ declare module '@tanstack/react-router' {
       path: '/$callsign'
       fullPath: '/flights/$callsign'
       preLoaderRoute: typeof FlightsCallsignRouteImport
+      parentRoute: typeof FlightsRoute
+    }
+    '/flights/route-viewer': {
+      id: '/flights/route-viewer'
+      path: '/route-viewer'
+      fullPath: '/flights/route-viewer'
+      preLoaderRoute: typeof FlightsRouteViewerRouteImport
       parentRoute: typeof FlightsRoute
     }
     '/navdata/preferred-routes': {
@@ -1108,11 +1127,13 @@ const EventsRouteWithChildren =
 
 interface FlightsRouteChildren {
   FlightsCallsignRoute: typeof FlightsCallsignRoute
+  FlightsRouteViewerRoute: typeof FlightsRouteViewerRoute
   FlightsIndexRoute: typeof FlightsIndexRoute
 }
 
 const FlightsRouteChildren: FlightsRouteChildren = {
   FlightsCallsignRoute: FlightsCallsignRoute,
+  FlightsRouteViewerRoute: FlightsRouteViewerRoute,
   FlightsIndexRoute: FlightsIndexRoute,
 }
 

@@ -1,5 +1,8 @@
+import { RequireRole } from "@/components/require-role";
+import { LinkButton } from "@/components/ui/link-button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Input } from "@mantine/core";
@@ -17,12 +20,13 @@ export const Route = createFileRoute("/flights/")({
 
 const Flight: React.FC<{
   flight: components["schemas"]["FlightDto"];
-}> = ({ flight: { callsign, cid, departure, arrival, aircraft } }) => (
+  mine?: boolean;
+}> = ({ flight: { callsign, cid, departure, arrival, aircraft }, mine }) => (
   <Link
     to="/flights/$callsign"
     params={{ callsign }}
     key={callsign}
-    className="flex flex-col gap-1 border px-3 py-2"
+    className={cn("flex flex-col gap-1 border px-3 py-2", mine && "border-red-700 dark:border-red-300")}
     target="_blank"
   >
     <span className="text-lg font-bold">
@@ -56,7 +60,8 @@ function RouteComponent() {
   const { data: mine, error: mineError } = $api.useQuery("get", "/api/flights/mine");
   const isCurrentUserOffline =
     mineError?.type === "urn:vatprc-uniapi-error:flight-not-found-for-cid" && mineError.status === 404;
-  const visibleError = error ?? (isCurrentUserOffline ? undefined : mineError);
+  const isUnauthenticated = mineError?.type === "urn:vatprc-uniapi-error:unauthorized" && mineError.status === 401;
+  const visibleError = error ?? (isCurrentUserOffline || isUnauthenticated ? undefined : mineError);
 
   const [filter, setFilter] = useState("");
   const [departureFilter, setDepartureFilter] = useState("");
@@ -83,19 +88,26 @@ function RouteComponent() {
   );
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setFilter(e.target.value);
+    setFilter(e.target.value.toUpperCase());
   };
   const onDepartureFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setDepartureFilter(e.target.value);
+    setDepartureFilter(e.target.value.toUpperCase());
   };
   const onArrivalFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setArrivalFilter(e.target.value);
+    setArrivalFilter(e.target.value.toUpperCase());
   };
   return (
     <div className="flex flex-col items-start gap-4">
-      <h1 className="text-3xl">
-        <Trans>Flight Plan Checker</Trans>
-      </h1>
+      <div className="flex w-full flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl">
+          <Trans>Flight Plan Checker</Trans>
+        </h1>
+        <RequireRole role="software-engineer">
+          <LinkButton to="/flights/route-viewer" variant="default">
+            <Trans>Route Viewer</Trans>
+          </LinkButton>
+        </RequireRole>
+      </div>
       {visibleError && (
         <Alert className="w-full" color="red" title={visibleError.title}>
           {visibleError.detail}
@@ -106,8 +118,8 @@ function RouteComponent() {
         <Input placeholder={t`Departure`} value={departureFilter} onChange={onDepartureFilterChange} />
         <Input placeholder={t`Arrival`} value={arrivalFilter} onChange={onArrivalFilterChange} />
       </div>
-      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(calc(var(--spacing)*64),1fr))] gap-2">
-        {mine && <Flight flight={mine} />}
+      <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(--spacing(64),1fr))] gap-2">
+        {mine && <Flight flight={mine} mine />}
         {isCurrentUserOffline && <OfflineFlight />}
         {filteredFlights?.map((flight) => (
           <Flight flight={flight} key={flight.callsign} />
