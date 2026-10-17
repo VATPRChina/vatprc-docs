@@ -27,7 +27,7 @@ function RouteComponent() {
     return (
       <>
         {showTabs ? (
-          <section className="flex flex-col gap-1">
+          <section className="flex flex-col gap-2">
             <div className="flex justify-end">
               <TrainingApplicationCreateModal />
             </div>
