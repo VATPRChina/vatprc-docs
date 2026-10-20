@@ -138,6 +138,10 @@ msgstr "机型"
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 
+#: src/components/route-segments.tsx:32
+msgid "Airports"
+msgstr "机场"
+
 #: src/components/app/app-nav-menu.tsx:60
 msgid "Airspace"
 msgstr "空域"
@@ -417,6 +421,14 @@ msgstr "不支持预订"
 msgid "Booking:"
 msgstr "预订时间："
 
+#: src/components/route-segments.tsx:40
+msgid "Border entry"
+msgstr "入境航段"
+
+#: src/components/route-segments.tsx:46
+msgid "Border exit"
+msgstr "出境航段"
+
 #: src/components/atc-training/training-application-create.tsx:130
 #: src/components/atc-training/training-save.tsx:100
 msgid "Briefly describe the target of the training, such as position and lesson content."
@@ -524,6 +536,15 @@ msgstr "成都低空"
 #: src/components/audit-log/audit-log-table.tsx:141
 msgid "Child Entity"
 msgstr "子实体"
+
+#: src/components/route-segments.tsx:25
+msgid "China mainland"
+msgstr "中国大陆"
+
+#: src/components/flight-parsed-route.tsx:181
+#: src/components/flight-parsed-route.tsx:193
+msgid "China mainland: either endpoint inside"
+msgstr "中国大陆情报区（至少一个端点位于区内）"
 
 #: src/components/app/app-nav-menu.tsx:61
 #: src/routes/flights/$callsign.tsx:358
@@ -928,6 +949,10 @@ msgstr "英文说明"
 msgid "English name"
 msgstr "英文名称"
 
+#: src/components/route-segments.tsx:36
+msgid "Enroute"
+msgstr "航路巡航段"
+
 #: src/components/event/slot-import.tsx:154
 msgid "Enter at"
 msgstr "进入空域时间"
@@ -1188,6 +1213,10 @@ msgstr "姓名"
 msgid "Full Name"
 msgstr "姓名"
 
+#: src/components/flight-parsed-route.tsx:113
+msgid "Full route"
+msgstr "完整航路"
+
 #: src/components/table.tsx:216
 msgid "Go to first page"
 msgstr "前往第一页"
@@ -1297,6 +1326,10 @@ msgstr "教员"
 msgid "Insufficient controller bookings"
 msgstr "活动管制员预订数量不足"
 
+#: src/components/route-segments.tsx:25
+msgid "International"
+msgstr "国际"
+
 #: src/components/app/app-nav-menu.tsx:48
 msgid "Introduction"
 msgstr "介绍"
@@ -1332,6 +1365,10 @@ msgstr "了解中国 RVSM"
 #: src/routes/flights/$callsign.tsx:149
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
+
+#: src/components/route-segments.tsx:28
+msgid "Leg range"
+msgstr "航段索引范围"
 
 #: src/components/event/atc-booking-warning.tsx:52
 msgid "Less than half of the configured area control positions have been booked for this event."
@@ -1508,7 +1545,7 @@ msgstr "无需要许可的航路"
 msgid "No comments"
 msgstr "暂无评论"
 
-#: src/components/flight-parsed-route.tsx:43
+#: src/components/flight-parsed-route.tsx:44
 msgid "No complete flight plan route is available."
 msgstr "暂无完整的飞行计划航路。"
 
@@ -1528,6 +1565,10 @@ msgstr "无直飞段"
 msgid "No fields."
 msgstr "没有字段。"
 
+#: src/components/route-segments.tsx:54
+#~ msgid "No mainland route segments."
+#~ msgstr "没有中国大陆航路分段。"
+
 #: src/routes/events/history.tsx:148
 msgid "No past events found in the selected time range."
 msgstr "所选时间范围内没有历史活动。"
@@ -1540,13 +1581,17 @@ msgstr "没有权限"
 msgid "No region loaded"
 msgstr "尚未加载区域"
 
-#: src/components/flight-parsed-route.tsx:139
+#: src/components/flight-parsed-route.tsx:175
 msgid "No resolved coordinates are available to display on the map."
 msgstr "没有可用于地图显示的已解析坐标。"
 
 #: src/routes/flights/$callsign.tsx:143
 msgid "No RNAV1"
 msgstr "无 RNAV1"
+
+#: src/components/route-segments.tsx:57
+msgid "No route segments."
+msgstr "没有航路分段。"
 
 #: src/routes/flights/$callsign.tsx:142
 msgid "No RVSM"
@@ -1669,6 +1714,11 @@ msgstr "其他移交协议书"
 msgid "Other SOPs"
 msgstr "其他标准运行程序"
 
+#: src/components/flight-parsed-route.tsx:185
+#: src/components/flight-parsed-route.tsx:193
+msgid "Outside China mainland"
+msgstr "中国大陆情报区外"
+
 #: src/components/table.tsx:207
 msgid "Page {currentPage} of {totalPages}"
 msgstr "第 {currentPage} 页，共 {totalPages} 页"
@@ -1681,11 +1731,11 @@ msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者
 msgid "Parse route"
 msgstr "解析航路"
 
-#: src/components/flight-parsed-route.tsx:40
+#: src/components/flight-parsed-route.tsx:41
 msgid "Parsed route"
 msgstr "解析后的航路"
 
-#: src/components/flight-parsed-route.tsx:90
+#: src/components/flight-parsed-route.tsx:103
 msgid "Parsed route map"
 msgstr "解析航路地图"
 
@@ -1934,9 +1984,18 @@ msgstr "权限"
 msgid "Route"
 msgstr "航路"
 
-#: src/components/flight-parsed-route.tsx:47
+#: src/components/flight-parsed-route.tsx:48
 msgid "Route parsing failed"
 msgstr "航路解析失败"
+
+#: src/components/route-segments.tsx:13
+#: src/components/route-segments.tsx:15
+msgid "Route segments"
+msgstr "航路分段"
+
+#: src/components/flight-parsed-route.tsx:108
+msgid "Route view"
+msgstr "航路视图"
 
 #: src/components/route-viewer.tsx:23
 #: src/routes/flights/index.tsx:107
@@ -2341,7 +2400,7 @@ msgstr "下方表格的内容基于管制员中心数据自动生成，正常情
 msgid "The Moodle account has been provisioned successfully."
 msgstr "Moodle 账号已成功开通。"
 
-#: src/components/flight-parsed-route.tsx:82
+#: src/components/flight-parsed-route.tsx:95
 msgid "The parser returned no route segments."
 msgstr "解析结果中没有航段。"
 
@@ -2511,7 +2570,7 @@ msgstr "应答机"
 msgid "Transponder field is empty."
 msgstr "应答机设备代码为空。"
 
-#: src/components/flight-parsed-route.tsx:48
+#: src/components/flight-parsed-route.tsx:49
 msgid "Unable to load the parsed route."
 msgstr "无法加载解析后的航路。"
 

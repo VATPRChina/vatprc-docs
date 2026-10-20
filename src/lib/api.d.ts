@@ -1457,6 +1457,14 @@ export interface components {
       verification_uri: string;
       verification_uri_complete?: string | null;
     };
+    DomesticRouteSegment: {
+      /** @description Exclusive zero-based index into RouteDeliveryInfo.legs. */
+      end_index: number;
+      /** @description First fix identifier followed by the last fix identifier, e.g. ZSPD-LAMEN. */
+      identifier: string;
+      /** @description Inclusive zero-based index into RouteDeliveryInfo.legs. */
+      start_index: number;
+    };
     EventAirspaceDto: {
       /** Format: date-time */
       created_at: string;
@@ -1604,6 +1612,23 @@ export interface components {
       transponder: string;
       wake_category: string;
     };
+    /** @description A mainland or international portion. Leg ranges refer to the expanded legs array. */
+    FlightRouteSegment: {
+      kind: components["schemas"]["SegmentKind"];
+      cross_border_enter_end_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_enter_start_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_exit_end_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_exit_start_fix?: null | components["schemas"]["FlightRouteFix"];
+      /** @description Exclusive zero-based leg index. */
+      end_index: number;
+      enroute_end_fix: components["schemas"]["FlightRouteFix"];
+      enroute_start_fix: components["schemas"]["FlightRouteFix"];
+      identifier: string;
+      route_end_airport?: null | components["schemas"]["FlightRouteFix"];
+      route_start_airport?: null | components["schemas"]["FlightRouteFix"];
+      /** @description Inclusive zero-based leg index. */
+      start_index: number;
+    };
     /** @description Coordinates are exposed only by the developer-only v2 route endpoint. */
     FlightRouteFix: {
       identifier: string;
@@ -1615,6 +1640,8 @@ export interface components {
     };
     FlightRouteLeg: {
       from: components["schemas"]["FlightRouteFix"];
+      /** @description Whether either endpoint is mainland or unresolved. */
+      is_mainland: boolean;
       is_sid: boolean;
       is_star: boolean;
       is_unknown: boolean;
@@ -1675,9 +1702,14 @@ export interface components {
       type: string;
     };
     RouteDeliveryInfo: {
+      /** @description Mainland and international portions, partitioning the expanded legs in order. */
+      segments: components["schemas"]["FlightRouteSegment"][];
+      /** @description Contiguous portions with at least one mainland FIR endpoint per leg. */
+      domestic_segments?: components["schemas"]["DomesticRouteSegment"][];
       legs: components["schemas"]["FlightRouteLeg"][];
       sid_candidates: components["schemas"]["SidCandidate"][];
     };
+    SegmentKind: "mainland" | "international";
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;

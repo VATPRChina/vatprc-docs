@@ -138,6 +138,10 @@ msgstr "Aircraft Type"
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
+#: src/components/route-segments.tsx:32
+msgid "Airports"
+msgstr "Airports"
+
 #: src/components/app/app-nav-menu.tsx:60
 msgid "Airspace"
 msgstr "Airspace"
@@ -417,6 +421,14 @@ msgstr "Booking not supported"
 msgid "Booking:"
 msgstr "Booking:"
 
+#: src/components/route-segments.tsx:40
+msgid "Border entry"
+msgstr "Border entry"
+
+#: src/components/route-segments.tsx:46
+msgid "Border exit"
+msgstr "Border exit"
+
 #: src/components/atc-training/training-application-create.tsx:130
 #: src/components/atc-training/training-save.tsx:100
 msgid "Briefly describe the target of the training, such as position and lesson content."
@@ -524,6 +536,15 @@ msgstr "Chengdu Low Area"
 #: src/components/audit-log/audit-log-table.tsx:141
 msgid "Child Entity"
 msgstr "Child Entity"
+
+#: src/components/route-segments.tsx:25
+msgid "China mainland"
+msgstr "China mainland"
+
+#: src/components/flight-parsed-route.tsx:181
+#: src/components/flight-parsed-route.tsx:193
+msgid "China mainland: either endpoint inside"
+msgstr "China mainland: either endpoint inside"
 
 #: src/components/app/app-nav-menu.tsx:61
 #: src/routes/flights/$callsign.tsx:358
@@ -928,6 +949,10 @@ msgstr "English description"
 msgid "English name"
 msgstr "English name"
 
+#: src/components/route-segments.tsx:36
+msgid "Enroute"
+msgstr "Enroute"
+
 #: src/components/event/slot-import.tsx:154
 msgid "Enter at"
 msgstr "Enter at"
@@ -1188,6 +1213,10 @@ msgstr "Full name"
 msgid "Full Name"
 msgstr "Full Name"
 
+#: src/components/flight-parsed-route.tsx:113
+msgid "Full route"
+msgstr "Full route"
+
 #: src/components/table.tsx:216
 msgid "Go to first page"
 msgstr "Go to first page"
@@ -1297,6 +1326,10 @@ msgstr "Instructor"
 msgid "Insufficient controller bookings"
 msgstr "Insufficient controller bookings"
 
+#: src/components/route-segments.tsx:25
+msgid "International"
+msgstr "International"
+
 #: src/components/app/app-nav-menu.tsx:48
 msgid "Introduction"
 msgstr "Introduction"
@@ -1332,6 +1365,10 @@ msgstr "Learn more about China RVSM"
 #: src/routes/flights/$callsign.tsx:149
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
+
+#: src/components/route-segments.tsx:28
+msgid "Leg range"
+msgstr "Leg range"
 
 #: src/components/event/atc-booking-warning.tsx:52
 msgid "Less than half of the configured area control positions have been booked for this event."
@@ -1508,7 +1545,7 @@ msgstr "no airway requiring approval"
 msgid "No comments"
 msgstr "No comments"
 
-#: src/components/flight-parsed-route.tsx:43
+#: src/components/flight-parsed-route.tsx:44
 msgid "No complete flight plan route is available."
 msgstr "No complete flight plan route is available."
 
@@ -1528,6 +1565,10 @@ msgstr "no direct route legs"
 msgid "No fields."
 msgstr "No fields."
 
+#: src/components/route-segments.tsx:54
+#~ msgid "No mainland route segments."
+#~ msgstr "No mainland route segments."
+
 #: src/routes/events/history.tsx:148
 msgid "No past events found in the selected time range."
 msgstr "No past events found in the selected time range."
@@ -1540,13 +1581,17 @@ msgstr "No permission"
 msgid "No region loaded"
 msgstr "No region loaded"
 
-#: src/components/flight-parsed-route.tsx:139
+#: src/components/flight-parsed-route.tsx:175
 msgid "No resolved coordinates are available to display on the map."
 msgstr "No resolved coordinates are available to display on the map."
 
 #: src/routes/flights/$callsign.tsx:143
 msgid "No RNAV1"
 msgstr "No RNAV1"
+
+#: src/components/route-segments.tsx:57
+msgid "No route segments."
+msgstr "No route segments."
 
 #: src/routes/flights/$callsign.tsx:142
 msgid "No RVSM"
@@ -1669,6 +1714,11 @@ msgstr "Other LOAs"
 msgid "Other SOPs"
 msgstr "Other SOPs"
 
+#: src/components/flight-parsed-route.tsx:185
+#: src/components/flight-parsed-route.tsx:193
+msgid "Outside China mainland"
+msgstr "Outside China mainland"
+
 #: src/components/table.tsx:207
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Page {currentPage} of {totalPages}"
@@ -1681,11 +1731,11 @@ msgstr "Page you are trying to open does not exist. You may have mistyped the ad
 msgid "Parse route"
 msgstr "Parse route"
 
-#: src/components/flight-parsed-route.tsx:40
+#: src/components/flight-parsed-route.tsx:41
 msgid "Parsed route"
 msgstr "Parsed route"
 
-#: src/components/flight-parsed-route.tsx:90
+#: src/components/flight-parsed-route.tsx:103
 msgid "Parsed route map"
 msgstr "Parsed route map"
 
@@ -1934,9 +1984,18 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
-#: src/components/flight-parsed-route.tsx:47
+#: src/components/flight-parsed-route.tsx:48
 msgid "Route parsing failed"
 msgstr "Route parsing failed"
+
+#: src/components/route-segments.tsx:13
+#: src/components/route-segments.tsx:15
+msgid "Route segments"
+msgstr "Route segments"
+
+#: src/components/flight-parsed-route.tsx:108
+msgid "Route view"
+msgstr "Route view"
 
 #: src/components/route-viewer.tsx:23
 #: src/routes/flights/index.tsx:107
@@ -2341,7 +2400,7 @@ msgstr "The list below is displayed based on the controller data in our ATC Cent
 msgid "The Moodle account has been provisioned successfully."
 msgstr "The Moodle account has been provisioned successfully."
 
-#: src/components/flight-parsed-route.tsx:82
+#: src/components/flight-parsed-route.tsx:95
 msgid "The parser returned no route segments."
 msgstr "The parser returned no route segments."
 
@@ -2511,7 +2570,7 @@ msgstr "Transponder"
 msgid "Transponder field is empty."
 msgstr "Transponder field is empty."
 
-#: src/components/flight-parsed-route.tsx:48
+#: src/components/flight-parsed-route.tsx:49
 msgid "Unable to load the parsed route."
 msgstr "Unable to load the parsed route."
 

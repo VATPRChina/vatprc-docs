@@ -1,15 +1,16 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { Map } from "@/components/airspace/map";
 import { RequireRole } from "@/components/require-role";
+import { RouteSegments } from "@/components/route-segments";
 import { SidCandidates } from "@/components/sid-candidates";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { buildRouteMap, hasPosition, type RouteLeg } from "@/lib/flight-route-map";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
+import { Alert, SegmentedControl, Skeleton } from "@mantine/core";
 import { Layer, NavigationControl, Source, type MapRef, type StyleSpecification } from "@vis.gl/react-maplibre";
-import { Fragment, useCallback, useEffect, useMemo, useRef } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type FlightPlan = Pick<components["schemas"]["FlightDto"], "departure" | "arrival" | "raw_route">;
 const UNKNOWN_COLOR = "text-red-600 dark:text-red-400";
@@ -51,7 +52,8 @@ export function ParsedRoute({ route, available = true }: { route: string; availa
       {isLoading && <Skeleton h={384} />}
       {available && !error && data && (
         <Fragment key={route}>
-          <RouteResult legs={data.legs} />
+          <RouteResult legs={data.legs} segments={data.segments ?? data.domestic_segments} />
+          <RouteSegments segments={data.segments ?? []} />
           <SidCandidates candidates={data.sid_candidates} />
         </Fragment>
       )}
@@ -60,14 +62,25 @@ export function ParsedRoute({ route, available = true }: { route: string; availa
 }
 
 export function RouteResult({
-  legs,
+  legs: fullLegs,
+  segments = [],
   style = mapStyle as unknown as StyleSpecification,
 }: {
   legs: RouteLeg[];
+  segments?: Pick<components["schemas"]["FlightRouteSegment"], "identifier" | "start_index" | "end_index">[];
   style?: StyleSpecification;
 }) {
   const { t } = useLingui();
   const ref = useRef<MapRef>(null);
+  const [selection, setSelection] = useState("full");
+  const segmentKey = (
+    segment: Pick<components["schemas"]["FlightRouteSegment"], "identifier" | "start_index" | "end_index">,
+  ) => `${segment.start_index}:${segment.end_index}:${segment.identifier}`;
+  const selectedSegment = segments.find((segment) => segmentKey(segment) === selection);
+  const legs = useMemo(
+    () => (selectedSegment ? fullLegs.slice(selectedSegment.start_index, selectedSegment.end_index) : fullLegs),
+    [fullLegs, selectedSegment],
+  );
 
   const geometry = useMemo(() => buildRouteMap(legs), [legs]);
 
@@ -88,8 +101,20 @@ export function RouteResult({
       {geometry.bounds ? (
         <div
           aria-label={t`Parsed route map`}
-          className="aspect-video w-full overflow-hidden rounded border border-black/15 dark:border-white/20"
+          className="relative aspect-video w-full overflow-hidden rounded border border-black/15 dark:border-white/20"
         >
+          <div className="absolute top-2 left-2 z-10 max-w-[calc(100%-4rem)] overflow-x-auto rounded shadow">
+            <SegmentedControl
+              aria-label={t`Route view`}
+              size="xs"
+              value={selectedSegment ? selection : "full"}
+              onChange={setSelection}
+              data={[
+                { label: t`Full route`, value: "full" },
+                ...segments.map((segment) => ({ label: segment.identifier, value: segmentKey(segment) })),
+              ]}
+            />
+          </div>
           <Map
             ref={ref}
             initialViewState={{ bounds: geometry.bounds, fitBoundsOptions: { padding: 40, maxZoom: 9 } }}
@@ -102,9 +127,20 @@ export function RouteResult({
               <Layer
                 id="flight-route-lines"
                 type="line"
+                filter={["==", ["get", "is_mainland"], true]}
                 paint={{
                   "line-color": ["case", ["boolean", ["get", "is_unknown"], false], "#dc2626", "#2563eb"],
                   "line-width": 3,
+                }}
+              />
+              <Layer
+                id="flight-route-lines-outside"
+                type="line"
+                filter={["==", ["get", "is_mainland"], false]}
+                paint={{
+                  "line-color": ["case", ["boolean", ["get", "is_unknown"], false], "#dc2626", "#2563eb"],
+                  "line-width": 3,
+                  "line-dasharray": [2, 2],
                 }}
               />
             </Source>
@@ -139,11 +175,22 @@ export function RouteResult({
           <Trans>No resolved coordinates are available to display on the map.</Trans>
         </Alert>
       )}
+      <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <span className="flex items-center gap-2">
+          <span aria-hidden="true" className="w-8 border-t-2 border-blue-600" />
+          <Trans>China mainland: either endpoint inside</Trans>
+        </span>
+        <span className="flex items-center gap-2">
+          <span aria-hidden="true" className="w-8 border-t-2 border-dashed border-blue-600" />
+          <Trans>Outside China mainland</Trans>
+        </span>
+      </div>
       <p className="flex flex-wrap items-center gap-2 font-mono">
         <span className={!hasPosition(legs[0].from) ? UNKNOWN_COLOR : undefined}>{legs[0].from.identifier}</span>
         {legs.map((leg, index) => (
           <Fragment key={index}>
             <span
+              title={leg.is_mainland ? t`China mainland: either endpoint inside` : t`Outside China mainland`}
               className={cn(
                 (leg.is_unknown || !leg.leg_identifier) && UNKNOWN_COLOR,
                 (leg.is_sid || leg.is_star) && SID_STAR_STYLE,

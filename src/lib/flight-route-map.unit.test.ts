@@ -14,6 +14,7 @@ const leg = (from: RouteFix, to: RouteFix): RouteLeg => ({
   is_unknown: false,
   is_sid: false,
   is_star: false,
+  is_mainland: false,
 });
 
 test("keeps a date-line crossing local and preserves real zero coordinates", () => {
@@ -46,4 +47,15 @@ test("marks mapped unknown connections for red styling without marking their fix
   const route = buildRouteMap([{ ...leg(fix("A", 1), fix("B", 2)), is_unknown: true }]);
   expect(route.segments.features[0].properties.is_unknown).toBe(true);
   expect(route.unresolved).toEqual([]);
+});
+
+test("preserves mainland flags for solid and dashed route layers independently of unknown styling", () => {
+  const route = buildRouteMap([
+    { ...leg(fix("A", 110, 30), fix("B", 140, 35)), is_mainland: true },
+    { ...leg(fix("B", 140, 35), fix("C", 141, 36)), is_mainland: false, is_unknown: true },
+    { ...leg(fix("C", 141, 36), fix("D", 111, 31)), is_mainland: true },
+  ]);
+  expect(route.segments.features.map((segment) => segment.properties.is_mainland)).toEqual([true, false, true]);
+  expect(route.segments.features.map((segment) => segment.properties.is_unknown)).toEqual([false, true, false]);
+  expect(route.segments.features).toHaveLength(3);
 });

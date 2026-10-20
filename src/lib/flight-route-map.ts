@@ -16,7 +16,7 @@ const unwrapLongitude = (longitude: number, reference: number) =>
   longitude + 360 * Math.round((reference - longitude) / 360);
 
 type Point = GeoJSON.Feature<GeoJSON.Point, { identifier: string }>;
-type Segment = GeoJSON.Feature<GeoJSON.LineString, { identifier: string; is_unknown: boolean }>;
+type Segment = GeoJSON.Feature<GeoJSON.LineString, { identifier: string; is_unknown: boolean; is_mainland: boolean }>;
 
 /** Keep date-line crossings local and never draw through an unresolved fix. */
 export const buildRouteMap = (legs: readonly RouteLeg[]) => {
@@ -41,6 +41,7 @@ export const buildRouteMap = (legs: readonly RouteLeg[]) => {
                 properties: {
                   identifier: leg.leg_identifier || "DCT",
                   is_unknown: leg.is_unknown || !leg.leg_identifier,
+                  is_mainland: leg.is_mainland,
                 },
                 geometry: { type: "LineString", coordinates: [from, to] },
               },
