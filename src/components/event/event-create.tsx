@@ -2,9 +2,9 @@ import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
+import { ActionIcon, Alert, Anchor, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
@@ -55,14 +55,37 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
     },
   });
   const { mutateAsync: update, error: updateError } = $api.useMutation("put", "/api/events/{id}", {
-    onSuccess: wrapPromiseWithLog(async () => {
-      close();
+    onSuccess: (data, variables) => {
+      form.reset({
+        ...variables.body,
+        title_en: variables.body.title_en ?? null,
+        image_url: variables.body.image_url ?? null,
+        community_link: variables.body.community_link ?? null,
+        vatsim_link: variables.body.vatsim_link ?? null,
+        start_booking_at: variables.body.start_booking_at,
+        end_booking_at: variables.body.end_booking_at,
+        start_atc_booking_at: variables.body.start_atc_booking_at,
+      });
+      if (data.discord_message?.status !== "OutOfSync") close();
       if (eventId) {
-        await queryClient.invalidateQueries(
-          $api.queryOptions("get", "/api/events/{id}", { params: { path: { id: eventId } } }),
+        queryClient.setQueryData(
+          $api.queryOptions("get", "/api/events/{id}", { params: { path: { id: eventId } } }).queryKey,
+          data,
         );
       }
-    }),
+    },
+  });
+  const {
+    mutate: publishDiscord,
+    isPending: isPublishingDiscord,
+    error: discordError,
+  } = $api.useMutation("put", "/api/events/{id}/discord", {
+    onSuccess: (data) => {
+      queryClient.setQueryData(
+        $api.queryOptions("get", "/api/events/{id}", { params: { path: { id: eventId ?? NULL_ULID } } }).queryKey,
+        data,
+      );
+    },
   });
   const now = formatISO(setMinutes(setSeconds(addHours(Date.now(), 1), 0), 0));
   const form = useForm({
@@ -132,10 +155,52 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
           }}
         >
           <div className="flex flex-col gap-4">
-            {(loadError ?? uploadError ?? createError ?? updateError) && (
-              <Alert color="red" title={(loadError ?? uploadError ?? createError ?? updateError)?.title}>
-                {(loadError ?? uploadError ?? createError ?? updateError)?.detail}
+            {(loadError ?? uploadError ?? createError ?? updateError ?? discordError) && (
+              <Alert
+                color="red"
+                title={(loadError ?? uploadError ?? createError ?? updateError ?? discordError)?.title}
+              >
+                {(loadError ?? uploadError ?? createError ?? updateError ?? discordError)?.detail}
               </Alert>
+            )}
+            {eventId && event && (
+              <div className="flex flex-col gap-2">
+                {event.discord_message && (
+                  <Anchor
+                    href={`https://discord.com/channels/${event.discord_message.guild_id}/${event.discord_message.message_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Trans>View Discord post</Trans>
+                  </Anchor>
+                )}
+                {event.discord_message?.status === "OutOfSync" && (
+                  <Alert color="yellow">
+                    <Trans>The event is saved, but the Discord post could not be updated. Please retry syncing.</Trans>
+                  </Alert>
+                )}
+                {(!event.discord_message || event.discord_message?.status === "OutOfSync") && (
+                  <form.Subscribe selector={(state) => [state.isDirty, state.isSubmitting]}>
+                    {([isDirty, isSubmitting]) => (
+                      <div>
+                        <Button
+                          type="button"
+                          loading={isPublishingDiscord}
+                          disabled={isDirty || isSubmitting || isLoading}
+                          onClick={() => publishDiscord({ params: { path: { id: eventId } } })}
+                        >
+                          {event.discord_message ? t`Retry Discord sync` : t`Publish to Discord`}
+                        </Button>
+                        {isDirty && (
+                          <p>
+                            <Trans>Save changes before publishing to Discord.</Trans>
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </form.Subscribe>
+                )}
+              </div>
             )}
             <form.Field name="title">
               {(field) => (
@@ -280,7 +345,12 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
             <div>
               <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
                 {([canSubmit, isSubmitting]) => (
-                  <Button variant="subtle" type="submit" loading={isSubmitting} disabled={!canSubmit}>
+                  <Button
+                    variant="subtle"
+                    type="submit"
+                    loading={isSubmitting}
+                    disabled={!canSubmit || isPublishingDiscord}
+                  >
                     {eventId ? t`Save` : t`Create`}
                   </Button>
                 )}
