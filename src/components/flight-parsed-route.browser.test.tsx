@@ -14,6 +14,7 @@ const legs = [
     to: { identifier: "ZSPD", latitude: 31, longitude: 121, is_unknown: false },
     leg_identifier: "",
     is_unknown: false,
+    is_mainland: true,
     is_sid: false,
     is_star: false,
   },
@@ -92,4 +93,18 @@ test("flags an unknown connection in red even with known endpoints", async () =>
   await expect.element(screen.getByText("NOLEG", { exact: true })).toHaveClass("text-red-600");
   await expect.element(screen.getByText("ZBAA", { exact: true })).not.toHaveClass("text-red-600");
   await expect.element(screen.getByText("ZSPD", { exact: true })).not.toHaveClass("text-red-600");
+});
+
+test("places leg annotations on the parsed leg identifier", async () => {
+  const screen = await renderComponent(
+    <RouteResult
+      legs={legs}
+      style={{ version: 8, sources: {}, layers: [] }}
+      legAnnotations={(index) => <button>Check leg {index + 1}</button>}
+    />,
+  );
+  const annotation = screen.getByRole("button", { name: "Check leg 1" });
+  await expect.element(annotation).toBeVisible();
+  const button = Array.from(document.querySelectorAll("button")).find((button) => button.textContent === "Check leg 1");
+  expect(button?.parentElement?.textContent).toBe("DCTCheck leg 1");
 });

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { Layer, NavigationControl, Source, type MapRef, type StyleSpecification } from "@vis.gl/react-maplibre";
-import { Fragment, useCallback, useEffect, useMemo, useRef } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, type ReactNode } from "react";
 
 type FlightPlan = Pick<components["schemas"]["FlightDto"], "departure" | "arrival" | "raw_route">;
 const UNKNOWN_COLOR = "text-red-600 dark:text-red-400";
@@ -62,9 +62,11 @@ export function ParsedRoute({ route, available = true }: { route: string; availa
 export function RouteResult({
   legs,
   style = mapStyle as unknown as StyleSpecification,
+  legAnnotations,
 }: {
   legs: RouteLeg[];
   style?: StyleSpecification;
+  legAnnotations?: (index: number) => ReactNode;
 }) {
   const { t } = useLingui();
   const ref = useRef<MapRef>(null);
@@ -143,14 +145,17 @@ export function RouteResult({
         <span className={!hasPosition(legs[0].from) ? UNKNOWN_COLOR : undefined}>{legs[0].from.identifier}</span>
         {legs.map((leg, index) => (
           <Fragment key={index}>
-            <span
-              className={cn(
-                (leg.is_unknown || !leg.leg_identifier) && UNKNOWN_COLOR,
-                (leg.is_sid || leg.is_star) && SID_STAR_STYLE,
-                "text-sm",
-              )}
-            >
-              {leg.leg_identifier || "DCT"}
+            <span className="inline-flex flex-wrap items-center gap-1">
+              <span
+                className={cn(
+                  (leg.is_unknown || !leg.leg_identifier) && UNKNOWN_COLOR,
+                  (leg.is_sid || leg.is_star) && SID_STAR_STYLE,
+                  "text-sm",
+                )}
+              >
+                {leg.leg_identifier || "DCT"}
+              </span>
+              {legAnnotations?.(index)}
             </span>
             <span className={cn(!hasPosition(leg.to) && UNKNOWN_COLOR)}>{leg.to.identifier}</span>
           </Fragment>

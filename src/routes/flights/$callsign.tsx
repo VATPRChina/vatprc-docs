@@ -1,6 +1,5 @@
 import { BackButton } from "@/components/back-button";
-import { FlightParsedRoute } from "@/components/flight-parsed-route";
-import { FlightValidationProvider, FlightValidationTags } from "@/components/flight-validations";
+import { FlightV2 } from "@/components/flight-v2";
 import { FlightWarnings } from "@/components/flight-warnings";
 import { RequireRole } from "@/components/require-role";
 import { formatCruisingLevelInMeters, getCruisingLevelInMeters } from "@/lib/altitude";
@@ -55,11 +54,8 @@ const FplField = ({
   );
 
   return (
-    <div className={cn("flex flex-col items-start gap-1", className)} {...props}>
-      <div className="flex flex-wrap items-center gap-1">
-        {labelC}
-        {field && <FlightValidationTags field={field} />}
-      </div>
+    <div className={cn("flex flex-col items-start gap-1", className)} data-field={field} {...props}>
+      <div className="flex flex-wrap items-center gap-1">{labelC}</div>
       {value && value !== "-" && <span className="font-mono">{value}</span>}
       {value === "-" && (
         <Tooltip label={<Trans>Check at VATSIM</Trans>}>
@@ -382,7 +378,7 @@ function RouteComponent() {
   );
 
   return (
-    <FlightValidationProvider callsign={callsign}>
+    <>
       <div className="flex flex-col items-start gap-4">
         <BackButton />
         {(error ?? warningsError) && (
@@ -469,15 +465,12 @@ function RouteComponent() {
               <Trans>Validation Result</Trans>
             </h2>
             <FlightWarnings callsign={callsign} />
-            <RequireRole role="software-engineer">
-              <h2 className="text-2xl">
-                <Trans>Flight Route</Trans>
-              </h2>
-              <FlightParsedRoute flight={flight} />
-            </RequireRole>
           </div>
         )}
+        <RequireRole role="software-engineer">
+          <FlightV2 callsign={callsign} />
+        </RequireRole>
       </div>
-    </FlightValidationProvider>
+    </>
   );
 }

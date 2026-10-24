@@ -772,6 +772,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/by-callsign/{callsign}/v2": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Complete v2 flight diagnostics from one flight-plan snapshot.
+     *     Parser and matching errors retain earlier completed stages in the response.
+     */
+    get: operations["flight_v2_by_callsign"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/by-callsign/{callsign}/validations": {
     parameters: {
       query?: never;
@@ -779,6 +799,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
+    /** @description Superseded for flight diagnostics by /api/flights/by-callsign/{callsign}/v2. */
     get: operations["validations_by_callsign"];
     put?: never;
     post?: never;
@@ -828,8 +849,10 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Parse a complete route with v2 and return expanded legs and matching SIDs.
+     * Superseded for flight diagnostics by `/api/flights/by-callsign/{callsign}/v2`.
+     *     Parse a complete route with v2 and return expanded legs, mainland segments and matching SIDs.
      *     Requires the software-engineer role.
+     * @description Superseded for flight diagnostics by /api/flights/by-callsign/{callsign}/v2.
      */
     get: operations["route_v2"];
     put?: never;
@@ -1457,6 +1480,8 @@ export interface components {
       verification_uri: string;
       verification_uri_complete?: string | null;
     };
+    /** @enum {string} */
+    DirectionRestriction: "none" | "forward" | "backward";
     EventAirspaceDto: {
       /** Format: date-time */
       created_at: string;
@@ -1615,16 +1640,59 @@ export interface components {
     };
     FlightRouteLeg: {
       from: components["schemas"]["FlightRouteFix"];
+      /** @description Whether either endpoint is mainland or unresolved. */
+      is_mainland: boolean;
       is_sid: boolean;
       is_star: boolean;
       is_unknown: boolean;
       leg_identifier: string;
       to: components["schemas"]["FlightRouteFix"];
     };
+    /** @description A mainland or international portion. Leg ranges refer to the expanded legs array. */
+    FlightRouteSegment: {
+      cross_border_enter_end_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_enter_start_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_exit_end_fix?: null | components["schemas"]["FlightRouteFix"];
+      cross_border_exit_start_fix?: null | components["schemas"]["FlightRouteFix"];
+      /** @description Exclusive zero-based leg index. */
+      end_index: number;
+      enroute_end_fix: components["schemas"]["FlightRouteFix"];
+      enroute_start_fix: components["schemas"]["FlightRouteFix"];
+      identifier: string;
+      kind: components["schemas"]["SegmentKind"];
+      route_end_airport?: null | components["schemas"]["FlightRouteFix"];
+      route_start_airport?: null | components["schemas"]["FlightRouteFix"];
+      /** @description Inclusive zero-based leg index. */
+      start_index: number;
+    };
+    FlightV2DiagnosticError: {
+      message: string;
+      stage: string;
+    };
+    /** @description A single flight snapshot and its v2 analysis. No v1 parsing or validation is used. */
+    FlightV2Dto: {
+      errors: components["schemas"]["FlightV2DiagnosticError"][];
+      flight_plan: components["schemas"]["FlightDto"];
+      /** @description None means matching could not complete. Indices refer to `segments`. */
+      preferred_route_matching?: components["schemas"]["SegmentRouteMatches"][] | null;
+      route_parse: components["schemas"]["RouteParseResults"];
+      /** @description None means parsing did not complete; an empty array means no segments. */
+      segments?: components["schemas"]["FlightV2Segment"][] | null;
+      validations: components["schemas"]["ValidatorResult"][];
+    };
+    FlightV2Leg: components["schemas"]["FlightRouteLeg"] & {
+      direction_restriction: components["schemas"]["DirectionRestriction"];
+      kind: components["schemas"]["LegKind"];
+    };
+    FlightV2Segment: components["schemas"]["FlightRouteSegment"] & {
+      legs: components["schemas"]["FlightV2Leg"][];
+    };
     HealthResponse: {
       database: string;
       status: string;
     };
+    /** @enum {string} */
+    LegKind: "airway" | "sid" | "star" | "direct";
     /** @enum {string} */
     LevelRestrictionType:
       "standard-even" | "standard-odd" | "standard" | "flight-level-even" | "flight-level-odd" | "flight-level";
@@ -1653,6 +1721,19 @@ export interface components {
       /** Format: date-time */
       valid_until?: string | null;
     };
+    PreferredRouteMatchCandidate: {
+      airport_pair: boolean;
+      end_leg_index: number;
+      enroute_end_fix: components["schemas"]["FlightRouteFix"];
+      enroute_start_fix: components["schemas"]["FlightRouteFix"];
+      /** @description Invalid published routes are reported, without preventing other matches. */
+      error?: string | null;
+      from: components["schemas"]["FlightRouteFix"];
+      matched: boolean;
+      route: components["schemas"]["PreferredRouteSnapshot"];
+      start_leg_index: number;
+      to: components["schemas"]["FlightRouteFix"];
+    };
     PreferredRouteSaveRequest: {
       allowed_altitudes?: number[];
       arrival: string;
@@ -1667,6 +1748,22 @@ export interface components {
       /** Format: date-time */
       valid_until?: string | null;
     };
+    PreferredRouteSnapshot: {
+      allowed_altitudes: number[];
+      arrival: string;
+      cruising_level_restriction: string;
+      departure: string;
+      is_public: boolean;
+      /** Format: int32 */
+      minimal_altitude: number;
+      name: string;
+      raw_route: string;
+      remarks: string;
+      /** Format: date-time */
+      valid_from?: string | null;
+      /** Format: date-time */
+      valid_until?: string | null;
+    };
     ProblemDetails: {
       detail: string;
       /** Format: int32 */
@@ -1674,13 +1771,89 @@ export interface components {
       title: string;
       type: string;
     };
+    RouteAmendment: {
+      kind: string;
+      value: string;
+    };
+    RouteCandidate: {
+      fix?: null | components["schemas"]["FlightRouteFix"];
+      identifier: string;
+      is_unknown: boolean;
+      /**
+       * @description airport, waypoint, ndb, vhf, coordinate, fix-reference, unknown-fix,
+       *     airway, sid, star, or direct. Unknown procedures retain their kind.
+       */
+      kind: string;
+    };
+    RouteConstructedLeg: {
+      leg: components["schemas"]["FlightV2Leg"];
+      procedure?: null | components["schemas"]["RouteCandidate"];
+    };
     RouteDeliveryInfo: {
       legs: components["schemas"]["FlightRouteLeg"][];
+      /** @description Mainland and international portions, partitioning the expanded legs in order. */
+      segments: components["schemas"]["FlightRouteSegment"][];
       sid_candidates: components["schemas"]["SidCandidate"][];
+    };
+    RouteLexerToken: {
+      amendments: components["schemas"]["RouteAmendment"][];
+      /** Format: int32 */
+      distance_nm?: number | null;
+      /** Format: int32 */
+      heading?: number | null;
+      kind: string;
+      /** Format: double */
+      latitude?: number | null;
+      /** Format: double */
+      longitude?: number | null;
+      reference_identifier?: string | null;
+      text: string;
+    };
+    /** @description A null stage has not completed. Completed stages are retained on later errors. */
+    RouteParseResults: {
+      constructor?: components["schemas"]["RouteConstructedLeg"][] | null;
+      expander?: components["schemas"]["FlightV2Leg"][] | null;
+      lex_grouper?: components["schemas"]["RouteParsedIdent"][] | null;
+      lexer?: components["schemas"]["RouteLexerToken"][] | null;
+      resolver?: components["schemas"]["RouteResolvedIdent"][] | null;
+      solver?: components["schemas"]["RouteSolvedIdent"][] | null;
+    };
+    RouteParsedIdent: {
+      amendments: components["schemas"]["RouteAmendment"][];
+      errors: string[];
+      identifier: string;
+    };
+    RouteResolvedIdent: {
+      candidates: components["schemas"]["RouteCandidate"][];
+      ident: components["schemas"]["RouteParsedIdent"];
+    };
+    RouteSolvedIdent: {
+      candidates: components["schemas"]["RouteSolverState"][];
+      ident: components["schemas"]["RouteParsedIdent"];
+    };
+    RouteSolverState: {
+      candidate: components["schemas"]["RouteCandidate"];
+      /** Format: double */
+      distance_nm?: number | null;
+      fallback_count: number;
+      /** Format: double */
+      latitude?: number | null;
+      /** Format: double */
+      longitude?: number | null;
+      /** @description Index in the previous identifier's surviving candidates; null at departure. */
+      predecessor_index?: number | null;
     };
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;
+    };
+    /** @enum {string} */
+    SegmentKind: "mainland" | "international";
+    SegmentRouteMatches: {
+      candidates: components["schemas"]["PreferredRouteMatchCandidate"][];
+      segment_index: number;
+      /** @description First matching candidate in matching priority order, used by validation. */
+      selected_candidate_index?: number | null;
     };
     SheetDto: {
       fields: components["schemas"]["SheetFieldDto"][];
@@ -1882,8 +2055,29 @@ export interface components {
       | "controller"
       | "api-client"
       | "user";
+    /** @description Indices are zero-based offsets into the segment list and expanded route. */
+    ValidationScope:
+      | {
+          /** @enum {string} */
+          level: "flight";
+        }
+      | {
+          /** @description Exclusive end of the segment in the expanded route. */
+          end_leg_index: number;
+          /** @enum {string} */
+          level: "segment";
+          segment_index: number;
+          start_leg_index: number;
+        }
+      | {
+          leg_index: number;
+          /** @enum {string} */
+          level: "leg";
+          segment_index: number;
+        };
     ValidatorResult: {
       field: components["schemas"]["WarningMessageField"];
+      scope: components["schemas"]["ValidationScope"];
       status: components["schemas"]["ValidatorStatus"];
       validator_ident: string;
       warnings: components["schemas"]["WarningMessage"][];
@@ -3553,6 +3747,51 @@ export interface operations {
       500: components["responses"]["InternalServerError"];
     };
   };
+  flight_v2_by_callsign: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Callsign */
+        callsign: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Flight plan, parser stages, segments, preferred-route matching and validators */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["FlightV2Dto"];
+        };
+      };
+      /** @description Authentication required */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Software engineer role required */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Flight not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
   validations_by_callsign: {
     parameters: {
       query?: never;
@@ -3634,7 +3873,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Expanded route segments and SID candidates */
+      /** @description Expanded legs, mainland segments and SID candidates */
       200: {
         headers: {
           [name: string]: unknown;

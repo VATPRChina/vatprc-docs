@@ -12,6 +12,7 @@ const leg = (from: RouteFix, to: RouteFix): RouteLeg => ({
   to,
   leg_identifier: "A1",
   is_unknown: false,
+  is_mainland: true,
   is_sid: false,
   is_star: false,
 });

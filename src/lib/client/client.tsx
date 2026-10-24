@@ -99,6 +99,8 @@ const throwMiddleware: Middleware = {
   },
 };
 
+console.log(import.meta.env.VITE_API_ENDPOINT);
+
 export const client = createClient<paths>({ baseUrl: import.meta.env.VITE_API_ENDPOINT });
 client.use(authMiddleware);
 client.use(createRoleAssumptionMiddleware(() => getDefaultStore().get(assumedRolesAtom)));
