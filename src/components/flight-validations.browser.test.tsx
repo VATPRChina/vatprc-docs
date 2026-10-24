@@ -3,7 +3,7 @@ import type { components } from "@/lib/api";
 import { renderComponent } from "@/test/render-component";
 import { expect, test } from "vitest";
 
-test("keeps repeated validators distinct and displays their execution scopes", async () => {
+test("keeps repeated validators distinct and opens their results", async () => {
   const results: components["schemas"]["ValidatorResult"][] = [
     {
       validator_ident: "route-preferred",
@@ -35,16 +35,11 @@ test("keeps repeated validators distinct and displays their execution scopes", a
       ))}
     </div>,
   );
-  await expect
-    .element(screen.getByRole("button", { name: "designated route · Segment 1 (legs 1–2): P" }))
-    .toBeVisible();
-  const second = screen.getByRole("button", { name: "designated route · Segment 2 (legs 3–4): R" });
+  await expect.element(screen.getByRole("button", { name: "designated route: P" })).toBeVisible();
+  const second = screen.getByRole("button", { name: "designated route: R" });
   await expect.element(second).toBeVisible();
-  await expect
-    .element(screen.getByRole("button", { name: "no direct route legs · Leg 3 (segment 2): S" }))
-    .toBeVisible();
-  await expect.element(screen.getByRole("button", { name: "callsign · Flight: U" })).toBeVisible();
+  await expect.element(screen.getByRole("button", { name: "no direct route legs: S" })).toBeVisible();
+  await expect.element(screen.getByRole("button", { name: "callsign: U" })).toBeVisible();
   await second.click();
-  await expect.element(screen.getByText("Segment 2 (legs 3–4)", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("Rejected", { exact: true })).toBeVisible();
 });

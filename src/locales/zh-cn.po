@@ -909,7 +909,7 @@ msgid "Insufficient controller bookings"
 msgstr "活动管制员预订数量不足"
 
 msgid "International"
-msgstr "国际区段"
+msgstr "国际"
 
 msgid "Introduction"
 msgstr "介绍"
@@ -1005,7 +1005,7 @@ msgid "Logout"
 msgstr "登出"
 
 msgid "Mainland"
-msgstr "中国大陆区段"
+msgstr "中国内地"
 
 msgid "Match designated route"
 msgstr "符合指定航路"

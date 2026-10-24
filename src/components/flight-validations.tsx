@@ -1,4 +1,4 @@
-import { FLIGHT_WARNING_MESSAGES } from "@/components/flight-warning-messages";
+import { FLIGHT_WARNING_MESSAGES } from "./flight/message";
 import type { components } from "@/lib/api";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
@@ -36,36 +36,17 @@ export const statuses: Record<ValidatorStatus, { color: string; character: strin
   unavailable: { color: "yellow", character: "U", label: <Trans>Unavailable</Trans> },
 };
 
-export function ValidationTag({
-  result,
-  compact = false,
-}: {
-  result: components["schemas"]["ValidatorResult"];
-  compact?: boolean;
-}) {
+export function ValidationTag({ result }: { result: components["schemas"]["ValidatorResult"]; compact?: boolean }) {
   const { i18n } = useLingui();
   const name = Object.hasOwn(VALIDATOR_NAMES, result.validator_ident)
     ? i18n._(VALIDATOR_NAMES[result.validator_ident as keyof typeof VALIDATOR_NAMES])
     : result.validator_ident;
-  const scope = result.scope;
-  let scopeLabel: string;
-  if (scope.level === "flight") {
-    scopeLabel = i18n._(msg`Flight`);
-  } else if (scope.level === "segment") {
-    const segment = scope.segment_index + 1;
-    const startLeg = scope.start_leg_index + 1;
-    const endLeg = scope.end_leg_index;
-    scopeLabel = i18n._(msg`Segment ${segment} (legs ${startLeg}–${endLeg})`);
-  } else {
-    const segment = scope.segment_index + 1;
-    const leg = scope.leg_index + 1;
-    scopeLabel = i18n._(msg`Leg ${leg} (segment ${segment})`);
-  }
+
   const status = statuses[result.status];
   return (
     <Popover withArrow>
       <Popover.Target>
-        <Tooltip label={`${name} · ${scopeLabel}`}>
+        <Tooltip label={name}>
           <Badge
             component="button"
             type="button"
@@ -73,10 +54,9 @@ export function ValidationTag({
             color={status.color}
             size="sm"
             radius="xs"
-            aria-label={`${name} · ${scopeLabel}: ${status.character}`}
+            aria-label={`${name}: ${status.character}`}
           >
             {status.character}
-            {!compact && ` · ${scopeLabel}`}
           </Badge>
         </Tooltip>
       </Popover.Target>
@@ -84,10 +64,10 @@ export function ValidationTag({
         <div className="flex flex-col gap-2">
           <div>
             <strong className="text-sm">{name}</strong>
-            <span className="ml-2 font-mono text-xs">{result.validator_ident}</span>
+            <Badge variant="filled" color={status.color} size="sm" radius="xs" className="ml-2">
+              {status.label}
+            </Badge>
           </div>
-          <div>{scopeLabel}</div>
-          <div>{status.label}</div>
           <ValidationWarnings warnings={result.warnings} />
         </div>
       </Popover.Dropdown>
@@ -97,22 +77,15 @@ export function ValidationTag({
 
 export function ValidationWarnings({ warnings }: { warnings: components["schemas"]["WarningMessage"][] }) {
   if (warnings.length <= 0) {
-    return (
-      <span>
-        <Trans>No warnings</Trans>
-      </span>
-    );
+    return null;
   }
+
   return (
     <ul className="flex flex-col gap-2">
       {warnings.map((warning, index) => (
         <li key={index} className="flex flex-col gap-1 text-sm wrap-break-word">
           <span>{FLIGHT_WARNING_MESSAGES[warning.message_code]}</span>
-          <span className="font-mono">
-            {warning.message_code} ({warning.field}
-            {warning.field_index != null && `[${warning.field_index}]`})
-            {warning.parameter != null && `: ${warning.parameter}`}
-          </span>
+          <span className="font-mono">{warning.parameter}</span>
         </li>
       ))}
     </ul>

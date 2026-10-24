@@ -1,4 +1,6 @@
+import { FlightPlan } from "./flight-plan";
 import { FlightV2, FlightV2Result } from "./flight-v2";
+import { RequireRole } from "@/components/require-role";
 import type { components } from "@/lib/api";
 import { renderComponent } from "@/test/render-component";
 import { expect, test, vi } from "vitest";
@@ -190,12 +192,16 @@ const data: components["schemas"]["FlightV2Dto"] = {
 test("does not fetch or render v2 diagnostics for non-engineers", async () => {
   mocks.permissions.mockReturnValue(["user"]);
   mocks.query.mockClear();
-  const screen = await renderComponent(<FlightV2 callsign="CCA123" />);
+  const screen = await renderComponent(
+    <RequireRole role="software-engineer">
+      <FlightV2 callsign="CCA123" />
+    </RequireRole>,
+  );
   expect(mocks.query).not.toHaveBeenCalled();
   await expect.element(screen.getByRole("region", { name: "Flight analysis v2" })).not.toBeInTheDocument();
 });
 
-test("uses the unified endpoint, refreshes it, and follows the selected callsign", async () => {
+test("uses the unified endpoint and follows the selected callsign", async () => {
   mocks.permissions.mockReturnValue(["software-engineer"]);
   const refetch = vi.fn();
   mocks.query.mockReturnValue({ data, refetch });
@@ -206,9 +212,7 @@ test("uses the unified endpoint, refreshes it, and follows the selected callsign
     { params: { path: { callsign: "CCA123" } } },
     { retry: false },
   );
-  await expect.element(screen.getByText("B738", { exact: true })).toBeVisible();
-  await screen.getByRole("button", { name: "Refresh analysis" }).click();
-  expect(refetch).toHaveBeenCalledOnce();
+  await expect.element(screen.getByRole("heading", { name: "Route segments" })).toBeVisible();
   await screen.rerender(<FlightV2 callsign="CCA456" />);
   expect(mocks.query).toHaveBeenLastCalledWith(
     "get",
@@ -218,54 +222,51 @@ test("uses the unified endpoint, refreshes it, and follows the selected callsign
   );
 });
 
-test("shows the overview then segments, with validators inline at their scopes", async () => {
+test("opens segments with scoped validators, parsed routes, and matching information", async () => {
   const screen = await renderComponent(<FlightV2Result data={data} />);
-  await expect.element(screen.getByRole("heading", { name: "Flight Plan", exact: true })).toBeVisible();
-  const first = screen.getByRole("article", { name: "Segment 1", exact: true });
-  const second = screen.getByRole("article", { name: "Segment 2", exact: true });
-  await expect.element(first).toBeVisible();
-  await expect.element(second).toBeVisible();
+  const firstControl = screen.getByRole("button", { name: /^Segment 1/ });
+  const secondControl = screen.getByRole("button", { name: /^Segment 2/ });
+  await expect.element(firstControl).toHaveAttribute("aria-expanded", "false");
+  await firstControl.click();
+  await secondControl.click();
+  const first = screen.getByRole("region", { name: /^Segment 1/ });
+  const second = screen.getByRole("region", { name: /^Segment 2/ });
   await expect.element(first.getByText("Selected match", { exact: true })).toBeVisible();
   await expect.element(first.getByText("No match", { exact: true })).toBeVisible();
   await expect.element(second.getByText("No preferred route candidates for this segment.")).toBeVisible();
-  await expect.element(first.getByRole("button", { name: "designated route · Segment 1 (legs 1–2): P" })).toBeVisible();
-  const rejected = second.getByRole("button", { name: "designated route · Segment 2 (legs 3–3): R" });
-  await expect.element(rejected).toBeVisible();
-  const flightField = document.querySelector('[data-field="aircraft-type"]');
-  expect(flightField?.textContent).toContain("B738");
-  expect(flightField?.querySelector("button")?.getAttribute("aria-label")).toBe(
-    "ICAO aircraft type existence · Flight: P",
-  );
+  await expect.element(screen.getByRole("button", { name: "designated route: P" })).toBeVisible();
   await expect
-    .element(
-      first
-        .getByLabelText("Leg 1 validations")
-        .getByRole("button", { name: "no direct route legs · Leg 1 (segment 1): S" }),
-    )
+    .element(first.getByLabelText("Leg 1 validations").getByRole("button", { name: "no direct route legs: S" }))
     .toBeVisible();
-  expect(document.querySelectorAll('[aria-label="Leg 3 validations"] button').length).toBe(0);
-  const overview = document.querySelector('[aria-label="Flight Plan"]');
-  const segment = document.querySelector('article[aria-label="Segment 1"]');
-  expect(
-    Boolean(overview && segment && overview.compareDocumentPosition(segment) & Node.DOCUMENT_POSITION_FOLLOWING),
-  ).toBe(true);
-  const parsed = segment?.querySelector('[aria-label="Parsed route"]');
-  const matches = segment?.querySelector('[aria-label="Preferred routes"]');
-  expect(Boolean(parsed && matches && parsed.compareDocumentPosition(matches) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(
-    true,
-  );
-  await expect.element(screen.getByRole("tab")).not.toBeInTheDocument();
-  await expect.element(screen.getByText("120.5 NM", { exact: true })).not.toBeInTheDocument();
-  window.scrollTo(0, 0);
-  await page.screenshot({ path: "../../.vitest/flight-v2-inline.png" });
+  expect(document.querySelectorAll('[aria-label="Leg 3 validations"] button')).toHaveLength(0);
+  const rejected = screen.getByRole("button", { name: "designated route: R" });
   await rejected.click();
   await expect
     .element(screen.getByText("The flight plan does not match the designated route for this flight.", { exact: true }))
     .toBeVisible();
+  await expect.element(secondControl).toHaveAttribute("aria-expanded", "true");
+  expect(document.querySelector("button button")).toBeNull();
   await rejected.click();
+  await expect.element(screen.getByRole("tab")).not.toBeInTheDocument();
+  await expect.element(screen.getByText("120.5 NM", { exact: true })).not.toBeInTheDocument();
+  window.scrollTo(0, 0);
+  await page.screenshot({ path: "../../../.vitest/flight-v2-inline.png" });
 });
 
-test("keeps the overview and flight validators available when parsing fails", async () => {
+test("shows flight-scoped validators in the extracted plan overview", async () => {
+  mocks.permissions.mockReturnValue(["software-engineer"]);
+  mocks.query.mockImplementation((_method: string, path: string) => ({
+    data: path.endsWith("/v2") ? data : path.endsWith("/warnings") ? [] : data.flight_plan,
+  }));
+  const screen = await renderComponent(<FlightPlan callsign="CCA123" />);
+  await expect.element(screen.getByText("B738", { exact: true })).toBeVisible();
+  expect(document.querySelector('[data-field="aircraft-type"] button')?.getAttribute("aria-label")).toBe(
+    "ICAO aircraft type existence: P",
+  );
+  await expect.element(screen.getByRole("button", { name: "designated route: P" })).not.toBeInTheDocument();
+});
+
+test("shows parsing errors and unavailable segments", async () => {
   const partial = {
     ...data,
     segments: null,
@@ -274,12 +275,10 @@ test("keeps the overview and flight validators available when parsing fails", as
     errors: [{ stage: "resolver", message: "Navigation data unavailable" }],
   };
   const screen = await renderComponent(<FlightV2Result data={partial} />);
-  await expect.element(screen.getByText("B738", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("Navigation data unavailable", { exact: true })).toBeVisible();
   await expect
     .element(screen.getByText("Route segments are unavailable. See the diagnostic error above."))
     .toBeVisible();
-  await expect.element(screen.getByRole("button", { name: "ICAO aircraft type existence · Flight: P" })).toBeVisible();
   await expect.element(screen.getByRole("tab")).not.toBeInTheDocument();
 });
 

@@ -44,3 +44,8 @@
   @apply prose-code:p-0.5;
   @apply prose-code:before:content-none prose-code:after:content-none;
 }
+
+.mantine-ActionIcon-root svg {
+  width: 60%;
+  height: 60%;
+}

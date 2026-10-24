@@ -1,7 +1,8 @@
-import { FLIGHT_WARNING_MESSAGES } from "@/components/flight-warning-messages";
+import { ChinaRvsmHelp } from "./flight/message";
+import { FLIGHT_WARNING_MESSAGES } from "./flight/message";
+import { CRUISING_LEVEL_TEXT } from "@/components/flight/message";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { ChinaRvsmHelp, CRUISING_LEVEL_TEXT } from "@/routes/flights/$callsign";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { TbCheck, TbExclamationCircle } from "react-icons/tb";

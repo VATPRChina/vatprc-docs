@@ -13,7 +13,7 @@ import { formatISO } from "date-fns";
 import { FC } from "react";
 import { TbEdit } from "react-icons/tb";
 
-const CRUISE_LEVELS = {
+export const CRUISE_LEVELS = {
   standard: msg`metric flight level (meters)`,
   "standard-odd": msg`metric odd flight level (meters)`,
   "standard-even": msg`metric even flight level (meters)`,

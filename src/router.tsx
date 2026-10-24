@@ -84,7 +84,7 @@ export function getRouter() {
     },
   });
 
-  if (!router.isServer) {
+  if (!router.isServer && !import.meta.dev) {
     import("@sentry/tanstackstart-react")
       .then((Sentry) => {
         Sentry.init({
