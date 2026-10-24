@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_API_AUTH_ENDPOINT: string;
   readonly VITE_API_REDIRECT_URI: string;
   readonly VITE_API_CLIENT_ID: string;
+  readonly VITE_API_DEV_ENDPOINT: string;
   // more env variables...
 }
 

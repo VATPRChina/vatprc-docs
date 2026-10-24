@@ -6,11 +6,12 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
 import { nitro } from "nitro/vite";
+import { loadEnv } from "vite";
 import { defineConfig } from "vitest/config";
 
 /// <reference types="vitest/config" />
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
   plugins: [
     !process.env.VITEST && tanstackStart(),
     // nitro is a list of plugins so gating with command
@@ -32,7 +33,7 @@ export default defineConfig(({ command }) => ({
   server: {
     proxy: {
       "/uniapi": {
-        target: "https://uniapi.vatprc.net",
+        target: loadEnv(mode, process.cwd()).VITE_API_DEV_ENDPOINT ?? "https://uniapi.vatprc.net",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/uniapi/, ""),
       },
