@@ -11,6 +11,8 @@ const descriptions: Record<
   components["schemas"]["WarningMessageCode"],
   (flight: components["schemas"]["FlightDto"], warning: components["schemas"]["WarningMessage"]) => React.ReactNode
 > = {
+  "aircraft-wingspan-too-large": () => null,
+  "aircraft-wingspan-manual-check": () => null,
   "no-rvsm": () => (
     <>
       <p>

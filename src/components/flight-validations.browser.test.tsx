@@ -43,3 +43,50 @@ test("keeps repeated validators distinct and opens their results", async () => {
   await second.click();
   await expect.element(screen.getByText("Rejected", { exact: true })).toBeVisible();
 });
+
+test("shows airport wingspan rejection details and manual-check unavailability", async () => {
+  const screen = await renderComponent(
+    <div>
+      <ValidationTag
+        result={{
+          validator_ident: "departure-aircraft-type",
+          field: "departure",
+          scope: { level: "flight" },
+          status: "rejected",
+          warnings: [
+            {
+              message_code: "aircraft-wingspan-too-large",
+              field: "departure",
+              parameter: "ZBAL: B738 (35.8 m; ≤ 30 m)",
+            },
+          ],
+        }}
+      />
+      <ValidationTag
+        result={{
+          validator_ident: "arrival-aircraft-type",
+          field: "arrival",
+          scope: { level: "flight" },
+          status: "unavailable",
+          warnings: [{ message_code: "aircraft-wingspan-manual-check", field: "arrival", parameter: "ZBHH: B748" }],
+        }}
+      />
+    </div>,
+  );
+  const departure = screen.getByRole("button", { name: "wingspan limit at departure: R" });
+  await departure.click();
+  await expect
+    .element(screen.getByText("The aircraft wingspan exceeds the airport's limit.", { exact: true }))
+    .toBeVisible();
+  await expect.element(screen.getByText("ZBAL: B738 (35.8 m; ≤ 30 m)", { exact: true })).toBeVisible();
+  await departure.click();
+  await screen.getByRole("button", { name: "wingspan limit at arrival: U" }).click();
+  await expect.element(screen.getByText("Unavailable", { exact: true })).toBeVisible();
+  await expect
+    .element(
+      screen.getByText("This aircraft requires a controller's manual compatibility check at this airport.", {
+        exact: true,
+      }),
+    )
+    .toBeVisible();
+});

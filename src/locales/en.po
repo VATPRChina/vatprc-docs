@@ -95,14 +95,14 @@ msgstr "AFV Facility Engineer"
 msgid "Aircraft Type"
 msgstr "Aircraft Type"
 
+msgid "Aircraft wingspan exceeds airport limit"
+msgstr "Aircraft wingspan exceeds airport limit"
+
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 
 msgid "Airport endpoints"
 msgstr "Airport endpoints"
-
-msgid "Airport pair"
-msgstr "Airport pair"
 
 msgid "Airspace"
 msgstr "Airspace"
@@ -119,8 +119,8 @@ msgstr "All runways"
 msgid "All VATPRC positions incl. FSS."
 msgstr "All VATPRC positions incl. FSS."
 
-msgid "Allowed altitudes"
-msgstr "Allowed altitudes"
+msgid "Allowed altitudes: "
+msgstr "Allowed altitudes: "
 
 msgid "Allowed levels are {level} (in feet)."
 msgstr "Allowed levels are {level} (in feet)."
@@ -130,9 +130,6 @@ msgstr "Already Booked"
 
 msgid "Altitude"
 msgstr "Altitude"
-
-msgid "Altitude restriction"
-msgstr "Altitude restriction"
 
 msgid "altitude restriction from designated route"
 msgstr "altitude restriction from designated route"
@@ -305,9 +302,6 @@ msgstr "Booking not supported"
 msgid "Booking:"
 msgstr "Booking:"
 
-msgid "Border alternative"
-msgstr "Border alternative"
-
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "Briefly describe the target of the training, such as position and lesson content."
 
@@ -442,6 +436,9 @@ msgstr "Controller Info"
 
 msgid "Controller List"
 msgstr "Controller List"
+
+msgid "Controller manual check required"
+msgstr "Controller manual check required"
 
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
@@ -772,9 +769,6 @@ msgstr "FIR coverage estimate"
 msgid "Fit region"
 msgstr "Fit region"
 
-msgid "Flight"
-msgstr "Flight"
-
 msgid "Flight analysis v2"
 msgstr "Flight analysis v2"
 
@@ -844,6 +838,9 @@ msgstr "Graphics Designer"
 
 msgid "Ground"
 msgstr "Ground"
+
+msgid "Hide passed and suppressed validations"
+msgstr "Hide passed and suppressed validations"
 
 msgid "How to fly"
 msgstr "How to fly"
@@ -938,17 +935,11 @@ msgstr "Learn more"
 msgid "Learn more about China RVSM"
 msgstr "Learn more about China RVSM"
 
-msgid "Leg {leg} (segment {segment})"
-msgstr "Leg {leg} (segment {segment})"
-
 msgid "Leg {legNumber} validations"
 msgstr "Leg {legNumber} validations"
 
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
-
-msgid "Legs {start}–{end}"
-msgstr "Legs {start}–{end}"
 
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "Less than half of the configured area control positions have been booked for this event."
@@ -1079,9 +1070,6 @@ msgstr "Next events"
 msgid "No"
 msgstr "No"
 
-msgid "No additional restriction"
-msgstr "No additional restriction"
-
 msgid "no airway requiring approval"
 msgstr "no airway requiring approval"
 
@@ -1150,9 +1138,6 @@ msgstr "no unknown leg or fix"
 
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
-
-msgid "No warnings"
-msgstr "No warnings"
 
 msgid "Not booked"
 msgstr "Not booked"
@@ -1311,17 +1296,11 @@ msgstr "Previous Trainings"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-msgid "Private route"
-msgstr "Private route"
-
 msgid "Progression Guide"
 msgstr "Progression Guide"
 
 msgid "Provision Moodle"
 msgstr "Provision Moodle"
-
-msgid "Public route"
-msgstr "Public route"
 
 msgid "Radar Coverage"
 msgstr "Radar Coverage"
@@ -1340,9 +1319,6 @@ msgstr "Recent 3 months"
 
 msgid "Recent Events"
 msgstr "Recent Events"
-
-msgid "Refresh analysis"
-msgstr "Refresh analysis"
 
 msgid "Region data could not be loaded."
 msgstr "Region data could not be loaded."
@@ -1469,9 +1445,6 @@ msgstr "See All Announcements"
 
 msgid "See All Events"
 msgstr "See All Events"
-
-msgid "Segment {segment} (legs {startLeg}–{endLeg})"
-msgstr "Segment {segment} (legs {startLeg}–{endLeg})"
 
 msgid "Segment {segmentNumber}"
 msgstr "Segment {segmentNumber}"
@@ -1653,6 +1626,9 @@ msgstr "The aircraft specifies RNP AR capability without RF, which is eligible t
 msgid "The aircraft type designator is not recognized."
 msgstr "The aircraft type designator is not recognized."
 
+msgid "The aircraft wingspan exceeds the airport's limit."
+msgstr "The aircraft wingspan exceeds the airport's limit."
+
 msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 msgstr "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 
@@ -1733,6 +1709,9 @@ msgstr "There is no response to this training request yet."
 
 msgid "There is no upcoming events."
 msgstr "There is no upcoming events."
+
+msgid "This aircraft requires a controller's manual compatibility check at this airport."
+msgstr "This aircraft requires a controller's manual compatibility check at this airport."
 
 msgid "This event does not have pilot booking."
 msgstr "This event does not have pilot booking."

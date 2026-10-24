@@ -12,6 +12,8 @@ export const CRUISING_LEVEL_TEXT: Record<string, React.ReactElement> = {
 };
 
 export const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningMessageCode"], "error" | "warning"> = {
+  "aircraft-wingspan-too-large": "error",
+  "aircraft-wingspan-manual-check": "warning",
   "invalid-aircraft-type": "error",
   "wake-category-mismatch": "error",
   "invalid-airport": "error",
@@ -32,6 +34,8 @@ export const WARNING_MESSAGE_TO_SEVERITY: Record<components["schemas"]["WarningM
 };
 
 export const WARNING_CODE_TO_MESSAGE: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  "aircraft-wingspan-too-large": <Trans>Aircraft wingspan exceeds airport limit</Trans>,
+  "aircraft-wingspan-manual-check": <Trans>Controller manual check required</Trans>,
   "invalid-aircraft-type": <Trans>Invalid aircraft type</Trans>,
   "wake-category-mismatch": <Trans>Wake category mismatch</Trans>,
   "invalid-airport": <Trans>Invalid airport</Trans>,
@@ -55,6 +59,8 @@ export const WARNING_MESSAGE_TO_POPOVER: Record<
   components["schemas"]["WarningMessageCode"],
   React.FC<{ warning: components["schemas"]["WarningMessage"]; flight: components["schemas"]["FlightDto"] }>
 > = {
+  "aircraft-wingspan-too-large": () => null,
+  "aircraft-wingspan-manual-check": () => null,
   "no-rvsm": () => (
     <>
       <p>
@@ -223,6 +229,10 @@ export const EditFpl = () => (
   </a>
 );
 export const FLIGHT_WARNING_MESSAGES: Record<components["schemas"]["WarningMessageCode"], React.ReactNode> = {
+  "aircraft-wingspan-too-large": <Trans>The aircraft wingspan exceeds the airport&apos;s limit.</Trans>,
+  "aircraft-wingspan-manual-check": (
+    <Trans>This aircraft requires a controller&apos;s manual compatibility check at this airport.</Trans>
+  ),
   "invalid-aircraft-type": <Trans>The aircraft type designator is not recognized.</Trans>,
   "wake-category-mismatch": <Trans>The declared wake category does not match the aircraft type.</Trans>,
   "invalid-airport": <Trans>The specified airport could not be resolved as a valid airport.</Trans>,

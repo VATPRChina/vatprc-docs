@@ -95,14 +95,14 @@ msgstr "AFV 设备工程师"
 msgid "Aircraft Type"
 msgstr "机型"
 
+msgid "Aircraft wingspan exceeds airport limit"
+msgstr "航空器翼展超出机场限制"
+
 msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
 msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
 
 msgid "Airport endpoints"
 msgstr "机场端点"
-
-msgid "Airport pair"
-msgstr "机场对"
 
 msgid "Airspace"
 msgstr "空域"
@@ -119,8 +119,8 @@ msgstr "所有跑道"
 msgid "All VATPRC positions incl. FSS."
 msgstr "包含 FSS 在内的所有 VATPRC 席位。"
 
-msgid "Allowed altitudes"
-msgstr "允许的高度"
+msgid "Allowed altitudes: "
+msgstr ""
 
 msgid "Allowed levels are {level} (in feet)."
 msgstr "允许的巡航高度是 {level} （英尺）。"
@@ -130,9 +130,6 @@ msgstr "已被预订"
 
 msgid "Altitude"
 msgstr "高度范围"
-
-msgid "Altitude restriction"
-msgstr "高度限制"
 
 msgid "altitude restriction from designated route"
 msgstr "指定航路高度限制"
@@ -305,9 +302,6 @@ msgstr "不支持预订"
 msgid "Booking:"
 msgstr "预订时间："
 
-msgid "Border alternative"
-msgstr "边界端点方案"
-
 msgid "Briefly describe the target of the training, such as position and lesson content."
 msgstr "简要描述训练目标，例如席位和课程内容。"
 
@@ -442,6 +436,9 @@ msgstr "管制员信息"
 
 msgid "Controller List"
 msgstr "管制员列表"
+
+msgid "Controller manual check required"
+msgstr "需由管制员人工核查"
 
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
@@ -772,9 +769,6 @@ msgstr "FIR 覆盖估算"
 msgid "Fit region"
 msgstr "适配区域"
 
-msgid "Flight"
-msgstr "航班"
-
 msgid "Flight analysis v2"
 msgstr "航班分析 v2"
 
@@ -844,6 +838,9 @@ msgstr "图形设计师"
 
 msgid "Ground"
 msgstr "地面"
+
+msgid "Hide passed and suppressed validations"
+msgstr "隐藏已通过和已抑制的验证结果"
 
 msgid "How to fly"
 msgstr "如何飞行"
@@ -938,17 +935,11 @@ msgstr "了解详情"
 msgid "Learn more about China RVSM"
 msgstr "了解中国 RVSM"
 
-msgid "Leg {leg} (segment {segment})"
-msgstr "航段 {leg}（区段 {segment}）"
-
 msgid "Leg {legNumber} validations"
 msgstr "航段 {legNumber} 验证结果"
 
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
-
-msgid "Legs {start}–{end}"
-msgstr "航段 {start}–{end}"
 
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "本活动配置的区域管制席位预约数不足一半。"
@@ -1079,9 +1070,6 @@ msgstr "下一批活动"
 msgid "No"
 msgstr "否"
 
-msgid "No additional restriction"
-msgstr "无额外限制"
-
 msgid "no airway requiring approval"
 msgstr "无需要许可的航路"
 
@@ -1150,9 +1138,6 @@ msgstr "无未知航段或航点"
 
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
-
-msgid "No warnings"
-msgstr "无警告"
 
 msgid "Not booked"
 msgstr "未预订"
@@ -1311,17 +1296,11 @@ msgstr "历史训练"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-msgid "Private route"
-msgstr "非公开航路"
-
 msgid "Progression Guide"
 msgstr "晋升指引"
 
 msgid "Provision Moodle"
 msgstr "开通 Moodle"
-
-msgid "Public route"
-msgstr "公开航路"
 
 msgid "Radar Coverage"
 msgstr "雷达覆盖范围"
@@ -1340,9 +1319,6 @@ msgstr "最近三个月"
 
 msgid "Recent Events"
 msgstr "近期活动"
-
-msgid "Refresh analysis"
-msgstr "刷新分析"
 
 msgid "Region data could not be loaded."
 msgstr "无法加载区域数据。"
@@ -1469,9 +1445,6 @@ msgstr "查看所有公告"
 
 msgid "See All Events"
 msgstr "查看所有活动"
-
-msgid "Segment {segment} (legs {startLeg}–{endLeg})"
-msgstr "区段 {segment}（航段 {startLeg}–{endLeg}）"
 
 msgid "Segment {segmentNumber}"
 msgstr "区段 {segmentNumber}"
@@ -1653,6 +1626,9 @@ msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 
 msgid "The aircraft type designator is not recognized."
 msgstr "无法识别航空器机型代码。"
 
+msgid "The aircraft wingspan exceeds the airport's limit."
+msgstr "航空器翼展超出该机场的翼展限制。"
+
 msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 msgstr "此处列出的空域是禁飞区、限制区或危险区。请访问 <0>vPLAAF 的网站</0>了解详情。这些空域由 vPLAAF 指定，并经 VATPRC 批准。"
 
@@ -1733,6 +1709,9 @@ msgstr "当前暂无对该管制训练申请的回应。"
 
 msgid "There is no upcoming events."
 msgstr "当前无活动计划。"
+
+msgid "This aircraft requires a controller's manual compatibility check at this airport."
+msgstr "该机型在此机场运行需要管制员人工核查其适用性。"
 
 msgid "This event does not have pilot booking."
 msgstr "本活动不支持飞行员预订。"

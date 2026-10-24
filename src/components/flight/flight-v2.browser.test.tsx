@@ -3,6 +3,7 @@ import { FlightV2, FlightV2Result } from "./flight-v2";
 import { RequireRole } from "@/components/require-role";
 import type { components } from "@/lib/api";
 import { renderComponent } from "@/test/render-component";
+import { Provider } from "jotai";
 import { expect, test, vi } from "vitest";
 import { page } from "vitest/browser";
 
@@ -264,6 +265,65 @@ test("shows flight-scoped validators in the extracted plan overview", async () =
     "ICAO aircraft type existence: P",
   );
   await expect.element(screen.getByRole("button", { name: "designated route: P" })).not.toBeInTheDocument();
+});
+
+test("can hide and restore passed and suppressed validations at every level", async () => {
+  const scopes: components["schemas"]["ValidationScope"][] = [
+    { level: "flight" },
+    { level: "segment", segment_index: 0, start_leg_index: 0, end_leg_index: 2 },
+    { level: "leg", segment_index: 0, leg_index: 0 },
+  ];
+  const statuses = ["pass", "suppressed", "rejected", "unavailable"] as const;
+  const filteredData = {
+    ...data,
+    validations: scopes.flatMap((scope) =>
+      statuses.map((status) => ({
+        scope,
+        status,
+        field: "aircraft-type" as const,
+        validator_ident: `${scope.level}-${status}`,
+        warnings: [],
+      })),
+    ),
+  };
+  mocks.permissions.mockReturnValue(["software-engineer"]);
+  mocks.query.mockImplementation((_method: string, path: string) => ({
+    data: path.endsWith("/v2") ? filteredData : path.endsWith("/warnings") ? [] : data.flight_plan,
+  }));
+  const screen = await renderComponent(
+    <Provider>
+      <FlightPlan callsign="CCA123" />
+      <FlightV2Result data={filteredData} />
+    </Provider>,
+  );
+  await screen.getByRole("button", { name: /^Segment 1/ }).click();
+  const toggle = screen.getByRole("checkbox", { name: "Hide passed and suppressed validations" });
+  await expect.element(toggle).not.toBeChecked();
+  for (const result of filteredData.validations) {
+    const character = result.status[0].toUpperCase();
+    await expect
+      .element(screen.getByRole("button", { name: `${result.validator_ident}: ${character}`, exact: true }))
+      .toBeVisible();
+  }
+  await toggle.click();
+  await expect.element(toggle).toBeChecked();
+  for (const result of filteredData.validations) {
+    const character = result.status[0].toUpperCase();
+    const tag = screen.getByRole("button", { name: `${result.validator_ident}: ${character}`, exact: true });
+    if (result.status === "pass" || result.status === "suppressed") {
+      await expect.element(tag).not.toBeInTheDocument();
+    } else {
+      await expect.element(tag).toBeVisible();
+    }
+  }
+  await expect.element(screen.getByRole("button", { name: /^Segment 1/ })).toHaveAttribute("aria-expanded", "true");
+  await toggle.click();
+  for (const result of filteredData.validations) {
+    const character = result.status[0].toUpperCase();
+    await expect
+      .element(screen.getByRole("button", { name: `${result.validator_ident}: ${character}`, exact: true }))
+      .toBeVisible();
+  }
 });
 
 test("shows parsing errors and unavailable segments", async () => {

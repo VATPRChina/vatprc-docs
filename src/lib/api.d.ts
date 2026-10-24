@@ -2095,6 +2095,8 @@ export interface components {
       | "invalid-airport"
       | "invalid-aircraft-type"
       | "wake-category-mismatch"
+      | "aircraft-wingspan-too-large"
+      | "aircraft-wingspan-manual-check"
       | "no-rvsm"
       | "no-rnav1"
       | "rnp-ar"

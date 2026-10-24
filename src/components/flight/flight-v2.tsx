@@ -3,11 +3,15 @@ import { ValidationTag } from "@/components/flight-validations";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Divider, Skeleton } from "@mantine/core";
+import { Alert, Checkbox, Divider, Skeleton } from "@mantine/core";
+import { atom, useAtom, useAtomValue } from "jotai";
 import type { FC } from "react";
 
 type FlightAnalysis = components["schemas"]["FlightV2Dto"];
 type Validation = components["schemas"]["ValidatorResult"];
+
+// Flight fields and route segments render separately, but share this display setting.
+const hidePassedAndSuppressedAtom = atom(false);
 
 export const FlightV2: FC<{ callsign: string }> = ({ callsign }) => {
   const { t } = useLingui();
@@ -33,9 +37,15 @@ export const FlightV2: FC<{ callsign: string }> = ({ callsign }) => {
 
 export function FlightV2Result({ data }: { data: FlightAnalysis }) {
   const { t } = useLingui();
+  const [hidePassedAndSuppressed, setHidePassedAndSuppressed] = useAtom(hidePassedAndSuppressedAtom);
 
   return (
     <section aria-label={t`Flight analysis v2`} className="flex w-full min-w-0 flex-col gap-6">
+      <Checkbox
+        label={t`Hide passed and suppressed validations`}
+        checked={hidePassedAndSuppressed}
+        onChange={(event) => setHidePassedAndSuppressed(event.currentTarget.checked)}
+      />
       {data.errors.length > 0 && (
         <Alert color="yellow">
           <Trans>Analysis is incomplete. Only validators with the required inputs are shown.</Trans>
@@ -57,9 +67,16 @@ export function FlightV2Result({ data }: { data: FlightAnalysis }) {
 }
 
 export function InlineValidations({ results }: { results: Validation[] }) {
+  const hidePassedAndSuppressed = useAtomValue(hidePassedAndSuppressedAtom);
+  const visibleResults = hidePassedAndSuppressed
+    ? results.filter((result) => result.status !== "pass" && result.status !== "suppressed")
+    : results;
+
+  if (visibleResults.length === 0) return null;
+
   return (
     <span className="inline-flex flex-wrap items-center gap-1">
-      {results.map((result) => (
+      {visibleResults.map((result) => (
         <ValidationTag key={`${result.validator_ident}:${JSON.stringify(result.scope)}`} result={result} compact />
       ))}
     </span>
