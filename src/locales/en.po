@@ -41,6 +41,9 @@ msgstr "<0>S</0> Solo Training: This controller is eligible to provide solo serv
 msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 msgstr "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 
+msgid "<0>The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:</0><1><2>{raw_route}</2></1>"
+msgstr "<0>The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:</0><1><2>{raw_route}</2></1>"
+
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
@@ -77,20 +80,14 @@ msgstr "Add field"
 msgid "Add position"
 msgstr "Add position"
 
-msgid "Add<0>D1</0>or<1>D2</1>to PBN."
-msgstr "Add <0>D1</0> or <1>D2</1> to PBN."
-
-msgid "Add<0>R</0>to equipment code."
-msgstr "Add <0>R</0> to equipment code."
-
-msgid "Add<0>W</0>to equipment code."
-msgstr "Add <0>W</0> to equipment code."
-
 msgid "Admin"
 msgstr "Admin"
 
 msgid "AFV Facility Engineer"
 msgstr "AFV Facility Engineer"
+
+msgid "aircraft type"
+msgstr "aircraft type"
 
 msgid "Aircraft Type"
 msgstr "Aircraft Type"
@@ -98,47 +95,26 @@ msgstr "Aircraft Type"
 msgid "Aircraft wingspan exceeds airport limit"
 msgstr "Aircraft wingspan exceeds airport limit"
 
-msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
-msgstr "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
-
-msgid "Airport endpoints"
-msgstr "Airport endpoints"
-
 msgid "Airspace"
 msgstr "Airspace"
 
 msgid "Airspace boundaries"
 msgstr "Airspace boundaries"
 
+msgid "airway direction restriction"
+msgstr "airway direction restriction"
+
 msgid "All"
 msgstr "All"
 
-msgid "All runways"
-msgstr "All runways"
-
 msgid "All VATPRC positions incl. FSS."
 msgstr "All VATPRC positions incl. FSS."
-
-msgid "Allowed altitudes: "
-msgstr "Allowed altitudes: "
-
-msgid "Allowed levels are {level} (in feet)."
-msgstr "Allowed levels are {level} (in feet)."
 
 msgid "Already Booked"
 msgstr "Already Booked"
 
 msgid "Altitude"
 msgstr "Altitude"
-
-msgid "altitude restriction from designated route"
-msgstr "altitude restriction from designated route"
-
-msgid "altitude type from first leg"
-msgstr "altitude type from first leg"
-
-msgid "Analysis is incomplete. Only validators with the required inputs are shown."
-msgstr "Analysis is incomplete. Only validators with the required inputs are shown."
 
 msgid "Announcement"
 msgstr "Announcement"
@@ -209,8 +185,8 @@ msgstr "Area"
 msgid "Arrival"
 msgstr "Arrival"
 
-msgid "arrival airport existence"
-msgstr "arrival airport existence"
+msgid "arrival airport"
+msgstr "arrival airport"
 
 msgid "Assign"
 msgstr "Assign"
@@ -323,6 +299,9 @@ msgstr "callsign"
 msgid "Callsign"
 msgstr "Callsign"
 
+msgid "Callsign / CID"
+msgstr "Callsign / CID"
+
 msgid "Callsign & Aircraft"
 msgstr "Callsign & Aircraft"
 
@@ -407,12 +386,6 @@ msgstr "Community & Membership Director"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
-msgid "Complete route"
-msgstr "Complete route"
-
-msgid "compliance with airway direction restrictions"
-msgstr "compliance with airway direction restrictions"
-
 msgid "Computed station height"
 msgstr "Computed station height"
 
@@ -437,9 +410,6 @@ msgstr "Controller Info"
 msgid "Controller List"
 msgstr "Controller List"
 
-msgid "Controller manual check required"
-msgstr "Controller manual check required"
-
 msgid "Controller Training Director"
 msgstr "Controller Training Director"
 
@@ -458,9 +428,6 @@ msgstr "Controlling"
 
 msgid "Controlling History"
 msgstr "Controlling History"
-
-msgid "Conventional"
-msgstr "Conventional"
 
 msgid "Coverage calculation failed. Please reload the page."
 msgstr "Coverage calculation failed. Please reload the page."
@@ -495,26 +462,32 @@ msgstr "Created at"
 msgid "Created At"
 msgstr "Created At"
 
-msgid "Cross-border entry"
-msgstr "Cross-border entry"
+msgid "cruise altitude (with designated route)"
+msgstr "cruise altitude (with designated route)"
 
-msgid "Cross-border exit"
-msgstr "Cross-border exit"
+msgid "cruise altitude (without designated route)"
+msgstr "cruise altitude (without designated route)"
 
 msgid "Cruising Level"
 msgstr "Cruising Level"
 
-msgid "Cruising Level Not Allowed"
-msgstr "Cruising Level Not Allowed"
+msgid "Cruising level not allowed"
+msgstr "Cruising level not allowed"
 
-msgid "Cruising Level Too Low"
-msgstr "Cruising Level Too Low"
+msgid "Cruising level should be {allowed}."
+msgstr "Cruising level should be {allowed}."
+
+msgid "Cruising level should be {level}."
+msgstr "Cruising level should be {level}."
+
+msgid "Cruising level too low"
+msgstr "Cruising level too low"
 
 msgid "Cruising Level Type"
 msgstr "Cruising Level Type"
 
-msgid "Cruising Level Type Mismatch"
-msgstr "Cruising Level Type Mismatch"
+msgid "Cruising level type mismatch"
+msgstr "Cruising level type mismatch"
 
 msgid "CTOT"
 msgstr "CTOT"
@@ -546,8 +519,8 @@ msgstr "Delivery"
 msgid "Departure"
 msgstr "Departure"
 
-msgid "departure airport existence"
-msgstr "departure airport existence"
+msgid "departure airport"
+msgstr "departure airport"
 
 msgid "Description"
 msgstr "Description"
@@ -603,9 +576,6 @@ msgstr "Edit Preferred Route {title}"
 msgid "Edit roles"
 msgstr "Edit roles"
 
-msgid "Edit your flight plan on VATSIM."
-msgstr "Edit your flight plan on VATSIM."
-
 msgid "ELDT"
 msgstr "ELDT"
 
@@ -636,8 +606,8 @@ msgstr "English description"
 msgid "English name"
 msgstr "English name"
 
-msgid "Enroute fixes"
-msgstr "Enroute fixes"
+msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
+msgstr "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 
 msgid "Enter at"
 msgstr "Enter at"
@@ -684,9 +654,6 @@ msgstr "Events"
 
 msgid "Events this week"
 msgstr "Events this week"
-
-msgid "Expected wake category: {categories}."
-msgstr "Expected wake category: {categories}."
 
 msgid "Failed to delete ATC position"
 msgstr "Failed to delete ATC position"
@@ -760,6 +727,9 @@ msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (y
 msgid "Filter sectors by controller type"
 msgstr "Filter sectors by controller type"
 
+msgid "Find flight"
+msgstr "Find flight"
+
 msgid "Finished Trainings"
 msgstr "Finished Trainings"
 
@@ -769,18 +739,11 @@ msgstr "FIR coverage estimate"
 msgid "Fit region"
 msgstr "Fit region"
 
-msgid "Flight analysis v2"
-msgstr "Flight analysis v2"
-
 msgid "Flight information region"
 msgstr "Flight information region"
 
-msgctxt "feet"
-msgid "flight level"
-msgstr "flight level"
-
-msgid "Flight looks good. Please confirm with the clearance delivery controller."
-msgstr "Flight looks good. Please confirm with the clearance delivery controller."
+msgid "Flight or validation data is missing."
+msgstr "Flight or validation data is missing."
 
 msgid "Flight Plan"
 msgstr "Flight Plan"
@@ -839,9 +802,6 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
-msgid "Hide passed and suppressed validations"
-msgstr "Hide passed and suppressed validations"
-
 msgid "How to fly"
 msgstr "How to fly"
 
@@ -869,9 +829,6 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-msgid "ICAO aircraft type existence"
-msgstr "ICAO aircraft type existence"
-
 msgid "Image Upload Tool"
 msgstr "Image Upload Tool"
 
@@ -896,17 +853,11 @@ msgstr "Import Slots"
 msgid "In Waitlist"
 msgstr "In Waitlist"
 
-msgid "Include the departure and arrival airports, for example: ZBAA DCT ZSPD."
-msgstr "Include the departure and arrival airports, for example: ZBAA DCT ZSPD."
-
 msgid "Instructor"
 msgstr "Instructor"
 
 msgid "Insufficient controller bookings"
 msgstr "Insufficient controller bookings"
-
-msgid "International"
-msgstr "International"
 
 msgid "Introduction"
 msgstr "Introduction"
@@ -920,9 +871,6 @@ msgstr "Invalid aircraft type"
 msgid "Invalid airport"
 msgstr "Invalid airport"
 
-msgid "Invalid route"
-msgstr "Invalid route"
-
 msgid "Join the controller team"
 msgstr "Join the controller team"
 
@@ -935,11 +883,14 @@ msgstr "Learn more"
 msgid "Learn more about China RVSM"
 msgstr "Learn more about China RVSM"
 
-msgid "Leg {legNumber} validations"
-msgstr "Leg {legNumber} validations"
+msgid "Leg {legNumber}"
+msgstr "Leg {legNumber}"
 
 msgid "Leg direction violation"
 msgstr "Leg direction violation"
+
+msgid "Legs {from}–{to}"
+msgstr "Legs {from}–{to}"
 
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "Less than half of the configured area control positions have been booked for this event."
@@ -968,8 +919,8 @@ msgstr "Loading"
 msgid "Loading events"
 msgstr "Loading events"
 
-msgid "Loading flight analysis"
-msgstr "Loading flight analysis"
+msgid "Loading flights"
+msgstr "Loading flights"
 
 msgid "Loading map"
 msgstr "Loading map"
@@ -995,14 +946,8 @@ msgstr "Logo Pack"
 msgid "Logout"
 msgstr "Logout"
 
-msgid "Mainland"
-msgstr "Mainland"
-
 msgid "Match designated route"
 msgstr "Match designated route"
-
-msgid "Matched"
-msgstr "Matched"
 
 msgid "Maximum available coverage range"
 msgstr "Maximum available coverage range"
@@ -1030,9 +975,6 @@ msgstr "metric odd flight level (meters)"
 
 msgid "Military"
 msgstr "Military"
-
-msgid "Minimum altitude"
-msgstr "Minimum altitude"
 
 msgid "Minimum State"
 msgstr "Minimum State"
@@ -1076,23 +1018,17 @@ msgstr "no airway requiring approval"
 msgid "No comments"
 msgstr "No comments"
 
-msgid "No complete flight plan route is available."
-msgstr "No complete flight plan route is available."
-
 msgid "No content"
 msgstr "No content"
 
 msgid "No data"
 msgstr "No data"
 
-msgid "no direct route legs"
-msgstr "no direct route legs"
+msgid "no direct leg"
+msgstr "no direct leg"
 
 msgid "No fields."
 msgstr "No fields."
-
-msgid "No match"
-msgstr "No match"
 
 msgid "No past events found in the selected time range."
 msgstr "No past events found in the selected time range."
@@ -1100,14 +1036,8 @@ msgstr "No past events found in the selected time range."
 msgid "No permission"
 msgstr "No permission"
 
-msgid "No preferred route candidates for this segment."
-msgstr "No preferred route candidates for this segment."
-
 msgid "No region loaded"
 msgstr "No region loaded"
-
-msgid "No resolved coordinates are available to display on the map."
-msgstr "No resolved coordinates are available to display on the map."
 
 msgid "No results."
 msgstr "No results."
@@ -1123,9 +1053,6 @@ msgstr "No self reflection has been filed yet."
 
 msgid "No sheet available."
 msgstr "No sheet available."
-
-msgid "No SID candidates match this route."
-msgstr "No SID candidates match this route."
 
 msgid "No training record has been filed yet."
 msgstr "No training record has been filed yet."
@@ -1209,15 +1136,6 @@ msgstr "Page {currentPage} of {totalPages}"
 msgid "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 msgstr "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 
-msgid "Parse route"
-msgstr "Parse route"
-
-msgid "Parsed route"
-msgstr "Parsed route"
-
-msgid "Parsed route map"
-msgstr "Parsed route map"
-
 msgid "Pass"
 msgstr "Pass"
 
@@ -1233,9 +1151,6 @@ msgstr "Pending"
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
 
-msgid "Pick a suitable cruising level."
-msgstr "Pick a suitable cruising level."
-
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
 
@@ -1244,15 +1159,6 @@ msgstr "Pilots"
 
 msgid "Pilots online"
 msgstr "Pilots online"
-
-msgid "Planned route matches a designated route:<0>{route}</0>"
-msgstr "Planned route matches a designated route:<0>{route}</0>"
-
-msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
-msgstr "Please choose a designated route from the following list, or contact ATC for assistance:"
-
-msgid "Please contact ATC for help adjusting the route."
-msgstr "Please contact ATC for help adjusting the route."
 
 msgid "Please login to book a slot."
 msgstr "Please login to book a slot."
@@ -1274,15 +1180,6 @@ msgstr "Please wait while being logged in."
 
 msgid "Position"
 msgstr "Position"
-
-msgid "Preferred"
-msgstr "Preferred"
-
-msgid "Preferred route matching is unavailable."
-msgstr "Preferred route matching is unavailable."
-
-msgid "Preferred routes"
-msgstr "Preferred routes"
 
 msgid "Preferred Routes"
 msgstr "Preferred Routes"
@@ -1362,20 +1259,17 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
-msgid "RNAV"
-msgstr "RNAV"
+msgid "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
 
-msgid "RNAV 1 capability"
-msgstr "RNAV 1 capability"
-
-msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
-msgstr "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
+msgid "RNAV1 equipment"
+msgstr "RNAV1 equipment"
 
 msgid "RNP AR"
 msgstr "RNP AR"
 
-msgid "RNP AR capability"
-msgstr "RNP AR capability"
+msgid "RNP AR equipment"
+msgstr "RNP AR equipment"
 
 msgid "RNP AR without RF"
 msgstr "RNP AR without RF"
@@ -1386,26 +1280,8 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
-msgid "Route parsing failed"
-msgstr "Route parsing failed"
-
-msgid "Route segments"
-msgstr "Route segments"
-
-msgid "Route segments are unavailable. See the diagnostic error above."
-msgstr "Route segments are unavailable. See the diagnostic error above."
-
-msgid "Route Viewer"
-msgstr "Route Viewer"
-
-msgid "Runway {runway}"
-msgstr "Runway {runway}"
-
-msgid "RVSM capability"
-msgstr "RVSM capability"
-
-msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
-msgstr "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
+msgid "RVSM equipment"
+msgstr "RVSM equipment"
 
 msgid "S1"
 msgstr "S1"
@@ -1446,9 +1322,6 @@ msgstr "See All Announcements"
 msgid "See All Events"
 msgstr "See All Events"
 
-msgid "Segment {segmentNumber}"
-msgstr "Segment {segmentNumber}"
-
 msgid "Select {callsign}"
 msgstr "Select {callsign}"
 
@@ -1457,9 +1330,6 @@ msgstr "Select a radar or click its map marker"
 
 msgid "Select all positions on this page"
 msgstr "Select all positions on this page"
-
-msgid "Selected match"
-msgstr "Selected match"
 
 msgid "Self Reflection"
 msgstr "Self Reflection"
@@ -1490,9 +1360,6 @@ msgstr "Show less"
 
 msgid "Show more"
 msgstr "Show more"
-
-msgid "SID candidates"
-msgstr "SID candidates"
 
 msgid "Slots"
 msgstr "Slots"
@@ -1626,11 +1493,11 @@ msgstr "The aircraft specifies RNP AR capability without RF, which is eligible t
 msgid "The aircraft type designator is not recognized."
 msgstr "The aircraft type designator is not recognized."
 
-msgid "The aircraft wingspan exceeds the airport's limit."
-msgstr "The aircraft wingspan exceeds the airport's limit."
+msgid "The aircraft wingspan exceeds the airport's limit {maximum}."
+msgstr "The aircraft wingspan exceeds the airport's limit {maximum}."
 
-msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
-msgstr "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
+msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to<0> vPLAAF's website </0>for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
+msgstr "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to<0> vPLAAF's website </0>for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
 
 msgid "The ATC application review has been updated successfully."
 msgstr "The ATC application review has been updated successfully."
@@ -1644,29 +1511,17 @@ msgstr "The callsign cannot be changed after creation."
 msgid "The cruising level is not allowed for the route."
 msgstr "The cruising level is not allowed for the route."
 
-msgid "The cruising level is too low for route. The minimum is {level} feet."
-msgstr "The cruising level is too low for route. The minimum is {level} feet."
-
-msgid "The cruising level is too low for the route."
-msgstr "The cruising level is too low for the route."
+msgid "The cruising level is too low for route. The minimum is {minimum_ft} feet."
+msgstr "The cruising level is too low for route. The minimum is {minimum_ft} feet."
 
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "The cruising level type does not meet the requirement of the route."
 
-msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
-msgstr "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
-
-msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
-msgstr "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
-
-msgid "The declared wake category does not match the aircraft type."
-msgstr "The declared wake category does not match the aircraft type."
+msgid "The declared wake category does not match the aircraft type. It should be {expected}."
+msgstr "The declared wake category does not match the aircraft type. It should be {expected}."
 
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
-
-msgid "The flight plan does not match the designated route for this flight."
-msgstr "The flight plan does not match the designated route for this flight."
 
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
@@ -1674,23 +1529,20 @@ msgstr "The list below is displayed based on the controller data in our ATC Cent
 msgid "The Moodle account has been provisioned successfully."
 msgstr "The Moodle account has been provisioned successfully."
 
-msgid "The parser returned no route segments."
-msgstr "The parser returned no route segments."
-
 msgid "The planned route matches designated route."
 msgstr "The planned route matches designated route."
 
-msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
-msgstr "The route contains a direct leg. Please ensure that the direct segment is valid."
+msgid "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
+msgstr "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
 
-msgid "The route contains a leg with an invalid direction."
-msgstr "The route contains a leg with an invalid direction."
+msgid "The route contains the airway leg \"{from} {ident} {to}\" that requires controller approval."
+msgstr "The route contains the airway leg \"{from} {ident} {to}\" that requires controller approval."
 
-msgid "The route contains an airway that requires controller approval."
-msgstr "The route contains an airway that requires controller approval."
+msgid "The route contains the leg \"{from} {ident} {to}\" violating direction restriction."
+msgstr "The route contains the leg \"{from} {ident} {to}\" violating direction restriction."
 
-msgid "The route contains an unknown leg or fix."
-msgstr "The route contains an unknown leg or fix."
+msgid "The route contains the unknown leg or fix {ident}. Note: a leg not connecting to the fix specified is also unknown."
+msgstr "The route contains the unknown leg or fix {ident}. Note: a leg not connecting to the fix specified is also unknown."
 
 msgid "The specified airport could not be resolved as a valid airport."
 msgstr "The specified airport could not be resolved as a valid airport."
@@ -1709,9 +1561,6 @@ msgstr "There is no response to this training request yet."
 
 msgid "There is no upcoming events."
 msgstr "There is no upcoming events."
-
-msgid "This aircraft requires a controller's manual compatibility check at this airport."
-msgstr "This aircraft requires a controller's manual compatibility check at this airport."
 
 msgid "This event does not have pilot booking."
 msgstr "This event does not have pilot booking."
@@ -1745,6 +1594,9 @@ msgstr "Title (English)"
 
 msgid "Title is required"
 msgstr "Title is required"
+
+msgid "To enter RVSM airspace, include W in the Equipment field."
+msgstr "To enter RVSM airspace, include W in the Equipment field."
 
 msgid "Total"
 msgstr "Total"
@@ -1785,15 +1637,6 @@ msgstr "Trainings"
 
 msgid "Transponder"
 msgstr "Transponder"
-
-msgid "Transponder field is empty."
-msgstr "Transponder field is empty."
-
-msgid "Unable to load flight analysis"
-msgstr "Unable to load flight analysis"
-
-msgid "Unable to load the parsed route."
-msgstr "Unable to load the parsed route."
 
 msgid "Unassign"
 msgstr "Unassign"
@@ -1900,11 +1743,11 @@ msgstr "Visiting & Transfer"
 msgid "Volunteer"
 msgstr "Volunteer"
 
+msgid "wake category"
+msgstr "wake category"
+
 msgid "Wake Category"
 msgstr "Wake Category"
-
-msgid "wake category matches aircraft"
-msgstr "wake category matches aircraft"
 
 msgid "Wake category mismatch"
 msgstr "Wake category mismatch"
@@ -1918,17 +1761,14 @@ msgstr "We regret to inform you that your application has been rejected. Please 
 msgid "Weather"
 msgstr "Weather"
 
-msgid "wingspan limit at arrival"
-msgstr "wingspan limit at arrival"
+msgid "wingspan at arrival"
+msgstr "wingspan at arrival"
 
-msgid "wingspan limit at departure"
-msgstr "wingspan limit at departure"
+msgid "wingspan at departure"
+msgstr "wingspan at departure"
 
 msgid "Withdraw"
 msgstr "Withdraw"
-
-msgid "Write your transponder equipment code."
-msgstr "Write your transponder equipment code."
 
 msgid "Yes"
 msgstr "Yes"
@@ -1956,6 +1796,9 @@ msgstr "Your ATC application has been updated successfully."
 
 msgid "Your flight is not online"
 msgstr "Your flight is not online"
+
+msgid "Your flight plan has some problems, please<0> edit your flight plan on VATSIM </0>according to the information below."
+msgstr "Your flight plan has some problems, please<0> edit your flight plan on VATSIM </0>according to the information below."
 
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."

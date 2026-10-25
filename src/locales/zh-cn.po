@@ -41,6 +41,9 @@ msgstr "<0>S</0> 训练中：此管制员为了训练原因，可以在本席位
 msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 msgstr "<0>T</0> 教员监督下开扇：此管制员可以在辅导员或教员的监督下开扇。(Under Supervision)"
 
+msgid "<0>The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:</0><1><2>{raw_route}</2></1>"
+msgstr "<0>飞行计划不符合指定航路。请在 {from} 和 {to} 之间使用下列航路：</0><1><2>{raw_route}</2></1>"
+
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> 客座：此管制员为客座管制员。"
 
@@ -77,20 +80,14 @@ msgstr "添加字段"
 msgid "Add position"
 msgstr "添加席位"
 
-msgid "Add<0>D1</0>or<1>D2</1>to PBN."
-msgstr "将 <0>D1</0> 或 <1>D2</1> 添加到 PBN。"
-
-msgid "Add<0>R</0>to equipment code."
-msgstr "将 <0>R</0> 添加到设备代码。"
-
-msgid "Add<0>W</0>to equipment code."
-msgstr "将 <0>W</0> 添加到设备代码。"
-
 msgid "Admin"
 msgstr "管理"
 
 msgid "AFV Facility Engineer"
 msgstr "AFV 设备工程师"
+
+msgid "aircraft type"
+msgstr "机型"
 
 msgid "Aircraft Type"
 msgstr "机型"
@@ -98,47 +95,26 @@ msgstr "机型"
 msgid "Aircraft wingspan exceeds airport limit"
 msgstr "航空器翼展超出机场限制"
 
-msgid "Aircraft without RVSM capability will not be allowed to enter RVSM airspace."
-msgstr "不具备RVSM能力的航空器将不会许可进入RVSM空域。"
-
-msgid "Airport endpoints"
-msgstr "机场端点"
-
 msgid "Airspace"
 msgstr "空域"
 
 msgid "Airspace boundaries"
 msgstr "空域边界"
 
+msgid "airway direction restriction"
+msgstr "航路方向限制"
+
 msgid "All"
 msgstr "全部"
 
-msgid "All runways"
-msgstr "所有跑道"
-
 msgid "All VATPRC positions incl. FSS."
 msgstr "包含 FSS 在内的所有 VATPRC 席位。"
-
-msgid "Allowed altitudes: "
-msgstr ""
-
-msgid "Allowed levels are {level} (in feet)."
-msgstr "允许的巡航高度是 {level} （英尺）。"
 
 msgid "Already Booked"
 msgstr "已被预订"
 
 msgid "Altitude"
 msgstr "高度范围"
-
-msgid "altitude restriction from designated route"
-msgstr "指定航路高度限制"
-
-msgid "altitude type from first leg"
-msgstr "第一个航段高度层类型"
-
-msgid "Analysis is incomplete. Only validators with the required inputs are shown."
-msgstr "分析尚未完成，仅显示具备所需输入的验证器。"
 
 msgid "Announcement"
 msgstr "公告"
@@ -209,8 +185,8 @@ msgstr "区域"
 msgid "Arrival"
 msgstr "到达机场"
 
-msgid "arrival airport existence"
-msgstr "到达机场有效"
+msgid "arrival airport"
+msgstr "到达机场"
 
 msgid "Assign"
 msgstr "指派"
@@ -323,6 +299,9 @@ msgstr "呼号"
 msgid "Callsign"
 msgstr "呼号"
 
+msgid "Callsign / CID"
+msgstr "呼号 / CID"
+
 msgid "Callsign & Aircraft"
 msgstr "呼号和机型"
 
@@ -407,12 +386,6 @@ msgstr "社区会员部主管"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
-msgid "Complete route"
-msgstr "完整航路"
-
-msgid "compliance with airway direction restrictions"
-msgstr "航路方向限制"
-
 msgid "Computed station height"
 msgstr "计算站高"
 
@@ -437,9 +410,6 @@ msgstr "管制员信息"
 msgid "Controller List"
 msgstr "管制员列表"
 
-msgid "Controller manual check required"
-msgstr "需由管制员人工核查"
-
 msgid "Controller Training Director"
 msgstr "管制员训练部主管"
 
@@ -458,9 +428,6 @@ msgstr "管制"
 
 msgid "Controlling History"
 msgstr "管制上线记录"
-
-msgid "Conventional"
-msgstr "传统导航"
 
 msgid "Coverage calculation failed. Please reload the page."
 msgstr "覆盖范围计算失败，请重新加载页面。"
@@ -495,26 +462,32 @@ msgstr "创建时间"
 msgid "Created At"
 msgstr "创建时间"
 
-msgid "Cross-border entry"
-msgstr "跨境进入点"
+msgid "cruise altitude (with designated route)"
+msgstr "巡航高度（按指定航路）"
 
-msgid "Cross-border exit"
-msgstr "跨境离开点"
+msgid "cruise altitude (without designated route)"
+msgstr "巡航高度（非指定航路）"
 
 msgid "Cruising Level"
 msgstr "巡航高度"
 
-msgid "Cruising Level Not Allowed"
-msgstr "巡航高度不允许"
+msgid "Cruising level not allowed"
+msgstr "巡航高度不许可"
 
-msgid "Cruising Level Too Low"
+msgid "Cruising level should be {allowed}."
+msgstr "巡航高度应为 {allowed}。"
+
+msgid "Cruising level should be {level}."
+msgstr "巡航高度应为 {level}。"
+
+msgid "Cruising level too low"
 msgstr "巡航高度过低"
 
 msgid "Cruising Level Type"
 msgstr "巡航高度类型"
 
-msgid "Cruising Level Type Mismatch"
-msgstr "巡航高度类型不允许"
+msgid "Cruising level type mismatch"
+msgstr "巡航高度类型不匹配"
 
 msgid "CTOT"
 msgstr "CTOT"
@@ -546,8 +519,8 @@ msgstr "放行"
 msgid "Departure"
 msgstr "出发机场"
 
-msgid "departure airport existence"
-msgstr "出发机场有效"
+msgid "departure airport"
+msgstr "出发机场"
 
 msgid "Description"
 msgstr "描述"
@@ -603,9 +576,6 @@ msgstr "修改推荐航路 {title}"
 msgid "Edit roles"
 msgstr "编辑权限"
 
-msgid "Edit your flight plan on VATSIM."
-msgstr "在 VATSIM 上修改你的飞行计划。"
-
 msgid "ELDT"
 msgstr "ELDT"
 
@@ -636,8 +606,8 @@ msgstr "英文说明"
 msgid "English name"
 msgstr "英文名称"
 
-msgid "Enroute fixes"
-msgstr "航路起止航点"
+msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
+msgstr "输入起飞或到达机场的 ICAO 代码以查看航班，或通过呼号打开航班。"
 
 msgid "Enter at"
 msgstr "进入空域时间"
@@ -684,9 +654,6 @@ msgstr "活动"
 
 msgid "Events this week"
 msgstr "本周活动"
-
-msgid "Expected wake category: {categories}."
-msgstr "预期尾流类别：{categories}。"
 
 msgid "Failed to delete ATC position"
 msgstr "删除管制席位失败"
@@ -760,6 +727,9 @@ msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH
 msgid "Filter sectors by controller type"
 msgstr "按管制类型筛选扇区"
 
+msgid "Find flight"
+msgstr "查找航班"
+
 msgid "Finished Trainings"
 msgstr "已完成培训"
 
@@ -769,18 +739,11 @@ msgstr "FIR 覆盖估算"
 msgid "Fit region"
 msgstr "适配区域"
 
-msgid "Flight analysis v2"
-msgstr "航班分析 v2"
-
 msgid "Flight information region"
 msgstr "飞行情报区"
 
-msgctxt "feet"
-msgid "flight level"
-msgstr "英制高度层"
-
-msgid "Flight looks good. Please confirm with the clearance delivery controller."
-msgstr "未发现飞行计划问题，但请以放行管制员为准。"
+msgid "Flight or validation data is missing."
+msgstr "缺少航班或校验数据。"
 
 msgid "Flight Plan"
 msgstr "飞行计划"
@@ -839,9 +802,6 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
-msgid "Hide passed and suppressed validations"
-msgstr "隐藏已通过和已抑制的验证结果"
-
 msgid "How to fly"
 msgstr "如何飞行"
 
@@ -869,9 +829,6 @@ msgstr "I1"
 msgid "I3"
 msgstr "I3"
 
-msgid "ICAO aircraft type existence"
-msgstr "ICAO机型代码有效"
-
 msgid "Image Upload Tool"
 msgstr "图床"
 
@@ -896,17 +853,11 @@ msgstr "导入时刻表"
 msgid "In Waitlist"
 msgstr "等待中"
 
-msgid "Include the departure and arrival airports, for example: ZBAA DCT ZSPD."
-msgstr "请包含起飞和到达机场，例如：ZBAA DCT ZSPD。"
-
 msgid "Instructor"
 msgstr "教员"
 
 msgid "Insufficient controller bookings"
 msgstr "活动管制员预订数量不足"
-
-msgid "International"
-msgstr "国际"
 
 msgid "Introduction"
 msgstr "介绍"
@@ -920,9 +871,6 @@ msgstr "无效的机型"
 msgid "Invalid airport"
 msgstr "无效机场"
 
-msgid "Invalid route"
-msgstr "无效航路"
-
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
@@ -935,11 +883,14 @@ msgstr "了解详情"
 msgid "Learn more about China RVSM"
 msgstr "了解中国 RVSM"
 
-msgid "Leg {legNumber} validations"
-msgstr "航段 {legNumber} 验证结果"
+msgid "Leg {legNumber}"
+msgstr "航段 {legNumber}"
 
 msgid "Leg direction violation"
 msgstr "航段方向不允许"
+
+msgid "Legs {from}–{to}"
+msgstr "航段 {from}–{to}"
 
 msgid "Less than half of the configured area control positions have been booked for this event."
 msgstr "本活动配置的区域管制席位预约数不足一半。"
@@ -968,8 +919,8 @@ msgstr "正在加载"
 msgid "Loading events"
 msgstr "正在加载活动"
 
-msgid "Loading flight analysis"
-msgstr "正在加载航班分析"
+msgid "Loading flights"
+msgstr "正在加载航班"
 
 msgid "Loading map"
 msgstr "正在加载地图"
@@ -995,14 +946,8 @@ msgstr "视觉标识包"
 msgid "Logout"
 msgstr "登出"
 
-msgid "Mainland"
-msgstr "中国内地"
-
 msgid "Match designated route"
 msgstr "符合指定航路"
-
-msgid "Matched"
-msgstr "匹配成功"
 
 msgid "Maximum available coverage range"
 msgstr "最大可用覆盖范围"
@@ -1030,9 +975,6 @@ msgstr "公制单数飞行高度层（米）"
 
 msgid "Military"
 msgstr "军用"
-
-msgid "Minimum altitude"
-msgstr "最低高度"
 
 msgid "Minimum State"
 msgstr "最低权限"
@@ -1076,23 +1018,17 @@ msgstr "无需要许可的航路"
 msgid "No comments"
 msgstr "暂无评论"
 
-msgid "No complete flight plan route is available."
-msgstr "暂无完整的飞行计划航路。"
-
 msgid "No content"
 msgstr "暂无内容"
 
 msgid "No data"
 msgstr "无数据"
 
-msgid "no direct route legs"
+msgid "no direct leg"
 msgstr "无直飞段"
 
 msgid "No fields."
 msgstr "没有字段。"
-
-msgid "No match"
-msgstr "不匹配"
 
 msgid "No past events found in the selected time range."
 msgstr "所选时间范围内没有历史活动。"
@@ -1100,14 +1036,8 @@ msgstr "所选时间范围内没有历史活动。"
 msgid "No permission"
 msgstr "没有权限"
 
-msgid "No preferred route candidates for this segment."
-msgstr "此区段没有指定航路候选项。"
-
 msgid "No region loaded"
 msgstr "尚未加载区域"
-
-msgid "No resolved coordinates are available to display on the map."
-msgstr "没有可用于地图显示的已解析坐标。"
 
 msgid "No results."
 msgstr "无结果。"
@@ -1123,9 +1053,6 @@ msgstr "尚未填写自我反思。"
 
 msgid "No sheet available."
 msgstr "当前没有表单。"
-
-msgid "No SID candidates match this route."
-msgstr "没有与此航路匹配的 SID。"
 
 msgid "No training record has been filed yet."
 msgstr "尚未填写训练记录。"
@@ -1209,15 +1136,6 @@ msgstr "第 {currentPage} 页，共 {totalPages} 页"
 msgid "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL."
 msgstr "你试图访问的页面不存在。页面的拼写可能有误，或者该页面的地址有所变化。"
 
-msgid "Parse route"
-msgstr "解析航路"
-
-msgid "Parsed route"
-msgstr "解析后的航路"
-
-msgid "Parsed route map"
-msgstr "解析航路地图"
-
 msgid "Pass"
 msgstr "通过"
 
@@ -1233,9 +1151,6 @@ msgstr "待处理"
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
 
-msgid "Pick a suitable cruising level."
-msgstr "选择合适的巡航高度。"
-
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
 
@@ -1244,15 +1159,6 @@ msgstr "飞行员"
 
 msgid "Pilots online"
 msgstr "在线机组"
-
-msgid "Planned route matches a designated route:<0>{route}</0>"
-msgstr "计划航路与指定航路 <0>{route}</0> 匹配。"
-
-msgid "Please choose a designated route from the following list, or contact ATC for assistance:"
-msgstr "请从下列指定航路中选择一条作为计划航路，或与管制员联系。"
-
-msgid "Please contact ATC for help adjusting the route."
-msgstr "请与管制员联系调整航路。"
 
 msgid "Please login to book a slot."
 msgstr "预订时刻前请先登入。"
@@ -1274,15 +1180,6 @@ msgstr "正在登入，请稍等片刻。"
 
 msgid "Position"
 msgstr "席位"
-
-msgid "Preferred"
-msgstr "主用程序"
-
-msgid "Preferred route matching is unavailable."
-msgstr "指定航路匹配暂不可用。"
-
-msgid "Preferred routes"
-msgstr "指定航路"
 
 msgid "Preferred Routes"
 msgstr "推荐航路"
@@ -1362,20 +1259,17 @@ msgstr "重试"
 msgid "Review"
 msgstr "审核"
 
-msgid "RNAV"
-msgstr "RNAV"
+msgid "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "RNAV 1 要求设备代码包含 R，且 PBN 包含 D1、D2、D3 或 D4。如果航空器无法满足这些要求，请联系 ATC 申请特别许可。"
 
-msgid "RNAV 1 capability"
-msgstr "RNAV 1 能力"
-
-msgid "RNAV1 is implemented in the entire VATPRC airspace. It is not possible to follow enroute airways or standard departure / arrival procedures without RNAV1 capability. Please contact ATC for special clearance."
-msgstr "VATPRC 全空域实施 RNAV1 运行，不具备 RNAV1 能力的航空器将无法执行航路及标准进离场。不具备 RNAV1 能力的航空器，需要联系 ATC 申请特别航路许可。"
+msgid "RNAV1 equipment"
+msgstr "RNAV1 设备"
 
 msgid "RNP AR"
 msgstr "RNP AR"
 
-msgid "RNP AR capability"
-msgstr "RNP AR 能力"
+msgid "RNP AR equipment"
+msgstr "RNP AR 设备"
 
 msgid "RNP AR without RF"
 msgstr "RNP AR（无 RF 航段）"
@@ -1386,26 +1280,8 @@ msgstr "权限"
 msgid "Route"
 msgstr "航路"
 
-msgid "Route parsing failed"
-msgstr "航路解析失败"
-
-msgid "Route segments"
-msgstr "航路区段"
-
-msgid "Route segments are unavailable. See the diagnostic error above."
-msgstr "航路区段暂不可用，请查看上方的诊断错误。"
-
-msgid "Route Viewer"
-msgstr "航路查看器"
-
-msgid "Runway {runway}"
-msgstr "跑道 {runway}"
-
-msgid "RVSM capability"
-msgstr "RVSM 能力"
-
-msgid "RVSM stands for Reduced Vertical Separation Minima. In the VATPRC airspace, the RVSM altitude range is between 8,900 meters (29,100 feet) and 12,500 meters (41,100 feet) inclusive, with altitude layers separated by 300 meters. To enter this airspace, your flight plan must include W in the Equipment field."
-msgstr "RVSM全称Reduced Vertical Separation Minima，中文“缩小垂直间隔”，适用于VATPRC所辖空域的RVSM高度区间为8900米（29100英尺）至12500米（41100英尺）之间（含）。该空域内每300米为一个高度层。进入该空域，你的飞行计划中的Equipment项中，必须包含W。否则管制员将不会批准你进入RVSM空域。"
+msgid "RVSM equipment"
+msgstr "RVSM 设备"
 
 msgid "S1"
 msgstr "S1"
@@ -1446,9 +1322,6 @@ msgstr "查看所有公告"
 msgid "See All Events"
 msgstr "查看所有活动"
 
-msgid "Segment {segmentNumber}"
-msgstr "区段 {segmentNumber}"
-
 msgid "Select {callsign}"
 msgstr "选择 {callsign}"
 
@@ -1457,9 +1330,6 @@ msgstr "选择雷达或点击地图上的站点"
 
 msgid "Select all positions on this page"
 msgstr "选择当前页所有席位"
-
-msgid "Selected match"
-msgstr "选定匹配"
 
 msgid "Self Reflection"
 msgstr "自我反思"
@@ -1490,9 +1360,6 @@ msgstr "收起"
 
 msgid "Show more"
 msgstr "显示更多"
-
-msgid "SID candidates"
-msgstr "SID 候选"
 
 msgid "Slots"
 msgstr "时刻"
@@ -1626,11 +1493,11 @@ msgstr "拥有 RNP AR（不带 RF 航段）能力的航空器会被许可使用 
 msgid "The aircraft type designator is not recognized."
 msgstr "无法识别航空器机型代码。"
 
-msgid "The aircraft wingspan exceeds the airport's limit."
-msgstr "航空器翼展超出该机场的翼展限制。"
+msgid "The aircraft wingspan exceeds the airport's limit {maximum}."
+msgstr "飞机翼展超出机场的翼展限制（{maximum} 米）。"
 
-msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to <0>vPLAAF's website</0> for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
-msgstr "此处列出的空域是禁飞区、限制区或危险区。请访问 <0>vPLAAF 的网站</0>了解详情。这些空域由 vPLAAF 指定，并经 VATPRC 批准。"
+msgid "The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to<0> vPLAAF's website </0>for the details. These airspaces are designated by vPLAAF and approved by VATPRC."
+msgstr "此处列出的空域是禁飞区、限制区或危险区。请访问<0> vPLAAF 的网站</0>了解详情。这些空域由 vPLAAF 指定，并经 VATPRC 批准。"
 
 msgid "The ATC application review has been updated successfully."
 msgstr "管制员申请审核已成功更新。"
@@ -1644,29 +1511,17 @@ msgstr "创建后无法修改呼号。"
 msgid "The cruising level is not allowed for the route."
 msgstr "巡航高度违反航路限制。"
 
-msgid "The cruising level is too low for route. The minimum is {level} feet."
-msgstr "巡航高度过低，不满足航路要求。至少应当为 {level} 英尺。"
-
-msgid "The cruising level is too low for the route."
-msgstr "巡航高度过低，不满足航路要求。"
+msgid "The cruising level is too low for route. The minimum is {minimum_ft} feet."
+msgstr "巡航高度过低，不满足航路要求，最低为 {minimum_ft} 英尺。"
 
 msgid "The cruising level type does not meet the requirement of the route."
 msgstr "巡航高度类型不符合航路要求。"
 
-msgid "The cruising level type does not meet the requirement of the route. Cruising level should be {level}."
-msgstr "巡航高度类型不符合航路要求。巡航高度应该是{level}。"
-
-msgid "The cruising level type does not meet the requirement of the route. Please contact ATC for help."
-msgstr "巡航高度类型不符合航路要求。请与 ATC 联系获得帮助。"
-
-msgid "The declared wake category does not match the aircraft type."
-msgstr "申报的尾流类别与机型不符。"
+msgid "The declared wake category does not match the aircraft type. It should be {expected}."
+msgstr "尾流类别不匹配机型，应当为 {expected}。"
 
 msgid "The field must not be empty."
 msgstr "该项不能为空。"
-
-msgid "The flight plan does not match the designated route for this flight."
-msgstr "计划航路与指定航路不一致。"
 
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "下方表格的内容基于管制员中心数据自动生成，正常情况下最多存在24小时延迟。表中数据仅包含至少含有一类席位管制权限的管制员（含客座管制员），即不包含在下表中的管制员不再拥有管制权限。"
@@ -1674,23 +1529,20 @@ msgstr "下方表格的内容基于管制员中心数据自动生成，正常情
 msgid "The Moodle account has been provisioned successfully."
 msgstr "Moodle 账号已成功开通。"
 
-msgid "The parser returned no route segments."
-msgstr "解析结果中没有航段。"
-
 msgid "The planned route matches designated route."
 msgstr "计划航路符合指定航路。"
 
-msgid "The route contains a direct leg. Please ensure that the direct segment is valid."
-msgstr "计划航路包含直飞段。请确认直飞段是否符合实际飞行要求。"
+msgid "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
+msgstr "航路包含直飞段 {from} 到 {to}，请确认直飞航路符合要求。"
 
-msgid "The route contains a leg with an invalid direction."
-msgstr "计划航路包含与航路方向不一致的航段。"
+msgid "The route contains the airway leg \"{from} {ident} {to}\" that requires controller approval."
+msgstr "航路包含航段 \"{from} {ident} {to}\"，该航段需要管制员许可。"
 
-msgid "The route contains an airway that requires controller approval."
-msgstr "计划航路包括需要管制员许可的航路。"
+msgid "The route contains the leg \"{from} {ident} {to}\" violating direction restriction."
+msgstr "航路包含航段 \"{from} {ident} {to}\"，该航段不符合航路方向限制。"
 
-msgid "The route contains an unknown leg or fix."
-msgstr "航路包含未知航段或定位点。"
+msgid "The route contains the unknown leg or fix {ident}. Note: a leg not connecting to the fix specified is also unknown."
+msgstr "航路包含未知航段或航点 {ident}。注：未能连接到相应航点的航段也是未知航段。"
 
 msgid "The specified airport could not be resolved as a valid airport."
 msgstr "无法将指定机场解析为有效机场。"
@@ -1709,9 +1561,6 @@ msgstr "当前暂无对该管制训练申请的回应。"
 
 msgid "There is no upcoming events."
 msgstr "当前无活动计划。"
-
-msgid "This aircraft requires a controller's manual compatibility check at this airport."
-msgstr "该机型在此机场运行需要管制员人工核查其适用性。"
 
 msgid "This event does not have pilot booking."
 msgstr "本活动不支持飞行员预订。"
@@ -1745,6 +1594,9 @@ msgstr "标题（英文）"
 
 msgid "Title is required"
 msgstr "标题为必填项"
+
+msgid "To enter RVSM airspace, include W in the Equipment field."
+msgstr "进入 RVSM 空域需要在设备代码中包含 W。"
 
 msgid "Total"
 msgstr "总计"
@@ -1785,15 +1637,6 @@ msgstr "培训"
 
 msgid "Transponder"
 msgstr "应答机"
-
-msgid "Transponder field is empty."
-msgstr "应答机设备代码为空。"
-
-msgid "Unable to load flight analysis"
-msgstr "无法加载航班分析"
-
-msgid "Unable to load the parsed route."
-msgstr "无法加载解析后的航路。"
 
 msgid "Unassign"
 msgstr "取消指派"
@@ -1900,11 +1743,11 @@ msgstr "访问和转移"
 msgid "Volunteer"
 msgstr "志愿者"
 
-msgid "Wake Category"
+msgid "wake category"
 msgstr "尾流类别"
 
-msgid "wake category matches aircraft"
-msgstr "尾流类别符合机型"
+msgid "Wake Category"
+msgstr "尾流类别"
 
 msgid "Wake category mismatch"
 msgstr "尾流类别不匹配"
@@ -1918,17 +1761,14 @@ msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注
 msgid "Weather"
 msgstr "天气"
 
-msgid "wingspan limit at arrival"
+msgid "wingspan at arrival"
 msgstr "到达机场翼展限制"
 
-msgid "wingspan limit at departure"
+msgid "wingspan at departure"
 msgstr "出发机场翼展限制"
 
 msgid "Withdraw"
 msgstr "撤回"
-
-msgid "Write your transponder equipment code."
-msgstr "给出你的应答机设备代码。"
 
 msgid "Yes"
 msgstr "是"
@@ -1956,6 +1796,9 @@ msgstr "已经成功修改管制员申请。"
 
 msgid "Your flight is not online"
 msgstr "你的航班当前不在线"
+
+msgid "Your flight plan has some problems, please<0> edit your flight plan on VATSIM </0>according to the information below."
+msgstr "您的飞行计划不符合要求，请根据下列信息<0>在 VATSIM 修改您的飞行计划</0>。"
 
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "由于不活跃或其他原因，您的训练已被中止。请查看备注以获取更多详情。如有疑问，请联系职员，或再次提交申请，我们会优先考虑您的申请。"

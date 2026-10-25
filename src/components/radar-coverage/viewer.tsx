@@ -103,7 +103,7 @@ export function RadarCoverageViewer() {
       )}
       {builtin.isError && (
         <Alert color="red">
-          <Trans>Region data could not be loaded.</Trans>{" "}
+          <Trans>Region data could not be loaded.</Trans>&nbsp;
           <Button
             size="compact-xs"
             variant="subtle"
@@ -133,7 +133,7 @@ export function RadarCoverageViewer() {
               <Trans>Target altitude</Trans>
             </h2>
             <span className="text-3xl font-medium">
-              {format(altitude)} <span className="text-sm">ft MSL</span>{" "}
+              {format(altitude)} <span className="text-sm">ft MSL</span>&nbsp;
               <span className="text-sm font-normal whitespace-nowrap text-gray-600 dark:text-gray-400">
                 {format(Math.round(altitude * 0.3048))} m
               </span>

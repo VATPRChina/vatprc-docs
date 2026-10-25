@@ -1,7 +1,4 @@
-import type { components } from "@/lib/api";
 import { FC } from "react";
-
-export type Fix = components["schemas"]["FlightRouteFix"];
 
 export const FixLabel: FC<{ fix: string | null }> = ({ fix }) => {
   if (!fix) return <span>—</span>;

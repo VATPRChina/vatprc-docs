@@ -80,10 +80,10 @@ function RouteComponent() {
       </h1>
       <Alert color="yellow">
         <Trans>
-          The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to{" "}
+          The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to
           <a href="https://www.vplaaf.org/airspace" target="_blank" rel="noreferrer" className="underline">
-            vPLAAF&apos;s website
-          </a>{" "}
+            &nbsp;vPLAAF&apos;s website&nbsp;
+          </a>
           for the details. These airspaces are designated by vPLAAF and approved by VATPRC.
         </Trans>
       </Alert>
