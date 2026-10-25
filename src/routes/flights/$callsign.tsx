@@ -1,5 +1,7 @@
 import { FlightPlan } from "@/components/flight/flight-plan";
+import { FlightRoute } from "@/components/flight/flight-route";
 import { FlightValidationContext, ValidationResult } from "@/components/flight/validation";
+import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
@@ -67,6 +69,9 @@ function RouteComponent() {
           <Trans>Validation Result</Trans>
         </h2>
         <ValidationResult />
+        <RequireRole role="software-engineer">
+          <FlightRoute callsign={callsign} />
+        </RequireRole>
       </div>
     </FlightValidationContext.Provider>
   );

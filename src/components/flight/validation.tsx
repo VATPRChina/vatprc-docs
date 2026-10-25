@@ -1,5 +1,6 @@
 import { PROBLEM_LABELS, ProblemDetails, VALIDATION_STATUS, VALIDATOR_NAMES } from "./message";
 import { components } from "@/lib/api";
+import { matchesValidationField } from "@/lib/validation-field";
 import { Trans } from "@lingui/react/macro";
 import { Popover, Tooltip, Badge, Alert, Anchor } from "@mantine/core";
 import { createContext, FC, useContext } from "react";
@@ -94,7 +95,7 @@ export const InlineValidationTooltip: FC<{ field: components["schemas"]["Validat
 
   if (!validations) return null;
 
-  const filtered = validations.validators.filter((v) => v.field.kind === field.kind);
+  const filtered = validations.validators.filter((v) => matchesValidationField(v.field, field));
 
   return (
     <span className="inline-flex flex-wrap items-center gap-1">

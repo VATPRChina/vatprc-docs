@@ -772,6 +772,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/by-callsign/{callsign}/route": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["flight_route_by_callsign"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/by-callsign/{callsign}/validation": {
     parameters: {
       query?: never;
@@ -1641,6 +1657,10 @@ export interface components {
       transponder: string;
       wake_category: components["schemas"]["WakeCategory"];
     };
+    FlightRouteDto: {
+      /** @description Segments in route order, indexed from zero. */
+      segments: components["schemas"]["SegmentDto"][];
+    };
     /** @enum {string} */
     FlightRule: "I" | "V";
     FlightValidationDto: {
@@ -1650,6 +1670,15 @@ export interface components {
       database: string;
       status: string;
     };
+    LegDto: {
+      from_ident: string;
+      index: number;
+      leg_kind: components["schemas"]["LegKind"];
+      route_ident?: string | null;
+      to_ident: string;
+    };
+    /** @enum {string} */
+    LegKind: "sid" | "star" | "enroute";
     /** @enum {string} */
     LevelRestrictionType:
       "standard-even" | "standard-odd" | "standard" | "flight-level-even" | "flight-level-odd" | "flight-level";
@@ -1702,6 +1731,15 @@ export interface components {
     SectorPermissionResponse: {
       has_permission: boolean;
       sector_type: string;
+    };
+    SegmentDto: {
+      enroute_initial_fix: string;
+      enroute_last_fix: string;
+      index: number;
+      initial_fix: string;
+      last_fix: string;
+      /** @description Legs in route order, using the global indices in validation fields. */
+      legs: components["schemas"]["LegDto"][];
     };
     SheetDto: {
       fields: components["schemas"]["SheetFieldDto"][];
@@ -3702,6 +3740,58 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["FlightDto"];
         };
+      };
+      /** @description Flight not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  flight_route_by_callsign: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @description Callsign */
+        callsign: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Expanded route with globally indexed legs matching validation fields */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["FlightRouteDto"];
+        };
+      };
+      /** @description Invalid route */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Authentication required */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Software engineer role required */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
       /** @description Flight not found */
       404: {

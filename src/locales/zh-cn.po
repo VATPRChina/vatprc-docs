@@ -606,6 +606,9 @@ msgstr "英文说明"
 msgid "English name"
 msgstr "英文名称"
 
+msgid "Enroute"
+msgstr "航路部分"
+
 msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 msgstr "输入起飞或到达机场的 ICAO 代码以查看航班，或通过呼号打开航班。"
 
@@ -778,6 +781,9 @@ msgstr "频率（MHz）"
 msgid "Frequency (MHz) {callsign}"
 msgstr "{callsign} 频率（MHz）"
 
+msgid "From"
+msgstr "起点"
+
 msgid "Full name"
 msgstr "姓名"
 
@@ -874,6 +880,9 @@ msgstr "无效机场"
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
 
+msgid "Kind"
+msgstr "类型"
+
 msgid "Lead Event Coordinator"
 msgstr "活动协调员组长"
 
@@ -882,6 +891,9 @@ msgstr "了解详情"
 
 msgid "Learn more about China RVSM"
 msgstr "了解中国 RVSM"
+
+msgid "Leg"
+msgstr "航段"
 
 msgid "Leg {legNumber}"
 msgstr "航段 {legNumber}"
@@ -1044,6 +1056,9 @@ msgstr "无结果。"
 
 msgid "No RNAV1"
 msgstr "无 RNAV1"
+
+msgid "No route segments."
+msgstr "无航路分段。"
 
 msgid "No RVSM"
 msgstr "无 RVSM"
@@ -1238,6 +1253,9 @@ msgstr "备注"
 msgid "Remove row"
 msgstr "移除此行"
 
+msgid "Resolved Route"
+msgstr "解析后的航路"
+
 msgid "Resources"
 msgstr "资源"
 
@@ -1321,6 +1339,9 @@ msgstr "查看所有公告"
 
 msgid "See All Events"
 msgstr "查看所有活动"
+
+msgid "Segment {segmentNumber}"
+msgstr "分段 {segmentNumber}"
 
 msgid "Select {callsign}"
 msgstr "选择 {callsign}"
@@ -1594,6 +1615,9 @@ msgstr "标题（英文）"
 
 msgid "Title is required"
 msgstr "标题为必填项"
+
+msgid "To"
+msgstr "终点"
 
 msgid "To enter RVSM airspace, include W in the Equipment field."
 msgstr "进入 RVSM 空域需要在设备代码中包含 W。"

@@ -606,6 +606,9 @@ msgstr "English description"
 msgid "English name"
 msgstr "English name"
 
+msgid "Enroute"
+msgstr "Enroute"
+
 msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 msgstr "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 
@@ -778,6 +781,9 @@ msgstr "Frequency (MHz)"
 msgid "Frequency (MHz) {callsign}"
 msgstr "Frequency (MHz) {callsign}"
 
+msgid "From"
+msgstr "From"
+
 msgid "Full name"
 msgstr "Full name"
 
@@ -874,6 +880,9 @@ msgstr "Invalid airport"
 msgid "Join the controller team"
 msgstr "Join the controller team"
 
+msgid "Kind"
+msgstr "Kind"
+
 msgid "Lead Event Coordinator"
 msgstr "Lead Event Coordinator"
 
@@ -882,6 +891,9 @@ msgstr "Learn more"
 
 msgid "Learn more about China RVSM"
 msgstr "Learn more about China RVSM"
+
+msgid "Leg"
+msgstr "Leg"
 
 msgid "Leg {legNumber}"
 msgstr "Leg {legNumber}"
@@ -1044,6 +1056,9 @@ msgstr "No results."
 
 msgid "No RNAV1"
 msgstr "No RNAV1"
+
+msgid "No route segments."
+msgstr "No route segments."
 
 msgid "No RVSM"
 msgstr "No RVSM"
@@ -1238,6 +1253,9 @@ msgstr "Remarks"
 msgid "Remove row"
 msgstr "Remove row"
 
+msgid "Resolved Route"
+msgstr "Resolved Route"
+
 msgid "Resources"
 msgstr "Resources"
 
@@ -1321,6 +1339,9 @@ msgstr "See All Announcements"
 
 msgid "See All Events"
 msgstr "See All Events"
+
+msgid "Segment {segmentNumber}"
+msgstr "Segment {segmentNumber}"
 
 msgid "Select {callsign}"
 msgstr "Select {callsign}"
@@ -1594,6 +1615,9 @@ msgstr "Title (English)"
 
 msgid "Title is required"
 msgstr "Title is required"
+
+msgid "To"
+msgstr "To"
 
 msgid "To enter RVSM airspace, include W in the Equipment field."
 msgstr "To enter RVSM airspace, include W in the Equipment field."
