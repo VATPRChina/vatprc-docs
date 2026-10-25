@@ -133,9 +133,7 @@ export const ValidationResult: FC = () => {
 
   if (!validations) return null;
 
-  const hasFailure = validations.validators.some(
-    (validator) => validator.status !== "pass" && validator.status !== "suppressed",
-  );
+  const hasFailure = validations.validators.some((validator) => validator.status === "rejected");
 
   return (
     <div className="flex flex-col gap-2">
