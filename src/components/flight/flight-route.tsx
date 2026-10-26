@@ -36,6 +36,15 @@ export function FlightRoute({ callsign }: { callsign: string }) {
               <Paper key={segment.index} withBorder p="sm" className="flex flex-col gap-2">
                 <h3 className="flex flex-wrap items-center gap-2 font-semibold">
                   <Trans>Segment {segmentNumber}</Trans>
+                  <Badge variant="light">
+                    {segment.kind === "hong_kong" ? (
+                      <Trans>Hong Kong</Trans>
+                    ) : segment.kind === "mainland" ? (
+                      <Trans>Mainland</Trans>
+                    ) : (
+                      <Trans>International</Trans>
+                    )}
+                  </Badge>
                   <span>
                     {segment.initial_fix} → {segment.last_fix}
                   </span>

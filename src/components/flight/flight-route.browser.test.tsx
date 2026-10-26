@@ -24,6 +24,7 @@ beforeEach(() => {
       segments: [
         {
           index: 1,
+          kind: "hong_kong",
           initial_fix: "ALPHA",
           last_fix: "CHARLIE",
           enroute_initial_fix: "ALPHA",
@@ -44,6 +45,7 @@ test("shows route legs in index order with only their own validation results", a
       <FlightRoute callsign="CCA123" />
     </FlightValidationContext.Provider>,
   );
+  await expect.element(screen.getByText("Hong Kong", { exact: true })).toBeVisible();
   const rows = screen.getByRole("row");
   await expect.element(rows.nth(1).getByRole("cell").nth(0)).toHaveTextContent("3");
   await expect.element(rows.nth(1).getByRole("cell").nth(1)).toHaveTextContent("ALPHA");

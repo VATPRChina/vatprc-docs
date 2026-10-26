@@ -1737,10 +1737,13 @@ export interface components {
       enroute_last_fix: string;
       index: number;
       initial_fix: string;
+      kind: components["schemas"]["SegmentKind"];
       last_fix: string;
       /** @description Legs in route order, using the global indices in validation fields. */
       legs: components["schemas"]["LegDto"][];
     };
+    /** @enum {string} */
+    SegmentKind: "mainland" | "hong_kong" | "international";
     SheetDto: {
       fields: components["schemas"]["SheetFieldDto"][];
       id: string;

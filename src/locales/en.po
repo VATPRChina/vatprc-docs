@@ -808,6 +808,9 @@ msgstr "Graphics Designer"
 msgid "Ground"
 msgstr "Ground"
 
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
 msgid "How to fly"
 msgstr "How to fly"
 
@@ -864,6 +867,9 @@ msgstr "Instructor"
 
 msgid "Insufficient controller bookings"
 msgstr "Insufficient controller bookings"
+
+msgid "International"
+msgstr "International"
 
 msgid "Introduction"
 msgstr "Introduction"
@@ -957,6 +963,9 @@ msgstr "Logo Pack"
 
 msgid "Logout"
 msgstr "Logout"
+
+msgid "Mainland"
+msgstr "Mainland"
 
 msgid "Match designated route"
 msgstr "Match designated route"

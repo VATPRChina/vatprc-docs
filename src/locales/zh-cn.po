@@ -808,6 +808,9 @@ msgstr "图形设计师"
 msgid "Ground"
 msgstr "地面"
 
+msgid "Hong Kong"
+msgstr "香港"
+
 msgid "How to fly"
 msgstr "如何飞行"
 
@@ -864,6 +867,9 @@ msgstr "教员"
 
 msgid "Insufficient controller bookings"
 msgstr "活动管制员预订数量不足"
+
+msgid "International"
+msgstr "国际"
 
 msgid "Introduction"
 msgstr "介绍"
@@ -957,6 +963,9 @@ msgstr "视觉标识包"
 
 msgid "Logout"
 msgstr "登出"
+
+msgid "Mainland"
+msgstr "中国大陆"
 
 msgid "Match designated route"
 msgstr "符合指定航路"
