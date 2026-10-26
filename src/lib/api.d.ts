@@ -4005,7 +4005,7 @@ export interface operations {
         };
         content?: never;
       };
-      /** @description API client role required */
+      /** @description API client or software engineer role required */
       403: {
         headers: {
           [name: string]: unknown;
@@ -4060,7 +4060,7 @@ export interface operations {
         };
         content?: never;
       };
-      /** @description API client role required */
+      /** @description API client or software engineer role required */
       403: {
         headers: {
           [name: string]: unknown;

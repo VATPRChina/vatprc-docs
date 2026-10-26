@@ -1,3 +1,4 @@
+import { RequireRole } from "@/components/require-role";
 import { LinkButton } from "@/components/ui/link-button";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
@@ -77,6 +78,11 @@ export function FlightSearch() {
         <h1 className="text-3xl">
           <Trans>Flight Plan Checker</Trans>
         </h1>
+        <RequireRole role="software-engineer">
+          <LinkButton to="/flights/temporary" variant="light">
+            <Trans>Temporary Flight Plan</Trans>
+          </LinkButton>
+        </RequireRole>
       </div>
       {error && (
         <Alert className="w-full" color="red" title={error.title}>

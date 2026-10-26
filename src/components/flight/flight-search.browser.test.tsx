@@ -20,8 +20,8 @@ vi.mock("@tanstack/react-router", () => ({
   ),
 }));
 vi.mock("@/components/ui/link-button", () => ({
-  LinkButton: ({ children, params }: { children: React.ReactNode; params?: { callsign: string } }) => (
-    <a href={params ? `/flights/${params.callsign}` : "/flights/route-viewer"}>{children}</a>
+  LinkButton: ({ children, params, to }: { children: React.ReactNode; params?: { callsign: string }; to: string }) => (
+    <a href={params ? `/flights/${params.callsign}` : to}>{children}</a>
   ),
 }));
 
@@ -95,4 +95,15 @@ test("keeps the signed-in pilot's offline state separate from lookup errors", as
   const screen = await renderComponent(<FlightSearch />);
   await expect.element(screen.getByText("Your flight is not online", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("Offline", { exact: true })).not.toBeInTheDocument();
+});
+
+test("only software engineers see the temporary flight-plan entry", async () => {
+  const screen = await renderComponent(<FlightSearch />);
+  await expect.element(screen.getByRole("link", { name: "Temporary Flight Plan" })).not.toBeInTheDocument();
+  await screen.unmount();
+  mocks.permissions.mockReturnValue(["software-engineer"]);
+  const engineerScreen = await renderComponent(<FlightSearch />);
+  await expect
+    .element(engineerScreen.getByRole("link", { name: "Temporary Flight Plan" }))
+    .toHaveAttribute("href", "/flights/temporary");
 });

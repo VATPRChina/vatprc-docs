@@ -101,6 +101,9 @@ msgstr "空域"
 msgid "Airspace boundaries"
 msgstr "空域边界"
 
+msgid "Airspeed"
+msgstr "空速"
+
 msgid "airway direction restriction"
 msgstr "航路方向限制"
 
@@ -471,6 +474,9 @@ msgstr "巡航高度（非指定航路）"
 msgid "Cruising Level"
 msgstr "巡航高度"
 
+msgid "Cruising Level (feet)"
+msgstr "巡航高度（英尺）"
+
 msgid "Cruising level not allowed"
 msgstr "巡航高度不许可"
 
@@ -527,6 +533,9 @@ msgstr "描述"
 
 msgid "designated route"
 msgstr "指定航路"
+
+msgid "Details"
+msgstr "详情"
 
 msgid "Diff"
 msgstr "差异"
@@ -611,6 +620,9 @@ msgstr "航路部分"
 
 msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 msgstr "输入起飞或到达机场的 ICAO 代码以查看航班，或通过呼号打开航班。"
+
+msgid "Enter a flight plan to run validation without filing it on VATSIM."
+msgstr "输入飞行计划进行验证，无需向 VATSIM 提交。"
 
 msgid "Enter at"
 msgstr "进入空域时间"
@@ -888,6 +900,9 @@ msgstr "加入管制员队伍"
 
 msgid "Kind"
 msgstr "类型"
+
+msgid "Last validated flight plan"
+msgstr "上次验证的飞行计划"
 
 msgid "Lead Event Coordinator"
 msgstr "活动协调员组长"
@@ -1307,6 +1322,9 @@ msgstr "权限"
 msgid "Route"
 msgstr "航路"
 
+msgid "Run Validation"
+msgstr "运行验证"
+
 msgid "RVSM equipment"
 msgstr "RVSM 设备"
 
@@ -1330,6 +1348,9 @@ msgstr "保存变更"
 
 msgid "Save sheet"
 msgstr "保存表单"
+
+msgid "Scope"
+msgstr "范围"
 
 msgid "Search..."
 msgstr "搜索..."
@@ -1396,6 +1417,9 @@ msgstr "时刻"
 
 msgid "Software Engineer"
 msgstr "软件工程师"
+
+msgid "Software engineer access required."
+msgstr "仅软件工程师可访问。"
 
 msgid "Solo"
 msgstr "独立训练"
@@ -1501,6 +1525,9 @@ msgstr "技术部主管"
 
 msgid "Tech Director Assistant"
 msgstr "技术部主管助理"
+
+msgid "Temporary Flight Plan"
+msgstr "临时飞行计划"
 
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "MIL 列标记具有军用席位权限的管制员。"
@@ -1730,6 +1757,12 @@ msgstr "生效自"
 
 msgid "Valid Until"
 msgstr "生效至"
+
+msgid "Validation"
+msgstr "验证项目"
+
+msgid "Validation failed"
+msgstr "验证失败"
 
 msgid "Validation Result"
 msgstr "检查结果"

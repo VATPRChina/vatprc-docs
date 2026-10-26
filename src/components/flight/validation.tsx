@@ -2,7 +2,7 @@ import { PROBLEM_LABELS, ProblemDetails, VALIDATION_STATUS, VALIDATOR_NAMES } fr
 import { components } from "@/lib/api";
 import { matchesValidationField } from "@/lib/validation-field";
 import { Trans } from "@lingui/react/macro";
-import { Popover, Tooltip, Badge, Alert, Anchor } from "@mantine/core";
+import { Popover, Tooltip, Badge, Alert, Anchor, Table } from "@mantine/core";
 import { createContext, FC, useContext } from "react";
 import { TbAlertSquareRounded } from "react-icons/tb";
 
@@ -85,8 +85,21 @@ function ValidationLocation({ field }: { field: components["schemas"]["Validatio
           <Trans>Arrival</Trans>
         </p>
       );
-    default:
-      return null;
+    default: {
+      const labels = {
+        callsign: <Trans>Callsign</Trans>,
+        "flight-rules": <Trans>Flight Rules</Trans>,
+        "aircraft-type": <Trans>Aircraft Type</Trans>,
+        "wake-category": <Trans>Wake Category</Trans>,
+        equipment: <Trans>Equipment</Trans>,
+        transponder: <Trans>Transponder</Trans>,
+        airspeed: <Trans>Airspeed</Trans>,
+        "cruising-level": <Trans>Cruising Level</Trans>,
+        route: <Trans>Route</Trans>,
+        "navigation-performance": <Trans>PBN</Trans>,
+      };
+      return <span>{labels[field.kind]}</span>;
+    }
   }
 }
 
@@ -157,3 +170,47 @@ export const ValidationResult: FC = () => {
     </div>
   );
 };
+
+/** Complete diagnostics, including passing, suppressed and unavailable checks. */
+export function ValidationChecks() {
+  const validation = useContext(FlightValidationContext);
+  if (!validation) return null;
+  return (
+    <Table.ScrollContainer minWidth={600}>
+      <Table>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>
+              <Trans>Validation</Trans>
+            </Table.Th>
+            <Table.Th>
+              <Trans>Scope</Trans>
+            </Table.Th>
+            <Table.Th>
+              <Trans>Status</Trans>
+            </Table.Th>
+            <Table.Th>
+              <Trans>Details</Trans>
+            </Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {validation.validators.map((check, index) => (
+            <Table.Tr key={index}>
+              <Table.Td>{VALIDATOR_NAMES[check.id]}</Table.Td>
+              <Table.Td>
+                <ValidationLocation field={check.field} />
+              </Table.Td>
+              <Table.Td>
+                <Badge color={VALIDATION_STATUS[check.status].color}>{VALIDATION_STATUS[check.status].name}</Badge>
+              </Table.Td>
+              <Table.Td>
+                <ValidationProblems problems={check.problems} />
+              </Table.Td>
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
+    </Table.ScrollContainer>
+  );
+}

@@ -101,6 +101,9 @@ msgstr "Airspace"
 msgid "Airspace boundaries"
 msgstr "Airspace boundaries"
 
+msgid "Airspeed"
+msgstr "Airspeed"
+
 msgid "airway direction restriction"
 msgstr "airway direction restriction"
 
@@ -471,6 +474,9 @@ msgstr "cruise altitude (without designated route)"
 msgid "Cruising Level"
 msgstr "Cruising Level"
 
+msgid "Cruising Level (feet)"
+msgstr "Cruising Level (feet)"
+
 msgid "Cruising level not allowed"
 msgstr "Cruising level not allowed"
 
@@ -527,6 +533,9 @@ msgstr "Description"
 
 msgid "designated route"
 msgstr "designated route"
+
+msgid "Details"
+msgstr "Details"
 
 msgid "Diff"
 msgstr "Diff"
@@ -611,6 +620,9 @@ msgstr "Enroute"
 
 msgid "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
 msgstr "Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign."
+
+msgid "Enter a flight plan to run validation without filing it on VATSIM."
+msgstr "Enter a flight plan to run validation without filing it on VATSIM."
 
 msgid "Enter at"
 msgstr "Enter at"
@@ -888,6 +900,9 @@ msgstr "Join the controller team"
 
 msgid "Kind"
 msgstr "Kind"
+
+msgid "Last validated flight plan"
+msgstr "Last validated flight plan"
 
 msgid "Lead Event Coordinator"
 msgstr "Lead Event Coordinator"
@@ -1307,6 +1322,9 @@ msgstr "Roles"
 msgid "Route"
 msgstr "Route"
 
+msgid "Run Validation"
+msgstr "Run Validation"
+
 msgid "RVSM equipment"
 msgstr "RVSM equipment"
 
@@ -1330,6 +1348,9 @@ msgstr "Save changes"
 
 msgid "Save sheet"
 msgstr "Save sheet"
+
+msgid "Scope"
+msgstr "Scope"
 
 msgid "Search..."
 msgstr "Search..."
@@ -1396,6 +1417,9 @@ msgstr "Slots"
 
 msgid "Software Engineer"
 msgstr "Software Engineer"
+
+msgid "Software engineer access required."
+msgstr "Software engineer access required."
 
 msgid "Solo"
 msgstr "Solo"
@@ -1501,6 +1525,9 @@ msgstr "Tech Director"
 
 msgid "Tech Director Assistant"
 msgstr "Tech Director Assistant"
+
+msgid "Temporary Flight Plan"
+msgstr "Temporary Flight Plan"
 
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "The <0>MIL</0> column marks controllers with military position permission."
@@ -1730,6 +1757,12 @@ msgstr "Valid From"
 
 msgid "Valid Until"
 msgstr "Valid Until"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Validation failed"
+msgstr "Validation failed"
 
 msgid "Validation Result"
 msgstr "Validation Result"
