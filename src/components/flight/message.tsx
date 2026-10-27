@@ -149,15 +149,15 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
       The route contains the airway leg &quot;{from} {ident} {to}&quot; that requires controller approval.
     </Trans>
   ),
-  "not-preferred-route": ({ problem: { from, raw_route, to } }) => (
-    <Trans>
+  "not-preferred-route": ({ problem: { routes } }) => (
+    <>
       <p>
-        The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:
+        <Trans>The flight plan does not match a designated route. Use one of the following routes:</Trans>
       </p>
-      <pre>
-        <code>{raw_route}</code>
+      <pre className="wrap-break-word whitespace-pre-wrap">
+        <code>{routes.map(({ from, to, raw_route }) => `${from} → ${to}: ${raw_route}`).join("\n")}</code>
       </pre>
-    </Trans>
+    </>
   ),
   "cruising-level-mismatch": ({ problem: { expected_type } }) => {
     const level = CRUISING_LEVEL_TEXT[expected_type];
@@ -185,7 +185,18 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
       <ChinaRvsmHelp />
     </>
   ),
-  "route-match-preferred": () => <Trans>The planned route matches designated route.</Trans>,
+  "route-match-preferred": ({ problem: { from, to, raw_route } }) => (
+    <>
+      <p>
+        <Trans>
+          The planned route matches the designated route from {from} to {to}.
+        </Trans>
+      </p>
+      <pre className="wrap-break-word whitespace-pre-wrap">
+        <code>{raw_route}</code>
+      </pre>
+    </>
+  ),
 };
 
 export function ProblemDetails<K extends components["schemas"]["ValidationProblemDto"]["kind"]>({

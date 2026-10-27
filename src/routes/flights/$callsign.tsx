@@ -1,6 +1,5 @@
-import { FlightPlan } from "@/components/flight/flight-plan";
+import { FlightDetails } from "@/components/flight/flight-details";
 import { FlightRoute } from "@/components/flight/flight-route";
-import { FlightValidationContext, ValidationResult } from "@/components/flight/validation";
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -51,28 +50,20 @@ function RouteComponent() {
   }
 
   return (
-    <FlightValidationContext.Provider value={validation ?? null}>
-      <div className="flex w-full flex-col gap-2">
-        <h1 className="flex items-baseline">
-          <span className="text-3xl">{callsign}</span>
-          <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
-            <span>{flight.flight_plan.departure}</span>
-            <TbPlaneInflight />
-            <span>{flight.flight_plan.arrival}</span>
-          </span>
-        </h1>
-        <h2 className="text-2xl">
-          <Trans>Flight Plan</Trans>
-        </h2>
-        <FlightPlan callsign={callsign} />
-        <h2 className="text-2xl">
-          <Trans>Validation Result</Trans>
-        </h2>
-        <ValidationResult />
+    <div className="flex w-full flex-col gap-2">
+      <h1 className="flex items-baseline">
+        <span className="text-3xl">{callsign}</span>
+        <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
+          <span>{flight.flight_plan.departure}</span>
+          <TbPlaneInflight />
+          <span>{flight.flight_plan.arrival}</span>
+        </span>
+      </h1>
+      <FlightDetails plan={flight.flight_plan} validation={validation}>
         <RequireRole role="software-engineer">
           <FlightRoute callsign={callsign} />
         </RequireRole>
-      </div>
-    </FlightValidationContext.Provider>
+      </FlightDetails>
+    </div>
   );
 }

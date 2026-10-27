@@ -1,18 +1,11 @@
 import { CruisingLevelMeters } from "./cruising-level-meters";
 import { FlightPlanField } from "./flight-plan-field";
-import { $api } from "@/lib/client";
+import type { components } from "@/lib/api";
 import { useLingui } from "@lingui/react/macro";
 import { type FC } from "react";
 
-export const FlightPlan: FC<{ callsign: string }> = ({ callsign }) => {
+export const FlightPlan: FC<{ plan: components["schemas"]["FlightPlanDto"] }> = ({ plan }) => {
   const { t } = useLingui();
-  const { data: flight } = $api.useQuery("get", "/api/flights/by-callsign/{callsign}", {
-    params: { path: { callsign } },
-  });
-
-  if (!flight) return null;
-
-  const plan = flight.flight_plan;
 
   return (
     <div className="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-4">

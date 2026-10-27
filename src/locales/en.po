@@ -41,9 +41,6 @@ msgstr "<0>S</0> Solo Training: This controller is eligible to provide solo serv
 msgid "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 msgstr "<0>T</0> In Training: This controller is eligible to provide service to this position ONLY under supervision from a mentor"
 
-msgid "<0>The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:</0><1><2>{raw_route}</2></1>"
-msgstr "<0>The flight plan does not match the designated route for this flight. For the route between {from} and {to}, use:</0><1><2>{raw_route}</2></1>"
-
 msgid "<0>V</0> Visiting: This controller is a visiting controller."
 msgstr "<0>V</0> Visiting: This controller is a visiting controller."
 
@@ -533,9 +530,6 @@ msgstr "Description"
 
 msgid "designated route"
 msgstr "designated route"
-
-msgid "Details"
-msgstr "Details"
 
 msgid "Diff"
 msgstr "Diff"
@@ -1349,9 +1343,6 @@ msgstr "Save changes"
 msgid "Save sheet"
 msgstr "Save sheet"
 
-msgid "Scope"
-msgstr "Scope"
-
 msgid "Search..."
 msgstr "Search..."
 
@@ -1580,14 +1571,17 @@ msgstr "The declared wake category does not match the aircraft type. It should b
 msgid "The field must not be empty."
 msgstr "The field must not be empty."
 
+msgid "The flight plan does not match a designated route. Use one of the following routes:"
+msgstr "The flight plan does not match a designated route. Use one of the following routes:"
+
 msgid "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 msgstr "The list below is displayed based on the controller data in our ATC Center. Automatic data updates may have at most 24 hours of delay. Only controllers (including visiting controller) with controlling permission on at least one type of positions will be listed. (i.e. Controllers not in the list have no controlling permission.)"
 
 msgid "The Moodle account has been provisioned successfully."
 msgstr "The Moodle account has been provisioned successfully."
 
-msgid "The planned route matches designated route."
-msgstr "The planned route matches designated route."
+msgid "The planned route matches the designated route from {from} to {to}."
+msgstr "The planned route matches the designated route from {from} to {to}."
 
 msgid "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
 msgstr "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
@@ -1719,6 +1713,9 @@ msgstr "until"
 msgid "Upcoming"
 msgstr "Upcoming"
 
+msgid "Update the temporary flight plan above and run validation again."
+msgstr "Update the temporary flight plan above and run validation again."
+
 msgid "Updated at"
 msgstr "Updated at"
 
@@ -1757,9 +1754,6 @@ msgstr "Valid From"
 
 msgid "Valid Until"
 msgstr "Valid Until"
-
-msgid "Validation"
-msgstr "Validation"
 
 msgid "Validation failed"
 msgstr "Validation failed"

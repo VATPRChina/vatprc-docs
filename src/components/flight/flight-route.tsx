@@ -1,4 +1,5 @@
 import { InlineValidationTooltip } from "./validation";
+import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Badge, Paper, Skeleton, Table } from "@mantine/core";
@@ -11,6 +12,18 @@ export function FlightRoute({ callsign }: { callsign: string }) {
     { retry: false },
   );
 
+  return <FlightRouteView data={data} error={error} isLoading={isLoading} />;
+}
+
+export function FlightRouteView({
+  data,
+  error,
+  isLoading = false,
+}: {
+  data?: components["schemas"]["FlightRouteDto"];
+  error?: Pick<components["schemas"]["ProblemDetails"], "title" | "detail"> | null;
+  isLoading?: boolean;
+}) {
   return (
     <section className="flex flex-col gap-2">
       <h2 className="text-2xl">

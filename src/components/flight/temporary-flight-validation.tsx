@@ -1,4 +1,5 @@
-import { ValidationChecks, FlightValidationContext } from "./validation";
+import { FlightDetails } from "./flight-details";
+import { FlightRouteView } from "./flight-route";
 import type { operations } from "@/lib/api";
 import { usePermissions } from "@/lib/client";
 import { client } from "@/lib/client/client";
@@ -37,11 +38,17 @@ function TemporaryFlightValidationForm() {
   });
   const validation = useMutation({
     mutationFn: async (submittedPlan: TemporaryPlan) => {
-      const { data, error, response } = await client.GET("/api/flights/temporary/by-plan/validation", {
-        params: { query: submittedPlan },
-      });
-      if (error || !data) throw new Error(error?.detail ?? error?.title ?? response.statusText);
-      return { plan: submittedPlan, validation: data };
+      const params = { params: { query: submittedPlan } };
+      const [flight, validation, route] = await Promise.all([
+        client.GET("/api/flights/temporary/by-plan", params),
+        client.GET("/api/flights/temporary/by-plan/validation", params),
+        client.GET("/api/flights/temporary/by-plan/route", params),
+      ]);
+      if (flight.error || !flight.data)
+        throw new Error(flight.error?.detail ?? flight.error?.title ?? flight.response.statusText);
+      if (validation.error || !validation.data)
+        throw new Error(validation.error?.detail ?? validation.error?.title ?? validation.response.statusText);
+      return { plan: flight.data.flight_plan, validation: validation.data, route: route.data, routeError: route.error };
     },
     retry: false,
   });
@@ -138,31 +145,12 @@ function TemporaryFlightValidationForm() {
       )}
       {validation.data && (
         <section aria-label={t`Validation Result`} className="flex flex-col gap-3">
-          <h2 className="text-2xl">
-            <Trans>Validation Result</Trans>
-          </h2>
-          <Paper withBorder p="sm" className="flex flex-col gap-1">
-            <h3 className="font-semibold">
-              <Trans>Last validated flight plan</Trans>
-            </h3>
-            <p>
-              {validation.data.plan.departure} → {validation.data.plan.arrival} · {validation.data.plan.aircraft} ·{" "}
-              {validation.data.plan.cruising_level} ft
-            </p>
-            <p>
-              <Trans>Flight Rules</Trans>: {validation.data.plan.flight_rules} · <Trans>Wake Category</Trans>:{" "}
-              {validation.data.plan.wake_category}
-            </p>
-            <p>
-              <Trans>Equipment</Trans>: {validation.data.plan.equipment || "—"} · <Trans>Transponder</Trans>:{" "}
-              {validation.data.plan.transponder || "—"} · <Trans>PBN</Trans>:{" "}
-              {validation.data.plan.navigation_performance || "—"}
-            </p>
-            <p className="font-mono wrap-break-word">{validation.data.plan.raw_route || "DCT"}</p>
-          </Paper>
-          <FlightValidationContext.Provider value={validation.data.validation}>
-            <ValidationChecks />
-          </FlightValidationContext.Provider>
+          <p className="text-sm">
+            <Trans>Last validated flight plan</Trans>
+          </p>
+          <FlightDetails plan={validation.data.plan} validation={validation.data.validation} temporary>
+            <FlightRouteView data={validation.data.route} error={validation.data.routeError} />
+          </FlightDetails>
         </section>
       )}
     </div>

@@ -889,6 +889,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/flights/temporary/by-plan/route": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["temporary_flight_route"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/flights/temporary/by-plan/validation": {
     parameters: {
       query?: never;
@@ -1692,6 +1708,11 @@ export interface components {
       | "unsupported_grant_type"
       | "authorization_pending"
       | "expired_token";
+    PreferredRouteDescriptionDto: {
+      from: string;
+      raw_route: string;
+      to: string;
+    };
     PreferredRouteDto: {
       allowed_altitudes: number[];
       arrival: string;
@@ -2064,11 +2085,9 @@ export interface components {
           to: string;
         }
       | {
-          from: string;
           /** @enum {string} */
           kind: "not-preferred-route";
-          raw_route: string;
-          to: string;
+          routes: components["schemas"]["PreferredRouteDescriptionDto"][];
         }
       | {
           expected_type: components["schemas"]["CruiseAltitudeType"];
@@ -2087,8 +2106,11 @@ export interface components {
           minimum_ft: number;
         }
       | {
+          from: string;
           /** @enum {string} */
           kind: "route-match-preferred";
+          raw_route: string;
+          to: string;
         };
     ValidatorExecutionDto: {
       field: components["schemas"]["ValidationFieldDto"];
@@ -4006,6 +4028,61 @@ export interface operations {
         content?: never;
       };
       /** @description API client or software engineer role required */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  temporary_flight_route: {
+    parameters: {
+      query: {
+        departure: string;
+        arrival: string;
+        aircraft?: string;
+        /** @description I (IFR) or V (VFR); defaults to I when omitted or empty. */
+        flight_rules?: string;
+        /** @description J, H, M or L; defaults to M when omitted or empty. */
+        wake_category?: string;
+        equipment?: string;
+        navigation_performance?: string;
+        transponder?: string;
+        raw_route?: string;
+        cruising_level?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Expanded temporary route with globally indexed legs matching validation fields */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["FlightRouteDto"];
+        };
+      };
+      /** @description Invalid flight plan query or route */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Authentication required */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description Software engineer role required */
       403: {
         headers: {
           [name: string]: unknown;
