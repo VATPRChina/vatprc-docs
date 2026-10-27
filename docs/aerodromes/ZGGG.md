@@ -585,7 +585,7 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 |  AGVIL  | ZGKL、西北、西藏、四川、贵州、欧洲、西亚 |  米制双数  |  主用离场点   |
 
 > [!IMPORTANT]
-> 广州白云机场出发进入香港飞行情报区的航空器，不得经由 TAMOT 进入香港情报区。应当沿 VIBOS R473 SIERA 或 [LoA](https://files.vatprc.net/loa/VATPRC-LOA-1-R4-EN.pdf) 中公布的目视飞行航线进入香港情报区；但目的地为香港启德机场（VHHX）、VMMC 的航空器除外。
+> 广州白云机场出发进入香港飞行情报区的航空器，不得经由 TAMOT 进入香港情报区。应当沿 VIBOS R473 SIERA 或 [LoA](https://files.vatprc.net/loa/VATPRC-LOA-1-R4-EN.pdf) 中公布的目视飞行航线进入香港情报区；但目的地为香港启德机场（VHHX）、澳门机场（VMMC）的航空器除外。
 
 > [!NOTE]
 >
