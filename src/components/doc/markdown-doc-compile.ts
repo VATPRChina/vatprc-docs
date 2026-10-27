@@ -1,4 +1,6 @@
+import { parseGeojson } from "./geojson";
 import withToc, { type Toc } from "@stefanprobst/remark-extract-toc";
+import type { Root as HtmlRoot } from "hast";
 import type { Root } from "mdast";
 import rehypeExternalLinks from "rehype-external-links";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
@@ -12,16 +14,19 @@ import gfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { visit } from "unist-util-visit";
 import { parse as parseYaml } from "yaml";
 
 export interface CompiledMarkdownDoc {
   html: string;
+  geojson: GeoJSON.FeatureCollection[];
   tableOfContents: Toc;
   frontmatter: Record<string, unknown>;
   title: string | undefined;
 }
 
 export const compileMarkdownDoc = async (source: string): Promise<CompiledMarkdownDoc> => {
+  const geojson: GeoJSON.FeatureCollection[] = [];
   let frontmatter: Record<string, unknown> = {};
   const file = await unified()
     .use(remarkParse)
@@ -67,10 +72,46 @@ export const compileMarkdownDoc = async (source: string): Promise<CompiledMarkdo
     })
     .use(rehypeSlug)
     .use(rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" })
+    .use(() => (tree: HtmlRoot) => {
+      visit(tree, "element", (node, index, parent) => {
+        if (node.tagName !== "pre" || !parent || index === undefined) return;
+        const code = node.children[0];
+        if (
+          code?.type !== "element" ||
+          code.tagName !== "code" ||
+          !Array.isArray(code.properties.className) ||
+          !code.properties.className.includes("language-geojson")
+        )
+          return;
+        const source = code.children
+          .filter((child) => child.type === "text")
+          .map((child) => child.value)
+          .join("");
+        const data = parseGeojson(source);
+        if (!data) return;
+        const mapIndex = geojson.push(data) - 1;
+        parent.children[index] = {
+          type: "element",
+          tagName: "div",
+          properties: { dataMarkdownGeojson: mapIndex },
+          children: [
+            {
+              type: "element",
+              tagName: "details",
+              properties: {},
+              children: [
+                { type: "element", tagName: "summary", properties: {}, children: [{ type: "text", value: "GeoJSON" }] },
+                node,
+              ],
+            },
+          ],
+        };
+      });
+    })
     .use(rehypeStringify)
     .process(source);
 
   const tableOfContents = file.data.toc ?? [];
   const title = typeof frontmatter.title === "string" ? frontmatter.title : tableOfContents[0]?.value;
-  return { html: String(file), tableOfContents, frontmatter, title };
+  return { html: String(file), geojson, tableOfContents, frontmatter, title };
 };

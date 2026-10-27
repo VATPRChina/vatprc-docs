@@ -1,5 +1,6 @@
 import { MarkdownDoc } from "./markdown-doc";
 import type { CompiledMarkdownDoc } from "./markdown-doc-compile";
+import { MarkdownContent } from "@/components/doc/markdown-content";
 import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
@@ -74,7 +75,7 @@ export const DiscourseDocument: React.FC<{
     <MarkdownDoc tocHeader={editButtons} inline={inline}>
       {extraHeader}
       <h1 className="text-2xl">{document.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: document.html }} />
+      <MarkdownContent document={document} />
     </MarkdownDoc>
   );
 };

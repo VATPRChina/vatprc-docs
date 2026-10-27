@@ -44,6 +44,43 @@ const getAllDocumentPaths = async () => {
 };
 
 describe.concurrent("compileMarkdownDoc", async () => {
+  test("extracts multiple GeoJSON maps, including nested fences", async () => {
+    const point = '{"type":"Point","coordinates":[116.6,40.1]}';
+    const doc = await compileMarkdownDoc(
+      `# Map\n\n\`\`\`geojson\n${point}\n\`\`\`\n\n> \`\`\`geojson\n> ${point}\n> \`\`\``,
+    );
+    expect(doc.geojson).toHaveLength(2);
+    expect(doc.html).toContain('data-markdown-geojson="0"');
+    expect(doc.html).toContain('data-markdown-geojson="1"');
+    expect(doc.html).toContain("<details><summary>GeoJSON</summary>");
+    expect(doc.geojson[0].features[0].geometry).toEqual({ type: "Point", coordinates: [116.6, 40.1] });
+  });
+
+  test("leaves invalid GeoJSON and ordinary JSON fences as code", async () => {
+    const doc = await compileMarkdownDoc(
+      '```geojson\n{"type":"Point","coordinates":[0]}\n```\n\n```json\n{"type":"Point","coordinates":[0,0]}\n```',
+    );
+    expect(doc.geojson).toEqual([]);
+    expect(doc.html).toContain('class="language-geojson"');
+    expect(doc.html).toContain('class="language-json"');
+    expect(doc.html).not.toContain("data-markdown-geojson");
+  });
+
+  test("escapes GeoJSON properties and strips forged map placeholders", async () => {
+    const source = JSON.stringify({
+      type: "Feature",
+      properties: { name: "<script>alert(1)</script>" },
+      geometry: { type: "Point", coordinates: [0, 0] },
+    });
+    const doc = await compileMarkdownDoc(
+      "```geojson\n" + source + '\n```\n\n<div data-markdown-geojson="0">forged</div>',
+    );
+    expect(doc.geojson).toHaveLength(1);
+    expect(doc.html.match(/data-markdown-geojson/g)).toHaveLength(1);
+    expect(doc.html).not.toContain("<script>");
+    expect(JSON.parse(JSON.stringify(doc))).toEqual(doc);
+  });
+
   test("extracts YAML metadata and falls back to the first heading", async () => {
     const doc = await compileMarkdownDoc('---\ntitle: "Document title"\norder: 0\n---\n# Heading');
     expect(doc.title).toBe("Document title");
