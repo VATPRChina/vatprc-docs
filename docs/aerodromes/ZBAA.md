@@ -471,9 +471,6 @@
 |  RUSDO  |  36L  | RUSDO-9Z |
 |  RUSDO  |  36R  | RUSDO-9Z |
 |  RUSDO  | `01`  | RUSDO-9Z |
-| `PEGSO` |  36L  | PEGSO-9Z |
-| `PEGSO` |  36R  | PEGSO-9Z |
-| `PEGSO` | `01`  | PEGSO-9Z |
 | `OMDEK` |  36L  | OMDEK-9Z |
 | `OMDEK` |  36R  | OMDEK-9Z |
 | `OMDEK` | `01`  | OMDEK-9Z |
@@ -515,9 +512,6 @@
 |  RUSDO  |  18R  | RUSDO-2G |
 |  RUSDO  |  18L  | RUSDO-6J |
 |  RUSDO  | `19`  | RUSDO-4E |
-| `PEGSO` |  18L  | PEGSO-2G |
-| `PEGSO` |  18R  | PEGSO-2G |
-| `PEGSO` | `19`  | PEGSO-2G |
 | `OMDEK` |  18L  | OMDEK-2G |
 | `OMDEK` |  18R  | OMDEK-2G |
 | `OMDEK` | `19`  | OMDEK-2G |
