@@ -127,12 +127,7 @@ interface ValidationProblemProps {
 const ValidationProblem: FC<ValidationProblemProps> = ({ validator, problem }) => {
   return (
     <Alert
-      title={
-        <span>
-          {PROBLEM_LABELS[problem.kind]}
-          <span className="ml-2 text-xs font-light">({VALIDATOR_NAMES[validator.id]})</span>
-        </span>
-      }
+      title={PROBLEM_LABELS[problem.kind]}
       icon={<TbAlertSquareRounded />}
       variant="outline"
       color={VALIDATION_STATUS[validator.status].color}
