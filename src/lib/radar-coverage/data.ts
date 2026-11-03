@@ -110,7 +110,17 @@ function airspaces(value: unknown): Airspace[] {
   return value.map((item) => {
     const a = record(item);
     if (typeof a.name !== "string") return fail("dataset");
-    return { name: a.name, points: coordinates(a.points, 2) };
+    if (a.lowerLimit !== undefined && !numeric(a.lowerLimit, -2000, 1000000)) return fail("dataset");
+    if (a.upperLimit !== undefined && a.upperLimit !== null && !numeric(a.upperLimit, -2000, 1000000))
+      return fail("dataset");
+    if (typeof a.lowerLimit === "number" && typeof a.upperLimit === "number" && a.lowerLimit > a.upperLimit)
+      return fail("dataset");
+    return {
+      name: a.name,
+      points: coordinates(a.points, 2),
+      ...(a.lowerLimit !== undefined ? { lowerLimit: a.lowerLimit } : {}),
+      ...(a.upperLimit !== undefined ? { upperLimit: a.upperLimit } : {}),
+    };
   });
 }
 
@@ -131,7 +141,7 @@ export function parseRegion(code: string, airspace: unknown, stations: unknown):
     name: r.name,
     boundary: coordinates(r.boundary, 3),
     radars: stations.map(radar),
-    airspace: { tma: airspaces(a.tma), twr: airspaces(a.twr) },
+    airspace: { acc: airspaces(a.acc), tma: airspaces(a.tma), twr: airspaces(a.twr) },
   };
 }
 const DATA_URL = "https://files.vatprc.net/radar-coverage/";

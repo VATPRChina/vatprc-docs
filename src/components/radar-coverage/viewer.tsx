@@ -1,7 +1,15 @@
 import { RadarMap } from "./map";
+import { AIRSPACE_COLORS, airspaceEntries, airspaceHeight } from "@/lib/radar-coverage/airspace";
 import { BUILTIN_REGIONS, loadRegion } from "@/lib/radar-coverage/data";
 import { RADAR_COLORS } from "@/lib/radar-coverage/model";
-import { CoverageRequest, CoverageResult, RADAR_TYPES, RadarRegion, RadarType } from "@/lib/radar-coverage/types";
+import {
+  AIRSPACE_TYPES,
+  CoverageRequest,
+  CoverageResult,
+  RADAR_TYPES,
+  RadarRegion,
+  RadarType,
+} from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
@@ -9,13 +17,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const EMPTY_REGION: RadarRegion = { code: "local", name: "", boundary: [], radars: [] };
 const QUICK_HEIGHTS = [0, 3000, 10000, 20000, 30000, 40000];
-function useCoverage(region: RadarRegion, altitude: number, enabled: RadarType[]) {
+function useCoverage(region: RadarRegion, altitude: number, enabled: RadarType[], selectedRadar: number | null) {
   const [state, setState] = useState<{
     request: CoverageRequest;
     result: CoverageResult | null;
     failed: boolean;
   } | null>(null);
-  const request = useMemo(() => ({ region, altitude, enabled }), [region, altitude, enabled]);
+  const request = useMemo(
+    () => ({ region, altitude, enabled, selectedRadar }),
+    [region, altitude, enabled, selectedRadar],
+  );
   const canCalculate = region.radars.length > 0;
   const workerRef = useRef<Worker | null>(null);
   const active = useRef<{ id: number; request: CoverageRequest } | null>(null);
@@ -70,7 +81,7 @@ export function RadarCoverageViewer() {
   const [code, setCode] = useState<string | null>(BUILTIN_REGIONS[0].code);
   const [altitude, setAltitude] = useState(10000);
   const [enabled, setEnabled] = useState<RadarType[]>(["SSR", "ADSB"]);
-  const [airspaceEnabled, setAirspaceEnabled] = useState<string[]>(["tma", "twr"]);
+  const [hiddenAirspaces, setHiddenAirspaces] = useState<string[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const builtin = useQuery({
@@ -82,7 +93,12 @@ export function RadarCoverageViewer() {
   });
   const region = builtin.data ?? EMPTY_REGION;
   const loadingRegion = builtin.isPending;
-  const { coverage, pending, failed } = useCoverage(region, altitude, enabled);
+  const { coverage, pending, failed } = useCoverage(region, altitude, enabled, selected);
+  const entries = useMemo(() => airspaceEntries(region), [region]);
+  const airspaceEnabled = useMemo(
+    () => entries.filter((entry) => !hiddenAirspaces.includes(entry.key)).map((entry) => entry.key),
+    [entries, hiddenAirspaces],
+  );
   const radar = selected === null ? undefined : region.radars[selected];
   useEffect(() => {
     setMounted(true);
@@ -125,6 +141,7 @@ export function RadarCoverageViewer() {
             onChange={(value) => {
               setCode(value);
               setSelected(null);
+              setHiddenAirspaces([]);
             }}
             allowDeselect={false}
           />
@@ -193,20 +210,60 @@ export function RadarCoverageViewer() {
             <h2 className="font-medium">
               <Trans>Airspace boundaries</Trans>
             </h2>
-            {(["tma", "twr"] as const).map((type) => (
-              <Checkbox
-                key={type}
-                label={`${type.toUpperCase()} (${region.airspace?.[type].length ?? 0})`}
-                color={type === "tma" ? "green" : "pink"}
-                checked={airspaceEnabled.includes(type)}
-                onChange={(event) => {
-                  const checked = event.currentTarget.checked;
-                  setAirspaceEnabled((current) =>
-                    checked ? [...current, type] : current.filter((value) => value !== type),
-                  );
-                }}
-              />
-            ))}
+            {AIRSPACE_TYPES.map((type) => {
+              const group = entries.filter((entry) => entry.type === type);
+              const visible = group.filter((entry) => airspaceEnabled.includes(entry.key)).length;
+              return (
+                <details key={`${code}:${type}`} className="rounded border border-black/15 p-2 dark:border-white/20">
+                  <summary className="cursor-pointer text-sm font-medium">
+                    {type.toUpperCase()} ({visible}/{group.length})
+                  </summary>
+                  <div className="mt-3 flex flex-col gap-3">
+                    <Checkbox
+                      label={t`Select all`}
+                      color={AIRSPACE_COLORS[type]}
+                      checked={group.length > 0 && visible === group.length}
+                      indeterminate={visible > 0 && visible < group.length}
+                      disabled={!group.length}
+                      onChange={(event) => {
+                        const checked = event.currentTarget.checked;
+                        setHiddenAirspaces((current) =>
+                          checked
+                            ? current.filter((key) => !group.some((entry) => entry.key === key))
+                            : [...new Set([...current, ...group.map((entry) => entry.key)])],
+                        );
+                      }}
+                    />
+                    <div className="flex max-h-64 flex-col gap-3 overflow-y-auto pr-1">
+                      {group.map((entry) => (
+                        <Checkbox
+                          key={entry.key}
+                          color={AIRSPACE_COLORS[type]}
+                          checked={airspaceEnabled.includes(entry.key)}
+                          onChange={(event) => {
+                            const checked = event.currentTarget.checked;
+                            setHiddenAirspaces((current) =>
+                              checked ? current.filter((key) => key !== entry.key) : [...current, entry.key],
+                            );
+                          }}
+                          label={
+                            <span className="flex flex-col">
+                              <span>{entry.name}</span>
+                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                                {airspaceHeight(entry) ?? t`Altitude not provided`}
+                              </span>
+                            </span>
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </details>
+              );
+            })}
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              <Trans>Airspace altitudes are in metres. Click the map to inspect all sectors at that position.</Trans>
+            </p>
           </section>
           <dl className="grid grid-cols-2 gap-2 border-t border-black/15 pt-3 text-sm dark:border-white/20">
             <dt>
@@ -222,10 +279,10 @@ export function RadarCoverageViewer() {
               )}
             </dd>
             <dt>
-              <Trans>Visible radars</Trans>
+              <Trans>Radars used for coverage</Trans>
             </dt>
             <dd className="text-right">
-              {region.radars.filter((r) => enabled.includes(r.type)).length} / {region.radars.length}
+              {radar ? 1 : region.radars.filter((r) => enabled.includes(r.type)).length} / {region.radars.length}
             </dd>
           </dl>
           {failed && (
@@ -244,6 +301,7 @@ export function RadarCoverageViewer() {
             searchable
             clearable
             label={t`Radar details`}
+            description={t`Clear the selection to show all enabled radars.`}
             placeholder={t`Select a radar or click its map marker`}
             value={selected === null ? null : String(selected)}
             onChange={(value) => setSelected(value === null ? null : Number(value))}
@@ -284,6 +342,8 @@ export function RadarCoverageViewer() {
           {mounted && builtin.data ? (
             <RadarMap
               region={region}
+              key={code}
+              selectedRadar={selected}
               enabled={enabled}
               airspaceEnabled={airspaceEnabled}
               coverage={coverage}
