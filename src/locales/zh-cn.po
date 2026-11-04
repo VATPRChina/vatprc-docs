@@ -95,6 +95,12 @@ msgstr "航空器翼展超出机场限制"
 msgid "Airspace"
 msgstr "空域"
 
+msgid "Airspace altitudes are in metres. Click the map to inspect all sectors at that position."
+msgstr "空域高度单位为米。点击地图可查看该位置各高度的扇区。"
+
+msgid "Airspace at this position"
+msgstr "此处空域"
+
 msgid "Airspace boundaries"
 msgstr "空域边界"
 
@@ -115,6 +121,9 @@ msgstr "已被预订"
 
 msgid "Altitude"
 msgstr "高度范围"
+
+msgid "Altitude not provided"
+msgstr "高度未提供"
 
 msgid "Announcement"
 msgstr "公告"
@@ -373,6 +382,9 @@ msgstr "中文名称"
 
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear the selection to show all enabled radars."
+msgstr "清除选择可显示所有已启用雷达的覆盖范围。"
 
 msgid "Comment"
 msgstr "评论"
@@ -1042,6 +1054,9 @@ msgstr "下一批活动"
 msgid "No"
 msgstr "否"
 
+msgid "No airspace"
+msgstr "无空域覆盖"
+
 msgid "no airway requiring approval"
 msgstr "无需要许可的航路"
 
@@ -1241,6 +1256,9 @@ msgstr "雷达覆盖地图"
 msgid "Radar details"
 msgstr "雷达详情"
 
+msgid "Radars used for coverage"
+msgstr "参与覆盖计算的雷达"
+
 msgid "Rating"
 msgstr "评级"
 
@@ -1369,6 +1387,9 @@ msgstr "选择 {callsign}"
 
 msgid "Select a radar or click its map marker"
 msgstr "选择雷达或点击地图上的站点"
+
+msgid "Select all"
+msgstr "全选"
 
 msgid "Select all positions on this page"
 msgstr "选择当前页所有席位"
@@ -1790,9 +1811,6 @@ msgstr "查看过去活动"
 
 msgid "View training details"
 msgstr "查看训练详情"
-
-msgid "Visible radars"
-msgstr "当前雷达"
 
 msgid "Visiting"
 msgstr "客座"

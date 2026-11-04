@@ -95,6 +95,12 @@ msgstr "Aircraft wingspan exceeds airport limit"
 msgid "Airspace"
 msgstr "Airspace"
 
+msgid "Airspace altitudes are in metres. Click the map to inspect all sectors at that position."
+msgstr "Airspace altitudes are in metres. Click the map to inspect all sectors at that position."
+
+msgid "Airspace at this position"
+msgstr "Airspace at this position"
+
 msgid "Airspace boundaries"
 msgstr "Airspace boundaries"
 
@@ -115,6 +121,9 @@ msgstr "Already Booked"
 
 msgid "Altitude"
 msgstr "Altitude"
+
+msgid "Altitude not provided"
+msgstr "Altitude not provided"
 
 msgid "Announcement"
 msgstr "Announcement"
@@ -373,6 +382,9 @@ msgstr "Chinese name"
 
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear the selection to show all enabled radars."
+msgstr "Clear the selection to show all enabled radars."
 
 msgid "Comment"
 msgstr "Comment"
@@ -1042,6 +1054,9 @@ msgstr "Next events"
 msgid "No"
 msgstr "No"
 
+msgid "No airspace"
+msgstr "No airspace"
+
 msgid "no airway requiring approval"
 msgstr "no airway requiring approval"
 
@@ -1241,6 +1256,9 @@ msgstr "Radar coverage map"
 msgid "Radar details"
 msgstr "Radar details"
 
+msgid "Radars used for coverage"
+msgstr "Radars used for coverage"
+
 msgid "Rating"
 msgstr "Rating"
 
@@ -1369,6 +1387,9 @@ msgstr "Select {callsign}"
 
 msgid "Select a radar or click its map marker"
 msgstr "Select a radar or click its map marker"
+
+msgid "Select all"
+msgstr "Select all"
 
 msgid "Select all positions on this page"
 msgstr "Select all positions on this page"
@@ -1790,9 +1811,6 @@ msgstr "View past events"
 
 msgid "View training details"
 msgstr "View training details"
-
-msgid "Visible radars"
-msgstr "Visible radars"
 
 msgid "Visiting"
 msgstr "Visiting"

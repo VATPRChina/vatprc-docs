@@ -213,7 +213,7 @@ class CoverageGrid {
 }
 
 function* coverageRows(
-  { region, altitude, enabled }: CoverageRequest,
+  { region, altitude, enabled, selectedRadar }: CoverageRequest,
   terrain: ElevationSource,
   cache?: CoverageCache,
 ): Generator<void, CoverageResult> {
@@ -226,7 +226,7 @@ function* coverageRows(
   };
   if (!grid.rows || !region.radars.length) return result;
   const radars = grid.stations.flatMap((station, index) =>
-    enabled.includes(station.radar.type)
+    enabled.includes(station.radar.type) && (selectedRadar == null || selectedRadar === index)
       ? [{ ...station, distances: cache ? grid.distancesFor(index) : undefined }]
       : [],
   );

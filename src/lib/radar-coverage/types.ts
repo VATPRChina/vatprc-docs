@@ -22,18 +22,23 @@ export interface TerrainPreview {
 export interface Airspace {
   name: string;
   points: Coordinate[];
+  lowerLimit?: number; // feet MSL; undefined means not supplied
+  upperLimit?: number | null; // feet MSL; null explicitly means unlimited
 }
+export const AIRSPACE_TYPES = ["acc", "tma", "twr"] as const;
+export type AirspaceType = (typeof AIRSPACE_TYPES)[number];
 export interface RadarRegion {
   code: string;
   name: string;
   boundary: Coordinate[];
   radars: Radar[];
-  airspace?: { tma: Airspace[]; twr: Airspace[] };
+  airspace?: { acc?: Airspace[]; tma: Airspace[]; twr: Airspace[] };
 }
 export interface CoverageRequest {
   region: RadarRegion;
   altitude: number;
   enabled: RadarType[];
+  selectedRadar?: number | null;
 }
 export interface CoverageResult {
   cells: GeoJSON.FeatureCollection<GeoJSON.Polygon, { type: RadarType | "fusion" | "unknown" }>;
