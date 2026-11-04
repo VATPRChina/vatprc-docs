@@ -362,15 +362,6 @@ msgstr "子实体"
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
-msgid "China RVSM even flight level"
-msgstr "中国 RVSM 双数高度层"
-
-msgid "China RVSM flight level"
-msgstr "中国 RVSM 高度层"
-
-msgid "China RVSM odd flight level"
-msgstr "中国 RVSM 单数高度层"
-
 msgid "Chinese Callsign"
 msgstr "中文呼号"
 
@@ -642,10 +633,6 @@ msgstr "设备代码"
 msgid "Error"
 msgstr "错误"
 
-msgctxt "feet"
-msgid "even flight level"
-msgstr "英制双数飞行高度层"
-
 msgid "Event"
 msgstr "活动"
 
@@ -862,11 +849,19 @@ msgstr "图床"
 msgid "Image URL"
 msgstr "图片 URL"
 
+msgctxt "feet"
+msgid "imperial even flight level"
+msgstr "英制双数飞行高度层"
+
 msgid "imperial even flight level (feet)"
 msgstr "英制双数飞行高度层（英尺）"
 
 msgid "imperial flight level (feet)"
 msgstr "英制飞行高度层（英尺）"
+
+msgctxt "feet"
+msgid "imperial odd flight level"
+msgstr "英制单数飞行高度层"
 
 msgid "imperial odd flight level (feet)"
 msgstr "英制单数飞行高度层（英尺）"
@@ -1006,11 +1001,20 @@ msgstr "分配教员"
 msgid "Mentor Feedback"
 msgstr "教员反馈"
 
+msgid "metric even flight level"
+msgstr "公制双数飞行高度层"
+
 msgid "metric even flight level (meters)"
 msgstr "公制双数飞行高度层（米）"
 
-msgid "metric flight level (meters)"
+msgid "metric flight level"
 msgstr "公制飞行高度层"
+
+msgid "metric flight level (meters)"
+msgstr "公制飞行高度层（米）"
+
+msgid "metric odd flight level"
+msgstr "公制单数飞行高度层"
 
 msgid "metric odd flight level (meters)"
 msgstr "公制单数飞行高度层（米）"
@@ -1134,10 +1138,6 @@ msgstr "这里空无一物"
 
 msgid "OBS"
 msgstr "OBS"
-
-msgctxt "feet"
-msgid "odd flight level"
-msgstr "英制单数飞行高度层"
 
 msgid "Offline"
 msgstr "未上线"

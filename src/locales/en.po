@@ -362,15 +362,6 @@ msgstr "Child Entity"
 msgid "China RVSM"
 msgstr "China RVSM"
 
-msgid "China RVSM even flight level"
-msgstr "China RVSM even flight level"
-
-msgid "China RVSM flight level"
-msgstr "China RVSM flight level"
-
-msgid "China RVSM odd flight level"
-msgstr "China RVSM odd flight level"
-
 msgid "Chinese Callsign"
 msgstr "Chinese Callsign"
 
@@ -642,10 +633,6 @@ msgstr "Equipment"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "feet"
-msgid "even flight level"
-msgstr "even flight level"
-
 msgid "Event"
 msgstr "Event"
 
@@ -862,11 +849,19 @@ msgstr "Image Upload Tool"
 msgid "Image URL"
 msgstr "Image URL"
 
+msgctxt "feet"
+msgid "imperial even flight level"
+msgstr "imperial even flight level"
+
 msgid "imperial even flight level (feet)"
 msgstr "imperial even flight level (feet)"
 
 msgid "imperial flight level (feet)"
 msgstr "imperial flight level (feet)"
+
+msgctxt "feet"
+msgid "imperial odd flight level"
+msgstr "imperial odd flight level"
 
 msgid "imperial odd flight level (feet)"
 msgstr "imperial odd flight level (feet)"
@@ -1006,11 +1001,20 @@ msgstr "Mentor assignment"
 msgid "Mentor Feedback"
 msgstr "Mentor Feedback"
 
+msgid "metric even flight level"
+msgstr "metric even flight level"
+
 msgid "metric even flight level (meters)"
 msgstr "metric even flight level (meters)"
 
+msgid "metric flight level"
+msgstr "metric flight level"
+
 msgid "metric flight level (meters)"
 msgstr "metric flight level (meters)"
+
+msgid "metric odd flight level"
+msgstr "metric odd flight level"
 
 msgid "metric odd flight level (meters)"
 msgstr "metric odd flight level (meters)"
@@ -1134,10 +1138,6 @@ msgstr "Nothing to see here"
 
 msgid "OBS"
 msgstr "OBS"
-
-msgctxt "feet"
-msgid "odd flight level"
-msgstr "odd flight level"
 
 msgid "Offline"
 msgstr "Offline"

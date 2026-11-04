@@ -38,12 +38,18 @@ export const VALIDATION_STATUS: Record<components["schemas"]["ValidatorStatus"],
   unavailable: { short: "U", name: <Trans>Unavailable</Trans>, color: "yellow" },
 };
 
+const METRIC_CURISING_LEVEL_TYPES: components["schemas"]["CruiseAltitudeType"][] = [
+  "standard",
+  "standard-even",
+  "standard-odd",
+];
+
 export const CRUISING_LEVEL_TEXT: Record<components["schemas"]["CruiseAltitudeType"], React.ReactElement> = {
-  "standard-even": <Trans>China RVSM even flight level</Trans>,
-  "standard-odd": <Trans>China RVSM odd flight level</Trans>,
-  standard: <Trans>China RVSM flight level</Trans>,
-  "flight-level-even": <Trans context="feet">even flight level</Trans>,
-  "flight-level-odd": <Trans context="feet">odd flight level</Trans>,
+  "standard-even": <Trans>metric even flight level</Trans>,
+  "standard-odd": <Trans>metric odd flight level</Trans>,
+  standard: <Trans>metric flight level</Trans>,
+  "flight-level-even": <Trans context="feet">imperial even flight level</Trans>,
+  "flight-level-odd": <Trans context="feet">imperial odd flight level</Trans>,
 };
 
 export const PROBLEM_LABELS: Record<components["schemas"]["ValidationProblemDto"]["kind"], React.ReactNode> = {
@@ -165,7 +171,7 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
       <>
         <Trans>The cruising level type does not meet the requirement of the route.</Trans>
         <Trans>Cruising level should be {level}.</Trans>
-        <ChinaRvsmHelp />
+        {METRIC_CURISING_LEVEL_TYPES.includes(expected_type) && <ChinaRvsmHelp />}
       </>
     );
   },
