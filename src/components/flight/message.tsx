@@ -160,18 +160,30 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
       <p>
         <Trans>The flight plan does not match a designated route. Use one of the following routes:</Trans>
       </p>
-      <pre className="wrap-break-word whitespace-pre-wrap">
-        <code>{routes.map(({ from, to, raw_route }) => `${from} → ${to}: ${raw_route}`).join("\n")}</code>
-      </pre>
+      <ul>
+        {routes.map((route, index) => (
+          <PreferredRoute key={index} route={route} />
+        ))}
+      </ul>
     </>
   ),
   "cruising-level-mismatch": ({ problem: { expected_type } }) => {
     const level = CRUISING_LEVEL_TEXT[expected_type];
     return (
       <>
-        <Trans>The cruising level type does not meet the requirement of the route.</Trans>
-        <Trans>Cruising level should be {level}.</Trans>
+        <p>
+          <Trans>The cruising level type does not meet the requirement of the route.</Trans>
+        </p>
+        <p>
+          <Trans>Cruising level should be {level}.</Trans>
+        </p>
         {METRIC_CURISING_LEVEL_TYPES.includes(expected_type) && <ChinaRvsmHelp />}
+        <p>
+          <Trans>
+            Note: Cruising level type is relevant to planned route. If the route changes, the required cruising level
+            type may change.
+          </Trans>
+        </p>
       </>
     );
   },
@@ -203,6 +215,36 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
       </pre>
     </>
   ),
+};
+
+const PreferredRoute = ({ route }: { route: components["schemas"]["PreferredRouteDescriptionDto"] }) => {
+  const { t } = useLingui();
+
+  const { allowed_altitudes, cruising_level_restriction, from, minimal_altitude, raw_route, to } = route;
+
+  const level = CRUISING_LEVEL_TEXT[cruising_level_restriction];
+  const allowed = allowed_altitudes.map((altitude) => t`${altitude} ft`).join(t`, `);
+  return (
+    <li>
+      <span>
+        <Trans>
+          From {from} to {to}, use&nbsp;
+        </Trans>
+      </span>
+      <code>{raw_route}</code>
+      <Trans>, with curising level {level}.</Trans>
+      {minimal_altitude > 0 && (
+        <span>
+          <Trans>Keep curising level not below {minimal_altitude} feet.</Trans>
+        </span>
+      )}
+      {allowed_altitudes.length > 0 && (
+        <span>
+          <Trans>Choose one of the curising levels in {allowed}.</Trans>
+        </span>
+      )}
+    </li>
+  );
 };
 
 export function ProblemDetails<K extends components["schemas"]["ValidationProblemDto"]["kind"]>({

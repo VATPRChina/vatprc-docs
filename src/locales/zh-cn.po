@@ -17,6 +17,15 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"
 
+msgid ", "
+msgstr "、"
+
+msgid ", with curising level {level}."
+msgstr "，使用{level}作为巡航高度层。"
+
+msgid "{altitude} ft"
+msgstr "{altitude} 英尺"
+
 msgid "{size} items/page"
 msgstr "每页 {size} 条"
 
@@ -371,6 +380,9 @@ msgstr "中文说明"
 msgid "Chinese name"
 msgstr "中文名称"
 
+msgid "Choose one of the curising levels in {allowed}."
+msgstr "在以下巡航高度层中选择一个：{allowed}。"
+
 msgid "CID"
 msgstr "CID"
 
@@ -472,28 +484,28 @@ msgid "cruise altitude (without designated route)"
 msgstr "巡航高度（非指定航路）"
 
 msgid "Cruising Level"
-msgstr "巡航高度"
+msgstr "巡航高度层"
 
 msgid "Cruising Level (feet)"
-msgstr "巡航高度（英尺）"
+msgstr "巡航高度层（英尺）"
 
 msgid "Cruising level not allowed"
-msgstr "巡航高度不许可"
+msgstr "巡航高度层不许可"
 
 msgid "Cruising level should be {allowed}."
-msgstr "巡航高度应为 {allowed}。"
+msgstr "巡航高度层应为 {allowed}。"
 
 msgid "Cruising level should be {level}."
-msgstr "巡航高度应为 {level}。"
+msgstr "巡航高度层应为 {level}。"
 
 msgid "Cruising level too low"
-msgstr "巡航高度过低"
+msgstr "巡航高度层过低"
 
 msgid "Cruising Level Type"
-msgstr "巡航高度类型"
+msgstr "巡航高度层类型"
 
 msgid "Cruising level type mismatch"
-msgstr "巡航高度类型不匹配"
+msgstr "巡航高度层类型不匹配"
 
 msgid "CTOT"
 msgstr "CTOT"
@@ -789,6 +801,9 @@ msgstr "{callsign} 频率（MHz）"
 msgid "From"
 msgstr "起点"
 
+msgid "From {from} to {to}, use "
+msgstr "在 {from} 和 {to} 之间使用"
+
 msgid "Full name"
 msgstr "姓名"
 
@@ -898,6 +913,9 @@ msgstr "无效机场"
 
 msgid "Join the controller team"
 msgstr "加入管制员队伍"
+
+msgid "Keep curising level not below {minimal_altitude} feet."
+msgstr "保持巡航高度层不低于 {minimal_altitude} 英尺。"
 
 msgid "Kind"
 msgstr "类型"
@@ -1129,6 +1147,9 @@ msgstr "不符合指定航路"
 
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · 分部公告"
+
+msgid "Note: Cruising level type is relevant to planned route. If the route changes, the required cruising level type may change."
+msgstr "注：巡航高度层类型与计划航路有关。如果航路发生变动，要求的巡航高度层类型可能发生改变。"
 
 msgid "Nothing on the calendar yet"
 msgstr "活动日历暂时空空如也"
@@ -1578,13 +1599,13 @@ msgid "The callsign cannot be changed after creation."
 msgstr "创建后无法修改呼号。"
 
 msgid "The cruising level is not allowed for the route."
-msgstr "巡航高度违反航路限制。"
+msgstr "巡航高度层违反航路限制。"
 
 msgid "The cruising level is too low for route. The minimum is {minimum_ft} feet."
-msgstr "巡航高度过低，不满足航路要求，最低为 {minimum_ft} 英尺。"
+msgstr "巡航高度层过低，不满足航路要求，最低为 {minimum_ft} 英尺。"
 
 msgid "The cruising level type does not meet the requirement of the route."
-msgstr "巡航高度类型不符合航路要求。"
+msgstr "巡航高度层类型不符合航路要求。"
 
 msgid "The declared wake category does not match the aircraft type. It should be {expected}."
 msgstr "尾流类别不匹配机型，应当为 {expected}。"

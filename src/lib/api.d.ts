@@ -1709,7 +1709,11 @@ export interface components {
       | "authorization_pending"
       | "expired_token";
     PreferredRouteDescriptionDto: {
+      allowed_altitudes: number[];
+      cruising_level_restriction: components["schemas"]["CruiseAltitudeType"];
       from: string;
+      /** Format: int32 */
+      minimal_altitude: number;
       raw_route: string;
       to: string;
     };
@@ -2106,9 +2110,13 @@ export interface components {
           minimum_ft: number;
         }
       | {
+          allowed_altitudes: number[];
+          cruising_level_restriction: components["schemas"]["CruiseAltitudeType"];
           from: string;
           /** @enum {string} */
           kind: "route-match-preferred";
+          /** Format: int32 */
+          minimal_altitude: number;
           raw_route: string;
           to: string;
         };

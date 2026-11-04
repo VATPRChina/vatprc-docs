@@ -17,6 +17,15 @@ msgstr ""
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM P.R. China Division"
 
+msgid ", "
+msgstr ", "
+
+msgid ", with curising level {level}."
+msgstr ", with curising level {level}."
+
+msgid "{altitude} ft"
+msgstr "{altitude} ft"
+
 msgid "{size} items/page"
 msgstr "{size} items/page"
 
@@ -370,6 +379,9 @@ msgstr "Chinese description"
 
 msgid "Chinese name"
 msgstr "Chinese name"
+
+msgid "Choose one of the curising levels in {allowed}."
+msgstr "Choose one of the curising levels in {allowed}."
 
 msgid "CID"
 msgstr "CID"
@@ -789,6 +801,9 @@ msgstr "Frequency (MHz) {callsign}"
 msgid "From"
 msgstr "From"
 
+msgid "From {from} to {to}, use "
+msgstr "From {from} to {to}, use "
+
 msgid "Full name"
 msgstr "Full name"
 
@@ -898,6 +913,9 @@ msgstr "Invalid airport"
 
 msgid "Join the controller team"
 msgstr "Join the controller team"
+
+msgid "Keep curising level not below {minimal_altitude} feet."
+msgstr "Keep curising level not below {minimal_altitude} feet."
 
 msgid "Kind"
 msgstr "Kind"
@@ -1129,6 +1147,9 @@ msgstr "Not designated route"
 
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · Announcements"
+
+msgid "Note: Cruising level type is relevant to planned route. If the route changes, the required cruising level type may change."
+msgstr "Note: Cruising level type is relevant to planned route. If the route changes, the required cruising level type may change."
 
 msgid "Nothing on the calendar yet"
 msgstr "Nothing on the calendar yet"
