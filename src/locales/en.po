@@ -368,6 +368,12 @@ msgstr "Chengdu Low Area"
 msgid "Child Entity"
 msgstr "Child Entity"
 
+msgid "China mainland airspace requires RNAV1 capability, but the flight plan does not specify RNAV1 capability on the aircraft. To indicate RNAV 1 capability, include <0>R</0> in Equipment and <1>D1</1>, <2>D2</2>, <3>D3</3> or <4>D4</4> in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "China mainland airspace requires RNAV1 capability, but the flight plan does not specify RNAV1 capability on the aircraft. To indicate RNAV 1 capability, include <0>R</0> in Equipment and <1>D1</1>, <2>D2</2>, <3>D3</3> or <4>D4</4> in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+
+msgid "China mainland airspace requires RVSM capability, but the flight plan does not specify transponder capability on the aircraft. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "China mainland airspace requires RVSM capability, but the flight plan does not specify transponder capability on the aircraft. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+
 msgid "China RVSM"
 msgstr "China RVSM"
 
@@ -1334,9 +1340,6 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
-msgid "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
-msgstr "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
-
 msgid "RNAV1 equipment"
 msgstr "RNAV1 equipment"
 
@@ -1565,15 +1568,6 @@ msgstr "Temporary Flight Plan"
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "The <0>MIL</0> column marks controllers with military position permission."
 
-msgid "The aircraft does not specify RNAV1 capability."
-msgstr "The aircraft does not specify RNAV1 capability."
-
-msgid "The aircraft does not specify RVSM capability."
-msgstr "The aircraft does not specify RVSM capability."
-
-msgid "The aircraft does not specify transponder capability."
-msgstr "The aircraft does not specify transponder capability."
-
 msgid "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 msgstr "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 
@@ -1624,6 +1618,9 @@ msgstr "The Moodle account has been provisioned successfully."
 
 msgid "The planned route matches the designated route from {from} to {to}."
 msgstr "The planned route matches the designated route from {from} to {to}."
+
+msgid "The requested flight level requires RVSM capability, but the flight plan does not specify RVSM capability on the aircraft. To indicate RVSM capability, include <0>W</0> in the Equipment field. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "The requested flight level requires RVSM capability, but the flight plan does not specify RVSM capability on the aircraft. To indicate RVSM capability, include <0>W</0> in the Equipment field. Contact ATC for special clearance if your aircraft cannot meet these requirements."
 
 msgid "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
 msgstr "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
@@ -1690,9 +1687,6 @@ msgstr "Title is required"
 
 msgid "To"
 msgstr "To"
-
-msgid "To enter RVSM airspace, include W in the Equipment field."
-msgstr "To enter RVSM airspace, include W in the Equipment field."
 
 msgid "Total"
 msgstr "Total"

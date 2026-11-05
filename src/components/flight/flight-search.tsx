@@ -140,11 +140,9 @@ export function FlightSearch() {
             </span>
           </div>
         )}
-        {flights
-          ?.filter((flight) => flight.flight_plan.callsign !== mine?.flight_plan.callsign)
-          .map((flight) => (
-            <FlightCard key={flight.flight_plan.callsign} flight={flight} />
-          ))}
+        {flights?.map((flight) => (
+          <FlightCard key={flight.flight_plan.callsign} flight={flight} />
+        ))}
       </div>
     </div>
   );

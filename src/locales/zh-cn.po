@@ -368,6 +368,12 @@ msgstr "成都低空"
 msgid "Child Entity"
 msgstr "子实体"
 
+msgid "China mainland airspace requires RNAV1 capability, but the flight plan does not specify RNAV1 capability on the aircraft. To indicate RNAV 1 capability, include <0>R</0> in Equipment and <1>D1</1>, <2>D2</2>, <3>D3</3> or <4>D4</4> in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "中国内地空域要求飞机具备 RNAV1 能力，但是飞行计划中未表明飞机具备 RNAV1 能力。如果飞机具备 RNAV1 能力，需在设备一栏中写明 <0>R</0>，并在 PBN 中写明 <1>D1</1>、<2>D2</2>、<3>D3</3> 或 <4>D4</4>。如果飞机无法满足要求，请与管制员联系申请特殊许可。"
+
+msgid "China mainland airspace requires RVSM capability, but the flight plan does not specify transponder capability on the aircraft. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "中国内地空域通常要求飞机具备应答机，但是飞行计划中未表明飞机具备应答机。如果飞机无法满足要求，请与管制员联系申请特殊许可。"
+
 msgid "China RVSM"
 msgstr "中国 RVSM"
 
@@ -1334,9 +1340,6 @@ msgstr "重试"
 msgid "Review"
 msgstr "审核"
 
-msgid "RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft cannot meet these requirements."
-msgstr "RNAV 1 要求设备代码包含 R，且 PBN 包含 D1、D2、D3 或 D4。如果航空器无法满足这些要求，请联系 ATC 申请特别许可。"
-
 msgid "RNAV1 equipment"
 msgstr "RNAV1 设备"
 
@@ -1565,15 +1568,6 @@ msgstr "临时飞行计划"
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "MIL 列标记具有军用席位权限的管制员。"
 
-msgid "The aircraft does not specify RNAV1 capability."
-msgstr "设备代码未表明具备 RNAV1 能力。"
-
-msgid "The aircraft does not specify RVSM capability."
-msgstr "设备代码未表明具备 RVSM 能力。"
-
-msgid "The aircraft does not specify transponder capability."
-msgstr "设备代码未填写应答机能力。"
-
 msgid "The aircraft specifies RNP AR capability with RF, which is eligible to be cleared with RNP AR procedures when possible."
 msgstr "拥有 RNP AR（带 RF 航段）能力的航空器会被许可使用 RNP AR（带 RF 航段）程序。"
 
@@ -1624,6 +1618,9 @@ msgstr "Moodle 账号已成功开通。"
 
 msgid "The planned route matches the designated route from {from} to {to}."
 msgstr "计划航路匹配从 {from} 到 {to} 的指定航路。"
+
+msgid "The requested flight level requires RVSM capability, but the flight plan does not specify RVSM capability on the aircraft. To indicate RVSM capability, include <0>W</0> in the Equipment field. Contact ATC for special clearance if your aircraft cannot meet these requirements."
+msgstr "申请的巡航高度层要求飞机具备 RVSM 能力，但是飞行计划中未表明飞机具备 RVSM 能力。如果飞机具备 RVSM 能力，需在设备一栏中写明 <0>W</0>。如果飞机无法满足要求，请与管制员联系申请特殊许可。"
 
 msgid "The route contains a direct leg from {from} to {to}. Please ensure that the direct segment is valid."
 msgstr "航路包含直飞段 {from} 到 {to}，请确认直飞航路符合要求。"
@@ -1690,9 +1687,6 @@ msgstr "标题为必填项"
 
 msgid "To"
 msgstr "终点"
-
-msgid "To enter RVSM airspace, include W in the Equipment field."
-msgstr "进入 RVSM 空域需要在设备代码中包含 W。"
 
 msgid "Total"
 msgstr "总计"

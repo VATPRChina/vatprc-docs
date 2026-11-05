@@ -107,18 +107,26 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
   ),
   "no-rvsm": () => (
     <>
-      <Trans>The aircraft does not specify RVSM capability.</Trans>
-      <Trans>To enter RVSM airspace, include W in the Equipment field.</Trans>
+      <p>
+        <Trans>
+          The requested flight level requires RVSM capability, but the flight plan does not specify RVSM capability on
+          the aircraft. To indicate RVSM capability, include <code>W</code> in the Equipment field. Contact ATC for
+          special clearance if your aircraft cannot meet these requirements.
+        </Trans>
+      </p>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
   "no-rnav1": () => (
     <>
-      <Trans>The aircraft does not specify RNAV1 capability.</Trans>
-      <Trans>
-        RNAV 1 requires R in Equipment and D1, D2, D3 or D4 in PBN. Contact ATC for special clearance if your aircraft
-        cannot meet these requirements.
-      </Trans>
+      <p>
+        <Trans>
+          China mainland airspace requires RNAV1 capability, but the flight plan does not specify RNAV1 capability on
+          the aircraft. To indicate RNAV 1 capability, include <code>R</code> in Equipment and&nbsp;
+          <code>D1</code>, <code>D2</code>, <code>D3</code> or <code>D4</code> in PBN. Contact ATC for special clearance
+          if your aircraft cannot meet these requirements.
+        </Trans>
+      </p>
       <AircraftCodeCommonHelp type="PBN" />
     </>
   ),
@@ -136,7 +144,10 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
   ),
   "no-transponder": () => (
     <>
-      <Trans>The aircraft does not specify transponder capability.</Trans>
+      <Trans>
+        China mainland airspace requires RVSM capability, but the flight plan does not specify transponder capability on
+        the aircraft. Contact ATC for special clearance if your aircraft cannot meet these requirements.
+      </Trans>
       <AircraftCodeCommonHelp type="Equip+T" />
     </>
   ),
