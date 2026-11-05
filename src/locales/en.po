@@ -20,9 +20,6 @@ msgstr "VATSIM P.R. China Division"
 msgid ", "
 msgstr ", "
 
-msgid ", with curising level {level}."
-msgstr ", with curising level {level}."
-
 msgid "{altitude} ft"
 msgstr "{altitude} ft"
 
@@ -386,9 +383,6 @@ msgstr "Chinese description"
 msgid "Chinese name"
 msgstr "Chinese name"
 
-msgid "Choose one of the curising levels in {allowed}."
-msgstr "Choose one of the curising levels in {allowed}."
-
 msgid "CID"
 msgstr "CID"
 
@@ -512,6 +506,9 @@ msgstr "Cruising Level Type"
 
 msgid "Cruising level type mismatch"
 msgstr "Cruising level type mismatch"
+
+msgid "crusing level of {allowed}"
+msgstr "crusing level of {allowed}"
 
 msgid "CTOT"
 msgstr "CTOT"
@@ -807,8 +804,8 @@ msgstr "Frequency (MHz) {callsign}"
 msgid "From"
 msgstr "From"
 
-msgid "From {from} to {to}, use "
-msgstr "From {from} to {to}, use "
+msgid "From {from} to {to}, use <0>{raw_route}</0>, with {level}."
+msgstr "From {from} to {to}, use <0>{raw_route}</0>, with {level}."
 
 msgid "Full name"
 msgstr "Full name"

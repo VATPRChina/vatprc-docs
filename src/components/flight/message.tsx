@@ -233,26 +233,17 @@ const PreferredRoute = ({ route }: { route: components["schemas"]["PreferredRout
 
   const { allowed_altitudes, cruising_level_restriction, from, minimal_altitude, raw_route, to } = route;
 
-  const level = CRUISING_LEVEL_TEXT[cruising_level_restriction];
   const allowed = allowed_altitudes.map((altitude) => t`${altitude} ft`).join(t`, `);
+  const level = allowed.length > 0 ? t`crusing level of ${allowed}` : CRUISING_LEVEL_TEXT[cruising_level_restriction];
   return (
     <li>
-      <span>
-        <Trans>
-          From {from} to {to}, use&nbsp;
-        </Trans>
-      </span>
-      <code>{raw_route}</code>
-      <Trans>, with curising level {level}.</Trans>
+      <Trans>
+        From {from} to {to}, use&nbsp;<code>{raw_route}</code>, with {level}.
+      </Trans>
       {minimal_altitude > 0 && (
-        <span>
-          <Trans>Keep curising level not below {minimal_altitude} feet.</Trans>
-        </span>
-      )}
-      {allowed_altitudes.length > 0 && (
-        <span>
-          <Trans>Choose one of the curising levels in {allowed}.</Trans>
-        </span>
+        <>
+          &nbsp;<Trans>Keep curising level not below {minimal_altitude} feet.</Trans>
+        </>
       )}
     </li>
   );

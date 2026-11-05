@@ -20,9 +20,6 @@ msgstr "VATSIM 中国分部"
 msgid ", "
 msgstr "、"
 
-msgid ", with curising level {level}."
-msgstr "，使用{level}作为巡航高度层。"
-
 msgid "{altitude} ft"
 msgstr "{altitude} 英尺"
 
@@ -386,9 +383,6 @@ msgstr "中文说明"
 msgid "Chinese name"
 msgstr "中文名称"
 
-msgid "Choose one of the curising levels in {allowed}."
-msgstr "在以下巡航高度层中选择一个：{allowed}。"
-
 msgid "CID"
 msgstr "CID"
 
@@ -512,6 +506,9 @@ msgstr "巡航高度层类型"
 
 msgid "Cruising level type mismatch"
 msgstr "巡航高度层类型不匹配"
+
+msgid "crusing level of {allowed}"
+msgstr "{allowed} 中的巡航高度层"
 
 msgid "CTOT"
 msgstr "CTOT"
@@ -807,8 +804,8 @@ msgstr "{callsign} 频率（MHz）"
 msgid "From"
 msgstr "起点"
 
-msgid "From {from} to {to}, use "
-msgstr "在 {from} 和 {to} 之间使用"
+msgid "From {from} to {to}, use <0>{raw_route}</0>, with {level}."
+msgstr "从 {from} 到 {to}，沿 {raw_route} 飞行，使用{level}。"
 
 msgid "Full name"
 msgstr "姓名"

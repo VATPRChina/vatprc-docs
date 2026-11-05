@@ -12,8 +12,12 @@ const altitude = {
 const requirements = { ...altitude, allowed_altitudes: [...altitude.allowed_altitudes] };
 
 test.each([false, true])(
-  "groups preferred alternatives into one message with newline-separated routes (temporary=%s)",
+  "groups preferred alternatives into one message with each route's altitude requirements (temporary=%s)",
   async (temporary) => {
+    const alternatives = [
+      { ...requirements, from: "VHHH", to: "LELIM", raw_route: "LEKEN V611 LELIM" },
+      { ...requirements, from: "VHHH", to: "DOTMI", raw_route: "LEKEN V601 DOTMI" },
+    ];
     const validation: components["schemas"]["FlightValidationDto"] = {
       validators: [
         {
@@ -23,10 +27,7 @@ test.each([false, true])(
           problems: [
             {
               kind: "not-preferred-route",
-              routes: [
-                { ...requirements, from: "VHHH", to: "LELIM", raw_route: "LEKEN V611 LELIM" },
-                { ...requirements, from: "VHHH", to: "DOTMI", raw_route: "LEKEN V601 DOTMI" },
-              ],
+              routes: alternatives,
             },
           ],
         },
@@ -37,13 +38,23 @@ test.each([false, true])(
         <ValidationResult temporary={temporary} />
       </FlightValidationContext.Provider>,
     );
-    await expect.element(screen.getByRole("alert", { name: /Not designated route/ })).toBeVisible();
-    expect(screen.getByRole("alert", { name: /Not designated route/ }).all()).toHaveLength(1);
-    expect(document.querySelectorAll("pre code")).toHaveLength(1);
-    expect(document.querySelector("pre code")?.textContent).toBe(
-      "VHHH → LELIM: LEKEN V611 LELIM\nRequired cruising altitude: metric even flight level. Allowed altitudes: 32100 ft, 34100 ft. Minimum altitude: 32100 ft.\nVHHH → DOTMI: LEKEN V601 DOTMI\nRequired cruising altitude: metric even flight level. Allowed altitudes: 32100 ft, 34100 ft. Minimum altitude: 32100 ft.",
-    );
-    expect(document.querySelector("pre")?.classList.contains("whitespace-pre-wrap")).toBe(true);
+    const alert = screen.getByRole("alert", { name: /Not designated route/ });
+    await expect.element(alert).toBeVisible();
+    expect(alert.all()).toHaveLength(1);
+    const routes = alert.getByRole("listitem");
+    expect(routes.all()).toHaveLength(2);
+    for (const [index, { to, raw_route }] of alternatives.entries()) {
+      await expect.element(routes.nth(index)).toMatchTextContent(`From VHHH to ${to}, use`);
+      await expect.element(routes.nth(index).getByRole("code")).toHaveTextContent(raw_route);
+      await expect.element(routes.nth(index)).toMatchTextContent(/with crusing level of 32100 ft, 34100 ft\./);
+      await expect.element(routes.nth(index)).toMatchTextContent(/Keep curising level not below 32100 feet\./);
+      expect(
+        routes
+          .nth(index)
+          .getByText(/metric even flight level/)
+          .all(),
+      ).toHaveLength(0);
+    }
   },
 );
 
@@ -69,9 +80,6 @@ test("shows the matched route's endpoints and raw route", async () => {
     .element(screen.getByText("The planned route matches the designated route from VHHH to LELIM."))
     .toBeVisible();
   await expect.element(screen.getByText("LEKEN V611 LELIM", { exact: true })).toBeVisible();
-  await expect.element(screen.getByText(/Required cruising altitude: metric even flight level/)).toBeVisible();
-  await expect.element(screen.getByText(/Allowed altitudes: 32100 ft, 34100 ft/)).toBeVisible();
-  await expect.element(screen.getByText(/Minimum altitude: 32100 ft/)).toBeVisible();
   expect(screen.getByRole("link").all()).toHaveLength(0);
 });
 
@@ -79,17 +87,21 @@ test("shows imperial requirements without inventing allowed or minimum altitudes
   const screen = await renderComponent(
     <ProblemDetails
       problem={{
-        kind: "route-match-preferred",
-        from: "VHHH",
-        to: "LELIM",
-        raw_route: "LEKEN V611 LELIM",
-        cruising_level_restriction: "flight-level-odd",
-        allowed_altitudes: [],
-        minimal_altitude: 0,
+        kind: "not-preferred-route",
+        routes: [
+          {
+            from: "VHHH",
+            to: "LELIM",
+            raw_route: "LEKEN V611 LELIM",
+            cruising_level_restriction: "flight-level-odd",
+            allowed_altitudes: [],
+            minimal_altitude: 0,
+          },
+        ],
       }}
     />,
   );
-  await expect.element(screen.getByText("Required cruising altitude: imperial odd flight level.")).toBeVisible();
-  expect(screen.getByText(/Allowed altitudes:/).all()).toHaveLength(0);
-  expect(screen.getByText(/Minimum altitude:/).all()).toHaveLength(0);
+  await expect
+    .element(screen.getByRole("listitem"))
+    .toHaveTextContent("From VHHH to LELIM, use LEKEN V611 LELIM, with imperial odd flight level.");
 });
