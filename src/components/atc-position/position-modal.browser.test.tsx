@@ -40,6 +40,34 @@ beforeEach(() => {
   writes = [];
   failWrite = false;
   failCallsign = undefined;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn((input: string | URL | Request) => {
+      const url = String(input instanceof Request ? input.url : input);
+      const code = /radar-coverage\/([^/]+)\//.exec(url)?.[1] ?? "ZBPE";
+      const points = [
+        [0, 0],
+        [0, 1],
+        [1, 0],
+      ];
+      return Promise.resolve(
+        Response.json({
+          code,
+          airspace: {
+            acc: [{ name: "ZBPE_CTR", sector_id: "BJC", points }],
+            tma: [
+              { name: "ZBAA_APP", sector_id: "BJA", points },
+              { name: "ZBAA_DEP", sector_id: "BJD", points },
+            ],
+            twr: [
+              { name: "ZBAA_TWR", sector_id: "BJT", points },
+              { name: "ZSPD_TWR", sector_id: "PUT", points },
+            ],
+          },
+        }),
+      );
+    }),
+  );
   vi.mocked(usePermission).mockReturnValue(true);
   request.mockImplementation(async (req) => {
     const path = new URL(req.url).pathname;
@@ -72,12 +100,85 @@ test("read-only visitors can see positions without management controls", async (
   vi.mocked(usePermission).mockReturnValue(false);
   const screen = await renderPage();
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("button", { name: "Sector ID", exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("BJT", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("DCL", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("CPDLC", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("columnheader", { name: "CPDLC", exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Create ATC Position" })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Delete selected (0)" })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("checkbox")).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Batch Create ATC Positions" })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Edit", exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Delete", exact: true })).not.toBeInTheDocument();
+});
+
+test("groups positions into airport, terminal and area tabs", async () => {
+  vi.mocked(usePermission).mockReturnValue(false);
+  positions = [
+    { ...initialPosition, callsign: "ZBAA_TWR" },
+    { ...initialPosition, callsign: "ZBAA_ATIS", cpdlc_code: null },
+    { ...initialPosition, callsign: "ZBAA_A_GND" },
+    { ...initialPosition, callsign: "ZBAA_AW_GND" },
+    { ...initialPosition, callsign: "ZBAA_AN_GND" },
+    { ...initialPosition, callsign: "ZBAA_AS_GND" },
+    { ...initialPosition, callsign: "ZBAA_AE_GND" },
+    { ...initialPosition, callsign: "ZBAA_AX_GND" },
+    { ...initialPosition, callsign: "ZBAA_W_GND" },
+    { ...initialPosition, callsign: "ZBAA_RMP" },
+    { ...initialPosition, callsign: "ZBAA_E_TWR" },
+    { ...initialPosition, callsign: "ZSPD_TWR" },
+    { ...initialPosition, callsign: "ZBAA_APP" },
+    { ...initialPosition, callsign: "ZBAA_DEP" },
+    { ...initialPosition, callsign: "ZBPE_CTR" },
+  ];
+  const screen = await renderPage();
+
+  await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("ZBAA_ATIS", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("DCL", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("CPDLC", { exact: true })).toBeVisible();
+  await expect
+    .element(screen.getByRole("row", { name: /ZBAA_ATIS/ }).getByText("CPDLC", { exact: true }))
+    .not.toBeInTheDocument();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_E_TWR/ }).getByText("DCL", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBAA_W_GND/ }).getByText("DCL", { exact: true })).toBeVisible();
+  for (const callsign of [
+    "ZBAA_ATIS",
+    "ZBAA_A_GND",
+    "ZBAA_AW_GND",
+    "ZBAA_AN_GND",
+    "ZBAA_AS_GND",
+    "ZBAA_AE_GND",
+    "ZBAA_AX_GND",
+    "ZBAA_RMP",
+  ]) {
+    await expect
+      .element(screen.getByRole("row", { name: new RegExp(callsign) }).getByText("DCL", { exact: true }))
+      .not.toBeInTheDocument();
+  }
+  const airportFilter = screen.getByRole("combobox", { name: "Airport", exact: true });
+  await expect.element(airportFilter).toHaveValue("All (12)");
+  await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("ZSPD_TWR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZSPD_TWR/ }).getByText("PUT", { exact: true })).toBeVisible();
+  await airportFilter.click();
+  await screen.getByRole("option", { name: "ZSPD (1)", exact: true }).click();
+  await expect.element(screen.getByText("ZSPD_TWR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).not.toBeInTheDocument();
+  await expect.element(screen.getByText("ZBAA_APP", { exact: true })).not.toBeInTheDocument();
+
+  await screen.getByRole("tab", { name: /Terminal/ }).click();
+  await expect.element(screen.getByText("ZBAA_APP", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("ZBAA_DEP", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("DCL", { exact: true })).not.toBeInTheDocument();
+  await expect.element(screen.getByRole("columnheader", { name: "CPDLC", exact: true })).not.toBeInTheDocument();
+  await expect.element(screen.getByText("ZBPE_CTR", { exact: true })).not.toBeInTheDocument();
+
+  await screen.getByRole("tab", { name: /Area/ }).click();
+  await expect.element(screen.getByText("ZBPE_CTR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByText("CPDLC", { exact: true }).first()).toBeVisible();
+  await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).not.toBeInTheDocument();
 });
 
 test("create validates callsign and channel, sends normalized data and refreshes the list", async () => {
@@ -247,7 +348,7 @@ test("select all respects filters and keeps previously selected hidden positions
   positions.push({ ...initialPosition, callsign: "ZBAA_GND" }, { ...initialPosition, callsign: "ZBAA_DEL" });
   const screen = await renderPage();
   await screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true }).click();
-  const filter = screen.getByRole("textbox").first();
+  const filter = screen.getByRole("textbox", { name: "ATC Position", exact: true });
   await filter.fill("ZBAA_GND");
   await expect.element(screen.getByRole("checkbox", { name: "Select ZBAA_TWR", exact: true })).not.toBeInTheDocument();
   await screen.getByRole("checkbox", { name: "Select all positions on this page" }).click();

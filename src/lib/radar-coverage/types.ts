@@ -21,6 +21,7 @@ export interface TerrainPreview {
 }
 export interface Airspace {
   name: string;
+  sectorId?: string;
   points: Coordinate[];
   lowerLimit?: number; // feet MSL; undefined means not supplied
   upperLimit?: number | null; // feet MSL; null explicitly means unlimited

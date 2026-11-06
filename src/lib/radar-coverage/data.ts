@@ -1,4 +1,4 @@
-import { Airspace, Coordinate, Radar, RadarRegion, RadarType } from "./types";
+import { AIRSPACE_TYPES, Airspace, Coordinate, Radar, RadarRegion, RadarType } from "./types";
 
 export const BUILTIN_REGIONS = [
   {
@@ -110,6 +110,7 @@ function airspaces(value: unknown): Airspace[] {
   return value.map((item) => {
     const a = record(item);
     if (typeof a.name !== "string") return fail("dataset");
+    if (a.sector_id !== undefined && (typeof a.sector_id !== "string" || !a.sector_id.trim())) return fail("dataset");
     if (a.lowerLimit !== undefined && !numeric(a.lowerLimit, -2000, 1000000)) return fail("dataset");
     if (a.upperLimit !== undefined && a.upperLimit !== null && !numeric(a.upperLimit, -2000, 1000000))
       return fail("dataset");
@@ -117,6 +118,7 @@ function airspaces(value: unknown): Airspace[] {
       return fail("dataset");
     return {
       name: a.name,
+      ...(typeof a.sector_id === "string" ? { sectorId: a.sector_id } : {}),
       points: coordinates(a.points, 2),
       ...(a.lowerLimit !== undefined ? { lowerLimit: a.lowerLimit } : {}),
       ...(a.upperLimit !== undefined ? { upperLimit: a.upperLimit } : {}),
@@ -146,6 +148,7 @@ export function parseRegion(code: string, airspace: unknown, stations: unknown):
 }
 const DATA_URL = "https://files.vatprc.net/radar-coverage/";
 const cache = new Map<string, Promise<RadarRegion>>();
+let sectorIdsPromise: Promise<Map<string, string>> | undefined;
 async function readJson(url: string): Promise<unknown> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Radar data HTTP ${response.status}`);
@@ -165,4 +168,33 @@ export function loadRegion(code: string): Promise<RadarRegion> {
     cache.set(code, promise);
   }
   return promise;
+}
+
+export function loadSectorIds(): Promise<Map<string, string>> {
+  if (!sectorIdsPromise) {
+    sectorIdsPromise = Promise.allSettled(
+      BUILTIN_REGIONS.map(async ({ code }) => {
+        const region = record(await readJson(`${DATA_URL.replace(/\/$/, "")}/${code}/airspace.json`));
+        if (region.code !== code) return fail("dataset");
+        const grouped = record(region.airspace);
+        return AIRSPACE_TYPES.flatMap((type) => airspaces(grouped[type]));
+      }),
+    )
+      .then((results) => {
+        const loaded = results.filter((result) => result.status === "fulfilled");
+        if (!loaded.length) throw new Error("Sector IDs could not be loaded");
+        const sectorIds = new Map<string, string>();
+        for (const result of loaded) {
+          for (const airspace of result.value) {
+            if (airspace.sectorId) sectorIds.set(airspace.name.toUpperCase(), airspace.sectorId);
+          }
+        }
+        return sectorIds;
+      })
+      .catch((error: unknown) => {
+        sectorIdsPromise = undefined;
+        throw error;
+      });
+  }
+  return sectorIdsPromise;
 }
