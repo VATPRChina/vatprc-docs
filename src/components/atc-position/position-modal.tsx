@@ -144,7 +144,7 @@ export function PositionModal({ action, onClose }: { action: PositionAction; onC
               onChange={(e) => setValue({ ...value, callsign_en: e.currentTarget.value })}
             />
             <TextInput
-              label="CPDLC (S0780+)"
+              label="CPDLC"
               value={value.cpdlc_code}
               onChange={(e) => setValue({ ...value, cpdlc_code: e.currentTarget.value })}
             />
