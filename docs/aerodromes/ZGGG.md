@@ -578,7 +578,7 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 | LMN     | 华东、日韩朝、北美                                                      | 米制单数   | ②             |
 | BOVMA   | 华东、日韩朝、北美                                                      | 米制单数   | ②             |
 | `SAREX` | ZGSZ、ZGSD、VMMC                                                        | 米制单数   | 非主用离场点  |
-| `SAREX` | VHHX（启德）                                                            | 英制高度层 | 非主用离场点③ |
+| `SAREX` | VHHX（启德）                                                            | 英制高度层 | 非主用离场点 ③ |
 | VIBOS   | 沿 VIBOS R473 ZUH R200 BEBEM 去往 ZGOW、福建                            | 米制单数   | /             |
 | VIBOS   | 沿 VIBOS R473 ZUH R200 BIGRO 去往海南、云南、广西、南亚、粤西、中南半岛 | 米制双数   | ④             |
 | VIBOS   | 沿 VIBOS R473 SIERA 去往台北情报区、东南亚、大洋洲、香港情报区          | 英制高度层 | ⑤⑥            |
