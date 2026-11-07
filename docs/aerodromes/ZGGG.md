@@ -7,11 +7,11 @@
 
 ### 1.1 根据
 
-为了确保 VATPRC 管辖范围内的广州白云机场（ZGGG）安全、合规、高效运行，根据中国民用航空局（CAAC）发布的[《中华人民共和国航空资料汇编（AIP CHINA）》](https://www.eaipchina.cn)，结合 VATPRC 实际运行情况，制定适用于广州白云机场（ZGGG）的标准运行程序。
+为了确保 VATPRC 管辖范围内的广州白云机场安全、合规、高效运行，根据中国民用航空局发布的[《中华人民共和国航空资料汇编》](https://www.eaipchina.cn)，结合 VATPRC 实际运行情况，制定适用于广州白云机场的标准运行程序。
 
 ### 1.2 原则
 
-管制员上线时需遵守 [VATSIM Code of Conduct (COC)](https://vatsim.net/docs/policy/code-of-conduct)，并积极与上下级管制员协调以达成一致认知。需要实施与本文件不一致的运行方式时，需与相关管制员协调达成一致后实施。
+管制员上线时需遵守 [VATSIM Code of Conduct (COC)](https://vatsim.net/docs/policy/code-of-conduct) ，并积极与其他管制员协调以达成一致认知。需要实施与本文件不一致的运行方式时，需与相关管制员协调达成一致后实施。
 
 ### 1.3 适用范围
 
