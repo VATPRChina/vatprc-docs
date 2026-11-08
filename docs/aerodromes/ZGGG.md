@@ -211,8 +211,8 @@
 | :------- | :------------------- | :------------------------------------ |
 | 01L      | GREEN1               | N（N6 以北） T12 H H2 E T3            |
 | 01L      | GREEN7               | N（N6 以北） T12 H H2 E T3 B B2 Q T64 |
-| 02R      | `GREEN3`①            | Y（P6 以北） B1 B T4                  |
-| 03       | `GREEN5`①            | W（L36 以北） T65 Q B2 B T4           |
+| 02R      | `GREEN3` ①             | Y（P6 以北） B1 B T4                  |
+| 03       | `GREEN5` ①             | W（L36 以北） T65 Q B2 B T4           |
 
 > [!CAUTION]
 > ① GREEN3、GREEN5 滑行方向与东北绕滑运行方向相反
@@ -236,8 +236,8 @@
 | :------- | :------------------- | :---------------------------------- |
 | 19R      | GREEN2               | N（N7 以南） T5 H H1 E T1           |
 | 19R      | GREEN8               | N（N7 以南） T5 H H1 E T1 B Y20 T61 |
-| 20L      | `GREEN4`①            | Y（Y12 以南） Y19 Y20 B T2          |
-| 21       | `GREEN6`①            | W（L36 以南） T62 M T61 Y20 B T2    |
+| 20L      | `GREEN4` ①             | Y（Y12 以南） Y19 Y20 B T2          |
+| 21       | `GREEN6` ①             | W（L36 以南） T62 M T61 Y20 B T2    |
 
 > [!CAUTION]
 > ① GREEN4、GREEN6 滑行方向与东南绕滑运行方向相反
@@ -388,7 +388,8 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 | 2      | ZGGG_S1_CTR | 125.350 | BOVMA、LMN、VIBOS、SAREX |
 | 2      | ZGGG_W_CTR  | 133.525 | MIKIP、AGVIL             |
 | 3      | ZGGG_S_CTR  | 124.450 | BOVMA、LMN、VIBOS、SAREX |
-| 4      | ZGGG_CTR    | 118.950 | 全部                     |
+| 4      | ZGGG_CTR    | 133.525 | MIKIP、AGVIL             |
+| 4      | ZGGG_CTR  | 124.450 | BOVMA、LMN、VIBOS、SAREX |
 
 ##### **南向运行**
 
@@ -397,7 +398,7 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 | 1      | ZGGG_APP    | 126.550 | 全部     |
 | 2      | ZGGG_S1_CTR | 125.350 | 全部     |
 | 3      | ZGGG_S_CTR  | 124.450 | 全部     |
-| 4      | ZGGG_CTR    | 118.950 | 全部     |
+| 4      | ZGGG_CTR    | 124.450 | 全部     |
 
 ### 4.2 地面
 
@@ -465,30 +466,30 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 | ZGGG_GND   | 北向/南向 | 预计沿 C1 进入维修机坪              | C1 前                 | ZGGG_RMP   |
 | ZGGG_GND   | 北向/南向 | 预计沿 L22 进入维修机坪             | L22 前                | ZGGG_RMP   |
 | ZGGG_GND   | 北向      | 预计沿 C 向南进入机坪               | C 前                  | ZGGG_RMP   |
-| ZGGG_GND   | 北向      | 预计向西进入机坪                    | 预计向西转向的道口②前 | ZGGG_RMP   |
+| ZGGG_GND   | 北向      | 预计向西进入机坪                    | 预计向西转向的道口 ② 前 | ZGGG_RMP   |
 | ZGGG_GND   | 南向      | 预计沿 C 向北进入机坪               | C 前                  | ZGGG_RMP   |
-| ZGGG_GND   | 南向      | 预计向西进入机坪                    | 预计向西转向的道口④前 | ZGGG_RMP   |
+| ZGGG_GND   | 南向      | 预计向西进入机坪                    | 预计向西转向的道口 ④ 前 | ZGGG_RMP   |
 | ZGGG_W_GND | 北向/南向 | 预计沿 D 进入货机坪                 | D 前                  | ZGGG_RMP   |
 | ZGGG_W_GND | 北向/南向 | 预计沿 J22 进入货机坪               | J22 前                | ZGGG_RMP   |
 | ZGGG_W_GND | 北向/南向 | 预计沿 D4/J21 进入机坪              | D4 前                 | ZGGG_RMP   |
 | ZGGG_W_GND | 北向/南向 | 需沿 J23 进入机位                   | J23 前                | ZGGG_RMP   |
 | ZGGG_W_GND | 北向      | 预计沿 D 向南进入机坪（不含货机坪） | D 前                  | ZGGG_RMP   |
-| ZGGG_W_GND | 北向      | 预计向东进入机坪                    | 预计向东转向的道口①前 | ZGGG_RMP   |
+| ZGGG_W_GND | 北向      | 预计向东进入机坪                    | 预计向东转向的道口 ① 前 | ZGGG_RMP   |
 | ZGGG_W_GND | 南向      | 预计沿 D 向北进入机坪（不含货机坪） | D 前                  | ZGGG_RMP   |
-| ZGGG_W_GND | 南向      | 预计向东进入机坪                    | 预计向东转向的道口③前 | ZGGG_RMP   |
+| ZGGG_W_GND | 南向      | 预计向东进入机坪                    | 预计向东转向的道口 ③ 前 | ZGGG_RMP   |
 | ZGGG_W_GND | 南向      | 预计沿 E J22 进入货机坪             | E J22前               | ZGGG_RMP   |
 | ZGGG_E_GND | 北向/南向 | 沿 R4 进入机坪                      | T63/T66 前            | ZGGG_E_RMP |
 | ZGGG_E_GND | 北向/南向 | 预计沿 R 进入机坪                   | R 前                  | ZGGG_E_RMP |
-| ZGGG_E_GND | 北向/南向 | 预计向东进入机坪                    | 预计向东转向的道口⑤前 | ZGGG_E_RMP |
-| ZGGG_E_GND | 北向/南向 | 预计向西进入机坪                    | 预计向西转向的道口⑥前 | ZGGG_E_RMP |
+| ZGGG_E_GND | 北向/南向 | 预计向东进入机坪                    | 预计向东转向的道口 ⑤ 前 | ZGGG_E_RMP |
+| ZGGG_E_GND | 北向/南向 | 预计向西进入机坪                    | 预计向西转向的道口 ⑥ 前 | ZGGG_E_RMP |
 
 > [!NOTE]
 > ① 北向运行时，西活动区向东进入机坪的道口包括：J6、J7、J8、J10、J11、J12、J14、J18、J20，**不包含 J9**。
 > ② 北向运行时，西活动区向西进入机坪的道口包括：L4、L5、L6、L8、L9、L10、L11、L14、L15，**不包含 L7**。
 > ③ 南向运行时，西活动区向东进入机坪的道口包括：J6、J7、J8、J9、J10、J12、J14、J18、J20，**不包含 J11**。
 > ④ 南向运行时，西活动区向西进入机坪的道口包括：L4、L5、L6、L7、L8、L9、L11、L14、L15，**不包含 L10**。
-> ④ 东活动区向东进入机坪的道口包括：J44、J35、J36、Q14、Q11、Q10、Q16、Q17。
-> ⑤ 东活动区向西进入机坪的道口包括：L31、L32、L33、L34、L35、L36、L37。
+> ⑤ 东活动区向东进入机坪的道口包括：J44、J35、J36、Q14、Q11、Q10、Q16、Q17。
+> ⑥ 东活动区向西进入机坪的道口包括：L31、L32、L33、L34、L35、L36、L37。
 
 ### 4.3 机坪席位
 
@@ -533,22 +534,22 @@ A、B 类航空器高度 300m，C、D 类航空器高度 500-600m。
 | ZGGG_RMP   | 北向/南向 | 沿 J23 滑行                              | H2 前                                 | ZGGG_W_GND  |
 | ZGGG_RMP   | 北向/南向 | 货机坪沿 D/D4 滑行                       | T4 前                                 | ZGGG_W_GND  |
 | ZGGG_RMP   | 北向/南向 | 沿 C5/C1 滑行                            | T4 前                                 | ZGGG_GND    |
-| ZGGG_RMP   | 北向/南向 | 沿 L22 滑行                              | B 前                                  | ZGGG_GND①   |
+| ZGGG_RMP   | 北向/南向 | 沿 L22 滑行                              | B 前                                  | ZGGG_GND ①    |
 | ZGGG_RMP   | 北向/南向 | 沿 L25 滑行                              | B2 前                                 | ZGGG_GND    |
 | ZGGG_RMP   | 北向/南向 | 沿 GT4 滑出                              | Y20 前                                | ZGGG_GND    |
-| ZGGG_RMP   | 北向      | 沿 D（T2 与 T3 之间）滑行                | T2 前或预计向西滑出机坪的道口②前      | ZGGG_W_GND  |
-| ZGGG_RMP   | 北向      | 不沿 D 滑行，预计使用向西滑出机坪的道口② | D 前                                  | ZGGG_W_GND  |
-| ZGGG_RMP   | 北向      | 沿 C 滑行                                | T2 前或预计向东滑出机坪的道口③前      | ZGGG_GND    |
-| ZGGG_RMP   | 北向      | 不沿 C 滑行，预计使用向东滑出机坪的道口③ | C 前                                  | ZGGG_GND    |
-| ZGGG_RMP   | 南向      | 沿 D（T2 与 T3 之间）滑行                | T3 前或预计向西滑出机坪的道口②前      | ZGGG_W_GND  |
-| ZGGG_RMP   | 南向      | 不沿 D 滑行，预计使用向西滑出机坪的道口② | D 前                                  | ZGGG_W_GND  |
-| ZGGG_RMP   | 南向      | 沿 C 滑行                                | T3 前或预计向东滑出机坪的道口③前      | ZGGG_GND    |
-| ZGGG_RMP   | 南向      | 不沿 C 滑行，预计使用向东滑出机坪的道口③ | C 前                                  | ZGGG_GND    |
+| ZGGG_RMP   | 北向      | 沿 D（T2 与 T3 之间）滑行                | T2 前或预计向西滑出机坪的道口 ② 前      | ZGGG_W_GND  |
+| ZGGG_RMP   | 北向      | 不沿 D 滑行，预计使用向西滑出机坪的道口 ②  | D 前                                  | ZGGG_W_GND  |
+| ZGGG_RMP   | 北向      | 沿 C 滑行                                | T2 前或预计向东滑出机坪的道口 ③ 前      | ZGGG_GND    |
+| ZGGG_RMP   | 北向      | 不沿 C 滑行，预计使用向东滑出机坪的道口 ③  | C 前                                  | ZGGG_GND    |
+| ZGGG_RMP   | 南向      | 沿 D（T2 与 T3 之间）滑行                | T3 前或预计向西滑出机坪的道口 ② 前      | ZGGG_W_GND  |
+| ZGGG_RMP   | 南向      | 不沿 D 滑行，预计使用向西滑出机坪的道口 ②  | D 前                                  | ZGGG_W_GND  |
+| ZGGG_RMP   | 南向      | 沿 C 滑行                                | T3 前或预计向东滑出机坪的道口 ③ 前      | ZGGG_GND    |
+| ZGGG_RMP   | 南向      | 不沿 C 滑行，预计使用向东滑出机坪的道口 ③  | C 前                                  | ZGGG_GND    |
 | ZGGG_E_RMP | 北向/南向 | 860-862.960-963 机位                     | 开车后移交                            | ZGGG_E_GND  |
 | ZGGG_E_RMP | 北向/南向 | 沿 T63/T66 滑行                          | Q/U 前                                | ZGGG_E_GND  |
 | ZGGG_E_RMP | 北向/南向 | 沿 R3/R5 滑行                            | T64 前                                | ZGGG_E_GND  |
-| ZGGG_E_RMP | 北向/南向 | 沿 S2/S3 滑行                            | 预计向西滑出机坪的道口④前             | ZGGG_E_GND  |
-| ZGGG_E_RMP | 北向/南向 | 沿 R 滑行                                | T61/T62 前或预计向东滑出机坪的道口⑤前 | ZGGG_E_GND⑥ |
+| ZGGG_E_RMP | 北向/南向 | 沿 S2/S3 滑行                            | 预计向西滑出机坪的道口 ④ 前             | ZGGG_E_GND  |
+| ZGGG_E_RMP | 北向/南向 | 沿 R 滑行                                | T61/T62 前或预计向东滑出机坪的道口 ⑤ 前 | ZGGG_E_GND ⑥  |
 | ZGGG_E_RMP | 北向/南向 | 沿 Q10/Q11/Q14/Q16 滑行                  | Q 前                                  | ZGGG_E_GND  |
 | ZGGG_E_RMP | 北向/南向 | 沿 Q17 滑行，去往东北绕滑                | Q 前                                  | ZGGG_GND    |
 | ZGGG_E_RMP | 北向      | 沿 Q17 滑行，不去往东北绕滑⑦             | Q 前                                  | ZGGG_E_GND  |
