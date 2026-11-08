@@ -259,48 +259,48 @@
 
 #### 4.1.6 与其它场面席位的移交
 
-|  管制席位  |              先决条件              |        移交位置         |  移交对象  |
-| :--------: | :--------------------------------: | :---------------------: | :--------: |
-|  ZBAA_TWR  |          36R 跑道向东脱离          |   给出滑行方向后移交    |  ZBAA_GND  |
-|  ZBAA_TWR  |        沿 A9 穿越 36R 跑道         |   给出滑行方向后移交    |  ZBAA_GND  |
-|  ZBAA_TWR  |          36R 跑道向西脱离          |   给出滑行方向后移交    | ZBAA_W_RMP |
-|  ZBAA_TWR  |        沿 A8 穿越 36R 跑道         |   给出滑行方向后移交    | ZBAA_W_RMP |
-|  ZBAA_TWR  |          18L 跑道向西脱离          |        Z3/M7 前         | ZBAA_W_RMP |
-|  ZBAA_TWR  |          A1 穿越 18L 跑道          |        Z3/M7 前         | ZBAA_W_RMP |
-|  ZBAA_TWR  |      18L 跑道沿 E0/E1/E2 脱离      |     脱离后立即移交      |  ZBAA_RMP  |
-|  ZBAA_TWR  | 18L 跑道向东（除 E0/E1/E2 外）脱离 |   给出滑行方向后移交    |  ZBAA_GND  |
-|  ZBAA_TWR  |  A0 穿越 18L 跑道后右转沿 G 滑行   |          E2 前          |  ZBAA_RMP  |
-|  ZBAA_TWR  |    A0 穿越 18L 跑道（不向右转）    |          G 前           |  ZBAA_GND  |
-| ZBAA_E_TWR |            01 跑道脱离             |   给出滑行方向后移交    |  ZBAA_GND  |
-| ZBAA_E_TWR |        19 跑道沿 Q3/Q4 脱离        |          K 前           |  ZBAA_GND  |
-| ZBAA_E_TWR |         19 跑道沿 Q2 脱离          |   给出滑行方向后移交    |  ZBAA_GND  |
-| ZBAA_E_TWR |        19 跑道沿 Q0/Q1 脱离        |          K 前           |  ZBAA_RMP  |
+|  管制席位  |              先决条件              |         移交位置         |  移交对象  |
+| :--------: | :--------------------------------: | :----------------------: | :--------: |
+|  ZBAA_TWR  |          36R 跑道向东脱离          |    给出滑行方向后移交    |  ZBAA_GND  |
+|  ZBAA_TWR  |        沿 A9 穿越 36R 跑道         |    给出滑行方向后移交    |  ZBAA_GND  |
+|  ZBAA_TWR  |          36R 跑道向西脱离          |    给出滑行方向后移交    | ZBAA_W_RMP |
+|  ZBAA_TWR  |        沿 A8 穿越 36R 跑道         |    给出滑行方向后移交    | ZBAA_W_RMP |
+|  ZBAA_TWR  |          18L 跑道向西脱离          |         Z3/M7 前         | ZBAA_W_RMP |
+|  ZBAA_TWR  |          A1 穿越 18L 跑道          |         Z3/M7 前         | ZBAA_W_RMP |
+|  ZBAA_TWR  |      18L 跑道沿 E0/E1/E2 脱离      |      脱离后立即移交      |  ZBAA_RMP  |
+|  ZBAA_TWR  | 18L 跑道向东（除 E0/E1/E2 外）脱离 |    给出滑行方向后移交    |  ZBAA_GND  |
+|  ZBAA_TWR  |  A0 穿越 18L 跑道后右转沿 G 滑行   |          E2 前           |  ZBAA_RMP  |
+|  ZBAA_TWR  |    A0 穿越 18L 跑道（不向右转）    |           G 前           |  ZBAA_GND  |
+| ZBAA_E_TWR |            01 跑道脱离             |    给出滑行方向后移交    |  ZBAA_GND  |
+| ZBAA_E_TWR |        19 跑道沿 Q3/Q4 脱离        |           K 前           |  ZBAA_GND  |
+| ZBAA_E_TWR |         19 跑道沿 Q2 脱离          |    给出滑行方向后移交    |  ZBAA_GND  |
+| ZBAA_E_TWR |        19 跑道沿 Q0/Q1 脱离        |           K 前           |  ZBAA_RMP  |
 | ZBAA_W_TWR |             沿 C 滑行              | 在预计向东转向的道口前 ① | ZBAA_W_RMP |
 
 > [!NOTE]
 >
->  ① 预计向东转向的道口包括：Z2、C1、C2、M、S5、C6、C7、C8
+> ① 预计向东转向的道口包括：Z2、C1、C2、M、S5、C6、C7、C8
 
 #### 4.1.7 与对进近管制区提供雷达管制服务的席位的移交
 
 ##### **北向运行**
 
-| 优先级 |    席位     |  频率   |
-| :---- | :--------- | :----- |
-|   1    | ZBAA_AA_APP | 119.000 |
-|   2    |  ZBAA_APP   | 120.600 |
-|   3    |  ZBAA_E1_CTR   | 125.900 |
-|   4    |  ZBAA_E_CTR   | 120.350 |
-|   5    |  ZBAA_CTR   | 120.350 |
+| 优先级 | 席位        | 频率    |
+| :----- | :---------- | :------ |
+| 1      | ZBAA_AA_APP | 119.000 |
+| 2      | ZBAA_APP    | 120.600 |
+| 3      | ZBAA_E1_CTR | 125.900 |
+| 4      | ZBAA_E_CTR  | 120.350 |
+| 5      | ZBAA_CTR    | 120.350 |
 
 ##### **南向运行**
 
-| 优先级 |    席位     |  频率   |
-| :---- | :--------- | :----- |
-|   1    | ZBAA_AA_APP | 119.000 |
-|   2    |  ZBAA_APP   | 120.600 |
-|   3    |  ZBAA_E_CTR   | 120.350 |
-|   4    |  ZBAA_CTR   | 120.350 |
+| 优先级 | 席位        | 频率    |
+| :----- | :---------- | :------ |
+| 1      | ZBAA_AA_APP | 119.000 |
+| 2      | ZBAA_APP    | 120.600 |
+| 3      | ZBAA_E_CTR  | 120.350 |
+| 4      | ZBAA_CTR    | 120.350 |
 
 ### 4.2 地面席位
 
@@ -393,26 +393,26 @@
 
 #### 4.3.3 与其它场面席位的移交
 
-|  管制席位  | 运行方向  |                           先决条件                           |        移交位置         |  移交对象  |
-| :--------: | :-------: | :----------------------------------------------------------: | :---------------------: | :--------: |
-|  ZBAA_RMP  | 北向/南向 |                   沿 T1/T3/Y4/Y9 向东滑行                    |          J 前           |  ZBAA_GND  |
-|  ZBAA_RMP  | 北向/南向 |             沿 T2/T4/Y1/Y8 向西滑行(不穿越跑道)              |          H 前           |  ZBAA_GND  |
-|  ZBAA_RMP  | 北向/南向 |                        沿 Y3 向西滑行                        |          J1 前          |  ZBAA_GND  |
-|  ZBAA_RMP  | 北向/南向 |                        沿 Y6 向东滑行                        |          J4 前          |  ZBAA_GND  |
-|  ZBAA_RMP  | 北向/南向 |                        沿 J 向南滑行                         |          U2 前          |  ZBAA_GND  |
-|  ZBAA_RMP  |   北向    |                     沿 G0/G1/G2 向西滑行                     |          G 前           |  ZBAA_TWR  |
-|  ZBAA_RMP  |   北向    |                      沿 K1/K2 向东滑行                       |          K 前           | ZBAA_E_TWR |
-|  ZBAA_RMP  |   南向    |           沿 T2 向西滑行，预计沿 A1 穿越 18L 跑道            |          H 前           |  ZBAA_TWR  |
-| ZBAA_W_RMP | 北向/南向 |              预计进入 C 滑行道（含）以西区域的               |          C 前           | ZBAA_W_TWR |
-| ZBAA_W_RMP | 北向/南向 |                   沿 Route2 （Y7）向南滑行                   |          H2 前          |  ZBAA_GND  |
-| ZBAA_W_RMP |   北向    |        沿 Z3 向南滑行，预计进入 M7 以南的 F 滑行道的         | 在预计向东转向的道口前 ①  |  ZBAA_TWR  |
-| ZBAA_W_RMP |   北向    | 沿 M7/F7/F4/Z0/F1/F0 向东滑行，预计进入 M7 以南的 F 滑行道的 |          Z3 前          |  ZBAA_TWR  |
-| ZBAA_W_RMP |   北向    |                        沿 F 向南滑行                         |          M7 前          |  ZBAA_TWR  |
-| ZBAA_W_RMP |   北向    |    沿 M 向东滑行/沿 F 向南滑行，预计沿 A9 穿越 36R 跑道的    |          A9 前          |  ZBAA_TWR  |
-| ZBAA_W_RMP |   北向    |              W211-W213 机位的航空器准备好滑行后              |        原地移交         | ZBAA_W_TWR |
-| ZBAA_W_RMP |   南向    |               沿 F 向北滑行去往 18L 跑道离场的               |          W7 前          |  ZBAA_TWR  |
-| ZBAA_W_RMP |   南向    |            沿 Z3 向南滑行，预计沿 F2 A0 穿越跑道             |          F2 前          |  ZBAA_TWR  |
-| ZBAA_W_RMP |   南向    |              沿 Route3/Route1 去往 18L 跑道离场              |      HP4（S4 前）       |  ZBAA_TWR  |
+|  管制席位  | 运行方向  |                           先决条件                           |         移交位置         |  移交对象  |
+| :--------: | :-------: | :----------------------------------------------------------: | :----------------------: | :--------: |
+|  ZBAA_RMP  | 北向/南向 |                   沿 T1/T3/Y4/Y9 向东滑行                    |           J 前           |  ZBAA_GND  |
+|  ZBAA_RMP  | 北向/南向 |             沿 T2/T4/Y1/Y8 向西滑行(不穿越跑道)              |           H 前           |  ZBAA_GND  |
+|  ZBAA_RMP  | 北向/南向 |                        沿 Y3 向西滑行                        |          J1 前           |  ZBAA_GND  |
+|  ZBAA_RMP  | 北向/南向 |                        沿 Y6 向东滑行                        |          J4 前           |  ZBAA_GND  |
+|  ZBAA_RMP  | 北向/南向 |                        沿 J 向南滑行                         |          U2 前           |  ZBAA_GND  |
+|  ZBAA_RMP  |   北向    |                     沿 G0/G1/G2 向西滑行                     |           G 前           |  ZBAA_TWR  |
+|  ZBAA_RMP  |   北向    |                      沿 K1/K2 向东滑行                       |           K 前           | ZBAA_E_TWR |
+|  ZBAA_RMP  |   南向    |           沿 T2 向西滑行，预计沿 A1 穿越 18L 跑道            |           H 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP | 北向/南向 |              预计进入 C 滑行道（含）以西区域的               |           C 前           | ZBAA_W_TWR |
+| ZBAA_W_RMP | 北向/南向 |                   沿 Route2 （Y7）向南滑行                   |          H2 前           |  ZBAA_GND  |
+| ZBAA_W_RMP |   北向    |        沿 Z3 向南滑行，预计进入 M7 以南的 F 滑行道的         | 在预计向东转向的道口前 ① |  ZBAA_TWR  |
+| ZBAA_W_RMP |   北向    | 沿 M7/F7/F4/Z0/F1/F0 向东滑行，预计进入 M7 以南的 F 滑行道的 |          Z3 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP |   北向    |                        沿 F 向南滑行                         |          M7 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP |   北向    |    沿 M 向东滑行/沿 F 向南滑行，预计沿 A9 穿越 36R 跑道的    |          A9 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP |   北向    |              W211-W213 机位的航空器准备好滑行后              |         原地移交         | ZBAA_W_TWR |
+| ZBAA_W_RMP |   南向    |               沿 F 向北滑行去往 18L 跑道离场的               |          W7 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP |   南向    |            沿 Z3 向南滑行，预计沿 F2 A0 穿越跑道             |          F2 前           |  ZBAA_TWR  |
+| ZBAA_W_RMP |   南向    |              沿 Route3/Route1 去往 18L 跑道离场              |       HP4（S4 前）       |  ZBAA_TWR  |
 
 > [!NOTE]
 >
