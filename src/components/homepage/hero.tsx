@@ -20,7 +20,7 @@ const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accen
 );
 
 export const Hero: React.FC = () => {
-  const enableNewNav = useNewNavigationFlag();
+  const [enableNewNav] = useNewNavigationFlag();
 
   const { data, error: statusError } = $api.useQuery("get", "/api/compat/online-status");
   const { data: events, error: eventsError } = $api.useQuery("get", "/api/events");
