@@ -407,6 +407,9 @@ msgstr "Computed station height"
 msgid "Connect to the VATSIM network to see your flight here."
 msgstr "Connect to the VATSIM network to see your flight here."
 
+msgid "Control"
+msgstr "Control"
+
 msgid "Controller"
 msgstr "Controller"
 
@@ -678,6 +681,9 @@ msgstr "Events"
 msgid "Events this week"
 msgstr "Events this week"
 
+msgid "Experimental features"
+msgstr "Experimental features"
+
 msgid "Failed to delete ATC position"
 msgstr "Failed to delete ATC position"
 
@@ -785,6 +791,9 @@ msgstr "Flight Service Station"
 
 msgid "Flow Management Position"
 msgstr "Flow Management Position"
+
+msgid "Fly"
+msgstr "Fly"
 
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
@@ -1073,6 +1082,9 @@ msgstr "Network Error"
 msgid "New ATC Application"
 msgstr "New ATC Application"
 
+msgid "New navigation"
+msgstr "New navigation"
+
 msgid "Next events"
 msgstr "Next events"
 
@@ -1180,6 +1192,9 @@ msgstr "Online sectors are highlighted. Select an area to view overlapping secto
 
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
 msgstr "Only staff can manage sheets. Changes are applied immediately after saving."
+
+msgid "Open navigation"
+msgstr "Open navigation"
 
 msgid "Operated By"
 msgstr "Operated By"
@@ -1839,14 +1854,14 @@ msgstr "Wake Category"
 msgid "Wake category mismatch"
 msgstr "Wake category mismatch"
 
-msgid "We need your help! Donate to VATPRC to help us to improve!"
-msgstr "We need your help! Donate to VATPRC to help us to improve!"
-
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 
 msgid "Weather"
 msgstr "Weather"
+
+msgid "What do you want to do today?"
+msgstr "What do you want to do today?"
 
 msgid "wingspan at arrival"
 msgstr "wingspan at arrival"

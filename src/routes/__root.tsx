@@ -34,7 +34,6 @@ interface ApplicationProps {
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const route = useRouterState();
-  const { i18n } = useLingui();
 
   if (route.location.pathname === "/division/api") {
     return children;
@@ -42,18 +41,10 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 
   return (
     <>
-      <AppHeader />
-      {i18n.locale === "zh-cn" && route.location.pathname === "/" && (
-        <a
-          className="block w-full bg-gray-100 py-4 text-center hover:bg-gray-50 dark:bg-gray-900 hover:dark:bg-gray-950"
-          href="https://community.vatprc.net/t/topic/10193"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Trans>We need your help! Donate to VATPRC to help us to improve!</Trans>
-        </a>
-      )}
-      <div className={route.location.pathname === "/" ? undefined : "pt-4"}>{children}</div>
+      <div className={route.location.pathname === "/" ? "grid" : undefined}>
+        <AppHeader overlayHero={route.location.pathname === "/"} />
+        <div className={route.location.pathname === "/" ? "col-start-1 row-start-1 min-w-0" : "pt-4"}>{children}</div>
+      </div>
       <AppFooter />
     </>
   );

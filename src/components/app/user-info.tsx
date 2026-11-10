@@ -1,4 +1,5 @@
 import { AssumeRoleModal } from "./assume-role-modal";
+import { ExperimentalFeatures } from "./experimental-features";
 import { RequireRole } from "@/components/require-role";
 import { $api, assumedRolesAtom, logout, redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
@@ -42,6 +43,7 @@ export const UserInfo = () => {
                 </Menu.Item>
               </Indicator>
             </RequireRole>
+            <ExperimentalFeatures />
             <Menu.Item onClick={onLogout}>
               <Trans>Logout</Trans>
             </Menu.Item>

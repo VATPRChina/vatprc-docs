@@ -17,6 +17,27 @@
   --color-vatprc-bright: #ff5a68;
 }
 
+.app-header[data-over-hero] .app-header-controls :is(.mantine-Button-root, .mantine-ActionIcon-root) {
+  color: white;
+  background: transparent;
+}
+
+.app-header[data-over-hero] .app-header-controls :is(.mantine-Button-root, .mantine-ActionIcon-root):hover {
+  background: rgb(255 255 255 / 15%);
+}
+
+.app-header[data-over-hero] .mantine-SegmentedControl-root {
+  background: rgb(0 0 0 / 20%);
+}
+
+.app-header[data-over-hero] .mantine-SegmentedControl-label {
+  color: white;
+}
+
+.app-header[data-over-hero] .mantine-SegmentedControl-indicator {
+  background: rgb(255 255 255 / 20%);
+}
+
 .nav-list-grid {
   @apply grid w-100 max-w-[90vw] gap-1 p-4 md:w-125 md:grid-cols-2 lg:w-150;
 }

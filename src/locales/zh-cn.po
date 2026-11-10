@@ -407,6 +407,9 @@ msgstr "计算站高"
 msgid "Connect to the VATSIM network to see your flight here."
 msgstr "连接到 VATSIM 网络后，你的航班将显示在这里。"
 
+msgid "Control"
+msgstr "管制"
+
 msgid "Controller"
 msgstr "管制员"
 
@@ -678,6 +681,9 @@ msgstr "活动"
 msgid "Events this week"
 msgstr "本周活动"
 
+msgid "Experimental features"
+msgstr "实验性功能"
+
 msgid "Failed to delete ATC position"
 msgstr "删除管制席位失败"
 
@@ -785,6 +791,9 @@ msgstr "飞服"
 
 msgid "Flow Management Position"
 msgstr "流量控制"
+
+msgid "Fly"
+msgstr "飞行"
 
 msgid "For technical limitations, the boundaries shown on the map may be outdated or simplified. Please adhere to local controllers' instructions when flying."
 msgstr "由于技术限制，地图上显示的边界可能过时或者被简化。飞行时请遵守本地管制员指令。"
@@ -1073,6 +1082,9 @@ msgstr "网络故障"
 msgid "New ATC Application"
 msgstr "递交管制员申请"
 
+msgid "New navigation"
+msgstr "新版导航"
+
 msgid "Next events"
 msgstr "下一批活动"
 
@@ -1180,6 +1192,9 @@ msgstr "已上线的扇区将高亮显示。选择区域可查看重叠扇区。
 
 msgid "Only staff can manage sheets. Changes are applied immediately after saving."
 msgstr "只有职员可以管理表单。保存后立即生效。"
+
+msgid "Open navigation"
+msgstr "打开导航"
 
 msgid "Operated By"
 msgstr "操作人"
@@ -1839,14 +1854,14 @@ msgstr "尾流类别"
 msgid "Wake category mismatch"
 msgstr "尾流类别不匹配"
 
-msgid "We need your help! Donate to VATPRC to help us to improve!"
-msgstr "我们需要你的帮助！向 VATPRC 捐款来让我们变得更好吧！"
-
 msgid "We regret to inform you that your application has been rejected. Please check the remarks for more details."
 msgstr "很遗憾地通知您，您的申请已被拒绝。详情请查看备注。"
 
 msgid "Weather"
 msgstr "天气"
+
+msgid "What do you want to do today?"
+msgstr "今天想要做什么？"
 
 msgid "wingspan at arrival"
 msgstr "到达机场翼展限制"
