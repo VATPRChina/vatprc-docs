@@ -1,15 +1,12 @@
+import { DateTime } from "../event/datetime";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
-import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Skeleton } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
-import { format, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
 import React from "react";
-import { TbArrowRight, TbChevronDown, TbChevronUp } from "react-icons/tb";
-
-const MAX_VISIBLE_STRIPS = 5;
+import { TbArrowRight } from "react-icons/tb";
 
 const ControllerStrip: React.FC<{
   callsign: string;
@@ -20,64 +17,47 @@ const ControllerStrip: React.FC<{
 }> = ({ callsign, name, frequency, eventTitle, schedule }) => (
   <div
     className={cn(
-      "flex flex-wrap items-baseline gap-1 border-b border-black/15 px-4 py-3 font-mono text-base last:border-b-0 dark:border-white/20",
-      "border-l-3",
+      "flex flex-col gap-1 border-l-2 p-4",
       schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
     )}
   >
-    <span className="min-w-28 font-bold">{callsign}</span>
-    <span className="min-w-20 truncate text-gray-700 dark:text-gray-300">
-      {(schedule ? eventTitle : frequency) ?? "--"}
-    </span>
-    <span className="flex-1 text-gray-700 dark:text-gray-300">{name}</span>
+    <p className="space-x-2">
+      <span className="font-mono font-bold">{callsign}</span>
+      {frequency && <span className="underline underline-offset-4">{frequency}</span>}
+      <span>{name}</span>
+    </p>
+    {schedule && eventTitle && <p className="text-dimmed">{schedule && eventTitle}</p>}
     {schedule && (
-      <span className="text-sm text-gray-600 dark:text-gray-400">
-        {format(schedule[0], "MM-dd HHmm", { in: utc })}Z–{format(schedule[1], "HHmm", { in: utc })}Z
-      </span>
+      <div className="flex items-center gap-1 text-sm">
+        <DateTime>{schedule[0]}</DateTime>
+        <TbArrowRight size={12} />
+        <DateTime>{schedule[1]}</DateTime>
+      </div>
     )}
   </div>
 );
 
 interface StripListProps {
-  strips: React.ReactElement[];
+  children: React.ReactElement[];
   empty: React.ReactNode;
   isLoading?: boolean;
 }
-const StripList: React.FC<StripListProps> = ({ strips, empty, isLoading }) => {
-  const { t } = useLingui();
-  const [opened, { toggle }] = useDisclosure(false);
 
+const StripList: React.FC<StripListProps> = ({ children, empty, isLoading }) => {
   return (
-    <div className="border border-black/15 dark:border-white/20">
-      {isLoading && (
-        <>
-          {Array(5)
-            .fill(0)
-            .map((_, i) => (
-              <div key={i} className="border-b border-black/15 px-4 py-3 last:border-b-0 dark:border-white/20">
-                <Skeleton width="100%" height={24} />
-              </div>
-            ))}
-        </>
-      )}
-      {!isLoading && strips.length === 0 && (
+    <div className="divide-y border border-black/15 dark:border-white/20">
+      {isLoading &&
+        Array(5)
+          .fill(0)
+          .map((_, i) => (
+            <div key={i} className="border-b border-black/15 px-4 py-3 last:border-b-0 dark:border-white/20">
+              <Skeleton width="100%" height={24} />
+            </div>
+          ))}
+      {!isLoading && children.length === 0 && (
         <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>
       )}
-      {!isLoading && strips.slice(0, MAX_VISIBLE_STRIPS)}
-      {strips.length > MAX_VISIBLE_STRIPS && (
-        <>
-          {opened && strips.slice(MAX_VISIBLE_STRIPS)}
-          <button
-            type="button"
-            aria-label={opened ? t`Show fewer controllers` : t`Show all controllers`}
-            aria-expanded={opened}
-            onClick={toggle}
-            className="flex w-full items-center justify-center border-t border-black/15 py-1.5 text-gray-600 hover:bg-gray-50 dark:border-white/20 dark:text-gray-300 dark:hover:bg-gray-900"
-          >
-            {opened ? <TbChevronUp size={20} /> : <TbChevronDown size={20} />}
-          </button>
-        </>
-      )}
+      {children}
     </div>
   );
 };
@@ -120,22 +100,18 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Online Controllers</Trans>
           </h3>
-          <StripList
-            empty={<Trans>There is currently no online ATC.</Trans>}
-            isLoading={isLoading}
-            strips={online.map((c) => (
+          <StripList empty={<Trans>There is currently no online ATC.</Trans>} isLoading={isLoading}>
+            {online.map((c) => (
               <ControllerStrip key={c.callsign} callsign={c.callsign} name={c.name} frequency={c.frequency} />
             ))}
-          />
+          </StripList>
         </div>
         <div>
           <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
             <Trans>Booked Controllers</Trans>
           </h3>
-          <StripList
-            empty={<Trans>No upcoming ATC booking.</Trans>}
-            isLoading={areBookingsLoading}
-            strips={booked.map((c) => {
+          <StripList empty={<Trans>No upcoming ATC booking.</Trans>} isLoading={areBookingsLoading}>
+            {booked.map((c) => {
               const schedule: [Date, Date] = [parseISO(c.start_at), parseISO(c.end_at)];
               const event = c.event_position?.event;
               const eventTitle = event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
@@ -149,7 +125,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
                 />
               );
             })}
-          />
+          </StripList>
         </div>
       </div>
     </section>
