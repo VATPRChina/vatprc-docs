@@ -1433,12 +1433,6 @@ msgstr "表单列表"
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
 
-msgid "Show all controllers"
-msgstr "显示全部管制员"
-
-msgid "Show fewer controllers"
-msgstr "收起管制员"
-
 msgid "Show less"
 msgstr "收起"
 
@@ -1657,6 +1651,9 @@ msgstr "本地图仅供模拟飞行使用。地图上的边界仅代表模拟飞
 
 msgid "This page is not available in English."
 msgstr "本页面仅支持简体中文。"
+
+msgid "This Week"
+msgstr "本周"
 
 msgid "Tier 2"
 msgstr "Tier 2"

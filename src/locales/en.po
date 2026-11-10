@@ -1433,12 +1433,6 @@ msgstr "Sheets"
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
 
-msgid "Show all controllers"
-msgstr "Show all controllers"
-
-msgid "Show fewer controllers"
-msgstr "Show fewer controllers"
-
 msgid "Show less"
 msgstr "Show less"
 
@@ -1657,6 +1651,9 @@ msgstr "This map is intended for flight simulation use only. The boundaries show
 
 msgid "This page is not available in English."
 msgstr "This page is not available in English."
+
+msgid "This Week"
+msgstr "This Week"
 
 msgid "Tier 2"
 msgstr "Tier 2"
