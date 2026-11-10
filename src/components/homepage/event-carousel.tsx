@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Carousel } from "@mantine/carousel";
-import { Alert, Button, Skeleton } from "@mantine/core";
+import { Alert, Badge, Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -81,7 +81,6 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
         ref={ref}
         className={cn(
           "flex h-full flex-col overflow-hidden border transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:group-hover:shadow-black/70",
-          thisWeek ? "border-2 border-emerald-600 dark:border-emerald-400" : "border-gray-300 dark:border-gray-600",
         )}
       >
         {event.image_url ? (
@@ -93,9 +92,16 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
         )}
         <div className="flex flex-col gap-1 px-4 py-3">
           <span className="truncate text-lg font-medium">{title}</span>
-          <span className="font-mono text-base text-gray-700 dark:text-gray-300">
-            {format(start, "MM-dd HHmm", { in: utc })}Z–{format(end, "HHmm", { in: utc })}Z
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-base text-gray-700 dark:text-gray-300">
+              {format(start, "MM-dd HHmm", { in: utc })}Z–{format(end, "HHmm", { in: utc })}Z
+            </span>
+            {thisWeek && (
+              <Badge variant="light">
+                <Trans>This Week</Trans>
+              </Badge>
+            )}
+          </div>
           <BookingCount eventId={event.id} />
         </div>
       </div>
@@ -154,7 +160,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
           emblaOptions={{ align: "start" }}
           previousControlProps={{ "aria-label": t`Previous events` }}
           nextControlProps={{ "aria-label": t`Next events` }}
-          classNames={{ viewport: "px-14" }}
+          classNames={{ root: "-mx-16", viewport: "px-16" }}
           styles={{ viewport: { overflow: "visible", clipPath: "inset(-100rem 0)" } }}
         >
           {upcoming.map((e) => (
