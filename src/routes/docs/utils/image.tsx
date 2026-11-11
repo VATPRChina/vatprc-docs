@@ -1,6 +1,6 @@
+import { Button, FileInput } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button, FileInput } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 

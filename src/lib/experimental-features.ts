@@ -7,4 +7,4 @@ const storage = withStorageValidator((value): value is boolean => typeof value =
 
 export const newNavigationAtom = atomWithStorage("vatprc-experimental-new-navigation", false, storage);
 
-export const useNewNavigationFlag = () => useAtom(newNavigationAtom);
+export const useNewNavigationFlag = () => useAtom(newNavigationAtom)[0];

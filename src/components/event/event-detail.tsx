@@ -1,9 +1,9 @@
 import { AtcBookingWarning } from "./atc-booking-warning";
 import { DateTime } from "./datetime";
+import { Alert, Anchor } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Anchor } from "@mantine/core";
 import { FC } from "react";
 import { TbArrowRight } from "react-icons/tb";
 

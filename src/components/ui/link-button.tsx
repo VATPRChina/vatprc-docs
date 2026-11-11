@@ -1,16 +1,16 @@
-import { Button, ButtonProps, ElementProps } from "@mantine/core";
+import { Button, ButtonProps, ElementProps } from "@/components/ui";
 import { createLink, LinkComponent } from "@tanstack/react-router";
 import * as React from "react";
 
-interface MantineAnchorProps extends ButtonProps, ElementProps<"a", keyof ButtonProps> {}
+interface HeroAnchorProps extends ButtonProps, ElementProps<"a", keyof ButtonProps> {}
 
-const MantineLinkComponent = React.forwardRef<HTMLAnchorElement, MantineAnchorProps>((props, ref) => {
+const HeroLinkComponent = React.forwardRef<HTMLAnchorElement, HeroAnchorProps>((props, ref) => {
   return <Button component="a" ref={ref} {...props} />;
 });
-MantineLinkComponent.displayName = "MantineLinkComponent";
+HeroLinkComponent.displayName = "HeroLinkComponent";
 
-const CreatedLinkComponent = createLink(MantineLinkComponent);
+const CreatedLinkComponent = createLink(HeroLinkComponent);
 
-export const LinkButton: LinkComponent<typeof MantineLinkComponent> = (props) => {
+export const LinkButton: LinkComponent<typeof HeroLinkComponent> = (props) => {
   return <CreatedLinkComponent preload="intent" {...props} />;
 };

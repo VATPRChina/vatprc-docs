@@ -1,8 +1,8 @@
+import { Alert, Button, Card, Select, TextInput, Textarea } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Card, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";

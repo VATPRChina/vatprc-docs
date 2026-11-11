@@ -1,8 +1,8 @@
+import { Alert, Button, Checkbox, Modal, Select, Textarea, TextInput } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Checkbox, Modal, Select, Textarea, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 

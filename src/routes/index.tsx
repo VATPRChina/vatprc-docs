@@ -2,8 +2,8 @@ import { ControllersBoard } from "@/components/homepage/controllers-board";
 import { EventCarousel } from "@/components/homepage/event-carousel";
 import { Hero } from "@/components/homepage/hero";
 import { NotamBoard } from "@/components/homepage/notam-board";
+import { Button } from "@/components/ui";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
@@ -15,7 +15,7 @@ function RouteComponent() {
   return (
     <div className="flex w-full flex-col">
       <Hero />
-      <div className="container mx-auto flex w-full flex-col gap-8 px-4 py-16">
+      <div className="container mx-auto mt-8 flex w-full flex-col gap-8">
         <EventCarousel />
         <NotamBoard />
         <ControllersBoard />

@@ -1,8 +1,8 @@
 import { PROBLEM_LABELS, ProblemDetails, VALIDATION_STATUS, VALIDATOR_NAMES } from "./message";
+import { Popover, Button, Badge, Alert, Anchor } from "@/components/ui";
 import { components } from "@/lib/api";
 import { matchesValidationField } from "@/lib/validation-field";
 import { Trans } from "@lingui/react/macro";
-import { Popover, Tooltip, Badge, Alert, Anchor } from "@mantine/core";
 import { createContext, FC, useContext } from "react";
 import { TbAlertSquareRounded } from "react-icons/tb";
 
@@ -14,11 +14,11 @@ function ValidationTag({ result }: { result: components["schemas"]["ValidatorExe
   return (
     <Popover withArrow>
       <Popover.Target>
-        <Tooltip label={validatorName}>
-          <Badge component="button" type="button" variant="filled" color={color} size="sm" radius="xs">
+        <Button variant="subtle" size="xs" aria-label={result.id}>
+          <Badge variant="filled" color={color} size="sm" radius="xs">
             {short}
           </Badge>
-        </Tooltip>
+        </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <div className="flex flex-col gap-2">

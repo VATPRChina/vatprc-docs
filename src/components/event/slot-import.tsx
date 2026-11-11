@@ -1,16 +1,16 @@
 import { DateTime } from "./datetime";
+import { ActionIcon, Alert, Button, Modal, Pill, Table, Text } from "@/components/ui";
+import { Dropzone, FileWithPath } from "@/components/ui/dropzone";
 import { useUser } from "@/lib/client";
 import { $api, client } from "@/lib/client/client";
+import { useDisclosure } from "@/lib/hooks";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
-import { Dropzone, FileWithPath } from "@mantine/dropzone";
-import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { parse } from "date-fns";
 import { unique } from "radash";
 import { useState } from "react";
-import { TbFileImport, TbUpload, TbX, TbFileTypeCsv } from "react-icons/tb";
+import { TbFileImport, TbFileTypeCsv } from "react-icons/tb";
 
 interface Slot {
   airspace: string;
@@ -24,7 +24,6 @@ interface Slot {
 export const ImportSlot = ({ eventId }: { eventId: string }) => {
   const { t } = useLingui();
   const [opened, { toggle, close }] = useDisclosure(false);
-  const theme = useMantineTheme();
   const user = useUser();
   const queryClient = useQueryClient();
 
@@ -126,14 +125,8 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
           </Text>
           <Dropzone onDrop={(files) => void onDrop(files)}>
             <div className="pointer-events-none flex flex-wrap items-center justify-center gap-2">
-              <Dropzone.Accept>
-                <TbUpload color={theme.colors.green[7]} size={52} strokeWidth={1.5} />
-              </Dropzone.Accept>
-              <Dropzone.Reject>
-                <TbX color={theme.colors.red[7]} size={52} strokeWidth={1.5} />
-              </Dropzone.Reject>
               <Dropzone.Idle>
-                <TbFileTypeCsv color={theme.colors.gray[7]} size={52} strokeWidth={1.5} />
+                <TbFileTypeCsv color={"var(--muted)"} size={52} strokeWidth={1.5} />
               </Dropzone.Idle>
 
               <Text size="xl" inline>

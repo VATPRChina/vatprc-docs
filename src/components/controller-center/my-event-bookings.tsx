@@ -1,7 +1,7 @@
+import { Alert } from "@/components/ui";
 import { $api, useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { useQueries } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";

@@ -1,12 +1,12 @@
 import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
+import { ActionIcon, Alert, Button, Image, Modal, TextInput, Textarea } from "@/components/ui";
+import { Dropzone, IMAGE_MIME_TYPE } from "@/components/ui/dropzone";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { addHours, formatISO, setMinutes, setSeconds } from "date-fns";

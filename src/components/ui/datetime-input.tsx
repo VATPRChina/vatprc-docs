@@ -1,31 +1,33 @@
 import { DateTime } from "../event/datetime";
-import { utc } from "@date-fns/utc";
-import { DateTimePicker, DateTimePickerProps, getTimeRange } from "@mantine/dates";
-import { format, formatISO, parse } from "date-fns";
-import { FC } from "react";
+import { DateTimePickerProps } from "./date-input";
+import { TextInput } from "./inputs";
+import { useLingui } from "@lingui/react/macro";
 
-export const DateTimeInput: FC<DateTimePickerProps> = ({ value, valueFormat, onChange, timePickerProps, ...props }) => {
-  const valueUtc = value && parse(format(value, "yyyy-MM-dd HH:mm", { in: utc }), "yyyy-MM-dd HH:mm", new Date());
-  const onChangeUtc = (value: string | null) =>
-    onChange?.(value && formatISO(parse(value, "yyyy-MM-dd HH:mm:ss", Date.now(), { in: utc })));
-
+// The control edits UTC wall time; the API always receives an explicit UTC instant.
+export function DateTimeInput({ value, onChange, clearable, ...props }: DateTimePickerProps) {
+  const { t } = useLingui();
+  const date = value ? new Date(value) : null;
+  const display = date && Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 16) : "";
   return (
     <div>
-      <DateTimePicker
-        value={valueUtc}
-        valueFormat={valueFormat ?? "YYYY-MM-DD HH:mm[Z]"}
-        onChange={onChangeUtc}
-        timePickerProps={
-          timePickerProps ?? {
-            withDropdown: true,
-            presets: getTimeRange({ startTime: "00:00", endTime: "23:00", interval: "01:00" }),
-          }
-        }
+      <TextInput
         {...props}
+        rightSection={
+          clearable && value ? (
+            <button type="button" aria-label={t`Clear date`} onClick={() => onChange?.(null)}>
+              ×
+            </button>
+          ) : undefined
+        }
+        type="datetime-local"
+        value={display}
+        onChange={(event) =>
+          onChange?.(event.target.value ? new Date(`${event.target.value}:00Z`).toISOString() : null)
+        }
       />
       <span className="text-xs">
         <DateTime localFirst>{value}</DateTime>
       </span>
     </div>
   );
-};
+}

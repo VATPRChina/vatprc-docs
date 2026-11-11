@@ -1,7 +1,7 @@
+import { Button, Checkbox, Modal } from "@/components/ui";
 import { assumedRolesAtom, UserRole } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Checkbox, Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import { FC, useEffect, useState } from "react";
 

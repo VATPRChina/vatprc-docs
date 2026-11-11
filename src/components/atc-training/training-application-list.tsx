@@ -3,13 +3,13 @@ import { RichTable, RichTableFeatures } from "../table";
 import { TrainingApplicationCreateModal } from "./training-application-create";
 import { TrainingApplicationDeleteModal } from "./training-application-delete";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
+import { Alert, Badge } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { renderWithMap } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FC } from "react";
 

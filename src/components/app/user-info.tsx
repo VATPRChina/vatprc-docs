@@ -1,10 +1,10 @@
 import { AssumeRoleModal } from "./assume-role-modal";
 import { ExperimentalFeatures } from "./experimental-features";
 import { RequireRole } from "@/components/require-role";
+import { Button, Indicator, Menu } from "@/components/ui";
 import { $api, assumedRolesAtom, logout, redirectToLogin } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { Trans } from "@lingui/react/macro";
-import { Button, Indicator, Menu } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";

@@ -1,11 +1,11 @@
 import { TrainingDetail } from "./training-detail";
 import { TrainingApplicationCreateModal } from "@/components/atc-training/training-application-create";
+import { Alert, Badge, Skeleton } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Skeleton } from "@mantine/core";
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbArrowLeft } from "react-icons/tb";

@@ -1,10 +1,10 @@
+import { SegmentedControl, useColorScheme, VisuallyHidden } from "@/components/ui";
 import { isColorScheme } from "@/lib/settings";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { SegmentedControl, useMantineColorScheme, VisuallyHidden } from "@mantine/core";
 import { TbDeviceDesktop, TbMoon, TbSun } from "react-icons/tb";
 
 export function ModeToggle() {
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   return (
     <SegmentedControl
@@ -51,7 +51,7 @@ export function ModeToggle() {
 }
 
 export function ModeToggleSegmented() {
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
   const { t } = useLingui();
 
   return (

@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where([data-mantine-color-scheme=dark], [data-mantine-color-scheme=dark] *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @layer base {
   * {
     @apply border-gray-200;
@@ -10,31 +11,33 @@
 }
 
 @theme {
-  --color-dimmed: var(--mantine-color-dimmed);
-  --font-sans: var(--mantine-font-family);
-  --font-mono: var(--mantine-font-family-monospace);
+  --color-dimmed: var(--muted);
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", "PingFang SC",
+    "Microsoft YaHei", "Noto Sans CJK SC", monospace;
   --color-vatprc: #c8102e;
   --color-vatprc-bright: #ff5a68;
 }
 
-.app-header[data-over-hero] .app-header-controls :is(.mantine-Button-root, .mantine-ActionIcon-root) {
+.app-header[data-over-hero] .app-header-controls .app-button {
   color: white;
   background: transparent;
 }
 
-.app-header[data-over-hero] .app-header-controls :is(.mantine-Button-root, .mantine-ActionIcon-root):hover {
+.app-header[data-over-hero] .app-header-controls .app-button:hover {
   background: rgb(255 255 255 / 15%);
 }
 
-.app-header[data-over-hero] .mantine-SegmentedControl-root {
+.app-header[data-over-hero] .app-segments {
   background: rgb(0 0 0 / 20%);
 }
 
-.app-header[data-over-hero] .mantine-SegmentedControl-label {
+.app-header[data-over-hero] .app-segments button {
   color: white;
 }
 
-.app-header[data-over-hero] .mantine-SegmentedControl-indicator {
+.app-header[data-over-hero] .app-segments [data-selected] {
   background: rgb(255 255 255 / 20%);
 }
 
@@ -66,7 +69,153 @@
   @apply prose-code:before:content-none prose-code:after:content-none;
 }
 
-.mantine-ActionIcon-root svg {
+.app-icon-button svg {
   width: 60%;
   height: 60%;
+}
+
+/*
+ * HeroUI Theme Customization
+ * Add this to your global.css after importing @heroui/styles
+ * Only includes variables users need to customize
+ * @see https://heroui.com/docs/react/getting-started/theming
+ */
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  /* Theme Colors (Light Mode) */
+  --accent: oklch(53.03% 0.2074 22.32);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(97.02% 0.0015 22.32);
+  --border: oklch(90% 0.0015 22.32);
+  --danger: oklch(65.32% 0.2335 357.96);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(94% 0.0015 22.32);
+  --default-foreground: oklch(21.03% 0.0059 22.32);
+  --field-background: oklch(100% 0.0008 22.32);
+  --field-border: transparent;
+  --field-foreground: oklch(21.03% 0.0015 22.32);
+  --field-placeholder: oklch(55.17% 0.003 22.32);
+  --focus: oklch(53.03% 0.2074 22.32);
+  --foreground: oklch(21.03% 0.0015 22.32);
+  --muted: oklch(55.17% 0.003 22.32);
+  --overlay: oklch(100% 0.0004 22.32);
+  --overlay-foreground: oklch(21.03% 0.0015 22.32);
+  --scrollbar: oklch(87.1% 0.0015 22.32);
+  --segment: oklch(100% 0.0015 22.32);
+  --segment-foreground: oklch(21.03% 0.0015 22.32);
+  --separator: oklch(92% 0.0015 22.32);
+  --success: oklch(73.29% 0.1941 123.03);
+  --success-foreground: oklch(21.03% 0.0059 123.03);
+  --surface: oklch(100% 0.0008 22.32);
+  --surface-foreground: oklch(21.03% 0.0015 22.32);
+  --surface-secondary: oklch(95.24% 0.0012 22.32);
+  --surface-secondary-foreground: oklch(21.03% 0.0015 22.32);
+  --surface-tertiary: oklch(93.73% 0.0012 22.32);
+  --surface-tertiary-foreground: oklch(21.03% 0.0015 22.32);
+  --warning: oklch(78.19% 0.159 44.55);
+  --warning-foreground: oklch(21.03% 0.0059 44.55);
+
+  /* Border Radius */
+  --radius: 0;
+  --field-radius: 0;
+
+  /* Font Family */
+  /* Make sure to load Figtree font in your app */
+  --font-sans: var(--font-figtree);
+}
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Theme Colors (Dark Mode) */
+  --accent: oklch(53.03% 0.2074 22.32);
+  --accent-foreground: oklch(99.11% 0 0);
+  --background: oklch(12% 0.0015 22.32);
+  --border: oklch(28% 0.0015 22.32);
+  --danger: oklch(59.4% 0.1973 356.85);
+  --danger-foreground: oklch(99.11% 0 0);
+  --default: oklch(27.4% 0.0015 22.32);
+  --default-foreground: oklch(99.11% 0 0);
+  --field-background: oklch(21.03% 0.003 22.32);
+  --field-border: transparent;
+  --field-foreground: oklch(99.11% 0.0015 22.32);
+  --field-placeholder: oklch(70.5% 0.003 22.32);
+  --focus: oklch(53.03% 0.2074 22.32);
+  --foreground: oklch(99.11% 0.0015 22.32);
+  --muted: oklch(70.5% 0.003 22.32);
+  --overlay: oklch(21.03% 0.003 22.32);
+  --overlay-foreground: oklch(99.11% 0.0015 22.32);
+  --scrollbar: oklch(70.5% 0.0015 22.32);
+  --segment: oklch(39.64% 0.0015 22.32);
+  --segment-foreground: oklch(99.11% 0.0015 22.32);
+  --separator: oklch(25% 0.0015 22.32);
+  --success: oklch(73.29% 0.1941 123.03);
+  --success-foreground: oklch(21.03% 0.0059 123.03);
+  --surface: oklch(21.03% 0.003 22.32);
+  --surface-foreground: oklch(99.11% 0.0015 22.32);
+  --surface-secondary: oklch(25.7% 0.0023 22.32);
+  --surface-secondary-foreground: oklch(99.11% 0.0015 22.32);
+  --surface-tertiary: oklch(27.21% 0.0023 22.32);
+  --surface-tertiary-foreground: oklch(99.11% 0.0015 22.32);
+  --warning: oklch(82.03% 0.1392 48.56);
+  --warning-foreground: oklch(21.03% 0.0059 48.56);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
+  }
+}
+
+/* Required markers are separate from the field's accessible name. */
+.label::after {
+  content: none !important;
+}
+/* Let the native checkbox receive pointer events beneath its visual control. */
+.checkbox__control,
+.radio__control {
+  pointer-events: none;
+}
+
+/* Align the native checkbox hit area with the visible label and control. */
+.checkbox__content {
+  position: relative;
+}
+.checkbox__content > span:first-child {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  clip: auto !important;
+  clip-path: none !important;
+  z-index: 1;
+}
+.checkbox__content input[type="checkbox"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
 }

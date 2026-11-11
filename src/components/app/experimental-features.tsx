@@ -1,6 +1,6 @@
+import { Menu } from "@/components/ui";
 import { newNavigationAtom } from "@/lib/experimental-features";
 import { Trans } from "@lingui/react/macro";
-import { Menu } from "@mantine/core";
 import { useAtom } from "jotai";
 import { TbCheck } from "react-icons/tb";
 

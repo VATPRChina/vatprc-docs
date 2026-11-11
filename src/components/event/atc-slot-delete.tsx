@@ -1,8 +1,8 @@
 import { RequireRole } from "../require-role";
 import { ConfirmButton } from "../ui/confirm-button";
+import { Alert } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 

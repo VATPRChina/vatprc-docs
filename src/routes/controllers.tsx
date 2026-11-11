@@ -3,11 +3,11 @@ import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ControllerCenterLoginPlaceholder } from "@/components/controller-center/login-placeholder";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { RequireRole } from "@/components/require-role";
+import { Alert, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers")({
@@ -88,45 +88,62 @@ function RouteComponent() {
   }
 
   return (
-    <div className="container mx-auto flex flex-col gap-4">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h1 className="text-3xl font-medium">
-          <Trans>Controller Center</Trans>
-        </h1>
-        {isController && <IdentityChip />}
-      </div>
-      {(sessionError ?? statusError) && (
-        <Alert color="red" title={(sessionError ?? statusError)?.title}>
-          {(sessionError ?? statusError)?.detail}
-        </Alert>
-      )}
-      {showTabs && (
-        <div className="flex flex-wrap items-baseline gap-2">
-          <CenterTabLink to="/controllers" active={tab === "mine"}>
-            <Trans>My Trainings</Trans>
-          </CenterTabLink>
-          <RequireRole role={"controller-training-mentor"}>
-            <CenterTabLink to="/controllers/trainings" active={tab === "trainings"}>
-              <Trans>Training Management</Trans>
-            </CenterTabLink>
-          </RequireRole>
-          <RequireRole role="controller-training-director-assistant">
-            <CenterTabLink to="/controllers/applications" active={tab === "applications"}>
-              <Trans>Application Review</Trans>
-            </CenterTabLink>
-          </RequireRole>
+    <>
+      <header
+        className={cn(
+          "app-header sticky top-[52px] z-50 w-full border-b bg-white px-4 py-2 transition-colors duration-200 sm:px-8 dark:bg-gray-950",
+        )}
+      >
+        <div className="app-header-controls container mx-auto flex flex-row items-center gap-4">
+          <h1 className="font-bold">
+            <Trans>ATC Center</Trans>
+          </h1>
         </div>
-      )}
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
-        <div className="flex min-w-0 flex-col gap-4">
-          <CenterRolesProvider value={{ userId: user?.id, isController, canManageTrainings, canReviewApplications }}>
-            <Outlet />
-          </CenterRolesProvider>
+      </header>
+      <div className="container mx-auto flex flex-col gap-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h1 className="text-3xl font-medium">
+            <Trans>Controller Center</Trans>
+          </h1>
+          {isController && <IdentityChip />}
         </div>
-        <aside className="xl:sticky xl:top-20 xl:self-start">
-          <ResourceGrid compact publicOnly={!hasInternalRole} />
-        </aside>
+        {(sessionError ?? statusError) && (
+          <Alert color="red" title={(sessionError ?? statusError)?.title}>
+            {(sessionError ?? statusError)?.detail}
+          </Alert>
+        )}
+        {showTabs && (
+          <div className="flex flex-wrap items-baseline gap-2">
+            <CenterTabLink to="/controllers" active={tab === "mine"}>
+              <Trans>My Trainings</Trans>
+            </CenterTabLink>
+            <RequireRole role={"controller-training-mentor"}>
+              <CenterTabLink to="/controllers/trainings" active={tab === "trainings"}>
+                <Trans>Training Management</Trans>
+              </CenterTabLink>
+            </RequireRole>
+            <RequireRole role="controller-training-director-assistant">
+              <CenterTabLink to="/controllers/applications" active={tab === "applications"}>
+                <Trans>Application Review</Trans>
+              </CenterTabLink>
+            </RequireRole>
+          </div>
+        )}
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
+          <div className="flex min-w-0 flex-col gap-4">
+            <CenterRolesProvider value={{ userId: user?.id, isController, canManageTrainings, canReviewApplications }}>
+              <Outlet />
+            </CenterRolesProvider>
+          </div>
+          <aside className="xl:sticky xl:top-20 xl:self-start">
+            <ResourceGrid compact publicOnly={!hasInternalRole} />
+            <ResourceGrid compact publicOnly={!hasInternalRole} />
+            <ResourceGrid compact publicOnly={!hasInternalRole} />
+            <ResourceGrid compact publicOnly={!hasInternalRole} />
+            <ResourceGrid compact publicOnly={!hasInternalRole} />
+          </aside>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,10 +1,11 @@
+import { Alert, Badge, Button, Skeleton } from "@/components/ui";
+import { Carousel } from "@/components/ui/carousel";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
+import { Card } from "@heroui/react";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Carousel } from "@mantine/carousel";
-import { Alert, Badge, Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -77,10 +78,10 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
-      <div
+      <Card
         ref={ref}
         className={cn(
-          "flex h-full flex-col overflow-hidden border transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:group-hover:shadow-black/70",
+          "flex h-full flex-col overflow-hidden border px-0 pt-0 transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:group-hover:shadow-black/70",
         )}
       >
         {event.image_url ? (
@@ -90,7 +91,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
             <TbPlaneDeparture size={36} />
           </div>
         )}
-        <div className="flex flex-col gap-1 px-4 py-3">
+        <div className="mx-4 flex flex-col gap-1">
           <span className="truncate text-lg font-medium">{title}</span>
           <div className="flex items-center gap-2">
             <span className="font-mono text-base text-gray-700 dark:text-gray-300">
@@ -104,7 +105,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
           </div>
           <BookingCount eventId={event.id} />
         </div>
-      </div>
+      </Card>
     </Link>
   );
 };

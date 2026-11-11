@@ -1,9 +1,9 @@
 import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
 import { DocList } from "@/components/doc/doc-list";
+import { Alert } from "@/components/ui";
 import { getAllDocuments } from "@/lib/doc";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_doc/controller/loa")({

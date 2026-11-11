@@ -1,13 +1,13 @@
 import { DateTime } from "../event/datetime";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTimeInput } from "../ui/datetime-input";
+import { Alert, Anchor, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Anchor, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";

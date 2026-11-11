@@ -1,7 +1,7 @@
+import { Alert, Button, Skeleton } from "@/components/ui";
 import { COMMUNITY_ENDPOINT } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import React from "react";

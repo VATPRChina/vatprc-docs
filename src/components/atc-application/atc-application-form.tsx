@@ -1,8 +1,8 @@
 import { Sheet } from "../sheet";
+import { Alert, Skeleton, Checkbox, Card } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton, Checkbox, Card } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { ComponentProps, FC, useState } from "react";

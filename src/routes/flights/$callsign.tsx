@@ -1,9 +1,9 @@
 import { FlightDetails } from "@/components/flight/flight-details";
 import { FlightRoute } from "@/components/flight/flight-route";
 import { RequireRole } from "@/components/require-role";
+import { Alert, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbPlaneInflight } from "react-icons/tb";
 

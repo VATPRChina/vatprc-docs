@@ -1,7 +1,7 @@
+import { ActionIcon } from "@/components/ui";
 import { getLocalPathname } from "@/lib/i18n";
 import { LANGUAGE_COOKIE_KEY, setCookie } from "@/lib/settings";
 import { useLingui } from "@lingui/react/macro";
-import { ActionIcon } from "@mantine/core";
 import { TbLanguage } from "react-icons/tb";
 
 export const LanguageToggle = () => {

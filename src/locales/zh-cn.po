@@ -383,8 +383,20 @@ msgstr "中文说明"
 msgid "Chinese name"
 msgstr "中文名称"
 
+msgid "Choose file"
+msgstr "选择文件"
+
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Clear date"
+msgstr "清除日期"
+
+msgid "Clear selection"
+msgstr "清除选择"
 
 msgid "Clear the selection to show all enabled radars."
 msgstr "清除选择可显示所有已启用雷达的覆盖范围。"
@@ -752,6 +764,10 @@ msgstr "字段列表"
 
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "文件格式：CSV，内容为 起飞机场, 起飞时间 (yyyy-MM-dd HH:mm), 到达机场, 到达时间 (yyyy-MM-dd HH:mm), 呼号, 机型"
+
+#. placeholder {0}: header.column.id
+msgid "Filter {columnId}"
+msgstr "筛选 {columnId}"
 
 msgid "Filter sectors by controller type"
 msgstr "按管制类型筛选扇区"
@@ -1121,6 +1137,9 @@ msgstr "没有权限"
 msgid "No region loaded"
 msgstr "尚未加载区域"
 
+msgid "No results"
+msgstr "无结果"
+
 msgid "No results."
 msgstr "无结果。"
 
@@ -1417,6 +1436,9 @@ msgstr "查看所有活动"
 
 msgid "Segment {segmentNumber}"
 msgstr "分段 {segmentNumber}"
+
+msgid "Select"
+msgstr "选择"
 
 msgid "Select {callsign}"
 msgstr "选择 {callsign}"
@@ -1752,6 +1774,9 @@ msgstr "未知航段或定位点"
 msgid "Unknown: {value}"
 msgstr "未知：{value}"
 
+msgid "Unsupported file type"
+msgstr "不支持的文件类型"
+
 msgid "until"
 msgstr "直到"
 
@@ -1766,6 +1791,9 @@ msgstr "修改时间"
 
 msgid "Upload"
 msgstr "上传"
+
+msgid "Upload file"
+msgstr "上传文件"
 
 msgid "Upload image"
 msgstr "上传图片"
@@ -1812,6 +1840,9 @@ msgstr "VATPRC 提供从放行到区调的完整训练体系。提交申请，�
 msgid "VATSIM"
 msgstr "VATSIM"
 
+msgid "VATSIM P.R. China division"
+msgstr "VATSIM 中国分部"
+
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM 中国分部 · VATPRC"
 
@@ -1835,6 +1866,9 @@ msgstr "查看过去活动"
 
 msgid "View training details"
 msgstr "查看训练详情"
+
+msgid "Virtual aviation community<0/>For China mainland"
+msgstr "聚焦中国内地的<0/>模拟飞行社区"
 
 msgid "Visiting"
 msgstr "客座"

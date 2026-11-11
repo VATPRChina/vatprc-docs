@@ -1,10 +1,10 @@
 import { DateTime } from "../event/datetime";
 import { RequireRole } from "../require-role";
+import { Alert, Badge, Button, Divider, Modal, Radio, Textarea } from "@/components/ui";
 import { $api, useUser } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Divider, Modal, Radio, Textarea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { FC, useState } from "react";

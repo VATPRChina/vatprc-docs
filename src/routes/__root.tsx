@@ -1,20 +1,15 @@
 import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
+import { Alert, ThemeProvider } from "@/components/ui";
+import { Notifications } from "@/components/ui/notifications";
+import { useNewNavigationFlag } from "@/lib/experimental-features";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
-import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorScheme } from "@/lib/settings";
+import { COLOR_SCHEME_COOKIE_KEY, getCookie, isColorScheme } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { theme } from "@/theme";
 import { Trans, useLingui } from "@lingui/react/macro";
-import mantineCarouselStyle from "@mantine/carousel/styles.css?url";
-import { Alert, mantineHtmlProps, MantineProvider } from "@mantine/core";
-import mantineCoreStyle from "@mantine/core/styles.css?url";
-import mantineDateStyle from "@mantine/dates/styles.css?url";
-import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
-import { Notifications } from "@mantine/notifications";
-import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -26,14 +21,14 @@ import {
 import mapLibreCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { FC, PropsWithChildren, useEffect } from "react";
 
-const colorSchemeManager = cookieColorSchemeManager();
-
 interface ApplicationProps {
   children?: React.ReactNode;
 }
 
 const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const route = useRouterState();
+  const useNewNav = useNewNavigationFlag();
+  const isHomepage = route.location.pathname === "/" && !useNewNav;
 
   if (route.location.pathname === "/division/api") {
     return children;
@@ -41,9 +36,9 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
 
   return (
     <>
-      <div className={route.location.pathname === "/" ? "grid" : undefined}>
-        <AppHeader overlayHero={route.location.pathname === "/"} />
-        <div className={route.location.pathname === "/" ? "col-start-1 row-start-1 min-w-0" : "pt-4"}>{children}</div>
+      <div className={isHomepage ? "grid" : undefined}>
+        <AppHeader overlayHero={isHomepage} />
+        <div className={isHomepage ? "col-start-1 row-start-1 min-w-0" : ""}>{children}</div>
       </div>
       <AppFooter />
     </>
@@ -67,19 +62,18 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <html
-      {...mantineHtmlProps}
       lang={i18n.locale}
       className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
-      data-mantine-color-scheme={htmlColorScheme}
+      data-theme={htmlColorScheme}
     >
       <head>
         <HeadContent />
       </head>
       <body className="px-1 md:px-0">
-        <MantineProvider theme={theme} defaultColorScheme="auto" colorSchemeManager={colorSchemeManager}>
+        <ThemeProvider initialColorScheme={isColorScheme(colorScheme) ? colorScheme : "auto"}>
           <Application>{children}</Application>
-          <Notifications position="top-center" />
-        </MantineProvider>
+          <Notifications />
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
@@ -117,11 +111,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
-        { rel: "stylesheet", href: mantineCoreStyle },
-        { rel: "stylesheet", href: mantineDateStyle },
-        { rel: "stylesheet", href: mantineCarouselStyle },
-        { rel: "stylesheet", href: mantineDropzoneStyle },
-        { rel: "stylesheet", href: mantineNotificationStyle },
         { rel: "stylesheet", href: mapLibreCss },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },

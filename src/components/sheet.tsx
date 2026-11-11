@@ -1,8 +1,8 @@
 import { ConfirmButton } from "./ui/confirm-button";
+import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@/components/ui";
 import { components } from "@/lib/api";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { ComponentProps, FC, ReactNode } from "react";
 

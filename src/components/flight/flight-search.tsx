@@ -1,10 +1,10 @@
 import { RequireRole } from "@/components/require-role";
+import { Alert, Skeleton, TextInput } from "@/components/ui";
 import { LinkButton } from "@/components/ui/link-button";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Skeleton, TextInput } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { TbPlaneOff } from "react-icons/tb";

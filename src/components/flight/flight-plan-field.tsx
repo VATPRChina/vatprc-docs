@@ -1,8 +1,8 @@
 import { InlineValidationTooltip } from "./validation";
+import { Tooltip } from "@/components/ui";
 import { components } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Tooltip } from "@mantine/core";
 import { ComponentProps } from "react";
 
 interface FlightPlanField extends ComponentProps<"div"> {

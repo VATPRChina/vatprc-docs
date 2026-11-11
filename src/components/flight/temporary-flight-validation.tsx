@@ -1,10 +1,10 @@
 import { FlightDetails } from "./flight-details";
 import { FlightRouteView } from "./flight-route";
+import { Alert, Button, NumberInput, Paper, Select, Textarea, TextInput } from "@/components/ui";
 import type { operations } from "@/lib/api";
 import { usePermissions } from "@/lib/client";
 import { client } from "@/lib/client/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, NumberInput, Paper, Select, Textarea, TextInput } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 

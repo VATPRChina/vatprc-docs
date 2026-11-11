@@ -6,9 +6,9 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { SlotList } from "@/components/event/slot-list";
 import { RequireRole } from "@/components/require-role";
+import { Alert, Skeleton, Tabs } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Skeleton, Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbAirTrafficControl, TbCalendar, TbHistory } from "react-icons/tb";
 

@@ -1,6 +1,6 @@
+import { Alert, Button, Modal } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Modal } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 

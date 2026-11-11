@@ -1,6 +1,6 @@
+import { Badge } from "@/components/ui";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
 import { FC } from "react";
 
 export const getStatusBadges = (status?: { is_visiting: boolean; is_absent: boolean }): ("visiting" | "absent")[] => {

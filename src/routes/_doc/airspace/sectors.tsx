@@ -1,8 +1,8 @@
 import { SectorMap } from "@/components/airspace/sector-map";
+import { Alert, Skeleton } from "@/components/ui";
 import { fetchZbpeSectors } from "@/lib/sector-data";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 

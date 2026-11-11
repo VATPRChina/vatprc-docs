@@ -1,6 +1,6 @@
+import { Alert, Card, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Card, Skeleton } from "@mantine/core";
 import { FC } from "react";
 
 export const formatControllingHours = (totalSeconds: number, locale: string): string =>

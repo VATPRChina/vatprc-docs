@@ -40,6 +40,20 @@ pnpm install
 pnpm dev
 ```
 
+#### UI
+
+The site uses [HeroUI 3](https://heroui.com/docs/react/getting-started/quick-start)
+with Tailwind CSS 4. Shared application controls live in `src/components/ui`;
+use these for forms, dialogs, navigation, feedback, and buttons. Import HeroUI
+components directly when a new feature needs additional primitives.
+
+Theme tokens and VATPRC colors live in `src/styles/app.css`. `ThemeProvider`
+preserves the color-scheme cookie and follows system changes in automatic mode.
+Date/time forms edit UTC and show local time beneath the input. The event
+carousel uses Embla; data tables retain TanStack Table with semantic HTML.
+
+Validate UI changes with `pnpm lint`, `pnpm exec vitest run`, and `pnpm build`.
+
 #### API
 
 The backend API is well-defined with OpenAPI. Please run the following command

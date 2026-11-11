@@ -1,7 +1,7 @@
+import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@/components/ui";
+import { useDebouncedCallback } from "@/lib/hooks";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
-import { useDebouncedCallback } from "@mantine/hooks";
 import {
   columnFilteringFeature,
   columnVisibilityFeature,
@@ -95,6 +95,7 @@ export const RichTable = <TData extends RowData>({
   hideGlobalSearch,
 }: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
+  const filterLabel = (columnId: string) => t`Filter ${columnId}`;
 
   const table = useTable({
     features: richTableFeatures,
@@ -122,7 +123,12 @@ export const RichTable = <TData extends RowData>({
   return (
     <div className="flex flex-col gap-1">
       {!hideGlobalSearch && (
-        <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
+        <TextInput
+          aria-label={t`Search...`}
+          placeholder={t`Search...`}
+          leftSection={<TbSearch size={16} />}
+          onChange={onGlobalFilterChange}
+        />
       )}
       <Table highlightOnHover>
         <Table.Thead>
@@ -144,6 +150,7 @@ export const RichTable = <TData extends RowData>({
                         <Select
                           className="font-normal"
                           size="xs"
+                          aria-label={filterLabel(header.column.id)}
                           data-field={header.column.id}
                           value={(table.getColumn(header.column.id)?.getFilterValue() as string) ?? null}
                           onChange={(v) => onColumnFilterSelectChange(v, header.column.id)}
@@ -157,6 +164,7 @@ export const RichTable = <TData extends RowData>({
                         <TextInput
                           className="font-normal"
                           size="xs"
+                          aria-label={filterLabel(header.column.id)}
                           data-field={header.column.id}
                           onChange={onColumnFilterChange}
                         />

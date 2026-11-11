@@ -1,4 +1,4 @@
-import { TableOfContents } from "@mantine/core";
+import { useEffect, useState } from "react";
 import type React from "react";
 
 export const MarkdownDoc: React.FC<{
@@ -19,19 +19,40 @@ export const MarkdownDoc: React.FC<{
       </div>
       <div className="z-10 md:sticky md:top-24 md:max-h-dvh md:flex-1/3 md:overflow-y-scroll">
         {tocHeader}
-        <TableOfContents
-          variant="light"
-          scrollSpyOptions={{
-            selector: "#markdown-doc :is(h1, h2, h3, h4, h5, h6)",
-            offset: 54,
-          }}
-          getControlProps={({ data }) => ({
-            component: "a",
-            href: data.getNode().getAttribute("id") && "#" + data.getNode().getAttribute("id"),
-            children: data.value,
-          })}
-        />
+        <DocumentContents />
       </div>
     </div>
   );
 };
+
+function DocumentContents() {
+  const [headings, setHeadings] = useState<{ id: string; title: string; level: number }[]>([]);
+  useEffect(() => {
+    const article = document.getElementById("markdown-doc");
+    if (!article) return;
+    const update = () =>
+      setHeadings(
+        Array.from(article.querySelectorAll("h1, h2, h3, h4, h5, h6"))
+          .filter((node) => node.id)
+          .map((node) => ({ id: node.id, title: node.textContent ?? "", level: Number(node.tagName.slice(1)) })),
+      );
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(article, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <nav aria-label="Table of contents" className="flex flex-col gap-1 p-4">
+      {headings.map((heading) => (
+        <a
+          key={heading.id}
+          href={`#${heading.id}`}
+          className="text-muted hover:bg-default hover:text-foreground rounded px-2 py-1 text-sm"
+          style={{ paddingLeft: `${(heading.level - 1) * 12 + 8}px` }}
+        >
+          {heading.title}
+        </a>
+      ))}
+    </nav>
+  );
+}

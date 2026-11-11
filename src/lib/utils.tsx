@@ -1,5 +1,5 @@
+import { Alert } from "@/components/ui";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createIsomorphicFn } from "@tanstack/react-start";
 import { getRequestUrl } from "@tanstack/react-start/server";
 import { clsx, type ClassValue } from "clsx";

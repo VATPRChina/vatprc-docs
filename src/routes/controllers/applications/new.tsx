@@ -2,8 +2,8 @@ import { AtcApplicationForm } from "@/components/atc-application/atc-application
 import { BackButton } from "@/components/back-button";
 import { useCenterRoles } from "@/components/controller-center/center-context";
 import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
+import { Alert } from "@/components/ui";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/new")({

@@ -1,8 +1,8 @@
 import { DateTime } from "../event/datetime";
+import { Alert, Button, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { parseISO } from "date-fns";
 import React from "react";

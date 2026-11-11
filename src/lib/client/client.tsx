@@ -1,8 +1,8 @@
 import { components, paths } from "../api";
 import { authMiddleware } from "./auth";
 import { assumedRolesAtom, createRoleAssumptionMiddleware } from "./role-assumption";
+import { notifications } from "@/components/ui/notifications";
 import { Trans } from "@lingui/react/macro";
-import { notifications } from "@mantine/notifications";
 import { getDefaultStore } from "jotai";
 import createClient, { Middleware } from "openapi-fetch";
 import createQueryClient from "openapi-react-query";

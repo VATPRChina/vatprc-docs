@@ -1,7 +1,7 @@
 import { RequireRole } from "../require-role";
+import { ActionIcon } from "@/components/ui";
 import { client } from "@/lib/client/client";
 import { wrapPromiseWithLog } from "@/lib/utils";
-import { ActionIcon } from "@mantine/core";
 import { TbFileExport } from "react-icons/tb";
 
 export const ExportSlot = ({ eventId }: { eventId: string }) => {

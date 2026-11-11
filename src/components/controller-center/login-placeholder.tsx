@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui";
 import { redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
 import { TbLockAccess, TbLogin2 } from "react-icons/tb";
 
 export const ControllerCenterLoginPlaceholder = () => (

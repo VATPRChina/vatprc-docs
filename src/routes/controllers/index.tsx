@@ -5,8 +5,8 @@ import { useCenterRoles } from "@/components/controller-center/center-context";
 import { MyAtcBookings } from "@/components/controller-center/my-atc-bookings";
 import { QuarterlyControllingTime } from "@/components/controller-center/quarterly-controlling-time";
 import { TrainingBrowser } from "@/components/controller-center/training-browser";
+import { Alert } from "@/components/ui";
 import { $api } from "@/lib/client";
-import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/")({

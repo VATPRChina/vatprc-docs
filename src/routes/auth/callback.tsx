@@ -1,6 +1,6 @@
+import { Title } from "@/components/ui";
 import { login } from "@/lib/client/auth";
 import { Trans } from "@lingui/react/macro";
-import { Title } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";

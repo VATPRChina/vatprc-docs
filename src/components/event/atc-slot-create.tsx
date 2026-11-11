@@ -1,12 +1,12 @@
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "../atc-permission-modal";
 import { DateTimeInput } from "../ui/datetime-input";
+import { Alert, Button, Modal, Select, TextInput } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Modal, Select, TextInput } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { formatISO, setMinutes, setSeconds } from "date-fns";

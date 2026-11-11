@@ -1,11 +1,11 @@
 import { Sheet } from "../sheet";
+import { Alert, Select, Skeleton } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api, usePermission } from "@/lib/client";
 import { renderWithMap } from "@/lib/utils";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Select, Skeleton } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { ComponentProps, FC, useState } from "react";
 

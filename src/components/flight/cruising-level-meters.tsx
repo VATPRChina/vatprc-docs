@@ -1,6 +1,6 @@
+import { Tooltip } from "@/components/ui";
 import { getCruisingLevelInMeters, formatCruisingLevelInMeters } from "@/lib/altitude";
 import { useLingui } from "@lingui/react/macro";
-import { Tooltip } from "@mantine/core";
 
 export const CruisingLevelMeters = ({ feet }: { feet: number }) => {
   const { t } = useLingui();

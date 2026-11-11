@@ -4,9 +4,9 @@ import { TrainingSelfReflection } from "@/components/atc-training/training-self-
 import { BackButton } from "@/components/back-button";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
+import { Alert, Skeleton, Table } from "@/components/ui";
 import { useUser, $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton, Table } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComponentProps } from "react";
@@ -65,7 +65,7 @@ function RouteComponent() {
         </h2>
         <TrainingSaveModal id={id} />
       </div>
-      <Table variant="vertical" layout="fixed">
+      <Table layout="fixed">
         <Table.Tbody>
           <Table.Tr>
             <Table.Th w={160}>

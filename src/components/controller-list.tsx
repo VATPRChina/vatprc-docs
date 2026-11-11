@@ -1,5 +1,6 @@
 import { AtcPermissionModalButton } from "./atc-permission-modal";
 import { RichTable, RichTableFeatures } from "./table";
+import { Alert, Checkbox, Tooltip } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { compareControllers, compareRatings, isMilitaryController } from "@/lib/controller-list";
@@ -7,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Checkbox, Tooltip } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import React, { ChangeEvent, useState } from "react";

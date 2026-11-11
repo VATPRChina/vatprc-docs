@@ -1,12 +1,12 @@
 import { User } from "../app/user";
 import { RichTable, RichTableFeatures } from "../table";
+import { Alert, Code, ScrollArea, Spoiler } from "@/components/ui";
 import { components } from "@/lib/api";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Code, ScrollArea, Spoiler } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { TbAlertTriangle } from "react-icons/tb";

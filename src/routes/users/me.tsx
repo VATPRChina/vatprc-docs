@@ -1,10 +1,10 @@
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "@/components/atc-permission-modal";
+import { Alert, Badge } from "@/components/ui";
 import { $api, usePermissions, useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { USER_ROLES } from "@/lib/user-roles";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { formatDate } from "date-fns";
 

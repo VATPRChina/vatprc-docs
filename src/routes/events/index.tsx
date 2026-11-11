@@ -1,9 +1,9 @@
 import { EventCard } from "@/components/event/event-card";
 import { CreateEvent } from "@/components/event/event-create";
 import { RequireRole } from "@/components/require-role";
+import { Alert, Button, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Skeleton } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowRight, TbCalendarOff } from "react-icons/tb";
 

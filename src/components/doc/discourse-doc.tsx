@@ -1,9 +1,9 @@
 import { MarkdownDoc } from "./markdown-doc";
 import type { CompiledMarkdownDoc } from "./markdown-doc-compile";
+import { Alert, Button, ButtonGroup, Skeleton } from "@/components/ui";
 import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import React, { ReactNode } from "react";
 import { TbCloudX } from "react-icons/tb";

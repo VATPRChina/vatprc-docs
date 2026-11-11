@@ -1,8 +1,8 @@
 import { RequireRole } from "@/components/require-role";
+import { Alert, Card, UnstyledButton } from "@/components/ui";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Card, UnstyledButton } from "@mantine/core";
 import { createFileRoute, Outlet, useNavigate, useParams } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/sheets")({

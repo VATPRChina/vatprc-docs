@@ -1,8 +1,8 @@
 import { InlineValidationTooltip } from "./validation";
+import { Alert, Badge, Paper, Skeleton, Table } from "@/components/ui";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Paper, Skeleton, Table } from "@mantine/core";
 
 export function FlightRoute({ callsign }: { callsign: string }) {
   const { data, error, isLoading } = $api.useQuery(

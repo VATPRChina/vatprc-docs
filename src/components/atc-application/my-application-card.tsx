@@ -1,11 +1,11 @@
 import { APPLICATION_STATUS } from "./atc-application-status";
+import { Badge } from "@/components/ui";
 import { LinkButton } from "@/components/ui/link-button";
 import { components } from "@/lib/api";
 import { useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
 import { format } from "date-fns";
 import { FC } from "react";
 

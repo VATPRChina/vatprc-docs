@@ -1,6 +1,6 @@
+import { Button, ButtonProps, PolymorphicComponentProps, Popover } from "@/components/ui";
+import { useDisclosure } from "@/lib/hooks";
 import { Trans } from "@lingui/react/macro";
-import { Button, ButtonProps, PolymorphicComponentProps, Popover } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { FC, ReactNode } from "react";
 
 type ConfirmButtonProps = PolymorphicComponentProps<"button", ButtonProps> & {
@@ -24,7 +24,7 @@ export const ConfirmButton: FC<ConfirmButtonProps> = (props) => {
       </Popover.Target>
       <Popover.Dropdown>
         <div className="flex flex-col items-start gap-2">
-          {actionDescription}
+          <div>{actionDescription}</div>
           <div className="flex flex-row gap-1">
             <Button size="xs" variant="subtle" onClick={close}>
               <Trans>No</Trans>

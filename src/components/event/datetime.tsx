@@ -1,6 +1,6 @@
+import { Tooltip } from "@/components/ui";
 import { utc } from "@date-fns/utc";
 import { useLingui } from "@lingui/react/macro";
-import { Tooltip } from "@mantine/core";
 import { format, intlFormatDistance } from "date-fns";
 
 export const DateTime = ({

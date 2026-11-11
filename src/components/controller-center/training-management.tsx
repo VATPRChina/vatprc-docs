@@ -1,8 +1,8 @@
 import { TrainingApplicationList } from "@/components/atc-training/training-application-list";
 import { TrainingList } from "@/components/atc-training/training-list";
 import { TrainingSaveModal } from "@/components/atc-training/training-save";
+import { Tabs } from "@/components/ui";
 import { Trans } from "@lingui/react/macro";
-import { Tabs } from "@mantine/core";
 import React from "react";
 
 export const TrainingManagement: React.FC = () => (

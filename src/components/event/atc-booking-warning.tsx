@@ -1,8 +1,8 @@
+import { Alert } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { useInterval } from "@/lib/hooks";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
-import { useInterval } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { TbExclamationCircle } from "react-icons/tb";
 

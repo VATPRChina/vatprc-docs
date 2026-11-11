@@ -1,5 +1,5 @@
+import { ComboboxItem, OptionsFilter, Select, SelectProps, Skeleton } from "@/components/ui";
 import { $api } from "@/lib/client";
-import { ComboboxItem, OptionsFilter, Select, SelectProps, Skeleton } from "@mantine/core";
 import { FC, useMemo } from "react";
 
 type UserOption = {
@@ -12,7 +12,7 @@ type UserOption = {
 const fuzzyFilter: OptionsFilter = ({ options, search, limit }) => {
   const tokens = search.toLowerCase().split(/\s+/).filter(Boolean);
   const joined = tokens.join("");
-  return (options as ComboboxItem[])
+  return options
     .filter((option) => {
       const label = option.label.toLowerCase();
       return label.replace(/\s+/g, "").includes(joined) || tokens.every((token) => label.includes(token));

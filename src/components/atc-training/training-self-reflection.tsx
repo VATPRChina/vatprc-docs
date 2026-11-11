@@ -1,8 +1,8 @@
 import { Sheet } from "@/components/sheet";
+import { Alert, Skeleton } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 

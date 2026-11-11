@@ -1,8 +1,8 @@
 import { EventCard } from "@/components/event/event-card";
+import { Alert, Select, Skeleton } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Select, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { endOfDay, endOfQuarter, formatISO, startOfDay, startOfQuarter, subMonths } from "date-fns";
 

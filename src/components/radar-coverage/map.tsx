@@ -1,4 +1,5 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
+import { Button } from "@/components/ui";
 import {
   AIRSPACE_COLORS,
   airspaceAtPosition,
@@ -9,7 +10,6 @@ import {
 import { coverageBounds, RADAR_COLORS } from "@/lib/radar-coverage/model";
 import { CoverageResult, RadarRegion, RadarType } from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
 import { circle, featureCollection, lineString, point } from "@turf/turf";
 import { Layer, Map, MapRef, NavigationControl, Popup, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import type { Popup as MapLibrePopup } from "maplibre-gl";

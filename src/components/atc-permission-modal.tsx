@@ -1,14 +1,14 @@
 import { RequireRole } from "./require-role";
+import { ActionIcon, Alert, Button, Checkbox, Modal, Select } from "@/components/ui";
+import { DateInput } from "@/components/ui/date-input";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { promiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Checkbox, Modal, Select } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { endOfDay, format, parse } from "date-fns";
@@ -199,7 +199,6 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
                                           : null,
                                       );
                                     }}
-                                    valueFormat="YYYY-MM-DD"
                                     clearable
                                     className="flex-1"
                                     disabled={isPending || isMutating}

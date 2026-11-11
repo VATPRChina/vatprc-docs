@@ -383,8 +383,20 @@ msgstr "Chinese description"
 msgid "Chinese name"
 msgstr "Chinese name"
 
+msgid "Choose file"
+msgstr "Choose file"
+
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Clear date"
+msgstr "Clear date"
+
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "Clear the selection to show all enabled radars."
 msgstr "Clear the selection to show all enabled radars."
@@ -752,6 +764,10 @@ msgstr "Fields"
 
 msgid "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
 msgstr "File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign, aircraft_type_icao"
+
+#. placeholder {0}: header.column.id
+msgid "Filter {columnId}"
+msgstr "Filter {columnId}"
 
 msgid "Filter sectors by controller type"
 msgstr "Filter sectors by controller type"
@@ -1121,6 +1137,9 @@ msgstr "No permission"
 msgid "No region loaded"
 msgstr "No region loaded"
 
+msgid "No results"
+msgstr "No results"
+
 msgid "No results."
 msgstr "No results."
 
@@ -1417,6 +1436,9 @@ msgstr "See All Events"
 
 msgid "Segment {segmentNumber}"
 msgstr "Segment {segmentNumber}"
+
+msgid "Select"
+msgstr "Select"
 
 msgid "Select {callsign}"
 msgstr "Select {callsign}"
@@ -1752,6 +1774,9 @@ msgstr "Unknown leg or fix"
 msgid "Unknown: {value}"
 msgstr "Unknown: {value}"
 
+msgid "Unsupported file type"
+msgstr "Unsupported file type"
+
 msgid "until"
 msgstr "until"
 
@@ -1766,6 +1791,9 @@ msgstr "Updated at"
 
 msgid "Upload"
 msgstr "Upload"
+
+msgid "Upload file"
+msgstr "Upload file"
 
 msgid "Upload image"
 msgstr "Upload image"
@@ -1812,6 +1840,9 @@ msgstr "VATPRC provides a complete training program from Delivery to Center. Sub
 msgid "VATSIM"
 msgstr "VATSIM"
 
+msgid "VATSIM P.R. China division"
+msgstr "VATSIM P.R. China division"
+
 msgid "VATSIM P.R. China Division · VATPRC"
 msgstr "VATSIM P.R. China Division · VATPRC"
 
@@ -1835,6 +1866,9 @@ msgstr "View past events"
 
 msgid "View training details"
 msgstr "View training details"
+
+msgid "Virtual aviation community<0/>For China mainland"
+msgstr "Virtual aviation community<0/>For China mainland"
 
 msgid "Visiting"
 msgstr "Visiting"

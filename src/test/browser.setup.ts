@@ -1,6 +1,5 @@
 import "@/styles/app.css";
-import "@mantine/core/styles.css";
 import "vitest-browser-react";
 
-document.documentElement.setAttribute("data-mantine-color-scheme", "light");
+document.documentElement.setAttribute("data-theme", "light");
 document.body.style.margin = "0";

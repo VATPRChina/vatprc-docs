@@ -1,7 +1,7 @@
 import { MarkdownDoc } from "@/components/doc/markdown-doc";
+import { Skeleton, Alert } from "@/components/ui";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
-import { Skeleton, Alert } from "@mantine/core";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { TbCloudX } from "react-icons/tb";
 

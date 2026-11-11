@@ -1,8 +1,8 @@
 import { POSITION_CATEGORIES } from "./position-modal";
+import { Alert, Button, Checkbox, Modal, Select, Table, Textarea, TextInput } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Checkbox, Modal, Select, Table, Textarea, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 

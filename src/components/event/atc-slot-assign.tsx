@@ -1,9 +1,9 @@
 import { UserInput } from "../user-input";
+import { Alert, Button, Modal } from "@/components/ui";
 import { $api } from "@/lib/client";
+import { useDisclosure } from "@/lib/hooks";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { FormEvent } from "react";

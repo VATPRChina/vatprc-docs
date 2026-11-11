@@ -1,4 +1,5 @@
 import { RadarMap } from "./map";
+import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@/components/ui";
 import { AIRSPACE_COLORS, airspaceEntries, airspaceHeight } from "@/lib/radar-coverage/airspace";
 import { BUILTIN_REGIONS, loadRegion } from "@/lib/radar-coverage/data";
 import { RADAR_COLORS } from "@/lib/radar-coverage/model";
@@ -11,7 +12,6 @@ import {
   RadarType,
 } from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
 

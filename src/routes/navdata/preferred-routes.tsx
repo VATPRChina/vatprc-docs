@@ -1,9 +1,9 @@
 import { CreatePreferredRoute } from "@/components/preferred-route-create";
 import { RichTable, RichTableFeatures } from "@/components/table";
+import { Alert } from "@/components/ui";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
 

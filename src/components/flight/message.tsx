@@ -1,6 +1,6 @@
+import { StatusColor } from "@/components/ui";
 import { components } from "@/lib/api";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { DefaultMantineColor } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { FC, ReactNode } from "react";
 
@@ -28,7 +28,7 @@ export const VALIDATOR_NAMES: Record<components["schemas"]["ValidatorIdentifier"
 interface ValidationStatusDescriptor {
   short: string;
   name: ReactNode;
-  color: DefaultMantineColor;
+  color: StatusColor;
 }
 
 export const VALIDATION_STATUS: Record<components["schemas"]["ValidatorStatus"], ValidationStatusDescriptor> = {

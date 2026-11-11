@@ -1,6 +1,6 @@
 import { LinkButton } from "../ui/link-button";
+import { Title, Text } from "@/components/ui";
 import { Trans } from "@lingui/react/macro";
-import { Title, Text } from "@mantine/core";
 
 export const NotFound: React.FC = () => (
   <div className="container mx-auto">
