@@ -53,7 +53,7 @@ const columns: ColumnDef<RichTableFeatures, AtcPositionRow>[] = [
             <Trans>Tier 2</Trans>
           </Badge>
         )}
-        {row.original.cpdlc_code && (
+        {getAtcPositionGroup(row.original.callsign) === "area" && row.original.cpdlc_code && (
           <Badge color="orange" variant="outline">
             CPDLC
           </Badge>

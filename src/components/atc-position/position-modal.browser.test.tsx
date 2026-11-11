@@ -103,7 +103,9 @@ test("read-only visitors can see positions without management controls", async (
   await expect.element(screen.getByRole("button", { name: "Sector ID", exact: true })).toBeVisible();
   await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("BJT", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("DCL", { exact: true })).toBeVisible();
-  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("CPDLC", { exact: true })).toBeVisible();
+  await expect
+    .element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("CPDLC", { exact: true }))
+    .not.toBeInTheDocument();
   await expect.element(screen.getByRole("columnheader", { name: "CPDLC", exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Create ATC Position" })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("button", { name: "Delete selected (0)" })).not.toBeInTheDocument();
@@ -137,7 +139,9 @@ test("groups positions into airport, terminal and area tabs", async () => {
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("ZBAA_ATIS", { exact: true })).toBeVisible();
   await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("DCL", { exact: true })).toBeVisible();
-  await expect.element(screen.getByRole("row", { name: /ZBAA_TWR/ }).getByText("CPDLC", { exact: true })).toBeVisible();
+  await expect
+    .element(screen.getByRole("row", { name: /ZBAA_E_TWR/ }).getByText("CPDLC", { exact: true }))
+    .not.toBeInTheDocument();
   await expect
     .element(screen.getByRole("row", { name: /ZBAA_ATIS/ }).getByText("CPDLC", { exact: true }))
     .not.toBeInTheDocument();
@@ -171,12 +175,16 @@ test("groups positions into airport, terminal and area tabs", async () => {
   await screen.getByRole("tab", { name: /Terminal/ }).click();
   await expect.element(screen.getByText("ZBAA_APP", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("ZBAA_DEP", { exact: true })).toBeVisible();
+  await expect
+    .element(screen.getByRole("row", { name: /ZBAA_APP/ }).getByText("CPDLC", { exact: true }))
+    .not.toBeInTheDocument();
   await expect.element(screen.getByText("DCL", { exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByRole("columnheader", { name: "CPDLC", exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByText("ZBPE_CTR", { exact: true })).not.toBeInTheDocument();
 
   await screen.getByRole("tab", { name: /Area/ }).click();
   await expect.element(screen.getByText("ZBPE_CTR", { exact: true })).toBeVisible();
+  await expect.element(screen.getByRole("row", { name: /ZBPE_CTR/ }).getByText("CPDLC", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("CPDLC", { exact: true }).first()).toBeVisible();
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).not.toBeInTheDocument();
 });
