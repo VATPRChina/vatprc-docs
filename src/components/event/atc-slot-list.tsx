@@ -153,7 +153,7 @@ const columns = [
               {(bookError ?? releaseError)?.detail}
             </Alert>
           )}
-          <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
+          <RequireRole role={["event-coordinator", "controller-training-mentor"]}>
             <CreateAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
             <AtcSlotDeleteButton eventId={row.original.event.id} positionId={row.original.id} />
             <AssignAtcSlot eventId={row.original.event.id} positionId={row.original.id} />
@@ -207,7 +207,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
           {error.title}
         </Alert>
       )}
-      <RequireRole role={["event-coordinator", "operation-director-assistant"]}>
+      <RequireRole role={["event-coordinator", "controller-training-mentor"]}>
         <div className="flex flex-row gap-1">
           <CreateAtcSlot eventId={eventId} />
         </div>

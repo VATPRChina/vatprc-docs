@@ -24,7 +24,7 @@ export const AtcSlotDeleteButton: FC<AtcSlotDeleteButtonProps> = ({ eventId, pos
   });
 
   return (
-    <RequireRole role="event-coordinator">
+    <RequireRole role={["event-coordinator", "controller-training-mentor"]}>
       <div className="flex flex-col gap-1">
         {error && (
           <Alert color="red" title={error.title}>
