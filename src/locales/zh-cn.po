@@ -98,6 +98,9 @@ msgstr "机型"
 msgid "Aircraft wingspan exceeds airport limit"
 msgstr "航空器翼展超出机场限制"
 
+msgid "Airport"
+msgstr "机场"
+
 msgid "Airspace"
 msgstr "空域"
 
@@ -1406,6 +1409,9 @@ msgstr "扇区组组员"
 msgid "Sector Files"
 msgstr "扇区文件"
 
+msgid "Sector ID"
+msgstr "扇区代号"
+
 msgid "Sector Map"
 msgstr "扇区地图"
 
@@ -1570,6 +1576,9 @@ msgstr "技术部主管助理"
 
 msgid "Temporary Flight Plan"
 msgstr "临时飞行计划"
+
+msgid "Terminal"
+msgstr "终端"
 
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "MIL 列标记具有军用席位权限的管制员。"

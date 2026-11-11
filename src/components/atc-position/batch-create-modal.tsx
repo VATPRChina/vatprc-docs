@@ -30,7 +30,7 @@ export function BatchCreateModal({ onClose }: { onClose: () => void }) {
   const labels = {
     callsign_zh: t`Chinese Callsign`,
     callsign_en: t`English Callsign`,
-    cpdlc_code: "CPDLC (S0780+)",
+    cpdlc_code: "CPDLC",
     remarks: t`Remarks`,
   };
   const edit = (index: number, patch: Partial<PositionSave>) => {

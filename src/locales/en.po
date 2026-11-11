@@ -98,6 +98,9 @@ msgstr "Aircraft Type"
 msgid "Aircraft wingspan exceeds airport limit"
 msgstr "Aircraft wingspan exceeds airport limit"
 
+msgid "Airport"
+msgstr "Airport"
+
 msgid "Airspace"
 msgstr "Airspace"
 
@@ -1406,6 +1409,9 @@ msgstr "Sector Editor"
 msgid "Sector Files"
 msgstr "Sector Files"
 
+msgid "Sector ID"
+msgstr "Sector ID"
+
 msgid "Sector Map"
 msgstr "Sector Map"
 
@@ -1570,6 +1576,9 @@ msgstr "Tech Director Assistant"
 
 msgid "Temporary Flight Plan"
 msgstr "Temporary Flight Plan"
+
+msgid "Terminal"
+msgstr "Terminal"
 
 msgid "The <0>MIL</0> column marks controllers with military position permission."
 msgstr "The <0>MIL</0> column marks controllers with military position permission."

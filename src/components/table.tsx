@@ -83,6 +83,8 @@ export interface RichTableProps<TData extends RowData> {
   initialState?: Partial<TableState<RichTableFeatures>>;
   /** Hide the global free-text search bar, e.g. when a column filter already covers the same search intent. */
   hideGlobalSearch?: boolean;
+  /** Hide the per-column filter controls while preserving sorting and table content. */
+  hideColumnFilters?: boolean;
 }
 
 const EMPTY_TABLE = [] as never[];
@@ -93,6 +95,7 @@ export const RichTable = <TData extends RowData>({
   isLoading,
   initialState,
   hideGlobalSearch,
+  hideColumnFilters,
 }: RichTableProps<TData>) => {
   const { t, i18n } = useLingui();
 
@@ -139,7 +142,8 @@ export const RichTable = <TData extends RowData>({
                     >
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </SortableHeader>
-                    {header.column.getCanFilter() &&
+                    {!hideColumnFilters &&
+                      header.column.getCanFilter() &&
                       (header.column.columnDef.meta?.filterValues ? (
                         <Select
                           className="font-normal"
