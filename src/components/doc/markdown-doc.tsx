@@ -31,7 +31,7 @@ export function MarkdownDoc({
           {children}
         </article>
       </div>
-      <aside className="z-10 md:sticky md:top-24 md:max-h-[80dvh] md:flex-1/3 md:self-start md:overflow-y-auto">
+      <aside className="border-border z-10 border-2 p-4 md:sticky md:top-24 md:max-h-[80dvh] md:flex-1/3 md:self-start md:overflow-y-auto">
         {tocHeader}
         <nav aria-label="Table of contents" className="grid gap-2 p-4">
           <h2 className="font-heading">

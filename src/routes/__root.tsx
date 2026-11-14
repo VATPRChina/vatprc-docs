@@ -39,7 +39,7 @@ const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps)
         <AppHeader overlayHero={route.location.pathname === "/"} />
         <div className={route.location.pathname === "/" ? "col-start-1 row-start-1 min-w-0" : "pt-4"}>{children}</div>
       </div>
-      <AppFooter />
+      <AppFooter className="border-border border-t-2" />
     </>
   );
 };

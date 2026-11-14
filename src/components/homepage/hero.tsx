@@ -1,118 +1,63 @@
-import heroImage from "@/assets/homepage/hero.jpg";
-import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { LinkButton } from "@/components/ui/link-button";
 import { $api } from "@/lib/client";
-import { useNewNavigationFlag } from "@/lib/experimental-features";
 import { Trans } from "@lingui/react/macro";
 import { isSameWeek, parseISO } from "date-fns";
-import React from "react";
-import { TbExternalLink } from "react-icons/tb";
+import { FC, PropsWithChildren, ReactNode } from "react";
 
-const HeroStat: React.FC<{ value: React.ReactNode; label: React.ReactNode; accent?: boolean }> = ({
-  value,
-  label,
-  accent,
-}) => (
-  <div className="flex flex-col">
-    <span className={accent ? "text-vatprc-bright text-2xl" : "text-2xl text-white"}>{value}</span>
-    <span className="text-sm text-gray-300">{label}</span>
-  </div>
-);
+interface HeroCardProps {
+  title: ReactNode;
+  num: ReactNode;
+}
 
-export const Hero: React.FC = () => {
-  const [enableNewNav] = useNewNavigationFlag();
+const HeroCard: FC<PropsWithChildren<HeroCardProps>> = ({ title, num, children }) => {
+  return (
+    <div className="bg-secondary-background border-border text-foreground min-w-[10svw] space-y-2 border-2 p-4">
+      <p>{title}</p>
+      <p className="font-heading text-vatprc">{num}</p>
+      <div className="space-x-2">{children}</div>
+    </div>
+  );
+};
 
-  const { data, error: statusError } = $api.useQuery("get", "/api/compat/online-status");
-  const { data: events, error: eventsError } = $api.useQuery("get", "/api/events");
+export const Hero: FC = () => {
+  const { data } = $api.useQuery("get", "/api/compat/online-status");
+  const { data: events } = $api.useQuery("get", "/api/events");
   const eventsThisWeek =
     events?.filter((e) => isSameWeek(parseISO(e.start_at), Date.now(), { weekStartsOn: 1 })).length ?? 0;
 
   return (
-    <>
-      <section data-homepage-hero className="relative w-full overflow-hidden">
-        <img
-          src={heroImage}
-          aria-hidden
-          className="absolute inset-0 h-full w-full scale-110 object-cover blur-[50px]"
-        />
-        <div className="absolute inset-0">
-          <div className="relative mx-auto h-full w-full max-w-336 mask-[linear-gradient(to_right,transparent,black_max(0px,calc((100%-72rem)/2)),black_calc(100%-max(0px,calc((100%-72rem)/2))),transparent)]">
-            <img src={heroImage} aria-hidden className="h-full w-full scale-105 object-cover blur-[3px]" />
-          </div>
-        </div>
-        <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/60 to-transparent" />
-        <div className="relative mx-auto flex max-h-svh min-h-112 w-full max-w-6xl flex-col items-start justify-center gap-4 px-4 pt-28 pb-16">
-          {(statusError ?? eventsError) && (
-            <Alert variant={"destructive"}>
-              <AlertTitle>{(statusError ?? eventsError)?.title}</AlertTitle>
-              <AlertDescription>{(statusError ?? eventsError)?.detail}</AlertDescription>
-            </Alert>
-          )}
-          <div className="flex flex-col items-start gap-2">
-            <h1 className="px-4 py-2 text-3xl font-medium text-white backdrop-blur-xl md:text-4xl">
-              <Trans>VATSIM P.R. China Division · VATPRC</Trans>
-            </h1>
-            {!enableNewNav && (
-              <p className="px-4 py-2 text-xl font-medium text-white italic backdrop-blur-xl">
-                <Trans>
-                  <b>VATPRC 有你更精彩</b>
-                  <br />
-                  You make the difference!
-                </Trans>
-              </p>
-            )}
-          </div>
-          {!enableNewNav && (
-            <div className="grid w-fit grid-cols-2 gap-1">
-              <LinkButton to="/controllers">
-                <Trans>Join the controller team</Trans>
-              </LinkButton>
-              <LinkButton to="/pilot/introduction-to-fly">
-                <Trans>How to fly</Trans>
-              </LinkButton>
-              <LinkButton to="/flights">
-                <Trans>Flight plan checker</Trans>
-              </LinkButton>
-              <Button
-                render={<a href="https://community.vatprc.net" target="_blank" rel="noreferrer" />}
-                nativeButton={false}
-              >
-                <Trans>Forum</Trans>
-                {<TbExternalLink size={14} />}
-              </Button>
-            </div>
-          )}
-          <div className="flex gap-2 px-4 py-2 font-mono backdrop-blur-xl">
-            <HeroStat value={data?.pilots?.length ?? "--"} label={<Trans>Pilots online</Trans>} />
-            <HeroStat value={data?.controllers?.length ?? "--"} label={<Trans>Controllers online</Trans>} />
-            <HeroStat value={eventsThisWeek} label={<Trans>Events this week</Trans>} accent />
-          </div>
-        </div>
-      </section>
-      {enableNewNav && (
-        <section className="container mx-auto mt-4">
-          <p className="text-xl font-medium">
-            <Trans>What do you want to do today?</Trans>
-          </p>
-          <div className="mt-4 flex gap-1">
-            <LinkButton className="flex-1" to="/controllers">
+    <section className="bg-main text-secondary-background flex min-h-[50svh] border-b-2 pt-16 pb-4">
+      <div className="container m-auto flex flex-col items-start gap-4">
+        <h1 className="font-heading text-5xl md:text-7xl">
+          <Trans>VATSIM P.R. China Division · VATPRC</Trans>
+        </h1>
+        <h2 className="font-heading text-3xl md:text-5xl">
+          <Trans>Flight simulation community for China mainland</Trans>
+        </h2>
+        <div className="flex gap-4">
+          <HeroCard title={<Trans>Pilots online</Trans>} num={data?.pilots?.length ?? "--"}>
+            <Button variant="secondary">
               <Trans>Fly</Trans>
-            </LinkButton>
-            <LinkButton className="flex-1" to="/pilot/introduction-to-fly">
-              <Trans>Control</Trans>
-            </LinkButton>
-            <Button
-              className="flex-1"
-              render={<a href="https://community.vatprc.net" target="_blank" rel="noreferrer" />}
-              nativeButton={false}
-            >
-              <Trans>Forum</Trans>
-              {<TbExternalLink size={14} />}
             </Button>
-          </div>
-        </section>
-      )}
-    </>
+          </HeroCard>
+          <HeroCard title={<Trans>Controllers online</Trans>} num={data?.controllers?.length ?? "--"}>
+            <Button variant="secondary">
+              <Trans>Control</Trans>
+            </Button>
+          </HeroCard>
+          <HeroCard title={<Trans>Events this week</Trans>} num={eventsThisWeek}>
+            <Button variant="secondary">
+              <Trans>Events</Trans>
+            </Button>
+            <Button variant="secondary">
+              <Trans>Discord</Trans>
+            </Button>
+            <Button variant="secondary">
+              <Trans>Forum</Trans>
+            </Button>
+          </HeroCard>
+        </div>
+      </div>
+    </section>
   );
 };

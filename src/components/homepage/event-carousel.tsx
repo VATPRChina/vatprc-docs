@@ -1,3 +1,4 @@
+import { Card, CardContent } from "../ui/card";
 import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
@@ -14,8 +15,6 @@ import React from "react";
 import { TbArrowRight, TbPlaneDeparture } from "react-icons/tb";
 
 type EventDto = components["schemas"]["EventDto"];
-
-const TILT_MAX_DEG = 8;
 
 const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   const { data: positions, error } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
@@ -52,41 +51,18 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
 
 const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
   const { i18n } = useLingui();
-  const ref = React.useRef<HTMLDivElement>(null);
   const start = parseISO(event.start_at);
   const end = parseISO(event.end_at);
   const title = i18n.locale === "en" ? (event.title_en ?? event.title) : event.title;
   const thisWeek = isSameWeek(start, Date.now(), { weekStartsOn: 1 });
-
-  const handleMove = (e: React.MouseEvent) => {
-    const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(800px) rotateX(${(-y * TILT_MAX_DEG).toFixed(2)}deg) rotateY(${(
-      x * TILT_MAX_DEG
-    ).toFixed(2)}deg) scale(1.03)`;
-  };
-
-  const handleLeave = () => {
-    if (ref.current) ref.current.style.transform = "";
-  };
 
   return (
     <Link
       to="/events/$id"
       params={{ id: event.id }}
       className="group relative z-0 block h-full hover:z-20 focus-visible:z-20"
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
     >
-      <div
-        ref={ref}
-        className={cn(
-          "flex h-full flex-col overflow-hidden border transition-[transform,box-shadow] duration-150 ease-out will-change-transform group-hover:shadow-xl group-hover:shadow-black/25 dark:group-hover:shadow-black/70",
-        )}
-      >
+      <Card className="overflow-hidden pt-0" size="sm">
         {event.image_url ? (
           <img src={event.image_url} alt={title} className="aspect-video w-full object-cover" />
         ) : (
@@ -94,7 +70,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
             <TbPlaneDeparture size={36} />
           </div>
         )}
-        <div className="flex flex-col gap-1 px-4 py-3">
+        <CardContent className="flex flex-col gap-2">
           <span className="truncate text-lg font-medium">{title}</span>
           <div className="flex items-center gap-2">
             <span className="font-mono text-base text-gray-700 dark:text-gray-300">
@@ -107,8 +83,8 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
             )}
           </div>
           <BookingCount eventId={event.id} />
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </Link>
   );
 };
@@ -152,7 +128,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         </p>
       )}
       {!isLoading && !error && upcoming.length > 0 && (
-        <Carousel opts={{ align: "start" }} className="mx-12">
+        <Carousel opts={{ align: "start" }}>
           <CarouselContent>
             {upcoming.map((e) => (
               <CarouselItem key={e.id} className="sm:basis-1/2 lg:basis-1/3">

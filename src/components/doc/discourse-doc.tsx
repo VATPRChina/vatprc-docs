@@ -50,7 +50,7 @@ export const DiscourseDocument: React.FC<{
 }> = ({ document, en, cn, inline, extraHeader }) => {
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
-    <div className="mb-2 gap-1!">
+    <div className="mb-2 space-x-2">
       <Button
         variant={"neutral"}
         render={<a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer" />}

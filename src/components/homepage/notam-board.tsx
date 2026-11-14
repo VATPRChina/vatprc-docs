@@ -1,3 +1,4 @@
+import { Card, CardContent } from "../ui/card";
 import { AlertDescription, Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -69,7 +70,7 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
           {<TbArrowRight size={14} />}
         </Button>
       </div>
-      <div className="border border-black/15 dark:border-white/20">
+      <div className="flex flex-col gap-2">
         {isLoading && (
           <>
             {Array(5)
@@ -96,17 +97,15 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
         {!isLoading &&
           !error &&
           announcements?.map((a) => (
-            <a
-              key={a.id}
-              href={a.url}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-baseline gap-1 border-b border-black/15 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900"
-            >
-              <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
-                {format(parseISO(a.createdAt), "yyyy-MM-dd")}
-              </span>
-              <span className="flex-1 truncate text-base">{a.title}</span>
+            <a key={a.id} href={a.url} target="_blank" rel="noreferrer">
+              <Card>
+                <CardContent>
+                  <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
+                    {format(parseISO(a.createdAt), "yyyy-MM-dd")}
+                  </span>
+                  <span className="ml-2 truncate text-base">{a.title}</span>
+                </CardContent>
+              </Card>
             </a>
           ))}
       </div>

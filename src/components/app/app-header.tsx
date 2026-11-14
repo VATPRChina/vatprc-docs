@@ -17,57 +17,19 @@ export const AppHeader = ({ overlayHero = false }: { overlayHero?: boolean }) =>
   const [opened, setOpened] = useDisclosureState(false);
   const open = () => setOpened(true);
   const close = () => setOpened(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const [overHero, setOverHero] = useState(overlayHero);
-  const transparent = overlayHero && overHero;
-
-  useEffect(() => {
-    if (!overlayHero) return;
-    const header = headerRef.current;
-    const hero = document.querySelector("[data-homepage-hero]");
-    if (!header || !hero) return;
-
-    let observer: IntersectionObserver;
-    const observe = () => {
-      observer?.disconnect();
-      const height = header.getBoundingClientRect().height;
-      setOverHero(hero.getBoundingClientRect().bottom > height);
-      observer = new IntersectionObserver(([entry]) => setOverHero(entry.isIntersecting), {
-        rootMargin: `-${height}px 0px 0px 0px`,
-      });
-      observer.observe(hero);
-    };
-    observe();
-    const resizeObserver = new ResizeObserver(observe);
-    resizeObserver.observe(header);
-    return () => {
-      observer.disconnect();
-      resizeObserver.disconnect();
-    };
-  }, [overlayHero]);
 
   return (
     <header
-      ref={headerRef}
-      data-over-hero={transparent || undefined}
       className={cn(
-        "app-header sticky top-0 z-50 w-full border-b px-4 py-2 transition-colors duration-200 sm:px-8",
+        "sticky top-0 z-50 w-full border-b px-4 py-2 transition-colors duration-200 sm:px-8",
         overlayHero && "col-start-1 row-start-1 self-start",
-        transparent ? "border-transparent bg-transparent" : "bg-white dark:bg-gray-950",
+        "bg-white dark:bg-gray-950",
       )}
     >
-      <div className="app-header-controls container mx-auto flex flex-row items-center gap-4">
+      <div className="container mx-auto flex flex-row items-center gap-4">
         <Link to="/">
-          <img
-            src={logo}
-            alt={t`VATSIM P.R.China Division`}
-            className={cn("h-6 dark:hidden", transparent && "hidden")}
-          />
-          <img
-            src={logoWhite}
-            alt={t`VATSIM P.R.China Division`}
-            className={cn("h-6 dark:block", !transparent && "hidden")}
-          />
+          <img src={logo} alt={t`VATSIM P.R.China Division`} className="block h-6 dark:hidden" />
+          <img src={logoWhite} alt={t`VATSIM P.R.China Division`} className="hidden h-6 dark:block" />
         </Link>
         <div className="hidden lg:contents">
           <NavMenu />

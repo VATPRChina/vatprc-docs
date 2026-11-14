@@ -1,4 +1,5 @@
 import { DateTime } from "../event/datetime";
+import { Card, CardContent } from "../ui/card";
 import { AlertDescription, Alert } from "@/components/ui/alert";
 import { LinkButton } from "@/components/ui/link-button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,26 +17,23 @@ const ControllerStrip: React.FC<{
   eventTitle?: string;
   schedule?: [Date, Date];
 }> = ({ callsign, name, frequency, eventTitle, schedule }) => (
-  <div
-    className={cn(
-      "flex flex-col gap-1 border-l-2 p-4",
-      schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
-    )}
-  >
-    <p className="space-x-2">
-      <span className="font-mono font-bold">{callsign}</span>
-      {frequency && <span className="underline underline-offset-4">{frequency}</span>}
-      <span>{name}</span>
-    </p>
-    {schedule && eventTitle && <p className="text-dimmed">{schedule && eventTitle}</p>}
-    {schedule && (
-      <div className="flex items-center gap-1 text-sm">
-        <DateTime>{schedule[0]}</DateTime>
-        <TbArrowRight size={12} />
-        <DateTime>{schedule[1]}</DateTime>
-      </div>
-    )}
-  </div>
+  <Card className={(!schedule && "border-l-emerald-600 dark:border-l-emerald-400") || ""}>
+    <CardContent>
+      <p className="space-x-2">
+        <span className="font-heading font-mono">{callsign}</span>
+        {frequency && <span className="underline underline-offset-4">{frequency}</span>}
+        <span className="text-dimmed">{name}</span>
+      </p>
+      {schedule && eventTitle && <p className="text-dimmed">{schedule && eventTitle}</p>}
+      {schedule && (
+        <div className="flex items-center gap-1 text-sm">
+          <DateTime>{schedule[0]}</DateTime>
+          <TbArrowRight size={12} />
+          <DateTime>{schedule[1]}</DateTime>
+        </div>
+      )}
+    </CardContent>
+  </Card>
 );
 
 interface StripListProps {
@@ -46,7 +44,7 @@ interface StripListProps {
 
 const StripList: React.FC<StripListProps> = ({ children, empty, isLoading }) => {
   return (
-    <div className="divide-y border border-black/15 dark:border-white/20">
+    <div className="*:not-last:border-b-0">
       {isLoading &&
         Array(5)
           .fill(0)
