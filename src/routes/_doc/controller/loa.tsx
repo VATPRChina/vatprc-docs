@@ -1,9 +1,9 @@
 import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
 import { DocList } from "@/components/doc/doc-list";
+import { AlertDescription, Alert } from "@/components/ui/alert";
 import { getAllDocuments } from "@/lib/doc";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_doc/controller/loa")({
@@ -22,8 +22,10 @@ function Page() {
   return (
     <div className="container mx-auto">
       {locale === "en" && (
-        <Alert color="yellow">
-          <Trans>This page is not available in English.</Trans>
+        <Alert>
+          <AlertDescription>
+            <Trans>This page is not available in English.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       <h1 className="my-4 text-center text-3xl font-bold">

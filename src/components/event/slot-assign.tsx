@@ -1,16 +1,20 @@
 import { UserInput } from "../user-input";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { $api } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/helpers";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState as useDisclosureState } from "react";
 import { FormEvent } from "react";
 
 export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: string }) => {
   const { t } = useLingui();
-  const [opened, { toggle, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const toggle = () => setOpened((value) => !value);
+  const close = () => setOpened(false);
 
   const queryClient = useQueryClient();
   const {
@@ -62,43 +66,56 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
 
   return (
     <>
-      <Button variant="subtle" onClick={toggle} size="compact-sm">
+      <Button onClick={toggle} variant={"neutral"} size={"sm"}>
         <Trans>Assign</Trans>
       </Button>
-      <Modal opened={opened} onClose={close} size="xl" title={t`Assign Slot ${callsign}`}>
-        <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          {(loadError ?? assignError ?? unassignError) && (
-            <Alert color="red" title={(loadError ?? assignError ?? unassignError)?.title}>
-              {(loadError ?? assignError ?? unassignError)?.detail}
-            </Alert>
-          )}
-          <form.Field name="user_id">
-            {(field) => (
-              <UserInput
-                label={<Trans>CID</Trans>}
-                onChange={(v) => v && field.handleChange(v)}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                disabled={isLoading}
-              />
+      <Dialog
+        open={opened}
+        onOpenChange={(open) => {
+          if (!open) close();
+        }}
+      >
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>{t`Assign Slot ${callsign}`}</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4">
+            {(loadError ?? assignError ?? unassignError) && (
+              <Alert variant={"destructive"}>
+                <AlertTitle>{(loadError ?? assignError ?? unassignError)?.title}</AlertTitle>
+                <AlertDescription>{(loadError ?? assignError ?? unassignError)?.detail}</AlertDescription>
+              </Alert>
             )}
-          </form.Field>
-          <div className="flex flex-row gap-1">
-            <Button variant="subtle" type="submit" loading={isAssignPending}>
-              <Trans>Assign</Trans>
-            </Button>
-            <Button
-              variant="subtle"
-              type="button"
-              loading={isUnassignPending}
-              disabled={slot?.booking == null}
-              onClick={onUnassign}
-            >
-              <Trans>Unassign</Trans>
-            </Button>
-          </div>
-        </form>
-      </Modal>
+            <form.Field name="user_id">
+              {(field) => (
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{<Trans>CID</Trans>}</span>
+                  <UserInput
+                    onChange={(v) => v && field.handleChange(v)}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    disabled={isLoading}
+                  />
+                </label>
+              )}
+            </form.Field>
+            <div className="flex flex-row gap-1">
+              <Button type="submit" disabled={isAssignPending} aria-busy={isAssignPending} variant={"neutral"}>
+                <Trans>Assign</Trans>
+              </Button>
+              <Button
+                type="button"
+                onClick={onUnassign}
+                disabled={slot?.booking == null || isUnassignPending}
+                aria-busy={isUnassignPending}
+                variant={"neutral"}
+              >
+                <Trans>Unassign</Trans>
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

@@ -4,17 +4,19 @@ import { ModeToggle } from "./theme-toggle";
 import { UserInfo } from "./user-info";
 import logo from "@/assets/logo_standard.svg";
 import logoWhite from "@/assets/logo_standard_white.svg";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLingui } from "@lingui/react/macro";
-import { ActionIcon } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
+import { useState as useDisclosureState } from "react";
 import { useEffect, useRef, useState } from "react";
 import { TbMenu2 } from "react-icons/tb";
 
 export const AppHeader = ({ overlayHero = false }: { overlayHero?: boolean }) => {
   const { t } = useLingui();
-  const [opened, { open, close }] = useDisclosure();
+  const [opened, setOpened] = useDisclosureState(false);
+  const open = () => setOpened(true);
+  const close = () => setOpened(false);
   const headerRef = useRef<HTMLElement>(null);
   const [overHero, setOverHero] = useState(overlayHero);
   const transparent = overlayHero && overHero;
@@ -76,20 +78,21 @@ export const AppHeader = ({ overlayHero = false }: { overlayHero?: boolean }) =>
           </div>
         </div>
         <div className="contents lg:hidden">
-          <ActionIcon
-            variant="subtle"
+          <Button
             onClick={open}
             className="ml-auto"
             aria-label={t`Open navigation`}
             aria-expanded={opened}
             aria-haspopup="dialog"
+            size={"icon-sm"}
+            variant={"neutral"}
           >
             <TbMenu2 />
-          </ActionIcon>
+          </Button>
         </div>
         <NavMenuDrawer
-          opened={opened}
-          onClose={close}
+          open={opened}
+          onOpenChange={setOpened}
           onClick={(event) => {
             if (event.target instanceof Element && event.target.closest("a")) {
               close();

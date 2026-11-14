@@ -1,10 +1,13 @@
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { LinkButton } from "@/components/ui/link-button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Carousel } from "@mantine/carousel";
-import { Alert, Badge, Button, Skeleton } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { format, isSameWeek, parseISO } from "date-fns";
 import React from "react";
@@ -21,8 +24,9 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
 
   if (error) {
     return (
-      <Alert color="red" title={error.title}>
-        {error.detail}
+      <Alert variant={"destructive"}>
+        <AlertTitle>{error.title}</AlertTitle>
+        <AlertDescription>{error.detail}</AlertDescription>
       </Alert>
     );
   }
@@ -97,7 +101,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
               {format(start, "MM-dd HHmm", { in: utc })}Z–{format(end, "HHmm", { in: utc })}Z
             </span>
             {thisWeek && (
-              <Badge variant="light">
+              <Badge>
                 <Trans>This Week</Trans>
               </Badge>
             )}
@@ -121,29 +125,25 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         <h2 className="text-2xl font-medium">
           <Trans>Recent Events</Trans>
         </h2>
-        <Button
-          variant="subtle"
-          color="red"
-          className="shrink-0 whitespace-nowrap"
-          component={Link}
-          to="/events"
-          rightSection={<TbArrowRight size={14} />}
-        >
+        <LinkButton className="shrink-0 whitespace-nowrap" to="/events" variant={"neutral"}>
           <Trans>See All Events</Trans>
-        </Button>
+          {<TbArrowRight size={14} />}
+        </LinkButton>
       </div>
       {isLoading && (
         <div className="flex flex-row gap-2">
           {Array(5)
             .fill(0)
             .map((_, i) => (
-              <Skeleton width="100%" height={144} key={i} />
+              <Skeleton className="h-24" key={i} style={{ width: "100%" }} />
             ))}
         </div>
       )}
       {error && (
-        <Alert color="red">
-          <Trans>Failed to load events.</Trans>
+        <Alert variant={"destructive"}>
+          <AlertDescription>
+            <Trans>Failed to load events.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {!isLoading && !error && upcoming.length === 0 && (
@@ -152,22 +152,16 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
         </p>
       )}
       {!isLoading && !error && upcoming.length > 0 && (
-        <Carousel
-          slideSize={{ base: "100%", sm: "50%", lg: "33.333333%" }}
-          slideGap="calc(var(--spacing) * 2)"
-          controlSize={40}
-          controlsOffset={0}
-          emblaOptions={{ align: "start" }}
-          previousControlProps={{ "aria-label": t`Previous events` }}
-          nextControlProps={{ "aria-label": t`Next events` }}
-          classNames={{ root: "-mx-16", viewport: "px-16" }}
-          styles={{ viewport: { overflow: "visible", clipPath: "inset(-100rem 0)" } }}
-        >
-          {upcoming.map((e) => (
-            <Carousel.Slide key={e.id}>
-              <EventCard event={e} />
-            </Carousel.Slide>
-          ))}
+        <Carousel opts={{ align: "start" }} className="mx-12">
+          <CarouselContent>
+            {upcoming.map((e) => (
+              <CarouselItem key={e.id} className="sm:basis-1/2 lg:basis-1/3">
+                <EventCard event={e} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious aria-label={t`Previous events`} />
+          <CarouselNext aria-label={t`Next events`} />
         </Carousel>
       )}
     </section>

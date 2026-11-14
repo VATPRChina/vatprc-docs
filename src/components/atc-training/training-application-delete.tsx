@@ -1,7 +1,7 @@
 import { ConfirmButton } from "../ui/confirm-button";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -23,17 +23,18 @@ export const TrainingApplicationDeleteModal: FC<TrainingApplicationDeleteModalPr
   return (
     <div className="flex flex-col gap-1">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <ConfirmButton
-        variant="subtle"
-        size="compact-sm"
         actionDescription={<Trans>Are you sure to withdraw this training application?</Trans>}
         onClick={() => mutate({ params: { path: { id } } })}
-        loading={isPending}
-        disabled={disabled}
+        disabled={disabled || isPending}
+        aria-busy={isPending}
+        variant={"neutral"}
+        size={"sm"}
       >
         <Trans>Withdraw</Trans>
       </ConfirmButton>

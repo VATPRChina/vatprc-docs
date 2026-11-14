@@ -7,9 +7,12 @@ import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { BackButton } from "@/components/back-button";
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Skeleton, Tooltip } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbSchool } from "react-icons/tb";
@@ -29,8 +32,9 @@ function RouteComponent() {
     <div className="flex flex-col gap-4">
       <BackButton />
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <h2 className="text-2xl font-medium">
@@ -47,7 +51,7 @@ function RouteComponent() {
       </h2>
       <div className="flex flex-row gap-1">
         {isLoading ? (
-          <Skeleton h={24} w={144} />
+          <Skeleton className="h-24" style={{ width: 144 }} />
         ) : data?.user_id ? (
           <>
             <AtcPermissionModalButton userId={data.user_id} />
@@ -93,29 +97,52 @@ const MoodleAccountProvisionButton = ({
     <RequireRole role="tech-director">
       <div className="flex flex-col gap-1">
         {isSuccess && (
-          <Alert color="green">
-            <Trans>The Moodle account has been provisioned successfully.</Trans>
+          <Alert>
+            <AlertDescription>
+              <Trans>The Moodle account has been provisioned successfully.</Trans>
+            </AlertDescription>
           </Alert>
         )}
         {error && (
-          <Alert color="red" title={error.title}>
-            {error.detail}
+          <Alert variant={"destructive"}>
+            <AlertTitle>{error.title}</AlertTitle>
+            <AlertDescription>{error.detail}</AlertDescription>
           </Alert>
         )}
-        <Tooltip label={t`Moodle account already exists`} disabled={!hasMoodleAccount}>
-          <span>
-            <Button
-              size="xs"
-              onClick={() => mutate({ params: { path: { id: userId } } })}
-              leftSection={<TbSchool />}
-              variant="subtle"
-              loading={isPending}
-              disabled={hasMoodleAccount}
-            >
-              <Trans>Provision Moodle</Trans>
-            </Button>
-          </span>
-        </Tooltip>
+        {!hasMoodleAccount ? (
+          <>
+            <span>
+              <Button
+                size="xs"
+                onClick={() => mutate({ params: { path: { id: userId } } })}
+                disabled={hasMoodleAccount || isPending}
+                aria-busy={isPending}
+                variant={"neutral"}
+              >
+                {<TbSchool />}
+                <Trans>Provision Moodle</Trans>
+              </Button>
+            </span>
+          </>
+        ) : (
+          <Tooltip>
+            <TooltipTrigger render={<span className="inline-flex" />}>
+              <span>
+                <Button
+                  size="xs"
+                  onClick={() => mutate({ params: { path: { id: userId } } })}
+                  disabled={hasMoodleAccount || isPending}
+                  aria-busy={isPending}
+                  variant={"neutral"}
+                >
+                  {<TbSchool />}
+                  <Trans>Provision Moodle</Trans>
+                </Button>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>{t`Moodle account already exists`}</TooltipContent>
+          </Tooltip>
+        )}
       </div>
     </RequireRole>
   );

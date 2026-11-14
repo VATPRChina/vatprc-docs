@@ -3,11 +3,12 @@ import { IdentityChip } from "@/components/controller-center/identity-chip";
 import { ControllerCenterLoginPlaceholder } from "@/components/controller-center/login-placeholder";
 import { ResourceGrid } from "@/components/controller-center/resource-grid";
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers")({
@@ -70,8 +71,8 @@ function RouteComponent() {
         <h1 className="text-3xl font-medium">
           <Trans>Controller Center</Trans>
         </h1>
-        <Skeleton h={320} />
-        <Skeleton h={140} />
+        <Skeleton style={{ height: 320 }} />
+        <Skeleton style={{ height: 140 }} />
       </div>
     );
   }
@@ -96,8 +97,9 @@ function RouteComponent() {
         {isController && <IdentityChip />}
       </div>
       {(sessionError ?? statusError) && (
-        <Alert color="red" title={(sessionError ?? statusError)?.title}>
-          {(sessionError ?? statusError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(sessionError ?? statusError)?.title}</AlertTitle>
+          <AlertDescription>{(sessionError ?? statusError)?.detail}</AlertDescription>
         </Alert>
       )}
       {showTabs && (

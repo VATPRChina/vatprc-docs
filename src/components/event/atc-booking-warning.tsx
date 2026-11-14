@@ -1,8 +1,7 @@
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
-import { useInterval } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { TbExclamationCircle } from "react-icons/tb";
 
@@ -27,12 +26,11 @@ export const hasInsufficientAreaControllerBookings = (
 
 export const AtcBookingWarning = ({ eventId, eventStart }: { eventId: string; eventStart: string }) => {
   const [now, setNow] = useState(() => Date.now());
-  const interval = useInterval(() => setNow(Date.now()), 60_000);
 
   useEffect(() => {
-    interval.start();
-    return interval.stop;
-  }, [interval]);
+    const interval = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(interval);
+  }, []);
 
   const { data: positions, error } = $api.useQuery("get", "/api/events/{event_id}/controllers", {
     params: { path: { event_id: eventId } },
@@ -40,16 +38,21 @@ export const AtcBookingWarning = ({ eventId, eventStart }: { eventId: string; ev
 
   if (error) {
     return (
-      <Alert color="red" title={error.title}>
-        {error.detail}
+      <Alert variant={"destructive"}>
+        <AlertTitle>{error.title}</AlertTitle>
+        <AlertDescription>{error.detail}</AlertDescription>
       </Alert>
     );
   }
   if (!positions || !hasInsufficientAreaControllerBookings(eventStart, positions, now)) return null;
 
   return (
-    <Alert color="yellow" icon={<TbExclamationCircle />} title={<Trans>Insufficient controller bookings</Trans>}>
-      <Trans>Less than half of the configured area control positions have been booked for this event.</Trans>
+    <Alert>
+      {<TbExclamationCircle />}
+      <AlertTitle>{<Trans>Insufficient controller bookings</Trans>}</AlertTitle>
+      <AlertDescription>
+        <Trans>Less than half of the configured area control positions have been booked for this event.</Trans>
+      </AlertDescription>
     </Alert>
   );
 };

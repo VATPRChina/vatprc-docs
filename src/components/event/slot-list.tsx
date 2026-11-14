@@ -6,10 +6,11 @@ import { DateTime } from "./datetime";
 import { AssignEventSlot } from "./slot-assign";
 import { ExportSlot } from "./slot-export";
 import { ImportSlot } from "./slot-import";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isPast, isFuture } from "date-fns";
 import { FC } from "react";
@@ -116,8 +117,9 @@ const columns = [
       return (
         <div role="cell" className="flex flex-wrap items-center gap-1">
           {(bookError ?? releaseError) && (
-            <Alert color="red" title={(bookError ?? releaseError)?.title}>
-              {(bookError ?? releaseError)?.detail}
+            <Alert variant={"destructive"}>
+              <AlertTitle>{(bookError ?? releaseError)?.title}</AlertTitle>
+              <AlertDescription>{(bookError ?? releaseError)?.detail}</AlertDescription>
             </Alert>
           )}
           <RequireRole role={["event-coordinator", "controller"]}>
@@ -128,28 +130,29 @@ const columns = [
           </RequireRole>
           {!isBookedByCurrentUser && !isBookedByOtherUser && (
             <ConfirmButton
-              variant="subtle"
-              size="compact-sm"
-              disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit}
               onClick={onBook}
-              loading={isBookPending}
               actionDescription={<Trans>Are you sure to book the slot?</Trans>}
+              disabled={!isLoggedIn || !isInBookingPeriod || isBookPending || isOverBookingLimit || isBookPending}
+              aria-busy={isBookPending}
+              variant={"neutral"}
+              size={"sm"}
             >
               <Trans>Book</Trans>
             </ConfirmButton>
           )}
           {isBookedByOtherUser && (
-            <Button variant="subtle" size="compact-sm" disabled>
+            <Button disabled variant={"neutral"} size={"sm"}>
               <Trans>Already Booked</Trans>
             </Button>
           )}
           {isBookedByCurrentUser && (
             <ConfirmButton
-              variant="subtle"
-              size="compact-sm"
               onClick={onRelease}
-              loading={isReleasePending}
               actionDescription={<Trans>Are you sure to release the slot?</Trans>}
+              disabled={isReleasePending}
+              aria-busy={isReleasePending}
+              variant={"neutral"}
+              size={"sm"}
             >
               <Trans>Release</Trans>
             </ConfirmButton>
@@ -187,17 +190,24 @@ export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
         <ExportSlot eventId={eventId} />
       </h2>
       {(eventError ?? slotsError) && (
-        <Alert color="red" title={(eventError ?? slotsError)?.title}>
-          {(eventError ?? slotsError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(eventError ?? slotsError)?.title}</AlertTitle>
+          <AlertDescription>{(eventError ?? slotsError)?.detail}</AlertDescription>
         </Alert>
       )}
-      {!session && <Alert icon={<TbLockAccess />} color="blue" title={<Trans>Please login to book a slot.</Trans>} />}
+      {!session && (
+        <Alert>
+          {<TbLockAccess />}
+          <AlertTitle>{<Trans>Please login to book a slot.</Trans>}</AlertTitle>
+          <AlertDescription></AlertDescription>
+        </Alert>
+      )}
       {!isInBookingPeriod && (
-        <Alert
-          icon={<TbLockAccess />}
-          color="blue"
-          title={<Trans>The booking has not started yet or has ended.</Trans>}
-        />
+        <Alert>
+          {<TbLockAccess />}
+          <AlertTitle>{<Trans>The booking has not started yet or has ended.</Trans>}</AlertTitle>
+          <AlertDescription></AlertDescription>
+        </Alert>
       )}
       <RichTable data={slots} columns={columns} isLoading={isLoading} />
     </>

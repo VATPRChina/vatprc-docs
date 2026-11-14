@@ -1,8 +1,8 @@
 import { RequireRole } from "../require-role";
 import { ConfirmButton } from "../ui/confirm-button";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -27,16 +27,18 @@ export const AtcSlotDeleteButton: FC<AtcSlotDeleteButtonProps> = ({ eventId, pos
     <RequireRole role={["event-coordinator", "controller-training-mentor"]}>
       <div className="flex flex-col gap-1">
         {error && (
-          <Alert color="red" title={error.title}>
-            {error.detail}
+          <Alert variant={"destructive"}>
+            <AlertTitle>{error.title}</AlertTitle>
+            <AlertDescription>{error.detail}</AlertDescription>
           </Alert>
         )}
         <ConfirmButton
-          variant="subtle"
-          size="compact-sm"
           actionDescription={<Trans>Are you sure to delete this ATC position?</Trans>}
           onClick={() => mutate({ params: { path: { event_id: eventId, position_id: positionId } } })}
-          loading={isPending}
+          disabled={isPending}
+          aria-busy={isPending}
+          variant={"neutral"}
+          size={"sm"}
         >
           <Trans>Delete</Trans>
         </ConfirmButton>

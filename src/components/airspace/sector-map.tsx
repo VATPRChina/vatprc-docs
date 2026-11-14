@@ -1,9 +1,9 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { Map as MapView } from "@/components/airspace/map";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { $api } from "@/lib/client";
 import type { SectorFeatureCollection, SectorProperties } from "@/lib/sector-data";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { SegmentedControl } from "@mantine/core";
 import * as turf from "@turf/turf";
 import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { FilterSpecification } from "maplibre-gl";
@@ -106,21 +106,23 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
           </p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <SegmentedControl
-            size="xs"
+          <ToggleGroup
             aria-label={t`Filter sectors by controller type`}
-            value={controllerTypeFilter}
-            onChange={(value) => {
-              setControllerTypeFilter(value);
-              setSelection(undefined);
+            value={[controllerTypeFilter]}
+            onValueChange={(values) => {
+              const value = values[0];
+              if (value === "ALL" || value === "TWR" || value === "APP" || value === "CTR") {
+                setControllerTypeFilter(value);
+                setSelection(undefined);
+              }
             }}
-            data={[
-              { label: t`All`, value: "ALL" },
-              { label: "TWR", value: "TWR" },
-              { label: "APP", value: "APP" },
-              { label: "CTR", value: "CTR" },
-            ]}
-          />
+          >
+            {["ALL", "TWR", "APP", "CTR"].map((value) => (
+              <ToggleGroupItem key={value} value={value}>
+                {value === "ALL" ? t`All` : value}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
           <div className="flex gap-3 font-mono text-sm text-gray-700 dark:text-gray-300">
             <span className="flex items-center gap-1.5">
               <span className="size-3 bg-emerald-500/70" aria-hidden />

@@ -30,6 +30,15 @@ export default defineConfig(
   // reactHooks.configs.flat.recommended,
   router.configs["flat/recommended"],
   { ignores: ["app/lib/api.d.ts"] },
+  {
+    // Preserve upstream registry source without changing it to satisfy local lint conventions.
+    files: ["src/components/ui/badge.tsx", "src/components/ui/toggle.tsx"],
+    rules: { "@typescript-eslint/no-unused-vars": "off" },
+  },
+  {
+    files: ["src/components/ui/slider.tsx"],
+    rules: { "@typescript-eslint/no-unsafe-return": "off" },
+  },
   pluginLingui.configs["flat/recommended"],
   {
     files: ["**/*.test.{ts,tsx}"],

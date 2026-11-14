@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button, FileInput } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -31,8 +32,18 @@ function RouteComponent() {
         <Trans>Upload image</Trans>
       </h1>
       <div className="flex w-full max-w-3xl flex-row items-end gap-2">
-        <FileInput id="picture" onChange={onSelectFile} label="Picture" />
-        <Button onClick={onUpload} variant="secondary" loading={isPending}>
+        <label className="grid gap-2">
+          <span>
+            <Trans>Picture</Trans>
+          </span>
+          <Input
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={(event) => onSelectFile(event.currentTarget.files?.[0] ?? null)}
+          />
+        </label>
+        <Button onClick={onUpload} variant="neutral" disabled={isPending} aria-busy={isPending}>
           <Trans>Upload</Trans>
         </Button>
       </div>

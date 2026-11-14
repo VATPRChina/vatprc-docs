@@ -1,10 +1,15 @@
 import { FlightDetails } from "./flight-details";
 import { FlightRouteView } from "./flight-route";
+import { AlertDescription, Alert, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Textarea } from "@/components/ui/textarea";
 import type { operations } from "@/lib/api";
 import { usePermissions } from "@/lib/client";
 import { client } from "@/lib/client/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, NumberInput, Paper, Select, Textarea, TextInput } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -14,8 +19,10 @@ export function TemporaryFlightValidation() {
   const roles = usePermissions();
   if (!roles.includes("software-engineer")) {
     return (
-      <Alert color="red">
-        <Trans>Software engineer access required.</Trans>
+      <Alert variant={"destructive"}>
+        <AlertDescription>
+          <Trans>Software engineer access required.</Trans>
+        </AlertDescription>
       </Alert>
     );
   }
@@ -68,79 +75,142 @@ function TemporaryFlightValidationForm() {
       <p>
         <Trans>Enter a flight plan to run validation without filing it on VATSIM.</Trans>
       </p>
-      <Paper withBorder p="md">
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (validation.isPending) return;
-            const submitted = { ...plan };
-            for (const key of Object.keys(submitted) as (keyof typeof submitted)[]) {
-              if (key !== "cruising_level") submitted[key] = submitted[key].trim().toUpperCase();
-            }
-            validation.mutate(submitted);
-          }}
-          className="flex flex-col gap-4"
-        >
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <TextInput
-              label={t`Departure`}
-              placeholder="ZBAA"
-              required
-              pattern="[A-Za-z]{4}"
-              maxLength={4}
-              {...textField("departure")}
-            />
-            <TextInput
-              label={t`Arrival`}
-              placeholder="VHHH"
-              required
-              pattern="[A-Za-z]{4}"
-              maxLength={4}
-              {...textField("arrival")}
-            />
-            <TextInput label={t`Aircraft Type`} placeholder="B738" required {...textField("aircraft")} />
-            <Select
-              label={t`Flight Rules`}
-              data={[
-                { value: "I", label: "IFR" },
-                { value: "V", label: "VFR" },
-              ]}
-              value={plan.flight_rules}
-              allowDeselect={false}
-              onChange={(value) => setPlan((previous) => ({ ...previous, flight_rules: value ?? "I" }))}
-            />
-            <Select
-              label={t`Wake Category`}
-              data={["L", "M", "H", "J"]}
-              value={plan.wake_category}
-              allowDeselect={false}
-              onChange={(value) => setPlan((previous) => ({ ...previous, wake_category: value ?? "M" }))}
-            />
-            <NumberInput
-              label={t`Cruising Level (feet)`}
-              required
-              min={0}
-              step={100}
-              allowDecimal={false}
-              allowNegative={false}
-              value={plan.cruising_level}
-              onChange={(value) =>
-                setPlan((previous) => ({ ...previous, cruising_level: typeof value === "number" ? value : 0 }))
+      <Card>
+        <CardContent>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (validation.isPending) return;
+              const submitted = { ...plan };
+              for (const key of Object.keys(submitted) as (keyof typeof submitted)[]) {
+                if (key !== "cruising_level") submitted[key] = submitted[key].trim().toUpperCase();
               }
-            />
-            <TextInput label={t`Equipment`} placeholder="SDE2E3FGHIRWXY" {...textField("equipment")} />
-            <TextInput label={t`Transponder`} placeholder="LB1" {...textField("transponder")} />
-            <TextInput label={t`PBN`} placeholder="A1B1C1D1O1S1" {...textField("navigation_performance")} />
-          </div>
-          <Textarea label={t`Route`} autosize minRows={3} {...textField("raw_route")} />
-          <Button type="submit" loading={validation.isPending} className="self-start">
-            <Trans>Run Validation</Trans>
-          </Button>
-        </form>
-      </Paper>
+              validation.mutate(submitted);
+            }}
+            className="flex flex-col gap-4"
+          >
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Departure`}</span>
+                <Input
+                  aria-label={t`Departure`}
+                  placeholder="ZBAA"
+                  required
+                  pattern="[A-Za-z]{4}"
+                  maxLength={4}
+                  {...textField("departure")}
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Arrival`}</span>
+                <Input
+                  aria-label={t`Arrival`}
+                  placeholder="VHHH"
+                  required
+                  pattern="[A-Za-z]{4}"
+                  maxLength={4}
+                  {...textField("arrival")}
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Aircraft Type`}</span>
+                <Input aria-label={t`Aircraft Type`} placeholder="B738" required {...textField("aircraft")} />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Flight Rules`}</span>
+                <NativeSelect
+                  aria-label={t`Flight Rules`}
+                  value={plan.flight_rules ?? ""}
+                  onChange={(event) => {
+                    const value = event.currentTarget.value || null;
+                    return setPlan((previous) => ({ ...previous, flight_rules: value ?? "I" }));
+                  }}
+                >
+                  <NativeSelectOption value=""></NativeSelectOption>
+                  {[
+                    { value: "I", label: "IFR" },
+                    { value: "V", label: "VFR" },
+                  ].map((option) => {
+                    const item = typeof option === "string" ? { value: option, label: option } : option;
+                    return (
+                      <NativeSelectOption key={item.value} value={item.value}>
+                        {item.label}
+                      </NativeSelectOption>
+                    );
+                  })}
+                </NativeSelect>
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Wake Category`}</span>
+                <NativeSelect
+                  aria-label={t`Wake Category`}
+                  value={plan.wake_category ?? ""}
+                  onChange={(event) => {
+                    const value = event.currentTarget.value || null;
+                    return setPlan((previous) => ({ ...previous, wake_category: value ?? "M" }));
+                  }}
+                >
+                  <NativeSelectOption value=""></NativeSelectOption>
+                  {["L", "M", "H", "J"].map((option) => {
+                    const item = typeof option === "string" ? { value: option, label: option } : option;
+                    return (
+                      <NativeSelectOption key={item.value} value={item.value}>
+                        {item.label}
+                      </NativeSelectOption>
+                    );
+                  })}
+                </NativeSelect>
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Cruising Level (feet)`}</span>
+                <Input
+                  aria-label={t`Cruising Level (feet)`}
+                  required
+                  min={0}
+                  step={100}
+                  value={plan.cruising_level}
+                  type={"number"}
+                  onChange={(event) => {
+                    const value = event.currentTarget.valueAsNumber;
+                    return setPlan((previous) => ({
+                      ...previous,
+                      cruising_level: typeof value === "number" ? value : 0,
+                    }));
+                  }}
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Equipment`}</span>
+                <Input aria-label={t`Equipment`} placeholder="SDE2E3FGHIRWXY" {...textField("equipment")} />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`Transponder`}</span>
+                <Input aria-label={t`Transponder`} placeholder="LB1" {...textField("transponder")} />
+              </label>
+              <label className="grid gap-1.5 text-sm">
+                <span className="font-heading">{t`PBN`}</span>
+                <Input aria-label={t`PBN`} placeholder="A1B1C1D1O1S1" {...textField("navigation_performance")} />
+              </label>
+            </div>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-heading">{t`Route`}</span>
+              <Textarea aria-label={t`Route`} {...textField("raw_route")} rows={3} />
+            </label>
+            <Button
+              type="submit"
+              className="self-start"
+              disabled={validation.isPending}
+              aria-busy={validation.isPending}
+            >
+              <Trans>Run Validation</Trans>
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
       {validation.isError && (
-        <Alert color="red" title={t`Validation failed`} role="alert">
-          {validation.error.message}
+        <Alert role="alert" variant={"destructive"}>
+          <AlertTitle>{t`Validation failed`}</AlertTitle>
+          <AlertDescription>{validation.error.message}</AlertDescription>
         </Alert>
       )}
       {validation.data && (

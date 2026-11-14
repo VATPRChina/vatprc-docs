@@ -2,8 +2,8 @@ import { AtcApplicationForm } from "@/components/atc-application/atc-application
 import { BackButton } from "@/components/back-button";
 import { useCenterRoles } from "@/components/controller-center/center-context";
 import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/new")({
@@ -25,12 +25,15 @@ function RouteComponent() {
       <h2 className="text-2xl font-medium">
         <Trans>New ATC Application</Trans>
       </h2>
-      <Alert color="yellow" title={<Trans>Controller Application Guideline</Trans>}>
-        <Trans>
-          Please read the following instructions carefully, and make sure the criteria listed has been fully satisfied.
-          If a previous application has been rejected, it will be taked into consideration for future applications.
-          Chinese proficiency is currently required for all ATC applicants.
-        </Trans>
+      <Alert>
+        <AlertTitle>{<Trans>Controller Application Guideline</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>
+            Please read the following instructions carefully, and make sure the criteria listed has been fully
+            satisfied. If a previous application has been rejected, it will be taked into consideration for future
+            applications. Chinese proficiency is currently required for all ATC applicants.
+          </Trans>
+        </AlertDescription>
       </Alert>
       <DiscourseDocument document={document} cn="7188" en="7188" inline />
       <AtcApplicationForm />

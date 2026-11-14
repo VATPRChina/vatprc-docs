@@ -1,8 +1,8 @@
 import { components, paths } from "../api";
 import { authMiddleware } from "./auth";
 import { assumedRolesAtom, createRoleAssumptionMiddleware } from "./role-assumption";
+import { toast } from "@/components/ui/toast";
 import { Trans } from "@lingui/react/macro";
-import { notifications } from "@mantine/notifications";
 import { getDefaultStore } from "jotai";
 import createClient, { Middleware } from "openapi-fetch";
 import createQueryClient from "openapi-react-query";
@@ -44,10 +44,10 @@ const throwMiddleware: Middleware = {
 
     if (isNetworkError(body.type, body.detail)) {
       const detail = body.detail ?? "unknown network error";
-      notifications.show({
+      toast.add({
         title: <Trans>Network Error</Trans>,
-        message: <Trans>Failed to fetch contents due to {{ detail }}.</Trans>,
-        color: "red",
+        description: <Trans>Failed to fetch contents due to {{ detail }}.</Trans>,
+        type: "error",
       });
       return;
     }
@@ -73,10 +73,10 @@ const throwMiddleware: Middleware = {
         }),
       )
       .catch((sentryError) => console.error("Failed to report API error to Sentry", sentryError));
-    notifications.show({
+    toast.add({
       title: body.title ?? response.statusText,
-      message: body.detail,
-      color: "red",
+      description: body.detail,
+      type: "error",
     });
   },
 

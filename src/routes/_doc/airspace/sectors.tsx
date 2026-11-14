@@ -1,8 +1,9 @@
 import { SectorMap } from "@/components/airspace/sector-map";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import { fetchZbpeSectors } from "@/lib/sector-data";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -20,10 +21,11 @@ function Page() {
 
   return (
     <main className="container mx-auto flex flex-col gap-4">
-      {isLoading && <Skeleton height={480} />}
+      {isLoading && <Skeleton style={{ height: 480 }} />}
       {error && (
-        <Alert color="red" title={<Trans>Failed to load sector data.</Trans>}>
-          {error.message}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{<Trans>Failed to load sector data.</Trans>}</AlertTitle>
+          <AlertDescription>{error.message}</AlertDescription>
         </Alert>
       )}
       {data && <SectorMap sectorData={data} />}

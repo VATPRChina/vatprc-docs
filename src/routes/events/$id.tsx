@@ -6,9 +6,11 @@ import { CreateEvent } from "@/components/event/event-create";
 import { EventDetail } from "@/components/event/event-detail";
 import { SlotList } from "@/components/event/slot-list";
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Skeleton, Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbAirTrafficControl, TbCalendar, TbHistory } from "react-icons/tb";
 
@@ -30,11 +32,12 @@ function RouteComponent() {
   return (
     <div className="flex flex-col gap-4">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
-      {isLoading && <Skeleton h={320} />}
+      {isLoading && <Skeleton style={{ height: 320 }} />}
       {event && (
         <div key={event.id} className="flex flex-col gap-4">
           <BackButton />
@@ -57,32 +60,32 @@ function RouteComponent() {
             </div>
           </div>
           <Tabs defaultValue={event.start_booking_at && event.end_booking_at ? "slot" : "controller"}>
-            <Tabs.List className="mb-2">
-              <Tabs.Tab value="slot" leftSection={<TbCalendar />}>
+            <TabsList className="mb-2">
+              <TabsTrigger value="slot">
+                {<TbCalendar />}
                 <Trans>Slots</Trans>
-              </Tabs.Tab>
-              <Tabs.Tab value="controller" leftSection={<TbAirTrafficControl />}>
+              </TabsTrigger>
+              <TabsTrigger value="controller">
+                {<TbAirTrafficControl />}
                 <Trans>Controllers</Trans>
-              </Tabs.Tab>
+              </TabsTrigger>
               <RequireRole role="volunteer">
-                <Tabs.Tab value="audit" leftSection={<TbHistory />}>
+                <TabsTrigger value="audit">
+                  {<TbHistory />}
                   <Trans>Audit Logs</Trans>
-                </Tabs.Tab>
+                </TabsTrigger>
               </RequireRole>
-            </Tabs.List>
-
-            <Tabs.Panel value="slot" className="flex flex-col gap-1">
+            </TabsList>
+            <TabsContent value="slot" className="flex flex-col gap-1">
               <SlotList eventId={event.id} />
-            </Tabs.Panel>
-
-            <Tabs.Panel value="controller" className="flex flex-col gap-1">
+            </TabsContent>
+            <TabsContent value="controller" className="flex flex-col gap-1">
               <AtcSlotList eventId={event.id} />
-            </Tabs.Panel>
-
+            </TabsContent>
             <RequireRole role="volunteer">
-              <Tabs.Panel value="audit" className="flex flex-col gap-1">
+              <TabsContent value="audit" className="flex flex-col gap-1">
                 <EventAuditLogPanel eventId={event.id} />
-              </Tabs.Panel>
+              </TabsContent>
             </RequireRole>
           </Tabs>
         </div>

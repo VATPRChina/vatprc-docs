@@ -1,17 +1,24 @@
 import { DateTime } from "../event/datetime";
 import { ConfirmButton } from "../ui/confirm-button";
 import { DateTimeInput } from "../ui/datetime-input";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/helpers";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Anchor, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { addHours, formatISO } from "date-fns";
+import { useState as useDisclosureState } from "react";
 import { FC, SubmitEvent } from "react";
 import { TbEdit, TbPlus, TbTrash } from "react-icons/tb";
 
@@ -36,7 +43,9 @@ const invalidateBookings = async (queryClient: ReturnType<typeof useQueryClient>
 const BookingModal: FC<{ booking?: Booking }> = ({ booking }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const open = () => setOpened(true);
+  const close = () => setOpened(false);
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
     await invalidateBookings(queryClient);
@@ -84,79 +93,118 @@ const BookingModal: FC<{ booking?: Booking }> = ({ booking }) => {
   return (
     <>
       {booking ? (
-        <Button variant="subtle" size="compact-sm" leftSection={<TbEdit />} onClick={open}>
+        <Button onClick={open} variant={"neutral"} size={"sm"}>
+          {<TbEdit />}
           <Trans>Edit</Trans>
         </Button>
       ) : (
-        <Button variant="outline" leftSection={<TbPlus />} onClick={open}>
+        <Button onClick={open} variant={"neutral"}>
+          {<TbPlus />}
           <Trans>Book ATC Position</Trans>
         </Button>
       )}
-      <Modal opened={opened} onClose={close} title={booking ? t`Edit ATC Booking` : t`Book ATC Position`} size="lg">
-        <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          {(createError ?? updateError) && (
-            <Alert color="red" title={(createError ?? updateError)?.title}>
-              {(createError ?? updateError)?.detail}
-            </Alert>
-          )}
-          <form.Field name="callsign">
-            {(field) => (
-              <TextInput
-                label={t`Callsign`}
-                placeholder="ZBAA_TWR"
-                value={field.state.value}
-                onChange={(event) => field.handleChange(event.currentTarget.value.toUpperCase())}
-                onBlur={field.handleBlur}
-                error={field.state.meta.errors.join("")}
-                required
-              />
+      <Dialog
+        open={opened}
+        onOpenChange={(open) => {
+          if (!open) close();
+        }}
+      >
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>{booking ? t`Edit ATC Booking` : t`Book ATC Position`}</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4">
+            {(createError ?? updateError) && (
+              <Alert variant={"destructive"}>
+                <AlertTitle>{(createError ?? updateError)?.title}</AlertTitle>
+                <AlertDescription>{(createError ?? updateError)?.detail}</AlertDescription>
+              </Alert>
             )}
-          </form.Field>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            <form.Field name="start_at">
+            <form.Field name="callsign">
               {(field) => (
-                <DateTimeInput
-                  label={t`Start at`}
-                  value={field.state.value ? new Date(field.state.value) : null}
-                  onChange={(value) => value && field.handleChange(formatISO(value, { in: utc }))}
-                  onBlur={field.handleBlur}
-                  error={field.state.meta.errors.join("")}
-                  required
-                />
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Callsign`}</span>
+                  <Input
+                    aria-label={t`Callsign`}
+                    placeholder="ZBAA_TWR"
+                    value={field.state.value}
+                    onChange={(event) => field.handleChange(event.currentTarget.value.toUpperCase())}
+                    onBlur={field.handleBlur}
+                    required
+                    aria-invalid={!!field.state.meta.errors.join("")}
+                  />
+                  {field.state.meta.errors.join("") && (
+                    <span role="alert" className="text-xs text-red-600">
+                      {field.state.meta.errors.join("")}
+                    </span>
+                  )}
+                </label>
               )}
             </form.Field>
-            <form.Field name="end_at">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <form.Field name="start_at">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Start at`}</span>
+                    <DateTimeInput
+                      aria-label={t`Start at`}
+                      value={field.state.value ? new Date(field.state.value) : null}
+                      onChange={(value) => value && field.handleChange(formatISO(value, { in: utc }))}
+                      onBlur={field.handleBlur}
+                      required
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="end_at">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`End at`}</span>
+                    <DateTimeInput
+                      aria-label={t`End at`}
+                      value={field.state.value ? new Date(field.state.value) : null}
+                      onChange={(value) => value && field.handleChange(formatISO(value, { in: utc }))}
+                      onBlur={field.handleBlur}
+                      required
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+            </div>
+            <form.Field name="remarks">
               {(field) => (
-                <DateTimeInput
-                  label={t`End at`}
-                  value={field.state.value ? new Date(field.state.value) : null}
-                  onChange={(value) => value && field.handleChange(formatISO(value, { in: utc }))}
-                  onBlur={field.handleBlur}
-                  error={field.state.meta.errors.join("")}
-                  required
-                />
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Remarks`}</span>
+                  <Textarea
+                    aria-label={t`Remarks`}
+                    value={field.state.value ?? ""}
+                    onChange={(event) => field.handleChange(event.currentTarget.value)}
+                    onBlur={field.handleBlur}
+                    rows={2}
+                  />
+                </label>
               )}
             </form.Field>
-          </div>
-          <form.Field name="remarks">
-            {(field) => (
-              <Textarea
-                label={t`Remarks`}
-                value={field.state.value ?? ""}
-                onChange={(event) => field.handleChange(event.currentTarget.value)}
-                onBlur={field.handleBlur}
-                autosize
-                minRows={2}
-              />
-            )}
-          </form.Field>
-          <div>
-            <Button type="submit" loading={isCreating || isUpdating}>
-              {booking ? <Trans>Save</Trans> : <Trans>Book</Trans>}
-            </Button>
-          </div>
-        </form>
-      </Modal>
+            <div>
+              <Button type="submit" disabled={isCreating || isUpdating} aria-busy={isCreating || isUpdating}>
+                {booking ? <Trans>Save</Trans> : <Trans>Book</Trans>}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
@@ -173,13 +221,13 @@ const CancelBookingButton: FC<{ booking: Booking }> = ({ booking }) => {
     <>
       <ConfirmButton
         actionDescription={<Trans>Cancel the booking for {callsign}?</Trans>}
-        color="red"
-        variant="subtle"
-        size="compact-sm"
-        leftSection={<TbTrash />}
         onClick={cancel}
-        loading={isPending}
+        disabled={isPending}
+        aria-busy={isPending}
+        variant={"neutral"}
+        size={"sm"}
       >
+        {<TbTrash />}
         <Trans>Cancel</Trans>
       </ConfirmButton>
       {error && <span className="text-sm text-red-700 dark:text-red-300">{error.detail}</span>}
@@ -199,10 +247,11 @@ export const MyAtcBookings: FC = () => {
         </h2>
         <BookingModal />
       </div>
-      {isLoading && <Skeleton h={96} />}
+      {isLoading && <Skeleton style={{ height: 96 }} />}
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       {data && data.length === 0 && (
@@ -216,32 +265,31 @@ export const MyAtcBookings: FC = () => {
             const event = booking.event_position?.event;
             const eventTitle = event && (i18n.locale === "en" ? (event.title_en ?? event.title) : event.title);
             return (
-              <Card key={booking.id} withBorder className="flex flex-col items-start gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-base font-bold">{booking.callsign}</span>
-                  {event && (
-                    <Badge variant="light" color="gray">
-                      <Trans>Event</Trans>
-                    </Badge>
-                  )}
-                </div>
-                <DateTime>{booking.start_at}</DateTime>
-                <DateTime>{booking.end_at}</DateTime>
-                {booking.remarks && <p className="text-sm text-gray-700 dark:text-gray-300">{booking.remarks}</p>}
-                {event && (
-                  <Anchor
-                    renderRoot={(props) => <Link to="/events/$id" params={{ id: event.id }} {...props} />}
-                    size="sm"
-                  >
-                    {eventTitle}
-                  </Anchor>
-                )}
-                {!event && (
-                  <div className="flex flex-wrap items-center gap-1">
-                    <BookingModal booking={booking} />
-                    <CancelBookingButton booking={booking} />
+              <Card key={booking.id} className="flex flex-col items-start gap-1">
+                <CardContent>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-base font-bold">{booking.callsign}</span>
+                    {event && (
+                      <Badge>
+                        <Trans>Event</Trans>
+                      </Badge>
+                    )}
                   </div>
-                )}
+                  <DateTime>{booking.start_at}</DateTime>
+                  <DateTime>{booking.end_at}</DateTime>
+                  {booking.remarks && <p className="text-sm text-gray-700 dark:text-gray-300">{booking.remarks}</p>}
+                  {event && (
+                    <Link to="/events/$id" params={{ id: event.id }}>
+                      {eventTitle}
+                    </Link>
+                  )}
+                  {!event && (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <BookingModal booking={booking} />
+                      <CancelBookingButton booking={booking} />
+                    </div>
+                  )}
+                </CardContent>
               </Card>
             );
           })}

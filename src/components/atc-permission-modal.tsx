@@ -1,21 +1,26 @@
 import { RequireRole } from "./require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/helpers";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Checkbox, Modal, Select } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { endOfDay, format, parse } from "date-fns";
+import { useState as useDisclosureState } from "react";
 import { ComponentProps, FC, FormEventHandler } from "react";
 import { TbAirTrafficControl } from "react-icons/tb";
 
-interface AtcPermissionModalProps extends ComponentProps<typeof Modal> {
+interface AtcPermissionModalProps extends ComponentProps<typeof Dialog> {
   userId: string;
 }
 
@@ -84,164 +89,219 @@ export const AtcPermissionModal: FC<AtcPermissionModalProps> = ({ userId, ...pro
   };
 
   return (
-    <Modal {...props} title={<Trans>Edit ATC permissions</Trans>} size="lg">
-      <form onSubmit={onSave}>
-        <div className="flex flex-col gap-4">
-          {(loadError ?? mutationError) && (
-            <Alert color="red" title={(loadError ?? mutationError)?.title}>
-              {(loadError ?? mutationError)?.detail}
-            </Alert>
-          )}
-          <form.Field name="is_visiting">
-            {(field) => (
-              <Checkbox
-                label={t`Visiting`}
-                checked={field.state.value}
-                onChange={(e) => field.handleChange(e.target.checked)}
-                onBlur={field.handleBlur}
-                disabled={isPending || isMutating}
-              />
+    <Dialog {...props}>
+      <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+        <DialogHeader>
+          <DialogTitle>{<Trans>Edit ATC permissions</Trans>}</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={onSave}>
+          <div className="flex flex-col gap-4">
+            {(loadError ?? mutationError) && (
+              <Alert variant={"destructive"}>
+                <AlertTitle>{(loadError ?? mutationError)?.title}</AlertTitle>
+                <AlertDescription>{(loadError ?? mutationError)?.detail}</AlertDescription>
+              </Alert>
             )}
-          </form.Field>
-          <form.Field name="is_absent">
-            {(field) => (
-              <Checkbox
-                label={t`Absent`}
-                checked={field.state.value}
-                onChange={(e) => {
-                  const isAbsent = e.target.checked;
-                  field.handleChange(isAbsent);
+            <form.Field name="is_visiting">
+              {(field) => (
+                <Label className="flex items-center gap-2">
+                  <Checkbox
+                    checked={field.state.value}
+                    onBlur={field.handleBlur}
+                    disabled={isPending || isMutating}
+                    onCheckedChange={(nextChecked) => {
+                      const e = nextChecked;
+                      return field.handleChange(e);
+                    }}
+                  />
+                  <span>{t`Visiting`}</span>
+                </Label>
+              )}
+            </form.Field>
+            <form.Field name="is_absent">
+              {(field) => (
+                <Label className="flex items-center gap-2">
+                  <Checkbox
+                    checked={field.state.value}
+                    onBlur={field.handleBlur}
+                    disabled={isPending || isMutating}
+                    onCheckedChange={(nextChecked) => {
+                      const e = nextChecked;
+                      const isAbsent = e;
+                      field.handleChange(isAbsent);
 
-                  if (isAbsent) {
-                    form.setFieldValue(
-                      "permissions",
-                      form.state.values.permissions.map((permission) =>
-                        permission.state === "student"
-                          ? permission
-                          : { ...permission, state: "under-mentor", solo_expires_at: null },
-                      ),
-                    );
-                  }
-                }}
-                onBlur={field.handleBlur}
-                disabled={isPending || isMutating}
-              />
-            )}
-          </form.Field>
-          <form.Field name="rating">
-            {(field) => (
-              <Select
-                label={t`Rating`}
-                value={field.state.value}
-                data={["OBS", "S1", "S2", "S3", "C1", "C3", "I1", "I3"]}
-                onChange={(e) => e && field.handleChange(e)}
-                onBlur={field.handleBlur}
-                disabled={isPending || isMutating}
-              />
-            )}
-          </form.Field>
-          <form.Field name="permissions" mode="array">
-            {(parentField) =>
-              POSITION_KINDS_MAP.entries()
-                .map(([kindId, kindName]) => (
-                  <form.Subscribe
-                    key={kindId}
-                    selector={(state) => state.values.permissions.findIndex((p) => p.position_kind_id === kindId)}
+                      if (isAbsent) {
+                        form.setFieldValue(
+                          "permissions",
+                          form.state.values.permissions.map((permission) =>
+                            permission.state === "student"
+                              ? permission
+                              : { ...permission, state: "under-mentor", solo_expires_at: null },
+                          ),
+                        );
+                      }
+                    }}
+                  />
+                  <span>{t`Absent`}</span>
+                </Label>
+              )}
+            </form.Field>
+            <form.Field name="rating">
+              {(field) => (
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Rating`}</span>
+                  <NativeSelect
+                    aria-label={t`Rating`}
+                    onBlur={field.handleBlur}
+                    disabled={isPending || isMutating}
+                    value={field.state.value ?? ""}
+                    onChange={(event) => {
+                      const e = event.currentTarget.value || null;
+                      return e && field.handleChange(e);
+                    }}
                   >
-                    {(idx) => (
-                      <>
-                        <form.Field name={`permissions[${idx}].state`}>
-                          {(field) => (
-                            <Select
-                              label={i18n._(kindName)}
-                              data={POSITION_STATE_MAP.entries()
-                                .map(([id, name]) => ({ value: id, label: i18n._(name) }))
-                                .toArray()}
-                              value={idx >= 0 ? field.state.value : null}
-                              placeholder={t`No permission`}
-                              clearable
-                              className="flex-1"
-                              onChange={(value) => {
-                                if (!value) {
-                                  parentField.removeValue(idx);
-                                } else if (idx >= 0) {
-                                  field.handleChange(value);
-                                  if (value !== "solo") {
-                                    form.setFieldValue(`permissions[${idx}].solo_expires_at`, null);
-                                  }
-                                } else {
-                                  parentField.insertValue(idx, {
-                                    position_kind_id: kindId,
-                                    state: value,
-                                    solo_expires_at: null,
-                                  });
-                                }
-                              }}
-                              onBlur={field.handleBlur}
-                              disabled={isPending || isMutating}
-                            />
-                          )}
-                        </form.Field>
-                        <form.Subscribe selector={(state) => state.values.permissions[idx]?.state}>
-                          {(value) =>
-                            value === "solo" && (
-                              <form.Field name={`permissions[${idx}].solo_expires_at`}>
-                                {(field) => (
-                                  <DateInput
-                                    label={t`Solo Expiration Date`}
-                                    value={field.state.value && format(field.state.value, "yyyy-MM-dd", { in: utc })}
-                                    onChange={(v) => {
-                                      field.handleChange(
-                                        v !== null
-                                          ? endOfDay(parse(v, "yyyy-MM-dd", Date.now(), { in: utc }), {
-                                              in: utc,
-                                            }).toISOString()
-                                          : null,
-                                      );
-                                    }}
-                                    valueFormat="YYYY-MM-DD"
-                                    clearable
-                                    className="flex-1"
-                                    disabled={isPending || isMutating}
-                                  />
-                                )}
-                              </form.Field>
-                            )
-                          }
-                        </form.Subscribe>
-                      </>
-                    )}
-                  </form.Subscribe>
-                ))
-                .toArray()
-            }
-          </form.Field>
-          <Button variant="subtle" type="submit" loading={isPending || isMutating}>
-            <Trans>Save</Trans>
-          </Button>
-        </div>
-      </form>
-    </Modal>
+                    <NativeSelectOption value=""></NativeSelectOption>
+                    {["OBS", "S1", "S2", "S3", "C1", "C3", "I1", "I3"].map((option) => {
+                      const item = typeof option === "string" ? { value: option, label: option } : option;
+                      return (
+                        <NativeSelectOption key={item.value} value={item.value}>
+                          {item.label}
+                        </NativeSelectOption>
+                      );
+                    })}
+                  </NativeSelect>
+                </label>
+              )}
+            </form.Field>
+            <form.Field name="permissions" mode="array">
+              {(parentField) =>
+                POSITION_KINDS_MAP.entries()
+                  .map(([kindId, kindName]) => (
+                    <form.Subscribe
+                      key={kindId}
+                      selector={(state) => state.values.permissions.findIndex((p) => p.position_kind_id === kindId)}
+                    >
+                      {(idx) => (
+                        <>
+                          <form.Field name={`permissions[${idx}].state`}>
+                            {(field) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{i18n._(kindName)}</span>
+                                <NativeSelect
+                                  aria-label={i18n._(kindName)}
+                                  className="flex-1"
+                                  onBlur={field.handleBlur}
+                                  disabled={isPending || isMutating}
+                                  value={(idx >= 0 ? field.state.value : null) ?? ""}
+                                  onChange={(event) => {
+                                    const value = event.currentTarget.value || null;
+                                    if (!value) {
+                                      parentField.removeValue(idx);
+                                    } else if (idx >= 0) {
+                                      field.handleChange(value as components["schemas"]["UserControllerState"]);
+                                      if (value !== "solo") {
+                                        form.setFieldValue(`permissions[${idx}].solo_expires_at`, null);
+                                      }
+                                    } else {
+                                      parentField.insertValue(idx, {
+                                        position_kind_id: kindId,
+                                        state: value as components["schemas"]["UserControllerState"],
+                                        solo_expires_at: null,
+                                      });
+                                    }
+                                  }}
+                                >
+                                  <NativeSelectOption value="">{t`No permission`}</NativeSelectOption>
+                                  {(
+                                    POSITION_STATE_MAP.entries()
+                                      .map(([id, name]) => ({ value: id, label: i18n._(name) }))
+                                      .toArray() ?? []
+                                  ).map((option) => {
+                                    const item = typeof option === "string" ? { value: option, label: option } : option;
+                                    return (
+                                      <NativeSelectOption key={item.value} value={item.value}>
+                                        {item.label}
+                                      </NativeSelectOption>
+                                    );
+                                  })}
+                                </NativeSelect>
+                              </label>
+                            )}
+                          </form.Field>
+                          <form.Subscribe selector={(state) => state.values.permissions[idx]?.state}>
+                            {(value) =>
+                              value === "solo" && (
+                                <form.Field name={`permissions[${idx}].solo_expires_at`}>
+                                  {(field) => (
+                                    <label className="grid gap-1.5 text-sm">
+                                      <span className="font-heading">{t`Solo Expiration Date`}</span>
+                                      <Input
+                                        aria-label={t`Solo Expiration Date`}
+                                        className="flex-1"
+                                        disabled={isPending || isMutating}
+                                        type={"date"}
+                                        value={
+                                          (field.state.value && format(field.state.value, "yyyy-MM-dd", { in: utc })) ??
+                                          ""
+                                        }
+                                        onChange={(event) => {
+                                          const v = event.currentTarget.value || null;
+                                          field.handleChange(
+                                            v !== null
+                                              ? endOfDay(parse(v, "yyyy-MM-dd", Date.now(), { in: utc }), {
+                                                  in: utc,
+                                                }).toISOString()
+                                              : null,
+                                          );
+                                        }}
+                                      />
+                                    </label>
+                                  )}
+                                </form.Field>
+                              )
+                            }
+                          </form.Subscribe>
+                        </>
+                      )}
+                    </form.Subscribe>
+                  ))
+                  .toArray()
+              }
+            </form.Field>
+            <Button
+              type="submit"
+              disabled={isPending || isMutating}
+              aria-busy={isPending || isMutating}
+              variant={"neutral"}
+            >
+              <Trans>Save</Trans>
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 
 export const AtcPermissionModalButton: FC<{ userId: string; iconOnly?: boolean }> = ({ userId, iconOnly = false }) => {
   const { t } = useLingui();
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const open = () => setOpened(true);
   const label = t`Edit ATC permissions`;
 
   return (
     <RequireRole role="controller-training-director-assistant">
       {iconOnly ? (
-        <ActionIcon variant="subtle" size="sm" onClick={open} aria-label={label} title={label}>
+        <Button onClick={open} aria-label={label} title={label} size={"icon-sm"} variant={"neutral"}>
           <TbAirTrafficControl />
-        </ActionIcon>
+        </Button>
       ) : (
-        <Button size="xs" onClick={open} leftSection={<TbAirTrafficControl />} variant="subtle">
+        <Button size="xs" onClick={open} variant={"neutral"}>
+          {<TbAirTrafficControl />}
           <Trans>ATC Permission</Trans>
         </Button>
       )}
-      {opened && <AtcPermissionModal userId={userId} opened={opened} onClose={close} />}
+      {opened && <AtcPermissionModal userId={userId} open={opened} onOpenChange={setOpened} />}
     </RequireRole>
   );
 };

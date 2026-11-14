@@ -1,12 +1,13 @@
 import { User } from "../app/user";
 import { RichTable, RichTableFeatures } from "../table";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { components } from "@/lib/api";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Code, ScrollArea, Spoiler } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { TbAlertTriangle } from "react-icons/tb";
@@ -96,17 +97,19 @@ const diffLinePrefix = (kind: DiffLine["kind"]) => {
 };
 
 const DiffCell = ({ before, after }: { before: unknown; after: unknown }) => (
-  <Spoiler maxHeight={160} showLabel={<Trans>Show more</Trans>} hideLabel={<Trans>Show less</Trans>}>
-    <ScrollArea maw={720}>
-      <Code block className="min-w-max">
+  <details>
+    <summary>{<Trans>Show more</Trans>}</summary>
+    <ScrollArea>
+      <code className="min-w-max">
         {diffJsonByLine(before, after).map((line, index) => (
           <span key={index} className={`block px-1 whitespace-pre ${diffLineClassName(line.kind)}`}>
-            {diffLinePrefix(line.kind)} {line.text}
+            {diffLinePrefix(line.kind)}
+            {line.text}
           </span>
         ))}
-      </Code>
+      </code>
     </ScrollArea>
-  </Spoiler>
+  </details>
 );
 
 const EntityCell = ({ entity }: { entity?: null | components["schemas"]["AuditLogEntityDto"] }) => {
@@ -117,7 +120,7 @@ const EntityCell = ({ entity }: { entity?: null | components["schemas"]["AuditLo
   return (
     <div className="flex max-w-56 flex-col gap-1">
       <span>{localizeWithMap(AUDIT_LOG_ENTITY_KIND, entity.kind, i18n)}</span>
-      <Code>{entity.id}</Code>
+      <code>{entity.id}</code>
     </div>
   );
 };
@@ -160,8 +163,10 @@ export const AuditLogTable = ({ data, error, isLoading }: AuditLogTableProps) =>
 
   if (error) {
     return (
-      <Alert color="red" title={<Trans>Failed to load audit logs</Trans>} icon={<TbAlertTriangle />}>
-        {errorMessage ?? <Trans>Please try again later.</Trans>}
+      <Alert variant={"destructive"}>
+        {<TbAlertTriangle />}
+        <AlertTitle>{<Trans>Failed to load audit logs</Trans>}</AlertTitle>
+        <AlertDescription>{errorMessage ?? <Trans>Please try again later.</Trans>}</AlertDescription>
       </Alert>
     );
   }

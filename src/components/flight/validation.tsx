@@ -1,37 +1,37 @@
 import { PROBLEM_LABELS, ProblemDetails, VALIDATION_STATUS, VALIDATOR_NAMES } from "./message";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { matchesValidationField } from "@/lib/validation-field";
 import { Trans } from "@lingui/react/macro";
-import { Popover, Tooltip, Badge, Alert, Anchor } from "@mantine/core";
-import { createContext, FC, useContext } from "react";
+import { createContext, FC, useContext, useId } from "react";
 import { TbAlertSquareRounded } from "react-icons/tb";
 
 export const FlightValidationContext = createContext<components["schemas"]["FlightValidationDto"] | null>(null);
 
 function ValidationTag({ result }: { result: components["schemas"]["ValidatorExecutionDto"]; compact?: boolean }) {
   const validatorName = VALIDATOR_NAMES[result.id];
-  const { short, name, color } = VALIDATION_STATUS[result.status];
+  const { short, name } = VALIDATION_STATUS[result.status];
   return (
-    <Popover withArrow>
-      <Popover.Target>
-        <Tooltip label={validatorName}>
-          <Badge component="button" type="button" variant="filled" color={color} size="sm" radius="xs">
-            {short}
-          </Badge>
-        </Tooltip>
-      </Popover.Target>
-      <Popover.Dropdown>
+    <Popover>
+      <Tooltip>
+        <TooltipTrigger render={<PopoverTrigger render={<Badge render={<button type="button" />} />} />}>
+          {short}
+        </TooltipTrigger>
+        <TooltipContent>{validatorName}</TooltipContent>
+      </Tooltip>
+      <PopoverContent>
         <div className="flex flex-col gap-2">
           <div>
             <strong className="text-sm">{validatorName}</strong>
-            <Badge variant="filled" color={color} size="sm" radius="xs" className="ml-2">
-              {name}
-            </Badge>
+            <Badge className="ml-2">{name}</Badge>
           </div>
           <ValidationLocation field={result.field} />
           <ValidationProblems problems={result.problems} />
         </div>
-      </Popover.Dropdown>
+      </PopoverContent>
     </Popover>
   );
 }
@@ -124,15 +124,15 @@ interface ValidationProblemProps {
   problem: components["schemas"]["ValidationProblemDto"];
 }
 
-const ValidationProblem: FC<ValidationProblemProps> = ({ validator, problem }) => {
+const ValidationProblem: FC<ValidationProblemProps> = ({ problem }) => {
+  const titleId = useId();
   return (
-    <Alert
-      title={PROBLEM_LABELS[problem.kind]}
-      icon={<TbAlertSquareRounded />}
-      variant="outline"
-      color={VALIDATION_STATUS[validator.status].color}
-    >
-      <ProblemDetails problem={problem} />
+    <Alert aria-labelledby={titleId}>
+      {<TbAlertSquareRounded />}
+      <AlertTitle id={titleId}>{PROBLEM_LABELS[problem.kind]}</AlertTitle>
+      <AlertDescription>
+        <ProblemDetails problem={problem} />
+      </AlertDescription>
     </Alert>
   );
 };
@@ -155,9 +155,9 @@ export const ValidationResult: FC<{ temporary?: boolean }> = ({ temporary = fals
         <p>
           <Trans>
             Your flight plan has some problems, please
-            <Anchor href="https://my.vatsim.net/pilots/flightplan/" target="_blank" rel="noopener noreferrer">
+            <a href="https://my.vatsim.net/pilots/flightplan/" target="_blank" rel="noopener noreferrer">
               &nbsp;edit your flight plan on VATSIM&nbsp;
-            </Anchor>
+            </a>
             according to the information below.
           </Trans>
         </p>

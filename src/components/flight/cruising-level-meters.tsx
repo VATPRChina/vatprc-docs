@@ -1,6 +1,6 @@
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { getCruisingLevelInMeters, formatCruisingLevelInMeters } from "@/lib/altitude";
 import { useLingui } from "@lingui/react/macro";
-import { Tooltip } from "@mantine/core";
 
 export const CruisingLevelMeters = ({ feet }: { feet: number }) => {
   const { t } = useLingui();
@@ -10,10 +10,13 @@ export const CruisingLevelMeters = ({ feet }: { feet: number }) => {
   if (!isChinaRvsm) return metricAltitude;
 
   return (
-    <Tooltip label={t`China RVSM`}>
-      <span className="text-muted-foreground text-sm underline decoration-dotted underline-offset-2">
-        {formatCruisingLevelInMeters(feet)}
-      </span>
+    <Tooltip>
+      <TooltipTrigger render={<span className="inline-flex" />}>
+        <span className="text-muted-foreground text-sm underline decoration-dotted underline-offset-2">
+          {formatCruisingLevelInMeters(feet)}
+        </span>
+      </TooltipTrigger>
+      <TooltipContent>{t`China RVSM`}</TooltipContent>
     </Tooltip>
   );
 };

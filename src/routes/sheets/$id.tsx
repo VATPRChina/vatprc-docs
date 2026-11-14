@@ -1,8 +1,13 @@
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { promiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/helpers";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Card, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -180,31 +185,37 @@ function RouteComponent() {
         }}
       >
         {sheetError && (
-          <Alert color="red" title={sheetError.title}>
-            {sheetError.detail}
+          <Alert variant={"destructive"}>
+            <AlertTitle>{sheetError.title}</AlertTitle>
+            <AlertDescription>{sheetError.detail}</AlertDescription>
           </Alert>
         )}
         <form.Field name="name">
           {(field) => (
-            <TextInput
-              label={t`Sheet name`}
-              value={field.state.value}
-              onChange={(event) => field.handleChange(event.currentTarget.value)}
-              onBlur={field.handleBlur}
-              disabled={isSheetLoading}
-              error={field.state.meta.errors[0]}
-            />
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-heading">{t`Sheet name`}</span>
+              <Input
+                aria-label={t`Sheet name`}
+                value={field.state.value}
+                onChange={(event) => field.handleChange(event.currentTarget.value)}
+                onBlur={field.handleBlur}
+                disabled={isSheetLoading}
+                aria-invalid={!!field.state.meta.errors[0]}
+              />
+              {field.state.meta.errors[0] && (
+                <span role="alert" className="text-xs text-red-600">
+                  {field.state.meta.errors[0]}
+                </span>
+              )}
+            </label>
           )}
         </form.Field>
-
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-medium">
             <Trans>Fields</Trans>
           </h2>
           <Button
             type="button"
-            variant="light"
-            leftSection={<TbPlus size={16} />}
             onClick={() => {
               const state = form.getFieldValue("fields" as const);
               const currentFields = Array.isArray(state) ? state : [];
@@ -213,11 +224,12 @@ function RouteComponent() {
                 { ...EMPTY_FIELD(), sequence: currentFields.length },
               ]);
             }}
+            variant={"neutral"}
           >
+            {<TbPlus size={16} />}
             <Trans>Add field</Trans>
           </Button>
         </div>
-
         <form.Field name="fields" mode="array">
           {(fieldsField) => {
             const fields: EditableField[] = Array.isArray(fieldsField.state.value) ? fieldsField.state.value : [];
@@ -227,182 +239,227 @@ function RouteComponent() {
                   const fieldNumber = index + 1;
 
                   return (
-                    <Card key={field.localKey} withBorder className="flex flex-col gap-1">
-                      <div className="flex items-start justify-between gap-1">
-                        <div className="font-medium">
-                          <Trans>Field {fieldNumber}</Trans>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-1">
-                          <Button
-                            type="button"
-                            variant="subtle"
-                            size="compact-sm"
-                            onClick={() => {
-                              if (index === 0) return;
-                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
-                                ? form.getFieldValue("fields")
-                                : [];
-                              const next = [...currentFields];
-                              [next[index - 1], next[index]] = [next[index], next[index - 1]];
-                              form.setFieldValue("fields" as const, renumberFields(next));
-                            }}
-                            disabled={index === 0}
-                          >
-                            <TbArrowUp size={16} />
-                          </Button>
-                          <Button
-                            type="button"
-                            variant="subtle"
-                            size="compact-sm"
-                            onClick={() => {
-                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
-                                ? form.getFieldValue("fields")
-                                : [];
-                              if (index === currentFields.length - 1) return;
-                              const next = [...currentFields];
-                              [next[index], next[index + 1]] = [next[index + 1], next[index]];
-                              form.setFieldValue("fields" as const, renumberFields(next));
-                            }}
-                            disabled={index === fields.length - 1}
-                          >
-                            <TbArrowDown size={16} />
-                          </Button>
-                          <Button
-                            type="button"
-                            color="red"
-                            variant="subtle"
-                            size="compact-sm"
-                            onClick={() => {
-                              const currentFields = Array.isArray(form.getFieldValue("fields" as const))
-                                ? form.getFieldValue("fields")
-                                : [];
-                              form.setFieldValue(
-                                "fields" as const,
-                                renumberFields(currentFields.filter((_, i) => i !== index)),
-                              );
-                            }}
-                          >
-                            <TbTrash size={16} />
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div className="grid gap-1 md:grid-cols-2">
-                        <form.Field name={`fields[${index}].id`}>
-                          {(idField) => (
-                            <TextInput
-                              label={t`Field ID`}
-                              value={idField.state.value ?? ""}
-                              onChange={(event) => idField.handleChange(event.currentTarget.value)}
-                              onBlur={idField.handleBlur}
-                              error={idField.state.meta.errors[0]}
-                            />
-                          )}
-                        </form.Field>
-                        <form.Field name={`fields[${index}].kind`}>
-                          {(kindField) => (
-                            <Select
-                              label={t`Field type`}
-                              data={FIELD_KIND_OPTIONS.map((kind) => ({
-                                value: kind,
-                                label: kind,
-                              }))}
-                              value={kindField.state.value ?? ""}
-                              allowDeselect={false}
-                              onChange={(value) => {
-                                if (!value) return;
-                                kindField.handleChange(value);
-                                if (value !== "single-choice") {
-                                  form.setFieldValue(`fields[${index}].optionsText`, "");
-                                }
+                    <Card key={field.localKey} className="flex flex-col gap-1">
+                      <CardContent>
+                        <div className="flex items-start justify-between gap-1">
+                          <div className="font-medium">
+                            <Trans>Field {fieldNumber}</Trans>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-1">
+                            <Button
+                              type="button"
+                              onClick={() => {
+                                if (index === 0) return;
+                                const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                  ? form.getFieldValue("fields")
+                                  : [];
+                                const next = [...currentFields];
+                                [next[index - 1], next[index]] = [next[index], next[index - 1]];
+                                form.setFieldValue("fields" as const, renumberFields(next));
                               }}
-                              onBlur={kindField.handleBlur}
-                            />
-                          )}
-                        </form.Field>
-                        <form.Field name={`fields[${index}].name_zh`}>
-                          {(nameZhField) => (
-                            <TextInput
-                              label={t`Chinese name`}
-                              value={nameZhField.state.value ?? ""}
-                              onChange={(event) => nameZhField.handleChange(event.currentTarget.value)}
-                              onBlur={nameZhField.handleBlur}
-                              error={nameZhField.state.meta.errors[0]}
-                            />
-                          )}
-                        </form.Field>
-                        <form.Field name={`fields[${index}].name_en`}>
-                          {(nameEnField) => (
-                            <TextInput
-                              label={t`English name`}
-                              value={nameEnField.state.value ?? ""}
-                              onChange={(event) => nameEnField.handleChange(event.currentTarget.value)}
-                              onBlur={nameEnField.handleBlur}
-                            />
-                          )}
-                        </form.Field>
-                      </div>
-
-                      <div className="grid gap-1 md:grid-cols-2">
-                        <form.Field name={`fields[${index}].description_zh`}>
-                          {(descZhField) => (
-                            <Textarea
-                              label={t`Chinese description`}
-                              value={descZhField.state.value ?? ""}
-                              onChange={(event) => descZhField.handleChange(event.currentTarget.value)}
-                              onBlur={descZhField.handleBlur}
-                              autosize
-                              minRows={2}
-                            />
-                          )}
-                        </form.Field>
-                        <form.Field name={`fields[${index}].description_en`}>
-                          {(descEnField) => (
-                            <Textarea
-                              label={t`English description`}
-                              value={descEnField.state.value ?? ""}
-                              onChange={(event) => descEnField.handleChange(event.currentTarget.value)}
-                              onBlur={descEnField.handleBlur}
-                              autosize
-                              minRows={2}
-                            />
-                          )}
-                        </form.Field>
-                      </div>
-
-                      {field.kind === "single-choice" && (
-                        <form.Field name={`fields[${index}].optionsText`}>
-                          {(optionsField) => (
-                            <Textarea
-                              label={t`Options`}
-                              description={t`One option per line.`}
-                              value={optionsField.state.value ?? ""}
-                              onChange={(event) => optionsField.handleChange(event.currentTarget.value)}
-                              onBlur={optionsField.handleBlur}
-                              error={optionsField.state.meta.errors[0]}
-                              autosize
-                              minRows={4}
-                            />
-                          )}
-                        </form.Field>
-                      )}
+                              disabled={index === 0}
+                              variant={"neutral"}
+                              size={"sm"}
+                            >
+                              <TbArrowUp size={16} />
+                            </Button>
+                            <Button
+                              type="button"
+                              onClick={() => {
+                                const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                  ? form.getFieldValue("fields")
+                                  : [];
+                                if (index === currentFields.length - 1) return;
+                                const next = [...currentFields];
+                                [next[index], next[index + 1]] = [next[index + 1], next[index]];
+                                form.setFieldValue("fields" as const, renumberFields(next));
+                              }}
+                              disabled={index === fields.length - 1}
+                              variant={"neutral"}
+                              size={"sm"}
+                            >
+                              <TbArrowDown size={16} />
+                            </Button>
+                            <Button
+                              type="button"
+                              onClick={() => {
+                                const currentFields = Array.isArray(form.getFieldValue("fields" as const))
+                                  ? form.getFieldValue("fields")
+                                  : [];
+                                form.setFieldValue(
+                                  "fields" as const,
+                                  renumberFields(currentFields.filter((_, i) => i !== index)),
+                                );
+                              }}
+                              variant={"neutral"}
+                              size={"sm"}
+                            >
+                              <TbTrash size={16} />
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="grid gap-1 md:grid-cols-2">
+                          <form.Field name={`fields[${index}].id`}>
+                            {(idField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`Field ID`}</span>
+                                <Input
+                                  aria-label={t`Field ID`}
+                                  value={idField.state.value ?? ""}
+                                  onChange={(event) => idField.handleChange(event.currentTarget.value)}
+                                  onBlur={idField.handleBlur}
+                                  aria-invalid={!!idField.state.meta.errors[0]}
+                                />
+                                {idField.state.meta.errors[0] && (
+                                  <span role="alert" className="text-xs text-red-600">
+                                    {idField.state.meta.errors[0]}
+                                  </span>
+                                )}
+                              </label>
+                            )}
+                          </form.Field>
+                          <form.Field name={`fields[${index}].kind`}>
+                            {(kindField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`Field type`}</span>
+                                <NativeSelect
+                                  aria-label={t`Field type`}
+                                  onBlur={kindField.handleBlur}
+                                  value={kindField.state.value ?? ""}
+                                  onChange={(event) => {
+                                    const value = event.currentTarget.value || null;
+                                    if (!value) return;
+                                    kindField.handleChange(value as EditableField["kind"]);
+                                    if (value !== "single-choice") {
+                                      form.setFieldValue(`fields[${index}].optionsText`, "");
+                                    }
+                                  }}
+                                >
+                                  <NativeSelectOption value=""></NativeSelectOption>
+                                  {(
+                                    FIELD_KIND_OPTIONS.map((kind) => ({
+                                      value: kind,
+                                      label: kind,
+                                    })) ?? []
+                                  ).map((option) => {
+                                    const item = typeof option === "string" ? { value: option, label: option } : option;
+                                    return (
+                                      <NativeSelectOption key={item.value} value={item.value}>
+                                        {item.label}
+                                      </NativeSelectOption>
+                                    );
+                                  })}
+                                </NativeSelect>
+                              </label>
+                            )}
+                          </form.Field>
+                          <form.Field name={`fields[${index}].name_zh`}>
+                            {(nameZhField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`Chinese name`}</span>
+                                <Input
+                                  aria-label={t`Chinese name`}
+                                  value={nameZhField.state.value ?? ""}
+                                  onChange={(event) => nameZhField.handleChange(event.currentTarget.value)}
+                                  onBlur={nameZhField.handleBlur}
+                                  aria-invalid={!!nameZhField.state.meta.errors[0]}
+                                />
+                                {nameZhField.state.meta.errors[0] && (
+                                  <span role="alert" className="text-xs text-red-600">
+                                    {nameZhField.state.meta.errors[0]}
+                                  </span>
+                                )}
+                              </label>
+                            )}
+                          </form.Field>
+                          <form.Field name={`fields[${index}].name_en`}>
+                            {(nameEnField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`English name`}</span>
+                                <Input
+                                  aria-label={t`English name`}
+                                  value={nameEnField.state.value ?? ""}
+                                  onChange={(event) => nameEnField.handleChange(event.currentTarget.value)}
+                                  onBlur={nameEnField.handleBlur}
+                                />
+                              </label>
+                            )}
+                          </form.Field>
+                        </div>
+                        <div className="grid gap-1 md:grid-cols-2">
+                          <form.Field name={`fields[${index}].description_zh`}>
+                            {(descZhField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`Chinese description`}</span>
+                                <Textarea
+                                  aria-label={t`Chinese description`}
+                                  value={descZhField.state.value ?? ""}
+                                  onChange={(event) => descZhField.handleChange(event.currentTarget.value)}
+                                  onBlur={descZhField.handleBlur}
+                                  rows={2}
+                                />
+                              </label>
+                            )}
+                          </form.Field>
+                          <form.Field name={`fields[${index}].description_en`}>
+                            {(descEnField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`English description`}</span>
+                                <Textarea
+                                  aria-label={t`English description`}
+                                  value={descEnField.state.value ?? ""}
+                                  onChange={(event) => descEnField.handleChange(event.currentTarget.value)}
+                                  onBlur={descEnField.handleBlur}
+                                  rows={2}
+                                />
+                              </label>
+                            )}
+                          </form.Field>
+                        </div>
+                        {field.kind === "single-choice" && (
+                          <form.Field name={`fields[${index}].optionsText`}>
+                            {(optionsField) => (
+                              <label className="grid gap-1.5 text-sm">
+                                <span className="font-heading">{t`Options`}</span>
+                                <Textarea
+                                  aria-label={t`Options`}
+                                  value={optionsField.state.value ?? ""}
+                                  onChange={(event) => optionsField.handleChange(event.currentTarget.value)}
+                                  onBlur={optionsField.handleBlur}
+                                  aria-invalid={!!optionsField.state.meta.errors[0]}
+                                  rows={4}
+                                />
+                                <span className="text-foreground/70 text-xs">{t`One option per line.`}</span>
+                                {optionsField.state.meta.errors[0] && (
+                                  <span role="alert" className="text-xs text-red-600">
+                                    {optionsField.state.meta.errors[0]}
+                                  </span>
+                                )}
+                              </label>
+                            )}
+                          </form.Field>
+                        )}
+                      </CardContent>
                     </Card>
                   );
                 })}
-
                 {fields.length === 0 && (
                   <Alert>
-                    <Trans>No fields.</Trans>
+                    <AlertDescription>
+                      <Trans>No fields.</Trans>
+                    </AlertDescription>
                   </Alert>
                 )}
               </div>
             );
           }}
         </form.Field>
-
-        {saveError && <Alert color="red">{saveError.title || t`Failed to save sheet.`}</Alert>}
-
-        <Button type="submit" loading={isSaving} className="self-start">
+        {saveError && (
+          <Alert variant={"destructive"}>
+            <AlertDescription>{saveError.title || t`Failed to save sheet.`}</AlertDescription>
+          </Alert>
+        )}
+        <Button type="submit" className="self-start" disabled={isSaving} aria-busy={isSaving}>
           <Trans>Save sheet</Trans>
         </Button>
       </form>

@@ -11,13 +11,14 @@ vi.mock("@/lib/client", () => ({
   $api: { useQuery: () => ({ data: undefined }) },
 }));
 vi.mock("./user-info", () => ({ UserInfo: () => null }));
-vi.mock("@/lib/utils", async () => ({ cn: (await import("clsx")).clsx, getPathname: () => "/" }));
+vi.mock("@/lib/pathname", () => ({ getPathname: () => "/" }));
 vi.mock("@/lib/settings", () => ({
   isColorScheme: (value: string) => ["light", "dark", "auto"].includes(value),
   getCookie: () => null,
   setCookie: vi.fn(),
   isLocale: () => false,
   LANGUAGE_COOKIE_KEY: "locale",
+  COLOR_SCHEME_COOKIE_KEY: "color-scheme",
 }));
 
 afterEach(async () => {

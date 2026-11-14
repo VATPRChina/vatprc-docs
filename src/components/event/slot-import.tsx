@@ -1,16 +1,20 @@
 import { DateTime } from "./datetime";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table";
 import { useUser } from "@/lib/client";
 import { $api, client } from "@/lib/client/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
-import { Dropzone, FileWithPath } from "@mantine/dropzone";
-import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { parse } from "date-fns";
 import { unique } from "radash";
+import { useState as useDisclosureState } from "react";
 import { useState } from "react";
-import { TbFileImport, TbUpload, TbX, TbFileTypeCsv } from "react-icons/tb";
+import { TbFileImport } from "react-icons/tb";
 
 interface Slot {
   airspace: string;
@@ -23,15 +27,17 @@ interface Slot {
 
 export const ImportSlot = ({ eventId }: { eventId: string }) => {
   const { t } = useLingui();
-  const [opened, { toggle, close }] = useDisclosure(false);
-  const theme = useMantineTheme();
+  const [opened, setOpened] = useDisclosureState(false);
+  const toggle = () => setOpened((value) => !value);
+  const close = () => setOpened(false);
+
   const user = useUser();
   const queryClient = useQueryClient();
 
   const [slots, setSlots] = useState<Slot[]>([]);
   const [fileError, setFileError] = useState<Error | null>(null);
 
-  const onDrop = async (files: FileWithPath[]) => {
+  const onDrop = async (files: File[]) => {
     try {
       setFileError(null);
       const file = files[0];
@@ -108,87 +114,91 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
   if (!user?.roles.includes("event-coordinator")) return null;
   return (
     <>
-      <ActionIcon variant="subtle" aria-label={t`Import Slots`} onClick={toggle}>
+      <Button aria-label={t`Import Slots`} onClick={toggle} size={"icon-sm"} variant={"neutral"}>
         <TbFileImport size={18} />
-      </ActionIcon>
-      <Modal opened={opened} onClose={close} title={t`Import slots`} size="xl">
-        <div className="flex flex-col gap-4">
-          {(fileError ?? error) && (
-            <Alert color="red" title={<Trans>Failed to import slots.</Trans>}>
-              {(fileError ?? error)?.message}
-            </Alert>
-          )}
-          <Text>
-            <Trans>
-              File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign,
-              aircraft_type_icao
-            </Trans>
-          </Text>
-          <Dropzone onDrop={(files) => void onDrop(files)}>
-            <div className="pointer-events-none flex flex-wrap items-center justify-center gap-2">
-              <Dropzone.Accept>
-                <TbUpload color={theme.colors.green[7]} size={52} strokeWidth={1.5} />
-              </Dropzone.Accept>
-              <Dropzone.Reject>
-                <TbX color={theme.colors.red[7]} size={52} strokeWidth={1.5} />
-              </Dropzone.Reject>
-              <Dropzone.Idle>
-                <TbFileTypeCsv color={theme.colors.gray[7]} size={52} strokeWidth={1.5} />
-              </Dropzone.Idle>
-
-              <Text size="xl" inline>
-                <Trans>Drag CSV here or click to select files</Trans>
-              </Text>
-            </div>
-          </Dropzone>
-          <Button onClick={onSubmit} disabled={slots.length === 0} loading={isPending}>
-            <Trans>Create Slots</Trans>
-          </Button>
-          <Table highlightOnHover>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>
-                  <Trans>Area</Trans>
-                </Table.Th>
-                <Table.Th>
-                  <Trans>Enter at</Trans>
-                </Table.Th>
-                <Table.Th>
-                  <Trans>Callsign</Trans>
-                </Table.Th>
-                <Table.Th>
-                  <Trans>Aircraft Type</Trans>
-                </Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>
-              {slots?.map((slot, i) => (
-                <Table.Tr key={i}>
-                  <Table.Td>{slot.airspace}</Table.Td>
-                  <Table.Td>
-                    <div className="flex flex-col gap-1">
-                      <Text>
-                        <Pill className="mr-1">
-                          <Trans>CTOT</Trans>
-                        </Pill>
-                        <DateTime noDate>{slot.enter_at}</DateTime>
-                      </Text>
-                      <Text>
-                        <Pill className="mr-1">
-                          <Trans>ELDT</Trans>
-                        </Pill>
-                        <DateTime noDate>{slot.leave_at}</DateTime>
-                      </Text>
-                    </div>
-                  </Table.Td>
-                  <Table.Td>{slot.callsign}</Table.Td>
-                  <Table.Td>{slot.aircraft_type_icao}</Table.Td>
-                </Table.Tr>
-              ))}
-            </Table.Tbody>
-          </Table>
-        </div>
-      </Modal>
+      </Button>
+      <Dialog
+        open={opened}
+        onOpenChange={(open) => {
+          if (!open) close();
+        }}
+      >
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>{t`Import slots`}</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col gap-4">
+            {(fileError ?? error) && (
+              <Alert variant={"destructive"}>
+                <AlertTitle>{<Trans>Failed to import slots.</Trans>}</AlertTitle>
+                <AlertDescription>{(fileError ?? error)?.message}</AlertDescription>
+              </Alert>
+            )}
+            <p>
+              <Trans>
+                File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign,
+                aircraft_type_icao
+              </Trans>
+            </p>
+            <label className="border-border grid gap-2 border-2 border-dashed p-4">
+              <span>
+                <Trans>Choose a CSV file to import slots</Trans>
+              </span>
+              <Input
+                type="file"
+                accept=".csv,text/csv"
+                onChange={(event) => void onDrop(Array.from(event.currentTarget.files ?? []))}
+              />
+            </label>
+            <Button onClick={onSubmit} disabled={slots.length === 0 || isPending} aria-busy={isPending}>
+              <Trans>Create Slots</Trans>
+            </Button>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>
+                    <Trans>Area</Trans>
+                  </TableHead>
+                  <TableHead>
+                    <Trans>Enter at</Trans>
+                  </TableHead>
+                  <TableHead>
+                    <Trans>Callsign</Trans>
+                  </TableHead>
+                  <TableHead>
+                    <Trans>Aircraft Type</Trans>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {slots?.map((slot, i) => (
+                  <TableRow key={i}>
+                    <TableCell>{slot.airspace}</TableCell>
+                    <TableCell>
+                      <div className="flex flex-col gap-1">
+                        <p>
+                          <Badge className="mr-1">
+                            <Trans>CTOT</Trans>
+                          </Badge>
+                          <DateTime noDate>{slot.enter_at}</DateTime>
+                        </p>
+                        <p>
+                          <Badge className="mr-1">
+                            <Trans>ELDT</Trans>
+                          </Badge>
+                          <DateTime noDate>{slot.leave_at}</DateTime>
+                        </p>
+                      </div>
+                    </TableCell>
+                    <TableCell>{slot.callsign}</TableCell>
+                    <TableCell>{slot.aircraft_type_icao}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

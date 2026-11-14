@@ -1,20 +1,16 @@
 import { AppFooter } from "@/components/app/app-footer";
 import { AppHeader } from "@/components/app/app-header";
+import { ThemeProvider } from "@/components/app/theme-provider";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Toaster } from "@/components/ui/toast";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
-import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorScheme } from "@/lib/settings";
+import { COLOR_SCHEME_COOKIE_KEY, getCookie, isColorScheme } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 import appCss from "@/styles/app.css?url";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
-import { theme } from "@/theme";
 import { Trans, useLingui } from "@lingui/react/macro";
-import mantineCarouselStyle from "@mantine/carousel/styles.css?url";
-import { Alert, mantineHtmlProps, MantineProvider } from "@mantine/core";
-import mantineCoreStyle from "@mantine/core/styles.css?url";
-import mantineDateStyle from "@mantine/dates/styles.css?url";
-import mantineDropzoneStyle from "@mantine/dropzone/styles.css?url";
-import { Notifications } from "@mantine/notifications";
-import mantineNotificationStyle from "@mantine/notifications/styles.css?url";
 import {
   createRootRouteWithContext,
   HeadContent,
@@ -25,8 +21,6 @@ import {
 } from "@tanstack/react-router";
 import mapLibreCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { FC, PropsWithChildren, useEffect } from "react";
-
-const colorSchemeManager = cookieColorSchemeManager();
 
 interface ApplicationProps {
   children?: React.ReactNode;
@@ -59,7 +53,6 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     try {
       window.localStorage.removeItem("vatprc-homepage-locale");
-      window.localStorage.removeItem("mantine-color-scheme-value");
     } catch {
       // Ignore storage access failures in restricted browser contexts.
     }
@@ -67,19 +60,21 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <html
-      {...mantineHtmlProps}
       lang={i18n.locale}
-      className={cn(publicHref !== "/division/api" && "scroll-pt-16")}
-      data-mantine-color-scheme={htmlColorScheme}
+      className={cn(publicHref !== "/division/api" && "scroll-pt-16", htmlColorScheme === "dark" && "dark")}
+      suppressHydrationWarning
     >
       <head>
         <HeadContent />
       </head>
       <body className="px-1 md:px-0">
-        <MantineProvider theme={theme} defaultColorScheme="auto" colorSchemeManager={colorSchemeManager}>
-          <Application>{children}</Application>
-          <Notifications position="top-center" />
-        </MantineProvider>
+        <ThemeProvider>
+          <TooltipProvider>
+            <Toaster>
+              <Application>{children}</Application>
+            </Toaster>
+          </TooltipProvider>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
@@ -96,11 +91,16 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     return (
       <AppHtml>
         <div className="container mx-auto">
-          <Alert color="red" title={<Trans>Error</Trans>}>
-            <p className="font-medium">{error.message}</p>
-            <p className="text-wrap">
-              <pre>{error.stack}</pre>
-            </p>
+          <Alert variant="destructive">
+            <AlertTitle>
+              <Trans>Error</Trans>
+            </AlertTitle>
+            <AlertDescription>
+              <p className="font-medium">{error.message}</p>
+              <p className="text-wrap">
+                <pre>{error.stack}</pre>
+              </p>
+            </AlertDescription>
           </Alert>
         </div>
       </AppHtml>
@@ -117,11 +117,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
-        { rel: "stylesheet", href: mantineCoreStyle },
-        { rel: "stylesheet", href: mantineDateStyle },
-        { rel: "stylesheet", href: mantineCarouselStyle },
-        { rel: "stylesheet", href: mantineDropzoneStyle },
-        { rel: "stylesheet", href: mantineNotificationStyle },
         { rel: "stylesheet", href: mapLibreCss },
 
         { rel: "alternate", hrefLang: "en", href: getLocalPathname("en", pathname) },

@@ -1,23 +1,15 @@
 import { APPLICATION_STATUS } from "./atc-application-status";
+import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/link-button";
 import { components } from "@/lib/api";
 import { useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
 import { format } from "date-fns";
 import { FC } from "react";
 
 type ApplicationDto = components["schemas"]["AtcApplicationSummaryDto"];
-
-const STATUS_COLOR: Record<components["schemas"]["AtcApplicationStatus"], string> = {
-  submitted: "blue",
-  "in-waitlist": "yellow",
-  approved: "green",
-  rejected: "red",
-  aborted: "gray",
-};
 
 export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ applications }) => {
   const user = useUser();
@@ -39,17 +31,16 @@ export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ appl
           key={application.id}
           className="flex flex-wrap items-center gap-1 border border-black/15 px-4 py-3 dark:border-white/20"
         >
-          <Badge color={STATUS_COLOR[application.status]} variant="filled" radius={0}>
-            {localizeWithMap(APPLICATION_STATUS, application.status, i18n)}
-          </Badge>
+          <Badge>{localizeWithMap(APPLICATION_STATUS, application.status, i18n)}</Badge>
           <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
-            <Trans>Applied at</Trans> {format(application.applied_at, "yyyy-MM-dd HH:mm'Z'", { in: utc })}
+            <Trans>Applied at</Trans>
+            {format(application.applied_at, "yyyy-MM-dd HH:mm'Z'", { in: utc })}
           </span>
           <LinkButton
             className="ml-auto"
-            variant="subtle"
             to="/controllers/applications/$id"
             params={{ id: application.id }}
+            variant={"neutral"}
           >
             <Trans>View</Trans>
           </LinkButton>

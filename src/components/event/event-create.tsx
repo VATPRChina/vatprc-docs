@@ -1,21 +1,26 @@
 import { DateTimeInput } from "../ui/datetime-input";
 import NoEventImage from "@/assets/no-event-image.svg";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/helpers";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Image, Modal, TextInput, Textarea } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { addHours, formatISO, setMinutes, setSeconds } from "date-fns";
+import { useState as useDisclosureState } from "react";
 import { TbEdit } from "react-icons/tb";
 
 const NULL_ULID = "01J2N4V2BNSP3E5Q9MBA3AE8E3";
 export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   const { t } = useLingui();
-  const [opened, { toggle, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const toggle = () => setOpened((value) => !value);
+  const close = () => setOpened(false);
 
   const user = useUser();
   const queryClient = useQueryClient();
@@ -115,180 +120,286 @@ export const CreateEvent = ({ eventId }: { eventId?: string }) => {
   return (
     <>
       {eventId ? (
-        <ActionIcon variant="subtle" aria-label={t`Edit Event {title}`} onClick={toggle}>
+        <Button aria-label={t`Edit Event {title}`} onClick={toggle} size={"icon-sm"} variant={"neutral"}>
           <TbEdit size={18} />
-        </ActionIcon>
+        </Button>
       ) : (
         <Button onClick={toggle}>
           <Trans>Create Event</Trans>
         </Button>
       )}
-      <Modal opened={opened} onClose={close} size="xl" title={eventId ? t`Edit Event ${title}` : t`Create Event`}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            promiseWithLog(form.handleSubmit());
-          }}
-        >
-          <div className="flex flex-col gap-4">
-            {(loadError ?? uploadError ?? createError ?? updateError) && (
-              <Alert color="red" title={(loadError ?? uploadError ?? createError ?? updateError)?.title}>
-                {(loadError ?? uploadError ?? createError ?? updateError)?.detail}
-              </Alert>
-            )}
-            <form.Field name="title">
-              {(field) => (
-                <TextInput
-                  label={t`Title`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  error={field.state.meta.errors.join("")}
-                />
+      <Dialog
+        open={opened}
+        onOpenChange={(open) => {
+          if (!open) close();
+        }}
+      >
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>{eventId ? t`Edit Event ${title}` : t`Create Event`}</DialogTitle>
+          </DialogHeader>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              promiseWithLog(form.handleSubmit());
+            }}
+          >
+            <div className="flex flex-col gap-4">
+              {(loadError ?? uploadError ?? createError ?? updateError) && (
+                <Alert variant={"destructive"}>
+                  <AlertTitle>{(loadError ?? uploadError ?? createError ?? updateError)?.title}</AlertTitle>
+                  <AlertDescription>
+                    {(loadError ?? uploadError ?? createError ?? updateError)?.detail}
+                  </AlertDescription>
+                </Alert>
               )}
-            </form.Field>
-            <form.Field name="title_en">
-              {(field) => (
-                <TextInput
-                  label={t`Title (English)`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  error={field.state.meta.errors.join("")}
-                />
-              )}
-            </form.Field>
-            <div className="grid grid-cols-2 gap-2">
-              <form.Field name="start_at">
+              <form.Field name="title">
                 {(field) => (
-                  <DateTimeInput
-                    label={t`Start at`}
-                    onChange={(e) => e && field.handleChange(e)}
-                    value={new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                    error={field.state.meta.errors.join("")}
-                  />
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Title`}</span>
+                    <Input
+                      aria-label={t`Title`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
                 )}
               </form.Field>
-              <form.Field name="end_at">
+              <form.Field name="title_en">
                 {(field) => (
-                  <DateTimeInput
-                    label={t`End at`}
-                    onChange={(e) => e && field.handleChange(e)}
-                    value={new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                    error={field.state.meta.errors.join("")}
-                  />
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Title (English)`}</span>
+                    <Input
+                      aria-label={t`Title (English)`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
                 )}
               </form.Field>
+              <div className="grid grid-cols-2 gap-2">
+                <form.Field name="start_at">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Start at`}</span>
+                      <DateTimeInput
+                        aria-label={t`Start at`}
+                        onChange={(e) => e && field.handleChange(e)}
+                        value={new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                        aria-invalid={!!field.state.meta.errors.join("")}
+                      />
+                      {field.state.meta.errors.join("") && (
+                        <span role="alert" className="text-xs text-red-600">
+                          {field.state.meta.errors.join("")}
+                        </span>
+                      )}
+                    </label>
+                  )}
+                </form.Field>
+                <form.Field name="end_at">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`End at`}</span>
+                      <DateTimeInput
+                        aria-label={t`End at`}
+                        onChange={(e) => e && field.handleChange(e)}
+                        value={new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                        aria-invalid={!!field.state.meta.errors.join("")}
+                      />
+                      {field.state.meta.errors.join("") && (
+                        <span role="alert" className="text-xs text-red-600">
+                          {field.state.meta.errors.join("")}
+                        </span>
+                      )}
+                    </label>
+                  )}
+                </form.Field>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <form.Field name="start_booking_at">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Start booking at`}</span>
+                      <DateTimeInput
+                        aria-label={t`Start booking at`}
+                        placeholder={t`Booking not supported`}
+                        onChange={(e) => field.handleChange(e)}
+                        value={field.state.value && new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                        aria-invalid={!!field.state.meta.errors.join("")}
+                      />
+                      {field.state.meta.errors.join("") && (
+                        <span role="alert" className="text-xs text-red-600">
+                          {field.state.meta.errors.join("")}
+                        </span>
+                      )}
+                    </label>
+                  )}
+                </form.Field>
+                <form.Field name="end_booking_at">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`End booking at`}</span>
+                      <DateTimeInput
+                        aria-label={t`End booking at`}
+                        placeholder={t`Booking not supported`}
+                        onChange={(e) => field.handleChange(e)}
+                        value={field.state.value && new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                        aria-invalid={!!field.state.meta.errors.join("")}
+                      />
+                      {field.state.meta.errors.join("") && (
+                        <span role="alert" className="text-xs text-red-600">
+                          {field.state.meta.errors.join("")}
+                        </span>
+                      )}
+                    </label>
+                  )}
+                </form.Field>
+              </div>
+              <form.Field name="start_atc_booking_at">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Start ATC booking at`}</span>
+                    <DateTimeInput
+                      aria-label={t`Start ATC booking at`}
+                      placeholder={t`Start immediately`}
+                      onChange={(e) => field.handleChange(e)}
+                      value={field.state.value && new Date(field.state.value)}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+              <div>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  aria-label={t`Upload image`}
+                  disabled={isImageUploading}
+                  onChange={(event) => onUpload(Array.from(event.currentTarget.files ?? []))}
+                />
+                <form.Subscribe selector={(state) => state.values.image_url}>
+                  {(image_url) => <img src={image_url ?? NoEventImage} alt={""} className={"w-full"} />}
+                </form.Subscribe>
+              </div>
+              <form.Field name="image_url">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Image URL`}</span>
+                    <Input aria-label={t`Image URL`} value={field.state.value ?? ""} disabled />
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="community_link">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Forum`}</span>
+                    <Input
+                      aria-label={t`Forum`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="vatsim_link">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`VATSIM`}</span>
+                    <Input
+                      aria-label={t`VATSIM`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="description">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Description`}</span>
+                    <Textarea
+                      aria-label={t`Description`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      aria-invalid={!!field.state.meta.errors.join("")}
+                      rows={5}
+                    />
+                    {field.state.meta.errors.join("") && (
+                      <span role="alert" className="text-xs text-red-600">
+                        {field.state.meta.errors.join("")}
+                      </span>
+                    )}
+                  </label>
+                )}
+              </form.Field>
+              <div>
+                <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+                  {([canSubmit, isSubmitting]) => (
+                    <Button
+                      type="submit"
+                      disabled={!canSubmit || isSubmitting}
+                      aria-busy={isSubmitting}
+                      variant={"neutral"}
+                    >
+                      {eventId ? t`Save` : t`Create`}
+                    </Button>
+                  )}
+                </form.Subscribe>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <form.Field name="start_booking_at">
-                {(field) => (
-                  <DateTimeInput
-                    label={t`Start booking at`}
-                    placeholder={t`Booking not supported`}
-                    onChange={(e) => field.handleChange(e)}
-                    value={field.state.value && new Date(field.state.value)}
-                    clearable
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                    error={field.state.meta.errors.join("")}
-                  />
-                )}
-              </form.Field>
-              <form.Field name="end_booking_at">
-                {(field) => (
-                  <DateTimeInput
-                    label={t`End booking at`}
-                    placeholder={t`Booking not supported`}
-                    onChange={(e) => field.handleChange(e)}
-                    value={field.state.value && new Date(field.state.value)}
-                    clearable
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                    error={field.state.meta.errors.join("")}
-                  />
-                )}
-              </form.Field>
-            </div>
-            <form.Field name="start_atc_booking_at">
-              {(field) => (
-                <DateTimeInput
-                  label={t`Start ATC booking at`}
-                  placeholder={t`Start immediately`}
-                  onChange={(e) => field.handleChange(e)}
-                  value={field.state.value && new Date(field.state.value)}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  clearable
-                  error={field.state.meta.errors.join("")}
-                />
-              )}
-            </form.Field>
-            <Dropzone onDrop={onUpload} accept={IMAGE_MIME_TYPE} loading={isImageUploading}>
-              <form.Subscribe selector={(state) => state.values.image_url}>
-                {(image_url) => <Image src={image_url ?? NoEventImage} />}
-              </form.Subscribe>
-            </Dropzone>
-            <form.Field name="image_url">
-              {(field) => <TextInput label={t`Image URL`} value={field.state.value ?? ""} disabled />}
-            </form.Field>
-            <form.Field name="community_link">
-              {(field) => (
-                <TextInput
-                  label={t`Forum`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  error={field.state.meta.errors.join("")}
-                />
-              )}
-            </form.Field>
-            <form.Field name="vatsim_link">
-              {(field) => (
-                <TextInput
-                  label={t`VATSIM`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  error={field.state.meta.errors.join("")}
-                />
-              )}
-            </form.Field>
-            <form.Field name="description">
-              {(field) => (
-                <Textarea
-                  label={t`Description`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  autosize
-                  minRows={5}
-                  error={field.state.meta.errors.join("")}
-                />
-              )}
-            </form.Field>
-            <div>
-              <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-                {([canSubmit, isSubmitting]) => (
-                  <Button variant="subtle" type="submit" loading={isSubmitting} disabled={!canSubmit}>
-                    {eventId ? t`Save` : t`Create`}
-                  </Button>
-                )}
-              </form.Subscribe>
-            </div>
-          </div>
-        </form>
-      </Modal>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

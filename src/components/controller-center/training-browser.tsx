@@ -1,11 +1,13 @@
 import { TrainingDetail } from "./training-detail";
 import { TrainingApplicationCreateModal } from "@/components/atc-training/training-application-create";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge, Skeleton } from "@mantine/core";
 import { format } from "date-fns";
 import { FC, useState } from "react";
 import { TbArrowLeft } from "react-icons/tb";
@@ -43,7 +45,7 @@ const TrainingListItem: FC<{
     <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
       {format(training.start_at, "yyyy-MM-dd HHmm'Z'", { in: utc })}
       {isUpcoming && (
-        <Badge component="span" className="ml-1" size="xs" color="green" radius={0}>
+        <Badge className="ml-1" render={<span />}>
           <Trans>Upcoming</Trans>
         </Badge>
       )}
@@ -81,7 +83,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
   const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const selected = sorted.find((t) => t.id === selectedId) ?? sorted[0];
 
-  if (isLoading) return <Skeleton w="100%" h={240} />;
+  if (isLoading) return <Skeleton className="h-24" style={{ width: "100%" }} />;
 
   return (
     <section className="flex flex-col gap-1">
@@ -94,8 +96,11 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
         </div>
       )}
       {(error ?? applicationsError) ? (
-        <Alert color="red" title={<Trans>Failed to load trainings</Trans>}>
-          {(error ?? applicationsError)?.detail || <Trans>Please refresh the page or try again later.</Trans>}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{<Trans>Failed to load trainings</Trans>}</AlertTitle>
+          <AlertDescription>
+            {(error ?? applicationsError)?.detail || <Trans>Please refresh the page or try again later.</Trans>}
+          </AlertDescription>
         </Alert>
       ) : (
         <>

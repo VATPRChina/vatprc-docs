@@ -40,6 +40,18 @@ pnpm install
 pnpm dev
 ```
 
+#### UI components
+
+Use [Neobrutalism](https://www.neobrutalism.dev/docs) components, installed through shadcn:
+
+```console
+pnpm dlx shadcn@latest add @neobrutalism/button
+```
+
+Keep registry components' native APIs. Compose labels, descriptions, validation messages,
+loading states, and domain behavior in callers rather than adding compatibility props to
+`src/components/ui`. Global tokens and typography live in `src/styles/app.css`.
+
 #### API
 
 The backend API is well-defined with OpenAPI. Please run the following command

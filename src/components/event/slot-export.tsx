@@ -1,7 +1,7 @@
 import { RequireRole } from "../require-role";
+import { Button } from "@/components/ui/button";
 import { client } from "@/lib/client/client";
-import { wrapPromiseWithLog } from "@/lib/utils";
-import { ActionIcon } from "@mantine/core";
+import { wrapPromiseWithLog } from "@/lib/helpers";
 import { TbFileExport } from "react-icons/tb";
 
 export const ExportSlot = ({ eventId }: { eventId: string }) => {
@@ -20,9 +20,9 @@ export const ExportSlot = ({ eventId }: { eventId: string }) => {
 
   return (
     <RequireRole role="event-coordinator">
-      <ActionIcon variant="subtle" aria-label="Export slots" onClick={wrapPromiseWithLog(onClick)}>
+      <Button aria-label="Export slots" onClick={wrapPromiseWithLog(onClick)} size={"icon-sm"} variant={"neutral"}>
         <TbFileExport />
-      </ActionIcon>
+      </Button>
     </RequireRole>
   );
 };

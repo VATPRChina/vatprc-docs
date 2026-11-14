@@ -2,13 +2,19 @@ import { BatchCreateModal } from "@/components/atc-position/batch-create-modal";
 import { BatchDeleteModal } from "@/components/atc-position/batch-delete-modal";
 import { POSITION_CATEGORIES, PositionModal, type PositionAction } from "@/components/atc-position/position-modal";
 import { RichTable, RichTableFeatures } from "@/components/table";
+import { AlertDescription, Alert, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import { components } from "@/lib/api";
 import { AtcPositionGroup, getAtcPositionCode, getAtcPositionGroup, supportsDcl } from "@/lib/atc-position-group";
 import { $api, usePermission } from "@/lib/client";
 import { loadSectorIds } from "@/lib/radar-coverage/data";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Checkbox, Select, Tabs, TextInput } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
@@ -49,19 +55,13 @@ const columns: ColumnDef<RichTableFeatures, AtcPositionRow>[] = [
       <span className="flex flex-row gap-1">
         <code className="whitespace-nowrap">{getValue<string>()}</code>
         {row.original.is_tier_2 && (
-          <Badge color="green" variant="outline">
+          <Badge>
             <Trans>Tier 2</Trans>
           </Badge>
         )}
-        {getAtcPositionGroup(row.original.callsign) === "area" && row.original.cpdlc_code && (
-          <Badge color="orange" variant="outline">
-            CPDLC
-          </Badge>
-        )}
+        {getAtcPositionGroup(row.original.callsign) === "area" && row.original.cpdlc_code && <Badge>CPDLC</Badge>}
         {getAtcPositionGroup(row.original.callsign) === "airport" && supportsDcl(row.original.callsign) && (
-          <Badge color="blue" variant="outline">
-            DCL
-          </Badge>
+          <Badge>DCL</Badge>
         )}
       </span>
     ),
@@ -170,7 +170,10 @@ export function StationPage() {
                 checked={callsigns.length > 0 && count === callsigns.length}
                 indeterminate={count > 0 && count < callsigns.length}
                 disabled={callsigns.length === 0}
-                onChange={(event) => toggleSelection(callsigns, event.currentTarget.checked)}
+                onCheckedChange={(nextChecked) => {
+                  const event = nextChecked;
+                  return toggleSelection(callsigns, event);
+                }}
               />
             );
           },
@@ -180,7 +183,10 @@ export function StationPage() {
               <Checkbox
                 aria-label={t`Select ${callsign}`}
                 checked={selected.has(callsign)}
-                onChange={(event) => toggleSelection([callsign], event.currentTarget.checked)}
+                onCheckedChange={(nextChecked) => {
+                  const event = nextChecked;
+                  return toggleSelection([callsign], event);
+                }}
               />
             );
           },
@@ -193,17 +199,16 @@ export function StationPage() {
           cell: ({ row }) => (
             <div className="flex gap-1">
               <Button
-                variant="subtle"
-                size="compact-sm"
                 onClick={() => setAction({ kind: "edit", position: row.original })}
+                variant={"neutral"}
+                size={"sm"}
               >
                 <Trans>Edit</Trans>
               </Button>
               <Button
-                variant="subtle"
-                color="red"
-                size="compact-sm"
                 onClick={() => setAction({ kind: "delete", position: row.original })}
+                variant={"neutral"}
+                size={"sm"}
               >
                 <Trans>Delete</Trans>
               </Button>
@@ -292,20 +297,20 @@ export function StationPage() {
       <h1 className="text-3xl">
         <Trans>ATC Positions and Frequencies</Trans>
       </h1>
-
-      <Alert color="blue">
-        <Trans>
-          CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the
-          controller&apos;s ATC information.
-        </Trans>
+      <Alert>
+        <AlertDescription>
+          <Trans>
+            CPDLC availability is decided by the controller. It is used at or above 7,800 meters; refer to the
+            controller&apos;s ATC information.
+          </Trans>
+        </AlertDescription>
       </Alert>
-
       {error && (
-        <Alert color="red" title={<Trans>Failed to load ATC positions</Trans>}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{<Trans>Failed to load ATC positions</Trans>}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
-
       {canManage && (
         <div className="flex gap-2">
           <Button onClick={() => setAction({ kind: "create" })}>
@@ -314,11 +319,7 @@ export function StationPage() {
           <Button variant="default" onClick={() => setBatchCreating(true)}>
             <Trans>Batch Create ATC Positions</Trans>
           </Button>
-          <Button
-            color="red"
-            disabled={selectedCount === 0 || isLoading || !!error}
-            onClick={() => setDeleting(selectedCallsigns)}
-          >
+          <Button disabled={selectedCount === 0 || isLoading || !!error} onClick={() => setDeleting(selectedCallsigns)}>
             <Trans>Delete selected ({selectedCount})</Trans>
           </Button>
         </div>
@@ -332,29 +333,27 @@ export function StationPage() {
           onClose={() => setDeleting(null)}
         />
       )}
-
-      <Tabs defaultValue="airport" keepMounted={false}>
-        <Tabs.List className="mb-2">
-          <Tabs.Tab value="airport">
+      <Tabs defaultValue="airport">
+        <TabsList className="mb-2">
+          <TabsTrigger value="airport">
             <span className="flex items-center gap-2">
               <Trans>Airport</Trans>
-              <Badge variant="light">{positionCount("airport")}</Badge>
+              <Badge>{positionCount("airport")}</Badge>
             </span>
-          </Tabs.Tab>
-          <Tabs.Tab value="terminal">
+          </TabsTrigger>
+          <TabsTrigger value="terminal">
             <span className="flex items-center gap-2">
               <Trans>Terminal</Trans>
-              <Badge variant="light">{positionCount("terminal")}</Badge>
+              <Badge>{positionCount("terminal")}</Badge>
             </span>
-          </Tabs.Tab>
-          <Tabs.Tab value="area">
+          </TabsTrigger>
+          <TabsTrigger value="area">
             <span className="flex items-center gap-2">
               <Trans>Area</Trans>
-              <Badge variant="light">{positionCount("area")}</Badge>
+              <Badge>{positionCount("area")}</Badge>
             </span>
-          </Tabs.Tab>
-        </Tabs.List>
-
+          </TabsTrigger>
+        </TabsList>
         {(Object.keys(groupedPositions) as AtcPositionGroup[]).map((group) => {
           const selectedCode = selectedCodes[group] ?? ALL_POSITION_CODES;
           const selectedPositions =
@@ -365,7 +364,7 @@ export function StationPage() {
           const groupTableColumns =
             group === "area" ? tableColumns : tableColumns.filter((column) => column.id !== "cpdlc");
           return (
-            <Tabs.Panel key={group} value={group}>
+            <TabsContent key={group} value={group}>
               <div
                 className={
                   group === "area"
@@ -373,72 +372,114 @@ export function StationPage() {
                     : "mb-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-8"
                 }
               >
-                <Select
-                  size="xs"
-                  label={group === "area" ? t`Area` : t`Airport`}
-                  value={selectedCode}
-                  onChange={(value) => value && setSelectedCodes((current) => ({ ...current, [group]: value }))}
-                  data={[
-                    { value: ALL_POSITION_CODES, label: `${t`All`} (${positionCount(group)})` },
-                    ...groupedPositions[group].map(({ code, positions }) => ({
-                      value: code,
-                      label: `${code} (${positions.length})`,
-                    })),
-                  ]}
-                  searchable
-                />
-                <TextInput
-                  size="xs"
-                  label={t`ATC Position`}
-                  value={groupFilters.callsign}
-                  onChange={(event) => updateFilters(group, { callsign: event.currentTarget.value })}
-                />
-                <TextInput
-                  size="xs"
-                  label={t`Sector ID`}
-                  value={groupFilters.sectorId}
-                  onChange={(event) => updateFilters(group, { sectorId: event.currentTarget.value })}
-                />
-                <Select
-                  size="xs"
-                  label={t`Category`}
-                  value={groupFilters.category}
-                  onChange={(value) => updateFilters(group, { category: value })}
-                  data={POSITION_CATEGORIES.map(({ value, label }) => ({ value, label: i18n._(label) }))}
-                  clearable
-                />
-                <TextInput
-                  size="xs"
-                  label={t`Chinese Callsign`}
-                  value={groupFilters.callsignZh}
-                  onChange={(event) => updateFilters(group, { callsignZh: event.currentTarget.value })}
-                />
-                <TextInput
-                  size="xs"
-                  label={t`English Callsign`}
-                  value={groupFilters.callsignEn}
-                  onChange={(event) => updateFilters(group, { callsignEn: event.currentTarget.value })}
-                />
-                <TextInput
-                  size="xs"
-                  label={t`Frequency`}
-                  value={groupFilters.frequency}
-                  onChange={(event) => updateFilters(group, { frequency: event.currentTarget.value })}
-                />
-                {group === "area" && (
-                  <TextInput
-                    size="xs"
-                    label="CPDLC"
-                    value={groupFilters.cpdlc}
-                    onChange={(event) => updateFilters(group, { cpdlc: event.currentTarget.value })}
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{group === "area" ? t`Area` : t`Airport`}</span>
+                  <NativeSelect
+                    aria-label={group === "area" ? t`Area` : t`Airport`}
+                    value={selectedCode ?? ""}
+                    onChange={(event) => {
+                      const value = event.currentTarget.value || null;
+                      return value && setSelectedCodes((current) => ({ ...current, [group]: value }));
+                    }}
+                  >
+                    <NativeSelectOption value=""></NativeSelectOption>
+                    {[
+                      { value: ALL_POSITION_CODES, label: `${t`All`} (${positionCount(group)})` },
+                      ...groupedPositions[group].map(({ code, positions }) => ({
+                        value: code,
+                        label: `${code} (${positions.length})`,
+                      })),
+                    ].map((option) => {
+                      const item = typeof option === "string" ? { value: option, label: option } : option;
+                      return (
+                        <NativeSelectOption key={item.value} value={item.value}>
+                          {item.label}
+                        </NativeSelectOption>
+                      );
+                    })}
+                  </NativeSelect>
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`ATC Position`}</span>
+                  <Input
+                    aria-label={t`ATC Position`}
+                    value={groupFilters.callsign}
+                    onChange={(event) => updateFilters(group, { callsign: event.currentTarget.value })}
                   />
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Sector ID`}</span>
+                  <Input
+                    aria-label={t`Sector ID`}
+                    value={groupFilters.sectorId}
+                    onChange={(event) => updateFilters(group, { sectorId: event.currentTarget.value })}
+                  />
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Category`}</span>
+                  <NativeSelect
+                    aria-label={t`Category`}
+                    value={groupFilters.category ?? ""}
+                    onChange={(event) => {
+                      const value = event.currentTarget.value || null;
+                      return updateFilters(group, { category: value as AtcPosition["category"] | null });
+                    }}
+                  >
+                    <NativeSelectOption value=""></NativeSelectOption>
+                    {(POSITION_CATEGORIES.map(({ value, label }) => ({ value, label: i18n._(label) })) ?? []).map(
+                      (option) => {
+                        const item = typeof option === "string" ? { value: option, label: option } : option;
+                        return (
+                          <NativeSelectOption key={item.value} value={item.value}>
+                            {item.label}
+                          </NativeSelectOption>
+                        );
+                      },
+                    )}
+                  </NativeSelect>
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Chinese Callsign`}</span>
+                  <Input
+                    aria-label={t`Chinese Callsign`}
+                    value={groupFilters.callsignZh}
+                    onChange={(event) => updateFilters(group, { callsignZh: event.currentTarget.value })}
+                  />
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`English Callsign`}</span>
+                  <Input
+                    aria-label={t`English Callsign`}
+                    value={groupFilters.callsignEn}
+                    onChange={(event) => updateFilters(group, { callsignEn: event.currentTarget.value })}
+                  />
+                </label>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Frequency`}</span>
+                  <Input
+                    aria-label={t`Frequency`}
+                    value={groupFilters.frequency}
+                    onChange={(event) => updateFilters(group, { frequency: event.currentTarget.value })}
+                  />
+                </label>
+                {group === "area" && (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{"CPDLC"}</span>
+                    <Input
+                      aria-label={"CPDLC"}
+                      value={groupFilters.cpdlc}
+                      onChange={(event) => updateFilters(group, { cpdlc: event.currentTarget.value })}
+                    />
+                  </label>
                 )}
-                <TextInput
-                  size="xs"
-                  label={t`Remarks`}
-                  value={groupFilters.remarks}
-                  onChange={(event) => updateFilters(group, { remarks: event.currentTarget.value })}
-                />
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{t`Remarks`}</span>
+                  <Input
+                    aria-label={t`Remarks`}
+                    value={groupFilters.remarks}
+                    onChange={(event) => updateFilters(group, { remarks: event.currentTarget.value })}
+                  />
+                </label>
               </div>
               <RichTable
                 data={selectedPositions}
@@ -448,7 +489,7 @@ export function StationPage() {
                 hideGlobalSearch
                 hideColumnFilters
               />
-            </Tabs.Panel>
+            </TabsContent>
           );
         })}
       </Tabs>

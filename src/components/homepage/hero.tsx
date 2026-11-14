@@ -1,9 +1,10 @@
 import heroImage from "@/assets/homepage/hero.jpg";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/link-button";
 import { $api } from "@/lib/client";
 import { useNewNavigationFlag } from "@/lib/experimental-features";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
 import { isSameWeek, parseISO } from "date-fns";
 import React from "react";
 import { TbExternalLink } from "react-icons/tb";
@@ -43,8 +44,9 @@ export const Hero: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/60 to-transparent" />
         <div className="relative mx-auto flex max-h-svh min-h-112 w-full max-w-6xl flex-col items-start justify-center gap-4 px-4 pt-28 pb-16">
           {(statusError ?? eventsError) && (
-            <Alert color="red" title={(statusError ?? eventsError)?.title}>
-              {(statusError ?? eventsError)?.detail}
+            <Alert variant={"destructive"}>
+              <AlertTitle>{(statusError ?? eventsError)?.title}</AlertTitle>
+              <AlertDescription>{(statusError ?? eventsError)?.detail}</AlertDescription>
             </Alert>
           )}
           <div className="flex flex-col items-start gap-2">
@@ -63,24 +65,21 @@ export const Hero: React.FC = () => {
           </div>
           {!enableNewNav && (
             <div className="grid w-fit grid-cols-2 gap-1">
-              <Button color="vatprc" component={Link} to="/controllers">
+              <LinkButton to="/controllers">
                 <Trans>Join the controller team</Trans>
-              </Button>
-              <Button color="dark" component={Link} to="/pilot/introduction-to-fly">
+              </LinkButton>
+              <LinkButton to="/pilot/introduction-to-fly">
                 <Trans>How to fly</Trans>
-              </Button>
-              <Button color="dark" component={Link} to="/flights">
+              </LinkButton>
+              <LinkButton to="/flights">
                 <Trans>Flight plan checker</Trans>
-              </Button>
+              </LinkButton>
               <Button
-                color="dark"
-                component="a"
-                href="https://community.vatprc.net"
-                target="_blank"
-                rel="noreferrer"
-                rightSection={<TbExternalLink size={14} />}
+                render={<a href="https://community.vatprc.net" target="_blank" rel="noreferrer" />}
+                nativeButton={false}
               >
                 <Trans>Forum</Trans>
+                {<TbExternalLink size={14} />}
               </Button>
             </div>
           )}
@@ -97,22 +96,19 @@ export const Hero: React.FC = () => {
             <Trans>What do you want to do today?</Trans>
           </p>
           <div className="mt-4 flex gap-1">
-            <Button className="flex-1" color="grey" component={Link} to="/controllers">
+            <LinkButton className="flex-1" to="/controllers">
               <Trans>Fly</Trans>
-            </Button>
-            <Button className="flex-1" color="grey" component={Link} to="/pilot/introduction-to-fly">
+            </LinkButton>
+            <LinkButton className="flex-1" to="/pilot/introduction-to-fly">
               <Trans>Control</Trans>
-            </Button>
+            </LinkButton>
             <Button
               className="flex-1"
-              color="grey"
-              component="a"
-              href="https://community.vatprc.net"
-              target="_blank"
-              rel="noreferrer"
-              rightSection={<TbExternalLink size={14} />}
+              render={<a href="https://community.vatprc.net" target="_blank" rel="noreferrer" />}
+              nativeButton={false}
             >
               <Trans>Forum</Trans>
+              {<TbExternalLink size={14} />}
             </Button>
           </div>
         </section>

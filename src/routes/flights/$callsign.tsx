@@ -1,9 +1,10 @@
 import { FlightDetails } from "@/components/flight/flight-details";
 import { FlightRoute } from "@/components/flight/flight-route";
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbPlaneInflight } from "react-icons/tb";
 
@@ -31,20 +32,23 @@ function RouteComponent() {
   if (error || validationError) {
     const e = error ?? validationError;
     return (
-      <Alert color="red" title={e?.title}>
-        {e?.detail}
+      <Alert variant={"destructive"}>
+        <AlertTitle>{e?.title}</AlertTitle>
+        <AlertDescription>{e?.detail}</AlertDescription>
       </Alert>
     );
   }
 
   if (isLoading || isValidationLoading) {
-    return <Skeleton h={64} />;
+    return <Skeleton style={{ height: 64 }} />;
   }
 
   if (!flight || !validation) {
     return (
       <Alert>
-        <Trans>Flight or validation data is missing.</Trans>
+        <AlertDescription>
+          <Trans>Flight or validation data is missing.</Trans>
+        </AlertDescription>
       </Alert>
     );
   }

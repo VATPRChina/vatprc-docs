@@ -1,9 +1,9 @@
 import { AtcBookingWarning } from "./atc-booking-warning";
 import { DateTime } from "./datetime";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Anchor } from "@mantine/core";
 import { FC } from "react";
 import { TbArrowRight } from "react-icons/tb";
 
@@ -61,22 +61,23 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
   return (
     <div className="flex flex-col gap-1">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       {event && <EventSummary {...event} />}
       {event && <AtcBookingWarning eventId={event.id} eventStart={event.start_at} />}
       <div className="flex flex-row items-baseline gap-1">
         {event?.community_link && event.community_link.length > 0 && (
-          <Anchor href={event.community_link} target="_blank" rel="noreferrer">
+          <a href={event.community_link} target="_blank" rel="noreferrer">
             <Trans>Forum</Trans>
-          </Anchor>
+          </a>
         )}
         {event?.vatsim_link && event.vatsim_link.length > 0 && (
-          <Anchor href={event.vatsim_link} target="_blank" rel="noreferrer">
+          <a href={event.vatsim_link} target="_blank" rel="noreferrer">
             <Trans>VATSIM</Trans>
-          </Anchor>
+          </a>
         )}
       </div>
       <div>{event?.description}</div>

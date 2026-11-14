@@ -1,7 +1,10 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table";
 import { MessageDescriptor } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Select, ActionIconGroup, ActionIcon, Table, Skeleton, UnstyledButton, TextInput } from "@mantine/core";
-import { useDebouncedCallback } from "@mantine/hooks";
 import {
   columnFilteringFeature,
   columnVisibilityFeature,
@@ -31,7 +34,6 @@ import {
   TbChevronDown,
   TbChevronUp,
   TbSelector,
-  TbSearch,
 } from "react-icons/tb";
 
 const columnMeta: { filterValues?: { value: string; label: MessageDescriptor }[] } = {};
@@ -66,12 +68,12 @@ const SortableHeader: FC<SortableHeaderProps> = ({ children, sorted, onSort, sor
   if (!sortable) return children;
 
   return (
-    <UnstyledButton onClick={onSort} className="w-full">
+    <button onClick={onSort} className="w-full" type={"button"}>
       <div className="flex flex-row items-center justify-between gap-1">
         <div>{children}</div>
         <Icon size={16} />
       </div>
-    </UnstyledButton>
+    </button>
   );
 };
 
@@ -109,30 +111,28 @@ export const RichTable = <TData extends RowData>({
   const currentPage = table.state.pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
 
-  const onGlobalFilterChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const onGlobalFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     table.setGlobalFilter(e.target.value);
-  }, 200);
+  };
 
-  const onColumnFilterChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const onColumnFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     const id = e.target.getAttribute("data-field") ?? "";
     table.setColumnFilters((f) => [...f.filter((f) => f.id !== id), { id, value: e.target.value }]);
-  }, 200);
+  };
 
-  const onColumnFilterSelectChange = useDebouncedCallback((value: string | null, id: string) => {
+  const onColumnFilterSelectChange = (value: string | null, id: string) => {
     table.setColumnFilters((f) => [...f.filter((f) => f.id !== id), { id, value }]);
-  }, 200);
+  };
 
   return (
     <div className="flex flex-col gap-1">
-      {!hideGlobalSearch && (
-        <TextInput placeholder={t`Search...`} leftSection={<TbSearch size={16} />} onChange={onGlobalFilterChange} />
-      )}
-      <Table highlightOnHover>
-        <Table.Thead>
-          <Table.Tr>
+      {!hideGlobalSearch && <Input placeholder={t`Search...`} onChange={onGlobalFilterChange} />}
+      <Table>
+        <TableHeader>
+          <TableRow>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers?.map((header) => (
-                <Table.Th key={`${headerGroup.id}/${header.id}`}>
+                <TableHead key={`${headerGroup.id}/${header.id}`}>
                   <div className="flex h-full flex-col gap-1">
                     <SortableHeader
                       key={header.id}
@@ -145,53 +145,60 @@ export const RichTable = <TData extends RowData>({
                     {!hideColumnFilters &&
                       header.column.getCanFilter() &&
                       (header.column.columnDef.meta?.filterValues ? (
-                        <Select
+                        <NativeSelect
                           className="font-normal"
-                          size="xs"
                           data-field={header.column.id}
-                          value={(table.getColumn(header.column.id)?.getFilterValue() as string) ?? null}
-                          onChange={(v) => onColumnFilterSelectChange(v, header.column.id)}
-                          data={header.column.columnDef.meta.filterValues.map(({ value, label }) => ({
-                            value,
-                            label: i18n._(label),
-                          }))}
-                          clearable
-                        />
+                          value={(table.getColumn(header.column.id)?.getFilterValue() as string) ?? ""}
+                          onChange={(event) => {
+                            const v = event.currentTarget.value || null;
+                            return onColumnFilterSelectChange(v, header.column.id);
+                          }}
+                        >
+                          <NativeSelectOption value=""></NativeSelectOption>
+                          {(
+                            header.column.columnDef.meta.filterValues.map(({ value, label }) => ({
+                              value,
+                              label: i18n._(label),
+                            })) ?? []
+                          ).map((option) => {
+                            const item = typeof option === "string" ? { value: option, label: option } : option;
+                            return (
+                              <NativeSelectOption key={item.value} value={item.value}>
+                                {item.label}
+                              </NativeSelectOption>
+                            );
+                          })}
+                        </NativeSelect>
                       ) : (
-                        <TextInput
-                          className="font-normal"
-                          size="xs"
-                          data-field={header.column.id}
-                          onChange={onColumnFilterChange}
-                        />
+                        <Input className="font-normal" data-field={header.column.id} onChange={onColumnFilterChange} />
                       ))}
                   </div>
-                </Table.Th>
+                </TableHead>
               )),
             )}
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <Table.Tr key={row.id} data-state={row.getIsSelected() && "selected"}>
+            <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
               {row.getVisibleCells().map((cell) => (
-                <Table.Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Table.Td>
+                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
               ))}
-            </Table.Tr>
+            </TableRow>
           ))}
           {isLoading &&
             Array(Math.min(table.state.pagination.pageSize, 15))
               .fill(0)
               .map((_, i) => (
-                <Table.Tr key={i}>
+                <TableRow key={i}>
                   {table.getAllColumns().map((col) => (
-                    <Table.Td key={col.id}>
-                      <Skeleton h={24} />
-                    </Table.Td>
+                    <TableCell key={col.id}>
+                      <Skeleton style={{ height: 24 }} />
+                    </TableCell>
                   ))}
-                </Table.Tr>
+                </TableRow>
               ))}
-        </Table.Tbody>
+        </TableBody>
       </Table>
       {table.getRowCount() === 0 && !isLoading && (
         <div className="text-dimmed flex items-center justify-center p-6">
@@ -199,53 +206,69 @@ export const RichTable = <TData extends RowData>({
         </div>
       )}
       <div className="flex items-center justify-between gap-2 self-stretch px-2">
-        <Select
+        <NativeSelect
           value={table.state.pagination.pageSize > 100 ? "all" : `${table.state.pagination.pageSize}`}
-          onChange={(value) => table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value))}
-          data={[
+          onChange={(event) => {
+            const value = event.currentTarget.value || null;
+            return table.setPageSize(value === "all" ? Number.MAX_SAFE_INTEGER : Number(value));
+          }}
+        >
+          <NativeSelectOption value=""></NativeSelectOption>
+          {[
             ...[10, 20, 25, 30, 40, 50, 100].map((size) => ({ value: `${size}`, label: t`${size} items/page` })),
             { value: "all", label: t`All` },
-          ]}
-        />
+          ].map((option) => {
+            const item = typeof option === "string" ? { value: option, label: option } : option;
+            return (
+              <NativeSelectOption key={item.value} value={item.value}>
+                {item.label}
+              </NativeSelectOption>
+            );
+          })}
+        </NativeSelect>
         <div className="flex items-center justify-center text-sm font-medium">
           <Trans>
             Page {currentPage} of {totalPages}
           </Trans>
         </div>
-        <ActionIconGroup className="gap-1!">
-          <ActionIcon
-            variant="subtle"
+        <div className="flex gap-1">
+          <Button
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
             title={t`Go to first page`}
+            size={"icon-sm"}
+            variant={"neutral"}
           >
             <TbChevronsLeft />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
+          </Button>
+          <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             title={t`Go to previous page`}
+            size={"icon-sm"}
+            variant={"neutral"}
           >
             <TbChevronLeft />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
+          </Button>
+          <Button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             title={t`Go to next page`}
+            size={"icon-sm"}
+            variant={"neutral"}
           >
             <TbChevronRight />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
+          </Button>
+          <Button
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
             title={t`Go to last page`}
+            size={"icon-sm"}
+            variant={"neutral"}
           >
             <TbChevronsRight />
-          </ActionIcon>
-        </ActionIconGroup>
+          </Button>
+        </div>
       </div>
     </div>
   );

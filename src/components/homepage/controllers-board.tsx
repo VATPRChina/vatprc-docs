@@ -1,9 +1,10 @@
 import { DateTime } from "../event/datetime";
+import { AlertDescription, Alert } from "@/components/ui/alert";
+import { LinkButton } from "@/components/ui/link-button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Skeleton } from "@mantine/core";
-import { Link } from "@tanstack/react-router";
 import { parseISO } from "date-fns";
 import React from "react";
 import { TbArrowRight } from "react-icons/tb";
@@ -51,7 +52,7 @@ const StripList: React.FC<StripListProps> = ({ children, empty, isLoading }) => 
           .fill(0)
           .map((_, i) => (
             <div key={i} className="border-b border-black/15 px-4 py-3 last:border-b-0 dark:border-white/20">
-              <Skeleton width="100%" height={24} />
+              <Skeleton className="h-24" style={{ width: "100%" }} />
             </div>
           ))}
       {!isLoading && children.length === 0 && (
@@ -80,20 +81,17 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
         <h2 className="text-2xl font-medium">
           <Trans>Controllers</Trans>
         </h2>
-        <Button
-          variant="subtle"
-          color="red"
-          component={Link}
-          to="/controllers"
-          rightSection={<TbArrowRight size={14} />}
-        >
+        <LinkButton to="/controllers" variant={"neutral"}>
           <Trans>ATC Center</Trans>
-        </Button>
+          {<TbArrowRight size={14} />}
+        </LinkButton>
       </div>
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         {(error ?? bookingsError) && (
-          <Alert color="red" className="lg:col-span-2">
-            <Trans>Failed to load controller information.</Trans>
+          <Alert className="lg:col-span-2" variant={"destructive"}>
+            <AlertDescription>
+              <Trans>Failed to load controller information.</Trans>
+            </AlertDescription>
           </Alert>
         )}
         <div>

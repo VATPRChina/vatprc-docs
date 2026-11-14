@@ -162,12 +162,11 @@ test("groups positions into airport, terminal and area tabs", async () => {
       .not.toBeInTheDocument();
   }
   const airportFilter = screen.getByRole("combobox", { name: "Airport", exact: true });
-  await expect.element(airportFilter).toHaveValue("All (12)");
+  await expect.element(airportFilter).toHaveValue("__all__");
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("ZSPD_TWR", { exact: true })).toBeVisible();
   await expect.element(screen.getByRole("row", { name: /ZSPD_TWR/ }).getByText("PUT", { exact: true })).toBeVisible();
-  await airportFilter.click();
-  await screen.getByRole("option", { name: "ZSPD (1)", exact: true }).click();
+  await airportFilter.selectOptions("ZSPD");
   await expect.element(screen.getByText("ZSPD_TWR", { exact: true })).toBeVisible();
   await expect.element(screen.getByText("ZBAA_TWR", { exact: true })).not.toBeInTheDocument();
   await expect.element(screen.getByText("ZBAA_APP", { exact: true })).not.toBeInTheDocument();
@@ -283,7 +282,7 @@ test("batch deletion confirms selected positions, retains failures and retries o
   await dialog.getByRole("button", { name: "Delete 2 positions" }).click();
   await expect.element(dialog.getByText("Callsign already exists")).toBeVisible();
   await expect.element(dialog.getByRole("button", { name: "Delete 1 positions" })).toBeEnabled();
-  await expect.element(screen.getByRole("button", { name: "Delete selected (1)" })).toBeVisible();
+  await expect.element(screen.getByText("Delete selected (1)", { exact: true })).toBeVisible();
   expect(writes.map((write) => write.path)).toEqual(["/api/atc/positions/ZBAA_TWR", "/api/atc/positions/ZBAA_GND"]);
   failCallsign = undefined;
   await dialog.getByRole("button", { name: "Delete 1 positions" }).click();

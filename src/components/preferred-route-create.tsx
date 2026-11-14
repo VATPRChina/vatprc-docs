@@ -1,15 +1,20 @@
 import { DateTimeInput } from "./ui/datetime-input";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog } from "@/lib/utils";
+import { promiseWithLog } from "@/lib/helpers";
 import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Modal, Select, TextInput, Textarea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { formatISO } from "date-fns";
+import { useState as useDisclosureState } from "react";
 import { FC } from "react";
 import { TbEdit } from "react-icons/tb";
 
@@ -28,7 +33,9 @@ interface CreatePreferredRouteProps {
 
 export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
   const { t, i18n } = useLingui();
-  const [opened, { toggle, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const toggle = () => setOpened((value) => !value);
+  const close = () => setOpened(false);
 
   const user = useUser();
   const {
@@ -79,132 +86,171 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
   return (
     <>
       {id ? (
-        <ActionIcon variant="subtle" aria-label={t`Edit Preferred Route {title}`} onClick={toggle}>
+        <Button aria-label={t`Edit Preferred Route {title}`} onClick={toggle} size={"icon-sm"} variant={"neutral"}>
           <TbEdit size={18} />
-        </ActionIcon>
+        </Button>
       ) : (
         <Button onClick={toggle}>
           <Trans>Create Preferred Route</Trans>
         </Button>
       )}
-      <Modal
-        opened={opened}
-        onClose={close}
-        size="xl"
-        title={id ? t`Edit Preferred Route ${title}` : t`Create Preferred Route`}
+      <Dialog
+        open={opened}
+        onOpenChange={(open) => {
+          if (!open) close();
+        }}
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            promiseWithLog(form.handleSubmit());
-          }}
-        >
-          <div className="flex flex-col gap-4">
-            {(loadError ?? createError ?? updateError) && (
-              <Alert color="red" title={(loadError ?? createError ?? updateError)?.title}>
-                {(loadError ?? createError ?? updateError)?.detail}
-              </Alert>
-            )}
-            <div className="grid grid-cols-2 gap-2">
-              <form.Field name="departure">
-                {(field) => (
-                  <TextInput
-                    label={t`Departure`}
-                    onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  ></TextInput>
-                )}
-              </form.Field>
-              <form.Field name="arrival">
-                {(field) => (
-                  <TextInput
-                    label={t`Arrival`}
-                    onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  ></TextInput>
-                )}
-              </form.Field>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <form.Field name="valid_from">
-                {(field) => (
-                  <DateTimeInput
-                    label={t`Valid From`}
-                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    clearable
-                    value={field.state.value && new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  />
-                )}
-              </form.Field>
-              <form.Field name="valid_until">
-                {(field) => (
-                  <DateTimeInput
-                    label={t`Valid Until`}
-                    onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
-                    clearable
-                    value={field.state.value && new Date(field.state.value)}
-                    onBlur={field.handleBlur}
-                    disabled={isLoading}
-                  />
-                )}
-              </form.Field>
-            </div>
-            <form.Field name="raw_route">
-              {(field) => (
-                <Textarea
-                  label={t`Route`}
-                  onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                  autosize
-                  minRows={5}
-                />
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>{id ? t`Edit Preferred Route ${title}` : t`Create Preferred Route`}</DialogTitle>
+          </DialogHeader>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              promiseWithLog(form.handleSubmit());
+            }}
+          >
+            <div className="flex flex-col gap-4">
+              {(loadError ?? createError ?? updateError) && (
+                <Alert variant={"destructive"}>
+                  <AlertTitle>{(loadError ?? createError ?? updateError)?.title}</AlertTitle>
+                  <AlertDescription>{(loadError ?? createError ?? updateError)?.detail}</AlertDescription>
+                </Alert>
               )}
-            </form.Field>
-            <form.Field name="cruising_level_restriction">
-              {(field) => (
-                <Select
-                  label={t`Cruising Level Type`}
-                  placeholder="Pick value"
-                  data={Object.entries(CRUISE_LEVELS).map(([value, msg]) => ({ value, label: i18n._(msg) }))}
-                  onChange={(value) =>
-                    value && field.handleChange(value as components["schemas"]["LevelRestrictionType"])
-                  }
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={isLoading}
-                />
-              )}
-            </form.Field>
-            <form.Field name="remarks">
-              {(field) => (
-                <Textarea
-                  label={t`Description`}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  value={field.state.value ?? ""}
-                  onBlur={field.handleBlur}
-                  disabled={true}
-                  autosize
-                  minRows={5}
-                />
-              )}
-            </form.Field>
-            <div className="flex flex-wrap items-center gap-1">
-              <Button variant="subtle" type="submit" loading={isCreatePending || isUpdatePending}>
-                {id ? t`Save` : t`Create`}
-              </Button>
+              <div className="grid grid-cols-2 gap-2">
+                <form.Field name="departure">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Departure`}</span>
+                      <Input
+                        aria-label={t`Departure`}
+                        onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                      />
+                    </label>
+                  )}
+                </form.Field>
+                <form.Field name="arrival">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Arrival`}</span>
+                      <Input
+                        aria-label={t`Arrival`}
+                        onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                      />
+                    </label>
+                  )}
+                </form.Field>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <form.Field name="valid_from">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Valid From`}</span>
+                      <DateTimeInput
+                        aria-label={t`Valid From`}
+                        onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
+                        value={field.state.value && new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                      />
+                    </label>
+                  )}
+                </form.Field>
+                <form.Field name="valid_until">
+                  {(field) => (
+                    <label className="grid gap-1.5 text-sm">
+                      <span className="font-heading">{t`Valid Until`}</span>
+                      <DateTimeInput
+                        aria-label={t`Valid Until`}
+                        onChange={(e) => field.handleChange(e && formatISO(e, { in: utc }))}
+                        value={field.state.value && new Date(field.state.value)}
+                        onBlur={field.handleBlur}
+                        disabled={isLoading}
+                      />
+                    </label>
+                  )}
+                </form.Field>
+              </div>
+              <form.Field name="raw_route">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Route`}</span>
+                    <Textarea
+                      aria-label={t`Route`}
+                      onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      rows={5}
+                    />
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="cruising_level_restriction">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Cruising Level Type`}</span>
+                    <NativeSelect
+                      aria-label={t`Cruising Level Type`}
+                      onBlur={field.handleBlur}
+                      disabled={isLoading}
+                      value={field.state.value ?? ""}
+                      onChange={(event) => {
+                        const value = event.currentTarget.value || null;
+                        return value && field.handleChange(value as components["schemas"]["LevelRestrictionType"]);
+                      }}
+                    >
+                      <NativeSelectOption value="">{"Pick value"}</NativeSelectOption>
+                      {(Object.entries(CRUISE_LEVELS).map(([value, msg]) => ({ value, label: i18n._(msg) })) ?? []).map(
+                        (option) => {
+                          const item = typeof option === "string" ? { value: option, label: option } : option;
+                          return (
+                            <NativeSelectOption key={item.value} value={item.value}>
+                              {item.label}
+                            </NativeSelectOption>
+                          );
+                        },
+                      )}
+                    </NativeSelect>
+                  </label>
+                )}
+              </form.Field>
+              <form.Field name="remarks">
+                {(field) => (
+                  <label className="grid gap-1.5 text-sm">
+                    <span className="font-heading">{t`Description`}</span>
+                    <Textarea
+                      aria-label={t`Description`}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      value={field.state.value ?? ""}
+                      onBlur={field.handleBlur}
+                      disabled={true}
+                      rows={5}
+                    />
+                  </label>
+                )}
+              </form.Field>
+              <div className="flex flex-wrap items-center gap-1">
+                <Button
+                  type="submit"
+                  disabled={isCreatePending || isUpdatePending}
+                  aria-busy={isCreatePending || isUpdatePending}
+                  variant={"neutral"}
+                >
+                  {id ? t`Save` : t`Create`}
+                </Button>
+              </div>
             </div>
-          </div>
-        </form>
-      </Modal>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

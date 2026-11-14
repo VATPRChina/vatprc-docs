@@ -1,8 +1,12 @@
 import { Sheet } from "../sheet";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
-import { wrapPromiseWithLog } from "@/lib/utils";
+import { wrapPromiseWithLog } from "@/lib/helpers";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton, Checkbox, Card } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { ComponentProps, FC, useState } from "react";
@@ -92,7 +96,13 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
     !!applicationId && (existingApplication?.status !== "submitted" || existingApplication?.user_id !== user?.id);
 
   if (!user && !isUserLoading) {
-    return <Alert icon={<TbUser />} title={<Trans>Please login to file an application.</Trans>}></Alert>;
+    return (
+      <Alert>
+        {<TbUser />}
+        <AlertTitle>{<Trans>Please login to file an application.</Trans>}</AlertTitle>
+        <AlertDescription></AlertDescription>
+      </Alert>
+    );
   }
 
   return (
@@ -100,43 +110,59 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
       <h2 className="text-lg">
         <Trans>Basic Information</Trans>
       </h2>
-      <Skeleton visible={isUserLoading || isValuesLoading}>
-        <p className="text-sm font-bold">
-          <Trans>CID</Trans>
-        </p>
-        <Card withBorder className="mt-1 text-sm" padding="xs">
-          <pre className="font-sans">{(applicationId ? existingApplication?.user?.cid : user?.cid) ?? ""}</pre>
-        </Card>
-      </Skeleton>
-      <Skeleton visible={isUserLoading || isValuesLoading}>
-        <p className="text-sm font-bold">
-          <Trans>Full Name</Trans>
-        </p>
-        <Card withBorder className="mt-1 text-sm" padding="xs">
-          <pre className="font-sans">
-            {(applicationId ? existingApplication?.user?.full_name : (user?.full_name ?? user?.full_name)) ?? ""}
-          </pre>
-        </Card>
-      </Skeleton>
+      {isUserLoading || isValuesLoading ? (
+        <Skeleton className="h-16 w-full" />
+      ) : (
+        <>
+          <p className="text-sm font-bold">
+            <Trans>CID</Trans>
+          </p>
+          <Card className="mt-1 text-sm">
+            <CardContent>
+              <pre className="font-sans">{(applicationId ? existingApplication?.user?.cid : user?.cid) ?? ""}</pre>
+            </CardContent>
+          </Card>
+        </>
+      )}
+      {isUserLoading || isValuesLoading ? (
+        <Skeleton className="h-16 w-full" />
+      ) : (
+        <>
+          <p className="text-sm font-bold">
+            <Trans>Full Name</Trans>
+          </p>
+          <Card className="mt-1 text-sm">
+            <CardContent>
+              <pre className="font-sans">
+                {(applicationId ? existingApplication?.user?.full_name : (user?.full_name ?? user?.full_name)) ?? ""}
+              </pre>
+            </CardContent>
+          </Card>
+        </>
+      )}
       <h2 className="text-lg">
         <Trans>Application Information</Trans>
       </h2>
       {isUpdateSuccess && (
-        <Alert color="green">
-          <Trans>Your ATC application has been updated successfully.</Trans>
+        <Alert>
+          <AlertDescription>
+            <Trans>Your ATC application has been updated successfully.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {(createError ?? updateError) && (
-        <Alert color="red" title={(createError ?? updateError)?.title}>
-          {(createError ?? updateError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(createError ?? updateError)?.title}</AlertTitle>
+          <AlertDescription>{(createError ?? updateError)?.detail}</AlertDescription>
         </Alert>
       )}
       {(userError ?? sheetError ?? applicationError) && (
-        <Alert color="red" title={(userError ?? sheetError ?? applicationError)?.title}>
-          {(userError ?? sheetError ?? applicationError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(userError ?? sheetError ?? applicationError)?.title}</AlertTitle>
+          <AlertDescription>{(userError ?? sheetError ?? applicationError)?.detail}</AlertDescription>
         </Alert>
       )}
-      {isSheetLoading && <Skeleton h={256} />}
+      {isSheetLoading && <Skeleton style={{ height: 256 }} />}
       <Sheet
         className="contents"
         sheet={applySheet}
@@ -153,13 +179,24 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
                 <h2 className="text-lg">
                   <Trans>Checklist</Trans>
                 </h2>
-                <Checkbox.Group value={value} onChange={setValue}>
+                <div>
                   <div className="flex flex-col gap-1">
                     {CHECKLIST.map((item) => (
-                      <Checkbox key={item.value} value={item.value} label={item.label} />
+                      <Label key={item.value} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={value.includes(item.value)}
+                          onCheckedChange={(checked) =>
+                            setValue((values) =>
+                              checked ? [...values, item.value] : values.filter((value) => value !== item.value),
+                            )
+                          }
+                          value={item.value}
+                        />
+                        <span>{item.label}</span>
+                      </Label>
                     ))}
                   </div>
-                </Checkbox.Group>
+                </div>
               </>
             )}
           </>

@@ -1,7 +1,10 @@
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { assumedRolesAtom, UserRole } from "@/lib/client";
 import { USER_ROLES } from "@/lib/user-roles";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Checkbox, Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import { FC, useEffect, useState } from "react";
 
@@ -27,24 +30,43 @@ export const AssumeRoleModal: FC<AssumeRoleModalProps> = ({ opened, onClose, onS
   };
 
   return (
-    <Modal opened={opened} onClose={onClose} title={<Trans>Assume Role</Trans>}>
-      <div className="flex flex-col gap-4">
-        <Checkbox.Group value={roles} onChange={setRoles}>
-          <div className="grid grid-cols-2 gap-1">
-            {USER_ROLES.entries().map(([role, name]) => (
-              <Checkbox key={role} value={role} label={i18n._(name)} />
-            ))}
+    <Dialog
+      open={opened}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+    >
+      <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+        <DialogHeader>
+          <DialogTitle>{<Trans>Assume Role</Trans>}</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col gap-4">
+          <div>
+            <div className="grid grid-cols-2 gap-1">
+              {USER_ROLES.entries().map(([role, name]) => (
+                <Label key={role} className="flex items-center gap-2">
+                  <Checkbox
+                    checked={roles.includes(role)}
+                    onCheckedChange={(checked) =>
+                      setRoles((roles) => (checked ? [...roles, role] : roles.filter((value) => value !== role)))
+                    }
+                    value={role}
+                  />
+                  <span>{i18n._(name)}</span>
+                </Label>
+              ))}
+            </div>
           </div>
-        </Checkbox.Group>
-        <div className="flex flex-wrap items-center gap-1">
-          <Button variant="outline" size="xs" onClick={onClose}>
-            <Trans>Cancel</Trans>
-          </Button>
-          <Button size="xs" onClick={onSave}>
-            <Trans>Save changes</Trans>
-          </Button>
+          <div className="flex flex-wrap items-center gap-1">
+            <Button size="xs" onClick={onClose} variant={"neutral"}>
+              <Trans>Cancel</Trans>
+            </Button>
+            <Button size="xs" onClick={onSave}>
+              <Trans>Save changes</Trans>
+            </Button>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };

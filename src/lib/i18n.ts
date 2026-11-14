@@ -1,5 +1,5 @@
+import { getPathname } from "./pathname";
 import { getCookie, isLocale, LANGUAGE_COOKIE_KEY } from "./settings";
-import { getPathname } from "./utils";
 import { I18n, MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 

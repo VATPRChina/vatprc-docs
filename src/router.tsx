@@ -1,12 +1,12 @@
 import { NotFound } from "./components/app/app-not-found";
 import { inferLocale } from "./lib/i18n";
-import { getPathname } from "./lib/utils";
+import { getPathname } from "./lib/pathname";
 import { routeTree } from "./routeTree.gen";
+import { Skeleton } from "@/components/ui/skeleton";
 import { messages as en } from "@/locales/en.po";
 import { messages as zh } from "@/locales/zh-cn.po";
 import { setupI18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { Skeleton } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
 import "es-iterator-helpers/auto";
@@ -57,7 +57,7 @@ export function getRouter() {
     defaultNotFoundComponent: () => <NotFound />,
     defaultPendingComponent: () => (
       <div className="h-svh w-full p-16">
-        <Skeleton h="100svh" />
+        <Skeleton style={{ height: "100svh" }} />
       </div>
     ),
     defaultPendingMs: 100,

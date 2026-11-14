@@ -1,5 +1,9 @@
 import { AtcPermissionModalButton } from "./atc-permission-modal";
 import { RichTable, RichTableFeatures } from "./table";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { compareControllers, compareRatings, isMilitaryController } from "@/lib/controller-list";
@@ -7,10 +11,9 @@ import { cn } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Checkbox, Tooltip } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 
 type AtcStatusDto = components["schemas"]["AtcStatusDto"];
 type AtcPermissionDto = components["schemas"]["AtcPermissionDto"];
@@ -53,14 +56,15 @@ const PermissionBadge: React.FC<{ permissions: AtcPermissionDto[]; kind: string 
   if (!permission.solo_expires_at) return badge;
 
   return (
-    <Tooltip
-      label={
-        <>
-          <Trans>until</Trans> {format(permission.solo_expires_at, "yyyy-MM-dd", { in: utc })}
-        </>
-      }
-    >
-      {badge}
+    <Tooltip>
+      <TooltipTrigger render={<span className="inline-flex" />}>{badge}</TooltipTrigger>
+      <TooltipContent>
+        {
+          <>
+            <Trans>until</Trans> {format(permission.solo_expires_at, "yyyy-MM-dd", { in: utc })}
+          </>
+        }
+      </TooltipContent>
     </Tooltip>
   );
 };
@@ -136,15 +140,21 @@ export const ControllerListTable: React.FC = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
-      <Checkbox
-        checked={showAbsent}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setShowAbsent(e.target.checked)}
-        label={<Trans>Show Absence Controllers</Trans>}
-      />
+      <Label className="flex items-center gap-2">
+        <Checkbox
+          checked={showAbsent}
+          onCheckedChange={(nextChecked) => {
+            const e = nextChecked;
+            return setShowAbsent(e);
+          }}
+        />
+        <span>{<Trans>Show Absence Controllers</Trans>}</span>
+      </Label>
       <RichTable
         data={rows}
         columns={columns}

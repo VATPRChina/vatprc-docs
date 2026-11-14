@@ -1,6 +1,8 @@
+import { AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Modal } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 
@@ -46,35 +48,44 @@ export function BatchDeleteModal({
     }
   };
   return (
-    <Modal
-      opened
-      title={t`Delete selected ATC positions`}
-      onClose={() => !submitting.current && onClose()}
-      withCloseButton={!pending}
+    <Dialog
+      open={true}
+      onOpenChange={(open) => {
+        if (!open) (() => !submitting.current && onClose())();
+      }}
     >
-      <div className="flex flex-col gap-4">
-        <p>
-          <Trans>
-            Are you sure you want to delete these {count} ATC positions? Successful deletions cannot be undone.
-          </Trans>
-        </p>
-        <ul className="list-inside list-disc">
-          {remaining.map((callsign) => (
-            <li key={callsign}>
-              <code>{callsign}</code>
-              {errors[callsign] && <Alert color="red">{errors[callsign]}</Alert>}
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-end gap-2">
-          <Button variant="default" disabled={pending} onClick={onClose}>
-            <Trans>Cancel</Trans>
-          </Button>
-          <Button color="red" loading={pending} disabled={count === 0} onClick={() => void deleteSelected()}>
-            <Trans>Delete {count} positions</Trans>
-          </Button>
+      <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+        <DialogHeader>
+          <DialogTitle>{t`Delete selected ATC positions`}</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col gap-4">
+          <p>
+            <Trans>
+              Are you sure you want to delete these {count} ATC positions? Successful deletions cannot be undone.
+            </Trans>
+          </p>
+          <ul className="list-inside list-disc">
+            {remaining.map((callsign) => (
+              <li key={callsign}>
+                <code>{callsign}</code>
+                {errors[callsign] && (
+                  <Alert variant={"destructive"}>
+                    <AlertDescription>{errors[callsign]}</AlertDescription>
+                  </Alert>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="flex justify-end gap-2">
+            <Button variant="default" disabled={pending} onClick={onClose}>
+              <Trans>Cancel</Trans>
+            </Button>
+            <Button onClick={() => void deleteSelected()} disabled={count === 0 || pending} aria-busy={pending}>
+              <Trans>Delete {count} positions</Trans>
+            </Button>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }

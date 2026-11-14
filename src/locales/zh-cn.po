@@ -386,8 +386,14 @@ msgstr "中文说明"
 msgid "Chinese name"
 msgstr "中文名称"
 
+msgid "Choose a CSV file to import slots"
+msgstr "选择 CSV 文件以导入时隙"
+
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear selection"
+msgstr "清除选择"
 
 msgid "Clear the selection to show all enabled radars."
 msgstr "清除选择可显示所有已启用雷达的覆盖范围。"
@@ -566,9 +572,6 @@ msgstr "分部主席"
 
 msgid "Division Policies"
 msgstr "分部政策"
-
-msgid "Drag CSV here or click to select files"
-msgstr "在此处拖放 CSV 文件或者点击此处选择文件"
 
 msgid "Duplicate callsign"
 msgstr "呼号重复"
@@ -1079,6 +1082,9 @@ msgstr "我的活动席位"
 msgid "My Trainings"
 msgstr "我的训练"
 
+msgid "Navigation"
+msgstr "导航"
+
 msgid "Network Error"
 msgstr "网络故障"
 
@@ -1153,6 +1159,9 @@ msgstr "无未知航段或航点"
 
 msgid "No upcoming ATC booking."
 msgstr "暂无管制预约。"
+
+msgid "No users found"
+msgstr "未找到用户"
 
 msgid "Not booked"
 msgstr "未预订"
@@ -1240,6 +1249,9 @@ msgstr "待处理"
 
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
+
+msgid "Picture"
+msgstr "图片"
 
 msgid "Pilot Softwares"
 msgstr "飞行员软件"
@@ -1400,6 +1412,9 @@ msgstr "保存变更"
 msgid "Save sheet"
 msgstr "保存表单"
 
+msgid "Search users"
+msgstr "搜索用户"
+
 msgid "Search..."
 msgstr "搜索..."
 
@@ -1436,6 +1451,9 @@ msgstr "全选"
 msgid "Select all positions on this page"
 msgstr "选择当前页所有席位"
 
+msgid "Select user"
+msgstr "选择用户"
+
 msgid "Self Reflection"
 msgstr "自我反思"
 
@@ -1453,9 +1471,6 @@ msgstr "表单列表"
 
 msgid "Show Absence Controllers"
 msgstr "显示缺席管制员"
-
-msgid "Show less"
-msgstr "收起"
 
 msgid "Show more"
 msgstr "显示更多"
@@ -1561,6 +1576,9 @@ msgstr "切换到英文"
 
 msgid "System"
 msgstr "跟随系统"
+
+msgid "Table of contents"
+msgstr "目录"
 
 msgid "Take me back to home page"
 msgstr "返回首页"

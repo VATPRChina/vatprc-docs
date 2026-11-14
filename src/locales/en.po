@@ -386,8 +386,14 @@ msgstr "Chinese description"
 msgid "Chinese name"
 msgstr "Chinese name"
 
+msgid "Choose a CSV file to import slots"
+msgstr "Choose a CSV file to import slots"
+
 msgid "CID"
 msgstr "CID"
+
+msgid "Clear selection"
+msgstr "Clear selection"
 
 msgid "Clear the selection to show all enabled radars."
 msgstr "Clear the selection to show all enabled radars."
@@ -566,9 +572,6 @@ msgstr "Division Director"
 
 msgid "Division Policies"
 msgstr "Division Policies"
-
-msgid "Drag CSV here or click to select files"
-msgstr "Drag CSV here or click to select files"
 
 msgid "Duplicate callsign"
 msgstr "Duplicate callsign"
@@ -1079,6 +1082,9 @@ msgstr "My Event Positions"
 msgid "My Trainings"
 msgstr "My Trainings"
 
+msgid "Navigation"
+msgstr "Navigation"
+
 msgid "Network Error"
 msgstr "Network Error"
 
@@ -1153,6 +1159,9 @@ msgstr "no unknown leg or fix"
 
 msgid "No upcoming ATC booking."
 msgstr "No upcoming ATC booking."
+
+msgid "No users found"
+msgstr "No users found"
 
 msgid "Not booked"
 msgstr "Not booked"
@@ -1240,6 +1249,9 @@ msgstr "Pending"
 
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
+
+msgid "Picture"
+msgstr "Picture"
 
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"
@@ -1400,6 +1412,9 @@ msgstr "Save changes"
 msgid "Save sheet"
 msgstr "Save sheet"
 
+msgid "Search users"
+msgstr "Search users"
+
 msgid "Search..."
 msgstr "Search..."
 
@@ -1436,6 +1451,9 @@ msgstr "Select all"
 msgid "Select all positions on this page"
 msgstr "Select all positions on this page"
 
+msgid "Select user"
+msgstr "Select user"
+
 msgid "Self Reflection"
 msgstr "Self Reflection"
 
@@ -1453,9 +1471,6 @@ msgstr "Sheets"
 
 msgid "Show Absence Controllers"
 msgstr "Show Absence Controllers"
-
-msgid "Show less"
-msgstr "Show less"
 
 msgid "Show more"
 msgstr "Show more"
@@ -1561,6 +1576,9 @@ msgstr "Switch to English"
 
 msgid "System"
 msgstr "System"
+
+msgid "Table of contents"
+msgstr "Table of contents"
 
 msgid "Take me back to home page"
 msgstr "Take me back to home page"

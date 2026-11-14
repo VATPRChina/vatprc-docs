@@ -4,9 +4,11 @@ import { TrainingSelfReflection } from "@/components/atc-training/training-self-
 import { BackButton } from "@/components/back-button";
 import { DateTime } from "@/components/event/datetime";
 import { Sheet } from "@/components/sheet";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TableHead, TableCell, TableRow, TableBody, Table } from "@/components/ui/table";
 import { useUser, $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton, Table } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComponentProps } from "react";
@@ -55,8 +57,9 @@ function RouteComponent() {
     <div className="flex flex-col gap-4">
       <BackButton />
       {trainingError && (
-        <Alert color="red" title={trainingError.title}>
-          {trainingError.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{trainingError.title}</AlertTitle>
+          <AlertDescription>{trainingError.detail}</AlertDescription>
         </Alert>
       )}
       <div className="flex flex-row items-center gap-1">
@@ -65,83 +68,91 @@ function RouteComponent() {
         </h2>
         <TrainingSaveModal id={id} />
       </div>
-      <Table variant="vertical" layout="fixed">
-        <Table.Tbody>
-          <Table.Tr>
-            <Table.Th w={160}>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableHead>
               <Trans>Title</Trans>
-            </Table.Th>
-            <Table.Td>{training?.name}</Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableHead>
+            <TableCell>{training?.name}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>Trainee</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               {training?.trainee.full_name}
               <span className="text-dimmed mx-1">{training?.trainee.cid}</span>
-            </Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>Trainer</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               {training?.trainer.full_name}
               <span className="text-dimmed mx-1">{training?.trainer.cid}</span>
-            </Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>Start at</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               <DateTime>{training?.start_at}</DateTime>
-            </Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>End at</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               <DateTime>{training?.end_at}</DateTime>
-            </Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>Created at</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               <DateTime>{training?.created_at}</DateTime>
-            </Table.Td>
-          </Table.Tr>
-          <Table.Tr>
-            <Table.Th>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>
               <Trans>Updated at</Trans>
-            </Table.Th>
-            <Table.Td>
+            </TableHead>
+            <TableCell>
               <DateTime>{training?.updated_at}</DateTime>
-            </Table.Td>
-          </Table.Tr>
-        </Table.Tbody>
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
-      {isLoading && <Skeleton h={160} />}
+      {isLoading && <Skeleton style={{ height: 160 }} />}
       {training && <TrainingSelfReflection key={training.id} training={training} />}
       <h2 className="text-xl">
         <Trans>Mentor Feedback</Trans>
       </h2>
       {isSuccess && (
-        <Alert color="green">
-          <Trans>Training record saved successfully.</Trans>
+        <Alert>
+          <AlertDescription>
+            <Trans>Training record saved successfully.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {mutationError && (
-        <Alert color="red" title={mutationError.title}>
-          {mutationError.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{mutationError.title}</AlertTitle>
+          <AlertDescription>{mutationError.detail}</AlertDescription>
         </Alert>
       )}
-      {error && <Alert title="Error">{error.title}</Alert>}
-      {isSheetLoading && <Skeleton h={256} />}
+      {error && (
+        <Alert>
+          <AlertTitle>{"Error"}</AlertTitle>
+          <AlertDescription>{error.title}</AlertDescription>
+        </Alert>
+      )}
+      {isSheetLoading && <Skeleton style={{ height: 256 }} />}
       <Sheet
         className="flex flex-col gap-2"
         sheet={applySheet}
@@ -154,7 +165,7 @@ function RouteComponent() {
       <h2 className="text-xl">
         <Trans>Previous Trainings</Trans>
       </h2>
-      {!training?.trainee_id && <Skeleton h={256} />}
+      {!training?.trainee_id && <Skeleton style={{ height: 256 }} />}
       {training?.trainee_id && <TrainingList mode="by-user/{userId}" userId={training?.trainee_id} />}
     </div>
   );

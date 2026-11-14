@@ -1,8 +1,13 @@
 import { ConfirmButton } from "./ui/confirm-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
-import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
+import { promiseWithLog, wrapPromiseWithLog } from "@/lib/helpers";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Skeleton, TextInput, Textarea, Select, Button, Card } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { ComponentProps, FC, ReactNode } from "react";
 
@@ -68,65 +73,59 @@ export const Sheet: FC<SheetProps> = ({
           }}
         >
           {(field) => {
+            const label = i18n.locale === "zh-cn" || !sheetField.name_en ? sheetField.name_zh : sheetField.name_en;
+            const description =
+              i18n.locale === "zh-cn" || !sheetField.description_en
+                ? sheetField.description_zh
+                : sheetField.description_en;
+            const error = field.state.meta.errors.join("");
             const commonProps = {
               id: field.name,
               name: field.name,
-              label: i18n.locale === "zh-cn" || !sheetField.name_en ? sheetField.name_zh : sheetField.name_en,
               value: field.state.value ?? "",
               onBlur: field.handleBlur,
-              description:
-                i18n.locale === "zh-cn" || !sheetField.description_en
-                  ? sheetField.description_zh
-                  : sheetField.description_en,
-              error: field.state.meta.errors.join(""),
-              disabled: isSubmitHidden,
+              "aria-invalid": !!error,
             };
-
-            if (commonProps.disabled) {
+            if (isFieldValuesLoading) return <Skeleton className="h-16 w-full" />;
+            if (isSubmitHidden)
               return (
-                <Skeleton visible={isFieldValuesLoading ?? false}>
-                  <p className="text-sm font-bold">{commonProps.label}</p>
-                  <Card withBorder className="mt-1 text-sm" padding="xs">
-                    <pre className="font-sans text-wrap">{commonProps.value}</pre>
-                    {commonProps.value.length === 0 && (
-                      <span className="text-dimmed">
-                        <Trans>No content</Trans>
-                      </span>
-                    )}
+                <div>
+                  <p className="text-sm font-bold">{label}</p>
+                  <Card className="mt-1 text-sm">
+                    <CardContent>
+                      <pre className="font-sans text-wrap">{commonProps.value || <Trans>No content</Trans>}</pre>
+                    </CardContent>
                   </Card>
-                </Skeleton>
+                </div>
               );
-            }
-
-            if (sheetField.kind === "short-text") {
+            const control =
+              sheetField.kind === "short-text" ? (
+                <Input {...commonProps} onChange={(e) => field.handleChange(e.target.value)} />
+              ) : sheetField.kind === "long-text" ? (
+                <Textarea {...commonProps} rows={4} onChange={(e) => field.handleChange(e.target.value)} />
+              ) : sheetField.kind === "single-choice" ? (
+                <NativeSelect {...commonProps} onChange={(e) => field.handleChange(e.currentTarget.value)}>
+                  <NativeSelectOption value="" />
+                  {sheetField.single_choice_options.map((option) => (
+                    <NativeSelectOption key={option} value={option}>
+                      {option}
+                    </NativeSelectOption>
+                  ))}
+                </NativeSelect>
+              ) : null;
+            if (control)
               return (
-                <Skeleton visible={isFieldValuesLoading ?? false}>
-                  <TextInput {...commonProps} onChange={(e) => field.handleChange(e.target.value)} />
-                </Skeleton>
+                <label className="grid gap-1.5 text-sm">
+                  <span className="font-heading">{label}</span>
+                  {control}
+                  {description && <span className="text-foreground/70 text-xs">{description}</span>}
+                  {error && (
+                    <span role="alert" className="text-xs text-red-600">
+                      {error}
+                    </span>
+                  )}
+                </label>
               );
-            } else if (sheetField.kind === "long-text") {
-              return (
-                <Skeleton visible={isFieldValuesLoading ?? false}>
-                  <Textarea
-                    {...commonProps}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    autosize
-                    minRows={4}
-                    resize="vertical"
-                  />
-                </Skeleton>
-              );
-            } else if (sheetField.kind === "single-choice") {
-              return (
-                <Skeleton visible={isFieldValuesLoading ?? false}>
-                  <Select
-                    {...commonProps}
-                    data={sheetField.single_choice_options}
-                    onChange={(value) => field.handleChange(value ?? "")}
-                  />
-                </Skeleton>
-              );
-            }
             return null;
           }}
         </form.Field>
@@ -138,19 +137,19 @@ export const Sheet: FC<SheetProps> = ({
             confirm ? (
               <ConfirmButton
                 actionDescription={confirm}
-                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
-                loading={isSubmitting}
                 className="self-start"
                 onClick={wrapPromiseWithLog(() => form.handleSubmit())}
+                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled || isSubmitting}
+                aria-busy={isSubmitting}
               >
                 {submitButtonContent}
               </ConfirmButton>
             ) : (
               <Button
-                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled}
-                loading={isSubmitting}
                 type="submit"
                 className="self-start"
+                disabled={!canSubmit || (!doNotRequirePristine && isPristine) || isSubmitDisabled || isSubmitting}
+                aria-busy={isSubmitting}
               >
                 {submitButtonContent}
               </Button>

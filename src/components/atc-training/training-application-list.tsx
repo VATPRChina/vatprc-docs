@@ -3,13 +3,14 @@ import { RichTable, RichTableFeatures } from "../table";
 import { TrainingApplicationCreateModal } from "./training-application-create";
 import { TrainingApplicationDeleteModal } from "./training-application-delete";
 import { TrainingApplicationResponsesModal } from "./training-application-responses";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
-import { renderWithMap } from "@/lib/utils";
+import { renderWithMap } from "@/lib/helpers";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FC } from "react";
 
@@ -24,7 +25,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   [
     "pending",
     () => (
-      <Badge variant="dot" color="yellow">
+      <Badge>
         <Trans>Pending</Trans>
       </Badge>
     ),
@@ -32,7 +33,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   [
     "accepted",
     () => (
-      <Badge variant="dot" color="green">
+      <Badge>
         <Trans>Accepted</Trans>
       </Badge>
     ),
@@ -40,7 +41,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   [
     "rejected",
     () => (
-      <Badge variant="dot" color="red">
+      <Badge>
         <Trans>Rejected</Trans>
       </Badge>
     ),
@@ -48,7 +49,7 @@ const STATUS_BADGE_MAP: Map<components["schemas"]["TrainingApplicationStatus"], 
   [
     "cancelled",
     () => (
-      <Badge variant="dot" color="gray">
+      <Badge>
         <Trans>Cancelled</Trans>
       </Badge>
     ),
@@ -90,8 +91,9 @@ export const TrainingApplicationList: FC = () => {
   return (
     <div className="flex flex-col gap-1">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <RichTable

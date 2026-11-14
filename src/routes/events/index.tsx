@@ -1,9 +1,11 @@
 import { EventCard } from "@/components/event/event-card";
 import { CreateEvent } from "@/components/event/event-create";
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Skeleton } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { TbArrowRight, TbCalendarOff } from "react-icons/tb";
 
@@ -36,8 +38,9 @@ function RouteComponent() {
         <CreateEvent />
       </div>
       {error && (
-        <Alert color="red" title={<Trans>Failed to load events</Trans>}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{<Trans>Failed to load events</Trans>}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       {isLoading && (
@@ -45,10 +48,10 @@ function RouteComponent() {
           {Array.from({ length: 2 }, (_, index) => (
             <div key={index} className="flex flex-col gap-1 border p-4">
               <Skeleton className="aspect-video w-full" />
-              <Skeleton height={32} width="70%" />
+              <Skeleton className="h-24" style={{ width: "70%" }} />
               <div className="flex flex-col gap-1">
-                <Skeleton height={18} width="55%" />
-                <Skeleton height={18} width="80%" />
+                <Skeleton className="h-24" style={{ width: "55%" }} />
+                <Skeleton className="h-24" style={{ width: "80%" }} />
               </div>
             </div>
           ))}
@@ -78,8 +81,9 @@ function RouteComponent() {
               <Trans>There are no upcoming events right now. Check back soon or explore events from the past.</Trans>
             </p>
             <Link to="/events/history" search={{ range: "recent" }}>
-              <Button component="span" variant="subtle" color="red" rightSection={<TbArrowRight size={16} />}>
+              <Button variant={"neutral"} render={<span />} nativeButton={false}>
                 <Trans>Browse past events</Trans>
+                {<TbArrowRight size={16} />}
               </Button>
             </Link>
           </div>

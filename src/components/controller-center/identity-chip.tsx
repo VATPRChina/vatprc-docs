@@ -1,6 +1,6 @@
+import { Badge } from "@/components/ui/badge";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Badge } from "@mantine/core";
 import { FC } from "react";
 
 export const getStatusBadges = (status?: { is_visiting: boolean; is_absent: boolean }): ("visiting" | "absent")[] => {
@@ -20,9 +20,7 @@ export const IdentityChip: FC = () => {
         {user.cid} · {status.rating}
       </span>
       {getStatusBadges(status).map((badge) => (
-        <Badge key={badge} color={badge === "absent" ? "red" : "blue"} variant="filled" radius={0}>
-          {badge === "absent" ? <Trans>Absent</Trans> : <Trans>Visiting</Trans>}
-        </Badge>
+        <Badge key={badge}>{badge === "absent" ? <Trans>Absent</Trans> : <Trans>Visiting</Trans>}</Badge>
       ))}
     </div>
   );

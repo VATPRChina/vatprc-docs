@@ -1,9 +1,11 @@
 import { MarkdownDoc } from "./markdown-doc";
 import type { CompiledMarkdownDoc } from "./markdown-doc-compile";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
 import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/react-router";
 import React, { ReactNode } from "react";
 import { TbCloudX } from "react-icons/tb";
@@ -48,26 +50,22 @@ export const DiscourseDocument: React.FC<{
 }> = ({ document, en, cn, inline, extraHeader }) => {
   const editPermission = usePermission("staff");
   const editButtons = editPermission && (
-    <ButtonGroup className="mb-2 gap-1!">
+    <div className="mb-2 gap-1!">
       <Button
-        component="a"
-        variant="subtle"
-        href={`https://community.vatprc.net/t/topic/${en}`}
-        target="_blank"
-        rel="noopener noreferrer"
+        variant={"neutral"}
+        render={<a href={`https://community.vatprc.net/t/topic/${en}`} target="_blank" rel="noopener noreferrer" />}
+        nativeButton={false}
       >
         <Trans>Edit English</Trans>
       </Button>
       <Button
-        component="a"
-        variant="subtle"
-        href={`https://community.vatprc.net/t/topic/${cn}`}
-        target="_blank"
-        rel="noopener noreferrer"
+        variant={"neutral"}
+        render={<a href={`https://community.vatprc.net/t/topic/${cn}`} target="_blank" rel="noopener noreferrer" />}
+        nativeButton={false}
       >
         <Trans>Edit Chinese</Trans>
       </Button>
-    </ButtonGroup>
+    </div>
   );
 
   return (
@@ -110,18 +108,15 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   pendingMs: 100,
   pendingComponent: () => (
     <div className="h-svh w-full p-16">
-      <Skeleton h="100svh" />
+      <Skeleton style={{ height: "100svh" }} />
     </div>
   ),
   errorComponent: (props) => {
     return (
-      <Alert
-        icon={<TbCloudX />}
-        title={<Trans>Failed to load document</Trans>}
-        color="red"
-        className="container mx-auto"
-      >
-        {props.error.message}
+      <Alert className="container mx-auto" variant={"destructive"}>
+        {<TbCloudX />}
+        <AlertTitle>{<Trans>Failed to load document</Trans>}</AlertTitle>
+        <AlertDescription>{props.error.message}</AlertDescription>
       </Alert>
     );
   },

@@ -1,45 +1,43 @@
 import { TrainingApplicationList } from "@/components/atc-training/training-application-list";
 import { TrainingList } from "@/components/atc-training/training-list";
 import { TrainingSaveModal } from "@/components/atc-training/training-save";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import { Trans } from "@lingui/react/macro";
-import { Tabs } from "@mantine/core";
 import React from "react";
 
 export const TrainingManagement: React.FC = () => (
   <Tabs defaultValue="trainings">
-    <Tabs.List className="mb-2">
-      <Tabs.Tab value="trainings">
+    <TabsList className="mb-2">
+      <TabsTrigger value="trainings">
         <Trans>Trainings</Trans>
-      </Tabs.Tab>
-      <Tabs.Tab value="applications">
+      </TabsTrigger>
+      <TabsTrigger value="applications">
         <Trans>Trainee Applications</Trans>
-      </Tabs.Tab>
-    </Tabs.List>
-
-    <Tabs.Panel value="trainings" className="flex flex-col gap-1">
+      </TabsTrigger>
+    </TabsList>
+    <TabsContent value="trainings" className="flex flex-col gap-1">
       <div className="flex flex-row gap-2">
         <TrainingSaveModal />
       </div>
       <Tabs defaultValue="active">
-        <Tabs.List className="mb-2">
-          <Tabs.Tab value="active">
+        <TabsList className="mb-2">
+          <TabsTrigger value="active">
             <Trans>Active Trainings</Trans>
-          </Tabs.Tab>
-          <Tabs.Tab value="finished">
+          </TabsTrigger>
+          <TabsTrigger value="finished">
             <Trans>Finished Trainings</Trans>
-          </Tabs.Tab>
-        </Tabs.List>
-        <Tabs.Panel value="active">
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="active">
           <TrainingList mode="active" />
-        </Tabs.Panel>
-        <Tabs.Panel value="finished">
+        </TabsContent>
+        <TabsContent value="finished">
           <TrainingList mode="finished" />
-        </Tabs.Panel>
+        </TabsContent>
       </Tabs>
-    </Tabs.Panel>
-
-    <Tabs.Panel value="applications">
+    </TabsContent>
+    <TabsContent value="applications">
       <TrainingApplicationList />
-    </Tabs.Panel>
+    </TabsContent>
   </Tabs>
 );

@@ -1,11 +1,13 @@
 import { Sheet } from "../sheet";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { components } from "@/lib/api";
 import { $api, usePermission } from "@/lib/client";
-import { renderWithMap } from "@/lib/utils";
+import { renderWithMap } from "@/lib/helpers";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Select, Skeleton } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { ComponentProps, FC, useState } from "react";
 
@@ -21,48 +23,63 @@ const ATC_APPLICATION_STATUS_ALERTS: Map<components["schemas"]["AtcApplicationSt
   [
     "submitted",
     () => (
-      <Alert title={<Trans>Submitted</Trans>} color="blue">
-        <Trans>Your application has been submitted and is pending review by the staff.</Trans>
+      <Alert>
+        <AlertTitle>{<Trans>Submitted</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>Your application has been submitted and is pending review by the staff.</Trans>
+        </AlertDescription>
       </Alert>
     ),
   ],
   [
     "in-waitlist",
     () => (
-      <Alert title={<Trans>In Waitlist</Trans>} color="yellow">
-        <Trans>
-          Your application has been placed in the waitlist. You will be notified if a spot becomes available.
-        </Trans>
+      <Alert>
+        <AlertTitle>{<Trans>In Waitlist</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>
+            Your application has been placed in the waitlist. You will be notified if a spot becomes available.
+          </Trans>
+        </AlertDescription>
       </Alert>
     ),
   ],
   [
     "approved",
     () => (
-      <Alert title={<Trans>Accepted</Trans>} color="green">
-        <Trans>Your application has been approved. Welcome to start growing to be a controller!</Trans>
+      <Alert>
+        <AlertTitle>{<Trans>Accepted</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>Your application has been approved. Welcome to start growing to be a controller!</Trans>
+        </AlertDescription>
       </Alert>
     ),
   ],
   [
     "rejected",
     () => (
-      <Alert title={<Trans>Rejected</Trans>} color="red">
-        <Trans>
-          We regret to inform you that your application has been rejected. Please check the remarks for more details.
-        </Trans>
+      <Alert variant={"destructive"}>
+        <AlertTitle>{<Trans>Rejected</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>
+            We regret to inform you that your application has been rejected. Please check the remarks for more details.
+          </Trans>
+        </AlertDescription>
       </Alert>
     ),
   ],
   [
     "aborted",
     () => (
-      <Alert title={<Trans>Aborted</Trans>} color="red">
-        <Trans>
-          Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details.
-          You may contact the staff if you have any questions, or file an application again, which will be considered in
-          priority.
-        </Trans>
+      <Alert variant={"destructive"}>
+        <AlertTitle>{<Trans>Aborted</Trans>}</AlertTitle>
+        <AlertDescription>
+          <Trans>
+            Your training has been aborted due to inactivity or other reasons. Please check the remarks for more
+            details. You may contact the staff if you have any questions, or file an application again, which will be
+            considered in priority.
+          </Trans>
+        </AlertDescription>
       </Alert>
     ),
   ],
@@ -82,9 +99,14 @@ export const AtcApplicationStatusAlert: FC<AtcApplicationStatusAlertProps> = ({ 
   });
 
   if (isLoading) {
-    return <Skeleton height={64} />;
+    return <Skeleton style={{ height: 64 }} />;
   }
-  if (error) return <Alert color="red">{error.detail || error.title}</Alert>;
+  if (error)
+    return (
+      <Alert variant={"destructive"}>
+        <AlertDescription>{error.detail || error.title}</AlertDescription>
+      </Alert>
+    );
   if (!application) return null;
 
   return renderWithMap(ATC_APPLICATION_STATUS_ALERTS, application.status);
@@ -122,39 +144,69 @@ export const AtcApplicationStatusEdit: FC<AtcApplicationStatusEditProps> = ({ ap
   };
 
   if (isApplicationLoading) {
-    return <Skeleton height={64} />;
+    return <Skeleton style={{ height: 64 }} />;
   }
-  if (applicationError) return <Alert color="red">{applicationError.detail || applicationError.title}</Alert>;
+  if (applicationError)
+    return (
+      <Alert variant={"destructive"}>
+        <AlertDescription>{applicationError.detail || applicationError.title}</AlertDescription>
+      </Alert>
+    );
   if (!application) return null;
 
   return (
     <div className="flex flex-col gap-1">
       {isSuccess && (
-        <Alert color="green">
-          <Trans>The ATC application review has been updated successfully.</Trans>
+        <Alert>
+          <AlertDescription>
+            <Trans>The ATC application review has been updated successfully.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {mutationError && (
-        <Alert color="red" title={mutationError.title}>
-          {mutationError.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{mutationError.title}</AlertTitle>
+          <AlertDescription>{mutationError.detail}</AlertDescription>
         </Alert>
       )}
       {sheetError && (
-        <Alert color="red" title={sheetError.title}>
-          {sheetError.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{sheetError.title}</AlertTitle>
+          <AlertDescription>{sheetError.detail}</AlertDescription>
         </Alert>
       )}
-      <Skeleton visible={isApplicationLoading}>
-        <Select
-          label={t`Status`}
-          data={APPLICATION_STATUS.entries()
-            .map(([id, name]) => ({ value: id, label: i18n.t(name) }))
-            .toArray()}
-          value={status ?? application.status}
-          onChange={(value) => setStatus(value)}
-          disabled={!hasPermission}
-        />
-      </Skeleton>
+      {isApplicationLoading ? (
+        <Skeleton className="h-16 w-full" />
+      ) : (
+        <>
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-heading">{t`Status`}</span>
+            <NativeSelect
+              aria-label={t`Status`}
+              disabled={!hasPermission}
+              value={status ?? application.status ?? ""}
+              onChange={(event) => {
+                const value = event.currentTarget.value || null;
+                return setStatus(value as components["schemas"]["AtcApplicationStatus"] | null);
+              }}
+            >
+              <NativeSelectOption value=""></NativeSelectOption>
+              {(
+                APPLICATION_STATUS.entries()
+                  .map(([id, name]) => ({ value: id, label: i18n.t(name) }))
+                  .toArray() ?? []
+              ).map((option) => {
+                const item = typeof option === "string" ? { value: option, label: option } : option;
+                return (
+                  <NativeSelectOption key={item.value} value={item.value}>
+                    {item.label}
+                  </NativeSelectOption>
+                );
+              })}
+            </NativeSelect>
+          </label>
+        </>
+      )}
       <Sheet
         className="contents"
         sheet={sheet}

@@ -1,10 +1,12 @@
 import { RequireRole } from "@/components/require-role";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Input } from "@/components/ui/input";
 import { LinkButton } from "@/components/ui/link-button";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Skeleton, TextInput } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { TbPlaneOff } from "react-icons/tb";
@@ -79,37 +81,47 @@ export function FlightSearch() {
           <Trans>Flight Plan Checker</Trans>
         </h1>
         <RequireRole role="software-engineer">
-          <LinkButton to="/flights/temporary" variant="light">
+          <LinkButton to="/flights/temporary" variant={"neutral"}>
             <Trans>Temporary Flight Plan</Trans>
           </LinkButton>
         </RequireRole>
       </div>
       {error && (
-        <Alert className="w-full" color="red" title={error.title}>
-          {error.detail}
+        <Alert className="w-full" variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <div className="flex flex-wrap items-end gap-2">
-        <TextInput
-          label={t`Callsign / CID`}
-          placeholder={t`Callsign`}
-          value={filter}
-          onChange={(event) => setFilter(event.currentTarget.value.toUpperCase())}
-        />
-        <TextInput
-          label={t`Departure`}
-          placeholder="ZBAA"
-          maxLength={4}
-          value={departure}
-          onChange={(event) => setDeparture(event.currentTarget.value.toUpperCase())}
-        />
-        <TextInput
-          label={t`Arrival`}
-          placeholder="ZSPD"
-          maxLength={4}
-          value={arrival}
-          onChange={(event) => setArrival(event.currentTarget.value.toUpperCase())}
-        />
+        <label className="grid gap-1.5 text-sm">
+          <span className="font-heading">{t`Callsign / CID`}</span>
+          <Input
+            aria-label={t`Callsign / CID`}
+            placeholder={t`Callsign`}
+            value={filter}
+            onChange={(event) => setFilter(event.currentTarget.value.toUpperCase())}
+          />
+        </label>
+        <label className="grid gap-1.5 text-sm">
+          <span className="font-heading">{t`Departure`}</span>
+          <Input
+            aria-label={t`Departure`}
+            placeholder="ZBAA"
+            maxLength={4}
+            value={departure}
+            onChange={(event) => setDeparture(event.currentTarget.value.toUpperCase())}
+          />
+        </label>
+        <label className="grid gap-1.5 text-sm">
+          <span className="font-heading">{t`Arrival`}</span>
+          <Input
+            aria-label={t`Arrival`}
+            placeholder="ZSPD"
+            maxLength={4}
+            value={arrival}
+            onChange={(event) => setArrival(event.currentTarget.value.toUpperCase())}
+          />
+        </label>
         {/^[A-Z0-9-]+$/.test(normalizedFilter) && /[A-Z]/.test(normalizedFilter) && (
           <LinkButton to="/flights/$callsign" params={{ callsign: normalizedFilter }}>
             <Trans>Find flight</Trans>
@@ -121,7 +133,7 @@ export function FlightSearch() {
           <Trans>Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign.</Trans>
         </p>
       )}
-      {query?.isLoading && <Skeleton h={64} w="100%" aria-label={t`Loading flights`} />}
+      {query?.isLoading && <Skeleton className="h-24" aria-label={t`Loading flights`} style={{ width: "100%" }} />}
       {query?.data && flights?.length === 0 && (
         <p>
           <Trans>No results.</Trans>

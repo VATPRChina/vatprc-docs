@@ -3,10 +3,10 @@ import { DateTime } from "../event/datetime";
 import { RichTable, RichTableFeatures } from "../table";
 import { ConfirmButton } from "../ui/confirm-button";
 import { LinkButton } from "../ui/link-button";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter } from "date-fns";
 import { FC } from "react";
@@ -45,7 +45,7 @@ const columns = [
 
       return (
         <div className="flex flex-row items-center gap-1">
-          <LinkButton variant="subtle" size="compact-sm" to="/controllers/trainings/$id" params={{ id }}>
+          <LinkButton to="/controllers/trainings/$id" params={{ id }} variant={"neutral"} size={"sm"}>
             <Trans>View</Trans>
           </LinkButton>
           {deleted_at !== null && (
@@ -56,10 +56,11 @@ const columns = [
           {deleted_at === null && isAfter(start_at, Date.now()) && (
             <ConfirmButton
               onClick={onCancel}
-              loading={isPending}
               actionDescription={<Trans>Are you sure to cancel this training?</Trans>}
-              variant="subtle"
-              size="compact-sm"
+              disabled={isPending}
+              aria-busy={isPending}
+              variant={"neutral"}
+              size={"sm"}
             >
               <Trans>Cancel Training</Trans>
             </ConfirmButton>
@@ -70,8 +71,9 @@ const columns = [
             </span>
           )}
           {error && (
-            <Alert color="red" title={error.title}>
-              {error.detail}
+            <Alert variant={"destructive"}>
+              <AlertTitle>{error.title}</AlertTitle>
+              <AlertDescription>{error.detail}</AlertDescription>
             </Alert>
           )}
         </div>
@@ -101,8 +103,9 @@ export const TrainingList: FC<TrainingListProps> = (props) => {
   return (
     <div className="flex flex-col gap-1">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <RichTable data={data} columns={columns} isLoading={isLoading} />

@@ -1,6 +1,5 @@
 import { login } from "@/lib/client/auth";
 import { Trans } from "@lingui/react/macro";
-import { Title } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -39,12 +38,10 @@ function Component() {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col items-start gap-4">
-        <Title order={1} size={192} c="dimmed">
-          307
-        </Title>
-        <Title order={2}>
+        <h1 className={"font-heading text-3xl"}>307</h1>
+        <h2 className={"font-heading text-3xl"}>
           <Trans>Please wait while being logged in.</Trans>
-        </Title>
+        </h2>
       </div>
     </div>
   );

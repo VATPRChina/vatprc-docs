@@ -1,7 +1,8 @@
 import { MarkdownDoc } from "@/components/doc/markdown-doc";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
-import { Skeleton, Alert } from "@mantine/core";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { TbCloudX } from "react-icons/tb";
 
@@ -26,18 +27,15 @@ export const Route = createFileRoute("/docs/$")({
   pendingMs: 100,
   pendingComponent: () => (
     <div className="h-svh w-full p-16">
-      <Skeleton h="100svh" />
+      <Skeleton style={{ height: "100svh" }} />
     </div>
   ),
   errorComponent: (props) => {
     return (
-      <Alert
-        icon={<TbCloudX />}
-        title={<Trans>Failed to load document</Trans>}
-        color="red"
-        className="container mx-auto"
-      >
-        {props.error.message}
+      <Alert className="container mx-auto" variant={"destructive"}>
+        {<TbCloudX />}
+        <AlertTitle>{<Trans>Failed to load document</Trans>}</AlertTitle>
+        <AlertDescription>{props.error.message}</AlertDescription>
       </Alert>
     );
   },

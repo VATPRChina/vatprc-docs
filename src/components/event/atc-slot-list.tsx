@@ -7,12 +7,13 @@ import { AssignAtcSlot } from "./atc-slot-assign";
 import { CreateAtcSlot } from "./atc-slot-create";
 import { AtcSlotDeleteButton } from "./atc-slot-delete";
 import { DateTime } from "./datetime";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { components } from "@/lib/api";
 import { $api, useControllerPermission, useUser } from "@/lib/client";
+import { wrapPromiseWithLog } from "@/lib/helpers";
 import { localizeWithMap } from "@/lib/i18n";
-import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { isAfter, isSameMinute } from "date-fns";
@@ -63,17 +64,11 @@ const columns = [
     cell: ({ getValue }) => {
       const { i18n } = useLingui();
       const [position, state, remarks] = getValue();
-      const hasPositionPermission = useControllerPermission(position, "student");
-      const hasPermission = useControllerPermission(position, state);
 
       return (
         <div className="flex gap-2">
-          <Badge color={hasPositionPermission ? "green" : "red"} variant="dot" size="lg">
-            {localizeWithMap(POSITION_KINDS_MAP, position, i18n)}
-          </Badge>
-          <Badge color={hasPermission ? "green" : "red"} variant="dot" size="lg">
-            {localizeWithMap(POSITION_STATE_MAP, state, i18n)}
-          </Badge>
+          <Badge>{localizeWithMap(POSITION_KINDS_MAP, position, i18n)}</Badge>
+          <Badge>{localizeWithMap(POSITION_STATE_MAP, state, i18n)}</Badge>
           <span>{remarks}</span>
         </div>
       );
@@ -149,8 +144,9 @@ const columns = [
       return (
         <div className="flex flex-wrap items-center gap-1">
           {(bookError ?? releaseError) && (
-            <Alert color="red" title={(bookError ?? releaseError)?.title}>
-              {(bookError ?? releaseError)?.detail}
+            <Alert variant={"destructive"}>
+              <AlertTitle>{(bookError ?? releaseError)?.title}</AlertTitle>
+              <AlertDescription>{(bookError ?? releaseError)?.detail}</AlertDescription>
             </Alert>
           )}
           <RequireRole role={["event-coordinator", "controller-training-mentor"]}>
@@ -161,21 +157,27 @@ const columns = [
           <RequireRole role="controller">
             <ConfirmButton
               actionDescription={<Trans>Are you sure to book this ATC position?</Trans>}
-              variant="subtle"
-              size="compact-sm"
               onClick={onBook}
-              loading={isBookPending}
-              disabled={!!slot?.booking || !hasPermission || isNotInBookingPeriod}
+              disabled={!!slot?.booking || !hasPermission || isNotInBookingPeriod || isBookPending}
+              aria-busy={isBookPending}
+              variant={"neutral"}
+              size={"sm"}
             >
               <Trans>Book</Trans>
             </ConfirmButton>
             <ConfirmButton
               actionDescription={<Trans>Are you sure to release this ATC position?</Trans>}
-              variant="subtle"
-              size="compact-sm"
               onClick={onRelease}
-              loading={isReleasePending}
-              disabled={!slot?.booking || !hasPermission || slot.booking.user_id !== user?.id || isNotInBookingPeriod}
+              disabled={
+                !slot?.booking ||
+                !hasPermission ||
+                slot.booking.user_id !== user?.id ||
+                isNotInBookingPeriod ||
+                isReleasePending
+              }
+              aria-busy={isReleasePending}
+              variant={"neutral"}
+              size={"sm"}
             >
               <Trans>Release</Trans>
             </ConfirmButton>
@@ -203,8 +205,10 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
         <Trans>Controllers</Trans>
       </h2>
       {error && (
-        <Alert color="red" icon={<TbExclamationCircle />} title={t`Error`}>
-          {error.title}
+        <Alert variant={"destructive"}>
+          {<TbExclamationCircle />}
+          <AlertTitle>{t`Error`}</AlertTitle>
+          <AlertDescription>{error.title}</AlertDescription>
         </Alert>
       )}
       <RequireRole role={["event-coordinator", "controller-training-mentor"]}>

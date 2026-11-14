@@ -1,10 +1,10 @@
 import firGeoJsonRaw from "@/assets/map/fir.geojson.json";
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { Map } from "@/components/airspace/map";
+import { AlertDescription, Alert, AlertTitle } from "@/components/ui/alert";
 import { $api } from "@/lib/client";
 import { Vplaaf } from "@/lib/client/vplaaf";
 import { Trans } from "@lingui/react/macro";
-import { Alert, LoadingOverlay } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import * as turf from "@turf/turf";
 import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
@@ -78,18 +78,21 @@ function RouteComponent() {
       <h1 className="text-3xl">
         <Trans>Restricted Airspaces</Trans>
       </h1>
-      <Alert color="yellow">
-        <Trans>
-          The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to
-          <a href="https://www.vplaaf.org/airspace" target="_blank" rel="noreferrer" className="underline">
-            &nbsp;vPLAAF&apos;s website&nbsp;
-          </a>
-          for the details. These airspaces are designated by vPLAAF and approved by VATPRC.
-        </Trans>
+      <Alert>
+        <AlertDescription>
+          <Trans>
+            The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to
+            <a href="https://www.vplaaf.org/airspace" target="_blank" rel="noreferrer" className="underline">
+              &nbsp;vPLAAF&apos;s website&nbsp;
+            </a>
+            for the details. These airspaces are designated by vPLAAF and approved by VATPRC.
+          </Trans>
+        </AlertDescription>
       </Alert>
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <section className="aspect-video max-h-svh w-full">
@@ -100,7 +103,7 @@ function RouteComponent() {
           mapStyle={mapStyle as unknown as StyleSpecification}
           maxZoom={10}
         >
-          <LoadingOverlay visible={isLoading} />
+          <div hidden={!isLoading} role={"status"} className={"bg-background/80 absolute inset-0 z-10 animate-pulse"} />
           {PRC_OUTLINE && (
             <Source id="firs" type="geojson" data={PRC_OUTLINE}>
               <Layer id="firs-line" type="line" source="firs" paint={{ "line-color": "#ffa8a8" }} />

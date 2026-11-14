@@ -1,7 +1,7 @@
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { $api, useUser } from "@/lib/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { useQueries } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
@@ -41,8 +41,9 @@ export const MyEventBookings: FC = () => {
         <h2 className="text-2xl font-medium">
           <Trans>My Event Positions</Trans>
         </h2>
-        <Alert color="red" title={(error ?? positionsError)?.title}>
-          {(error ?? positionsError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(error ?? positionsError)?.title}</AlertTitle>
+          <AlertDescription>{(error ?? positionsError)?.detail}</AlertDescription>
         </Alert>
       </section>
     );

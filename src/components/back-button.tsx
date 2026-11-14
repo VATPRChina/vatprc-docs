@@ -4,7 +4,8 @@ import { FC } from "react";
 import { TbArrowLeft } from "react-icons/tb";
 
 export const BackButton: FC = () => (
-  <LinkButton to=".." variant="subtle" className="self-start" leftSection={<TbArrowLeft />}>
+  <LinkButton to=".." className="self-start" variant={"neutral"}>
+    {<TbArrowLeft />}
     <Trans>Back</Trans>
   </LinkButton>
 );

@@ -1,19 +1,27 @@
 import { AssumeRoleModal } from "./assume-role-modal";
 import { ExperimentalFeatures } from "./experimental-features";
 import { RequireRole } from "@/components/require-role";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuContent,
+  DropdownMenu,
+} from "@/components/ui/dropdown-menu";
 import { $api, assumedRolesAtom, logout, redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button, Indicator, Menu } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
+import { useState as useDisclosureState } from "react";
 
 export const UserInfo = () => {
   const { data, error } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const client = useQueryClient();
   const assumedRoles = useAtomValue(assumedRolesAtom);
-  const [assumeRoleOpened, { open: openAssumeRole, close: closeAssumeRole }] = useDisclosure(false);
+  const [assumeRoleOpened, setAssumeRoleOpened] = useDisclosureState(false);
+  const openAssumeRole = () => setAssumeRoleOpened(true);
+  const closeAssumeRole = () => setAssumeRoleOpened(false);
 
   const onLogout = () => {
     (async () => {
@@ -25,30 +33,28 @@ export const UserInfo = () => {
   if (data?.user) {
     return (
       <>
-        <Menu shadow="md" width={200}>
-          <Menu.Target>
-            <Button variant="subtle" color="gray">
-              {data.user.full_name}
-            </Button>
-          </Menu.Target>
-
-          <Menu.Dropdown className="flex flex-col gap-1">
-            <Menu.Item renderRoot={(props) => <Link to="/users/me" {...props} />}>
+        <DropdownMenu>
+          <DropdownMenuTrigger render={<Button variant={"neutral"} />}>{data.user.full_name}</DropdownMenuTrigger>
+          <DropdownMenuContent className="flex flex-col gap-1">
+            <DropdownMenuItem render={<Link to="/users/me" />}>
               <Trans>User Info</Trans>
-            </Menu.Item>
+            </DropdownMenuItem>
             <RequireRole role="software-engineer">
-              <Indicator color="green" disabled={assumedRoles.length === 0} offset={14} position="middle-end" size={8}>
-                <Menu.Item onClick={openAssumeRole}>
+              <span className={"relative"}>
+                <DropdownMenuItem onClick={openAssumeRole}>
                   <Trans>Assume Role</Trans>
-                </Menu.Item>
-              </Indicator>
+                </DropdownMenuItem>
+                {!(assumedRoles.length === 0) && (
+                  <span className="absolute top-0 right-0 size-2 rounded-full bg-green-500" />
+                )}
+              </span>
             </RequireRole>
             <ExperimentalFeatures />
-            <Menu.Item onClick={onLogout}>
+            <DropdownMenuItem onClick={onLogout}>
               <Trans>Logout</Trans>
-            </Menu.Item>
-          </Menu.Dropdown>
-        </Menu>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <RequireRole role="software-engineer">
           <AssumeRoleModal
             opened={assumeRoleOpened}
@@ -62,14 +68,14 @@ export const UserInfo = () => {
 
   if (!data && !error) {
     return (
-      <Button variant="subtle">
+      <Button variant={"neutral"}>
         <Trans>Loading</Trans>
       </Button>
     );
   }
 
   return (
-    <Button variant="subtle" onClick={redirectToLogin}>
+    <Button onClick={redirectToLogin} variant={"neutral"}>
       <Trans>Login</Trans>
     </Button>
   );

@@ -1,10 +1,11 @@
 import { POSITION_KINDS_MAP, POSITION_STATE_MAP } from "@/components/atc-permission-modal";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { $api, usePermissions, useUser } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { USER_ROLES } from "@/lib/user-roles";
 import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { formatDate } from "date-fns";
 
@@ -43,11 +44,11 @@ function RouteComponent() {
         <Trans>User Info</Trans>
       </h1>
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
-
       <h2 className="text-xl">
         <Trans>Basic Info</Trans>
       </h2>
@@ -60,13 +61,10 @@ function RouteComponent() {
       <Field label={t`Roles`}>
         <div className="flex flex-wrap gap-1">
           {roles.map((role) => (
-            <Badge key={role} variant="dot" size="lg" color={user.direct_roles.includes(role) ? "green" : "blue"}>
-              {localizeWithMap(USER_ROLES, role, i18n)}
-            </Badge>
+            <Badge key={role}>{localizeWithMap(USER_ROLES, role, i18n)}</Badge>
           ))}
         </div>
       </Field>
-
       <h2 className="text-xl">
         <Trans>Controller Info</Trans>
       </h2>

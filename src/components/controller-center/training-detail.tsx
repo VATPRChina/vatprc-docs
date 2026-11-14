@@ -16,7 +16,7 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
     <article className="flex min-w-0 flex-col gap-1 border border-black/15 p-4 dark:border-white/20">
       <div className="flex flex-wrap items-center justify-between gap-1">
         <h3 className="text-xl font-medium">{training.name}</h3>
-        <LinkButton to="/controllers/trainings/$id" params={{ id: training.id }} variant="subtle" size="compact-sm">
+        <LinkButton to="/controllers/trainings/$id" params={{ id: training.id }} variant={"neutral"} size={"sm"}>
           <Trans>View training details</Trans>
         </LinkButton>
       </div>

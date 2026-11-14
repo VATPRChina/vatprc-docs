@@ -2,12 +2,12 @@ import { User } from "../app/user";
 import { RichTable, RichTableFeatures } from "../table";
 import { LinkButton } from "../ui/link-button";
 import { APPLICATION_STATUS } from "./atc-application-status";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { localizeWithMap } from "@/lib/i18n";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FC } from "react";
@@ -43,12 +43,12 @@ export const columns = [
     header: () => <Trans>Actions</Trans>,
     cell: ({ row }) => (
       <LinkButton
-        variant="subtle"
-        leftSection={<TbFileDescription />}
         to="/controllers/applications/$id"
         params={{ id: row.original.id }}
         target="_blank"
+        variant={"neutral"}
       >
+        {<TbFileDescription />}
         <Trans>View</Trans>
       </LinkButton>
     ),
@@ -61,8 +61,9 @@ export const AtcApplicationList: FC = () => {
   return (
     <div className="flex flex-col gap-1">
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <RichTable

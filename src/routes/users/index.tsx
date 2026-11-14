@@ -3,16 +3,21 @@ import { AtcPermissionModalButton } from "@/components/atc-permission-modal";
 import { AuditLogTable } from "@/components/audit-log/audit-log-table";
 import { RequireRole } from "@/components/require-role";
 import { RichTable, RichTableFeatures } from "@/components/table";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
+import { wrapPromiseWithLog } from "@/lib/helpers";
 import { USER_ROLES } from "@/lib/user-roles";
-import { wrapPromiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Checkbox, Modal, Tabs } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
-import { MouseEvent, useState } from "react";
+import { useState as useDisclosureState } from "react";
+import { useState } from "react";
 import { TbUserBolt, TbCheck, TbHistory } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
@@ -41,7 +46,9 @@ const columns = [
       const [roles, setRoles] = useState(getValue());
       const { mutate, error: mutationError, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/roles");
       const { refetch } = $api.useQuery("get", "/api/users");
-      const [opened, { open, close }] = useDisclosure(false);
+      const [opened, setOpened] = useDisclosureState(false);
+      const open = () => setOpened(true);
+      const close = () => setOpened(false);
 
       const onSave = () =>
         mutate(
@@ -54,8 +61,8 @@ const columns = [
           },
         );
 
-      const onToggleRole = (role: string) => (e: MouseEvent<HTMLInputElement>) =>
-        e.currentTarget.checked
+      const onToggleRole = (role: string) => (checked: boolean) =>
+        checked
           ? setRoles((pv) => [...pv.filter((r) => r !== role), role as components["schemas"]["UserRole"]])
           : setRoles((pv) => pv.filter((r) => r !== role));
 
@@ -72,36 +79,48 @@ const columns = [
               })}
             </div>
           )}
-          <ActionIcon variant="subtle" onClick={open}>
+          <Button onClick={open} size={"icon-sm"} variant={"neutral"}>
             <TbUserBolt />
-          </ActionIcon>
-          <Modal opened={opened} onClose={close} title={<Trans>Edit roles</Trans>}>
-            <div className="flex flex-col gap-4">
-              {mutationError && (
-                <Alert color="red" title={mutationError.title}>
-                  {mutationError.detail}
-                </Alert>
-              )}
-              {USER_ROLES.entries().map(([role, name]) => (
-                <Checkbox
-                  key={role}
-                  onClick={onToggleRole(role)}
-                  label={i18n._(name)}
-                  checked={roles.includes(role) || (computedRoles.includes(role) && AUTOMATIC_ROLES.includes(role))}
-                  disabled={AUTOMATIC_ROLES.includes(role)}
-                />
-              ))}
-              <div className="flex flex-wrap items-center gap-1">
-                <Button variant="outline" size="xs" onClick={close}>
-                  <Trans>Cancel</Trans>
-                </Button>
-                <Button size="xs" type="submit" onClick={onSave} loading={isPending}>
-                  {isSuccess && <TbCheck />}
-                  <Trans>Save changes</Trans>
-                </Button>
+          </Button>
+          <Dialog
+            open={opened}
+            onOpenChange={(open) => {
+              if (!open) close();
+            }}
+          >
+            <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+              <DialogHeader>
+                <DialogTitle>{<Trans>Edit roles</Trans>}</DialogTitle>
+              </DialogHeader>
+              <div className="flex flex-col gap-4">
+                {mutationError && (
+                  <Alert variant={"destructive"}>
+                    <AlertTitle>{mutationError.title}</AlertTitle>
+                    <AlertDescription>{mutationError.detail}</AlertDescription>
+                  </Alert>
+                )}
+                {USER_ROLES.entries().map(([role, name]) => (
+                  <Label key={role} className="flex items-center gap-2">
+                    <Checkbox
+                      onCheckedChange={onToggleRole(role)}
+                      checked={roles.includes(role) || (computedRoles.includes(role) && AUTOMATIC_ROLES.includes(role))}
+                      disabled={AUTOMATIC_ROLES.includes(role)}
+                    />
+                    <span>{i18n._(name)}</span>
+                  </Label>
+                ))}
+                <div className="flex flex-wrap items-center gap-1">
+                  <Button size="xs" onClick={close} variant={"neutral"}>
+                    <Trans>Cancel</Trans>
+                  </Button>
+                  <Button size="xs" type="submit" onClick={onSave} disabled={isPending} aria-busy={isPending}>
+                    {isSuccess && <TbCheck />}
+                    <Trans>Save changes</Trans>
+                  </Button>
+                </div>
               </div>
-            </div>
-          </Modal>
+            </DialogContent>
+          </Dialog>
         </div>
       );
     },
@@ -152,49 +171,62 @@ function RouteComponent() {
         </RequireRole>
       </div>
       {(usersError ?? controllersError) && (
-        <Alert color="red" title={(usersError ?? controllersError)?.title}>
-          {(usersError ?? controllersError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(usersError ?? controllersError)?.title}</AlertTitle>
+          <AlertDescription>{(usersError ?? controllersError)?.detail}</AlertDescription>
         </Alert>
       )}
       <Tabs defaultValue="users">
-        <Tabs.List className="mb-2">
-          <Tabs.Tab value="users">
+        <TabsList className="mb-2">
+          <TabsTrigger value="users">
             <Trans>Users</Trans>
-          </Tabs.Tab>
-          <Tabs.Tab value="controllers">
+          </TabsTrigger>
+          <TabsTrigger value="controllers">
             <Trans>Controllers</Trans>
-          </Tabs.Tab>
-          <Tabs.Tab value="roles">
+          </TabsTrigger>
+          <TabsTrigger value="roles">
             <Trans>Roles</Trans>
-          </Tabs.Tab>
-        </Tabs.List>
-
-        <Tabs.Panel value="users">
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="users">
           <RichTable data={data} columns={columns} isLoading={isLoading} />
-        </Tabs.Panel>
-        <Tabs.Panel value="controllers">
+        </TabsContent>
+        <TabsContent value="controllers">
           <RichTable data={controllers} columns={columns} isLoading={isLoading || isControllersLoading} />
-        </Tabs.Panel>
-        <Tabs.Panel value="roles">
+        </TabsContent>
+        <TabsContent value="roles">
           <RichTable data={usersWithRoles} columns={columns} isLoading={isLoading} />
-        </Tabs.Panel>
+        </TabsContent>
       </Tabs>
     </div>
   );
 }
 
 const UserAuditLogButton = ({ userId }: { userId: string }) => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, setOpened] = useDisclosureState(false);
+  const open = () => setOpened(true);
+  const close = () => setOpened(false);
 
   return (
     <>
-      <Button size="xs" onClick={open} leftSection={<TbHistory />} variant="subtle">
+      <Button size="xs" onClick={open} variant={"neutral"}>
+        {<TbHistory />}
         <Trans>Audit Logs</Trans>
       </Button>
       {opened && (
-        <Modal opened={opened} onClose={close} title={<Trans>Audit Logs</Trans>} size="xl">
-          <UserAuditLogModalContent userId={userId} />
-        </Modal>
+        <Dialog
+          open={opened}
+          onOpenChange={(open) => {
+            if (!open) close();
+          }}
+        >
+          <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+            <DialogHeader>
+              <DialogTitle>{<Trans>Audit Logs</Trans>}</DialogTitle>
+            </DialogHeader>
+            <UserAuditLogModalContent userId={userId} />
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

@@ -1,7 +1,13 @@
 import { RadarMap } from "./map";
-import { AIRSPACE_COLORS, airspaceEntries, airspaceHeight } from "@/lib/radar-coverage/airspace";
+import { AlertDescription, Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Slider } from "@/components/ui/slider";
+import { airspaceEntries, airspaceHeight } from "@/lib/radar-coverage/airspace";
 import { BUILTIN_REGIONS, loadRegion } from "@/lib/radar-coverage/data";
-import { RADAR_COLORS } from "@/lib/radar-coverage/model";
 import {
   AIRSPACE_TYPES,
   CoverageRequest,
@@ -11,7 +17,6 @@ import {
   RadarType,
 } from "@/lib/radar-coverage/types";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -118,59 +123,73 @@ export function RadarCoverageViewer() {
         </p>
       )}
       {builtin.isError && (
-        <Alert color="red">
-          <Trans>Region data could not be loaded.</Trans>&nbsp;
-          <Button
-            size="compact-xs"
-            variant="subtle"
-            onClick={() => {
-              void builtin.refetch();
-            }}
-          >
-            <Trans>Retry</Trans>
-          </Button>
+        <Alert variant={"destructive"}>
+          <AlertDescription>
+            <Trans>Region data could not be loaded.</Trans>&nbsp;
+            <Button
+              onClick={() => {
+                void builtin.refetch();
+              }}
+              variant={"neutral"}
+              size={"xs"}
+            >
+              <Trans>Retry</Trans>
+            </Button>
+          </AlertDescription>
         </Alert>
       )}
       <div className="grid items-start gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="flex flex-col gap-5 border border-black/15 p-4 dark:border-white/20">
-          <Select
-            label={t`Flight information region`}
-            placeholder={t`No region loaded`}
-            value={code}
-            data={BUILTIN_REGIONS.map((r) => ({ value: r.code, label: r.name }))}
-            onChange={(value) => {
-              setCode(value);
-              setSelected(null);
-              setHiddenAirspaces([]);
-            }}
-            allowDeselect={false}
-          />
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-heading">{t`Flight information region`}</span>
+            <NativeSelect
+              aria-label={t`Flight information region`}
+              value={code ?? ""}
+              onChange={(event) => {
+                const value = event.currentTarget.value || null;
+                setCode(value);
+                setSelected(null);
+                setHiddenAirspaces([]);
+              }}
+            >
+              <NativeSelectOption value="">{t`No region loaded`}</NativeSelectOption>
+              {(BUILTIN_REGIONS.map((r) => ({ value: r.code, label: r.name })) ?? []).map((option) => {
+                const item = typeof option === "string" ? { value: option, label: option } : option;
+                return (
+                  <NativeSelectOption key={item.value} value={item.value}>
+                    {item.label}
+                  </NativeSelectOption>
+                );
+              })}
+            </NativeSelect>
+          </label>
           <section className="flex flex-col gap-3">
             <h2 className="font-medium">
               <Trans>Target altitude</Trans>
             </h2>
             <span className="text-3xl font-medium">
-              {format(altitude)} <span className="text-sm">ft MSL</span>&nbsp;
+              {format(altitude)}
+              <span className="text-sm">ft MSL</span>&nbsp;
               <span className="text-sm font-normal whitespace-nowrap text-gray-600 dark:text-gray-400">
                 {format(Math.round(altitude * 0.3048))} m
               </span>
             </span>
             <Slider
-              value={altitude}
-              onChange={setAltitude}
               min={0}
               max={60000}
               step={500}
-              label={(value) => `${format(value)} ft / ${format(Math.round(value * 0.3048))} m`}
-              thumbLabel={t`Target altitude`}
+              value={[altitude]}
+              onValueChange={(value: number | readonly number[]) =>
+                setAltitude(typeof value === "number" ? value : value[0])
+              }
             />
             <div className="flex flex-wrap gap-1">
               {QUICK_HEIGHTS.map((height) => (
                 <Button
                   key={height}
-                  size="compact-xs"
-                  variant={altitude === height ? "filled" : "default"}
+                  variant={altitude === height ? "default" : "neutral"}
                   onClick={() => setAltitude(height)}
+                  size={"xs"}
                 >
                   {format(height)}
                 </Button>
@@ -182,24 +201,25 @@ export function RadarCoverageViewer() {
               <Trans>Surveillance sources</Trans>
             </h2>
             {RADAR_TYPES.map((type) => (
-              <Checkbox
-                key={type}
-                color={RADAR_COLORS[type]}
-                checked={enabled.includes(type)}
-                onChange={(event) => {
-                  const checked = event.currentTarget.checked;
-                  setEnabled((current) => (checked ? [...current, type] : current.filter((value) => value !== type)));
-                  if (!checked && radar?.type === type) setSelected(null);
-                }}
-                label={
-                  <span className="flex items-center gap-2">
-                    {type === "ADSB" ? "ADS-B" : type}
-                    <Badge color={RADAR_COLORS[type]} variant="light">
-                      {region.radars.filter((r) => r.type === type).length}
-                    </Badge>
-                  </span>
-                }
-              />
+              <Label key={type} className="flex items-center gap-2">
+                <Checkbox
+                  checked={enabled.includes(type)}
+                  onCheckedChange={(nextChecked) => {
+                    const event = nextChecked;
+                    const checked = event;
+                    setEnabled((current) => (checked ? [...current, type] : current.filter((value) => value !== type)));
+                    if (!checked && radar?.type === type) setSelected(null);
+                  }}
+                />
+                <span>
+                  {
+                    <span className="flex items-center gap-2">
+                      {type === "ADSB" ? "ADS-B" : type}
+                      <Badge>{region.radars.filter((r) => r.type === type).length}</Badge>
+                    </span>
+                  }
+                </span>
+              </Label>
             ))}
             <span className="flex items-center gap-2 text-sm">
               <span className="h-3 w-3 shrink-0 bg-blue-600" aria-hidden="true" />
@@ -219,42 +239,47 @@ export function RadarCoverageViewer() {
                     {type.toUpperCase()} ({visible}/{group.length})
                   </summary>
                   <div className="mt-3 flex flex-col gap-3">
-                    <Checkbox
-                      label={t`Select all`}
-                      color={AIRSPACE_COLORS[type]}
-                      checked={group.length > 0 && visible === group.length}
-                      indeterminate={visible > 0 && visible < group.length}
-                      disabled={!group.length}
-                      onChange={(event) => {
-                        const checked = event.currentTarget.checked;
-                        setHiddenAirspaces((current) =>
-                          checked
-                            ? current.filter((key) => !group.some((entry) => entry.key === key))
-                            : [...new Set([...current, ...group.map((entry) => entry.key)])],
-                        );
-                      }}
-                    />
+                    <Label className="flex items-center gap-2">
+                      <Checkbox
+                        checked={group.length > 0 && visible === group.length}
+                        indeterminate={visible > 0 && visible < group.length}
+                        disabled={!group.length}
+                        onCheckedChange={(nextChecked) => {
+                          const event = nextChecked;
+                          const checked = event;
+                          setHiddenAirspaces((current) =>
+                            checked
+                              ? current.filter((key) => !group.some((entry) => entry.key === key))
+                              : [...new Set([...current, ...group.map((entry) => entry.key)])],
+                          );
+                        }}
+                      />
+                      <span>{t`Select all`}</span>
+                    </Label>
                     <div className="flex max-h-64 flex-col gap-3 overflow-y-auto pr-1">
                       {group.map((entry) => (
-                        <Checkbox
-                          key={entry.key}
-                          color={AIRSPACE_COLORS[type]}
-                          checked={airspaceEnabled.includes(entry.key)}
-                          onChange={(event) => {
-                            const checked = event.currentTarget.checked;
-                            setHiddenAirspaces((current) =>
-                              checked ? current.filter((key) => key !== entry.key) : [...current, entry.key],
-                            );
-                          }}
-                          label={
-                            <span className="flex flex-col">
-                              <span>{entry.name}</span>
-                              <span className="text-xs text-gray-600 dark:text-gray-400">
-                                {airspaceHeight(entry) ?? t`Altitude not provided`}
+                        <Label key={entry.key} className="flex items-center gap-2">
+                          <Checkbox
+                            checked={airspaceEnabled.includes(entry.key)}
+                            onCheckedChange={(nextChecked) => {
+                              const event = nextChecked;
+                              const checked = event;
+                              setHiddenAirspaces((current) =>
+                                checked ? current.filter((key) => key !== entry.key) : [...current, entry.key],
+                              );
+                            }}
+                          />
+                          <span>
+                            {
+                              <span className="flex flex-col">
+                                <span>{entry.name}</span>
+                                <span className="text-xs text-gray-600 dark:text-gray-400">
+                                  {airspaceHeight(entry) ?? t`Altitude not provided`}
+                                </span>
                               </span>
-                            </span>
-                          }
-                        />
+                            }
+                          </span>
+                        </Label>
                       ))}
                     </div>
                   </div>
@@ -271,7 +296,13 @@ export function RadarCoverageViewer() {
             </dt>
             <dd className="text-right font-medium" aria-live="polite">
               {pending ? (
-                <Loader size="xs" aria-label={t`Calculating coverage`} />
+                <span
+                  role="status"
+                  aria-label={t`Calculating coverage`}
+                  className={
+                    "inline-block size-5 animate-spin rounded-full border-2 border-current border-t-transparent"
+                  }
+                />
               ) : coverage?.percentage == null ? (
                 "—"
               ) : (
@@ -282,12 +313,14 @@ export function RadarCoverageViewer() {
               <Trans>Radars used for coverage</Trans>
             </dt>
             <dd className="text-right">
-              {radar ? 1 : region.radars.filter((r) => enabled.includes(r.type)).length} / {region.radars.length}
+              {radar ? 1 : region.radars.filter((r) => enabled.includes(r.type)).length}/{region.radars.length}
             </dd>
           </dl>
           {failed && (
-            <Alert color="red">
-              <Trans>Coverage calculation failed. Please reload the page.</Trans>
+            <Alert variant={"destructive"}>
+              <AlertDescription>
+                <Trans>Coverage calculation failed. Please reload the page.</Trans>
+              </AlertDescription>
             </Alert>
           )}
           {coverage && coverage.percentage === null && (
@@ -297,18 +330,32 @@ export function RadarCoverageViewer() {
               </Trans>
             </p>
           )}
-          <Select
-            searchable
-            clearable
-            label={t`Radar details`}
-            description={t`Clear the selection to show all enabled radars.`}
-            placeholder={t`Select a radar or click its map marker`}
-            value={selected === null ? null : String(selected)}
-            onChange={(value) => setSelected(value === null ? null : Number(value))}
-            data={region.radars.flatMap((r, index) =>
-              enabled.includes(r.type) ? [{ value: String(index), label: `${r.name} · ${r.type}` }] : [],
-            )}
-          />
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-heading">{t`Radar details`}</span>
+            <NativeSelect
+              aria-label={t`Radar details`}
+              value={(selected === null ? null : String(selected)) ?? ""}
+              onChange={(event) => {
+                const value = event.currentTarget.value || null;
+                return setSelected(value === null ? null : Number(value));
+              }}
+            >
+              <NativeSelectOption value="">{t`Select a radar or click its map marker`}</NativeSelectOption>
+              {(
+                region.radars.flatMap((r, index) =>
+                  enabled.includes(r.type) ? [{ value: String(index), label: `${r.name} · ${r.type}` }] : [],
+                ) ?? []
+              ).map((option) => {
+                const item = typeof option === "string" ? { value: option, label: option } : option;
+                return (
+                  <NativeSelectOption key={item.value} value={item.value}>
+                    {item.label}
+                  </NativeSelectOption>
+                );
+              })}
+            </NativeSelect>
+            <span className="text-foreground/70 text-xs">{t`Clear the selection to show all enabled radars.`}</span>
+          </label>
           {radar && (
             <dl className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 text-sm">
               <dt>
@@ -351,7 +398,11 @@ export function RadarCoverageViewer() {
             />
           ) : (
             <div className="flex h-96 items-center justify-center border">
-              <Loader aria-label={t`Loading map`} />
+              <span
+                role="status"
+                aria-label={t`Loading map`}
+                className={"inline-block size-5 animate-spin rounded-full border-2 border-current border-t-transparent"}
+              />
             </div>
           )}
         </section>

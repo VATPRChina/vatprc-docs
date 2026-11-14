@@ -2,12 +2,15 @@ import { RequireRole } from "../require-role";
 import { LanguageToggle } from "./language-toggle";
 import { ModeToggleSegmented } from "./theme-toggle";
 import { UserInfo } from "./user-info";
+import { AccordionTrigger, AccordionContent, AccordionItem, Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { DropdownMenuTrigger, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { usePermissions, UserRole } from "@/lib/client";
 import { cn } from "@/lib/utils";
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react/macro";
-import { Accordion, Button, Drawer, Menu } from "@mantine/core";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ComponentProps, Fragment, PropsWithChildren, useState } from "react";
 import { TbChevronDown, TbExternalLink } from "react-icons/tb";
@@ -195,70 +198,77 @@ export const NavMenu: React.FC<ComponentProps<"div">> = (props) => {
           return null;
         }
         return (
-          <Menu
+          <DropdownMenu
             key={i}
-            trigger="click-hover"
-            position="bottom-start"
-            opened={openedIndex === i}
-            onChange={(opened) => setOpenedIndex((current) => (opened ? i : current === i ? null : current))}
+            open={openedIndex === i}
+            onOpenChange={(opened) => setOpenedIndex((current) => (opened ? i : current === i ? null : current))}
           >
-            <Menu.Target>
-              <Button
-                variant="subtle"
-                color="gray"
-                className="group"
-                style={{
-                  borderBottom: `2px solid ${i === activeIndex ? "var(--color-vatprc)" : "transparent"}`,
-                }}
-                rightSection={
-                  <TbChevronDown size={14} className="transition-transform group-aria-expanded:rotate-180" />
-                }
-              >
-                {i18n._(group.title)}
-              </Button>
-            </Menu.Target>
-            <Menu.Dropdown className="flex flex-col gap-1">
+            <DropdownMenuTrigger
+              render={
+                <Button
+                  className="group"
+                  style={{
+                    borderBottom: `2px solid ${i === activeIndex ? "var(--color-vatprc)" : "transparent"}`,
+                  }}
+                  variant={"neutral"}
+                />
+              }
+            >
+              {i18n._(group.title)}
+              {<TbChevronDown size={14} className="transition-transform group-aria-expanded:rotate-180" />}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="flex flex-col gap-1">
               <NavGroupItems group={group} />
-            </Menu.Dropdown>
-          </Menu>
+            </DropdownMenuContent>
+          </DropdownMenu>
         );
       })}
     </div>
   );
 };
 
-export const NavMenuDrawer: React.FC<ComponentProps<typeof Drawer>> = (props) => {
+type NavMenuDrawerProps = ComponentProps<typeof Sheet> & { onClick?: React.MouseEventHandler<HTMLDivElement> };
+export const NavMenuDrawer = ({ onClick, ...props }: NavMenuDrawerProps) => {
   const roles = usePermissions();
   const { i18n } = useLingui();
   const pathname = useLocation({ select: (location) => location.pathname });
   const activeIndex = getActiveGroup(pathname, contents);
 
   return (
-    <Drawer {...props}>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-1">
-            <ModeToggleSegmented />
-            <LanguageToggle />
+    <Sheet {...props}>
+      <SheetContent side="left" className="overflow-y-auto" onClick={onClick} aria-describedby={undefined}>
+        <SheetHeader>
+          <SheetTitle>{i18n._(msg`Navigation`)}</SheetTitle>
+        </SheetHeader>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1">
+              <ModeToggleSegmented />
+              <LanguageToggle />
+            </div>
+            <UserInfo />
           </div>
-          <UserInfo />
+          <Accordion
+            defaultValue={[activeIndex === undefined ? null : String(activeIndex)].filter(
+              (value): value is string => value !== null,
+            )}
+          >
+            {contents.map((group, i) => {
+              if (group.requireRole && !roles.includes(group.requireRole)) {
+                return null;
+              }
+              return (
+                <AccordionItem key={i} value={String(i)}>
+                  <AccordionTrigger>{i18n._(group.title)}</AccordionTrigger>
+                  <AccordionContent className="flex flex-col gap-1">
+                    <NavGroupItems group={group} row />
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
         </div>
-        <Accordion defaultValue={activeIndex === undefined ? null : String(activeIndex)}>
-          {contents.map((group, i) => {
-            if (group.requireRole && !roles.includes(group.requireRole)) {
-              return null;
-            }
-            return (
-              <Accordion.Item key={i} value={String(i)}>
-                <Accordion.Control>{i18n._(group.title)}</Accordion.Control>
-                <Accordion.Panel className="flex flex-col gap-1">
-                  <NavGroupItems group={group} row />
-                </Accordion.Panel>
-              </Accordion.Item>
-            );
-          })}
-        </Accordion>
-      </div>
-    </Drawer>
+      </SheetContent>
+    </Sheet>
   );
 };

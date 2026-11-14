@@ -1,8 +1,9 @@
 import { Sheet } from "@/components/sheet";
+import { AlertDescription, Alert, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Skeleton } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -52,16 +53,19 @@ export const TrainingSelfReflection: FC<{ training: components["schemas"]["Train
         <Trans>Self Reflection</Trans>
       </h2>
       {isSuccess && (
-        <Alert color="green">
-          <Trans>Self reflection saved successfully.</Trans>
+        <Alert>
+          <AlertDescription>
+            <Trans>Self reflection saved successfully.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {(loadError ?? saveError) && (
-        <Alert color="red" title={(loadError ?? saveError)?.title}>
-          {(loadError ?? saveError)?.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{(loadError ?? saveError)?.title}</AlertTitle>
+          <AlertDescription>{(loadError ?? saveError)?.detail}</AlertDescription>
         </Alert>
       )}
-      {isLoading && <Skeleton h={160} />}
+      {isLoading && <Skeleton style={{ height: 160 }} />}
       {sheet && !loadError && (
         <Sheet
           className="flex flex-col gap-2"

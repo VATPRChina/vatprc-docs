@@ -1,6 +1,8 @@
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Card, Skeleton } from "@mantine/core";
 import { FC } from "react";
 
 export const formatControllingHours = (totalSeconds: number, locale: string): string =>
@@ -23,10 +25,13 @@ export const QuarterlyControllingTime: FC = () => {
         <Trans>Controlling History</Trans>
         <span className="ml-2 text-emerald-700 dark:text-emerald-400">{data?.period}</span>
       </h2>
-      {isLoading && <Skeleton h={280} />}
+      {isLoading && <Skeleton style={{ height: 280 }} />}
       {error && (
-        <Alert color="red" title={error.title}>
-          <Trans>Failed to load controlling time.</Trans>
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>
+            <Trans>Failed to load controlling time.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {data && (
@@ -47,28 +52,32 @@ export const QuarterlyControllingTime: FC = () => {
               lifetime: data.lifetime.by_position[rating],
             })),
           ].map(({ label, key, positions, quarter, lifetime }) => (
-            <Card component="article" key={key} aria-labelledby={`controlling-time-${key}`} withBorder>
-              <h3 id={`controlling-time-${key}`} className="text-lg font-bold">
-                {label}
-              </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">{positions}</p>
-              <div className="mt-4 grid grid-flow-col grid-rows-[auto_auto] items-baseline">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  <Trans>Current quarter</Trans>
-                </span>
-                <span className="text-3xl font-bold text-emerald-700 tabular-nums dark:text-emerald-400">
-                  {formatControllingHours(quarter, i18n.locale)}
-                  <span className="font-light text-gray-600 dark:text-gray-400">h</span>
-                </span>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  <Trans>Lifetime</Trans>
-                </span>
-                <span className="text-lg font-semibold tabular-nums">
-                  {formatControllingHours(lifetime, i18n.locale)}
-                  <span className="font-light text-gray-600 dark:text-gray-400">h</span>
-                </span>
-              </div>
-            </Card>
+            <article key={key} aria-labelledby={`controlling-time-${key}`}>
+              <Card>
+                <CardContent>
+                  <h3 id={`controlling-time-${key}`} className="text-lg font-bold">
+                    {label}
+                  </h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{positions}</p>
+                  <div className="mt-4 grid grid-flow-col grid-rows-[auto_auto] items-baseline">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      <Trans>Current quarter</Trans>
+                    </span>
+                    <span className="text-3xl font-bold text-emerald-700 tabular-nums dark:text-emerald-400">
+                      {formatControllingHours(quarter, i18n.locale)}
+                      <span className="font-light text-gray-600 dark:text-gray-400">h</span>
+                    </span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      <Trans>Lifetime</Trans>
+                    </span>
+                    <span className="text-lg font-semibold tabular-nums">
+                      {formatControllingHours(lifetime, i18n.locale)}
+                      <span className="font-light text-gray-600 dark:text-gray-400">h</span>
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </article>
           ))}
         </div>
       )}

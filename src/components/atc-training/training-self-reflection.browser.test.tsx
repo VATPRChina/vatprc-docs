@@ -20,7 +20,7 @@ const field: components["schemas"]["SheetFieldDto"] = {
   is_deleted: false,
 };
 
-vi.mock("@/lib/utils", () => ({
+vi.mock("@/lib/helpers", () => ({
   promiseWithLog: (promise: Promise<unknown>) => void promise.catch(console.error),
   wrapPromiseWithLog: (callback: () => Promise<unknown>) => () => void callback().catch(console.error),
 }));

@@ -1,9 +1,9 @@
 import { CreatePreferredRoute } from "@/components/preferred-route-create";
 import { RichTable, RichTableFeatures } from "@/components/table";
+import { AlertTitle, AlertDescription, Alert } from "@/components/ui/alert";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -47,8 +47,9 @@ function RouteComponent() {
         <CreatePreferredRoute />
       </div>
       {error && (
-        <Alert color="red" title={error.title}>
-          {error.detail}
+        <Alert variant={"destructive"}>
+          <AlertTitle>{error.title}</AlertTitle>
+          <AlertDescription>{error.detail}</AlertDescription>
         </Alert>
       )}
       <RichTable data={data} columns={columns} isLoading={isLoading} />

@@ -1,16 +1,10 @@
-import { Button, ButtonProps, ElementProps } from "@mantine/core";
-import { createLink, LinkComponent } from "@tanstack/react-router";
-import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { createLink } from "@tanstack/react-router";
+import { forwardRef, type ComponentProps } from "react";
 
-interface MantineAnchorProps extends ButtonProps, ElementProps<"a", keyof ButtonProps> {}
-
-const MantineLinkComponent = React.forwardRef<HTMLAnchorElement, MantineAnchorProps>((props, ref) => {
-  return <Button component="a" ref={ref} {...props} />;
-});
-MantineLinkComponent.displayName = "MantineLinkComponent";
-
-const CreatedLinkComponent = createLink(MantineLinkComponent);
-
-export const LinkButton: LinkComponent<typeof MantineLinkComponent> = (props) => {
-  return <CreatedLinkComponent preload="intent" {...props} />;
-};
+const AnchorButton = forwardRef<
+  HTMLAnchorElement,
+  Omit<ComponentProps<typeof Button>, "render" | "nativeButton"> & ComponentProps<"a">
+>((props, ref) => <Button render={<a ref={ref} />} nativeButton={false} {...props} />);
+AnchorButton.displayName = "AnchorButton";
+export const LinkButton = createLink(AnchorButton);

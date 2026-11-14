@@ -2,8 +2,8 @@ import { ControllersBoard } from "@/components/homepage/controllers-board";
 import { EventCarousel } from "@/components/homepage/event-carousel";
 import { Hero } from "@/components/homepage/hero";
 import { NotamBoard } from "@/components/homepage/notam-board";
+import { Button } from "@/components/ui/button";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
@@ -30,25 +30,17 @@ function RouteComponent() {
             </Trans>
           </p>
           <div className="flex flex-wrap justify-center gap-1">
-            <Button
-              variant="subtle"
-              color="red"
-              component="a"
-              href="mailto:feedback@vatprc.net"
-              leftSection={<TbMail />}
-            >
+            <Button variant={"neutral"} render={<a href="mailto:feedback@vatprc.net" />} nativeButton={false}>
+              {<TbMail />}
               feedback@vatprc.net
             </Button>
             <Button
-              variant="subtle"
-              color="red"
-              component="a"
-              href="https://community.vatprc.net"
-              target="_blank"
-              rel="noreferrer"
-              rightSection={<TbArrowRight />}
+              variant={"neutral"}
+              render={<a href="https://community.vatprc.net" target="_blank" rel="noreferrer" />}
+              nativeButton={false}
             >
               <Trans>Forum</Trans>
+              {<TbArrowRight />}
             </Button>
           </div>
         </section>

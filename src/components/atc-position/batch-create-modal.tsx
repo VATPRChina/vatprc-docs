@@ -1,8 +1,15 @@
 import { POSITION_CATEGORIES } from "./position-modal";
+import { AlertDescription, Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Checkbox, Modal, Select, Table, Textarea, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 
@@ -79,151 +86,172 @@ export function BatchCreateModal({ onClose }: { onClose: () => void }) {
   const count = rows.length;
 
   return (
-    <Modal
-      opened
-      size="100%"
-      title={t`Batch Create ATC Positions`}
-      onClose={() => !submitting.current && onClose()}
-      withCloseButton={!pending}
+    <Dialog
+      open={true}
+      onOpenChange={(open) => {
+        if (!open) (() => !submitting.current && onClose())();
+      }}
     >
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void savePositions();
-        }}
-      >
-        <Alert color="blue">
-          <Trans>
-            Each position is saved separately. Successfully created positions remain saved if another position fails.
-          </Trans>
-        </Alert>
-        <fieldset disabled={pending}>
-          <Table.ScrollContainer minWidth={1200}>
-            <Table>
-              <Table.Thead>
-                <Table.Tr>
-                  <Table.Th>
-                    <Trans>ATC Position</Trans>
-                  </Table.Th>
-                  <Table.Th>
-                    <Trans>Category</Trans>
-                  </Table.Th>
-                  <Table.Th>
-                    <Trans>Tier 2</Trans>
-                  </Table.Th>
-                  <Table.Th>
-                    <Trans>Frequency (MHz)</Trans>
-                  </Table.Th>
-                  {optionalFields.map((key) => (
-                    <Table.Th key={key}>{labels[key]}</Table.Th>
-                  ))}
-                </Table.Tr>
-              </Table.Thead>
-              <Table.Tbody>
-                {rows.map((row, index) => {
-                  const callsign = row.callsign;
-                  const rowNumber = index + 1;
-                  return (
-                    <Table.Tr key={index}>
-                      <Table.Td>
-                        <TextInput
-                          aria-label={t`Callsign row ${rowNumber}`}
-                          required
-                          maxLength={32}
-                          pattern="[A-Za-z0-9_*]+"
-                          value={row.callsign}
-                          onChange={(event) => edit(index, { callsign: event.currentTarget.value.toUpperCase() })}
-                        />
-                        {errors[index] && (
-                          <Alert color="red" mt="xs">
-                            {errors[index]}
-                          </Alert>
-                        )}
-                        <Button
-                          variant="subtle"
-                          color="red"
-                          size="compact-sm"
-                          onClick={() => {
-                            setRows((current) => current.filter((_, rowIndex) => rowIndex !== index));
-                            setErrors({});
-                          }}
-                        >
-                          <Trans>Remove row</Trans>
-                        </Button>
-                      </Table.Td>
-                      <Table.Td>
-                        <Select
-                          aria-label={t`Category ${callsign}`}
-                          required
-                          allowDeselect={false}
-                          disabled={pending}
-                          data={POSITION_CATEGORIES.map((category) => ({ ...category, label: i18n._(category.label) }))}
-                          value={row.category}
-                          onChange={(value) => {
-                            const category = POSITION_CATEGORIES.find((item) => item.value === value);
-                            if (category) edit(index, { category: category.value });
-                          }}
-                        />
-                      </Table.Td>
-                      <Table.Td>
-                        <Checkbox
-                          aria-label={t`Tier 2 ${callsign}`}
-                          checked={row.is_tier_2}
-                          onChange={(event) => edit(index, { is_tier_2: event.currentTarget.checked })}
-                        />
-                      </Table.Td>
-                      <Table.Td>
-                        <TextInput
-                          aria-label={t`Frequency (MHz) ${callsign}`}
-                          type="number"
-                          required
-                          min={118}
-                          max={136.975}
-                          step={0.005}
-                          value={Number.isNaN(row.frequency) ? "" : row.frequency}
-                          onChange={(event) =>
-                            edit(index, {
-                              frequency: event.currentTarget.value === "" ? NaN : Number(event.currentTarget.value),
-                            })
-                          }
-                        />
-                      </Table.Td>
-                      {optionalFields.map((key) => {
-                        const Input = key === "remarks" ? Textarea : TextInput;
-                        return (
-                          <Table.Td key={key}>
-                            <Input
-                              aria-label={`${labels[key]} ${callsign}`}
-                              value={row[key] ?? ""}
-                              onChange={(event) => edit(index, { [key]: event.currentTarget.value })}
-                            />
-                          </Table.Td>
-                        );
-                      })}
-                    </Table.Tr>
-                  );
-                })}
-              </Table.Tbody>
-            </Table>
-          </Table.ScrollContainer>
-        </fieldset>
-        <div className="flex justify-end gap-2">
-          <Button
-            variant="default"
-            disabled={pending}
-            onClick={() => setRows((current) => [...current, emptyPosition()])}
-          >
-            <Trans>Add position</Trans>
-          </Button>
-          <Button variant="default" disabled={pending} onClick={onClose}>
-            <Trans>Cancel</Trans>
-          </Button>
-          <Button type="submit" loading={pending} disabled={rows.length === 0}>
-            <Trans>Save {count} positions</Trans>
-          </Button>
-        </div>
-      </form>
-    </Modal>
+      <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-3xl" aria-describedby={undefined}>
+        <DialogHeader>
+          <DialogTitle>{t`Batch Create ATC Positions`}</DialogTitle>
+        </DialogHeader>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void savePositions();
+          }}
+        >
+          <Alert>
+            <AlertDescription>
+              <Trans>
+                Each position is saved separately. Successfully created positions remain saved if another position
+                fails.
+              </Trans>
+            </AlertDescription>
+          </Alert>
+          <fieldset disabled={pending}>
+            <div className={"overflow-x-auto"}>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>
+                      <Trans>ATC Position</Trans>
+                    </TableHead>
+                    <TableHead>
+                      <Trans>Category</Trans>
+                    </TableHead>
+                    <TableHead>
+                      <Trans>Tier 2</Trans>
+                    </TableHead>
+                    <TableHead>
+                      <Trans>Frequency (MHz)</Trans>
+                    </TableHead>
+                    {optionalFields.map((key) => (
+                      <TableHead key={key}>{labels[key]}</TableHead>
+                    ))}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {rows.map((row, index) => {
+                    const callsign = row.callsign;
+                    const rowNumber = index + 1;
+                    return (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <Input
+                            aria-label={t`Callsign row ${rowNumber}`}
+                            required
+                            maxLength={32}
+                            pattern="[A-Za-z0-9_*]+"
+                            value={row.callsign}
+                            onChange={(event) => edit(index, { callsign: event.currentTarget.value.toUpperCase() })}
+                          />
+                          {errors[index] && (
+                            <Alert variant={"destructive"}>
+                              <AlertDescription>{errors[index]}</AlertDescription>
+                            </Alert>
+                          )}
+                          <Button
+                            onClick={() => {
+                              setRows((current) => current.filter((_, rowIndex) => rowIndex !== index));
+                              setErrors({});
+                            }}
+                            variant={"neutral"}
+                            size={"sm"}
+                          >
+                            <Trans>Remove row</Trans>
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <NativeSelect
+                            aria-label={t`Category ${callsign}`}
+                            required
+                            disabled={pending}
+                            value={row.category ?? ""}
+                            onChange={(event) => {
+                              const value = event.currentTarget.value || null;
+                              const category = POSITION_CATEGORIES.find((item) => item.value === value);
+                              if (category) edit(index, { category: category.value });
+                            }}
+                          >
+                            <NativeSelectOption value=""></NativeSelectOption>
+                            {(
+                              POSITION_CATEGORIES.map((category) => ({ ...category, label: i18n._(category.label) })) ??
+                              []
+                            ).map((option) => {
+                              const item = typeof option === "string" ? { value: option, label: option } : option;
+                              return (
+                                <NativeSelectOption key={item.value} value={item.value}>
+                                  {item.label}
+                                </NativeSelectOption>
+                              );
+                            })}
+                          </NativeSelect>
+                        </TableCell>
+                        <TableCell>
+                          <Checkbox
+                            aria-label={t`Tier 2 ${callsign}`}
+                            checked={row.is_tier_2}
+                            onCheckedChange={(nextChecked) => {
+                              const event = nextChecked;
+                              return edit(index, { is_tier_2: event });
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            aria-label={t`Frequency (MHz) ${callsign}`}
+                            type="number"
+                            required
+                            min={118}
+                            max={136.975}
+                            step={0.005}
+                            value={Number.isNaN(row.frequency) ? "" : row.frequency}
+                            onChange={(event) =>
+                              edit(index, {
+                                frequency: event.currentTarget.value === "" ? NaN : Number(event.currentTarget.value),
+                              })
+                            }
+                          />
+                        </TableCell>
+                        {optionalFields.map((key) => {
+                          const FieldInput = key === "remarks" ? Textarea : Input;
+                          return (
+                            <TableCell key={key}>
+                              <FieldInput
+                                aria-label={`${labels[key]} ${callsign}`}
+                                value={row[key] ?? ""}
+                                onChange={(event) => edit(index, { [key]: event.currentTarget.value })}
+                              />
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+          </fieldset>
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="default"
+              disabled={pending}
+              onClick={() => setRows((current) => [...current, emptyPosition()])}
+            >
+              <Trans>Add position</Trans>
+            </Button>
+            <Button variant="default" disabled={pending} onClick={onClose}>
+              <Trans>Cancel</Trans>
+            </Button>
+            <Button type="submit" disabled={rows.length === 0 || pending} aria-busy={pending}>
+              <Trans>Save {count} positions</Trans>
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

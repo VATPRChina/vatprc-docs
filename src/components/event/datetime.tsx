@@ -1,6 +1,6 @@
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { utc } from "@date-fns/utc";
 import { useLingui } from "@lingui/react/macro";
-import { Tooltip } from "@mantine/core";
 import { format, intlFormatDistance } from "date-fns";
 
 export const DateTime = ({
@@ -23,16 +23,19 @@ export const DateTime = ({
 
   const time = typeof children === "string" ? new Date(children) : children;
   return (
-    <Tooltip label={format(time, tooltipFormat, tooltipFormatOptions)}>
-      <span>
-        <span>{format(time, textFormat, textFormatOptions)}</span>
-        <span className="text-dimmed ml-1 text-xs">{localFirst ? format(time, "zzzz") : "Z"}</span>
-        {!noDistance && (
-          <span className="ml-1">
-            ({intlFormatDistance(time, Date.now(), { locale: i18n.locale, numeric: "always" })})
-          </span>
-        )}
-      </span>
+    <Tooltip>
+      <TooltipTrigger render={<span className="inline-flex" />}>
+        <span>
+          <span>{format(time, textFormat, textFormatOptions)}</span>
+          <span className="text-dimmed ml-1 text-xs">{localFirst ? format(time, "zzzz") : "Z"}</span>
+          {!noDistance && (
+            <span className="ml-1">
+              ({intlFormatDistance(time, Date.now(), { locale: i18n.locale, numeric: "always" })})
+            </span>
+          )}
+        </span>
+      </TooltipTrigger>
+      <TooltipContent>{format(time, tooltipFormat, tooltipFormatOptions)}</TooltipContent>
     </Tooltip>
   );
 };

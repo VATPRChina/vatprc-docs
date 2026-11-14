@@ -1,8 +1,10 @@
 import { EventCard } from "@/components/event/event-card";
+import { AlertDescription, Alert } from "@/components/ui/alert";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Select, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { endOfDay, endOfQuarter, formatISO, startOfDay, startOfQuarter, subMonths } from "date-fns";
 
@@ -114,26 +116,39 @@ function RouteComponent() {
           <Link to="/events" className="w-full text-sm underline">
             <Trans>Back to upcoming events</Trans>
           </Link>
-          <Select
-            label={<Trans>Time Range</Trans>}
-            data={rangeOptions}
-            value={range}
-            onChange={(value) =>
-              void navigate({
-                search: {
-                  range: value ?? RECENT_RANGE,
-                },
-                replace: true,
-              })
-            }
-            allowDeselect={false}
-            className="w-full md:max-w-56"
-          />
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-heading">{<Trans>Time Range</Trans>}</span>
+            <NativeSelect
+              className="w-full md:max-w-56"
+              value={range ?? ""}
+              onChange={(event) => {
+                const value = event.currentTarget.value || null;
+                return void navigate({
+                  search: {
+                    range: value ?? RECENT_RANGE,
+                  },
+                  replace: true,
+                });
+              }}
+            >
+              <NativeSelectOption value=""></NativeSelectOption>
+              {(rangeOptions ?? []).map((option) => {
+                const item = typeof option === "string" ? { value: option, label: option } : option;
+                return (
+                  <NativeSelectOption key={item.value} value={item.value}>
+                    {item.label}
+                  </NativeSelectOption>
+                );
+              })}
+            </NativeSelect>
+          </label>
         </div>
       </div>
       {error && (
-        <Alert color="red">
-          <Trans>Failed to load past events.</Trans>
+        <Alert variant={"destructive"}>
+          <AlertDescription>
+            <Trans>Failed to load past events.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {isLoading && (
@@ -145,7 +160,9 @@ function RouteComponent() {
       )}
       {!isLoading && !error && sortedEvents?.length === 0 && (
         <Alert>
-          <Trans>No past events found in the selected time range.</Trans>
+          <AlertDescription>
+            <Trans>No past events found in the selected time range.</Trans>
+          </AlertDescription>
         </Alert>
       )}
       {!isLoading && !error && (

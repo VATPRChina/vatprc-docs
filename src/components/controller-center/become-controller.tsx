@@ -27,7 +27,7 @@ export const BecomeController: FC<{ showApply?: boolean }> = ({ showApply = true
       <Step index={4} title={<Trans>Start training</Trans>} />
     </ol>
     {showApply && (
-      <LinkButton className="self-start" color="red" to="/controllers/applications/new">
+      <LinkButton className="self-start" to="/controllers/applications/new">
         <Trans>Apply Now</Trans>
       </LinkButton>
     )}

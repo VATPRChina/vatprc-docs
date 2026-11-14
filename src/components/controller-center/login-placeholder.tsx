@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Button } from "@mantine/core";
 import { TbLockAccess, TbLogin2 } from "react-icons/tb";
 
 export const ControllerCenterLoginPlaceholder = () => (
@@ -23,8 +23,9 @@ export const ControllerCenterLoginPlaceholder = () => (
       <p className="text-gray-600 dark:text-gray-400">
         <Trans>Log in with your VATSIM account to view your controller training, applications, and bookings.</Trans>
       </p>
-      <Button variant="subtle" color="red" rightSection={<TbLogin2 size={16} />} onClick={redirectToLogin}>
+      <Button onClick={redirectToLogin} variant={"neutral"}>
         <Trans>Login</Trans>
+        {<TbLogin2 size={16} />}
       </Button>
     </div>
   </section>
