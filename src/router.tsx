@@ -89,7 +89,7 @@ export function getRouter() {
       .then((Sentry) => {
         Sentry.init({
           dsn: "https://70174050ab722ce431b6906686263907@o131360.ingest.us.sentry.io/4509490348294144",
-          sendDefaultPii: true,
+          dataCollection: { userInfo: true },
         });
       })
       .catch((err) => console.error("Failed to initialize sentry", err));

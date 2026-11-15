@@ -1,7 +1,6 @@
 import { components, paths } from "../api";
 import { atom, getDefaultStore } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
-import { SyncStringStorage } from "jotai/vanilla/utils/atomWithStorage";
 import createClient, { type Middleware } from "openapi-fetch";
 
 const authClient = createClient<paths>({ baseUrl: import.meta.env.VITE_API_ENDPOINT });
@@ -14,7 +13,7 @@ interface IAccessToken {
 let refreshPromise: Promise<void> | undefined;
 const TOKEN_EXPIRY_MARGIN_MS = 30_000;
 
-const noopStorage: SyncStringStorage = {
+const noopStorage: Pick<Storage, "getItem" | "setItem" | "removeItem"> = {
   getItem: () => null,
   setItem: () => {},
   removeItem: () => {},

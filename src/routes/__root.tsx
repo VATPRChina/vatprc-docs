@@ -97,9 +97,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <AppHtml>
         <div className="container mx-auto">
           <Alert color="red" title={<Trans>Error</Trans>}>
-            <p className="font-medium">{error.message}</p>
+            <p className="font-medium">{error instanceof Error ? error.message : String(error)}</p>
             <p className="text-wrap">
-              <pre>{error.stack}</pre>
+              <pre>{error instanceof Error ? error.stack : undefined}</pre>
             </p>
           </Alert>
         </div>

@@ -1,11 +1,10 @@
 import { components } from "../api";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
-import { SyncStringStorage } from "jotai/vanilla/utils/atomWithStorage";
 import { Middleware } from "openapi-fetch";
 
 type UserRole = components["schemas"]["UserRole"];
 
-const noopStorage: SyncStringStorage = {
+const noopStorage: Pick<Storage, "getItem" | "setItem" | "removeItem"> = {
   getItem: () => null,
   setItem: () => {},
   removeItem: () => {},

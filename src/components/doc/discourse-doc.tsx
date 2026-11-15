@@ -121,7 +121,7 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
         color="red"
         className="container mx-auto"
       >
-        {props.error.message}
+        {props.error instanceof Error ? props.error.message : String(props.error)}
       </Alert>
     );
   },

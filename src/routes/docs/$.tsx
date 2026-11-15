@@ -37,7 +37,7 @@ export const Route = createFileRoute("/docs/$")({
         color="red"
         className="container mx-auto"
       >
-        {props.error.message}
+        {props.error instanceof Error ? props.error.message : String(props.error)}
       </Alert>
     );
   },
