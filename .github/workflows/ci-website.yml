@@ -11,6 +11,11 @@ on:
       - "uniapi/**"
       - ".github/workflows/ci-uniapi.yml"
       - ".github/workflows/container-uniapi.yml"
+
+defaults:
+  run:
+    working-directory: website
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -19,11 +24,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         name: Install pnpm
+        with:
+          package_json_file: website/package.json
       - uses: actions/setup-node@v6
         name: Setup Node.js
         with:
           node-version: "22"
           cache: "pnpm"
+          cache-dependency-path: website/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install
       - name: Install browser for testing

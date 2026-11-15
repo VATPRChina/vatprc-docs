@@ -11,7 +11,9 @@ export interface DocumentEntry {
   order?: number;
 }
 
-const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Promise<DocumentEntry[]> => {
+const docsDirectory = path.resolve("../docs");
+
+const findAllDocuments = createServerOnlyFn(async (prefix: string = docsDirectory): Promise<DocumentEntry[]> => {
   const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
   const documents = [] as DocumentEntry[];
   const dirEntries = await fs.opendir(prefix);
@@ -26,7 +28,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
           title: file.title ?? entry.name,
           path: filePath,
           children: [],
-          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.md$/, ""),
+          webPath: "/docs/" + path.relative(docsDirectory, filePath).replace(/\.md$/, ""),
           fileName: path.basename(filePath, path.extname(filePath)),
           order: typeof file.frontmatter?.order === "number" ? file.frontmatter?.order : undefined,
         });
@@ -36,7 +38,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
           title: entry.name,
           path: filePath,
           children: [],
-          webPath: "/docs/" + path.relative("docs", filePath).replace(/\.md$/, ""),
+          webPath: "/docs/" + path.relative(docsDirectory, filePath).replace(/\.md$/, ""),
           fileName: path.basename(filePath, path.extname(filePath)),
           order: undefined,
         });
@@ -61,7 +63,8 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = "docs"): Pro
         title,
         path: path.resolve(entry.parentPath, entry.name),
         children: await findAllDocuments(path.resolve(prefix, entry.name)),
-        webPath: "/docs/" + path.relative("docs", path.resolve(entry.parentPath, entry.name)).replace(/\.md$/, ""),
+        webPath:
+          "/docs/" + path.relative(docsDirectory, path.resolve(entry.parentPath, entry.name)).replace(/\.md$/, ""),
         fileName: entry.name,
         order,
       });
@@ -81,7 +84,7 @@ export const getAllDocuments = createServerFn().handler(async () => findAllDocum
 export const getDocument = createServerFn()
   .validator((data: string) => data)
   .handler(async (ctx) => {
-    const filePath = `docs/${ctx.data}`;
+    const filePath = path.join(docsDirectory, ctx.data);
     const content = await fs.readFile(filePath, "utf-8");
     return content;
   });

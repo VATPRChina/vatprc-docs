@@ -1,10 +1,11 @@
 # vatprc-docs
 
-This is the code for VATPRC's Homepage.
+This is the code for VATPRC's website.
 
 ## Repository and containers
 
-The frontend stays at the repository root. The backend is imported from
+The frontend lives in `website/`, while shared documentation stays in `docs/` at
+the repository root. The backend is imported from
 <https://github.com/VATPRChina/uniapi> as a Git subtree under `uniapi/`, preserving its full commit history.
 To update it, start with a clean working tree and run:
 
@@ -14,10 +15,10 @@ git subtree pull --prefix=uniapi https://github.com/VATPRChina/uniapi main
 
 On pushes to `main`, the container workflows publish independently:
 
-| Image                                     | Build context | Changes that trigger publishing                                  | Tag                         |
-| ----------------------------------------- | ------------- | ---------------------------------------------------------------- | --------------------------- |
-| `ghcr.io/vatprchina/vatprc-docs/frontend` | `.`           | Any path outside `uniapi/`, except the UniAPI container workflow | `1.0.<workflow run number>` |
-| `ghcr.io/vatprchina/vatprc-docs/uniapi`   | `uniapi/`     | `uniapi/**` or `.github/workflows/uniapi-container.yml`          | `1.1.<workflow run number>` |
+| Image                                    | Build context | Changes that trigger publishing                         | Tag                         |
+| ---------------------------------------- | ------------- | ------------------------------------------------------- | --------------------------- |
+| `ghcr.io/vatprchina/vatprc-docs/website` | `.`           | Any path outside `uniapi/`, except the UniAPI workflows | `1.1.<workflow run number>` |
+| `ghcr.io/vatprchina/vatprc-docs/uniapi`  | `uniapi/`     | `uniapi/**` or `.github/workflows/container-uniapi.yml` | `1.1.<workflow run number>` |
 
 The frontend image targets `linux/amd64`; UniAPI targets `linux/amd64` and
 `linux/arm64`. The frontend Docker context and frontend formatting/type checks
@@ -27,7 +28,7 @@ development instructions.
 To build locally:
 
 ```sh
-docker build -t ghcr.io/vatprchina/vatprc-docs/frontend .
+docker build -f website/Dockerfile -t ghcr.io/vatprchina/vatprc-docs/website .
 docker build -t ghcr.io/vatprchina/vatprc-docs/uniapi ./uniapi
 ```
 
@@ -65,14 +66,15 @@ document currently.
 To run the server locally,
 
 ```console
+cd website
 pnpm install
 pnpm dev
 ```
 
 #### API
 
-The backend API is well-defined with OpenAPI. Please run the following command
-to grab the latest API definition.
+The backend API is well-defined with OpenAPI. Run frontend commands from
+`website/`. Please run the following command to grab the latest API definition.
 
 ```
 pnpm build:api
@@ -91,7 +93,7 @@ const { data: warnings } = $api.useQuery("get", "/api/flights/by-callsign/{calls
 #### Pages
 
 This project is based on [TanStack Router](https://tanstack.com/router/latest)'s
-file-based routing. Create new page by creating relevant file in `src/routes`, and
+file-based routing. Create new page by creating relevant file in `website/src/routes`, and
 `pnpm dev` will automatically update the routing on the fly.
 
 #### Localization
@@ -107,7 +109,7 @@ files:
 pnpm i18n:extract
 ```
 
-And update `src/locales/zh-cn.po` to provide Chinese localization for the new
+And update `website/src/locales/zh-cn.po` to provide Chinese localization for the new
 strings.
 
 ## License

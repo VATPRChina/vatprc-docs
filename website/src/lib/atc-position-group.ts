@@ -1,4 +1,4 @@
-import dclAirports from "../../docs/dcl-airports.json";
+import dclAirports from "../../../docs/dcl-airports.json";
 
 export type AtcPositionGroup = "airport" | "terminal" | "area";
 
