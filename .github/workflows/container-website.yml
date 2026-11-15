@@ -1,8 +1,17 @@
-name: Container
+name: Website Container
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "uniapi/**"
+      - ".github/workflows/ci-uniapi.yml"
+      - ".github/workflows/container-uniapi.yml"
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   container:
     runs-on: ubuntu-latest
@@ -25,20 +34,21 @@ jobs:
         id: meta
         with:
           images: |
-            ghcr.io/${{ github.repository }}
+            ghcr.io/vatprchina/vatprc-docs/website
           tags: |
-            type=raw,value=1.0.${{ github.run_number }}
+            type=raw,value=1.1.${{ github.run_number }}
 
       - name: Publish images
         uses: docker/build-push-action@v5
         with:
+          context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=website
+          cache-to: type=gha,mode=max,scope=website
           secrets: |
             SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
           build-args: |
-            VERSION=1.0.${{ github.run_number }}
+            VERSION=1.1.${{ github.run_number }}

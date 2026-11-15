@@ -1,0 +1,30 @@
+name: Container Cleanup
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+permissions:
+  packages: write
+
+jobs:
+  clean:
+    name: Clean ${{ matrix.package }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - vatprc-docs/website
+          - vatprc-docs/uniapi
+
+    steps:
+      - name: Delete old image versions
+        uses: snok/container-retention-policy@v3.1.0
+        with:
+          account: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: ${{ matrix.package }}
+          cut-off: 2w
+          keep-n-most-recent: 5

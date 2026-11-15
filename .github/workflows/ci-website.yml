@@ -1,8 +1,16 @@
-name: CI
+name: Website CI
 
 on:
-  - push
-  - pull_request
+  push:
+    paths-ignore:
+      - "uniapi/**"
+      - ".github/workflows/ci-uniapi.yml"
+      - ".github/workflows/container-uniapi.yml"
+  pull_request:
+    paths-ignore:
+      - "uniapi/**"
+      - ".github/workflows/ci-uniapi.yml"
+      - ".github/workflows/container-uniapi.yml"
 jobs:
   ci:
     runs-on: ubuntu-latest

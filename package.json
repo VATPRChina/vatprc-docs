@@ -11,7 +11,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "build:api": "openapi-typescript https://uniapi.vatprc.net/openapi.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
-    "build:api-local": "openapi-typescript ../vatprc-uniapi/openapi.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
+    "build:api-local": "openapi-typescript uniapi/openapi.json -o src/lib/api.d.ts && prettier --write src/lib/api.d.ts",
     "start": "vite start",
     "lint": "concurrently --raw 'pnpm:lint:*'",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",

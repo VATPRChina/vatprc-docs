@@ -2,6 +2,35 @@
 
 This is the code for VATPRC's Homepage.
 
+## Repository and containers
+
+The frontend stays at the repository root. The backend is imported from
+<https://github.com/VATPRChina/uniapi> as a Git subtree under `uniapi/`, preserving its full commit history.
+To update it, start with a clean working tree and run:
+
+```sh
+git subtree pull --prefix=uniapi https://github.com/VATPRChina/uniapi main
+```
+
+On pushes to `main`, the container workflows publish independently:
+
+| Image                                     | Build context | Changes that trigger publishing                                  | Tag                         |
+| ----------------------------------------- | ------------- | ---------------------------------------------------------------- | --------------------------- |
+| `ghcr.io/vatprchina/vatprc-docs/frontend` | `.`           | Any path outside `uniapi/`, except the UniAPI container workflow | `1.0.<workflow run number>` |
+| `ghcr.io/vatprchina/vatprc-docs/uniapi`   | `uniapi/`     | `uniapi/**` or `.github/workflows/uniapi-container.yml`          | `1.1.<workflow run number>` |
+
+The frontend image targets `linux/amd64`; UniAPI targets `linux/amd64` and
+`linux/arm64`. The frontend Docker context and frontend formatting/type checks
+exclude the backend subtree. See [UniAPI's README](uniapi/README.md) for backend
+development instructions.
+
+To build locally:
+
+```sh
+docker build -t ghcr.io/vatprchina/vatprc-docs/frontend .
+docker build -t ghcr.io/vatprchina/vatprc-docs/uniapi ./uniapi
+```
+
 ## Contributing
 
 ### Docs / SOP
