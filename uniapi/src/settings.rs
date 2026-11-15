@@ -1,0 +1,188 @@
+use config::{Config, ConfigError, Environment, File, FileFormat};
+use serde::Deserialize;
+use std::collections::HashMap;
+use std::env;
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Settings {
+    pub bind_address: String,
+    pub authentication: Authentication,
+    pub database: Database,
+    pub dcl: Dcl,
+    pub discord: Discord,
+    pub discourse: Discourse,
+    #[serde(default)]
+    pub email: Email,
+    pub moodle: Moodle,
+    pub storage: Storage,
+    pub utils: Utils,
+    pub navdata: Navdata,
+    pub telemetry: OpenTelemetry,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct OpenTelemetry {
+    pub service_name: String,
+    pub log_level: String,
+    pub logs: OpenTelemetrySignal,
+    pub metrics: OpenTelemetrySignal,
+    pub tracing: OpenTelemetrySignal,
+}
+
+#[derive(Debug, Deserialize, Clone, Default)]
+pub struct OpenTelemetrySignal {
+    pub enabled: bool,
+    pub endpoint: Option<String>,
+    #[serde(default)]
+    pub headers: HashMap<String, String>,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Authentication {
+    pub jwt: JwtAuthentication,
+    pub vatsim: VatsimAuthentication,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct JwtAuthentication {
+    pub private_key: String,
+    pub public_key: String,
+    pub issuer: String,
+    pub audience_first_party: String,
+    pub first_party_expires_seconds: i64,
+    pub refresh_expires_days: i64,
+    pub device_authz_expires_seconds: i64,
+    #[serde(default)]
+    pub clients: Vec<JwtClient>,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct JwtClient {
+    pub client_id: String,
+    pub client_secret: Option<String>,
+    pub redirect_uri: Vec<String>,
+    #[serde(default)]
+    pub unsafe_assume_user: bool,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct VatsimAuthentication {
+    pub endpoint: String,
+    pub client_id: String,
+    pub client_secret: String,
+    pub redirect_uri: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Database {
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Dcl {
+    pub airports_url: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Discord {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub token: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Discourse {
+    pub endpoint: String,
+    pub api_key: String,
+}
+
+#[derive(Debug, Deserialize, Clone, Default)]
+pub struct Email {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub smtp: SmtpEmail,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct SmtpEmail {
+    pub server: String,
+    pub port: u16,
+    pub username: String,
+    pub password: String,
+    pub from: String,
+}
+
+impl Default for SmtpEmail {
+    fn default() -> Self {
+        Self {
+            server: String::new(),
+            port: 587,
+            username: String::new(),
+            password: String::new(),
+            from: String::new(),
+        }
+    }
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Storage {
+    pub image: ImageStorage,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct ImageStorage {
+    pub smms: SmmsStorage,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct SmmsStorage {
+    pub base_url: String,
+    pub secret_token: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Moodle {
+    pub api_key: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Utils {
+    pub vatsim_data_url: String,
+    pub metar: Metar,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Metar {
+    pub endpoint: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Navdata {
+    pub local_data_path: String,
+    pub preferred_routes_path: String,
+}
+
+impl Settings {
+    pub fn new() -> Result<Self, ConfigError> {
+        let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
+
+        let s = Config::builder()
+            .add_source(File::from_str(
+                include_str!("../assets/config/settings.default.toml"),
+                FileFormat::Toml,
+            ))
+            .add_source(File::with_name(&format!("settings.{}", run_mode)).required(false))
+            .add_source(File::with_name("settings.local").required(false))
+            .add_source(File::with_name(&format!("settings.{}.local", run_mode)).required(false))
+            .add_source(
+                Environment::with_prefix("app")
+                    .prefix_separator("_")
+                    .separator("__"),
+            )
+            .build()?;
+
+        s.try_deserialize()
+    }
+}

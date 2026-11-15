@@ -1,0 +1,181 @@
+use crate::adapter::compat::{CompatClient, CompatClientError};
+use crate::adapter::compat::{FlightPlan, Pilot, VatsimData};
+use crate::modules::flight::models::{
+    Flight, FlightPlan as FiledFlightPlan, FlightRule, WakeCategory,
+};
+
+pub(crate) trait FlightRepository {
+    async fn list_flights(&self) -> Result<Vec<Flight>, CompatClientError>;
+}
+
+impl FlightRepository for CompatClient {
+    async fn list_flights(&self) -> Result<Vec<Flight>, CompatClientError> {
+        Ok(flights_from_vatsim(self.get_online_data().await?))
+    }
+}
+
+fn flights_from_vatsim(data: VatsimData) -> Vec<Flight> {
+    data.pilots
+        .into_iter()
+        .chain(data.prefiles)
+        .filter_map(map_pilot)
+        .collect()
+}
+
+fn map_pilot(pilot: Pilot) -> Option<Flight> {
+    let flight_plan = pilot.flight_plan?;
+    let departure = flight_plan.departure.clone()?;
+    let arrival = flight_plan.arrival.clone()?;
+    if !is_china_airport(&departure) && !is_china_airport(&arrival) {
+        return None;
+    }
+    if departure == arrival {
+        return None;
+    }
+    if flight_plan.flight_rules.as_deref() != Some("I") {
+        return None;
+    }
+    let aircraft = parse_aircraft(&flight_plan);
+
+    Some(Flight {
+        cid: pilot.cid.to_string(),
+        last_observed_at: pilot.last_updated,
+        altitude: pilot.altitude.unwrap_or_default(),
+        flight_plan: FiledFlightPlan {
+            callsign: pilot.callsign,
+            departure,
+            arrival,
+            equipment: aircraft.equipment,
+            navigation_performance: aircraft.navigation_performance,
+            transponder: aircraft.transponder,
+            raw_route: flight_plan.route.unwrap_or_default(),
+            aircraft: aircraft.code,
+            flight_rules: FlightRule::Ifr,
+            wake_category: match aircraft.wake_category.as_str() {
+                "J" => WakeCategory::Super,
+                "H" => WakeCategory::Heavy,
+                "L" => WakeCategory::Light,
+                _ => WakeCategory::Medium,
+            },
+            cruising_level: flight_plan
+                .altitude
+                .as_deref()
+                .and_then(parse_flight_altitude)
+                .unwrap_or_default(),
+        },
+    })
+}
+
+fn is_china_airport(ident: &str) -> bool {
+    let bytes = ident.as_bytes();
+    ident.len() == 4
+        && bytes[0] == b'Z'
+        && matches!(
+            bytes[1],
+            b'B' | b'M' | b'S' | b'P' | b'G' | b'J' | b'Y' | b'W' | b'L' | b'U' | b'H'
+        )
+}
+
+fn parse_flight_altitude(altitude: &str) -> Option<i64> {
+    altitude.parse().ok().or_else(|| {
+        altitude
+            .strip_prefix("FL")
+            .or_else(|| altitude.strip_prefix("fl"))
+            .and_then(|level| level.parse::<i64>().ok())
+            .map(|level| level * 100)
+    })
+}
+
+struct AircraftParts {
+    code: String,
+    wake_category: String,
+    equipment: String,
+    transponder: String,
+    navigation_performance: String,
+}
+
+fn parse_aircraft(flight_plan: &FlightPlan) -> AircraftParts {
+    let aircraft = flight_plan.aircraft.as_deref().unwrap_or_default();
+    let aircraft_segments = aircraft.to_uppercase();
+    let segments = aircraft_segments.split('/').collect::<Vec<_>>();
+    let tail_segments = segments
+        .get(1)
+        .map(|segment| segment.split('-').collect::<Vec<_>>())
+        .unwrap_or_default();
+
+    AircraftParts {
+        code: segments.first().copied().unwrap_or_default().to_owned(),
+        wake_category: tail_segments
+            .first()
+            .copied()
+            .unwrap_or_default()
+            .to_owned(),
+        equipment: tail_segments.get(1).copied().unwrap_or_default().to_owned(),
+        transponder: segments.get(2).copied().unwrap_or_default().to_owned(),
+        navigation_performance: pbn(flight_plan.remarks.as_deref().unwrap_or_default()),
+    }
+}
+
+fn pbn(remarks: &str) -> String {
+    let Some(start) = remarks.find("PBN/").map(|index| index + 4) else {
+        return String::new();
+    };
+    let end = remarks[start..]
+        .find(' ')
+        .map(|index| start + index)
+        .unwrap_or(remarks.len());
+    remarks[start..end].to_owned()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn maps_vatsim_flight_rules_and_declared_wake_category() {
+        let pilot: Pilot = serde_json::from_value(serde_json::json!({
+            "cid": 1234567, "callsign": "CCA123", "name": "Test Pilot",
+            "last_updated": "2026-10-10T00:00:00Z",
+            "flight_plan": { "flight_rules": "I", "departure": "ZBAA", "arrival": "ZSPD",
+                "aircraft": "A320/M-SDE2E3FGHIRWY/LB1", "altitude": "FL331" }
+        }))
+        .unwrap();
+        let flight = map_pilot(pilot).unwrap();
+        assert!(matches!(flight.flight_plan.flight_rules, FlightRule::Ifr));
+        assert!(matches!(
+            flight.flight_plan.wake_category,
+            WakeCategory::Medium
+        ));
+        assert_eq!(flight.flight_plan.aircraft, "A320");
+        assert_eq!(flight.flight_plan.equipment, "SDE2E3FGHIRWY");
+        assert_eq!(flight.flight_plan.transponder, "LB1");
+        let dto =
+            serde_json::to_value(crate::modules::flight::dto::FlightDto::from(flight)).unwrap();
+        assert_eq!(dto["flight_plan"]["flight_rules"], "I");
+        assert_eq!(dto["flight_plan"]["wake_category"], "M");
+    }
+
+    #[test]
+    fn temporary_flight_accepts_new_fields_and_defaults_missing_fields() {
+        let query = serde_json::json!({"departure":"ZBAA", "arrival":"ZSPD", "flight_rules":"V", "wake_category":"L"});
+        let flight = Flight::from(
+            serde_json::from_value::<crate::modules::flight::dto::TemporaryFlightQuery>(query)
+                .unwrap(),
+        );
+        assert!(matches!(flight.flight_plan.flight_rules, FlightRule::Vfr));
+        assert!(matches!(
+            flight.flight_plan.wake_category,
+            WakeCategory::Light
+        ));
+        let query = serde_json::json!({"departure":"ZBAA", "arrival":"ZSPD"});
+        let flight = Flight::from(
+            serde_json::from_value::<crate::modules::flight::dto::TemporaryFlightQuery>(query)
+                .unwrap(),
+        );
+        assert!(matches!(flight.flight_plan.flight_rules, FlightRule::Ifr));
+        assert!(matches!(
+            flight.flight_plan.wake_category,
+            WakeCategory::Medium
+        ));
+    }
+}

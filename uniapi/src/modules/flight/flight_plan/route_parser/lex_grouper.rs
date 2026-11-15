@@ -1,0 +1,633 @@
+//! Flight route parser
+//!
+//! ```text
+//! route = dep ident* arr
+//! dep = IDENTIFIER IDENTIFIER? SPEED_AND_ALTITUDE?
+//! tail = arr | ident tail
+//! arr = IDENTIFIER? IDENTIFIER
+//! ident = (IDENTIFIER | IDENTIFIER_REFERENCE | GEO) (VFR | IFR)? | DIRECT
+//! ```
+//!
+//! Optional endpoint identifiers must match the adjacent identifier. Their
+//! amendments and diagnostics are merged in input order.
+
+use crate::modules::flight::flight_plan::route_parser::{
+    CruisingLevel, LexerToken, LexerTokenAmend, LexerTokenValue, Speed,
+};
+
+pub struct LexGrouper<'s> {
+    tokens: Vec<LexerToken<'s>>,
+}
+
+#[derive(Clone, PartialEq)]
+pub struct Ident<'s> {
+    pub ident: &'s str,
+    pub amendments: Vec<IdentAmend>,
+    pub errors: Vec<ParserIdentError>,
+}
+
+impl<'s> Ident<'s> {
+    pub fn identifier(&self) -> &'s str {
+        self.ident
+    }
+}
+
+impl<'s> std::fmt::Debug for Ident<'s> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Ident({}", self.ident)?;
+        if !self.amendments.is_empty() {
+            write!(f, ", amend={:?}", self.amendments)?;
+        }
+        if !self.errors.is_empty() {
+            write!(f, ", err={:?}", self.errors)?;
+        }
+        write!(f, ")")?;
+        Ok(())
+    }
+}
+
+#[derive(Clone, PartialEq)]
+pub enum IdentAmend {
+    SpeedAndAltitude {
+        speed: Speed,
+        altitude: CruisingLevel,
+    },
+    Runway(String),
+    FlightRuleVfr,
+    FlightRuleIfr,
+}
+
+impl std::fmt::Debug for IdentAmend {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                Self::SpeedAndAltitude { .. } => "SpeedAndAltitude",
+                Self::Runway(_) => "Runway",
+                Self::FlightRuleVfr => "FlightRuleVfr",
+                Self::FlightRuleIfr => "FlightRuleIfr",
+            }
+        )?;
+        if let Self::SpeedAndAltitude { speed, altitude } = self {
+            write!(f, "({:?}, {:?})", speed, altitude)?;
+        }
+        if let Self::Runway(runway) = self {
+            write!(f, "({runway})")?;
+        }
+        Ok(())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum ParserIdentError {
+    ExpectedDepIdent,
+    ExpectedArrIdent,
+    UnexpectedSpeedAndAltitude,
+    UnexpectedFlightRule,
+    MissingArr,
+    InvalidAmendment,
+}
+
+impl<'s> LexGrouper<'s> {
+    pub fn new(tokens: Vec<LexerToken<'s>>) -> Self {
+        Self { tokens }
+    }
+
+    /// Parse `dep ident* arr`, retaining invalid tokens with diagnostics.
+    /// Empty input yields no idents.
+    pub fn parse(self) -> impl Iterator<Item = Ident<'s>> {
+        Input {
+            tokens: &self.tokens,
+        }
+        .parse_route()
+        .into_iter()
+    }
+}
+
+/// Immutable input cursor for the recursive-descent parser.
+///
+/// Two-token lookahead distinguishes the final arrival token from an enroute
+/// entry. Each production returns its value and the remaining input.
+#[derive(Clone, Copy)]
+struct Input<'t, 's> {
+    tokens: &'t [LexerToken<'s>],
+}
+
+impl<'t, 's> Input<'t, 's> {
+    fn peek(self, offset: usize) -> Option<&'t LexerTokenValue<'s>> {
+        self.tokens.get(offset).map(|token| &token.value)
+    }
+
+    fn advance(self) -> Option<(&'t LexerToken<'s>, Self)> {
+        let (token, tokens) = self.tokens.split_first()?;
+        Some((token, Self { tokens }))
+    }
+
+    // route = dep ident* arr
+    fn parse_route(self) -> Vec<Ident<'s>> {
+        let Some((departure, input)) = self.parse_departure() else {
+            return Vec::new();
+        };
+        if input.peek(0).is_none() {
+            return vec![Ident {
+                errors: departure
+                    .errors
+                    .into_iter()
+                    .chain([ParserIdentError::MissingArr])
+                    .collect(),
+                ..departure
+            }];
+        }
+        std::iter::once(departure)
+            .chain(input.parse_tail())
+            .collect()
+    }
+
+    // dep = IDENTIFIER IDENTIFIER? SPEED_AND_ALTITUDE?
+    fn parse_departure(self) -> Option<(Ident<'s>, Self)> {
+        let valid = matches!(self.peek(0), Some(LexerTokenValue::Ident));
+        let (mut departure, input) = self.parse_endpoint(ParserIdentError::ExpectedDepIdent)?;
+        let (amendment, input) = if valid {
+            input.parse_speed_and_altitude()
+        } else {
+            (None, input)
+        };
+        departure.amendments.extend(amendment);
+        Some((departure, input))
+    }
+
+    // tail = arr | ident tail
+    fn parse_tail(self) -> Vec<Ident<'s>> {
+        if self.peek(1).is_none() || (self.tokens.len() == 2 && self.has_matching_identifiers()) {
+            return self.parse_arrival().into_iter().collect();
+        }
+        let (ident, input) = self.parse_ident().expect("lookahead is not EOF");
+        if input.peek(0).is_none() {
+            return vec![Ident {
+                errors: ident
+                    .errors
+                    .into_iter()
+                    .chain([ParserIdentError::MissingArr])
+                    .collect(),
+                ..ident
+            }];
+        }
+        std::iter::once(ident).chain(input.parse_tail()).collect()
+    }
+
+    // arr = IDENTIFIER? IDENTIFIER
+    fn parse_arrival(self) -> Option<Ident<'s>> {
+        self.parse_endpoint(ParserIdentError::ExpectedArrIdent)
+            .map(|(arrival, _)| arrival)
+    }
+
+    fn has_matching_identifiers(self) -> bool {
+        matches!(
+            self.tokens,
+            [first, second, ..]
+                if matches!(first.value, LexerTokenValue::Ident)
+                    && matches!(second.value, LexerTokenValue::Ident)
+                    && first.str == second.str
+        )
+    }
+
+    fn parse_endpoint(self, expected: ParserIdentError) -> Option<(Ident<'s>, Self)> {
+        let (token, input) = self.advance()?;
+        let (duplicate, input) = if self.has_matching_identifiers() {
+            let (duplicate, input) = input.advance().expect("matching identifier exists");
+            (Some(duplicate), input)
+        } else {
+            (None, input)
+        };
+        Some((
+            Ident {
+                ident: token.str,
+                amendments: inline_amendment(token)
+                    .into_iter()
+                    .chain(duplicate.and_then(inline_amendment))
+                    .collect(),
+                errors: amendment_error(token)
+                    .into_iter()
+                    .chain(duplicate.and_then(amendment_error))
+                    .chain((!matches!(token.value, LexerTokenValue::Ident)).then_some(expected))
+                    .collect(),
+            },
+            input,
+        ))
+    }
+
+    // ident = (IDENTIFIER | IDENTIFIER_REFERENCE | GEO) (VFR | IFR)? | DIRECT
+    // Recovery consumes any other token as an entry so parsing always advances.
+    fn parse_ident(self) -> Option<(Ident<'s>, Self)> {
+        let (token, input) = self.advance()?;
+        let (amendment, input) = match token.value {
+            LexerTokenValue::Ident
+            | LexerTokenValue::IdentRef { .. }
+            | LexerTokenValue::Geo { .. } => input.parse_flight_rule(),
+            _ => (None, input),
+        };
+        let error = match token.value {
+            LexerTokenValue::SpeedAndAltitude { .. } => {
+                Some(ParserIdentError::UnexpectedSpeedAndAltitude)
+            }
+            LexerTokenValue::Vfr | LexerTokenValue::Ifr => {
+                Some(ParserIdentError::UnexpectedFlightRule)
+            }
+            _ => None,
+        };
+        Some((
+            Ident {
+                ident: token.str,
+                amendments: inline_amendment(token)
+                    .into_iter()
+                    .chain(amendment)
+                    .collect(),
+                errors: amendment_error(token).into_iter().chain(error).collect(),
+            },
+            input,
+        ))
+    }
+
+    fn parse_speed_and_altitude(self) -> (Option<IdentAmend>, Self) {
+        let Some(LexerTokenValue::SpeedAndAltitude { speed, altitude }) = self.peek(0) else {
+            return (None, self);
+        };
+        let (_, input) = self.advance().expect("lookahead is not EOF");
+        (
+            Some(IdentAmend::SpeedAndAltitude {
+                speed: speed.clone(),
+                altitude: altitude.clone(),
+            }),
+            input,
+        )
+    }
+
+    fn parse_flight_rule(self) -> (Option<IdentAmend>, Self) {
+        let amendment = match self.peek(0) {
+            Some(LexerTokenValue::Vfr) => IdentAmend::FlightRuleVfr,
+            Some(LexerTokenValue::Ifr) => IdentAmend::FlightRuleIfr,
+            _ => return (None, self),
+        };
+        let (_, input) = self.advance().expect("lookahead is not EOF");
+        (Some(amendment), input)
+    }
+}
+
+fn inline_amendment(token: &LexerToken<'_>) -> Option<IdentAmend> {
+    match token.amend.as_ref()? {
+        LexerTokenAmend::SpeedAndAltitude { speed, altitude } => {
+            Some(IdentAmend::SpeedAndAltitude {
+                speed: speed.clone(),
+                altitude: altitude.clone(),
+            })
+        }
+        LexerTokenAmend::Runway(runway) => Some(IdentAmend::Runway(runway.clone())),
+        LexerTokenAmend::Invalid(_) => None,
+    }
+}
+
+fn amendment_error(token: &LexerToken<'_>) -> Option<ParserIdentError> {
+    matches!(token.amend, Some(LexerTokenAmend::Invalid(_)))
+        .then_some(ParserIdentError::InvalidAmendment)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::modules::flight::flight_plan::route_parser::lexer::Lexer;
+
+    fn parse(route: &str) -> Vec<Ident<'_>> {
+        LexGrouper::new(Lexer::new(route).parse_all().collect())
+            .parse()
+            .collect()
+    }
+
+    #[test]
+    fn parses_all_enroute_token_types_in_order() {
+        let route = parse("ZBAA VYK VYK180040 38N054E 3806N16730W DCT ZSPD");
+        assert_eq!(
+            route.iter().map(|ident| ident.ident).collect::<Vec<_>>(),
+            [
+                "ZBAA",
+                "VYK",
+                "VYK180040",
+                "38N054E",
+                "3806N16730W",
+                "DCT",
+                "ZSPD"
+            ]
+        );
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+        assert!(route.iter().all(|ident| ident.amendments.is_empty()));
+    }
+
+    #[test]
+    fn attaches_speed_and_altitude_only_to_departure() {
+        let route = parse("ZBAA K0830M0840 DCT ZSPD");
+        assert_eq!(route.len(), 3);
+        assert_eq!(route[0].ident, "ZBAA");
+        assert_eq!(
+            route[0].amendments,
+            [IdentAmend::SpeedAndAltitude {
+                speed: Speed::KmH(830),
+                altitude: CruisingLevel::MeterAltitude(840),
+            }]
+        );
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+        assert!(route[1..].iter().all(|ident| ident.amendments.is_empty()));
+    }
+
+    #[test]
+    fn merges_matching_endpoint_identifiers_and_amendments() {
+        let route = parse("ZBAA ZBAA/01 K0300S0720 AVBOX8J  AVBOX DCT SASAN ZSPD/17L ZSPD");
+        assert_eq!(
+            route.iter().map(Ident::identifier).collect::<Vec<_>>(),
+            ["ZBAA", "AVBOX8J", "AVBOX", "DCT", "SASAN", "ZSPD"]
+        );
+        assert_eq!(
+            route[0].amendments,
+            [
+                IdentAmend::Runway("01".into()),
+                IdentAmend::SpeedAndAltitude {
+                    speed: Speed::KmH(300),
+                    altitude: CruisingLevel::MeterLevel(720),
+                },
+            ]
+        );
+        assert_eq!(route[5].amendments, [IdentAmend::Runway("17L".into())]);
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+    }
+
+    #[test]
+    fn merges_endpoint_amendments_in_input_order() {
+        let route = parse("ZBAA/01 ZBAA/K0300S0720 ZSPD/K0400S0600 ZSPD/17L");
+        assert_eq!(route.len(), 2);
+        assert_eq!(
+            route[0].amendments,
+            [
+                IdentAmend::Runway("01".into()),
+                IdentAmend::SpeedAndAltitude {
+                    speed: Speed::KmH(300),
+                    altitude: CruisingLevel::MeterLevel(720),
+                },
+            ]
+        );
+        assert_eq!(
+            route[1].amendments,
+            [
+                IdentAmend::SpeedAndAltitude {
+                    speed: Speed::KmH(400),
+                    altitude: CruisingLevel::MeterLevel(600),
+                },
+                IdentAmend::Runway("17L".into()),
+            ]
+        );
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+    }
+
+    #[test]
+    fn retains_invalid_amendments_on_either_endpoint_token() {
+        for input in [
+            "ZBAA/INVALID ZBAA/01 ZSPD/INVALID ZSPD/17L",
+            "ZBAA/01 ZBAA/INVALID ZSPD/17L ZSPD/INVALID",
+        ] {
+            let route = parse(input);
+            assert_eq!(route.len(), 2);
+            assert_eq!(route[0].amendments, [IdentAmend::Runway("01".into())]);
+            assert_eq!(route[1].amendments, [IdentAmend::Runway("17L".into())]);
+            assert!(
+                route
+                    .iter()
+                    .all(|ident| ident.errors == [ParserIdentError::InvalidAmendment])
+            );
+        }
+    }
+
+    #[test]
+    fn merges_only_one_matching_pair_at_each_endpoint() {
+        let route = parse("ZBAA ZBAA ZBAA VYK VYK ZSPD ZSPD ZSPD");
+        assert_eq!(
+            route.iter().map(Ident::identifier).collect::<Vec<_>>(),
+            ["ZBAA", "ZBAA", "VYK", "VYK", "ZSPD", "ZSPD"]
+        );
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+
+        for input in ["ZBAA ZBAA ZSPD ZSPD", "ZBAA ZBAA K0300S0720 ZSPD ZSPD"] {
+            let route = parse(input);
+            assert_eq!(
+                route.iter().map(Ident::identifier).collect::<Vec<_>>(),
+                ["ZBAA", "ZSPD"]
+            );
+            assert!(route.iter().all(|ident| ident.errors.is_empty()));
+        }
+    }
+
+    #[test]
+    fn repeated_non_identifiers_are_not_merged() {
+        for token in ["DCT", "38N054E", "VYK180040"] {
+            let input = format!("{token} {token} ZSPD");
+            let route = parse(&input);
+            assert_eq!(route.len(), 3);
+            assert_eq!(route[0].errors, [ParserIdentError::ExpectedDepIdent]);
+
+            let input = format!("ZBAA {token} {token}");
+            let route = parse(&input);
+            assert_eq!(route.len(), 3);
+            assert_eq!(route[2].errors, [ParserIdentError::ExpectedArrIdent]);
+        }
+    }
+
+    #[test]
+    fn requires_identifier_endpoints() {
+        for token in ["DCT", "38N054E", "VYK180040", "K0830M0840", "VFR", "IFR"] {
+            let input = format!("{token} DCT ZSPD");
+            let route = parse(&input);
+            assert_eq!(route[0].errors, [ParserIdentError::ExpectedDepIdent]);
+            let input = format!("ZBAA DCT {token}");
+            let route = parse(&input);
+            assert_eq!(route[2].errors, [ParserIdentError::ExpectedArrIdent]);
+        }
+    }
+
+    #[test]
+    fn retains_misplaced_and_repeated_speed_and_altitude_with_errors() {
+        for input in [
+            "ZBAA DCT K0830M0840 ZSPD",
+            "ZBAA K0830M0840 DCT K0830M0840 ZSPD",
+            "ZBAA K0830M0840 K0830M0840 DCT ZSPD",
+        ] {
+            let route = parse(input);
+            let invalid = route
+                .iter()
+                .find(|ident| ident.ident == "K0830M0840")
+                .unwrap();
+            assert_eq!(
+                invalid.errors,
+                [ParserIdentError::UnexpectedSpeedAndAltitude]
+            );
+            assert!(invalid.amendments.is_empty());
+            assert_eq!(route.last().unwrap().ident, "ZSPD");
+        }
+    }
+
+    #[test]
+    fn attaches_flight_rules_to_points() {
+        let route = parse("ZBAA VYK VFR VYK180040 IFR 38N054E VFR ZSPD");
+        assert_eq!(
+            route.iter().map(|ident| ident.ident).collect::<Vec<_>>(),
+            ["ZBAA", "VYK", "VYK180040", "38N054E", "ZSPD"]
+        );
+        assert_eq!(route[1].amendments, [IdentAmend::FlightRuleVfr]);
+        assert_eq!(route[2].amendments, [IdentAmend::FlightRuleIfr]);
+        assert_eq!(route[3].amendments, [IdentAmend::FlightRuleVfr]);
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+    }
+
+    #[test]
+    fn departure_does_not_accept_flight_rules() {
+        for rule in ["VFR", "IFR"] {
+            for prefix in ["ZBAA", "ZBAA K0830M0840"] {
+                let input = format!("{prefix} {rule} ZSPD");
+                let route = parse(&input);
+                assert_eq!(route.len(), 3);
+                assert_eq!(route[1].ident, rule);
+                assert_eq!(route[1].errors, [ParserIdentError::UnexpectedFlightRule]);
+                assert!(
+                    route[0]
+                        .amendments
+                        .iter()
+                        .all(|amendment| matches!(amendment, IdentAmend::SpeedAndAltitude { .. }))
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn accepts_at_most_one_flight_rule_per_point() {
+        for rules in ["VFR IFR", "IFR VFR", "VFR VFR", "IFR IFR"] {
+            let input = format!("ZBAA VYK {rules} ZSPD");
+            let route = parse(&input);
+            assert_eq!(route.len(), 4);
+            assert_eq!(route[1].amendments.len(), 1);
+            assert_eq!(route[2].errors, [ParserIdentError::UnexpectedFlightRule]);
+            assert!(route[2].amendments.is_empty());
+        }
+    }
+
+    #[test]
+    fn retains_flight_rules_without_a_preceding_point() {
+        for rule in ["VFR", "IFR"] {
+            let input = format!("ZBAA DCT {rule} ZSPD");
+            let route = parse(&input);
+            assert_eq!(route.len(), 4);
+            assert_eq!(route[2].ident, rule);
+            assert_eq!(route[2].errors, [ParserIdentError::UnexpectedFlightRule]);
+            assert!(route.iter().all(|ident| ident.amendments.is_empty()));
+        }
+    }
+
+    #[test]
+    fn requires_arrival_after_amended_enroute_point() {
+        let route = parse("ZBAA VYK IFR ZSPD");
+        assert_eq!(route.len(), 3);
+        assert_eq!(route[1].amendments, [IdentAmend::FlightRuleIfr]);
+        assert!(route[2].amendments.is_empty());
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+
+        for point in ["ZSPD", "38N054E", "VYK180040"] {
+            for rule in ["VFR", "IFR"] {
+                let input = format!("ZBAA {point} {rule}");
+                let route = parse(&input);
+                assert_eq!(route.len(), 2);
+                assert_eq!(route[1].amendments.len(), 1);
+                assert_eq!(route[1].errors, [ParserIdentError::MissingArr]);
+            }
+        }
+    }
+
+    #[test]
+    fn accepts_zero_enroute_idents() {
+        for input in ["ZBAA ZSPD", "ZBAA K0830M0840 ZSPD"] {
+            let route = parse(input);
+            assert_eq!(route.len(), 2);
+            assert_eq!(route[0].ident, "ZBAA");
+            assert_eq!(route[1].ident, "ZSPD");
+            assert!(route[1].amendments.is_empty());
+            assert!(route.iter().all(|ident| ident.errors.is_empty()));
+        }
+    }
+
+    #[test]
+    fn handles_empty_and_incomplete_routes() {
+        assert!(parse("").is_empty());
+        for input in [
+            "ZBAA",
+            "ZBAA K0830M0840",
+            "ZBAA ZBAA/01",
+            "ZBAA ZBAA/01 K0830M0840",
+        ] {
+            let route = parse(input);
+            assert_eq!(route.len(), 1);
+            assert_eq!(route[0].errors, [ParserIdentError::MissingArr]);
+        }
+    }
+    #[test]
+    fn parses_inline_speed_level_and_runway_amendments() {
+        let route = parse("ZBAA PIKAS1/36L AGAVO/K0745S0660 VFR XAC/M082F350 ZSPD");
+        assert_eq!(
+            route.iter().map(Ident::identifier).collect::<Vec<_>>(),
+            ["ZBAA", "PIKAS1", "AGAVO", "XAC", "ZSPD"]
+        );
+        assert_eq!(route[1].amendments, [IdentAmend::Runway("36L".into())]);
+        assert_eq!(
+            route[2].amendments,
+            [
+                IdentAmend::SpeedAndAltitude {
+                    speed: Speed::KmH(745),
+                    altitude: CruisingLevel::MeterLevel(660)
+                },
+                IdentAmend::FlightRuleVfr,
+            ]
+        );
+        assert_eq!(
+            route[3].amendments,
+            [IdentAmend::SpeedAndAltitude {
+                speed: Speed::Mach(82),
+                altitude: CruisingLevel::FeetLevel(350),
+            }]
+        );
+        assert!(route.iter().all(|ident| ident.errors.is_empty()));
+        let tokens = Lexer::new("PIKAS1/36L AGAVO/K0745S0660")
+            .parse_all()
+            .collect::<Vec<_>>();
+        assert!(format!("{tokens:?}").contains("Runway"));
+        assert!(format!("{tokens:?}").contains("MeterLevel(660)"));
+    }
+
+    #[test]
+    fn parses_runway_variants_and_rejects_malformed_suffixes() {
+        for runway in ["01", "09C", "18R", "36L"] {
+            let input = format!("ZBAA PIKAS1/{runway} ZSPD");
+            let route = parse(&input);
+            assert_eq!(route[1].amendments, [IdentAmend::Runway(runway.into())]);
+            assert!(route[1].errors.is_empty());
+        }
+        for suffix in [
+            "",
+            "00",
+            "37L",
+            "36X",
+            "K0745",
+            "K0745S0660EXTRA",
+            "36L/OTHER",
+            "中文",
+        ] {
+            let input = format!("ZBAA AGAVO/{suffix} ZSPD");
+            let route = parse(&input);
+            assert_eq!(route[1].identifier(), "AGAVO");
+            assert!(route[1].amendments.is_empty());
+            assert_eq!(route[1].errors, [ParserIdentError::InvalidAmendment]);
+        }
+    }
+}

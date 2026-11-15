@@ -1,0 +1,48 @@
+[database]
+url = "postgres://localhost/vatprc"
+
+[authentication.jwt]
+private_key = """
+-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgUmXARhAPI0J82PkY
+TdK00JZl4t+8BJANigCDjHRjqSChRANCAATfUjHFTc2o/kdI/tA902XY83S/xKJB
+5g2Nl7LuskZRD+uGVWudjZHd0WjMMw1lIgcbVAkVQkx4t+CiqljcUP0P
+-----END PRIVATE KEY-----
+"""
+public_key = """
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE31IxxU3NqP5HSP7QPdNl2PN0v8Si
+QeYNjZey7rJGUQ/rhlVrnY2R3dFozDMNZSIHG1QJFUJMeLfgoqpY3FD9Dw==
+-----END PUBLIC KEY-----
+"""
+
+[[authentication.jwt.clients]]
+client_id = "01J2ED6BDX9J9BTYS2RVW83ME7"
+redirect_uri = ["http://localhost:5173/auth/callback"]
+
+[[authentication.jwt.clients]]
+client_id = "01K7XDHJGMYQWZ029T85BGDZ28"
+redirect_uri = ["http://localhost:5173/docs"]
+
+[[authentication.jwt.clients]]
+client_id = "01K7X723S04R1F5P2P8NJV5QT5"
+client_secret = "urn:vatprc:client_secret:01K7X71YQQXWSDT2XK1ZNYMS2J"
+redirect_uri = []
+unsafe_assume_user = true
+
+[[authentication.jwt.clients]]
+client_id = "01KKBQN3MEYA0D33VBX1QW0Y7B"
+client_secret = "urn:vatprc:client_secret:01KKBQNKEM70WGF785J7HS1DWR"
+redirect_uri = []
+
+[authentication.vatsim]
+endpoint = "https://auth-dev.vatsim.net"
+client_id = "1392"
+client_secret = "fDMUqXa4gGuQRq4MxR8NNXVIUGcD3WpEwNZPSiLz"
+redirect_uri = "http://localhost:3000/auth/callback/vatsim"
+
+[storage.image.smms]
+secret_token = ""
+
+[moodle]
+api_key = ""

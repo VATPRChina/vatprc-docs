@@ -1,0 +1,65 @@
+bind_address = "[::1]:3000"
+
+[dcl]
+airports_url = "https://raw.githubusercontent.com/VATPRChina/vatprc-docs/main/docs/dcl-airports.json"
+
+[authentication.jwt]
+issuer = "https://uniapi.vatprc.net"
+audience_first_party = "https://uniapi.vatprc.net"
+first_party_expires_seconds = 3600
+refresh_expires_days = 7
+device_authz_expires_seconds = 3600
+
+[authentication.vatsim]
+endpoint = "https://auth.vatsim.net"
+redirect_uri = "https://example.com/auth/callback/vatsim"
+
+[storage.image.smms]
+base_url = "https://s.ee/api/v1/file"
+
+[discourse]
+endpoint = "https://community.vatprc.net"
+api_key = ""
+
+[email]
+enabled = false
+
+[email.smtp]
+server = ""
+port = 587
+username = ""
+password = ""
+from = ""
+
+[navdata]
+local_data_path = "data/navdata.db"
+preferred_routes_path = "data/routes.db"
+
+[telemetry]
+service_name = "vatprc-uniapi"
+log_level = "info"
+
+[telemetry.logs]
+enabled = false
+endpoint = "http://localhost:4318/v1/logs"
+headers = {}
+
+[telemetry.metrics]
+enabled = false
+endpoint = "http://localhost:4318/v1/metrics"
+headers = {}
+
+[telemetry.tracing]
+enabled = false
+endpoint = "http://localhost:4318/v1/traces"
+headers = {}
+
+[discord]
+enabled = false
+token = ""
+
+[utils]
+vatsim_data_url = "https://data.vatsim.net/v3/vatsim-data.json"
+
+[utils.metar]
+endpoint = "https://metar.vatsim.net"

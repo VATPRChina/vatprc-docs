@@ -1,0 +1,62 @@
+use axum::extract::Path;
+use axum::response::Response;
+use axum::routing::get;
+use axum::{Json, Router};
+
+use crate::error::ApiError;
+use crate::modules::navdata::dto::{PreferredRouteDto, PreferredRouteSaveRequest};
+use crate::modules::user::middleware::CurrentUser;
+use crate::modules::user::models::UserRole;
+use crate::services::Services;
+
+#[derive(utoipa::OpenApi)]
+#[openapi(paths(
+    list_preferred_routes,
+    create_preferred_route,
+    get_preferred_route,
+    update_preferred_route
+))]
+pub(crate) struct ApiDoc;
+
+pub fn build_preferred_route_routes() -> Router<Services> {
+    Router::new()
+        .route("/", get(list_preferred_routes).post(create_preferred_route))
+        .route(
+            "/{id}",
+            get(get_preferred_route).put(update_preferred_route),
+        )
+}
+
+#[utoipa::path(get, path = "api/navdata/preferred-routes", tag = "Navdata", security(("oauth2" = [])), responses((status = 200, description = "Successful response", body = Vec<PreferredRouteDto>)))]
+async fn list_preferred_routes(current_user: CurrentUser) -> Result<Response, ApiError> {
+    current_user.require_role(UserRole::Volunteer)?;
+    todo!()
+}
+
+#[utoipa::path(get, path = "api/navdata/preferred-routes/{id}", tag = "Navdata", security(("oauth2" = [])), params(("id" = String, Path, description = "Preferred route ULID")), responses((status = 200, description = "Successful response", body = PreferredRouteDto)))]
+async fn get_preferred_route(
+    current_user: CurrentUser,
+    Path(_id): Path<String>,
+) -> Result<Response, ApiError> {
+    current_user.require_role(UserRole::Volunteer)?;
+    todo!()
+}
+
+#[utoipa::path(post, path = "api/navdata/preferred-routes", tag = "Navdata", security(("oauth2" = [])), request_body = PreferredRouteSaveRequest, responses((status = 200, description = "Successful response", body = PreferredRouteDto)))]
+async fn create_preferred_route(
+    current_user: CurrentUser,
+    Json(_request): Json<PreferredRouteSaveRequest>,
+) -> Result<Response, ApiError> {
+    current_user.require_role(UserRole::EventCoordinator)?;
+    todo!()
+}
+
+#[utoipa::path(put, path = "api/navdata/preferred-routes/{id}", tag = "Navdata", security(("oauth2" = [])), params(("id" = String, Path, description = "Preferred route ULID")), request_body = PreferredRouteSaveRequest, responses((status = 200, description = "Successful response", body = PreferredRouteDto)))]
+async fn update_preferred_route(
+    current_user: CurrentUser,
+    Path(_id): Path<String>,
+    Json(_request): Json<PreferredRouteSaveRequest>,
+) -> Result<Response, ApiError> {
+    current_user.require_role(UserRole::EventCoordinator)?;
+    todo!()
+}

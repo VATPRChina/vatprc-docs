@@ -1,0 +1,12 @@
+pub mod adapter;
+pub mod app;
+pub mod command;
+pub mod discord;
+pub mod error;
+pub mod modules;
+pub mod openapi;
+pub mod repository;
+pub mod services;
+pub mod settings;
+pub mod telemetry;
+pub mod utils;

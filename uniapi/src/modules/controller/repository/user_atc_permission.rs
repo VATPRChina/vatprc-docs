@@ -1,0 +1,131 @@
+use chrono::{DateTime, Utc};
+use serde::Serialize;
+use sqlx::FromRow;
+use uuid::Uuid;
+
+use super::super::models::ControllerPermissionSave;
+
+#[derive(Debug, Clone, FromRow, Serialize)]
+pub struct AtcPermissionRecord {
+    pub position_kind_id: String,
+    pub state: String,
+    pub solo_expires_at: Option<DateTime<Utc>>,
+}
+
+pub(crate) trait UserAtcPermissionRepository<'executor> {
+    async fn has_user_atc_permission_any_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<bool, sqlx::Error>;
+
+    async fn has_user_atc_permission_mentor_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<bool, sqlx::Error>;
+
+    async fn list_user_atc_permission_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<Vec<AtcPermissionRecord>, sqlx::Error>;
+}
+
+impl<'executor, E> UserAtcPermissionRepository<'executor> for E
+where
+    E: sqlx::Executor<'executor, Database = sqlx::Postgres>,
+{
+    async fn has_user_atc_permission_any_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<bool, sqlx::Error> {
+        sqlx::query_scalar::<_, bool>(
+            r#"
+        SELECT EXISTS (
+            SELECT 1
+            FROM public.user_atc_permission
+            WHERE user_id = $1
+        )
+        "#,
+        )
+        .bind(user_id)
+        .fetch_one(self)
+        .await
+    }
+    async fn has_user_atc_permission_mentor_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<bool, sqlx::Error> {
+        sqlx::query_scalar::<_, bool>(
+            r#"
+        SELECT EXISTS (
+            SELECT 1
+            FROM public.user_atc_permission
+            WHERE user_id = $1 AND state = 'Mentor'
+        )
+        "#,
+        )
+        .bind(user_id)
+        .fetch_one(self)
+        .await
+    }
+    async fn list_user_atc_permission_by_user_id(
+        self,
+        user_id: Uuid,
+    ) -> Result<Vec<AtcPermissionRecord>, sqlx::Error> {
+        sqlx::query_as::<_, AtcPermissionRecord>(
+            r#"
+        SELECT position_kind_id, state, solo_expires_at
+        FROM public.user_atc_permission
+        WHERE user_id = $1
+        ORDER BY position_kind_id
+        "#,
+        )
+        .bind(user_id)
+        .fetch_all(self)
+        .await
+    }
+}
+
+pub(crate) trait UserAtcPermissionTransactionRepository {
+    async fn replace_user_atc_permission(
+        &mut self,
+        user_id: Uuid,
+        permissions: &[ControllerPermissionSave],
+    ) -> Result<(), sqlx::Error>;
+}
+
+impl UserAtcPermissionTransactionRepository for sqlx::Transaction<'_, sqlx::Postgres> {
+    async fn replace_user_atc_permission(
+        &mut self,
+        user_id: Uuid,
+        permissions: &[ControllerPermissionSave],
+    ) -> Result<(), sqlx::Error> {
+        sqlx::query(
+            r#"
+        DELETE FROM public.user_atc_permission
+        WHERE user_id = $1
+        "#,
+        )
+        .bind(user_id)
+        .execute(&mut **self)
+        .await?;
+
+        for permission in permissions {
+            sqlx::query(
+                r#"
+            INSERT INTO public.user_atc_permission (
+                user_id, position_kind_id, state, solo_expires_at
+            )
+            VALUES ($1, $2, $3, $4)
+            "#,
+            )
+            .bind(user_id)
+            .bind(&permission.position_kind_id)
+            .bind(&permission.state)
+            .bind(permission.solo_expires_at)
+            .execute(&mut **self)
+            .await?;
+        }
+
+        Ok(())
+    }
+}

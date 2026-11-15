@@ -1,0 +1,310 @@
+use chrono::{Datelike, TimeZone, Utc};
+use mini_moka::sync::Cache;
+use reqwest::header::{HeaderMap, HeaderValue, USER_AGENT};
+use serde::Deserialize;
+use std::time::Duration;
+use thiserror::Error;
+
+use tracing::instrument;
+const VATSIM_DATA_URL: &str = "https://data.vatsim.net/v3/vatsim-data.json";
+const VATSIM_CORE_BASE_URL: &str = "https://api.vatsim.net/v2";
+const VATSIM_METAR_BASE_URL: &str = "https://metar.vatsim.net";
+const TRACK_AUDIO_VERSION_URL: &str =
+    "https://raw.githubusercontent.com/pierr3/TrackAudio/main/MANDATORY_VERSION";
+const VPLAAF_AREAS_URL: &str = "https://airspace.vplaaf.org/Areas.json";
+const RUDI_METAR_TIMEOUT: Duration = Duration::from_secs(10);
+const OUTBOUND_HTTP_CACHE_CAPACITY: usize = 256;
+const OUTBOUND_HTTP_CACHE_TTL: Duration = Duration::from_secs(30);
+
+#[derive(Clone)]
+pub struct CompatClient {
+    http: reqwest::Client,
+    metar_endpoint: String,
+    online_data_url: String,
+    cache: Cache<String, String>,
+}
+
+#[derive(Debug, Error)]
+pub enum CompatClientError {
+    #[error(transparent)]
+    Request(#[from] reqwest::Error),
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+}
+
+impl CompatClient {
+    pub fn new(metar_endpoint: String) -> Self {
+        let mut headers = HeaderMap::new();
+        headers.insert(
+            USER_AGENT,
+            HeaderValue::from_static("vatprc-uniapi-rust/0.1"),
+        );
+
+        Self {
+            http: reqwest::Client::builder()
+                .default_headers(headers)
+                .timeout(Duration::from_secs(15))
+                .build()
+                .expect("compat reqwest client should build"),
+            metar_endpoint,
+            online_data_url: VATSIM_DATA_URL.to_owned(),
+            cache: Cache::builder()
+                .max_capacity(OUTBOUND_HTTP_CACHE_CAPACITY as u64)
+                .time_to_live(OUTBOUND_HTTP_CACHE_TTL)
+                .build(),
+        }
+    }
+
+    pub fn with_online_data_url(mut self, url: String) -> Self {
+        self.online_data_url = url;
+        self
+    }
+
+    #[instrument(skip(self))]
+    pub async fn get_online_data(&self) -> Result<VatsimData, CompatClientError> {
+        Ok(serde_json::from_str(
+            &self.cached_get(&self.online_data_url).await?,
+        )?)
+    }
+
+    #[instrument(skip(self), fields(cid = %cid, limit, offset))]
+    pub async fn get_member_atc_sessions(
+        &self,
+        cid: &str,
+        limit: usize,
+        offset: usize,
+    ) -> Result<AtcSessionPage, CompatClientError> {
+        let url = format!("{VATSIM_CORE_BASE_URL}/members/{cid}/atc?limit={limit}&offset={offset}");
+        Ok(serde_json::from_str(&self.cached_get(&url).await?)?)
+    }
+
+    #[instrument(skip(self), fields(cid = %cid))]
+    pub async fn get_member(&self, cid: &str) -> Result<VatsimMember, CompatClientError> {
+        let url = format!("{VATSIM_CORE_BASE_URL}/members/{cid}");
+        Ok(serde_json::from_str(&self.cached_get(&url).await?)?)
+    }
+
+    #[instrument(skip(self))]
+    pub async fn get_track_audio_version(&self) -> Result<String, CompatClientError> {
+        self.cached_get(TRACK_AUDIO_VERSION_URL).await
+    }
+
+    #[instrument(skip(self))]
+    pub async fn get_vplaaf_areas(&self) -> Result<String, CompatClientError> {
+        self.cached_get(VPLAAF_AREAS_URL).await
+    }
+
+    #[instrument(skip(self), fields(icao = %icao))]
+    pub async fn get_metar(&self, icao: &str) -> String {
+        let rudi_metar = self
+            .cached_get_with_timeout(
+                &format!("{}/{}", self.metar_endpoint.trim_end_matches('/'), icao),
+                RUDI_METAR_TIMEOUT,
+            )
+            .await
+            .map(|metar| metar.trim().to_string())
+            .unwrap_or_default();
+        let vatsim_metar = self
+            .cached_get(&format!("{}/{}", VATSIM_METAR_BASE_URL, icao))
+            .await
+            .map(|metar| metar.trim().to_string())
+            .unwrap_or_default();
+
+        match (metar_time(&rudi_metar), metar_time(&vatsim_metar)) {
+            (Some(rudi_time), Some(vatsim_time)) if rudi_time > vatsim_time => rudi_metar,
+            (Some(_), Some(_)) => vatsim_metar,
+            (Some(_), None) => rudi_metar,
+            (None, Some(_)) | (None, None) => vatsim_metar,
+        }
+    }
+
+    #[instrument(skip(self), fields(url = %url))]
+    async fn cached_get(&self, url: &str) -> Result<String, CompatClientError> {
+        self.cached_get_with_optional_timeout(url, None).await
+    }
+
+    async fn cached_get_with_timeout(
+        &self,
+        url: &str,
+        timeout: Duration,
+    ) -> Result<String, CompatClientError> {
+        self.cached_get_with_optional_timeout(url, Some(timeout))
+            .await
+    }
+
+    #[instrument(skip(self), fields(url = %url))]
+    async fn cached_get_with_optional_timeout(
+        &self,
+        url: &str,
+        timeout: Option<Duration>,
+    ) -> Result<String, CompatClientError> {
+        if let Some(cached) = self.cached_text(url) {
+            return Ok(cached);
+        }
+
+        let mut request = self.http.get(url);
+        if let Some(timeout) = timeout {
+            request = request.timeout(timeout);
+        }
+
+        let text = request.send().await?.error_for_status()?.text().await?;
+
+        self.cache_text(url, &text);
+        Ok(text)
+    }
+
+    fn cached_text(&self, url: &str) -> Option<String> {
+        self.cache.get(&url.to_string())
+    }
+
+    fn cache_text(&self, url: &str, value: &str) {
+        self.cache.insert(url.to_string(), value.to_string());
+    }
+}
+
+fn metar_time(metar: &str) -> Option<chrono::DateTime<Utc>> {
+    let time = metar.split_whitespace().nth(1)?;
+    if time.len() < 7 || !time.ends_with('Z') {
+        return None;
+    }
+
+    let day = time.get(0..2)?.parse::<u32>().ok()?;
+    let hour = time.get(2..4)?.parse::<u32>().ok()?;
+    let minute = time.get(4..6)?.parse::<u32>().ok()?;
+    let mut reference = Utc::now();
+    if day > reference.day() {
+        reference -= chrono::Duration::days(reference.day() as i64);
+    }
+
+    Utc.with_ymd_and_hms(reference.year(), reference.month(), day, hour, minute, 0)
+        .single()
+}
+
+#[derive(Debug, Deserialize)]
+pub struct VatsimData {
+    pub general: General,
+    pub pilots: Vec<Pilot>,
+    #[serde(default)]
+    pub prefiles: Vec<Pilot>,
+    pub controllers: Vec<Controller>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct General {
+    pub update_timestamp: chrono::DateTime<Utc>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Pilot {
+    pub cid: i64,
+    pub name: String,
+    pub callsign: String,
+    pub altitude: Option<i64>,
+    pub last_updated: chrono::DateTime<Utc>,
+    pub flight_plan: Option<FlightPlan>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct FlightPlan {
+    pub flight_rules: Option<String>,
+    pub aircraft: Option<String>,
+    pub aircraft_short: Option<String>,
+    pub departure: Option<String>,
+    pub arrival: Option<String>,
+    pub altitude: Option<String>,
+    pub remarks: Option<String>,
+    pub route: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Controller {
+    pub cid: i64,
+    pub name: String,
+    pub callsign: String,
+    pub frequency: String,
+    pub facility: i64,
+    #[serde(default)]
+    pub logon_time: Option<chrono::DateTime<Utc>>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AtcSessionPage {
+    pub items: Vec<AtcSession>,
+    pub count: usize,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AtcSession {
+    pub connection_id: AtcConnection,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AtcConnection {
+    pub callsign: String,
+    pub start: Option<chrono::DateTime<Utc>>,
+    pub end: Option<chrono::DateTime<Utc>>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct VatsimMember {
+    pub rating: VatsimRating,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[serde(try_from = "i32")]
+pub enum VatsimRating {
+    Inactive,
+    Suspended,
+    Observer,
+    S1,
+    S2,
+    S3,
+    C1,
+    C2,
+    C3,
+    I1,
+    I2,
+    I3,
+    Supervisor,
+    Administrator,
+}
+
+impl TryFrom<i32> for VatsimRating {
+    type Error = String;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        match value {
+            -1 => Ok(Self::Inactive),
+            0 => Ok(Self::Suspended),
+            1 => Ok(Self::Observer),
+            2 => Ok(Self::S1),
+            3 => Ok(Self::S2),
+            4 => Ok(Self::S3),
+            5 => Ok(Self::C1),
+            6 => Ok(Self::C2),
+            7 => Ok(Self::C3),
+            8 => Ok(Self::I1),
+            9 => Ok(Self::I2),
+            10 => Ok(Self::I3),
+            11 => Ok(Self::Supervisor),
+            12 => Ok(Self::Administrator),
+            _ => Err(format!("invalid VATSIM controller rating {value}")),
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn deserializes_vatsim_member_rating_to_enum() {
+        let member = serde_json::from_str::<VatsimMember>(r#"{"rating":11}"#).unwrap();
+        assert_eq!(member.rating, VatsimRating::Supervisor);
+    }
+
+    #[test]
+    fn rejects_unknown_vatsim_member_rating() {
+        assert!(serde_json::from_str::<VatsimMember>(r#"{"rating":13}"#).is_err());
+    }
+}

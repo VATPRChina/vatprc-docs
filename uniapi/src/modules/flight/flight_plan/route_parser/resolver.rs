@@ -1,0 +1,271 @@
+use futures::{StreamExt, TryStreamExt, stream};
+
+use crate::modules::flight::flight_plan::route_parser::{
+    Ident, IdentAmend, Lexer, LexerTokenValue,
+};
+use crate::modules::navdata::models::{AnyFix, GeoPoint, NavProc};
+use crate::modules::navdata::service::{InvalidNavdataError, NavdataResult, NavdataService};
+
+pub struct CandidateResolver<'s> {
+    idents: Vec<Ident<'s>>,
+}
+#[derive(Clone, PartialEq)]
+pub struct IdentWithCandidate<'s> {
+    pub(super) ident: Ident<'s>,
+    pub(super) candidates: Vec<IdentCandidate>,
+}
+
+impl<'s> std::fmt::Debug for IdentWithCandidate<'s> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?} = ", self.ident)?;
+        f.debug_list().entries(self.candidates.iter()).finish()?;
+        Ok(())
+    }
+}
+
+/// An identifier can denote either a physical fix or a connecting leg.
+#[derive(Clone, PartialEq)]
+pub enum IdentCandidate {
+    Fix(AnyFix),
+    Leg(NavProc),
+}
+
+impl std::fmt::Debug for IdentCandidate {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Fix(fix) => write!(f, "Fix/{:?}", fix),
+            Self::Leg(leg) => write!(f, "Leg/{:?}", leg),
+        }
+    }
+}
+
+impl IdentCandidate {
+    fn permitted_by(&self, amendments: &[IdentAmend]) -> bool {
+        amendments.iter().all(|amendment| match amendment {
+            IdentAmend::SpeedAndAltitude { .. } => matches!(self, Self::Fix(_)),
+            IdentAmend::Runway(_) => {
+                matches!(
+                    self,
+                    Self::Fix(AnyFix::Airport(_))
+                        | Self::Leg(
+                            NavProc::Sid(_)
+                                | NavProc::UnknownSid(_)
+                                | NavProc::Star(_)
+                                | NavProc::UnknownStar(_)
+                        )
+                )
+            }
+            IdentAmend::FlightRuleVfr | IdentAmend::FlightRuleIfr => matches!(self, Self::Fix(_)),
+        })
+    }
+
+    pub fn is_unknown(&self) -> bool {
+        match self {
+            IdentCandidate::Fix(fix_candidate) => fix_candidate.is_unknown(),
+            IdentCandidate::Leg(leg_candidate) => leg_candidate.is_unknown(),
+        }
+    }
+}
+
+impl<'s> CandidateResolver<'s> {
+    pub fn new(idents: Vec<Ident<'s>>) -> Self {
+        Self { idents }
+    }
+
+    /// Resolve all candidates in route order without choosing between ambiguous matches.
+    /// Plain identifiers always include unknown route/point fallbacks.
+    /// Speed/level amendments restrict candidates to fixes; runway suffixes allow airports and SIDs/STARs.
+    /// Database failures propagate instead of being treated as unknown identifiers.
+    ///
+    /// # Panics
+    /// Panics if a standalone speed/altitude or flight-rule token reaches resolution.
+    pub async fn resolve_candidates(
+        self,
+        navdata: &NavdataService,
+    ) -> NavdataResult<impl Iterator<Item = IdentWithCandidate<'s>>> {
+        let resolved: Vec<_> = stream::iter(self.idents)
+            .then(|ident| async move {
+                let mut candidates = resolve_ident(navdata, ident.identifier()).await?;
+                candidates.retain(|candidate| candidate.permitted_by(&ident.amendments));
+                Ok::<_, InvalidNavdataError>(IdentWithCandidate { ident, candidates })
+            })
+            .try_collect()
+            .await?;
+        Ok(resolved.into_iter())
+    }
+}
+
+async fn resolve_ident(
+    navdata: &NavdataService,
+    ident: &str,
+) -> NavdataResult<Vec<IdentCandidate>> {
+    let Some(token) = Lexer::new(ident).parse_all().next() else {
+        return Ok(Vec::new());
+    };
+    match token.value {
+        LexerTokenValue::Direct => Ok(vec![IdentCandidate::Leg(NavProc::Direct)]),
+        LexerTokenValue::Geo { lat, lon } => {
+            Ok(vec![IdentCandidate::Fix(AnyFix::GeoPoint(GeoPoint {
+                latitude: lat.try_into()?,
+                longitude: lon.try_into()?,
+            }))])
+        }
+        LexerTokenValue::IdentRef { ident, .. } => {
+            let fixes = find_fix_candidates(navdata, ident).await?;
+            if fixes.is_empty() {
+                Ok(vec![IdentCandidate::Fix(AnyFix::Unknown(
+                    ident.to_string(),
+                ))])
+            } else {
+                Ok(fixes.into_iter().map(IdentCandidate::Fix).collect())
+            }
+        }
+
+        LexerTokenValue::Ident => {
+            let (routes, fixes) = tokio::try_join!(
+                find_route_candidates(navdata, ident),
+                find_fix_candidates(navdata, ident),
+            )?;
+            Ok(routes
+                .into_iter()
+                .map(IdentCandidate::Leg)
+                .chain(fixes.into_iter().map(IdentCandidate::Fix))
+                .chain([
+                    IdentCandidate::Leg(NavProc::UnknownSid(ident.to_string())),
+                    IdentCandidate::Leg(NavProc::UnknownStar(ident.to_string())),
+                    IdentCandidate::Leg(NavProc::UnknownAirway(ident.to_string())),
+                    IdentCandidate::Fix(AnyFix::Unknown(ident.to_string())),
+                ])
+                .collect())
+        }
+        LexerTokenValue::SpeedAndAltitude { .. } | LexerTokenValue::Vfr | LexerTokenValue::Ifr => {
+            panic!("standalone amendment token reached candidate resolution: {ident}")
+        }
+    }
+}
+
+async fn find_route_candidates(
+    navdata: &NavdataService,
+    ident: &str,
+) -> NavdataResult<Vec<NavProc>> {
+    let (airway, sids, stars) = tokio::try_join!(
+        navdata.find_airway(ident),
+        navdata.find_sids_by_ident(ident),
+        navdata.find_stars_by_ident(ident),
+    )?;
+    Ok((airway.into_iter().map(NavProc::Airway))
+        .chain(sids.into_iter().map(NavProc::Sid))
+        .chain(stars.into_iter().map(NavProc::Star))
+        .collect())
+}
+
+async fn find_fix_candidates(navdata: &NavdataService, ident: &str) -> NavdataResult<Vec<AnyFix>> {
+    let (airport, vhf, enroute_ndb, terminal_ndb, enroute_waypoint, terminal_waypoint) = tokio::try_join!(
+        navdata.find_airport(ident),
+        navdata.find_vhf(ident),
+        navdata.find_enroute_ndb(ident),
+        navdata.find_terminal_ndb(ident),
+        navdata.find_enroute_waypoint(ident),
+        navdata.find_terminal_waypoint(ident),
+    )?;
+    Ok((airport.into_iter().map(AnyFix::Airport))
+        .chain(vhf.into_iter().map(AnyFix::Vhf))
+        .chain(enroute_ndb.into_iter().map(AnyFix::Ndb))
+        .chain(terminal_ndb.into_iter().map(AnyFix::Ndb))
+        .chain(enroute_waypoint.into_iter().map(AnyFix::Waypoint))
+        .chain(terminal_waypoint.into_iter().map(AnyFix::Waypoint))
+        .collect())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::modules::flight::flight_plan::route_parser::{CruisingLevel, LexGrouper, Speed};
+    use crate::modules::navdata::models::{Airport, Airway, Sid, Star, TerminalProcedure};
+
+    #[test]
+    fn airport_candidates_accept_runways_with_speed_and_altitude() {
+        let idents: Vec<_> = LexGrouper::new(
+            Lexer::new("ZBAA ZBAA/01 K0300S0720 AVBOX8J AVBOX DCT SASAN ZSPD/17L ZSPD")
+                .parse_all()
+                .collect(),
+        )
+        .parse()
+        .collect();
+        for (ident, identifier) in [
+            (idents.first().unwrap(), "ZBAA"),
+            (idents.last().unwrap(), "ZSPD"),
+        ] {
+            let airport = IdentCandidate::Fix(AnyFix::Airport(Airport {
+                identifier: identifier.try_into().unwrap(),
+                latitude: 40.0.try_into().unwrap(),
+                longitude: 116.0.try_into().unwrap(),
+            }));
+            assert_eq!(ident.identifier(), identifier);
+            assert!(ident.errors.is_empty());
+            assert!(airport.permitted_by(&ident.amendments));
+        }
+    }
+
+    fn candidates() -> Vec<IdentCandidate> {
+        let procedure = TerminalProcedure {
+            airport: "ZBAA".try_into().unwrap(),
+            identifier: "PIKAS1".try_into().unwrap(),
+            runway_transitions: ["36L".try_into().unwrap()].into(),
+            enroute_transitions: ["PIKAS".try_into().unwrap()].into(),
+            is_rnav: true,
+        };
+        vec![
+            IdentCandidate::Fix(AnyFix::GeoPoint(GeoPoint::new(30., 110.).unwrap())),
+            IdentCandidate::Fix(AnyFix::Unknown("PIKAS1".into())),
+            IdentCandidate::Leg(NavProc::Sid(Sid {
+                proc: procedure.clone(),
+            })),
+            IdentCandidate::Leg(NavProc::Star(Star { proc: procedure })),
+            IdentCandidate::Leg(NavProc::Airway(Airway {
+                identifier: "PIKAS1".try_into().unwrap(),
+                legs: vec![],
+            })),
+            IdentCandidate::Leg(NavProc::UnknownSid("PIKAS1".into())),
+            IdentCandidate::Leg(NavProc::UnknownStar("PIKAS1".into())),
+            IdentCandidate::Leg(NavProc::UnknownAirway("PIKAS1".into())),
+            IdentCandidate::Leg(NavProc::Direct),
+        ]
+    }
+
+    #[test]
+    fn amendments_constrain_ambiguous_candidates_and_unknown_fallbacks() {
+        let all = candidates();
+        let idents: Vec<_> = LexGrouper::new(
+            Lexer::new("ZBAA AGAVO/K0745S0660 PIKAS1/36L ZSPD")
+                .parse_all()
+                .collect(),
+        )
+        .parse()
+        .collect();
+        let fixes: Vec<_> = all
+            .iter()
+            .filter(|candidate| candidate.permitted_by(&idents[1].amendments))
+            .collect();
+        assert_eq!(fixes, vec![&all[0], &all[1]]);
+        let sids: Vec<_> = all
+            .iter()
+            .filter(|candidate| candidate.permitted_by(&idents[2].amendments))
+            .collect();
+        assert_eq!(sids, vec![&all[2], &all[3], &all[5], &all[6]]);
+        for candidate in &all {
+            assert!(candidate.permitted_by(&[]));
+            assert_eq!(
+                candidate.permitted_by(&[IdentAmend::FlightRuleIfr]),
+                matches!(candidate, IdentCandidate::Fix(_))
+            );
+            assert!(!candidate.permitted_by(&[
+                IdentAmend::Runway("36L".into()),
+                IdentAmend::SpeedAndAltitude {
+                    speed: Speed::KmH(745),
+                    altitude: CruisingLevel::MeterLevel(660)
+                },
+            ]));
+        }
+    }
+}

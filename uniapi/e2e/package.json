@@ -1,0 +1,24 @@
+{
+  "name": "vatprc-uniapi-e2e",
+  "private": true,
+  "scripts": {
+    "generate:api": "openapi-typescript ${OPENAPI_URL:-http://localhost:3000/openapi.json} --export-type -o lib/api/schema.ts",
+    "test": "vitest run"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.0.6",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@vitest/ui": "^4.1.10",
+    "openapi-fetch": "^0.17.0",
+    "openapi-typescript": "^7.13.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

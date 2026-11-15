@@ -1,0 +1,442 @@
+use std::collections::HashSet;
+
+use axum::Json;
+use axum::http::StatusCode;
+use axum::response::{IntoResponse, Response};
+use serde::Serialize;
+
+use crate::adapter::compat::CompatClientError;
+use crate::adapter::email::EmailError;
+use crate::adapter::moodle::MoodleError;
+use crate::adapter::smms::SmmsError;
+use crate::modules::atc_application::models::InvalidAtcApplicationStatus;
+use crate::modules::atc_application::service::AtcApplicationServiceError;
+use crate::modules::atc_booking::service::AtcBookingServiceError;
+use crate::modules::atc_position::service::AtcPositionServiceError;
+use crate::modules::audit_log::service::AuditLogServiceError;
+use crate::modules::controller::service::ControllerServiceError;
+use crate::modules::event::service::EventServiceError;
+use crate::modules::flight::flight_plan::ParseRouteError;
+use crate::modules::flight::flight_plan::validator::ValidatorError;
+use crate::modules::flight::service::FlightServiceError;
+use crate::modules::sheet::service::SheetServiceError;
+use crate::modules::training::service::{TrainingApplicationServiceError, TrainingServiceError};
+use crate::modules::user::middleware::AuthError;
+use crate::modules::user::models::UserRole;
+use crate::modules::user::service::user::UserServiceError;
+
+macro_rules! api_errors {
+    (
+        $(
+            $name:ident
+            $( { $( $( #[$meta:meta] )* $field:ident : $fty:ty ),* $(,)? } )?
+            => $status:expr => $description:literal $( ( $title:literal ) )?
+        ),* $(,)?
+    ) => {
+        #[derive(std::fmt::Debug, thiserror::Error)]
+        pub enum ApiError {
+            $(
+                #[error($description)]
+                $name $( { $( $( #[$meta] )* $field : $fty ),* } )?,
+            )*
+        }
+
+        impl ApiError {
+            #[allow(unused_variables)]
+            pub fn identifier(&self) -> &'static str {
+                match self {
+                    $(
+                        ApiError::$name $( { $( $field: _ ),* } )? => stringify!($name),
+                    )*
+                }
+            }
+
+            #[allow(unused_variables)]
+            pub fn status_code(&self) -> StatusCode {
+                match self {
+                    $(
+                        ApiError::$name $( { $( $field: _ ),* } )? => $status,
+                    )*
+                }
+            }
+        }
+    };
+}
+
+api_errors!(
+    BadRequest { field: String, reason: String } => StatusCode::BAD_REQUEST
+        => "bad request on field {field}: {reason}",
+    NotFound { entity: String, id: String } => StatusCode::NOT_FOUND
+        => "{entity} with id {id} not found",
+    InvalidTokenClaims { field: String, reason: String } => StatusCode::INTERNAL_SERVER_ERROR
+        => "invalid token claim {field}: {reason}",
+    NotOwned { entity: String, id: String } => StatusCode::FORBIDDEN
+        => "{entity} with {id} is not owned by current user",
+    Forbidden { allowed_roles: HashSet<UserRole> } => StatusCode::FORBIDDEN
+        => "only user with roles {allowed_roles:?} can perform this action",
+    Unauthorized => StatusCode::UNAUTHORIZED
+        => "unauthorized",
+
+    TrainingApplicationAlreadyAccepted => StatusCode::CONFLICT
+        => "training application already accepted",
+    ApplicationAlreadyExists => StatusCode::CONFLICT
+        => "ATC application already exists",
+    ApplicationCannotUpdate => StatusCode::CONFLICT
+        => "ATC application cannot be updated at current status",
+    EventLinkedAtcBooking => StatusCode::CONFLICT
+        => "event-linked ATC bookings can only be changed through the event API",
+    CannotCreateForOtherTrainer => StatusCode::FORBIDDEN
+        => "cannot create training for other trainers",
+    CannotDeleteStartedTraining => StatusCode::FORBIDDEN
+        => "cannot delete started training",
+    CannotUpdateTrainerTrainee => StatusCode::FORBIDDEN
+        => "cannot update training trainer or trainee",
+    EventNotInBookingTime => StatusCode::CONFLICT
+        => "event not in booking time",
+    FlightNotFoundForCid => StatusCode::NOT_FOUND
+        => "flight not found for cid",
+    InsufficientAtcPermission => StatusCode::FORBIDDEN
+        => "insufficient ATC permission",
+    MissingSessionId => StatusCode::INTERNAL_SERVER_ERROR
+        => "no sid in token",
+    PositionBooked => StatusCode::CONFLICT
+        => "event position booked",
+    PositionBookedByAnotherUser => StatusCode::CONFLICT
+        => "event position booked by another user",
+    PositionNotBooked => StatusCode::CONFLICT
+        => "event position not booked",
+    RemoveStaffForbidden => StatusCode::FORBIDDEN
+        => "only division director can remove staff role",
+    SlotBooked => StatusCode::CONFLICT
+        => "event slot already booked",
+    SlotBookedByAnotherUser => StatusCode::CONFLICT
+        => "event slot booked by another user",
+    SlotNotBooked => StatusCode::CONFLICT
+        => "event slot not booked",
+    SoloExpirationNotProvided => StatusCode::BAD_REQUEST
+        => "solo expiration not provided",
+
+    RouteParser { #[from] source: ParseRouteError } => StatusCode::INTERNAL_SERVER_ERROR
+        => "failed to parse route: {source}",
+    RouteValidator { #[from] source: ValidatorError } => StatusCode::INTERNAL_SERVER_ERROR
+        => "failed to validate route: {source}",
+    AuditLog { #[from] source: AuditLogServiceError } => StatusCode::INTERNAL_SERVER_ERROR
+        => "failed to record audit log: {source}",
+
+    Compat { #[from] source: CompatClientError } => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Database { #[from] source: sqlx::Error} => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Email { #[from] source: EmailError } => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Moodle { #[from] source: MoodleError } => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Multipart { #[from] source: axum::extract::multipart::MultipartError } => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Smms { #[from] source: SmmsError } => StatusCode::SERVICE_UNAVAILABLE
+        => "transient error",
+    Internal => StatusCode::INTERNAL_SERVER_ERROR => "internal error",
+    InvalidDatabaseValue { field: String, value: String } => StatusCode::INTERNAL_SERVER_ERROR
+        => "invalid database value for {field}: {value}",
+    Ulid { #[from] source: ulid::DecodeError} => StatusCode::BAD_REQUEST
+        => "invalid ulid",
+);
+
+impl ApiError {
+    pub fn bad_request(field: impl Into<String>, reason: impl Into<String>) -> Self {
+        ApiError::BadRequest {
+            field: field.into(),
+            reason: reason.into(),
+        }
+    }
+
+    pub fn not_found(entity: impl Into<String>, id: impl Into<String>) -> Self {
+        ApiError::NotFound {
+            entity: entity.into(),
+            id: id.into(),
+        }
+    }
+
+    pub fn forbidden(allowed_roles: impl IntoIterator<Item = impl Into<UserRole>>) -> Self {
+        ApiError::Forbidden {
+            allowed_roles: allowed_roles.into_iter().map(Into::into).collect(),
+        }
+    }
+
+    pub fn invalid_database_value(field: impl Into<String>, value: impl Into<String>) -> Self {
+        ApiError::InvalidDatabaseValue {
+            field: field.into(),
+            value: value.into(),
+        }
+    }
+}
+
+impl From<AuthError> for ApiError {
+    fn from(error: AuthError) -> Self {
+        tracing::error!("AuthError: {}", error);
+        match error {
+            AuthError::MissingRole(role) => ApiError::forbidden([role]),
+            AuthError::MissingAnyRole(roles) => ApiError::forbidden(roles),
+            AuthError::Database(source) => ApiError::Database { source },
+            AuthError::User(source) => source.into(),
+            AuthError::Controller(source) => source.into(),
+            AuthError::MissingBearerToken
+            | AuthError::InvalidBearerToken
+            | AuthError::AccessToken(_) => ApiError::Unauthorized,
+        }
+    }
+}
+
+impl From<UserServiceError> for ApiError {
+    fn from(error: UserServiceError) -> Self {
+        tracing::error!("UserServiceError: {}", error);
+        match error {
+            UserServiceError::RemoveStaffForbidden => ApiError::RemoveStaffForbidden,
+            UserServiceError::Database(source) => ApiError::Database { source },
+            UserServiceError::Moodle(source) => ApiError::Moodle { source },
+            UserServiceError::AuditLog(source) => ApiError::AuditLog { source },
+        }
+    }
+}
+
+impl From<AtcApplicationServiceError> for ApiError {
+    fn from(error: AtcApplicationServiceError) -> Self {
+        tracing::error!("AtcApplicationServiceError: {}", error);
+        match error {
+            AtcApplicationServiceError::AlreadyExists => ApiError::ApplicationAlreadyExists,
+            AtcApplicationServiceError::CannotUpdate => ApiError::ApplicationCannotUpdate,
+            AtcApplicationServiceError::NotFound(id) => {
+                ApiError::not_found("application", ulid::Ulid::from(id).to_string())
+            }
+            AtcApplicationServiceError::UserNotFound(_) => ApiError::Internal,
+            AtcApplicationServiceError::Database(source) => {
+                if let sqlx::Error::Decode(error) = &source
+                    && let Some(error) = error.downcast_ref::<InvalidAtcApplicationStatus>()
+                {
+                    return ApiError::invalid_database_value("atc_application.status", &error.0);
+                }
+
+                ApiError::Database { source }
+            }
+            AtcApplicationServiceError::AuditLog(source) => ApiError::AuditLog { source },
+            AtcApplicationServiceError::User(source) => source.into(),
+            AtcApplicationServiceError::Sheet(source) => source.into(),
+        }
+    }
+}
+
+impl From<AtcBookingServiceError> for ApiError {
+    fn from(error: AtcBookingServiceError) -> Self {
+        tracing::error!("AtcBookingServiceError: {}", error);
+        match error {
+            AtcBookingServiceError::NotFound(id) => {
+                ApiError::not_found("ATC booking", ulid::Ulid::from(id).to_string())
+            }
+            AtcBookingServiceError::NotOwned(id) => ApiError::NotOwned {
+                entity: "ATC booking".to_string(),
+                id: ulid::Ulid::from(id).to_string(),
+            },
+            AtcBookingServiceError::EventLinked => ApiError::EventLinkedAtcBooking,
+            AtcBookingServiceError::UserNotFound(_) => ApiError::Internal,
+            AtcBookingServiceError::Database(source) => ApiError::Database { source },
+            AtcBookingServiceError::User(source) => source.into(),
+        }
+    }
+}
+
+impl From<AtcPositionServiceError> for ApiError {
+    fn from(error: AtcPositionServiceError) -> Self {
+        tracing::error!("AtcPositionServiceError: {}", error);
+        match error {
+            AtcPositionServiceError::NotFound(callsign) => {
+                ApiError::not_found("ATC position", callsign)
+            }
+            AtcPositionServiceError::Database(source) => ApiError::Database { source },
+            AtcPositionServiceError::AuditLog(source) => ApiError::AuditLog { source },
+        }
+    }
+}
+
+impl From<TrainingServiceError> for ApiError {
+    fn from(error: TrainingServiceError) -> Self {
+        tracing::error!("TrainingServiceError: {}", error);
+        match error {
+            TrainingServiceError::NotFound(id) => {
+                ApiError::not_found("training", ulid::Ulid::from(id).to_string())
+            }
+            TrainingServiceError::UserNotFound(_) => ApiError::Internal,
+            TrainingServiceError::NotOwned { entity, id } => ApiError::NotOwned {
+                entity: entity.to_string(),
+                id: ulid::Ulid::from(id).to_string(),
+            },
+            TrainingServiceError::CannotCreateForOtherTrainer => {
+                ApiError::CannotCreateForOtherTrainer
+            }
+            TrainingServiceError::CannotUpdateTrainerTrainee => {
+                ApiError::CannotUpdateTrainerTrainee
+            }
+            TrainingServiceError::CannotDeleteStarted => ApiError::CannotDeleteStartedTraining,
+            TrainingServiceError::Database(source) => ApiError::Database { source },
+            TrainingServiceError::User(source) => source.into(),
+            TrainingServiceError::Sheet(source) => source.into(),
+        }
+    }
+}
+
+impl From<EventServiceError> for ApiError {
+    fn from(error: EventServiceError) -> Self {
+        tracing::error!("EventServiceError: {}", error);
+        match error {
+            EventServiceError::EventNotFound(id) => {
+                ApiError::not_found("event", ulid::Ulid::from(id).to_string())
+            }
+            EventServiceError::SlotNotFound(id) => {
+                ApiError::not_found("event slot", ulid::Ulid::from(id).to_string())
+            }
+            EventServiceError::AirspaceNotFound(id) => {
+                ApiError::not_found("event airspace", ulid::Ulid::from(id).to_string())
+            }
+            EventServiceError::AtcPositionNotFound(id) => {
+                ApiError::not_found("event ATC position", ulid::Ulid::from(id).to_string())
+            }
+            EventServiceError::UserNotFound(_) => ApiError::Internal,
+            EventServiceError::NotInBookingPeriod => ApiError::EventNotInBookingTime,
+            EventServiceError::SlotBooked => ApiError::SlotBooked,
+            EventServiceError::SlotNotBooked => ApiError::SlotNotBooked,
+            EventServiceError::SlotBookedByAnotherUser => ApiError::SlotBookedByAnotherUser,
+            EventServiceError::AtcPositionBooked => ApiError::PositionBooked,
+            EventServiceError::AtcPositionNotBooked => ApiError::PositionNotBooked,
+            EventServiceError::AtcPositionBookedByAnotherUser => {
+                ApiError::PositionBookedByAnotherUser
+            }
+            EventServiceError::InsufficientAtcPermission => ApiError::InsufficientAtcPermission,
+            EventServiceError::Database(source) => ApiError::Database { source },
+            EventServiceError::AuditLog(source) => ApiError::AuditLog { source },
+            EventServiceError::User(source) => source.into(),
+        }
+    }
+}
+
+impl From<FlightServiceError> for ApiError {
+    fn from(error: FlightServiceError) -> Self {
+        tracing::error!("FlightServiceError: {}", error);
+        match error {
+            FlightServiceError::InvalidRoute(reason) => ApiError::bad_request("route", reason),
+            FlightServiceError::CallsignNotFound(callsign) => {
+                ApiError::not_found("callsign", callsign)
+            }
+            FlightServiceError::UserNotFound(id) => {
+                ApiError::not_found("user", ulid::Ulid::from(id).to_string())
+            }
+            FlightServiceError::FlightNotFoundForCid => ApiError::FlightNotFoundForCid,
+            FlightServiceError::Compat(source) => ApiError::Compat { source },
+            FlightServiceError::Parser(source) => ApiError::RouteParser { source },
+            FlightServiceError::Validator(source) => ApiError::RouteValidator { source },
+            FlightServiceError::User(source) => source.into(),
+        }
+    }
+}
+
+impl From<SheetServiceError> for ApiError {
+    fn from(error: SheetServiceError) -> Self {
+        tracing::error!("SheetServiceError: {}", error);
+        match error {
+            SheetServiceError::NotFound(id) => ApiError::not_found("sheet", id),
+            SheetServiceError::FieldNotFound { sheet_id, field_id } => {
+                ApiError::not_found("sheet field", format!("{sheet_id}/{field_id}"))
+            }
+            SheetServiceError::Database(source) => ApiError::Database { source },
+        }
+    }
+}
+
+impl From<TrainingApplicationServiceError> for ApiError {
+    fn from(error: TrainingApplicationServiceError) -> Self {
+        tracing::error!("TrainingApplicationServiceError: {}", error);
+        match error {
+            TrainingApplicationServiceError::NotFound(id) => {
+                ApiError::not_found("training application", ulid::Ulid::from(id).to_string())
+            }
+            TrainingApplicationServiceError::ResponseNotFound(id) => ApiError::not_found(
+                "training application response",
+                ulid::Ulid::from(id).to_string(),
+            ),
+            TrainingApplicationServiceError::SlotNotFound(id) => ApiError::not_found(
+                "training application slot",
+                ulid::Ulid::from(id).to_string(),
+            ),
+            TrainingApplicationServiceError::UserNotFound(_) => ApiError::Internal,
+            TrainingApplicationServiceError::ControllerPermissionRequired => {
+                ApiError::forbidden([UserRole::Controller])
+            }
+            TrainingApplicationServiceError::AlreadyAccepted => {
+                ApiError::TrainingApplicationAlreadyAccepted
+            }
+            TrainingApplicationServiceError::Database(source) => ApiError::Database { source },
+            TrainingApplicationServiceError::Email(source) => ApiError::Email { source },
+            TrainingApplicationServiceError::User(source) => source.into(),
+            TrainingApplicationServiceError::Controller(source) => source.into(),
+        }
+    }
+}
+
+impl From<ControllerServiceError> for ApiError {
+    fn from(error: ControllerServiceError) -> Self {
+        tracing::error!("ControllerServiceError: {}", error);
+        match error {
+            ControllerServiceError::UserNotFound(id) => {
+                ApiError::not_found("user", ulid::Ulid::from(id).to_string())
+            }
+            ControllerServiceError::Database(source) => ApiError::Database { source },
+            ControllerServiceError::InvalidControllerState(value) => {
+                ApiError::invalid_database_value("user_atc_permission.state", value)
+            }
+            ControllerServiceError::InvalidControllerRating(value) => {
+                ApiError::invalid_database_value("user_atc_status.rating", value)
+            }
+            ControllerServiceError::InvalidControllerPositionKind(value) => {
+                ApiError::invalid_database_value("user_atc_permission.position_kind_id", value)
+            }
+            ControllerServiceError::User(source) => source.into(),
+            ControllerServiceError::AuditLog(source) => ApiError::AuditLog { source },
+            ControllerServiceError::Compat(source) => ApiError::Compat { source },
+        }
+    }
+}
+
+#[derive(Debug, Serialize, utoipa::ToSchema)]
+pub struct ProblemDetails {
+    #[serde(rename = "type")]
+    type_: String,
+    title: String,
+    status: u16,
+    detail: String,
+}
+
+impl IntoResponse for ApiError {
+    fn into_response(self) -> Response {
+        match &self {
+            ApiError::Compat { source } => tracing::error!("API error: {:?}", source),
+            ApiError::Database { source } => tracing::error!("API error: {:?}", source),
+            ApiError::Email { source } => tracing::error!("API error: {:?}", source),
+            ApiError::Moodle { source } => tracing::error!("API error: {:?}", source),
+            ApiError::Multipart { source } => tracing::error!("API error: {:?}", source),
+            ApiError::Smms { source } => tracing::error!("API error: {:?}", source),
+            _ => (),
+        }
+        (
+            self.status_code(),
+            [(axum::http::header::CONTENT_TYPE, "application/problem+json")],
+            Json(ProblemDetails {
+                type_: format!(
+                    "urn:vatprc-uniapi-error:{}",
+                    convert_case::ccase!(kebab, self.identifier())
+                ),
+                title: self.to_string(),
+                status: self.status_code().as_u16(),
+                detail: self.to_string(),
+            }),
+        )
+            .into_response()
+    }
+}
