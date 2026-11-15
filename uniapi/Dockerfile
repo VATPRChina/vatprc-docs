@@ -26,7 +26,8 @@ COPY Cargo.toml Cargo.toml
 COPY Cargo.lock Cargo.lock
 RUN . /app/.env && \
   cargo build --release --locked --target ${RUST_TARGET} && \
-  rm src/*.rs target/${RUST_TARGET}/release/deps/vatprc_uniapi*
+  cargo clean --release --target ${RUST_TARGET} --package vatprc-uniapi && \
+  rm src/*.rs
 
 ADD . ./
 
