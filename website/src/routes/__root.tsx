@@ -4,7 +4,7 @@ import { getLocalPathname } from "@/lib/i18n";
 import { MyRouterContext } from "@/lib/route-context";
 import { COLOR_SCHEME_COOKIE_KEY, cookieColorSchemeManager, getCookie, isColorScheme } from "@/lib/settings";
 import { cn } from "@/lib/utils";
-import appCss from "@/styles/app.css?url";
+import "@/styles/app.css";
 import rehypeCssUrl from "@/styles/rehype-github-callouts.css?url";
 import { theme } from "@/theme";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -115,7 +115,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         { title: ctx.match.context.i18n._("VATSIM P.R. China Division") },
       ],
       links: [
-        { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: rehypeCssUrl },
         { rel: "stylesheet", href: mantineCoreStyle },
         { rel: "stylesheet", href: mantineDateStyle },
