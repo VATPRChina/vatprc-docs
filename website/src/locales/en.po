@@ -77,6 +77,9 @@ msgstr "Actions"
 msgid "Active Trainings"
 msgstr "Active Trainings"
 
+msgid "Add Examiner"
+msgstr "Add Examiner"
+
 msgid "Add field"
 msgstr "Add field"
 
@@ -404,6 +407,9 @@ msgstr "Community & Membership Director"
 msgid "Community & Teamspeak 3"
 msgstr "Community & Teamspeak 3"
 
+msgid "Competency Assessment"
+msgstr "Competency Assessment"
+
 msgid "Computed station height"
 msgstr "Computed station height"
 
@@ -464,6 +470,9 @@ msgstr "Create ATC Position"
 
 msgid "Create Event"
 msgstr "Create Event"
+
+msgid "Create Exam Record"
+msgstr "Create Exam Record"
 
 msgid "Create Preferred Route"
 msgstr "Create Preferred Route"
@@ -683,6 +692,21 @@ msgstr "Events"
 
 msgid "Events this week"
 msgstr "Events this week"
+
+msgid "Exam Level"
+msgstr "Exam Level"
+
+msgid "Exam Record"
+msgstr "Exam Record"
+
+msgid "Exam Records"
+msgstr "Exam Records"
+
+msgid "Examiner {examinerNumber}"
+msgstr "Examiner {examinerNumber}"
+
+msgid "Examiners"
+msgstr "Examiners"
 
 msgid "Experimental features"
 msgstr "Experimental features"
@@ -1079,6 +1103,12 @@ msgstr "My Event Positions"
 msgid "My Trainings"
 msgstr "My Trainings"
 
+msgid "N/A: Not applicable · I: Improvement needed · S: Satisfactory · G: Good"
+msgstr "N/A: Not applicable · I: Improvement needed · S: Satisfactory · G: Good"
+
+msgid "Name"
+msgstr "Name"
+
 msgid "Network Error"
 msgstr "Network Error"
 
@@ -1111,6 +1141,9 @@ msgstr "No data"
 
 msgid "no direct leg"
 msgstr "no direct leg"
+
+msgid "No exam records."
+msgstr "No exam records."
 
 msgid "No fields."
 msgstr "No fields."
@@ -1310,6 +1343,9 @@ msgstr "Recent 3 months"
 msgid "Recent Events"
 msgstr "Recent Events"
 
+msgid "Recorded by"
+msgstr "Recorded by"
+
 msgid "Region data could not be loaded."
 msgstr "Region data could not be loaded."
 
@@ -1328,8 +1364,14 @@ msgstr "Remark"
 msgid "Remarks"
 msgstr "Remarks"
 
+msgid "Remove"
+msgstr "Remove"
+
 msgid "Remove row"
 msgstr "Remove row"
+
+msgid "Requirement"
+msgstr "Requirement"
 
 msgid "Resolved Route"
 msgstr "Resolved Route"
@@ -1396,6 +1438,9 @@ msgstr "Save {count} positions"
 
 msgid "Save changes"
 msgstr "Save changes"
+
+msgid "Save Exam Record"
+msgstr "Save Exam Record"
 
 msgid "Save sheet"
 msgstr "Save sheet"
@@ -1693,6 +1738,9 @@ msgstr "Time Range"
 
 msgid "Time:"
 msgstr "Time:"
+
+msgid "Times are entered in UTC. The end time must be after the start time."
+msgstr "Times are entered in UTC. The end time must be after the start time."
 
 msgid "Title"
 msgstr "Title"

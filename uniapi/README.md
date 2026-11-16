@@ -77,6 +77,26 @@ To create a new migration:
 just new-migration MigrationName
 ```
 
+### CPT exam records
+
+Apply migrations with `cargo run -- migrate` before using exam records. The
+`20261116000000_add_exam_records.sql` migration creates the record table and
+seeds S1, S2, S3, and C1 sheets from `VATPRC_CPT_log.html`. Staff can manage these
+sheets through Sheet Management, using IDs `exam-record-s1`, `exam-record-s2`,
+`exam-record-s3`, and `exam-record-c1`.
+
+In Controller Center → Exam Records, ATC instructors can select a trainee,
+enter UTC exam times and examiner details, and submit the assessment. Each
+record and its sheet filing are saved in one transaction. Category remarks and
+overall feedback may be blank; every criterion requires a score, including N/A
+where appropriate. Records are visible to the trainee, ATC instructors, and
+training director assistants. Creating records requires the
+`controller-training-instructor` role (also inherited by training directors).
+
+The API exposes `GET/POST /api/atc/exams`, `GET /api/atc/exams/{id}`, and
+`GET /api/atc/exams/record-sheet/{level}`. The authenticated creator is recorded
+as the instructor; clients cannot submit another creator's ID.
+
 ### Discord bot
 
 The service can optionally run a Discord bot alongside the HTTP API. It is

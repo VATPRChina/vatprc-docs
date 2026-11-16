@@ -196,6 +196,54 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/atc/exams": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["list_exam_records"];
+    put?: never;
+    post: operations["create_exam_record"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/atc/exams/record-sheet/{level}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["get_exam_record_sheet"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/atc/exams/{id}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations["get_exam_record"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/atc/positions": {
     parameters: {
       query?: never;
@@ -1651,6 +1699,36 @@ export interface components {
       /** Format: date-time */
       leave_at?: string | null;
     };
+    ExamExaminer: {
+      cid: string;
+      name: string;
+      rating: string;
+    };
+    ExamRecordCreateRequest: {
+      /** Format: date-time */
+      end_at: string;
+      examiners: components["schemas"]["ExamExaminer"][];
+      level: string;
+      request_answers: components["schemas"]["SheetRequestField"][];
+      /** Format: date-time */
+      start_at: string;
+      trainee_id: string;
+    };
+    ExamRecordDto: {
+      /** Format: date-time */
+      created_at: string;
+      /** Format: date-time */
+      end_at: string;
+      examiners: components["schemas"]["ExamExaminer"][];
+      id: string;
+      instructor: components["schemas"]["UserDto"];
+      instructor_id: string;
+      level: string;
+      record_sheet_filing: components["schemas"]["SheetFieldAnswerDto"][];
+      /** Format: date-time */
+      start_at: string;
+      trainee: components["schemas"]["UserDto"];
+    };
     FlightDto: {
       /** Format: int64 */
       altitude: number;
@@ -2517,6 +2595,94 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["AtcStatusDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  list_exam_records: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ExamRecordDto"][];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  create_exam_record: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ExamRecordCreateRequest"];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ExamRecordDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  get_exam_record_sheet: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        level: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["SheetDto"];
+        };
+      };
+      500: components["responses"]["InternalServerError"];
+    };
+  };
+  get_exam_record: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["ExamRecordDto"];
         };
       };
       500: components["responses"]["InternalServerError"];

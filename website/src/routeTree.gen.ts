@@ -19,6 +19,7 @@ import { Route as DocSopRouteImport } from './routes/_doc/sop'
 import { Route as AirspaceRadarCoverageRouteImport } from './routes/airspace/radar-coverage'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ControllersIndexRouteImport } from './routes/controllers/index'
+import { Route as ControllersExamsRouteImport } from './routes/controllers/exams'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as EventsIdRouteImport } from './routes/events/$id'
@@ -111,6 +112,11 @@ const AuthCallbackRoute = AuthCallbackRouteImport.update({
 const ControllersIndexRoute = ControllersIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ControllersRoute,
+} as any)
+const ControllersExamsRoute = ControllersExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
   getParentRoute: () => ControllersRoute,
 } as any)
 const DocsSplatRoute = DocsSplatRouteImport.update({
@@ -349,6 +355,7 @@ export interface FileRoutesByFullPath {
   '/sop': typeof DocSopRoute
   '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/controllers/exams': typeof ControllersExamsRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/events/audit': typeof EventsAuditRoute
@@ -401,6 +408,7 @@ export interface FileRoutesByTo {
   '/sop': typeof DocSopRoute
   '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/controllers/exams': typeof ControllersExamsRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/events/audit': typeof EventsAuditRoute
@@ -457,6 +465,7 @@ export interface FileRoutesById {
   '/_doc/sop': typeof DocSopRoute
   '/airspace/radar-coverage': typeof AirspaceRadarCoverageRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/controllers/exams': typeof ControllersExamsRoute
   '/docs/$': typeof DocsSplatRoute
   '/events/$id': typeof EventsIdRoute
   '/events/audit': typeof EventsAuditRoute
@@ -514,6 +523,7 @@ export interface FileRouteTypes {
     | '/sop'
     | '/airspace/radar-coverage'
     | '/auth/callback'
+    | '/controllers/exams'
     | '/docs/$'
     | '/events/$id'
     | '/events/audit'
@@ -566,6 +576,7 @@ export interface FileRouteTypes {
     | '/sop'
     | '/airspace/radar-coverage'
     | '/auth/callback'
+    | '/controllers/exams'
     | '/docs/$'
     | '/events/$id'
     | '/events/audit'
@@ -621,6 +632,7 @@ export interface FileRouteTypes {
     | '/_doc/sop'
     | '/airspace/radar-coverage'
     | '/auth/callback'
+    | '/controllers/exams'
     | '/docs/$'
     | '/events/$id'
     | '/events/audit'
@@ -778,6 +790,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/controllers/'
       preLoaderRoute: typeof ControllersIndexRouteImport
+      parentRoute: typeof ControllersRoute
+    }
+    '/controllers/exams': {
+      id: '/controllers/exams'
+      path: '/exams'
+      fullPath: '/controllers/exams'
+      preLoaderRoute: typeof ControllersExamsRouteImport
       parentRoute: typeof ControllersRoute
     }
     '/docs/$': {
@@ -1085,6 +1104,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface ControllersRouteChildren {
+  ControllersExamsRoute: typeof ControllersExamsRoute
   ControllersIndexRoute: typeof ControllersIndexRoute
   ControllersApplicationsIdRoute: typeof ControllersApplicationsIdRoute
   ControllersApplicationsAuditRoute: typeof ControllersApplicationsAuditRoute
@@ -1095,6 +1115,7 @@ interface ControllersRouteChildren {
 }
 
 const ControllersRouteChildren: ControllersRouteChildren = {
+  ControllersExamsRoute: ControllersExamsRoute,
   ControllersIndexRoute: ControllersIndexRoute,
   ControllersApplicationsIdRoute: ControllersApplicationsIdRoute,
   ControllersApplicationsAuditRoute: ControllersApplicationsAuditRoute,
