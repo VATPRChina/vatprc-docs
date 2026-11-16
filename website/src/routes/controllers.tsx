@@ -40,11 +40,13 @@ const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: C
 
 function RouteComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const tab = pathname.startsWith("/controllers/trainings")
-    ? "trainings"
-    : pathname.startsWith("/controllers/applications")
-      ? "applications"
-      : "mine";
+  const tab = pathname.startsWith("/controllers/exams")
+    ? "exams"
+    : pathname.startsWith("/controllers/trainings")
+      ? "trainings"
+      : pathname.startsWith("/controllers/applications")
+        ? "applications"
+        : "mine";
   const { data: session, error: sessionError } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const user = session?.user;
   const roles = user?.roles ?? [];
@@ -100,10 +102,13 @@ function RouteComponent() {
           {(sessionError ?? statusError)?.detail}
         </Alert>
       )}
-      {showTabs && (
+      {(showTabs || isController) && (
         <div className="flex flex-wrap items-baseline gap-2">
           <CenterTabLink to="/controllers" active={tab === "mine"}>
             <Trans>My Trainings</Trans>
+          </CenterTabLink>
+          <CenterTabLink to="/controllers/exams" active={tab === "exams"}>
+            <Trans>Exam Records</Trans>
           </CenterTabLink>
           <RequireRole role={"controller-training-mentor"}>
             <CenterTabLink to="/controllers/trainings" active={tab === "trainings"}>

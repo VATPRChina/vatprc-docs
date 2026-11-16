@@ -77,6 +77,9 @@ msgstr "操作"
 msgid "Active Trainings"
 msgstr "待进行的培训"
 
+msgid "Add Examiner"
+msgstr "添加考官"
+
 msgid "Add field"
 msgstr "添加字段"
 
@@ -404,6 +407,9 @@ msgstr "社区会员部主管"
 msgid "Community & Teamspeak 3"
 msgstr "社群"
 
+msgid "Competency Assessment"
+msgstr "能力评定"
+
 msgid "Computed station height"
 msgstr "计算站高"
 
@@ -464,6 +470,9 @@ msgstr "创建管制席位"
 
 msgid "Create Event"
 msgstr "创建活动"
+
+msgid "Create Exam Record"
+msgstr "创建考试记录"
 
 msgid "Create Preferred Route"
 msgstr "创建推荐航路"
@@ -683,6 +692,21 @@ msgstr "活动"
 
 msgid "Events this week"
 msgstr "本周活动"
+
+msgid "Exam Level"
+msgstr "考试等级"
+
+msgid "Exam Record"
+msgstr "考试记录"
+
+msgid "Exam Records"
+msgstr "考试记录"
+
+msgid "Examiner {examinerNumber}"
+msgstr "监考 {examinerNumber}"
+
+msgid "Examiners"
+msgstr "考官"
 
 msgid "Experimental features"
 msgstr "实验性功能"
@@ -1079,6 +1103,12 @@ msgstr "我的活动席位"
 msgid "My Trainings"
 msgstr "我的训练"
 
+msgid "N/A: Not applicable · I: Improvement needed · S: Satisfactory · G: Good"
+msgstr "N/A 不适用 · I 未达标 · S 达标 · G 优秀"
+
+msgid "Name"
+msgstr "名字"
+
 msgid "Network Error"
 msgstr "网络故障"
 
@@ -1111,6 +1141,9 @@ msgstr "无数据"
 
 msgid "no direct leg"
 msgstr "无直飞段"
+
+msgid "No exam records."
+msgstr "暂无考试记录。"
 
 msgid "No fields."
 msgstr "没有字段。"
@@ -1310,6 +1343,9 @@ msgstr "最近三个月"
 msgid "Recent Events"
 msgstr "近期活动"
 
+msgid "Recorded by"
+msgstr "记录人"
+
 msgid "Region data could not be loaded."
 msgstr "无法加载区域数据。"
 
@@ -1328,8 +1364,14 @@ msgstr "备注"
 msgid "Remarks"
 msgstr "备注"
 
+msgid "Remove"
+msgstr "移除"
+
 msgid "Remove row"
 msgstr "移除此行"
+
+msgid "Requirement"
+msgstr "要求"
 
 msgid "Resolved Route"
 msgstr "解析后的航路"
@@ -1396,6 +1438,9 @@ msgstr "保存 {count} 个席位"
 
 msgid "Save changes"
 msgstr "保存变更"
+
+msgid "Save Exam Record"
+msgstr "保存考试记录"
 
 msgid "Save sheet"
 msgstr "保存表单"
@@ -1693,6 +1738,9 @@ msgstr "时间范围"
 
 msgid "Time:"
 msgstr "活动时间："
+
+msgid "Times are entered in UTC. The end time must be after the start time."
+msgstr "请使用 UTC 时间，结束时间必须晚于开始时间。"
 
 msgid "Title"
 msgstr "标题"

@@ -80,6 +80,10 @@ pub fn router(services: Services) -> Router {
             build_training_application_routes(),
         )
         .nest("/api/atc/trainings", build_training_routes())
+        .nest(
+            "/api/atc/exams",
+            crate::modules::exam::routes::build_exam_routes(),
+        )
         .nest("/api/users", build_user_routes())
         .nest("/api/users", build_user_atc_permission_routes())
         .nest("/api/sectors", build_sector_routes())

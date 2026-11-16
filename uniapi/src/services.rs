@@ -45,6 +45,7 @@ pub struct Services {
     event: EventService,
     flight: FlightService,
     sheet: SheetService,
+    exam: crate::modules::exam::service::ExamService,
     training: TrainingService,
     training_application: TrainingApplicationService,
     user: UserService,
@@ -103,7 +104,13 @@ impl Services {
             controller.clone(),
         );
 
+        let exam = crate::modules::exam::service::ExamService::new(
+            db.clone(),
+            sheet.clone(),
+            user.clone(),
+        );
         Ok(Self {
+            exam,
             controller,
             user,
             audit_log,
@@ -202,6 +209,10 @@ impl Services {
 
     pub fn sheet(&self) -> &SheetService {
         &self.sheet
+    }
+
+    pub fn exam(&self) -> &crate::modules::exam::service::ExamService {
+        &self.exam
     }
 
     pub fn training(&self) -> &TrainingService {

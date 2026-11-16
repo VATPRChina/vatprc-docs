@@ -4,6 +4,7 @@ pub mod atc_position;
 pub mod audit_log;
 pub mod controller;
 pub mod event;
+pub mod exam;
 pub mod flight;
 pub mod navdata;
 pub mod sheet;

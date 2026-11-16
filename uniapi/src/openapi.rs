@@ -6,6 +6,7 @@ use utoipa::{OpenApi, PartialSchema, ToSchema};
 #[derive(OpenApi)]
 #[openapi(
     nest(
+        (path = "/", api = crate::modules::exam::routes::ApiDoc),
         (path = "/", api = crate::app::ApiDoc),
         (path = "/", api = crate::modules::user::routes::auth::ApiDoc),
         (path = "/", api = crate::modules::user::routes::session::ApiDoc),
@@ -32,6 +33,7 @@ use utoipa::{OpenApi, PartialSchema, ToSchema};
     ),
     modifiers(&SecurityAddon, &InternalServerErrorAddon),
     tags(
+        (name = "Exams", description = "CPT exam records"),
         (name = "Auth", description = "OAuth and session endpoints"),
         (name = "Audit Logs", description = "Audit log history"),
         (name = "ATC", description = "ATC status and controllers"),

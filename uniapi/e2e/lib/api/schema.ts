@@ -4,6 +4,54 @@
  */
 
 export type paths = {
+    "/api/atc/exams": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["list_exam_records"];
+        put?: never;
+        post: operations["create_exam_record"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/atc/exams/record-sheet/{level}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get_exam_record_sheet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/atc/exams/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get_exam_record"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/atc/applications": {
         parameters: {
             query?: never;
@@ -1278,6 +1326,36 @@ export type paths = {
 export type webhooks = Record<string, never>;
 export type components = {
     schemas: {
+        ExamExaminer: {
+            cid: string;
+            name: string;
+            rating: string;
+        };
+        ExamRecordCreateRequest: {
+            /** Format: date-time */
+            end_at: string;
+            examiners: components["schemas"]["ExamExaminer"][];
+            level: string;
+            request_answers: components["schemas"]["SheetRequestField"][];
+            /** Format: date-time */
+            start_at: string;
+            trainee_id: string;
+        };
+        ExamRecordDto: {
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            end_at: string;
+            examiners: components["schemas"]["ExamExaminer"][];
+            id: string;
+            instructor: components["schemas"]["UserDto"];
+            instructor_id: string;
+            level: string;
+            record_sheet_filing: components["schemas"]["SheetFieldAnswerDto"][];
+            /** Format: date-time */
+            start_at: string;
+            trainee: components["schemas"]["UserDto"];
+        };
         AccessTokenRequest: {
             client_id?: string;
             client_secret?: string;
@@ -2216,6 +2294,94 @@ export type components = {
 };
 export type $defs = Record<string, never>;
 export interface operations {
+    list_exam_records: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamRecordDto"][];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
+        };
+    };
+    create_exam_record: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExamRecordCreateRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamRecordDto"];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
+        };
+    };
+    get_exam_record: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamRecordDto"];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
+        };
+    };
+    get_exam_record_sheet: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                level: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SheetDto"];
+                };
+            };
+            500: components["responses"]["InternalServerError"];
+        };
+    };
     list_applications: {
         parameters: {
             query?: never;
