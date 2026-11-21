@@ -38,7 +38,7 @@ test.each([false, true])(
         <ValidationResult temporary={temporary} />
       </FlightValidationContext.Provider>,
     );
-    const alert = screen.getByRole("alert", { name: /Not designated route/ });
+    const alert = screen.getByRole("alert", { name: /Not valid route/ });
     await expect.element(alert).toBeVisible();
     expect(alert.all()).toHaveLength(1);
     const routes = alert.getByRole("listitem");

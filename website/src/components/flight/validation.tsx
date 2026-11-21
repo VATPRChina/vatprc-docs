@@ -154,7 +154,7 @@ export const ValidationResult: FC<{ temporary?: boolean }> = ({ temporary = fals
       {hasFailure && !temporary && (
         <p>
           <Trans>
-            Your flight plan has some problems, please
+            Your flight plan is <strong className="underline">INVALID</strong>, please
             <Anchor href="https://my.vatsim.net/pilots/flightplan/" target="_blank" rel="noopener noreferrer">
               &nbsp;edit your flight plan on VATSIM&nbsp;
             </Anchor>
