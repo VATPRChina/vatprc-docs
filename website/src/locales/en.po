@@ -1160,8 +1160,8 @@ msgstr "Not booked"
 msgid "Not designated"
 msgstr "Not designated"
 
-msgid "Not designated route"
-msgstr "Not designated route"
+msgid "Not valid route"
+msgstr "Not valid route"
 
 msgid "NOTAM · Announcements"
 msgstr "NOTAM · Announcements"
@@ -1908,8 +1908,8 @@ msgstr "Your ATC application has been updated successfully."
 msgid "Your flight is not online"
 msgstr "Your flight is not online"
 
-msgid "Your flight plan has some problems, please<0> edit your flight plan on VATSIM </0>according to the information below."
-msgstr "Your flight plan has some problems, please<0> edit your flight plan on VATSIM </0>according to the information below."
+msgid "Your flight plan is <0>INVALID</0>, please<1> edit your flight plan on VATSIM </1>according to the information below."
+msgstr "Your flight plan is <0>INVALID</0>, please<1> edit your flight plan on VATSIM </1>according to the information below."
 
 msgid "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."
 msgstr "Your training has been aborted due to inactivity or other reasons. Please check the remarks for more details. You may contact the staff if you have any questions, or file an application again, which will be considered in priority."

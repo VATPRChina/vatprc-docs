@@ -66,7 +66,7 @@ export const PROBLEM_LABELS: Record<components["schemas"]["ValidationProblemDto"
   "route-direct-segment": <Trans>Direct leg</Trans>,
   "route-leg-direction": <Trans>Leg direction violation</Trans>,
   "airway-require-approval": <Trans>Restricted airway</Trans>,
-  "not-preferred-route": <Trans>Not designated route</Trans>,
+  "not-preferred-route": <Trans>Not valid route</Trans>,
   "cruising-level-mismatch": <Trans>Cruising level type mismatch</Trans>,
   "cruising-level-too-low": <Trans>Cruising level too low</Trans>,
   "cruising-level-not-allowed": <Trans>Cruising level not allowed</Trans>,
