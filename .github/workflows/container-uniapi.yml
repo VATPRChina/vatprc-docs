@@ -7,18 +7,14 @@ on:
       - "uniapi/**"
       - ".github/workflows/container-uniapi.yml"
 
-permissions:
-  contents: read
-  id-token: write
-  packages: write
-
-defaults:
-  run:
-    working-directory: uniapi
-
 jobs:
   container:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.meta.outputs.tags }}
 
     steps:
       - uses: actions/checkout@v4
@@ -52,6 +48,14 @@ jobs:
           cache-from: type=gha,scope=uniapi
           cache-to: type=gha,mode=max,scope=uniapi
 
+  deployment:
+    name: UniAPI Deployment
+    needs: container
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    steps:
       - name: Connect to the VATPRChina tailnet
         uses: tailscale/github-action@v4
         with:
@@ -64,7 +68,7 @@ jobs:
         shell: bash
         env:
           BIRCH_K8S_CA_B64: ${{ secrets.KUBE_BIRCH_CLUSTER_CA }}
-          EXPECTED_UNIAPI_IMAGE: ${{ steps.meta.outputs.tags }}
+          EXPECTED_UNIAPI_IMAGE: ${{ needs.container.outputs.image }}
         run: |
           set -euo pipefail
           umask 077
