@@ -3,7 +3,7 @@ use std::time::Duration;
 use anyhow::{Context, ensure};
 use chrono::{DateTime, Utc};
 use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
-use reqwest::{Client, StatusCode, Url};
+use reqwest::{Client, RequestBuilder, StatusCode, Url};
 use serde::Serialize;
 use sqlx::{FromRow, PgPool};
 use uuid::Uuid;
@@ -75,12 +75,6 @@ impl VatsimBookingSync {
     }
 
     pub(super) async fn sync_booking(&self, db: &PgPool, id: Uuid) -> anyhow::Result<()> {
-        let mut tx = db.begin().await?;
-        // Read committed state after serializing writes for this ID across API instances.
-        sqlx::query("SELECT pg_advisory_xact_lock(hashtextextended($1::uuid::text, 37333))")
-            .bind(id)
-            .execute(&mut *tx)
-            .await?;
         let booking = sqlx::query_as::<_, Booking>(
             r#"
             SELECT controller.cid, booking.callsign,
@@ -93,7 +87,7 @@ impl VatsimBookingSync {
             "#,
         )
         .bind(id)
-        .fetch_optional(&mut *tx)
+        .fetch_optional(db)
         .await?;
 
         let external_id = format!("vatprc-uniapi-{id}");
@@ -105,24 +99,21 @@ impl VatsimBookingSync {
 
         if let Some(booking) = booking {
             let status = self
-                .client
-                .put(booking_url)
-                .json(&booking)
-                .send()
-                .await?
-                .status();
+                .send(id, self.client.put(booking_url).json(&booking))
+                .await?;
             if status == StatusCode::NOT_FOUND {
                 // A booking may predate enabling sync or its previous publication may have failed.
                 let status = self
-                    .client
-                    .post(self.bookings_url.clone())
-                    .json(&CreateBooking {
-                        external_id: &external_id,
-                        booking: &booking,
-                    })
-                    .send()
-                    .await?
-                    .status();
+                    .send(
+                        id,
+                        self.client
+                            .post(self.bookings_url.clone())
+                            .json(&CreateBooking {
+                                external_id: &external_id,
+                                booking: &booking,
+                            }),
+                    )
+                    .await?;
                 ensure!(
                     status.is_success(),
                     "VATSIM booking POST returned HTTP {status}"
@@ -134,14 +125,26 @@ impl VatsimBookingSync {
                 );
             }
         } else {
-            let status = self.client.delete(booking_url).send().await?.status();
+            let status = self.send(id, self.client.delete(booking_url)).await?;
             ensure!(
                 status.is_success() || status == StatusCode::NOT_FOUND,
                 "VATSIM booking DELETE returned HTTP {status}"
             );
         }
 
-        tx.commit().await?;
         Ok(())
+    }
+
+    async fn send(&self, booking_id: Uuid, request: RequestBuilder) -> anyhow::Result<StatusCode> {
+        let request = request.build()?;
+        let method = request.method().clone();
+        let status = self
+            .client
+            .execute(request)
+            .await
+            .with_context(|| format!("VATSIM booking {method} request failed"))?
+            .status();
+        tracing::info!(%booking_id, %method, %status, "VATSIM ATC booking response");
+        Ok(status)
     }
 }
