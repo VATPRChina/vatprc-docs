@@ -26,7 +26,8 @@ pub struct VatsimBookingSync {
     #[serde(default)]
     pub enabled: bool,
     pub base_url: String,
-    pub api_key: Option<String>,
+    #[serde(default)]
+    pub api_key: String,
 }
 
 impl std::fmt::Debug for VatsimBookingSync {

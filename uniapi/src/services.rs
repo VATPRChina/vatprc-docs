@@ -7,7 +7,7 @@ use crate::adapter::email::EmailClient;
 use crate::adapter::moodle::MoodleClient;
 use crate::adapter::smms::SmmsClient;
 use crate::modules::atc_application::service::AtcApplicationService;
-use crate::modules::atc_booking::service::AtcBookingService;
+use crate::modules::atc_booking::services::AtcBookingService;
 use crate::modules::atc_position::dcl::DclAirports;
 use crate::modules::atc_position::service::AtcPositionService;
 use crate::modules::controller::service::ControllerService;
@@ -83,10 +83,16 @@ impl Services {
         let sheet = SheetService::new(db.clone());
         let atc_application =
             AtcApplicationService::new(db.clone(), audit_log.clone(), user.clone(), sheet.clone());
-        let atc_booking = AtcBookingService::new(db.clone(), user.clone());
+        let atc_booking =
+            AtcBookingService::new(db.clone(), user.clone(), &settings.vatsim_booking_sync)?;
         let dcl_airports = DclAirports::load(&settings.dcl.airports_url).await?;
         let atc_position = AtcPositionService::new(db.clone(), audit_log.clone());
-        let event = EventService::new(db.clone(), audit_log.clone(), user.clone());
+        let event = EventService::new(
+            db.clone(),
+            audit_log.clone(),
+            user.clone(),
+            atc_booking.clone(),
+        );
         let access_token = AccessTokenService::new(&settings.authentication.jwt);
         let refresh_token =
             RefreshTokenService::new(db.clone(), settings.authentication.jwt.refresh_expires_days);

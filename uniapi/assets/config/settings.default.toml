@@ -67,3 +67,4 @@ endpoint = "https://metar.vatsim.net"
 [vatsim_booking_sync]
 enabled = false
 base_url = "https://staging.vsimtech.org/api"
+api_key = ""

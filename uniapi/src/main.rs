@@ -3,7 +3,6 @@ use std::path::Path;
 
 use clap::Parser;
 use vatprc_uniapi::discord::DiscordBot;
-use vatprc_uniapi::modules::atc_booking::vatsim_sync::VatsimBookingSync;
 use vatprc_uniapi::modules::flight::flight_plan::{
     PreferredRouteMatcher, RouteParseStep, RouteSegmenter, parse_route_with_observer,
 };
@@ -30,10 +29,8 @@ async fn run() -> Result<(), anyhow::Error> {
     let _telemetry = telemetry::init(&settings.telemetry)?;
 
     let discord_bot = DiscordBot::from_settings(&settings.discord)?;
-    let booking_sync = VatsimBookingSync::from_settings(&settings.vatsim_booking_sync)?;
     let services = Services::connect(&settings).await?;
     let discord_services = services.clone();
-    let booking_db = services.db().clone();
 
     let listener = tokio::net::TcpListener::bind(&settings.bind_address).await?;
 
@@ -41,19 +38,11 @@ async fn run() -> Result<(), anyhow::Error> {
 
     tokio::try_join!(
         async {
-            let server = axum::serve(listener, app::router(services))
-                .with_graceful_shutdown(shutdown_signal());
-            tokio::select! {
-                result = server => result
-                    .inspect_err(|error| tracing::error!(%error, "failed to start HTTP server"))
-                    .map_err(anyhow::Error::from),
-                _ = async {
-                    match booking_sync {
-                        Some(sync) => sync.run(&booking_db).await,
-                        None => std::future::pending().await,
-                    }
-                } => unreachable!("booking sync runs until shutdown"),
-            }
+            axum::serve(listener, app::router(services))
+                .with_graceful_shutdown(shutdown_signal())
+                .await
+                .inspect_err(|error| tracing::error!(%error, "failed to start HTTP server"))
+                .map_err(anyhow::Error::from)
         },
         async {
             if let Some(discord_bot) = discord_bot {

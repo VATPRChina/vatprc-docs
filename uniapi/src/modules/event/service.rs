@@ -3,6 +3,7 @@ use futures::future::try_join_all;
 use sqlx::PgPool;
 use uuid::Uuid;
 
+use crate::modules::atc_booking::services::AtcBookingService;
 use crate::modules::audit_log::models::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
 use crate::modules::user::models::UserSummary;
@@ -25,14 +26,21 @@ pub struct EventService {
     db: PgPool,
     audit_log: AuditLogService,
     user: UserService,
+    atc_booking: AtcBookingService,
 }
 
 impl EventService {
-    pub fn new(db: PgPool, audit_log: AuditLogService, user: UserService) -> Self {
+    pub fn new(
+        db: PgPool,
+        audit_log: AuditLogService,
+        user: UserService,
+        atc_booking: AtcBookingService,
+    ) -> Self {
         Self {
             db,
             audit_log,
             user,
+            atc_booking,
         }
     }
 
@@ -294,6 +302,7 @@ impl EventService {
             .sync_event_atc_position_booking(&position)
             .await?;
         transaction.commit().await?;
+        self.atc_booking.sync_to_vatsim(position.booking_id).await;
         self.record_position_audit(&position, Some(&before), Some(&position), operated_by)
             .await?;
         self.with_position_user(position).await
@@ -320,6 +329,7 @@ impl EventService {
             transaction.delete_event_atc_booking(booking_id).await?;
         }
         transaction.commit().await?;
+        self.atc_booking.sync_to_vatsim(position.booking_id).await;
         self.record_position_audit(&position, Some(&position), None, operated_by)
             .await
     }
@@ -364,6 +374,7 @@ impl EventService {
             .await?
             .ok_or(EventServiceError::AtcPositionNotFound(position_id))?;
         transaction.commit().await?;
+        self.atc_booking.sync_to_vatsim(after.booking_id).await;
         self.record_position_audit(&after, Some(&position), Some(&after), operated_by)
             .await?;
         self.with_position_user(after).await
@@ -403,6 +414,7 @@ impl EventService {
             .await?
             .ok_or(EventServiceError::AtcPositionNotFound(position_id))?;
         transaction.commit().await?;
+        self.atc_booking.sync_to_vatsim(Some(booking_id)).await;
         self.record_position_audit(&after, Some(&position), Some(&after), current_user_id)
             .await?;
         Ok(EventAtcPositionView {
