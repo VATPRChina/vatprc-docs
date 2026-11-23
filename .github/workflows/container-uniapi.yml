@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
   packages: write
 
 defaults:
@@ -50,3 +51,89 @@ jobs:
           push: true
           cache-from: type=gha,scope=uniapi
           cache-to: type=gha,mode=max,scope=uniapi
+
+      - name: Connect to the VATPRChina tailnet
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_CLIENT_ID }}
+          audience: ${{ secrets.TAILSCALE_AUDIENCE }}
+          tags: "ci"
+
+      - name: Wait for UniAPI deployment
+        timeout-minutes: 15
+        shell: bash
+        env:
+          BIRCH_K8S_CA_B64: ${{ secrets.KUBE_BIRCH_CLUSTER_CA }}
+          EXPECTED_UNIAPI_IMAGE: ${{ steps.meta.outputs.tags }}
+        run: |
+          set -euo pipefail
+          umask 077
+          work=$(mktemp -d)
+          trap 'rm -rf "$work"' EXIT
+
+          refresh_token() {
+            local token
+            token=$(curl --fail --silent --show-error --max-time 10 \
+              --header "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+              --get --data-urlencode 'audience=urn:vatprchina:birch:uniapi-restart' \
+              "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq -er '.value')
+            echo "::add-mask::${token}"
+            printf '%s' "$token" > "$work/token"
+          }
+
+          cat > "$work/config" <<EOF
+          apiVersion: v1
+          kind: Config
+          clusters:
+            - name: birch
+              cluster:
+                server: https://100.108.172.18:6443
+                certificate-authority-data: ${BIRCH_K8S_CA_B64:?missing Birch Kubernetes CA}
+          users:
+            - name: github-actions
+              user:
+                tokenFile: $work/token
+          contexts:
+            - name: birch
+              context:
+                cluster: birch
+                user: github-actions
+                namespace: vatprc-uniapi
+          current-context: birch
+          EOF
+
+          expected_image=${EXPECTED_UNIAPI_IMAGE:?missing published UniAPI image}
+          echo "Waiting for $expected_image or newer on Birch"
+          next_refresh=$SECONDS
+
+          while true; do
+            if (( SECONDS >= next_refresh )); then
+              refresh_token
+              next_refresh=$((SECONDS + 120))
+            fi
+
+            if deployment=$(kubectl --kubeconfig "$work/config" --request-timeout=15s get deployment/uniapi -o json) &&
+              deployed_image=$(jq -er --arg repository "${expected_image%:*}:" --arg version "${expected_image##*:}" '
+                def version_parts:
+                  select(test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))
+                  | ltrimstr("v") | split(".") | map(tonumber);
+
+                select(
+                  .spec.replicas > 0 and
+                  .status.observedGeneration == .metadata.generation and
+                  .status.replicas == .spec.replicas and
+                  .status.updatedReplicas == .spec.replicas and
+                  .status.availableReplicas == .spec.replicas
+                )
+                | .spec.template.spec.containers[]
+                | select(.name == "uniapi")
+                | .image
+                | select(startswith($repository))
+                | select((ltrimstr($repository) | version_parts) >= ($version | version_parts))
+              ' <<< "$deployment"); then
+              echo "UniAPI is available on $deployed_image"
+              exit 0
+            fi
+
+            sleep 15
+          done
