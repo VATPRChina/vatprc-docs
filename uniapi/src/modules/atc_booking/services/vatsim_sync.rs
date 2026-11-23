@@ -98,32 +98,7 @@ impl VatsimBookingSync {
             .push(&external_id);
 
         if let Some(booking) = booking {
-            let status = self
-                .send(id, self.client.put(booking_url).json(&booking))
-                .await?;
-            if status == StatusCode::NOT_FOUND {
-                // A booking may predate enabling sync or its previous publication may have failed.
-                let status = self
-                    .send(
-                        id,
-                        self.client
-                            .post(self.bookings_url.clone())
-                            .json(&CreateBooking {
-                                external_id: &external_id,
-                                booking: &booking,
-                            }),
-                    )
-                    .await?;
-                ensure!(
-                    status.is_success(),
-                    "VATSIM booking POST returned HTTP {status}"
-                );
-            } else {
-                ensure!(
-                    status.is_success(),
-                    "VATSIM booking PUT returned HTTP {status}"
-                );
-            }
+            self.upsert(id, &external_id, booking_url, &booking).await?;
         } else {
             let status = self.send(id, self.client.delete(booking_url)).await?;
             ensure!(
@@ -132,6 +107,42 @@ impl VatsimBookingSync {
             );
         }
 
+        Ok(())
+    }
+
+    async fn upsert(
+        &self,
+        id: Uuid,
+        external_id: &str,
+        booking_url: Url,
+        booking: &Booking,
+    ) -> anyhow::Result<()> {
+        // An identical POST is idempotent. A 409 means the external ID names different data.
+        let status = self
+            .send(
+                id,
+                self.client
+                    .post(self.bookings_url.clone())
+                    .json(&CreateBooking {
+                        external_id,
+                        booking,
+                    }),
+            )
+            .await?;
+        if status == StatusCode::CONFLICT {
+            let status = self
+                .send(id, self.client.put(booking_url).json(booking))
+                .await?;
+            ensure!(
+                status.is_success(),
+                "VATSIM booking PUT returned HTTP {status}"
+            );
+        } else {
+            ensure!(
+                status.is_success(),
+                "VATSIM booking POST returned HTTP {status}"
+            );
+        }
         Ok(())
     }
 
@@ -146,5 +157,93 @@ impl VatsimBookingSync {
             .status();
         tracing::info!(%booking_id, %method, %status, "VATSIM ATC booking response");
         Ok(status)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::sync::{Arc, Mutex};
+
+    use axum::extract::State;
+    use axum::routing::{post, put};
+    use axum::{Json, Router};
+    use serde_json::Value;
+    use tokio::net::TcpListener;
+
+    use super::*;
+
+    #[tokio::test]
+    async fn creates_before_attempting_an_update_by_external_id() {
+        let calls = Arc::new(Mutex::new(Vec::new()));
+        let router = Router::new()
+            .route(
+                "/api/bookings/external",
+                post(
+                    |State(calls): State<Arc<Mutex<Vec<_>>>>, Json(body): Json<Value>| async move {
+                        let mut calls = calls.lock().unwrap();
+                        let status = match (calls.last(), body["callsign"].as_str()) {
+                            (None, Some("ZBAA_TWR")) => StatusCode::CREATED,
+                            (Some(_), Some("ZBAA_TWR")) => StatusCode::OK,
+                            (Some(_), Some("ZSPD_TWR")) => StatusCode::CONFLICT,
+                            _ => StatusCode::BAD_REQUEST,
+                        };
+                        calls.push(("POST", body));
+                        status
+                    },
+                ),
+            )
+            .route(
+                "/api/bookings/external/vatprc-uniapi-00000000-0000-0000-0000-000000000000",
+                put(
+                    |State(calls): State<Arc<Mutex<Vec<_>>>>, Json(body): Json<Value>| async move {
+                        let mut calls = calls.lock().unwrap();
+                        let status = if calls.is_empty() {
+                            StatusCode::FORBIDDEN
+                        } else {
+                            StatusCode::OK
+                        };
+                        calls.push(("PUT", body));
+                        status
+                    },
+                ),
+            )
+            .with_state(calls.clone());
+        let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let address = listener.local_addr().unwrap();
+        let server = tokio::spawn(async move { axum::serve(listener, router).await.unwrap() });
+        let sync = VatsimBookingSync::from_settings(&settings::VatsimBookingSync {
+            enabled: true,
+            base_url: format!("http://{address}/api"),
+            api_key: "local-mock-key".into(),
+        })
+        .unwrap()
+        .unwrap();
+        let id = Uuid::nil();
+        let external_id = format!("vatprc-uniapi-{id}");
+        let booking_url = Url::parse(&format!(
+            "http://{address}/api/bookings/external/{external_id}"
+        ))
+        .unwrap();
+        let mut booking = Booking {
+            cid: "1234567".into(),
+            callsign: "ZBAA_TWR".into(),
+            kind: "booking".into(),
+            start: "2026-11-23T10:00:00Z".parse().unwrap(),
+            end: "2026-11-23T12:00:00Z".parse().unwrap(),
+        };
+
+        for callsign in ["ZBAA_TWR", "ZBAA_TWR", "ZSPD_TWR"] {
+            booking.callsign = callsign.into();
+            sync.upsert(id, &external_id, booking_url.clone(), &booking)
+                .await
+                .unwrap();
+        }
+        server.abort();
+
+        let calls = calls.lock().unwrap();
+        let methods: Vec<_> = calls.iter().map(|(method, _)| *method).collect();
+        assert_eq!(methods, ["POST", "POST", "POST", "PUT"]);
+        assert_eq!(calls[0].1["externalId"], external_id);
+        assert_eq!(calls[3].1["callsign"], "ZSPD_TWR");
     }
 }
