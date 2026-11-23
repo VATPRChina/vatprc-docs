@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use anyhow::{Context, ensure};
 use chrono::{DateTime, Utc};
-use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
+use reqwest::header::{AUTHORIZATION, HeaderValue};
 use reqwest::{Client, RequestBuilder, StatusCode, Url};
 use serde::Serialize;
 use sqlx::{FromRow, PgPool};
@@ -10,10 +10,14 @@ use uuid::Uuid;
 
 use crate::settings;
 
+const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"));
+const MAX_ERROR_BODY_BYTES: usize = 4096;
+
 #[derive(Clone)]
 pub(super) struct VatsimBookingSync {
     client: Client,
     bookings_url: Url,
+    authorization: HeaderValue,
 }
 
 #[derive(Serialize, FromRow)]
@@ -61,16 +65,15 @@ impl VatsimBookingSync {
         let mut authorization = HeaderValue::from_str(&format!("Bearer {key}"))
             .context("invalid VATSIM booking API key")?;
         authorization.set_sensitive(true);
-        let mut headers = HeaderMap::new();
-        headers.insert(AUTHORIZATION, authorization);
         let client = Client::builder()
-            .default_headers(headers)
+            .user_agent(USER_AGENT)
             .redirect(reqwest::redirect::Policy::none())
             .timeout(Duration::from_secs(10))
             .build()?;
         Ok(Some(Self {
             client,
             bookings_url: base_url.join("bookings/external")?,
+            authorization,
         }))
     }
 
@@ -147,15 +150,55 @@ impl VatsimBookingSync {
     }
 
     async fn send(&self, booking_id: Uuid, request: RequestBuilder) -> anyhow::Result<StatusCode> {
-        let request = request.build()?;
+        let request = request
+            .header(AUTHORIZATION, self.authorization.clone())
+            .build()?;
         let method = request.method().clone();
-        let status = self
+        let mut response = self
             .client
             .execute(request)
             .await
-            .with_context(|| format!("VATSIM booking {method} request failed"))?
-            .status();
-        tracing::info!(%booking_id, %method, %status, "VATSIM ATC booking response");
+            .with_context(|| format!("VATSIM booking {method} request failed"))?;
+        let status = response.status();
+        if status.is_success() {
+            tracing::info!(%booking_id, %method, %status, "VATSIM ATC booking response");
+            return Ok(status);
+        }
+
+        let cf_ray = response
+            .headers()
+            .get("cf-ray")
+            .and_then(|value| value.to_str().ok())
+            .map(str::to_owned);
+        let mut body = Vec::new();
+        let mut body_read_error = None;
+        while body.len() < MAX_ERROR_BODY_BYTES {
+            match response.chunk().await {
+                Ok(Some(chunk)) => {
+                    let take = chunk.len().min(MAX_ERROR_BODY_BYTES - body.len());
+                    body.extend_from_slice(&chunk[..take]);
+                }
+                Ok(None) => break,
+                Err(error) => {
+                    body_read_error = Some(error);
+                    break;
+                }
+            }
+        }
+        let body = String::from_utf8_lossy(&body);
+        let body = match self
+            .authorization
+            .to_str()
+            .ok()
+            .and_then(|header| header.strip_prefix("Bearer "))
+        {
+            Some(key) => body.replace(key, "[redacted]"),
+            None => body.into_owned(),
+        };
+        tracing::info!(
+            %booking_id, %method, %status, ?cf_ray, response_body = ?body, ?body_read_error,
+            "VATSIM ATC booking response"
+        );
         Ok(status)
     }
 }
@@ -165,6 +208,7 @@ mod tests {
     use std::sync::{Arc, Mutex};
 
     use axum::extract::State;
+    use axum::http::HeaderMap;
     use axum::routing::{post, put};
     use axum::{Json, Router};
     use serde_json::Value;
@@ -179,7 +223,11 @@ mod tests {
             .route(
                 "/api/bookings/external",
                 post(
-                    |State(calls): State<Arc<Mutex<Vec<_>>>>, Json(body): Json<Value>| async move {
+                    |State(calls): State<Arc<Mutex<Vec<_>>>>,
+                     headers: HeaderMap,
+                     Json(body): Json<Value>| async move {
+                        assert_eq!(headers["user-agent"], USER_AGENT);
+                        assert_eq!(headers["authorization"], "Bearer local-mock-key");
                         let mut calls = calls.lock().unwrap();
                         let status = match (calls.last(), body["callsign"].as_str()) {
                             (None, Some("ZBAA_TWR")) => StatusCode::CREATED,
@@ -195,7 +243,11 @@ mod tests {
             .route(
                 "/api/bookings/external/vatprc-uniapi-00000000-0000-0000-0000-000000000000",
                 put(
-                    |State(calls): State<Arc<Mutex<Vec<_>>>>, Json(body): Json<Value>| async move {
+                    |State(calls): State<Arc<Mutex<Vec<_>>>>,
+                     headers: HeaderMap,
+                     Json(body): Json<Value>| async move {
+                        assert_eq!(headers["user-agent"], USER_AGENT);
+                        assert_eq!(headers["authorization"], "Bearer local-mock-key");
                         let mut calls = calls.lock().unwrap();
                         let status = if calls.is_empty() {
                             StatusCode::FORBIDDEN
