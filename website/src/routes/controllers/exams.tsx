@@ -1,12 +1,12 @@
 import { DateTime } from "@/components/event/datetime";
 import { RequireRole } from "@/components/require-role";
+import { Sheet } from "@/components/sheet";
 import { DateTimeInput } from "@/components/ui/datetime-input";
 import { ControllerInput } from "@/components/user-input";
 import { components } from "@/lib/api";
 import { $api, useUser } from "@/lib/client";
-import { promiseWithLog } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Button, Card, Modal, Radio, Select, Skeleton, Table, Textarea, TextInput } from "@mantine/core";
+import { Alert, Button, Card, Modal, Select, Skeleton, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
@@ -76,7 +76,7 @@ function ExamRecords() {
 }
 
 function ExamCreate({ onSaved }: { onSaved: () => void }) {
-  const { t, i18n } = useLingui();
+  const { t } = useLingui();
   const user = useUser();
   const queryClient = useQueryClient();
   const [level, setLevel] = useState("S1");
@@ -102,16 +102,10 @@ function ExamCreate({ onSaved }: { onSaved: () => void }) {
     },
   });
   const answers = answersByLevel[level] ?? {};
-  const setAnswer = (id: string, value: string) =>
-    setAnswersByLevel((current) => ({
-      ...current,
-      [level]: { ...current[level], [id]: value },
-    }));
   const updateExaminer = (index: number, key: keyof Examiner, value: string) =>
     setExaminers((current) => current.map((examiner, i) => (i === index ? { ...examiner, [key]: value } : examiner)));
   const complete =
     !!sheet?.fields.length &&
-    sheet.fields.every((field) => field.kind === "long-text" || !!answers[field.id]?.trim()) &&
     !!traineeId &&
     !!startAt &&
     !!endAt &&
@@ -119,25 +113,7 @@ function ExamCreate({ onSaved }: { onSaved: () => void }) {
     examiners.every((e) => e.name.trim() && /^\d+$/.test(e.cid) && e.rating);
 
   return (
-    <form
-      className="flex flex-col gap-4"
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (!complete || !startAt || !endAt || !sheet) return;
-        promiseWithLog(
-          mutateAsync({
-            body: {
-              trainee_id: traineeId,
-              level,
-              start_at: new Date(startAt).toISOString(),
-              end_at: new Date(endAt).toISOString(),
-              examiners,
-              request_answers: sheet.fields.map((field) => ({ id: field.id, answer: answers[field.id] ?? "" })),
-            },
-          }),
-        );
-      }}
-    >
+    <div className="flex flex-col gap-4">
       {(error ?? sheetError) && (
         <Alert color="red" title={(error ?? sheetError)?.title}>
           {(error ?? sheetError)?.detail}
@@ -209,102 +185,37 @@ function ExamCreate({ onSaved }: { onSaved: () => void }) {
         <Trans>N/A: Not applicable · I: Improvement needed · S: Satisfactory · G: Good</Trans>
       </Alert>
       {isLoading && <Skeleton h={200} />}
-      {sheet?.fields.map((field) => {
-        const label = i18n.locale === "zh-cn" || !field.name_en ? field.name_zh : field.name_en;
-        const value = answers[field.id] ?? "";
-        const category = /^(category-\d+)-\d+$/.exec(field.id)?.[1];
-        if (category) {
-          const criteria = sheet.fields.filter(
-            (item) => item.id.startsWith(`${category}-`) && !item.id.endsWith("-remarks"),
-          );
-          if (criteria[0].id !== field.id) return null;
-          return (
-            <div key={category}>
-              <h4 className="mb-2 font-medium">{field.name_zh.split(" — ")[0]}</h4>
-              <Table.ScrollContainer minWidth={500}>
-                <Table withTableBorder withColumnBorders>
-                  <Table.Thead>
-                    <Table.Tr>
-                      <Table.Th>
-                        <Trans>Requirement</Trans>
-                      </Table.Th>
-                      {["N/A", "I", "S", "G"].map((score) => (
-                        <Table.Th key={score} w={48}>
-                          {score}
-                        </Table.Th>
-                      ))}
-                    </Table.Tr>
-                  </Table.Thead>
-                  <Table.Tbody>
-                    {criteria.map((criterion) => (
-                      <Table.Tr key={criterion.id}>
-                        <Table.Td>
-                          {(i18n.locale === "zh-cn" || !criterion.name_en ? criterion.name_zh : criterion.name_en)
-                            .split(" — ")
-                            .slice(1)
-                            .join(" — ") || criterion.name_zh}
-                        </Table.Td>
-                        {["N/A", "I", "S", "G"].map((score) => (
-                          <Table.Td key={score}>
-                            <Radio
-                              name={criterion.id}
-                              value={score}
-                              aria-label={`${criterion.name_zh}: ${score}`}
-                              checked={answers[criterion.id] === score}
-                              onChange={() => setAnswer(criterion.id, score)}
-                              required
-                            />
-                          </Table.Td>
-                        ))}
-                      </Table.Tr>
-                    ))}
-                  </Table.Tbody>
-                </Table>
-              </Table.ScrollContainer>
-            </div>
-          );
-        }
-        if (field.kind === "single-choice")
-          return (
-            <Select
-              key={field.id}
-              label={label}
-              required
-              data={field.single_choice_options}
-              value={value}
-              onChange={(v) => setAnswer(field.id, v ?? "")}
-            />
-          );
-        if (field.kind === "long-text")
-          return (
-            <Textarea
-              key={field.id}
-              label={label}
-              autosize
-              minRows={3}
-              value={value}
-              onChange={(event) => setAnswer(field.id, event.target.value)}
-            />
-          );
-        return (
-          <TextInput
-            key={field.id}
-            label={label}
-            required
-            value={value}
-            onChange={(event) => setAnswer(field.id, event.target.value)}
-          />
-        );
-      })}
-      <Button type="submit" disabled={!complete} loading={isPending}>
-        <Trans>Save Exam Record</Trans>
-      </Button>
-    </form>
+      {sheet && !sheetError && (
+        <Sheet
+          key={sheet.id}
+          className="flex flex-col gap-2"
+          sheet={sheet}
+          existingFillingAnswers={sheet.fields.map((field) => ({ field, answer: answers[field.id] ?? "" }))}
+          optionalFieldIds={sheet.fields.filter((field) => field.kind === "long-text").map((field) => field.id)}
+          onValuesChange={(values) => setAnswersByLevel((current) => ({ ...current, [level]: values }))}
+          isSubmitDisabled={!complete || isPending}
+          submitButtonContent={<Trans>Save Exam Record</Trans>}
+          doNotRequirePristine
+          onSubmit={async (requestAnswers) => {
+            if (!complete || !startAt || !endAt) return;
+            await mutateAsync({
+              body: {
+                trainee_id: traineeId,
+                level,
+                start_at: new Date(startAt).toISOString(),
+                end_at: new Date(endAt).toISOString(),
+                examiners,
+                request_answers: requestAnswers,
+              },
+            });
+          }}
+        />
+      )}
+    </div>
   );
 }
 
 function ExamDetail({ record }: { record: ExamRecord }) {
-  const { i18n } = useLingui();
   return (
     <div className="flex flex-col gap-4">
       <p>
@@ -324,16 +235,16 @@ function ExamDetail({ record }: { record: ExamRecord }) {
           {examiner.name} ({examiner.cid}) · {examiner.rating}
         </p>
       ))}
-      <Table>
-        <Table.Tbody>
-          {record.record_sheet_filing.map(({ field, answer }) => (
-            <Table.Tr key={field.id}>
-              <Table.Th>{i18n.locale === "zh-cn" || !field.name_en ? field.name_zh : field.name_en}</Table.Th>
-              <Table.Td className="whitespace-pre-wrap">{answer || "—"}</Table.Td>
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
+      <Sheet
+        className="flex flex-col gap-2"
+        sheet={{
+          id: `exam-record-${record.level.toLowerCase()}`,
+          name: record.level,
+          fields: record.record_sheet_filing.map(({ field }) => field),
+        }}
+        existingFillingAnswers={record.record_sheet_filing}
+        isSubmitHidden
+      />
     </div>
   );
 }

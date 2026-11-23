@@ -9,6 +9,8 @@ import { ComponentProps, FC, ReactNode } from "react";
 interface SheetProps extends Omit<ComponentProps<"form">, "onSubmit"> {
   sheet?: components["schemas"]["SheetDto"];
   existingFillingAnswers?: components["schemas"]["SheetFieldAnswerDto"][];
+  optionalFieldIds?: readonly string[];
+  onValuesChange?: (values: Record<string, string>) => void;
   onSubmit?: (answers: { id: string; answer: string }[]) => Promise<unknown>;
   isFieldValuesLoading?: boolean;
   isSubmitDisabled?: boolean;
@@ -23,6 +25,8 @@ export const Sheet: FC<SheetProps> = ({
   sheet,
   existingFillingAnswers,
   onSubmit,
+  optionalFieldIds = [],
+  onValuesChange,
   isFieldValuesLoading,
   isSubmitDisabled,
   isSubmitHidden,
@@ -39,6 +43,9 @@ export const Sheet: FC<SheetProps> = ({
         .filter((field) => !field.is_deleted)
         .map((field) => [field.id, existingFillingAnswers?.find((a) => a.field.id === field.id)?.answer ?? ""]) ?? [],
     ),
+    listeners: {
+      onChange: ({ formApi }) => onValuesChange?.(formApi.state.values),
+    },
     onSubmit: ({ value }) => {
       const answers = Object.entries(value).map(([fieldId, answer]) => {
         return {
@@ -64,7 +71,10 @@ export const Sheet: FC<SheetProps> = ({
           key={sheetField.id}
           name={sheetField.id}
           validators={{
-            onChange: ({ value }) => value?.length === 0 && t`The field must not be empty.`,
+            onChange: ({ value }) =>
+              !optionalFieldIds.includes(sheetField.id) && value?.length === 0 && t`The field must not be empty.`,
+            onSubmit: ({ value }) =>
+              !optionalFieldIds.includes(sheetField.id) && !value?.trim() && t`The field must not be empty.`,
           }}
         >
           {(field) => {
@@ -78,7 +88,7 @@ export const Sheet: FC<SheetProps> = ({
                 i18n.locale === "zh-cn" || !sheetField.description_en
                   ? sheetField.description_zh
                   : sheetField.description_en,
-              error: field.state.meta.errors.join(""),
+              error: [...new Set(field.state.meta.errors)].join(""),
               disabled: isSubmitHidden,
             };
 

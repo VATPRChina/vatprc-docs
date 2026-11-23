@@ -1370,9 +1370,6 @@ msgstr "Remove"
 msgid "Remove row"
 msgstr "Remove row"
 
-msgid "Requirement"
-msgstr "Requirement"
-
 msgid "Resolved Route"
 msgstr "Resolved Route"
 

@@ -1370,9 +1370,6 @@ msgstr "移除"
 msgid "Remove row"
 msgstr "移除此行"
 
-msgid "Requirement"
-msgstr "要求"
-
 msgid "Resolved Route"
 msgstr "解析后的航路"
 
