@@ -1,22 +1,24 @@
 ## Description
 
-<!-- Explain the feature or bug fix and its motivation -->
+<!-- Explain the change from a user's prospective and its motivation. -->
 
 ## Change
 
-<!-- Describe the changes in a human-readable way -->
+<!-- Describe the changes in a human-readable way. -->
 
 ## Test
 
+<!-- For changes in `docs` folder only, omit this section. -->
+
 ### Unit test
 
-<!-- List unit tests per module -->
+<!-- List unit tests per module. -->
 
 ### E2E test
 
-<!-- List E2E test cases added to website/uniapi -->
+<!-- List E2E test cases added to website/uniapi. -->
 
-<!-- Show E2E test execution result -->
+<!-- Show E2E test execution result. -->
 
 ### Manual test
 
