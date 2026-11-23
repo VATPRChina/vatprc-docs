@@ -55,6 +55,7 @@ export async function startBackend(
       ...process.env,
       ...env,
       APP_BIND_ADDRESS: `${backendHost}:${backendPort}`,
+      APP_VATSIM_BOOKING_SYNC__ENABLED: "false",
     },
   });
 

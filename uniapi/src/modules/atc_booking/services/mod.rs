@@ -1,3 +1,5 @@
+mod vatsim_sync;
+
 use sqlx::PgPool;
 use uuid::Uuid;
 
@@ -6,7 +8,9 @@ use crate::modules::event::repository::event_atc_position::EventAtcPositionRepos
 use crate::modules::event::service::EventAtcPositionView;
 use crate::modules::user::models::UserSummary;
 use crate::modules::user::service::user::{UserService, UserServiceError};
+use crate::settings;
 
+use self::vatsim_sync::VatsimBookingSync;
 use super::models::{AtcBooking, AtcBookingSave};
 use super::repository::AtcBookingRepository;
 
@@ -14,11 +18,20 @@ use super::repository::AtcBookingRepository;
 pub struct AtcBookingService {
     db: PgPool,
     user: UserService,
+    vatsim_sync: Option<VatsimBookingSync>,
 }
 
 impl AtcBookingService {
-    pub fn new(db: PgPool, user: UserService) -> Self {
-        Self { db, user }
+    pub fn new(
+        db: PgPool,
+        user: UserService,
+        sync_settings: &settings::VatsimBookingSync,
+    ) -> anyhow::Result<Self> {
+        Ok(Self {
+            db,
+            user,
+            vatsim_sync: VatsimBookingSync::from_settings(sync_settings)?,
+        })
     }
 
     pub async fn list_upcoming(&self) -> Result<Vec<AtcBookingView>, AtcBookingServiceError> {
@@ -40,6 +53,7 @@ impl AtcBookingService {
         booking: AtcBookingSave,
     ) -> Result<AtcBookingView, AtcBookingServiceError> {
         let booking = self.db.create_atc_booking(user_id, booking).await?;
+        self.sync_to_vatsim(Some(booking.id)).await;
         self.with_detail(booking).await
     }
 
@@ -60,6 +74,7 @@ impl AtcBookingService {
             .await?
             .ok_or(AtcBookingServiceError::NotFound(id))?;
         transaction.commit().await?;
+        self.sync_to_vatsim(Some(booking.id)).await;
         self.with_detail(booking).await
     }
 
@@ -79,7 +94,17 @@ impl AtcBookingService {
             .await?
             .ok_or(AtcBookingServiceError::NotFound(id))?;
         transaction.commit().await?;
+        self.sync_to_vatsim(Some(booking.id)).await;
         self.with_detail(booking).await
+    }
+
+    pub(crate) async fn sync_to_vatsim(&self, booking_id: Option<Uuid>) {
+        let (Some(sync), Some(booking_id)) = (&self.vatsim_sync, booking_id) else {
+            return;
+        };
+        if let Err(error) = sync.sync_booking(&self.db, booking_id).await {
+            tracing::warn!(%booking_id, %error, "VATSIM ATC booking sync failed");
+        }
     }
 
     async fn with_details(
