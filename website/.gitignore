@@ -3,53 +3,21 @@ __screenshots__
 .vinxi
 .nitro
 .tanstack
-.vite/
+.vite
+.vitest
 
-# Created by https://www.toptal.com/developers/gitignore/api/node,nextjs
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,nextjs
-
-### NextJS ###
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-.vitest/
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# local env files
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Created by https://www.toptal.com/developers/gitignore/api/node,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,react
 
 ### Node ###
 # Logs
 logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 lerna-debug.log*
+.pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -90,6 +58,7 @@ jspm_packages/
 web_modules/
 
 # TypeScript cache
+*.tsbuildinfo
 
 # Optional npm cache directory
 .npm
@@ -116,7 +85,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-# .env
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -180,15 +149,17 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-# End of https://www.toptal.com/developers/gitignore/api/node,nextjs
+### react ###
+.DS_*
+**/*.backup.*
+**/*.back.*
 
-# Sentry Config File
-.env.sentry-build-plugin
+node_modules
 
-# AI assistant files (local only, do not commit)
-.claude/
-CLAUDE.md
-.mcp.json
-.remember/
-docs/superpowers/
-.superpowers/
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/node,react
