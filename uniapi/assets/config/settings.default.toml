@@ -63,3 +63,7 @@ vatsim_data_url = "https://data.vatsim.net/v3/vatsim-data.json"
 
 [utils.metar]
 endpoint = "https://metar.vatsim.net"
+
+[vatsim_booking_sync]
+enabled = false
+base_url = "https://staging.vsimtech.org/api"

@@ -19,6 +19,21 @@ vatprc-uniapi migrate      # apply pending database migrations
 vatprc-uniapi route-v2 "ZBAA ELKUR W40 YQG ZSPD" # print the complete parser trace
 ```
 
+### VATSIM ATC booking sync
+
+UniAPI can mirror active and upcoming standalone and event ATC bookings to the
+[VATSIM booking API](https://staging.vsimtech.org/api-docs). Sync defaults to
+disabled, and the E2E launcher explicitly keeps it disabled.
+
+Set `APP_VATSIM_BOOKING_SYNC__ENABLED=true` and supply an organization API key
+through `APP_VATSIM_BOOKING_SYNC__API_KEY`. The default API base URL is
+`https://staging.vsimtech.org/api`. Set `APP_VATSIM_BOOKING_SYNC__BASE_URL` to
+target another deployment that supports the external booking endpoints.
+
+UniAPI reconciles bookings at startup and once a minute afterward. It retries
+failed changes on later passes and logs API rejections. VATSIM's eligibility
+rules still apply. UniAPI manages only bookings with its own external IDs.
+
 ## Testing
 
 Test routes are defined in `assets/test/routes.sql`. CI generates

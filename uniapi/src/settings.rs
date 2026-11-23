@@ -18,6 +18,24 @@ pub struct Settings {
     pub utils: Utils,
     pub navdata: Navdata,
     pub telemetry: OpenTelemetry,
+    pub vatsim_booking_sync: VatsimBookingSync,
+}
+
+#[derive(Deserialize, Clone)]
+pub struct VatsimBookingSync {
+    #[serde(default)]
+    pub enabled: bool,
+    pub base_url: String,
+    pub api_key: Option<String>,
+}
+
+impl std::fmt::Debug for VatsimBookingSync {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("VatsimBookingSync")
+            .field("enabled", &self.enabled)
+            .field("base_url", &self.base_url)
+            .finish_non_exhaustive()
+    }
 }
 
 #[derive(Debug, Deserialize, Clone)]
