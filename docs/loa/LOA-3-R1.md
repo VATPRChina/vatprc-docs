@@ -44,29 +44,37 @@ Unless otherwise stated or coordinated,
 
 En-route control (CTR) of both parties shall keep traffic away from t    the **5 nautical miles (nm) margin** of the boundary between Taipei FIR (RCAA) and Shanghai FIR (ZSHA) (or Guangzhou FIR (ZGZU)) under all circumstances. The margins on both sides constitute a buffer zone of width **10nm**. Except during a standard handover procedure, controllers in charge of the corresponding airspace or sector must coordinate and point out such aircraft to the controller of the other party when it becomes necessary for traffic to enter or crossing such margin.  
    
-### 6.1.2
+#### 6.1.2
 
 Controllers shall make every effort to follow the radar separation minima defined in ICAO Doc 4444 
 
-### 6.1.3
+#### 6.1.3
 
 Controllers of each side shall initiate each handover **ten to thirty nautical miles (10-30 nm)** before crossing the Transfer of Control Point (TCP). Handoff must be completed at least **ten nautical miles (10nm)** from the TCP. 
 
-### 6.1.4
+#### 6.1.4
 
 Conversion of altitude measurement unit shall be performed according to Section 7 of this document prior to handoff. 
 
-### 6.1.5
+#### 6.1.5
 
 **No controller shall clear an aircraft directly to a waypoint outside of the FIR** at which the controller controls unless prior coordination is made, and proper permission of such clearance is obtained. This also applies when there is no en-route/ terminal ATC available at the adjacent FIR through which a flight will transit. 
 
-6.1.6   Proper liaison between Taipei FIR and Guangzhou FIR (Shanghai FIR) shall be established for handover. **Controllers shall advise the requested cruising level (i.e. the altitude at which the aircraft will be flying during the handover) of a particular aircraft prior entering neighbouring FIR.** As per ICAO Doc 4444 Section 5.3.3.1, aircraft may not be cleared to change altitude during a handoff unless prior clearance has been obtained from the accepting controller. Controllers may request an altitude different from the ones specified in Section 7 of this LoA document from the receiving controller with prior coordination. 
+#### 6.1.6
 
-6.1.7   Controllers covering major aerodromes should advise neighboring controllers when a change of flow has occurred via controller chat or private message if necessary. 6.1.8 \- Controller shall ensure that all aircraft are flying under real-time speed (1x rate) prior to the initiation of a handover and during a handover. Crossing FIR boundary while under acceleration mode is strictly prohibited. 6.1.9 \- En-route or Terminal controllers should advise controllers of the other FIR when a sector is combined or separated and provide corresponding information. 6.1.10 \- If the route of the filed flight plan of a flight flying between Guangzhou FIR (Shanghai FIR) and Taipei FIR does not include a valid TCP or does not include an airway that contains the valid TCP, a controller shall amend the route of such flight plan following standard procedures per ICAO Doc 4444 so that amended route will include a valid TCP. If the pilot is unable to amend such a route, proper coordination shall be made to accommodate such situations. 6.1.11 \- Unless otherwise specified, all handovers shall be conducted between two en-route (CTR) controllers. 
+Proper liaison between Taipei FIR and Guangzhou FIR (Shanghai FIR) shall be established for handover. **Controllers shall advise the requested cruising level (i.e. the altitude at which the aircraft will be flying during the handover) of a particular aircraft prior entering neighbouring FIR.** As per ICAO Doc 4444 Section 5.3.3.1, aircraft may not be cleared to change altitude during a handoff unless prior clearance has been obtained from the accepting controller. Controllers may request an altitude different from the ones specified in Section 7 of this LoA document from the receiving controller with prior coordination. 
 
-6.2     The separations between handovers need to be in accordance with the horizontal and vertical separations specified in ICAO Doc 4444\.
+#### 6.1.7
 
-6.3      There are differences between Mainland China's flight levels and international flight levels. To avoid this difference affecting traffic, all handovers must be in feet and completed within Mainland China.
+Controllers covering major aerodromes should advise neighboring controllers when a change of flow has occurred via controller chat or private message if necessary. 6.1.8 \- Controller shall ensure that all aircraft are flying under real-time speed (1x rate) prior to the initiation of a handover and during a handover. Crossing FIR boundary while under acceleration mode is strictly prohibited. 6.1.9 \- En-route or Terminal controllers should advise controllers of the other FIR when a sector is combined or separated and provide corresponding information. 6.1.10 \- If the route of the filed flight plan of a flight flying between Guangzhou FIR (Shanghai FIR) and Taipei FIR does not include a valid TCP or does not include an airway that contains the valid TCP, a controller shall amend the route of such flight plan following standard procedures per ICAO Doc 4444 so that amended route will include a valid TCP. If the pilot is unable to amend such a route, proper coordination shall be made to accommodate such situations. 6.1.11 \- Unless otherwise specified, all handovers shall be conducted between two en-route (CTR) controllers. 
+
+### 6.2
+
+The separations between handovers need to be in accordance with the horizontal and vertical separations specified in ICAO Doc 4444\.
+
+### 6.3
+
+There are differences between Mainland China's flight levels and international flight levels. To avoid this difference affecting traffic, all handovers must be in feet and completed within Mainland China.
 
 ## 7. Sector Definitions
 
