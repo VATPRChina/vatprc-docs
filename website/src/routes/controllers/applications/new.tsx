@@ -1,15 +1,17 @@
 import { AtcApplicationForm } from "@/components/atc-application/atc-application-form";
 import { BackButton } from "@/components/back-button";
 import { useCenterRoles } from "@/components/controller-center/center-context";
-import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
+import { DiscourseDocument } from "@/components/doc/discourse-doc";
+import { getDiscourseDocument } from "@/lib/discourse";
 import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/controllers/applications/new")({
+  ssr: true,
   component: RouteComponent,
   async loader() {
-    return [await getDiscourseDocument("7188")] as const;
+    return [await getDiscourseDocument({ data: "7188" })] as const;
   },
 });
 

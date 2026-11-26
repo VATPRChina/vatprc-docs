@@ -1,6 +1,6 @@
 import { MarkdownDoc } from "./markdown-doc";
-import type { CompiledMarkdownDoc } from "./markdown-doc-compile";
-import { COMMUNITY_ENDPOINT, usePermission } from "@/lib/client";
+import { usePermission } from "@/lib/client";
+import { getDiscourseDocument } from "@/lib/discourse";
 import { MyRouterContext } from "@/lib/route-context";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Button, ButtonGroup, Skeleton } from "@mantine/core";
@@ -8,39 +8,10 @@ import { createFileRoute, FileRoutesByPath, useLoaderData } from "@tanstack/reac
 import React, { ReactNode } from "react";
 import { TbCloudX } from "react-icons/tb";
 
-export interface PostMeta {
-  title: string;
-  thumbnails?: {
-    url?: string;
-  }[];
-}
-
-export const getDiscourseDocument = async (postId: string) => {
-  const postPath = `${postId}/1`;
-  const [meta, raw] = await Promise.all([
-    fetch(`${COMMUNITY_ENDPOINT}/t/topic/${postPath}.json`).then((res) => {
-      return res.json() as Promise<PostMeta>;
-    }),
-    fetch(`${COMMUNITY_ENDPOINT}/raw/${postPath}`).then((res) => {
-      return res.text();
-    }),
-  ]);
-
-  let contentRes = raw;
-  let i = 0;
-  contentRes = contentRes.replaceAll(/upload:\/\/([\w.-]+)/g, () => {
-    const thumbnailUrl = meta.thumbnails?.[i]?.url ?? "";
-    i++;
-    return thumbnailUrl;
-  });
-
-  const { compileMarkdownDoc } = await import("./markdown-doc-compile");
-  const doc = await compileMarkdownDoc(contentRes);
-  return doc;
-};
+type DiscoursePageData = Awaited<ReturnType<typeof getDiscourseDocument>>;
 
 export const DiscourseDocument: React.FC<{
-  document: CompiledMarkdownDoc;
+  document: Pick<DiscoursePageData, "html" | "title">;
   en: string;
   cn: string;
   inline?: boolean;
@@ -86,26 +57,16 @@ export const createDiscourseFileRoute = <TFilePath extends keyof FileRoutesByPat
   extraHeader?: ReactNode,
 ): Parameters<ReturnType<typeof createFileRoute<TFilePath>>>[0] => ({
   component: () => {
-    const document: CompiledMarkdownDoc = useLoaderData({ strict: false });
+    const document: DiscoursePageData = useLoaderData({ strict: false });
     return <DiscourseDocument document={document} en={en} cn={cn} extraHeader={extraHeader} />;
   },
-  async head(ctx) {
-    const postId = (ctx.match.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
-    try {
-      const meta = await fetch(`${COMMUNITY_ENDPOINT}/t/topic/${postId}.json`).then((res) => {
-        if (!res.ok) {
-          throw new Error(`Failed to fetch: ${res.status}`);
-        }
-        return res.json() as Promise<PostMeta>;
-      });
-      return { meta: [{ title: meta.title }] };
-    } catch {
-      return {};
-    }
+  head({ loaderData }) {
+    const document = loaderData as DiscoursePageData | undefined;
+    return document?.postTitle ? { meta: [{ title: document.postTitle }] } : {};
   },
   async loader(ctx) {
     const postId = (ctx.context as MyRouterContext).i18n.locale === "zh-cn" ? (cn ?? en) : en;
-    return await getDiscourseDocument(postId);
+    return await getDiscourseDocument({ data: postId });
   },
   pendingMs: 100,
   pendingComponent: () => (

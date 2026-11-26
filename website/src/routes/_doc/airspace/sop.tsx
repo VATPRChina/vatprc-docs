@@ -1,5 +1,6 @@
-import { DiscourseDocument, getDiscourseDocument } from "@/components/doc/discourse-doc";
+import { DiscourseDocument } from "@/components/doc/discourse-doc";
 import { DocList } from "@/components/doc/doc-list";
+import { getDiscourseDocument } from "@/lib/discourse";
 import { getAllDocuments } from "@/lib/doc";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
@@ -9,7 +10,7 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/_doc/airspace/sop")({
   component: Page,
   async loader() {
-    return [await getAllDocuments(), await getDiscourseDocument("7532")] as const;
+    return [await getAllDocuments(), await getDiscourseDocument({ data: "7532" })] as const;
   },
   head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Standard Operation Procedures`) }] }),
 });
