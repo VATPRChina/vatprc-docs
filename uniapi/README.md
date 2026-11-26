@@ -19,6 +19,19 @@ vatprc-uniapi migrate      # apply pending database migrations
 vatprc-uniapi route-v2 "ZBAA ELKUR W40 YQG ZSPD" # print the complete parser trace
 ```
 
+## Publishing approved airspace
+
+Run the database migrations before deploying the API. To enable R2 publication,
+set `APP_AIRSPACE_PUBLICATION__ACCOUNT_ID` and store
+`APP_AIRSPACE_PUBLICATION__API_TOKEN` as a service secret with R2 write access.
+The export owns `vatprc-files/sectors/vatprc_airspace.json`.
+
+Each completed review queues a refresh. UniAPI replaces the JSON with the
+approved applications whose end time is still in the future. Future start
+times remain in the export so clients can activate them later. Expired
+applications remain available in review history. Failed uploads are retried
+from the database, including after a process restart.
+
 ## Testing
 
 Test routes are defined in `assets/test/routes.sql`. CI generates

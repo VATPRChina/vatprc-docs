@@ -14,6 +14,9 @@ use crate::modules::user::middleware::CurrentUser;
 use crate::modules::user::models::{UserRole, role_closure_from_strings};
 use crate::services::Services;
 
+mod publication;
+pub use publication::start_publication;
+
 #[derive(utoipa::OpenApi)]
 #[openapi(paths(create, list, review))]
 pub(crate) struct ApiDoc;
@@ -226,14 +229,18 @@ async fn review(
             "comment exceeds 5000 bytes",
         ));
     }
+    let mut tx = services.db().begin().await?;
     let updated = sqlx::query("UPDATE public.airspace_application SET status = $2, reviewer_id = $3, reviewed_at = now(), review_comment = $4 WHERE id = $1 AND status = 'submitted'")
-        .bind(id).bind(request.status).bind(reviewer_id).bind(request.comment).execute(services.db()).await?;
+        .bind(id).bind(request.status).bind(reviewer_id).bind(request.comment).execute(&mut *tx).await?;
     if updated.rows_affected() == 0 {
         return Err(ApiError::bad_request(
             "status",
             "application does not exist or has already been reviewed",
         ));
     }
+    publication::mark_pending(&mut tx).await?;
+    tx.commit().await?;
+    publication::wake();
     Ok(Json(
         fetch_application(&services, id)
             .await?

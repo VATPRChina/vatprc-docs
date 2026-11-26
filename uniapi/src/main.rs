@@ -33,6 +33,10 @@ async fn run() -> Result<(), anyhow::Error> {
     let discord_services = services.clone();
 
     let listener = tokio::net::TcpListener::bind(&settings.bind_address).await?;
+    vatprc_uniapi::modules::airspace_application::start_publication(
+        services.db().clone(),
+        settings.airspace_publication.as_ref(),
+    )?;
 
     tracing::info!("listening on http://{}", settings.bind_address);
 

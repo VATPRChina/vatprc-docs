@@ -19,6 +19,19 @@ pub struct Settings {
     pub navdata: Navdata,
     pub telemetry: OpenTelemetry,
     pub vatsim_booking_sync: VatsimBookingSync,
+    pub airspace_publication: Option<AirspacePublication>,
+}
+
+#[derive(Deserialize, Clone)]
+pub struct AirspacePublication {
+    pub account_id: String,
+    pub api_token: String,
+}
+
+impl std::fmt::Debug for AirspacePublication {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("AirspacePublication").finish_non_exhaustive()
+    }
 }
 
 #[derive(Deserialize, Clone)]
