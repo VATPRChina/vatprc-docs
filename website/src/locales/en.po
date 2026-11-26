@@ -170,6 +170,12 @@ msgstr "Appreciation? Compliment? Criticism? You are welcome to provide feedback
 msgid "Approach"
 msgstr "Approach"
 
+msgid "Approve"
+msgstr "Approve"
+
+msgid "Approved"
+msgstr "Approved"
+
 msgid "Are you sure to book the slot?"
 msgstr "Are you sure to book the slot?"
 

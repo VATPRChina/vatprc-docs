@@ -281,6 +281,12 @@ msgstr "如有任何建议或反馈，欢迎通过邮件直接向我们提出，
 msgid "Approach"
 msgstr "进近"
 
+msgid "Approve"
+msgstr "批准"
+
+msgid "Approved"
+msgstr "已批准"
+
 msgid "Are you sure to book the slot?"
 msgstr "确定要预订该时段吗？"
 

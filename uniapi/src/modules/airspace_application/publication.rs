@@ -138,13 +138,14 @@ fn format_export(approved: &[ApprovedAirspace]) -> anyhow::Result<String> {
     }
     let records = approved
         .iter()
-        .map(ApprovedAirspace::format_record)
+        .enumerate()
+        .map(|(index, airspace)| airspace.format_record(index + 1))
         .collect::<anyhow::Result<Vec<_>>>()?;
     Ok(format!("[{}]\n", records.join(", ")))
 }
 
 impl ApprovedAirspace {
-    fn format_record(&self) -> anyhow::Result<String> {
+    fn format_record(&self, number: usize) -> anyhow::Result<String> {
         fn point(value: &Coordinate) -> [f64; 2] {
             [value.latitude, value.longitude]
         }
@@ -153,7 +154,7 @@ impl ApprovedAirspace {
                 point(center),
                 vec![
                     ("circle", json!(point(center))),
-                    ("range", json!(radius_km / 1.852)),
+                    ("range", json!((radius_km / 1.852 * 10.0).round() / 10.0)),
                 ],
             ),
             Boundary::Polygon { vertices } => {
@@ -196,7 +197,10 @@ impl ApprovedAirspace {
             &self.category
         };
         let mut fields = vec![
-            ("name", json!(format!("VATPRC-{}", self.id.simple()))),
+            (
+                "name",
+                json!(format!("VATPRC-Temporary-Airspace-{number:03}")),
+            ),
             ("type", json!(category)),
             ("alt_min", json!(self.lower_ft / 100)),
             ("alt_max", json!((i64::from(self.upper_ft) + 99) / 100)),
@@ -262,6 +266,7 @@ mod tests {
         .unwrap();
         let values: Value = serde_json::from_str(&body).unwrap();
         let entry = &values[0];
+        assert_eq!(entry["name"], "VATPRC-Temporary-Airspace-001");
         assert_eq!(entry["type"], "Prohibited");
         assert_eq!(entry["alt_min"], 1);
         assert_eq!(entry["alt_max"], 20);
@@ -276,6 +281,27 @@ mod tests {
         );
         assert_eq!(entry["user_text"], "Pilot \"notice\"");
         assert!(entry.get("coordinates").is_none());
+    }
+
+    #[test]
+    fn numbers_airspaces_and_rounds_circle_ranges() {
+        let circle = |radius_km| {
+            approved(Boundary::Circle {
+                center: Coordinate {
+                    latitude: 40.0,
+                    longitude: 116.0,
+                },
+                radius_km,
+            })
+        };
+        let body = format_export(&[circle(20.0), circle(18.52), circle(1.0)]).unwrap();
+        let values: Value = serde_json::from_str(&body).unwrap();
+        assert_eq!(values[0]["name"], "VATPRC-Temporary-Airspace-001");
+        assert_eq!(values[1]["name"], "VATPRC-Temporary-Airspace-002");
+        assert_eq!(values[2]["name"], "VATPRC-Temporary-Airspace-003");
+        assert_eq!(values[0]["range"], 10.8);
+        assert_eq!(values[1]["range"], 10.0);
+        assert_eq!(values[2]["range"], 0.5);
     }
 
     #[test]
