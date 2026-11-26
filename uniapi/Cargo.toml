@@ -5,11 +5,11 @@ edition = "2024"
 
 [dependencies]
 axum = { version = "0.8.9", features = ["multipart", "ws"] }
-base64 = "0.22.1"
+base64 = "0.23.1"
 chrono = { version = "0.4.44", features = ["clock", "serde"] }
 config = "0.15.22"
 futures = "0.3.32"
-jsonwebtoken = { version = "10.3.0", features = ["rust_crypto"] }
+jsonwebtoken = { version = "11.1.0", features = ["rust_crypto"] }
 lettre = { version = "0.11.19", default-features = false, features = [
   "builder",
   "smtp-transport",
@@ -27,7 +27,7 @@ reqwest = { version = "0.13.3", features = ["json", "form", "multipart"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
 sha2 = "0.11.0"
-sqlx = { version = "0.8.6", features = [
+sqlx = { version = "0.9.1", features = [
   "runtime-tokio",
   "postgres",
   "sqlite",
@@ -45,30 +45,30 @@ tokio = { version = "1.52.1", features = [
 ] }
 thiserror = "2.0.18"
 tracing = "0.1.44"
-tracing-opentelemetry = "0.33.0"
-opentelemetry-appender-tracing = "0.32.0"
-opentelemetry-otlp = { version = "0.32.0", features = ["reqwest-rustls"] }
-opentelemetry_sdk = { version = "0.32.0", features = ["rt-tokio"] }
-opentelemetry = "0.32.0"
+tracing-opentelemetry = "0.34.0"
+opentelemetry-appender-tracing = "0.33.1"
+opentelemetry-otlp = { version = "0.33.1", features = ["reqwest-rustls"] }
+opentelemetry_sdk = { version = "0.33.1", features = ["rt-tokio"] }
+opentelemetry = "0.33.1"
 tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
-ulid = { version = "1.2.1", features = ["serde", "uuid"] }
-utoipa = { version = "5.4.0", features = ["chrono", "uuid"] }
-utoipa-axum = "0.2"
-utoipa-scalar = { version = "0.3", features = ["axum"] }
+ulid = { version = "3.0.0", features = ["serde", "uuid"] }
+utoipa = { version = "6.0.0", features = ["chrono", "uuid"] }
+utoipa-axum = "0.3"
+utoipa-scalar = { version = "0.4", features = ["axum"] }
 url = "2.5.8"
 uuid = { version = "1.23.1", features = ["serde"] }
-tower-http = { version = "0.6.8", features = ["cors", "trace", "catch-panic"] }
-convert_case = "0.11.0"
+tower-http = { version = "0.7.1", features = ["cors", "trace", "catch-panic"] }
+convert_case = "0.12.0"
 arrayvec = { version = "0.7.6", features = ["serde"] }
-zip = "8.6.0"
-itertools = "0.14.0"
+zip = "9.1.2"
+itertools = "0.15.0"
 anyhow = "1.0.102"
 ordered-float = "5.3.0"
 serde_plain = "1.0.2"
 approx = "0.5.1"
 mini-moka = { version = "0.10.3", features = ["sync"] }
 clap = { version = "4.6.1", features = ["derive"] }
-sea-query = { version = "0.32.7", default-features = false, features = [
+sea-query = { version = "1.0.2", default-features = false, features = [
   "backend-postgres",
   "derive",
   "with-uuid",
