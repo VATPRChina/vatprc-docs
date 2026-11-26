@@ -31,8 +31,7 @@ Please use an online image service, and include the absolute link to it.
 In repository or Discourse Markdown, use a fenced `geojson` block to embed an
 interactive map. Coordinates are in longitude, latitude order. Each block accepts
 a geometry, Feature, or FeatureCollection, including multi-geometries and
-GeometryCollections. Readers can expand the GeoJSON below each map to see its
-source. Invalid JSON or geometry appears as an ordinary code block.
+GeometryCollections. Invalid JSON or geometry appears as an ordinary code block.
 
 ````markdown
 ```geojson

@@ -181,7 +181,7 @@ describe.concurrent("compileMarkdownDoc", async () => {
   });
 });
 
-test("compiles nested GeoJSON fences in order and retains escaped source on the server", () => {
+test("compiles nested GeoJSON maps and renders ordinary and malformed fences as code", () => {
   const point = { type: "Point", coordinates: [1, 2] };
   const feature = { type: "Feature", geometry: point, properties: { name: "<img src=x>" } };
   const doc = compileMarkdownDoc(
@@ -217,10 +217,10 @@ test("compiles nested GeoJSON fences in order and retains escaped source on the 
     properties: { collection: JSON.stringify({ type: "FeatureCollection", features: [feature] }) },
   });
   expect(ssr).not.toContain("data-geojson-index");
-  expect(ssr).toMatch(/<blockquote>[\s\S]*?class="language-geojson"[\s\S]*?<\/blockquote>/);
-  expect(ssr).toMatch(/<li>[\s\S]*?class="language-geojson"[\s\S]*?<\/li>/);
-  expect(ssr).toMatch(/class="language-geojson">[\s\S]*?class="th-token th-property">&quot;type&quot;/);
-  expect(ssr).toContain("&lt;img src=x&gt;");
+  expect(doc.markdown.children.find((node) => node.type === "list")?.items[0].children).toContainEqual(
+    expect.objectContaining({ type: "component", tagName: "geojson-map" }),
+  );
+  expect(ssr).not.toContain("<img src=x>");
   expect(ssr).toContain('class="language-geojson"><span class="th-line" data-line="1">{broken}</span></code></pre>');
   expect(ssr).toContain('class="language-json">');
   expect(ssr).not.toContain("<canvas");
