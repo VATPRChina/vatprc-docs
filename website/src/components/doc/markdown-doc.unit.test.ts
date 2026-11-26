@@ -1,5 +1,6 @@
-import { compileMarkdownDoc } from "./markdown-doc-compile";
+import { compileMarkdownDoc, parseMarkdownDoc, renderMarkdownDoc } from "./markdown-doc-compile";
 import { getAllDocuments, getDocument } from "@/lib/doc";
+import type { MarkdownDocument } from "@tanstack/markdown";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import path from "node:path";
 import { describe, expect, test, vi } from "vitest";
@@ -44,18 +45,18 @@ const getAllDocumentPaths = async () => {
 };
 
 describe.concurrent("compileMarkdownDoc", async () => {
-  test("extracts YAML metadata and falls back to the first heading", async () => {
-    const doc = await compileMarkdownDoc('---\ntitle: "Document title"\norder: 0\n---\n# Heading');
+  test("extracts YAML metadata and falls back to the first heading", () => {
+    const doc = compileMarkdownDoc('---\ntitle: "Document title"\norder: 0\n---\n# Heading');
     expect(doc.title).toBe("Document title");
     expect(doc.frontmatter).toEqual({ title: "Document title", order: 0 });
     expect(doc.html).toBe('<h1 id="heading">Heading</h1>');
     expect(doc.tableOfContents).toEqual([{ depth: 1, value: "Heading" }]);
-    expect((await compileMarkdownDoc("# Heading")).title).toBe("Heading");
-    expect((await compileMarkdownDoc("No heading")).title).toBeUndefined();
+    expect(compileMarkdownDoc("# Heading").title).toBe("Heading");
+    expect(compileMarkdownDoc("No heading").title).toBeUndefined();
   });
 
-  test("renders Markdown features and unique heading anchors", async () => {
-    const doc = await compileMarkdownDoc(
+  test("renders Markdown features and unique heading anchors", () => {
+    const doc = compileMarkdownDoc(
       [
         "# 标题",
         "# 标题",
@@ -73,6 +74,8 @@ describe.concurrent("compileMarkdownDoc", async () => {
         "line two",
         "",
         "[external](https://example.com) [local](#标题)",
+        "",
+        "<https://example.com/standalone>",
       ].join("\n"),
     );
     expect(doc.html).toContain('id="标题"');
@@ -85,10 +88,11 @@ describe.concurrent("compileMarkdownDoc", async () => {
     expect(doc.html).toContain('target="_blank"');
     expect(doc.html).toContain('rel="noopener noreferrer"');
     expect(doc.html).toContain('<a href="#%E6%A0%87%E9%A2%98">local</a>');
+    expect(doc.html).toContain('href="https://example.com/standalone"');
   });
 
-  test("preserves raw HTML tables, images and literal Markdown text", async () => {
-    const doc = await compileMarkdownDoc(
+  test("preserves raw HTML tables, images and literal Markdown text", () => {
+    const doc = compileMarkdownDoc(
       [
         "# Test",
         "",
@@ -106,8 +110,8 @@ describe.concurrent("compileMarkdownDoc", async () => {
     expect(doc.html).toContain('src="https://example.com/image.png"');
   });
 
-  test("strips executable HTML and treats MDX expressions as text", async () => {
-    const doc = await compileMarkdownDoc(
+  test("strips executable HTML and treats MDX expressions as text", () => {
+    const doc = compileMarkdownDoc(
       [
         "{globalThis.alert('expression')}",
         "",
@@ -118,15 +122,44 @@ describe.concurrent("compileMarkdownDoc", async () => {
         '<a href="javascript:alert(1)">unsafe</a>',
         "",
         '<iframe src="https://example.com"></iframe>',
+        "",
+        "[unsafe Markdown link](javascript:alert(1))",
       ].join("\n"),
     );
     expect(doc.html).toContain("{globalThis.alert('expression')}");
     expect(doc.html).not.toMatch(/<script|onerror|javascript:|<iframe/);
   });
 
+  test("renders the same HTML from a serialized document", () => {
+    const source = "# Heading\n\n### Nested\n\nA footnote[^note].\n\n[^note]: Footnote";
+    const document = parseMarkdownDoc(source);
+    const restored = JSON.parse(JSON.stringify(document)) as MarkdownDocument;
+    const doc = compileMarkdownDoc(source);
+
+    expect(doc.tableOfContents).toEqual([{ depth: 1, value: "Heading", children: [{ depth: 3, value: "Nested" }] }]);
+    expect(renderMarkdownDoc(restored)).toBe(doc.html);
+    expect(doc.html).toContain('href="#user-content-fn-note"');
+    expect(doc.html).toContain('id="user-content-fn-note"');
+    expect(doc.html).toContain('href="#user-content-fnref-note"');
+    expect(doc.html).toContain('id="user-content-fnref-note"');
+    expect(doc.html).toContain('aria-describedby="user-content-footnote-label"');
+    expect(doc.html).toContain('id="user-content-footnote-label"');
+  });
+
+  test("reparses accumulated streaming text and escapes raw HTML", () => {
+    const streaming = { streaming: true };
+    const partial = "# Response\n\n<img src=x>\n\n-";
+    const complete = partial + " Completed";
+
+    const incomplete = compileMarkdownDoc(partial, streaming);
+    expect(incomplete.html).not.toContain("<ul>");
+    expect(incomplete.html).toContain("&#x3C;img src=x>");
+    expect(compileMarkdownDoc(complete, streaming).html).toContain("<li>Completed</li>");
+    expect(compileMarkdownDoc(partial, streaming)).toEqual(incomplete);
+  });
+
   test.concurrent.each(await getAllDocumentPaths())('can compile doc at "%s"', async (docPath) => {
-    const document = await getDocument({ data: docPath });
-    const markdown = await compileMarkdownDoc(document);
+    const markdown = await getDocument({ data: docPath });
 
     expect(markdown.html).toBeTruthy();
     expect(markdown.title).toBeTruthy();

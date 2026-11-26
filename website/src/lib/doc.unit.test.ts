@@ -50,7 +50,6 @@ describe.concurrent("getDocument", async () => {
       .map((doc) => [path.relative(path.resolve(import.meta.filename, "../../../../docs"), doc.path)]),
   )('should load document at path "%s"', async (docPath) => {
     const document = await getDocument({ data: docPath });
-    expect(document).toBeDefined();
-    expect(document).length.to.be.greaterThan(0);
+    expect(document.html).toBeTruthy();
   });
 });

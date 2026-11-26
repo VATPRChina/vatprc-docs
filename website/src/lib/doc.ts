@@ -1,3 +1,4 @@
+import { notFound } from "@tanstack/react-router";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -22,7 +23,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = docsDirector
       const filePath = path.resolve(entry.parentPath, entry.name);
       const fileContent = await fs.readFile(filePath, "utf-8");
       try {
-        const file = await compileMarkdownDoc(fileContent);
+        const file = compileMarkdownDoc(fileContent);
 
         documents.push({
           title: file.title ?? entry.name,
@@ -53,7 +54,7 @@ const findAllDocuments = createServerOnlyFn(async (prefix: string = docsDirector
       let order = undefined;
       if (indexExists) {
         const fileContent = await fs.readFile(indexFilePath, "utf-8");
-        const file = await compileMarkdownDoc(fileContent);
+        const file = compileMarkdownDoc(fileContent);
         title = file.title ?? entry.name;
         if (typeof file.frontmatter?.order === "number") {
           order = file.frontmatter?.order;
@@ -84,7 +85,23 @@ export const getAllDocuments = createServerFn().handler(async () => findAllDocum
 export const getDocument = createServerFn()
   .validator((data: string) => data)
   .handler(async (ctx) => {
-    const filePath = path.join(docsDirectory, ctx.data);
-    const content = await fs.readFile(filePath, "utf-8");
-    return content;
+    const filePath = path.resolve(docsDirectory, ctx.data);
+    const relativePath = path.relative(docsDirectory, filePath);
+    if (
+      relativePath.startsWith(`..${path.sep}`) ||
+      path.extname(relativePath) !== ".md" ||
+      path.isAbsolute(relativePath)
+    ) {
+      notFound({ throw: true });
+    }
+
+    const source = await fs.readFile(filePath, "utf-8").catch((error: NodeJS.ErrnoException) => {
+      if (error.code === "ENOENT" || error.code === "ENOTDIR") {
+        notFound({ throw: true });
+      }
+      throw error;
+    });
+    const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
+    const { html, title } = compileMarkdownDoc(source);
+    return { html, title };
   });

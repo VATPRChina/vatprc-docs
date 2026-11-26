@@ -2,24 +2,13 @@ import { MarkdownDoc } from "@/components/doc/markdown-doc";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton, Alert } from "@mantine/core";
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { TbCloudX } from "react-icons/tb";
 
 export const Route = createFileRoute("/docs/$")({
+  ssr: true,
   component: RouteComponent,
-  async loader(ctx) {
-    try {
-      const source = await getDocument({ data: `${ctx.params._splat}.md` });
-      const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
-      const doc = await compileMarkdownDoc(source);
-      return doc;
-    } catch (exception) {
-      if (exception instanceof Error && exception.message.startsWith("ENOENT")) {
-        notFound({ throw: true });
-      }
-      throw exception;
-    }
-  },
+  loader: ({ params }) => getDocument({ data: `${params._splat}.md` }),
   head: () => ({
     meta: [{ name: "robots", content: "noindex" }],
   }),
