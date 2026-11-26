@@ -1,9 +1,11 @@
+import { geojsonExtension } from "./geojson-extension";
+import { mapBlocks } from "./markdown-blocks";
 import type { InlineNode, MarkdownDocument, MarkdownExtension } from "@tanstack/markdown";
 import { autolinksExtension } from "@tanstack/markdown/extensions/autolinks";
 import { calloutsExtension } from "@tanstack/markdown/extensions/callouts";
 import { headingCollectionExtension } from "@tanstack/markdown/extensions/headings";
 import { streamingMarkdownExtension } from "@tanstack/markdown/extensions/streaming";
-import { renderHtml } from "@tanstack/markdown/html";
+import { renderInline } from "@tanstack/markdown/html";
 import { parseMarkdown } from "@tanstack/markdown/parser";
 import GithubSlugger from "github-slugger";
 import { fromHtml } from "hast-util-from-html";
@@ -18,7 +20,7 @@ interface TocEntry {
 }
 
 export interface CompiledMarkdownDoc {
-  html: string;
+  markdown: MarkdownDocument;
   tableOfContents: TocEntry[];
   frontmatter: Record<string, unknown>;
   title: string | undefined;
@@ -55,20 +57,6 @@ const extensions: MarkdownExtension[] = [
   { name: "line-breaks", transformInline: withLineBreaks },
   headingCollectionExtension(),
 ];
-const streamingExtensions = [streamingMarkdownExtension(), ...extensions];
-
-export const parseMarkdownDoc = (source: string, { streaming = false } = {}): MarkdownDocument => {
-  const slugger = new GithubSlugger();
-  return parseMarkdown(source, {
-    // Existing docs use HTML tables and images. Only render them through the sanitizer below.
-    allowHtml: !streaming,
-    frontmatter: !streaming,
-    headingIds: (text) => slugger.slug(text),
-    extensions: streaming ? streamingExtensions : extensions,
-    urlTransform: (_url, _kind, safeUrl) => encodeURI(safeUrl.toWellFormed()).replace(/%25(?=[\da-f]{2})/gi, "%"),
-  });
-};
-
 const htmlSchema: Schema = {
   ...defaultSchema,
   tagNames: [...(defaultSchema.tagNames ?? []), "figure", "figcaption"],
@@ -89,30 +77,14 @@ const htmlSchema: Schema = {
   },
 };
 
-export const renderMarkdownDoc = (document: MarkdownDocument): string => {
-  const fragment = fromHtml(renderHtml(document, { allowHtml: true }), { fragment: true });
+const sanitizeHtml = (html: string): string => {
+  const fragment = fromHtml(html, { fragment: true });
   const tree = sanitize(fragment, htmlSchema) as typeof fragment;
-  const headingIds = new Set(document.headings?.map(({ id }) => id));
-  const prefix = defaultSchema.clobberPrefix ?? "user-content-";
-
   const formatElements = (parent: typeof tree | Extract<(typeof tree.children)[number], { type: "element" }>) => {
     for (const node of parent.children) {
-      if (node.type !== "element") {
-        continue;
-      }
-      const { id, href } = node.properties;
-      const originalId = typeof id === "string" ? id.slice(prefix.length) : "";
-      // Keep existing Markdown anchors and TanStack's already-prefixed footnote IDs.
-      if (/^h[1-6]$/.test(node.tagName) && headingIds.has(originalId)) {
-        node.properties.id = originalId;
-      }
-      if (node.tagName === "li" && originalId.startsWith("user-content-fn-")) {
-        node.properties.id = originalId;
-      }
+      if (node.type !== "element") continue;
       if (node.tagName === "a") {
-        if (node.properties.dataFootnoteRef !== undefined && originalId.startsWith("user-content-fnref-")) {
-          node.properties.id = originalId;
-        }
+        const { href } = node.properties;
         if (typeof href === "string" && /^(https?:)?\/\//i.test(href)) {
           node.properties.target = "_blank";
           node.properties.rel = ["noopener", "noreferrer"];
@@ -124,6 +96,46 @@ export const renderMarkdownDoc = (document: MarkdownDocument): string => {
 
   formatElements(tree);
   return toHtml(tree);
+};
+
+const containsHtml = (node: InlineNode): boolean =>
+  node.type === "inlineHtml" || ("children" in node && node.children.some(containsHtml));
+
+const sanitizeInlines = (nodes: InlineNode[]): InlineNode[] =>
+  nodes.some(containsHtml)
+    ? [
+        {
+          type: "inlineHtml",
+          value: sanitizeHtml(nodes.map((node) => renderInline(node, { allowHtml: true })).join("")),
+        },
+      ]
+    : nodes;
+
+const htmlExtension: MarkdownExtension = {
+  name: "sanitized-html",
+  transformDocument(document) {
+    return {
+      ...document,
+      children: mapBlocks(document.children, (node) => {
+        switch (node.type) {
+          case "html":
+            return { ...node, value: sanitizeHtml(node.value) };
+          case "heading":
+          case "paragraph":
+            return { ...node, children: sanitizeInlines(node.children) };
+          case "table": {
+            const cleanCell = (cell: (typeof node.header)[number]) => ({
+              ...cell,
+              children: sanitizeInlines(cell.children),
+            });
+            return { ...node, header: node.header.map(cleanCell), rows: node.rows.map((row) => row.map(cleanCell)) };
+          }
+          default:
+            return node;
+        }
+      }),
+    };
+  },
 };
 
 const buildTableOfContents = (headings: NonNullable<MarkdownDocument["headings"]>): TocEntry[] => {
@@ -142,11 +154,24 @@ const buildTableOfContents = (headings: NonNullable<MarkdownDocument["headings"]
 };
 
 export const compileMarkdownDoc = (source: string, options?: { streaming?: boolean }): CompiledMarkdownDoc => {
-  const document = parseMarkdownDoc(source, options);
+  const slugger = new GithubSlugger();
+  const streaming = options?.streaming ?? false;
+  const document = parseMarkdown(source, {
+    allowHtml: !streaming,
+    frontmatter: !streaming,
+    headingIds: (text) => slugger.slug(text),
+    extensions: [
+      ...(streaming ? [streamingMarkdownExtension()] : []),
+      ...extensions,
+      htmlExtension,
+      geojsonExtension(),
+    ],
+    urlTransform: (_url, _kind, safeUrl) => encodeURI(safeUrl.toWellFormed()).replace(/%25(?=[\da-f]{2})/gi, "%"),
+  });
   const parsed: unknown = document.frontmatter === undefined ? undefined : parseYaml(document.frontmatter);
   const frontmatter =
     parsed !== null && typeof parsed === "object" && !Array.isArray(parsed) ? (parsed as Record<string, unknown>) : {};
   const tableOfContents = buildTableOfContents(document.headings ?? []);
   const title = typeof frontmatter.title === "string" ? frontmatter.title : tableOfContents[0]?.value;
-  return { html: renderMarkdownDoc(document), tableOfContents, frontmatter, title };
+  return { markdown: { type: "root", children: document.children }, tableOfContents, frontmatter, title };
 };

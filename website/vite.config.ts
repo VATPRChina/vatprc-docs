@@ -60,7 +60,13 @@ export default defineConfig(({ command, mode }) => ({
         // Browser component tests mock server helpers; Start's virtual entries are not available here.
         optimizeDeps: {
           entries: [],
-          include: ["@date-fns/utc"],
+          include: [
+            "@date-fns/utc",
+            "@tanstack/markdown/parser",
+            "@tanstack/markdown/react",
+            "@turf/turf",
+            "@vis.gl/react-maplibre",
+          ],
           exclude: ["@tanstack/react-start", "@tanstack/react-start/server"],
         },
         server: { preTransformRequests: false },

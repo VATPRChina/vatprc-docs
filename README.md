@@ -26,6 +26,24 @@ Please use an online image service, and include the absolute link to it.
 - For VATPRC staff, you may use <https://www.vatprc.net/docs/utils/image>.
 - For others, please use an online image CDN service.
 
+#### GeoJSON maps
+
+In repository or Discourse Markdown, use a fenced `geojson` block to embed an
+interactive map. Coordinates are in longitude, latitude order. Each block accepts
+a geometry, Feature, or FeatureCollection, including multi-geometries and
+GeometryCollections. Readers can expand the GeoJSON below each map to see its
+source. Invalid JSON or geometry appears as an ordinary code block.
+
+````markdown
+```geojson
+{
+  "type": "Feature",
+  "properties": { "name": "Beijing Capital International Airport" },
+  "geometry": { "type": "Point", "coordinates": [116.5975, 40.0799] }
+}
+```
+````
+
 ### Website
 
 See [README](./website/README.md).

@@ -102,6 +102,6 @@ export const getDocument = createServerFn()
       throw error;
     });
     const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
-    const { html, title } = compileMarkdownDoc(source);
-    return { html, title };
+    const { markdown, title } = compileMarkdownDoc(source);
+    return { markdown, title };
   });

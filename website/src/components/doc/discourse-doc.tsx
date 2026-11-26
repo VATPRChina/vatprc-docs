@@ -1,4 +1,5 @@
 import { MarkdownDoc } from "./markdown-doc";
+import { MarkdownContent } from "@/components/doc/markdown-content";
 import { usePermission } from "@/lib/client";
 import { getDiscourseDocument } from "@/lib/discourse";
 import { MyRouterContext } from "@/lib/route-context";
@@ -11,7 +12,7 @@ import { TbCloudX } from "react-icons/tb";
 type DiscoursePageData = Awaited<ReturnType<typeof getDiscourseDocument>>;
 
 export const DiscourseDocument: React.FC<{
-  document: Pick<DiscoursePageData, "html" | "title">;
+  document: Pick<DiscoursePageData, "markdown" | "title">;
   en: string;
   cn: string;
   inline?: boolean;
@@ -45,7 +46,7 @@ export const DiscourseDocument: React.FC<{
     <MarkdownDoc tocHeader={editButtons} inline={inline}>
       {extraHeader}
       <h1 className="text-2xl">{document.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: document.html }} />
+      <MarkdownContent markdown={document.markdown} />
     </MarkdownDoc>
   );
 };
