@@ -126,100 +126,64 @@ All direct cross-border flights are strictly forbidden.
 
 ## 9. Handoff Altitudes at Transfer of Control Points (TCP) for IFR flights
 
-### 9.1	**R200** Airway (TCP: **OLDID**)
+### 9.1	Guangzhou FIR – Taipei FIR
 
-#### 9.1.1
-Leaving Guangzhou FIR – Entering Taipei FIR: Primary FL290, Secondary **FL310**, or subject to ATC coordination   
+|      TCP       |  Route   |    Direction     | Altitudes (FLAS) |
+| :------------: | :------: | :--------------: | :--------------: |
+|    OLDID     | R200  | To Taipei FIR |  **FL290\FL310**\subject on coordination |
+|    OLDID     | R200  | To Guangzhou FIR |  **FL280\FL300**\subject on coordination |
 
-#### 9.1.2
+ ### 9.2	Shanghai FIR – Taipei FIR
 
-Leaving Taipei FIR – Entering Guangzhou FIR: Primary FL280, Secondary **FL300**, or subject to ATC coordination 
+|      TCP       |  Route   |    Direction     | Altitudes (FLAS) |
+| :------------: | :------: | :--------------: | :--------------: |
+|    KASKA     | B591  |  Transiting  Taipei FIR |  **FL300\FL320** |
+|    KASKA     | B591  | Transiting  Shanghai FIR |  **FL270\FL320** |
+|    SULEM     | R596  | Transiting  Taipei FIR |**FL240\FL280\FL340** |
+|    SULEM     | R596  | Transiting  Shanghai FIR  | **FL250\FL290\FL370** |
 
-### 9.2	**B591** Airway (TCP: **KASKA**) 
+### 9.3 Kinmen (RCBS) TMA and Matsu (RCMT) TMA
 
-#### 9.2.1	Transiting Shanghai FIR and Taipei FIR   
+|  Position   |    Airway (Waypoint)     | Altitudes (FLAS) |
+| :------: | :--------------: | :--------------: |
+| in Kinmen (RCBS) TMA ① | W6 (INDIA) ② |  At or below **FL160** |
+| in Matsu (RCMT) TMA ③  | W2 (DUMAS) ④ |  At or below **FL200** |
+| in Matsu (RCMT) TMA ③ | W8 (DEFOE) ④ |  At or below **FL200** |
+| in the horizontal boundary of Kinmen (RCBS) TMA | M503 |  At or above **S0840**: controlled by ZSHA_CTR |
+|   |   |  At or below FL160: controlled by RCKH_APP |
+|   |   | Between **FL160** and **S0840** (exclusive) ⑤ : Buffer area, strictly forbidden for cruising. Climbing: from RCKH_APP handover to ZSHA_CTR Descending: from ZSHA_CTR handover to RCKH_APP|
+| in the horizontal boundary of Matsu (RCMT) TMA  | M503 |  At or above **S0840**: controlled by ZSHA_CTR |
+|   |   | At or below **FL200**: controlled by RCTP_APP |
+|   |   |   Between **FL200** and **S0840** (exclusive) ⑤ :    Buffer area, strictly forbidden for cruising.   Climbing: from RCTP_APP handover to ZSHA_CTR Descending: from ZSHA_CTR handover to RCTP_APP |
 
-**FL300, FL320.** 
+### 9.3.1
 
-#### 9.2.2	Transiting Taipei FIR and Shanghai FIR   
+The available flight levels of M503 are:Between **S0840** and **S1250** ⑥ : controlled by ZSHA_CTR
 
-**FL270, FL370.** 
+### 9.3.2
 
-### 9.3	**R596** Airway (TCP: **SULEM**) 
+Aircraft shall establish a lateral offset ⑦  at a distance of 6 NM to the west side of M503 while operating from PONEN to LELIM
 
-#### 9.3.1	Transiting Shanghai FIR and Taipei FIR   
-
-**FL240, FL280, FL340** 
-
-#### 9.3.2	Transiting Taipei FIR and Shanghai FIR   
-
-**FL250, FL290, FL370**  
-   
-### 9.4	**W6** Airway (Waypoint: **INDIA**)1 
-
-#### 9.4.1	Any aircraft within Kinmen **(RCBS)** TMA2:   
-
-At or below **FL160** 
-
-***Remarks:***   
-*1 Normally, this route should not be used unless the flight is related to Kinmen Airport (RCBS).*   
-*2 Any aircraft which enters Kinmen TMA should strictly stay within the TMA, except for emergency situations.* 
-
-### 9.5	**W2** Airway (Waypoint: **DUMAS**)1 
-
-#### 9.5.1	Any aircraft within Matsu **(RCMT)** TMA2:  
-              
-At or below **FL200**   
-                    
-***Remarks:***   
-*1 Normally, this route should not be used unless the flight is related to Matsu Beigan Airport (RCMT) or Matsu Nangan Airport (RCFG).*   
-*2 Any aircraft which enters Matsu TMA should strictly stay within the TMA, except for emergency situations.* 
-
-### 9.6	W8 Airway (Waypoint: DEFOE)1 
-
-#### 9.6.1	Any aircraft within Matsu **(RCMT)** TMA2:   
-
-At or below **FL200** 
-
-***Remarks**:*   
-*1 Normally, this route should not be used unless the flight is related to Matsu Beigan Airport (RCMT) or Matsu Nangan Airport (RCFG).*   
-*2 Any aircraft which enters Matsu TMA should strictly stay within the TMA, except for emergency situations.* 
-
-### 9.7	**M503** Airway 
-
-#### 9.7.1	Any aircraft within the horizontal boundary of Kinmen **(RCBS)** TMA:  
-
-  At or above **S0840**: controlled by ZSHA_CTR   
-  At or below **FL160**: controlled by RCKH_APP   
-  Between **FL160** and **S0840** (exclusive) 1:   
-  Buffer area, strictly forbidden for cruising.   
-  Climbing: from RCKH_APP handover to ZSHA_CTR   
-  Descending: from ZSHA_CTR handover to RCKH_APP 
-
-#### 9.7.2	Any aircraft within the horizontal boundary of Matsu (RCMT) TMA:   
-
-  At or above **S0840**: controlled by ZSHA_CTR  
-  At or below **FL200**: controlled by RCTP_APP   
-  Between **FL200** and **S0840** (exclusive) 1:   
-  Buffer area, strictly forbidden for cruising.   
-  Climbing: from RCTP_APP handover to ZSHA_CTR  
-  Descending: from ZSHA_CTR handover to RCTP_APP  
-
-#### 9.7.3	The available flight levels of M503 are:   
-
-  Between **S0840** and **S12502**: controlled by ZSHA\_CTR   
-
-#### 9.7.4	Aircraft shall establish a lateral offset3 at a distance of **6 NM** to the **west side** of M503 while operating from **PONEN** to **LELIM**. 
-
-***Remarks:***   
-*1 This situation should be avoided, except for emergency situations. Both controllers should coordinate before the handover.*   
-*2 Normally ATC will only approve the usage of flight levels S0920 or above. 3 Optional; ATC will give offsaaaaaaet instruction, but only when the pilot can execute offset.* 
-
+> **Remarks:**
+>
+> ① Any aircraft which enters Kinmen TMA should strictly stay within the TMA,except for emergency situations.
+>
+> ② Normally,this route should not be used unless the flight is related to Kinmen Airport (RCBS).
+>
+> ③ Any aircraft which enters Matsu TMA should strictly stay within the TMA, except for emergency situations.
+>
+> ④ Normally, this route should not be used unless the flight is related to Matsu Beigan Airport (RCMT) or Matsu Nangan Airport (RCFG).
+>
+> ⑤ This situation should be avoided, except for emergency situations. Both controllers should coordinate before the handover.
+>
+> ⑥ Normally ATC will only approve the usage of flight levels S0920 or above.
+>
+> ⑦ Optional; ATC will give offsaaaaaaet instruction, but only when the pilot can execute offset.
 ## 10. Special agreement
 
 ### 10.1
 
-Since the LoA with HKvACC(HKVACC-LOA-ZGZU-R0/ZGZUVHHK180428), both parties agree to follow the definition in the AIP of Mainland China (ENR 6-ERC2). R200 shall fall within Guangzhou FIR and under the control of Guangzhou Control (ZGZU_CTR). Therefore, aircrafts flying through R200 should transfer between RCAA\_CTR and ZGZU\_CTR. 
+Since the LoA with HKvACC(HKVACC-LOA-ZGZU-R0/ZGZUVHHK180428), both parties agree to follow the definition in the AIP of Mainland China (ENR 6-ERC2). R200 shall fall within Guangzhou FIR and under the control of Guangzhou Control (ZGZU_CTR). Therefore, aircrafts flying through R200 should transfer between RCAA_CTR and ZGZU_CTR. 
 
 ## 11. Validity, Review, and amendment
 
