@@ -1,17 +1,23 @@
 import firGeoJsonRaw from "@/assets/map/fir.geojson.json";
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
+import { AirspaceApplication } from "@/components/airspace/airspace-application";
+import { AirspaceReview } from "@/components/airspace/airspace-review";
 import { Map } from "@/components/airspace/map";
-import { $api } from "@/lib/client";
+import { $api, usePermission } from "@/lib/client";
 import { Vplaaf } from "@/lib/client/vplaaf";
 import { Trans } from "@lingui/react/macro";
 import { Alert, LoadingOverlay } from "@mantine/core";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import * as turf from "@turf/turf";
 import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { DataDrivenPropertyValueSpecification, ColorSpecification } from "maplibre-gl";
 import { useMemo } from "react";
 
 export const Route = createFileRoute("/_doc/airspace/restricted")({
+  validateSearch: (search: Record<string, unknown>): { apply?: "1"; review?: "1" } => ({
+    apply: search.apply === "1" ? "1" : undefined,
+    review: search.review === "1" ? "1" : undefined,
+  }),
   component: RouteComponent,
 });
 
@@ -37,6 +43,9 @@ const COLOR_MAP = [
 ] satisfies DataDrivenPropertyValueSpecification<ColorSpecification>;
 
 function RouteComponent() {
+  const canApply = usePermission("airspace-applicant");
+  const canReview = usePermission("operation-director");
+  const { apply, review } = Route.useSearch();
   const { data: areas, error, isLoading } = $api.useQuery("get", "/api/compat/vplaaf/areas.json");
   const vplaafGeojson = useMemo(
     () =>
@@ -73,11 +82,41 @@ function RouteComponent() {
     [vplaafGeojson],
   );
 
+  if (review === "1") {
+    return canReview ? (
+      <AirspaceReview />
+    ) : (
+      <Alert color="red">
+        <Trans>You do not have permission to review airspace applications.</Trans>
+      </Alert>
+    );
+  }
+  if (apply === "1") {
+    return canApply ? (
+      <AirspaceApplication />
+    ) : (
+      <Alert color="red">
+        <Trans>You do not have permission to apply for airspace.</Trans>
+      </Alert>
+    );
+  }
+
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <h1 className="text-3xl">
-        <Trans>Restricted Airspaces</Trans>
-      </h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl">
+          <Trans>Restricted Airspaces</Trans>
+        </h1>
+        {canApply && (
+          <Link
+            to="/airspace/restricted"
+            search={{ apply: "1", review: undefined }}
+            className="rounded bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
+          >
+            <Trans>Apply for Airspace</Trans>
+          </Link>
+        )}
+      </div>
       <Alert color="yellow">
         <Trans>
           The airspaces listed on this map are either prohibited, restricted, or dangerous. Please refer to

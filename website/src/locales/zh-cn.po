@@ -13,6 +13,117 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "Authorized Airspace Applicant"
+msgstr "认证空域申请"
+
+msgid "Apply for Airspace"
+msgstr "空域申请"
+
+msgid "Airspace Application"
+msgstr "空域申请"
+
+msgid "You do not have permission to apply for airspace."
+msgstr "你没有空域申请权限。"
+
+msgid "Application submission is not yet available."
+msgstr "空域申请暂时无法提交。"
+
+msgid "Airspace Review"
+msgstr "空域审批"
+
+msgid "You do not have permission to review airspace applications."
+msgstr "你没有空域审批权限。"
+
+msgid "Enter a valid time range with the end after the start."
+msgstr "请填写有效的起止时间，结束时间须晚于开始时间。"
+
+msgid "Enter the airspace type, label and a valid altitude range."
+msgstr "请填写空域种类、标签和有效的高度范围。"
+
+msgid "Enter valid center coordinates and a positive radius."
+msgstr "请填写有效的中心点坐标和大于零的半径。"
+
+msgid "Enter at least three valid vertices and repeat the first coordinate at the end."
+msgstr "请填写至少三个有效的顶点，并在末尾重复第一个坐标。"
+
+msgid "The first and last boundary coordinates must match."
+msgstr "边界的第一个坐标和最后一个坐标须相同。"
+
+msgid "Unable to submit the application."
+msgstr "无法提交申请。"
+
+msgid "Your airspace application has been submitted for review."
+msgstr "空域申请已提交，等待审批。"
+
+msgid "Unable to load applications."
+msgstr "无法加载申请。"
+
+msgid "Unable to review the application."
+msgstr "无法审批申请。"
+
+msgid "No airspace applications."
+msgstr "暂无空域申请。"
+
+msgid "Review comment (optional)"
+msgstr "审批意见（选填）"
+
+msgid "Review comment"
+msgstr "审批意见"
+
+msgid "Start time (UTC)"
+msgstr "开始时间（UTC）"
+
+msgid "End time (UTC)"
+msgstr "结束时间（UTC）"
+
+msgid "Airspace type"
+msgstr "空域种类"
+
+msgid "Restricted area"
+msgstr "限制区"
+
+msgid "Danger area"
+msgstr "危险区"
+
+msgid "Prohibited area"
+msgstr "禁区"
+
+msgid "Lower altitude (ft)"
+msgstr "最低高度（英尺）"
+
+msgid "Upper altitude (ft)"
+msgstr "最高高度（英尺）"
+
+msgid "Label"
+msgstr "标签信息"
+
+msgid "Remarks (optional)"
+msgstr "备注（选填）"
+
+msgid "Boundary type"
+msgstr "边界类型"
+
+msgid "Circle"
+msgstr "圆形"
+
+msgid "Coordinates"
+msgstr "坐标"
+
+msgid "Center coordinates"
+msgstr "中心点坐标"
+
+msgid "WGS-84 decimal degrees, latitude, longitude"
+msgstr "WGS-84 十进制度数，纬度在前，经度在后"
+
+msgid "Radius (km)"
+msgstr "半径（公里）"
+
+msgid "Boundary coordinates"
+msgstr "边界坐标"
+
+msgid "WGS-84 decimal degrees, latitude, longitude; one coordinate per line, in boundary order. Close the polygon by repeating the first coordinate."
+msgstr "WGS-84 十进制度数，纬度在前，经度在后。按边界顺序每行填写一个坐标，最后一行重复第一个坐标以闭合边界。"
+
 #. js-lingui-explicit-id
 msgid "VATSIM P.R. China Division"
 msgstr "VATSIM 中国分部"

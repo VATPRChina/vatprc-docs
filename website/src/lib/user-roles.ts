@@ -14,6 +14,7 @@ export const USER_ROLES = new Map<components["schemas"]["UserRole"], MessageDesc
   ["operation-director-assistant", msg`Operation Director Assistant`],
   ["operation-sector-editor", msg`Sector Editor`],
   ["operation-loa-editor", msg`LOA Editor`],
+  ["airspace-applicant", msg`Authorized Airspace Applicant`],
   ["event-director", msg`Event & Organization Director`],
   ["lead-event-coordinator", msg`Lead Event Coordinator`],
   ["event-coordinator", msg`Event Coordinator`],

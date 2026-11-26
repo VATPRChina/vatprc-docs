@@ -1953,6 +1953,7 @@ export interface components {
       | "operation-director-assistant"
       | "operation-sector-editor"
       | "operation-loa-editor"
+      | "airspace-applicant"
       | "event-director"
       | "lead-event-coordinator"
       | "event-coordinator"

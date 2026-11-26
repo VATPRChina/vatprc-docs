@@ -141,6 +141,7 @@ pub enum UserRole {
     OperationDirectorAssistant,
     OperationSectorEditor,
     OperationLoaEditor,
+    AirspaceApplicant,
     EventDirector,
     LeadEventCoordinator,
     EventCoordinator,

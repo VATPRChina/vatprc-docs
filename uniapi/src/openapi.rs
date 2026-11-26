@@ -14,6 +14,7 @@ use utoipa::{OpenApi, PartialSchema, ToSchema};
         (path = "/", api = crate::modules::controller::routes::controllers::ApiDoc),
         (path = "/", api = crate::modules::controller::routes::user_atc_permissions::ApiDoc),
         (path = "/", api = crate::modules::atc_application::routes::ApiDoc),
+        (path = "/", api = crate::modules::airspace_application::ApiDoc),
         (path = "/", api = crate::modules::atc_booking::routes::ApiDoc),
         (path = "/", api = crate::modules::atc_position::routes::ApiDoc),
         (path = "/", api = crate::modules::training::routes::trainings::ApiDoc),

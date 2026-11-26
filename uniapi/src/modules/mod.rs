@@ -1,3 +1,4 @@
+pub mod airspace_application;
 pub mod atc_application;
 pub mod atc_booking;
 pub mod atc_position;

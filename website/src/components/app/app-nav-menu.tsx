@@ -117,6 +117,7 @@ const contents: NavGroupData[] = [
       { label: msg`Event`, href: "/events" },
       { label: msg`User List`, href: "/users" },
       { label: msg`Image Upload Tool`, href: "/docs/utils/image" },
+      { label: msg`Airspace Review`, href: "/airspace/restricted?review=1", requireRole: "operation-director" },
       { label: msg`Sheet Management`, href: "/sheets", requireRole: "staff" },
       {
         label: msg`Preferred Routes`,
@@ -151,6 +152,13 @@ const NavMenuLink: React.FC<{ item: NavItem; row?: boolean }> = ({ item, row }: 
     </h3>
   );
 
+  if (item.href === "/airspace/restricted?review=1") {
+    return (
+      <Link role="listitem" className={cnLink} to="/airspace/restricted" search={{ apply: undefined, review: "1" }}>
+        {inner}
+      </Link>
+    );
+  }
   return item.external ? (
     <a role="listitem" className={cnLink} href={item.href} target="_blank" rel="noopener noreferrer">
       {inner}

@@ -88,6 +88,17 @@ impl EmailClient {
 }
 
 impl EmailContent {
+    pub fn airspace_application_submitted() -> Self {
+        Self::notification(
+            "New airspace application",
+            "New airspace application",
+            "An airspace application is awaiting review.",
+            "Review applications",
+            "/airspace/restricted?review=1",
+            None,
+            "you are an operation director",
+        )
+    }
     pub fn atc_application_status_change(application: &AtcApplication) -> Self {
         let status = match application.status {
             AtcApplicationStatus::Submitted => "pending review",

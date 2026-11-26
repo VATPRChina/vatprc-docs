@@ -13,6 +13,7 @@ use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
 
 use crate::error::ApiError;
+use crate::modules::airspace_application::routes as airspace_application_routes;
 use crate::modules::atc_application::routes::build_atc_application_routes;
 use crate::modules::atc_booking::routes::build_atc_booking_routes;
 use crate::modules::atc_position::routes::build_atc_position_routes;
@@ -59,6 +60,7 @@ pub fn router(services: Services) -> Router {
         .nest("/api", build_audit_log_routes())
         .nest("/api/atc/controllers", build_atc_routes())
         .nest("/api/atc/applications", build_atc_application_routes())
+        .nest("/api/airspace-applications", airspace_application_routes())
         .nest("/api/atc/bookings", build_atc_booking_routes())
         .nest("/api/atc/positions", build_atc_position_routes())
         .nest("/api/compat", build_compat_routes())
