@@ -3,10 +3,10 @@ use std::collections::HashSet;
 use arrayvec::ArrayString;
 use futures::{FutureExt, future::OptionFuture};
 use itertools::Itertools;
-use sqlx::FromRow;
 
 use super::{InvalidNavdataError, NavdataResult, NavdataService};
-use crate::modules::navdata::models::TerminalProcedure;
+use crate::modules::navdata::model::TerminalProcedure;
+use crate::modules::navdata::repository::dfd::{self, ProcedureLegRecord};
 
 impl NavdataService {
     /// Load exact and abbreviated SID/STAR identifiers, skipping invalid procedures.
@@ -57,15 +57,7 @@ impl NavdataService {
             FindProcedureMode::Sid => "tbl_pd_sids",
             FindProcedureMode::Star => "tbl_pe_stars",
         };
-        let legs: Vec<ProcedureLegRecord> = sqlx::query_as(&format!(
-            "SELECT airport_identifier, procedure_identifier, route_type,
-                    transition_identifier, seqno, path_termination, waypoint_identifier
-             FROM {table} WHERE {column} = $1
-             ORDER BY airport_identifier, procedure_identifier, seqno",
-        ))
-        .bind(value)
-        .fetch_all(&self.db)
-        .await?;
+        let legs = dfd::procedure_legs(&self.db, table, column, value).await?;
         Ok(legs
             .into_iter()
             .chunk_by(|leg| (leg.airport_identifier.clone(), leg.procedure_identifier.clone()))
@@ -162,17 +154,6 @@ pub enum FindProcedureMode {
 struct ProcedureRecord {
     mode: FindProcedureMode,
     legs: Vec<ProcedureLegRecord>,
-}
-
-#[derive(FromRow)]
-struct ProcedureLegRecord {
-    airport_identifier: String,
-    procedure_identifier: String,
-    route_type: String,
-    transition_identifier: Option<String>,
-    seqno: u32,
-    path_termination: Option<String>,
-    waypoint_identifier: Option<String>,
 }
 
 impl TryFrom<ProcedureRecord> for TerminalProcedure {

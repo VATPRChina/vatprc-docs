@@ -1,7 +1,7 @@
 use tracing::warn;
 
 use super::ConstructedLeg;
-use crate::modules::navdata::models::{AnyFix, LegKind, NavProc, ResolvedLeg};
+use crate::modules::navdata::model::{AnyFix, LegKind, NavProc, ResolvedLeg};
 use std::borrow::Cow;
 
 #[derive(Debug, thiserror::Error)]
@@ -143,7 +143,7 @@ fn find_path(edges: &[ResolvedLeg], from: &AnyFix, to: &AnyFix) -> Option<Vec<Re
 #[cfg(test)]
 mod tests {
     use super::find_path;
-    use crate::modules::navdata::models::{
+    use crate::modules::navdata::model::{
         AnyFix, DirectionRestriction, GeoPoint, LegKind, ResolvedLeg, Waypoint, WaypointKind,
     };
 
@@ -183,7 +183,7 @@ mod tests {
     fn expansion_preserves_published_tamot_region_and_mainland_cutoff() {
         use super::{ConstructedLeg, Expander};
         use crate::modules::flight::flight_plan::{RouteSegmenter, SegmentKind};
-        use crate::modules::navdata::models::{Airway, ChinaMainlandBoundary, NavProc};
+        use crate::modules::navdata::model::{Airway, ChinaMainlandBoundary, NavProc};
 
         let fix = |identifier: &str, region: &str, latitude: f64, longitude: f64| {
             AnyFix::Waypoint(Waypoint {

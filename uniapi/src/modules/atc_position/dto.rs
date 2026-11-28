@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::error::ApiError;
 
 use super::dcl::DclAirports;
-use super::models::{AtcPosition, AtcPositionCategory, AtcPositionSave};
+use super::model::{AtcPosition, AtcPositionCategory, AtcPositionSave};
 
 #[derive(Debug, Deserialize, utoipa::ToSchema)]
 pub struct AtcPositionSaveRequest {
@@ -159,7 +159,7 @@ mod tests {
 
     use super::{AtcPositionDto, dcl_airport_code, frequency_to_khz, normalize_callsign};
     use crate::modules::atc_position::dcl::DclAirports;
-    use crate::modules::atc_position::models::AtcPosition;
+    use crate::modules::atc_position::model::AtcPosition;
 
     fn dcl_airports() -> DclAirports {
         DclAirports::try_from_codes(vec!["ZBAA".to_owned()]).unwrap()

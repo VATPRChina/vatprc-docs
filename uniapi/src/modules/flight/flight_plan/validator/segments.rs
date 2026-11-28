@@ -3,8 +3,8 @@ use crate::modules::flight::flight_plan::matcher::SegmentMatchReport;
 use crate::modules::flight::flight_plan::{
     PreferredRouteMatcher, RouteSegment, RouteSegmenter, Segment, SegmentKind,
 };
-use crate::modules::flight::models::{Flight, ParsedRoute, ValidationField, ValidatorExecution};
-use crate::modules::navdata::models::PreferredRoute;
+use crate::modules::flight::model::{Flight, ParsedRoute, ValidationField, ValidatorExecution};
+use crate::modules::navdata::model::PreferredRoute;
 use crate::modules::navdata::service::NavdataService;
 
 /// Preserve every execution, including passing and suppressed checks. Hong Kong
@@ -133,8 +133,8 @@ mod tests {
     use super::*;
     use crate::modules::flight::dto::TemporaryFlightQuery;
     use crate::modules::flight::flight_plan::validator::validate_flight;
-    use crate::modules::flight::models::ValidatorStatus;
-    use crate::modules::navdata::models::{
+    use crate::modules::flight::model::ValidatorStatus;
+    use crate::modules::navdata::model::{
         AnyFix, DirectionRestriction, LegKind, ResolvedLeg, Waypoint, WaypointKind,
     };
     use sqlx::{SqlitePool, sqlite::SqliteConnectOptions};

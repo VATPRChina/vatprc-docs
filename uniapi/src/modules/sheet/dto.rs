@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::error::ApiError;
 
-use super::models::{Sheet, SheetAnswer, SheetAnswerSave, SheetField, SheetFieldSave, SheetSave};
+use super::model::{Sheet, SheetAnswer, SheetAnswerSave, SheetField, SheetFieldSave, SheetSave};
 
 #[derive(Deserialize, utoipa::ToSchema)]
 pub struct SheetRequestField {

@@ -4,7 +4,7 @@ use ordered_float::OrderedFloat;
 use crate::modules::flight::flight_plan::route_parser::{
     Ident, IdentCandidate, IdentWithCandidate,
 };
-use crate::modules::navdata::models::{AnyFix, Fix, NavProc, Ndb, NdbKind, Waypoint, WaypointKind};
+use crate::modules::navdata::model::{AnyFix, Fix, NavProc, Ndb, NdbKind, Waypoint, WaypointKind};
 use crate::utils::geo::{Latitude, Longitude};
 
 pub struct Solver<'s> {

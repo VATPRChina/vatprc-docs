@@ -2,7 +2,7 @@ use std::fmt::{self, Display};
 
 use super::{ConstructedLeg, Ident, IdentWithCandidate, LexerToken, SolvedIdent};
 use crate::modules::flight::flight_plan::RouteSegment;
-use crate::modules::navdata::models::{AnyFix, Fix, LegKind, PreferredRoute, ResolvedLeg};
+use crate::modules::navdata::model::{AnyFix, Fix, LegKind, PreferredRoute, ResolvedLeg};
 
 /// Borrowed snapshots of the shared parser pipeline, in execution order.
 pub enum RouteParseStep<'a, 's> {

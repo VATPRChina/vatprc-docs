@@ -42,7 +42,7 @@ pub use resolver::{CandidateResolver, IdentCandidate, IdentWithCandidate};
 pub use solver::{CandidateWithState, SolvedIdent, Solver};
 pub use trace::RouteParseStep;
 
-use crate::modules::flight::models::ParsedRoute;
+use crate::modules::flight::model::ParsedRoute;
 use crate::modules::navdata::service::{InvalidNavdataError, NavdataService};
 
 #[derive(Debug, thiserror::Error)]

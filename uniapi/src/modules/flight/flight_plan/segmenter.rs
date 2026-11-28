@@ -1,4 +1,4 @@
-use crate::modules::navdata::models::{
+use crate::modules::navdata::model::{
     AnyFix, ChinaMainlandBoundary, FirBoundary, Fix, LegKind, ResolvedLeg,
 };
 

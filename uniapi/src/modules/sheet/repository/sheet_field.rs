@@ -1,4 +1,4 @@
-use crate::modules::sheet::models::SheetField;
+use crate::modules::sheet::model::SheetField;
 
 pub trait SheetFieldRepository<'executor> {
     async fn list_sheet_field(self, sheet_id: &str) -> Result<Vec<SheetField>, sqlx::Error>;

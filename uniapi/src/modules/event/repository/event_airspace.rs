@@ -1,7 +1,7 @@
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::event::models::{EventAirspace, EventAirspaceSave};
+use crate::modules::event::model::{EventAirspace, EventAirspaceSave};
 
 pub(crate) trait EventAirspaceRepository<'executor> {
     async fn find_event_airspace_by_id(

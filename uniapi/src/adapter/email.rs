@@ -5,9 +5,9 @@ use thiserror::Error;
 use tracing::instrument;
 use ulid::Ulid;
 
-use crate::modules::atc_application::models::{AtcApplication, AtcApplicationStatus};
-use crate::modules::training::models::{TrainingApplication, TrainingApplicationResponse};
-use crate::modules::user::models::UserSummary;
+use crate::modules::atc_application::model::{AtcApplication, AtcApplicationStatus};
+use crate::modules::training::model::{TrainingApplication, TrainingApplicationResponse};
+use crate::modules::user::model::UserSummary;
 use crate::settings::Email;
 
 const SITE_URL: &str = "https://www.vatprc.net";

@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::super::models::{DeviceAuthorizationConfirmation, DeviceAuthorizationGrant};
+use super::super::model::{DeviceAuthorizationConfirmation, DeviceAuthorizationGrant};
 
 #[derive(Debug, Clone)]
 pub struct NewDeviceAuthorization<'a> {

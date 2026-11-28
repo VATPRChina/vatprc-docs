@@ -3,7 +3,7 @@ use serde::Serialize;
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use super::models::{AuditLog, AuditLogEntity};
+use super::model::{AuditLog, AuditLogEntity};
 use super::repository::{AuditLogEntityKind, AuditLogRepository};
 
 #[derive(Debug, Clone)]

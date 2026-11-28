@@ -1,4 +1,4 @@
-use crate::modules::navdata::models::AnyFix;
+use crate::modules::navdata::model::AnyFix;
 
 pub(crate) mod altitude;
 mod matcher;

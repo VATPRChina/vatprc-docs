@@ -5,9 +5,9 @@ use ulid::Ulid;
 use crate::error::ApiError;
 use crate::modules::sheet::dto::{SheetFieldAnswerDto, SheetRequestField};
 use crate::modules::user::dto::UserDto;
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 
-use super::models::{
+use super::model::{
     Training, TrainingApplication, TrainingApplicationResponse, TrainingApplicationSlot,
     TrainingApplicationSlotSave, TrainingSave,
 };

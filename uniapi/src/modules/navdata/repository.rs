@@ -1,8 +1,10 @@
+pub(super) mod dfd;
+
 use std::path::Path;
 
 use sqlx::{FromRow, SqlitePool, sqlite::SqliteConnectOptions};
 
-use crate::modules::navdata::models::{CruiseAltitudeType, PreferredRoute};
+use crate::modules::navdata::model::{CruiseAltitudeType, PreferredRoute};
 
 #[derive(Debug, thiserror::Error)]
 pub enum PreferredRouteRepositoryError {

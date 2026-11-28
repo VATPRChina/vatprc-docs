@@ -2,7 +2,7 @@ use chrono::Utc;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::models::{AtcBooking, AtcBookingSave};
+use super::model::{AtcBooking, AtcBookingSave, EventAtcBooking};
 
 const SELECT: &str = r#"
     SELECT atc_booking.id,
@@ -13,14 +13,26 @@ const SELECT: &str = r#"
            atc_booking.remarks,
            atc_booking.created_at,
            atc_booking.updated_at,
-           atc_booking.deleted_at,
-           event_atc_position_booking.event_atc_position_id AS event_position_id
+           atc_booking.deleted_at
     FROM public.atc_booking
-    LEFT JOIN public.event_atc_position_booking
-      ON event_atc_position_booking.atc_booking_id = atc_booking.id
 "#;
 
 pub(crate) trait AtcBookingRepository<'executor> {
+    async fn delete_linked_booking(self, id: Uuid) -> Result<(), sqlx::Error>;
+
+    async fn update_linked_booking(
+        self,
+        id: Uuid,
+        booking: AtcBookingSave,
+    ) -> Result<(), sqlx::Error>;
+
+    async fn find_event_atc_booking(
+        self,
+        booking_id: Uuid,
+    ) -> Result<Option<EventAtcBooking>, sqlx::Error>;
+
+    async fn find_vatsim_booking(self, id: Uuid) -> Result<Option<AtcBooking>, sqlx::Error>;
+
     async fn list_upcoming_atc_bookings(self) -> Result<Vec<AtcBooking>, sqlx::Error>;
 
     async fn list_upcoming_atc_bookings_by_user(
@@ -50,6 +62,61 @@ impl<'executor, E> AtcBookingRepository<'executor> for E
 where
     E: sqlx::Executor<'executor, Database = sqlx::Postgres>,
 {
+    async fn delete_linked_booking(self, id: Uuid) -> Result<(), sqlx::Error> {
+        sqlx::query("DELETE FROM public.atc_booking WHERE id = $1")
+            .bind(id)
+            .execute(self)
+            .await?;
+        Ok(())
+    }
+
+    async fn update_linked_booking(
+        self,
+        id: Uuid,
+        booking: AtcBookingSave,
+    ) -> Result<(), sqlx::Error> {
+        sqlx::query(
+            r#"
+            UPDATE public.atc_booking
+            SET callsign = $2, start_at = $3, end_at = $4, remarks = $5, updated_at = now()
+            WHERE id = $1
+            "#,
+        )
+        .bind(id)
+        .bind(booking.callsign)
+        .bind(booking.start_at)
+        .bind(booking.end_at)
+        .bind(booking.remarks)
+        .execute(self)
+        .await?;
+        Ok(())
+    }
+
+    async fn find_event_atc_booking(
+        self,
+        booking_id: Uuid,
+    ) -> Result<Option<EventAtcBooking>, sqlx::Error> {
+        sqlx::query_as::<_, EventAtcBooking>(
+            r#"
+        SELECT id, user_id, booked_at
+        FROM public.atc_booking
+        WHERE id = $1
+        "#,
+        )
+        .bind(booking_id)
+        .fetch_optional(self)
+        .await
+    }
+
+    async fn find_vatsim_booking(self, id: Uuid) -> Result<Option<AtcBooking>, sqlx::Error> {
+        sqlx::query_as::<_, AtcBooking>(&format!(
+            "{SELECT} WHERE id = $1 AND deleted_at IS NULL AND end_at > statement_timestamp()"
+        ))
+        .bind(id)
+        .fetch_optional(self)
+        .await
+    }
+
     async fn list_upcoming_atc_bookings(self) -> Result<Vec<AtcBooking>, sqlx::Error> {
         sqlx::query_as::<_, AtcBooking>(&format!(
             "{SELECT} WHERE atc_booking.deleted_at IS NULL AND atc_booking.end_at > now() ORDER BY atc_booking.start_at, atc_booking.callsign"
@@ -96,18 +163,12 @@ where
         let now = Utc::now();
         sqlx::query_as::<_, AtcBooking>(
             r#"
-            WITH inserted AS (
-                INSERT INTO public.atc_booking (
-                    id, user_id, callsign, booked_at, start_at, end_at, remarks,
-                    created_at, updated_at
-                )
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $4, $4)
-                RETURNING *
+            INSERT INTO public.atc_booking (
+                id, user_id, callsign, booked_at, start_at, end_at, remarks,
+                created_at, updated_at
             )
-            SELECT inserted.id, inserted.user_id, inserted.callsign, inserted.start_at,
-                   inserted.end_at, inserted.remarks, inserted.created_at, inserted.updated_at,
-                   inserted.deleted_at, NULL::uuid AS event_position_id
-            FROM inserted
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $4, $4)
+            RETURNING *
             "#,
         )
         .bind(id)
@@ -133,20 +194,14 @@ where
         );
         sqlx::query_as::<_, AtcBooking>(
             r#"
-            WITH updated AS (
-                UPDATE public.atc_booking
-                SET callsign = $2,
-                    start_at = $3,
-                    end_at = $4,
-                    remarks = $5,
-                    updated_at = now()
-                WHERE id = $1 AND deleted_at IS NULL
-                RETURNING *
-            )
-            SELECT updated.id, updated.user_id, updated.callsign, updated.start_at,
-                   updated.end_at, updated.remarks, updated.created_at, updated.updated_at,
-                   updated.deleted_at, NULL::uuid AS event_position_id
-            FROM updated
+            UPDATE public.atc_booking
+            SET callsign = $2,
+                start_at = $3,
+                end_at = $4,
+                remarks = $5,
+                updated_at = now()
+            WHERE id = $1 AND deleted_at IS NULL
+            RETURNING *
             "#,
         )
         .bind(id)
@@ -166,16 +221,10 @@ where
         );
         sqlx::query_as::<_, AtcBooking>(
             r#"
-            WITH deleted AS (
-                UPDATE public.atc_booking
-                SET deleted_at = now(), updated_at = now()
-                WHERE id = $1 AND deleted_at IS NULL
-                RETURNING *
-            )
-            SELECT deleted.id, deleted.user_id, deleted.callsign, deleted.start_at,
-                   deleted.end_at, deleted.remarks, deleted.created_at, deleted.updated_at,
-                   deleted.deleted_at, NULL::uuid AS event_position_id
-            FROM deleted
+            UPDATE public.atc_booking
+            SET deleted_at = now(), updated_at = now()
+            WHERE id = $1 AND deleted_at IS NULL
+            RETURNING *
             "#,
         )
         .bind(id)

@@ -1,5 +1,5 @@
 use super::*;
-use crate::modules::navdata::models::{Airport, DirectionRestriction, GeoPoint};
+use crate::modules::navdata::model::{Airport, DirectionRestriction, GeoPoint};
 
 fn boundary() -> ChinaMainlandBoundary {
     ChinaMainlandBoundary::from_rings(vec![vec![

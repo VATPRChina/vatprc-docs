@@ -1,5 +1,5 @@
 use crate::modules::flight::flight_plan::ParseRouteError;
-use crate::modules::flight::models::ValidatorExecution;
+use crate::modules::flight::model::ValidatorExecution;
 use crate::modules::navdata::service::InvalidNavdataError;
 use crate::modules::navdata::service::NavdataService;
 

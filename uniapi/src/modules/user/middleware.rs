@@ -12,7 +12,7 @@ use uuid::Uuid;
 
 use crate::error::ApiError;
 use crate::modules::controller::service::ControllerServiceError;
-use crate::modules::user::models::{UserRole, role_closure};
+use crate::modules::user::model::{UserRole, role_closure};
 use crate::modules::user::service::access_token::AccessTokenServiceError;
 use crate::modules::user::service::user::UserServiceError;
 use crate::services::Services;

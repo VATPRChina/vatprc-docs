@@ -2,7 +2,7 @@ use chrono::Utc;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::training::models::{
+use crate::modules::training::model::{
     TrainingApplication, TrainingApplicationResponse, TrainingApplicationSlot,
 };
 

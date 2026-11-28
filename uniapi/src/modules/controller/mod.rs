@@ -1,5 +1,5 @@
 pub mod dto;
-pub mod models;
-pub mod repository;
-pub mod routes;
+pub mod model;
+mod repository;
+pub mod route;
 pub mod service;

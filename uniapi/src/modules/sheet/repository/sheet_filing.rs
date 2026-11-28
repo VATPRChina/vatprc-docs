@@ -5,7 +5,7 @@ use chrono::Utc;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::sheet::models::{SheetAnswerSave, SheetField};
+use crate::modules::sheet::model::{SheetAnswerSave, SheetField};
 
 pub trait SheetFilingTransactionRepository {
     async fn set_sheet_filing(

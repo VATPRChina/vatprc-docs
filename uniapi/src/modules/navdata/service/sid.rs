@@ -1,4 +1,4 @@
-use crate::modules::navdata::models::Sid;
+use crate::modules::navdata::model::Sid;
 use crate::modules::navdata::service::{FindProcedureMode, NavdataResult, NavdataService};
 
 impl NavdataService {

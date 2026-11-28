@@ -1,9 +1,9 @@
 use super::CheckResult;
 use super::{ValidationContext, Validator};
-use crate::modules::flight::models::ValidatorStatus;
-use crate::modules::flight::models::{ValidationField, ValidationProblem, ValidatorIdentifier};
+use crate::modules::flight::model::ValidatorStatus;
+use crate::modules::flight::model::{ValidationField, ValidationProblem, ValidatorIdentifier};
 use crate::modules::navdata::aircraft_limits::{AircraftLimits, WingspanMaximum};
-use crate::modules::navdata::models::AnyFix;
+use crate::modules::navdata::model::AnyFix;
 use crate::modules::navdata::service::NavdataService;
 
 /// Departure airport must permit the aircraft type.
@@ -177,7 +177,7 @@ fn validate_airport<V: Validator>(identifier: &str, endpoint: Option<&AnyFix>) -
 mod tests {
     use super::*;
     use crate::modules::flight::dto::TemporaryFlightQuery;
-    use crate::modules::flight::models::{Flight, ParsedRoute};
+    use crate::modules::flight::model::{Flight, ParsedRoute};
 
     const WINGSPANS: &str =
         "B738 35.8 C\nB77W 64.8 E\nA388 79.8 F\nB748 68.4 F\nA225 88.4 F+\nTEST 36 C\n";

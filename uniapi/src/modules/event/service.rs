@@ -1,25 +1,79 @@
+use crate::modules::atc_booking::model::{AtcBookingSave, EventAtcBooking};
+use crate::modules::controller::service::ControllerService;
 use chrono::{DateTime, Utc};
 use futures::future::try_join_all;
 use sqlx::PgPool;
+use std::collections::HashMap;
 use uuid::Uuid;
 
-use crate::modules::atc_booking::services::AtcBookingService;
-use crate::modules::audit_log::models::AuditLogEntity;
+use crate::modules::atc_booking::service::AtcBookingService;
+use crate::modules::audit_log::model::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 use crate::modules::user::service::user::{UserService, UserServiceError};
 
-use super::models::{
-    Event, EventAirspace, EventAirspaceSave, EventAtcBooking, EventAtcPosition,
-    EventAtcPositionSave, EventBooking, EventSave, EventSlot, EventSlotSave,
+use super::model::{
+    Event, EventAirspace, EventAirspaceSave, EventAtcPosition, EventAtcPositionSave, EventBooking,
+    EventSave, EventSlot, EventSlotSave,
 };
 use super::repository::event::EventRepository;
 use super::repository::event_airspace::EventAirspaceRepository;
 use super::repository::event_atc_position::{
-    EventAtcPositionRepository, EventAtcPositionTransactionRepository, UserAtcPermissionRecord,
+    EventAtcPositionRepository, EventAtcPositionTransactionRepository,
 };
 use super::repository::event_slot::EventSlotRepository;
 use super::repository::event_slot_booking::EventSlotBookingRepository;
+
+#[derive(Clone)]
+pub struct EventPositionLookup {
+    db: PgPool,
+}
+
+impl EventPositionLookup {
+    pub fn new(db: PgPool) -> Self {
+        Self { db }
+    }
+
+    pub(crate) async fn by_booking_ids(
+        &self,
+        ids: &[Uuid],
+    ) -> Result<HashMap<Uuid, EventAtcPositionView>, sqlx::Error> {
+        let positions = self.db.positions_for_bookings(ids).await?;
+        if positions.is_empty() {
+            return Ok(HashMap::new());
+        }
+        let event_ids: Vec<_> = positions.iter().map(|position| position.event_id).collect();
+        let events: HashMap<_, _> = self
+            .db
+            .events_by_ids(&event_ids)
+            .await?
+            .into_iter()
+            .map(|event| (event.id, event))
+            .collect();
+        Ok(positions
+            .into_iter()
+            .filter_map(|position| {
+                let booking_id = position.booking_id?;
+                let event = events.get(&position.event_id)?.clone();
+                Some((
+                    booking_id,
+                    EventAtcPositionView {
+                        position,
+                        event,
+                        booking: None,
+                    },
+                ))
+            })
+            .collect())
+    }
+
+    pub(crate) async fn is_linked<'e>(
+        db: impl sqlx::PgExecutor<'e>,
+        id: Uuid,
+    ) -> Result<bool, sqlx::Error> {
+        db.has_linked_booking(id).await
+    }
+}
 
 #[derive(Clone)]
 pub struct EventService {
@@ -27,6 +81,7 @@ pub struct EventService {
     audit_log: AuditLogService,
     user: UserService,
     atc_booking: AtcBookingService,
+    controller: ControllerService,
 }
 
 impl EventService {
@@ -35,12 +90,14 @@ impl EventService {
         audit_log: AuditLogService,
         user: UserService,
         atc_booking: AtcBookingService,
+        controller: ControllerService,
     ) -> Self {
         Self {
             db,
             audit_log,
             user,
             atc_booking,
+            controller,
         }
     }
 
@@ -68,9 +125,7 @@ impl EventService {
         event: EventSave,
         operated_by: Uuid,
     ) -> Result<Event, EventServiceError> {
-        let mut transaction = self.db.begin().await?;
-        let event = (&mut *transaction).create_event(event).await?;
-        transaction.commit().await?;
+        let event = self.db.create_event(event).await?;
         self.audit_log
             .record(
                 AuditLogEntity::Event(event.id),
@@ -142,9 +197,7 @@ impl EventService {
         if airspace.event_id != event_id {
             return Err(EventServiceError::AirspaceNotFound(slot.airspace_id));
         }
-        let mut transaction = self.db.begin().await?;
-        let slot = (&mut *transaction).create_event_slot(slot).await?;
-        transaction.commit().await?;
+        let slot = self.db.create_event_slot(slot).await?;
         self.audit_log
             .record(
                 AuditLogEntity::EventSlot(event_id, slot.id),
@@ -161,7 +214,19 @@ impl EventService {
         event_id: Uuid,
     ) -> Result<Vec<String>, EventServiceError> {
         self.ensure_event(event_id).await?;
-        Ok(self.db.booking_event_slot_export_rows(event_id).await?)
+        let rows = self.db.booking_event_slot_export_rows(event_id).await?;
+        let users = self
+            .user
+            .get_users_bulk(rows.iter().map(|(id, _)| *id))
+            .await?;
+        Ok(rows
+            .into_iter()
+            .filter_map(|(id, enter_at)| {
+                users
+                    .get(&id)
+                    .map(|user| format!("{},{}", user.cid, enter_at.format("%H%M")))
+            })
+            .collect())
     }
 
     pub async fn create_slot_booking(
@@ -272,11 +337,10 @@ impl EventService {
         position: EventAtcPositionSave,
         operated_by: Uuid,
     ) -> Result<EventAtcPositionView, EventServiceError> {
-        let mut transaction = self.db.begin().await?;
-        let position = (&mut *transaction)
+        let position = self
+            .db
             .create_event_atc_position(event_id, position)
             .await?;
-        transaction.commit().await?;
         self.record_position_audit(&position, None, Some(&position), operated_by)
             .await?;
         self.with_position_user(position).await
@@ -298,9 +362,14 @@ impl EventService {
             .update_event_atc_position(event_id, position_id, position)
             .await?
             .ok_or(EventServiceError::AtcPositionNotFound(position_id))?;
-        transaction
-            .sync_event_atc_position_booking(&position)
+        if let Some(id) = position.booking_id {
+            AtcBookingService::update_event_booking(
+                &mut transaction,
+                id,
+                AtcBookingSave::from(&position),
+            )
             .await?;
+        }
         transaction.commit().await?;
         self.atc_booking.sync_to_vatsim(position.booking_id).await;
         self.record_position_audit(&position, Some(&before), Some(&position), operated_by)
@@ -326,7 +395,7 @@ impl EventService {
             return Err(EventServiceError::AtcPositionNotFound(position_id));
         }
         if let Some(booking_id) = position.booking_id {
-            transaction.delete_event_atc_booking(booking_id).await?;
+            AtcBookingService::delete_event_booking(&mut transaction, booking_id).await?;
         }
         transaction.commit().await?;
         self.atc_booking.sync_to_vatsim(position.booking_id).await;
@@ -358,16 +427,25 @@ impl EventService {
         {
             return Err(EventServiceError::NotInBookingPeriod);
         }
-        let permission = self
-            .db
-            .user_event_atc_position_permission(user_id, &position.position_kind_id)
+        if !self
+            .controller
+            .can_book_event_position(
+                user_id,
+                &position.position_kind_id,
+                position.minimum_controller_state,
+            )
             .await?
-            .ok_or(EventServiceError::InsufficientAtcPermission)?;
-        if !permission_satisfies(&permission, position.minimum_controller_state) {
+        {
             return Err(EventServiceError::InsufficientAtcPermission);
         }
+        let booking = AtcBookingService::create_event_booking(
+            &mut transaction,
+            user_id,
+            AtcBookingSave::from(&position),
+        )
+        .await?;
         transaction
-            .create_event_atc_position_booking(&position, user_id)
+            .create_event_atc_position_booking(position.id, user_id, booking.id, booking.created_at)
             .await?;
         let after = (&mut *transaction)
             .find_event_atc_position_by_event_and_id_in_transaction(event_id, position_id, false)
@@ -396,8 +474,8 @@ impl EventService {
             .booking_id
             .ok_or(EventServiceError::AtcPositionNotBooked)?;
         let booking = self
-            .db
-            .find_event_atc_booking(booking_id)
+            .atc_booking
+            .find_event_booking(booking_id)
             .await?
             .ok_or(EventServiceError::AtcPositionNotBooked)?;
         let booking_user_id = booking.user_id;
@@ -407,8 +485,9 @@ impl EventService {
             return Err(EventServiceError::AtcPositionBookedByAnotherUser);
         }
         transaction
-            .delete_event_atc_position_booking(position.id, position.booking_id)
+            .delete_event_atc_position_booking(position.id)
             .await?;
+        AtcBookingService::delete_event_booking(&mut transaction, booking_id).await?;
         let after = (&mut *transaction)
             .find_event_atc_position_by_event_and_id_in_transaction(event_id, position_id, false)
             .await?
@@ -472,8 +551,8 @@ impl EventService {
         let booking = match position.booking_id {
             Some(booking_id) => {
                 let booking = self
-                    .db
-                    .find_event_atc_booking(booking_id)
+                    .atc_booking
+                    .find_event_booking(booking_id)
                     .await?
                     .ok_or(EventServiceError::AtcPositionNotBooked)?;
                 let user = self.optional_user(Some(booking.user_id)).await?;
@@ -547,24 +626,15 @@ pub struct EventAtcBookingView {
     pub user: Option<UserSummary>,
 }
 
-fn permission_satisfies(permission: &UserAtcPermissionRecord, minimum_state: i32) -> bool {
-    let permission_rank = match permission.state.as_str() {
-        "Student" => 0,
-        "UnderMentor" => 1,
-        "Solo" => {
-            if permission
-                .solo_expires_at
-                .is_some_and(|expires_at| expires_at <= Utc::now())
-            {
-                return minimum_state <= 1;
-            }
-            2
+impl From<&EventAtcPosition> for AtcBookingSave {
+    fn from(position: &EventAtcPosition) -> Self {
+        Self {
+            callsign: position.callsign.clone(),
+            start_at: position.start_at,
+            end_at: position.end_at,
+            remarks: position.remarks.clone(),
         }
-        "Certified" => 3,
-        "Mentor" => return true,
-        _ => return false,
-    };
-    permission_rank >= minimum_state
+    }
 }
 
 #[derive(Debug, thiserror::Error)]

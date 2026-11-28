@@ -7,11 +7,11 @@ use crate::adapter::email::EmailClient;
 use crate::adapter::moodle::MoodleClient;
 use crate::adapter::smms::SmmsClient;
 use crate::modules::atc_application::service::AtcApplicationService;
-use crate::modules::atc_booking::services::AtcBookingService;
+use crate::modules::atc_booking::service::AtcBookingService;
 use crate::modules::atc_position::dcl::DclAirports;
 use crate::modules::atc_position::service::AtcPositionService;
 use crate::modules::controller::service::ControllerService;
-use crate::modules::event::service::EventService;
+use crate::modules::event::service::{EventPositionLookup, EventService};
 use crate::modules::flight::service::FlightService;
 use crate::modules::navdata::service::NavdataService;
 use crate::modules::sheet::service::SheetService;
@@ -73,25 +73,31 @@ impl Services {
         let user = UserService::new(db.clone(), moodle.clone(), audit_log.clone());
         let compat_client = CompatClient::new(settings.utils.metar.endpoint.clone())
             .with_online_data_url(settings.utils.vatsim_data_url.clone());
+        let atc_position = AtcPositionService::new(db.clone(), audit_log.clone());
         let controller = ControllerService::new(
             db.clone(),
             audit_log.clone(),
             user.clone(),
+            atc_position.clone(),
             compat_client.clone(),
         );
         let flight = FlightService::new(compat_client.clone(), navdata, user.clone());
         let sheet = SheetService::new(db.clone());
         let atc_application =
             AtcApplicationService::new(db.clone(), audit_log.clone(), user.clone(), sheet.clone());
-        let atc_booking =
-            AtcBookingService::new(db.clone(), user.clone(), &settings.vatsim_booking_sync)?;
+        let atc_booking = AtcBookingService::new(
+            db.clone(),
+            user.clone(),
+            EventPositionLookup::new(db.clone()),
+            &settings.vatsim_booking_sync,
+        )?;
         let dcl_airports = DclAirports::load(&settings.dcl.airports_url).await?;
-        let atc_position = AtcPositionService::new(db.clone(), audit_log.clone());
         let event = EventService::new(
             db.clone(),
             audit_log.clone(),
             user.clone(),
             atc_booking.clone(),
+            controller.clone(),
         );
         let access_token = AccessTokenService::new(&settings.authentication.jwt);
         let refresh_token =

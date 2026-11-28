@@ -6,8 +6,8 @@ use crate::error::ApiError;
 use crate::modules::event::dto::EventAtcPositionDto;
 use crate::modules::user::dto::UserDto;
 
-use super::models::{AtcBooking, AtcBookingSave};
-use super::services::AtcBookingView;
+use super::model::{AtcBooking, AtcBookingSave};
+use super::service::AtcBookingView;
 
 #[derive(Debug, Deserialize, utoipa::ToSchema)]
 pub struct AtcBookingSaveRequest {

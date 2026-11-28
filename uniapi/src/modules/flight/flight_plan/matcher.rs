@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use super::segmenter::enroute;
 use super::{ParseRouteError, RouteSegment, Segment, SegmentKind, parse_route};
 use crate::modules::flight::flight_plan::validator::ValidatorError;
-use crate::modules::navdata::models::{AnyFix, LegKind, PreferredRoute, ResolvedLeg};
+use crate::modules::navdata::model::{AnyFix, LegKind, PreferredRoute, ResolvedLeg};
 use crate::modules::navdata::service::NavdataService;
 
 pub struct PreferredRouteMatcher<'s> {

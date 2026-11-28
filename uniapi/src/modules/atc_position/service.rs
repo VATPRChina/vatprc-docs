@@ -1,10 +1,10 @@
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::modules::audit_log::models::AuditLogEntity;
+use crate::modules::audit_log::model::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
 
-use super::models::{AtcPosition, AtcPositionSave};
+use super::model::{AtcPosition, AtcPositionSave};
 use super::repository::AtcPositionRepository;
 
 #[derive(Debug, Clone)]
@@ -20,6 +20,10 @@ impl AtcPositionService {
 
     pub async fn list(&self) -> Result<Vec<AtcPosition>, AtcPositionServiceError> {
         Ok(self.db.list_atc_positions().await?)
+    }
+
+    pub(crate) async fn tier_2_callsigns(&self) -> Result<Vec<String>, sqlx::Error> {
+        self.db.list_tier_2_atc_position_callsigns().await
     }
 
     pub async fn find(&self, callsign: &str) -> Result<AtcPosition, AtcPositionServiceError> {
@@ -78,15 +82,11 @@ impl AtcPositionService {
         callsign: &str,
         operated_by: Uuid,
     ) -> Result<(), AtcPositionServiceError> {
-        let mut transaction = self.db.begin().await?;
-        let before = (&mut *transaction)
-            .find_atc_position_for_update(callsign)
+        let before = self
+            .db
+            .delete_atc_position(callsign)
             .await?
             .ok_or_else(|| AtcPositionServiceError::NotFound(callsign.to_owned()))?;
-        if !(&mut *transaction).delete_atc_position(callsign).await? {
-            return Err(AtcPositionServiceError::NotFound(callsign.to_owned()));
-        }
-        transaction.commit().await?;
         self.audit_log
             .record(
                 AuditLogEntity::AtcPosition(callsign.to_owned()),

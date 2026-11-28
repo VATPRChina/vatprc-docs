@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { getClient } from "../../lib/backend.js";
+import { getBaseUrl, getClient } from "../../lib/backend.js";
 
 test("issues a device authorization for a valid client", async () => {
   const client = await getClient();
@@ -26,10 +26,10 @@ test("issues a device authorization for a valid client", async () => {
   expect(data.user_code).toMatch(
     /^[BCDFGHJKLMNPQRSTVWXZ]{4}-[BCDFGHJKLMNPQRSTVWXZ]{4}$/,
   );
-  expect(data.verification_uri).toBe("http://127.0.0.1:3010/auth/device");
+  const verificationUri = `${getBaseUrl()}/auth/device`;
+  expect(data.verification_uri).toBe(verificationUri);
   expect(data.verification_uri_complete).toBe(
-    "http://127.0.0.1:3010/auth/device?user_code=" +
-      data.user_code.replace("-", ""),
+    `${verificationUri}?user_code=${data.user_code.replace("-", "")}`,
   );
   expect(data.expires_in).toBeGreaterThan(0);
 });

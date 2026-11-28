@@ -4,10 +4,10 @@ use sqlx::PgPool;
 use uuid::Uuid;
 
 use crate::adapter::moodle::{MoodleClient, MoodleError};
-use crate::modules::audit_log::models::AuditLogEntity;
+use crate::modules::audit_log::model::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
-use crate::modules::user::models::UserRole;
-use crate::modules::user::models::{MoodleUser, User, UserSummary};
+use crate::modules::user::model::UserRole;
+use crate::modules::user::model::{MoodleUser, User, UserAuditIdentity, UserSummary};
 use crate::modules::user::repository::user::{UserRecord, UserRepository};
 
 #[derive(Clone)]
@@ -50,6 +50,23 @@ impl UserService {
         id: Uuid,
     ) -> Result<Option<UserSummary>, UserServiceError> {
         Ok(self.db.find_user_detail_by_id(id).await?.map(user_summary))
+    }
+
+    pub(crate) async fn lock_audit_identity(
+        db: &mut sqlx::PgConnection,
+        id: Uuid,
+    ) -> Result<Option<UserAuditIdentity>, sqlx::Error> {
+        Ok(db
+            .find_user_detail_by_id_for_update(id)
+            .await?
+            .map(|user| UserAuditIdentity {
+                user_id: user.id,
+                user_cid: user.cid,
+                user_full_name: user.full_name,
+                user_created_at: user.created_at,
+                user_updated_at: user.updated_at,
+                user_roles: user.roles,
+            }))
     }
 
     pub async fn get_users_bulk(

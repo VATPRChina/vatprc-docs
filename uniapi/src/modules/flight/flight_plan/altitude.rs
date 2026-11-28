@@ -1,6 +1,6 @@
 //! Shared China metric altitude table and preferred-route level classification.
 
-use crate::modules::navdata::models::CruiseAltitudeType;
+use crate::modules::navdata::model::CruiseAltitudeType;
 
 pub(crate) fn level_restriction_type(cruising_level: i32) -> CruiseAltitudeType {
     if let Some(metric_level) = standard_altitude_from_flight_level(cruising_level) {

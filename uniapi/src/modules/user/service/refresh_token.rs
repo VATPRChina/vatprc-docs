@@ -3,7 +3,7 @@ use sqlx::PgPool;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::super::models::{IssuedRefreshToken, RefreshToken};
+use super::super::model::{IssuedRefreshToken, RefreshToken};
 use super::super::repository::refresh_token::{RefreshTokenRepository, RefreshTokenTransaction};
 
 #[derive(Clone)]

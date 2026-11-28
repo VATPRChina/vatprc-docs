@@ -5,17 +5,16 @@ use sqlx::{PgPool, Postgres, Transaction};
 use uuid::Uuid;
 
 use crate::adapter::compat::{AtcConnection, CompatClient, CompatClientError, VatsimRating};
-use crate::modules::atc_position::repository::AtcPositionRepository;
-use crate::modules::audit_log::models::AuditLogEntity;
+use crate::modules::atc_position::service::AtcPositionService;
+use crate::modules::audit_log::model::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
+use crate::modules::user::model::UserAuditIdentity;
 use crate::modules::user::service::user::{UserService, UserServiceError};
 
-use super::models::{
-    CompatFutureController, Controller, ControllerOnlineTime, ControllerOnlineTimeSummary,
-    ControllerPermission, ControllerPositionKind, ControllerRating, ControllerSave,
-    UserControllerState,
+use super::model::{
+    Controller, ControllerOnlineTime, ControllerOnlineTimeSummary, ControllerPermission,
+    ControllerPositionKind, ControllerRating, ControllerSave, UserControllerState,
 };
-use super::repository::compat::CompatRepository;
 use super::repository::controller::{AtcControllerPermissionRecord, ControllerRepository};
 use super::repository::sector::SectorRepository;
 use super::repository::user_atc_permission::{AtcPermissionRecord, UserAtcPermissionRepository};
@@ -28,6 +27,7 @@ pub struct ControllerService {
     db: PgPool,
     audit_log: AuditLogService,
     user: UserService,
+    atc_position: AtcPositionService,
     compat: CompatClient,
 }
 
@@ -36,14 +36,29 @@ impl ControllerService {
         db: PgPool,
         audit_log: AuditLogService,
         user: UserService,
+        atc_position: AtcPositionService,
         compat: CompatClient,
     ) -> Self {
         Self {
             db,
             audit_log,
             user,
+            atc_position,
             compat,
         }
+    }
+
+    pub(crate) async fn can_book_event_position(
+        &self,
+        user_id: Uuid,
+        position_kind_id: &str,
+        minimum_state: i32,
+    ) -> Result<bool, sqlx::Error> {
+        let permission = self
+            .db
+            .user_event_atc_position_permission(user_id, position_kind_id)
+            .await?;
+        Ok(permission.is_some_and(|permission| permission_satisfies(&permission, minimum_state)))
     }
 
     pub async fn list(&self) -> Result<Vec<Controller>, ControllerServiceError> {
@@ -62,13 +77,17 @@ impl ControllerService {
     }
 
     pub async fn find(&self, user_id: Uuid) -> Result<Controller, ControllerServiceError> {
+        self.user
+            .find_summary_by_id(user_id)
+            .await?
+            .ok_or(ControllerServiceError::UserNotFound(user_id))?;
         let status = self
             .db
             .find_user_atc_status_by_user_id(user_id)
             .await?
-            .ok_or(ControllerServiceError::UserNotFound(user_id))?;
+            .unwrap_or_default();
         let permissions = self.db.list_user_atc_permission_by_user_id(user_id).await?;
-        controller_from_records(status, permissions)
+        controller_from_records(user_id, status, permissions)
     }
 
     pub async fn update(
@@ -78,13 +97,12 @@ impl ControllerService {
         operated_by: Uuid,
     ) -> Result<Controller, ControllerServiceError> {
         let mut transaction = self.db.begin().await?;
-        let before = controller_audit_snapshot(&mut transaction, user_id)
+        let identity = UserService::lock_audit_identity(&mut transaction, user_id)
             .await?
             .ok_or(ControllerServiceError::UserNotFound(user_id))?;
+        let before = controller_audit_snapshot(&mut transaction, &identity).await?;
         transaction.upsert_user_atc_status(user_id, &status).await?;
-        let after = controller_audit_snapshot(&mut transaction, user_id)
-            .await?
-            .ok_or(ControllerServiceError::UserNotFound(user_id))?;
+        let after = controller_audit_snapshot(&mut transaction, &identity).await?;
         transaction.commit().await?;
 
         self.audit_log
@@ -128,23 +146,6 @@ impl ControllerService {
         Ok(self.db.user_sector_can_online(user.id, &user.cid).await?)
     }
 
-    pub async fn future_compat_controllers(
-        &self,
-    ) -> Result<Vec<CompatFutureController>, ControllerServiceError> {
-        Ok(self
-            .db
-            .future_compat_controllers()
-            .await?
-            .into_iter()
-            .map(|controller| CompatFutureController {
-                callsign: controller.callsign,
-                name: controller.name,
-                start_at: controller.start_at,
-                end_at: controller.end_at,
-            })
-            .collect())
-    }
-
     pub async fn current_quarter_online_time(
         &self,
         user_id: Uuid,
@@ -160,7 +161,7 @@ impl ControllerService {
             self.member_atc_sessions(&user.cid),
             self.compat.get_online_data(),
             self.compat.get_member(&user.cid),
-            self.db.list_tier_2_atc_position_callsigns(),
+            self.atc_position.tier_2_callsigns(),
         );
         let sessions = sessions?;
         let rating = member?.rating;
@@ -444,11 +445,12 @@ fn controller_permission(
 }
 
 fn controller_from_records(
+    user_id: Uuid,
     status: AtcStatusRecord,
     permissions: Vec<AtcPermissionRecord>,
 ) -> Result<Controller, ControllerServiceError> {
     Ok(Controller {
-        user_id: status.user_id,
+        user_id,
         is_visiting: status.is_visiting.unwrap_or(false),
         is_absent: status.is_absent.unwrap_or(false),
         rating: parse_rating(status.rating.as_deref())?,
@@ -463,6 +465,26 @@ fn controller_from_records(
             })
             .collect::<Result<_, ControllerServiceError>>()?,
     })
+}
+
+fn permission_satisfies(permission: &AtcPermissionRecord, minimum_state: i32) -> bool {
+    let permission_rank = match permission.state.as_str() {
+        "Student" => 0,
+        "UnderMentor" => 1,
+        "Solo" => {
+            if permission
+                .solo_expires_at
+                .is_some_and(|expires_at| expires_at <= Utc::now())
+            {
+                return minimum_state <= 1;
+            }
+            2
+        }
+        "Certified" => 3,
+        "Mentor" => return true,
+        _ => return false,
+    };
+    permission_rank >= minimum_state
 }
 
 fn parse_rating(rating: Option<&str>) -> Result<ControllerRating, ControllerServiceError> {
@@ -487,29 +509,34 @@ fn parse_controller_state(state: &str) -> Result<UserControllerState, Controller
 }
 
 #[derive(serde::Serialize)]
-struct ControllerAuditSnapshot {
-    status: AtcStatusRecord,
+struct ControllerAuditSnapshot<'a> {
+    status: ControllerAuditStatus<'a>,
     permissions: Vec<AtcPermissionRecord>,
 }
 
-async fn controller_audit_snapshot(
-    transaction: &mut Transaction<'_, Postgres>,
-    user_id: Uuid,
-) -> Result<Option<ControllerAuditSnapshot>, sqlx::Error> {
-    let Some(status) = (&mut **transaction)
-        .find_user_atc_status_by_user_id_for_update(user_id)
-        .await?
-    else {
-        return Ok(None);
-    };
-    let permissions = (&mut **transaction)
-        .list_user_atc_permission_by_user_id(user_id)
-        .await?;
+#[derive(serde::Serialize)]
+struct ControllerAuditStatus<'a> {
+    #[serde(flatten)]
+    user: &'a UserAuditIdentity,
+    #[serde(flatten)]
+    status: AtcStatusRecord,
+}
 
-    Ok(Some(ControllerAuditSnapshot {
-        status,
+async fn controller_audit_snapshot<'a>(
+    transaction: &mut Transaction<'_, Postgres>,
+    user: &'a UserAuditIdentity,
+) -> Result<ControllerAuditSnapshot<'a>, sqlx::Error> {
+    let status = (&mut **transaction)
+        .find_user_atc_status_by_user_id(user.user_id)
+        .await?
+        .unwrap_or_default();
+    let permissions = (&mut **transaction)
+        .list_user_atc_permission_by_user_id(user.user_id)
+        .await?;
+    Ok(ControllerAuditSnapshot {
+        status: ControllerAuditStatus { user, status },
         permissions,
-    }))
+    })
 }
 
 #[derive(Debug, thiserror::Error)]

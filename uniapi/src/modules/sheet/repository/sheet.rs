@@ -1,4 +1,4 @@
-use crate::modules::sheet::models::{Sheet, SheetSave};
+use crate::modules::sheet::model::{Sheet, SheetSave};
 
 pub trait SheetTransactionRepository {
     async fn upsert_sheet(

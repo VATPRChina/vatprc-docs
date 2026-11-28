@@ -1,7 +1,7 @@
 use super::CheckResult;
 use super::{ValidationContext, Validator};
-use crate::modules::flight::models::ValidatorStatus;
-use crate::modules::flight::models::{ValidationField, ValidationProblem, ValidatorIdentifier};
+use crate::modules::flight::model::ValidatorStatus;
+use crate::modules::flight::model::{ValidationField, ValidationProblem, ValidatorIdentifier};
 use crate::modules::navdata::service::NavdataService;
 
 /// Equipment must permit RVSM when cruising at a China metric RVSM flight level.

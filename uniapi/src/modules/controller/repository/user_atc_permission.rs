@@ -3,7 +3,7 @@ use serde::Serialize;
 use sqlx::FromRow;
 use uuid::Uuid;
 
-use super::super::models::ControllerPermissionSave;
+use super::super::model::ControllerPermissionSave;
 
 #[derive(Debug, Clone, FromRow, Serialize)]
 pub struct AtcPermissionRecord {
@@ -13,6 +13,12 @@ pub struct AtcPermissionRecord {
 }
 
 pub(crate) trait UserAtcPermissionRepository<'executor> {
+    async fn user_event_atc_position_permission(
+        self,
+        user_id: Uuid,
+        position_kind_id: &str,
+    ) -> Result<Option<AtcPermissionRecord>, sqlx::Error>;
+
     async fn has_user_atc_permission_any_by_user_id(
         self,
         user_id: Uuid,
@@ -33,6 +39,24 @@ impl<'executor, E> UserAtcPermissionRepository<'executor> for E
 where
     E: sqlx::Executor<'executor, Database = sqlx::Postgres>,
 {
+    async fn user_event_atc_position_permission(
+        self,
+        user_id: Uuid,
+        position_kind_id: &str,
+    ) -> Result<Option<AtcPermissionRecord>, sqlx::Error> {
+        sqlx::query_as::<_, AtcPermissionRecord>(
+            r#"
+        SELECT position_kind_id, state, solo_expires_at
+        FROM public.user_atc_permission
+        WHERE user_id = $1 AND position_kind_id = $2
+        "#,
+        )
+        .bind(user_id)
+        .bind(position_kind_id)
+        .fetch_optional(self)
+        .await
+    }
+
     async fn has_user_atc_permission_any_by_user_id(
         self,
         user_id: Uuid,

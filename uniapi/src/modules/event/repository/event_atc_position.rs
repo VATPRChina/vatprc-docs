@@ -1,15 +1,8 @@
 use chrono::{DateTime, Utc};
-use sqlx::FromRow;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::event::models::{EventAtcBooking, EventAtcPosition, EventAtcPositionSave};
-
-#[derive(Debug, Clone, FromRow)]
-pub struct UserAtcPermissionRecord {
-    pub state: String,
-    pub solo_expires_at: Option<DateTime<Utc>>,
-}
+use crate::modules::event::model::{EventAtcPosition, EventAtcPositionSave};
 
 fn position_select_sql(where_clause: &str) -> String {
     position_select_sql_from("public.event_atc_position", where_clause)
@@ -36,15 +29,17 @@ fn position_select_sql_from(source: &str, where_clause: &str) -> String {
 }
 
 pub(crate) trait EventAtcPositionRepository<'executor> {
+    async fn has_linked_booking(self, booking_id: Uuid) -> Result<bool, sqlx::Error>;
+
     async fn list_event_atc_position_by_event(
         self,
         event_id: Uuid,
     ) -> Result<Vec<EventAtcPosition>, sqlx::Error>;
 
-    async fn find_event_atc_position_by_id(
+    async fn positions_for_bookings(
         self,
-        position_id: Uuid,
-    ) -> Result<Option<EventAtcPosition>, sqlx::Error>;
+        booking_ids: &[Uuid],
+    ) -> Result<Vec<EventAtcPosition>, sqlx::Error>;
 
     async fn find_event_atc_position_by_event_and_id_in_transaction(
         self,
@@ -71,23 +66,21 @@ pub(crate) trait EventAtcPositionRepository<'executor> {
         event_id: Uuid,
         position_id: Uuid,
     ) -> Result<bool, sqlx::Error>;
-
-    async fn user_event_atc_position_permission(
-        self,
-        user_id: Uuid,
-        position_kind_id: &str,
-    ) -> Result<Option<UserAtcPermissionRecord>, sqlx::Error>;
-
-    async fn find_event_atc_booking(
-        self,
-        booking_id: Uuid,
-    ) -> Result<Option<EventAtcBooking>, sqlx::Error>;
 }
 
 impl<'executor, E> EventAtcPositionRepository<'executor> for E
 where
     E: sqlx::Executor<'executor, Database = sqlx::Postgres>,
 {
+    async fn has_linked_booking(self, booking_id: Uuid) -> Result<bool, sqlx::Error> {
+        sqlx::query_scalar(
+            "SELECT EXISTS(SELECT 1 FROM public.event_atc_position_booking WHERE atc_booking_id = $1)"
+        )
+        .bind(booking_id)
+        .fetch_one(self)
+        .await
+    }
+
     async fn list_event_atc_position_by_event(
         self,
         event_id: Uuid,
@@ -102,15 +95,15 @@ where
         .await
     }
 
-    async fn find_event_atc_position_by_id(
+    async fn positions_for_bookings(
         self,
-        position_id: Uuid,
-    ) -> Result<Option<EventAtcPosition>, sqlx::Error> {
+        booking_ids: &[Uuid],
+    ) -> Result<Vec<EventAtcPosition>, sqlx::Error> {
         sqlx::query_as::<_, EventAtcPosition>(&position_select_sql(
-            "WHERE event_atc_position.id = $1",
+            "WHERE event_atc_position_booking.atc_booking_id = ANY($1)",
         ))
-        .bind(position_id)
-        .fetch_optional(self)
+        .bind(booking_ids)
+        .fetch_all(self)
         .await
     }
     async fn find_event_atc_position_by_event_and_id_in_transaction(
@@ -240,67 +233,30 @@ where
 
         Ok(result.rows_affected() > 0)
     }
-    async fn user_event_atc_position_permission(
-        self,
-        user_id: Uuid,
-        position_kind_id: &str,
-    ) -> Result<Option<UserAtcPermissionRecord>, sqlx::Error> {
-        sqlx::query_as::<_, UserAtcPermissionRecord>(
-            r#"
-        SELECT state, solo_expires_at
-        FROM public.user_atc_permission
-        WHERE user_id = $1 AND position_kind_id = $2
-        "#,
-        )
-        .bind(user_id)
-        .bind(position_kind_id)
-        .fetch_optional(self)
-        .await
-    }
-
-    async fn find_event_atc_booking(
-        self,
-        booking_id: Uuid,
-    ) -> Result<Option<EventAtcBooking>, sqlx::Error> {
-        sqlx::query_as::<_, EventAtcBooking>(
-            r#"
-        SELECT id, user_id, booked_at
-        FROM public.atc_booking
-        WHERE id = $1
-        "#,
-        )
-        .bind(booking_id)
-        .fetch_optional(self)
-        .await
-    }
 }
 
 pub(crate) trait EventAtcPositionTransactionRepository {
     async fn create_event_atc_position_booking(
         &mut self,
-        position: &EventAtcPosition,
+        position_id: Uuid,
         user_id: Uuid,
+        atc_booking_id: Uuid,
+        booked_at: DateTime<Utc>,
     ) -> Result<(), sqlx::Error>;
 
     async fn delete_event_atc_position_booking(
         &mut self,
         position_id: Uuid,
-        atc_booking_id: Option<Uuid>,
     ) -> Result<(), sqlx::Error>;
-
-    async fn sync_event_atc_position_booking(
-        &mut self,
-        position: &EventAtcPosition,
-    ) -> Result<(), sqlx::Error>;
-
-    async fn delete_event_atc_booking(&mut self, booking_id: Uuid) -> Result<(), sqlx::Error>;
 }
 
 impl EventAtcPositionTransactionRepository for sqlx::Transaction<'_, sqlx::Postgres> {
     async fn create_event_atc_position_booking(
         &mut self,
-        position: &EventAtcPosition,
+        position_id: Uuid,
         user_id: Uuid,
+        atc_booking_id: Uuid,
+        booked_at: DateTime<Utc>,
     ) -> Result<(), sqlx::Error> {
         tracing::info!(
             operation = "create_booking",
@@ -308,25 +264,6 @@ impl EventAtcPositionTransactionRepository for sqlx::Transaction<'_, sqlx::Postg
             "modifying data"
         );
 
-        let atc_booking_id = Uuid::from(Ulid::new());
-        let now = Utc::now();
-        sqlx::query(
-            r#"
-        INSERT INTO public.atc_booking (
-            id, user_id, callsign, booked_at, start_at, end_at, remarks
-        )
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        "#,
-        )
-        .bind(atc_booking_id)
-        .bind(user_id)
-        .bind(&position.callsign)
-        .bind(now)
-        .bind(position.start_at)
-        .bind(position.end_at)
-        .bind(&position.remarks)
-        .execute(&mut **self)
-        .await?;
         sqlx::query(
             r#"
         INSERT INTO public.event_atc_position_booking (
@@ -335,9 +272,9 @@ impl EventAtcPositionTransactionRepository for sqlx::Transaction<'_, sqlx::Postg
         VALUES ($1, $2, $3, $4)
         "#,
         )
-        .bind(position.id)
+        .bind(position_id)
         .bind(user_id)
-        .bind(now)
+        .bind(booked_at)
         .bind(atc_booking_id)
         .execute(&mut **self)
         .await?;
@@ -348,7 +285,6 @@ impl EventAtcPositionTransactionRepository for sqlx::Transaction<'_, sqlx::Postg
     async fn delete_event_atc_position_booking(
         &mut self,
         position_id: Uuid,
-        atc_booking_id: Option<Uuid>,
     ) -> Result<(), sqlx::Error> {
         tracing::info!(
             operation = "delete_booking",
@@ -363,49 +299,6 @@ impl EventAtcPositionTransactionRepository for sqlx::Transaction<'_, sqlx::Postg
         .execute(&mut **self)
         .await?;
 
-        if let Some(atc_booking_id) = atc_booking_id {
-            sqlx::query("DELETE FROM public.atc_booking WHERE id = $1")
-                .bind(atc_booking_id)
-                .execute(&mut **self)
-                .await?;
-        }
-
-        Ok(())
-    }
-
-    async fn sync_event_atc_position_booking(
-        &mut self,
-        position: &EventAtcPosition,
-    ) -> Result<(), sqlx::Error> {
-        let Some(booking_id) = position.booking_id else {
-            return Ok(());
-        };
-        sqlx::query(
-            r#"
-            UPDATE public.atc_booking
-            SET callsign = $2,
-                start_at = $3,
-                end_at = $4,
-                remarks = $5,
-                updated_at = now()
-            WHERE id = $1
-            "#,
-        )
-        .bind(booking_id)
-        .bind(&position.callsign)
-        .bind(position.start_at)
-        .bind(position.end_at)
-        .bind(&position.remarks)
-        .execute(&mut **self)
-        .await?;
-        Ok(())
-    }
-
-    async fn delete_event_atc_booking(&mut self, booking_id: Uuid) -> Result<(), sqlx::Error> {
-        sqlx::query("DELETE FROM public.atc_booking WHERE id = $1")
-            .bind(booking_id)
-            .execute(&mut **self)
-            .await?;
         Ok(())
     }
 }
