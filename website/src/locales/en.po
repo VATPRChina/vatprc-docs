@@ -768,9 +768,6 @@ msgstr "Finished Trainings"
 msgid "FIR coverage estimate"
 msgstr "FIR coverage estimate"
 
-msgid "Fit region"
-msgstr "Fit region"
-
 msgid "Flight information region"
 msgstr "Flight information region"
 
@@ -1330,6 +1327,9 @@ msgstr "Remarks"
 
 msgid "Remove row"
 msgstr "Remove row"
+
+msgid "Reset Zoom"
+msgstr "Reset Zoom"
 
 msgid "Resolved Route"
 msgstr "Resolved Route"
