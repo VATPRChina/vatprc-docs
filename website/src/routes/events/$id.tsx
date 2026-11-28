@@ -10,13 +10,10 @@ import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Skeleton, Tabs } from "@mantine/core";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { FC } from "react";
 import { TbAirTrafficControl, TbCalendar, TbHistory } from "react-icons/tb";
 
-export const Route = createFileRoute("/events/$id")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { id } = Route.useParams();
   const { i18n } = useLingui();
   const {
@@ -89,12 +86,16 @@ function RouteComponent() {
       )}
     </div>
   );
-}
+};
 
-const EventAuditLogPanel = ({ eventId }: { eventId: string }) => {
+const EventAuditLogPanel: FC<{ eventId: string }> = ({ eventId }) => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/events/{id}/audit", {
     params: { path: { id: eventId } },
   });
 
   return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
 };
+
+export const Route = createFileRoute("/events/$id")({
+  component: RouteComponent,
+});

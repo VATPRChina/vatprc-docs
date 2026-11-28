@@ -90,7 +90,7 @@ export const ResourceGrid: FC<{ publicOnly?: boolean; compact?: boolean }> = ({
 
   return (
     <section className="flex flex-col gap-1">
-      <h2 className="text-2xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>Resources</Trans>
       </h2>
       {groups.map((group) => (

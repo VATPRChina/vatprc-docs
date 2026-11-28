@@ -12,7 +12,7 @@ import { ActionIcon, Alert, Button, Checkbox, Modal, Tabs } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
-import { MouseEvent, useState } from "react";
+import { type FC, MouseEvent, useState } from "react";
 import { TbUserBolt, TbCheck, TbHistory } from "react-icons/tb";
 
 const AUTOMATIC_ROLES: components["schemas"]["UserRole"][] = [
@@ -124,11 +124,7 @@ const columns = [
   }),
 ];
 
-export const Route = createFileRoute("/users/")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { data, error: usersError, isLoading } = $api.useQuery("get", "/api/users");
   const {
     data: controllerStatuses,
@@ -142,7 +138,7 @@ function RouteComponent() {
   return (
     <div className="container mx-auto flex flex-col gap-4">
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <h1 className="text-2xl">
+        <h1 className="text-3xl font-bold">
           <Trans>Users</Trans>
         </h1>
         <RequireRole role="volunteer">
@@ -181,9 +177,9 @@ function RouteComponent() {
       </Tabs>
     </div>
   );
-}
+};
 
-const UserAuditLogButton = ({ userId }: { userId: string }) => {
+const UserAuditLogButton: FC<{ userId: string }> = ({ userId }) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -200,10 +196,14 @@ const UserAuditLogButton = ({ userId }: { userId: string }) => {
   );
 };
 
-const UserAuditLogModalContent = ({ userId }: { userId: string }) => {
+const UserAuditLogModalContent: FC<{ userId: string }> = ({ userId }) => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/users/{id}/audit", {
     params: { path: { id: userId } },
   });
 
   return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
 };
+
+export const Route = createFileRoute("/users/")({
+  component: RouteComponent,
+});

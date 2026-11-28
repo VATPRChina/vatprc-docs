@@ -19,13 +19,13 @@ const NETWORK_ERROR_MESSAGES = [
   "a server with the specified hostname could not be found",
 ];
 
-function isNetworkError(name: string | undefined, message: string | undefined) {
+const isNetworkError = (name: string | undefined, message: string | undefined) => {
   if (name === "NetworkError") return true;
   if (name !== "TypeError") return false;
 
   const normalizedMessage = message?.toLowerCase();
   return normalizedMessage !== undefined && NETWORK_ERROR_MESSAGES.some((value) => normalizedMessage.includes(value));
-}
+};
 
 const throwMiddleware: Middleware = {
   async onResponse({ response }) {

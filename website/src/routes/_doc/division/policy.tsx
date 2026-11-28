@@ -3,17 +3,9 @@ import { getAllDocuments } from "@/lib/doc";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/_doc/division/policy")({
-  component: Page,
-  async loader() {
-    const documents = await getAllDocuments();
-    return documents.find((document) => document.webPath === "/docs/policy")?.children ?? [];
-  },
-  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Division Policies`) }] }),
-});
-
-function Page() {
+const Page: FC = () => {
   const documents = Route.useLoaderData();
 
   return (
@@ -26,4 +18,13 @@ function Page() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/division/policy")({
+  component: Page,
+  async loader() {
+    const documents = await getAllDocuments();
+    return documents.find((document) => document.webPath === "/docs/policy")?.children ?? [];
+  },
+  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Division Policies`) }] }),
+});

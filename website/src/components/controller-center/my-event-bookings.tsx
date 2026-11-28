@@ -38,7 +38,7 @@ export const MyEventBookings: FC = () => {
   if (error ?? positionsError) {
     return (
       <section className="flex flex-col gap-1">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>My Event Positions</Trans>
         </h2>
         <Alert color="red" title={(error ?? positionsError)?.title}>
@@ -51,7 +51,7 @@ export const MyEventBookings: FC = () => {
 
   return (
     <section className="flex flex-col gap-1">
-      <h2 className="text-2xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>My Event Positions</Trans>
       </h2>
       <div className="border border-black/15 dark:border-white/20">
@@ -66,7 +66,7 @@ export const MyEventBookings: FC = () => {
             <span className="flex-1 truncate text-gray-700 dark:text-gray-300">
               {i18n.locale === "en" ? (position.event.title_en ?? position.event.title) : position.event.title}
             </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+            <span className="text-dimmed text-sm">
               {format(position.start_at, "MM-dd HHmm", { in: utc })}Z–{format(position.end_at, "HHmm", { in: utc })}Z
             </span>
           </Link>

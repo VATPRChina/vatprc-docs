@@ -6,9 +6,9 @@ import { Alert, Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
-import { FormEvent } from "react";
+import { type FC, FormEvent } from "react";
 
-export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: string }) => {
+export const AssignEventSlot: FC<{ eventId: string; slotId: string }> = ({ eventId, slotId }) => {
   const { t } = useLingui();
   const [opened, { toggle, close }] = useDisclosure(false);
 
@@ -25,10 +25,9 @@ export const AssignEventSlot = ({ eventId, slotId }: { eventId: string; slotId: 
 
   const onSuccess = wrapPromiseWithLog(async () => {
     close();
-    await queryClient.invalidateQueries({
-      queryKey: $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } })
-        .queryKey,
-    });
+    await queryClient.invalidateQueries(
+      $api.queryOptions("get", "/api/events/{event_id}/slots", { params: { path: { event_id: eventId } } }),
+    );
   });
 
   const {

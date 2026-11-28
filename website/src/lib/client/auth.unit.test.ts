@@ -26,24 +26,24 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 
-function setTokens(access: string, refresh: string, expiresIn: number) {
+const setTokens = (access: string, refresh: string, expiresIn: number) => {
   storage.set(
     "access_token",
     JSON.stringify({ access_token: access, expires_at: new Date(Date.now() + expiresIn * 1000).toJSON() }),
   );
   storage.set("refresh_token", JSON.stringify(refresh));
-}
+};
 
-function tokenResponse() {
+const tokenResponse = () => {
   return Response.json({ access_token: "new-access", refresh_token: "new-refresh", expires_in: 3600 });
-}
+};
 
-async function sessionClient() {
+const sessionClient = async () => {
   const auth = await import("./auth");
   const client = createClient<paths>({ baseUrl: "https://api.example.com" });
   client.use(auth.authMiddleware);
   return { auth, client };
-}
+};
 
 test("restores an expired access token from persistent refresh credentials", async () => {
   fetchMock.mockImplementation(async (request: Request) => {

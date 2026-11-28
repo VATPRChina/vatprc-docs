@@ -3,7 +3,7 @@ import { DateTime } from "./datetime";
 import { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Anchor } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { FC } from "react";
 import { TbArrowRight } from "react-icons/tb";
 
@@ -53,7 +53,7 @@ export const EventSummary: FC<
   );
 };
 
-export const EventDetail = ({ eventId }: { eventId: string }) => {
+export const EventDetail: FC<{ eventId: string }> = ({ eventId }) => {
   const { data: event, error } = $api.useQuery("get", "/api/events/{id}", {
     params: { path: { id: eventId } },
   });
@@ -69,14 +69,24 @@ export const EventDetail = ({ eventId }: { eventId: string }) => {
       {event && <AtcBookingWarning eventId={event.id} eventStart={event.start_at} />}
       <div className="flex flex-row items-baseline gap-1">
         {event?.community_link && event.community_link.length > 0 && (
-          <Anchor href={event.community_link} target="_blank" rel="noreferrer">
+          <a
+            href={event.community_link}
+            target="_blank"
+            rel="noreferrer"
+            className="text-(--mantine-color-anchor) hover:underline"
+          >
             <Trans>Forum</Trans>
-          </Anchor>
+          </a>
         )}
         {event?.vatsim_link && event.vatsim_link.length > 0 && (
-          <Anchor href={event.vatsim_link} target="_blank" rel="noreferrer">
+          <a
+            href={event.vatsim_link}
+            target="_blank"
+            rel="noreferrer"
+            className="text-(--mantine-color-anchor) hover:underline"
+          >
             <Trans>VATSIM</Trans>
-          </Anchor>
+          </a>
         )}
       </div>
       <div>{event?.description}</div>

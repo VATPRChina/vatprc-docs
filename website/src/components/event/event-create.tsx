@@ -10,10 +10,11 @@ import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { addHours, formatISO, setMinutes, setSeconds } from "date-fns";
+import type { FC } from "react";
 import { TbEdit } from "react-icons/tb";
 
 const NULL_ULID = "01J2N4V2BNSP3E5Q9MBA3AE8E3";
-export const CreateEvent = ({ eventId }: { eventId?: string }) => {
+export const CreateEvent: FC<{ eventId?: string }> = ({ eventId }) => {
   const { t } = useLingui();
   const [opened, { toggle, close }] = useDisclosure(false);
 

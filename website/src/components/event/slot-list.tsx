@@ -31,14 +31,14 @@ const columns = [
       return (
         <div className="flex gap-2">
           <span>
-            <span className="text-muted-foreground">CTOT/</span>
+            <span className="text-dimmed">CTOT/</span>
             <DateTime noDistance noDate>
               {enterAt}
             </DateTime>
           </span>
           {leaveAt && (
             <span>
-              <span className="text-muted-foreground">ELDT/</span>
+              <span className="text-dimmed">ELDT/</span>
               <DateTime noDistance noDate>
                 {leaveAt}
               </DateTime>
@@ -59,7 +59,7 @@ const columns = [
       return (
         <>
           {callsign}
-          {aircraft && <span className="text-muted-foreground">({aircraft})</span>}
+          {aircraft && <span className="text-dimmed">({aircraft})</span>}
         </>
       );
     },
@@ -181,7 +181,7 @@ export const SlotList: FC<{ eventId: string }> = ({ eventId }) => {
 
   return (
     <>
-      <h2 className="text-2xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Slots</Trans>
         <ImportSlot eventId={eventId} />
         <ExportSlot eventId={eventId} />

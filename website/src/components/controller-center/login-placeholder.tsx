@@ -1,9 +1,10 @@
 import { redirectToLogin } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
+import type { FC } from "react";
 import { TbLockAccess, TbLogin2 } from "react-icons/tb";
 
-export const ControllerCenterLoginPlaceholder = () => (
+export const ControllerCenterLoginPlaceholder: FC = () => (
   <section className="relative isolate flex min-h-80 items-center justify-center overflow-hidden border border-dashed border-black/20 bg-linear-to-br from-gray-50 via-white to-red-50 p-4 dark:border-white/20 dark:from-gray-950 dark:via-gray-950 dark:to-red-950/30">
     <div
       aria-hidden
@@ -17,10 +18,10 @@ export const ControllerCenterLoginPlaceholder = () => (
       <div className="mb-1 flex size-16 items-center justify-center border border-red-200 bg-white/80 text-red-700 shadow-sm backdrop-blur dark:border-red-900 dark:bg-gray-950/80 dark:text-red-300">
         <TbLockAccess size={32} strokeWidth={1.5} />
       </div>
-      <h2 className="text-2xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>Log in to Controller Center</Trans>
       </h2>
-      <p className="text-gray-600 dark:text-gray-400">
+      <p className="text-dimmed text-base">
         <Trans>Log in with your VATSIM account to view your controller training, applications, and bookings.</Trans>
       </p>
       <Button variant="subtle" color="red" rightSection={<TbLogin2 size={16} />} onClick={redirectToLogin}>

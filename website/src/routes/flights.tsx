@@ -1,13 +1,14 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/flights")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   return (
     <div className="container mx-auto">
       <Outlet />
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/flights")({
+  component: RouteComponent,
+});

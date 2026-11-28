@@ -6,16 +6,9 @@ import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/_doc/controller/loa")({
-  component: Page,
-  async loader() {
-    return [await getAllDocuments(), await getDiscourseDocument({ data: "7217" })] as const;
-  },
-  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Letter of Agreement`) }] }),
-});
-
-function Page() {
+const Page: FC = () => {
   const { i18n } = useLingui();
   const locale = i18n.locale;
   const [documents, document] = Route.useLoaderData();
@@ -38,4 +31,12 @@ function Page() {
       <DiscourseDocument document={document} cn="7217" en="7217" />
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/controller/loa")({
+  component: Page,
+  async loader() {
+    return [await getAllDocuments(), await getDiscourseDocument({ data: "7217" })] as const;
+  },
+  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Letter of Agreement`) }] }),
+});

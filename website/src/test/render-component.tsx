@@ -3,12 +3,12 @@ import { theme } from "@/theme";
 import { setupI18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { MantineProvider } from "@mantine/core";
-import { ReactNode } from "react";
+import { type FC, ReactNode } from "react";
 import { render } from "vitest-browser-react";
 
 const i18n = setupI18n({ locale: "en", messages: { en } });
 
-const AppTestProviders = ({ children }: { children: ReactNode }) => (
+const AppTestProviders: FC<{ children: ReactNode }> = ({ children }) => (
   <I18nProvider i18n={i18n}>
     <MantineProvider theme={theme} forceColorScheme="light">
       {children}

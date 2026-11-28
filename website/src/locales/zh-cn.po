@@ -687,6 +687,9 @@ msgstr "本周活动"
 msgid "Experimental features"
 msgstr "实验性功能"
 
+msgid "Export slots"
+msgstr "导出时刻表"
+
 msgid "Failed to delete ATC position"
 msgstr "删除管制席位失败"
 
@@ -821,6 +824,9 @@ msgstr "姓名"
 
 msgid "Full Name"
 msgstr "姓名"
+
+msgid "GeoJSON map"
+msgstr "GeoJSON 地图"
 
 msgid "Go to first page"
 msgstr "前往第一页"
@@ -1237,6 +1243,9 @@ msgstr "待处理"
 
 msgid "Performance Based Navigation"
 msgstr "所需导航性能能力"
+
+msgid "Pick value"
+msgstr "请选择"
 
 msgid "Pilot Softwares"
 msgstr "飞行员软件"

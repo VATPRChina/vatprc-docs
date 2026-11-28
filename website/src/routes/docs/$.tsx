@@ -4,7 +4,18 @@ import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
 import { Skeleton, Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 import { TbCloudX } from "react-icons/tb";
+
+const RouteComponent: FC = () => {
+  const doc = Route.useLoaderData();
+
+  return (
+    <MarkdownDoc>
+      <MarkdownContent markdown={doc.markdown} />
+    </MarkdownDoc>
+  );
+};
 
 export const Route = createFileRoute("/docs/$")({
   ssr: true,
@@ -32,13 +43,3 @@ export const Route = createFileRoute("/docs/$")({
     );
   },
 });
-
-function RouteComponent() {
-  const doc = Route.useLoaderData();
-
-  return (
-    <MarkdownDoc>
-      <MarkdownContent markdown={doc.markdown} />
-    </MarkdownDoc>
-  );
-}

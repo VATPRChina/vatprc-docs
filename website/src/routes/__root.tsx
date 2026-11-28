@@ -32,7 +32,7 @@ interface ApplicationProps {
   children?: React.ReactNode;
 }
 
-const Application: React.FC<ApplicationProps> = ({ children }: ApplicationProps) => {
+const Application: FC<ApplicationProps> = ({ children }: ApplicationProps) => {
   const route = useRouterState();
 
   if (route.location.pathname === "/division/api") {
@@ -86,6 +86,14 @@ const AppHtml: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
+const RootLayout: FC = () => {
+  return (
+    <AppHtml>
+      <Outlet />
+    </AppHtml>
+  );
+};
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootLayout,
   errorComponent: ({ error }) => {
@@ -97,7 +105,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <AppHtml>
         <div className="container mx-auto">
           <Alert color="red" title={<Trans>Error</Trans>}>
-            <p className="font-medium">{error instanceof Error ? error.message : String(error)}</p>
+            <p className="text-base font-medium">{error instanceof Error ? error.message : String(error)}</p>
             <p className="text-wrap">
               <pre>{error instanceof Error ? error.stack : undefined}</pre>
             </p>
@@ -137,11 +145,3 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     };
   },
 });
-
-function RootLayout() {
-  return (
-    <AppHtml>
-      <Outlet />
-    </AppHtml>
-  );
-}

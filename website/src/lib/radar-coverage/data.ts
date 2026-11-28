@@ -78,13 +78,13 @@ const coordinates = (value: unknown, minimum: number): Coordinate[] => {
   }
   return points;
 };
-function radarType(value: unknown): RadarType {
+const radarType = (value: unknown): RadarType => {
   const type = String(value).toUpperCase().replaceAll("-", "");
   if (/^SSR(?:_MODE[ACS])?$/.test(type)) return "SSR";
   if (type === "SSR" || type === "ADSB" || type === "SMR") return type;
   return fail("radar");
-}
-function radar(value: unknown): Radar {
+};
+const radar = (value: unknown): Radar => {
   const r = record(value);
   if (
     typeof r.name !== "string" ||
@@ -103,8 +103,8 @@ function radar(value: unknown): Radar {
     elevation: r.elevation,
     maxRange: r.maxRange,
   };
-}
-function airspaces(value: unknown): Airspace[] {
+};
+const airspaces = (value: unknown): Airspace[] => {
   if (value === undefined) return [];
   if (!Array.isArray(value) || value.length > 2000) return fail("dataset");
   return value.map((item) => {
@@ -124,9 +124,9 @@ function airspaces(value: unknown): Airspace[] {
       ...(a.upperLimit !== undefined ? { upperLimit: a.upperLimit } : {}),
     };
   });
-}
+};
 
-export function parseRegion(code: string, airspace: unknown, stations: unknown): RadarRegion {
+export const parseRegion = (code: string, airspace: unknown, stations: unknown): RadarRegion => {
   const r = record(airspace);
   if (
     r.code !== code ||
@@ -145,16 +145,16 @@ export function parseRegion(code: string, airspace: unknown, stations: unknown):
     radars: stations.map(radar),
     airspace: { acc: airspaces(a.acc), tma: airspaces(a.tma), twr: airspaces(a.twr) },
   };
-}
+};
 const DATA_URL = "https://files.vatprc.net/radar-coverage/";
 const cache = new Map<string, Promise<RadarRegion>>();
 let sectorIdsPromise: Promise<Map<string, string>> | undefined;
-async function readJson(url: string): Promise<unknown> {
+const readJson = async (url: string): Promise<unknown> => {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Radar data HTTP ${response.status}`);
   return response.json() as Promise<unknown>;
-}
-export function loadRegion(code: string): Promise<RadarRegion> {
+};
+export const loadRegion = (code: string): Promise<RadarRegion> => {
   if (!BUILTIN_REGIONS.some((region) => region.code === code)) return Promise.reject(new Error("Unknown radar region"));
   let promise = cache.get(code);
   if (!promise) {
@@ -168,9 +168,9 @@ export function loadRegion(code: string): Promise<RadarRegion> {
     cache.set(code, promise);
   }
   return promise;
-}
+};
 
-export function loadSectorIds(): Promise<Map<string, string>> {
+export const loadSectorIds = (): Promise<Map<string, string>> => {
   if (!sectorIdsPromise) {
     sectorIdsPromise = Promise.allSettled(
       BUILTIN_REGIONS.map(async ({ code }) => {
@@ -197,4 +197,4 @@ export function loadSectorIds(): Promise<Map<string, string>> {
       });
   }
   return sectorIdsPromise;
-}
+};

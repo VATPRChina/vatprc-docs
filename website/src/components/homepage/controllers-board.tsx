@@ -17,16 +17,18 @@ const ControllerStrip: React.FC<{
 }> = ({ callsign, name, frequency, eventTitle, schedule }) => (
   <div
     className={cn(
-      "flex flex-col gap-1 border-l-2 p-4",
+      "flex flex-col gap-1 border-l-2 p-2",
       schedule ? "border-l-gray-300 dark:border-l-gray-600" : "border-l-emerald-600 dark:border-l-emerald-400",
     )}
   >
     <p className="space-x-2">
       <span className="font-mono font-bold">{callsign}</span>
-      {frequency && <span className="underline underline-offset-4">{frequency}</span>}
+      &nbsp;
+      {frequency && <span className="text-dimmed underline underline-offset-4">{frequency}</span>}
+      &nbsp;
       <span>{name}</span>
     </p>
-    {schedule && eventTitle && <p className="text-dimmed">{schedule && eventTitle}</p>}
+    {schedule && eventTitle && <p className="text-dimmed text-base">{schedule && eventTitle}</p>}
     {schedule && (
       <div className="flex items-center gap-1 text-sm">
         <DateTime>{schedule[0]}</DateTime>
@@ -54,9 +56,7 @@ const StripList: React.FC<StripListProps> = ({ children, empty, isLoading }) => 
               <Skeleton width="100%" height={24} />
             </div>
           ))}
-      {!isLoading && children.length === 0 && (
-        <p className="px-4 py-6 font-mono text-base text-gray-600 dark:text-gray-300">{empty}</p>
-      )}
+      {!isLoading && children.length === 0 && <p className="text-dimmed p-2 font-mono text-base">{empty}</p>}
       {children}
     </div>
   );
@@ -77,7 +77,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
   return (
     <section className={cn("w-full", className)}>
       <div className="mb-2 flex items-baseline justify-between">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>Controllers</Trans>
         </h2>
         <Button
@@ -97,7 +97,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </Alert>
         )}
         <div>
-          <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
+          <h3 className="text-dimmed mb-1 font-mono text-xl font-bold uppercase">
             <Trans>Online Controllers</Trans>
           </h3>
           <StripList empty={<Trans>There is currently no online ATC.</Trans>} isLoading={isLoading}>
@@ -107,7 +107,7 @@ export const ControllersBoard: React.FC<{ className?: string }> = ({ className }
           </StripList>
         </div>
         <div>
-          <h3 className="mb-1 font-mono text-base text-gray-700 uppercase dark:text-gray-300">
+          <h3 className="text-dimmed mb-1 font-mono text-xl font-bold uppercase">
             <Trans>Booked Controllers</Trans>
           </h3>
           <StripList empty={<Trans>No upcoming ATC booking.</Trans>} isLoading={areBookingsLoading}>

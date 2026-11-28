@@ -97,7 +97,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
 
   return (
     <div className="flex flex-col gap-1">
-      <h2 className="text-lg">
+      <h2 className="text-2xl font-bold">
         <Trans>Basic Information</Trans>
       </h2>
       <Skeleton visible={isUserLoading || isValuesLoading}>
@@ -118,7 +118,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
           </pre>
         </Card>
       </Skeleton>
-      <h2 className="text-lg">
+      <h2 className="text-2xl font-bold">
         <Trans>Application Information</Trans>
       </h2>
       {isUpdateSuccess && (
@@ -150,7 +150,7 @@ export const AtcApplicationForm: FC<AtcApplicationFormProps> = ({ applicationId 
           <>
             {!applicationId && (
               <>
-                <h2 className="text-lg">
+                <h2 className="text-2xl font-bold">
                   <Trans>Checklist</Trans>
                 </h2>
                 <Checkbox.Group value={value} onChange={setValue}>

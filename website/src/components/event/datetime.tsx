@@ -2,18 +2,14 @@ import { utc } from "@date-fns/utc";
 import { useLingui } from "@lingui/react/macro";
 import { Tooltip } from "@mantine/core";
 import { format, intlFormatDistance } from "date-fns";
+import type { FC } from "react";
 
-export const DateTime = ({
-  children,
-  noDistance,
-  noDate,
-  localFirst,
-}: {
+export const DateTime: FC<{
   children?: string | Date | null;
   noDistance?: boolean;
   noDate?: boolean;
   localFirst?: boolean;
-}) => {
+}> = ({ children, noDistance, noDate, localFirst }) => {
   const { i18n } = useLingui();
   if (!children) return null;
 

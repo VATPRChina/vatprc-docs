@@ -2,13 +2,7 @@ import { ControllerListTable } from "@/components/controller-list";
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/_doc/controller/controller-list")({
-  component: Page,
-  head: (ctx) => ({
-    meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],
-  }),
-});
+import type { FC } from "react";
 
 const SOLO_POSITIONS = [
   { type: "CTR", positions: ["ZBAA_CTR", "ZGGG_CTR", "ZSSS_CTR", "ZYTL_CTR", "ZJSY_CTR"] },
@@ -16,7 +10,7 @@ const SOLO_POSITIONS = [
   { type: "TWR", positions: ["ZBAA_TWR", "ZSPD_TWR", "ZSSS_TWR", "ZYTL_TWR", "ZJSY_TWR"] },
 ];
 
-function Page() {
+const Page: FC = () => {
   return (
     <div className="container mx-auto">
       <div className="prose dark:prose-invert min-w-full">
@@ -86,4 +80,11 @@ function Page() {
       <ControllerListTable />
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/controller/controller-list")({
+  component: Page,
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Controller List`) }],
+  }),
+});

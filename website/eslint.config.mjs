@@ -29,7 +29,7 @@ export default defineConfig(
   ...fixupConfigRules([react.configs.flat.recommended, react.configs.flat["jsx-runtime"]]),
   // reactHooks.configs.flat.recommended,
   router.configs["flat/recommended"],
-  { ignores: ["app/lib/api.d.ts"] },
+  { ignores: ["src/lib/api.d.ts", "src/routeTree.gen.ts"] },
   pluginLingui.configs["flat/recommended"],
   {
     files: ["**/*.test.{ts,tsx}"],

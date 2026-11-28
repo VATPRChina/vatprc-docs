@@ -9,10 +9,10 @@ import { useLingui } from "@lingui/react/macro";
 import { ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { type FC, useEffect, useRef, useState } from "react";
 import { TbMenu2 } from "react-icons/tb";
 
-export const AppHeader = ({ overlayHero = false }: { overlayHero?: boolean }) => {
+export const AppHeader: FC<{ overlayHero?: boolean }> = ({ overlayHero = false }) => {
   const { t } = useLingui();
   const [opened, { open, close }] = useDisclosure();
   const headerRef = useRef<HTMLElement>(null);

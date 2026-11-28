@@ -12,13 +12,10 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Skeleton, Tooltip } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 import { TbSchool } from "react-icons/tb";
 
-export const Route = createFileRoute("/controllers/applications/$id")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { params } = Route.useMatch();
 
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications/{id}", {
@@ -33,16 +30,16 @@ function RouteComponent() {
           {error.detail}
         </Alert>
       )}
-      <h2 className="text-2xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>ATC Application</Trans>
       </h2>
       <AtcApplicationStatusAlert applicationId={params.id} />
       <AtcApplicationForm applicationId={params.id} />
-      <h2 className="text-lg">
+      <h2 className="text-2xl font-bold">
         <Trans>Review</Trans>
       </h2>
       <AtcApplicationStatusEdit applicationId={params.id} />
-      <h2 className="text-lg">
+      <h2 className="text-2xl font-bold">
         <Trans>User</Trans>
       </h2>
       <div className="flex flex-row gap-1">
@@ -60,24 +57,20 @@ function RouteComponent() {
         ) : null}
       </div>
       <RequireRole role="volunteer">
-        <h2 className="text-lg">
+        <h2 className="text-2xl font-bold">
           <Trans>Audit Logs</Trans>
         </h2>
         <AtcApplicationAuditLogPanel applicationId={params.id} />
       </RequireRole>
     </div>
   );
-}
+};
 
-const MoodleAccountProvisionButton = ({
-  applicationId,
-  userId,
-  hasMoodleAccount,
-}: {
+const MoodleAccountProvisionButton: FC<{
   applicationId: string;
   userId: string;
   hasMoodleAccount: boolean;
-}) => {
+}> = ({ applicationId, userId, hasMoodleAccount }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
   const { mutate, error, isPending, isSuccess } = $api.useMutation("put", "/api/users/{id}/moodle-account", {
@@ -121,10 +114,14 @@ const MoodleAccountProvisionButton = ({
   );
 };
 
-const AtcApplicationAuditLogPanel = ({ applicationId }: { applicationId: string }) => {
+const AtcApplicationAuditLogPanel: FC<{ applicationId: string }> = ({ applicationId }) => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/atc/applications/{id}/audit", {
     params: { path: { id: applicationId } },
   });
 
   return <AuditLogTable data={data} error={error} isLoading={isLoading} />;
 };
+
+export const Route = createFileRoute("/controllers/applications/$id")({
+  component: RouteComponent,
+});

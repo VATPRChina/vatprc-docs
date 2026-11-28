@@ -5,13 +5,9 @@ import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/_doc/airspace/sectors")({
-  component: Page,
-  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Sector Map`) }] }),
-});
-
-function Page() {
+const Page: FC = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["zbpe-sectors"],
     queryFn: fetchZbpeSectors,
@@ -45,4 +41,9 @@ function Page() {
       </section>
     </main>
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/airspace/sectors")({
+  component: Page,
+  head: (ctx) => ({ meta: [{ title: ctx.match.context.i18n._(msg`Sector Map`) }] }),
+});

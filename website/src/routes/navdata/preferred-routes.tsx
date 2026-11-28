@@ -6,6 +6,7 @@ import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { ColumnDef } from "@tanstack/react-table";
+import type { FC } from "react";
 
 const columns: ColumnDef<RichTableFeatures, components["schemas"]["PreferredRouteDto"]>[] = [
   {
@@ -34,11 +35,7 @@ const columns: ColumnDef<RichTableFeatures, components["schemas"]["PreferredRout
   },
 ];
 
-export const Route = createFileRoute("/navdata/preferred-routes")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { data, error, isLoading } = $api.useQuery("get", "/api/navdata/preferred-routes");
 
   return (
@@ -54,4 +51,8 @@ function RouteComponent() {
       <RichTable data={data} columns={columns} isLoading={isLoading} />
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/navdata/preferred-routes")({
+  component: RouteComponent,
+});

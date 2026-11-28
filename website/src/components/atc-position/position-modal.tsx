@@ -4,7 +4,7 @@ import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Checkbox, Modal, Select, Textarea, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { type FC, useState } from "react";
 
 export type AtcPosition = components["schemas"]["AtcPositionDto"];
 
@@ -17,7 +17,7 @@ export const POSITION_CATEGORIES = [
 
 export type PositionAction = { kind: "create" } | { kind: "edit" | "delete"; position: AtcPosition };
 
-export function PositionModal({ action, onClose }: { action: PositionAction; onClose: () => void }) {
+export const PositionModal: FC<{ action: PositionAction; onClose: () => void }> = ({ action, onClose }) => {
   const { t, i18n } = useLingui();
   const queryClient = useQueryClient();
   const position = action.kind === "create" ? undefined : action.position;
@@ -166,4 +166,4 @@ export function PositionModal({ action, onClose }: { action: PositionAction; onC
       </form>
     </Modal>
   );
-}
+};

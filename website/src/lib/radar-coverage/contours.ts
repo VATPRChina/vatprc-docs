@@ -2,7 +2,7 @@ import { CoverageResult } from "./types";
 import { dissolve, featureCollection, flatten, polygonSmooth, simplify } from "@turf/turf";
 
 /** Smooth display geometry only; coverage statistics keep the original sampled grid. */
-export function coverageContours(cells: CoverageResult["cells"]): CoverageResult["cells"] {
+export const coverageContours = (cells: CoverageResult["cells"]): CoverageResult["cells"] => {
   if (!cells.features.length) return { type: "FeatureCollection", features: [] };
   const first = cells.features[0].geometry.coordinates[0];
   const tolerance = Math.min(first[1][0] - first[0][0], first[2][1] - first[1][1]) * 0.35;
@@ -31,4 +31,4 @@ export function coverageContours(cells: CoverageResult["cells"]): CoverageResult
   const outlines = simplify(merged, { tolerance, highQuality: true });
   // Dissolve removes internal grid lines; Chaikin smoothing rounds the outer and hole boundaries.
   return flatten(polygonSmooth(outlines, { iterations: 2 })) as CoverageResult["cells"];
-}
+};

@@ -26,10 +26,10 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
       </Alert>
     );
   }
-  if (!positions) return <span className="font-mono text-base text-gray-600 dark:text-gray-300">--</span>;
+  if (!positions) return <span className="text-dimmed font-mono text-base">--</span>;
   if (positions.length === 0)
     return (
-      <span className="font-mono text-base text-gray-600 dark:text-gray-300">
+      <span className="text-dimmed font-mono text-base">
         <Trans>ATC booking not open</Trans>
       </span>
     );
@@ -38,7 +38,7 @@ const BookingCount: React.FC<{ eventId: string }> = ({ eventId }) => {
   const total = positions.length;
   const hue = Math.round((booked / total) * 140);
   return (
-    <span className="font-mono text-base" style={{ color: `light-dark(hsl(${hue} 85% 36%), hsl(${hue} 85% 62%))` }}>
+    <span style={{ color: `light-dark(hsl(${hue} 85% 36%), hsl(${hue} 85% 62%))` }} className="font-mono text-base">
       <Trans>
         ATC booked {booked}/{total}
       </Trans>
@@ -93,7 +93,7 @@ const EventCard: React.FC<{ event: EventDto }> = ({ event }) => {
         <div className="flex flex-col gap-1 px-4 py-3">
           <span className="truncate text-lg font-medium">{title}</span>
           <div className="flex items-center gap-2">
-            <span className="font-mono text-base text-gray-700 dark:text-gray-300">
+            <span className="text-dimmed font-mono text-base">
               {format(start, "MM-dd HHmm", { in: utc })}Z–{format(end, "HHmm", { in: utc })}Z
             </span>
             {thisWeek && (
@@ -118,7 +118,7 @@ export const EventCarousel: React.FC<{ className?: string }> = ({ className }) =
   return (
     <section className={cn("w-full", className)}>
       <div className="mb-2 flex items-baseline justify-between">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>Recent Events</Trans>
         </h2>
         <Button

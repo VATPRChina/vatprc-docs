@@ -4,7 +4,7 @@ import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Checkbox, Modal, Select, Table, Textarea, TextInput } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { type FC, useRef, useState } from "react";
 
 type PositionSave = components["schemas"]["AtcPositionSaveRequest"];
 const optionalFields = ["callsign_zh", "callsign_en", "cpdlc_code", "remarks"] as const;
@@ -19,7 +19,7 @@ const emptyPosition = (): PositionSave => ({
   remarks: null,
 });
 
-export function BatchCreateModal({ onClose }: { onClose: () => void }) {
+export const BatchCreateModal: FC<{ onClose: () => void }> = ({ onClose }) => {
   const { t, i18n } = useLingui();
   const queryClient = useQueryClient();
   const [rows, setRows] = useState(() => [emptyPosition()]);
@@ -226,4 +226,4 @@ export function BatchCreateModal({ onClose }: { onClose: () => void }) {
       </form>
     </Modal>
   );
-}
+};

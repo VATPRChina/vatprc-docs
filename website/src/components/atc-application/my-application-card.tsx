@@ -31,7 +31,7 @@ export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ appl
 
   return (
     <div className="flex flex-col gap-1">
-      <h2 className="text-xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>My Application</Trans>
       </h2>
       {mine.map((application) => (
@@ -42,7 +42,7 @@ export const MyApplicationCard: FC<{ applications: ApplicationDto[] }> = ({ appl
           <Badge color={STATUS_COLOR[application.status]} variant="filled" radius={0}>
             {localizeWithMap(APPLICATION_STATUS, application.status, i18n)}
           </Badge>
-          <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
+          <span className="text-dimmed font-mono text-sm">
             <Trans>Applied at</Trans> {format(application.applied_at, "yyyy-MM-dd HH:mm'Z'", { in: utc })}
           </span>
           <LinkButton

@@ -1,24 +1,14 @@
 import { login } from "@/lib/client/auth";
 import { Trans } from "@lingui/react/macro";
-import { Title } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { type FC, useEffect } from "react";
 
 interface AuthCallbackSearch {
   code: string;
 }
 
-export const Route = createFileRoute("/auth/callback")({
-  validateSearch: (search: Record<string, unknown>): AuthCallbackSearch => {
-    return {
-      code: ("code" in search && typeof search["code"] === "string" ? search["code"] : undefined) ?? "",
-    };
-  },
-  component: Component,
-});
-
-function Component() {
+const Component: FC = () => {
   const match = Route.useMatch();
   const client = useQueryClient();
 
@@ -39,13 +29,20 @@ function Component() {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col items-start gap-4">
-        <Title order={1} size={192} c="dimmed">
-          307
-        </Title>
-        <Title order={2}>
+        <h1 className="text-dimmed text-3xl font-bold">307</h1>
+        <h2 className="text-2xl font-bold">
           <Trans>Please wait while being logged in.</Trans>
-        </Title>
+        </h2>
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/auth/callback")({
+  validateSearch: (search: Record<string, unknown>): AuthCallbackSearch => {
+    return {
+      code: ("code" in search && typeof search["code"] === "string" ? search["code"] : undefined) ?? "",
+    };
+  },
+  component: Component,
+});

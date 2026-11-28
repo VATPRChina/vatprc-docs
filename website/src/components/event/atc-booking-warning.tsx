@@ -3,7 +3,7 @@ import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert } from "@mantine/core";
 import { useInterval } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { TbExclamationCircle } from "react-icons/tb";
 
 const ATC_BOOKING_WARNING_WINDOW_MS = 8 * 60 * 60 * 1000;
@@ -25,7 +25,7 @@ export const hasInsufficientAreaControllerBookings = (
   return bookedAreaPositions * 2 < areaPositions.length;
 };
 
-export const AtcBookingWarning = ({ eventId, eventStart }: { eventId: string; eventStart: string }) => {
+export const AtcBookingWarning: FC<{ eventId: string; eventStart: string }> = ({ eventId, eventStart }) => {
   const [now, setNow] = useState(() => Date.now());
   const interval = useInterval(() => setNow(Date.now()), 60_000);
 

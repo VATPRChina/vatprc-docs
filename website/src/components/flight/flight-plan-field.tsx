@@ -3,7 +3,7 @@ import { components } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
 import { Tooltip } from "@mantine/core";
-import { ComponentProps } from "react";
+import { type FC, ComponentProps } from "react";
 
 interface FlightPlanField extends ComponentProps<"div"> {
   label: string;
@@ -14,13 +14,21 @@ interface FlightPlanField extends ComponentProps<"div"> {
     | Exclude<components["schemas"]["ValidationFieldDto"]["kind"], "leg" | "multiple-legs">;
 }
 
-export const FlightPlanField = ({ label, value, tooltip, field, children, className, ...props }: FlightPlanField) => {
+export const FlightPlanField: FC<FlightPlanField> = ({
+  label,
+  value,
+  tooltip,
+  field,
+  children,
+  className,
+  ...props
+}) => {
   const labelC = tooltip ? (
     <Tooltip label={tooltip}>
-      <span className="text-muted-foreground">{label}</span>
+      <span className="text-dimmed">{label}</span>
     </Tooltip>
   ) : (
-    <span className="text-muted-foreground">{label}</span>
+    <span className="text-dimmed">{label}</span>
   );
 
   return (
@@ -32,7 +40,7 @@ export const FlightPlanField = ({ label, value, tooltip, field, children, classN
       {value && value !== "-" && <span className="font-mono">{value}</span>}
       {value === "-" && (
         <Tooltip label={<Trans>Check at VATSIM</Trans>}>
-          <span className="text-muted-foreground min-w-8">{value}</span>
+          <span className="text-dimmed min-w-8">{value}</span>
         </Tooltip>
       )}
       {children}

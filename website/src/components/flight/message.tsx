@@ -228,7 +228,7 @@ export const PROBLEM_DETAILS: ProblemDetailsMap = {
   ),
 };
 
-const PreferredRoute = ({ route }: { route: components["schemas"]["PreferredRouteDescriptionDto"] }) => {
+const PreferredRoute: FC<{ route: components["schemas"]["PreferredRouteDescriptionDto"] }> = ({ route }) => {
   const { t } = useLingui();
 
   const { allowed_altitudes, cruising_level_restriction, from, minimal_altitude, raw_route, to } = route;
@@ -249,16 +249,16 @@ const PreferredRoute = ({ route }: { route: components["schemas"]["PreferredRout
   );
 };
 
-export function ProblemDetails<K extends components["schemas"]["ValidationProblemDto"]["kind"]>({
+export const ProblemDetails = <K extends components["schemas"]["ValidationProblemDto"]["kind"]>({
   problem,
 }: {
   problem: ProblemOfKind<K>;
-}) {
+}) => {
   const Detail: FC<{ problem: ProblemOfKind<K> }> = PROBLEM_DETAILS[problem.kind];
   return <Detail problem={problem} />;
-}
+};
 
-const ChinaRvsmHelp = () => (
+const ChinaRvsmHelp: FC = () => (
   <>
     <p className="hover:text-primary/80 underline">
       <Link to="/airspace/rvsm">
@@ -268,7 +268,7 @@ const ChinaRvsmHelp = () => (
   </>
 );
 
-const AircraftCodeCommonHelp = ({ type }: { type: "PBN" | "Equip+T" }) => {
+const AircraftCodeCommonHelp: FC<{ type: "PBN" | "Equip+T" }> = ({ type }) => {
   const { i18n } = useLingui();
   const locale = i18n.locale;
   const AIRCRAFT_CODES_HELP_LINK = `https://community.vatprc.net/t/topic/${locale == "en" ? 9700 : 9695}`;

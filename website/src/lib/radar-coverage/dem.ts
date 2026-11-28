@@ -22,7 +22,7 @@ export interface ElevationSource {
   elevationCell?(x: number, y: number): number | null;
   step: number;
 }
-export function parseDemHeader(text: string): DemHeader {
+export const parseDemHeader = (text: string): DemHeader => {
   const fields = Object.fromEntries(
     text
       .trim()
@@ -64,29 +64,29 @@ export function parseDemHeader(text: string): DemHeader {
   if (!aligned((west - dx / 2) / DEM_STEP) || !aligned((north + dy / 2) / DEM_STEP))
     throw new Error("Misaligned DEM grid");
   return { rows, cols, west, north, dx: DEM_STEP, dy: DEM_STEP };
-}
-export function decodeDem(header: DemHeader, bytes: Uint8Array): DemTile {
+};
+export const decodeDem = (header: DemHeader, bytes: Uint8Array): DemTile => {
   if (bytes.byteLength !== header.rows * header.cols * 2) throw new Error("DEM byte count does not match header");
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const values = new Int16Array(header.rows * header.cols);
   for (let i = 0; i < values.length; i++) values[i] = view.getInt16(i * 2, false);
   return { ...header, values };
-}
-function zipEntry(bytes: Uint8Array, extension: string): Uint8Array {
+};
+const zipEntry = (bytes: Uint8Array, extension: string): Uint8Array => {
   const files = unzipSync(bytes, { filter: (file) => file.name.toLowerCase().endsWith(extension) });
   const entries = Object.values(files);
   if (entries.length !== 1) throw new Error(`Expected one ${extension} file`);
   return entries[0];
-}
-export function tileName(west: number, north: number): string {
+};
+export const tileName = (west: number, north: number): string => {
   return `${west < 0 ? "w" : "e"}${Math.abs(west).toString().padStart(3, "0")}${north < 0 ? "s" : "n"}${Math.abs(north).toString().padStart(2, "0")}`;
-}
-export function tilesForBounds([west, south, east, north]: Bounds): string[] {
+};
+export const tilesForBounds = ([west, south, east, north]: Bounds): string[] => {
   const names: string[] = [];
   for (let x = Math.floor(west / 10) * 10; x < east; x += 10)
     for (let y = Math.ceil(north / 10) * 10; y > south; y -= 10) names.push(tileName(x, y));
   return names;
-}
+};
 /** One loader lives in the persistent worker. Promise caching deduplicates overlapping requests. */
 export class DemLoader {
   private cache = new Map<string, Promise<DemTile | null>>();
@@ -204,12 +204,12 @@ export class TiledElevation implements ElevationSource {
 }
 
 /** Visit global raster indices, including corner neighbours. False stops traversal. */
-export function traverseCells(
+export const traverseCells = (
   a: Coordinate,
   b: Coordinate,
   step: number,
   visit: (x: number, y: number, fraction: number) => boolean,
-): boolean {
+): boolean => {
   const x0 = a[1] / step,
     y0 = a[0] / step,
     dx = (b[1] - a[1]) / step,
@@ -244,4 +244,4 @@ export function traverseCells(
     start = end;
   }
   return true;
-}
+};

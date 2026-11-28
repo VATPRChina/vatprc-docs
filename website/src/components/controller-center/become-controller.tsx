@@ -11,10 +11,10 @@ const Step: FC<{ index: number; title: ReactNode }> = ({ index, title }) => (
 
 export const BecomeController: FC<{ showApply?: boolean }> = ({ showApply = true }) => (
   <section className="flex flex-col gap-1">
-    <h2 className="text-2xl font-medium">
+    <h2 className="text-2xl font-bold">
       <Trans>Become a Controller</Trans>
     </h2>
-    <p className="text-gray-700 dark:text-gray-300">
+    <p className="text-dimmed text-base">
       <Trans>
         VATPRC provides a complete training program from Delivery to Center. Submit an application to start your
         controller journey.

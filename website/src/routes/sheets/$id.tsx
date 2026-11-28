@@ -5,12 +5,8 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Card, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { type FC, useEffect } from "react";
 import { TbArrowDown, TbArrowUp, TbPlus, TbTrash } from "react-icons/tb";
-
-export const Route = createFileRoute("/sheets/$id")({
-  component: RouteComponent,
-});
 
 type EditableField = components["schemas"]["SheetFieldSaveRequest"] & {
   localKey: string;
@@ -37,7 +33,7 @@ const EMPTY_FIELD = (): EditableField => ({
   description_en: "",
 });
 
-function toEditableFields(fields: components["schemas"]["SheetFieldDto"][]) {
+const toEditableFields = (fields: components["schemas"]["SheetFieldDto"][]) => {
   return fields
     .filter((field) => !field.is_deleted)
     .toSorted((a, b) => a.sequence - b.sequence)
@@ -53,13 +49,13 @@ function toEditableFields(fields: components["schemas"]["SheetFieldDto"][]) {
       description_zh: field.description_zh ?? "",
       description_en: field.description_en ?? "",
     }));
-}
+};
 
-function renumberFields(fields: EditableField[]) {
+const renumberFields = (fields: EditableField[]) => {
   return fields.map((field, index) => ({ ...field, sequence: index }));
-}
+};
 
-function validateSheet(data: SheetFormData, t: ReturnType<typeof useLingui>["t"]) {
+const validateSheet = (data: SheetFormData, t: ReturnType<typeof useLingui>["t"]) => {
   const errors: Record<string, string> = {};
 
   if (data.name.trim().length === 0) {
@@ -99,9 +95,9 @@ function validateSheet(data: SheetFormData, t: ReturnType<typeof useLingui>["t"]
   }
 
   return Object.keys(errors).length > 0 ? errors : null;
-}
+};
 
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { id } = Route.useParams();
   const { t } = useLingui();
   const {
@@ -198,7 +194,7 @@ function RouteComponent() {
         </form.Field>
 
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-medium">
+          <h2 className="text-2xl font-bold">
             <Trans>Fields</Trans>
           </h2>
           <Button
@@ -408,4 +404,8 @@ function RouteComponent() {
       </form>
     </>
   );
-}
+};
+
+export const Route = createFileRoute("/sheets/$id")({
+  component: RouteComponent,
+});
