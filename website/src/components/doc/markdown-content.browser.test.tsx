@@ -1,5 +1,6 @@
 import { geojsonExtension } from "./extension/geojson-extension";
 import { MarkdownContent } from "./markdown-content";
+import { renderComponent } from "@/test/render-component";
 import { parseMarkdown } from "@tanstack/markdown/parser";
 import {
   createMemoryHistory,
@@ -12,7 +13,6 @@ import type { MapProps } from "@vis.gl/react-maplibre";
 import type { Map as MapLibre } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { expect, test, vi } from "vitest";
-import { render } from "vitest-browser-react";
 
 const maps: MapLibre[] = [];
 vi.mock("@/components/airspace/map", async (importOriginal) => {
@@ -73,7 +73,7 @@ test("fits and renders each map and disposes maps on document navigation", { tim
     routeTree: root.addChildren([route]),
     history: createMemoryHistory({ initialEntries: ["/docs/airport"] }),
   });
-  const screen = await render(<RouterProvider router={router} />);
+  const screen = await renderComponent(<RouterProvider router={router} />);
   await expect.poll(() => maps.length, { timeout: 15_000 }).toBe(2);
   const [airport, area] = [...maps].sort((a, b) => b.getCenter().lng - a.getCenter().lng);
   expect(airport.getCenter().lng).toBeCloseTo(116);
