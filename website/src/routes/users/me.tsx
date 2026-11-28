@@ -7,13 +7,14 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { formatDate } from "date-fns";
+import type { FC } from "react";
 
 interface FieldProps {
   label: string;
   value?: string;
 }
 
-const Field = ({ label, value, children, className, ...props }: FieldProps & React.ComponentProps<"div">) => {
+const Field: FC<FieldProps & React.ComponentProps<"div">> = ({ label, value, children, className, ...props }) => {
   return (
     <div className={cn("flex flex-col items-start gap-1", className)} {...props}>
       <span className="text-dimmed">{label}</span>
@@ -23,11 +24,7 @@ const Field = ({ label, value, children, className, ...props }: FieldProps & Rea
   );
 };
 
-export const Route = createFileRoute("/users/me")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { t, i18n } = useLingui();
 
   const user = useUser();
@@ -39,7 +36,7 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <h1 className="text-3xl">
+      <h1 className="text-3xl font-bold">
         <Trans>User Info</Trans>
       </h1>
       {error && (
@@ -48,7 +45,7 @@ function RouteComponent() {
         </Alert>
       )}
 
-      <h2 className="text-xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Basic Info</Trans>
       </h2>
       <div className="grid grid-cols-4 gap-2">
@@ -67,7 +64,7 @@ function RouteComponent() {
         </div>
       </Field>
 
-      <h2 className="text-xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Controller Info</Trans>
       </h2>
       <div className="grid grid-cols-4 gap-2">
@@ -86,4 +83,8 @@ function RouteComponent() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/users/me")({
+  component: RouteComponent,
+});

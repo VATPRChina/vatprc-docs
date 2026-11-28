@@ -9,13 +9,7 @@ import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/controllers")({
-  component: RouteComponent,
-  head: (ctx) => ({
-    meta: [{ title: ctx.match.context.i18n._(msg`Controller Center`) }],
-  }),
-});
+import type { FC } from "react";
 
 interface CenterTabLinkProps {
   to: string;
@@ -23,7 +17,7 @@ interface CenterTabLinkProps {
   children: React.ReactNode;
 }
 
-const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: CenterTabLinkProps) => (
+const CenterTabLink: FC<CenterTabLinkProps> = ({ to, active, children }: CenterTabLinkProps) => (
   <Link
     to={to}
     aria-current={active ? "page" : undefined}
@@ -38,7 +32,7 @@ const CenterTabLink: React.FC<CenterTabLinkProps> = ({ to, active, children }: C
   </Link>
 );
 
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const pathname = useLocation({ select: (location) => location.pathname });
   const tab = pathname.startsWith("/controllers/trainings")
     ? "trainings"
@@ -67,7 +61,7 @@ function RouteComponent() {
   if (isPending) {
     return (
       <div className="container mx-auto flex flex-col gap-4">
-        <h1 className="text-3xl font-medium">
+        <h1 className="text-3xl font-bold">
           <Trans>Controller Center</Trans>
         </h1>
         <Skeleton h={320} />
@@ -79,7 +73,7 @@ function RouteComponent() {
   if (!user) {
     return (
       <div className="container mx-auto flex flex-col gap-4">
-        <h1 className="text-3xl font-medium">
+        <h1 className="text-3xl font-bold">
           <Trans>Controller Center</Trans>
         </h1>
         <ControllerCenterLoginPlaceholder />
@@ -90,7 +84,7 @@ function RouteComponent() {
   return (
     <div className="container mx-auto flex flex-col gap-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h1 className="text-3xl font-medium">
+        <h1 className="text-3xl font-bold">
           <Trans>Controller Center</Trans>
         </h1>
         {isController && <IdentityChip />}
@@ -129,4 +123,11 @@ function RouteComponent() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/controllers")({
+  component: RouteComponent,
+  head: (ctx) => ({
+    meta: [{ title: ctx.match.context.i18n._(msg`Controller Center`) }],
+  }),
+});

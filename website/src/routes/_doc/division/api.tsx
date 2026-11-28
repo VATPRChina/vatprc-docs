@@ -1,15 +1,9 @@
 import { ApiReferenceReact } from "@scalar/api-reference-react";
 import scalaCss from "@scalar/api-reference-react/style.css?url";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/_doc/division/api")({
-  component: RouteComponent,
-  head() {
-    return { links: [{ rel: "stylesheet", href: scalaCss }] };
-  },
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   return (
     <ApiReferenceReact
       configuration={{
@@ -18,4 +12,11 @@ function RouteComponent() {
       }}
     />
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/division/api")({
+  component: RouteComponent,
+  head() {
+    return { links: [{ rel: "stylesheet", href: scalaCss }] };
+  },
+});

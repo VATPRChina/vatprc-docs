@@ -3,13 +3,13 @@ import { useUser } from "@/lib/client";
 import { $api, client } from "@/lib/client/client";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { ActionIcon, Alert, Button, Modal, Pill, Table, Text, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Alert, Button, Modal, Pill, Table, useMantineTheme } from "@mantine/core";
 import { Dropzone, FileWithPath } from "@mantine/dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { parse } from "date-fns";
 import { unique } from "radash";
-import { useState } from "react";
+import { type FC, useState } from "react";
 import { TbFileImport, TbUpload, TbX, TbFileTypeCsv } from "react-icons/tb";
 
 interface Slot {
@@ -21,7 +21,7 @@ interface Slot {
   aircraft_type_icao?: string;
 }
 
-export const ImportSlot = ({ eventId }: { eventId: string }) => {
+export const ImportSlot: FC<{ eventId: string }> = ({ eventId }) => {
   const { t } = useLingui();
   const [opened, { toggle, close }] = useDisclosure(false);
   const theme = useMantineTheme();
@@ -118,12 +118,12 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
               {(fileError ?? error)?.message}
             </Alert>
           )}
-          <Text>
+          <p className="text-base">
             <Trans>
               File format: CSV with dep, dep_time (yyyy-MM-dd HH:mm), arr, arr_time (yyyy-MM-dd HH:mm), callsign,
               aircraft_type_icao
             </Trans>
-          </Text>
+          </p>
           <Dropzone onDrop={(files) => void onDrop(files)}>
             <div className="pointer-events-none flex flex-wrap items-center justify-center gap-2">
               <Dropzone.Accept>
@@ -136,9 +136,9 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
                 <TbFileTypeCsv color={theme.colors.gray[7]} size={52} strokeWidth={1.5} />
               </Dropzone.Idle>
 
-              <Text size="xl" inline>
+              <p className="text-xl leading-none">
                 <Trans>Drag CSV here or click to select files</Trans>
-              </Text>
+              </p>
             </div>
           </Dropzone>
           <Button onClick={onSubmit} disabled={slots.length === 0} loading={isPending}>
@@ -167,18 +167,18 @@ export const ImportSlot = ({ eventId }: { eventId: string }) => {
                   <Table.Td>{slot.airspace}</Table.Td>
                   <Table.Td>
                     <div className="flex flex-col gap-1">
-                      <Text>
+                      <p className="text-base">
                         <Pill className="mr-1">
                           <Trans>CTOT</Trans>
                         </Pill>
                         <DateTime noDate>{slot.enter_at}</DateTime>
-                      </Text>
-                      <Text>
+                      </p>
+                      <p className="text-base">
                         <Pill className="mr-1">
                           <Trans>ELDT</Trans>
                         </Pill>
                         <DateTime noDate>{slot.leave_at}</DateTime>
-                      </Text>
+                      </p>
                     </div>
                   </Table.Td>
                   <Table.Td>{slot.callsign}</Table.Td>

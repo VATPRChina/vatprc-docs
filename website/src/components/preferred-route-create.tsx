@@ -79,7 +79,7 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
   return (
     <>
       {id ? (
-        <ActionIcon variant="subtle" aria-label={t`Edit Preferred Route {title}`} onClick={toggle}>
+        <ActionIcon variant="subtle" aria-label={t`Edit Preferred Route ${title}`} onClick={toggle}>
           <TbEdit size={18} />
         </ActionIcon>
       ) : (
@@ -173,7 +173,7 @@ export const CreatePreferredRoute: FC<CreatePreferredRouteProps> = ({ id }) => {
               {(field) => (
                 <Select
                   label={t`Cruising Level Type`}
-                  placeholder="Pick value"
+                  placeholder={t`Pick value`}
                   data={Object.entries(CRUISE_LEVELS).map(([value, msg]) => ({ value, label: i18n._(msg) }))}
                   onChange={(value) =>
                     value && field.handleChange(value as components["schemas"]["LevelRestrictionType"])

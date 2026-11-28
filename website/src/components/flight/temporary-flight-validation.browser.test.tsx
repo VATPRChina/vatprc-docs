@@ -39,7 +39,7 @@ const route: components["schemas"]["FlightRouteDto"] = {
   ],
 };
 type Plan = operations["temporary_flight_validation"]["parameters"]["query"];
-function apiResponse(path: string, options: { params: { query: Plan } }) {
+const apiResponse = (path: string, options: { params: { query: Plan } }) => {
   const data = path.endsWith("/validation")
     ? validation
     : path.endsWith("/route")
@@ -48,27 +48,27 @@ function apiResponse(path: string, options: { params: { query: Plan } }) {
           flight_plan: { ...options.params.query, callsign: "" },
         };
   return { data, response: { statusText: "OK" } };
-}
+};
 beforeEach(() => {
   mocks.permissions.mockReturnValue(["software-engineer"]);
   mocks.get.mockReset();
   mocks.query.mockReset();
   mocks.get.mockImplementation(apiResponse);
 });
-function renderForm() {
+const renderForm = () => {
   return renderComponent(
     <QueryClientProvider client={new QueryClient()}>
       <TemporaryFlightValidation />
     </QueryClientProvider>,
   );
-}
-async function fillRequired(screen: Awaited<ReturnType<typeof renderForm>>) {
+};
+const fillRequired = async (screen: Awaited<ReturnType<typeof renderForm>>) => {
   await screen.getByLabelText("Departure", { exact: false }).fill("zbaa");
   await screen.getByLabelText("Arrival", { exact: false }).fill("vhhh");
   await screen.getByLabelText("Aircraft Type", { exact: false }).fill("b738");
   await screen.getByLabelText("Cruising Level (feet)", { exact: false }).fill("32000");
   await screen.getByLabelText("Route", { exact: true }).fill(" leken v611 lelim ");
-}
+};
 
 test("ordinary users and API clients cannot open or submit the form", async () => {
   for (const roles of [[], ["user"], ["api-client"]]) {

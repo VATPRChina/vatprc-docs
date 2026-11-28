@@ -2,7 +2,7 @@ import { coverageContours } from "./contours";
 import { CoverageResult } from "./types";
 import { expect, test } from "vitest";
 
-function grid(hole = false): CoverageResult["cells"] {
+const grid = (hole = false): CoverageResult["cells"] => {
   const features: CoverageResult["cells"]["features"] = [];
   for (let y = 0; y < 5; y++)
     for (let x = 0; x < 5; x++) {
@@ -25,7 +25,7 @@ function grid(hole = false): CoverageResult["cells"] {
       });
     }
   return { type: "FeatureCollection", features };
-}
+};
 
 test("joins adjacent coverage cells into a rounded outline without changing source data", () => {
   const cells = grid();

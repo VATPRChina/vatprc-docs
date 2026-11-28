@@ -2,9 +2,10 @@ import { newNavigationAtom } from "@/lib/experimental-features";
 import { Trans } from "@lingui/react/macro";
 import { Menu } from "@mantine/core";
 import { useAtom } from "jotai";
+import type { FC } from "react";
 import { TbCheck } from "react-icons/tb";
 
-export const ExperimentalFeatures = () => {
+export const ExperimentalFeatures: FC = () => {
   const [newNavigation, setNewNavigation] = useAtom(newNavigationAtom);
 
   return (

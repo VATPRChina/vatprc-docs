@@ -19,7 +19,7 @@ export const QuarterlyControllingTime: FC = () => {
 
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="text-2xl font-medium">
+      <h2 className="text-2xl font-bold">
         <Trans>Controlling History</Trans>
         <span className="ml-2 text-emerald-700 dark:text-emerald-400">{data?.period}</span>
       </h2>
@@ -48,24 +48,24 @@ export const QuarterlyControllingTime: FC = () => {
             })),
           ].map(({ label, key, positions, quarter, lifetime }) => (
             <Card component="article" key={key} aria-labelledby={`controlling-time-${key}`} withBorder>
-              <h3 id={`controlling-time-${key}`} className="text-lg font-bold">
+              <h3 id={`controlling-time-${key}`} className="text-xl font-bold">
                 {label}
               </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">{positions}</p>
+              <p className="text-dimmed text-xs">{positions}</p>
               <div className="mt-4 grid grid-flow-col grid-rows-[auto_auto] items-baseline">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-dimmed text-sm">
                   <Trans>Current quarter</Trans>
                 </span>
                 <span className="text-3xl font-bold text-emerald-700 tabular-nums dark:text-emerald-400">
                   {formatControllingHours(quarter, i18n.locale)}
-                  <span className="font-light text-gray-600 dark:text-gray-400">h</span>
+                  <span className="text-dimmed font-light">h</span>
                 </span>
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-dimmed text-sm">
                   <Trans>Lifetime</Trans>
                 </span>
                 <span className="text-lg font-semibold tabular-nums">
                   {formatControllingHours(lifetime, i18n.locale)}
-                  <span className="font-light text-gray-600 dark:text-gray-400">h</span>
+                  <span className="text-dimmed font-light">h</span>
                 </span>
               </div>
             </Card>

@@ -687,6 +687,9 @@ msgstr "Events this week"
 msgid "Experimental features"
 msgstr "Experimental features"
 
+msgid "Export slots"
+msgstr "Export slots"
+
 msgid "Failed to delete ATC position"
 msgstr "Failed to delete ATC position"
 
@@ -821,6 +824,9 @@ msgstr "Full name"
 
 msgid "Full Name"
 msgstr "Full Name"
+
+msgid "GeoJSON map"
+msgstr "GeoJSON map"
 
 msgid "Go to first page"
 msgstr "Go to first page"
@@ -1237,6 +1243,9 @@ msgstr "Pending"
 
 msgid "Performance Based Navigation"
 msgstr "Performance Based Navigation"
+
+msgid "Pick value"
+msgstr "Pick value"
 
 msgid "Pilot Softwares"
 msgstr "Pilot Softwares"

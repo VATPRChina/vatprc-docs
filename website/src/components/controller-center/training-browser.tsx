@@ -40,7 +40,7 @@ const TrainingListItem: FC<{
         : "border-l-transparent hover:bg-gray-50 dark:hover:bg-gray-900/50",
     )}
   >
-    <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
+    <span className="text-dimmed font-mono text-xs">
       {format(training.start_at, "yyyy-MM-dd HHmm'Z'", { in: utc })}
       {isUpcoming && (
         <Badge component="span" className="ml-1" size="xs" color="green" radius={0}>
@@ -49,7 +49,7 @@ const TrainingListItem: FC<{
       )}
     </span>
     <span className="text-sm font-medium">{training.name}</span>
-    <span className="text-xs text-gray-600 dark:text-gray-400">{counterpartName}</span>
+    <span className="text-dimmed text-xs">{counterpartName}</span>
   </button>
 );
 
@@ -87,7 +87,7 @@ export const TrainingBrowser: FC<{ hideHeader?: boolean }> = ({ hideHeader }) =>
     <section className="flex flex-col gap-1">
       {!hideHeader && (
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-2xl font-medium">
+          <h2 className="text-2xl font-bold">
             <Trans>My Trainings</Trans>
           </h2>
           <TrainingApplicationCreateModal />

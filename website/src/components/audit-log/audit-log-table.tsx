@@ -6,9 +6,10 @@ import { utc } from "@date-fns/utc";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Code, ScrollArea, Spoiler } from "@mantine/core";
+import { Alert, ScrollArea, Spoiler } from "@mantine/core";
 import { createColumnHelper } from "@tanstack/react-table";
 import { format } from "date-fns";
+import type { FC } from "react";
 import { TbAlertTriangle } from "react-icons/tb";
 
 export const AUDIT_LOG_ENTITY_KIND = new Map<components["schemas"]["AuditLogEntityKindDto"], MessageDescriptor>([
@@ -95,21 +96,23 @@ const diffLinePrefix = (kind: DiffLine["kind"]) => {
   return " ";
 };
 
-const DiffCell = ({ before, after }: { before: unknown; after: unknown }) => (
+const DiffCell: FC<{ before: unknown; after: unknown }> = ({ before, after }) => (
   <Spoiler maxHeight={160} showLabel={<Trans>Show more</Trans>} hideLabel={<Trans>Show less</Trans>}>
     <ScrollArea maw={720}>
-      <Code block className="min-w-max">
-        {diffJsonByLine(before, after).map((line, index) => (
-          <span key={index} className={`block px-1 whitespace-pre ${diffLineClassName(line.kind)}`}>
-            {diffLinePrefix(line.kind)} {line.text}
-          </span>
-        ))}
-      </Code>
+      <pre className="min-w-max font-mono text-sm">
+        <code>
+          {diffJsonByLine(before, after).map((line, index) => (
+            <span key={index} className={`block px-1 whitespace-pre ${diffLineClassName(line.kind)}`}>
+              {diffLinePrefix(line.kind)} {line.text}
+            </span>
+          ))}
+        </code>
+      </pre>
     </ScrollArea>
   </Spoiler>
 );
 
-const EntityCell = ({ entity }: { entity?: null | components["schemas"]["AuditLogEntityDto"] }) => {
+const EntityCell: FC<{ entity?: null | components["schemas"]["AuditLogEntityDto"] }> = ({ entity }) => {
   const { i18n } = useLingui();
 
   if (!entity) return null;
@@ -117,7 +120,7 @@ const EntityCell = ({ entity }: { entity?: null | components["schemas"]["AuditLo
   return (
     <div className="flex max-w-56 flex-col gap-1">
       <span>{localizeWithMap(AUDIT_LOG_ENTITY_KIND, entity.kind, i18n)}</span>
-      <Code>{entity.id}</Code>
+      <code className="font-mono text-sm">{entity.id}</code>
     </div>
   );
 };
@@ -155,7 +158,7 @@ interface AuditLogTableProps {
   isLoading?: boolean;
 }
 
-export const AuditLogTable = ({ data, error, isLoading }: AuditLogTableProps) => {
+export const AuditLogTable: FC<AuditLogTableProps> = ({ data, error, isLoading }) => {
   const errorMessage = getErrorMessage(error);
 
   if (error) {

@@ -2,17 +2,13 @@ import { $api } from "@/lib/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, Modal } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { type FC, useRef, useState } from "react";
 
-export function BatchDeleteModal({
-  callsigns,
-  onDeleted,
-  onClose,
-}: {
+export const BatchDeleteModal: FC<{
   callsigns: string[];
   onDeleted: (callsign: string) => void;
   onClose: () => void;
-}) {
+}> = ({ callsigns, onDeleted, onClose }) => {
   const { t } = useLingui();
   const queryClient = useQueryClient();
   const [remaining, setRemaining] = useState(callsigns);
@@ -77,4 +73,4 @@ export function BatchDeleteModal({
       </div>
     </Modal>
   );
-}
+};

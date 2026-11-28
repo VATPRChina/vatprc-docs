@@ -5,6 +5,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Select, Skeleton } from "@mantine/core";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { endOfDay, endOfQuarter, formatISO, startOfDay, startOfQuarter, subMonths } from "date-fns";
+import type { FC } from "react";
 
 const RECENT_RANGE = "recent";
 const QUARTER_PATTERN = /^\d{4}Q[1-4]$/;
@@ -19,11 +20,11 @@ type RangeOption = {
   value: string;
 };
 
-function getQuarterValue(date: Date) {
+const getQuarterValue = (date: Date) => {
   return `${date.getUTCFullYear()}Q${Math.floor(date.getUTCMonth() / 3) + 1}`;
-}
+};
 
-function parseQuarterRange(value: string) {
+const parseQuarterRange = (value: string) => {
   if (!QUARTER_PATTERN.test(value)) return null;
 
   const year = Number(value.slice(0, 4));
@@ -32,17 +33,17 @@ function parseQuarterRange(value: string) {
   const end = endOfQuarter(start);
 
   return { start, end };
-}
+};
 
-function getRecentRange() {
+const getRecentRange = () => {
   const now = new Date();
   return {
     since: formatISO(subMonths(now, 3)),
     until: formatISO(now),
   };
-}
+};
 
-function getQuarterOptions() {
+const getQuarterOptions = () => {
   const currentQuarter = startOfQuarter(new Date());
 
   return Array.from({ length: QUARTER_COUNT }, (_, index): RangeOption => {
@@ -56,9 +57,9 @@ function getQuarterOptions() {
       label: quarterValue,
     };
   });
-}
+};
 
-function getRangeQuery(range: string) {
+const getRangeQuery = (range: string) => {
   if (range === RECENT_RANGE) {
     return getRecentRange();
   }
@@ -72,16 +73,9 @@ function getRangeQuery(range: string) {
   }
 
   return getRecentRange();
-}
+};
 
-export const Route = createFileRoute("/events/history")({
-  validateSearch: (search: Record<string, unknown>): HistorySearch => ({
-    range: typeof search["range"] === "string" ? search["range"] : RECENT_RANGE,
-  }),
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { range } = Route.useSearch();
   const { t } = useLingui();
   const navigate = useNavigate({ from: Route.fullPath });
@@ -106,7 +100,7 @@ function RouteComponent() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-1">
-          <h1 className="text-3xl">
+          <h1 className="text-3xl font-bold">
             <Trans>Past Events</Trans>
           </h1>
         </div>
@@ -157,4 +151,11 @@ function RouteComponent() {
       )}
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/events/history")({
+  validateSearch: (search: Record<string, unknown>): HistorySearch => ({
+    range: typeof search["range"] === "string" ? search["range"] : RECENT_RANGE,
+  }),
+  component: RouteComponent,
+});

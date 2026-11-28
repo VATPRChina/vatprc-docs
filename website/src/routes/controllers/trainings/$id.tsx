@@ -9,13 +9,9 @@ import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton, Table } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { ComponentProps } from "react";
+import { type FC, ComponentProps } from "react";
 
-export const Route = createFileRoute("/controllers/trainings/$id")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { id } = Route.useParams();
 
   const queryClient = useQueryClient();
@@ -60,7 +56,7 @@ function RouteComponent() {
         </Alert>
       )}
       <div className="flex flex-row items-center gap-1">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>Training</Trans>
         </h2>
         <TrainingSaveModal id={id} />
@@ -127,7 +123,7 @@ function RouteComponent() {
       </Table>
       {isLoading && <Skeleton h={160} />}
       {training && <TrainingSelfReflection key={training.id} training={training} />}
-      <h2 className="text-xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Mentor Feedback</Trans>
       </h2>
       {isSuccess && (
@@ -151,11 +147,15 @@ function RouteComponent() {
         submitButtonContent={<Trans>Save</Trans>}
         isSubmitHidden={training?.trainer_id !== user?.id}
       />
-      <h2 className="text-xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Previous Trainings</Trans>
       </h2>
       {!training?.trainee_id && <Skeleton h={256} />}
       {training?.trainee_id && <TrainingList mode="by-user/{userId}" userId={training?.trainee_id} />}
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/controllers/trainings/$id")({
+  component: RouteComponent,
+});

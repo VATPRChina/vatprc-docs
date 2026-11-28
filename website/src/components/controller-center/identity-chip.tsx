@@ -16,9 +16,9 @@ export const IdentityChip: FC = () => {
 
   return (
     <div className="flex items-center gap-1">
-      <span className="bg-emerald-700 px-3 py-1 font-mono text-sm text-white dark:bg-emerald-400 dark:text-gray-950">
+      <Badge color="teal" variant="filled" radius={0} className="font-mono" size="lg">
         {user.cid} · {status.rating}
-      </span>
+      </Badge>
       {getStatusBadges(status).map((badge) => (
         <Badge key={badge} color={badge === "absent" ? "red" : "blue"} variant="filled" radius={0}>
           {badge === "absent" ? <Trans>Absent</Trans> : <Trans>Visiting</Trans>}

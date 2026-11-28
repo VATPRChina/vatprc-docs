@@ -48,7 +48,7 @@ export const TrainingSelfReflection: FC<{ training: components["schemas"]["Train
 
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="text-xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Self Reflection</Trans>
       </h2>
       {isSuccess && (

@@ -20,6 +20,7 @@
     "format": "prettier --write .",
     "test": "vitest",
     "ui:add": "shadcn add",
+    "test:e2e": "playwright test",
     "test:browser": "vitest --project browser",
     "i18n:extract": "lingui extract --clean"
   },

@@ -1,16 +1,11 @@
 import { RequireRole } from "@/components/require-role";
 import { $api } from "@/lib/client";
-import { cn } from "@/lib/utils";
 import { Trans } from "@lingui/react/macro";
-import { Alert, Card, UnstyledButton } from "@mantine/core";
-import { createFileRoute, Outlet, useNavigate, useParams } from "@tanstack/react-router";
+import { Alert, Card, NavLink } from "@mantine/core";
+import { createFileRoute, Link, Outlet, useParams } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/sheets")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
-  const navigate = useNavigate();
+const RouteComponent: FC = () => {
   const id = useParams({ from: "/sheets/$id", shouldThrow: false, select: ({ id }) => id });
   const { data: sheets, error: sheetsError, isLoading: isSheetsLoading } = $api.useQuery("get", "/api/sheets");
 
@@ -19,7 +14,7 @@ function RouteComponent() {
   return (
     <RequireRole role="staff">
       <div className="container mx-auto flex flex-col gap-4">
-        <h1 className="text-3xl">
+        <h1 className="text-3xl font-bold">
           <Trans>Sheet Management</Trans>
         </h1>
         <Alert color="blue">
@@ -32,26 +27,18 @@ function RouteComponent() {
         )}
         <div className="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
           <Card withBorder className="flex flex-col gap-1">
-            <h2 className="text-xl font-medium">
+            <h2 className="text-2xl font-bold">
               <Trans>Sheets</Trans>
             </h2>
             <div className="flex max-h-128 flex-col gap-1 overflow-y-auto">
               {sheets?.map((currentSheet) => (
-                <UnstyledButton
+                <NavLink
                   key={currentSheet.id}
-                  className="rounded border px-3 py-2 text-left"
-                  onClick={() =>
-                    void navigate({
-                      to: "/sheets/$id",
-                      params: { id: currentSheet.id },
-                    })
-                  }
-                >
-                  <div className={cn("font-medium", currentSheet.id === id && "text-blue-900 dark:text-blue-100")}>
-                    {currentSheet.name}
-                  </div>
-                  <div className="text-dimmed text-sm">{currentSheet.id}</div>
-                </UnstyledButton>
+                  renderRoot={(props) => <Link {...props} to="/sheets/$id" params={{ id: currentSheet.id }} />}
+                  active={currentSheet.id === id}
+                  label={currentSheet.name}
+                  description={currentSheet.id}
+                />
               ))}
               {!isSheetsLoading && !sheets?.length && (
                 <Alert>
@@ -71,4 +58,8 @@ function RouteComponent() {
       </div>
     </RequireRole>
   );
-}
+};
+
+export const Route = createFileRoute("/sheets")({
+  component: RouteComponent,
+});

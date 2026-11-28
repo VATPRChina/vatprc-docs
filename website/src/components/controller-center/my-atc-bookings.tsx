@@ -6,7 +6,7 @@ import { $api } from "@/lib/client";
 import { promiseWithLog, wrapPromiseWithLog } from "@/lib/utils";
 import { utc } from "@date-fns/utc";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Alert, Anchor, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
+import { Alert, Badge, Button, Card, Modal, Skeleton, Textarea, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
@@ -194,7 +194,7 @@ export const MyAtcBookings: FC = () => {
   return (
     <section className="flex flex-col gap-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>My ATC Bookings</Trans>
         </h2>
         <BookingModal />
@@ -227,14 +227,15 @@ export const MyAtcBookings: FC = () => {
                 </div>
                 <DateTime>{booking.start_at}</DateTime>
                 <DateTime>{booking.end_at}</DateTime>
-                {booking.remarks && <p className="text-sm text-gray-700 dark:text-gray-300">{booking.remarks}</p>}
+                {booking.remarks && <p className="text-dimmed text-sm">{booking.remarks}</p>}
                 {event && (
-                  <Anchor
-                    renderRoot={(props) => <Link to="/events/$id" params={{ id: event.id }} {...props} />}
-                    size="sm"
+                  <Link
+                    to="/events/$id"
+                    params={{ id: event.id }}
+                    className="text-sm text-(--mantine-color-anchor) hover:underline"
                   >
                     {eventTitle}
-                  </Anchor>
+                  </Link>
                 )}
                 {!event && (
                   <div className="flex flex-wrap items-center gap-1">

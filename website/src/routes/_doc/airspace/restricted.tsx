@@ -9,11 +9,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import * as turf from "@turf/turf";
 import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { DataDrivenPropertyValueSpecification, ColorSpecification } from "maplibre-gl";
-import { useMemo } from "react";
-
-export const Route = createFileRoute("/_doc/airspace/restricted")({
-  component: RouteComponent,
-});
+import { type FC, useMemo } from "react";
 
 const firGeoJson = firGeoJsonRaw as GeoJSON.FeatureCollection;
 const CENTER = turf.center(firGeoJson);
@@ -36,7 +32,7 @@ const COLOR_MAP = [
   "#e67700",
 ] satisfies DataDrivenPropertyValueSpecification<ColorSpecification>;
 
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { data: areas, error, isLoading } = $api.useQuery("get", "/api/compat/vplaaf/areas.json");
   const vplaafGeojson = useMemo(
     () =>
@@ -75,7 +71,7 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col gap-4">
-      <h1 className="text-3xl">
+      <h1 className="text-3xl font-bold">
         <Trans>Restricted Airspaces</Trans>
       </h1>
       <Alert color="yellow">
@@ -177,4 +173,8 @@ function RouteComponent() {
       </section>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/_doc/airspace/restricted")({
+  component: RouteComponent,
+});

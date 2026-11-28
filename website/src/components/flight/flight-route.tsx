@@ -3,8 +3,9 @@ import type { components } from "@/lib/api";
 import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Badge, Paper, Skeleton, Table } from "@mantine/core";
+import type { FC } from "react";
 
-export function FlightRoute({ callsign }: { callsign: string }) {
+export const FlightRoute: FC<{ callsign: string }> = ({ callsign }) => {
   const { data, error, isLoading } = $api.useQuery(
     "get",
     "/api/flights/by-callsign/{callsign}/route",
@@ -13,20 +14,16 @@ export function FlightRoute({ callsign }: { callsign: string }) {
   );
 
   return <FlightRouteView data={data} error={error} isLoading={isLoading} />;
-}
+};
 
-export function FlightRouteView({
-  data,
-  error,
-  isLoading = false,
-}: {
+export const FlightRouteView: FC<{
   data?: components["schemas"]["FlightRouteDto"];
   error?: Pick<components["schemas"]["ProblemDetails"], "title" | "detail"> | null;
   isLoading?: boolean;
-}) {
+}> = ({ data, error, isLoading = false }) => {
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="text-2xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Resolved Route</Trans>
       </h2>
       {isLoading ? (
@@ -47,7 +44,7 @@ export function FlightRouteView({
             const segmentNumber = segment.index + 1;
             return (
               <Paper key={segment.index} withBorder p="sm" className="flex flex-col gap-2">
-                <h3 className="flex flex-wrap items-center gap-2 font-semibold">
+                <h3 className="flex flex-wrap items-center gap-2 text-xl font-bold">
                   <Trans>Segment {segmentNumber}</Trans>
                   <Badge variant="light">
                     {segment.kind === "hong_kong" ? (
@@ -118,4 +115,4 @@ export function FlightRouteView({
       )}
     </section>
   );
-}
+};

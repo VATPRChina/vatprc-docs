@@ -2,11 +2,11 @@ import { DocumentEntry } from "@/lib/doc";
 import { Link } from "@tanstack/react-router";
 import React from "react";
 
-const DocCard = ({ title, fileName, webPath, children }: DocumentEntry) => {
+const DocCard: React.FC<DocumentEntry> = ({ title, fileName, webPath, children }) => {
   if (children && children.length > 0) {
     return (
       <div className="mb-4 flex flex-col gap-4">
-        <h1 className="text-2xl">{title}</h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
         <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-3">
           <DocList documents={children} />
         </div>

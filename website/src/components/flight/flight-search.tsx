@@ -6,16 +6,13 @@ import { cn } from "@/lib/utils";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Skeleton, TextInput } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { type FC, useState } from "react";
 import { TbPlaneOff } from "react-icons/tb";
 
-function FlightCard({
-  flight: { cid, flight_plan: plan },
-  mine,
-}: {
+const FlightCard: FC<{
   flight: components["schemas"]["FlightDto"];
   mine?: boolean;
-}) {
+}> = ({ flight: { cid, flight_plan: plan }, mine }) => {
   return (
     <Link
       to="/flights/$callsign"
@@ -29,14 +26,14 @@ function FlightCard({
       </span>
       <div className="flex items-center gap-1">
         <span>{plan.departure}</span>
-        <span className="mx-1 font-mono text-xs font-light text-gray-400">{plan.aircraft}</span>
+        <span className="text-dimmed mx-1 font-mono text-xs font-light">{plan.aircraft}</span>
         <span>{plan.arrival}</span>
       </div>
     </Link>
   );
-}
+};
 
-export function FlightSearch() {
+export const FlightSearch: FC = () => {
   const { t } = useLingui();
   const [filter, setFilter] = useState("");
   const [departure, setDeparture] = useState("");
@@ -75,7 +72,7 @@ export function FlightSearch() {
   return (
     <div className="flex flex-col items-start gap-4">
       <div className="flex w-full flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl">
+        <h1 className="text-3xl font-bold">
           <Trans>Flight Plan Checker</Trans>
         </h1>
         <RequireRole role="software-engineer">
@@ -117,7 +114,7 @@ export function FlightSearch() {
         )}
       </div>
       {!query && (
-        <p className="text-muted-foreground">
+        <p className="text-dimmed text-base">
           <Trans>Enter a departure or arrival airport ICAO code to list flights, or open a flight by callsign.</Trans>
         </p>
       )}
@@ -146,4 +143,4 @@ export function FlightSearch() {
       </div>
     </div>
   );
-}
+};

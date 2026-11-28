@@ -4,7 +4,7 @@ import { Markdown } from "@tanstack/markdown/react";
 import { ClientOnly } from "@tanstack/react-router";
 import React, { lazy, Suspense } from "react";
 
-const GeojsonMap = lazy(() => import("./extension/GeojsonMap"));
+const GeojsonMap = lazy(() => import("./extension/geojson-map").then(({ GeojsonMap }) => ({ default: GeojsonMap })));
 
 const GeojsonBlock: React.FC<React.PropsWithChildren<{ collection: string }>> = ({ collection }) => {
   return (

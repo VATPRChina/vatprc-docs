@@ -6,13 +6,13 @@ const EARTH_NM = 3440.065;
 const FT_PER_NM = 6076.12;
 const EFFECTIVE_EARTH_FT = (20925525 * 4) / 3;
 export const RADAR_COLORS = { SSR: "#0891b2", ADSB: "#d97706", SMR: "#a855f7", fusion: "#2563eb", unknown: "#6b7280" };
-export function distanceNm(a: Coordinate, b: Coordinate): number {
+export const distanceNm = (a: Coordinate, b: Coordinate): number => {
   const q =
     Math.sin(((b[0] - a[0]) * DEG) / 2) ** 2 +
     Math.cos(a[0] * DEG) * Math.cos(b[0] * DEG) * Math.sin(((b[1] - a[1]) * DEG) / 2) ** 2;
   return 2 * EARTH_NM * Math.asin(Math.min(1, Math.sqrt(q)));
-}
-export function pointInside(point: Coordinate, polygon: Coordinate[]): boolean {
+};
+export const pointInside = (point: Coordinate, polygon: Coordinate[]): boolean => {
   let inside = false;
   for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
     const [yi, xi] = polygon[i],
@@ -20,9 +20,9 @@ export function pointInside(point: Coordinate, polygon: Coordinate[]): boolean {
     if (yi > point[0] !== yj > point[0] && point[1] < ((xj - xi) * (point[0] - yi)) / (yj - yi) + xi) inside = !inside;
   }
   return inside;
-}
+};
 /** Great-circle interpolation avoids a straight latitude/longitude path at high latitudes. */
-function greatCircleInterpolator(a: Coordinate, b: Coordinate, angle: number): (fraction: number) => Coordinate {
+const greatCircleInterpolator = (a: Coordinate, b: Coordinate, angle: number): ((fraction: number) => Coordinate) => {
   // These terms are constant for the whole ray, which can span hundreds of segments.
   const sinAngle = Math.sin(angle);
   const cosLatA = Math.cos(a[0] * DEG),
@@ -42,14 +42,14 @@ function greatCircleInterpolator(a: Coordinate, b: Coordinate, angle: number): (
     const z = first * sinLatA + second * sinLatB;
     return [Math.atan2(z, Math.hypot(x, y)) / DEG, Math.atan2(y, x) / DEG];
   };
-}
+};
 /** null means unavailable terrain, never assumed sea level. */
-export function hasLineOfSight(
+export const hasLineOfSight = (
   terrain: ElevationSource,
   radar: Radar,
   target: Coordinate,
   altitude: number,
-): boolean | null {
+): boolean | null => {
   const stationPoint: Coordinate = [radar.lat, radar.lon];
   const distance = distanceNm(stationPoint, target);
   if (distance > radar.maxRange) return false;
@@ -57,8 +57,8 @@ export function hasLineOfSight(
     stationGround = terrain.elevation(stationPoint);
   const station = stationGround === null ? null : Math.max(radar.elevation, stationGround * 3.28084);
   return lineOfSight(terrain, stationPoint, target, altitude, distance, targetGround, station);
-}
-function lineOfSight(
+};
+const lineOfSight = (
   terrain: ElevationSource,
   stationPoint: Coordinate,
   target: Coordinate,
@@ -66,7 +66,7 @@ function lineOfSight(
   distance: number,
   targetGround: number | null,
   station: number | null,
-): boolean | null {
+): boolean | null => {
   if (targetGround === null || station === null) return null;
   if (altitude <= targetGround * 3.28084) return false;
   if (distance < 0.01) return true;
@@ -108,8 +108,8 @@ function lineOfSight(
     previous = next;
   }
   return missing ? null : true;
-}
-export function regionBounds(region: RadarRegion): [number, number, number, number] | null {
+};
+export const regionBounds = (region: RadarRegion): [number, number, number, number] | null => {
   const points = region.boundary.length ? region.boundary : region.radars.map((r) => [r.lat, r.lon] as Coordinate);
   if (!points.length) return null;
   return [
@@ -118,9 +118,9 @@ export function regionBounds(region: RadarRegion): [number, number, number, numb
     Math.max(...points.map((p) => p[1])),
     Math.max(...points.map((p) => p[0])),
   ];
-}
+};
 /** Include each station's spherical maximum-range envelope, not just the FIR polygon. */
-export function coverageBounds(region: RadarRegion): [number, number, number, number] | null {
+export const coverageBounds = (region: RadarRegion): [number, number, number, number] | null => {
   let bounds = regionBounds(region);
   for (const radar of region.radars) {
     const radius = radar.maxRange / EARTH_NM;
@@ -142,7 +142,7 @@ export function coverageBounds(region: RadarRegion): [number, number, number, nu
       : range;
   }
   return bounds;
-}
+};
 
 /** One current grid per worker. Terrain sources must be immutable snapshots. */
 export class CoverageCache {
@@ -323,23 +323,23 @@ function* coverageRows(
 }
 
 /** Synchronous entry point for deterministic model tests. */
-export function calculateCoverage(
+export const calculateCoverage = (
   request: CoverageRequest,
   terrain: ElevationSource,
   cache?: CoverageCache,
-): CoverageResult {
+): CoverageResult => {
   const rows = coverageRows(request, terrain, cache);
   let step = rows.next();
   while (!step.done) step = rows.next();
   return step.value;
-}
+};
 /** Yield between rows so the persistent worker can cancel stale jobs without losing DEM cache. */
-export async function calculateCoverageAsync(
+export const calculateCoverageAsync = async (
   request: CoverageRequest,
   terrain: ElevationSource,
   cancelled: () => boolean,
   cache?: CoverageCache,
-): Promise<CoverageResult | null> {
+): Promise<CoverageResult | null> => {
   const rows = coverageRows(request, terrain, cache);
   let step = rows.next();
   let count = 0;
@@ -349,11 +349,11 @@ export async function calculateCoverageAsync(
     step = rows.next();
   }
   return step.value;
-}
-export function terrainPreview(
+};
+export const terrainPreview = (
   region: RadarRegion,
   terrain: ElevationSource,
-): NonNullable<CoverageResult["terrain"]> | undefined {
+): NonNullable<CoverageResult["terrain"]> | undefined => {
   const bounds = coverageBounds(region);
   if (!bounds) return undefined;
   const [minLon, minLat, maxLon, maxLat] = bounds;
@@ -369,4 +369,4 @@ export function terrainPreview(
         ]) ?? DEM_NODATA;
     }
   return { minLon, minLat, maxLon, maxLat, rows, cols, values };
-}
+};

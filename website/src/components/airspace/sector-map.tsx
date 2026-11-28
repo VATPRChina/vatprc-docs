@@ -7,7 +7,7 @@ import { SegmentedControl } from "@mantine/core";
 import * as turf from "@turf/turf";
 import { Layer, NavigationControl, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import { FilterSpecification } from "maplibre-gl";
-import { useMemo, useState } from "react";
+import { type FC, useMemo, useState } from "react";
 
 type ControllerType = "TWR" | "APP" | "CTR";
 type ControllerTypeFilter = "ALL" | ControllerType;
@@ -59,7 +59,7 @@ const formatAltitude = (altitude: number, isUpperLimit = false) => {
   return `${altitude.toLocaleString()} ft`;
 };
 
-export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection }) => {
+export const SectorMap: FC<{ sectorData: SectorFeatureCollection }> = ({ sectorData }) => {
   const { data } = $api.useQuery("get", "/api/compat/online-status", {}, { refetchInterval: 60000 });
   const { t } = useLingui();
   const [controllerTypeFilter, setControllerTypeFilter] = useState<ControllerTypeFilter>("ALL");
@@ -98,10 +98,10 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
     <section className="w-full">
       <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h1 className="text-3xl font-medium">
+          <h1 className="text-3xl font-bold">
             <Trans>Beijing FIR Airspace</Trans>
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-dimmed text-sm">
             <Trans>Online sectors are highlighted. Select an area to view overlapping sectors.</Trans>
           </p>
         </div>
@@ -121,7 +121,7 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
               { label: "CTR", value: "CTR" },
             ]}
           />
-          <div className="flex gap-3 font-mono text-sm text-gray-700 dark:text-gray-300">
+          <div className="text-dimmed flex gap-3 font-mono text-sm">
             <span className="flex items-center gap-1.5">
               <span className="size-3 bg-emerald-500/70" aria-hidden />
               <Trans>Online</Trans>
@@ -288,7 +288,7 @@ export const SectorMap = ({ sectorData }: { sectorData: SectorFeatureCollection 
                 }`}
               >
                 <div className="flex items-baseline justify-between gap-2">
-                  <p className="font-bold">{sector.atc_id}</p>
+                  <p className="text-base font-bold">{sector.atc_id}</p>
                   <span className="text-[10px] text-gray-500 dark:text-gray-400">{sector.controller_type}</span>
                 </div>
                 <p>{sector.name}</p>

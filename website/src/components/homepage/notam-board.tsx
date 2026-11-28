@@ -54,7 +54,7 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <section className={cn("w-full", className)}>
       <div className="mb-2 flex items-baseline justify-between">
-        <h2 className="text-2xl font-medium">
+        <h2 className="text-2xl font-bold">
           <Trans>NOTAM · Announcements</Trans>
         </h2>
         <Button
@@ -102,9 +102,7 @@ export const NotamBoard: React.FC<{ className?: string }> = ({ className }) => {
               rel="noreferrer"
               className="flex items-baseline gap-1 border-b border-black/15 px-4 py-3 last:border-b-0 hover:bg-gray-50 dark:border-white/20 dark:hover:bg-gray-900"
             >
-              <span className="font-mono text-sm text-gray-600 dark:text-gray-300">
-                {format(parseISO(a.createdAt), "yyyy-MM-dd")}
-              </span>
+              <span className="text-dimmed font-mono text-sm">{format(parseISO(a.createdAt), "yyyy-MM-dd")}</span>
               <span className="flex-1 truncate text-base">{a.title}</span>
             </a>
           ))}

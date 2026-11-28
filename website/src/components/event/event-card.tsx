@@ -3,8 +3,9 @@ import { EventSummary } from "@/components/event/event-detail";
 import { components } from "@/lib/api";
 import { useLingui } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export function EventCard({ event }: { event: components["schemas"]["EventDto"] }) {
+export const EventCard: FC<{ event: components["schemas"]["EventDto"] }> = ({ event }) => {
   const { i18n } = useLingui();
 
   return (
@@ -14,4 +15,4 @@ export function EventCard({ event }: { event: components["schemas"]["EventDto"] 
       <EventSummary {...event} />
     </Link>
   );
-}
+};

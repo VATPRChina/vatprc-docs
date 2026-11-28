@@ -14,7 +14,7 @@ import { circle, featureCollection, lineString, point } from "@turf/turf";
 import { Layer, Map, MapRef, NavigationControl, Popup, Source, StyleSpecification } from "@vis.gl/react-maplibre";
 import type { Popup as MapLibrePopup } from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type FC, useEffect, useMemo, useRef, useState } from "react";
 
 export interface RadarMapProps {
   region: RadarRegion;
@@ -25,7 +25,14 @@ export interface RadarMapProps {
   onSelectRadar: (index: number) => void;
 }
 
-export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedRadar, onSelectRadar }: RadarMapProps) {
+export const RadarMap: FC<RadarMapProps> = ({
+  region,
+  enabled,
+  airspaceEnabled,
+  coverage,
+  selectedRadar,
+  onSelectRadar,
+}) => {
   const { t } = useLingui();
   const ref = useRef<MapRef>(null);
   const [loaded, setLoaded] = useState(false);
@@ -279,7 +286,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedR
             maxWidth="340px"
           >
             <div className="min-w-56 text-gray-900">
-              <h3 className="mb-1 pr-4 text-base font-semibold">
+              <h3 className="mb-1 pr-4 text-xl font-bold">
                 <Trans>Airspace at this position</Trans>
               </h3>
               <div className="overflow-y-auto" style={{ maxHeight: position.contentHeight }} role="list">
@@ -289,14 +296,14 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedR
                     {band.entries.length ? (
                       band.entries.map((entry) => (
                         <div key={entry.key} className="grid grid-cols-[3rem_minmax(0,1fr)] items-start gap-2 py-0.5">
-                          <span className="text-xs font-semibold" style={{ color: AIRSPACE_COLORS[entry.type] }}>
+                          <span style={{ color: AIRSPACE_COLORS[entry.type] }} className="text-xs font-semibold">
                             {entry.type.toUpperCase()}
                           </span>
                           <span>{entry.name}</span>
                         </div>
                       ))
                     ) : (
-                      <p className="text-xs text-gray-500">
+                      <p className="text-dimmed text-xs">
                         <Trans>No airspace</Trans>
                       </p>
                     )}
@@ -305,7 +312,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedR
                 ))}
                 {positionAirspace.unknown.length > 0 && (
                   <div className="border-t border-gray-200 py-2">
-                    <p className="font-semibold">
+                    <p className="text-base font-semibold">
                       <Trans>Altitude not provided</Trans>
                     </p>
                     {positionAirspace.unknown.map((entry) => (
@@ -330,4 +337,4 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedR
       )}
     </div>
   );
-}
+};

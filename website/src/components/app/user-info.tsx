@@ -8,8 +8,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
+import type { FC } from "react";
 
-export const UserInfo = () => {
+export const UserInfo: FC = () => {
   const { data, error } = $api.useQuery("get", "/api/session", {}, { retry: false });
   const client = useQueryClient();
   const assumedRoles = useAtomValue(assumedRolesAtom);

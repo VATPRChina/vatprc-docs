@@ -5,16 +5,10 @@ import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Alert, Skeleton } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 import { TbPlaneInflight } from "react-icons/tb";
 
-export const Route = createFileRoute("/flights/$callsign")({
-  component: RouteComponent,
-  head: (ctx) => ({
-    meta: [{ name: "robots", content: "noindex" }, { title: ctx.params.callsign }],
-  }),
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { callsign } = Route.useParams();
 
   const {
@@ -53,7 +47,7 @@ function RouteComponent() {
     <div className="flex w-full flex-col gap-2">
       <h1 className="flex items-baseline">
         <span className="text-3xl">{callsign}</span>
-        <span className="text-muted-foreground ml-1 flex gap-1 text-2xl">
+        <span className="text-dimmed ml-1 flex gap-1 text-2xl">
           <span>{flight.flight_plan.departure}</span>
           <TbPlaneInflight />
           <span>{flight.flight_plan.arrival}</span>
@@ -66,4 +60,11 @@ function RouteComponent() {
       </FlightDetails>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/flights/$callsign")({
+  component: RouteComponent,
+  head: (ctx) => ({
+    meta: [{ name: "robots", content: "noindex" }, { title: ctx.params.callsign }],
+  }),
+});

@@ -45,7 +45,7 @@ export const DiscourseDocument: React.FC<{
   return (
     <MarkdownDoc tocHeader={editButtons} inline={inline}>
       {extraHeader}
-      <h1 className="text-2xl">{document.title}</h1>
+      <h1 className="text-3xl font-bold">{document.title}</h1>
       <MarkdownContent markdown={document.markdown} />
     </MarkdownDoc>
   );

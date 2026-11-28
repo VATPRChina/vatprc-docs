@@ -6,11 +6,11 @@ import { client } from "@/lib/client/client";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Button, NumberInput, Paper, Select, Textarea, TextInput } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { type FC, useState } from "react";
 
 type TemporaryPlan = operations["temporary_flight_validation"]["parameters"]["query"];
 
-export function TemporaryFlightValidation() {
+export const TemporaryFlightValidation: FC = () => {
   const roles = usePermissions();
   if (!roles.includes("software-engineer")) {
     return (
@@ -20,9 +20,9 @@ export function TemporaryFlightValidation() {
     );
   }
   return <TemporaryFlightValidationForm />;
-}
+};
 
-function TemporaryFlightValidationForm() {
+const TemporaryFlightValidationForm: FC = () => {
   const { t } = useLingui();
   const [plan, setPlan] = useState<Required<TemporaryPlan>>({
     departure: "",
@@ -62,7 +62,7 @@ function TemporaryFlightValidationForm() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-3xl">
+      <h1 className="text-3xl font-bold">
         <Trans>Temporary Flight Plan</Trans>
       </h1>
       <p>
@@ -155,4 +155,4 @@ function TemporaryFlightValidationForm() {
       )}
     </div>
   );
-}
+};

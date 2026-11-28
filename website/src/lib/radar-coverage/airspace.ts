@@ -6,12 +6,12 @@ export interface AirspaceEntry extends Airspace {
   key: string;
   type: AirspaceType;
 }
-export function airspaceEntries(region: RadarRegion): AirspaceEntry[] {
+export const airspaceEntries = (region: RadarRegion): AirspaceEntry[] => {
   return AIRSPACE_TYPES.flatMap((type) =>
     (region.airspace?.[type] ?? []).map((airspace, index) => ({ ...airspace, type, key: `${type}:${index}` })),
   );
-}
-export function altitudeLabel(value: number | null): string {
+};
+export const altitudeLabel = (value: number | null): string => {
   if (value === null || value === Infinity) return "UNL";
   if (value === 0) return "GND";
   const levels: Record<number, number> = {
@@ -62,12 +62,12 @@ export function altitudeLabel(value: number | null): string {
     50900: 15500,
   };
   return `${levels[value] ?? Math.round(value * 0.3048)} m`;
-}
-export function airspaceHeight(airspace: Airspace): string | null {
+};
+export const airspaceHeight = (airspace: Airspace): string | null => {
   if (airspace.lowerLimit === undefined || airspace.upperLimit === undefined) return null;
   return `${altitudeLabel(airspace.lowerLimit)} – ${altitudeLabel(airspace.upperLimit)}`;
-}
-function contains(position: Coordinate, points: Coordinate[]): boolean {
+};
+const contains = (position: Coordinate, points: Coordinate[]): boolean => {
   if (points.length < 3) return false;
   // Include points exactly on an edge, including shared sector boundaries.
   for (let i = 0; i < points.length; i++) {
@@ -84,13 +84,13 @@ function contains(position: Coordinate, points: Coordinate[]): boolean {
       return true;
   }
   return pointInside(position, points);
-}
+};
 export interface AirspaceBand {
   min: number;
   max: number;
   entries: AirspaceEntry[];
 }
-export function airspaceAtPosition(entries: AirspaceEntry[], position: Coordinate) {
+export const airspaceAtPosition = (entries: AirspaceEntry[], position: Coordinate) => {
   const matches = entries.filter((entry) => contains(position, entry.points));
   const known = matches.filter((entry) => entry.lowerLimit !== undefined && entry.upperLimit !== undefined);
   const unknown = matches.filter((entry) => entry.lowerLimit === undefined || entry.upperLimit === undefined);
@@ -110,4 +110,4 @@ export function airspaceAtPosition(entries: AirspaceEntry[], position: Coordinat
     }
   }
   return { bands: bands.reverse(), unknown };
-}
+};

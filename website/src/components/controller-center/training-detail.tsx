@@ -15,7 +15,7 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
   return (
     <article className="flex min-w-0 flex-col gap-1 border border-black/15 p-4 dark:border-white/20">
       <div className="flex flex-wrap items-center justify-between gap-1">
-        <h3 className="text-xl font-medium">{training.name}</h3>
+        <h3 className="text-xl font-bold">{training.name}</h3>
         <LinkButton to="/controllers/trainings/$id" params={{ id: training.id }} variant="subtle" size="compact-sm">
           <Trans>View training details</Trans>
         </LinkButton>
@@ -34,21 +34,21 @@ export const TrainingDetail: FC<{ training: TrainingDto }> = ({ training }) => {
           </span>
         )}
       </p>
-      <h4 className="mt-2 font-medium">
+      <h4 className="mt-2 text-lg font-bold">
         <Trans>Mentor Feedback</Trans>
       </h4>
       {(training.record_sheet_filing?.length ?? 0) === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-dimmed text-base">
           <Trans>No training record has been filed yet.</Trans>
         </p>
       ) : (
         <FilingAnswers answers={training.record_sheet_filing!} />
       )}
-      <h4 className="mt-2 font-medium">
+      <h4 className="mt-2 text-lg font-bold">
         <Trans>Self Reflection</Trans>
       </h4>
       {(training.self_reflection_sheet_filing?.length ?? 0) === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-dimmed text-base">
           <Trans>No self reflection has been filed yet.</Trans>
         </p>
       ) : (

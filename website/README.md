@@ -6,11 +6,15 @@ TODO.
 
 ## Development
 
-TODO.
+From `website/`, use the Node and pnpm versions specified in `package.json`.
+Run `pnpm install` followed by `pnpm dev`. To use a local UniAPI instance,
+set `VITE_API_DEV_ENDPOINT` in `.env.development.local`.
 
 ## Testing
 
-TODO.
+Install Chromium with `pnpm exec playwright install chromium`. Run `pnpm lint`
+for formatting, TypeScript, and ESLint checks, `pnpm test --run` for unit and
+browser component tests, and `pnpm test:e2e` for mocked-backend page flows.
 
 ## License
 

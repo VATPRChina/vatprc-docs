@@ -1,6 +1,6 @@
 import type { AtcPosition } from "./position-modal";
+import { StationPage } from "./station-page";
 import { usePermission } from "@/lib/client";
-import { StationPage } from "@/routes/_doc/airspace/station";
 import { renderComponent } from "@/test/render-component";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { beforeEach, expect, test, vi } from "vitest";

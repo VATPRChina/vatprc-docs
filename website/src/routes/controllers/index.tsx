@@ -8,12 +8,9 @@ import { TrainingBrowser } from "@/components/controller-center/training-browser
 import { $api } from "@/lib/client";
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 
-export const Route = createFileRoute("/controllers/")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { userId, isController, canManageTrainings, canReviewApplications } = useCenterRoles();
   const {
     data: applications,
@@ -57,4 +54,8 @@ function RouteComponent() {
       {userId && <MyApplicationCard applications={applications ?? []} />}
     </>
   );
-}
+};
+
+export const Route = createFileRoute("/controllers/")({
+  component: RouteComponent,
+});

@@ -21,7 +21,7 @@ const getRouterBasepath = (pathname: string) => {
   return "/";
 };
 
-export function getRouter() {
+export const getRouter = () => {
   const i18n = setupI18n();
   i18n.load("en", en);
   i18n.load("zh-cn", zh);
@@ -96,4 +96,4 @@ export function getRouter() {
   }
 
   return router;
-}
+};

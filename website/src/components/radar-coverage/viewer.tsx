@@ -13,11 +13,11 @@ import {
 import { Trans, useLingui } from "@lingui/react/macro";
 import { Alert, Badge, Button, Checkbox, Loader, Select, Slider } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type FC, useEffect, useMemo, useRef, useState } from "react";
 
 const EMPTY_REGION: RadarRegion = { code: "local", name: "", boundary: [], radars: [] };
 const QUICK_HEIGHTS = [0, 3000, 10000, 20000, 30000, 40000];
-function useCoverage(region: RadarRegion, altitude: number, enabled: RadarType[], selectedRadar: number | null) {
+const useCoverage = (region: RadarRegion, altitude: number, enabled: RadarType[], selectedRadar: number | null) => {
   const [state, setState] = useState<{
     request: CoverageRequest;
     result: CoverageResult | null;
@@ -75,8 +75,8 @@ function useCoverage(region: RadarRegion, altitude: number, enabled: RadarType[]
     pending: canCalculate && state?.request !== request,
     failed: canCalculate && state?.request === request && state.failed,
   };
-}
-export function RadarCoverageViewer() {
+};
+export const RadarCoverageViewer: FC = () => {
   const { t, i18n } = useLingui();
   const [code, setCode] = useState<string | null>(BUILTIN_REGIONS[0].code);
   const [altitude, setAltitude] = useState(10000);
@@ -108,7 +108,7 @@ export function RadarCoverageViewer() {
   return (
     <div className="container mx-auto flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl">
+        <h1 className="text-3xl font-bold">
           <Trans>Radar Coverage</Trans>
         </h1>
       </div>
@@ -146,11 +146,12 @@ export function RadarCoverageViewer() {
             allowDeselect={false}
           />
           <section className="flex flex-col gap-3">
-            <h2 className="font-medium">
+            <h2 className="text-2xl font-bold">
               <Trans>Target altitude</Trans>
             </h2>
             <span className="text-3xl font-medium">
-              {format(altitude)} <span className="text-sm">ft MSL</span>&nbsp;
+              {format(altitude)} <span className="text-sm">ft MSL</span>
+              &nbsp;
               <span className="text-sm font-normal whitespace-nowrap text-gray-600 dark:text-gray-400">
                 {format(Math.round(altitude * 0.3048))} m
               </span>
@@ -178,7 +179,7 @@ export function RadarCoverageViewer() {
             </div>
           </section>
           <section className="flex flex-col gap-2">
-            <h2 className="font-medium">
+            <h2 className="text-2xl font-bold">
               <Trans>Surveillance sources</Trans>
             </h2>
             {RADAR_TYPES.map((type) => (
@@ -207,7 +208,7 @@ export function RadarCoverageViewer() {
             </span>
           </section>
           <section className="flex flex-col gap-2">
-            <h2 className="font-medium">
+            <h2 className="text-2xl font-bold">
               <Trans>Airspace boundaries</Trans>
             </h2>
             {AIRSPACE_TYPES.map((type) => {
@@ -249,7 +250,7 @@ export function RadarCoverageViewer() {
                           label={
                             <span className="flex flex-col">
                               <span>{entry.name}</span>
-                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                              <span className="text-dimmed text-xs">
                                 {airspaceHeight(entry) ?? t`Altitude not provided`}
                               </span>
                             </span>
@@ -261,7 +262,7 @@ export function RadarCoverageViewer() {
                 </details>
               );
             })}
-            <p className="text-xs text-gray-600 dark:text-gray-400">
+            <p className="text-dimmed text-xs">
               <Trans>Airspace altitudes are in metres. Click the map to inspect all sectors at that position.</Trans>
             </p>
           </section>
@@ -358,4 +359,4 @@ export function RadarCoverageViewer() {
       </div>
     </div>
   );
-}
+};

@@ -5,13 +5,10 @@ import { NotamBoard } from "@/components/homepage/notam-board";
 import { Trans } from "@lingui/react/macro";
 import { Button } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import type { FC } from "react";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 
-export const Route = createFileRoute("/")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   return (
     <div className="flex w-full flex-col">
       <Hero />
@@ -20,10 +17,10 @@ function RouteComponent() {
         <NotamBoard />
         <ControllersBoard />
         <section className="flex flex-col items-center gap-2 border-t border-black/15 pt-16 text-center dark:border-white/20">
-          <h2 className="text-2xl font-medium">
+          <h2 className="text-2xl font-bold">
             <Trans>Feedback</Trans>
           </h2>
-          <p className="max-w-xl text-gray-600 dark:text-gray-400">
+          <p className="text-dimmed max-w-xl text-base">
             <Trans>
               Appreciation? Compliment? Criticism? You are welcome to provide feedback to the staff team via email or
               join the discussion on our forum!
@@ -55,4 +52,8 @@ function RouteComponent() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/")({
+  component: RouteComponent,
+});

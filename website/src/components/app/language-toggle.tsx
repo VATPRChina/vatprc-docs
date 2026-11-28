@@ -2,9 +2,10 @@ import { getLocalPathname } from "@/lib/i18n";
 import { LANGUAGE_COOKIE_KEY, setCookie } from "@/lib/settings";
 import { useLingui } from "@lingui/react/macro";
 import { ActionIcon } from "@mantine/core";
+import type { FC } from "react";
 import { TbLanguage } from "react-icons/tb";
 
-export const LanguageToggle = () => {
+export const LanguageToggle: FC = () => {
   const { i18n, t } = useLingui();
   const nextLang = i18n.locale === "zh-cn" ? "en" : "zh-cn";
 

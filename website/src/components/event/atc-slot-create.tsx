@@ -10,9 +10,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { formatISO, setMinutes, setSeconds } from "date-fns";
-import { FormEvent } from "react";
+import { type FC, FormEvent } from "react";
 
-export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positionId?: string }) => {
+export const CreateAtcSlot: FC<{ eventId: string; positionId?: string }> = ({ eventId, positionId }) => {
   const { t, i18n } = useLingui();
   const [opened, { toggle, close }] = useDisclosure(false);
 
@@ -31,11 +31,11 @@ export const CreateAtcSlot = ({ eventId, positionId }: { eventId: string; positi
   const onSuccess = () => {
     close();
     promiseWithLog(
-      queryClient.invalidateQueries({
-        queryKey: $api.queryOptions("get", "/api/events/{event_id}/controllers", {
+      queryClient.invalidateQueries(
+        $api.queryOptions("get", "/api/events/{event_id}/controllers", {
           params: { path: { event_id: eventId } },
-        }).queryKey,
-      }),
+        }),
+      ),
     );
   };
   const {

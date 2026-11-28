@@ -2,13 +2,9 @@ import { $api } from "@/lib/client";
 import { Trans } from "@lingui/react/macro";
 import { Button, FileInput } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { type FC, useState } from "react";
 
-export const Route = createFileRoute("/docs/utils/image")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const RouteComponent: FC = () => {
   const { mutate, data, error, isPending } = $api.useMutation("post", "/api/storage/images");
 
   const [file, setFile] = useState<File | null>(null);
@@ -27,7 +23,7 @@ function RouteComponent() {
 
   return (
     <div className="container mx-auto flex flex-col items-start gap-4">
-      <h1 className="text-3xl">
+      <h1 className="text-3xl font-bold">
         <Trans>Upload image</Trans>
       </h1>
       <div className="flex w-full max-w-3xl flex-row items-end gap-2">
@@ -40,4 +36,8 @@ function RouteComponent() {
       <p>Error: {error?.title}</p>
     </div>
   );
-}
+};
+
+export const Route = createFileRoute("/docs/utils/image")({
+  component: RouteComponent,
+});

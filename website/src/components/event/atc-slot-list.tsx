@@ -199,7 +199,7 @@ export const AtcSlotList: FC<{ eventId: string }> = ({ eventId }) => {
 
   return (
     <>
-      <h2 className="text-2xl">
+      <h2 className="text-2xl font-bold">
         <Trans>Controllers</Trans>
       </h2>
       {error && (

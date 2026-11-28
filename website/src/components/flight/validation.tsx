@@ -2,13 +2,15 @@ import { PROBLEM_LABELS, ProblemDetails, VALIDATION_STATUS, VALIDATOR_NAMES } fr
 import { components } from "@/lib/api";
 import { matchesValidationField } from "@/lib/validation-field";
 import { Trans } from "@lingui/react/macro";
-import { Popover, Tooltip, Badge, Alert, Anchor } from "@mantine/core";
+import { Popover, Tooltip, Badge, Alert } from "@mantine/core";
 import { createContext, FC, useContext } from "react";
 import { TbAlertSquareRounded } from "react-icons/tb";
 
 export const FlightValidationContext = createContext<components["schemas"]["FlightValidationDto"] | null>(null);
 
-function ValidationTag({ result }: { result: components["schemas"]["ValidatorExecutionDto"]; compact?: boolean }) {
+const ValidationTag: FC<{ result: components["schemas"]["ValidatorExecutionDto"]; compact?: boolean }> = ({
+  result,
+}) => {
   const validatorName = VALIDATOR_NAMES[result.id];
   const { short, name, color } = VALIDATION_STATUS[result.status];
   return (
@@ -34,9 +36,9 @@ function ValidationTag({ result }: { result: components["schemas"]["ValidatorExe
       </Popover.Dropdown>
     </Popover>
   );
-}
+};
 
-function ValidationProblems({ problems }: { problems: components["schemas"]["ValidationProblemDto"][] }) {
+const ValidationProblems: FC<{ problems: components["schemas"]["ValidationProblemDto"][] }> = ({ problems }) => {
   if (problems.length <= 0) {
     return null;
   }
@@ -50,9 +52,9 @@ function ValidationProblems({ problems }: { problems: components["schemas"]["Val
       ))}
     </ul>
   );
-}
+};
 
-function ValidationLocation({ field }: { field: components["schemas"]["ValidationFieldDto"] }) {
+const ValidationLocation: FC<{ field: components["schemas"]["ValidationFieldDto"] }> = ({ field }) => {
   switch (field.kind) {
     case "leg": {
       const legNumber = field.index + 1;
@@ -101,7 +103,7 @@ function ValidationLocation({ field }: { field: components["schemas"]["Validatio
       return <span>{labels[field.kind]}</span>;
     }
   }
-}
+};
 
 export const InlineValidationTooltip: FC<{ field: components["schemas"]["ValidationFieldDto"] }> = ({ field }) => {
   const validations = useContext(FlightValidationContext);
@@ -155,9 +157,14 @@ export const ValidationResult: FC<{ temporary?: boolean }> = ({ temporary = fals
         <p>
           <Trans>
             Your flight plan is <strong className="underline">INVALID</strong>, please
-            <Anchor href="https://my.vatsim.net/pilots/flightplan/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://my.vatsim.net/pilots/flightplan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-(--mantine-color-anchor) hover:underline"
+            >
               &nbsp;edit your flight plan on VATSIM&nbsp;
-            </Anchor>
+            </a>
             according to the information below.
           </Trans>
         </p>
