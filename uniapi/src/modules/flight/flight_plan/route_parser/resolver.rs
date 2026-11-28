@@ -3,7 +3,7 @@ use futures::{StreamExt, TryStreamExt, stream};
 use crate::modules::flight::flight_plan::route_parser::{
     Ident, IdentAmend, Lexer, LexerTokenValue,
 };
-use crate::modules::navdata::models::{AnyFix, GeoPoint, NavProc};
+use crate::modules::navdata::model::{AnyFix, GeoPoint, NavProc};
 use crate::modules::navdata::service::{InvalidNavdataError, NavdataResult, NavdataService};
 
 pub struct CandidateResolver<'s> {
@@ -181,7 +181,7 @@ async fn find_fix_candidates(navdata: &NavdataService, ident: &str) -> NavdataRe
 mod tests {
     use super::*;
     use crate::modules::flight::flight_plan::route_parser::{CruisingLevel, LexGrouper, Speed};
-    use crate::modules::navdata::models::{Airport, Airway, Sid, Star, TerminalProcedure};
+    use crate::modules::navdata::model::{Airport, Airway, Sid, Star, TerminalProcedure};
 
     #[test]
     fn airport_candidates_accept_runways_with_speed_and_altitude() {

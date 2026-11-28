@@ -2,9 +2,9 @@ use chrono::{DateTime, Utc};
 use serde::Serialize;
 use ulid::Ulid;
 
-use crate::modules::user::{dto::UserDto, models::UserSummary};
+use crate::modules::user::{dto::UserDto, model::UserSummary};
 
-use super::models::{AuditLog, AuditLogEntity};
+use super::model::{AuditLog, AuditLogEntity};
 
 #[derive(Serialize, utoipa::ToSchema)]
 #[serde(rename_all = "kebab-case")]

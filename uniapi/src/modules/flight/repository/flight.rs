@@ -1,6 +1,6 @@
 use crate::adapter::compat::{CompatClient, CompatClientError};
 use crate::adapter::compat::{FlightPlan, Pilot, VatsimData};
-use crate::modules::flight::models::{
+use crate::modules::flight::model::{
     Flight, FlightPlan as FiledFlightPlan, FlightRule, WakeCategory,
 };
 

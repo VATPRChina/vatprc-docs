@@ -5,7 +5,7 @@ use arrayvec::CapacityError;
 use sqlx::SqlitePool;
 
 use crate::modules::navdata::{
-    models::{ChinaMainlandBoundary, FirBoundary},
+    model::{ChinaMainlandBoundary, FirBoundary},
     repository::{PreferredRouteRepository, PreferredRouteRepositoryError},
 };
 
@@ -101,7 +101,7 @@ impl NavdataService {
         &self,
         departure: &str,
         arrival: &str,
-    ) -> NavdataResult<Vec<crate::modules::navdata::models::PreferredRoute>> {
+    ) -> NavdataResult<Vec<crate::modules::navdata::model::PreferredRoute>> {
         Ok(self
             .routes
             .list_preferred_routes(departure, arrival)

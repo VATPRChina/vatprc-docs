@@ -3,9 +3,9 @@ use super::{ValidationContext, Validator};
 use crate::modules::flight::flight_plan::altitude::{
     level_restriction_matches, level_restriction_type, standard_altitude_from_flight_level,
 };
-use crate::modules::flight::models::ValidatorStatus;
-use crate::modules::flight::models::{ValidationField, ValidationProblem, ValidatorIdentifier};
-use crate::modules::navdata::models::{CruiseAltitudeType, Fix, ResolvedLeg};
+use crate::modules::flight::model::ValidatorStatus;
+use crate::modules::flight::model::{ValidationField, ValidationProblem, ValidatorIdentifier};
+use crate::modules::navdata::model::{CruiseAltitudeType, Fix, ResolvedLeg};
 use crate::modules::navdata::service::NavdataService;
 
 /// Validate metric or imperial altitude restrictions on a matched preferred route.

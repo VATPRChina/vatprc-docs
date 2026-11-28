@@ -1,15 +1,16 @@
+use crate::modules::atc_booking::model::EventAtcBooking;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use ulid::Ulid;
 
 use crate::error::ApiError;
-use crate::modules::controller::models::{ControllerPositionKind, UserControllerState};
+use crate::modules::controller::model::{ControllerPositionKind, UserControllerState};
 use crate::modules::user::dto::UserDto;
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 
-use super::models::{
-    Event, EventAirspace, EventAirspaceSave, EventAtcBooking, EventAtcPosition,
-    EventAtcPositionSave, EventBooking, EventSave, EventSlot, EventSlotSave,
+use super::model::{
+    Event, EventAirspace, EventAirspaceSave, EventAtcPosition, EventAtcPositionSave, EventBooking,
+    EventSave, EventSlot, EventSlotSave,
 };
 
 #[derive(Deserialize, utoipa::ToSchema)]

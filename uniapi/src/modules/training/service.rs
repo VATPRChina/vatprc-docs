@@ -5,13 +5,12 @@ use uuid::Uuid;
 
 use crate::adapter::email::{EmailClient, EmailContent, EmailError};
 use crate::modules::controller::service::{ControllerService, ControllerServiceError};
-use crate::modules::sheet::models::SheetAnswerSave;
-use crate::modules::sheet::repository::sheet_filing::SheetFilingTransactionRepository;
+use crate::modules::sheet::model::SheetAnswerSave;
 use crate::modules::sheet::service::{SheetAnswerView, SheetService, SheetServiceError};
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 use crate::modules::user::service::user::{UserService, UserServiceError};
 
-use super::models::{
+use super::model::{
     Training, TrainingApplication, TrainingApplicationResponse, TrainingApplicationSlotSave,
     TrainingSave,
 };
@@ -144,14 +143,14 @@ impl TrainingService {
         let training = self.find(id).await?;
         ensure_trainer_access(&training, current_user_id, can_manage_all)?;
         let mut transaction = self.db.begin().await?;
-        let filing_id = transaction
-            .set_sheet_filing(
-                RECORD_SHEET_ID,
-                training.record_sheet_filing_id,
-                training.trainer_id,
-                answers,
-            )
-            .await?;
+        let filing_id = SheetService::set_filing(
+            &mut transaction,
+            RECORD_SHEET_ID,
+            training.record_sheet_filing_id,
+            training.trainer_id,
+            answers,
+        )
+        .await?;
         transaction.commit().await?;
         let training = self
             .db
@@ -180,14 +179,14 @@ impl TrainingService {
                 id,
             });
         }
-        let filing_id = transaction
-            .set_sheet_filing(
-                SELF_REFLECTION_SHEET_ID,
-                training.self_reflection_sheet_filing_id,
-                training.trainee_id,
-                answers,
-            )
-            .await?;
+        let filing_id = SheetService::set_filing(
+            &mut transaction,
+            SELF_REFLECTION_SHEET_ID,
+            training.self_reflection_sheet_filing_id,
+            training.trainee_id,
+            answers,
+        )
+        .await?;
         let training = (&mut *transaction)
             .set_training_self_reflection_filing(id, filing_id)
             .await?
@@ -535,7 +534,7 @@ impl TrainingApplicationService {
 pub struct TrainingApplicationView {
     pub application: TrainingApplication,
     pub trainee: UserSummary,
-    pub slots: Vec<super::models::TrainingApplicationSlot>,
+    pub slots: Vec<super::model::TrainingApplicationSlot>,
 }
 
 #[derive(Debug)]

@@ -1,11 +1,12 @@
 use futures::future::try_join_all;
-use sqlx::PgPool;
+use sqlx::{PgPool, Postgres, Transaction};
 
 use uuid::Uuid;
 
-use super::models::{Sheet, SheetAnswer, SheetField, SheetSave};
+use super::model::{Sheet, SheetAnswer, SheetAnswerSave, SheetField, SheetSave};
 use super::repository::sheet::{SheetRepository, SheetTransactionRepository};
 use super::repository::sheet_field::SheetFieldRepository;
+use super::repository::sheet_filing::SheetFilingTransactionRepository;
 use super::repository::sheet_filing_answer::SheetFilingAnswerRepository;
 
 #[derive(Clone)]
@@ -46,6 +47,27 @@ impl SheetService {
         let sheet = transaction.upsert_sheet(sheet_id, sheet).await?;
         transaction.commit().await?;
         self.with_fields(sheet).await
+    }
+
+    pub(crate) async fn set_filing(
+        transaction: &mut Transaction<'_, Postgres>,
+        sheet_id: &str,
+        filing_id: Option<Uuid>,
+        user_id: Uuid,
+        answers: &[SheetAnswerSave],
+    ) -> Result<Uuid, sqlx::Error> {
+        transaction
+            .set_sheet_filing(sheet_id, filing_id, user_id, answers)
+            .await
+    }
+
+    pub(crate) async fn filing_answers_in_transaction(
+        transaction: &mut Transaction<'_, Postgres>,
+        filing_id: Uuid,
+    ) -> Result<Vec<SheetAnswer>, sqlx::Error> {
+        (&mut **transaction)
+            .list_sheet_filing_answer_by_filing(filing_id)
+            .await
     }
 
     pub async fn filing_answers(

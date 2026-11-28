@@ -1,6 +1,6 @@
 use uuid::Uuid;
 
-use crate::modules::sheet::models::SheetAnswer;
+use crate::modules::sheet::model::SheetAnswer;
 
 fn list_by_filing_sql() -> &'static str {
     r#"
@@ -21,11 +21,6 @@ pub trait SheetFilingAnswerRepository<'executor> {
         self,
         filing_id: Uuid,
     ) -> Result<Vec<SheetAnswer>, sqlx::Error>;
-
-    async fn list_sheet_filing_answer_by_filing_in_transaction(
-        self,
-        filing_id: Uuid,
-    ) -> Result<Vec<SheetAnswer>, sqlx::Error>;
 }
 
 impl<'executor, E> SheetFilingAnswerRepository<'executor> for E
@@ -33,15 +28,6 @@ where
     E: sqlx::Executor<'executor, Database = sqlx::Postgres>,
 {
     async fn list_sheet_filing_answer_by_filing(
-        self,
-        filing_id: Uuid,
-    ) -> Result<Vec<SheetAnswer>, sqlx::Error> {
-        sqlx::query_as::<_, SheetAnswer>(list_by_filing_sql())
-            .bind(filing_id)
-            .fetch_all(self)
-            .await
-    }
-    async fn list_sheet_filing_answer_by_filing_in_transaction(
         self,
         filing_id: Uuid,
     ) -> Result<Vec<SheetAnswer>, sqlx::Error> {

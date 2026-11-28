@@ -4,7 +4,9 @@ This project targets providing an universal API server for all the services VATP
 
 ## Architecture
 
-TODO.
+Business domains live in `src/modules`. The application wires their services together in
+`src/services.rs` and registers HTTP routes in `src/app.rs`. See [AGENTS.md](AGENTS.md)
+for the module layout and contribution guidelines.
 
 ## Development
 
@@ -16,7 +18,7 @@ vatprc-uniapi run          # start the web application
 vatprc-uniapi openapi      # save the specification to openapi.json
 vatprc-uniapi openapi -o api.json
 vatprc-uniapi migrate      # apply pending database migrations
-vatprc-uniapi route-v2 "ZBAA ELKUR W40 YQG ZSPD" # print the complete parser trace
+vatprc-uniapi --help       # list commands and options
 ```
 
 ## Testing
@@ -33,20 +35,10 @@ sqlite3 -bail data/routes.db < assets/test/routes.sql
 The database must not already contain route tables. Generated databases stay
 under the ignored `data/` directory; no binary fixture is required.
 
-The E2E setup starts a local VATSIM data feed with fixed pilots and prefiles,
-so flight validation tests do not depend on live traffic or VATSIM availability.
-The backend uses `utils.vatsim_data_url` (or `APP_UTILS__VATSIM_DATA_URL`) to
-select the feed; it defaults to the public VATSIM data URL.
-
-There is E2E testing for each API endpoint. It is still missing test coverage on some endpoints.
-
-### Writing tests
-
-Place the test for each API endpoint in `/e2e/src/**/*.test.ts`. The test folder structure should match the API endpoint's URL. For example, test for GET `/api/atc/applications/review-sheet` should be placed in `/e2e/src/atc/applications/review-sheet.test.ts` (prefix `/api` is stripped).
-
-If a user is needed, check `getClient` from `/e2e/lib/backend.ts`. Use Vitest's `extend` to establish a shared context for different roles used in the same test file.
-
-If some common data setup is required for the API endpoint (e.g. `/api/events` requires a present event), use Vitest's `extend` to establish a shared context to avoid duplication in setting up the data.
+Run `cargo test --locked` for Rust tests. The navigation tests also use the sample
+`data/navdata.db` prepared by [the UniAPI CI workflow](../.github/workflows/ci-uniapi.yml).
+The HTTP tests run with `pnpm test` in `e2e/` against a migrated test PostgreSQL database
+and a local VATSIM feed.
 
 ## License
 

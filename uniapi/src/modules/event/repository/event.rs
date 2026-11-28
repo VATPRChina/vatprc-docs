@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::event::models::{Event, EventSave};
+use crate::modules::event::model::{Event, EventSave};
 
 pub(crate) trait EventRepository<'executor> {
     async fn list_event_current(self) -> Result<Vec<Event>, sqlx::Error>;
@@ -14,6 +14,8 @@ pub(crate) trait EventRepository<'executor> {
     ) -> Result<Vec<Event>, sqlx::Error>;
 
     async fn find_event_by_id(self, id: Uuid) -> Result<Option<Event>, sqlx::Error>;
+
+    async fn events_by_ids(self, ids: &[Uuid]) -> Result<Vec<Event>, sqlx::Error>;
 
     async fn exists_event(self, id: Uuid) -> Result<bool, sqlx::Error>;
 
@@ -80,6 +82,13 @@ where
         .fetch_optional(self)
         .await
     }
+    async fn events_by_ids(self, ids: &[Uuid]) -> Result<Vec<Event>, sqlx::Error> {
+        sqlx::query_as("SELECT * FROM public.event WHERE id = ANY($1)")
+            .bind(ids)
+            .fetch_all(self)
+            .await
+    }
+
     async fn exists_event(self, id: Uuid) -> Result<bool, sqlx::Error> {
         sqlx::query_scalar::<_, bool>(
             r#"

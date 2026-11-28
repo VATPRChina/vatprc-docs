@@ -8,7 +8,7 @@ use uuid::Uuid;
 
 use crate::settings::JwtAuthentication;
 
-use super::super::models::{IssuedAccessToken, ValidatedAccessToken, ValidatedAuthorizationCode};
+use super::super::model::{IssuedAccessToken, ValidatedAccessToken, ValidatedAuthorizationCode};
 
 #[derive(Clone)]
 pub struct AccessTokenService {

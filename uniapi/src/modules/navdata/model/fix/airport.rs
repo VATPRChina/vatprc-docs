@@ -1,0 +1,39 @@
+use arrayvec::ArrayString;
+
+use crate::modules::navdata::model::{Fix, Identifiable};
+use crate::utils::geo::{Latitude, Longitude};
+
+#[derive(Debug, Clone)]
+pub struct Airport {
+    pub identifier: ArrayString<4>,
+    pub latitude: Latitude,
+    pub longitude: Longitude,
+}
+
+impl Identifiable for Airport {
+    fn icao_code(&self) -> &str {
+        ""
+    }
+
+    fn identifier(&self) -> &str {
+        &self.identifier
+    }
+}
+
+impl Fix for Airport {
+    fn latitude(&self) -> Option<Latitude> {
+        Some(self.latitude)
+    }
+
+    fn longitude(&self) -> Option<Longitude> {
+        Some(self.longitude)
+    }
+}
+
+impl PartialEq for Airport {
+    fn eq(&self, other: &Self) -> bool {
+        self.identifier == other.identifier
+    }
+}
+
+impl Eq for Airport {}

@@ -1,7 +1,7 @@
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::training::models::{TrainingApplicationSlot, TrainingApplicationSlotSave};
+use crate::modules::training::model::{TrainingApplicationSlot, TrainingApplicationSlotSave};
 
 pub(crate) trait TrainingApplicationSlotRepository<'executor> {
     async fn list_training_application_slot(

@@ -3,13 +3,13 @@ use serde::{Deserialize, Serialize};
 use ulid::Ulid;
 
 use crate::error::ApiError;
-use crate::modules::controller::models::{
+use crate::modules::controller::model::{
     Controller, ControllerOnlineTime, ControllerOnlineTimeByPosition, ControllerOnlineTimeSummary,
 };
 use crate::modules::user::dto::UserDto;
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 
-use super::models::{
+use super::model::{
     ControllerPermission, ControllerPermissionSave, ControllerRating, ControllerSave,
     UserControllerState,
 };

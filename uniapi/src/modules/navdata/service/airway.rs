@@ -1,23 +1,15 @@
-use crate::modules::navdata::models::{
+use crate::modules::navdata::model::{
     Airway, AnyFix, DirectionRestriction, LegKind, Ndb, NdbKind, ResolvedLeg, Vhf, Waypoint,
     WaypointKind,
 };
+use crate::modules::navdata::repository::dfd::{self, EnrouteAirwayRecord};
 use crate::modules::navdata::service::{InvalidNavdataError, NavdataResult, NavdataService};
 use arrayvec::ArrayString;
 use itertools::Itertools;
-use sqlx::prelude::FromRow;
 
 impl NavdataService {
     pub async fn find_airway(&self, ident: &str) -> NavdataResult<Option<Airway>> {
-        let records: Vec<EnrouteAirwayRecord> = sqlx::query_as(
-            "SELECT area_code, COALESCE(direction_restriction, '') AS direction_restriction,
-                    icao_code, route_identifier, seqno, waypoint_description_code,
-                    waypoint_identifier, waypoint_latitude, waypoint_longitude, waypoint_ref_table
-             FROM tbl_er_enroute_airways WHERE route_identifier = $1 ORDER BY area_code, seqno",
-        )
-        .bind(ident)
-        .fetch_all(&self.db)
-        .await?;
+        let records = dfd::find_airway(&self.db, ident).await?;
         if records.is_empty() {
             return Ok(None);
         }
@@ -35,22 +27,6 @@ impl NavdataService {
             legs,
         }))
     }
-}
-
-#[derive(Debug, Clone, FromRow)]
-struct EnrouteAirwayRecord {
-    #[allow(unused)]
-    area_code: String,
-    direction_restriction: String,
-    icao_code: String,
-    route_identifier: String,
-    #[allow(unused)]
-    seqno: u32,
-    waypoint_description_code: String,
-    waypoint_identifier: String,
-    waypoint_latitude: f64,
-    waypoint_longitude: f64,
-    waypoint_ref_table: String,
 }
 
 impl EnrouteAirwayRecord {

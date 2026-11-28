@@ -2,16 +2,14 @@ use serde::Serialize;
 use sqlx::{PgPool, Postgres, Transaction};
 use uuid::Uuid;
 
-use crate::modules::audit_log::models::AuditLogEntity;
+use crate::modules::audit_log::model::AuditLogEntity;
 use crate::modules::audit_log::service::{AuditLogService, AuditLogServiceError};
-use crate::modules::sheet::models::{SheetAnswer, SheetAnswerSave};
-use crate::modules::sheet::repository::sheet_filing::SheetFilingTransactionRepository;
-use crate::modules::sheet::repository::sheet_filing_answer::SheetFilingAnswerRepository;
+use crate::modules::sheet::model::{SheetAnswer, SheetAnswerSave};
 use crate::modules::sheet::service::{SheetAnswerView, SheetService, SheetServiceError};
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 use crate::modules::user::service::user::{UserService, UserServiceError};
 
-use super::models::{AtcApplication, AtcApplicationStatus};
+use super::model::{AtcApplication, AtcApplicationStatus};
 use super::repository::AtcApplicationRepository;
 
 const APPLICATION_SHEET_ID: &str = "atc-application";
@@ -75,9 +73,14 @@ impl AtcApplicationService {
         }
 
         let mut transaction = self.db.begin().await?;
-        let filing_id = transaction
-            .set_sheet_filing(APPLICATION_SHEET_ID, None, current_user_id, answers)
-            .await?;
+        let filing_id = SheetService::set_filing(
+            &mut transaction,
+            APPLICATION_SHEET_ID,
+            None,
+            current_user_id,
+            answers,
+        )
+        .await?;
         let application = (&mut *transaction)
             .create_atc_application(current_user_id, filing_id)
             .await?;
@@ -122,14 +125,14 @@ impl AtcApplicationService {
         }
         let before = application_audit_snapshot(&mut transaction, &application).await?;
 
-        transaction
-            .set_sheet_filing(
-                APPLICATION_SHEET_ID,
-                Some(application.application_filing_id),
-                current_user_id,
-                answers,
-            )
-            .await?;
+        SheetService::set_filing(
+            &mut transaction,
+            APPLICATION_SHEET_ID,
+            Some(application.application_filing_id),
+            current_user_id,
+            answers,
+        )
+        .await?;
         let application = (&mut *transaction)
             .find_atc_application_by_id_for_update(application.id)
             .await?
@@ -155,14 +158,14 @@ impl AtcApplicationService {
             .await?
             .ok_or(AtcApplicationServiceError::NotFound(id))?;
         let before = application_audit_snapshot(&mut transaction, &application).await?;
-        let filing_id = transaction
-            .set_sheet_filing(
-                REVIEW_SHEET_ID,
-                application.review_filing_id,
-                current_user_id,
-                answers,
-            )
-            .await?;
+        let filing_id = SheetService::set_filing(
+            &mut transaction,
+            REVIEW_SHEET_ID,
+            application.review_filing_id,
+            current_user_id,
+            answers,
+        )
+        .await?;
         let application = (&mut *transaction)
             .set_atc_application_review(id, status.as_db_str(), filing_id)
             .await?
@@ -279,15 +282,13 @@ async fn application_audit_snapshot(
     transaction: &mut Transaction<'_, Postgres>,
     application: &AtcApplication,
 ) -> Result<AtcApplicationAuditSnapshot, sqlx::Error> {
-    let application_filing_answers = (&mut **transaction)
-        .list_sheet_filing_answer_by_filing_in_transaction(application.application_filing_id)
-        .await?;
+    let application_filing_answers =
+        SheetService::filing_answers_in_transaction(transaction, application.application_filing_id)
+            .await?;
     let review_filing_answers = match application.review_filing_id {
-        Some(filing_id) => Some(
-            (&mut **transaction)
-                .list_sheet_filing_answer_by_filing_in_transaction(filing_id)
-                .await?,
-        ),
+        Some(filing_id) => {
+            Some(SheetService::filing_answers_in_transaction(transaction, filing_id).await?)
+        }
         None => None,
     };
 

@@ -1,7 +1,7 @@
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::event::models::{EventSlot, EventSlotSave};
+use crate::modules::event::model::{EventSlot, EventSlotSave};
 
 fn slot_select_sql(where_clause: &str) -> String {
     slot_select_sql_from("public.event_slot", where_clause)
@@ -35,7 +35,7 @@ pub(crate) trait EventSlotRepository<'executor> {
     async fn booking_event_slot_export_rows(
         self,
         event_id: Uuid,
-    ) -> Result<Vec<String>, sqlx::Error>;
+    ) -> Result<Vec<(Uuid, chrono::DateTime<chrono::Utc>)>, sqlx::Error>;
 }
 
 impl<'executor, E> EventSlotRepository<'executor> for E
@@ -85,12 +85,11 @@ where
     async fn booking_event_slot_export_rows(
         self,
         event_id: Uuid,
-    ) -> Result<Vec<String>, sqlx::Error> {
-        sqlx::query_scalar::<_, String>(
+    ) -> Result<Vec<(Uuid, chrono::DateTime<chrono::Utc>)>, sqlx::Error> {
+        sqlx::query_as(
             r#"
-        SELECT "user".cid || ',' || to_char(event_slot.enter_at AT TIME ZONE 'UTC', 'HH24MI')
+        SELECT event_booking.user_id, event_slot.enter_at
         FROM public.event_booking
-        JOIN public."user" ON "user".id = event_booking.user_id
         JOIN public.event_slot ON event_slot.id = event_booking.event_slot_id
         JOIN public.event_airspace ON event_airspace.id = event_slot.event_airspace_id
         WHERE event_airspace.event_id = $1

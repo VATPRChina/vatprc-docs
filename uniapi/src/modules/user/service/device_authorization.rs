@@ -4,7 +4,7 @@ use sqlx::PgPool;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::super::models::{
+use super::super::model::{
     DeviceAuthorizationConfirmation, DeviceAuthorizationGrant, IssuedDeviceAuthorization,
 };
 use super::super::repository::device_authorization::{

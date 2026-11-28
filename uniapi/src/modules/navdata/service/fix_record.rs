@@ -1,15 +1,6 @@
-use sqlx::FromRow;
-
 use super::{InvalidNavdataError, NavdataResult};
-use crate::modules::navdata::models::{Ndb, NdbKind, Vhf, Waypoint, WaypointKind};
-
-#[derive(FromRow)]
-pub(super) struct FixRecord {
-    pub icao_code: String,
-    pub identifier: String,
-    pub latitude: Option<f64>,
-    pub longitude: Option<f64>,
-}
+use crate::modules::navdata::model::{Ndb, NdbKind, Vhf, Waypoint, WaypointKind};
+use crate::modules::navdata::repository::dfd::FixRecord;
 
 impl FixRecord {
     pub fn position(&self) -> NavdataResult<(f64, f64)> {

@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::super::models::{IssuedRefreshToken, RefreshToken};
+use super::super::model::{IssuedRefreshToken, RefreshToken};
 
 pub(crate) trait RefreshTokenTransaction {
     async fn issue_session_refresh_token(

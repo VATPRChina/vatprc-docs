@@ -5,9 +5,9 @@ use uuid::Uuid;
 
 use crate::modules::sheet::dto::{SheetFieldAnswerDto, SheetRequestField};
 use crate::modules::user::dto::{UserDto, UserMoodleInfoDto};
-use crate::modules::user::models::UserSummary;
+use crate::modules::user::model::UserSummary;
 
-use super::models::{AtcApplication, AtcApplicationStatus as ApplicationStatus};
+use super::model::{AtcApplication, AtcApplicationStatus as ApplicationStatus};
 
 #[derive(Deserialize, utoipa::ToSchema)]
 pub struct AtcApplicationRequest {

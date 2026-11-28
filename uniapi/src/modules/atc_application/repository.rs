@@ -5,7 +5,7 @@ use sqlx::FromRow;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use super::models::{AtcApplication, AtcApplicationStatus, InvalidAtcApplicationStatus};
+use super::model::{AtcApplication, AtcApplicationStatus, InvalidAtcApplicationStatus};
 
 #[derive(Debug, Clone, FromRow)]
 struct AtcApplicationRecord {

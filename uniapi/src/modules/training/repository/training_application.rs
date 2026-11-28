@@ -2,7 +2,7 @@ use chrono::Utc;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::training::models::{TrainingApplication, TrainingApplicationSlotSave};
+use crate::modules::training::model::{TrainingApplication, TrainingApplicationSlotSave};
 use crate::modules::training::repository::training_application_slot::TrainingApplicationSlotTransactionRepository;
 
 fn application_select_sql(where_clause: &str) -> String {

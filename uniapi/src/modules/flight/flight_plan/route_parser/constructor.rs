@@ -1,5 +1,5 @@
 use super::{CandidateWithState, IdentCandidate, SolvedIdent};
-use crate::modules::navdata::models::{DirectionRestriction, LegKind, NavProc, ResolvedLeg};
+use crate::modules::navdata::model::{DirectionRestriction, LegKind, NavProc, ResolvedLeg};
 
 type PathEntry<'a, 's> = (&'a SolvedIdent<'s>, &'a CandidateWithState);
 

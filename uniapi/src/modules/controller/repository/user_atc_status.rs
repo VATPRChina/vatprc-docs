@@ -1,19 +1,12 @@
-use chrono::{DateTime, Utc};
 use serde::Serialize;
 use sqlx::FromRow;
 use uuid::Uuid;
 
-use super::super::models::ControllerSave;
+use super::super::model::ControllerSave;
 use super::user_atc_permission::UserAtcPermissionTransactionRepository;
 
-#[derive(Debug, Clone, FromRow, Serialize)]
+#[derive(Debug, Default, FromRow, Serialize)]
 pub struct AtcStatusRecord {
-    pub user_id: Uuid,
-    pub user_cid: String,
-    pub user_full_name: String,
-    pub user_created_at: DateTime<Utc>,
-    pub user_updated_at: DateTime<Utc>,
-    pub user_roles: Vec<String>,
     pub is_visiting: Option<bool>,
     pub is_absent: Option<bool>,
     pub rating: Option<String>,
@@ -21,11 +14,6 @@ pub struct AtcStatusRecord {
 
 pub(crate) trait UserAtcStatusRepository<'executor> {
     async fn find_user_atc_status_by_user_id(
-        self,
-        user_id: Uuid,
-    ) -> Result<Option<AtcStatusRecord>, sqlx::Error>;
-
-    async fn find_user_atc_status_by_user_id_for_update(
         self,
         user_id: Uuid,
     ) -> Result<Option<AtcStatusRecord>, sqlx::Error>;
@@ -41,43 +29,9 @@ where
     ) -> Result<Option<AtcStatusRecord>, sqlx::Error> {
         sqlx::query_as::<_, AtcStatusRecord>(
             r#"
-        SELECT "user".id AS user_id,
-               "user".cid AS user_cid,
-               "user".full_name AS user_full_name,
-               "user".created_at AS user_created_at,
-               "user".updated_at AS user_updated_at,
-               "user".roles AS user_roles,
-               user_atc_status.is_visiting,
-               user_atc_status.is_absent,
-               user_atc_status.rating
-        FROM public."user"
-        LEFT JOIN public.user_atc_status ON user_atc_status.user_id = "user".id
-        WHERE "user".id = $1
-        "#,
-        )
-        .bind(user_id)
-        .fetch_optional(self)
-        .await
-    }
-    async fn find_user_atc_status_by_user_id_for_update(
-        self,
-        user_id: Uuid,
-    ) -> Result<Option<AtcStatusRecord>, sqlx::Error> {
-        sqlx::query_as::<_, AtcStatusRecord>(
-            r#"
-        SELECT "user".id AS user_id,
-               "user".cid AS user_cid,
-               "user".full_name AS user_full_name,
-               "user".created_at AS user_created_at,
-               "user".updated_at AS user_updated_at,
-               "user".roles AS user_roles,
-               user_atc_status.is_visiting,
-               user_atc_status.is_absent,
-               user_atc_status.rating
-        FROM public."user"
-        LEFT JOIN public.user_atc_status ON user_atc_status.user_id = "user".id
-        WHERE "user".id = $1
-        FOR UPDATE OF "user"
+        SELECT is_visiting, is_absent, rating
+        FROM public.user_atc_status
+        WHERE user_id = $1
         "#,
         )
         .bind(user_id)

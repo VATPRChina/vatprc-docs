@@ -2,13 +2,13 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 
-use crate::modules::controller::models::CompatFutureController;
-use crate::modules::flight::models::{
+use crate::modules::atc_booking::model::CompatFutureController;
+use crate::modules::flight::model::{
     FlightRule, ValidatorIdentifier, ValidatorStatus, WakeCategory,
 };
-use crate::modules::navdata::models::CruiseAltitudeType;
+use crate::modules::navdata::model::CruiseAltitudeType;
 
-use super::models::{CompatController, CompatPilot, CompatStatus, Flight};
+use super::model::{CompatController, CompatPilot, CompatStatus, Flight};
 
 #[derive(Deserialize, utoipa::ToSchema)]
 pub struct MetarQuery {
@@ -44,7 +44,7 @@ impl From<TemporaryFlightQuery> for Flight {
     fn from(query: TemporaryFlightQuery) -> Self {
         Self {
             cid: String::new(),
-            flight_plan: super::models::FlightPlan {
+            flight_plan: super::model::FlightPlan {
                 callsign: String::new(),
                 departure: query.departure.trim().to_ascii_uppercase(),
                 arrival: query.arrival.trim().to_ascii_uppercase(),
@@ -132,7 +132,7 @@ pub enum LegKind {
 
 impl FlightRouteDto {
     pub fn from_segments(segments: &[super::flight_plan::Segment<'_>]) -> Self {
-        use crate::modules::navdata::models::LegKind as ResolvedLegKind;
+        use crate::modules::navdata::model::LegKind as ResolvedLegKind;
         Self {
             segments: segments
                 .iter()
@@ -172,8 +172,8 @@ impl FlightRouteDto {
     }
 }
 
-fn route_fix_ident(fix: &crate::modules::navdata::models::AnyFix) -> String {
-    use crate::modules::navdata::models::Fix;
+fn route_fix_ident(fix: &crate::modules::navdata::model::AnyFix) -> String {
+    use crate::modules::navdata::model::Fix;
     fix.identifier().map(str::to_owned).unwrap_or_else(|| {
         fix.position()
             .map(|(lat, lon)| format!("{lat:.6},{lon:.6}"))
@@ -383,8 +383,8 @@ impl From<Flight> for FlightDto {
     }
 }
 
-impl From<super::models::FlightPlan> for FlightPlanDto {
-    fn from(plan: super::models::FlightPlan) -> Self {
+impl From<super::model::FlightPlan> for FlightPlanDto {
+    fn from(plan: super::model::FlightPlan) -> Self {
         Self {
             callsign: plan.callsign,
             departure: plan.departure,
@@ -401,16 +401,16 @@ impl From<super::models::FlightPlan> for FlightPlanDto {
     }
 }
 
-impl From<Vec<super::models::ValidatorExecution>> for FlightValidationDto {
-    fn from(validators: Vec<super::models::ValidatorExecution>) -> Self {
+impl From<Vec<super::model::ValidatorExecution>> for FlightValidationDto {
+    fn from(validators: Vec<super::model::ValidatorExecution>) -> Self {
         Self {
             validators: validators.into_iter().map(Into::into).collect(),
         }
     }
 }
 
-impl From<super::models::ValidatorExecution> for ValidatorExecutionDto {
-    fn from(execution: super::models::ValidatorExecution) -> Self {
+impl From<super::model::ValidatorExecution> for ValidatorExecutionDto {
+    fn from(execution: super::model::ValidatorExecution) -> Self {
         Self {
             id: execution.id,
             field: execution.field.into(),
@@ -420,9 +420,9 @@ impl From<super::models::ValidatorExecution> for ValidatorExecutionDto {
     }
 }
 
-impl From<super::models::ValidationField> for ValidationFieldDto {
-    fn from(field: super::models::ValidationField) -> Self {
-        use super::models::ValidationField as Field;
+impl From<super::model::ValidationField> for ValidationFieldDto {
+    fn from(field: super::model::ValidationField) -> Self {
+        use super::model::ValidationField as Field;
         match field {
             Field::Callsign => Self::Callsign,
             Field::FlightRules => Self::FlightRules,
@@ -445,9 +445,9 @@ impl From<super::models::ValidationField> for ValidationFieldDto {
     }
 }
 
-impl From<super::models::ValidationProblem> for ValidationProblemDto {
-    fn from(problem: super::models::ValidationProblem) -> Self {
-        use super::models::ValidationProblem as Problem;
+impl From<super::model::ValidationProblem> for ValidationProblemDto {
+    fn from(problem: super::model::ValidationProblem) -> Self {
+        use super::model::ValidationProblem as Problem;
         match problem {
             Problem::InvalidAirport => Self::InvalidAirport,
             Problem::InvalidAircraftType => Self::InvalidAircraftType,
@@ -510,12 +510,12 @@ impl From<super::models::ValidationProblem> for ValidationProblemDto {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::modules::flight::models::{ValidationField, ValidationProblem, ValidatorExecution};
+    use crate::modules::flight::model::{ValidationField, ValidationProblem, ValidatorExecution};
     use serde_json::json;
 
     #[test]
     fn preferred_route_messages_preserve_all_routes_and_match_details() {
-        use crate::modules::flight::models::PreferredRouteDescription;
+        use crate::modules::flight::model::PreferredRouteDescription;
         let details = PreferredRouteDescription {
             from: "VHHH".into(),
             to: "LELIM".into(),

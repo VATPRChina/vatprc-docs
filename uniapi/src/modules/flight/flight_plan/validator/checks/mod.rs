@@ -1,8 +1,8 @@
-use crate::modules::flight::models::{
+use crate::modules::flight::model::{
     Flight, ParsedRoute, ValidationField, ValidationProblem, ValidatorExecution,
     ValidatorIdentifier, ValidatorStatus,
 };
-use crate::modules::navdata::models::PreferredRoute;
+use crate::modules::navdata::model::PreferredRoute;
 use crate::modules::navdata::service::NavdataService;
 
 mod airport;

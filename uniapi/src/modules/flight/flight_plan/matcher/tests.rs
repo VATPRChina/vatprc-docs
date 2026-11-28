@@ -168,7 +168,7 @@ async fn border_definitions_are_used_when_the_airport_pair_has_no_definitions() 
 async fn airport_pair_definitions_reject_a_matching_border_route_via_abbey() {
     use crate::modules::flight::dto::TemporaryFlightQuery;
     use crate::modules::flight::flight_plan::validator::validate_route;
-    use crate::modules::flight::models::{
+    use crate::modules::flight::model::{
         Flight, ValidationProblem, ValidatorIdentifier, ValidatorStatus,
     };
 
@@ -339,7 +339,7 @@ INSERT INTO Routes VALUES
 async fn hong_kong_preferred_routes_validate_only_their_segment_coverage() {
     use crate::modules::flight::dto::TemporaryFlightQuery;
     use crate::modules::flight::flight_plan::validator::validate_route;
-    use crate::modules::flight::models::{
+    use crate::modules::flight::model::{
         Flight, ValidationField, ValidatorIdentifier, ValidatorStatus,
     };
 
@@ -435,7 +435,7 @@ async fn hong_kong_preferred_routes_validate_only_their_segment_coverage() {
             assert_eq!(
                 preferred.problems,
                 vec![
-                    crate::modules::flight::models::ValidationProblem::RouteMatchPreferred {
+                    crate::modules::flight::model::ValidationProblem::RouteMatchPreferred {
                         from: matched.departure.clone(),
                         to: matched.arrival.clone(),
                         raw_route: matched.raw_route.clone(),
@@ -493,7 +493,7 @@ async fn hong_kong_preferred_routes_validate_only_their_segment_coverage() {
                 | ValidatorIdentifier::DirectionalCruiseAltitude
         )));
         if expected_status == ValidatorStatus::Rejected {
-            let [crate::modules::flight::models::ValidationProblem::NotPreferredRoute { routes }] =
+            let [crate::modules::flight::model::ValidationProblem::NotPreferredRoute { routes }] =
                 preferred.problems.as_slice()
             else {
                 panic!("expected one grouped preferred-route problem")
@@ -534,7 +534,7 @@ async fn hong_kong_preferred_routes_validate_only_their_segment_coverage() {
 async fn hong_kong_retrieves_departure_definition_and_rejects_a_direct_shortcut() {
     use crate::modules::flight::dto::TemporaryFlightQuery;
     use crate::modules::flight::flight_plan::validator::validate_route;
-    use crate::modules::flight::models::{
+    use crate::modules::flight::model::{
         Flight, ValidationField, ValidationProblem, ValidatorIdentifier, ValidatorStatus,
     };
 
@@ -655,7 +655,7 @@ async fn hong_kong_retrieves_departure_definition_and_rejects_a_direct_shortcut(
 }
 
 fn matching_fixture() -> Vec<ResolvedLeg> {
-    use crate::modules::navdata::models::{Airport, DirectionRestriction, Waypoint, WaypointKind};
+    use crate::modules::navdata::model::{Airport, DirectionRestriction, Waypoint, WaypointKind};
     let waypoint = |identifier: &str, longitude: f64| {
         AnyFix::Waypoint(Waypoint {
             icao_code: "ZB".try_into().unwrap(),

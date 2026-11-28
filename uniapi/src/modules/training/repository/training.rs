@@ -2,7 +2,7 @@ use chrono::Utc;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::training::models::{Training, TrainingSave};
+use crate::modules::training::model::{Training, TrainingSave};
 
 fn training_select_sql(where_clause: &str) -> String {
     training_select_sql_from("public.training", where_clause)

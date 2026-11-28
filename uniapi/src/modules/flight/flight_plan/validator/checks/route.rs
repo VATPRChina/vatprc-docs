@@ -1,11 +1,11 @@
 use itertools::Itertools;
 
 use super::{CheckResult, ValidationContext, ValidationLevel, Validator};
-use crate::modules::flight::models::{
+use crate::modules::flight::model::{
     PreferredRouteDescription, ValidationField, ValidationProblem, ValidatorIdentifier,
     ValidatorStatus,
 };
-use crate::modules::navdata::models::{AnyFix, DirectionRestriction, Fix, LegKind, ResolvedLeg};
+use crate::modules::navdata::model::{AnyFix, DirectionRestriction, Fix, LegKind, ResolvedLeg};
 use crate::modules::navdata::service::NavdataService;
 
 /// Route must match a predefined preferred route.

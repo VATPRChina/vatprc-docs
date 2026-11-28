@@ -7,7 +7,7 @@ use sqlx::FromRow;
 use thiserror::Error;
 use uuid::Uuid;
 
-use super::models::{AuditLog, AuditLogEntity};
+use super::model::{AuditLog, AuditLogEntity};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]

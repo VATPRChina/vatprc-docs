@@ -1,9 +1,10 @@
 use std::collections::{BTreeMap, BTreeSet};
 
-use sqlx::{FromRow, SqlitePool};
+use sqlx::SqlitePool;
 
 use super::{InvalidNavdataError, NavdataResult, NavdataService};
-use crate::modules::navdata::models::{ChinaMainlandBoundary, FirBoundary};
+use crate::modules::navdata::model::{ChinaMainlandBoundary, FirBoundary};
+use crate::modules::navdata::repository::dfd::{self, FirRecord};
 
 const MAINLAND_FIRS: [&str; 9] = [
     "ZBPE", "ZGZU", "ZHWH", "ZJSA", "ZLHW", "ZPKM", "ZSHA", "ZWUQ", "ZYSH",
@@ -24,42 +25,16 @@ impl NavdataService {
     }
 
     async fn fir_boundaries(db: &SqlitePool, identifiers: &[&str]) -> NavdataResult<FirBoundary> {
-        let has_table: bool = sqlx::query_scalar(
-            "SELECT EXISTS(SELECT 1 FROM sqlite_master
-             WHERE name = 'tbl_uf_fir_uir' COLLATE NOCASE AND type IN ('table', 'view'))",
-        )
-        .fetch_one(db)
-        .await?;
+        let has_table = dfd::has_fir_table(db).await?;
         if !has_table {
             tracing::warn!(
                 "FIR boundary table is missing; continuing without geographic classification"
             );
             return Ok(ChinaMainlandBoundary::default());
         }
-        let records = sqlx::query_as::<_, FirRecord>(
-            "SELECT area_code, fir_uir_identifier, fir_uir_indicator, seqno,
-                    boundary_via, fir_uir_latitude AS latitude, fir_uir_longitude AS longitude
-             FROM tbl_uf_fir_uir
-             WHERE fir_uir_identifier IN (SELECT value FROM json_each(?))
-               AND fir_uir_indicator IN ('F', 'B')
-             ORDER BY area_code, fir_uir_identifier, fir_uir_indicator, seqno",
-        )
-        .bind(serde_json::to_string(identifiers).unwrap())
-        .fetch_all(db)
-        .await?;
+        let records = dfd::fir_records(db, identifiers).await?;
         build_fir_boundaries(records, identifiers)
     }
-}
-
-#[derive(Debug, FromRow)]
-struct FirRecord {
-    area_code: String,
-    fir_uir_identifier: String,
-    fir_uir_indicator: String,
-    seqno: i64,
-    boundary_via: String,
-    latitude: f64,
-    longitude: f64,
 }
 
 fn invalid(message: impl Into<String>) -> InvalidNavdataError {
@@ -199,7 +174,7 @@ fn append_edge(ring: &mut Vec<(f64, f64)>, from: &FirRecord, to: &FirRecord) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::modules::navdata::models::{Airport, AnyFix, GeoPoint};
+    use crate::modules::navdata::model::{Airport, AnyFix, GeoPoint};
 
     async fn database() -> SqlitePool {
         sqlx::sqlite::SqlitePoolOptions::new()

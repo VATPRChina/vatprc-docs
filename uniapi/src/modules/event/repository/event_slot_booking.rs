@@ -2,7 +2,7 @@ use sqlx::FromRow;
 use ulid::Ulid;
 use uuid::Uuid;
 
-use crate::modules::event::models::EventBooking;
+use crate::modules::event::model::EventBooking;
 
 #[derive(Debug, Clone, FromRow)]
 pub struct SlotBookingState {

@@ -1,15 +1,15 @@
 use std::sync::LazyLock;
 
 use crate::adapter::compat::{CompatClient, CompatClientError};
-use crate::modules::controller::models::CompatFutureController;
+use crate::modules::atc_booking::model::CompatFutureController;
 use crate::modules::flight::flight_plan::{ParseRouteError, parse_route};
-use crate::modules::flight::models::ParsedRoute;
+use crate::modules::flight::model::ParsedRoute;
 use crate::modules::navdata::service::NavdataService;
 use crate::modules::user::service::user::{UserService, UserServiceError};
 use regex::Regex;
 
 use super::flight_plan::validator::{self, ValidatorError};
-use super::models::{CompatController, CompatPilot, CompatStatus, Flight, ValidatorExecution};
+use super::model::{CompatController, CompatPilot, CompatStatus, Flight, ValidatorExecution};
 use super::repository::flight::FlightRepository;
 
 static VATPRC_CONTROLLER_REGEX: LazyLock<Regex> = LazyLock::new(|| {
@@ -152,21 +152,19 @@ impl FlightService {
             .collect())
     }
 
-    pub async fn flight_route(
-        &self,
-        flight: &Flight,
-    ) -> Result<super::dto::FlightRouteDto, FlightServiceError> {
+    pub async fn flight_route(&self, flight: &Flight) -> Result<ParsedRoute, FlightServiceError> {
         let plan = &flight.flight_plan;
-        let route = self
-            .route_v2(&format!(
-                "{} {} {}",
-                plan.departure, plan.raw_route, plan.arrival
-            ))
-            .await?;
-        let segments = super::flight_plan::RouteSegmenter::new(self.navdata.china_boundaries())
+        self.route_v2(&format!(
+            "{} {} {}",
+            plan.departure, plan.raw_route, plan.arrival
+        ))
+        .await
+    }
+
+    pub fn segments<'a>(&self, route: &'a ParsedRoute) -> Vec<super::flight_plan::Segment<'a>> {
+        super::flight_plan::RouteSegmenter::new(self.navdata.china_boundaries())
             .with_hong_kong_boundary(self.navdata.hong_kong_boundary())
-            .segment(&route.legs);
-        Ok(super::dto::FlightRouteDto::from_segments(&segments))
+            .segment(&route.legs)
     }
 
     pub async fn validate(

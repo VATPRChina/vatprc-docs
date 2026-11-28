@@ -2,7 +2,7 @@
 
 use chrono::Utc;
 
-use super::models::{AtcPosition, AtcPositionSave};
+use super::model::{AtcPosition, AtcPositionSave};
 
 const SELECT: &str = r#"
     SELECT category, callsign, is_tier_2, callsign_zh, callsign_en,
@@ -27,7 +27,7 @@ pub(crate) trait AtcPositionRepository<'executor> {
         callsign: &str,
         position: AtcPositionSave,
     ) -> Result<Option<AtcPosition>, sqlx::Error>;
-    async fn delete_atc_position(self, callsign: &str) -> Result<bool, sqlx::Error>;
+    async fn delete_atc_position(self, callsign: &str) -> Result<Option<AtcPosition>, sqlx::Error>;
 }
 
 impl<'executor, E> AtcPositionRepository<'executor> for E
@@ -154,19 +154,21 @@ where
         .await
     }
 
-    async fn delete_atc_position(self, callsign: &str) -> Result<bool, sqlx::Error> {
+    async fn delete_atc_position(self, callsign: &str) -> Result<Option<AtcPosition>, sqlx::Error> {
         tracing::info!(
             operation = "delete",
             repository = "atc_position",
             "modifying data"
         );
-        Ok(
-            sqlx::query("DELETE FROM public.atc_position WHERE callsign = $1")
-                .bind(callsign)
-                .execute(self)
-                .await?
-                .rows_affected()
-                > 0,
+        sqlx::query_as::<_, AtcPosition>(
+            r#"
+            DELETE FROM public.atc_position WHERE callsign = $1
+            RETURNING category, callsign, is_tier_2, callsign_zh, callsign_en,
+                      frequency_khz, cpdlc_code, remarks, created_at, updated_at
+            "#,
         )
+        .bind(callsign)
+        .fetch_optional(self)
+        .await
     }
 }

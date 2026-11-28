@@ -2,8 +2,8 @@ use std::{collections::HashMap, sync::LazyLock};
 
 use super::CheckResult;
 use super::{ValidationContext, Validator};
-use crate::modules::flight::models::{FlightRule, ValidatorStatus};
-use crate::modules::flight::models::{ValidationField, ValidationProblem, ValidatorIdentifier};
+use crate::modules::flight::model::{FlightRule, ValidatorStatus};
+use crate::modules::flight::model::{ValidationField, ValidationProblem, ValidatorIdentifier};
 use crate::modules::navdata::service::NavdataService;
 
 // Generated from data/AircraftTypes.json by scripts/generate_aircraft_types.py.
