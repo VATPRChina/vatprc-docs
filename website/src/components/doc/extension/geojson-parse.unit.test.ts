@@ -1,4 +1,4 @@
-import { parseGeojson } from "./geojson";
+import { parseGeojson } from "./geojson-parse";
 import { describe, expect, test } from "vitest";
 
 const point = { type: "Point", coordinates: [116.6, 40.1] };

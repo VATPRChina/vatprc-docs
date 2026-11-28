@@ -1,4 +1,4 @@
-import { geojsonExtension } from "./geojson-extension";
+import { geojsonExtension } from "./extension/geojson-extension";
 import { mapBlocks } from "./markdown-blocks";
 import type { InlineNode, MarkdownDocument, MarkdownExtension } from "@tanstack/markdown";
 import { autolinksExtension } from "@tanstack/markdown/extensions/autolinks";

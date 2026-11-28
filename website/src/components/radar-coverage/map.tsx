@@ -321,7 +321,7 @@ export function RadarMap({ region, enabled, airspaceEnabled, coverage, selectedR
         )}
       </Map>
       <Button className="absolute! top-3 left-3" size="xs" variant="white" disabled={!bounds} onClick={fit}>
-        <Trans>Fit region</Trans>
+        <Trans>Reset Zoom</Trans>
       </Button>
       {mapError && (
         <p role="status" className="absolute right-2 bottom-8 left-2 bg-white p-2 text-sm text-gray-900">

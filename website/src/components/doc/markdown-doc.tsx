@@ -1,17 +1,6 @@
+import { HIGHLIGHT_CSS } from "./markdown-highlighter";
 import { TableOfContents } from "@mantine/core";
-import { createThemeCss } from "@tanstack/highlight/theme";
-import { githubDarkTheme } from "@tanstack/highlight/themes/github-dark";
-import { githubLightTheme } from "@tanstack/highlight/themes/github-light";
 import type React from "react";
-
-const highlightCss = createThemeCss({
-  light: githubLightTheme,
-  dark: githubDarkTheme,
-  lightSelector: ".vatprc-prose",
-  darkSelector: '[data-mantine-color-scheme="dark"] .vatprc-prose',
-  codeBlockSelector: ".vatprc-prose pre.tm-code",
-  lineNumbersSelector: ".vatprc-prose .tm-code--line-numbers",
-});
 
 export const MarkdownDoc: React.FC<{
   children: React.ReactNode;
@@ -21,11 +10,12 @@ export const MarkdownDoc: React.FC<{
   const content = (
     <>
       <style href="markdown-highlight-theme" precedence="markdown">
-        {highlightCss}
+        {HIGHLIGHT_CSS}
       </style>
       {children}
     </>
   );
+
   if (inline) {
     return <article className="prose dark:prose-invert vatprc-prose">{content}</article>;
   }

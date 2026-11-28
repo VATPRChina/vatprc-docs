@@ -1,4 +1,4 @@
-import { geojsonExtension } from "./geojson-extension";
+import { geojsonExtension } from "./extension/geojson-extension";
 import { MarkdownContent } from "./markdown-content";
 import { parseMarkdown } from "@tanstack/markdown/parser";
 import {

@@ -1,5 +1,5 @@
-import { parseGeojson } from "./geojson";
-import { mapBlocks } from "./markdown-blocks";
+import { mapBlocks } from "../markdown-blocks";
+import { parseGeojson } from "./geojson-parse";
 import type { MarkdownExtension } from "@tanstack/markdown";
 
 export const geojsonExtension = (): MarkdownExtension => ({

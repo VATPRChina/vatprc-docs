@@ -10,6 +10,7 @@ The project uses React and TanStack Start.
 
 - Prefer using arrow functions, even for React components. Use `React.FC` for the
   type of components.
+- Prefer using named exports and avoid default exports.
 
 The project uses both [Mantine UI](https://mantine.dev/) and Tailwind CSS.
 

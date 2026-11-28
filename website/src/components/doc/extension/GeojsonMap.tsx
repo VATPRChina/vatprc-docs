@@ -1,10 +1,11 @@
 import mapStyle from "@/assets/map/voyager_without_boundary.json";
 import { Map } from "@/components/airspace/map";
+import { Paper } from "@mantine/core";
 import { bbox } from "@turf/turf";
 import { Layer, NavigationControl, Source, type StyleSpecification } from "@vis.gl/react-maplibre";
 import React, { useMemo } from "react";
 
-const GeojsonMap: React.FC<{ collection: string }> = ({ collection }) => {
+export const GeojsonMap: React.FC<{ collection: string }> = ({ collection }) => {
   const data = useMemo(() => JSON.parse(collection) as GeoJSON.FeatureCollection, [collection]);
   const bounds = useMemo(() => {
     const extent = bbox(data, { recompute: true });
@@ -12,11 +13,7 @@ const GeojsonMap: React.FC<{ collection: string }> = ({ collection }) => {
   }, [data]);
 
   return (
-    <div
-      className="not-prose my-4 overflow-hidden rounded border border-black/15 dark:border-white/20"
-      role="region"
-      aria-label="GeoJSON map"
-    >
+    <Paper role="region" aria-label="GeoJSON map" withBorder>
       <Map
         style={{ width: "100%", height: 400 }}
         initialViewState={
@@ -54,7 +51,7 @@ const GeojsonMap: React.FC<{ collection: string }> = ({ collection }) => {
           />
         </Source>
       </Map>
-    </div>
+    </Paper>
   );
 };
 
