@@ -122,6 +122,7 @@ impl<'s> Solver<'s> {
             .collect();
 
         let candidates = CandidateSortPruneState::new(candidates.iter()).handle(candidates);
+        let candidates = prefer_same_icao_on_direct_legs(candidates, last_solved);
 
         SolvedIdent {
             ident: ident.ident.clone(),
@@ -158,6 +159,55 @@ impl<'s> Solver<'s> {
                 last_candidate_idx,
             })
     }
+}
+
+/// Reorder only the slots of equidistant destinations reached from the same
+/// predecessor. Keep every alternative available for a subsequent airway.
+fn prefer_same_icao_on_direct_legs(
+    candidates: Vec<CandidateWithState>,
+    previous: &SolvedIdent<'_>,
+) -> Vec<CandidateWithState> {
+    if candidates.len() < 2 {
+        return candidates;
+    }
+    let mut ties = std::collections::HashMap::new();
+    for (index, candidate) in candidates.iter().enumerate() {
+        let IdentCandidate::Fix(to) = &candidate.candidate else {
+            continue;
+        };
+        let from = match &previous.candidates[candidate.last_candidate_idx]
+            .state
+            .last_token
+        {
+            StateToken::Fix(from) | StateToken::Leg(from, NavProc::Direct) => from,
+            _ => continue,
+        };
+        if let Some(code) = from.icao_code().filter(|code| !code.is_empty()) {
+            ties.entry((
+                candidate.last_candidate_idx,
+                OrderedFloat(candidate.distance()),
+            ))
+            .or_insert_with(Vec::new)
+            .push((index, to.icao_code() == Some(code)));
+        }
+    }
+    let mut order: Vec<_> = (0..candidates.len()).collect();
+    for group in ties.values().filter(|group| group.len() > 1) {
+        let slots = group.iter().map(|&(index, _)| index);
+        for ((index, _), slot) in group
+            .iter()
+            .sorted_by_key(|(_, matches)| !matches)
+            .zip(slots)
+        {
+            order[*index] = slot;
+        }
+    }
+    candidates
+        .into_iter()
+        .zip(order)
+        .sorted_by_key(|(_, slot)| *slot)
+        .map(|(candidate, _)| candidate)
+        .collect()
 }
 
 trait Priority {
@@ -361,4 +411,56 @@ fn distance_nm(lat1: f64, lon1: f64, lat2: f64, lon2: f64) -> f64 {
     let c = 2.0 * a.sqrt().atan2((1.0 - a).sqrt());
 
     EARTH_RADIUS_NM * c
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::modules::flight::flight_plan::route_parser::Constructor;
+
+    fn waypoint(name: &str, code: &str, longitude: f64) -> AnyFix {
+        AnyFix::Waypoint(Waypoint {
+            identifier: name.try_into().unwrap(),
+            icao_code: code.try_into().unwrap(),
+            latitude: 30.0.try_into().unwrap(),
+            longitude: longitude.try_into().unwrap(),
+            kind: WaypointKind::Enroute,
+        })
+    }
+
+    fn entry(name: &'static str, candidates: Vec<IdentCandidate>) -> IdentWithCandidate<'static> {
+        IdentWithCandidate {
+            ident: Ident {
+                ident: name,
+                amendments: vec![],
+                errors: vec![],
+            },
+            candidates,
+        }
+    }
+
+    #[test]
+    fn direct_destination_prefers_same_icao_only_on_distance_ties() {
+        for explicit_dct in [false, true] {
+            for (same_region_lon, expected_code) in [(121., "ZS"), (122., "RC")] {
+                let mut route = vec![entry(
+                    "TOGUG",
+                    vec![IdentCandidate::Fix(waypoint("TOGUG", "ZS", 120.))],
+                )];
+                if explicit_dct {
+                    route.push(entry("DCT", vec![IdentCandidate::Leg(NavProc::Direct)]));
+                }
+                route.push(entry(
+                    "SULEM",
+                    vec![
+                        IdentCandidate::Fix(waypoint("SULEM", "RC", 121.)),
+                        IdentCandidate::Fix(waypoint("SULEM", "ZS", same_region_lon)),
+                    ],
+                ));
+                let solved = Solver::new(route).solve().into_iter().collect();
+                let legs = Constructor::new(solved).construct();
+                assert_eq!(legs[0].leg.to.icao_code(), Some(expected_code));
+            }
+        }
+    }
 }
