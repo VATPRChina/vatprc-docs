@@ -768,9 +768,6 @@ msgstr "已完成培训"
 msgid "FIR coverage estimate"
 msgstr "FIR 覆盖估算"
 
-msgid "Fit region"
-msgstr "适配区域"
-
 msgid "Flight information region"
 msgstr "飞行情报区"
 
@@ -1330,6 +1327,9 @@ msgstr "备注"
 
 msgid "Remove row"
 msgstr "移除此行"
+
+msgid "Reset Zoom"
+msgstr "重置缩放"
 
 msgid "Resolved Route"
 msgstr "解析后的航路"

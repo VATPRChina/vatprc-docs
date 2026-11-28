@@ -1,9 +1,14 @@
-import { compileMarkdownDoc, parseMarkdownDoc, renderMarkdownDoc } from "./markdown-doc-compile";
+import { MarkdownContent } from "./markdown-content";
+import { compileMarkdownDoc } from "./markdown-doc-compile";
 import { getAllDocuments, getDocument } from "@/lib/doc";
-import type { MarkdownDocument } from "@tanstack/markdown";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import path from "node:path";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, test, vi } from "vitest";
+
+const renderDoc = (doc: Pick<ReturnType<typeof compileMarkdownDoc>, "markdown">) =>
+  renderToStaticMarkup(createElement(MarkdownContent, doc));
 
 type CreateServerFn = typeof createServerFn<"GET">;
 type CreateServerOnlyFn = typeof createServerOnlyFn;
@@ -49,7 +54,7 @@ describe.concurrent("compileMarkdownDoc", async () => {
     const doc = compileMarkdownDoc('---\ntitle: "Document title"\norder: 0\n---\n# Heading');
     expect(doc.title).toBe("Document title");
     expect(doc.frontmatter).toEqual({ title: "Document title", order: 0 });
-    expect(doc.html).toBe('<h1 id="heading">Heading</h1>');
+    expect(renderDoc(doc)).toBe('<h1 id="heading">Heading</h1>');
     expect(doc.tableOfContents).toEqual([{ depth: 1, value: "Heading" }]);
     expect(compileMarkdownDoc("# Heading").title).toBe("Heading");
     expect(compileMarkdownDoc("No heading").title).toBeUndefined();
@@ -78,17 +83,18 @@ describe.concurrent("compileMarkdownDoc", async () => {
         "<https://example.com/standalone>",
       ].join("\n"),
     );
-    expect(doc.html).toContain('id="标题"');
-    expect(doc.html).toContain('id="标题-1"');
-    expect(doc.html).toContain("<table>");
-    expect(doc.html).toContain('type="checkbox"');
-    expect(doc.html).toContain("markdown-alert-note");
-    expect(doc.html).toContain("<p>Alert</p>");
-    expect(doc.html).toContain("<br>");
-    expect(doc.html).toContain('target="_blank"');
-    expect(doc.html).toContain('rel="noopener noreferrer"');
-    expect(doc.html).toContain('<a href="#%E6%A0%87%E9%A2%98">local</a>');
-    expect(doc.html).toContain('href="https://example.com/standalone"');
+    const html = renderDoc(doc);
+    expect(html).toContain('id="标题"');
+    expect(html).toContain('id="标题-1"');
+    expect(html).toContain("<table>");
+    expect(html).toContain('type="checkbox"');
+    expect(html).toContain("markdown-alert-note");
+    expect(html).toContain("<p>Alert</p>");
+    expect(html).toContain("<br/>");
+    expect(html).toContain('target="_blank"');
+    expect(html).toContain('rel="noopener noreferrer"');
+    expect(html).toContain('<a href="#%E6%A0%87%E9%A2%98">local</a>');
+    expect(html).toContain('href="https://example.com/standalone"');
   });
 
   test("preserves raw HTML tables, images and literal Markdown text", () => {
@@ -103,17 +109,24 @@ describe.concurrent("compileMarkdownDoc", async () => {
         '<img src="https://example.com/image.png" width="100" alt="image">',
       ].join("\n"),
     );
-    expect(doc.html).toContain("{value} &#x3C;- text<br>next");
-    expect(doc.html).toContain('style="text-align:center; border-collapse:collapse"');
-    expect(doc.html).toContain('rowspan="2"');
-    expect(doc.html).toContain('cellpadding="6"');
-    expect(doc.html).toContain('src="https://example.com/image.png"');
+    const html = renderDoc(doc);
+    expect(html).toContain("{value} &#x3C;- text<br>next");
+    expect(html).toContain('style="text-align:center; border-collapse:collapse"');
+    expect(html).toContain('rowspan="2"');
+    expect(html).toContain('cellpadding="6"');
+    expect(html).toContain('src="https://example.com/image.png"');
   });
 
   test("strips executable HTML and treats MDX expressions as text", () => {
     const doc = compileMarkdownDoc(
       [
         "{globalThis.alert('expression')}",
+        "",
+        "**Nested <img src=x onerror=alert(1)>**",
+        "",
+        "| Cell |",
+        "| --- |",
+        "| **<img src=x onerror=alert(1)>** |",
         "",
         "<script>alert('script')</script>",
         "",
@@ -126,24 +139,25 @@ describe.concurrent("compileMarkdownDoc", async () => {
         "[unsafe Markdown link](javascript:alert(1))",
       ].join("\n"),
     );
-    expect(doc.html).toContain("{globalThis.alert('expression')}");
-    expect(doc.html).not.toMatch(/<script|onerror|javascript:|<iframe/);
+    const html = renderDoc(doc);
+    expect(html).toContain("{globalThis.alert(&#x27;expression&#x27;)}");
+    expect(html).not.toMatch(/<script|onerror|javascript:|<iframe/);
   });
 
   test("renders the same HTML from a serialized document", () => {
     const source = "# Heading\n\n### Nested\n\nA footnote[^note].\n\n[^note]: Footnote";
-    const document = parseMarkdownDoc(source);
-    const restored = JSON.parse(JSON.stringify(document)) as MarkdownDocument;
     const doc = compileMarkdownDoc(source);
+    const restored = JSON.parse(JSON.stringify(doc)) as typeof doc;
 
     expect(doc.tableOfContents).toEqual([{ depth: 1, value: "Heading", children: [{ depth: 3, value: "Nested" }] }]);
-    expect(renderMarkdownDoc(restored)).toBe(doc.html);
-    expect(doc.html).toContain('href="#user-content-fn-note"');
-    expect(doc.html).toContain('id="user-content-fn-note"');
-    expect(doc.html).toContain('href="#user-content-fnref-note"');
-    expect(doc.html).toContain('id="user-content-fnref-note"');
-    expect(doc.html).toContain('aria-describedby="user-content-footnote-label"');
-    expect(doc.html).toContain('id="user-content-footnote-label"');
+    const html = renderDoc(doc);
+    expect(renderDoc(restored)).toBe(html);
+    expect(html).toContain('href="#user-content-fn-note"');
+    expect(html).toContain('id="user-content-fn-note"');
+    expect(html).toContain('href="#user-content-fnref-note"');
+    expect(html).toContain('id="user-content-fnref-note"');
+    expect(html).toContain('aria-describedby="footnote-label"');
+    expect(html).toContain('id="footnote-label"');
   });
 
   test("reparses accumulated streaming text and escapes raw HTML", () => {
@@ -152,17 +166,75 @@ describe.concurrent("compileMarkdownDoc", async () => {
     const complete = partial + " Completed";
 
     const incomplete = compileMarkdownDoc(partial, streaming);
-    expect(incomplete.html).not.toContain("<ul>");
-    expect(incomplete.html).toContain("&#x3C;img src=x>");
-    expect(compileMarkdownDoc(complete, streaming).html).toContain("<li>Completed</li>");
+    expect(renderDoc(incomplete)).not.toContain("<ul>");
+    expect(renderDoc(incomplete)).toContain("&lt;img src=x&gt;");
+    expect(renderDoc(compileMarkdownDoc(complete, streaming))).toContain("<li>Completed</li>");
     expect(compileMarkdownDoc(partial, streaming)).toEqual(incomplete);
   });
 
   test.concurrent.each(await getAllDocumentPaths())('can compile doc at "%s"', async (docPath) => {
     const markdown = await getDocument({ data: docPath });
 
-    expect(markdown.html).toBeTruthy();
+    expect(markdown.markdown.children.length).toBeTruthy();
     expect(markdown.title).toBeTruthy();
-    expect(JSON.parse(JSON.stringify(markdown))).toEqual(markdown);
+    expect(renderDoc(JSON.parse(JSON.stringify(markdown)) as typeof markdown)).toBe(renderDoc(markdown));
   });
+});
+
+test("compiles nested GeoJSON maps and renders ordinary and malformed fences as code", () => {
+  const point = { type: "Point", coordinates: [1, 2] };
+  const feature = { type: "Feature", geometry: point, properties: { name: "<img src=x>" } };
+  const doc = compileMarkdownDoc(
+    [
+      '<div data-geojson-index="0"></div>',
+      "",
+      `<pre data-lang="geojson"><code>${JSON.stringify(point)}</code></pre>`,
+      "",
+      "> ```geojson",
+      "> " + JSON.stringify(feature),
+      "> ```",
+      "",
+      "- Map",
+      "",
+      "  ```geojson",
+      "  " + JSON.stringify(point),
+      "  ```",
+      "",
+      "```json",
+      JSON.stringify(point),
+      "```",
+      "",
+      "```geojson",
+      "{broken}",
+      "```",
+    ].join("\n"),
+  );
+  const ssr = renderDoc(doc);
+  expect(ssr).toContain(`<pre data-lang="geojson"><code>${JSON.stringify(point)}</code></pre>`);
+  const quote = doc.markdown.children.find((node) => node.type === "blockquote");
+  expect(quote?.children[0]).toMatchObject({
+    type: "component",
+    properties: { collection: JSON.stringify({ type: "FeatureCollection", features: [feature] }) },
+  });
+  expect(ssr).not.toContain("data-geojson-index");
+  expect(doc.markdown.children.find((node) => node.type === "list")?.items[0].children).toContainEqual(
+    expect.objectContaining({ type: "component", tagName: "geojson-map" }),
+  );
+  expect(ssr).not.toContain("<img src=x>");
+  expect(ssr).toContain('class="language-geojson"><span class="th-line" data-line="1">{broken}</span></code></pre>');
+  expect(ssr).toContain('class="language-json">');
+  expect(ssr).not.toContain("<canvas");
+});
+
+test("highlights declared languages and line metadata, and escapes unknown fences", () => {
+  const html = renderDoc(
+    compileMarkdownDoc(
+      ["```ts {2}", "const a = 1;", "const b = 2;", "```", "", "```unknown-language", "<img src=x>", "```"].join("\n"),
+    ),
+  );
+  expect(html).toContain('class="th-token th-keyword">const</span>');
+  expect(html).toContain('class="th-line th-line--highlighted" data-line="2"');
+  expect(html).toContain(
+    'class="language-unknown-language"><span class="th-line" data-line="1">&lt;img src=x&gt;</span>',
+  );
 });

@@ -66,6 +66,16 @@
   @apply prose-code:before:content-none prose-code:after:content-none;
 }
 
+.vatprc-prose pre.tm-code > code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.vatprc-prose .th-line--highlighted {
+  background: color-mix(in srgb, var(--th-token) 10%, transparent);
+}
+
 .mantine-ActionIcon-root svg {
   width: 60%;
   height: 60%;

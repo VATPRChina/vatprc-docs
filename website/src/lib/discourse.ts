@@ -28,6 +28,6 @@ export const getDiscourseDocument = createServerFn()
     let thumbnailIndex = 0;
     const source = raw.replaceAll(/upload:\/\/[\w.-]+/g, () => meta.thumbnails?.[thumbnailIndex++]?.url ?? "");
     const { compileMarkdownDoc } = await import("@/components/doc/markdown-doc-compile");
-    const { html, title } = compileMarkdownDoc(source);
-    return { html, title, postTitle: meta.title };
+    const { markdown, title } = compileMarkdownDoc(source);
+    return { markdown, title, postTitle: meta.title };
   });

@@ -1,3 +1,4 @@
+import { MarkdownContent } from "@/components/doc/markdown-content";
 import { MarkdownDoc } from "@/components/doc/markdown-doc";
 import { getDocument } from "@/lib/doc";
 import { Trans } from "@lingui/react/macro";
@@ -37,7 +38,7 @@ function RouteComponent() {
 
   return (
     <MarkdownDoc>
-      <div dangerouslySetInnerHTML={{ __html: doc.html }} />
+      <MarkdownContent markdown={doc.markdown} />
     </MarkdownDoc>
   );
 }
